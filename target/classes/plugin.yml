@@ -1,0 +1,10 @@
+name: Depenizen
+author: GnomeffinWay
+version: 0.1
+main: net.gnomeffinway.depenizen.Depenizen
+depend: [Denizen]
+softdepend: [mcMMO, BattleNight, Towny, Factions]
+
+commands:
+
+permissions:
