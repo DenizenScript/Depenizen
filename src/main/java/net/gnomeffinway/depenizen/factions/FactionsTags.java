@@ -34,7 +34,7 @@ public class FactionsTags implements Listener {
         if(event.matches("PLAYER")) {
             if (type.equals("FACTION")) {
                 if(FPlayers.i.get(p).hasFaction()) {
-                    if(subType.equals("ROLE") || subType.equals("RANK")) {
+                    if(subType.equals("ROLE")) {
                         if(FPlayers.i.get(p).getRole() == null)
                             event.setReplaced(String.valueOf(FPlayers.i.get(p).getRole()));
                         else
@@ -45,14 +45,13 @@ public class FactionsTags implements Listener {
                         else
                             event.setReplaced("none");
                     } else {
-                        if(FPlayers.i.get(p).hasFaction()) 
                             event.setReplaced(String.valueOf(FPlayers.i.get(p).getFaction().getTag()));
-                        else
-                            event.setReplaced("none");
                     }
                 } else {
                     if(subType.equals("POWER")) {
                         event.setReplaced(String.valueOf(FPlayers.i.get(p).getPower()));
+                    } else {
+                    event.setReplaced("none");
                     }
                 }
             }

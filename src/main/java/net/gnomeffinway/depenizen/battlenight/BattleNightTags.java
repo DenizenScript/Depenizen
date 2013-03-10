@@ -41,11 +41,19 @@ public class BattleNightTags implements Listener {
             }
         } else if (event.matches("BATTLE")) {
             if (type.equals("ARENA")) {
-                event.setReplaced(String.valueOf(BattleNight.instance.getAPI().getBattle().getArena().getName()));
+                if(BattleNight.instance.getAPI().getBattle().isInProgress()) {
+                    event.setReplaced(String.valueOf(BattleNight.instance.getAPI().getBattle().getArena().getName()));
+                } else {
+                    event.setReplaced("none");
+                }
             } else if (type.equals("INPROGRESS")) {
                 event.setReplaced(String.valueOf(BattleNight.instance.getAPI().getBattle().isInProgress()));
             } else if (type.equals("TIMEREMAINING")) {
-                event.setReplaced(String.valueOf(BattleNight.instance.getAPI().getBattle().getTimer().getTimeRemaining()));
+                if(BattleNight.instance.getAPI().getBattle().isInProgress()) {
+                    event.setReplaced(String.valueOf(BattleNight.instance.getAPI().getBattle().getTimer().getTimeRemaining()));
+                } else {
+                    event.setReplaced("none");
+                }
             }
         }
         

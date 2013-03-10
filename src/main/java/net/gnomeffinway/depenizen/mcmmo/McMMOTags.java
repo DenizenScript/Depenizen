@@ -22,6 +22,7 @@ public class McMMOTags implements Listener {
     public void mcmmoTags(ReplaceableTagEvent event) {        
         
         Player p = event.getPlayer();
+        String nameContext = event.getNameContext() != null ? event.getNameContext().toUpperCase() : "";
         String type = event.getType() != null ? event.getType().toUpperCase() : "";
         String typeContext = event.getTypeContext() != null ? event.getTypeContext().toUpperCase() : "";
         String subType = event.getSubType() != null ? event.getSubType().toUpperCase() : "";
@@ -31,7 +32,11 @@ public class McMMOTags implements Listener {
         if(event.matches("PLAYER")) {
             if (type.equals("MCMMO")) {
                 if (subType.equals("LEVEL")) {
-                    event.setReplaced(String.valueOf(ExperienceAPI.getLevel(p, subTypeContext)));
+                    if(subTypeContext == "") {
+                        event.setReplaced(String.valueOf(ExperienceAPI.getPowerLevel(p)));
+                    } else {
+                        event.setReplaced(String.valueOf(ExperienceAPI.getLevel(p, subTypeContext)));
+                    }
                 } else if (subType.equals("PARTY")) {
                     if(PartyAPI.inParty(p)) {
                         event.setReplaced(String.valueOf(PartyAPI.getPartyName(p)));
@@ -54,7 +59,7 @@ public class McMMOTags implements Listener {
             }
         } else if (event.matches("PARTY")) {
             if (type.equals("LEADER")) {
-                event.setReplaced(String.valueOf(PartyAPI.getPartyLeader(typeContext)));
+                event.setReplaced(String.valueOf(PartyAPI.getPartyLeader(nameContext)));
             }
         }
         
