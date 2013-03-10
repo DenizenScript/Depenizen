@@ -78,24 +78,24 @@
     </repositories>
     <dependencies>
 		<dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>LATEST</version>
-            <type>jar</type>
-            <scope>compile</scope>
+			<groupId>org.bukkit</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>LATEST</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
-		<dependency> 
+		<dependency>
 			<groupId>net.aufdemrand</groupId>
 			<artifactId>denizen</artifactId>
 			<version>0.8.8-PRERELEASE</version>
-			<scope>provided</scope> 
+			<scope>provided</scope>
 		</dependency>
    		<dependency>
-      		<groupId>junit</groupId>
-      		<artifactId>junit</artifactId>
-      		<version>3.8.1</version>
-      		<scope>test</scope>
-    	</dependency>
+ 			<groupId>junit</groupId>
+ 			<artifactId>junit</artifactId>
+ 			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.palmergames</groupId>
 			<artifactId>Towny</artifactId>
