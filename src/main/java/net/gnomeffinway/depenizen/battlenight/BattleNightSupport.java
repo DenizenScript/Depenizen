@@ -12,5 +12,6 @@ public class BattleNightSupport {
 
     public void register() {
         new BattleNightTags(depenizen);
+        new BattleNightCommands().activate().as("BN").withOptions("see documentation", 1);
     }
 }

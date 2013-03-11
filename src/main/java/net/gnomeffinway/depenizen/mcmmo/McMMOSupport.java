@@ -12,6 +12,7 @@ public class McMMOSupport {
 
     public void register() {
         new McMMOTags(depenizen);
+        new McMMOCommands().activate().as("MCMMO").withOptions("see documentation", 1);
     }
     
 }

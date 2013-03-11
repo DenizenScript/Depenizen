@@ -9,6 +9,7 @@ import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.api.PartyAPI;
 import com.gmail.nossr50.database.LeaderboardManager;
 import com.gmail.nossr50.datatypes.skills.SkillType;
+import com.gmail.nossr50.party.PartyManager;
 
 import net.gnomeffinway.depenizen.Depenizen;
 
@@ -60,6 +61,8 @@ public class McMMOTags implements Listener {
         } else if (event.matches("PARTY")) {
             if (type.equals("LEADER")) {
                 event.setReplaced(String.valueOf(PartyAPI.getPartyLeader(nameContext)));
+            } else if(type.equals("PLAYERCOUNT")) {
+                event.setReplaced(String.valueOf(PartyManager.getParty(nameContext).getMembers().size()));
             }
         }
         

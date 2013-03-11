@@ -84,7 +84,7 @@ public class FactionsTags implements Listener {
                     event.setReplaced(String.valueOf(faction.getLandRounded()));
                 }
             }
-        }
+        } 
         
     }
     

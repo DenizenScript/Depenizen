@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.towny;
 
 import net.aufdemrand.denizen.events.ReplaceableTagEvent;
+import net.aufdemrand.denizen.utilities.arguments.aH;
 import net.gnomeffinway.depenizen.Depenizen;
 
 import org.bukkit.Location;
@@ -14,6 +15,7 @@ import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.TownyUniverse;
 
 public class TownyTags implements Listener{
     
@@ -191,6 +193,19 @@ public class TownyTags implements Listener{
                 event.setReplaced(String.valueOf(nation.getTaxes()));
             } else if (type.equals("TOWNCOUNT")) {
                 event.setReplaced(String.valueOf(nation.getNumTowns()));
+            }
+        } else if (event.matches("LOCATION")) {
+            Location loc = null;
+            if (aH.matchesLocation("location:" + nameContext)) {
+                    loc = aH.getLocationFrom("location:" + nameContext);
+                    town = TownyUniverse.getTownBlock(loc) == null ? null : TownyUniverse.getTownBlock(loc).getTown();
+                if (type.equals("TOWN")) {
+                    if(town != null) {
+                        event.setReplaced(String.valueOf(town.getName()));
+                    } else {
+                        event.setReplaced(String.valueOf("none"));
+                    }
+                }
             }
         }
     }
