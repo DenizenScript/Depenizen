@@ -104,13 +104,6 @@
 			<systemPath>${basedir}/src/main/resources/Towny.jar</systemPath>
 		</dependency>
 		<dependency>
-			<groupId>com.ancientshores</groupId>
-			<artifactId>AncientRPG</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/resources/AncientRPG.jar</systemPath>
-		</dependency>
-		<dependency>
 			<groupId>com.massivecraft</groupId>
 			<artifactId>Factions</artifactId>
 			<version>1.6.9</version>
