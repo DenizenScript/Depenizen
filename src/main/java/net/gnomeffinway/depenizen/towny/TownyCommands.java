@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.mcmmo;
+package net.gnomeffinway.depenizen.towny;
 
 import net.aufdemrand.denizen.exceptions.CommandExecutionException;
 import net.aufdemrand.denizen.exceptions.InvalidArgumentsException;
@@ -8,22 +8,17 @@ import net.aufdemrand.denizen.utilities.arguments.aH;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizen.utilities.debugging.dB.Messages;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.gmail.nossr50.api.ExperienceAPI;
-import com.gmail.nossr50.api.PartyAPI;
-import com.gmail.nossr50.config.Config;
-import com.gmail.nossr50.database.DatabaseManager;
-import com.gmail.nossr50.database.LeaderboardManager;
-import com.gmail.nossr50.party.PartyManager;
-import com.gmail.nossr50.util.Misc;
-
-public class McMMOCommands extends AbstractCommand {
+public class TownyCommands extends AbstractCommand {
+    //TODO: CLASS ?
     private enum Action {ADD, REMOVE, SET}
     private enum State {TRUE, FALSE, TOGGLE} 
-    private enum Type {XP, LEVELS, TOGGLE, XPRATE, LEADER, VAMPIRISM, HARDCORE} 
+    private enum Type {RESIDENT, MONEY, TOWN, NATION, TOWNBLOCK, BONUS, PLOT, OUTPOST, NAME, 
+        CAPITAL, OPEN, PUBLIC, MAYOR, SURNAME, TITLE, RANK, BOARD, WAR, MAXSIZE, TAXES, TAG, SPAWN, PERM, RELATION} 
 
-    public McMMOCommands() {
+    public TownyCommands() {
         
     }
     
@@ -32,9 +27,10 @@ public class McMMOCommands extends AbstractCommand {
         // Initialize fields used
         Action action = null;
         Player player = null;
-        String party = "";
+        String town = "";
+        String nation = "";
+        Location location = null;
         Type type = null;
-        String skill = "";
         State state = State.TOGGLE;
         double qty = -1;
         
@@ -52,33 +48,40 @@ public class McMMOCommands extends AbstractCommand {
                 } else dB.echoError("Unknown STATE! Valid: TRUE, FALSE, TOGGLE");
             } else if (aH.matchesValueArg("PLAYER", arg, aH.ArgumentType.String)) {
                 player = aH.getPlayerFrom(arg);
-            } else if (aH.matchesValueArg("PARTY", arg, aH.ArgumentType.String)) {
-                party = aH.getStringFrom(arg);
-            } else if (aH.matchesValueArg("SKILL", arg, aH.ArgumentType.String)) {
-                skill = aH.getStringFrom(arg);
+            } else if (aH.matchesValueArg("TOWN", arg, aH.ArgumentType.String)) {
+                town = aH.getStringFrom(arg);
+            } else if (aH.matchesValueArg("NATION", arg, aH.ArgumentType.String)) {
+                nation = aH.getStringFrom(arg);
+            } else if (aH.matchesValueArg("NAME", arg, aH.ArgumentType.String)) {
+                nation = aH.getStringFrom(arg);
+            } else if (aH.matchesValueArg("LOCATION", arg, aH.ArgumentType.String)) {
+                location = aH.getLocationFrom(arg);
             } else if (aH.matchesValueArg("QTY", arg, aH.ArgumentType.String)) {
                 qty = aH.getDoubleFrom(arg);
-            } else if (aH.matchesArg("XP, LEVELS, TOGGLE, XPRATE, VAMPIRISM, HARDCORE", arg)) {
+            } else if (aH.matchesArg("RESIDENT, MONEY, TOWN, NATION, TOWNBLOCK, BONUS, PLOT, OUTPOST, NAME, " +
+            		"CAPITAL, OPEN, PUBLIC, MAYOR, SURNAME, TITLE, RANK, BOARD, WAR, MAXSIZE, TAXES, TAG, SPAWN, PERM, RELATION", arg)) {
                 type = Type.valueOf(aH.getStringFrom(arg).toUpperCase());
             } else throw new InvalidArgumentsException(Messages.ERROR_UNKNOWN_ARGUMENT, arg);
             
         }
         
         // Stash objects in scriptEntry for use in execute()
-        scriptEntry.addObject("action", action).addObject("player", player).addObject("state", state)
-                .addObject("qty", qty).addObject("type", type).addObject("party", party).addObject("skill", skill);
+        scriptEntry.addObject("action", action).addObject("player", player).addObject("state", state).addObject("qty", qty)
+            .addObject("type", type).addObject("town", town).addObject("nation", nation).addObject("location", location);
     }
     
     @Override
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
         // Get objects
+        /*
         Action action = (Action) scriptEntry.getObject("action");
         Player tempPlayer = (Player) scriptEntry.getObject("player");
         Player player = tempPlayer != null ? tempPlayer: scriptEntry.getPlayer();
         State state = State.valueOf(String.valueOf(scriptEntry.getObject("state")));
         double qty = Double.valueOf(String.valueOf(scriptEntry.getObject("qty")));
-        String party = String.valueOf(scriptEntry.getObject("party"));
-        String skill = String.valueOf(scriptEntry.getObject("skill"));
+        String town = String.valueOf(scriptEntry.getObject("town"));
+        Location location = aH.getLocationFrom(String.valueOf(scriptEntry.getObject("location")));
+        String nation = String.valueOf(scriptEntry.getObject("nation"));
         Type type = (Type) scriptEntry.getObject("type");
 
         // Report to dB
@@ -96,17 +99,9 @@ public class McMMOCommands extends AbstractCommand {
             case ADD: {
                 if(qty >= 0 && !skill.equals("")) {
                     if(type == Type.LEVELS) {
-                        if(player.isOnline()) {
-                            ExperienceAPI.addLevel(player, skill, (int) qty);
-                        } else {
-                            ExperienceAPI.addLevelOffline(player.getName(), skill, (int) qty);
-                        }
+                        ExperienceAPI.addLevel(player, skill, (int) qty);
                     } else if(type == Type.XP) {
-                        if(player.isOnline()) {
-                            ExperienceAPI.addRawXP(player, skill, (int) qty);
-                        } else {
-                            ExperienceAPI.addRawXPOffline(player.getName(), skill, (int) qty);
-                        }
+                        ExperienceAPI.addRawXP(player, skill, (int) qty);
                     }
                 } else if(PartyManager.isParty(party)) {
                     PartyAPI.addToParty(player,party);
@@ -116,17 +111,9 @@ public class McMMOCommands extends AbstractCommand {
             case REMOVE: {
                 if(qty >= 0 && !skill.equals("")) {
                     if(type == Type.LEVELS) {
-                        if(player.isOnline()){
-                            ExperienceAPI.setLevel(player, skill, ExperienceAPI.getLevel(player, skill) - (int) qty);
-                        } else {
-                            ExperienceAPI.setLevelOffline(player.getName(), skill, ExperienceAPI.getLevel(player, skill) - (int) qty);
-                        }
+                        ExperienceAPI.setLevel(player, skill, ExperienceAPI.getLevel(player, skill) - (int) qty);
                     } else if(type == Type.XP) {
-                        if(player.isOnline()) {
-                            ExperienceAPI.removeXP(player, skill, (int) qty);
-                        } else {
-                            ExperienceAPI.removeXPOffline(player.getName(), skill, (int) qty);
-                        }
+                        ExperienceAPI.removeXP(player, skill, (int) qty);
                     }
                 } else if(PartyManager.isParty(party)) {
                     if(tempPlayer == null) {
@@ -141,13 +128,13 @@ public class McMMOCommands extends AbstractCommand {
                         String tablePrefix = Config.getInstance().getMySQLTablePrefix();
 
                         if (DatabaseManager.update("DELETE FROM " + tablePrefix + "users WHERE " + tablePrefix + "users.user = '" + player.getName() + "'") != 0) {
-                            Misc.profileCleanup(player.getName());
+                            DatabaseManager.profileCleanup(player.getName());
                         }
 
                     }
                     else {
                         if (LeaderboardManager.removeFlatFileUser(player.getName())) {
-                            Misc.profileCleanup(player.getName());
+                            DatabaseManager.profileCleanup(player.getName());
                         }
                     }
                 }
@@ -156,17 +143,9 @@ public class McMMOCommands extends AbstractCommand {
             case SET: {
                 if(qty >= 0 && !skill.equals("")) {
                     if(type == Type.LEVELS) {
-                        if(player.isOnline()) {
-                            ExperienceAPI.setLevel(player, skill, (int) qty);
-                        } else {
-                            ExperienceAPI.setLevelOffline(player.getName(), skill, (int) qty);
-                        }
+                        ExperienceAPI.setLevel(player, skill, (int) qty);
                     } else if(type == Type.XP) {
-                        if(player.isOnline()) {
-                            ExperienceAPI.setXP(player, skill, (int) qty);
-                        } else {
-                            ExperienceAPI.setXPOffline(player.getName(), skill, (int) qty);
-                        }
+                        ExperienceAPI.setXP(player, skill, (int) qty);
                     }
                 } else if(type == Type.XPRATE) {
                     Config.getInstance().setExperienceGainsGlobalMultiplier(qty);
@@ -194,5 +173,7 @@ public class McMMOCommands extends AbstractCommand {
                 return;
             }
         }
+                    */
+
     }
 }

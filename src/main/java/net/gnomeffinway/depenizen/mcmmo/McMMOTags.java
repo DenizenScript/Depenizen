@@ -34,9 +34,17 @@ public class McMMOTags implements Listener {
             if (type.equals("MCMMO")) {
                 if (subType.equals("LEVEL")) {
                     if(subTypeContext == "") {
-                        event.setReplaced(String.valueOf(ExperienceAPI.getPowerLevel(p)));
+                        if(p.isOnline()) {
+                            event.setReplaced(String.valueOf(ExperienceAPI.getPowerLevel(p)));
+                        } else {
+                            event.setReplaced(String.valueOf(ExperienceAPI.getPowerLevelOffline(p.getName())));
+                        }
                     } else {
-                        event.setReplaced(String.valueOf(ExperienceAPI.getLevel(p, subTypeContext)));
+                        if(p.isOnline()) {
+                            event.setReplaced(String.valueOf(ExperienceAPI.getLevel(p, subTypeContext)));
+                        } else {
+                            event.setReplaced(String.valueOf(ExperienceAPI.getLevelOffline(p.getName(), subTypeContext)));
+                        }
                     }
                 } else if (subType.equals("PARTY")) {
                     if(PartyAPI.inParty(p)) {
@@ -52,9 +60,17 @@ public class McMMOTags implements Listener {
                     }
                 } else if (subType.equals("XP")) {
                     if(specifier.equals("TONEXTLEVEL")) {
-                        event.setReplaced(String.valueOf(ExperienceAPI.getXPToNextLevel(p, subTypeContext)));
+                        if(p.isOnline()) {
+                            event.setReplaced(String.valueOf(ExperienceAPI.getXPToNextLevel(p, subTypeContext)));
+                        } else {
+                            event.setReplaced(String.valueOf(ExperienceAPI.getOfflineXPToNextLevel(p.getName(), subTypeContext)));
+                        }
                     } else {
-                        event.setReplaced(String.valueOf(ExperienceAPI.getXP(p, subTypeContext)));
+                        if(p.isOnline()) {
+                            event.setReplaced(String.valueOf(ExperienceAPI.getXP(p, subTypeContext)));
+                        } else {
+                            event.setReplaced(String.valueOf(ExperienceAPI.getOfflineXP(p.getName(), subTypeContext)));
+                        }
                     }
                 }
             }

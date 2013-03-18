@@ -2,6 +2,7 @@ package net.gnomeffinway.depenizen;
 
 import me.limebyte.battlenight.core.BattleNight;
 import net.aufdemrand.denizen.Denizen;
+import net.gnomeffinway.depenizen.ancientrpg.AncientRPGSupport;
 import net.gnomeffinway.depenizen.battlenight.BattleNightSupport;
 import net.gnomeffinway.depenizen.factions.FactionsSupport;
 import net.gnomeffinway.depenizen.mcmmo.McMMOSupport;
@@ -9,6 +10,7 @@ import net.gnomeffinway.depenizen.towny.TownySupport;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.ancientshores.AncientRPG.AncientRPG;
 import com.gmail.nossr50.mcMMO;
 import com.massivecraft.factions.Factions;
 import com.palmergames.bukkit.towny.Towny;
@@ -18,11 +20,13 @@ public class Depenizen extends JavaPlugin{
     public static mcMMO mcmmo;
     public static Factions factions;
     public static BattleNight battlenight;
+    public static AncientRPG ancientrpg;
     public static Denizen denizen;
     public static Towny towny;
     
     public McMMOSupport mcmmoSupport;
     public BattleNightSupport battlenightSupport;
+    public AncientRPGSupport ancientrpgSupport;
     public TownySupport townySupport;
     public FactionsSupport factionsSupport;
 
@@ -41,6 +45,7 @@ public class Depenizen extends JavaPlugin{
     public void checkPlugins() {         
         denizen=(Denizen) getServer().getPluginManager().getPlugin("Denizen");
         mcmmo=(mcMMO) getServer().getPluginManager().getPlugin("mcMMO");
+        ancientrpg=(AncientRPG) getServer().getPluginManager().getPlugin("AncientRPG");
         factions=(Factions) getServer().getPluginManager().getPlugin("Factions");
         towny=(Towny) getServer().getPluginManager().getPlugin("Towny");
         battlenight=(BattleNight) getServer().getPluginManager().getPlugin("BattleNight");
@@ -62,7 +67,14 @@ public class Depenizen extends JavaPlugin{
         else {
             getServer().getLogger().info("[Depenizen] mcMMO not found, addons will not enable");
         }
-        
+        if(ancientrpg != null) {
+            getServer().getLogger().info("[Depenizen] AncientRPG hooked, enabling addons");
+            ancientrpgSupport = new AncientRPGSupport(this);
+            ancientrpgSupport.register();
+        }
+        else {
+            getServer().getLogger().info("[Depenizen] AncientRPG not found, addons will not enable");
+        }
         if(towny != null) {
             getServer().getLogger().info("[Depenizen] Towny hooked, enabling addons");
             townySupport = new TownySupport(this);
