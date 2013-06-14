@@ -87,7 +87,7 @@ public class TownyTags implements Listener{
                             event.setReplaced("none");
                         }
                     } else {
-                        event.setReplaced(resident.getTown().getName());
+                        event.setReplaced(resident.getTown().getNation().getName());
                     }
                 } else {
                     event.setReplaced("none");
