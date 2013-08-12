@@ -1,15 +1,12 @@
-package net.gnomeffinway.depenizen.towny;
+package net.gnomeffinway.depenizen.commands;
 
 import net.aufdemrand.denizen.exceptions.CommandExecutionException;
 import net.aufdemrand.denizen.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizen.scripts.ScriptEntry;
 import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
-import net.aufdemrand.denizen.utilities.arguments.aH;
-import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizen.utilities.debugging.dB.Messages;
-
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
+import net.aufdemrand.denizen.objects.Element;
+import net.aufdemrand.denizen.objects.aH;
+import net.aufdemrand.denizen.objects.dLocation;
 
 public class TownyCommands extends AbstractCommand {
     //TODO: CLASS ?
@@ -24,50 +21,44 @@ public class TownyCommands extends AbstractCommand {
     
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        // Initialize fields used
-        Action action = null;
-        Player player = null;
-        String town = "";
-        String nation = "";
-        Location location = null;
-        Type type = null;
-        State state = State.TOGGLE;
-        double qty = -1;
         
         // Iterate through arguments
-        for (String arg : scriptEntry.getArguments()) {
-            if (aH.matchesArg("ADD, REMOVE, SET", arg)) {
-                action = Action.valueOf(aH.getStringFrom(arg).toUpperCase());
-            } else if (aH.matchesValueArg("STATE", arg, aH.ArgumentType.String)) {
-                if (aH.getStringFrom(arg).equalsIgnoreCase("TRUE")) {
-                    state = State.TRUE;
-                } else if (aH.getStringFrom(arg).equalsIgnoreCase("FALSE")) {
-                    state = State.FALSE;
-                } else if (aH.getStringFrom(arg).equalsIgnoreCase("TOGGLE")) {
-                    state = State.TOGGLE;
-                } else dB.echoError("Unknown STATE! Valid: TRUE, FALSE, TOGGLE");
-            } else if (aH.matchesValueArg("PLAYER", arg, aH.ArgumentType.String)) {
-                player = aH.getPlayerFrom(arg);
-            } else if (aH.matchesValueArg("TOWN", arg, aH.ArgumentType.String)) {
-                town = aH.getStringFrom(arg);
-            } else if (aH.matchesValueArg("NATION", arg, aH.ArgumentType.String)) {
-                nation = aH.getStringFrom(arg);
-            } else if (aH.matchesValueArg("NAME", arg, aH.ArgumentType.String)) {
-                nation = aH.getStringFrom(arg);
-            } else if (aH.matchesValueArg("LOCATION", arg, aH.ArgumentType.String)) {
-                location = aH.getLocationFrom(arg);
-            } else if (aH.matchesValueArg("QTY", arg, aH.ArgumentType.String)) {
-                qty = aH.getDoubleFrom(arg);
-            } else if (aH.matchesArg("RESIDENT, MONEY, TOWN, NATION, TOWNBLOCK, BONUS, PLOT, OUTPOST, NAME, " +
-            		"CAPITAL, OPEN, PUBLIC, MAYOR, SURNAME, TITLE, RANK, BOARD, WAR, MAXSIZE, TAXES, TAG, SPAWN, PERM, RELATION", arg)) {
-                type = Type.valueOf(aH.getStringFrom(arg).toUpperCase());
-            } else throw new InvalidArgumentsException(Messages.ERROR_UNKNOWN_ARGUMENT, arg);
+        for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
+        	
+            if (!scriptEntry.hasObject("action")
+            		&& arg.matchesEnum(Action.values()))
+                scriptEntry.addObject("action", Action.valueOf(arg.getValue()));
+            
+            else if (!scriptEntry.hasObject("state")
+            		&& arg.matchesEnum(State.values()))
+                scriptEntry.addObject("state", State.valueOf(arg.getValue()));
+            
+            else if (!scriptEntry.hasObject("town")
+            		&& arg.matchesPrefix("town"))
+                scriptEntry.addObject("town", arg.asElement());
+            
+            else if (!scriptEntry.hasObject("nation")
+            		&& arg.matchesPrefix("nation, name"))
+                scriptEntry.addObject("nation", arg.asElement());
+            
+            else if (!scriptEntry.hasObject("location")
+            		&& arg.matchesArgumentType(dLocation.class))
+            	scriptEntry.addObject("location", arg.asType(dLocation.class));
+            
+            else if (!scriptEntry.hasObject("qty")
+            		&& arg.matchesPrefix("qty, q, quantity")
+            		&& arg.matchesPrimitive(aH.PrimitiveType.Double))
+                scriptEntry.addObject("qty", arg.asElement());
+            
+            else if (!scriptEntry.hasObject("type")
+            		&& arg.matchesEnum(Type.values()))
+                scriptEntry.addObject("type", Type.valueOf(arg.getValue()));
             
         }
         
-        // Stash objects in scriptEntry for use in execute()
-        scriptEntry.addObject("action", action).addObject("player", player).addObject("state", state).addObject("qty", qty)
-            .addObject("type", type).addObject("town", town).addObject("nation", nation).addObject("location", location);
+        scriptEntry.defaultObject("town", new Element("")).defaultObject("nation", "")
+        		.defaultObject("state", State.TOGGLE).defaultObject("qty", new Element(-1));
+        
     }
     
     @Override

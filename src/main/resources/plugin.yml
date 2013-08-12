@@ -1,6 +1,6 @@
 name: Depenizen
 author: GnomeffinWay
-version: 0.1
+version: 0.2.0
 main: net.gnomeffinway.depenizen.Depenizen
 depend: [Denizen]
 softdepend: [mcMMO, BattleNight, Towny, Factions]

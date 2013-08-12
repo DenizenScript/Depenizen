@@ -1,6 +1,8 @@
-package net.gnomeffinway.depenizen.mcmmo;
+package net.gnomeffinway.depenizen.support;
 
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.commands.McMMOCommands;
+import net.gnomeffinway.depenizen.tags.McMMOTags;
 
 public class McMMOSupport {
     

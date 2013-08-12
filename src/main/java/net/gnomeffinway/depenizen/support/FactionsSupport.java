@@ -1,6 +1,7 @@
-package net.gnomeffinway.depenizen.factions;
+package net.gnomeffinway.depenizen.support;
 
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.tags.FactionsTags;
 
 public class FactionsSupport {
     

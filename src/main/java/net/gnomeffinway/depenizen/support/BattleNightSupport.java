@@ -1,6 +1,8 @@
-package net.gnomeffinway.depenizen.battlenight;
+package net.gnomeffinway.depenizen.support;
 
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.commands.BattleNightCommands;
+import net.gnomeffinway.depenizen.tags.BattleNightTags;
 
 public class BattleNightSupport {
 

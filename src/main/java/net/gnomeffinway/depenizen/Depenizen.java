@@ -1,11 +1,14 @@
 package net.gnomeffinway.depenizen;
 
+import java.io.IOException;
+
 import me.limebyte.battlenight.core.BattleNight;
 import net.aufdemrand.denizen.Denizen;
-import net.gnomeffinway.depenizen.battlenight.BattleNightSupport;
-import net.gnomeffinway.depenizen.factions.FactionsSupport;
-import net.gnomeffinway.depenizen.mcmmo.McMMOSupport;
-import net.gnomeffinway.depenizen.towny.TownySupport;
+import net.aufdemrand.denizen.tags.ObjectFetcher;
+import net.gnomeffinway.depenizen.support.BattleNightSupport;
+import net.gnomeffinway.depenizen.support.FactionsSupport;
+import net.gnomeffinway.depenizen.support.McMMOSupport;
+import net.gnomeffinway.depenizen.support.TownySupport;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -88,6 +91,13 @@ public class Depenizen extends JavaPlugin{
         else {
             getServer().getLogger().info("[Depenizen] BattleNight not found, add-ons will not enable");
         }
+        
+        try {
+			ObjectFetcher._initialize();
+		} 
+        catch (ClassNotFoundException e) {} 
+        catch (IOException e) {}
+        
     }
 
 }
