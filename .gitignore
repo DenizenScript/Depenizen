@@ -32,11 +32,5 @@
 *.iws
 .idea/
 
-# Project Stuff
-/src/main/resources/mcMMO
-
-# Other Libraries
-*.jar
-
 # Atlassian Stuff
 /atlassian-ide-plugin.xml
