@@ -33,8 +33,8 @@ public class dNation implements dObject {
 	}
 
 	public static boolean matches(String arg) {
-		arg = arg.replace("town@", "");
-		return TownyUniverse.getDataSource().hasTown(arg);
+		arg = arg.replace("nation@", "");
+		return TownyUniverse.getDataSource().hasNation(arg);
 	}
 	
     /////////////////////

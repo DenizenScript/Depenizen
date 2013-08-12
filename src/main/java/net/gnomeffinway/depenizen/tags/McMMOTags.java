@@ -84,37 +84,43 @@ public class McMMOTags implements Listener {
                 } 
                 
                 else if (attribute.startsWith("party"))
-                    if(PartyAPI.inParty(p.getPlayerEntity()))
-                        replaced = new Element(PartyAPI.getPartyName(p.getPlayerEntity()))
-    							.getAttribute(attribute.fulfill(1));
+                    replaced = new Element(PartyAPI.getPartyName(p.getPlayerEntity()))
+    						.getAttribute(attribute.fulfill(1));
                 
                 else if (attribute.startsWith("xp")) {
                 	
+                	String skill = attribute.getContext(1);
                 	attribute = attribute.fulfill(1);
                 	
-                	if (p.isOnline()) {
-                    	replaced = new Element(ExperienceAPI.getXP(p.getPlayerEntity(), attribute.getContext(1)))
-								.getAttribute(attribute.fulfill(1));
-                    }
-                    else {
-                    	replaced = new Element(ExperienceAPI.getOfflineXP(p.getName(), attribute.getContext(1)))
-								.getAttribute(attribute.fulfill(1));
-                    }
-                	
-                    if (attribute.startsWith("tonextlevel") || attribute.startsWith("to_next_level")) {
+                	if (attribute.startsWith("tonextlevel") || attribute.startsWith("to_next_level")) {
                         if (p.isOnline()) {
-                        	replaced = new Element(ExperienceAPI.getXPToNextLevel(p.getPlayerEntity(), attribute.getContext(1)))
-                        			.getAttribute(attribute.fulfill(0));
+                        	replaced = new Element(ExperienceAPI.getXPToNextLevel(p.getPlayerEntity(), skill))
+                        			.getAttribute(attribute.fulfill(1));
+                        	dB.log("Value found: " + replaced);
                         }
                         else {
-                        	replaced = new Element(ExperienceAPI.getOfflineXPToNextLevel(p.getName(), attribute.getContext(1)))
-									.getAttribute(attribute.fulfill(0));
+                        	replaced = new Element(ExperienceAPI.getOfflineXPToNextLevel(p.getName(), skill))
+									.getAttribute(attribute.fulfill(1));
+                        	dB.log("Value found: " + replaced);
                         }
                     }
+                	
+                	else if (p.isOnline()) {
+                    	replaced = new Element(ExperienceAPI.getXP(p.getPlayerEntity(), skill))
+								.getAttribute(attribute.fulfill(0));
+                    	dB.log("Value found: " + replaced);
+                    }
+                    else {
+                    	replaced = new Element(ExperienceAPI.getOfflineXP(p.getName(), skill))
+								.getAttribute(attribute.fulfill(0));
+                    	dB.log("Value found: " + replaced);
+                    }
+                	
+                    
                     
                 }
                 
-             // Ranks seem to have disappeared...
+             // Waiting on new API...
                 
                 /*
                 else if (attribute.startsWith("rank")) {
