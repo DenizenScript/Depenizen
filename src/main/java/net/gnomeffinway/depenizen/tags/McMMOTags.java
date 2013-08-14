@@ -13,6 +13,7 @@ import net.aufdemrand.denizen.utilities.debugging.dB;
 import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.api.PartyAPI;
 import com.gmail.nossr50.datatypes.party.Party;
+import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.party.PartyManager;
 
 import net.gnomeffinway.depenizen.Depenizen;
@@ -120,20 +121,22 @@ public class McMMOTags implements Listener {
                     
                 }
                 
-             // Waiting on new API...
-                
-                /*
                 else if (attribute.startsWith("rank")) {
-                    if(!attribute.hasContext(1))
-                    	replaced = new Element(LeaderboardManager.getPlayerRank(p.getName())[0])
-								.getAttribute(attribute.fulfill(1));
-                    else
-                    	replaced = new Element(LeaderboardManager.getPlayerRank(p.getName(), SkillType.getSkill(attribute.getContext(1)))[0])
-								.getAttribute(attribute.fulfill(1));
+                    if (!attribute.hasContext(1)) {
+                        replaced = new Element(ExperienceAPI.getPlayerRankOverall(p.getName()))
+                             .getAttribute(attribute.fulfill(1));
+                    }
+                    else {
+                        if (SkillType.getSkill(attribute.getContext(1)) != null)
+                            replaced = new Element(ExperienceAPI.getPlayerRankSkill(p.getName(), attribute.getContext(1)))
+                                    .getAttribute(attribute.fulfill(1));
+                        else
+                            dB.echoError("Skill type '" + attribute.getContext(1) + "' does not exist!");
+                    }
                 }
-                */
                 
             }
+                
         } 
     	
     	else if (event.matches("party")) {
