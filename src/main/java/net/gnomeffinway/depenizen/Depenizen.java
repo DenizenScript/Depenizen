@@ -1,20 +1,19 @@
 package net.gnomeffinway.depenizen;
 
-import java.io.IOException;
-
 import me.limebyte.battlenight.core.BattleNight;
 import net.aufdemrand.denizen.Denizen;
-import net.aufdemrand.denizen.tags.ObjectFetcher;
 import net.gnomeffinway.depenizen.support.BattleNightSupport;
 import net.gnomeffinway.depenizen.support.FactionsSupport;
 import net.gnomeffinway.depenizen.support.McMMOSupport;
 import net.gnomeffinway.depenizen.support.TownySupport;
+import net.gnomeffinway.depenizen.support.VotifierSupport;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.nossr50.mcMMO;
 import com.massivecraft.factions.Factions;
 import com.palmergames.bukkit.towny.Towny;
+import com.vexsoftware.votifier.Votifier;
 
 public class Depenizen extends JavaPlugin{
     
@@ -23,11 +22,13 @@ public class Depenizen extends JavaPlugin{
     public static BattleNight battlenight;
     public static Denizen denizen;
     public static Towny towny;
+    public static Votifier votifier;
     
     public McMMOSupport mcmmoSupport;
     public BattleNightSupport battlenightSupport;
     public TownySupport townySupport;
     public FactionsSupport factionsSupport;
+    public VotifierSupport votifierSupport;
 
     @Override
     public void onEnable() {         
@@ -47,8 +48,9 @@ public class Depenizen extends JavaPlugin{
         factions=(Factions) getServer().getPluginManager().getPlugin("Factions");
         towny=(Towny) getServer().getPluginManager().getPlugin("Towny");
         battlenight=(BattleNight) getServer().getPluginManager().getPlugin("BattleNight");
+        votifier=(Votifier) getServer().getPluginManager().getPlugin("Votifier");
         
-        if(denizen != null) {
+        if (denizen != null) {
             getServer().getLogger().info("[Depenizen] Denizen hooked");
         }
         else {
@@ -57,46 +59,48 @@ public class Depenizen extends JavaPlugin{
             return;
         }           
         
-        if(mcmmo != null) {
-            getServer().getLogger().info("[Depenizen] mcMMO hooked, enabling addons");
+        if (mcmmo != null) {
+            getServer().getLogger().info("[Depenizen] mcMMO hooked, enabling add-ons.");
             mcmmoSupport = new McMMOSupport(this);
             mcmmoSupport.register();
         }
         else {
-            getServer().getLogger().info("[Depenizen] mcMMO not found, addons will not enable");
+            getServer().getLogger().info("[Depenizen] mcMMO not found, add-ons will not enable.");
         }
-        if(towny != null) {
-            getServer().getLogger().info("[Depenizen] Towny hooked, enabling addons");
+        if (towny != null) {
+            getServer().getLogger().info("[Depenizen] Towny hooked, enabling add-ons.");
             townySupport = new TownySupport(this);
             townySupport.register();
         }
         else {
-            getServer().getLogger().info("[Depenizen] Towny not found, addons will not addons");
+            getServer().getLogger().info("[Depenizen] Towny not found, add-ons. will not add-ons.");
         }
         
-        if(factions != null) {
-            getServer().getLogger().info("[Depenizen] Factions hooked, enabling addons");
+        if (factions != null) {
+            getServer().getLogger().info("[Depenizen] Factions hooked, enabling add-ons.");
             factionsSupport = new FactionsSupport(this);
             factionsSupport.register();
         }
         else {
-            getServer().getLogger().info("[Depenizen] Factions not found, addons will not enable");
+            getServer().getLogger().info("[Depenizen] Factions not found, add-ons will not enable.");
         }
         
-        if(battlenight != null) {
-            getServer().getLogger().info("[Depenizen] BattleNight hooked, enabling addons");
+        if (battlenight != null) {
+            getServer().getLogger().info("[Depenizen] BattleNight hooked, enabling add-ons.");
             battlenightSupport = new BattleNightSupport(this);
             battlenightSupport.register();
         }
         else {
-            getServer().getLogger().info("[Depenizen] BattleNight not found, add-ons will not enable");
+            getServer().getLogger().info("[Depenizen] BattleNight not found, add-ons will not enable.");
         }
-        
-        try {
-			ObjectFetcher._initialize();
-		} 
-        catch (ClassNotFoundException e) {} 
-        catch (IOException e) {}
+        if (votifier != null) {
+            getServer().getLogger().info("[Depenizen] Votifier hooked, enabling add-ons.");
+            votifierSupport = new VotifierSupport(this);
+            votifierSupport.register();
+        }
+        else {
+            getServer().getLogger().info("[Depenizen] Votifier not found, add-ons will not enable.");
+        }
         
     }
 

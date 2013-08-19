@@ -134,6 +134,13 @@
 			<artifactId>mcMMO</artifactId>
 			<version>LATEST</version>
 		</dependency>
+		<dependency>
+			<groupId>com.vexsoftware</groupId>
+			<artifactId>Votifier</artifactId>
+			<version>6.5.2</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/resources/Votifier.jar</systemPath>
+		</dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
