@@ -1,10 +1,13 @@
 name: Depenizen
 author: GnomeffinWay
-version: 0.2.0
+version: ${project.version} (build ${BUILD_NUMBER})
 main: net.gnomeffinway.depenizen.Depenizen
 depend: [Denizen]
 softdepend: [mcMMO, BattleNight, Towny, Factions, Votifier]
 
 commands:
+    depenizen:
+        description: Prints out the current Depenizen version.
+        usage: /depenizen
 
 permissions:

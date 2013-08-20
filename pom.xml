@@ -4,11 +4,28 @@
     <artifactId>Depenizen</artifactId>
     <version>0.2.0</version>
     <name>Depenizen</name>
-    <url>https://github.com/GnomeffinWay/Depenizen</url>
+    <url>https://github.com/Morphan1/Depenizen</url>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <BUILD_NUMBER>Unknown</BUILD_NUMBER>
+    </properties>
+    
     <issueManagement>
         <system>GitHub</system>
         <url>https://github.com/GnomeffinWay/Depenizen/issues</url>
     </issueManagement>
+    
+    <ciManagement>
+		<system>jenkins</system>
+		<url>http://ci.citizensnpcs.com</url>
+	</ciManagement>
+	<scm>
+		<connection>scm:git:git://github.com/Morphan1/Depenizen.git</connection>
+		<developerConnection>scm:git:git:@github.com:Morphan1/Depenizen.git</developerConnection>
+		<url>https://github.com/Morphan1/Depenizen/tree/master/</url>
+	</scm>
+	
     <build>
         <finalName>Depenizen</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
@@ -142,7 +159,4 @@
 			<systemPath>${basedir}/src/main/resources/Votifier.jar</systemPath>
 		</dependency>
     </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 </project>

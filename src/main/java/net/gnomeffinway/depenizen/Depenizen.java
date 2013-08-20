@@ -8,6 +8,9 @@ import net.gnomeffinway.depenizen.support.McMMOSupport;
 import net.gnomeffinway.depenizen.support.TownySupport;
 import net.gnomeffinway.depenizen.support.VotifierSupport;
 
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.nossr50.mcMMO;
@@ -40,6 +43,17 @@ public class Depenizen extends JavaPlugin{
     @Override
     public void onDisable() {
 
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (cmd.getName().equalsIgnoreCase("depenizen")) {
+            sender.sendMessage(ChatColor.UNDERLINE + "Depenizen");
+            sender.sendMessage(ChatColor.GRAY + "Developers: " + ChatColor.AQUA + "Morphan1" + ChatColor.GRAY + " and GnomeffinWay");
+            sender.sendMessage(ChatColor.GRAY + "Current version: "+ ChatColor.GOLD + this.getDescription().getVersion());
+            return true;
+        }
+        return false;
     }
 
     public void checkPlugins() {         
