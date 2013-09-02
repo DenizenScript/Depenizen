@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
 
-import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.objects.Element;
+import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.scripts.containers.core.WorldScriptHelper;
 import net.gnomeffinway.depenizen.Depenizen;
 
@@ -25,17 +25,15 @@ public class VotifierEvents implements Listener {
     @EventHandler
     public void onVotifierEvent(VotifierEvent event) {
         
-        Map<String, Object> context = new HashMap<String, Object>();
+        Map<String, dObject> context = new HashMap<String, dObject>();
         Vote vote = event.getVote();
-        Player player = Bukkit.getPlayer(vote.getUsername());
 
-        context.put("player", new dPlayer(player));
-        context.put("time", vote.getTimeStamp());
-        context.put("service", vote.getServiceName());
+        context.put("time", new Element(vote.getTimeStamp()));
+        context.put("service", new Element(vote.getServiceName()));
         
         WorldScriptHelper.doEvents(Arrays.asList
                 ("votifier vote"),
-                null, player, context);
+                null, Bukkit.getPlayer(vote.getUsername()), context);
     
     }
 
