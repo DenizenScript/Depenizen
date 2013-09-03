@@ -3,7 +3,7 @@ author: GnomeffinWay
 version: ${project.version} (build ${BUILD_NUMBER})
 main: net.gnomeffinway.depenizen.Depenizen
 depend: [Denizen]
-softdepend: [mcMMO, BattleNight, Towny, Factions, Votifier]
+softdepend: [mcMMO, BattleNight, Towny, Factions, Votifier, Jobs]
 
 commands:
     depenizen:
