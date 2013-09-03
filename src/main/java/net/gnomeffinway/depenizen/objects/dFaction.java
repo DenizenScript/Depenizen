@@ -1,7 +1,6 @@
 package net.gnomeffinway.depenizen.objects;
 
 import com.massivecraft.factions.FFlag;
-import com.massivecraft.factions.Factions;
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
 import com.massivecraft.factions.entity.FactionColls;

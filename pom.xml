@@ -158,5 +158,12 @@
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/Votifier.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>me.zford</groupId>
+			<artifactId>Jobs</artifactId>
+			<version>2.11.3</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/resources/Jobs.jar</systemPath>
+		</dependency>
     </dependencies>
 </project>

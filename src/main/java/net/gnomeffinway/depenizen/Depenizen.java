@@ -1,9 +1,11 @@
 package net.gnomeffinway.depenizen;
 
 import me.limebyte.battlenight.core.BattleNight;
+import me.zford.jobs.Jobs;
 import net.aufdemrand.denizen.Denizen;
 import net.gnomeffinway.depenizen.support.BattleNightSupport;
 import net.gnomeffinway.depenizen.support.FactionsSupport;
+import net.gnomeffinway.depenizen.support.JobsSupport;
 import net.gnomeffinway.depenizen.support.McMMOSupport;
 import net.gnomeffinway.depenizen.support.TownySupport;
 import net.gnomeffinway.depenizen.support.VotifierSupport;
@@ -26,12 +28,14 @@ public class Depenizen extends JavaPlugin{
     public static Denizen denizen;
     public static Towny towny;
     public static Votifier votifier;
+    public static Jobs jobs;
     
     public McMMOSupport mcmmoSupport;
     public BattleNightSupport battlenightSupport;
     public TownySupport townySupport;
     public FactionsSupport factionsSupport;
     public VotifierSupport votifierSupport;
+    public JobsSupport jobsSupport;
 
     @Override
     public void onEnable() {         
@@ -57,12 +61,13 @@ public class Depenizen extends JavaPlugin{
     }
 
     public void checkPlugins() {         
-        denizen=(Denizen) getServer().getPluginManager().getPlugin("Denizen");
-        mcmmo=(mcMMO) getServer().getPluginManager().getPlugin("mcMMO");
-        factions=(Factions) getServer().getPluginManager().getPlugin("Factions");
-        towny=(Towny) getServer().getPluginManager().getPlugin("Towny");
-        battlenight=(BattleNight) getServer().getPluginManager().getPlugin("BattleNight");
-        votifier=(Votifier) getServer().getPluginManager().getPlugin("Votifier");
+        denizen = (Denizen) getServer().getPluginManager().getPlugin("Denizen");
+        mcmmo = (mcMMO) getServer().getPluginManager().getPlugin("mcMMO");
+        factions = (Factions) getServer().getPluginManager().getPlugin("Factions");
+        towny = (Towny) getServer().getPluginManager().getPlugin("Towny");
+        battlenight = (BattleNight) getServer().getPluginManager().getPlugin("BattleNight");
+        votifier = (Votifier) getServer().getPluginManager().getPlugin("Votifier");
+        jobs = (Jobs) getServer().getPluginManager().getPlugin("Jobs");
         
         if (denizen != null) {
             getServer().getLogger().info("[Depenizen] Denizen hooked");
@@ -114,6 +119,14 @@ public class Depenizen extends JavaPlugin{
         }
         else {
             getServer().getLogger().info("[Depenizen] Votifier not found, add-ons will not enable.");
+        }
+        if (jobs != null) {
+            getServer().getLogger().info("[Depenizen] Jobs hooked, enabling add-ons.");
+            jobsSupport = new JobsSupport(this);
+            jobsSupport.register();
+        }
+        else {
+            getServer().getLogger().info("[Depenizen] Jobs not found, add-ons will not enable.");
         }
         
     }
