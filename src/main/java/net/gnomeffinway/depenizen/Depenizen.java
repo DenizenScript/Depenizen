@@ -1,7 +1,7 @@
 package net.gnomeffinway.depenizen;
 
 import me.limebyte.battlenight.core.BattleNight;
-import me.zford.jobs.Jobs;
+import me.zford.jobs.bukkit.JobsPlugin;
 import net.aufdemrand.denizen.Denizen;
 import net.gnomeffinway.depenizen.support.BattleNightSupport;
 import net.gnomeffinway.depenizen.support.FactionsSupport;
@@ -28,7 +28,7 @@ public class Depenizen extends JavaPlugin{
     public static Denizen denizen;
     public static Towny towny;
     public static Votifier votifier;
-    public static Jobs jobs;
+    public static JobsPlugin jobs;
     
     public McMMOSupport mcmmoSupport;
     public BattleNightSupport battlenightSupport;
@@ -67,7 +67,7 @@ public class Depenizen extends JavaPlugin{
         towny = (Towny) getServer().getPluginManager().getPlugin("Towny");
         battlenight = (BattleNight) getServer().getPluginManager().getPlugin("BattleNight");
         votifier = (Votifier) getServer().getPluginManager().getPlugin("Votifier");
-        jobs = (Jobs) getServer().getPluginManager().getPlugin("Jobs");
+        jobs = (JobsPlugin) getServer().getPluginManager().getPlugin("Jobs");
         
         if (denizen != null) {
             getServer().getLogger().info("[Depenizen] Denizen hooked");

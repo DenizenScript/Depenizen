@@ -69,7 +69,7 @@ public class JobsTags implements Listener {
         
         else if (event.matches("jobs")) {
             
-         // JobsTags require a... dJob!
+            // JobsTags require a... dJob!
             dJob j = null;
 
             // Player tag may specify a new player in the <player[context]...> portion of the tag.
