@@ -20,7 +20,7 @@ import com.massivecraft.factions.Factions;
 import com.palmergames.bukkit.towny.Towny;
 import com.vexsoftware.votifier.Votifier;
 
-public class Depenizen extends JavaPlugin{
+public class Depenizen extends JavaPlugin {
     
     public static mcMMO mcmmo;
     public static Factions factions;

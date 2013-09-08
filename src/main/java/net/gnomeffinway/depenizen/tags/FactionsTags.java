@@ -2,7 +2,6 @@ package net.gnomeffinway.depenizen.tags;
 
 import net.aufdemrand.denizen.events.ReplaceableTagEvent;
 import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -17,8 +16,6 @@ import com.massivecraft.factions.entity.UPlayer;
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
 import com.massivecraft.factions.entity.FactionColls;
-import com.massivecraft.factions.FFlag;
-import com.massivecraft.mcore.money.Money;
 
 public class FactionsTags implements Listener {
     
@@ -63,17 +60,25 @@ public class FactionsTags implements Listener {
     		
     		if (attribute.startsWith("factions")) {
                 if (player.hasFaction()) {
-    		        if (attribute.startsWith("role"))
-    		            event.setReplaced(new Element(player.getRole().toString()).getAttribute(attribute.fulfill(2)));
+    		        if (attribute.startsWith("role")) {
+    		            if (player.getRole() != null)
+    		                event.setReplaced(new Element(player.getRole().toString()).getAttribute(attribute.fulfill(2)));
+    		            else
+    		                event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
+    		        }
     		        
     		        else if (attribute.startsWith("title"))
-    		            event.setReplaced(new Element(player.getTitle()).getAttribute(attribute.fulfill(2)));
+    		            if (player.hasTitle())
+    		                event.setReplaced(new Element(player.getTitle()).getAttribute(attribute.fulfill(2)));
+    		            else
+                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
     		    }
                 
                 if (attribute.startsWith("power"))
                     event.setReplaced(new Element(player.getPower()).getAttribute(attribute.fulfill(2)));
     		}
-            if (attribute.startsWith("faction")) {
+    		
+    		else if (attribute.startsWith("faction")) {
             	event.setReplaced(new dFaction(player.getFaction()).getAttribute(attribute.fulfill(1)));
             }
     	}

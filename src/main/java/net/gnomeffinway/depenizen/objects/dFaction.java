@@ -59,6 +59,10 @@ public class dFaction implements dObject {
             dB.echoError("Faction referenced is null!");
     }
     
+    public Faction getFaction() {
+        return faction;
+    }
+    
     /////////////////////
     //   dObject Methods
     /////////////////
@@ -103,9 +107,13 @@ public class dFaction implements dObject {
             return new Element(Money.get(faction))
                     .getAttribute(attribute.fulfill(1));
 
-        else if (attribute.startsWith("home"))
-            return new dLocation(faction.getHome().asBukkitBlock().getLocation())
-                    .getAttribute(attribute.fulfill(1));
+        else if (attribute.startsWith("home")) {
+            if (faction.hasHome())
+                return new dLocation(faction.getHome().asBukkitBlock().getLocation())
+                        .getAttribute(attribute.fulfill(1));
+            else
+                return new Element("null").getAttribute(attribute.fulfill(1));
+        }
         
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open"))
             return new Element(faction.isOpen())
@@ -136,27 +144,20 @@ public class dFaction implements dObject {
                     .getAttribute(attribute.fulfill(1));
         
         else if (attribute.startsWith("relation")) {
-            
-            Faction to = null;
-            
-            for (FactionColl fc : FactionColls.get().getColls())
-                for (Faction f : fc.getAll())
-                    if (f.getComparisonName().equalsIgnoreCase(attribute.getContext(1))) {
-                        to = f;
-                        break;
-                    }
+            dFaction to = valueOf(attribute.getContext(1));
             
             if(to != null) 
-                return new Element(faction.getRelationTo(to).name())
+                return new Element(faction.getRelationTo(to.getFaction()).toString())
                         .getAttribute(attribute.fulfill(1));
-        
+            else
+                return new Element("null").getAttribute(attribute.fulfill(1));
         }
         
         else if (attribute.startsWith("size"))
             return new Element(faction.getLandCount())
                     .getAttribute(attribute.fulfill(1));
         
-        return new Element(identify()).getAttribute(attribute.fulfill(1));
+        return new Element(identify()).getAttribute(attribute);
         
     }
 

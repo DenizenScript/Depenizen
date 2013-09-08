@@ -11,7 +11,6 @@ import me.zford.jobs.container.JobsPlayer;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.ObjectFetcher;
 import net.aufdemrand.denizen.objects.dObject;
-import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 
