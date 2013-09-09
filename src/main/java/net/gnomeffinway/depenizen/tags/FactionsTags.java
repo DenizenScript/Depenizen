@@ -59,23 +59,29 @@ public class FactionsTags implements Listener {
     		attribute = attribute.fulfill(1);
     		
     		if (attribute.startsWith("factions")) {
-                if (player.hasFaction()) {
+                
+                if (attribute.startsWith("power")) {
+                    event.setReplaced(new Element(player.getPower()).getAttribute(attribute.fulfill(2)));
+                    return;
+                }
+                
+                else if (player.hasFaction()) {
     		        if (attribute.startsWith("role")) {
     		            if (player.getRole() != null)
     		                event.setReplaced(new Element(player.getRole().toString()).getAttribute(attribute.fulfill(2)));
     		            else
     		                event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
+    		            return;
     		        }
     		        
-    		        else if (attribute.startsWith("title"))
+    		        else if (attribute.startsWith("title")) {
     		            if (player.hasTitle())
     		                event.setReplaced(new Element(player.getTitle()).getAttribute(attribute.fulfill(2)));
     		            else
                             event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
+    		            return;
+    		        }
     		    }
-                
-                if (attribute.startsWith("power"))
-                    event.setReplaced(new Element(player.getPower()).getAttribute(attribute.fulfill(2)));
     		}
     		
     		else if (attribute.startsWith("faction")) {
