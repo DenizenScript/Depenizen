@@ -81,7 +81,7 @@ public class dTown implements dObject {
 	}
 
 	@Override
-	public String getType() {
+	public String getObjectType() {
 		return "Town";
 	}
 

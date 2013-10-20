@@ -125,7 +125,7 @@ public class dJob implements dObject {
     }
 
     @Override
-    public String getType() {
+    public String getObjectType() {
         return "Job";
     }
 

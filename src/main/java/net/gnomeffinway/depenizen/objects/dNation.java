@@ -78,7 +78,7 @@ public class dNation implements dObject {
 	}
 
 	@Override
-	public String getType() {
+	public String getObjectType() {
 		return "Nation";
 	}
 

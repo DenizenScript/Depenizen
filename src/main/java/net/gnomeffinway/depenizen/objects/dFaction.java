@@ -91,7 +91,7 @@ public class dFaction implements dObject {
     }
 
     @Override
-    public String getType() {
+    public String getObjectType() {
         return "Faction";
     }
 
@@ -109,7 +109,7 @@ public class dFaction implements dObject {
 
         else if (attribute.startsWith("home")) {
             if (faction.hasHome())
-                return new dLocation(faction.getHome().asBukkitBlock().getLocation())
+                return new dLocation(faction.getHome().asBukkitLocation())
                         .getAttribute(attribute.fulfill(1));
             else
                 return new Element("null").getAttribute(attribute.fulfill(1));
