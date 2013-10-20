@@ -13,12 +13,12 @@
     
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/GnomeffinWay/Depenizen/issues</url>
+        <url>https://github.com/Morphan1/Depenizen/issues</url>
     </issueManagement>
     
     <ciManagement>
 		<system>jenkins</system>
-		<url>http://ci.citizensnpcs.com</url>
+		<url>http://ci.citizensnpcs.co</url>
 	</ciManagement>
 	<scm>
 		<connection>scm:git:git://github.com/Morphan1/Depenizen.git</connection>
@@ -82,11 +82,11 @@
         </repository>
 		<repository>
 			<id>mcmmo-repo</id>
-			<url>http://repo.mcmmo.info/</url>
+			<url>http://ci.ecocitycraft.com</url>
 		</repository>
 		<repository>
 			<id>citizens</id>
-			<url>http://repo.citizensnpcs.com</url>
+			<url>http://repo.citizensnpcs.co</url>
 		</repository>
 		<repository>
 			<id>vault-repo</id>
@@ -149,7 +149,9 @@
 		<dependency>
 			<groupId>com.gmail.nossr50.mcMMO</groupId>
 			<artifactId>mcMMO</artifactId>
-			<version>LATEST</version>
+			<version>1.4.07-dev2</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/resources/mcMMO.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.vexsoftware</groupId>

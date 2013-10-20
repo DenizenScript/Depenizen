@@ -171,10 +171,11 @@ public class McMMOCommands extends AbstractCommand {
                             ExperienceAPI.setXPOffline(player.getName(), skill, (int) qty);
                     }
                 }
-                else if(type == Type.XPRATE)
-                    Config.getInstance().setExperienceGainsGlobalMultiplier(qty);
                 else if(type == Type.LEADER && !party.equals(""))
                     PartyAPI.setPartyLeader(party, player.getName());
+                /*
+                else if(type == Type.XPRATE)
+                    Config.getInstance().setExperienceGainsGlobalMultiplier(qty);
                 else if(type == Type.HARDCORE) {
                     boolean isEnabled = Config.getInstance().getHardcoreEnabled();
                     
@@ -197,6 +198,7 @@ public class McMMOCommands extends AbstractCommand {
                         Config.getInstance().setHardcoreVampirismEnabled(false);
                     
                 }
+                */
                 return;
             }
         }
