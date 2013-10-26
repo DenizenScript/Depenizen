@@ -9,7 +9,7 @@ import me.zford.jobs.container.JobProgression;
 import me.zford.jobs.container.JobsPlayer;
 
 import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.ObjectFetcher;
+import net.aufdemrand.denizen.objects.Fetchable;
 import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -26,7 +26,7 @@ public class dJob implements dObject {
     //   OBJECT FETCHER
     /////////////////
     
-    @ObjectFetcher("job")
+    @Fetchable("job")
     public static dJob valueOf(String string) {
         if (string == null) return null;        
         

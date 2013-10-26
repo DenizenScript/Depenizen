@@ -2,7 +2,7 @@ package net.gnomeffinway.depenizen.support;
 
 import org.bukkit.Bukkit;
 
-import net.aufdemrand.denizen.tags.ObjectFetcher;
+import net.aufdemrand.denizen.objects.ObjectFetcher;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.objects.dFaction;
 import net.gnomeffinway.depenizen.tags.FactionsTags;
@@ -18,9 +18,8 @@ public class FactionsSupport {
     public void register() {
         new FactionsTags(depenizen);
         
-        ObjectFetcher.registerWithObjectFetcher(dFaction.class);
-        
         try {
+            ObjectFetcher.registerWithObjectFetcher(dFaction.class);
             ObjectFetcher._initialize();
         } 
         catch (Exception e) {

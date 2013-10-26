@@ -6,7 +6,7 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 
 import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.ObjectFetcher;
+import net.aufdemrand.denizen.objects.Fetchable;
 import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -17,7 +17,7 @@ public class dNation implements dObject {
 	//   OBJECT FETCHER
 	/////////////////
 
-	@ObjectFetcher("nation")
+	@Fetchable("nation")
 	public static dNation valueOf(String string) {
 		if (string == null) return null;
 

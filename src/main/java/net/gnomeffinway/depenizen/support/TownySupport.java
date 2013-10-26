@@ -1,12 +1,12 @@
 package net.gnomeffinway.depenizen.support;
 
-import org.bukkit.Bukkit;
-
-import net.aufdemrand.denizen.tags.ObjectFetcher;
+import net.aufdemrand.denizen.objects.ObjectFetcher;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
 import net.gnomeffinway.depenizen.tags.TownyTags;
+
+import org.bukkit.Bukkit;
 
 public class TownySupport {
 
@@ -19,10 +19,9 @@ public class TownySupport {
     public void register() {
         new TownyTags(depenizen);
         
-        ObjectFetcher.registerWithObjectFetcher(dTown.class);
-        ObjectFetcher.registerWithObjectFetcher(dNation.class);
-        
         try {
+            ObjectFetcher.registerWithObjectFetcher(dTown.class);
+            ObjectFetcher.registerWithObjectFetcher(dNation.class);
             ObjectFetcher._initialize();
         } 
         catch (Exception e) {

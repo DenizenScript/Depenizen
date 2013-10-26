@@ -2,7 +2,7 @@ package net.gnomeffinway.depenizen.support;
 
 import org.bukkit.Bukkit;
 
-import net.aufdemrand.denizen.tags.ObjectFetcher;
+import net.aufdemrand.denizen.objects.ObjectFetcher;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.commands.JobsCommands;
 import net.gnomeffinway.depenizen.objects.dJob;
@@ -20,9 +20,8 @@ public class JobsSupport {
         new JobsTags(depenizen);
         new JobsCommands().activate().as("jobs").withOptions("see documentation", 2);
         
-        ObjectFetcher.registerWithObjectFetcher(dJob.class);
-        
         try {
+            ObjectFetcher.registerWithObjectFetcher(dJob.class);
             ObjectFetcher._initialize();
         } 
         catch (Exception e) {

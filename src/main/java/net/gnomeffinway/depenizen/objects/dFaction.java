@@ -7,7 +7,7 @@ import com.massivecraft.factions.entity.FactionColls;
 import com.massivecraft.mcore.money.Money;
 
 import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.ObjectFetcher;
+import net.aufdemrand.denizen.objects.Fetchable;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -20,7 +20,7 @@ public class dFaction implements dObject {
     //   OBJECT FETCHER
     /////////////////
     
-    @ObjectFetcher("faction")
+    @Fetchable("faction")
     public static dFaction valueOf(String string) {
         if (string == null) return null;        
         
