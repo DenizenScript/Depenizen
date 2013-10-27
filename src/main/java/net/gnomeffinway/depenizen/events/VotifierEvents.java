@@ -22,6 +22,22 @@ public class VotifierEvents implements Listener {
         depenizen.getServer().getPluginManager().registerEvents(this, depenizen);
     }
     
+    // <--[event]
+    // @events votifier vote
+    // @triggers when a Votifier vote is made.
+    // @context
+    // <context.time> returns the time the vote was sent.
+    // <context.service> returns what service was used to send the vote.
+    // @plugin Votifier
+    // -->
+    // <--[event]
+    // @events bungeefier vote
+    // @triggers when a Bungeefier vote is made.
+    // @context
+    // <context.time> returns the time the vote was sent.
+    // <context.service> returns what service was used to send the vote.
+    // @plugin Bungeefier
+    // -->
     @EventHandler
     public void onVotifierEvent(VotifierEvent event) {
         
@@ -32,7 +48,7 @@ public class VotifierEvents implements Listener {
         context.put("service", new Element(vote.getServiceName()));
         
         WorldScriptHelper.doEvents(Arrays.asList
-                ("votifier vote"),
+                ("votifier vote", "bungeefier vote"),
                 null, Bukkit.getPlayer(vote.getUsername()), context);
     
     }

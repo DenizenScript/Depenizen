@@ -7,8 +7,10 @@ import net.gnomeffinway.depenizen.support.BattleNightSupport;
 import net.gnomeffinway.depenizen.support.FactionsSupport;
 import net.gnomeffinway.depenizen.support.JobsSupport;
 import net.gnomeffinway.depenizen.support.McMMOSupport;
+import net.gnomeffinway.depenizen.support.PVPArenaSupport;
 import net.gnomeffinway.depenizen.support.TownySupport;
 import net.gnomeffinway.depenizen.support.VotifierSupport;
+import net.slipcor.pvparena.PVPArena;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -30,6 +32,7 @@ public class Depenizen extends JavaPlugin {
     public static Votifier votifier;
     public static Votifier bungeefier;
     public static JobsPlugin jobs;
+    public static PVPArena pvparena;
     
     public McMMOSupport mcmmoSupport;
     public BattleNightSupport battlenightSupport;
@@ -38,6 +41,7 @@ public class Depenizen extends JavaPlugin {
     public VotifierSupport votifierSupport;
     public VotifierSupport bungeefierSupport;
     public JobsSupport jobsSupport;
+    public PVPArenaSupport pvparenaSupport;
 
     @Override
     public void onEnable() {         
@@ -71,6 +75,7 @@ public class Depenizen extends JavaPlugin {
         votifier = (Votifier) getServer().getPluginManager().getPlugin("Votifier");
         bungeefier = (Votifier) getServer().getPluginManager().getPlugin("Bungeefier");
         jobs = (JobsPlugin) getServer().getPluginManager().getPlugin("Jobs");
+        pvparena = (PVPArena) getServer().getPluginManager().getPlugin("pvparena");
         
         if (denizen != null) {
             getServer().getLogger().info("[Depenizen] Denizen hooked");
@@ -138,6 +143,14 @@ public class Depenizen extends JavaPlugin {
         }
         else {
             getServer().getLogger().info("[Depenizen] Jobs not found, add-ons will not enable.");
+        }
+        if (pvparena != null) {
+            getServer().getLogger().info("[Depenizen] PvP Arena hooked, enabling add-ons.");
+            pvparenaSupport = new PVPArenaSupport(this);
+            pvparenaSupport.register();
+        }
+        else {
+            getServer().getLogger().info("[Depenizen] PvP Arena not found, add-ons will not enable.");
         }
         
     }

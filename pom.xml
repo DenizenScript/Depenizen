@@ -170,5 +170,12 @@
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/Jobs.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>net.slipcor</groupId>
+			<artifactId>pvparena</artifactId>
+			<version>1.0.9.287</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/resources/pvparena.jar</systemPath>
+		</dependency>
     </dependencies>
 </project>
