@@ -8,6 +8,7 @@ import com.palmergames.bukkit.towny.object.TownyUniverse;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.Fetchable;
 import net.aufdemrand.denizen.objects.dObject;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 
@@ -89,7 +90,14 @@ public class dNation implements dObject {
 
 	@Override
 	public String getAttribute(Attribute attribute) {
-		
+
+        // <--[tag]
+        // @attribute <nation@nation.balance>
+        // @returns Element(Double)
+        // @description
+        // Returns the current money balance of the nation.
+        // @plugin Towny
+        // -->
 		if (attribute.startsWith("balance"))
         	try  {
             	return new Element(nation.getHoldingBalance()).getAttribute(attribute.fulfill(1));
@@ -97,49 +105,105 @@ public class dNation implements dObject {
             catch(EconomyException e) {
             	dB.echoError("Invalid economy response!");
             }
-        
+
+        // <--[tag]
+        // @attribute <nation@nation.capital>
+        // @returns dTown
+        // @description
+        // Returns the capital city of the nation as a dTown.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("capital"))
             if(nation.hasCapital())
-                return new Element(nation.getCapital().getName())
+                return new dTown(nation.getCapital())
             			.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <nation@nation.king>
+        // @returns dPlayer
+        // @description
+        // Returns the king of the nation.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("king"))
-            return new Element(nation.getCapital().getMayor().getName())
+            return dPlayer.valueOf(nation.getCapital().getMayor().getName())
             		.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <nation@nation.is_neutral>
+        // @returns Element(Boolean)
+        // @description
+        // Returns true if the nation is neutral.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("isneutral") || attribute.startsWith("is_neutral"))
             return new Element(nation.isNeutral())
         			.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <nation@nation.player_count>
+        // @returns Element(Integer)
+        // @description
+        // Returns the amount of players in the nation.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count"))
             return new Element(nation.getNumResidents())
             		.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <nation@nation.relation[<nation>]>
+        // @returns Element
+        // @description
+        // Returns the nation's current relation with another nation.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("relation")) {
 
     		try {
-				Nation to = TownyUniverse.getDataSource().getNation(attribute.getContext(1));
+				dNation to = valueOf(attribute.getContext(1));
 				
-				if(nation.hasAlly(to))
+				if(nation.hasAlly(to.nation))
 	                return new Element("allies").getAttribute(attribute.fulfill(1));
-	            else if(nation.hasEnemy(to))
+	            else if(nation.hasEnemy(to.nation))
 	            	return new Element("enemies").getAttribute(attribute.fulfill(1));
 	            else
 	            	return new Element("neutral").getAttribute(attribute.fulfill(1));
 				
-			} catch (NotRegisteredException e) {}
+			} catch (Exception e) {}
             
         }
-        
+
+        // <--[tag]
+        // @attribute <nation@nation.tag>
+        // @returns Element
+        // @description
+        // Returns the nation's tag.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("tag"))
             if(nation.hasTag())
                 return new Element(nation.getTag())
             			.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <nation@nation.taxes>
+        // @returns Element(Double)
+        // @description
+        // Returns the nation's current taxes.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("taxes"))
             return new Element(nation.getTaxes())
             		.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <nation@nation.town_count>
+        // @returns Element(Integer)
+        // @description
+        // Returns the number of towns in the nation.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("towncount") || attribute.startsWith("town_count"))
         	return new Element(nation.getNumTowns())
         			.getAttribute(attribute.fulfill(1));

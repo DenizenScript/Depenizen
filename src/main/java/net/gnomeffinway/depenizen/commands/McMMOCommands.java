@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 
 import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.api.PartyAPI;
-import com.gmail.nossr50.config.Config;
 import com.gmail.nossr50.party.PartyManager;
 
 public class McMMOCommands extends AbstractCommand {
@@ -128,10 +127,7 @@ public class McMMOCommands extends AbstractCommand {
                 } 
                 
                 else if (PartyManager.isParty(party)) {
-                	if(player == null)
-                        PartyManager.disbandParty(PartyManager.getParty(party));
-                    
-                    else if(PartyAPI.getPartyLeader(party).equals(player.getName()))
+                	if(PartyAPI.getPartyLeader(party).equals(player.getName()))
                         PartyManager.disbandParty(PartyManager.getParty(party));
                     
                     else

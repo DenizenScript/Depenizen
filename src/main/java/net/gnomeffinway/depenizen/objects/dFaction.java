@@ -103,10 +103,24 @@ public class dFaction implements dObject {
     @Override
     public String getAttribute(Attribute attribute) {
 
+        // <--[tag]
+        // @attribute <faction@faction.balance>
+        // @returns Element(Double)
+        // @description
+        // Returns the amount of money the faction currently has.
+        // @plugin Factions
+        // -->
         if (attribute.startsWith("balance"))
             return new Element(Money.get(faction))
                     .getAttribute(attribute.fulfill(1));
 
+        // <--[tag]
+        // @attribute <faction@faction.home>
+        // @returns dLocation
+        // @description
+        // Returns the location of the faction's home, if any.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("home")) {
             if (faction.hasHome())
                 return new dLocation(faction.getHome().asBukkitLocation())
@@ -115,34 +129,90 @@ public class dFaction implements dObject {
                 return new Element("null").getAttribute(attribute.fulfill(1));
         }
         
+        // <--[tag]
+        // @attribute <faction@faction.is_open>
+        // @returns Element(Boolean)
+        // @description
+        // Returns true if the faction is open.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open"))
             return new Element(faction.isOpen())
                     .getAttribute(attribute.fulfill(1));
         
+        // <--[tag]
+        // @attribute <faction@faction.is_peaceful>
+        // @returns Element(Boolean)
+        // @description
+        // Returns true if the faction is peaceful.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("ispeaceful") || attribute.startsWith("is_peaceful"))
             return new Element(faction.getFlag(FFlag.PEACEFUL))
                     .getAttribute(attribute.fulfill(1));
         
+        // <--[tag]
+        // @attribute <faction@faction.is_permanent>
+        // @returns Element(Boolean)
+        // @description
+        // Returns true if the faction is permanent.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("ispermanent") || attribute.startsWith("is_permanent"))
             return new Element(faction.getFlag(FFlag.PERMANENT))
                     .getAttribute(attribute.fulfill(1));
         
+        // <--[tag]
+        // @attribute <faction@faction.leader>
+        // @returns dPlayer
+        // @description
+        // Returns the faction's leader as a dPlayer.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("leader"))
             return new dPlayer(faction.getLeader().getPlayer())
                     .getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <faction@faction.name>
+        // @returns Element
+        // @description
+        // Returns the name of the faction.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("name"))
             return new Element(faction.getName())
                     .getAttribute(attribute.fulfill(1));
         
+        // <--[tag]
+        // @attribute <faction@faction.player_count>
+        // @returns Element(Integer)
+        // @description
+        // Returns the number of players in the faction.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count"))
             return new Element(faction.getUPlayers().size())
                     .getAttribute(attribute.fulfill(1));
         
+        // <--[tag]
+        // @attribute <faction@faction.power>
+        // @returns Element(Double)
+        // @description
+        // Returns the amount of power the faction currently has.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("power"))
             return new Element(faction.getPower())
                     .getAttribute(attribute.fulfill(1));
         
+        // <--[tag]
+        // @attribute <faction@faction.relation[<faction>]>
+        // @returns Element
+        // @description
+        // Returns the current relation between the faction and another faction.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("relation")) {
             dFaction to = valueOf(attribute.getContext(1));
             
@@ -152,7 +222,14 @@ public class dFaction implements dObject {
             else
                 return new Element("null").getAttribute(attribute.fulfill(1));
         }
-        
+
+        // <--[tag]
+        // @attribute <faction@faction.size>
+        // @returns Element(Integer)
+        // @description
+        // Returns the amount of land the faction has.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("size"))
             return new Element(faction.getLandCount())
                     .getAttribute(attribute.fulfill(1));

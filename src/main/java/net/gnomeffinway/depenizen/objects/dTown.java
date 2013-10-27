@@ -92,7 +92,14 @@ public class dTown implements dObject {
 
 	@Override
 	public String getAttribute(Attribute attribute) {
-		
+
+        // <--[tag]
+        // @attribute <town@town.balance>
+        // @returns Element(Double)
+        // @description
+        // Returns the current money balance of the town.
+        // @plugin Towny
+        // -->
 		if (attribute.startsWith("balance")) {
             try  {
             	return new Element(town.getHoldingBalance()).getAttribute(attribute.fulfill(1));
@@ -101,37 +108,93 @@ public class dTown implements dObject {
             	dB.echoError("Invalid economy response!");
             }
         }
-        
+
+        // <--[tag]
+        // @attribute <town@town.board>
+        // @returns Element
+        // @description
+        // Returns the town's current board.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("board"))
             return new Element(town.getTownBoard())
                 	.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <town@town.is_open>
+        // @returns Element(Boolean)
+        // @description
+        // Returns true if the town is currently open.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open"))
         	return new Element(town.isOpen())
 					.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <town@town.is_public>
+        // @returns Element(Boolean)
+        // @description
+        // Returns true if the town is currently public.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("ispublic") || attribute.startsWith("is_public"))
         	return new Element(town.isPublic())
     				.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <town@town.mayor>
+        // @returns dPlayer
+        // @description
+        // Returns the mayor of the town.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("mayor")) 
         	return dPlayer.valueOf(town.getMayor().getName())
     				.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <town@town.nation>
+        // @returns dNation
+        // @description
+        // Returns the nation that the town belongs to.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("nation"))
             try {
-				return new Element(town.getNation().getName())
+				return new dNation(town.getNation())
 						.getAttribute(attribute.fulfill(1));
 			} catch (NotRegisteredException e) {}
-		
+
+        // <--[tag]
+        // @attribute <town@town.player_count>
+        // @returns Element(Integer)
+        // @description
+        // Returns the number of players in the town.
+        // @plugin Towny
+        // -->
 		else if (attribute.startsWith("playercount") || attribute.startsWith("player_count"))
             return new Element(town.getNumResidents())
             		.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <town@town.size>
+        // @returns Element(Integer)
+        // @description
+        // Returns the number of blocks the town owns.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("size"))
             return new Element(town.getPurchasedBlocks())
             		.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <town@town.spawn>
+        // @returns dLocation
+        // @description
+        // Returns the spawn point of the town.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("spawn")) {
 			try {
 				return new dLocation(town.getSpawn().getBlock().getLocation())
@@ -139,11 +202,25 @@ public class dTown implements dObject {
 			} 
         	catch (TownyException e) {}
         }
-		
+
+        // <--[tag]
+        // @attribute <town@town.tag>
+        // @returns Element
+        // @description
+        // Returns the town's tag.
+        // @plugin Towny
+        // -->
 		else if (attribute.startsWith("tag"))
             return new Element(town.getTag())
             		.getAttribute(attribute.fulfill(1));
-        
+
+        // <--[tag]
+        // @attribute <town@town.taxes>
+        // @returns Element(Double)
+        // @description
+        // Returns the town's current taxes.
+        // @plugin Towny
+        // -->
         else if (attribute.startsWith("taxes"))
             return new Element(town.getTaxes())
         			.getAttribute(attribute.fulfill(1));

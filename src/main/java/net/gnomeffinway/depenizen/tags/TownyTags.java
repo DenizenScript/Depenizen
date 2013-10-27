@@ -56,10 +56,22 @@ public class TownyTags implements Listener {
     	    
     	    attribute = attribute.fulfill(1);
 
+            // <--[tag]
+            // @attribute <p@player.town>
+            // @returns dTown
+            // @description
+            // Returns the player's town.
+            // @plugin Towny
     	    if (attribute.startsWith("town"))
     	    	event.setReplaced(new dTown(TownyUniverse.getDataSource().getResident(p.getName()).getTown())
     	    			.getAttribute(attribute.fulfill(1)));
-    	    
+
+            // <--[tag]
+            // @attribute <p@player.nation>
+            // @returns dNation
+            // @description
+            // Returns the player's nation.
+            // @plugin Towny
     	    if (attribute.startsWith("nation"))
     	    	event.setReplaced(new dNation(TownyUniverse.getDataSource().getResident(p.getName()).getTown().getNation())
     	    			.getAttribute(attribute.fulfill(1)));

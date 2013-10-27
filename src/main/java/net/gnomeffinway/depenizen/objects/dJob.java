@@ -138,37 +138,87 @@ public class dJob implements dObject {
     public String getAttribute(Attribute attribute) {
         
         if (jobProgression != null) {
+            
             if (attribute.startsWith("xp")) {
                 attribute = attribute.fulfill(1);
-                
+
+                // <--[tag]
+                // @attribute <job@job[<player>].xp.max>
+                // @returns Element(Integer)
+                // @description
+                // Returns the maximum experience a player can get in a specified job.
+                // @plugin Jobs
+                // -->
                 if (attribute.startsWith("max")) {
                     return new Element(jobProgression.getMaxExperience())
                             .getAttribute(attribute.fulfill(1));
                 }
-                
+
+                // <--[tag]
+                // @attribute <job@job[<player>].xp.level>
+                // @returns Element(Integer)
+                // @description
+                // Returns the current experience level a player has in a specified job.
+                // @plugin Jobs
+                // -->
                 if (attribute.startsWith("level")) {
                     return new Element(jobProgression.getLevel())
                             .getAttribute(attribute.fulfill(1));
                 }
-                
+
+                // <--[tag]
+                // @attribute <job@job[<player>].xp>
+                // @returns Element(Double)
+                // @description
+                // Returns the current experience a player has in a specified job.
+                // @plugin Jobs
+                // -->
                 return new Element(jobProgression.getExperience()).getAttribute(attribute);
             }
         }
-        
+
+        // <--[tag]
+        // @attribute <job@job.description>
+        // @returns Element
+        // @description
+        // Returns the description of the job.
+        // @plugin Jobs
+        // -->
         if (attribute.startsWith("description"))
             return new Element(job.getDescription()).getAttribute(attribute.fulfill(1));
-        
+
         else if (attribute.startsWith("name")) {
             attribute = attribute.fulfill(1);
-            
+
+            // <--[tag]
+            // @attribute <job@job.name.short>
+            // @returns Element
+            // @description
+            // Returns the shortened name of the job.
+            // @plugin Jobs
+            // -->
             if (attribute.startsWith("short")) {
                 return new Element(job.getShortName())
                         .getAttribute(attribute.fulfill(1));
             }
-            
+
+            // <--[tag]
+            // @attribute <job@job.name>
+            // @returns Element
+            // @description
+            // Returns the name of the job.
+            // @plugin Jobs
+            // -->
             return new Element(job.getName()).getAttribute(attribute);
         }
-        
+
+        // <--[tag]
+        // @attribute <job@job.color>
+        // @returns Element(ChatColor)
+        // @description
+        // Returns the ChatColor of the job.
+        // @plugin Jobs
+        // -->
         else if (attribute.startsWith("color"))
             return new Element(job.getChatColor().toString())
                 .getAttribute(attribute.fulfill(1));

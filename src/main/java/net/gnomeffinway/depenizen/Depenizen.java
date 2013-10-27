@@ -28,6 +28,7 @@ public class Depenizen extends JavaPlugin {
     public static Denizen denizen;
     public static Towny towny;
     public static Votifier votifier;
+    public static Votifier bungeefier;
     public static JobsPlugin jobs;
     
     public McMMOSupport mcmmoSupport;
@@ -35,6 +36,7 @@ public class Depenizen extends JavaPlugin {
     public TownySupport townySupport;
     public FactionsSupport factionsSupport;
     public VotifierSupport votifierSupport;
+    public VotifierSupport bungeefierSupport;
     public JobsSupport jobsSupport;
 
     @Override
@@ -67,6 +69,7 @@ public class Depenizen extends JavaPlugin {
         towny = (Towny) getServer().getPluginManager().getPlugin("Towny");
         battlenight = (BattleNight) getServer().getPluginManager().getPlugin("BattleNight");
         votifier = (Votifier) getServer().getPluginManager().getPlugin("Votifier");
+        bungeefier = (Votifier) getServer().getPluginManager().getPlugin("Bungeefier");
         jobs = (JobsPlugin) getServer().getPluginManager().getPlugin("Jobs");
         
         if (denizen != null) {
@@ -119,6 +122,14 @@ public class Depenizen extends JavaPlugin {
         }
         else {
             getServer().getLogger().info("[Depenizen] Votifier not found, add-ons will not enable.");
+        }
+        if (bungeefier != null) {
+            getServer().getLogger().info("[Depenizen] Bungeefier hooked, enabling add-ons.");
+            bungeefierSupport = new VotifierSupport(this);
+            bungeefierSupport.register();
+        }
+        else {
+            getServer().getLogger().info("[Depenizen] Bungeefier not found, add-ons will not enable.");
         }
         if (jobs != null) {
             getServer().getLogger().info("[Depenizen] Jobs hooked, enabling add-ons.");

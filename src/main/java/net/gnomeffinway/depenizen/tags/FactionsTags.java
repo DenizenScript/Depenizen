@@ -57,15 +57,30 @@ public class FactionsTags implements Listener {
 
     		UPlayer player = UPlayer.get(p.getPlayerEntity());
     		attribute = attribute.fulfill(1);
-    		
+
     		if (attribute.startsWith("factions")) {
-                
+
+                // <--[tag]
+                // @attribute <p@player.factions.power>
+                // @returns Element(Double)
+                // @description
+                // Returns the player's power level.
+                // @plugin Factions
+                // -->
                 if (attribute.startsWith("power")) {
                     event.setReplaced(new Element(player.getPower()).getAttribute(attribute.fulfill(2)));
                     return;
                 }
                 
                 else if (player.hasFaction()) {
+                    
+                    // <--[tag]
+                    // @attribute <p@player.factions.role>
+                    // @returns Element
+                    // @description
+                    // Returns the player's role in their faction.
+                    // @plugin Factions
+                    // -->
     		        if (attribute.startsWith("role")) {
     		            if (player.getRole() != null)
     		                event.setReplaced(new Element(player.getRole().toString()).getAttribute(attribute.fulfill(2)));
@@ -73,7 +88,14 @@ public class FactionsTags implements Listener {
     		                event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
     		            return;
     		        }
-    		        
+
+                    // <--[tag]
+                    // @attribute <p@player.factions.title>
+                    // @returns Element
+                    // @description
+                    // Returns the player's title.
+                    // @plugin Factions
+                    // -->
     		        else if (attribute.startsWith("title")) {
     		            if (player.hasTitle())
     		                event.setReplaced(new Element(player.getTitle()).getAttribute(attribute.fulfill(2)));
@@ -83,7 +105,14 @@ public class FactionsTags implements Listener {
     		        }
     		    }
     		}
-    		
+
+            // <--[tag]
+            // @attribute <p@player.faction>
+            // @returns dFaction
+            // @description
+            // Returns the player's faction.
+            // @plugin Factions
+            // -->
     		else if (attribute.startsWith("faction")) {
             	event.setReplaced(new dFaction(player.getFaction()).getAttribute(attribute.fulfill(1)));
             }

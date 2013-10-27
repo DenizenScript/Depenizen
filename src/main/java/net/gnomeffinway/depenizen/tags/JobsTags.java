@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.tags;
 
 import me.zford.jobs.Jobs;
+import me.zford.jobs.container.Job;
 import me.zford.jobs.container.JobsPlayer;
 import net.aufdemrand.denizen.events.ReplaceableTagEvent;
 import net.aufdemrand.denizen.objects.Element;
@@ -55,9 +56,24 @@ public class JobsTags implements Listener {
             
             JobsPlayer player = new JobsPlayer(p.getName());
             attribute = attribute.fulfill(1);
-            
+
+            // <--[tag]
+            // @attribute <p@player.jobs[<job>]>
+            // @returns dJob
+            // @description
+            // Returns the job specified with the player's information attached.
+            // @plugin Jobs
+            // -->
             if (attribute.startsWith("jobs")) {
-                event.setReplaced(new dJob(Jobs.getJob(attribute.getContext(1)), player)
+                Job job = null;
+                if (attribute.hasContext(1)) {
+                    job = Jobs.getJob(attribute.getContext(1));
+                }
+                if (job == null) {
+                    dB.echoDebug("Invalid or missing job specified in tag <" + event.raw_tag + ">!");
+                    return;
+                }
+                event.setReplaced(new dJob(job, player)
                         .getAttribute(attribute.fulfill(1)));
             }
             
@@ -72,7 +88,7 @@ public class JobsTags implements Listener {
             // JobsTags require a... dJob!
             dJob j = null;
 
-            // Player tag may specify a new player in the <player[context]...> portion of the tag.
+            // Job tag may specify a new job in the <jobs[context]...> portion of the tag.
             if (attribute.hasContext(1))
                 // Check if this is a valid player and update the dPlayer object reference.
                 if (dJob.matches(attribute.getContext(1))) {
