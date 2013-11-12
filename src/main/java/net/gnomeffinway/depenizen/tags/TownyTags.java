@@ -1,6 +1,6 @@
 package net.gnomeffinway.depenizen.tags;
 
-import net.aufdemrand.denizen.events.ReplaceableTagEvent;
+import net.aufdemrand.denizen.events.bukkit.ReplaceableTagEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;

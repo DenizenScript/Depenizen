@@ -72,7 +72,7 @@ public class McMMOCommands extends AbstractCommand {
         String skill = scriptEntry.getElement("skill").asString();
 
         // Report to dB
-        dB.report(getName(),
+        dB.report(scriptEntry, getName(),
                 aH.debugObj("NPC", scriptEntry.getNPC().toString())
                         + aH.debugObj("Action", action.toString())
                         + aH.debugObj("Player", player.getName())
@@ -88,17 +88,20 @@ public class McMMOCommands extends AbstractCommand {
             	
                 if (qty >= 0 && !skill.equals("")) {
                     if (type == Type.LEVELS) {
-                        if (player.isOnline())
+                        if (player.isOnline()) {
                             ExperienceAPI.addLevel(player, skill, (int) qty);
-                        else
+                        }
+                        else {
                             ExperienceAPI.addLevelOffline(player.getName(), skill, (int) qty);
+                        }
                     }
                     
                     else if (type == Type.XP) {
-                    	if (player.isOnline())
-                        	ExperienceAPI.addRawXP(player, skill, (int) qty);
-                        else
-                            ExperienceAPI.addRawXPOffline(player.getName(), skill, (int) qty);
+                    	if (player.isOnline()) {
+                            ExperienceAPI.addRawXP(player, skill, (float) qty);
+                        } else {
+                            ExperienceAPI.addRawXPOffline(player.getName(), skill, (float) qty);
+                        }
                     }
                 } 
                 

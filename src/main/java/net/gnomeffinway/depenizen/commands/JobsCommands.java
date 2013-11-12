@@ -8,7 +8,6 @@ import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.aH;
 import net.aufdemrand.denizen.scripts.ScriptEntry;
 import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
-import net.aufdemrand.denizen.utilities.debugging.dB.Messages;
 import net.gnomeffinway.depenizen.objects.dJob;
 
 public class JobsCommands extends AbstractCommand {
@@ -43,9 +42,9 @@ public class JobsCommands extends AbstractCommand {
         }
         
         if (!scriptEntry.hasObject("action"))
-            throw new InvalidArgumentsException(Messages.ERROR_MISSING_OTHER, "ACTION");
+            throw new InvalidArgumentsException("Must specify an action!");
         if (!scriptEntry.hasObject("job"))
-            throw new InvalidArgumentsException(Messages.ERROR_MISSING_OTHER, "JOB");
+            throw new InvalidArgumentsException("Must specify a job!");
         
     }
     

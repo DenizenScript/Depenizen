@@ -3,7 +3,7 @@ package net.gnomeffinway.depenizen.tags;
 import me.zford.jobs.Jobs;
 import me.zford.jobs.container.Job;
 import me.zford.jobs.container.JobsPlayer;
-import net.aufdemrand.denizen.events.ReplaceableTagEvent;
+import net.aufdemrand.denizen.events.bukkit.ReplaceableTagEvent;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;

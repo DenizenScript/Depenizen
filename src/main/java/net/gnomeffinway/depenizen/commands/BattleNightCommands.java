@@ -8,7 +8,6 @@ import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizen.objects.aH;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizen.utilities.debugging.dB.Messages;
 
 public class BattleNightCommands extends AbstractCommand {
     //TODO: CLASS ?
@@ -52,7 +51,7 @@ public class BattleNightCommands extends AbstractCommand {
         
         // Stash objects in scriptEntry for use in execute()
         if (!scriptEntry.hasObject("action"))
-        	throw new InvalidArgumentsException(Messages.ERROR_MISSING_OTHER, "ACTION");
+        	throw new InvalidArgumentsException("Must specify an action!");
         
         // scriptEntry.defaultObject("spectator", Element.FALSE);
     }
@@ -66,7 +65,7 @@ public class BattleNightCommands extends AbstractCommand {
         // boolean spectator = scriptEntry.getElement("spectator").asBoolean();
 
         // Report to dB
-        dB.report(getName(),
+        dB.report(scriptEntry, getName(),
                 aH.debugObj("NPC", scriptEntry.getNPC().toString())
                         + aH.debugObj("Action", action.toString())
                         // + aH.debugObj("Spectator", String.valueOf(spectator))

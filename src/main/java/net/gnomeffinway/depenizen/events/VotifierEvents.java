@@ -11,9 +11,9 @@ import org.bukkit.event.Listener;
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
 
+import net.aufdemrand.denizen.events.EventManager;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dObject;
-import net.aufdemrand.denizen.scripts.containers.core.WorldScriptHelper;
 import net.gnomeffinway.depenizen.Depenizen;
 
 public class VotifierEvents implements Listener {
@@ -47,7 +47,7 @@ public class VotifierEvents implements Listener {
         context.put("time", new Element(vote.getTimeStamp()));
         context.put("service", new Element(vote.getServiceName()));
         
-        WorldScriptHelper.doEvents(Arrays.asList
+        EventManager.doEvents(Arrays.asList
                 ("votifier vote", "bungeefier vote"),
                 null, Bukkit.getPlayer(vote.getUsername()), context);
     
