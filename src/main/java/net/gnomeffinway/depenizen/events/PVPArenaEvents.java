@@ -9,7 +9,7 @@ import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dList;
 import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.events.EventManager;;
+import net.aufdemrand.denizen.events.EventManager;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.slipcor.pvparena.arena.Arena;
 import net.slipcor.pvparena.arena.ArenaPlayer;

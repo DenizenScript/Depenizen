@@ -8,6 +8,7 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <bukkit.version>1.7.2-R0.1-SNAPSHOT</bukkit.version>
         <BUILD_NUMBER>Unknown</BUILD_NUMBER>
     </properties>
     
@@ -97,9 +98,9 @@
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
-			<version>LATEST</version>
-			<type>jar</type>
+   			<type>jar</type>
 			<scope>compile</scope>
+			<version>${bukkit.version}</version>
 		</dependency>
    		<dependency>
  			<groupId>junit</groupId>

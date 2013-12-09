@@ -21,6 +21,20 @@ public class JobsCommands extends AbstractCommand {
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
         
+        // <--[command]
+        // @Name Jobs
+        // @Syntax jobs [promote/demote/join/quit] [<job>] (<#>)
+        // @Plugin Jobs
+        // @Required 2
+        // @Stable untested
+        // @Short Modifies the specified job of a player.
+        // @Author Morphan1
+        //
+        // @Description Todo
+        // @Tags Todo
+        // @Usage Todo
+        // -->
+        
         // Iterate through arguments
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
             
