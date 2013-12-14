@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.tags;
 
 import net.aufdemrand.denizen.events.bukkit.ReplaceableTagEvent;
+import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -78,6 +79,39 @@ public class TownyTags implements Listener {
     	    	event.setReplaced(new dNation(TownyUniverse.getDataSource().getResident(p.getName()).getTown().getNation())
     	    			.getAttribute(attribute.fulfill(1)));
     	 
+    	}
+    	
+        /////////////////////
+        //   LOCATION TAGS
+        /////////////////
+    	
+    	else if (event.matches("location, l")) {
+    	    
+    	    dLocation loc = null;
+
+            // Check name context for a specified location, or check
+            // the ScriptEntry for a 'location' context
+            if (event.hasNameContext() && dLocation.matches(event.getNameContext()))
+                loc = dLocation.valueOf(event.getNameContext());
+            else if (event.getScriptEntry().hasObject("location"))
+                loc = (dLocation) event.getScriptEntry().getObject("location");
+
+            // Check if location is null, return null if it is
+            if (loc == null) { event.setReplaced("null"); return; }
+            
+            attribute.fulfill(1);
+
+            // <--[tag]
+            // @attribute <l@location.town>
+            // @returns dTown
+            // @description
+            // Returns the town at the specified location.
+            // @plugin Towny
+            // -->
+            if (attribute.startsWith("town"))
+                event.setReplaced(new dTown(TownyUniverse.getDataSource().getTown(TownyUniverse.getTownName(loc)))
+                        .getAttribute(attribute.fulfill(1)));
+    	    
     	}
     	
         /////////////////////

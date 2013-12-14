@@ -2,6 +2,7 @@ package net.gnomeffinway.depenizen.tags;
 
 import net.aufdemrand.denizen.events.bukkit.ReplaceableTagEvent;
 import net.aufdemrand.denizen.objects.Element;
+import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -12,10 +13,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
+import com.massivecraft.factions.Factions;
+import com.massivecraft.factions.entity.BoardColls;
 import com.massivecraft.factions.entity.UPlayer;
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
 import com.massivecraft.factions.entity.FactionColls;
+import com.massivecraft.mcore.ps.PS;
 
 public class FactionsTags implements Listener {
     
@@ -117,6 +121,39 @@ public class FactionsTags implements Listener {
             	event.setReplaced(new dFaction(player.getFaction()).getAttribute(attribute.fulfill(1)));
             }
     	}
+        
+        /////////////////////
+        //   LOCATION TAGS
+        /////////////////
+        
+        else if (event.matches("location, l")) {
+            
+            dLocation loc = null;
+
+            // Check name context for a specified location, or check
+            // the ScriptEntry for a 'location' context
+            if (event.hasNameContext() && dLocation.matches(event.getNameContext()))
+                loc = dLocation.valueOf(event.getNameContext());
+            else if (event.getScriptEntry().hasObject("location"))
+                loc = (dLocation) event.getScriptEntry().getObject("location");
+
+            // Check if location is null, return null if it is
+            if (loc == null) { event.setReplaced("null"); return; }
+            
+            attribute.fulfill(1);
+            
+            // <--[tag]
+            // @attribute <l@location.faction>
+            // @returns dFaction
+            // @description
+            // Returns the faction at the location. (Can also be SafeZone, WarZone, or Wilderness)
+            // @plugin Factions
+            // -->
+            if (attribute.startsWith("faction"))
+                event.setReplaced(new dFaction(BoardColls.get().getFactionAt(PS.valueOf(loc)))
+                        .getAttribute(attribute.fulfill(1)));
+            
+        }
     	
         /////////////////////
         //   FACTION TAGS
