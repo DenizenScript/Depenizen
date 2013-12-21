@@ -5,6 +5,7 @@ import me.zford.jobs.bukkit.JobsPlugin;
 import net.aufdemrand.denizen.Denizen;
 import net.gnomeffinway.depenizen.support.BattleNightSupport;
 import net.gnomeffinway.depenizen.support.FactionsSupport;
+import net.gnomeffinway.depenizen.support.HeroesSupport;
 import net.gnomeffinway.depenizen.support.JobsSupport;
 import net.gnomeffinway.depenizen.support.McMMOSupport;
 import net.gnomeffinway.depenizen.support.PVPArenaSupport;
@@ -18,6 +19,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.nossr50.mcMMO;
+import com.herocraftonline.heroes.Heroes;
 import com.massivecraft.factions.Factions;
 import com.palmergames.bukkit.towny.Towny;
 import com.vexsoftware.votifier.Votifier;
@@ -33,6 +35,7 @@ public class Depenizen extends JavaPlugin {
     public static Votifier bungeefier;
     public static JobsPlugin jobs;
     public static PVPArena pvparena;
+    public static Heroes heroes;
     
     public McMMOSupport mcmmoSupport;
     public BattleNightSupport battlenightSupport;
@@ -42,6 +45,7 @@ public class Depenizen extends JavaPlugin {
     public VotifierSupport bungeefierSupport;
     public JobsSupport jobsSupport;
     public PVPArenaSupport pvparenaSupport;
+    public HeroesSupport heroesSupport;
 
     @Override
     public void onEnable() {         
@@ -151,6 +155,14 @@ public class Depenizen extends JavaPlugin {
         }
         else {
             getServer().getLogger().info("[Depenizen] PvP Arena not found, add-ons will not enable.");
+        }
+        if (heroes != null) {
+            getServer().getLogger().info("[Depenizen] Heroes hooked, enabling add-ons.");
+            heroesSupport = new HeroesSupport(this);
+            heroesSupport.register();
+        }
+        else {
+            getServer().getLogger().info("[Depenizen] Heroes not found, add-ons will not enable.");
         }
         
     }
