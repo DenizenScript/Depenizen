@@ -8,7 +8,8 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <bukkit.version>1.7.2-R0.2-SNAPSHOT</bukkit.version>
+        <bukkit.version>1.7.2-R0.3-SNAPSHOT</bukkit.version>
+        <citizens.version>2.0.11-SNAPSHOT</citizens.version>
         <BUILD_NUMBER>Unknown</BUILD_NUMBER>
     </properties>
     
@@ -185,5 +186,12 @@
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/Heroes.jar</systemPath>
 		</dependency>
+        <dependency>
+            <groupId>net.citizensnpcs</groupId>
+            <artifactId>citizens</artifactId>
+            <version>${citizens.version}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
