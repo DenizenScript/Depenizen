@@ -214,6 +214,17 @@ public class dNation implements dObject {
         	return new Element(nation.getNumTowns())
         			.getAttribute(attribute.fulfill(1));
 		
+        // <--[tag]
+        // @attribute <nation@nation.name>
+        // @returns Element(String)
+        // @description
+        // Returns the nation's current name.
+        // @plugin Towny
+        // -->
+        else if (attribute.startsWith("name"))
+            return new Element(nation.getName())
+            		.getAttribute(attribute.fulfill(1));
+		
 		return new Element(identify()).getAttribute(attribute.fulfill(0));
 		
 	}
