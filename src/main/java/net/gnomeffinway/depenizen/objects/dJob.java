@@ -135,6 +135,12 @@ public class dJob implements dObject {
     }
 
     @Override
+    public String identifySimple() {
+        // TODO: Properties?
+        return identify();
+    }
+
+    @Override
     public String getAttribute(Attribute attribute) {
         
         if (jobProgression != null) {

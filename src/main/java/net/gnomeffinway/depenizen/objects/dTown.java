@@ -90,7 +90,13 @@ public class dTown implements dObject {
 		return "town@" + town.getName();
 	}
 
-	@Override
+    @Override
+    public String identifySimple() {
+        // TODO: Properties?
+        return identify();
+    }
+
+    @Override
 	public String getAttribute(Attribute attribute) {
 
         // <--[tag]

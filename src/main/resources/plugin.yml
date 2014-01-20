@@ -2,7 +2,7 @@ name: Depenizen
 author: GnomeffinWay
 version: ${project.version} (build ${BUILD_NUMBER})
 main: net.gnomeffinway.depenizen.Depenizen
-depend: [Denizen]
+depend: [Denizen, Citizens]
 softdepend: [mcMMO, BattleNight, Towny, Factions, Votifier, Bungeefier, Jobs, Heroes, pvparena]
 
 commands:

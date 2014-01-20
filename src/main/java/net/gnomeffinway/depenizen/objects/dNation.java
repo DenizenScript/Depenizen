@@ -88,6 +88,12 @@ public class dNation implements dObject {
 		return "nation@" + nation.getName();
 	}
 
+    @Override
+    public String identifySimple() {
+        // TODO: Properties?
+        return identify();
+    }
+
 	@Override
 	public String getAttribute(Attribute attribute) {
 
