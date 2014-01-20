@@ -231,6 +231,17 @@ public class dTown implements dObject {
             return new Element(town.getTaxes())
         			.getAttribute(attribute.fulfill(1));
 		
+        // <--[tag]
+        // @attribute <town@town.name>
+        // @returns Element(String)
+        // @description
+        // Returns the town's names.
+        // @plugin Towny
+        // -->
+        else if (attribute.startsWith("name"))
+            return new Element(town.getName())
+        			.getAttribute(attribute.fulfill(1));
+		
 		return new Element(identify()).getAttribute(attribute.fulfill(0));
         
 	}
