@@ -5,9 +5,9 @@ import net.gnomeffinway.depenizen.commands.McMMOCommands;
 import net.gnomeffinway.depenizen.tags.McMMOTags;
 
 public class McMMOSupport {
-    
+
     public Depenizen depenizen;
-    
+
     public McMMOSupport(Depenizen depenizen) {
         this.depenizen = depenizen;
     }
@@ -16,5 +16,5 @@ public class McMMOSupport {
         new McMMOTags(depenizen);
         new McMMOCommands().activate().as("MCMMO").withOptions("see documentation", 1);
     }
-    
+
 }

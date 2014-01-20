@@ -5,22 +5,17 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.Fetchable;
-import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.objects.dObject;
-import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 
 public class dTown implements dObject {
-	
+
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
-	
-	@Fetchable("town")
+
+    @Fetchable("town")
     public static dTown valueOf(String string) {
         if (string == null) return null;
 
@@ -29,66 +24,66 @@ public class dTown implements dObject {
 
         string = string.replace("town@", "");
         try {
-			return new dTown(TownyUniverse.getDataSource().getTown(string));
-		} catch (NotRegisteredException e) {
-			return null;
-		}
+            return new dTown(TownyUniverse.getDataSource().getTown(string));
+        } catch (NotRegisteredException e) {
+            return null;
+        }
     }
-	
-	public static boolean matches(String arg) {
-		arg = arg.replace("town@", "");
-		return TownyUniverse.getDataSource().hasTown(arg);
-	}
-	
+
+    public static boolean matches(String arg) {
+        arg = arg.replace("town@", "");
+        return TownyUniverse.getDataSource().hasTown(arg);
+    }
+
     /////////////////////
     //   STATIC CONSTRUCTORS
     /////////////////
-	
-	Town town = null;
-	
-	public dTown(Town town) {
-		if (town != null)
-			this.town = town;
-		else
-			dB.echoError("Town referenced is null!");
-	}
-	
+
+    Town town = null;
+
+    public dTown(Town town) {
+        if (town != null)
+            this.town = town;
+        else
+            dB.echoError("Town referenced is null!");
+    }
+
     /////////////////////
     //   dObject Methods
     /////////////////
-	
-	private String prefix = "Town";
-	
-	@Override
-	public String getPrefix() {
-		return prefix;
-	}
 
-	@Override
-	public dTown setPrefix(String prefix) {
-		this.prefix = prefix;
-		return this;
-	}
+    private String prefix = "Town";
 
-	@Override
-	public String debug() {
-		return (prefix + "='<A>" + identify() + "<G>' ");
-	}
+    @Override
+    public String getPrefix() {
+        return prefix;
+    }
 
-	@Override
-	public boolean isUnique() {
-		return true;
-	}
+    @Override
+    public dTown setPrefix(String prefix) {
+        this.prefix = prefix;
+        return this;
+    }
 
-	@Override
-	public String getObjectType() {
-		return "Town";
-	}
+    @Override
+    public String debug() {
+        return (prefix + "='<A>" + identify() + "<G>' ");
+    }
 
-	@Override
-	public String identify() {
-		return "town@" + town.getName();
-	}
+    @Override
+    public boolean isUnique() {
+        return true;
+    }
+
+    @Override
+    public String getObjectType() {
+        return "Town";
+    }
+
+    @Override
+    public String identify() {
+        return "town@" + town.getName();
+    }
 
     @Override
     public String identifySimple() {
@@ -97,7 +92,7 @@ public class dTown implements dObject {
     }
 
     @Override
-	public String getAttribute(Attribute attribute) {
+    public String getAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <town@town.balance>
@@ -106,12 +101,11 @@ public class dTown implements dObject {
         // Returns the current money balance of the town.
         // @plugin Towny
         // -->
-		if (attribute.startsWith("balance")) {
-            try  {
-            	return new Element(town.getHoldingBalance()).getAttribute(attribute.fulfill(1));
-            }
-            catch(EconomyException e) {
-            	dB.echoError("Invalid economy response!");
+        if (attribute.startsWith("balance")) {
+            try {
+                return new Element(town.getHoldingBalance()).getAttribute(attribute.fulfill(1));
+            } catch (EconomyException e) {
+                dB.echoError("Invalid economy response!");
             }
         }
 
@@ -124,7 +118,7 @@ public class dTown implements dObject {
         // -->
         else if (attribute.startsWith("board"))
             return new Element(town.getTownBoard())
-                	.getAttribute(attribute.fulfill(1));
+                    .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
         // @attribute <town@town.is_open>
@@ -134,8 +128,8 @@ public class dTown implements dObject {
         // @plugin Towny
         // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open"))
-        	return new Element(town.isOpen())
-					.getAttribute(attribute.fulfill(1));
+            return new Element(town.isOpen())
+                    .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
         // @attribute <town@town.is_public>
@@ -145,8 +139,8 @@ public class dTown implements dObject {
         // @plugin Towny
         // -->
         else if (attribute.startsWith("ispublic") || attribute.startsWith("is_public"))
-        	return new Element(town.isPublic())
-    				.getAttribute(attribute.fulfill(1));
+            return new Element(town.isPublic())
+                    .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
         // @attribute <town@town.mayor>
@@ -155,9 +149,9 @@ public class dTown implements dObject {
         // Returns the mayor of the town.
         // @plugin Towny
         // -->
-        else if (attribute.startsWith("mayor")) 
-        	return dPlayer.valueOf(town.getMayor().getName())
-    				.getAttribute(attribute.fulfill(1));
+        else if (attribute.startsWith("mayor"))
+            return dPlayer.valueOf(town.getMayor().getName())
+                    .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
         // @attribute <town@town.nation>
@@ -168,9 +162,9 @@ public class dTown implements dObject {
         // -->
         else if (attribute.startsWith("nation"))
             try {
-				return new dNation(town.getNation())
-						.getAttribute(attribute.fulfill(1));
-			} catch (NotRegisteredException e) {}
+                return new dNation(town.getNation())
+                        .getAttribute(attribute.fulfill(1));
+            } catch (NotRegisteredException e) {}
 
         // <--[tag]
         // @attribute <town@town.player_count>
@@ -179,9 +173,9 @@ public class dTown implements dObject {
         // Returns the number of players in the town.
         // @plugin Towny
         // -->
-		else if (attribute.startsWith("playercount") || attribute.startsWith("player_count"))
+        else if (attribute.startsWith("playercount") || attribute.startsWith("player_count"))
             return new Element(town.getNumResidents())
-            		.getAttribute(attribute.fulfill(1));
+                    .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
         // @attribute <town@town.size>
@@ -192,7 +186,7 @@ public class dTown implements dObject {
         // -->
         else if (attribute.startsWith("size"))
             return new Element(town.getPurchasedBlocks())
-            		.getAttribute(attribute.fulfill(1));
+                    .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
         // @attribute <town@town.spawn>
@@ -202,11 +196,10 @@ public class dTown implements dObject {
         // @plugin Towny
         // -->
         else if (attribute.startsWith("spawn")) {
-			try {
-				return new dLocation(town.getSpawn().getBlock().getLocation())
-						.getAttribute(attribute.fulfill(1));
-			} 
-        	catch (TownyException e) {}
+            try {
+                return new dLocation(town.getSpawn().getBlock().getLocation())
+                        .getAttribute(attribute.fulfill(1));
+            } catch (TownyException e) {}
         }
 
         // <--[tag]
@@ -216,9 +209,9 @@ public class dTown implements dObject {
         // Returns the town's tag.
         // @plugin Towny
         // -->
-		else if (attribute.startsWith("tag"))
+        else if (attribute.startsWith("tag"))
             return new Element(town.getTag())
-            		.getAttribute(attribute.fulfill(1));
+                    .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
         // @attribute <town@town.taxes>
@@ -229,8 +222,8 @@ public class dTown implements dObject {
         // -->
         else if (attribute.startsWith("taxes"))
             return new Element(town.getTaxes())
-        			.getAttribute(attribute.fulfill(1));
-		
+                    .getAttribute(attribute.fulfill(1));
+
         // <--[tag]
         // @attribute <town@town.name>
         // @returns Element(String)
@@ -240,10 +233,10 @@ public class dTown implements dObject {
         // -->
         else if (attribute.startsWith("name"))
             return new Element(town.getName())
-        			.getAttribute(attribute.fulfill(1));
-		
-		return new Element(identify()).getAttribute(attribute.fulfill(0));
-        
-	}
+                    .getAttribute(attribute.fulfill(1));
+
+        return new Element(identify()).getAttribute(attribute.fulfill(0));
+
+    }
 
 }

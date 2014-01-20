@@ -7,7 +7,7 @@ import net.gnomeffinway.depenizen.tags.BattleNightTags;
 public class BattleNightSupport {
 
     public Depenizen depenizen;
-    
+
     public BattleNightSupport(Depenizen depenizen) {
         this.depenizen = depenizen;
     }

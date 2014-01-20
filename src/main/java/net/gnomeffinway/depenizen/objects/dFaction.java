@@ -5,28 +5,23 @@ import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
 import com.massivecraft.factions.entity.FactionColls;
 import com.massivecraft.mcore.money.Money;
-
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.Fetchable;
-import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.objects.dObject;
-import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 
 public class dFaction implements dObject {
-    
+
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
-    
+
     @Fetchable("faction")
     public static dFaction valueOf(String string) {
-        if (string == null) return null;        
-        
+        if (string == null) return null;
+
         ////////
         // Match faction name
-        
+
         string = string.replace("faction@", "");
         for (FactionColl fc : FactionColls.get().getColls()) {
             for (Faction f : fc.getAll()) {
@@ -35,40 +30,40 @@ public class dFaction implements dObject {
                 }
             }
         }
-        
+
         return null;
     }
-    
+
     public static boolean matches(String arg) {
         if (valueOf(arg) != null)
             return true;
-        
+
         return false;
     }
-    
+
     /////////////////////
     //   STATIC CONSTRUCTORS
     /////////////////
-    
+
     Faction faction = null;
-    
+
     public dFaction(Faction faction) {
         if (faction != null)
             this.faction = faction;
         else
             dB.echoError("Faction referenced is null!");
     }
-    
+
     public Faction getFaction() {
         return faction;
     }
-    
+
     /////////////////////
     //   dObject Methods
     /////////////////
-    
+
     private String prefix = "Faction";
-    
+
     @Override
     public String getPrefix() {
         return prefix;
@@ -120,13 +115,13 @@ public class dFaction implements dObject {
             return new Element(Money.get(faction))
                     .getAttribute(attribute.fulfill(1));
 
-        // <--[tag]
-        // @attribute <faction@faction.home>
-        // @returns dLocation
-        // @description
-        // Returns the location of the faction's home, if any.
-        // @plugin Factions
-        // -->
+            // <--[tag]
+            // @attribute <faction@faction.home>
+            // @returns dLocation
+            // @description
+            // Returns the location of the faction's home, if any.
+            // @plugin Factions
+            // -->
         else if (attribute.startsWith("home")) {
             if (faction.hasHome())
                 return new dLocation(faction.getHome().asBukkitLocation())
@@ -134,7 +129,7 @@ public class dFaction implements dObject {
             else
                 return new Element("null").getAttribute(attribute.fulfill(1));
         }
-        
+
         // <--[tag]
         // @attribute <faction@faction.is_open>
         // @returns Element(Boolean)
@@ -145,7 +140,7 @@ public class dFaction implements dObject {
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open"))
             return new Element(faction.isOpen())
                     .getAttribute(attribute.fulfill(1));
-        
+
         // <--[tag]
         // @attribute <faction@faction.is_peaceful>
         // @returns Element(Boolean)
@@ -156,7 +151,7 @@ public class dFaction implements dObject {
         else if (attribute.startsWith("ispeaceful") || attribute.startsWith("is_peaceful"))
             return new Element(faction.getFlag(FFlag.PEACEFUL))
                     .getAttribute(attribute.fulfill(1));
-        
+
         // <--[tag]
         // @attribute <faction@faction.is_permanent>
         // @returns Element(Boolean)
@@ -167,7 +162,7 @@ public class dFaction implements dObject {
         else if (attribute.startsWith("ispermanent") || attribute.startsWith("is_permanent"))
             return new Element(faction.getFlag(FFlag.PERMANENT))
                     .getAttribute(attribute.fulfill(1));
-        
+
         // <--[tag]
         // @attribute <faction@faction.leader>
         // @returns dPlayer
@@ -189,7 +184,7 @@ public class dFaction implements dObject {
         else if (attribute.startsWith("name"))
             return new Element(faction.getName())
                     .getAttribute(attribute.fulfill(1));
-        
+
         // <--[tag]
         // @attribute <faction@faction.player_count>
         // @returns Element(Integer)
@@ -200,7 +195,7 @@ public class dFaction implements dObject {
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count"))
             return new Element(faction.getUPlayers().size())
                     .getAttribute(attribute.fulfill(1));
-        
+
         // <--[tag]
         // @attribute <faction@faction.power>
         // @returns Element(Double)
@@ -211,7 +206,7 @@ public class dFaction implements dObject {
         else if (attribute.startsWith("power"))
             return new Element(faction.getPower())
                     .getAttribute(attribute.fulfill(1));
-        
+
         // <--[tag]
         // @attribute <faction@faction.relation[<faction>]>
         // @returns Element
@@ -221,8 +216,8 @@ public class dFaction implements dObject {
         // -->
         else if (attribute.startsWith("relation")) {
             dFaction to = valueOf(attribute.getContext(1));
-            
-            if(to != null) 
+
+            if (to != null)
                 return new Element(faction.getRelationTo(to.getFaction()).toString())
                         .getAttribute(attribute.fulfill(1));
             else
@@ -239,19 +234,19 @@ public class dFaction implements dObject {
         else if (attribute.startsWith("size"))
             return new Element(faction.getLandCount())
                     .getAttribute(attribute.fulfill(1));
-        // <--[tag]
-        // @attribute <faction@faction.leader>
-        // @returns Element(String)
-        // @description
-        // Returns the name of the faction leader.
-        // @plugin Factions
-        // -->
+            // <--[tag]
+            // @attribute <faction@faction.leader>
+            // @returns Element(String)
+            // @description
+            // Returns the name of the faction leader.
+            // @plugin Factions
+            // -->
         else if (attribute.startsWith("leader"))
             return new Element(faction.getLeader().getName())
                     .getAttribute(attribute.fulfill(1));
-        
+
         return new Element(identify()).getAttribute(attribute);
-        
+
     }
 
 }
