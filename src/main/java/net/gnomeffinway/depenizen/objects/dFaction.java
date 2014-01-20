@@ -239,6 +239,16 @@ public class dFaction implements dObject {
         else if (attribute.startsWith("size"))
             return new Element(faction.getLandCount())
                     .getAttribute(attribute.fulfill(1));
+        // <--[tag]
+        // @attribute <faction@faction.leader>
+        // @returns Element(String)
+        // @description
+        // Returns the name of the faction leader.
+        // @plugin Factions
+        // -->
+        else if (attribute.startsWith("leader"))
+            return new Element(faction.getLeader().getName())
+                    .getAttribute(attribute.fulfill(1));
         
         return new Element(identify()).getAttribute(attribute);
         
