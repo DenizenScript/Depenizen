@@ -109,7 +109,7 @@ public class McMMOTags implements Listener {
                 	attribute = attribute.fulfill(1);
 
                     // <--[tag]
-                    // @attribute <p@player.mcmmo.to_next_level[<skill>]>
+                    // @attribute <p@player.mcmmo.xp.to_next_level[<skill>]>
                     // @returns Element(Integer)
                     // @description
                     // Returns the amount of experience a player has left to level up
