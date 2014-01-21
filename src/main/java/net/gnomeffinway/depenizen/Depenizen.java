@@ -1,19 +1,22 @@
 package net.gnomeffinway.depenizen;
 
-import com.gmail.nossr50.mcMMO;
-import com.herocraftonline.heroes.Heroes;
-import com.massivecraft.factions.Factions;
-import com.palmergames.bukkit.towny.Towny;
-import com.vexsoftware.votifier.Votifier;
 import me.limebyte.battlenight.core.BattleNight;
 import me.zford.jobs.bukkit.JobsPlugin;
 import net.aufdemrand.denizen.Denizen;
 import net.gnomeffinway.depenizen.support.*;
 import net.slipcor.pvparena.PVPArena;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.dynmap.DynmapAPI;
+
+import com.gmail.nossr50.mcMMO;
+import com.herocraftonline.heroes.Heroes;
+import com.massivecraft.factions.Factions;
+import com.palmergames.bukkit.towny.Towny;
+import com.vexsoftware.votifier.Votifier;
 
 public class Depenizen extends JavaPlugin {
 
@@ -27,6 +30,7 @@ public class Depenizen extends JavaPlugin {
     public static JobsPlugin jobs;
     public static PVPArena pvparena;
     public static Heroes heroes;
+    public static DynmapAPI dynmap;
 
     public McMMOSupport mcmmoSupport;
     public BattleNightSupport battlenightSupport;
@@ -37,6 +41,7 @@ public class Depenizen extends JavaPlugin {
     public JobsSupport jobsSupport;
     public PVPArenaSupport pvparenaSupport;
     public HeroesSupport heroesSupport;
+    public DynmapSupport dynmapSupport;
 
     @Override
     public void onEnable() {
@@ -54,8 +59,8 @@ public class Depenizen extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("depenizen")) {
             sender.sendMessage(ChatColor.UNDERLINE + "Depenizen");
-            sender.sendMessage(ChatColor.GRAY + "Developers: " + ChatColor.AQUA + "Morphan1" + ChatColor.GRAY + " and GnomeffinWay");
-            sender.sendMessage(ChatColor.GRAY + "Current version: " + ChatColor.GOLD + this.getDescription().getVersion());
+            sender.sendMessage(ChatColor.GRAY + "Developers: " + ChatColor.AQUA + "Morphan1" + ChatColor.GRAY + ", " + ChatColor.GREEN + "Jeebiss" + ChatColor.GRAY + " and GnomeffinWay");
+            sender.sendMessage(ChatColor.GRAY + "Current version: "+ ChatColor.GOLD + this.getDescription().getVersion());
             return true;
         }
         return false;
@@ -71,6 +76,7 @@ public class Depenizen extends JavaPlugin {
         bungeefier = (Votifier) getServer().getPluginManager().getPlugin("Bungeefier");
         jobs = (JobsPlugin) getServer().getPluginManager().getPlugin("Jobs");
         pvparena = (PVPArena) getServer().getPluginManager().getPlugin("pvparena");
+        dynmap = (DynmapAPI) getServer().getPluginManager().getPlugin("dynmap"); 
 
         if (denizen != null) {
             getServer().getLogger().info("[Depenizen] Denizen hooked");
@@ -144,6 +150,11 @@ public class Depenizen extends JavaPlugin {
             heroesSupport.register();
         } else {
             getServer().getLogger().info("[Depenizen] Heroes not found, add-ons will not enable.");
+        }
+        if (dynmap != null) {
+        	getServer().getLogger().info("[Depenizen] Dynmap hooked, enabling add-ons.");
+        	dynmapSupport = new DynmapSupport(this);
+        	dynmapSupport.register();
         }
 
     }
