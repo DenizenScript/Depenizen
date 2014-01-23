@@ -3,9 +3,7 @@ package net.gnomeffinway.depenizen.tags;
 import com.massivecraft.factions.entity.*;
 import com.massivecraft.mcore.ps.PS;
 import net.aufdemrand.denizen.events.bukkit.ReplaceableTagEvent;
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.Depenizen;
@@ -13,6 +11,8 @@ import net.gnomeffinway.depenizen.objects.dFaction;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+
+import java.util.ArrayList;
 
 public class FactionsTags implements Listener {
 
@@ -114,6 +114,96 @@ public class FactionsTags implements Listener {
         }
 
         /////////////////////
+        //   NPC TAGS
+        /////////////////
+
+        else if (event.matches("npc")) {
+
+            dNPC n = event.getNPC();
+
+            if (attribute.hasContext(1))
+                if (dNPC.matches(attribute.getContext(1)))
+                    n = dNPC.valueOf(attribute.getContext(1));
+                else {
+                    dB.echoDebug(event.getScriptEntry(), "Could not match '" + attribute.getContext(1) + "' to a valid NPC!");
+                    return;
+                }
+
+            if (n == null || !n.isValid()) {
+                dB.echoDebug(event.getScriptEntry(), "Invalid or missing NPC for tag <" + event.raw_tag + ">!");
+                event.setReplaced("null");
+                return;
+            }
+
+            UPlayer npc = null;
+            for (UPlayerColl upc : UPlayerColls.get().getColls()) {
+                for (UPlayer up : upc.getAll())
+                    if (up.getName().equalsIgnoreCase(n.getName()))
+                        npc = up;
+            }
+            if (npc == null) return;
+
+            if (attribute.startsWith("factions")) {
+
+                // <--[tag]
+                // @attribute <n@npc.factions.power>
+                // @returns Element(Double)
+                // @description
+                // Returns the NPC's power level.
+                // @plugin Factions
+                // -->
+                if (attribute.startsWith("power")) {
+                    event.setReplaced(new Element(npc.getPower()).getAttribute(attribute.fulfill(2)));
+                    return;
+                } else if (npc.hasFaction()) {
+
+                    // <--[tag]
+                    // @attribute <n@npc.factions.role>
+                    // @returns Element
+                    // @description
+                    // Returns the NPC's role in their faction.
+                    // @plugin Factions
+                    // -->
+                    if (attribute.startsWith("role")) {
+                        if (npc.getRole() != null)
+                            event.setReplaced(new Element(npc.getRole().toString()).getAttribute(attribute.fulfill(2)));
+                        else
+                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
+                        return;
+                    }
+
+                    // <--[tag]
+                    // @attribute <n@npc.factions.title>
+                    // @returns Element
+                    // @description
+                    // Returns the NPC's title.
+                    // @plugin Factions
+                    // -->
+                    else if (attribute.startsWith("title")) {
+                        if (npc.hasTitle())
+                            event.setReplaced(new Element(npc.getTitle()).getAttribute(attribute.fulfill(2)));
+                        else
+                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
+                        return;
+                    }
+                }
+
+            }
+
+            // <--[tag]
+            // @attribute <n@npc.faction>
+            // @returns dFaction
+            // @description
+            // Returns the NPC's faction.
+            // @plugin Factions
+            // -->
+            else if (attribute.startsWith("faction")) {
+                event.setReplaced(new dFaction(npc.getFaction()).getAttribute(attribute.fulfill(1)));
+            }
+
+        }
+
+        /////////////////////
         //   LOCATION TAGS
         /////////////////
 
@@ -152,6 +242,29 @@ public class FactionsTags implements Listener {
         /////////////////////
         //   FACTION TAGS
         /////////////////
+
+        else if (event.matches("factions")) {
+
+            attribute = event.getAttributes().fulfill(1);
+
+            // <--[tag]
+            // @attribute <factions.list_factions>
+            // @returns dList(dFaction)
+            // @description
+            // Returns a list of all current factions.
+            // @plugin Factions
+            // -->
+            if (attribute.startsWith("list_factions")) {
+                ArrayList<dFaction> factions = new ArrayList<dFaction>();
+
+                for (FactionColl fc : FactionColls.get().getColls())
+                    for (Faction f : fc.getAll())
+                        factions.add(new dFaction(f));
+
+                event.setReplaced(new dList(factions).getAttribute(attribute.fulfill(1)));
+            }
+
+        }
 
         else if (event.matches("faction")) {
 

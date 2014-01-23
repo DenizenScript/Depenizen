@@ -170,9 +170,13 @@ public class dFaction implements dObject {
         // Returns the faction's leader as a dPlayer.
         // @plugin Factions
         // -->
-        else if (attribute.startsWith("leader"))
-            return dPlayer.valueOf(faction.getLeader().getName())
-                    .getAttribute(attribute.fulfill(1));
+        else if (attribute.startsWith("leader")) {
+            if (faction.getLeader() != null)
+                return dPlayer.valueOf(faction.getLeader().getName())
+                        .getAttribute(attribute.fulfill(1));
+            else
+                return Element.NULL.getAttribute(attribute.fulfill(1));
+        }
 
         // <--[tag]
         // @attribute <faction@faction.name>
