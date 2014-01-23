@@ -52,7 +52,14 @@ public class FactionsTags implements Listener {
                 return;
             }
 
-            UPlayer player = UPlayer.get(p.getPlayerEntity());
+            UPlayer player = null;
+            for (UPlayerColl upc : UPlayerColls.get().getColls()) {
+                for (UPlayer up : upc.getAll())
+                    if (up.getName().equalsIgnoreCase(p.getName()))
+                        player = up;
+            }
+            if (player == null) return;
+
             attribute = attribute.fulfill(1);
 
             if (attribute.startsWith("factions")) {
@@ -142,6 +149,8 @@ public class FactionsTags implements Listener {
                         npc = up;
             }
             if (npc == null) return;
+
+            attribute = attribute.fulfill(1);
 
             if (attribute.startsWith("factions")) {
 
