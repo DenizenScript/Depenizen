@@ -148,7 +148,7 @@ public class dJob implements dObject {
 
                 // <--[tag]
                 // @attribute <job@job[<player>].xp.max>
-                // @returns Element(Integer)
+                // @returns Element(Number)
                 // @description
                 // Returns the maximum experience a player can get in a specified job.
                 // @plugin Jobs
@@ -160,7 +160,7 @@ public class dJob implements dObject {
 
                 // <--[tag]
                 // @attribute <job@job[<player>].xp.level>
-                // @returns Element(Integer)
+                // @returns Element(Number)
                 // @description
                 // Returns the current experience level a player has in a specified job.
                 // @plugin Jobs
@@ -182,13 +182,24 @@ public class dJob implements dObject {
         }
 
         // <--[tag]
+        // @attribute <job@job.color>
+        // @returns Element(ChatColor)
+        // @description
+        // Returns the ChatColor of the job.
+        // @plugin Jobs
+        // -->
+        if (attribute.startsWith("color"))
+            return new Element(job.getChatColor().toString())
+                    .getAttribute(attribute.fulfill(1));
+
+        // <--[tag]
         // @attribute <job@job.description>
         // @returns Element
         // @description
         // Returns the description of the job.
         // @plugin Jobs
         // -->
-        if (attribute.startsWith("description"))
+        else if (attribute.startsWith("description"))
             return new Element(job.getDescription()).getAttribute(attribute.fulfill(1));
 
         else if (attribute.startsWith("name")) {
@@ -215,17 +226,6 @@ public class dJob implements dObject {
             // -->
             return new Element(job.getName()).getAttribute(attribute);
         }
-
-        // <--[tag]
-        // @attribute <job@job.color>
-        // @returns Element(ChatColor)
-        // @description
-        // Returns the ChatColor of the job.
-        // @plugin Jobs
-        // -->
-        else if (attribute.startsWith("color"))
-            return new Element(job.getChatColor().toString())
-                    .getAttribute(attribute.fulfill(1));
 
         return new Element(identify()).getAttribute(attribute.fulfill(1));
 

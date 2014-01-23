@@ -106,7 +106,7 @@ public class dFaction implements dObject {
 
         // <--[tag]
         // @attribute <faction@faction.balance>
-        // @returns Element(Double)
+        // @returns Element(Decimal)
         // @description
         // Returns the amount of money the faction currently has.
         // @plugin Factions
@@ -115,13 +115,13 @@ public class dFaction implements dObject {
             return new Element(Money.get(faction))
                     .getAttribute(attribute.fulfill(1));
 
-            // <--[tag]
-            // @attribute <faction@faction.home>
-            // @returns dLocation
-            // @description
-            // Returns the location of the faction's home, if any.
-            // @plugin Factions
-            // -->
+        // <--[tag]
+        // @attribute <faction@faction.home>
+        // @returns dLocation
+        // @description
+        // Returns the location of the faction's home, if any.
+        // @plugin Factions
+        // -->
         else if (attribute.startsWith("home")) {
             if (faction.hasHome())
                 return new dLocation(faction.getHome().asBukkitLocation())
@@ -171,7 +171,7 @@ public class dFaction implements dObject {
         // @plugin Factions
         // -->
         else if (attribute.startsWith("leader"))
-            return new dPlayer(faction.getLeader().getPlayer())
+            return dPlayer.valueOf(faction.getLeader().getName())
                     .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
@@ -187,7 +187,7 @@ public class dFaction implements dObject {
 
         // <--[tag]
         // @attribute <faction@faction.player_count>
-        // @returns Element(Integer)
+        // @returns Element(Number)
         // @description
         // Returns the number of players in the faction.
         // @plugin Factions
@@ -198,7 +198,7 @@ public class dFaction implements dObject {
 
         // <--[tag]
         // @attribute <faction@faction.power>
-        // @returns Element(Double)
+        // @returns Element(Decimal)
         // @description
         // Returns the amount of power the faction currently has.
         // @plugin Factions
@@ -226,23 +226,13 @@ public class dFaction implements dObject {
 
         // <--[tag]
         // @attribute <faction@faction.size>
-        // @returns Element(Integer)
+        // @returns Element(Number)
         // @description
         // Returns the amount of land the faction has.
         // @plugin Factions
         // -->
         else if (attribute.startsWith("size"))
             return new Element(faction.getLandCount())
-                    .getAttribute(attribute.fulfill(1));
-            // <--[tag]
-            // @attribute <faction@faction.leader>
-            // @returns Element(String)
-            // @description
-            // Returns the name of the faction leader.
-            // @plugin Factions
-            // -->
-        else if (attribute.startsWith("leader"))
-            return new Element(faction.getLeader().getName())
                     .getAttribute(attribute.fulfill(1));
 
         return new Element(identify()).getAttribute(attribute);

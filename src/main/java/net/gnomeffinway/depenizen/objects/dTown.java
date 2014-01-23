@@ -96,7 +96,7 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.balance>
-        // @returns Element(Double)
+        // @returns Element(Decimal)
         // @description
         // Returns the current money balance of the town.
         // @plugin Towny
@@ -154,6 +154,17 @@ public class dTown implements dObject {
                     .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
+        // @attribute <town@town.name>
+        // @returns Element
+        // @description
+        // Returns the town's names.
+        // @plugin Towny
+        // -->
+        else if (attribute.startsWith("name"))
+            return new Element(town.getName())
+                    .getAttribute(attribute.fulfill(1));
+
+        // <--[tag]
         // @attribute <town@town.nation>
         // @returns dNation
         // @description
@@ -168,7 +179,7 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.player_count>
-        // @returns Element(Integer)
+        // @returns Element(Number)
         // @description
         // Returns the number of players in the town.
         // @plugin Towny
@@ -179,7 +190,7 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.size>
-        // @returns Element(Integer)
+        // @returns Element(Number)
         // @description
         // Returns the number of blocks the town owns.
         // @plugin Towny
@@ -215,24 +226,13 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.taxes>
-        // @returns Element(Double)
+        // @returns Element(Decimal)
         // @description
         // Returns the town's current taxes.
         // @plugin Towny
         // -->
         else if (attribute.startsWith("taxes"))
             return new Element(town.getTaxes())
-                    .getAttribute(attribute.fulfill(1));
-
-        // <--[tag]
-        // @attribute <town@town.name>
-        // @returns Element(String)
-        // @description
-        // Returns the town's names.
-        // @plugin Towny
-        // -->
-        else if (attribute.startsWith("name"))
-            return new Element(town.getName())
                     .getAttribute(attribute.fulfill(1));
 
         return new Element(identify()).getAttribute(attribute.fulfill(0));
