@@ -64,6 +64,8 @@ public class FactionsTags implements Listener {
 
             if (attribute.startsWith("factions")) {
 
+                attribute = attribute.fulfill(1);
+
                 // <--[tag]
                 // @attribute <p@player.factions.power>
                 // @returns Element(Double)
@@ -72,9 +74,11 @@ public class FactionsTags implements Listener {
                 // @plugin Factions
                 // -->
                 if (attribute.startsWith("power")) {
-                    event.setReplaced(new Element(player.getPower()).getAttribute(attribute.fulfill(2)));
+                    event.setReplaced(new Element(player.getPower()).getAttribute(attribute.fulfill(1)));
                     return;
-                } else if (player.hasFaction()) {
+                }
+
+                else if (player.hasFaction()) {
 
                     // <--[tag]
                     // @attribute <p@player.factions.role>
@@ -85,9 +89,9 @@ public class FactionsTags implements Listener {
                     // -->
                     if (attribute.startsWith("role")) {
                         if (player.getRole() != null)
-                            event.setReplaced(new Element(player.getRole().toString()).getAttribute(attribute.fulfill(2)));
+                            event.setReplaced(new Element(player.getRole().toString()).getAttribute(attribute.fulfill(1)));
                         else
-                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
+                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(1)));
                         return;
                     }
 
@@ -100,9 +104,9 @@ public class FactionsTags implements Listener {
                     // -->
                     else if (attribute.startsWith("title")) {
                         if (player.hasTitle())
-                            event.setReplaced(new Element(player.getTitle()).getAttribute(attribute.fulfill(2)));
+                            event.setReplaced(new Element(player.getTitle()).getAttribute(attribute.fulfill(1)));
                         else
-                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
+                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(1)));
                         return;
                     }
                 }
@@ -154,6 +158,8 @@ public class FactionsTags implements Listener {
 
             if (attribute.startsWith("factions")) {
 
+                attribute = attribute.fulfill(1);
+
                 // <--[tag]
                 // @attribute <n@npc.factions.power>
                 // @returns Element(Double)
@@ -162,9 +168,11 @@ public class FactionsTags implements Listener {
                 // @plugin Factions
                 // -->
                 if (attribute.startsWith("power")) {
-                    event.setReplaced(new Element(npc.getPower()).getAttribute(attribute.fulfill(2)));
+                    event.setReplaced(new Element(npc.getPower()).getAttribute(attribute.fulfill(1)));
                     return;
-                } else if (npc.hasFaction()) {
+                }
+
+                else if (npc.hasFaction()) {
 
                     // <--[tag]
                     // @attribute <n@npc.factions.role>
@@ -175,9 +183,9 @@ public class FactionsTags implements Listener {
                     // -->
                     if (attribute.startsWith("role")) {
                         if (npc.getRole() != null)
-                            event.setReplaced(new Element(npc.getRole().toString()).getAttribute(attribute.fulfill(2)));
+                            event.setReplaced(new Element(npc.getRole().toString()).getAttribute(attribute.fulfill(1)));
                         else
-                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
+                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(1)));
                         return;
                     }
 
@@ -190,9 +198,9 @@ public class FactionsTags implements Listener {
                     // -->
                     else if (attribute.startsWith("title")) {
                         if (npc.hasTitle())
-                            event.setReplaced(new Element(npc.getTitle()).getAttribute(attribute.fulfill(2)));
+                            event.setReplaced(new Element(npc.getTitle()).getAttribute(attribute.fulfill(1)));
                         else
-                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(2)));
+                            event.setReplaced(new Element("null").getAttribute(attribute.fulfill(1)));
                         return;
                     }
                 }
