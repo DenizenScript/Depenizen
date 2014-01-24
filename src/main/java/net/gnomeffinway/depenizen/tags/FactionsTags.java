@@ -287,7 +287,8 @@ public class FactionsTags implements Listener {
 
             for (FactionColl fc : FactionColls.get().getColls()) {
                 for (Faction f : fc.getAll()) {
-                    if (f.getName().equalsIgnoreCase(attribute.getContext(1))) {
+                    if (f.getId().equalsIgnoreCase(attribute.getContext(1))
+                            || f.getName().equalsIgnoreCase(attribute.getContext(1))) {
                         event.setReplaced(new dFaction(f).getAttribute(attribute.fulfill(1)));
                     }
                 }
