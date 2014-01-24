@@ -2,10 +2,7 @@ package net.gnomeffinway.depenizen.objects;
 
 import com.massivecraft.factions.FFlag;
 import com.massivecraft.factions.Rel;
-import com.massivecraft.factions.entity.Faction;
-import com.massivecraft.factions.entity.FactionColl;
-import com.massivecraft.factions.entity.FactionColls;
-import com.massivecraft.factions.entity.UPlayer;
+import com.massivecraft.factions.entity.*;
 import com.massivecraft.mcore.money.Money;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
@@ -191,22 +188,6 @@ public class dFaction implements dObject {
                         .getAttribute(attribute.fulfill(1));
             else
                 return Element.NULL.getAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <faction@faction.list_players[<role>]>
-        // @returns dList(dPlayer)
-        // @description
-        // Returns a list of players in this faction, optionally with a search by role.
-        // @plugin Factions
-        // -->
-        else if (attribute.startsWith("list_players")) {
-            if (attribute.hasContext(1)) {
-                ArrayList<dPlayer> players = new ArrayList<dPlayer>();
-                for (UPlayer player : faction.getUPlayersWhereRole(Rel.parse(attribute.getContext(1))))
-                    players.add(dPlayer.valueOf(player.getName()));
-                return new dList(players).getAttribute(attribute.fulfill(1));
-            }
         }
 
         // <--[tag]

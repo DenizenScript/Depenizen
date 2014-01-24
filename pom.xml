@@ -98,6 +98,10 @@
 			<id>dynmap-repo</id>
 			<url>http://repo.mikeprimm.com/</url>
 		</repository>
+        <repository>
+            <id>heroes-repo</id>
+            <url>http://nexus.theyeticave.net/content/groups/public/</url>
+        </repository>
     </repositories>
     <dependencies>
 		<dependency>
@@ -123,14 +127,14 @@
 		<dependency>
 			<groupId>com.massivecraft</groupId>
 			<artifactId>Factions</artifactId>
-			<version>2.0.4</version>
+			<version>2.3.0</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/Factions.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.massivecraft</groupId>
 			<artifactId>mcore</artifactId>
-			<version>6.5.2</version>
+			<version>7.0.1</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/mcore.jar</systemPath>
 		</dependency>
@@ -151,16 +155,16 @@
 		<dependency>
 			<groupId>net.aufdemrand</groupId>
 			<artifactId>denizen</artifactId>
-			<version>0.9.3-SNAPSHOT</version>
+			<version>0.9.4-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.gmail.nossr50.mcMMO</groupId>
+			<groupId>com.gmail.nossr50</groupId>
 			<artifactId>mcMMO</artifactId>
-			<version>1.4.07-dev2</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/resources/mcMMO.jar</systemPath>
+			<version>1.4.07</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/mcMMO.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.vexsoftware</groupId>
@@ -186,9 +190,8 @@
 		<dependency>
 			<groupId>com.herocraftonline</groupId>
 			<artifactId>Heroes</artifactId>
-			<version>1.5.5-b1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/resources/Heroes.jar</systemPath>
+			<version>1.5.5</version>
+			<scope>compile</scope>
 		</dependency>
         <dependency>
             <groupId>net.citizensnpcs</groupId>
@@ -198,9 +201,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-                <groupId>org.dynmap</groupId>
-                <artifactId>dynmap-api</artifactId>
-                <version>1.9</version>
+            <groupId>org.dynmap</groupId>
+            <artifactId>dynmap-api</artifactId>
+            <version>1.9</version>
         </dependency>
     </dependencies>
 </project>
