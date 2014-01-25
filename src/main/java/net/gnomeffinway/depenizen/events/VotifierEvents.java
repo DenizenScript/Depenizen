@@ -23,21 +23,25 @@ public class VotifierEvents implements Listener {
     }
     
     // <--[event]
-    // @events votifier vote
-    // @triggers when a Votifier vote is made.
-    // @context
+    // @Events
+    // votifier vote
+    // @Triggers when a Votifier vote is made.
+    // @Context
     // <context.time> returns the time the vote was sent.
     // <context.service> returns what service was used to send the vote.
-    // @plugin Votifier
+    // @Plugin Votifier
     // -->
+
     // <--[event]
-    // @events bungeefier vote
-    // @triggers when a Bungeefier vote is made.
-    // @context
+    // @Events
+    // bungeefier vote
+    // @Triggers when a Bungeefier vote is made.
+    // @Context
     // <context.time> returns the time the vote was sent.
     // <context.service> returns what service was used to send the vote.
-    // @plugin Bungeefier
+    // @Plugin Bungeefier
     // -->
+
     @EventHandler
     public void onVotifierEvent(VotifierEvent event) {
         

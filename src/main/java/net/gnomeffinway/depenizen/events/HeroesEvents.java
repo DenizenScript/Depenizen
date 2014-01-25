@@ -22,14 +22,16 @@ public class HeroesEvents implements Listener {
     }
 
     // <--[event]
-    // @events hero changes class (to <class>)
-    // @triggers when a Hero changes classes.
-    // @context
+    // @Events
+    // hero changes class (to <class>)
+    // @Triggers when a Hero changes classes.
+    // @Context
     // <context.class> returns the class that the Hero changed to.
     // <context.cost> returns the cost of changing the class.
     // <context.entity> returns the Hero changing classes.
-    // @plugin Heroes
+    // @Plugin Heroes
     // -->
+
     @EventHandler
     public void changeClass(ClassChangeEvent event) {
 

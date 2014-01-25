@@ -24,13 +24,15 @@ public class PVPArenaEvents implements Listener {
     }
 
     // <--[event]
-    // @events arena starts
-    // @triggers when an arena starts a round.
-    // @context
+    // @Events
+    // arena starts
+    // @Triggers when an arena starts a round.
+    // @Context
     // <context.arena> returns the arena name.
     // <context.fighters> returns a dList of the fighters in the round.
-    // @plugin PvP Arena
+    // @Plugin PvP Arena
     // -->
+
     @EventHandler
     public void onArenaStarts(PAStartEvent event) {
 
