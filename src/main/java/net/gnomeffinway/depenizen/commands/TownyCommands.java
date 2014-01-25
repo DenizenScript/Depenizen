@@ -11,7 +11,9 @@ import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
 
 public class TownyCommands extends AbstractCommand {
-    //TODO: CLASS ?
+
+    // TODO: make this work
+
     private enum Action {
         ADD, REMOVE, SET
     }

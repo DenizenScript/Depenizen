@@ -113,6 +113,7 @@ public class PVPArenaTags implements Listener {
                     if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
                         event.setReplaced(new Element(player.getArenaTeam().getTeamMembers().size())
                                 .getAttribute(attribute.fulfill(1)));
+                        return;
                     }
 
                     // <--[tag]

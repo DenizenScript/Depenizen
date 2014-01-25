@@ -29,10 +29,17 @@ public class JobsCommands extends AbstractCommand {
         // @Stable untested
         // @Short Modifies the specified job of a player.
         // @Author Morphan1
-        //
-        // @Description Todo
-        // @Tags Todo
-        // @Usage Todo
+
+        // @Description
+        // This allows you to promote or demote a player's job level. This also allows you
+        // to force a player to join or quit a job.
+
+        // @Tags
+        // TODO
+
+        // @Usage
+        // TODO
+        
         // -->
         
         // Iterate through arguments

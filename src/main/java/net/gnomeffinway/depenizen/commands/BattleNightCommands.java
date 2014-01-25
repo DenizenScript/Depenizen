@@ -10,7 +10,42 @@ import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 
 public class BattleNightCommands extends AbstractCommand {
-    //TODO: CLASS ?
+
+    // <--[command]
+    // @Name BN
+    // @Syntax bn [add/kick/start/end]
+    // @Plugin BattleNight
+    // @Required 1
+    // @Stable stable
+    // @Short Adds/kicks player, starts/ends battle.
+    // @Author GnomeffinWay
+
+    // @Description
+    // With this command, you can add or kick players to/from the current battle. By default,
+    // this uses the player currently attached to the running Denizen queue. However, you can
+    // change the player by using Denizen's command-wide "player:" prefix. You can also use
+    // this command to start or end a battle.
+
+    // @Tags None
+
+    // @Usage
+    // Use to add the current player to a battle.
+    // - bn add
+
+    // @Usage
+    // Use to kick unattached player from a battle.
+    // - bn kick player:BlackCoyote
+
+    // @Usage
+    // Use to start a battle.
+    // - bn start
+
+    // @Usage
+    // Use to end a battle.
+    // - bn end
+
+    // -->
+
     private enum Action {
         ADD, KICK, START, END
     }
@@ -26,7 +61,7 @@ public class BattleNightCommands extends AbstractCommand {
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("action")
-                    && arg.matches("ADD, KICK, START, END")) {
+                    && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", Action.valueOf(arg.getValue()));
             }
 

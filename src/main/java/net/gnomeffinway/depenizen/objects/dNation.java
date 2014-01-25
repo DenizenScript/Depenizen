@@ -112,6 +112,7 @@ public class dNation implements dObject {
         }
 
         // <--[tag]
+        // @attribute <nation@nation.capital>
         // @returns dTown
         // @description
         // Returns the capital city of the nation as a dTown.
@@ -156,6 +157,7 @@ public class dNation implements dObject {
                     .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
+        // @attribute <nation@nation.player_count>
         // @returns Element(Number)
         // @description
         // Returns the amount of players in the nation.

@@ -141,7 +141,7 @@
 		<dependency>
 			<groupId>me.limebyte</groupId>
 			<artifactId>BattleNight</artifactId>
-			<version>1.5.1</version>
+			<version>1.10.0</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/BattleNight.jar</systemPath>
 		</dependency>
