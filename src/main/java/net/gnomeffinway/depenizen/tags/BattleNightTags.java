@@ -78,6 +78,7 @@ public class BattleNightTags implements Listener {
                 // @returns Element(Boolean)
                 // @description
                 // Returns true if the player is in battle.
+                // @plugin BattleNight
                 // -->
                 else if (attribute.startsWith("inbattle") || attribute.startsWith("in_battle")) {
                     replaced = new Element(api.getBattle().containsPlayer(player))
