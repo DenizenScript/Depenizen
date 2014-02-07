@@ -76,7 +76,7 @@ public class Depenizen extends JavaPlugin {
         bungeefier = (Votifier) getServer().getPluginManager().getPlugin("Bungeefier");
         jobs = (JobsPlugin) getServer().getPluginManager().getPlugin("Jobs");
         pvparena = (PVPArena) getServer().getPluginManager().getPlugin("pvparena");
-        dynmap = (DynmapAPI) getServer().getPluginManager().getPlugin("dynmap"); 
+        dynmap = (DynmapAPI) getServer().getPluginManager().getPlugin("dynmap");
 
         if (denizen != null) {
             getServer().getLogger().info("[Depenizen] Denizen hooked");
@@ -152,9 +152,9 @@ public class Depenizen extends JavaPlugin {
             getServer().getLogger().info("[Depenizen] Heroes not found, add-ons will not enable.");
         }
         if (dynmap != null) {
-        	getServer().getLogger().info("[Depenizen] Dynmap hooked, enabling add-ons.");
-        	dynmapSupport = new DynmapSupport(this);
-        	dynmapSupport.register();
+            getServer().getLogger().info("[Depenizen] Dynmap hooked, enabling add-ons.");
+            dynmapSupport = new DynmapSupport(this);
+            dynmapSupport.register();
         }
 
     }

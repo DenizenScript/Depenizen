@@ -6,7 +6,7 @@ import net.gnomeffinway.depenizen.events.VotifierEvents;
 public class VotifierSupport {
 
 public Depenizen depenizen;
-    
+
     public VotifierSupport(Depenizen depenizen) {
         this.depenizen = depenizen;
     }
@@ -14,5 +14,5 @@ public Depenizen depenizen;
     public void register() {
         new VotifierEvents(depenizen);
     }
-    
+
 }

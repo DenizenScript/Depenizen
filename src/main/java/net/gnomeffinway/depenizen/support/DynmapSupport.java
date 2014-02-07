@@ -6,7 +6,7 @@ import net.gnomeffinway.depenizen.events.DynmapEvents;
 public class DynmapSupport {
 
     public Depenizen depenizen;
-    
+
     public DynmapSupport(Depenizen depenizen) {
         this.depenizen = depenizen;
     }

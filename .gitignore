@@ -23,8 +23,9 @@
 
 /world
 
-# Mac filesystem dust
+# filesystem dust, random side files
 *.DS_Store
+*.exe
 
 # intellij
 *.iml

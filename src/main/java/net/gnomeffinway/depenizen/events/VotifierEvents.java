@@ -21,7 +21,7 @@ public class VotifierEvents implements Listener {
     public VotifierEvents(Depenizen depenizen) {
         depenizen.getServer().getPluginManager().registerEvents(this, depenizen);
     }
-    
+
     // <--[event]
     // @Events
     // votifier vote
@@ -44,17 +44,17 @@ public class VotifierEvents implements Listener {
 
     @EventHandler
     public void onVotifierEvent(VotifierEvent event) {
-        
+
         Map<String, dObject> context = new HashMap<String, dObject>();
         Vote vote = event.getVote();
 
         context.put("time", new Element(vote.getTimeStamp()));
         context.put("service", new Element(vote.getServiceName()));
-        
+
         EventManager.doEvents(Arrays.asList
                 ("votifier vote", "bungeefier vote"),
                 null, Bukkit.getPlayer(vote.getUsername()), context);
-    
+
     }
 
 }

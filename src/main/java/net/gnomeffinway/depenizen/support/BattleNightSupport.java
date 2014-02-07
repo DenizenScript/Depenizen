@@ -5,7 +5,7 @@ import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.commands.BattleNightCommands;
 import net.gnomeffinway.depenizen.tags.BattleNightTags;
-import net.gnomeffinway.depenizen.tags.battlenights.BNPlayerTags;
+import net.gnomeffinway.depenizen.tags.battlenight.BNPlayerTags;
 
 public class BattleNightSupport {
 

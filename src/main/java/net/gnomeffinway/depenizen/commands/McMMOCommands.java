@@ -196,26 +196,26 @@ public class McMMOCommands extends AbstractCommand {
                 else if(type == Type.HARDCORE) {
                     SkillType skillType = SkillType.getSkill(skill);
                     boolean isEnabled = Config.getInstance().getHardcoreStatLossEnabled(skillType);
-                    
+
                     if(state == State.TOGGLE)
                         Config.getInstance().setHardcoreStatLossEnabled(skillType, !isEnabled);
                     else if(state == State.TRUE)
                         Config.getInstance().setHardcoreStatLossEnabled(skillType, true);
                     else if(state == State.FALSE)
                         Config.getInstance().setHardcoreStatLossEnabled(skillType, false);
-                    
+
                 }
                 else if(type == Type.VAMPIRISM) {
                     SkillType skillType = SkillType.getSkill(skill);
                     boolean isEnabled = Config.getInstance().getHardcoreVampirismEnabled(skillType);
-                    
+
                     if(state == State.TOGGLE)
                         Config.getInstance().setHardcoreVampirismEnabled(skillType, !isEnabled);
                     else if(state == State.TRUE)
                         Config.getInstance().setHardcoreVampirismEnabled(skillType, true);
                     else if(state == State.FALSE)
                         Config.getInstance().setHardcoreVampirismEnabled(skillType, false);
-                    
+
                 }
                 break;
 

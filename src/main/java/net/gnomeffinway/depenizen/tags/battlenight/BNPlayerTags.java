@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.tags.battlenights;
+package net.gnomeffinway.depenizen.tags.battlenight;
 
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.objects.properties.Property;

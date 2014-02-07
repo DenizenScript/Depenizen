@@ -70,18 +70,18 @@ public class BattleNightCommands extends AbstractCommand {
             // It seems that spectator mode was removed in the latest version of BattleNight...
             // Looks like they're going to find a better way to do it. Until then, let's just
             // keep this code commented out.
-            
+
             /*
             Allow - bn (spectator), which is more 0.9-like.
             else if (!scriptEntry.hasObject("spectator")
-            		&& arg.matches("spectator"))
+                    && arg.matches("spectator"))
                 scriptEntry.addObject("spectator", Element.TRUE);
-            
+
             // Keep old format for backwards compatibility
             else if (!scriptEntry.hasObject("spectator")
-            		&& arg.matchesPrefix("spectator")
-            		&& arg.matchesPrimitive(aH.PrimitiveType.Boolean))
-            	scriptEntry.addObject("spectator", arg.asElement());
+                    && arg.matchesPrefix("spectator")
+                    && arg.matchesPrimitive(aH.PrimitiveType.Boolean))
+                scriptEntry.addObject("spectator", arg.asElement());
             */
 
         }
@@ -118,7 +118,7 @@ public class BattleNightCommands extends AbstractCommand {
                 } else {
                    BattleNight.instance.getAPI().getBattle().addPlayer(player.getPlayerEntity());
                 }
-            	*/
+                */
 
                 // Add the player
                 BattleNight.instance.getAPI().getBattle().addPlayer(player.getPlayerEntity());
