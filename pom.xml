@@ -188,7 +188,7 @@
 			<systemPath>${basedir}/src/main/resources/pvparena.jar</systemPath>
 		</dependency>
 		<dependency>
-			<groupId>com.herocraftonline</groupId>
+			<groupId>com.herocraftonline.heroes</groupId>
 			<artifactId>Heroes</artifactId>
 			<version>1.5.5</version>
 			<scope>compile</scope>
