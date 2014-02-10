@@ -174,19 +174,19 @@
 		<dependency>
 			<groupId>com.vexsoftware</groupId>
 			<artifactId>Votifier</artifactId>
-			<version>6.5.2</version>
+			<version>1.9</version>
             <scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>me.zford</groupId>
 			<artifactId>Jobs</artifactId>
-			<version>2.11.3</version>
+			<version>2.11.4</version>
             <scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.slipcor</groupId>
 			<artifactId>pvparena</artifactId>
-			<version>1.0.9.287</version>
+			<version>1.1</version>
             <scope>compile</scope>
         </dependency>
 		<dependency>
