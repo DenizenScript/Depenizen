@@ -35,3 +35,6 @@
 
 # Atlassian Stuff
 /atlassian-ide-plugin.xml
+
+# resource jars
+*.jar
