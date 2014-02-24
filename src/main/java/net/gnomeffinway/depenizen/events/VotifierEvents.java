@@ -14,6 +14,7 @@ import com.vexsoftware.votifier.model.VotifierEvent;
 import net.aufdemrand.denizen.events.EventManager;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dObject;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.gnomeffinway.depenizen.Depenizen;
 
 public class VotifierEvents implements Listener {
@@ -53,7 +54,7 @@ public class VotifierEvents implements Listener {
 
         EventManager.doEvents(Arrays.asList
                 ("votifier vote", "bungeefier vote"),
-                null, Bukkit.getPlayer(vote.getUsername()), context);
+                null, new dPlayer(Bukkit.getOfflinePlayer(vote.getUsername())), context, 1);
 
     }
 

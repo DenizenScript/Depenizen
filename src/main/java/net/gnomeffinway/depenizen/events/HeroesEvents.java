@@ -5,6 +5,7 @@ import net.aufdemrand.denizen.events.EventManager;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dNPC;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dObject;
 import net.gnomeffinway.depenizen.Depenizen;
 import org.bukkit.entity.Player;
@@ -52,7 +53,7 @@ public class HeroesEvents implements Listener {
         String determination = EventManager.doEvents(Arrays.asList
                 ("hero changes class",
                         "hero changes class to " + event.getTo().getName()),
-                npc, player, context).toUpperCase();
+                npc, new dPlayer(player), context, 1).toUpperCase();
 
         if (determination.equals("CANCELLED")) {
             event.setCancelled(true);

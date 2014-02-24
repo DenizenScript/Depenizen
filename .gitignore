@@ -37,4 +37,4 @@
 /atlassian-ide-plugin.xml
 
 # resource jars
-*.jar
+# *.jar

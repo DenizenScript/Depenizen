@@ -49,7 +49,7 @@ public class PVPArenaEvents implements Listener {
 
         EventManager.doEvents(Arrays.asList
                 ("arena starts"),
-                null, null, context);
+                null, null, context, 1);
 
     }
 
