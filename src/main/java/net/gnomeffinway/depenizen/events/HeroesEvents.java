@@ -53,7 +53,7 @@ public class HeroesEvents implements Listener {
         String determination = EventManager.doEvents(Arrays.asList
                 ("hero changes class",
                         "hero changes class to " + event.getTo().getName()),
-                npc, new dPlayer(player), context, 1).toUpperCase();
+                npc, new dPlayer(player), context).toUpperCase();
 
         if (determination.equals("CANCELLED")) {
             event.setCancelled(true);
