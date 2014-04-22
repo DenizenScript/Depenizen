@@ -77,7 +77,8 @@ public class Depenizen extends JavaPlugin {
         jobs = (JobsPlugin) getServer().getPluginManager().getPlugin("Jobs");
         pvparena = (PVPArena) getServer().getPluginManager().getPlugin("pvparena");
         dynmap = (DynmapAPI) getServer().getPluginManager().getPlugin("dynmap");
-
+        heroes = (Heroes) getServer().getPluginManager().getPlugin("heroes");
+        
         if (denizen != null) {
             getServer().getLogger().info("[Depenizen] Denizen hooked");
         } else {
