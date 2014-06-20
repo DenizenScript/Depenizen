@@ -1,6 +1,9 @@
 package net.gnomeffinway.depenizen.events;
 
 import com.herocraftonline.heroes.api.events.ClassChangeEvent;
+import com.herocraftonline.heroes.api.events.ExperienceChangeEvent;
+import com.herocraftonline.heroes.api.events.HeroChangeLevelEvent;
+
 import net.aufdemrand.denizen.events.EventManager;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dEntity;
@@ -8,6 +11,7 @@ import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dObject;
 import net.gnomeffinway.depenizen.Depenizen;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -60,5 +64,71 @@ public class HeroesEvents implements Listener {
         }
 
     }
+    
+    // <--[event]
+    // @Events
+    // hero changes experience
+    // @Triggers when a Hero changes the experience.
+    // @Context
+    // <context.amount> returns the amount of experience the Hero gained.
+    // @Plugin Heroes
+    // -->
 
+    @EventHandler
+    public void changeExperience(ExperienceChangeEvent event) {
+
+        dEntity hero = new dEntity(event.getHero().getEntity());
+        Player player = null;
+        dNPC npc = null;
+
+        Map<String, dObject> context = new HashMap<String, dObject>();
+        context.put("amount", new Element(event.getExpChange()));
+
+        if (hero.isNPC())
+            npc = hero.getDenizenNPC();
+        else if (hero.isPlayer())
+            player = hero.getPlayer();
+
+        String determination = EventManager.doEvents(Arrays.asList
+                ("hero changes experience"),
+                		npc, new dPlayer(player), context).toUpperCase();
+
+        if (determination.equals("CANCELLED")) {
+            event.setCancelled(true);
+        }
+
+    }
+    
+    // <--[event]
+    // @Events
+    // hero changes level (to <level>)
+    // @Triggers when a Hero changes the level.
+    // @Context
+    // <context.from> returns the level that the Hero changed from.
+    // <context.class> returns the class that the Hero leveled up with.
+    // @Plugin Heroes
+    // -->
+
+    @EventHandler
+    public void changeLevel(HeroChangeLevelEvent event) {
+
+        dEntity hero = new dEntity(event.getHero().getEntity());
+        Player player = null;
+        dNPC npc = null;
+
+        Map<String, dObject> context = new HashMap<String, dObject>();
+        context.put("from", new Element(event.getFrom()));
+        context.put("class", new Element(event.getHeroClass().getName()));
+
+        if (hero.isNPC())
+            npc = hero.getDenizenNPC();
+        else if (hero.isPlayer())
+            player = hero.getPlayer();
+
+        EventManager.doEvents(Arrays.asList
+                	("hero changes level",
+                			"hero changes level to " + event.getTo()),
+                				npc, new dPlayer(player), context).toUpperCase();
+
+    }
 }
