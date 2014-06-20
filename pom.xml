@@ -22,6 +22,7 @@
 		<system>jenkins</system>
 		<url>http://ci.citizensnpcs.co</url>
 	</ciManagement>
+
 	<scm>
 		<connection>scm:git:git://github.com/Morphan1/Depenizen.git</connection>
 		<developerConnection>scm:git:git:@github.com:Morphan1/Depenizen.git</developerConnection>
@@ -101,6 +102,10 @@
         <repository>
             <id>heroes-repo</id>
             <url>http://nexus.theyeticave.net/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>sk89q-repo</id>
+            <url>http://maven.sk89q.com/artifactory/repo/</url>
         </repository>
     </repositories>
     <dependencies>
@@ -205,6 +210,13 @@
             <groupId>org.dynmap</groupId>
             <artifactId>dynmap-api</artifactId>
             <version>1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldedit</artifactId>
+            <version>5.6.2</version>
+            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
