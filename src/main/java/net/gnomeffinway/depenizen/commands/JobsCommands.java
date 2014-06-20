@@ -24,6 +24,7 @@ public class JobsCommands extends AbstractCommand {
         // <--[command]
         // @Name Jobs
         // @Syntax jobs [promote/demote/join/quit] [<job>] (<#>)
+        // @Group Depenizen
         // @Plugin Jobs
         // @Required 2
         // @Stable untested

@@ -25,6 +25,7 @@ public class McMMOCommands extends AbstractCommand {
     // <--[command]
     // @Name mcMMO
     // @Syntax mcmmo [add/remove/set] [levels/xp/xprate/vampirism/hardcore/leader] (skill:<skill>) (state:{toggle}/true/false) (qty:<#>) (party:<party>)
+    // @Group Depenizen
     // @Plugin mcMMO
     // @Required 1
     // @Stable untested

@@ -10,6 +10,7 @@ import net.aufdemrand.denizen.objects.dPlayer;
 import org.bukkit.entity.Player;
 
 public class BNPlayerTags implements Property {
+
     public static boolean describes(dObject pl) {
         return pl instanceof dPlayer
                 && ((dPlayer) pl).isOnline();
@@ -90,4 +91,5 @@ public class BNPlayerTags implements Property {
     @Override
     public void adjust(Mechanism mechanism) {
     }
+
 }

@@ -12,6 +12,7 @@ import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
 
 public class TownyPlayerTags implements Property {
+
     public static boolean describes(dObject pl) {
         return pl instanceof dPlayer;
     }
@@ -90,4 +91,5 @@ public class TownyPlayerTags implements Property {
     @Override
     public void adjust(Mechanism mechanism) {
     }
+
 }

@@ -14,6 +14,7 @@ public class BattleNightCommands extends AbstractCommand {
     // <--[command]
     // @Name BN
     // @Syntax bn [add/kick/start/end]
+    // @Group Depenizen
     // @Plugin BattleNight
     // @Required 1
     // @Stable stable

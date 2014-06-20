@@ -128,7 +128,7 @@ public class dFaction implements dObject {
                 return new dLocation(faction.getHome().asBukkitLocation())
                         .getAttribute(attribute.fulfill(1));
             else
-                return new Element("null").getAttribute(attribute.fulfill(1));
+                return Element.NULL.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -237,7 +237,7 @@ public class dFaction implements dObject {
                 return new Element(faction.getRelationTo(to.getFaction()).toString())
                         .getAttribute(attribute.fulfill(1));
             else
-                return new Element("null").getAttribute(attribute.fulfill(1));
+                return Element.NULL.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

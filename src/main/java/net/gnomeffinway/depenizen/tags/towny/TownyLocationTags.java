@@ -11,6 +11,7 @@ import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.dTown;
 
 public class TownyLocationTags implements Property {
+
     public static boolean describes(dObject loc) {
         return loc instanceof dLocation;
     }
@@ -72,4 +73,5 @@ public class TownyLocationTags implements Property {
     @Override
     public void adjust(Mechanism mechanism) {
     }
+
 }
