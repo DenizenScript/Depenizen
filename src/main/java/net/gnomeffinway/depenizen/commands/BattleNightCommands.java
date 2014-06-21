@@ -63,7 +63,7 @@ public class BattleNightCommands extends AbstractCommand {
 
             if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
-                scriptEntry.addObject("action", Action.valueOf(arg.getValue()));
+                scriptEntry.addObject("action", Action.valueOf(arg.getValue().toUpperCase()));
             }
 
             // The player:<name> argument is handled in Denizen automatically. No need to re-create it here

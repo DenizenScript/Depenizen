@@ -72,12 +72,12 @@ public class McMMOCommands extends AbstractCommand {
 
             if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values()))
-                scriptEntry.addObject("action", Action.valueOf(arg.getValue()));
+                scriptEntry.addObject("action", Action.valueOf(arg.getValue().toUpperCase()));
 
             else if (!scriptEntry.hasObject("state")
                     && arg.matchesPrefix("state")
                     && arg.matchesEnum(State.values()))
-                scriptEntry.addObject("state", State.valueOf(arg.getValue()));
+                scriptEntry.addObject("state", State.valueOf(arg.getValue().toUpperCase()));
 
             else if (!scriptEntry.hasObject("party")
                     && arg.matchesPrefix("party"))
@@ -94,7 +94,7 @@ public class McMMOCommands extends AbstractCommand {
 
             else if (!scriptEntry.hasObject("type")
                     && arg.matchesEnum(Type.values()))
-                scriptEntry.addObject("type", Type.valueOf(arg.getValue()));
+                scriptEntry.addObject("type", Type.valueOf(arg.getValue().toUpperCase()));
 
         }
 
