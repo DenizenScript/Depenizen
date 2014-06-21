@@ -5,6 +5,7 @@ import com.herocraftonline.heroes.Heroes;
 import com.massivecraft.factions.Factions;
 import com.palmergames.bukkit.towny.Towny;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.vexsoftware.votifier.Votifier;
 import me.limebyte.battlenight.core.BattleNight;
 import me.zford.jobs.bukkit.JobsPlugin;
@@ -32,6 +33,7 @@ public class Depenizen extends JavaPlugin {
     public static Heroes heroes;
     public static DynmapAPI dynmap;
     public static WorldEditPlugin worldedit;
+    public static WorldGuardPlugin worldguard;
 
     public McMMOSupport mcmmoSupport;
     public BattleNightSupport battlenightSupport;
@@ -44,6 +46,7 @@ public class Depenizen extends JavaPlugin {
     public HeroesSupport heroesSupport;
     public DynmapSupport dynmapSupport;
     public WorldEditSupport worldeditSupport;
+    public WorldGuardSupport worldguardSupport;
 
     @Override
     public void onEnable() {
@@ -76,9 +79,10 @@ public class Depenizen extends JavaPlugin {
         bungeefier = (Votifier) getServer().getPluginManager().getPlugin("Bungeefier");
         jobs = (JobsPlugin) getServer().getPluginManager().getPlugin("Jobs");
         pvparena = (PVPArena) getServer().getPluginManager().getPlugin("pvparena");
-        dynmap = (DynmapAPI) getServer().getPluginManager().getPlugin("dynmap");
-        heroes = (Heroes) getServer().getPluginManager().getPlugin("heroes");
-        worldedit = (WorldEditPlugin) getServer().getPluginManager().getPlugin("worldedit");
+        dynmap = (DynmapAPI) getServer().getPluginManager().getPlugin("Dynmap");
+        heroes = (Heroes) getServer().getPluginManager().getPlugin("Heroes");
+        worldedit = (WorldEditPlugin) getServer().getPluginManager().getPlugin("WorldEdit");
+        worldguard = (WorldGuardPlugin) getServer().getPluginManager().getPlugin("WorldGuard");
         
         if (denizen != null) {
             dB.log("Denizen hooked");
@@ -174,6 +178,14 @@ public class Depenizen extends JavaPlugin {
             worldeditSupport.register();
         } else {
             dB.log("WorldEdit not found, add-ons will not enable.");
+        }
+
+        if (worldguard != null) {
+            dB.log("WorldGuard hooked, enabling add-ons.");
+            worldguardSupport = new WorldGuardSupport(this);
+            worldguardSupport.register();
+        } else {
+            dB.log("WorldGuard not found, add-ons will not enable.");
         }
     }
 
