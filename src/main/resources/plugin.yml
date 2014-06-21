@@ -10,4 +10,4 @@ commands:
         description: Prints out the current Depenizen version.
         usage: /depenizen
 
-permissions: []
+permissions: {}
