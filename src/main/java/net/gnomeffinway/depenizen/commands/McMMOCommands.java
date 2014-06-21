@@ -113,7 +113,8 @@ public class McMMOCommands extends AbstractCommand {
         String party = scriptEntry.getElement("party").asString();
         String skill = scriptEntry.getElement("skill").asString();
 
-        // Report to dB
+        /*
+        // Report to dB TODO: fix... this, this is not right
         dB.report(scriptEntry, getName(),
                 aH.debugObj("NPC", scriptEntry.getNPC().toString())
                         + aH.debugObj("Action", action.toString())
@@ -123,6 +124,7 @@ public class McMMOCommands extends AbstractCommand {
                         + aH.debugObj("Party", String.valueOf(party))
                         + aH.debugObj("Skill", String.valueOf(skill))
                         + aH.debugObj("Qty", String.valueOf(qty)));
+        */
 
         switch (action) {
 
