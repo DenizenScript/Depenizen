@@ -3,7 +3,7 @@ package net.gnomeffinway.depenizen.support;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.gnomeffinway.depenizen.Depenizen;
-import net.gnomeffinway.depenizen.commands.SchematicCommand;
+import net.gnomeffinway.depenizen.commands.worldedit.SchematicCommand;
 import net.gnomeffinway.depenizen.tags.worldedit.WorldEditPlayerTags;
 
 public class WorldEditSupport {

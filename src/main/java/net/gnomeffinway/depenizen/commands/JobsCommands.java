@@ -12,6 +12,28 @@ import net.gnomeffinway.depenizen.objects.dJob;
 
 public class JobsCommands extends AbstractCommand {
 
+    // <--[command]
+    // @Name Jobs
+    // @Syntax jobs [promote/demote/join/quit] [<job>] (<#>)
+    // @Group Depenizen
+    // @Plugin Jobs
+    // @Required 2
+    // @Stable untested
+    // @Short Modifies the specified job of a player.
+    // @Author Morphan1
+
+    // @Description
+    // This allows you to promote or demote a player's job level. This also allows you
+    // to force a player to join or quit a job.
+
+    // @Tags
+    // TODO
+
+    // @Usage
+    // TODO
+
+    // -->
+
     private enum Action { PROMOTE, DEMOTE, JOIN, QUIT }
 
     public JobsCommands() {
@@ -20,28 +42,6 @@ public class JobsCommands extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
-        // <--[command]
-        // @Name Jobs
-        // @Syntax jobs [promote/demote/join/quit] [<job>] (<#>)
-        // @Group Depenizen
-        // @Plugin Jobs
-        // @Required 2
-        // @Stable untested
-        // @Short Modifies the specified job of a player.
-        // @Author Morphan1
-
-        // @Description
-        // This allows you to promote or demote a player's job level. This also allows you
-        // to force a player to join or quit a job.
-
-        // @Tags
-        // TODO
-
-        // @Usage
-        // TODO
-
-        // -->
 
         // Iterate through arguments
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
