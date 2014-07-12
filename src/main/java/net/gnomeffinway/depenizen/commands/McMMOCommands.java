@@ -8,6 +8,7 @@ import com.gmail.nossr50.database.DatabaseManager;
 import com.gmail.nossr50.database.DatabaseManagerFactory;
 import com.gmail.nossr50.database.FlatfileDatabaseManager;
 import com.gmail.nossr50.datatypes.database.DatabaseUpdateType;
+import com.gmail.nossr50.datatypes.party.Party;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.party.PartyManager;
 import com.gmail.nossr50.util.Misc;
@@ -144,7 +145,7 @@ public class McMMOCommands extends AbstractCommand {
                             ExperienceAPI.addRawXPOffline(player.getName(), skill, (float) qty);
                         }
                     }
-                } else if (PartyManager.isParty(party)) {
+                } else if (PartyManager.getParty(party) != null) {
                     PartyAPI.addToParty(player, party);
                 }
                 break;
@@ -165,7 +166,7 @@ public class McMMOCommands extends AbstractCommand {
                             ExperienceAPI.removeXPOffline(player.getName(), skill, (int) qty);
                     }
                 }
-                else if (PartyManager.isParty(party)) {
+                else if (PartyManager.getParty(party) != null) {
                     if (PartyAPI.getPartyLeader(party).equals(player.getName()))
                         PartyManager.disbandParty(PartyManager.getParty(party));
 
