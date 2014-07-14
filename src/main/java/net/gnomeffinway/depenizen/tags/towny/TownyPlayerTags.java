@@ -27,9 +27,7 @@ public class TownyPlayerTags implements Property {
     // Instance Fields and Methods
     /////////////
 
-    private TownyPlayerTags(dPlayer pl) {
-        player = pl;
-    }
+    private TownyPlayerTags(dPlayer pl) { player = pl; }
 
     dPlayer player = null;
 
@@ -49,6 +47,7 @@ public class TownyPlayerTags implements Property {
 
     @Override
     public String getAttribute(Attribute attribute) {
+
         // <--[tag]
         // @attribute <p@player.town>
         // @returns dTown
@@ -86,10 +85,10 @@ public class TownyPlayerTags implements Property {
         }
 
         return null;
+
     }
 
     @Override
-    public void adjust(Mechanism mechanism) {
-    }
+    public void adjust(Mechanism mechanism) {}
 
 }

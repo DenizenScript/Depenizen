@@ -112,10 +112,10 @@ public class WorldGuardLocationTags implements Property {
         }
 
         return null;
+
     }
 
     @Override
-    public void adjust(Mechanism mechanism) {
-    }
+    public void adjust(Mechanism mechanism) {}
 
 }

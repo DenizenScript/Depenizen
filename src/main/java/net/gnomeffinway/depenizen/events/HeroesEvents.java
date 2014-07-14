@@ -40,7 +40,6 @@ public class HeroesEvents implements Listener {
     // "CANCELLED" to stop the hero from changing classes.
     // @Plugin Heroes
     // -->
-
     @EventHandler
     public void changeClass(ClassChangeEvent event) {
 
@@ -69,7 +68,7 @@ public class HeroesEvents implements Listener {
         }
 
     }
-    
+
     // <--[event]
     // @Events
     // hero changes experience
@@ -83,7 +82,6 @@ public class HeroesEvents implements Listener {
     // "CANCELLED" to stop the hero from gaining experience.
     // @Plugin Heroes
     // -->
-
     @EventHandler
     public void changeExperience(ExperienceChangeEvent event) {
 
@@ -111,7 +109,7 @@ public class HeroesEvents implements Listener {
         }
 
     }
-    
+
     // <--[event]
     // @Events
     // hero changes level (to <level>)
@@ -125,7 +123,6 @@ public class HeroesEvents implements Listener {
     // None
     // @Plugin Heroes
     // -->
-
     @EventHandler
     public void changeLevel(HeroChangeLevelEvent event) {
 

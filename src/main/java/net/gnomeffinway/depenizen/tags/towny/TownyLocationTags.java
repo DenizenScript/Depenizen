@@ -48,6 +48,7 @@ public class TownyLocationTags implements Property {
 
     @Override
     public String getAttribute(Attribute attribute) {
+
         // <--[tag]
         // @attribute <l@location.town>
         // @returns dTown
@@ -66,12 +67,11 @@ public class TownyLocationTags implements Property {
             }
         }
 
-
         return null;
+
     }
 
     @Override
-    public void adjust(Mechanism mechanism) {
-    }
+    public void adjust(Mechanism mechanism) {}
 
 }
