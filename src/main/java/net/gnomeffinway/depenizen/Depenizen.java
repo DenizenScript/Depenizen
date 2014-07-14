@@ -1,5 +1,6 @@
 package net.gnomeffinway.depenizen;
 
+import com.earth2me.essentials.Essentials;
 import com.gmail.nossr50.mcMMO;
 import com.herocraftonline.heroes.Heroes;
 import com.massivecraft.factions.Factions;
@@ -34,19 +35,22 @@ public class Depenizen extends JavaPlugin {
     public static DynmapAPI dynmap;
     public static WorldEditPlugin worldedit;
     public static WorldGuardPlugin worldguard;
+    public static Essentials essentials;
 
-    public McMMOSupport mcmmoSupport;
-    public BattleNightSupport battlenightSupport;
-    public TownySupport townySupport;
-    public FactionsSupport factionsSupport;
-    public VotifierSupport votifierSupport;
-    public VotifierSupport bungeefierSupport;
-    public JobsSupport jobsSupport;
-    public PVPArenaSupport pvparenaSupport;
-    public HeroesSupport heroesSupport;
-    public DynmapSupport dynmapSupport;
-    public WorldEditSupport worldeditSupport;
-    public WorldGuardSupport worldguardSupport;
+    // TODO: make these local variables instead?
+    private McMMOSupport mcmmoSupport;
+    private BattleNightSupport battlenightSupport;
+    private TownySupport townySupport;
+    private FactionsSupport factionsSupport;
+    private VotifierSupport votifierSupport;
+    private VotifierSupport bungeefierSupport;
+    private JobsSupport jobsSupport;
+    private PVPArenaSupport pvparenaSupport;
+    private HeroesSupport heroesSupport;
+    private DynmapSupport dynmapSupport;
+    private WorldEditSupport worldeditSupport;
+    private WorldGuardSupport worldguardSupport;
+    private EssentialsSupport essentialsSupport;
 
     @Override
     public void onEnable() {
@@ -83,6 +87,7 @@ public class Depenizen extends JavaPlugin {
         heroes = (Heroes) getServer().getPluginManager().getPlugin("Heroes");
         worldedit = (WorldEditPlugin) getServer().getPluginManager().getPlugin("WorldEdit");
         worldguard = (WorldGuardPlugin) getServer().getPluginManager().getPlugin("WorldGuard");
+        essentials = (Essentials) getServer().getPluginManager().getPlugin("Essentials");
         
         if (denizen != null) {
             dB.log("Denizen hooked");
@@ -186,6 +191,14 @@ public class Depenizen extends JavaPlugin {
             worldguardSupport.register();
         } else {
             dB.log("WorldGuard not found, add-ons will not enable.");
+        }
+
+        if (essentials != null) {
+            dB.log("Essentials hooked, enabling add-ons.");
+            essentialsSupport = new EssentialsSupport(this);
+            essentialsSupport.register();
+        } else {
+            dB.log("Essentials not found, add-ons will not enabled.");
         }
     }
 
