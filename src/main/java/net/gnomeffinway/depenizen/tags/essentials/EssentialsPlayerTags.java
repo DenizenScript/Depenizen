@@ -94,7 +94,9 @@ public class EssentialsPlayerTags implements Property {
             for (String home : essUser.getHomes()) {
                 try {
                     homes.add(home + "/" + new dLocation(essUser.getHome(home)).identifySimple());
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    dB.echoError(e);
+                }
             }
             return homes.getAttribute(attribute.fulfill(1));
         }
@@ -106,12 +108,14 @@ public class EssentialsPlayerTags implements Property {
         // Returns a list of the locations of homes of the player.
         // @plugin Essentials
         // -->
-        if (attribute.startsWith("list_homes")) {
+        if (attribute.startsWith("list_home_locations")) {
             dList homes = new dList();
             for (String home : essUser.getHomes()) {
                 try {
                     homes.add(new dLocation(essUser.getHome(home)).identifySimple());
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    dB.echoError(e);
+                }
             }
             return homes.getAttribute(attribute.fulfill(1));
         }
