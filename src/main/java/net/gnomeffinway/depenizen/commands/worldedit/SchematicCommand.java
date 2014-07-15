@@ -88,7 +88,6 @@ public class SchematicCommand extends AbstractCommand implements Listener {
     private enum Type { CREATE, LOAD, UNLOAD, ROTATE, PASTE, SAVE }
     public static Map<String, CuboidClipboard> schematics;
 
-    // TODO: Create schematic from dCuboid
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
@@ -296,6 +295,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
         // @returns Element(Number)
         // @description
         // Returns the height of the schematic.
+        // @plugin WorldEdit
         // -->
         if (attribute.startsWith("height")) {
             event.setReplaced(new Element(cc.getHeight())
@@ -308,6 +308,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
         // @returns Element(Number)
         // @description
         // Returns the length of the schematic.
+        // @plugin WorldEdit
         // -->
         if (attribute.startsWith("length")) {
             event.setReplaced(new Element(cc.getLength())
@@ -320,6 +321,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
         // @returns Element(Number)
         // @description
         // Returns the width of the schematic.
+        // @plugin WorldEdit
         // -->
         if (attribute.startsWith("width")) {
             event.setReplaced(new Element(cc.getWidth())
@@ -332,6 +334,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
         // @returns dMaterial
         // @description
         // Returns the material for the block at the location in the schematic.
+        // @plugin WorldEdit
         // -->
         if (attribute.startsWith("block")) {
             if (attribute.hasContext(1) && dLocation.matches(attribute.getContext(1))) {
@@ -348,6 +351,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
         // @returns dLocation
         // @description
         // Returns the origin location of the schematic.
+        // @plugin WorldEdit
         // -->
         if (attribute.startsWith("origin")) {
             event.setReplaced(new dLocation(Bukkit.getWorlds().get(0),
@@ -361,6 +365,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
         // @returns dLocation
         // @description
         // Returns the offset location of the schematic.
+        // @plugin WorldEdit
         // -->
         if (attribute.startsWith("offset")) {
             event.setReplaced(new dLocation(Bukkit.getWorlds().get(0),
@@ -374,6 +379,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
         // @returns Element(Number)
         // @description
         // Returns the number of blocks in the schematic.
+        // @plugin WorldEdit
         // -->
         if (attribute.startsWith("blocks")) {
             event.setReplaced(new Element(cc.getHeight() * cc.getWidth() * cc.getLength())
@@ -386,6 +392,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
         // @returns dCuboid
         // @description
         // Returns a cuboid of where the schematic would be if it was pasted at an origin.
+        // @plugin WorldEdit
         // -->
         if (attribute.startsWith("cuboid") && attribute.hasContext(1)) {
             dLocation origin = dLocation.valueOf(attribute.getContext(1));

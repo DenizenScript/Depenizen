@@ -4,22 +4,17 @@ import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.api.PartyAPI;
 import com.gmail.nossr50.config.Config;
 import com.gmail.nossr50.config.experience.ExperienceConfig;
-import com.gmail.nossr50.database.DatabaseManager;
 import com.gmail.nossr50.database.DatabaseManagerFactory;
-import com.gmail.nossr50.database.FlatfileDatabaseManager;
-import com.gmail.nossr50.datatypes.database.DatabaseUpdateType;
-import com.gmail.nossr50.datatypes.party.Party;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.party.PartyManager;
-import com.gmail.nossr50.util.Misc;
 import net.aufdemrand.denizen.exceptions.CommandExecutionException;
 import net.aufdemrand.denizen.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.aH;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.scripts.ScriptEntry;
 import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import org.bukkit.entity.Player;
 
 public class McMMOCommands extends AbstractCommand {
 
@@ -73,12 +68,12 @@ public class McMMOCommands extends AbstractCommand {
 
             if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values()))
-                scriptEntry.addObject("action", Action.valueOf(arg.getValue().toUpperCase()));
+                scriptEntry.addObject("action", arg.asElement());
 
             else if (!scriptEntry.hasObject("state")
                     && arg.matchesPrefix("state")
                     && arg.matchesEnum(State.values()))
-                scriptEntry.addObject("state", State.valueOf(arg.getValue().toUpperCase()));
+                scriptEntry.addObject("state", arg.asElement());
 
             else if (!scriptEntry.hasObject("party")
                     && arg.matchesPrefix("party"))
@@ -95,83 +90,94 @@ public class McMMOCommands extends AbstractCommand {
 
             else if (!scriptEntry.hasObject("type")
                     && arg.matchesEnum(Type.values()))
-                scriptEntry.addObject("type", Type.valueOf(arg.getValue().toUpperCase()));
+                scriptEntry.addObject("type", arg.asElement());
 
         }
 
-        scriptEntry.defaultObject("state", State.TOGGLE).defaultObject("qty", new Element(-1)).defaultObject("skill", new Element("")).defaultObject("party", new Element(""));
+        if (!scriptEntry.hasObject("action"))
+            throw new InvalidArgumentsException("Must specify a valid action!");
+
+        if (!scriptEntry.hasObject("type"))
+            throw new InvalidArgumentsException("Must specify a valid type!");
+
+        scriptEntry.defaultObject("state", State.TOGGLE)
+                .defaultObject("qty", new Element(-1));
 
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+
         // Get objects
-        Action action = (Action) scriptEntry.getObject("action");
-        State state = (State) scriptEntry.getObject("state");
-        Type type = (Type) scriptEntry.getObject("type");
-        Player player = scriptEntry.getPlayer().getPlayerEntity();
-        double qty = scriptEntry.getElement("qty").asDouble();
-        String party = scriptEntry.getElement("party").asString();
-        String skill = scriptEntry.getElement("skill").asString();
+        Element action = scriptEntry.getElement("action");
+        Element state = scriptEntry.getElement("state");
+        Element type = scriptEntry.getElement("type");
+        Element qty = scriptEntry.getElement("qty");
+        Element party = scriptEntry.getElement("party");
+        Element skill = scriptEntry.getElement("skill");
 
-        /*
-        // Report to dB TODO: fix... this, this is not right
-        dB.report(scriptEntry, getName(),
-                aH.debugObj("NPC", scriptEntry.getNPC().toString())
-                        + aH.debugObj("Action", action.toString())
-                        + aH.debugObj("Player", player.getName())
-                        + aH.debugObj("State", String.valueOf(state))
-                        + aH.debugObj("Type", String.valueOf(type))
-                        + aH.debugObj("Party", String.valueOf(party))
-                        + aH.debugObj("Skill", String.valueOf(skill))
-                        + aH.debugObj("Qty", String.valueOf(qty)));
-        */
+        dPlayer player = scriptEntry.getPlayer();
 
-        switch (action) {
+        // Report to dB
+        dB.report(scriptEntry, getName(), action.debug() + type.debug() + state.debug() + qty.debug()
+                + (party != null ? party.debug() : "") + (skill != null ? skill.debug() : ""));
+
+        switch (Action.valueOf(action.asString().toUpperCase())) {
 
             case ADD: {
 
-                if (qty >= 0 && !skill.equals("")) {
-                    if (type == Type.LEVELS) {
-                        if (player.isOnline()) {
-                            ExperienceAPI.addLevel(player, skill, (int) qty);
-                        } else {
-                            ExperienceAPI.addLevelOffline(player.getName(), skill, (int) qty);
+                if (qty.asDouble() >= 0 && skill != null && player != null) {
+                    switch (Type.valueOf(type.asString().toUpperCase())) {
+                        case LEVELS: {
+                            if (player.isOnline()) {
+                                ExperienceAPI.addLevel(player.getPlayerEntity(), skill.asString(), qty.asInt());
+                            } else {
+                                ExperienceAPI.addLevelOffline(player.getName(), skill.asString(), qty.asInt());
+                            }
+                            break;
                         }
-                    } else if (type == Type.XP) {
-                        if (player.isOnline()) {
-                            ExperienceAPI.addRawXP(player, skill, (float) qty);
-                        } else {
-                            ExperienceAPI.addRawXPOffline(player.getName(), skill, (float) qty);
+                        case XP: {
+                            if (player.isOnline()) {
+                                ExperienceAPI.addRawXP(player.getPlayerEntity(), skill.asString(), qty.asFloat());
+                            } else {
+                                ExperienceAPI.addRawXPOffline(player.getName(), skill.asString(), qty.asFloat());
+                            }
                         }
                     }
-                } else if (PartyManager.getParty(party) != null) {
-                    PartyAPI.addToParty(player, party);
+                } else if (party != null && PartyManager.getParty(party.asString()) != null) {
+                    PartyAPI.addToParty(player.getPlayerEntity(), party.asString());
                 }
                 break;
 
             }
             case REMOVE: {
 
-                if (qty >= 0 && !skill.equals("")) {
-                    if (type == Type.LEVELS) {
-                        if (player.isOnline())
-                            ExperienceAPI.setLevel(player, skill, ExperienceAPI.getLevel(player, skill) - (int) qty);
-                        else
-                            ExperienceAPI.setLevelOffline(player.getName(), skill, ExperienceAPI.getLevel(player, skill) - (int) qty);
-                    } else if (type == Type.XP) {
-                        if (player.isOnline())
-                            ExperienceAPI.removeXP(player, skill, (int) qty);
-                        else
-                            ExperienceAPI.removeXPOffline(player.getName(), skill, (int) qty);
+                if (qty.asDouble() >= 0 && skill != null && player != null) {
+                    switch (Type.valueOf(type.asString().toUpperCase())) {
+                        case LEVELS: {
+                            if (player.isOnline()) {
+                                ExperienceAPI.setLevel(player.getPlayerEntity(), skill.asString(), ExperienceAPI.getLevel(player.getPlayerEntity(), skill.asString()) - qty.asInt());
+                            } else {
+                                ExperienceAPI.setLevelOffline(player.getName(), skill.asString(), ExperienceAPI.getLevelOffline(player.getName(), skill.asString()) - qty.asInt());
+                            }
+                            break;
+                        }
+                        case XP: {
+                            if (player.isOnline()) {
+                                ExperienceAPI.removeXP(player.getPlayerEntity(), skill.asString(), qty.asInt());
+                            } else {
+                                ExperienceAPI.removeXPOffline(player.getName(), skill.asString(), qty.asInt());
+                            }
+                            break;
+                        }
                     }
                 }
-                else if (PartyManager.getParty(party) != null) {
-                    if (PartyAPI.getPartyLeader(party).equals(player.getName()))
-                        PartyManager.disbandParty(PartyManager.getParty(party));
+                else if (player != null && player.isOnline() && party != null && PartyManager.getParty(party.asString()) != null) {
+                    if (PartyAPI.getPartyLeader(party.asString()).equals(player.getName()))
+                        PartyManager.disbandParty(PartyManager.getParty(party.asString()));
 
                     else
-                        PartyAPI.removeFromParty(player);
+                        PartyAPI.removeFromParty(player.getPlayerEntity());
                 }
                 else if (player != null) {
                     DatabaseManagerFactory.getDatabaseManager().removeUser(player.getName());
@@ -181,49 +187,83 @@ public class McMMOCommands extends AbstractCommand {
             }
             case SET: {
 
-                if (qty >= 0 && !skill.equals("")) {
-                    if (type == Type.LEVELS) {
-                        if (player.isOnline())
-                            ExperienceAPI.setLevel(player, skill, (int) qty);
-                        else
-                            ExperienceAPI.setLevelOffline(player.getName(), skill, (int) qty);
-                    } else if (type == Type.XP) {
-                        if (player.isOnline())
-                            ExperienceAPI.setXP(player, skill, (int) qty);
-                        else
-                            ExperienceAPI.setXPOffline(player.getName(), skill, (int) qty);
+                if (qty.asDouble() >= 0 && skill != null && player != null) {
+                    switch (Type.valueOf(type.asString().toUpperCase())) {
+                        case LEVELS: {
+                            if (player.isOnline()) {
+                                ExperienceAPI.setLevel(player.getPlayerEntity(), skill.asString(), qty.asInt());
+                            } else {
+                                ExperienceAPI.setLevelOffline(player.getName(), skill.asString(), qty.asInt());
+                            }
+                            break;
+                        }
+                        case XP: {
+                            if (player.isOnline()) {
+                                ExperienceAPI.setXP(player.getPlayerEntity(), skill.asString(), qty.asInt());
+                            } else {
+                                ExperienceAPI.setXPOffline(player.getName(), skill.asString(), qty.asInt());
+                            }
+                            break;
+                        }
                     }
-                } else if (type == Type.LEADER && !party.equals(""))
-                    PartyAPI.setPartyLeader(party, player.getName());
-                else if(type == Type.XPRATE)
-                    ExperienceConfig.getInstance().setExperienceGainsGlobalMultiplier(qty);
-                else if(type == Type.HARDCORE) {
-                    SkillType skillType = SkillType.getSkill(skill);
-                    boolean isEnabled = Config.getInstance().getHardcoreStatLossEnabled(skillType);
+                } else switch(Type.valueOf(type.asString().toUpperCase())) {
+                    case LEADER: {
+                        if (party != null && PartyManager.getParty(party.asString()) != null)
+                            PartyAPI.setPartyLeader(party.asString(), player.getName());
+                        break;
+                    }
+                    case XPRATE: {
+                        if (qty.asInt() > 0)
+                            ExperienceConfig.getInstance().setExperienceGainsGlobalMultiplier(qty.asInt());
+                        break;
+                    }
+                    case HARDCORE: {
+                        if (skill == null) return;
+                        SkillType skillType = SkillType.getSkill(skill.asString());
+                        boolean isEnabled = Config.getInstance().getHardcoreStatLossEnabled(skillType);
 
-                    if(state == State.TOGGLE)
-                        Config.getInstance().setHardcoreStatLossEnabled(skillType, !isEnabled);
-                    else if(state == State.TRUE)
-                        Config.getInstance().setHardcoreStatLossEnabled(skillType, true);
-                    else if(state == State.FALSE)
-                        Config.getInstance().setHardcoreStatLossEnabled(skillType, false);
+                        switch (State.valueOf(state.asString().toUpperCase())) {
+                            case TOGGLE: {
+                                Config.getInstance().setHardcoreStatLossEnabled(skillType, !isEnabled);
+                                break;
+                            }
+                            case TRUE: {
+                                Config.getInstance().setHardcoreStatLossEnabled(skillType, true);
+                                break;
+                            }
+                            case FALSE: {
+                                Config.getInstance().setHardcoreStatLossEnabled(skillType, false);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case VAMPIRISM: {
+                        if (skill == null) return;
+                        SkillType skillType = SkillType.getSkill(skill.asString());
+                        boolean isEnabled = Config.getInstance().getHardcoreVampirismEnabled(skillType);
 
-                }
-                else if(type == Type.VAMPIRISM) {
-                    SkillType skillType = SkillType.getSkill(skill);
-                    boolean isEnabled = Config.getInstance().getHardcoreVampirismEnabled(skillType);
-
-                    if(state == State.TOGGLE)
-                        Config.getInstance().setHardcoreVampirismEnabled(skillType, !isEnabled);
-                    else if(state == State.TRUE)
-                        Config.getInstance().setHardcoreVampirismEnabled(skillType, true);
-                    else if(state == State.FALSE)
-                        Config.getInstance().setHardcoreVampirismEnabled(skillType, false);
-
+                        switch (State.valueOf(state.asString().toUpperCase())) {
+                            case TOGGLE: {
+                                Config.getInstance().setHardcoreVampirismEnabled(skillType, !isEnabled);
+                                break;
+                            }
+                            case TRUE: {
+                                Config.getInstance().setHardcoreVampirismEnabled(skillType, true);
+                                break;
+                            }
+                            case FALSE: {
+                                Config.getInstance().setHardcoreVampirismEnabled(skillType, false);
+                                break;
+                            }
+                        }
+                        break;
+                    }
                 }
                 break;
 
             }
         }
+
     }
 }
