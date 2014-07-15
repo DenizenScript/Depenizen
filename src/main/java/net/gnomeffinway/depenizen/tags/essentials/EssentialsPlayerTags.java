@@ -84,16 +84,16 @@ public class EssentialsPlayerTags implements Property {
 
         // <--[tag]
         // @attribute <p@player.list_homes>
-        // @returns dList(Element,dLocation)
+        // @returns dList(Element/dLocation)
         // @description
-        // Returns a list of the homes of the player, in the format "HomeName,l@x,y,z,world".
+        // Returns a list of the homes of the player, in the format "HomeName/l@x,y,z,world".
         // @plugin Essentials
         // -->
         if (attribute.startsWith("list_homes")) {
             dList homes = new dList();
             for (String home : essUser.getHomes()) {
                 try {
-                    homes.add(home + new dLocation(essUser.getHome(home)).identifySimple());
+                    homes.add(home + "/" + new dLocation(essUser.getHome(home)).identifySimple());
                 } catch (Exception e) {}
             }
             return homes.getAttribute(attribute.fulfill(1));
