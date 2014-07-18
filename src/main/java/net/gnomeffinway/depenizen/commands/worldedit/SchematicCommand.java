@@ -277,18 +277,38 @@ public class SchematicCommand extends AbstractCommand implements Listener {
 
         String id = event.getNameContext().toUpperCase();
 
+        Attribute attribute = new Attribute(event.raw_tag, event.getScriptEntry()).fulfill(1);
+
         if (!schematics.containsKey(id)) {
+            // Meta below
+            if (attribute.startsWith("exists")) {
+                event.setReplaced(new Element(false)
+                        .getAttribute(attribute.fulfill(1)));
+                return;
+            }
+
             dB.echoError("Schematic file " + id + " is not loaded.");
             return;
         }
 
         CuboidClipboard cc = schematics.get(id);
 
-        Attribute attribute = new Attribute(event.raw_tag, event.getScriptEntry()).fulfill(1);
-
         //
         // Check attributes
         //
+
+        // <--[tag]
+        // @attribute <schematic[<name>].exists>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the schematic exists.
+        // @plugin WorldEdit
+        // -->
+        if (attribute.startsWith("exists")) {
+            event.setReplaced(new Element(true)
+                    .getAttribute(attribute.fulfill(1)));
+            return;
+        }
 
         // <--[tag]
         // @attribute <schematic[<name>].height>
