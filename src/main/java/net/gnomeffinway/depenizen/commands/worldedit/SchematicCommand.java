@@ -360,7 +360,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
             if (attribute.hasContext(1) && dLocation.matches(attribute.getContext(1))) {
                 dLocation location = dLocation.valueOf(attribute.getContext(1));
                 BaseBlock bb = cc.getBlock(new com.sk89q.worldedit.Vector(location.getX(), location.getY(), location.getZ()));
-                event.setReplaced(dMaterial.valueOf(bb.getType() + ":" + bb.getData()) // TODO: Better representation of the block
+                event.setReplaced(dMaterial.valueOf(bb.getType() + "," + bb.getData()) // TODO: Better representation of the block
                         .getAttribute(attribute.fulfill(1)));
                 return;
             }
