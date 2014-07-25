@@ -11,7 +11,9 @@ import java.util.GregorianCalendar;
 
 public class EssentialsPlayerTags implements Property {
 
-    public static boolean describes(dObject pl) { return pl instanceof dPlayer; }
+    public static boolean describes(dObject pl) {
+        return pl instanceof dPlayer && ((dPlayer) pl).isOnline();
+    }
 
     public static EssentialsPlayerTags getFrom(dObject pl) {
         if (!describes(pl)) return null;
@@ -23,7 +25,10 @@ public class EssentialsPlayerTags implements Property {
     // Instance Fields and Methods
     /////////////
 
-    private EssentialsPlayerTags(dPlayer pl) { this.essUser = Depenizen.essentials.getUser(pl.getName()); }
+    private EssentialsPlayerTags(dPlayer pl) {
+        // TODO: UUID
+        this.essUser = Depenizen.essentials.getUser(pl.getPlayerEntity());
+    }
 
     User essUser = null;
 
