@@ -88,13 +88,13 @@ public class EssentialsPlayerTags implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.list_homes>
+        // @attribute <p@player.home_list>
         // @returns dList(Element/dLocation)
         // @description
         // Returns a list of the homes of the player, in the format "HomeName/l@x,y,z,world".
         // @plugin Essentials
         // -->
-        if (attribute.startsWith("list_homes")) {
+        if (attribute.startsWith("home_list")) {
             dList homes = new dList();
             for (String home : essUser.getHomes()) {
                 try {
@@ -107,13 +107,13 @@ public class EssentialsPlayerTags implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.list_home_locations>
+        // @attribute <p@player.home_location_list>
         // @returns dList(dLocation)
         // @description
         // Returns a list of the locations of homes of the player.
         // @plugin Essentials
         // -->
-        if (attribute.startsWith("list_home_locations")) {
+        if (attribute.startsWith("home_location_list")) {
             dList homes = new dList();
             for (String home : essUser.getHomes()) {
                 try {
@@ -126,24 +126,24 @@ public class EssentialsPlayerTags implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.list_home_names>
+        // @attribute <p@player.home_name_list>
         // @returns dList(Element)
         // @description
         // Returns a list of the names of homes of the player.
         // @plugin Essentials
         // -->
-        if (attribute.startsWith("list_home_names")) {
+        if (attribute.startsWith("home_name_list")) {
             return new dList(essUser.getHomes()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
-        // @attribute <p@player.list_mails>
+        // @attribute <p@player.mail_list>
         // @returns dList(Element)
         // @description
         // Returns a list of mail the player currently has.
         // @plugin Essentials
         // -->
-        if (attribute.startsWith("list_mails")) {
+        if (attribute.startsWith("mail_list")) {
             return new dList(essUser.getMails()).getAttribute(attribute.fulfill(1));
         }
 
