@@ -1,14 +1,13 @@
 package net.gnomeffinway.depenizen.objects;
 
 import com.massivecraft.factions.FFlag;
-import com.massivecraft.factions.Rel;
-import com.massivecraft.factions.entity.*;
-import com.massivecraft.mcore.money.Money;
+import com.massivecraft.factions.entity.Faction;
+import com.massivecraft.factions.entity.FactionColl;
+import com.massivecraft.factions.entity.FactionColls;
+import com.massivecraft.massivecore.money.Money;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-
-import java.util.ArrayList;
 
 public class dFaction implements dObject {
 

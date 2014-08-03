@@ -1,7 +1,7 @@
 package net.gnomeffinway.depenizen.tags;
 
 import com.massivecraft.factions.entity.*;
-import com.massivecraft.mcore.ps.PS;
+import com.massivecraft.massivecore.ps.PS;
 import net.aufdemrand.denizen.events.bukkit.ReplaceableTagEvent;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
