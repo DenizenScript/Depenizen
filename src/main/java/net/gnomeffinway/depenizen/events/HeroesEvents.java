@@ -6,14 +6,13 @@ import com.herocraftonline.heroes.api.events.HeroChangeLevelEvent;
 
 import net.aufdemrand.denizen.events.EventManager;
 import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dObject;
 import net.gnomeffinway.depenizen.Depenizen;
 
-import net.gnomeffinway.depenizen.objects.dHero;
-import org.bukkit.entity.Player;
+import net.gnomeffinway.depenizen.objects.heroes.HeroesClass;
+import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -43,20 +42,20 @@ public class HeroesEvents implements Listener {
     @EventHandler
     public void changeClass(ClassChangeEvent event) {
 
-        dHero hero = new dHero(event.getHero());
+        HeroesHero hero = new HeroesHero(event.getHero());
         dPlayer player = null;
         dNPC npc = null;
 
         Map<String, dObject> context = new HashMap<String, dObject>();
-        context.put("class", new Element(event.getTo().getName()));
+        context.put("class", new HeroesClass(event.getTo()));
         context.put("cost", new Element(event.getCost()));
-        context.put("from", new Element(event.getFrom().getName()));
+        context.put("from", new HeroesClass(event.getFrom()));
         context.put("hero", hero);
 
         if (hero.isNPC())
-            npc = hero.getDenizenNPC();
+            npc = (dNPC) hero.getDenizenObject();
         else if (hero.isPlayer())
-            player = hero.getDenizenPlayer();
+            player = (dPlayer) hero.getDenizenObject();
 
         String determination = EventManager.doEvents(Arrays.asList
                 ("hero changes class",
@@ -85,20 +84,20 @@ public class HeroesEvents implements Listener {
     @EventHandler
     public void changeExperience(ExperienceChangeEvent event) {
 
-        dHero hero = new dHero(event.getHero());
+        HeroesHero hero = new HeroesHero(event.getHero());
         dPlayer player = null;
         dNPC npc = null;
 
         Map<String, dObject> context = new HashMap<String, dObject>();
         context.put("amount", new Element(event.getExpChange()));
-        context.put("class", new Element(event.getHeroClass().getName()));
+        context.put("class", new HeroesClass(event.getHeroClass()));
         context.put("hero", hero);
         context.put("reason", new Element(event.getSource().name()));
 
         if (hero.isNPC())
-            npc = hero.getDenizenNPC();
+            npc = (dNPC) hero.getDenizenObject();
         else if (hero.isPlayer())
-            player = hero.getDenizenPlayer();
+            player = (dPlayer) hero.getDenizenObject();
 
         String determination = EventManager.doEvents(Arrays.asList
                 ("hero changes experience"),
@@ -126,20 +125,20 @@ public class HeroesEvents implements Listener {
     @EventHandler
     public void changeLevel(HeroChangeLevelEvent event) {
 
-        dHero hero = new dHero(event.getHero());
+        HeroesHero hero = new HeroesHero(event.getHero());
         dPlayer player = null;
         dNPC npc = null;
 
         Map<String, dObject> context = new HashMap<String, dObject>();
-        context.put("class", new Element(event.getHeroClass().getName()));
+        context.put("class", new HeroesClass(event.getHeroClass()));
         context.put("from", new Element(event.getFrom()));
         context.put("hero", hero);
         context.put("level", new Element(event.getTo()));
 
         if (hero.isNPC())
-            npc = hero.getDenizenNPC();
+            npc = (dNPC) hero.getDenizenObject();
         else if (hero.isPlayer())
-            player = hero.getDenizenPlayer();
+            player = (dPlayer) hero.getDenizenObject();
 
         String determination = EventManager.doEvents(Arrays.asList
                 	("hero changes level",
