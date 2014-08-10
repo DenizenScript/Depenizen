@@ -419,7 +419,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
             Location schemSize = new Location(origin.getWorld(), cc.getWidth(), cc.getHeight(), cc.getLength());
             Location offset = new Location(origin.getWorld(), cc.getOffset().getX(), cc.getOffset().getY(), cc.getOffset().getZ());
             Location min = new Location(origin.getWorld(), origin.getX() + offset.getX(), origin.getY() + offset.getY(), origin.getZ() + offset.getZ());
-            Location max = new Location(origin.getWorld(), min.getX() + schemSize.getX(), min.getY() + schemSize.getY(), min.getZ() + schemSize.getZ());
+            Location max = new Location(origin.getWorld(), min.getX() + schemSize.getX() - 1, min.getY() + schemSize.getY() - 1, min.getZ() + schemSize.getZ() - 1);
             event.setReplaced(new dCuboid(min, max)
                     .getAttribute(attribute.fulfill(1)));
             return;
