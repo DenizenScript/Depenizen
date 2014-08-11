@@ -4,17 +4,12 @@ import net.aufdemrand.denizen.events.EventManager;
 import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.ess3.api.events.*;
-import net.gnomeffinway.depenizen.Depenizen;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.*;
 
 public class EssentialsEvents implements Listener {
-
-    public EssentialsEvents(Depenizen depenizen) {
-        depenizen.getServer().getPluginManager().registerEvents(this, depenizen);
-    }
 
     // <--[event]
     // @Events

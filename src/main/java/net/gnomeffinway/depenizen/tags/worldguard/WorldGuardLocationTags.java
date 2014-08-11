@@ -1,11 +1,13 @@
 package net.gnomeffinway.depenizen.tags.worldguard;
 
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.objects.properties.Property;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.support.Supported;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +49,8 @@ public class WorldGuardLocationTags implements Property {
     }
 
     private ApplicableRegionSet getApplicableRegions() {
-        return Depenizen.worldguard.getRegionManager(location.getWorld()).getApplicableRegions(location);
+        WorldGuardPlugin worldGuard = Supported.get("WORLDGUARD").getPlugin();
+        return worldGuard.getRegionManager(location.getWorld()).getApplicableRegions(location);
     }
 
     private boolean inRegion() {

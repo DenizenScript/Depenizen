@@ -8,7 +8,7 @@ import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.aH;
 import net.aufdemrand.denizen.scripts.ScriptEntry;
 import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
-import net.gnomeffinway.depenizen.objects.dJob;
+import net.gnomeffinway.depenizen.objects.jobs.JobsJob;
 
 public class JobsCommands extends AbstractCommand {
 
@@ -30,7 +30,16 @@ public class JobsCommands extends AbstractCommand {
     // TODO
 
     // @Usage
-    // TODO
+    // Use to promote a player.
+    // - jobs promote Woodcutter
+
+    // @Usage
+    // Use to demote a player multiple times.
+    // - jobs demote Builder 3
+
+    // @Usage
+    // Use to make a player join a job.
+    // - jobs join Worker player:Jeebiss
 
     // -->
 
@@ -52,8 +61,8 @@ public class JobsCommands extends AbstractCommand {
             }
 
             else if (!scriptEntry.hasObject("job")
-                    && arg.matchesArgumentType(dJob.class)) {
-                scriptEntry.addObject("job", dJob.valueOf(arg.getValue()));
+                    && arg.matchesArgumentType(JobsJob.class)) {
+                scriptEntry.addObject("job", JobsJob.valueOf(arg.getValue()));
             }
 
             else if (!scriptEntry.hasObject("number")
@@ -74,7 +83,7 @@ public class JobsCommands extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
 
         Action action = (Action) scriptEntry.getObject("action");
-        dJob job = (dJob) scriptEntry.getObject("job");
+        JobsJob job = (JobsJob) scriptEntry.getObject("job");
         int number = (scriptEntry.hasObject("number") ? scriptEntry.getElement("number").asInt() : 0);
         JobsPlayer player = Jobs.getPlayerManager().getJobsPlayer(scriptEntry.getPlayer().getName());
 

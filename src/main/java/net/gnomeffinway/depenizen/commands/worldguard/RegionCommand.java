@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.commands.worldguard;
 
 import com.sk89q.worldedit.BlockVector;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.aufdemrand.denizen.exceptions.CommandExecutionException;
@@ -14,6 +15,8 @@ import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.support.Support;
+import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.Location;
 import org.bukkit.World;
 
@@ -101,7 +104,8 @@ public class RegionCommand extends AbstractCommand {
                 + aH.debugObj("world", world.getName()) + action.debug());
 
         if (action.asString().equalsIgnoreCase("REMOVE")) {
-            Depenizen.worldguard.getRegionManager(world).removeRegion(region_id.asString());
+            WorldGuardPlugin worldGuard = Supported.get("WORLDGUARD").getPlugin();
+            worldGuard.getRegionManager(world).removeRegion(region_id.asString());
             return;
         }
 
@@ -111,7 +115,8 @@ public class RegionCommand extends AbstractCommand {
                 new BlockVector(low.getX(), low.getY(), low.getZ()),
                 new BlockVector(high.getX(), high.getY(), high.getZ()));
 
-        Depenizen.worldguard.getRegionManager(cuboid.getWorld()).addRegion(region);
+        WorldGuardPlugin worldGuard = Supported.get("WORLDGUARD").getPlugin();
+        worldGuard.getRegionManager(cuboid.getWorld()).addRegion(region);
 
     }
 

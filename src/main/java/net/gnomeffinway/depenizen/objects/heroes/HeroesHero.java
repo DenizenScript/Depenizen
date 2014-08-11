@@ -1,13 +1,16 @@
 package net.gnomeffinway.depenizen.objects.heroes;
 
+import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.Hero;
 import com.herocraftonline.heroes.characters.classes.HeroClass;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizen.utilities.depends.Depends;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.entity.Player;
 
 import java.util.regex.Matcher;
@@ -33,11 +36,13 @@ public class HeroesHero implements dObject {
         if (dPlayer.matches(string))
             return new HeroesHero(dPlayer.valueOf(string));
 
-        Matcher m = npc_pattern.matcher(string);
-        if (m.matches()) {
-            NPC npc = CitizensAPI.getNPCRegistry().getById(Integer.valueOf(m.group(2)));
-            if (npc != null)
-                return new HeroesHero(dNPC.mirrorCitizensNPC(npc));
+        if (Depends.citizens != null) {
+            Matcher m = npc_pattern.matcher(string);
+            if (m.matches()) {
+                NPC npc = CitizensAPI.getNPCRegistry().getById(Integer.valueOf(m.group(2)));
+                if (npc != null)
+                    return new HeroesHero(dNPC.mirrorCitizensNPC(npc));
+            }
         }
 
         return null;
@@ -61,20 +66,22 @@ public class HeroesHero implements dObject {
     public HeroesHero(dPlayer player) {
         denizenObj = player;
         if (player.isOnline()) {
-            hero = Depenizen.heroes.getCharacterManager().getHero(player.getPlayerEntity());
+            Heroes heroes = Supported.get("HEROES").getPlugin();
+            hero = heroes.getCharacterManager().getHero(player.getPlayerEntity());
         }
     }
 
     public HeroesHero(dNPC npc) {
         denizenObj = npc;
         if (npc.isSpawned() && npc.getEntity() instanceof Player) {
-            hero = Depenizen.heroes.getCharacterManager().getHero((Player) npc.getEntity());
+            Heroes heroes = Supported.get("HEROES").getPlugin();
+            hero = heroes.getCharacterManager().getHero((Player) npc.getEntity());
         }
     }
 
     public HeroesHero(Hero hero) {
         this.hero = hero;
-        if (CitizensAPI.getNPCRegistry().isNPC(hero.getPlayer()))
+        if (Depends.citizens != null && CitizensAPI.getNPCRegistry().isNPC(hero.getPlayer()))
             denizenObj = dNPC.fromEntity(hero.getPlayer());
         else
             denizenObj = dPlayer.mirrorBukkitPlayer(hero.getPlayer());

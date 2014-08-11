@@ -1,56 +1,14 @@
 package net.gnomeffinway.depenizen;
 
-import com.earth2me.essentials.Essentials;
-import com.gmail.nossr50.mcMMO;
-import com.herocraftonline.heroes.Heroes;
-import com.massivecraft.factions.Factions;
-import com.palmergames.bukkit.towny.Towny;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.vexsoftware.votifier.Votifier;
-import me.limebyte.battlenight.core.BattleNight;
-import me.zford.jobs.bukkit.JobsPlugin;
-import net.aufdemrand.denizen.Denizen;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.gnomeffinway.depenizen.support.*;
-import net.slipcor.pvparena.PVPArena;
+import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.dynmap.DynmapAPI;
 
 public class Depenizen extends JavaPlugin {
-
-    public static mcMMO mcmmo;
-    public static Factions factions;
-    public static BattleNight battlenight;
-    public static Denizen denizen;
-    public static Towny towny;
-    public static Votifier votifier;
-    public static Votifier bungeefier;
-    public static JobsPlugin jobs;
-    public static PVPArena pvparena;
-    public static Heroes heroes;
-    public static DynmapAPI dynmap;
-    public static WorldEditPlugin worldedit;
-    public static WorldGuardPlugin worldguard;
-    public static Essentials essentials;
-
-    // TODO: make these local variables instead?
-    private McMMOSupport mcmmoSupport;
-    private BattleNightSupport battlenightSupport;
-    private TownySupport townySupport;
-    private FactionsSupport factionsSupport;
-    private VotifierSupport votifierSupport;
-    private VotifierSupport bungeefierSupport;
-    private JobsSupport jobsSupport;
-    private PVPArenaSupport pvparenaSupport;
-    private HeroesSupport heroesSupport;
-    private DynmapSupport dynmapSupport;
-    private WorldEditSupport worldeditSupport;
-    private WorldGuardSupport worldguardSupport;
-    private EssentialsSupport essentialsSupport;
 
     @Override
     public void onEnable() {
@@ -74,132 +32,23 @@ public class Depenizen extends JavaPlugin {
     }
 
     public void checkPlugins() {
-        denizen = (Denizen) getServer().getPluginManager().getPlugin("Denizen");
-        mcmmo = (mcMMO) getServer().getPluginManager().getPlugin("mcMMO");
-        factions = (Factions) getServer().getPluginManager().getPlugin("Factions");
-        towny = (Towny) getServer().getPluginManager().getPlugin("Towny");
-        battlenight = (BattleNight) getServer().getPluginManager().getPlugin("BattleNight");
-        votifier = (Votifier) getServer().getPluginManager().getPlugin("Votifier");
-        bungeefier = (Votifier) getServer().getPluginManager().getPlugin("Bungeefier");
-        jobs = (JobsPlugin) getServer().getPluginManager().getPlugin("Jobs");
-        pvparena = (PVPArena) getServer().getPluginManager().getPlugin("pvparena");
-        dynmap = (DynmapAPI) getServer().getPluginManager().getPlugin("Dynmap");
-        heroes = (Heroes) getServer().getPluginManager().getPlugin("Heroes");
-        worldedit = (WorldEditPlugin) getServer().getPluginManager().getPlugin("WorldEdit");
-        worldguard = (WorldGuardPlugin) getServer().getPluginManager().getPlugin("WorldGuard");
-        essentials = (Essentials) getServer().getPluginManager().getPlugin("Essentials");
-        
-        if (denizen != null) {
-            dB.log("Denizen hooked");
+
+        PluginManager pm = getServer().getPluginManager();
+
+        if (pm.getPlugin("Denizen") != null) {
+            depenizenLog("Denizen hooked");
         } else {
             getServer().getLogger().severe("[Depenizen] Denizen not found, disabling");
             getPluginLoader().disablePlugin(this);
             return;
         }
 
-        if (mcmmo != null) {
-            dB.log("mcMMO hooked, enabling add-ons.");
-            mcmmoSupport = new McMMOSupport(this);
-            mcmmoSupport.register();
-        } else {
-            dB.log("mcMMO not found, add-ons will not enable.");
-        }
+        Supported.setup(this, pm, getClassLoader());
 
-        if (towny != null) {
-            dB.log("Towny hooked, enabling add-ons.");
-            townySupport = new TownySupport(this);
-            townySupport.register();
-        } else {
-            dB.log("Towny not found, add-ons. will not add-ons.");
-        }
+    }
 
-        if (factions != null) {
-            dB.log("Factions hooked, enabling add-ons.");
-            factionsSupport = new FactionsSupport(this);
-            factionsSupport.register();
-        } else {
-            dB.log("Factions not found, add-ons will not enable.");
-        }
-
-        if (battlenight != null) {
-            dB.log("BattleNight hooked, enabling add-ons.");
-            battlenightSupport = new BattleNightSupport(this);
-            battlenightSupport.register();
-        } else {
-            dB.log("BattleNight not found, add-ons will not enable.");
-        }
-
-        if (votifier != null) {
-            dB.log("Votifier hooked, enabling add-ons.");
-            votifierSupport = new VotifierSupport(this);
-            votifierSupport.register();
-        } else {
-            dB.log("Votifier not found, add-ons will not enable.");
-        }
-
-        if (bungeefier != null) {
-            dB.log("Bungeefier hooked, enabling add-ons.");
-            bungeefierSupport = new VotifierSupport(this);
-            bungeefierSupport.register();
-        } else {
-            dB.log("Bungeefier not found, add-ons will not enable.");
-        }
-
-        if (jobs != null) {
-            dB.log("Jobs hooked, enabling add-ons.");
-            jobsSupport = new JobsSupport(this);
-            jobsSupport.register();
-        } else {
-            dB.log("Jobs not found, add-ons will not enable.");
-        }
-
-        if (pvparena != null) {
-            dB.log("PvP Arena hooked, enabling add-ons.");
-            pvparenaSupport = new PVPArenaSupport(this);
-            pvparenaSupport.register();
-        } else {
-            dB.log("PvP Arena not found, add-ons will not enable.");
-        }
-
-        if (heroes != null) {
-            dB.log("Heroes hooked, enabling add-ons.");
-            heroesSupport = new HeroesSupport(this);
-            heroesSupport.register();
-        } else {
-            dB.log("Heroes not found, add-ons will not enable.");
-        }
-
-        if (dynmap != null) {
-            dB.log("Dynmap hooked, enabling add-ons.");
-            dynmapSupport = new DynmapSupport(this);
-            dynmapSupport.register();
-        } else {
-            dB.log("Dynmap not found, add-ons will not enable.");
-        }
-
-        if (worldedit != null) {
-            dB.log("WorldEdit hooked, enabling add-ons.");
-            worldeditSupport = new WorldEditSupport(this);
-            worldeditSupport.register();
-        } else {
-            dB.log("WorldEdit not found, add-ons will not enable.");
-        }
-
-        if (worldguard != null) {
-            dB.log("WorldGuard hooked, enabling add-ons.");
-            worldguardSupport = new WorldGuardSupport(this);
-            worldguardSupport.register();
-        } else {
-            dB.log("WorldGuard not found, add-ons will not enable.");
-        }
-
-        if (essentials != null) {
-            dB.log("Essentials hooked, enabling add-ons.");
-            essentialsSupport = new EssentialsSupport(this);
-            essentialsSupport.register();
-        } else {
-            dB.log("Essentials not found, add-ons will not enabled.");
-        }
+    public static void depenizenLog(String message) {
+        dB.log(message);
     }
 
 }

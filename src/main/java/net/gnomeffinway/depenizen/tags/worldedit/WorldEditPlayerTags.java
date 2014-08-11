@@ -1,10 +1,12 @@
 package net.gnomeffinway.depenizen.tags.worldedit;
 
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.objects.properties.Property;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.entity.Player;
 
 public class WorldEditPlayerTags implements Property {
@@ -55,7 +57,8 @@ public class WorldEditPlayerTags implements Property {
         // @Plugin WorldEdit
         // -->
         if (attribute.startsWith("selected_region")) {
-            Selection selection = Depenizen.worldedit.getSelection(player);
+            WorldEditPlugin worldEdit = Supported.get("WORLDEDIT").getPlugin();
+            Selection selection = worldEdit.getSelection(player);
             if (selection != null)
                 return new dCuboid(selection.getMinimumPoint(), selection.getMaximumPoint()).getAttribute(attribute.fulfill(1));
             else

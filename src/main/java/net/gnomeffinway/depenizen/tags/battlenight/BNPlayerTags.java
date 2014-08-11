@@ -1,5 +1,7 @@
 package net.gnomeffinway.depenizen.tags.battlenight;
 
+import me.limebyte.battlenight.api.battle.Battle;
+import me.limebyte.battlenight.api.battle.TeamedBattle;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.objects.properties.Property;
 import net.aufdemrand.denizen.tags.Attribute;
@@ -73,15 +75,25 @@ public class BNPlayerTags implements Property {
             // Returns true if the player is in battle.
             // @plugin BattleNight
             // -->
-            // TODO: Make this not throw NPE's
             else if (attribute.startsWith("inbattle") || attribute.startsWith("in_battle")) {
-                return new Element(api.getBattle().containsPlayer(player))
+                Battle battle = api.getBattle();
+                return new Element(battle != null && battle.containsPlayer(player))
                         .getAttribute(attribute.fulfill(1));
             }
 
-            // TODO: Make this actually return the team?!
+            // <--[tag]
+            // @attribute <p@player.bn.team>
+            // @returns Element
+            // @decription
+            // Returns the team the player is currenly on.
+            // @plugin BattleNight
+            // -->
             else if (attribute.startsWith("team")) {
-                return null;
+                Battle battle = api.getBattle();
+                if (battle != null && battle instanceof TeamedBattle) {
+                    return new Element(((TeamedBattle) battle).getTeam(player).getName())
+                            .getAttribute(attribute.fulfill(1));
+                }
             }
         }
 

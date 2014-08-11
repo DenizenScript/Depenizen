@@ -1,11 +1,13 @@
 package net.gnomeffinway.depenizen.tags.essentials;
 
+import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.objects.properties.Property;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.support.Supported;
 
 import java.util.GregorianCalendar;
 
@@ -27,7 +29,8 @@ public class EssentialsPlayerTags implements Property {
 
     private EssentialsPlayerTags(dPlayer pl) {
         // TODO: UUID
-        this.essUser = Depenizen.essentials.getUser(pl.getPlayerEntity());
+        Essentials essentials = Supported.get("ESSENTIALS").getPlugin();
+        this.essUser = essentials.getUser(pl.getPlayerEntity());
     }
 
     User essUser = null;

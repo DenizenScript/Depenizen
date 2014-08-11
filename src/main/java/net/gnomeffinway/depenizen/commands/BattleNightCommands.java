@@ -51,10 +51,6 @@ public class BattleNightCommands extends AbstractCommand {
         ADD, KICK, START, END
     }
 
-    public BattleNightCommands() {
-
-    }
-
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 

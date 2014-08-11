@@ -1,30 +1,16 @@
 package net.gnomeffinway.depenizen.events;
 
-import com.herocraftonline.heroes.api.events.ClassChangeEvent;
-import com.herocraftonline.heroes.api.events.ExperienceChangeEvent;
-import com.herocraftonline.heroes.api.events.HeroChangeLevelEvent;
-
+import com.herocraftonline.heroes.api.events.*;
 import net.aufdemrand.denizen.events.EventManager;
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.dNPC;
-import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.objects.dObject;
-import net.gnomeffinway.depenizen.Depenizen;
-
+import net.aufdemrand.denizen.objects.*;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesClass;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class HeroesEvents implements Listener {
-
-    public HeroesEvents(Depenizen depenizen) {
-        depenizen.getServer().getPluginManager().registerEvents(this, depenizen);
-    }
 
     // <--[event]
     // @Events
@@ -144,10 +130,6 @@ public class HeroesEvents implements Listener {
                 	("hero changes level",
                 			"hero changes level to " + event.getTo()),
                 				npc, player, context).toUpperCase();
-
-        if (determination.equals("CANCELLED")) {
-            // TODO: find a workaround for no event.setCancelled()
-        }
 
     }
 

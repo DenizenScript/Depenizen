@@ -19,10 +19,6 @@ import net.gnomeffinway.depenizen.Depenizen;
 
 public class VotifierEvents implements Listener {
 
-    public VotifierEvents(Depenizen depenizen) {
-        depenizen.getServer().getPluginManager().registerEvents(this, depenizen);
-    }
-
     // <--[event]
     // @Events
     // votifier vote

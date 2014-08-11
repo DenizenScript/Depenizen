@@ -1,9 +1,11 @@
 package net.gnomeffinway.depenizen.objects.heroes;
 
+import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.classes.HeroClass;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.Material;
 
 import java.util.Set;
@@ -20,7 +22,8 @@ public class HeroesClass implements dObject {
 
         string = string.replace("hclass@", "");
 
-        HeroClass heroClass = Depenizen.heroes.getClassManager().getClass(string);
+        Heroes heroes = Supported.get("HEROES").getPlugin();
+        HeroClass heroClass = heroes.getClassManager().getClass(string);
         if (heroClass != null) {
             return new HeroesClass(heroClass);
         }

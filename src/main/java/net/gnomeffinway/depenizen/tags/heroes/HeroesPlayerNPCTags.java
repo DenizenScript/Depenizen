@@ -1,10 +1,12 @@
 package net.gnomeffinway.depenizen.tags.heroes;
 
+import com.herocraftonline.heroes.Heroes;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.objects.properties.Property;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
+import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.entity.Player;
 
 public class HeroesPlayerNPCTags implements Property {
@@ -70,7 +72,8 @@ public class HeroesPlayerNPCTags implements Property {
         // @plugin Heroes
         // -->
         if (attribute.startsWith("heroes")) {
-            return new HeroesHero(Depenizen.heroes.getCharacterManager().getHero(player))
+            Heroes heroes = Supported.get("HEROES").getPlugin();
+            return new HeroesHero(heroes.getCharacterManager().getHero(player))
                     .getAttribute(attribute.fulfill(1));
         }
 

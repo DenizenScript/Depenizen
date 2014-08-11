@@ -1,27 +1,16 @@
 package net.gnomeffinway.depenizen.events;
 
 import net.aufdemrand.denizen.events.EventManager;
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.dList;
-import net.aufdemrand.denizen.objects.dObject;
-import net.aufdemrand.denizen.objects.dPlayer;
-import net.gnomeffinway.depenizen.Depenizen;
+import net.aufdemrand.denizen.objects.*;
 import net.slipcor.pvparena.arena.Arena;
 import net.slipcor.pvparena.arena.ArenaPlayer;
 import net.slipcor.pvparena.events.PAStartEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PVPArenaEvents implements Listener {
-
-    public PVPArenaEvents(Depenizen depenizen) {
-        depenizen.getServer().getPluginManager().registerEvents(this, depenizen);
-    }
 
     // <--[event]
     // @Events
