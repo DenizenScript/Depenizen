@@ -81,6 +81,10 @@ public class RegionCommand extends AbstractCommand {
                 || scriptEntry.getElement("action").asString().equalsIgnoreCase("ADD")))
             throw new InvalidArgumentsException("Must specify a valid cuboid!");
 
+        if (!scriptEntry.hasObject("world") && scriptEntry.hasObject("action")
+                && scriptEntry.getElement("action").asString().equalsIgnoreCase("REMOVE"))
+            throw new InvalidArgumentsException("Must specify a valid world!");
+
         if (!scriptEntry.hasObject("action"))
             scriptEntry.addObject("action", new Element("ADD"));
 
@@ -90,11 +94,9 @@ public class RegionCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
 
         Element region_id = scriptEntry.getElement("region_id");
-        dCuboid cuboid = scriptEntry.hasObject("cuboid") ? scriptEntry.getdObjectAs("cuboid", dCuboid.class) : null;
-        World world = scriptEntry.hasObject("world") ? scriptEntry.getdObjectAs("world", dWorld.class).getWorld()
-                : cuboid != null ? cuboid.getWorld()
-                : scriptEntry.hasPlayer() ? scriptEntry.getPlayer().getWorld()
-                : scriptEntry.hasNPC() ? scriptEntry.getNPC().getWorld() : null;
+        dCuboid cuboid = scriptEntry.getdObject("cuboid");
+        dWorld w = scriptEntry.getdObject("world");
+        World world = w != null ? w.getWorld() : cuboid != null ? cuboid.getWorld() : null;
         Element action = scriptEntry.getElement("action");
 
         if (world == null)

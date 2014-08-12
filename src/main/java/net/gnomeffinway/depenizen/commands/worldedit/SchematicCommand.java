@@ -145,8 +145,8 @@ public class SchematicCommand extends AbstractCommand implements Listener {
         Element type = scriptEntry.getElement("type");
         Element name = scriptEntry.getElement("name");
         Element noair = scriptEntry.getElement("noair");
-        dLocation location = (dLocation) scriptEntry.getObject("location");
-        dCuboid cuboid = (dCuboid) scriptEntry.getObject("cuboid");
+        dLocation location = scriptEntry.getdObject("location");
+        dCuboid cuboid = scriptEntry.getdObject("cuboid");
 
         dB.report(scriptEntry, getName(), type.debug()
                 + name.debug()
