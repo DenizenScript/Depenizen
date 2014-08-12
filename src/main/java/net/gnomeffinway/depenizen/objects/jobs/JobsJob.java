@@ -18,7 +18,7 @@ public class JobsJob implements dObject {
     //   PATTERNS
     /////////////////
 
-    final static Pattern job_with_player = Pattern.compile("(job@)(.+)(\\[(.+)\\])", Pattern.CASE_INSENSITIVE);
+    final static Pattern job_with_player = Pattern.compile("(job@)?(.+)(\\[(.+)\\])", Pattern.CASE_INSENSITIVE);
 
     /////////////////////
     //   OBJECT FETCHER
