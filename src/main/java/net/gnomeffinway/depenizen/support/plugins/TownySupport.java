@@ -7,8 +7,8 @@ import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.tags.towny.TownyLocationTags;
-import net.gnomeffinway.depenizen.tags.towny.TownyPlayerTags;
+import net.gnomeffinway.depenizen.extensions.towny.TownyLocationTags;
+import net.gnomeffinway.depenizen.extensions.towny.TownyPlayerTags;
 
 public class TownySupport extends Support {
 

@@ -5,7 +5,7 @@ import net.aufdemrand.denizen.objects.dPlayer;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesClass;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.tags.heroes.HeroesPlayerNPCTags;
+import net.gnomeffinway.depenizen.extensions.heroes.HeroesPlayerNPCTags;
 
 public class HeroesSupport extends Support {
 

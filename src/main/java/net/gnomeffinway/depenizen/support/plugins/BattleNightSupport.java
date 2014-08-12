@@ -6,7 +6,7 @@ import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.commands.BattleNightCommands;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.tags.battlenight.BNPlayerTags;
+import net.gnomeffinway.depenizen.extensions.battlenight.BNPlayerTags;
 
 public class BattleNightSupport extends Support {
 
