@@ -18,6 +18,7 @@ public class VotifierEvents implements Listener {
     // @Context
     // <context.time> returns the time the vote was sent.
     // <context.service> returns what service was used to send the vote.
+    // <context.username> returns the username input with the vote.
     // @Plugin Votifier
     // -->
     @EventHandler
@@ -28,6 +29,7 @@ public class VotifierEvents implements Listener {
 
         context.put("time", new Element(vote.getTimeStamp()));
         context.put("service", new Element(vote.getServiceName()));
+        context.put("username", new Element(vote.getUsername()));
 
         EventManager.doEvents(Arrays.asList("votifier vote"), null, dPlayer.valueOf(vote.getUsername()), context);
 
