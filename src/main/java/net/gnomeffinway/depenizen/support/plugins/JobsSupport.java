@@ -23,7 +23,7 @@ public class JobsSupport extends Support {
     @Override
     public String playerTags(dPlayer pl, Attribute attribute) {
 
-        JobsPlayer player = new JobsPlayer(pl.getName());
+        JobsPlayer player = Jobs.getPlayerManager().getJobsPlayerOffline(pl.getOfflinePlayer());
         attribute = attribute.fulfill(1);
 
         // <--[tag]

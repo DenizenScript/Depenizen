@@ -37,7 +37,8 @@ public class JobsJob implements dObject {
         if (m.matches()) {
             if (Jobs.getJob(m.group(2)) != null) {
                 job = new JobsJob(Jobs.getJob(m.group(2)));
-                job.setJobProgression(Jobs.getPlayerManager().getJobsPlayer(m.group(4)).getJobProgression(job.getJob()));
+                job.setJobProgression(Jobs.getPlayerManager().getJobsPlayerOffline(dPlayer.valueOf(m.group(4))
+                        .getOfflinePlayer()).getJobProgression(job.getJob()));
             }
             return job;
         }
@@ -91,11 +92,11 @@ public class JobsJob implements dObject {
     }
 
     public dPlayer getOwner() {
-        return dPlayer.valueOf(jobOwner.getName());
+        return new dPlayer(jobOwner.getPlayerUUID());
     }
 
     public void setOwner(dPlayer player) {
-        this.jobOwner = new JobsPlayer(player.getName());
+        this.jobOwner = Jobs.getPlayerManager().getJobsPlayerOffline(player.getOfflinePlayer());
     }
 
     /////////////////////

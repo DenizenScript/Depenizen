@@ -85,7 +85,7 @@ public class JobsCommands extends AbstractCommand {
         Action action = (Action) scriptEntry.getObject("action");
         JobsJob job = (JobsJob) scriptEntry.getObject("job");
         int number = (scriptEntry.hasObject("number") ? scriptEntry.getElement("number").asInt() : 0);
-        JobsPlayer player = Jobs.getPlayerManager().getJobsPlayer(scriptEntry.getPlayer().getName());
+        JobsPlayer player = Jobs.getPlayerManager().getJobsPlayerOffline(scriptEntry.getPlayer().getOfflinePlayer());
 
         switch (action) {
 
