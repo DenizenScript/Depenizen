@@ -40,7 +40,7 @@ public class TownyCommands extends AbstractCommand {
                 scriptEntry.addObject("action", Action.valueOf(arg.getValue().toUpperCase()));
 
             else if (!scriptEntry.hasObject("state")
-                    && arg.matchesPrefix("s, state")
+                    && arg.matchesPrefix("s", "state")
                     && arg.matchesEnum(State.values()))
                 scriptEntry.addObject("state", State.valueOf(arg.getValue().toUpperCase()));
 
@@ -57,7 +57,7 @@ public class TownyCommands extends AbstractCommand {
                 scriptEntry.addObject("location", arg.asType(dLocation.class));
 
             else if (!scriptEntry.hasObject("qty")
-                    && arg.matchesPrefix("qty, q, quantity")
+                    && arg.matchesPrefix("qty", "q", "quantity")
                     && arg.matchesPrimitive(aH.PrimitiveType.Double))
                 scriptEntry.addObject("qty", arg.asElement());
 

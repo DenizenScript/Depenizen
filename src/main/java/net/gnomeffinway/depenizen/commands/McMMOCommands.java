@@ -84,7 +84,7 @@ public class McMMOCommands extends AbstractCommand {
                 scriptEntry.addObject("skill", arg.asElement());
 
             else if (!scriptEntry.hasObject("qty")
-                    && arg.matchesPrefix("q, qty, quantity")
+                    && arg.matchesPrefix("q", "qty", "quantity")
                     && arg.matchesPrimitive(aH.PrimitiveType.Double))
                 scriptEntry.addObject("qty", arg.asElement());
 
