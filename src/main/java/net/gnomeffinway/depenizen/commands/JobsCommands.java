@@ -2,8 +2,8 @@ package net.gnomeffinway.depenizen.commands;
 
 import me.zford.jobs.Jobs;
 import me.zford.jobs.container.JobsPlayer;
-import net.aufdemrand.denizen.exceptions.CommandExecutionException;
-import net.aufdemrand.denizen.exceptions.InvalidArgumentsException;
+import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
+import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.aH;
 import net.aufdemrand.denizen.scripts.ScriptEntry;

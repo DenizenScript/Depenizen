@@ -1,8 +1,8 @@
 package net.gnomeffinway.depenizen.commands;
 
 import me.limebyte.battlenight.core.BattleNight;
-import net.aufdemrand.denizen.exceptions.CommandExecutionException;
-import net.aufdemrand.denizen.exceptions.InvalidArgumentsException;
+import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
+import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizen.objects.aH;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.scripts.ScriptEntry;
