@@ -228,5 +228,4 @@ public class dNation implements dObject {
         return new Element(identify()).getAttribute(attribute.fulfill(0));
 
     }
-
 }

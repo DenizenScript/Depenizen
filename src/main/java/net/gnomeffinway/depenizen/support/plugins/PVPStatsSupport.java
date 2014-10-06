@@ -7,5 +7,4 @@ public class PVPStatsSupport extends Support {
     public PVPStatsSupport() {
         // TODO
     }
-
 }

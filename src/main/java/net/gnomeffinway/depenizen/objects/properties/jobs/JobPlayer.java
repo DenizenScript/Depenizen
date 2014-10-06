@@ -67,5 +67,4 @@ public class JobPlayer implements Property {
         }
 
     }
-
 }

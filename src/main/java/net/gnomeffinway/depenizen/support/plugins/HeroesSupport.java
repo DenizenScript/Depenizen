@@ -13,5 +13,4 @@ public class HeroesSupport extends Support {
         registerObjects(HeroesClass.class, HeroesHero.class);
         registerProperty(HeroesPlayerNPCTags.class, dNPC.class, dPlayer.class);
     }
-
 }

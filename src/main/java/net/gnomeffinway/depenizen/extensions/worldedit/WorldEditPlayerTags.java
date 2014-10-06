@@ -70,5 +70,4 @@ public class WorldEditPlayerTags implements Property {
 
     @Override
     public void adjust(Mechanism mechanism) {}
-
 }

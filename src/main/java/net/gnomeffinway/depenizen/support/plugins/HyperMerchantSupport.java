@@ -7,5 +7,4 @@ public class HyperMerchantSupport extends Support {
     public HyperMerchantSupport() {
 
     }
-
 }

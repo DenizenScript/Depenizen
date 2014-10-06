@@ -147,7 +147,7 @@ public class McMMOSupport extends Support {
         }
 
         return null;
-        
+
     }
 
     @Override
@@ -186,5 +186,4 @@ public class McMMOSupport extends Support {
         return null;
 
     }
-
 }

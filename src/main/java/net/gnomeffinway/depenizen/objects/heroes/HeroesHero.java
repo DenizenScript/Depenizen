@@ -2,14 +2,12 @@ package net.gnomeffinway.depenizen.objects.heroes;
 
 import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.Hero;
-import com.herocraftonline.heroes.characters.classes.HeroClass;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizen.utilities.depends.Depends;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
-import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.entity.Player;
 
@@ -201,5 +199,4 @@ public class HeroesHero implements dObject {
         return new Element(identify()).getAttribute(attribute);
 
     }
-
 }

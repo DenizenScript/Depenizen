@@ -11,5 +11,4 @@ public class WorldEditSupport extends Support {
         registerProperty(WorldEditPlayerTags.class, dPlayer.class);
         new SchematicCommand().activate().as("SCHEMATIC").withOptions("schematic [create/load/unload/rotate/paste/save] [name:<name>] (angle:<#>) (<location>) (<cuboid>) (noair)", 2);
     }
-
 }

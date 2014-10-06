@@ -90,5 +90,4 @@ public class TownyPlayerTags implements Property {
 
     @Override
     public void adjust(Mechanism mechanism) {}
-
 }

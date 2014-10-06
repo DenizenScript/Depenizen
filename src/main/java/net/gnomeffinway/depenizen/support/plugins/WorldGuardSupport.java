@@ -13,5 +13,4 @@ public class WorldGuardSupport extends Support {
         registerProperty(WorldGuardLocationTags.class, dLocation.class);
         new RegionCommand().activate().as("REGION").withOptions("see documentation", 2);
     }
-
 }

@@ -253,5 +253,4 @@ public class dFaction implements dObject {
         return new Element(identify()).getAttribute(attribute);
 
     }
-
 }

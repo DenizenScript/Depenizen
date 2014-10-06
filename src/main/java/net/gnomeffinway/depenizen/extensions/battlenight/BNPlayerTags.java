@@ -103,5 +103,4 @@ public class BNPlayerTags implements Property {
     @Override
     public void adjust(Mechanism mechanism) {
     }
-
 }

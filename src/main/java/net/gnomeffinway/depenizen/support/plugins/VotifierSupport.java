@@ -8,5 +8,4 @@ public class VotifierSupport extends Support {
     public VotifierSupport() {
         registerEvents(VotifierEvents.class);
     }
-
 }

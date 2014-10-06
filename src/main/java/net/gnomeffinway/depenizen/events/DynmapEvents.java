@@ -6,5 +6,4 @@ public class DynmapEvents implements Listener {
 
     // Will be automatically registered, does not need constructor.
     // TODO: add events
-    
 }

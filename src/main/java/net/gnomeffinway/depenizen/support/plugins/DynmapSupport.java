@@ -8,5 +8,4 @@ public class DynmapSupport extends Support {
     public DynmapSupport() {
         registerEvents(DynmapEvents.class);
     }
-
 }

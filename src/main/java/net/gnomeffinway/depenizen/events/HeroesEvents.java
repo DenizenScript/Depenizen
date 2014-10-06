@@ -87,7 +87,7 @@ public class HeroesEvents implements Listener {
 
         String determination = EventManager.doEvents(Arrays.asList
                 ("hero changes experience"),
-                		npc, player, context).toUpperCase();
+                        npc, player, context).toUpperCase();
 
         if (determination.equals("CANCELLED")) {
             event.setCancelled(true);
@@ -127,10 +127,9 @@ public class HeroesEvents implements Listener {
             player = (dPlayer) hero.getDenizenObject();
 
         String determination = EventManager.doEvents(Arrays.asList
-                	("hero changes level",
-                			"hero changes level to " + event.getTo()),
-                				npc, player, context).toUpperCase();
+                    ("hero changes level",
+                            "hero changes level to " + event.getTo()),
+                                npc, player, context).toUpperCase();
 
     }
-
 }

@@ -69,5 +69,4 @@ public class TownySupport extends Support {
         return null;
 
     }
-
 }

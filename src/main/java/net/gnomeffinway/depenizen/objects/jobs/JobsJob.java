@@ -233,5 +233,4 @@ public class JobsJob implements dObject {
         return new Element(identify()).getAttribute(attribute.fulfill(1));
 
     }
-
 }

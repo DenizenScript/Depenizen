@@ -187,5 +187,4 @@ public class FactionsSupport extends Support {
         return null;
 
     }
-
 }

@@ -68,5 +68,4 @@ public class BattleNightSupport extends Support {
         return null;
 
     }
-
 }

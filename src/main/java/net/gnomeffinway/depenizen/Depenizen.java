@@ -50,5 +50,4 @@ public class Depenizen extends JavaPlugin {
     public static void depenizenLog(String message) {
         dB.log(message);
     }
-
 }

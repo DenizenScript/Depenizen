@@ -4,7 +4,6 @@ import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.classes.HeroClass;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
-import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.Material;
 
@@ -147,5 +146,4 @@ public class HeroesClass implements dObject {
         return null;
 
     }
-
 }

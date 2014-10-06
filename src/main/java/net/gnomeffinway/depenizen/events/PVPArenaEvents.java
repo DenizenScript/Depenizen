@@ -41,5 +41,4 @@ public class PVPArenaEvents implements Listener {
                 null, null, context);
 
     }
-
 }

@@ -3,7 +3,6 @@ package net.gnomeffinway.depenizen.commands.worldguard;
 import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.aufdemrand.denizen.exceptions.CommandExecutionException;
 import net.aufdemrand.denizen.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizen.objects.Element;
@@ -12,10 +11,7 @@ import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dWorld;
 import net.aufdemrand.denizen.scripts.ScriptEntry;
 import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.gnomeffinway.depenizen.Depenizen;
-import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -121,5 +117,4 @@ public class RegionCommand extends AbstractCommand {
         worldGuard.getRegionManager(cuboid.getWorld()).addRegion(region);
 
     }
-
 }

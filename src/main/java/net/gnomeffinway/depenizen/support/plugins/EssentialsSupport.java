@@ -11,5 +11,4 @@ public class EssentialsSupport extends Support {
         registerEvents(EssentialsEvents.class);
         registerProperty(EssentialsPlayerTags.class, dPlayer.class);
     }
-
 }

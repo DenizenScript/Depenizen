@@ -34,5 +34,4 @@ public class VotifierEvents implements Listener {
         EventManager.doEvents(Arrays.asList("votifier vote"), null, dPlayer.valueOf(vote.getUsername()), context);
 
     }
-
 }

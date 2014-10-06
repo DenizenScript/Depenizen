@@ -7,5 +7,4 @@ public class HyperConomySupport extends Support {
     public HyperConomySupport() {
 
     }
-
 }

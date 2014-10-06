@@ -73,5 +73,4 @@ public class TownyLocationTags implements Property {
 
     @Override
     public void adjust(Mechanism mechanism) {}
-
 }

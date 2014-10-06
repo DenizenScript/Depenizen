@@ -83,5 +83,4 @@ public class HeroesPlayerNPCTags implements Property {
     @Override
     public void adjust(Mechanism mechanism) {
     }
-
 }

@@ -172,5 +172,4 @@ public class EssentialsEvents implements Listener {
     }
 
     // TODO: add the rest of the events
-
 }
