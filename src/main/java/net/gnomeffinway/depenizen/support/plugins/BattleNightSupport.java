@@ -6,12 +6,12 @@ import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.commands.BattleNightCommands;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.extensions.battlenight.BNPlayerTags;
+import net.gnomeffinway.depenizen.extensions.battlenight.BNPlayerExtension;
 
 public class BattleNightSupport extends Support {
 
     public BattleNightSupport() {
-        registerProperty(BNPlayerTags.class, dPlayer.class);
+        registerProperty(BNPlayerExtension.class, dPlayer.class);
         registerAdditionalTags("battle");
         new BattleNightCommands().activate().as("BN").withOptions("see documentation", 1);
     }

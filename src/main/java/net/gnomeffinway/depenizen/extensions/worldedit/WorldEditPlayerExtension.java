@@ -2,48 +2,32 @@ package net.gnomeffinway.depenizen.extensions.worldedit;
 
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.objects.properties.Property;
+import net.aufdemrand.denizen.objects.Element;
+import net.aufdemrand.denizen.objects.dCuboid;
+import net.aufdemrand.denizen.objects.dObject;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
+import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.entity.Player;
 
-public class WorldEditPlayerTags implements Property {
+public class WorldEditPlayerExtension extends dObjectExtension {
 
     public static boolean describes(dObject pl) {
         return pl instanceof dPlayer
                 && ((dPlayer) pl).isOnline();
     }
 
-    public static WorldEditPlayerTags getFrom(dObject pl) {
+    public static WorldEditPlayerExtension getFrom(dObject pl) {
         if (!describes(pl)) return null;
-        else return new WorldEditPlayerTags((dPlayer) pl);
+        else return new WorldEditPlayerExtension((dPlayer) pl);
     }
 
-
-    ///////////////////
-    // Instance Fields and Methods
-    /////////////
-
-    private WorldEditPlayerTags(dPlayer pl) {
+    private WorldEditPlayerExtension(dPlayer pl) {
         player = pl.getPlayerEntity();
     }
 
     Player player = null;
-
-    /////////
-    // Property Methods
-    ///////
-
-    @Override
-    public String getPropertyString() {
-        return null;
-    }
-
-    @Override
-    public String getPropertyId() {
-        return "WorldEditPlayerTags";
-    }
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -68,6 +52,4 @@ public class WorldEditPlayerTags implements Property {
 
     }
 
-    @Override
-    public void adjust(Mechanism mechanism) {}
 }

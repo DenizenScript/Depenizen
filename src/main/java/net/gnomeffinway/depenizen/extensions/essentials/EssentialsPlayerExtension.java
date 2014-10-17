@@ -3,22 +3,22 @@ package net.gnomeffinway.depenizen.extensions.essentials;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.objects.properties.Property;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.support.Supported;
 
 import java.util.GregorianCalendar;
 
-public class EssentialsPlayerTags implements Property {
+public class EssentialsPlayerExtension extends dObjectExtension {
 
     public static boolean describes(dObject pl) {
         return pl instanceof dPlayer && ((dPlayer) pl).isOnline();
     }
 
-    public static EssentialsPlayerTags getFrom(dObject pl) {
+    public static EssentialsPlayerExtension getFrom(dObject pl) {
         if (!describes(pl)) return null;
-        else return new EssentialsPlayerTags((dPlayer) pl);
+        else return new EssentialsPlayerExtension((dPlayer) pl);
     }
 
 
@@ -26,21 +26,13 @@ public class EssentialsPlayerTags implements Property {
     // Instance Fields and Methods
     /////////////
 
-    private EssentialsPlayerTags(dPlayer pl) {
+    private EssentialsPlayerExtension(dPlayer pl) {
         // TODO: UUID
         Essentials essentials = Supported.get("ESSENTIALS").getPlugin();
         this.essUser = essentials.getUser(pl.getPlayerEntity());
     }
 
     User essUser = null;
-
-    @Override
-    public String getPropertyString() { return null; }
-
-    @Override
-    public String getPropertyId() {
-        return "EssentialsPlayerTags";
-    }
 
     @Override
     public String getAttribute(Attribute attribute) {

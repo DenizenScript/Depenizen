@@ -93,18 +93,6 @@ public class Support {
     /// Tag Handlers
     ////////
 
-    public String playerTags(dPlayer player, Attribute attribute) {
-        return null;
-    }
-
-    public String locationTags(dLocation location, Attribute attribute) {
-        return null;
-    }
-
-    public String npcTags(dNPC npc, Attribute attribute) {
-        return null;
-    }
-
     public String additionalTags(Attribute attribute) {
         return null;
     }

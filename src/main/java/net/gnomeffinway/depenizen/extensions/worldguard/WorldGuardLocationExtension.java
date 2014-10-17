@@ -3,49 +3,33 @@ package net.gnomeffinway.depenizen.extensions.worldguard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.objects.properties.Property;
+import net.aufdemrand.denizen.objects.Element;
+import net.aufdemrand.denizen.objects.dList;
+import net.aufdemrand.denizen.objects.dLocation;
+import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.tags.Attribute;
+import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.support.Supported;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorldGuardLocationTags implements Property {
+public class WorldGuardLocationExtension extends dObjectExtension {
 
     public static boolean describes(dObject loc) {
         return loc instanceof dLocation;
     }
 
-    public static WorldGuardLocationTags getFrom(dObject loc) {
+    public static WorldGuardLocationExtension getFrom(dObject loc) {
         if (!describes(loc)) return null;
-        else return new WorldGuardLocationTags((dLocation) loc);
+        else return new WorldGuardLocationExtension((dLocation) loc);
     }
 
-
-    ///////////////////
-    // Instance Fields and Methods
-    /////////////
-
-    private WorldGuardLocationTags(dLocation loc) {
+    private WorldGuardLocationExtension(dLocation loc) {
         location = loc;
     }
 
     dLocation location = null;
-
-    /////////
-    // Property Methods
-    ///////
-
-    @Override
-    public String getPropertyString() {
-        return null;
-    }
-
-    @Override
-    public String getPropertyId() {
-        return "WorldGuardLocationTags";
-    }
 
     private ApplicableRegionSet getApplicableRegions() {
         WorldGuardPlugin worldGuard = Supported.get("WORLDGUARD").getPlugin();
@@ -117,6 +101,4 @@ public class WorldGuardLocationTags implements Property {
 
     }
 
-    @Override
-    public void adjust(Mechanism mechanism) {}
 }

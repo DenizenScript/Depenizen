@@ -1,14 +1,16 @@
 package net.gnomeffinway.depenizen.extensions.heroes;
 
 import com.herocraftonline.heroes.Heroes;
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.objects.properties.Property;
+import net.aufdemrand.denizen.objects.dNPC;
+import net.aufdemrand.denizen.objects.dObject;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
+import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
 import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.entity.Player;
 
-public class HeroesPlayerNPCTags implements Property {
+public class HeroesPlayerNPCExtension extends dObjectExtension {
 
     public static boolean describes(dObject obj) {
         return (obj instanceof dPlayer && ((dPlayer) obj).isOnline())
@@ -16,17 +18,12 @@ public class HeroesPlayerNPCTags implements Property {
                 && ((dNPC) obj).getEntity() instanceof Player);
     }
 
-    public static HeroesPlayerNPCTags getFrom(dObject obj) {
+    public static HeroesPlayerNPCExtension getFrom(dObject obj) {
         if (!describes(obj)) return null;
-        else return new HeroesPlayerNPCTags(obj);
+        else return new HeroesPlayerNPCExtension(obj);
     }
 
-
-    ///////////////////
-    // Instance Fields and Methods
-    /////////////
-
-    private HeroesPlayerNPCTags(dObject obj) {
+    private HeroesPlayerNPCExtension(dObject obj) {
         if (obj instanceof dPlayer)
             player = ((dPlayer) obj).getPlayerEntity();
         else if (obj instanceof dNPC)
@@ -34,20 +31,6 @@ public class HeroesPlayerNPCTags implements Property {
     }
 
     Player player = null;
-
-    /////////
-    // Property Methods
-    ///////
-
-    @Override
-    public String getPropertyString() {
-        return null;
-    }
-
-    @Override
-    public String getPropertyId() {
-        return "HeroesPlayerNPCTags";
-    }
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -80,7 +63,4 @@ public class HeroesPlayerNPCTags implements Property {
 
     }
 
-    @Override
-    public void adjust(Mechanism mechanism) {
-    }
 }

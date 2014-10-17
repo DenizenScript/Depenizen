@@ -2,48 +2,28 @@ package net.gnomeffinway.depenizen.extensions.towny;
 
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import net.aufdemrand.denizen.objects.Mechanism;
 import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.objects.properties.Property;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
 
-public class TownyPlayerTags implements Property {
+public class TownyPlayerExtension extends dObjectExtension {
 
     public static boolean describes(dObject pl) {
         return pl instanceof dPlayer;
     }
 
-    public static TownyPlayerTags getFrom(dObject pl) {
+    public static TownyPlayerExtension getFrom(dObject pl) {
         if (!describes(pl)) return null;
-        else return new TownyPlayerTags((dPlayer) pl);
+        else return new TownyPlayerExtension((dPlayer) pl);
     }
 
-
-    ///////////////////
-    // Instance Fields and Methods
-    /////////////
-
-    private TownyPlayerTags(dPlayer pl) { player = pl; }
+    private TownyPlayerExtension(dPlayer pl) { player = pl; }
 
     dPlayer player = null;
-
-    /////////
-    // Property Methods
-    ///////
-
-    @Override
-    public String getPropertyString() {
-        return null;
-    }
-
-    @Override
-    public String getPropertyId() {
-        return "TownyPlayerTags";
-    }
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -88,6 +68,4 @@ public class TownyPlayerTags implements Property {
 
     }
 
-    @Override
-    public void adjust(Mechanism mechanism) {}
 }

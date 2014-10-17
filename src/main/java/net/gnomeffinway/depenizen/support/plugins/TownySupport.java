@@ -7,15 +7,15 @@ import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.extensions.towny.TownyLocationTags;
-import net.gnomeffinway.depenizen.extensions.towny.TownyPlayerTags;
+import net.gnomeffinway.depenizen.extensions.towny.TownyLocationExtension;
+import net.gnomeffinway.depenizen.extensions.towny.TownyPlayerExtension;
 
 public class TownySupport extends Support {
 
     public TownySupport() {
         registerObjects(dTown.class, dNation.class);
-        registerProperty(TownyPlayerTags.class, dPlayer.class);
-        registerProperty(TownyLocationTags.class, dLocation.class);
+        registerProperty(TownyPlayerExtension.class, dPlayer.class);
+        registerProperty(TownyLocationExtension.class, dLocation.class);
         registerAdditionalTags("town", "nation");
     }
 
