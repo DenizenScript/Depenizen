@@ -196,6 +196,33 @@ public class HeroesHero implements dObject {
             return new HeroesClass(hero.getHeroClass()).getAttribute(attribute.fulfill(1));
         }
 
+        // <--[tag]
+        // @attribute <hero@hero.party.leader>
+        // @returns dPlayer
+        // @description
+        // Returns the leader of the hero's party.
+        // @plugin Heroes
+        // -->
+        if (attribute.startsWith("party.leader")) {
+            return dPlayer.mirrorBukkitPlayer(hero.getParty().getLeader().getPlayer())
+                    .getAttribute(attribute.fulfill(2));
+        }
+
+        // <--[tag]
+        // @attribute <hero@hero.party.members>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns a list of players currently in the hero's party.
+        // @plugin Heroes
+        // -->
+        if (attribute.startsWith("party.members")) {
+            dList members = new dList();
+            for (Hero member : hero.getParty().getMembers()) {
+                members.add(dPlayer.mirrorBukkitPlayer(member.getPlayer()).identify());
+            }
+            return members.getAttribute(attribute.fulfill(2));
+        }
+
         return new Element(identify()).getAttribute(attribute);
 
     }
