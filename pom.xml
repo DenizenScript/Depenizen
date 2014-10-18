@@ -71,10 +71,6 @@
             <id>regalowl-repo</id>
             <url>http://www.regalowl.net:8080/repository/snapshots/</url>
         </repository>
-        <repository>
-            <id>grokswell-repo</id>
-            <url>http://repository-remremrem.forge.cloudbees.com/snapshot/</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -212,13 +208,6 @@
             <groupId>regalowl.hyperconomy</groupId>
             <artifactId>Hyperconomy</artifactId>
             <version>0.974.56-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.grokswell.hypermerchant</groupId>
-            <artifactId>hypermerchant</artifactId>
-            <version>1.56</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
