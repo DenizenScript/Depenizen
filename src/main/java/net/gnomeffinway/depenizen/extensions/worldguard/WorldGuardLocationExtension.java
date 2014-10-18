@@ -9,7 +9,9 @@ import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
+import net.gnomeffinway.depenizen.objects.worldguard.WorldGuardRegion;
 import net.gnomeffinway.depenizen.support.Supported;
+import org.bukkit.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +51,10 @@ public class WorldGuardLocationExtension extends dObjectExtension {
         return false;
     }
 
-    private dList getRegions() {
+    private dList getRegions(World world) {
         List<String> regionList = new ArrayList<String>();
         for (ProtectedRegion protectedRegion : getApplicableRegions()) {
-            regionList.add(protectedRegion.getId());
+            regionList.add(new WorldGuardRegion(protectedRegion, world).identify());
         }
         return new dList(regionList);
     }
@@ -88,13 +90,13 @@ public class WorldGuardLocationExtension extends dObjectExtension {
 
         // <--[tag]
         // @attribute <l@location.regions>
-        // @returns dList
+        // @returns dList(Region)
         // @description
         // Returns a list of regions that the location is in.
         // @Plugin WorldGuard
         // -->
         if (attribute.startsWith("regions")) {
-            return new dList(getRegions()).getAttribute(attribute.fulfill(1));
+            return getRegions(location.getWorld()).getAttribute(attribute.fulfill(1));
         }
 
         return null;
