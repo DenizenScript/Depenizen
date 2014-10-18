@@ -47,6 +47,7 @@ public class WorldGuardRegion implements dObject {
                         + "' for world '" + worldName + "'");
                 return null;
             }
+            return new WorldGuardRegion(manager.getRegion(regionName), world);
         }
 
         return null;
@@ -152,6 +153,38 @@ public class WorldGuardRegion implements dObject {
         }
 
         // <--[tag]
+        // @attribute <region@region.members>
+        // @returns dList(dPlayer)
+        // @description
+        // Gets a list of all members of a region. (Members are permitted to build, etc.)
+        // -->
+        if (attribute.startsWith("members")) {
+            dList list = new dList();
+            for (String str: region.getMembers().getPlayers()) {
+                dPlayer player = dPlayer.valueOf(str);
+                if (player != null)
+                    list.add(player.identify());
+            }
+            return list.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <region@region.owners>
+        // @returns dList(dPlayer)
+        // @description
+        // Gets a list of all owners of a region. (Owners are permitted to build, edit settings, etc.)
+        // -->
+        if (attribute.startsWith("owners")) {
+            dList list = new dList();
+            for (String str: region.getOwners().getPlayers()) {
+                dPlayer player = dPlayer.valueOf(str);
+                if (player != null)
+                    list.add(player.identify());
+            }
+            return list.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <region@region.world>
         // @returns dWorld
         // @description
@@ -161,7 +194,7 @@ public class WorldGuardRegion implements dObject {
             return new dWorld(world).getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute.fulfill(1));
+        return new Element(identify()).getAttribute(attribute);
 
     }
 }
