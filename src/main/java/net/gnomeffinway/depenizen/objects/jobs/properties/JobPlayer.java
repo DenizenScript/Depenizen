@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.objects.properties.jobs;
+package net.gnomeffinway.depenizen.objects.jobs.properties;
 
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.objects.properties.Property;

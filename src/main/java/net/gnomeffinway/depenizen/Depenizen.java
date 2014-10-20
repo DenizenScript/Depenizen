@@ -10,14 +10,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Depenizen extends JavaPlugin {
 
+    private static Depenizen instance;
+
+    public static Depenizen getCurrentInstance() {
+        return instance;
+    }
+
     @Override
     public void onEnable() {
+        instance = this;
         checkPlugins();
     }
 
     @Override
     public void onDisable() {
-
+        instance = null;
     }
 
     @Override

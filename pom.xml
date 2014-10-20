@@ -67,10 +67,6 @@
             <id>slipcor-repo</id>
             <url>http://mc-praxis.com:8080/plugin/repository/everything/</url>
         </repository>
-        <repository>
-            <id>regalowl-repo</id>
-            <url>http://www.regalowl.net:8080/repository/snapshots/</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -174,7 +170,7 @@
             <artifactId>citizens</artifactId>
             <version>${citizens.version}</version>
             <type>jar</type>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.dynmap</groupId>
@@ -207,9 +203,9 @@
         <dependency>
             <groupId>regalowl.hyperconomy</groupId>
             <artifactId>Hyperconomy</artifactId>
-            <version>0.974.56-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <version>0.974.57-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/HyperConomy.jar</systemPath>
         </dependency>
     </dependencies>
 

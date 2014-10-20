@@ -6,7 +6,7 @@ import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.commands.JobsCommands;
 import net.gnomeffinway.depenizen.extensions.jobs.JobsPlayerExtension;
 import net.gnomeffinway.depenizen.objects.jobs.JobsJob;
-import net.gnomeffinway.depenizen.objects.properties.jobs.JobPlayer;
+import net.gnomeffinway.depenizen.objects.jobs.properties.JobPlayer;
 import net.gnomeffinway.depenizen.support.Support;
 
 public class JobsSupport extends Support {
