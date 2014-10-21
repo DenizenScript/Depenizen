@@ -93,21 +93,21 @@
 		<dependency>
 			<groupId>com.massivecraft</groupId>
 			<artifactId>Factions</artifactId>
-			<version>2.5.0</version>
+			<version>2.6.0</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/Factions.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.massivecraft</groupId>
 			<artifactId>MassiveCore</artifactId>
-			<version>7.3.0</version>
+			<version>7.4.0</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/MassiveCore.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>me.limebyte</groupId>
 			<artifactId>BattleNight</artifactId>
-			<version>1.10.0</version>
+			<version>1.11.0</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/BattleNight.jar</systemPath>
 		</dependency>
@@ -161,7 +161,7 @@
 		<dependency>
 			<groupId>com.herocraftonline</groupId>
 			<artifactId>Heroes</artifactId>
-			<version>1.5.5.3</version>
+			<version>1.5.5.4</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/resources/Heroes.jar</systemPath>
 		</dependency>
