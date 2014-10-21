@@ -30,6 +30,8 @@ public class HyperConomySupport extends Support {
         try {
             field = TransactionResponse.class.getDeclaredField("hp");
             field.setAccessible(true);
+        } catch (NoClassDefFoundError e) {
+            // HyperConomy isn't enabled
         } catch (Exception e) {
             dB.echoError(e);
         }
