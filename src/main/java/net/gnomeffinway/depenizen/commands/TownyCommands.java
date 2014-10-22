@@ -1,5 +1,6 @@
 package net.gnomeffinway.depenizen.commands;
 
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizen.objects.Element;
@@ -37,12 +38,12 @@ public class TownyCommands extends AbstractCommand {
 
             if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values()))
-                scriptEntry.addObject("action", Action.valueOf(arg.getValue().toUpperCase()));
+                scriptEntry.addObject("action", arg.asElement());
 
             else if (!scriptEntry.hasObject("state")
                     && arg.matchesPrefix("s", "state")
                     && arg.matchesEnum(State.values()))
-                scriptEntry.addObject("state", State.valueOf(arg.getValue().toUpperCase()));
+                scriptEntry.addObject("state", arg.asElement());
 
             else if (!scriptEntry.hasObject("town")
                     && arg.matchesArgumentType(dTown.class))
@@ -63,18 +64,85 @@ public class TownyCommands extends AbstractCommand {
 
             else if (!scriptEntry.hasObject("type")
                     && arg.matchesEnum(Type.values()))
-                scriptEntry.addObject("type", Type.valueOf(arg.getValue().toUpperCase()));
+                scriptEntry.addObject("type", arg.asElement());
 
         }
 
+        if (!scriptEntry.hasObject("action"))
+            throw new InvalidArgumentsException("Must specify a valid action!");
+
+        if (!scriptEntry.hasObject("type"))
+            throw new InvalidArgumentsException("Must specify a valid type!");
+
         scriptEntry.defaultObject("town", new Element("")).defaultObject("nation", "")
-                .defaultObject("state", State.TOGGLE).defaultObject("qty", new Element(-1));
+                .defaultObject("state", new Element("TOGGLE"));
 
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
 
+        Element action = scriptEntry.getElement("action");
+        Element state = scriptEntry.getElement("state");
+        Element type = scriptEntry.getElement("type");
+        Element town = scriptEntry.getElement("town");
+        Element nation = scriptEntry.getElement("nation");
+        Element qty = scriptEntry.getElement("qty");
+        dLocation location = scriptEntry.getdObject("location");
+
+        dB.report(scriptEntry, getName(), action.debug() + type.debug() + state.debug() + town.debug() + nation.debug()
+                + (qty != null ? qty.debug() : "") + (location != null ? location.debug() :""));
+
+        switch (Type.valueOf(type.asString().toUpperCase())) {
+            case RESIDENT:
+                break;
+            case MONEY:
+                break;
+            case TOWN:
+                break;
+            case NATION:
+                break;
+            case TOWNBLOCK:
+                break;
+            case BONUS:
+                break;
+            case PLOT:
+                break;
+            case OUTPOST:
+                break;
+            case NAME:
+                break;
+            case CAPITAL:
+                break;
+            case OPEN:
+                break;
+            case PUBLIC:
+                break;
+            case MAYOR:
+                break;
+            case SURNAME:
+                break;
+            case TITLE:
+                break;
+            case RANK:
+                break;
+            case BOARD:
+                break;
+            case WAR:
+                break;
+            case MAXSIZE:
+                break;
+            case TAXES:
+                break;
+            case TAG:
+                break;
+            case SPAWN:
+                break;
+            case PERM:
+                break;
+            case RELATION:
+                break;
+        }
 
     }
 }
