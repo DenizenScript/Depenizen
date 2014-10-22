@@ -207,6 +207,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/HyperConomy.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.sucy</groupId>
+            <artifactId>SkillAPI</artifactId>
+            <version>2.42</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/SkillAPI.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
