@@ -10,15 +10,8 @@ import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class JobsJob implements dObject {
-
-    /////////////////////
-    //   PATTERNS
-    /////////////////
-
-    final static Pattern job_with_player = Pattern.compile("(job@)?(.+)(\\[(.+)\\])", Pattern.CASE_INSENSITIVE);
 
     /////////////////////
     //   OBJECT FETCHER
@@ -33,17 +26,11 @@ public class JobsJob implements dObject {
 
         JobsJob job = null;
 
-        Matcher m = job_with_player.matcher(string);
+        Matcher m = ObjectFetcher.DESCRIBED_PATTERN.matcher(string);
         if (m.matches()) {
-            if (Jobs.getJob(m.group(2)) != null) {
-                job = new JobsJob(Jobs.getJob(m.group(2)));
-                job.setJobProgression(Jobs.getPlayerManager().getJobsPlayerOffline(dPlayer.valueOf(m.group(4))
-                        .getOfflinePlayer()).getJobProgression(job.getJob()));
-            }
-            return job;
+            return ObjectFetcher.getObjectFrom(JobsJob.class, string);
         }
-        string = string.replace("job@", "");
-        return new JobsJob(Jobs.getJob(string));
+        return new JobsJob(Jobs.getJob(string.replace("job@", "")));
     }
 
     public static boolean matches(String arg) {
@@ -97,6 +84,7 @@ public class JobsJob implements dObject {
 
     public void setOwner(dPlayer player) {
         this.jobOwner = Jobs.getPlayerManager().getJobsPlayerOffline(player.getOfflinePlayer());
+        this.jobProgression = jobOwner.getJobProgression(job);
     }
 
     /////////////////////
