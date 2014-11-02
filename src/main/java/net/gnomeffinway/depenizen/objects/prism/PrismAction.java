@@ -118,7 +118,7 @@ public class PrismAction implements dObject, Adjustable {
 
     @Override
     public String identify() {
-        return "prism@";
+        return "prism@" + action.getType().getName() + PropertyParser.getPropertiesString(this);
     }
 
     @Override

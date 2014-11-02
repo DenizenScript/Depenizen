@@ -48,13 +48,13 @@ public class PrismActionBlock implements Property {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <prism@action.new_block>
+        // @attribute <prism@action.block>
         // @returns dMaterial
         // @description
-        // Returns the new material for this action.
+        // Returns the main material for this action.
         // @plugin Prism
         // -->
-        if (attribute.startsWith("new_block")) {
+        if (attribute.startsWith("block")) {
             int id = action.getBlockId();
             int subId = action.getBlockSubId();
             if (id == -1)
@@ -65,13 +65,13 @@ public class PrismActionBlock implements Property {
         }
 
         // <--[tag]
-        // @attribute <prism@action.old_block>
+        // @attribute <prism@action.alt_block>
         // @returns dMaterial
         // @description
-        // Returns the old material for this action.
+        // Returns the alternate material for this action.
         // @plugin Prism
         // -->
-        if (attribute.startsWith("old_block")) {
+        if (attribute.startsWith("alt_block")) {
             int id = action.getOldBlockId();
             int subId = action.getOldBlockSubId();
             if (id == -1)

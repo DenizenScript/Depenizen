@@ -47,6 +47,8 @@ public class PrismLocationExtension extends dObjectExtension {
             QueryParameters params = new QueryParameters();
             params.setProcessType(PrismProcessType.LOOKUP);
 
+            boolean isRadius = false;
+
             // <--[tag]
             // @attribute <l@location.prism_logs.radius[<#>]>
             // @returns dList(PrismAction)
@@ -56,6 +58,7 @@ public class PrismLocationExtension extends dObjectExtension {
             // -->
             if (attribute.startsWith("radius")) {
                 params.setRadius(attribute.getIntContext(1));
+                isRadius = true;
                 attribute = attribute.fulfill(1);
 
                 // <--[tag]
@@ -99,13 +102,17 @@ public class PrismLocationExtension extends dObjectExtension {
                 // -->
                 if (attribute.startsWith("radius")) {
                     params.setRadius(attribute.getIntContext(1));
+                    isRadius = true;
                     attribute = attribute.fulfill(1);
                 }
             }
 
 
             params.setWorld(location.getWorld().getName());
-            params.setMinMaxVectorsFromPlayerLocation(location);
+            if (isRadius)
+                params.setMinMaxVectorsFromPlayerLocation(location);
+            else
+                params.setSpecificBlockLocation(location);
 
             ActionsQuery query = new ActionsQuery((Prism) Supported.get("PRISM").getPlugin());
             List<Handler> results = query.lookup(params).getActionResults();
