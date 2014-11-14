@@ -140,13 +140,25 @@ public class PrismAction implements dObject, Adjustable {
             return new Element(action.getType().getName()).getAttribute(attribute.fulfill(1));
         }
 
+        // <--[tag]
+        // @attribute <prism@action.type>
+        // @returns Element
+        // @description
+        // Always returns 'Prism Action' for PrismAction objects. All objects fetchable by the Object Fetcher will return the
+        // type of object that is fulfilling this attribute.
+        // @plugin Prism
+        // -->
+        if (attribute.startsWith("type")) {
+            return new Element("Prism Action").getAttribute(attribute.fulfill(1));
+        }
+
         // Iterate through this object's properties' attributes
         for (Property property : PropertyParser.getProperties(this)) {
             String returned = property.getAttribute(attribute);
             if (returned != null) return returned;
         }
 
-        return null;
+        return new Element(identify()).getAttribute(attribute);
 
     }
 

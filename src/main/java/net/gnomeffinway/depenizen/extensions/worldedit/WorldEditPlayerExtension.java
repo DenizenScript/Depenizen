@@ -44,8 +44,6 @@ public class WorldEditPlayerExtension extends dObjectExtension {
             Selection selection = worldEdit.getSelection(player);
             if (selection != null)
                 return new dCuboid(selection.getMinimumPoint(), selection.getMaximumPoint()).getAttribute(attribute.fulfill(1));
-            else
-                return Element.NULL.getAttribute(attribute.fulfill(1));
         }
 
         return null;

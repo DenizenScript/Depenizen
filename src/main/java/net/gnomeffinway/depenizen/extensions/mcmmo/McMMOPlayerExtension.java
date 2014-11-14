@@ -147,7 +147,7 @@ public class McMMOPlayerExtension extends dObjectExtension {
                     if (SkillType.getSkill(attribute.getContext(1)) != null)
                         return new Element(ExperienceAPI.getPlayerRankSkill(p.getName(), attribute.getContext(1)))
                                 .getAttribute(attribute.fulfill(1));
-                    else
+                    else if (!attribute.hasAlternative())
                         dB.echoError("Skill type '" + attribute.getContext(1) + "' does not exist!");
                 }
             }

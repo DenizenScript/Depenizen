@@ -126,8 +126,6 @@ public class dFaction implements dObject {
             if (faction.hasHome())
                 return new dLocation(faction.getHome().asBukkitLocation())
                         .getAttribute(attribute.fulfill(1));
-            else
-                return Element.NULL.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -185,8 +183,6 @@ public class dFaction implements dObject {
             if (faction.getLeader() != null)
                 return dPlayer.valueOf(faction.getLeader().getName())
                         .getAttribute(attribute.fulfill(1));
-            else
-                return Element.NULL.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -235,8 +231,6 @@ public class dFaction implements dObject {
             if (to != null)
                 return new Element(faction.getRelationTo(to.getFaction()).toString())
                         .getAttribute(attribute.fulfill(1));
-            else
-                return Element.NULL.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -249,6 +243,18 @@ public class dFaction implements dObject {
         else if (attribute.startsWith("size"))
             return new Element(faction.getLandCount())
                     .getAttribute(attribute.fulfill(1));
+
+        // <--[tag]
+        // @attribute <faction@faction.type>
+        // @returns Element
+        // @description
+        // Always returns 'Faction' for dFaction objects. All objects fetchable by the Object Fetcher will return the
+        // type of object that is fulfilling this attribute.
+        // @plugin Factions
+        // -->
+        if (attribute.startsWith("type")) {
+            return new Element("Faction").getAttribute(attribute.fulfill(1));
+        }
 
         return new Element(identify()).getAttribute(attribute);
 

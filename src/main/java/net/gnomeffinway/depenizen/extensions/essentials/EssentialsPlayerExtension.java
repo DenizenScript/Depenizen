@@ -94,7 +94,8 @@ public class EssentialsPlayerExtension extends dObjectExtension {
                 try {
                     homes.add(home + "/" + new dLocation(essUser.getHome(home)).identifySimple());
                 } catch (Exception e) {
-                    dB.echoError(e);
+                    if (!attribute.hasAlternative())
+                        dB.echoError(e);
                 }
             }
             return homes.getAttribute(attribute.fulfill(1));
@@ -113,7 +114,8 @@ public class EssentialsPlayerExtension extends dObjectExtension {
                 try {
                     homes.add(new dLocation(essUser.getHome(home)).identifySimple());
                 } catch (Exception e) {
-                    dB.echoError(e);
+                    if (!attribute.hasAlternative())
+                        dB.echoError(e);
                 }
             }
             return homes.getAttribute(attribute.fulfill(1));

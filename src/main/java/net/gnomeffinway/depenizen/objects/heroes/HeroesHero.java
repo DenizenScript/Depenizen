@@ -149,8 +149,8 @@ public class HeroesHero implements dObject {
     public String getAttribute(Attribute attribute) {
 
         if (hero == null) {
-            dB.echoError("Specified Hero is null! Are they online/spawned?");
-            return null;
+            if (!attribute.hasAlternative())
+                dB.echoError("Specified Hero is null! Are they online/spawned?");
         }
 
         // <--[tag]
@@ -161,39 +161,17 @@ public class HeroesHero implements dObject {
         // If no class is specified, returns the hero's current highest level.
         // @plugin Heroes
         // -->
-        if (attribute.startsWith("level")) {
+        else if(attribute.startsWith("level")) {
             if (attribute.hasContext(1)) {
                 try {
                     return new Element(hero.getLevel(HeroesClass.valueOf(attribute.getContext(1)).getHeroClass()))
                             .getAttribute(attribute.fulfill(1));
                 } catch (Exception e) {
-                    dB.echoError("'" + attribute.getContext(1) + "' is not a valid Heroes class!");
-                    return Element.NULL.getAttribute(attribute.fulfill(1));
+                    if (!attribute.hasAlternative())
+                        dB.echoError("'" + attribute.getContext(1) + "' is not a valid Heroes class!");
                 }
             }
             return new Element(hero.getLevel()).getAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <hero@hero.primary_class>
-        // @returns HeroesClass
-        // @description
-        // Returns the primary class for the hero.
-        // @plugin Heroes
-        // -->
-        if (attribute.startsWith("primary_class")) {
-            return new HeroesClass(hero.getHeroClass()).getAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <hero@hero.secondary_class>
-        // @returns HeroesClass
-        // @description
-        // Returns the secondary class for the hero.
-        // @plugin Heroes
-        // -->
-        if (attribute.startsWith("secondary_class")) {
-            return new HeroesClass(hero.getHeroClass()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -221,6 +199,40 @@ public class HeroesHero implements dObject {
                 members.add(dPlayer.mirrorBukkitPlayer(member.getPlayer()).identify());
             }
             return members.getAttribute(attribute.fulfill(2));
+        }
+
+        // <--[tag]
+        // @attribute <hero@hero.primary_class>
+        // @returns HeroesClass
+        // @description
+        // Returns the primary class for the hero.
+        // @plugin Heroes
+        // -->
+        if (attribute.startsWith("primary_class")) {
+            return new HeroesClass(hero.getHeroClass()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <hero@hero.secondary_class>
+        // @returns HeroesClass
+        // @description
+        // Returns the secondary class for the hero.
+        // @plugin Heroes
+        // -->
+        if (attribute.startsWith("secondary_class")) {
+            return new HeroesClass(hero.getHeroClass()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <hero@hero.type>
+        // @returns Element
+        // @description
+        // Always returns 'Hero' for HeroesHero objects. All objects fetchable by the Object Fetcher will return the
+        // type of object that is fulfilling this attribute.
+        // @plugin Heroes
+        // -->
+        if (attribute.startsWith("type")) {
+            return new Element("Hero").getAttribute(attribute.fulfill(1));
         }
 
         return new Element(identify()).getAttribute(attribute);

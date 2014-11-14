@@ -41,8 +41,8 @@ public class TownyPlayerExtension extends dObjectExtension {
                         .getAttribute(attribute.fulfill(1));
             }
             catch (NotRegisteredException ex) {
-                dB.echoError(player.getName() + " is not registered to a town!");
-                return "null";
+                if (!attribute.hasAlternative())
+                    dB.echoError(player.getName() + " is not registered to a town!");
             }
         }
 
@@ -59,8 +59,8 @@ public class TownyPlayerExtension extends dObjectExtension {
                         .getAttribute(attribute.fulfill(1));
             }
             catch (NotRegisteredException ex) {
-                dB.echoError(player.getName() + " is not registered to a nation!");
-                return "null";
+                if (!attribute.hasAlternative())
+                    dB.echoError(player.getName() + " is not registered to a nation!");
             }
         }
 

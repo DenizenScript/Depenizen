@@ -135,8 +135,9 @@ public class WorldGuardRegion implements dObject {
         // -->
         if (attribute.startsWith("as_cuboid")) {
             if (!(region instanceof ProtectedCuboidRegion)) {
-                dB.echoError("<region@region.as_cuboid> requires a Cuboid-shaped region!");
-                return Element.NULL.getAttribute(attribute.fulfill(1));
+                if (!attribute.hasAlternative())
+                    dB.echoError("<region@region.as_cuboid> requires a Cuboid-shaped region!");
+                return null;
             }
             return new dCuboid(BukkitUtil.toLocation(world, region.getMinimumPoint()),
                     BukkitUtil.toLocation(world, region.getMaximumPoint())).getAttribute(attribute.fulfill(1));
@@ -182,6 +183,18 @@ public class WorldGuardRegion implements dObject {
                     list.add(player.identify());
             }
             return list.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <hclass@class.type>
+        // @returns Element
+        // @description
+        // Always returns 'Region' for WorldGuardRegion objects. All objects fetchable by the Object Fetcher will return the
+        // type of object that is fulfilling this attribute.
+        // @plugin WorldGuard
+        // -->
+        if (attribute.startsWith("type")) {
+            return new Element("Region").getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

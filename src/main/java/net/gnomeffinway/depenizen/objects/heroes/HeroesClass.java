@@ -141,9 +141,21 @@ public class HeroesClass implements dObject {
             return new Element(heroClass.getName()).getAttribute(attribute.fulfill(1));
         }
 
+        // <--[tag]
+        // @attribute <hclass@class.type>
+        // @returns Element
+        // @description
+        // Always returns 'Hero Class' for HeroesClass objects. All objects fetchable by the Object Fetcher will return the
+        // type of object that is fulfilling this attribute.
+        // @plugin Heroes
+        // -->
+        if (attribute.startsWith("type")) {
+            return new Element("Hero Class").getAttribute(attribute.fulfill(1));
+        }
+
         // TODO: more tags
 
-        return null;
+        return new Element(identify()).getAttribute(attribute);
 
     }
 }

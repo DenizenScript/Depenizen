@@ -42,8 +42,8 @@ public class TownyLocationExtension extends dObjectExtension {
                         .getAttribute(attribute.fulfill(1));
             }
             catch (NotRegisteredException ex) {
-                dB.echoError(location.identifySimple() + " is not registered to a town!");
-                return "null";
+                if (!attribute.hasAlternative())
+                    dB.echoError(location.identifySimple() + " is not registered to a town!");
             }
         }
 

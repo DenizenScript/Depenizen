@@ -42,10 +42,7 @@ public class dTown implements dObject {
     Town town = null;
 
     public dTown(Town town) {
-        if (town != null)
-            this.town = town;
-        else
-            dB.echoError("Town referenced is null!");
+        this.town = town;
     }
 
     /////////////////////
@@ -105,7 +102,8 @@ public class dTown implements dObject {
             try {
                 return new Element(town.getHoldingBalance()).getAttribute(attribute.fulfill(1));
             } catch (EconomyException e) {
-                dB.echoError("Invalid economy response!");
+                if (!attribute.hasAlternative())
+                    dB.echoError("Invalid economy response!");
             }
         }
 
@@ -235,7 +233,19 @@ public class dTown implements dObject {
             return new Element(town.getTaxes())
                     .getAttribute(attribute.fulfill(1));
 
-        return new Element(identify()).getAttribute(attribute.fulfill(0));
+        // <--[tag]
+        // @attribute <town@town.type>
+        // @returns Element
+        // @description
+        // Always returns 'Town' for dTown objects. All objects fetchable by the Object Fetcher will return the
+        // type of object that is fulfilling this attribute.
+        // @plugin Towny
+        // -->
+        if (attribute.startsWith("type")) {
+            return new Element("Town").getAttribute(attribute.fulfill(1));
+        }
+
+        return new Element(identify()).getAttribute(attribute);
 
     }
 }

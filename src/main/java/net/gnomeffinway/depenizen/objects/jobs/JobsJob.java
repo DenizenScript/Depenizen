@@ -7,7 +7,6 @@ import me.zford.jobs.container.JobsPlayer;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.objects.properties.PropertyParser;
 import net.aufdemrand.denizen.tags.Attribute;
-import net.aufdemrand.denizen.utilities.debugging.dB;
 
 import java.util.regex.Matcher;
 
@@ -49,10 +48,7 @@ public class JobsJob implements dObject {
     JobsPlayer jobOwner = null;
 
     public JobsJob(Job job) {
-        if (job != null)
-            this.job = job;
-        else
-            dB.echoError("Job referenced is null!");
+        this.job = job;
     }
 
     public JobsJob(Job job, JobsPlayer jobOwner) {
@@ -218,7 +214,19 @@ public class JobsJob implements dObject {
             return new Element(job.getName()).getAttribute(attribute);
         }
 
-        return new Element(identify()).getAttribute(attribute.fulfill(1));
+        // <--[tag]
+        // @attribute <jobs@job.type>
+        // @returns Element
+        // @description
+        // Always returns 'Job' for JobsJob objects. All objects fetchable by the Object Fetcher will return the
+        // type of object that is fulfilling this attribute.
+        // @plugin Jobs
+        // -->
+        if (attribute.startsWith("type")) {
+            return new Element("Job").getAttribute(attribute.fulfill(1));
+        }
+
+        return new Element(identify()).getAttribute(attribute);
 
     }
 }

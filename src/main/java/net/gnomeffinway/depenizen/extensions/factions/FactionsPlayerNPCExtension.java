@@ -86,8 +86,6 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
                 if (attribute.startsWith("role")) {
                     if (player.getRole() != null)
                         return new Element(player.getRole().toString()).getAttribute(attribute.fulfill(1));
-                    else
-                        return Element.NULL.getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -107,8 +105,6 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
                 else if (attribute.startsWith("title")) {
                     if (player.hasTitle())
                         return new Element(player.getTitle()).getAttribute(attribute.fulfill(1));
-                    else
-                        return Element.NULL.getAttribute(attribute.fulfill(1));
                 }
             }
 

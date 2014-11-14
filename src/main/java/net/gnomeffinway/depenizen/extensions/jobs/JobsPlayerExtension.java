@@ -43,7 +43,8 @@ public class JobsPlayerExtension extends dObjectExtension {
                 job = Jobs.getJob(attribute.getContext(1));
             }
             if (job == null) {
-                dB.echoError("Invalid or missing job specified!");
+                if (!attribute.hasAlternative())
+                    dB.echoError("Invalid or missing job specified!");
                 return null;
             }
             return new JobsJob(job, player).getAttribute(attribute.fulfill(1));
