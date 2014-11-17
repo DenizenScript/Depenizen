@@ -69,7 +69,7 @@ public class WorldGuardLocationExtension extends dObjectExtension {
         // If a region name or list of names is specified, returns whether the
         // location is in one of the listed regions, otherwise returns whether
         // the location is in any region.
-        // @Plugin WorldGuard
+        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("in_region")) {
             // Check if the location is in the specified region
@@ -93,7 +93,7 @@ public class WorldGuardLocationExtension extends dObjectExtension {
         // @returns dList(Region)
         // @description
         // Returns a list of regions that the location is in.
-        // @Plugin WorldGuard
+        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("regions")) {
             return getRegions(location.getWorld()).getAttribute(attribute.fulfill(1));

@@ -96,7 +96,7 @@ public class dTown implements dObject {
         // @returns Element(Decimal)
         // @description
         // Returns the current money balance of the town.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("balance")) {
             try {
@@ -112,7 +112,7 @@ public class dTown implements dObject {
         // @returns Element
         // @description
         // Returns the town's current board.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("board"))
             return new Element(town.getTownBoard())
@@ -123,7 +123,7 @@ public class dTown implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns true if the town is currently open.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open"))
             return new Element(town.isOpen())
@@ -134,7 +134,7 @@ public class dTown implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns true if the town is currently public.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("ispublic") || attribute.startsWith("is_public"))
             return new Element(town.isPublic())
@@ -145,7 +145,7 @@ public class dTown implements dObject {
         // @returns dPlayer
         // @description
         // Returns the mayor of the town.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("mayor"))
             return dPlayer.valueOf(town.getMayor().getName())
@@ -156,7 +156,7 @@ public class dTown implements dObject {
         // @returns Element
         // @description
         // Returns the town's names.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("name"))
             return new Element(town.getName())
@@ -167,7 +167,7 @@ public class dTown implements dObject {
         // @returns dNation
         // @description
         // Returns the nation that the town belongs to.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("nation"))
             try {
@@ -180,7 +180,7 @@ public class dTown implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the number of players in the town.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count"))
             return new Element(town.getNumResidents())
@@ -191,7 +191,7 @@ public class dTown implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the number of blocks the town owns.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("size"))
             return new Element(town.getPurchasedBlocks())
@@ -202,7 +202,7 @@ public class dTown implements dObject {
         // @returns dLocation
         // @description
         // Returns the spawn point of the town.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("spawn")) {
             try {
@@ -216,7 +216,7 @@ public class dTown implements dObject {
         // @returns Element
         // @description
         // Returns the town's tag.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("tag"))
             return new Element(town.getTag())
@@ -227,7 +227,7 @@ public class dTown implements dObject {
         // @returns Element(Decimal)
         // @description
         // Returns the town's current taxes.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("taxes"))
             return new Element(town.getTaxes())
@@ -239,7 +239,7 @@ public class dTown implements dObject {
         // @description
         // Always returns 'Town' for dTown objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("type")) {
             return new Element("Town").getAttribute(attribute.fulfill(1));

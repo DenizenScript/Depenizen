@@ -63,7 +63,7 @@ public class HyperConomySupport extends Support {
                             // <context.item> returns the dItem the player bought.
                             // @Determine
                             // NONE
-                            // @Plugin HyperConomy
+                            // @Plugin Depenizen, HyperConomy
                             // -->
                             case BUY:
                                 dItem buying = new dItem(playerTransaction.getHyperObject().getItemStack());
@@ -83,7 +83,7 @@ public class HyperConomySupport extends Support {
                             // <context.item> returns the dItem the player sold.
                             // @Determine
                             // NONE
-                            // @Plugin HyperConomy
+                            // @Plugin Depenizen, HyperConomy
                             // -->
                             case SELL:
                                 dItem selling = new dItem(playerTransaction.getHyperObject().getItemStack());

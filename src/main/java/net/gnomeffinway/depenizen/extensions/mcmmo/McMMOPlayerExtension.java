@@ -40,7 +40,7 @@ public class McMMOPlayerExtension extends dObjectExtension {
             // @description
             // Returns the player's level in a skill. If no skill is specified,
             // this returns the player's overall level.
-            // @plugin mcMMO
+            // @plugin Depenizen, mcMMO
             // -->
             if (attribute.startsWith("level")) {
                 if (!attribute.hasContext(1)) {
@@ -67,7 +67,7 @@ public class McMMOPlayerExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the name of the player's party.
-            // @plugin mcMMO
+            // @plugin Depenizen, mcMMO
             // -->
             else if (attribute.startsWith("party"))
                 return new Element(PartyAPI.getPartyName(p.getPlayerEntity()))
@@ -84,7 +84,7 @@ public class McMMOPlayerExtension extends dObjectExtension {
                 // @description
                 // Returns the amount of experience a player has left to level up
                 // in a skill.
-                // @plugin mcMMO
+                // @plugin Depenizen, mcMMO
                 // -->
                 if (attribute.startsWith("tonextlevel") || attribute.startsWith("to_next_level")) {
                     if (p.isOnline()) {
@@ -101,7 +101,7 @@ public class McMMOPlayerExtension extends dObjectExtension {
                 // @returns Element(Integer)
                 // @description
                 // Returns the player's experience level in a skill.
-                // @plugin mcMMO
+                // @plugin Depenizen, mcMMO
                 // -->
                 else if (attribute.startsWith("level")) {
                     if (p.isOnline()) {
@@ -118,7 +118,7 @@ public class McMMOPlayerExtension extends dObjectExtension {
                 // @returns Element(Integer)
                 // @description
                 // Returns the player's amount of experience in a skill.
-                // @plugin mcMMO
+                // @plugin Depenizen, mcMMO
                 // -->
                 else if (p.isOnline()) {
                     return new Element(ExperienceAPI.getXP(p.getPlayerEntity(), skill))
@@ -137,7 +137,7 @@ public class McMMOPlayerExtension extends dObjectExtension {
             // @description
             // Returns the player's current rank in a skill. If no skill is specified,
             // this returns the player's overall rank.
-            // @plugin mcMMO
+            // @plugin Depenizen, mcMMO
             // -->
             else if (attribute.startsWith("rank")) {
                 if (!attribute.hasContext(1)) {

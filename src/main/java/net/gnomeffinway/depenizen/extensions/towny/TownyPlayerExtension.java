@@ -33,7 +33,7 @@ public class TownyPlayerExtension extends dObjectExtension {
         // @returns dTown
         // @description
         // Returns the player's town.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("town")) {
             try {
@@ -51,7 +51,7 @@ public class TownyPlayerExtension extends dObjectExtension {
         // @returns dNation
         // @description
         // Returns the player's nation.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("nation")) {
             try {

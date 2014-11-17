@@ -48,7 +48,7 @@ public class PVPArenaSupport extends Support {
             // @returns Element(Integer)
             // @description
             // Returns the number of players in the arena.
-            // @plugin PvP Arena
+            // @plugin Depenizen, PvP Arena
             // -->
             if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
                 return new Element(a.getFighters().size()).getAttribute(attribute.fulfill(1));
