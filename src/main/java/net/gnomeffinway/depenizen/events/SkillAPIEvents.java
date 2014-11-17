@@ -24,7 +24,7 @@ public class SkillAPIEvents implements Listener {
     // <context.gained> returns how many levels the player gained.
     // @Determine
     // NONE
-    // @Plugin SkillAPI
+    // @Plugin Depenizen, SkillAPI
     // -->
     @EventHandler
     public void onLevelUp(PlayerLevelUpEvent event) {
@@ -46,7 +46,7 @@ public class SkillAPIEvents implements Listener {
     // <context.skill_name> returns the name of the skill upgraded.
     // @Determine
     // "CANCELLED" to stop the player from upgrading the skill.
-    // @Plugin SkillAPI
+    // @Plugin Depenizen, SkillAPI
     // -->
     @EventHandler
     public void onSkillUpgrade(PlayerSkillUpgradeEvent event) {
@@ -74,7 +74,7 @@ public class SkillAPIEvents implements Listener {
     // <context.skill_name> returns the name of the skill downgraded.
     // @Determine
     // NONE
-    // @Plugin SkillAPI
+    // @Plugin Depenizen, SkillAPI
     // -->
     @EventHandler
     public void onSkillDowngrade(PlayerSkillDowngradeEvent event) {
@@ -98,7 +98,7 @@ public class SkillAPIEvents implements Listener {
     // <context.skill_name> returns the name of the skill downgraded.
     // @Determine
     // NONE
-    // @Plugin SkillAPI
+    // @Plugin Depenizen, SkillAPI
     // -->
     @EventHandler
     public void onSkillUnlock(PlayerSkillUnlockEvent event) {

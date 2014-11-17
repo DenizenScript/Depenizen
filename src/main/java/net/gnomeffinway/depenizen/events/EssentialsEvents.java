@@ -19,7 +19,7 @@ public class EssentialsEvents implements Listener {
     // None
     // @Determine
     // "CANCELLED" to stop the player from being marked as AFK.
-    // @Plugin Essentials
+    // @Plugin Depenizen, Essentials
     // -->
     // <--[event]
     // @Events
@@ -29,7 +29,7 @@ public class EssentialsEvents implements Listener {
     // None
     // @Determine
     // "CANCELLED" to stop the player from being marked as back.
-    // @Plugin Essentials
+    // @Plugin Depenizen, Essentials
     // -->
     @EventHandler
     public void afkStatusChange(AfkStatusChangeEvent event) {
@@ -56,7 +56,7 @@ public class EssentialsEvents implements Listener {
     // <context.controller> returns the dPlayer that enabled god mode for this player, if any.
     // @Determine
     // "CANCELLED" to stop the player from having god mode enabled.
-    // @Plugin Essentials
+    // @Plugin Depenizen, Essentials
     // -->
     // <--[event]
     // @Events
@@ -66,7 +66,7 @@ public class EssentialsEvents implements Listener {
     // <context.controller> returns the dPlayer that disabled god mode for this player, if any.
     // @Determine
     // "CANCELLED" to stop the player from having god mode disabled.
-    // @Plugin Essentials
+    // @Plugin Depenizen, Essentials
     // -->
     @EventHandler
     public void godStatusChange(GodStatusChangeEvent event) {
@@ -97,7 +97,7 @@ public class EssentialsEvents implements Listener {
     // <context.controller> returns the dPlayer that jailed the player, if any.
     // @Determine
     // "CANCELLED" to stop the player from being jailed.
-    // @Plugin Essentials
+    // @Plugin Depenizen, Essentials
     // -->
     // <--[event]
     // @Events
@@ -107,7 +107,7 @@ public class EssentialsEvents implements Listener {
     // <context.controller> returns the dPlayer that unjailed the player, if any.
     // @Determine
     // "CANCELLED" to stop the player from being unjailed.
-    // @Plugin Essentials
+    // @Plugin Depenizen, Essentials
     // -->
     @EventHandler
     public void jailStatusChange(JailStatusChangeEvent event) {
@@ -138,7 +138,7 @@ public class EssentialsEvents implements Listener {
     // <context.controller> returns the dPlayer that muted the player, if any.
     // @Determine
     // "CANCELLED" to stop the player from being muted.
-    // @Plugin Essentials
+    // @Plugin Depenizen, Essentials
     // -->
     // <--[event]
     // @Events
@@ -148,7 +148,7 @@ public class EssentialsEvents implements Listener {
     // <context.controller> returns the dPlayer that unmuted the player, if any.
     // @Determine
     // "CANCELLED" to stop the player from being unmuted.
-    // @Plugin Essentials
+    // @Plugin Depenizen, Essentials
     // -->
     @EventHandler
     public void muteStatusChange(MuteStatusChangeEvent event) {

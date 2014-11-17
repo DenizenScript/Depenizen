@@ -54,14 +54,14 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
             // @returns Element(Double)
             // @description
             // Returns the player's power level.
-            // @plugin Factions
+            // @plugin Depenizen, Factions
             // -->
             // <--[tag]
             // @attribute <n@npc.factions.power>
             // @returns Element(Double)
             // @description
             // Returns the NPC's power level.
-            // @plugin Factions
+            // @plugin Depenizen, Factions
             // -->
             if (attribute.startsWith("power")) {
                 return new Element(player.getPower()).getAttribute(attribute.fulfill(1));
@@ -74,14 +74,14 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
                 // @returns Element
                 // @description
                 // Returns the player's role in their faction.
-                // @plugin Factions
+                // @plugin Depenizen, Factions
                 // -->
                 // <--[tag]
                 // @attribute <n@npc.factions.role>
                 // @returns Element
                 // @description
                 // Returns the NPC's role in their faction.
-                // @plugin Factions
+                // @plugin Depenizen, Factions
                 // -->
                 if (attribute.startsWith("role")) {
                     if (player.getRole() != null)
@@ -93,14 +93,14 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
                 // @returns Element
                 // @description
                 // Returns the player's title.
-                // @plugin Factions
+                // @plugin Depenizen, Factions
                 // -->
                 // <--[tag]
                 // @attribute <n@npc.factions.title>
                 // @returns Element
                 // @description
                 // Returns the NPC's title.
-                // @plugin Factions
+                // @plugin Depenizen, Factions
                 // -->
                 else if (attribute.startsWith("title")) {
                     if (player.hasTitle())
@@ -115,14 +115,14 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
         // @returns dFaction
         // @description
         // Returns the player's faction.
-        // @plugin Factions
+        // @plugin Depenizen, Factions
         // -->
         // <--[tag]
         // @attribute <n@npc.faction>
         // @returns dFaction
         // @description
         // Returns the NPC's faction.
-        // @plugin Factions
+        // @plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("faction")) {
             return new dFaction(player.getFaction()).getAttribute(attribute.fulfill(1));

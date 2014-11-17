@@ -19,7 +19,7 @@ public class VotifierEvents implements Listener {
     // <context.time> returns the time the vote was sent.
     // <context.service> returns what service was used to send the vote.
     // <context.username> returns the username input with the vote.
-    // @Plugin Votifier
+    // @Plugin Depenizen, Votifier
     // -->
     @EventHandler
     public void onVotifierEvent(VotifierEvent event) {

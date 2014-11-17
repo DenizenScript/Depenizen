@@ -19,7 +19,7 @@ public class PVPArenaEvents implements Listener {
     // @Context
     // <context.arena> returns the arena name.
     // <context.fighters> returns a dList of the fighters in the round.
-    // @Plugin PvP Arena
+    // @Plugin Depenizen, PvP Arena
     // -->
 
     @EventHandler

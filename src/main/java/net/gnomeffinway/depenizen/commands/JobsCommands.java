@@ -16,7 +16,7 @@ public class JobsCommands extends AbstractCommand {
     // @Name Jobs
     // @Syntax jobs [promote/demote/join/quit] [<job>] (<#>)
     // @Group Depenizen
-    // @Plugin Jobs
+    // @Plugin Depenizen, Jobs
     // @Required 2
     // @Stable untested
     // @Short Modifies the specified job of a player.

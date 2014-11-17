@@ -23,7 +23,7 @@ public class HeroesEvents implements Listener {
     // <context.hero> returns the Hero changing classes.
     // @Determine
     // "CANCELLED" to stop the hero from changing classes.
-    // @Plugin Heroes
+    // @Plugin Depenizen, Heroes
     // -->
     @EventHandler
     public void changeClass(ClassChangeEvent event) {
@@ -65,7 +65,7 @@ public class HeroesEvents implements Listener {
     // <context.reason> returns the reason the Hero is changing experience.
     // @Determine
     // "CANCELLED" to stop the hero from gaining experience.
-    // @Plugin Heroes
+    // @Plugin Depenizen, Heroes
     // -->
     @EventHandler
     public void changeExperience(ExperienceChangeEvent event) {
@@ -106,7 +106,7 @@ public class HeroesEvents implements Listener {
     // <context.level> returns the level the Hero is changing to.
     // @Determine
     // None
-    // @Plugin Heroes
+    // @Plugin Depenizen, Heroes
     // -->
     @EventHandler
     public void changeLevel(HeroChangeLevelEvent event) {

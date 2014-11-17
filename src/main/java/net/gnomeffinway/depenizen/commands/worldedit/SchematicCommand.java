@@ -33,9 +33,9 @@ public class SchematicCommand extends AbstractCommand implements Listener {
     // @Name Schematic
     // @Syntax schematic [create/load/unload/rotate/paste/save] [name:<name>] (angle:<#>) (<location>) (<cuboid>) (noair)
     // @Group Depenizen
-    // @Plugin WorldEdit
+    // @Plugin Depenizen, WorldEdit
     // @Required 2
-    // @Stable unstable
+    // @Stable stable
     // @Short Creates, loads, pastes, and saves WorldEdit schematics.
     // @Author mcmonkey
 
