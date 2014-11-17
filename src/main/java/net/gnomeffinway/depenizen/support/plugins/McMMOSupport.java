@@ -33,7 +33,7 @@ public class McMMOSupport extends Support {
             // @returns dPlayer
             // @description
             // Returns the leader of the party.
-            // @plugin mcMMO
+            // @plugin Depenizen, mcMMO
             // -->
             if (attribute.startsWith("leader"))
                 return dPlayer.valueOf(party.getLeader()).getAttribute(attribute.fulfill(1));
@@ -43,7 +43,7 @@ public class McMMOSupport extends Support {
             // @returns Element(Integer)
             // @description
             // Returns the number of players in the party.
-            // @plugin mcMMO
+            // @plugin Depenizen, mcMMO
             // -->
             else if (attribute.startsWith("playercount") || attribute.startsWith("player_count"))
                 return new Element(party.getMembers().size()).getAttribute(attribute.fulfill(1));

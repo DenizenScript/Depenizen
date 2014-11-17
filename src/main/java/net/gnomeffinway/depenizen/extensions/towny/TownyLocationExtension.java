@@ -34,7 +34,7 @@ public class TownyLocationExtension extends dObjectExtension {
         // @returns dTown
         // @description
         // Returns the town at the specified location.
-        // @plugin Towny
+        // @plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("town")) {
             try {

@@ -37,7 +37,7 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         // @returns dCuboid
         // @description
         // Returns the player's current region selection, as a dCuboid.
-        // @Plugin WorldEdit
+        // @Plugin Depenizen, WorldEdit
         // -->
         if (attribute.startsWith("selected_region")) {
             WorldEditPlugin worldEdit = Supported.get("WORLDEDIT").getPlugin();

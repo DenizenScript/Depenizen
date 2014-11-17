@@ -40,7 +40,7 @@ public class PrismLocationExtension extends dObjectExtension {
         // @returns dList(PrismAction)
         // @description
         // Returns a list of prism logs for this location.
-        // @plugin Prism
+        // @plugin Depenizen, Prism
         // -->
         if (attribute.startsWith("prism_logs")) {
             attribute = attribute.fulfill(1);
@@ -54,7 +54,7 @@ public class PrismLocationExtension extends dObjectExtension {
             // @returns dList(PrismAction)
             // @description
             // Returns a list of prism logs for a specified radius of blocks around this location.
-            // @plugin Prism
+            // @plugin Depenizen, Prism
             // -->
             if (attribute.startsWith("radius")) {
                 params.setRadius(attribute.getIntContext(1));
@@ -68,7 +68,7 @@ public class PrismLocationExtension extends dObjectExtension {
                 // Returns a list of prism logs for a specified radius of blocks around this location
                 // with a search for action types.
                 // For example, <player.location.prism_logs.radius[10].types[block-break|block-place]>
-                // @plugin Prism
+                // @plugin Depenizen, Prism
                 // -->
                 if (attribute.startsWith("types")) {
                     for (String type : dList.valueOf(attribute.getContext(1))) {
@@ -83,7 +83,7 @@ public class PrismLocationExtension extends dObjectExtension {
             // @description
             // Returns a list of prism logs for this location, with a search for action types.
             // For example, <player.location.prism_logs.types[block-break|block-place]>
-            // @plugin Prism
+            // @plugin Depenizen, Prism
             // -->
             else if (attribute.startsWith("types")) {
                 for (String type : dList.valueOf(attribute.getContext(1))) {
@@ -98,7 +98,7 @@ public class PrismLocationExtension extends dObjectExtension {
                 // Returns a list of prism logs, with a search for action types, for a specified radius
                 // of blocks around this location.
                 // For example, <player.location.prism_logs.types[block-break|block-place].radius[10]>
-                // @plugin Prism
+                // @plugin Depenizen, Prism
                 // -->
                 if (attribute.startsWith("radius")) {
                     params.setRadius(attribute.getIntContext(1));

@@ -36,7 +36,7 @@ public class PVPStatsPlayerExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the number of times the player has died.
-            // @plugin PvP Stats
+            // @plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("deaths")) {
                 return new Element(PVPData.getDeaths(playerName)).getAttribute(attribute.fulfill(1));
@@ -47,7 +47,7 @@ public class PVPStatsPlayerExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the Elo rating of the player.
-            // @plugin PvP Stats
+            // @plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("elo")) {
                 return new Element(PVPData.getEloScore(playerName)).getAttribute(attribute.fulfill(1));
@@ -58,7 +58,7 @@ public class PVPStatsPlayerExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the number of players the player has killed.
-            // @plugin PvP Stats
+            // @plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("kills")) {
                 return new Element(PVPData.getKills(playerName)).getAttribute(attribute.fulfill(1));
@@ -69,7 +69,7 @@ public class PVPStatsPlayerExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the current kill streak of the player.
-            // @plugin PvP Stats
+            // @plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("streak")) {
                 return new Element(PVPData.getStreak(playerName)).getAttribute(attribute.fulfill(1));
@@ -80,7 +80,7 @@ public class PVPStatsPlayerExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the highest kill streak of the player.
-            // @plugin PvP Stats
+            // @plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("max_streak")) {
                 return new Element(PVPData.getMaxStreak(playerName)).getAttribute(attribute.fulfill(1));

@@ -36,7 +36,7 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the player's class if they're in an arena. Otherwise, returns null.
-            // @plugin PvP Arena
+            // @plugin Depenizen, PvP Arena
             // -->
             if (attribute.startsWith("class")) {
                 return new Element(player.getArenaClass().getName()).getAttribute(attribute.fulfill(1));
@@ -48,7 +48,7 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
             // @description
             // Returns true if the player is in the specified arena. If no arena is specified,
             // this returns true if the player is in any arena.
-            // @plugin PvP Arena
+            // @plugin Depenizen, PvP Arena
             // -->
             else if (attribute.startsWith("inarena") || attribute.startsWith("in_arena")) {
                 if (attribute.hasContext(1)) {
@@ -65,7 +65,7 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns true if the player is ready.
-            // @plugin PvP Arena
+            // @plugin Depenizen, PvP Arena
             // -->
             else if (attribute.startsWith("isready") || attribute.startsWith("is_ready")) {
                 return new Element(player.getStatus().equals(ArenaPlayer.Status.READY))
@@ -81,7 +81,7 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
                 // @returns Element(Integer)
                 // @description
                 // Returns the number of players in the team.
-                // @plugin PvP Arena
+                // @plugin Depenizen, PvP Arena
                 // -->
                 if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
                     return new Element(player.getArenaTeam().getTeamMembers().size())
@@ -93,7 +93,7 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
                 // @returns Element
                 // @description
                 // Returns the player's team name if they're in an arena. Otherwise, returns null.
-                // @plugin PvP Arena
+                // @plugin Depenizen, PvP Arena
                 // -->
                 return new Element(player.getArenaTeam().getName())
                         .getAttribute(attribute.fulfill(1));

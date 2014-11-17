@@ -42,7 +42,7 @@ public class HeroesPlayerNPCExtension extends dObjectExtension {
         // Returns this player as a HeroesHero. This is designed
         // to allow <p@player.heroes.some.extensions> for ease of use, and
         // usually should not be used alone.
-        // @plugin Heroes
+        // @plugin Depenizen, Heroes
         // -->
         // <--[tag]
         // @attribute <n@npc.heroes>
@@ -51,7 +51,7 @@ public class HeroesPlayerNPCExtension extends dObjectExtension {
         // Returns a Player-type NPC as a HeroesHero. This is designed
         // to allow <n@npc.heroes.some.extensions> for ease of use, and
         // usually shouldn't be used alone.
-        // @plugin Heroes
+        // @plugin Depenizen, Heroes
         // -->
         if (attribute.startsWith("heroes")) {
             Heroes heroes = Supported.get("HEROES").getPlugin();
