@@ -49,7 +49,7 @@ public class PrismActionPlayer implements Property {
             // @returns dPlayer
             // @description
             // Returns the player who performed this action.
-            // @plugin Prism
+            // @plugin Depenizen, Prism
             // -->
             if (attribute.startsWith("player")) {
                 return dPlayer.valueOf(getPropertyString()).getAttribute(attribute.fulfill(1));

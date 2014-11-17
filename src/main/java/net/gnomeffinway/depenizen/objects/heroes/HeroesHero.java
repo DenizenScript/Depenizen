@@ -159,7 +159,7 @@ public class HeroesHero implements dObject {
         // @description
         // Returns the level of the hero for the specified class.
         // If no class is specified, returns the hero's current highest level.
-        // @plugin Heroes
+        // @plugin Depenizen, Heroes
         // -->
         else if(attribute.startsWith("level")) {
             if (attribute.hasContext(1)) {
@@ -179,7 +179,7 @@ public class HeroesHero implements dObject {
         // @returns dPlayer
         // @description
         // Returns the leader of the hero's party.
-        // @plugin Heroes
+        // @plugin Depenizen, Heroes
         // -->
         if (attribute.startsWith("party.leader")) {
             return dPlayer.mirrorBukkitPlayer(hero.getParty().getLeader().getPlayer())
@@ -191,7 +191,7 @@ public class HeroesHero implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Returns a list of players currently in the hero's party.
-        // @plugin Heroes
+        // @plugin Depenizen, Heroes
         // -->
         if (attribute.startsWith("party.members")) {
             dList members = new dList();
@@ -206,7 +206,7 @@ public class HeroesHero implements dObject {
         // @returns HeroesClass
         // @description
         // Returns the primary class for the hero.
-        // @plugin Heroes
+        // @plugin Depenizen, Heroes
         // -->
         if (attribute.startsWith("primary_class")) {
             return new HeroesClass(hero.getHeroClass()).getAttribute(attribute.fulfill(1));
@@ -217,7 +217,7 @@ public class HeroesHero implements dObject {
         // @returns HeroesClass
         // @description
         // Returns the secondary class for the hero.
-        // @plugin Heroes
+        // @plugin Depenizen, Heroes
         // -->
         if (attribute.startsWith("secondary_class")) {
             return new HeroesClass(hero.getHeroClass()).getAttribute(attribute.fulfill(1));
@@ -229,7 +229,7 @@ public class HeroesHero implements dObject {
         // @description
         // Always returns 'Hero' for HeroesHero objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Heroes
+        // @plugin Depenizen, Heroes
         // -->
         if (attribute.startsWith("type")) {
             return new Element("Hero").getAttribute(attribute.fulfill(1));

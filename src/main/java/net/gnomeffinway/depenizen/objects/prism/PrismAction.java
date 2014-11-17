@@ -134,7 +134,7 @@ public class PrismAction implements dObject, Adjustable {
         // @returns Element
         // @description
         // Returns the action type of the logged action.
-        // @plugin Prism
+        // @plugin Depenizen, Prism
         // -->
         if (attribute.startsWith("action_type")) {
             return new Element(action.getType().getName()).getAttribute(attribute.fulfill(1));
@@ -146,7 +146,7 @@ public class PrismAction implements dObject, Adjustable {
         // @description
         // Always returns 'Prism Action' for PrismAction objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Prism
+        // @plugin Depenizen, Prism
         // -->
         if (attribute.startsWith("type")) {
             return new Element("Prism Action").getAttribute(attribute.fulfill(1));
