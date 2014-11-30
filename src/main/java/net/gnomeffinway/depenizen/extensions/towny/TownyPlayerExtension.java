@@ -1,7 +1,9 @@
 package net.gnomeffinway.depenizen.extensions.towny;
 
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
+import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
@@ -28,22 +30,35 @@ public class TownyPlayerExtension extends dObjectExtension {
     @Override
     public String getAttribute(Attribute attribute) {
 
+        Resident resident;
+        try {
+            resident = TownyUniverse.getDataSource().getResident(player.getName());
+        } catch (NotRegisteredException e) {
+            if (!attribute.hasAlternative())
+                dB.echoError("'" + player.getName() + "' is not registered in Towny!");
+            return null;
+        }
+
         // <--[tag]
-        // @attribute <p@player.town>
-        // @returns dTown
+        // @attribute <p@player.has_nation>
+        // @returns Element(Boolean)
         // @description
-        // Returns the player's town.
+        // Returns whether the player is part of a nation.
         // @plugin Depenizen, Towny
         // -->
-        if (attribute.startsWith("town")) {
-            try {
-                return new dTown(TownyUniverse.getDataSource().getResident(player.getName()).getTown())
-                        .getAttribute(attribute.fulfill(1));
-            }
-            catch (NotRegisteredException ex) {
-                if (!attribute.hasAlternative())
-                    dB.echoError(player.getName() + " is not registered to a town!");
-            }
+        if (attribute.startsWith("has_nation")) {
+            return new Element(resident.hasNation()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <p@player.has_town>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the player is part of a town.
+        // @plugin Depenizen, Towny
+        // -->
+        if (attribute.startsWith("has_town")) {
+            return new Element(resident.hasTown()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -55,12 +70,32 @@ public class TownyPlayerExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("nation")) {
             try {
-                return new dNation(TownyUniverse.getDataSource().getResident(player.getName()).getTown().getNation())
-                        .getAttribute(attribute.fulfill(1));
-            }
-            catch (NotRegisteredException ex) {
+                if (resident.hasNation())
+                    return new dNation(resident.getTown().getNation()).getAttribute(attribute.fulfill(1));
+                else
+                    return null;
+            } catch (NotRegisteredException e) {
                 if (!attribute.hasAlternative())
-                    dB.echoError(player.getName() + " is not registered to a nation!");
+                    dB.echoError("'" + player.getName() + "' is not registered to a nation in Towny!");
+            }
+        }
+
+        // <--[tag]
+        // @attribute <p@player.town>
+        // @returns dTown
+        // @description
+        // Returns the player's town.
+        // @plugin Depenizen, Towny
+        // -->
+        if (attribute.startsWith("town")) {
+            try {
+                if (resident.hasTown())
+                    return new dTown(resident.getTown()).getAttribute(attribute.fulfill(1));
+                else
+                    return null;
+            } catch (NotRegisteredException e) {
+                if (!attribute.hasAlternative())
+                    dB.echoError("'" + player.getName() + "' is not registered to a town in Towny!");
             }
         }
 
