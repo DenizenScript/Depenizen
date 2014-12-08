@@ -4,7 +4,8 @@ import com.sk89q.worldedit.LocalWorld;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
-import net.aufdemrand.denizen.events.bukkit.ReplaceableTagEvent;
+import net.aufdemrand.denizen.tags.ReplaceableTagEvent;
+import net.aufdemrand.denizen.tags.TagManager;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizen.objects.*;
@@ -27,7 +28,7 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SchematicCommand extends AbstractCommand implements Listener {
+public class SchematicCommand extends AbstractCommand {
 
     // <--[command]
     // @Name Schematic
@@ -79,7 +80,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
 
     @Override
     public void onEnable() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
+        TagManager.registerTagEvents(this);
         schematics = new HashMap<String, CuboidClipboard>();
     }
 
@@ -265,7 +266,7 @@ public class SchematicCommand extends AbstractCommand implements Listener {
                 break;
         }
     }
-    @EventHandler
+    @TagManager.TagEvents
     public void schematicTags(ReplaceableTagEvent event) {
 
         if (!event.matches("schematic, schem")) return;

@@ -1,19 +1,20 @@
 package net.gnomeffinway.depenizen.support;
 
-import net.aufdemrand.denizen.events.bukkit.ReplaceableTagEvent;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.objects.properties.Property;
 import net.aufdemrand.denizen.objects.properties.PropertyParser;
 import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizen.tags.ReplaceableTagEvent;
+import net.aufdemrand.denizen.tags.TagManager;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizen.utilities.depends.Depends;
 import net.gnomeffinway.depenizen.Depenizen;
-import org.bukkit.event.*;
+import org.bukkit.event.Listener;
 
 import java.util.*;
 
-public class SupportManager implements Listener {
+public class SupportManager {
 
     private final Depenizen depenizen;
     private final PropertyParser propertyParser;
@@ -26,7 +27,7 @@ public class SupportManager implements Listener {
         this.propertyParser = DenizenAPI.getCurrentInstance().getPropertyParser();
         this.supported = new HashMap<String, Support>();
         this.additionalTags = new HashMap<String, Support>();
-        depenizen.getServer().getPluginManager().registerEvents(this, depenizen);
+        TagManager.registerTagEvents(this);
     }
 
     public void register(Support support) {
@@ -81,7 +82,7 @@ public class SupportManager implements Listener {
         return null;
     }
 
-    @EventHandler(priority = EventPriority.LOW)
+    @TagManager.TagEvents
     public void tagListener(ReplaceableTagEvent event) {
         if (event.replaced()) return;
         Attribute attribute = new Attribute(event.raw_tag, event.getScriptEntry());
