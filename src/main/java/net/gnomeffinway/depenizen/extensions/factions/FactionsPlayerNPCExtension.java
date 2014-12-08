@@ -1,8 +1,7 @@
 package net.gnomeffinway.depenizen.extensions.factions;
 
-import com.massivecraft.factions.entity.UPlayer;
-import com.massivecraft.factions.entity.UPlayerColl;
-import com.massivecraft.factions.entity.UPlayerColls;
+import com.massivecraft.factions.entity.MPlayer;
+import com.massivecraft.massivecore.util.IdUtil;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dObject;
@@ -31,16 +30,12 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
             dB.echoError("Invalid dObject! Must be a dPlayer or dNPC!");
             return;
         }
-        for (UPlayerColl upc : UPlayerColls.get().getColls()) {
-            for (UPlayer up : upc.getAll())
-                if (up.getName().equalsIgnoreCase(name))
-                    player = up;
-        }
+        player = MPlayer.get(IdUtil.getId(name));
         if (player == null)
             dB.echoError("No Factions player data found for '" + name + "'!");
     }
 
-    UPlayer player = null;
+    MPlayer player = null;
 
     @Override
     public String getAttribute(Attribute attribute) {

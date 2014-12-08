@@ -2,7 +2,6 @@ package net.gnomeffinway.depenizen.support.plugins;
 
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
-import com.massivecraft.factions.entity.FactionColls;
 import net.aufdemrand.denizen.objects.dList;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dNPC;
@@ -41,9 +40,8 @@ public class FactionsSupport extends Support {
             if (attribute.startsWith("list_factions")) {
                 ArrayList<dFaction> factions = new ArrayList<dFaction>();
 
-                for (FactionColl fc : FactionColls.get().getColls())
-                    for (Faction f : fc.getAll())
-                        factions.add(new dFaction(f));
+                for (Faction f : FactionColl.get().getAll())
+                    factions.add(new dFaction(f));
 
                 return new dList(factions).getAttribute(attribute.fulfill(1));
             }
@@ -52,14 +50,12 @@ public class FactionsSupport extends Support {
 
         else if (attribute.startsWith("faction")) {
 
-            for (FactionColl fc : FactionColls.get().getColls()) {
-                for (Faction f : fc.getAll()) {
-                    if (f.getId().equalsIgnoreCase(attribute.getContext(1))
-                            || f.getName().equalsIgnoreCase(attribute.getContext(1))) {
-                        return new dFaction(f).getAttribute(attribute.fulfill(1));
-                    }
-                }
-            }
+            String nameOrId = attribute.getContext(1);
+            Faction f = FactionColl.get().getByName(nameOrId);
+            if (f == null && FactionColl.get().containsId(nameOrId))
+                f = FactionColl.get().get(nameOrId);
+            if (f != null)
+                return new dFaction(f).getAttribute(attribute.fulfill(1));
 
         }
 

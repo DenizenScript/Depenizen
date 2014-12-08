@@ -1,6 +1,6 @@
 package net.gnomeffinway.depenizen.extensions.factions;
 
-import com.massivecraft.factions.entity.BoardColls;
+import com.massivecraft.factions.entity.BoardColl;
 import com.massivecraft.massivecore.ps.PS;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dObject;
@@ -36,7 +36,7 @@ public class FactionsLocationExtension extends dObjectExtension {
         // @plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("faction"))
-            return new dFaction(BoardColls.get().getFactionAt(PS.valueOf(location)))
+            return new dFaction(BoardColl.get().getFactionAt(PS.valueOf(location)))
                     .getAttribute(attribute.fulfill(1));
 
         return null;

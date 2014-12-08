@@ -1,9 +1,8 @@
 package net.gnomeffinway.depenizen.objects;
 
-import com.massivecraft.factions.FFlag;
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
-import com.massivecraft.factions.entity.FactionColls;
+import com.massivecraft.factions.entity.MFlag;
 import com.massivecraft.massivecore.money.Money;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
@@ -23,13 +22,9 @@ public class dFaction implements dObject {
         // Match faction name
 
         string = string.replace("faction@", "");
-        for (FactionColl fc : FactionColls.get().getColls()) {
-            for (Faction f : fc.getAll()) {
-                if (f.getComparisonName().equalsIgnoreCase(string)) {
-                    return new dFaction(f);
-                }
-            }
-        }
+        Faction faction = FactionColl.get().getByName(string);
+        if (faction != null)
+            return new dFaction(faction);
 
         return null;
     }
@@ -158,7 +153,7 @@ public class dFaction implements dObject {
         // @plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("ispeaceful") || attribute.startsWith("is_peaceful"))
-            return new Element(faction.getFlag(FFlag.PEACEFUL))
+            return new Element(faction.getFlag(MFlag.getFlagPeaceful()))
                     .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
@@ -169,7 +164,7 @@ public class dFaction implements dObject {
         // @plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("ispermanent") || attribute.startsWith("is_permanent"))
-            return new Element(faction.getFlag(FFlag.PERMANENT))
+            return new Element(faction.getFlag(MFlag.getFlagPermanent()))
                     .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
@@ -204,7 +199,7 @@ public class dFaction implements dObject {
         // @plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count"))
-            return new Element(faction.getUPlayers().size())
+            return new Element(faction.getMPlayers().size())
                     .getAttribute(attribute.fulfill(1));
 
         // <--[tag]
