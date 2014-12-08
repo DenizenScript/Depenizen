@@ -12,10 +12,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-import regalowl.hyperconomy.HyperConomy;
 import regalowl.hyperconomy.account.HyperPlayer;
+import regalowl.hyperconomy.bukkit.BukkitConnector;
 import regalowl.hyperconomy.event.HyperEventHandler;
-import regalowl.hyperconomy.event.TransactionEvent;
 import regalowl.hyperconomy.inventory.HItemStack;
 import regalowl.hyperconomy.transaction.PlayerTransaction;
 import regalowl.hyperconomy.transaction.TransactionResponse;
@@ -46,8 +45,8 @@ public class HyperConomySupport extends Support {
         new BukkitRunnable() {
             @Override
             public void run() {
-                HyperConomy hyperConomy = Supported.get("HYPERCONOMY").getPlugin();
-                HyperEventHandler eventHandler = hyperConomy.getHyperEventHandler();
+                BukkitConnector hyperConomy = Supported.get("HYPERCONOMY").getPlugin();
+                HyperEventHandler eventHandler = hyperConomy.getHC().getHyperEventHandler();
                 eventHandler.registerListener(this);
             }
         }.runTaskLaterAsynchronously(Depenizen.getCurrentInstance(), 1);
