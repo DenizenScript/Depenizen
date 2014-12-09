@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.extensions.factions;
 
 import com.massivecraft.factions.entity.MPlayer;
+import com.massivecraft.factions.entity.MPlayerColl;
 import com.massivecraft.massivecore.util.IdUtil;
 import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dNPC;
@@ -31,8 +32,10 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
             return;
         }
         player = MPlayer.get(IdUtil.getId(name));
-        if (player == null)
-            dB.echoError("No Factions player data found for '" + name + "'!");
+        if (player == null) {
+            // Attempt to force NPCs into Factions
+            player = MPlayerColl.get().create(IdUtil.getId(name));
+        }
     }
 
     MPlayer player = null;
