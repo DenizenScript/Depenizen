@@ -7,6 +7,7 @@ import com.gmail.nossr50.config.experience.ExperienceConfig;
 import com.gmail.nossr50.database.DatabaseManagerFactory;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.party.PartyManager;
+import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizen.objects.Element;
@@ -108,6 +109,8 @@ public class McMMOCommands extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
 
+        BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.getData();
+
         // Get objects
         Element action = scriptEntry.getElement("action");
         Element state = scriptEntry.getElement("state");
@@ -116,7 +119,7 @@ public class McMMOCommands extends AbstractCommand {
         Element party = scriptEntry.getElement("party");
         Element skill = scriptEntry.getElement("skill");
 
-        dPlayer player = scriptEntry.getPlayer();
+        dPlayer player = scriptEntryData.getPlayer();
 
         // Report to dB
         dB.report(scriptEntry, getName(), action.debug() + type.debug() + state.debug() + qty.debug()

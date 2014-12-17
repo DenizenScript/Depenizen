@@ -10,6 +10,7 @@ import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.prism.fake.FakeHandler;
 import net.gnomeffinway.depenizen.support.Supported;
+import net.gnomeffinway.depenizen.support.plugins.PrismSupport;
 
 import java.util.regex.Matcher;
 
@@ -29,7 +30,7 @@ public class PrismAction implements dObject, Adjustable {
         }
 
         string = string.replace("prism@", "");
-        Prism prism = Supported.get("PRISM").getPlugin();
+        Prism prism = PrismSupport.getPlugin();
         ActionType actionType = prism.getActionRegistry().getAction(string);
         if (actionType != null) {
             return new PrismAction(actionType);

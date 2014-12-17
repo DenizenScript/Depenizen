@@ -45,10 +45,6 @@ public class Supported {
         return false;
     }
 
-    public static Support get(String plugin) {
-        return supportManager.supported.get(plugin.toUpperCase());
-    }
-
     private static void getSupportClasses(ClassLoader loader) {
         supportClasses = new HashMap<String, Class<? extends Support>>();
         final String pkg = "net.gnomeffinway.depenizen.support.plugins";

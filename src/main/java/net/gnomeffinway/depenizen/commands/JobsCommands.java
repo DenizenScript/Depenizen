@@ -2,6 +2,7 @@ package net.gnomeffinway.depenizen.commands;
 
 import me.zford.jobs.Jobs;
 import me.zford.jobs.container.JobsPlayer;
+import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizen.objects.Element;
@@ -82,10 +83,12 @@ public class JobsCommands extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
 
+        BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.getData();
+
         Action action = (Action) scriptEntry.getObject("action");
         JobsJob job = (JobsJob) scriptEntry.getObject("job");
         int number = (scriptEntry.hasObject("number") ? scriptEntry.getElement("number").asInt() : 0);
-        JobsPlayer player = Jobs.getPlayerManager().getJobsPlayerOffline(scriptEntry.getPlayer().getOfflinePlayer());
+        JobsPlayer player = Jobs.getPlayerManager().getJobsPlayerOffline(scriptEntryData.getPlayer().getOfflinePlayer());
 
         switch (action) {
 

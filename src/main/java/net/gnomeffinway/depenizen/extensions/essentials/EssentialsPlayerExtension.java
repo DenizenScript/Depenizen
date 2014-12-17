@@ -7,6 +7,7 @@ import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.support.Supported;
+import net.gnomeffinway.depenizen.support.plugins.EssentialsSupport;
 
 import java.util.GregorianCalendar;
 
@@ -28,7 +29,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
 
     private EssentialsPlayerExtension(dPlayer pl) {
         // TODO: UUID
-        Essentials essentials = Supported.get("ESSENTIALS").getPlugin();
+        Essentials essentials = EssentialsSupport.getPlugin();
         this.essUser = essentials.getUser(pl.getPlayerEntity());
     }
 

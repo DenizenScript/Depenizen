@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.commands;
 
 import me.limebyte.battlenight.core.BattleNight;
+import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizen.objects.aH;
@@ -93,14 +94,16 @@ public class BattleNightCommands extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
 
+        BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.getData();
+
         // Get objects
         Action action = (Action) scriptEntry.getObject("action");
-        dPlayer player = scriptEntry.getPlayer();
+        dPlayer player = scriptEntryData.getPlayer();
         // boolean spectator = scriptEntry.getElement("spectator").asBoolean();
 
         // Report to dB
         dB.report(scriptEntry, getName(),
-                aH.debugObj("NPC", scriptEntry.getNPC().toString())
+                aH.debugObj("NPC", scriptEntryData.getNPC().toString())
                         + aH.debugObj("Action", action.toString())
                         // + aH.debugObj("Spectator", String.valueOf(spectator))
                         + aH.debugObj("Player", player.getName()));

@@ -5,6 +5,7 @@ import com.herocraftonline.heroes.characters.classes.HeroClass;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.support.Supported;
+import net.gnomeffinway.depenizen.support.plugins.HeroesSupport;
 import org.bukkit.Material;
 
 import java.util.Set;
@@ -21,7 +22,7 @@ public class HeroesClass implements dObject {
 
         string = string.replace("hclass@", "");
 
-        Heroes heroes = Supported.get("HEROES").getPlugin();
+        Heroes heroes = HeroesSupport.getPlugin();
         HeroClass heroClass = heroes.getClassManager().getClass(string);
         if (heroClass != null) {
             return new HeroesClass(heroClass);

@@ -12,6 +12,7 @@ import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.prism.PrismAction;
 import net.gnomeffinway.depenizen.support.Supported;
+import net.gnomeffinway.depenizen.support.plugins.PrismSupport;
 
 import java.util.List;
 
@@ -114,7 +115,7 @@ public class PrismLocationExtension extends dObjectExtension {
             else
                 params.setSpecificBlockLocation(location);
 
-            ActionsQuery query = new ActionsQuery((Prism) Supported.get("PRISM").getPlugin());
+            ActionsQuery query = new ActionsQuery((Prism) PrismSupport.getPlugin());
             List<Handler> results = query.lookup(params).getActionResults();
             dList list = new dList();
             for (Handler action : results) {

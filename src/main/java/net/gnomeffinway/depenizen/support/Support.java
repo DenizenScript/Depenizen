@@ -23,9 +23,9 @@ public class Support {
 
     private final List<String> additionalTags = new ArrayList<String>();
 
-    private Plugin plugin = null;
+    protected static Plugin plugin = null;
 
-    public <T extends Plugin> T getPlugin() {
+    public static <T extends Plugin> T getPlugin() {
         return (T) plugin;
     }
 
@@ -83,8 +83,8 @@ public class Support {
 
     public boolean hasAdditionalTags() { return !additionalTags.isEmpty(); }
 
-    public Support setPlugin(Plugin plugin) {
-        this.plugin = plugin;
+    public Support setPlugin(Plugin p) {
+        plugin = p;
         return this;
     }
 

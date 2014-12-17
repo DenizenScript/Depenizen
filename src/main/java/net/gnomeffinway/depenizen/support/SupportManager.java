@@ -18,20 +18,17 @@ public class SupportManager {
 
     private final Depenizen depenizen;
     private final PropertyParser propertyParser;
-    public final Map<String, Support> supported;
     private final Map<String, Support> additionalTags;
     private boolean hasNewObjects = false;
 
     public SupportManager(Depenizen depenizen) {
         this.depenizen = depenizen;
         this.propertyParser = DenizenAPI.getCurrentInstance().getPropertyParser();
-        this.supported = new HashMap<String, Support>();
         this.additionalTags = new HashMap<String, Support>();
         TagManager.registerTagEvents(this);
     }
 
     public void register(Support support) {
-        supported.put(support.getPlugin().getName().toUpperCase(), support);
         if (support.hasObjects()) {
             for (Class<? extends dObject> object : support.getObjects()) {
                 ObjectFetcher.registerWithObjectFetcher(object);

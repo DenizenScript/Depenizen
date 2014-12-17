@@ -9,6 +9,7 @@ import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.support.Supported;
+import net.gnomeffinway.depenizen.support.plugins.WorldEditSupport;
 import org.bukkit.entity.Player;
 
 public class WorldEditPlayerExtension extends dObjectExtension {
@@ -40,7 +41,7 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         // @Plugin Depenizen, WorldEdit
         // -->
         if (attribute.startsWith("selected_region")) {
-            WorldEditPlugin worldEdit = Supported.get("WORLDEDIT").getPlugin();
+            WorldEditPlugin worldEdit = WorldEditSupport.getPlugin();
             Selection selection = worldEdit.getSelection(player);
             if (selection != null)
                 return new dCuboid(selection.getMinimumPoint(), selection.getMaximumPoint()).getAttribute(attribute.fulfill(1));
