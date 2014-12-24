@@ -2,6 +2,7 @@ package net.gnomeffinway.depenizen.extensions.towny;
 
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
+import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.tags.Attribute;
@@ -28,6 +29,20 @@ public class TownyLocationExtension extends dObjectExtension {
 
     @Override
     public String getAttribute(Attribute attribute) {
+
+        // <--[tag[
+        // @attribute <l@location.has_town>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the location is within a town.
+        // @plugin Depenizen, Towny
+        // -->
+        if (attribute.startsWith("has_town")) {
+            if (TownyUniverse.getTownName(location) != null)
+                return Element.TRUE.getAttribute(attribute.fulfill(1));
+            else
+                return Element.FALSE.getAttribute(attribute.fulfill(1));
+        }
 
         // <--[tag]
         // @attribute <l@location.town>
