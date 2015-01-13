@@ -11,6 +11,7 @@ import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.prism.PrismAction;
+import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.PrismSupport;
 
@@ -115,7 +116,7 @@ public class PrismLocationExtension extends dObjectExtension {
             else
                 params.setSpecificBlockLocation(location);
 
-            ActionsQuery query = new ActionsQuery((Prism) PrismSupport.getPlugin());
+            ActionsQuery query = new ActionsQuery((Prism) Support.getPlugin(PrismSupport.class));
             List<Handler> results = query.lookup(params).getActionResults();
             dList list = new dList();
             for (Handler action : results) {

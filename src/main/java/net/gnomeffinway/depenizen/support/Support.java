@@ -23,10 +23,10 @@ public class Support {
 
     private final List<String> additionalTags = new ArrayList<String>();
 
-    protected static Plugin plugin = null;
+    private static Map<Class<? extends Support>, Plugin> plugins = null;
 
-    public static <T extends Plugin> T getPlugin() {
-        return (T) plugin;
+    public static <T extends Plugin> T getPlugin(Class<? extends Support> support) {
+        return (T) plugins.get(support);
     }
 
 
@@ -83,9 +83,10 @@ public class Support {
 
     public boolean hasAdditionalTags() { return !additionalTags.isEmpty(); }
 
-    public Support setPlugin(Plugin p) {
-        plugin = p;
-        return this;
+    public static Support setPlugin(Class<? extends Support> support, Plugin p)
+            throws IllegalAccessException, InstantiationException {
+        plugins.put(support, p);
+        return support.newInstance();
     }
 
 

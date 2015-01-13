@@ -6,6 +6,7 @@ import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
+import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.EssentialsSupport;
 
@@ -29,7 +30,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
 
     private EssentialsPlayerExtension(dPlayer pl) {
         // TODO: UUID
-        Essentials essentials = EssentialsSupport.getPlugin();
+        Essentials essentials = Support.getPlugin(EssentialsSupport.class);
         this.essUser = essentials.getUser(pl.getPlayerEntity());
     }
 

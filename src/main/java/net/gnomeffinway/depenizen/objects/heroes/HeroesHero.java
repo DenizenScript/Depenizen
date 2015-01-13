@@ -8,6 +8,7 @@ import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizen.utilities.depends.Depends;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
+import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.HeroesSupport;
 import org.bukkit.entity.Player;
@@ -65,7 +66,7 @@ public class HeroesHero implements dObject {
     public HeroesHero(dPlayer player) {
         denizenObj = player;
         if (player.isOnline()) {
-            Heroes heroes = HeroesSupport.getPlugin();
+            Heroes heroes = Support.getPlugin(HeroesSupport.class);
             hero = heroes.getCharacterManager().getHero(player.getPlayerEntity());
         }
     }
@@ -73,7 +74,7 @@ public class HeroesHero implements dObject {
     public HeroesHero(dNPC npc) {
         denizenObj = npc;
         if (npc.isSpawned() && npc.getEntity() instanceof Player) {
-            Heroes heroes = HeroesSupport.getPlugin();
+            Heroes heroes = Support.getPlugin(HeroesSupport.class);
             hero = heroes.getCharacterManager().getHero((Player) npc.getEntity());
         }
     }

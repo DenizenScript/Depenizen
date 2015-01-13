@@ -45,7 +45,7 @@ public class HyperConomySupport extends Support {
         new BukkitRunnable() {
             @Override
             public void run() {
-                BukkitConnector hyperConomy = HyperConomySupport.getPlugin();
+                BukkitConnector hyperConomy = Support.getPlugin(HyperConomySupport.class);
                 HyperEventHandler eventHandler = hyperConomy.getHC().getHyperEventHandler();
                 eventHandler.registerListener(this);
             }

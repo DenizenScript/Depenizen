@@ -7,6 +7,7 @@ import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
+import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.HeroesSupport;
 import org.bukkit.entity.Player;
@@ -55,7 +56,7 @@ public class HeroesPlayerNPCExtension extends dObjectExtension {
         // @plugin Depenizen, Heroes
         // -->
         if (attribute.startsWith("heroes")) {
-            Heroes heroes = HeroesSupport.getPlugin();
+            Heroes heroes = Support.getPlugin(HeroesSupport.class);
             return new HeroesHero(heroes.getCharacterManager().getHero(player))
                     .getAttribute(attribute.fulfill(1));
         }

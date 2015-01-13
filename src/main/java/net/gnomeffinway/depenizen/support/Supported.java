@@ -33,7 +33,7 @@ public class Supported {
     private static boolean set(String name, Plugin plugin) {
         try {
             if (plugin == null || !plugin.isEnabled()) return false;
-            supportManager.register(supportClasses.get(name).newInstance().setPlugin(plugin));
+            supportManager.register(Support.setPlugin(supportClasses.get(name), plugin));
             return true;
         } catch (IllegalAccessException e) {
             dB.echoError("Report this error to Morphan1 or the Denizen dev team: SupportedIllegalAccess");

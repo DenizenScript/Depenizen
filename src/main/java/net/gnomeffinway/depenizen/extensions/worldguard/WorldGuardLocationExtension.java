@@ -10,6 +10,7 @@ import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.worldguard.WorldGuardRegion;
+import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.WorldGuardSupport;
 import org.bukkit.World;
@@ -35,7 +36,7 @@ public class WorldGuardLocationExtension extends dObjectExtension {
     dLocation location = null;
 
     private ApplicableRegionSet getApplicableRegions() {
-        WorldGuardPlugin worldGuard = WorldGuardSupport.getPlugin();
+        WorldGuardPlugin worldGuard = Support.getPlugin(WorldGuardSupport.class);
         return worldGuard.getRegionManager(location.getWorld()).getApplicableRegions(location);
     }
 

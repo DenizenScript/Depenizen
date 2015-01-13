@@ -8,6 +8,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.WorldGuardSupport;
 import org.bukkit.Bukkit;
@@ -41,7 +42,7 @@ public class WorldGuardRegion implements dObject {
                 dB.echoError("valueOf WorldGuard region returning null: Invalid world '" + worldName + "'");
                 return null;
             }
-            WorldGuardPlugin plugin = WorldGuardSupport.getPlugin();
+            WorldGuardPlugin plugin = Support.getPlugin(WorldGuardSupport.class);
             RegionManager manager = plugin.getRegionManager(world);
             if (!manager.hasRegion(regionName)) {
                 dB.echoError("valueOf WorldGuard region returning null: Invalid region '" + regionName

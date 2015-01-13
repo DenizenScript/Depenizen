@@ -9,6 +9,7 @@ import net.aufdemrand.denizen.objects.properties.PropertyParser;
 import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.prism.fake.FakeHandler;
+import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.PrismSupport;
 
@@ -30,7 +31,7 @@ public class PrismAction implements dObject, Adjustable {
         }
 
         string = string.replace("prism@", "");
-        Prism prism = PrismSupport.getPlugin();
+        Prism prism = Support.getPlugin(PrismSupport.class);
         ActionType actionType = prism.getActionRegistry().getAction(string);
         if (actionType != null) {
             return new PrismAction(actionType);
