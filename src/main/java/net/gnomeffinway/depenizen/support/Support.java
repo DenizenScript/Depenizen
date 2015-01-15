@@ -23,7 +23,7 @@ public class Support {
 
     private final List<String> additionalTags = new ArrayList<String>();
 
-    private static Map<Class<? extends Support>, Plugin> plugins = null;
+    private static Map<Class<? extends Support>, Plugin> plugins = new HashMap<Class<? extends Support>, Plugin>();
 
     public static <T extends Plugin> T getPlugin(Class<? extends Support> support) {
         return (T) plugins.get(support);
