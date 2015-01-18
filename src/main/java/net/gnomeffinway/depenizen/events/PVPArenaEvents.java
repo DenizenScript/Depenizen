@@ -1,7 +1,11 @@
 package net.gnomeffinway.depenizen.events;
 
-import net.aufdemrand.denizen.events.EventManager;
-import net.aufdemrand.denizen.objects.*;
+import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.events.OldEventManager;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.dList;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.slipcor.pvparena.arena.Arena;
 import net.slipcor.pvparena.arena.ArenaPlayer;
 import net.slipcor.pvparena.events.PAStartEvent;
@@ -36,9 +40,9 @@ public class PVPArenaEvents implements Listener {
 
         context.put("fighters", new dList(fighters));
 
-        EventManager.doEvents(Arrays.asList
-                ("arena starts"),
-                null, null, context);
+        OldEventManager.doEvents(Arrays.asList
+                        ("arena starts"),
+                null, context);
 
     }
 }

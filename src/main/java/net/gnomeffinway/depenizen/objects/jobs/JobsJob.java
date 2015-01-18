@@ -4,9 +4,13 @@ import me.zford.jobs.Jobs;
 import me.zford.jobs.container.Job;
 import me.zford.jobs.container.JobProgression;
 import me.zford.jobs.container.JobsPlayer;
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.objects.properties.PropertyParser;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.Fetchable;
+import net.aufdemrand.denizencore.objects.ObjectFetcher;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.objects.properties.PropertyParser;
+import net.aufdemrand.denizencore.tags.Attribute;
 
 import java.util.regex.Matcher;
 

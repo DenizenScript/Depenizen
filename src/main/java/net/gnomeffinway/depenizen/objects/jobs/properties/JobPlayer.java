@@ -1,8 +1,10 @@
 package net.gnomeffinway.depenizen.objects.jobs.properties;
 
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.objects.properties.Property;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.objects.Mechanism;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.objects.properties.Property;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.objects.jobs.JobsJob;
 
 public class JobPlayer implements Property {

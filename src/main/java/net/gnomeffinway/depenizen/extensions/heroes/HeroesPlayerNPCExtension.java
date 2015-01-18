@@ -2,13 +2,12 @@ package net.gnomeffinway.depenizen.extensions.heroes;
 
 import com.herocraftonline.heroes.Heroes;
 import net.aufdemrand.denizen.objects.dNPC;
-import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.HeroesSupport;
 import org.bukkit.entity.Player;
 

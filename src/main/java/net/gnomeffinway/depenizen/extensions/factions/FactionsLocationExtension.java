@@ -3,8 +3,8 @@ package net.gnomeffinway.depenizen.extensions.factions;
 import com.massivecraft.factions.entity.BoardColl;
 import com.massivecraft.massivecore.ps.PS;
 import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.objects.dObject;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.dFaction;
 

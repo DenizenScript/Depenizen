@@ -2,9 +2,9 @@ package net.gnomeffinway.depenizen.support.plugins;
 
 import com.gmail.nossr50.datatypes.party.Party;
 import com.gmail.nossr50.party.PartyManager;
-import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.commands.McMMOCommands;
 import net.gnomeffinway.depenizen.extensions.mcmmo.McMMOPlayerExtension;
 import net.gnomeffinway.depenizen.support.Support;

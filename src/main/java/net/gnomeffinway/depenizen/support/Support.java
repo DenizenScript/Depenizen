@@ -1,8 +1,8 @@
 package net.gnomeffinway.depenizen.support;
 
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.objects.properties.Property;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.objects.properties.Property;
+import net.aufdemrand.denizencore.tags.Attribute;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 

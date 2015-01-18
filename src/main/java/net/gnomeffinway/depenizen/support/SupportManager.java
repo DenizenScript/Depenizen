@@ -1,11 +1,13 @@
 package net.gnomeffinway.depenizen.support;
 
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.objects.properties.Property;
-import net.aufdemrand.denizen.objects.properties.PropertyParser;
-import net.aufdemrand.denizen.tags.Attribute;
-import net.aufdemrand.denizen.tags.ReplaceableTagEvent;
-import net.aufdemrand.denizen.tags.TagManager;
+import net.aufdemrand.denizen.objects.dNPC;
+import net.aufdemrand.denizencore.objects.ObjectFetcher;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.objects.properties.Property;
+import net.aufdemrand.denizencore.objects.properties.PropertyParser;
+import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.tags.ReplaceableTagEvent;
+import net.aufdemrand.denizencore.tags.TagManager;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizen.utilities.depends.Depends;

@@ -2,10 +2,10 @@ package net.gnomeffinway.depenizen.extensions.towny;
 
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import net.aufdemrand.denizen.objects.Element;
+import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.objects.dObject;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.dTown;

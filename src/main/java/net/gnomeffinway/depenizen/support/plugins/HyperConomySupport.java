@@ -1,13 +1,13 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
-import net.aufdemrand.denizen.events.EventManager;
+import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dItem;
-import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.events.OldEventManager;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.support.Supported;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -121,8 +121,8 @@ public class HyperConomySupport extends Support {
                 break;
         }
 
-        EventManager.doEvents(events, null, dPlayer.mirrorBukkitPlayer(Bukkit.getServer()
-                .getPlayer(hyperPlayer.getUUID())), context);
+        OldEventManager.doEvents(events, new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(Bukkit.getServer()
+                .getPlayer(hyperPlayer.getUUID())), null), context);
     }
 
 }

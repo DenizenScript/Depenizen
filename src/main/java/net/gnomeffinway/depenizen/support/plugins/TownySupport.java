@@ -2,7 +2,7 @@ package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;

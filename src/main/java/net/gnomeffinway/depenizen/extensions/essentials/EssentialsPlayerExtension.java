@@ -2,12 +2,13 @@ package net.gnomeffinway.depenizen.extensions.essentials;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizen.objects.dLocation;
+import net.aufdemrand.denizencore.objects.*;
+import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.EssentialsSupport;
 
 import java.util.GregorianCalendar;

@@ -1,8 +1,11 @@
 package net.gnomeffinway.depenizen.events;
 
 import com.herocraftonline.heroes.api.events.*;
-import net.aufdemrand.denizen.events.EventManager;
+import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizencore.events.OldEventManager;
 import net.aufdemrand.denizen.objects.*;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesClass;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
 import org.bukkit.event.EventHandler;
@@ -43,15 +46,16 @@ public class HeroesEvents implements Listener {
         else if (hero.isPlayer())
             player = (dPlayer) hero.getDenizenObject();
 
-        String determination = EventManager.doEvents(Arrays.asList
-                ("hero changes class",
-                        "hero changes class to " + event.getTo().getName()),
-                npc, player, context).toUpperCase();
+        List<String> determinations = OldEventManager.doEvents(Arrays.asList
+                        ("hero changes class",
+                                "hero changes class to " + event.getTo().getName()),
+                new BukkitScriptEntryData(player, npc), context);
 
-        if (determination.equals("CANCELLED")) {
-            event.setCancelled(true);
+        for (String determination : determinations) {
+            determination = determination.toUpperCase();
+            if (determination.equals("CANCELLED"))
+                event.setCancelled(true);
         }
-
     }
 
     // <--[event]
@@ -85,14 +89,14 @@ public class HeroesEvents implements Listener {
         else if (hero.isPlayer())
             player = (dPlayer) hero.getDenizenObject();
 
-        String determination = EventManager.doEvents(Arrays.asList
-                ("hero changes experience"),
-                        npc, player, context).toUpperCase();
+        List<String> determinations = OldEventManager.doEvents(Arrays.asList("hero changes experience"),
+                new BukkitScriptEntryData(player, npc), context);
 
-        if (determination.equals("CANCELLED")) {
-            event.setCancelled(true);
+        for (String determination : determinations) {
+            determination = determination.toUpperCase();
+            if (determination.equals("CANCELLED"))
+                event.setCancelled(true);
         }
-
     }
 
     // <--[event]
@@ -126,10 +130,9 @@ public class HeroesEvents implements Listener {
         else if (hero.isPlayer())
             player = (dPlayer) hero.getDenizenObject();
 
-        String determination = EventManager.doEvents(Arrays.asList
-                    ("hero changes level",
-                            "hero changes level to " + event.getTo()),
-                                npc, player, context).toUpperCase();
-
+        List<String> determinations = OldEventManager.doEvents(Arrays.asList
+                        ("hero changes level",
+                                "hero changes level to " + event.getTo()),
+                new BukkitScriptEntryData(player, npc), context);
     }
 }

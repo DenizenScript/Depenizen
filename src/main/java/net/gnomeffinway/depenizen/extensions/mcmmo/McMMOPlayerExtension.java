@@ -3,11 +3,11 @@ package net.gnomeffinway.depenizen.extensions.mcmmo;
 import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.api.PartyAPI;
 import com.gmail.nossr50.datatypes.skills.SkillType;
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 
 public class McMMOPlayerExtension extends dObjectExtension {

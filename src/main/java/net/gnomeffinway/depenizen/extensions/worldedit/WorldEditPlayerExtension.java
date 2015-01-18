@@ -2,14 +2,12 @@ package net.gnomeffinway.depenizen.extensions.worldedit;
 
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
-import net.aufdemrand.denizen.objects.Element;
 import net.aufdemrand.denizen.objects.dCuboid;
-import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.WorldEditSupport;
 import org.bukkit.entity.Player;
 

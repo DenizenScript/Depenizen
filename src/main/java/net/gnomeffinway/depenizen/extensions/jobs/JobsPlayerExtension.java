@@ -3,10 +3,10 @@ package net.gnomeffinway.depenizen.extensions.jobs;
 import me.zford.jobs.Jobs;
 import me.zford.jobs.container.Job;
 import me.zford.jobs.container.JobsPlayer;
-import net.aufdemrand.denizen.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.jobs.JobsJob;
 

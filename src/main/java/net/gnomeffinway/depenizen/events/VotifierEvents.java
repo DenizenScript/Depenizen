@@ -2,8 +2,11 @@ package net.gnomeffinway.depenizen.events;
 
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
-import net.aufdemrand.denizen.events.EventManager;
-import net.aufdemrand.denizen.objects.*;
+import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.events.OldEventManager;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.dObject;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -31,7 +34,8 @@ public class VotifierEvents implements Listener {
         context.put("service", new Element(vote.getServiceName()));
         context.put("username", new Element(vote.getUsername()));
 
-        EventManager.doEvents(Arrays.asList("votifier vote"), null, dPlayer.valueOf(vote.getUsername()), context);
+        OldEventManager.doEvents(Arrays.asList("votifier vote"),
+                new BukkitScriptEntryData(dPlayer.valueOf(vote.getUsername()), null), context);
 
     }
 }

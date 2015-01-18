@@ -4,9 +4,13 @@ import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
 import com.massivecraft.factions.entity.MFlag;
 import com.massivecraft.massivecore.money.Money;
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizen.objects.dLocation;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.Fetchable;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.tags.Attribute;
 
 public class dFaction implements dObject {
 

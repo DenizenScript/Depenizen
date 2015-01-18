@@ -5,10 +5,10 @@ import me.zford.jobs.container.JobsPlayer;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.aH;
-import net.aufdemrand.denizen.scripts.ScriptEntry;
-import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.aH;
+import net.aufdemrand.denizencore.scripts.ScriptEntry;
+import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.gnomeffinway.depenizen.objects.jobs.JobsJob;
 
 public class JobsCommands extends AbstractCommand {

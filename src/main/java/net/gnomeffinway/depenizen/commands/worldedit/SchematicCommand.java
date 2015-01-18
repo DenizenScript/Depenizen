@@ -1,27 +1,26 @@
 package net.gnomeffinway.depenizen.commands.worldedit;
 
-import com.sk89q.worldedit.LocalWorld;
-import com.sk89q.worldedit.Vector;
-import com.sk89q.worldedit.regions.CuboidRegion;
-import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
-import net.aufdemrand.denizen.tags.ReplaceableTagEvent;
-import net.aufdemrand.denizen.tags.TagManager;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
-import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.scripts.ScriptEntry;
-import net.aufdemrand.denizen.tags.Attribute;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizen.utilities.debugging.dB;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import com.sk89q.worldedit.CuboidClipboard;
-import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.*;
 import com.sk89q.worldedit.blocks.BaseBlock;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.schematic.SchematicFormat;
+import com.sk89q.worldedit.world.World;
+import net.aufdemrand.denizen.objects.dCuboid;
+import net.aufdemrand.denizen.objects.dLocation;
+import net.aufdemrand.denizen.objects.dMaterial;
+import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
+import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.aH;
+import net.aufdemrand.denizencore.scripts.ScriptEntry;
+import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
+import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.tags.ReplaceableTagEvent;
+import net.aufdemrand.denizencore.tags.TagManager;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 
 import java.io.File;
 import java.net.URLDecoder;
@@ -237,7 +236,7 @@ public class SchematicCommand extends AbstractCommand {
                 }
                 try {
                     schematics.get(name.asString().toUpperCase())
-                            .paste(new EditSession(new BukkitWorld(location.getWorld()), 99999999),
+                            .paste(WorldEdit.getInstance().getEditSessionFactory().getEditSession((World) new BukkitWorld(location.getWorld()), 99999999),
                                     new com.sk89q.worldedit.Vector(location.getX(), location.getY(), location.getZ()),
                                     noair != null);
                 }

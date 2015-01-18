@@ -2,11 +2,11 @@ package net.gnomeffinway.depenizen.support.plugins;
 
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
-import net.aufdemrand.denizen.objects.dList;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.objects.dList;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.factions.FactionsLocationExtension;
 import net.gnomeffinway.depenizen.extensions.factions.FactionsPlayerNPCExtension;
 import net.gnomeffinway.depenizen.objects.dFaction;

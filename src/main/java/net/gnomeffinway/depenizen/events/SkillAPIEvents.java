@@ -4,9 +4,10 @@ import com.sucy.skill.api.event.PlayerLevelUpEvent;
 import com.sucy.skill.api.event.PlayerSkillDowngradeEvent;
 import com.sucy.skill.api.event.PlayerSkillUnlockEvent;
 import com.sucy.skill.api.event.PlayerSkillUpgradeEvent;
-import net.aufdemrand.denizen.events.EventManager;
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.dObject;
+import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizencore.events.OldEventManager;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,8 +33,9 @@ public class SkillAPIEvents implements Listener {
         context.put("level", new Element(event.getLevel()));
         context.put("gained", new Element(event.getGainedLevels()));
 
-        EventManager.doEvents(Arrays.asList("player levels up in skillapi"), null,
-                dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), context);
+        OldEventManager.doEvents(Arrays.asList("player levels up in skillapi"),
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), null),
+                context);
     }
 
     // <--[event]
@@ -56,13 +58,17 @@ public class SkillAPIEvents implements Listener {
         context.put("cost", new Element(event.getCost()));
         context.put("skill_name", new Element(skill));
 
-        String determination = EventManager.doEvents(Arrays.asList(
+        List<String> determinations = OldEventManager.doEvents(Arrays.asList(
                         "player upgrades skill in skillapi",
-                        "player upgrades " + skill + " in skillapi"), null,
-                dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), context).toUpperCase();
+                        "player upgrades " + skill + " in skillapi"),
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), null),
+                context);
 
-        if (determination.startsWith("CANCELLED"))
-            event.setCancelled(true);
+        for (String determination : determinations) {
+            determination = determination.toUpperCase();
+            if (determination.startsWith("CANCELLED"))
+                event.setCancelled(true);
+        }
     }
 
     // <--[event]
@@ -83,10 +89,11 @@ public class SkillAPIEvents implements Listener {
         Map<String, dObject> context = new HashMap<String, dObject>();
         context.put("skill_name", new Element(skill));
 
-        EventManager.doEvents(Arrays.asList(
+        OldEventManager.doEvents(Arrays.asList(
                         "player downgrades skill in skillapi",
-                        "player downgrades " + skill + " in skillapi"), null,
-                dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), context);
+                        "player downgrades " + skill + " in skillapi"),
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), null),
+                context);
     }
 
     // <--[event]
@@ -107,10 +114,11 @@ public class SkillAPIEvents implements Listener {
         Map<String, dObject> context = new HashMap<String, dObject>();
         context.put("skill_name", new Element(skill));
 
-        EventManager.doEvents(Arrays.asList(
+        OldEventManager.doEvents(Arrays.asList(
                         "player unlocks skill in skillapi",
-                        "player unlocks " + skill + " in skillapi"), null,
-                dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), context);
+                        "player unlocks " + skill + " in skillapi"),
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), null),
+                context);
     }
 
 }

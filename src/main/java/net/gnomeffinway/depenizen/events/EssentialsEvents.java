@@ -1,7 +1,8 @@
 package net.gnomeffinway.depenizen.events;
 
-import net.aufdemrand.denizen.events.EventManager;
-import net.aufdemrand.denizen.objects.dObject;
+import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizencore.events.OldEventManager;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.ess3.api.events.*;
 import org.bukkit.event.EventHandler;
@@ -40,11 +41,14 @@ public class EssentialsEvents implements Listener {
         else
             events.add("player returns from afk");
 
-        String determination = EventManager.doEvents(events, null,
-                dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), null).toUpperCase();
+        List<String> determinations = OldEventManager.doEvents(events,
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), null), null);
 
-        if (determination.equals("CANCELLED"))
-            event.setCancelled(true);
+        for (String determination : determinations) {
+            determination = determination.toUpperCase();
+            if (determination.equals("CANCELLED"))
+                event.setCancelled(true);
+        }
 
     }
 
@@ -81,12 +85,14 @@ public class EssentialsEvents implements Listener {
         else
             events.add("player god mode disabled");
 
-        String determination = EventManager.doEvents(events, null,
-                dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), context).toUpperCase();
+        List<String> determinations = OldEventManager.doEvents(events,
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), null), context);
 
-        if (determination.equals("CANCELLED"))
-            event.setCancelled(true);
-
+        for (String determination : determinations) {
+            determination = determination.toUpperCase();
+            if (determination.equals("CANCELLED"))
+                event.setCancelled(true);
+        }
     }
 
     // <--[event]
@@ -122,12 +128,14 @@ public class EssentialsEvents implements Listener {
         else
             events.add("player unjailed");
 
-        String determination = EventManager.doEvents(events, null,
-                dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), context).toUpperCase();
+        List<String> determinations = OldEventManager.doEvents(events,
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), null), context);
 
-        if (determination.equals("CANCELLED"))
-            event.setCancelled(true);
-
+        for (String determination : determinations) {
+            determination = determination.toUpperCase();
+            if (determination.equals("CANCELLED"))
+                event.setCancelled(true);
+        }
     }
 
     // <--[event]
@@ -163,12 +171,14 @@ public class EssentialsEvents implements Listener {
         else
             events.add("player unmuted");
 
-        String determination = EventManager.doEvents(events, null,
-                dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), context).toUpperCase();
+        List<String> determinations = OldEventManager.doEvents(events,
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), null), context);
 
-        if (determination.equals("CANCELLED"))
-            event.setCancelled(true);
-
+        for (String determination : determinations) {
+            determination = determination.toUpperCase();
+            if (determination.equals("CANCELLED"))
+                event.setCancelled(true);
+        }
     }
 
     // TODO: add the rest of the events

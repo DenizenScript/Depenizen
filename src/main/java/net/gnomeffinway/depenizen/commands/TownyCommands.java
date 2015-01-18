@@ -3,11 +3,11 @@ package net.gnomeffinway.depenizen.commands;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.aH;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.scripts.ScriptEntry;
-import net.aufdemrand.denizen.scripts.commands.AbstractCommand;
+import net.aufdemrand.denizencore.scripts.ScriptEntry;
+import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
 

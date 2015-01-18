@@ -1,8 +1,8 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
-import net.aufdemrand.denizen.objects.Element;
+import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.events.PVPArenaEvents;
 import net.gnomeffinway.depenizen.extensions.pvparena.PVPArenaPlayerExtension;

@@ -4,11 +4,11 @@ import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.Fetchable;
-import net.aufdemrand.denizen.objects.dObject;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.Fetchable;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 
 public class dNation implements dObject {

@@ -2,10 +2,13 @@ package net.gnomeffinway.depenizen.objects.heroes;
 
 import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.classes.HeroClass;
-import net.aufdemrand.denizen.objects.*;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizen.objects.dMaterial;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.Fetchable;
+import net.aufdemrand.denizencore.objects.dList;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.HeroesSupport;
 import org.bukkit.Material;
 

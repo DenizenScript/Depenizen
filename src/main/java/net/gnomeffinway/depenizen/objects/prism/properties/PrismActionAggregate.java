@@ -1,11 +1,11 @@
 package net.gnomeffinway.depenizen.objects.prism.properties;
 
 import me.botsko.prism.actions.Handler;
-import net.aufdemrand.denizen.objects.Element;
-import net.aufdemrand.denizen.objects.Mechanism;
-import net.aufdemrand.denizen.objects.dObject;
-import net.aufdemrand.denizen.objects.properties.Property;
-import net.aufdemrand.denizen.tags.Attribute;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.Mechanism;
+import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.objects.properties.Property;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.objects.prism.PrismAction;
 
 public class PrismActionAggregate implements Property {
