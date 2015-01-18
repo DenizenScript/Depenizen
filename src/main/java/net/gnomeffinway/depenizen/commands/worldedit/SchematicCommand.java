@@ -1,11 +1,13 @@
 package net.gnomeffinway.depenizen.commands.worldedit;
 
-import com.sk89q.worldedit.*;
+import com.sk89q.worldedit.CuboidClipboard;
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.LocalWorld;
+import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.blocks.BaseBlock;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.schematic.SchematicFormat;
-import com.sk89q.worldedit.world.World;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dMaterial;
@@ -236,7 +238,7 @@ public class SchematicCommand extends AbstractCommand {
                 }
                 try {
                     schematics.get(name.asString().toUpperCase())
-                            .paste(WorldEdit.getInstance().getEditSessionFactory().getEditSession((World) new BukkitWorld(location.getWorld()), 99999999),
+                            .paste(new EditSession(new BukkitWorld(location.getWorld()), 99999999),
                                     new com.sk89q.worldedit.Vector(location.getX(), location.getY(), location.getZ()),
                                     noair != null);
                 }
