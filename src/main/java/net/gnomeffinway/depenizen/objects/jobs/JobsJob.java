@@ -11,6 +11,7 @@ import net.aufdemrand.denizencore.objects.ObjectFetcher;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.tags.TagContext;
 
 import java.util.regex.Matcher;
 
@@ -20,8 +21,12 @@ public class JobsJob implements dObject {
     //   OBJECT FETCHER
     /////////////////
 
-    @Fetchable("job")
     public static JobsJob valueOf(String string) {
+        return valueOf(string, null);
+    }
+
+    @Fetchable("job")
+    public static JobsJob valueOf(String string, TagContext context) {
         if (string == null) return null;
 
         ////////

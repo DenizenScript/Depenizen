@@ -11,6 +11,7 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Fetchable;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.tags.TagContext;
 
 public class dFaction implements dObject {
 
@@ -18,8 +19,12 @@ public class dFaction implements dObject {
     //   OBJECT FETCHER
     /////////////////
 
-    @Fetchable("faction")
     public static dFaction valueOf(String string) {
+        return valueOf(string, null);
+    }
+
+    @Fetchable("faction")
+    public static dFaction valueOf(String string, TagContext context) {
         if (string == null) return null;
 
         ////////

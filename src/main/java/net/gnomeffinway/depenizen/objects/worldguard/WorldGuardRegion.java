@@ -14,6 +14,7 @@ import net.aufdemrand.denizencore.objects.Fetchable;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.plugins.WorldGuardSupport;
 import org.bukkit.Bukkit;
@@ -34,8 +35,12 @@ public class WorldGuardRegion implements dObject {
     //   OBJECT FETCHER
     /////////////////
 
-    @Fetchable("region")
     public static WorldGuardRegion valueOf(String string) {
+        return valueOf(string, null);
+    }
+
+    @Fetchable("region")
+    public static WorldGuardRegion valueOf(String string, TagContext context) {
         if (string == null) return null;
 
         Matcher m = regionPattern.matcher(string);

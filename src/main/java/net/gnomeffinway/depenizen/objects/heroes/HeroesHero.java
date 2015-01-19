@@ -11,6 +11,7 @@ import net.aufdemrand.denizencore.objects.Fetchable;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.gnomeffinway.depenizen.support.Support;
@@ -32,8 +33,12 @@ public class HeroesHero implements dObject {
     //   OBJECT FETCHER
     /////////////////
 
-    @Fetchable("hero")
     public static HeroesHero valueOf(String string) {
+        return valueOf(string, null);
+    }
+
+    @Fetchable("hero")
+    public static HeroesHero valueOf(String string, TagContext context) {
         if (string == null) return null;
 
         string = string.replace("hero@", "");

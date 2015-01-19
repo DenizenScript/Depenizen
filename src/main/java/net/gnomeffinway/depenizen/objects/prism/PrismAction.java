@@ -7,6 +7,7 @@ import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.prism.fake.FakeHandler;
 import net.gnomeffinway.depenizen.support.Support;
@@ -21,8 +22,12 @@ public class PrismAction implements dObject, Adjustable {
     //   OBJECT FETCHER
     /////////////////
 
-    @Fetchable("prism")
     public static PrismAction valueOf(String string) {
+        return valueOf(string, null);
+    }
+
+    @Fetchable("prism")
+    public static PrismAction valueOf(String string, TagContext context) {
         if (string == null) return null;
 
         Matcher m = ObjectFetcher.DESCRIBED_PATTERN.matcher(string);

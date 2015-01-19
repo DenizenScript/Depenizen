@@ -11,6 +11,7 @@ import net.aufdemrand.denizencore.objects.Fetchable;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.tags.TagContext;
 
 public class dTown implements dObject {
 
@@ -18,8 +19,12 @@ public class dTown implements dObject {
     //   OBJECT FETCHER
     /////////////////
 
-    @Fetchable("town")
     public static dTown valueOf(String string) {
+        return valueOf(string, null);
+    }
+
+    @Fetchable("town")
+    public static dTown valueOf(String string, TagContext context) {
         if (string == null) return null;
 
         ////////

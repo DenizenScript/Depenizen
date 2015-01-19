@@ -10,6 +10,7 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.tags.TagContext;
 
 public class dNation implements dObject {
 
@@ -17,8 +18,12 @@ public class dNation implements dObject {
     //   OBJECT FETCHER
     /////////////////
 
-    @Fetchable("nation")
     public static dNation valueOf(String string) {
+        return valueOf(string, null);
+    }
+
+    @Fetchable("nation")
+    public static dNation valueOf(String string, TagContext context) {
         if (string == null) return null;
 
         ////////

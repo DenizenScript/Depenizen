@@ -8,6 +8,7 @@ import net.aufdemrand.denizencore.objects.Fetchable;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.plugins.HeroesSupport;
 import org.bukkit.Material;
@@ -20,8 +21,12 @@ public class HeroesClass implements dObject {
     //   OBJECT FETCHER
     /////////////////
 
-    @Fetchable("hclass")
     public static HeroesClass valueOf(String string) {
+        return valueOf(string, null);
+    }
+
+    @Fetchable("hclass")
+    public static HeroesClass valueOf(String string, TagContext context) {
         if (string == null) return null;
 
         string = string.replace("hclass@", "");
