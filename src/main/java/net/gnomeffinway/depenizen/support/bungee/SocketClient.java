@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.security.MessageDigest;
@@ -45,7 +46,7 @@ public class SocketClient implements Runnable {
             this.output.flush();
         } catch(Exception e) {
             dB.echoError(e);
-            this.close();
+            this.close("Error sending data to client: " + e.getMessage());
         }
     }
 
@@ -65,7 +66,14 @@ public class SocketClient implements Runnable {
     }
 
     public void close() {
+        close(null);
+    }
+
+    public void close(String reason) {
         if (isListening) {
+            if (reason != null) {
+                dB.log("Disconnected from BungeeCord Socket: " + reason);
+            }
             this.isListening = false;
             this.task.cancel();
             this.task = null;
@@ -91,8 +99,7 @@ public class SocketClient implements Runnable {
                 while (this.isListening) {
                     int receivedEncryptedLength = this.input.readInt();
                     if (receivedEncryptedLength == -1 || System.currentTimeMillis() >= timeoutExpired) {
-                        this.isListening = false;
-                        this.close();
+                        this.close(receivedEncryptedLength == -1 ? "Connection failed" : "Connection timed out");
                         break;
                     }
 
@@ -112,9 +119,10 @@ public class SocketClient implements Runnable {
                     this.handle(content);
                 }
 
+            } catch (IOException e) {
+                this.close("Server socket closed");
             } catch (Exception e) {
-                this.isListening = false;
-                this.close();
+                this.close("Error receiving data from server: " + e.getMessage());
                 dB.echoError(e);
             }
         }
