@@ -119,6 +119,8 @@ public class SocketClient implements Runnable {
                     this.handle(content);
                 }
 
+            } catch (IllegalStateException e) {
+                this.close("Password is incorrect");
             } catch (IOException e) {
                 this.close("Server socket closed");
             } catch (Exception e) {
