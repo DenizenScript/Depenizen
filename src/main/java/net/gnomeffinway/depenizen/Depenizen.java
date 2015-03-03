@@ -1,14 +1,20 @@
 package net.gnomeffinway.depenizen;
 
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteStreams;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.gnomeffinway.depenizen.commands.BungeeCommand;
 import net.gnomeffinway.depenizen.support.Supported;
+import net.gnomeffinway.depenizen.support.bungee.SocketClient;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
-public class Depenizen extends JavaPlugin {
+public class Depenizen extends JavaPlugin implements PluginMessageListener {
 
     private static Depenizen instance;
 
@@ -19,11 +25,16 @@ public class Depenizen extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        checkPlugins();
+
+        this.loadConfig();
+        this.checkPlugins();
+        this.enableBungeeCord();
+        this.startSocket();
     }
 
     @Override
     public void onDisable() {
+        this.closeSocket();
         instance = null;
     }
 
@@ -36,6 +47,11 @@ public class Depenizen extends JavaPlugin {
             return true;
         }
         return false;
+    }
+
+    public void loadConfig() {
+        saveDefaultConfig();
+        reloadConfig();
     }
 
     public void checkPlugins() {
@@ -51,10 +67,55 @@ public class Depenizen extends JavaPlugin {
         }
 
         Supported.setup(this, pm, getClassLoader());
+    }
 
+    private SocketClient socketClient;
+
+    public void enableBungeeCord() {
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
+        new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 0);
+    }
+
+    public void startSocket() {
+        if (Settings.socketEnabled()) {
+            String ipAddress = Settings.socketIpAddress();
+            if (ipAddress == null) {
+                dB.echoError("BungeeCord Socket is enabled, but no IP address is specified.");
+                return;
+            }
+            String password = Settings.socketPassword();
+            if (password == null) {
+                dB.echoError("BungeeCord Socket is enabled, but no password is specified.");
+                return;
+            }
+            this.socketClient = new SocketClient(ipAddress, Settings.socketPort(), password);
+            this.socketClient.connect();
+        }
+    }
+
+    public void closeSocket() {
+        if (this.socketClient != null) {
+            this.socketClient.close();
+        }
     }
 
     public static void depenizenLog(String message) {
         dB.log(message);
+    }
+
+    @Override
+    public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+        dB.log("Plugin message received");
+        if (!channel.equals("BungeeCord"))
+            return;
+        dB.log("Plugin message is Bungee");
+
+        ByteArrayDataInput data = ByteStreams.newDataInput(message);
+        String subChannel = data.readUTF();
+        if (subChannel.equals("Depenizen")) {
+            dB.log("Hey! Depenizen message received!");
+            dB.log("data: " + data.readUTF());
+        }
     }
 }

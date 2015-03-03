@@ -1,0 +1,8 @@
+# BungeeCord Socket configuration, required for sending information
+# between servers without the need for online players on each
+# sender and recipient
+Socket:
+  Enabled: false
+  Ip address: bungee.mcmonkey.org
+  Port: 25578
+  Password: MySecretPassword
