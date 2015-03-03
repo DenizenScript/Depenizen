@@ -50,34 +50,33 @@ public class SocketClient implements Runnable {
     }
 
     public void connect() {
-        try {
-            this.socket = new Socket();
-            this.socket.connect(new InetSocketAddress(this.ipAddress, this.port), 3000);
-            this.output = new DataOutputStream(this.socket.getOutputStream());
-            this.input = new DataInputStream(this.socket.getInputStream());
-            this.startListening();
-        } catch (Exception e) {
-            dB.echoError(e);
+        if (!isListening) {
+            try {
+                this.socket = new Socket();
+                this.socket.connect(new InetSocketAddress(this.ipAddress, this.port), 3000);
+                this.output = new DataOutputStream(this.socket.getOutputStream());
+                this.input = new DataInputStream(this.socket.getInputStream());
+                this.isListening = true;
+                this.task = Bukkit.getServer().getScheduler().runTaskAsynchronously(Depenizen.getCurrentInstance(), this);
+            } catch (Exception e) {
+                dB.echoError(e);
+            }
         }
     }
 
     public void close() {
-        this.stopListening();
-        this.task.cancel();
-        try {
-            this.socket.close();
-        } catch (Exception e) {
-            dB.echoError(e);
+        if (isListening) {
+            this.isListening = false;
+            this.task.cancel();
+            this.task = null;
+            try {
+                if (this.output != null) this.output.close();
+                if (this.input != null) this.input.close();
+                if (this.socket != null) this.socket.close();
+            } catch (Exception e) {
+                dB.echoError(e);
+            }
         }
-    }
-
-    public void startListening() {
-        this.isListening = true;
-        this.task = Bukkit.getServer().getScheduler().runTaskAsynchronously(Depenizen.getCurrentInstance(), this);
-    }
-
-    public void stopListening() {
-        this.isListening = false;
     }
 
     @Override
@@ -92,7 +91,7 @@ public class SocketClient implements Runnable {
                 while (this.isListening) {
                     int receivedEncryptedLength = this.input.readInt();
                     if (receivedEncryptedLength == -1 || System.currentTimeMillis() >= timeoutExpired) {
-                        this.stopListening();
+                        this.isListening = false;
                         this.close();
                         break;
                     }
@@ -114,7 +113,7 @@ public class SocketClient implements Runnable {
                 }
 
             } catch (Exception e) {
-                this.stopListening();
+                this.isListening = false;
                 this.close();
                 dB.echoError(e);
             }

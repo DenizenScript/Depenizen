@@ -225,13 +225,6 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>me.headhunts</groupId>
-            <artifactId>SkyBlock</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/SkyBlock.jar</systemPath>
-        </dependency>
     </dependencies>
 
     <build>
