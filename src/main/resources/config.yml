@@ -6,3 +6,11 @@ Socket:
   Ip address: bungee.mcmonkey.org
   Port: 25578
   Password: MySecretPassword
+  # The name to connect with. Used for the Bungee dServer object.
+  # This does not have to be the same name that Bungee itself
+  # recognizes, but it is recommended to use that for consistency.
+  Name: MyServer1
+  # The time in milliseconds that this server should take while
+  # trying to connect to the BungeeCord Socket before giving up.
+  # Set this to 0 to try to connect until there's an error
+  Timeout: 3000

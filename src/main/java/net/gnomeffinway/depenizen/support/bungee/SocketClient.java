@@ -4,7 +4,11 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
+import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.objects.bungee.dServer;
+import net.gnomeffinway.depenizen.support.bungee.packets.*;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -20,25 +24,31 @@ public class SocketClient implements Runnable {
     private String ipAddress;
     private int port;
     private String password;
+    private String registrationName;
+    private int timeout;
     private Socket socket;
     private BukkitTask task;
-    private boolean isListening;
+    private boolean isConnected;
     private DataOutputStream output;
     private DataInputStream input;
 
-    public SocketClient(String ipAddress, int port, String password) {
+    public SocketClient(String ipAddress, int port, String password, String name, int timeout) {
         this.ipAddress = ipAddress;
         this.port = port;
         this.password = md5(password);
+        this.registrationName = name;
+        this.timeout = timeout;
     }
 
-    public void send(String message) {
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+    public void send(Packet packet) {
         try {
             ByteArrayDataOutput data = ByteStreams.newDataOutput();
 
-            byte[] messageBytes = message.getBytes("UTF-8");
-            data.writeInt(messageBytes.length);
-            data.write(messageBytes);
+            packet.serialize(data);
 
             byte[] encryptedData = encryptOrDecrypt(this.password, data.toByteArray());
             this.output.writeInt(encryptedData.length);
@@ -46,19 +56,22 @@ public class SocketClient implements Runnable {
             this.output.flush();
         } catch(Exception e) {
             dB.echoError(e);
-            this.close("Error sending data to client: " + e.getMessage());
+            this.close("Error sending data to server: " + e.getMessage());
         }
     }
 
     public void connect() {
-        if (!isListening) {
+        if (!isConnected) {
             try {
                 this.socket = new Socket();
-                this.socket.connect(new InetSocketAddress(this.ipAddress, this.port), 3000);
+                this.socket.connect(new InetSocketAddress(this.ipAddress, this.port), timeout);
                 this.output = new DataOutputStream(this.socket.getOutputStream());
                 this.input = new DataInputStream(this.socket.getInputStream());
-                this.isListening = true;
+                this.isConnected = true;
                 this.task = Bukkit.getServer().getScheduler().runTaskAsynchronously(Depenizen.getCurrentInstance(), this);
+                this.send(new ClientPacketOutRegister(this.registrationName));
+            } catch (IOException e) {
+                dB.log("Error while connecting to BungeeCord Socket: " + e.getMessage());
             } catch (Exception e) {
                 dB.echoError(e);
             }
@@ -70,11 +83,11 @@ public class SocketClient implements Runnable {
     }
 
     public void close(String reason) {
-        if (isListening) {
+        if (isConnected) {
             if (reason != null) {
                 dB.log("Disconnected from BungeeCord Socket: " + reason);
             }
-            this.isListening = false;
+            this.isConnected = false;
             this.task.cancel();
             this.task = null;
             try {
@@ -89,16 +102,13 @@ public class SocketClient implements Runnable {
 
     @Override
     public void run() {
-        // TODO: remove this line
-        send("Hello BungeeCord!");
         if (this.socket != null && this.socket.isConnected()) {
-            long timeoutExpired = System.currentTimeMillis() + 3000;
+            long timeoutExpired = System.currentTimeMillis() + this.timeout;
             try {
                 byte[] buffer;
-                String content;
-                while (this.isListening) {
+                while (this.isConnected) {
                     int receivedEncryptedLength = this.input.readInt();
-                    if (receivedEncryptedLength == -1 || System.currentTimeMillis() >= timeoutExpired) {
+                    if (receivedEncryptedLength == -1 || (this.timeout > 0 && System.currentTimeMillis() >= timeoutExpired)) {
                         this.close(receivedEncryptedLength == -1 ? "Connection failed" : "Connection timed out");
                         break;
                     }
@@ -111,12 +121,41 @@ public class SocketClient implements Runnable {
                     byte[] decryptedBytes = encryptOrDecrypt(this.password, encryptedBytes);
 
                     ByteArrayDataInput data = ByteStreams.newDataInput(decryptedBytes);
-                    int contentLength = data.readInt();
-                    byte[] contentData = new byte[contentLength];
-                    data.readFully(contentData);
 
-                    content = new String(contentData);
-                    this.handle(content);
+                    int packetType = data.readInt();
+
+                    if (packetType == 0x00) {
+                        ClientPacketInAcceptRegister packet = new ClientPacketInAcceptRegister();
+                        packet.deserialize(data);
+                        if (packet.isAccepted()) {
+                            dB.log("Successfully registered name with the server");
+                            for (String server : packet.getServerList()) {
+                                if (!server.isEmpty())
+                                    dServer.addOnlineServer(server);
+                            }
+                        }
+                        else
+                            this.close("Specified name in config.yml is already registered to the server");
+                    }
+                    else if (packetType == 0x01) {
+                        ClientPacketInServer packet = new ClientPacketInServer();
+                        packet.deserialize(data);
+                        if (packet.getAction() == ClientPacketInServer.Action.REGISTERED)
+                            dServer.addOnlineServer(packet.getServerName());
+                        else if (packet.getAction() == ClientPacketInServer.Action.DISCONNECTED)
+                            dServer.removeOnlineServer(packet.getServerName());
+                    }
+                    else if (packetType == 0x02) {
+                        ClientPacketInScript packet = new ClientPacketInScript();
+                        packet.deserialize(data);
+                        InstantQueue queue = new InstantQueue(ScriptQueue.getNextId("BUNGEE"));
+                        queue.addEntries(packet.getScriptEntries());
+                        queue.getAllDefinitions().putAll(packet.getDefinitions());
+                        queue.start();
+                    }
+                    else {
+                        this.close("Received invalid packet from server: " + packetType);
+                    }
                 }
 
             } catch (IllegalStateException e) {
@@ -128,11 +167,6 @@ public class SocketClient implements Runnable {
                 dB.echoError(e);
             }
         }
-    }
-
-    private void handle(String message) {
-        // TODO: make this do stuff
-        dB.log("BungeeCord says: " + message);
     }
 
     private static String md5(String string) {

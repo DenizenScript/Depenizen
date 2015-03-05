@@ -1,10 +1,11 @@
 package net.gnomeffinway.depenizen;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteStreams;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.objects.ObjectFetcher;
 import net.gnomeffinway.depenizen.commands.BungeeCommand;
+import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.Supported;
+import net.gnomeffinway.depenizen.support.bungee.PluginMessageHandler;
 import net.gnomeffinway.depenizen.support.bungee.SocketClient;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -74,7 +75,8 @@ public class Depenizen extends JavaPlugin implements PluginMessageListener {
     public void enableBungeeCord() {
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
-        new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 0);
+        new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 2);
+        ObjectFetcher.registerWithObjectFetcher(dServer.class);
     }
 
     public void startSocket() {
@@ -89,9 +91,23 @@ public class Depenizen extends JavaPlugin implements PluginMessageListener {
                 dB.echoError("BungeeCord Socket is enabled, but no password is specified.");
                 return;
             }
-            this.socketClient = new SocketClient(ipAddress, Settings.socketPort(), password);
+            String name = Settings.socketName();
+            if (name == null) {
+                dB.echoError("BungeeCord Socket is enabled, but no registration name is specified.");
+                return;
+            }
+            this.socketClient = new SocketClient(ipAddress, Settings.socketPort(),
+                    password, name, Settings.socketTimeout());
             this.socketClient.connect();
         }
+    }
+
+    public SocketClient getSocketClient() {
+        return socketClient;
+    }
+
+    public boolean isSocketConnected() {
+        return socketClient != null && socketClient.isConnected();
     }
 
     public void closeSocket() {
@@ -106,16 +122,8 @@ public class Depenizen extends JavaPlugin implements PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
-        dB.log("Plugin message received");
-        if (!channel.equals("BungeeCord"))
-            return;
-        dB.log("Plugin message is Bungee");
-
-        ByteArrayDataInput data = ByteStreams.newDataInput(message);
-        String subChannel = data.readUTF();
-        if (subChannel.equals("Depenizen")) {
-            dB.log("Hey! Depenizen message received!");
-            dB.log("data: " + data.readUTF());
+        if (channel.equals("Depenizen-Bungee")) {
+            PluginMessageHandler.handle(message);
         }
     }
 }
