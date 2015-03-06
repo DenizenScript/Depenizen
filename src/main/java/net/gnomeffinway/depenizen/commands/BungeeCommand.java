@@ -18,6 +18,45 @@ import java.util.List;
 
 public class BungeeCommand extends BracedCommand {
 
+    // <--[command]
+    // @Name Bungee
+    // @Syntax bungee [<server>/all] [<commands>]
+    // @Group Depenizen
+    // @Plugin Depenizen
+    // @Required 2
+    // @Stable untested
+    // @Short Sends commands to other servers via BungeeCord.
+    // @Author Morphan1
+
+    // @Description
+    // This command allows you to send multiple lines of script to your BungeeCord
+    // server, which then relays it to the dServer you specified. Tags and definitions
+    // will be parsed on the dServer, and the definitions in the current queue will
+    // carry over.
+    // Note that sending to ALL does not run the commands on the current server.
+
+    // @Tags
+    // None
+
+    // @Usage
+    // Use to send network-wide join messages.
+    // - define name <player.name.display>
+    // - bungee all {
+    //   - announce "<yellow>%name% has joined the network."
+    //   }
+
+    // @Usage
+    // Use to keep a player's inventory consistent across 2 creative servers.
+    // - define player <player>
+    // - define contents <player.inventory.list_contents>
+    // - bungee creative2 {
+    //   - if <def[player].has_played_before||false> {
+    //     - inventory set d:<def[player].inventory> o:<def[contents]>
+    //     }
+    //   }
+
+    // -->
+
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
@@ -66,12 +105,7 @@ public class BungeeCommand extends BracedCommand {
             Depenizen.getCurrentInstance().getSocketClient().send(packet);
         }
         else {
-            ByteArrayDataOutput data = ByteStreams.newDataOutput();
-            data.writeUTF("Depenizen");
-            data.writeUTF("dummy data");
-
-            ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer().getPlayerEntity()
-                    .sendPluginMessage(Depenizen.getCurrentInstance(), "BungeeCord", data.toByteArray());
+            dB.echoError("Server is not connected to a BungeeCord Socket.");
         }
     }
 }
