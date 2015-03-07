@@ -2,6 +2,7 @@ package net.gnomeffinway.depenizen.objects.heroes;
 
 import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.Hero;
+import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -16,6 +17,7 @@ import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.plugins.HeroesSupport;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.regex.Matcher;
@@ -165,6 +167,17 @@ public class HeroesHero implements dObject {
         }
 
         // <--[tag]
+        // @attribute <hero@hero.in_combat[<entity>]>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the hero is currently in combat.
+        // @plugin Depenizen, Heroes
+        // -->
+        else if (attribute.startsWith("in_combat")) {
+            return new Element(hero.isInCombat()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <hero@hero.level[<class>]>
         // @returns Element(Number)
         // @description
@@ -183,6 +196,21 @@ public class HeroesHero implements dObject {
                 }
             }
             return new Element(hero.getLevel()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <hero@hero.list_combatants>
+        // @returns dList(dEntity)
+        // @description
+        // Returns the list of entities the hero is currently in combat with.
+        // @plugin Depenizen, Heroes
+        // -->
+        else if (attribute.startsWith("list_combatants")) {
+            dList list = new dList();
+            for (Entity entity : hero.getCombatants().keySet()) {
+                list.add(new dEntity(entity).identify());
+            }
+            return list.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -247,6 +275,5 @@ public class HeroesHero implements dObject {
         }
 
         return new Element(identify()).getAttribute(attribute);
-
     }
 }
