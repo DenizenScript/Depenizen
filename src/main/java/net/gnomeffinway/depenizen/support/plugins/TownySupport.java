@@ -1,9 +1,11 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
+import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.gnomeffinway.depenizen.extensions.towny.TownyCuboidExtension;
 import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
 import net.gnomeffinway.depenizen.support.Support;
@@ -16,6 +18,7 @@ public class TownySupport extends Support {
         registerObjects(dTown.class, dNation.class);
         registerProperty(TownyPlayerExtension.class, dPlayer.class);
         registerProperty(TownyLocationExtension.class, dLocation.class);
+        registerProperty(TownyCuboidExtension.class, dCuboid.class);
         registerAdditionalTags("town", "nation");
     }
 
