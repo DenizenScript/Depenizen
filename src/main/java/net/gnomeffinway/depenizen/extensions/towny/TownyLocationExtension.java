@@ -30,7 +30,7 @@ public class TownyLocationExtension extends dObjectExtension {
     @Override
     public String getAttribute(Attribute attribute) {
 
-        // <--[tag[
+        // <--[tag]
         // @attribute <l@location.has_town>
         // @returns Element(Boolean)
         // @description
