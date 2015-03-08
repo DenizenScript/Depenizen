@@ -43,10 +43,6 @@
 			<id>citizens</id>
 			<url>http://repo.citizensnpcs.co</url>
 		</repository>
-		<repository>
-			<id>dynmap-repo</id>
-			<url>http://repo.mikeprimm.com/</url>
-		</repository>
         <repository>
             <id>heroes-repo</id>
             <url>http://nexus.theyeticave.net/content/groups/public/</url>
