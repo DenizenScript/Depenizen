@@ -22,9 +22,9 @@ public class BungeeCommand extends BracedCommand {
     // @Name Bungee
     // @Syntax bungee [<server>/all] [<commands>]
     // @Group Depenizen
-    // @Plugin Depenizen
+    // @Plugin Depenizen, BungeeCord
     // @Required 2
-    // @Stable untested
+    // @Stable stable
     // @Short Sends commands to other servers via BungeeCord.
     // @Author Morphan1
 
