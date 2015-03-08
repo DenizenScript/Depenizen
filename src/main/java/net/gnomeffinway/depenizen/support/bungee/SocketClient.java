@@ -200,7 +200,7 @@ public class SocketClient implements Runnable {
     private static String md5(String string) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] bytes = md.digest(string.getBytes());
+            byte[] bytes = md.digest(string.getBytes("UTF-8"));
             StringBuilder sb = new StringBuilder();
             for (byte b : bytes)
                 sb.append(Integer.toHexString(b & 0xFF | 0x100)).substring(1, 3);
@@ -212,9 +212,9 @@ public class SocketClient implements Runnable {
         }
     }
 
-    private static byte[] encryptOrDecrypt(String password, byte[] data) {
+    private static byte[] encryptOrDecrypt(String password, byte[] data) throws Exception {
         byte[] result = new byte[data.length];
-        byte[] passwordBytes = password.getBytes();
+        byte[] passwordBytes = password.getBytes("UTF-8");
         for (int i = 0; i < data.length; i++)
             result[i] = ((byte)(data[i] ^ passwordBytes[(i % passwordBytes.length)]));
         return result;

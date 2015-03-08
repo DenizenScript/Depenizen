@@ -2,6 +2,7 @@ package net.gnomeffinway.depenizen.support.bungee.packets;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
+import net.aufdemrand.denizencore.utilities.debugging.dB;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +36,12 @@ public class DataDeserializer  {
     }
 
     public String readString() {
-        return new String(readByteArray());
+        try {
+            return new String(readByteArray(), "UTF-8");
+        } catch (Exception e) {
+            dB.echoError(e);
+            return null;
+        }
     }
 
     public String[] readStringArray() {

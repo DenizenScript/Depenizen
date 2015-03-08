@@ -2,6 +2,7 @@ package net.gnomeffinway.depenizen.support.bungee.packets;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import net.aufdemrand.denizencore.utilities.debugging.dB;
 
 import java.util.Collection;
 import java.util.Map;
@@ -41,7 +42,11 @@ public class DataSerializer {
             writeInt(0);
         }
         else {
-            writeByteArray(string.getBytes());
+            try {
+                writeByteArray(string.getBytes("UTF-8"));
+            } catch (Exception e) {
+                dB.echoError(e);
+            }
         }
     }
 
