@@ -1,19 +1,16 @@
 package net.gnomeffinway.depenizen.support.bungee.packets;
 
-import com.google.common.io.ByteArrayDataOutput;
-
 public class ClientPacketOutRegister extends Packet {
 
-    private byte[] name;
+    private String name;
 
     public ClientPacketOutRegister(String name) {
-        this.name = name.getBytes();
+        this.name = name;
     }
 
     @Override
-    public void serialize(ByteArrayDataOutput output) {
-        output.writeInt(0x00);
-        output.writeInt(name.length);
-        output.write(name);
+    public void serialize(DataSerializer serializer) {
+        serializer.writeInt(0x00);
+        serializer.writeString(name);
     }
 }

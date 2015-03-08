@@ -1,12 +1,11 @@
 package net.gnomeffinway.depenizen.support.bungee;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
 import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.bungee.packets.*;
 import org.bukkit.Bukkit;
@@ -18,6 +17,8 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SocketClient implements Runnable {
 
@@ -46,7 +47,7 @@ public class SocketClient implements Runnable {
 
     public void send(Packet packet) {
         try {
-            ByteArrayDataOutput data = ByteStreams.newDataOutput();
+            DataSerializer data = new DataSerializer();
 
             packet.serialize(data);
 
@@ -120,7 +121,7 @@ public class SocketClient implements Runnable {
                     System.arraycopy(buffer, 0, encryptedBytes, 0, encryptedBytes.length);
                     byte[] decryptedBytes = encryptOrDecrypt(this.password, encryptedBytes);
 
-                    ByteArrayDataInput data = ByteStreams.newDataInput(decryptedBytes);
+                    DataDeserializer data = new DataDeserializer(decryptedBytes);
 
                     int packetType = data.readInt();
 
@@ -148,11 +149,38 @@ public class SocketClient implements Runnable {
                     else if (packetType == 0x02) {
                         ClientPacketInScript packet = new ClientPacketInScript();
                         packet.deserialize(data);
-                        InstantQueue queue = new InstantQueue(ScriptQueue.getNextId("BUNGEE"));
+                        InstantQueue queue = new InstantQueue(ScriptQueue.getNextId("BUNGEE_CMD"));
                         queue.addEntries(packet.getScriptEntries());
                         queue.getAllDefinitions().putAll(packet.getDefinitions());
                         queue.start();
                     }
+                    else if (packetType == 0x03) {
+                        ClientPacketInEvent packet = new ClientPacketInEvent();
+                        packet.deserialize(data);
+                        if (packet.getEventName().equals("ProxyPing")) {
+                            ProxyPingScriptEvent event = ProxyPingScriptEvent.instance;
+                            if (event != null) {
+                                Map<String, String> context = packet.getContext();
+                                event.address = new Element(context.get("address"));
+                                event.numPlayers = new Element(context.get("num_players"));
+                                event.motd = new Element(context.get("motd"));
+                                event.maxPlayers = new Element(context.get("max_players"));
+                                event.version = new Element(context.get("version"));
+                                event.fire();
+                                if (packet.shouldSendResponse()) {
+                                    Map<String, String> determinations = new HashMap<String, String>();
+                                    determinations.put("num_players", event.numPlayers.asString());
+                                    determinations.put("max_players", event.maxPlayers.asString());
+                                    determinations.put("motd", event.motd.asString());
+                                    determinations.put("version", event.version.asString());
+                                    ClientPacketOutEventResponse response =
+                                            new ClientPacketOutEventResponse(packet.getEventId(), determinations);
+                                    send(response);
+                                }
+                            }
+                        }
+                    }
+                    // 0x04 (EventSubscribe) is outbound
                     else {
                         this.close("Received invalid packet from server: " + packetType);
                     }

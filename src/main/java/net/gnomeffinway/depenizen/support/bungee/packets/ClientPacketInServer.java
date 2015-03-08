@@ -1,7 +1,5 @@
 package net.gnomeffinway.depenizen.support.bungee.packets;
 
-import com.google.common.io.ByteArrayDataInput;
-
 public class ClientPacketInServer extends Packet {
 
     public static enum Action {
@@ -23,11 +21,8 @@ public class ClientPacketInServer extends Packet {
     }
 
     @Override
-    public void deserialize(ByteArrayDataInput input) {
-        this.action = Action.values()[input.readInt()];
-        int nameLength = input.readInt();
-        byte[] nameData = new byte[nameLength];
-        input.readFully(nameData);
-        this.name = new String(nameData);
+    public void deserialize(DataDeserializer deserializer) {
+        this.action = Action.values()[deserializer.readInt()];
+        this.name = deserializer.readString();
     }
 }

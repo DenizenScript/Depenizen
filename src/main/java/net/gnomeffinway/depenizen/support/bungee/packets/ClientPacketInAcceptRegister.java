@@ -1,6 +1,6 @@
 package net.gnomeffinway.depenizen.support.bungee.packets;
 
-import com.google.common.io.ByteArrayDataInput;
+import java.util.List;
 
 public class ClientPacketInAcceptRegister extends Packet {
 
@@ -9,7 +9,7 @@ public class ClientPacketInAcceptRegister extends Packet {
     }
 
     private Action action;
-    private String[] serverList;
+    private List<String> serverList;
 
     public ClientPacketInAcceptRegister() {
     }
@@ -18,16 +18,13 @@ public class ClientPacketInAcceptRegister extends Packet {
         return action == Action.ACCEPTED;
     }
 
-    public String[] getServerList() {
+    public List<String> getServerList() {
         return serverList;
     }
 
     @Override
-    public void deserialize(ByteArrayDataInput input) {
-        this.action = Action.values()[input.readInt()];
-        int serverListLength = input.readInt();
-        byte[] serverListData = new byte[serverListLength];
-        input.readFully(serverListData);
-        this.serverList = new String(serverListData).split(", ");
+    public void deserialize(DataDeserializer deserializer) {
+        this.action = Action.values()[deserializer.readInt()];
+        this.serverList = deserializer.readStringList();
     }
 }

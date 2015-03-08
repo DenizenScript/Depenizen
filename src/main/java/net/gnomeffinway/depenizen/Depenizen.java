@@ -1,8 +1,10 @@
 package net.gnomeffinway.depenizen;
 
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.ObjectFetcher;
 import net.gnomeffinway.depenizen.commands.BungeeCommand;
+import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.bungee.PluginMessageHandler;
@@ -77,6 +79,7 @@ public class Depenizen extends JavaPlugin implements PluginMessageListener {
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 2);
         ObjectFetcher.registerWithObjectFetcher(dServer.class);
+        ScriptEvent.registerScriptEvent(new ProxyPingScriptEvent());
     }
 
     public void startSocket() {
