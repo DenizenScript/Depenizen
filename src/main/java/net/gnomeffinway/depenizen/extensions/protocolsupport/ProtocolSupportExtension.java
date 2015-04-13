@@ -41,7 +41,7 @@ public class ProtocolSupportExtension extends dObjectExtension {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.version>
+            // @attribute <p@player.version.protocol>
             // @returns Element(Integer)
             // @description
             // Returns the protocol version of player.
