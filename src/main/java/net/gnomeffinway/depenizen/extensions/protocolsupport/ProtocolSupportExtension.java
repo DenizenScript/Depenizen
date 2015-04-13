@@ -54,6 +54,9 @@ public class ProtocolSupportExtension extends dObjectExtension {
             return new Element(String.valueOf(ProtocolSupportAPI.getProtocolVersion(player))).getAttribute(attribute);
 
         }
+
+        return null;
+
     }
     
 }
