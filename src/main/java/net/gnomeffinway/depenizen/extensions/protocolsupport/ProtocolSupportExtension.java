@@ -38,8 +38,6 @@ public class ProtocolSupportExtension extends dObjectExtension {
             if(player == null)
                 return null;
 
-            attribute = attribute.fulfill(1);
-
             // <--[tag]
             // @attribute <p@player.version.protocol>
             // @returns Element(Integer)
