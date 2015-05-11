@@ -1,20 +1,16 @@
 package net.gnomeffinway.depenizen.events.bungee;
 
 import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
-import net.gnomeffinway.depenizen.Depenizen;
-import net.gnomeffinway.depenizen.support.bungee.SocketClient;
-import net.gnomeffinway.depenizen.support.bungee.packets.ClientPacketOutEventSubscribe;
 
 import java.util.HashMap;
 
-public class ProxyPingScriptEvent extends ScriptEvent {
+public class ProxyPingScriptEvent extends BungeeScriptEvent {
 
     // <--[event]
     // @Events
@@ -38,6 +34,7 @@ public class ProxyPingScriptEvent extends ScriptEvent {
     // "VERSION:" + Element to change the response for the server version.
     // "MOTD:" + Element to change the MOTD.
     //
+    // @Plugin Depenizen, BungeeCord
     // -->
 
 
@@ -55,34 +52,18 @@ public class ProxyPingScriptEvent extends ScriptEvent {
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("proxy server list ping");
+        return lower.startsWith("proxy server list ");
     }
 
     @Override
     public boolean matches(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return lower.endsWith("proxy server list ping");
+        return CoreUtilities.xthArgEquals(3, lower, "ping");
     }
 
     @Override
     public String getName() {
         return "ProxyPing";
-    }
-
-    @Override
-    public void init() {
-        SocketClient socketClient = Depenizen.getCurrentInstance().getSocketClient();
-        if (socketClient != null && socketClient.isConnected()) {
-            socketClient.send(new ClientPacketOutEventSubscribe(ClientPacketOutEventSubscribe.Action.SUBSCRIBE, getName()));
-        }
-    }
-
-    @Override
-    public void destroy() {
-        SocketClient socketClient = Depenizen.getCurrentInstance().getSocketClient();
-        if (socketClient != null && socketClient.isConnected()) {
-            socketClient.send(new ClientPacketOutEventSubscribe(ClientPacketOutEventSubscribe.Action.UNSUBSCRIBE, getName()));
-        }
     }
 
     @Override
