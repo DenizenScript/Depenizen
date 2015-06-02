@@ -138,14 +138,14 @@ public class WorldGuardRegion implements dObject {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <region@region.as_cuboid>
+        // @attribute <region@region.cuboid>
         // @returns dCuboid
         // @group conversion
         // @description
         // Converts a cuboid-shaped region to a dCuboid.
         // @plugin Depenizen, WorldGuard
         // -->
-        if (attribute.startsWith("as_cuboid")) {
+        if (attribute.startsWith("cuboid") || attribute.startsWith("as_cuboid")) { // TODO: Scrap as_cuboid
             if (!(region instanceof ProtectedCuboidRegion)) {
                 if (!attribute.hasAlternative())
                     dB.echoError("<region@region.as_cuboid> requires a Cuboid-shaped region!");
