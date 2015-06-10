@@ -20,6 +20,7 @@ import net.gnomeffinway.depenizen.support.plugins.WorldGuardSupport;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -138,14 +139,14 @@ public class WorldGuardRegion implements dObject {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <region@region.as_cuboid>
+        // @attribute <region@region.cuboid>
         // @returns dCuboid
         // @group conversion
         // @description
         // Converts a cuboid-shaped region to a dCuboid.
         // @plugin Depenizen, WorldGuard
         // -->
-        if (attribute.startsWith("as_cuboid")) {
+        if (attribute.startsWith("cuboid") || attribute.startsWith("as_cuboid")) { // TODO: Scrap as_cuboid
             if (!(region instanceof ProtectedCuboidRegion)) {
                 if (!attribute.hasAlternative())
                     dB.echoError("<region@region.as_cuboid> requires a Cuboid-shaped region!");
@@ -175,10 +176,8 @@ public class WorldGuardRegion implements dObject {
         // -->
         if (attribute.startsWith("members")) {
             dList list = new dList();
-            for (String str: region.getMembers().getPlayers()) {
-                dPlayer player = dPlayer.valueOf(str);
-                if (player != null)
-                    list.add(player.identify());
+            for (UUID uuid : region.getMembers().getUniqueIds()) {
+                list.add(dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -192,10 +191,8 @@ public class WorldGuardRegion implements dObject {
         // -->
         if (attribute.startsWith("owners")) {
             dList list = new dList();
-            for (String str: region.getOwners().getPlayers()) {
-                dPlayer player = dPlayer.valueOf(str);
-                if (player != null)
-                    list.add(player.identify());
+            for (UUID uuid : region.getOwners().getUniqueIds()) {
+                list.add(dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }
