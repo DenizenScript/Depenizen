@@ -38,22 +38,24 @@ public class ProtocolSupportExtension extends dObjectExtension {
             if(player == null)
                 return null;
 
+			attribute = attribute.fulfill(1);
+
             // <--[tag]
-            // @attribute <p@player.version.protocol>
+            // @attribute <p@player.version>
             // @returns Element(Integer)
             // @description
             // Returns the protocol version of player.
             // @plugin Depenizen, ProtocolSupport
             // -->
             if (attribute.startsWith("protocol")) {
-                return new Element(ProtocolSupportAPI.getProtocolVersion(player).getId()).getAttribute(attribute.fulfill(1));
+				return new Element(ProtocolSupportAPI.getProtocolVersion(player).getId()).getAttribute(attribute.fulfill(1));
             }
 
-			return new Element(String.valueOf(ProtocolSupportAPI.getProtocolVersion(player))).getAttribute(attribute.fulfill(1));
+	        return new Element(String.valueOf(ProtocolSupportAPI.getProtocolVersion(player))).getAttribute(attribute);
 
         }
-
-        return null;
+		
+		return null;
 
     }
     
