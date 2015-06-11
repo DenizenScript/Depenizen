@@ -8,8 +8,8 @@
     <url>https://github.com/Morphan1/Depenizen</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <bukkit.version>1.8.3-R0.1-SNAPSHOT</bukkit.version>
-        <citizens.version>2.0.14-SNAPSHOT</citizens.version>
+        <bukkit.version>1.8.6-R0.1-SNAPSHOT</bukkit.version>
+        <citizens.version>2.0.16-SNAPSHOT</citizens.version>
         <denizen.version>0.9.6-SNAPSHOT</denizen.version>
         <BUILD_NUMBER>Unknown</BUILD_NUMBER>
     </properties>
@@ -28,8 +28,8 @@
     </scm>
     <repositories>
         <repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public/</url>
+            <id>spigot-repo</id>
+            <url>hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
         <repository>
             <id>mcmmo-repo</id>
@@ -54,10 +54,6 @@
         <repository>
             <id>ess-repo</id>
             <url>http://repo.ess3.net/content/groups/essentials</url>
-        </repository>
-        <repository>
-            <id>slipcor-repo</id>
-            <url>http://mc-praxis.com:8080/plugin/repository/everything/</url>
         </repository>
         <repository>
             <id>prism-repo</id>
@@ -145,13 +141,15 @@
             <groupId>net.slipcor</groupId>
             <artifactId>pvparena</artifactId>
             <version>1.3</version>
-            <scope>compile</scope>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/PVPArena.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>praxis.slipcor</groupId>
             <artifactId>pvpstats</artifactId>
             <version>0.8</version>
-            <scope>compile</scope>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/PVPStats.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.herocraftonline</groupId>
