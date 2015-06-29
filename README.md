@@ -5,4 +5,4 @@ Depenizen
 
 **Wiki**: http://wiki.citizensnpcs.co/Depenizen  
 **IRC**: http://webchat.esper.net/?channels=denizen-dev  
-**Denizen**: https://github.com/aufdemrand/Denizen  
+**Denizen For Bukkit**: https://github.com/DenizenScript/Denizen-For-Bukkit  
