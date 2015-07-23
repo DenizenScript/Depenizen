@@ -110,8 +110,9 @@
 		<dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
-            <version>1.5.4</version>
-            <scope>provided</scope>
+            <version>1.5.3</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/Vault.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>net.aufdemrand</groupId>
