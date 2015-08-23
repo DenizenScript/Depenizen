@@ -38,6 +38,7 @@ public class BungeePlayerExtension extends dObjectExtension {
         // Sends a player to the specified server.
         // @tags
         // None
+        // @plugin Depenizen, BungeeCord
         // -->
         if (mechanism.matches("send_to")
                 && mechanism.requireObject(dServer.class)) {

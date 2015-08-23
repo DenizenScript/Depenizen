@@ -31,10 +31,11 @@ public class SkillAPIEvents implements Listener {
     public void onLevelUp(PlayerLevelUpEvent event) {
         Map<String, dObject> context = new HashMap<String, dObject>();
         context.put("level", new Element(event.getLevel()));
-        context.put("gained", new Element(event.getGainedLevels()));
+        context.put("gained", new Element(event.getAmount()));
 
         OldEventManager.doEvents(Arrays.asList("player levels up in skillapi"),
-                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), null),
+                // NOTE: This code previously handled offline players, but SkillAPI no longer does?
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer()), null),
                 context);
     }
 
@@ -52,7 +53,7 @@ public class SkillAPIEvents implements Listener {
     // -->
     @EventHandler
     public void onSkillUpgrade(PlayerSkillUpgradeEvent event) {
-        String skill = event.getUpgradedSkill().getName();
+        String skill = event.getUpgradedSkill().getData().getName();
 
         Map<String, dObject> context = new HashMap<String, dObject>();
         context.put("cost", new Element(event.getCost()));
@@ -61,7 +62,8 @@ public class SkillAPIEvents implements Listener {
         List<String> determinations = OldEventManager.doEvents(Arrays.asList(
                         "player upgrades skill in skillapi",
                         "player upgrades " + skill + " in skillapi"),
-                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), null),
+                // NOTE: This code previously handled offline players, but SkillAPI no longer does?
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer()), null),
                 context);
 
         for (String determination : determinations) {
@@ -84,7 +86,7 @@ public class SkillAPIEvents implements Listener {
     // -->
     @EventHandler
     public void onSkillDowngrade(PlayerSkillDowngradeEvent event) {
-        String skill = event.getDowngradedSkill().getName();
+        String skill = event.getDowngradedSkill().getData().getName();
 
         Map<String, dObject> context = new HashMap<String, dObject>();
         context.put("skill_name", new Element(skill));
@@ -92,7 +94,8 @@ public class SkillAPIEvents implements Listener {
         OldEventManager.doEvents(Arrays.asList(
                         "player downgrades skill in skillapi",
                         "player downgrades " + skill + " in skillapi"),
-                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), null),
+                // NOTE: This code previously handled offline players, but SkillAPI no longer does?
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer()), null),
                 context);
     }
 
@@ -109,7 +112,7 @@ public class SkillAPIEvents implements Listener {
     // -->
     @EventHandler
     public void onSkillUnlock(PlayerSkillUnlockEvent event) {
-        String skill = event.getUnlockedSkill().getName();
+        String skill = event.getUnlockedSkill().getData().getName();
 
         Map<String, dObject> context = new HashMap<String, dObject>();
         context.put("skill_name", new Element(skill));
@@ -117,7 +120,8 @@ public class SkillAPIEvents implements Listener {
         OldEventManager.doEvents(Arrays.asList(
                         "player unlocks skill in skillapi",
                         "player unlocks " + skill + " in skillapi"),
-                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getOfflinePlayer()), null),
+                // NOTE: This code previously handled offline players, but SkillAPI no longer does?
+                new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer()), null),
                 context);
     }
 
