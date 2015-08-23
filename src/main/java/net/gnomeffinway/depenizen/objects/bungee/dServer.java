@@ -49,7 +49,7 @@ public class dServer implements dObject {
     }
 
     public static boolean matches(String arg) {
-        if (onlineServers.containsKey(arg.toLowerCase().replace("srv@", "")))
+        if (onlineServers.containsKey(arg.toLowerCase().replace("server@", "")))
             return true;
 
         return false;
