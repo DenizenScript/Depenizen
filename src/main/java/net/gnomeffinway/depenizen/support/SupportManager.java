@@ -84,7 +84,7 @@ public class SupportManager {
     @TagManager.TagEvents
     public void tagListener(ReplaceableTagEvent event) {
         if (event.replaced()) return;
-        Attribute attribute = new Attribute(event.raw_tag, event.getScriptEntry());
+        Attribute attribute = event.getAttributes();
         String replaced = null;
         String name = event.getName().toLowerCase();
         for (String tag : additionalTags.keySet()) {
