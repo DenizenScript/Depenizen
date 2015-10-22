@@ -16,6 +16,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,6 +67,7 @@ public class SocketClient implements Runnable {
             try {
                 this.socket = new Socket();
                 this.socket.connect(new InetSocketAddress(this.ipAddress, this.port), timeout);
+                this.socket.setSoTimeout(timeout);
                 this.output = new DataOutputStream(this.socket.getOutputStream());
                 this.input = new DataInputStream(this.socket.getInputStream());
                 this.isConnected = true;
@@ -104,13 +106,12 @@ public class SocketClient implements Runnable {
     @Override
     public void run() {
         if (this.socket != null && this.socket.isConnected()) {
-            long timeoutExpired = System.currentTimeMillis() + this.timeout;
             try {
                 byte[] buffer;
                 while (this.isConnected) {
                     int receivedEncryptedLength = this.input.readInt();
-                    if (receivedEncryptedLength == -1 || (this.timeout > 0 && System.currentTimeMillis() >= timeoutExpired)) {
-                        this.close(receivedEncryptedLength == -1 ? "Connection failed" : "Connection timed out");
+                    if (receivedEncryptedLength == -1) {
+                        this.close("Connection failed");
                         break;
                     }
 
@@ -188,6 +189,8 @@ public class SocketClient implements Runnable {
 
             } catch (IllegalStateException e) {
                 this.close("Password is incorrect");
+            } catch (SocketTimeoutException e) {
+                this.close("Connection timed out");
             } catch (IOException e) {
                 this.close("Server socket closed");
             } catch (Exception e) {
