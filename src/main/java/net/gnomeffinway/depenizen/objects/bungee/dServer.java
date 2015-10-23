@@ -6,6 +6,7 @@ import net.aufdemrand.denizencore.objects.Fetchable;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +16,11 @@ public class dServer implements dObject {
     private static final Map<String, dServer> onlineServers = new HashMap<String, dServer>();
 
     public static void addOnlineServer(String name) {
-        onlineServers.put(name.toLowerCase(), new dServer(name));
+        onlineServers.put(CoreUtilities.toLowerCase(name), new dServer(name));
     }
 
     public static void removeOnlineServer(String name) {
-        name = name.toLowerCase();
+        name = CoreUtilities.toLowerCase(name);
         if (onlineServers.containsKey(name))
             onlineServers.remove(name);
     }
@@ -39,11 +40,13 @@ public class dServer implements dObject {
         ////////
         // Match faction name
 
-        string = string.toLowerCase().replace("server@", "");
+        string = CoreUtilities.toLowerCase(string).replace("server@", "");
         if (onlineServers.containsKey(string)) {
             return onlineServers.get(string);
         }
-        dB.echoError("Specified server '" + string + "' does not exist or is not online.");
+        if (context == null || context.debug) {
+            dB.echoError("Specified server '" + string + "' does not exist or is not online.");
+        }
 
         return null;
     }
@@ -114,8 +117,9 @@ public class dServer implements dObject {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <server@Server.name>
+        // @attribute <server@server.name>
         // @returns Element
+        // @plugin Depenizen, BungeeCord
         // @description
         // The name of the server as set by its Depenizen's config.yml file.
         // -->
