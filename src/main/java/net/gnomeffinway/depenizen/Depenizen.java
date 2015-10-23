@@ -80,7 +80,7 @@ public class Depenizen extends JavaPlugin implements PluginMessageListener {
     public void enableBungeeCord() {
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
-        new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 2);
+        new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 1);
         ObjectFetcher.registerWithObjectFetcher(dServer.class);
         DenizenAPI.getCurrentInstance().getPropertyParser()
                 .registerProperty(BungeePlayerExtension.class, dPlayer.class);
