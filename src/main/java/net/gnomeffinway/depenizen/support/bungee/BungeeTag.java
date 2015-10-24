@@ -23,13 +23,13 @@ public class BungeeTag implements Listener {
         attribute = attribute.fulfill(1);
 
         // <--[tag]
-        // @attribute <bungee.server>
+        // @attribute <bungee.server.name>
         // @returns Element
         // @description
         // returns the current server name (as defined in Depenizen config.yml).
         // -->
-        if (attribute.startsWith("server")) {
-            event.setReplaced(new Element(CoreUtilities.toLowerCase(Settings.socketName())).getAttribute(attribute.fulfill(1)));
+        if (attribute.startsWith("server.name")) {
+            event.setReplaced(new Element(CoreUtilities.toLowerCase(Settings.socketName())).getAttribute(attribute.fulfill(2)));
             return;
         }
     }
