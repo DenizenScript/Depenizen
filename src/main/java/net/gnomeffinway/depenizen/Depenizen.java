@@ -10,6 +10,7 @@ import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.extensions.bungee.BungeePlayerExtension;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.Supported;
+import net.gnomeffinway.depenizen.support.bungee.BungeeTag;
 import net.gnomeffinway.depenizen.support.bungee.PluginMessageHandler;
 import net.gnomeffinway.depenizen.support.bungee.SocketClient;
 import org.bukkit.ChatColor;
@@ -85,6 +86,7 @@ public class Depenizen extends JavaPlugin implements PluginMessageListener {
         DenizenAPI.getCurrentInstance().getPropertyParser()
                 .registerProperty(BungeePlayerExtension.class, dPlayer.class);
         ScriptEvent.registerScriptEvent(new ProxyPingScriptEvent());
+        new BungeeTag(this);
     }
 
     public void startSocket() {
