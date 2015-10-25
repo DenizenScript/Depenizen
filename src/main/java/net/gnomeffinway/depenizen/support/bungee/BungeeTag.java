@@ -4,7 +4,6 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.ReplaceableTagEvent;
 import net.aufdemrand.denizencore.tags.TagManager;
-import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.gnomeffinway.depenizen.Settings;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,7 +28,7 @@ public class BungeeTag implements Listener {
         // returns the current server name (as defined in Depenizen config.yml).
         // -->
         if (attribute.startsWith("server.name")) {
-            event.setReplaced(new Element(CoreUtilities.toLowerCase(Settings.socketName())).getAttribute(attribute.fulfill(2)));
+            event.setReplaced(new Element(Settings.socketName()).getAttribute(attribute.fulfill(2)));
             return;
         }
     }
