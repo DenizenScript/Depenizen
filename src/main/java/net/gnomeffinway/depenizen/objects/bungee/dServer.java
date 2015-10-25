@@ -55,6 +55,14 @@ public class dServer implements dObject {
             dB.echoError("Specified server '" + string + "' does not exist or is not online.");
         }
 
+        string = CoreUtilities.toLowerCase(string).replace("server@", "");
+        if (onlineServers.containsKey(string)) {
+            return onlineServers.get(string);
+        }
+        if (context == null || context.debug) {
+            dB.echoError("Specified server '" + string + "' does not exist or is not online.");
+        }
+
         return server;
     }
 
@@ -124,8 +132,9 @@ public class dServer implements dObject {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <server@Server.name>
+        // @attribute <server@server.name>
         // @returns Element
+        // @plugin Depenizen, BungeeCord
         // @description
         // The name of the server as set by its Depenizen's config.yml file.
         // -->

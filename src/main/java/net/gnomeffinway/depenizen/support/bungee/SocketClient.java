@@ -1,6 +1,6 @@
 package net.gnomeffinway.depenizen.support.bungee;
 
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
 import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
@@ -94,9 +94,15 @@ public class SocketClient implements Runnable {
             this.task.cancel();
             this.task = null;
             try {
-                if (this.output != null) this.output.close();
-                if (this.input != null) this.input.close();
-                if (this.socket != null) this.socket.close();
+                if (this.output != null) {
+                    this.output.close();
+                }
+                if (this.input != null) {
+                    this.input.close();
+                }
+                if (this.socket != null) {
+                    this.socket.close();
+                }
             } catch (Exception e) {
                 dB.echoError(e);
             }
@@ -133,8 +139,12 @@ public class SocketClient implements Runnable {
                             dB.log("Successfully registered name with the server");
                             dServer.addOnlineServer(this.registrationName);
                             for (String server : packet.getServerList()) {
-                                if (!server.isEmpty())
+                                if (!server.isEmpty()) {
+                                    if (dB.verbose) {
+                                        dB.log("[Bungee]: Registered with " + server);
+                                    }
                                     dServer.addOnlineServer(server);
+                                }
                             }
                         }
                         else
@@ -143,10 +153,18 @@ public class SocketClient implements Runnable {
                     else if (packetType == 0x01) {
                         ClientPacketInServer packet = new ClientPacketInServer();
                         packet.deserialize(data);
-                        if (packet.getAction() == ClientPacketInServer.Action.REGISTERED)
+                        if (packet.getAction() == ClientPacketInServer.Action.REGISTERED) {
+                            if (dB.verbose) {
+                                dB.log("[Bungee]: Registered with " + packet.getServerName());
+                            }
                             dServer.addOnlineServer(packet.getServerName());
-                        else if (packet.getAction() == ClientPacketInServer.Action.DISCONNECTED)
+                        }
+                        else if (packet.getAction() == ClientPacketInServer.Action.DISCONNECTED) {
+                            if (dB.verbose) {
+                                dB.log("[Bungee]: Disconnected from " + packet.getServerName());
+                            }
                             dServer.removeOnlineServer(packet.getServerName());
+                        }
                     }
                     else if (packetType == 0x02) {
                         ClientPacketInScript packet = new ClientPacketInScript();
