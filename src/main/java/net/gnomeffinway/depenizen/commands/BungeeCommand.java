@@ -30,7 +30,6 @@ public class BungeeCommand extends BracedCommand {
     // server, which then relays it to the dServer you specified. Tags and definitions
     // will be parsed on the dServer, and the definitions in the current queue will
     // carry over.
-    // Note that sending to ALL does not run the commands on the current server.
 
     // @Tags
     // None
