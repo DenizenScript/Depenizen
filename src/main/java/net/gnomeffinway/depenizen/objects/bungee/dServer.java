@@ -6,6 +6,7 @@ import net.aufdemrand.denizencore.objects.Fetchable;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class dServer implements dObject {
         ////////
         // Match faction name
 
-        string = string.toLowerCase().replace("server@", "");
+        string = CoreUtilities.toLowerCase(string).replace("server@", "");
         if (onlineServers.containsKey(string)) {
             return onlineServers.get(string);
         }
@@ -49,7 +50,7 @@ public class dServer implements dObject {
     }
 
     public static boolean matches(String arg) {
-        if (onlineServers.containsKey(arg.toLowerCase().replace("server@", "")))
+        if (onlineServers.containsKey(CoreUtilities.toLowerCase(arg).replace("server@", "")))
             return true;
 
         return false;

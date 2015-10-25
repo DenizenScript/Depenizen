@@ -131,6 +131,7 @@ public class SocketClient implements Runnable {
                         packet.deserialize(data);
                         if (packet.isAccepted()) {
                             dB.log("Successfully registered name with the server");
+                            dServer.addOnlineServer(this.registrationName);
                             for (String server : packet.getServerList()) {
                                 if (!server.isEmpty())
                                     dServer.addOnlineServer(server);
