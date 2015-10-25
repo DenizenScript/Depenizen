@@ -1,8 +1,5 @@
 package net.gnomeffinway.depenizen.commands;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
@@ -10,8 +7,8 @@ import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.BracedCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
-import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
+import net.gnomeffinway.depenizen.support.bungee.BungeeSupport;
 import net.gnomeffinway.depenizen.support.bungee.packets.ClientPacketOutScript;
 
 import java.util.List;
@@ -99,10 +96,10 @@ public class BungeeCommand extends BracedCommand {
 
         dB.report(scriptEntry, getName(), (server != null ? server.debug() : "") + all.debug());
 
-        if (Depenizen.getCurrentInstance().isSocketConnected()) {
+        if (BungeeSupport.isSocketConnected()) {
             ClientPacketOutScript packet = new ClientPacketOutScript(all.asBoolean() ? "ALL" : server.getName(),
                     bracedCommands, scriptEntry.getResidingQueue().getAllDefinitions());
-            Depenizen.getCurrentInstance().getSocketClient().send(packet);
+            BungeeSupport.getSocketClient().send(packet);
         }
         else {
             dB.echoError("Server is not connected to a BungeeCord Socket.");

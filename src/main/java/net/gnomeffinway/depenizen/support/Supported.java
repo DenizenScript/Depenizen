@@ -2,6 +2,8 @@ package net.gnomeffinway.depenizen.support;
 
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.Settings;
+import net.gnomeffinway.depenizen.support.bungee.BungeeSupport;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
@@ -12,21 +14,31 @@ import java.util.jar.JarFile;
 
 public class Supported {
 
-    private final static Class<Supported> clazz = Supported.class;
-    private static Depenizen depenizen;
     private static SupportManager supportManager;
     private static Map<String, Class<? extends Support>> supportClasses;
 
-    public static void setup(Depenizen dep, PluginManager pluginManager, ClassLoader loader) {
-        depenizen = dep;
+    public static void setup(Depenizen depenizen, PluginManager pluginManager, ClassLoader loader) {
         getSupportClasses(loader);
         supportManager = new SupportManager(depenizen);
+
+        // Register plugin supports
         for (String name : depenizen.getDescription().getSoftDepend()) {
-            if (set(name.toUpperCase(), pluginManager.getPlugin(name)))
-                Depenizen.depenizenLog(name + " hooked, enabling add-ons.");
-            else
-                Depenizen.depenizenLog(name + " not found, add-ons will not enable.");
+            try {
+                if (set(name.toUpperCase(), pluginManager.getPlugin(name)))
+                    Depenizen.depenizenLog(name + " hooked, enabling add-ons.");
+                else
+                    Depenizen.depenizenLog(name + " not found, add-ons will not enable.");
+            } catch (Exception e) {
+                dB.echoError("Error while hooking plugin '" + name + "'");
+                dB.echoError(e);
+            }
         }
+
+        // Register BungeeCord support
+        if (Settings.socketEnabled()) {
+            supportManager.register(new BungeeSupport());
+        }
+
         supportManager.registerNewObjects();
     }
 
@@ -36,10 +48,10 @@ public class Supported {
             supportManager.register(Support.setPlugin(supportClasses.get(name), plugin));
             return true;
         } catch (IllegalAccessException e) {
-            dB.echoError("Report this error to Morphan1 or the Denizen dev team: SupportedIllegalAccess");
+            dB.echoError("Report this error to Morphan1 or the Denizen dev team: SupportedIllegalAccess-" + name);
             dB.echoError(e);
         } catch (InstantiationException e) {
-            dB.echoError("Report this error to Morphan1 or the Denizen dev team: SupportedInstantiationSupport" + name);
+            dB.echoError("Report this error to Morphan1 or the Denizen dev team: SupportedInstantiationSupport-" + name);
             dB.echoError(e);
         }
         return false;
