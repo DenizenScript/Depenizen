@@ -14,7 +14,8 @@ import net.aufdemrand.denizen.utilities.depends.Depends;
 import net.gnomeffinway.depenizen.Depenizen;
 import org.bukkit.event.Listener;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SupportManager {
 

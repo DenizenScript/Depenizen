@@ -16,13 +16,25 @@ public class dServer implements dObject {
     private static final Map<String, dServer> onlineServers = new HashMap<String, dServer>();
 
     public static void addOnlineServer(String name) {
-        onlineServers.put(name.toLowerCase(), new dServer(name));
+        onlineServers.put(CoreUtilities.toLowerCase(name), new dServer(name));
     }
 
     public static void removeOnlineServer(String name) {
-        name = name.toLowerCase();
+        name = CoreUtilities.toLowerCase(name);
         if (onlineServers.containsKey(name))
             onlineServers.remove(name);
+    }
+
+    public static dServer getServerFromName(String name) {
+        name = CoreUtilities.toLowerCase(name);
+        if (onlineServers.containsKey(name)) {
+            return onlineServers.get(name);
+        }
+        return null;
+    }
+
+    public static Map<String, dServer> getOnlineServers() {
+        return onlineServers;
     }
 
     /////////////////////
@@ -37,16 +49,13 @@ public class dServer implements dObject {
     public static dServer valueOf(String string, TagContext context) {
         if (string == null) return null;
 
-        ////////
-        // Match faction name
+        dServer server = getServerFromName(CoreUtilities.toLowerCase(string).replace("server@", ""));
 
-        string = CoreUtilities.toLowerCase(string).replace("server@", "");
-        if (onlineServers.containsKey(string)) {
-            return onlineServers.get(string);
+        if (server == null) {
+            dB.echoError("Specified server '" + string + "' does not exist or is not online.");
         }
-        dB.echoError("Specified server '" + string + "' does not exist or is not online.");
 
-        return null;
+        return server;
     }
 
     public static boolean matches(String arg) {
