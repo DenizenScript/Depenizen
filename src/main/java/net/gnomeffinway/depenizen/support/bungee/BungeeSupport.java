@@ -18,6 +18,7 @@ public class BungeeSupport extends Support {
         new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 2);
         registerObjects(dServer.class);
         registerProperty(BungeePlayerExtension.class, dPlayer.class);
+        registerAdditionalTags("bungee");
         ScriptEvent.registerScriptEvent(new ProxyPingScriptEvent());
         startSocket();
     }
