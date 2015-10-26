@@ -11,6 +11,7 @@ import net.aufdemrand.denizencore.tags.TagManager;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizen.utilities.depends.Depends;
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.gnomeffinway.depenizen.Depenizen;
 import org.bukkit.event.Listener;
 
@@ -58,7 +59,7 @@ public class SupportManager {
         }
         if (support.hasAdditionalTags()) {
             for (String tag : support.getAdditionalTags()) {
-                this.additionalTags.put(tag.toLowerCase(), support);
+                this.additionalTags.put(CoreUtilities.toLowerCase(tag), support);
             }
         }
     }
@@ -87,11 +88,11 @@ public class SupportManager {
         if (event.replaced()) return;
         Attribute attribute = event.getAttributes();
         String replaced = null;
-        String name = event.getName().toLowerCase();
+        String name = CoreUtilities.toLowerCase(event.getName());
         for (String tag : additionalTags.keySet()) {
             if (name.startsWith(tag)) {
                 replaced = additionalTags.get(tag).additionalTags(attribute);
-                return;
+                break;
             }
         }
         if (replaced != null) {

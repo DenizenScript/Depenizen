@@ -36,7 +36,11 @@ public class Supported {
 
         // Register BungeeCord support
         if (Settings.socketEnabled()) {
+            Depenizen.depenizenLog("BungeeCord socket enabled in config, enabling add-ons.");
             supportManager.register(new BungeeSupport());
+        }
+        else {
+            Depenizen.depenizenLog("BungeeCord socket disabled in config, add-ons will not enable.");
         }
 
         supportManager.registerNewObjects();
