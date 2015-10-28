@@ -8,11 +8,14 @@ import java.util.Map;
 public class ClientPacketOutScript extends Packet {
 
     private String destination;
+    private boolean shouldDebug;
     private List<ScriptEntry> scriptEntries;
     private Map<String, String> definitions;
 
-    public ClientPacketOutScript(String destination, List<ScriptEntry> scriptEntries, Map<String, String> definitions) {
+    public ClientPacketOutScript(String destination, boolean shouldDebug, List<ScriptEntry> scriptEntries,
+                                 Map<String, String> definitions) {
         this.destination = destination;
+        this.shouldDebug = shouldDebug;
         this.scriptEntries = scriptEntries;
         this.definitions = definitions;
     }
@@ -23,6 +26,7 @@ public class ClientPacketOutScript extends Packet {
         serializer.writeString(destination);
 
         DataSerializer scriptBox = new DataSerializer();
+        scriptBox.writeBoolean(shouldDebug);
         scriptBox.writeInt(scriptEntries.size());
         for (ScriptEntry scriptEntry : scriptEntries) {
             scriptBox.writeString(scriptEntry.getCommandName());

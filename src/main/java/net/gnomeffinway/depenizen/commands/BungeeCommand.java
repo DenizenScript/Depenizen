@@ -97,7 +97,7 @@ public class BungeeCommand extends BracedCommand {
 
         if (BungeeSupport.isSocketConnected()) {
             ClientPacketOutScript packet = new ClientPacketOutScript(all.asBoolean() ? "ALL" : server.getName(),
-                    bracedCommands, scriptEntry.getResidingQueue().getAllDefinitions());
+                    scriptEntry.shouldDebug(), bracedCommands, scriptEntry.getResidingQueue().getAllDefinitions());
             BungeeSupport.getSocketClient().send(packet);
         }
         else {

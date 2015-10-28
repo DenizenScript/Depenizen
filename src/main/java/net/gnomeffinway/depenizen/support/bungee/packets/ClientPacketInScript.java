@@ -28,12 +28,15 @@ public class ClientPacketInScript extends Packet {
         DataDeserializer scriptBox = new DataDeserializer(deserializer.readByteArray());
 
         List<ScriptEntry> scriptEntryList = new ArrayList<ScriptEntry>();
+        boolean shouldDebug = scriptBox.readBoolean();
         int commandCount = scriptBox.readInt();
         try {
             for (int i = 0; i < commandCount; i++) {
                 String commandName = scriptBox.readString();
                 String[] arguments = scriptBox.readStringArray();
-                scriptEntryList.add(new ScriptEntry(commandName, arguments, null));
+                ScriptEntry scriptEntry = new ScriptEntry(commandName, arguments, null);
+                scriptEntry.fallbackDebug = shouldDebug;
+                scriptEntryList.add(scriptEntry);
             }
         } catch (Exception e) {
             dB.echoError(e);
