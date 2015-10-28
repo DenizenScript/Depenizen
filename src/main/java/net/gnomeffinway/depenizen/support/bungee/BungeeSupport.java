@@ -5,18 +5,21 @@ import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.Settings;
 import net.gnomeffinway.depenizen.commands.BungeeCommand;
 import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.extensions.bungee.BungeePlayerExtension;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.Support;
+import org.bukkit.Bukkit;
 
 public class BungeeSupport extends Support {
 
     public BungeeSupport() {
         new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 2);
         registerObjects(dServer.class);
+        Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(Depenizen.getCurrentInstance(), "BungeeCord");
         registerProperty(BungeePlayerExtension.class, dPlayer.class);
         registerAdditionalTags("bungee");
         ScriptEvent.registerScriptEvent(new ProxyPingScriptEvent());
