@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.commands;
+package net.gnomeffinway.depenizen.commands.bungee;
 
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;

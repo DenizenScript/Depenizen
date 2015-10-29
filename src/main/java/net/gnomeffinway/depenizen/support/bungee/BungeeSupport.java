@@ -7,7 +7,7 @@ import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.Settings;
-import net.gnomeffinway.depenizen.commands.BungeeCommand;
+import net.gnomeffinway.depenizen.commands.bungee.BungeeCommand;
 import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.extensions.bungee.BungeePlayerExtension;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;

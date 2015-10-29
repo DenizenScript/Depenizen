@@ -1,10 +1,12 @@
 package net.gnomeffinway.depenizen.support.bungee;
 
+import net.aufdemrand.denizencore.tags.TagManager;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
 import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.commands.bungee.BungeeTagCommand;
 import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.bungee.packets.*;
@@ -201,6 +203,17 @@ public class SocketClient implements Runnable {
                         }
                     }
                     // 0x04 (EventSubscribe) is outbound
+                    else if (packetType == 0x05) {
+                        ClientPacketInTag packet = new ClientPacketInTag();
+                        packet.deserialize(data);
+                        String parsed = TagManager.tag(packet.getTag(), null);
+                        send(new ClientPacketOutTagParsed(packet.getId(), parsed, packet.getFrom()));
+                    }
+                    else if (packetType == 0x06) {
+                        ClientPacketInTagParsed packet = new ClientPacketInTagParsed();
+                        packet.deserialize(data);
+                        BungeeTagCommand.returnTag(packet.getId(), packet.getResult());
+                    }
                     else {
                         this.close("Received invalid packet from server: " + packetType);
                     }
