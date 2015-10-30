@@ -15,8 +15,12 @@ public class ClientPacketOutTagParsed extends Packet {
     @Override
     public void serialize(DataSerializer serializer) {
         serializer.writeInt(0x06);
-        serializer.writeInt(id);
-        serializer.writeString(result);
+
+        DataSerializer box = new DataSerializer();
+        box.writeInt(id);
+        box.writeString(result);
+        serializer.writeByteArray(box.toByteArray());
+
         serializer.writeString(returnToSender);
     }
 }

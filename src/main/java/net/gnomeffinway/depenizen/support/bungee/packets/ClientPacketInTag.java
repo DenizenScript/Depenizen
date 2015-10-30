@@ -23,8 +23,10 @@ public class ClientPacketInTag extends Packet {
 
     @Override
     public void deserialize(DataDeserializer deserializer) {
-        this.id = deserializer.readInt();
-        this.tag = deserializer.readString();
+        DataDeserializer box = new DataDeserializer(deserializer.readByteArray());
+        this.id = box.readInt();
+        this.tag = box.readString();
+
         this.from = deserializer.readString();
     }
 }
