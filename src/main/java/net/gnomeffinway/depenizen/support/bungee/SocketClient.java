@@ -264,10 +264,11 @@ public class SocketClient implements Runnable {
         final long delay = Settings.socketReconnectDelay();
         while (!this.isConnected) {
             try {
-                this.connect();
                 Thread.sleep(delay);
+                this.connect();
             } catch (InterruptedException e) {
                 dB.echoError(e);
+                return;
             }
         }
     }
