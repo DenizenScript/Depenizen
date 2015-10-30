@@ -1,6 +1,5 @@
 package net.gnomeffinway.depenizen.commands.bungee;
 
-import net.aufdemrand.denizen.tags.BukkitTagContext;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
@@ -9,7 +8,7 @@ import net.aufdemrand.denizencore.objects.ObjectFetcher;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
-import net.aufdemrand.denizencore.tags.TagContext;
+import net.aufdemrand.denizencore.scripts.commands.Holdable;
 import net.aufdemrand.denizencore.tags.TagManager;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
@@ -17,22 +16,26 @@ import net.gnomeffinway.depenizen.support.bungee.BungeeSupport;
 import net.gnomeffinway.depenizen.support.bungee.packets.ClientPacketOutTag;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class BungeeTagCommand extends AbstractCommand {
+public class BungeeTagCommand extends AbstractCommand implements Holdable {
+
+    public BungeeTagCommand(){
+        setParseArgs(false);
+    }
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
         for (aH.Argument arg : aH.interpret(scriptEntry.getOriginalArguments())) {
 
-            if (arg.matchesPrefix("server", "s")) {
+            if (!scriptEntry.hasObject("server")
+                    && arg.matchesPrefix("server", "s")) {
                 scriptEntry.addObject("server", dServer.valueOf(TagManager.tag(arg.getValue(),
                         DenizenAPI.getCurrentInstance().getTagContext(scriptEntry))));
             }
 
-            else {
+            else if (!scriptEntry.hasObject("tag")) {
                 scriptEntry.addObject("tag", arg.asElement());
             }
 
@@ -55,7 +58,9 @@ public class BungeeTagCommand extends AbstractCommand {
             if (!scriptEntry.shouldWaitFor()) {
                 throw new CommandExecutionException("Currently, this command only works if you ~wait for it!");
             }
-            BungeeSupport.getSocketClient().send(new ClientPacketOutTag(nextId++, tag.asString(), server.getName()));
+            int id = nextId++;
+            waitingEntries.put(id, scriptEntry);
+            BungeeSupport.getSocketClient().send(new ClientPacketOutTag(id, tag.asString(), server.getName()));
         }
         else {
             dB.echoError("Server is not connected to a BungeeCord Socket.");

@@ -8,6 +8,7 @@ import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.Settings;
 import net.gnomeffinway.depenizen.commands.bungee.BungeeCommand;
+import net.gnomeffinway.depenizen.commands.bungee.BungeeTagCommand;
 import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.extensions.bungee.BungeePlayerExtension;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
@@ -18,6 +19,7 @@ public class BungeeSupport extends Support {
 
     public BungeeSupport() {
         new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 2);
+        new BungeeTagCommand().activate().as("BUNGEETAG").withOptions("bungeetag [<tag>] [server:<server>]", 2);
         registerObjects(dServer.class);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(Depenizen.getCurrentInstance(), "BungeeCord");
         registerProperty(BungeePlayerExtension.class, dPlayer.class);
