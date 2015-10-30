@@ -14,6 +14,7 @@ public class Settings {
     private static final String SOCKET_PASSWORD = "Socket.Password";
     private static final String SOCKET_NAME = "Socket.Name";
     private static final String SOCKET_TIMEOUT = "Socket.Timeout";
+    private static final String SOCKET_RECONNECT_DELAY = "Socket.Reconnect Delay";
 
     public static boolean socketEnabled() {
         return Depenizen.getCurrentInstance().getConfig().getBoolean(SOCKET_ENABLED, false);
@@ -37,5 +38,9 @@ public class Settings {
 
     public static int socketTimeout() {
         return Depenizen.getCurrentInstance().getConfig().getInt(SOCKET_TIMEOUT, 3000);
+    }
+
+    public static long socketReconnectDelay() {
+        return Depenizen.getCurrentInstance().getConfig().getLong(SOCKET_RECONNECT_DELAY, 10000);
     }
 }

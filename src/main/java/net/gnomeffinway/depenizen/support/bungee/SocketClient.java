@@ -6,6 +6,7 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
 import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
 import net.gnomeffinway.depenizen.Depenizen;
+import net.gnomeffinway.depenizen.Settings;
 import net.gnomeffinway.depenizen.commands.bungee.BungeeTagCommand;
 import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
@@ -75,10 +76,12 @@ public class SocketClient implements Runnable {
                 this.isConnected = true;
                 this.task = Bukkit.getServer().getScheduler().runTaskAsynchronously(Depenizen.getCurrentInstance(), this);
                 this.send(new ClientPacketOutRegister(this.registrationName));
-            } catch (IOException e) {
-                dB.log("Error while connecting to BungeeCord Socket: " + e.getMessage());
             } catch (Exception e) {
-                dB.echoError(e);
+                dB.log("Error while connecting to BungeeCord Socket: " + e.getMessage());
+                if (socket.isConnected()) {
+                    close();
+                }
+                attemptReconnect();
             }
         }
     }
@@ -223,8 +226,10 @@ public class SocketClient implements Runnable {
                 this.close("Password is incorrect");
             } catch (SocketTimeoutException e) {
                 this.close("Connection timed out");
+                attemptReconnect();
             } catch (IOException e) {
                 this.close("Server socket closed");
+                attemptReconnect();
             } catch (Exception e) {
                 this.close("Error receiving data from server: " + e.getMessage());
                 dB.echoError(e);
@@ -253,5 +258,17 @@ public class SocketClient implements Runnable {
         for (int i = 0; i < data.length; i++)
             result[i] = ((byte)(data[i] ^ passwordBytes[(i % passwordBytes.length)]));
         return result;
+    }
+
+    private void attemptReconnect() {
+        final long delay = Settings.socketReconnectDelay();
+        while (!this.isConnected) {
+            try {
+                this.connect();
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+                dB.echoError(e);
+            }
+        }
     }
 }

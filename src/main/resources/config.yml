@@ -14,3 +14,6 @@ Socket:
   # trying to connect to the BungeeCord Socket before giving up.
   # Set this to 0 to try to connect until there's an error
   Timeout: 3000
+  # The time in milliseconds to wait between attempts at reconnecting
+  # to the socket
+  Reconnect Delay: 10000
