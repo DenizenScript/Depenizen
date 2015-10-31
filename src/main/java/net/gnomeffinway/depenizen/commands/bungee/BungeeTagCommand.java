@@ -20,6 +20,36 @@ import java.util.Map;
 
 public class BungeeTagCommand extends AbstractCommand implements Holdable {
 
+    // <--[command]
+    // @Name BungeeTag
+    // @Syntax bungeetag [<tag>] [server:<server>]
+    // @Group Depenizen
+    // @Plugin Depenizen, BungeeCord
+    // @Required 2
+    // @Stable stable
+    // @Short Gets tags from other servers on the BungeeCord network. Requires you ~wait for it.
+    // @Author Morphan1
+
+    // @Description
+    // This command allows you to request and receive data from Denizen tags on other servers
+    // connected to BungeeCord. The tag argument should be written just like a normal tag; you
+    // don't have to change anything about it. All definitions in the current queue are also
+    // sent, so you may use them in the tag as usual.
+    //
+    // NOTE: You MUST ~wait for the command to use it. This means DO NOT use "- bungeetag", but
+    // rather, "- ~bungeetag". This is so that the data can be correctly sent and received.
+
+    // @Tags
+    // <entry[entryName].result> returns the value of the tag as parsed on the other server.
+
+    // @Usage
+    // Use to check a player's experience on another server.
+    // - define player <player>
+    // - ~bungeetag <def[player].xp> server:Survival save:xp
+    // - narrate "You have <entry[xp].result> XP in Survival."
+
+    // -->
+
     public BungeeTagCommand(){
         setParseArgs(false);
     }
@@ -56,11 +86,12 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
 
         if (BungeeSupport.isSocketConnected()) {
             if (!scriptEntry.shouldWaitFor()) {
-                throw new CommandExecutionException("Currently, this command only works if you ~wait for it!");
+                throw new CommandExecutionException("You MUST ~wait for this command!");
             }
             int id = nextId++;
             waitingEntries.put(id, scriptEntry);
-            BungeeSupport.getSocketClient().send(new ClientPacketOutTag(id, tag.asString(), server.getName()));
+            BungeeSupport.getSocketClient().send(new ClientPacketOutTag(id, tag.asString(), scriptEntry.shouldDebug(),
+                    scriptEntry.getResidingQueue().getAllDefinitions(), server.getName()));
         }
         else {
             dB.echoError("Server is not connected to a BungeeCord Socket.");
