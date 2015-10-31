@@ -1,7 +1,5 @@
 package net.gnomeffinway.depenizen.support.bungee;
 
-import net.aufdemrand.denizen.tags.BukkitTagContext;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.tags.TagManager;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
@@ -211,7 +209,8 @@ public class SocketClient implements Runnable {
                     else if (packetType == 0x05) {
                         ClientPacketInTag packet = new ClientPacketInTag();
                         packet.deserialize(data);
-                        String parsed = TagManager.tag(packet.getTag(), new BukkitTagContext(null, null, false, null, false, null));
+                        DefinitionsWrapper definitions = new DefinitionsWrapper(packet.getDefinitions());
+                        String parsed = TagManager.tag(packet.getTag(), new BungeeTagContext(packet.shouldDebug(), definitions));
                         send(new ClientPacketOutTagParsed(packet.getId(), parsed, packet.getFrom()));
                     }
                     else if (packetType == 0x06) {
