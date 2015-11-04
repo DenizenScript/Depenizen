@@ -183,7 +183,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @input Element(Boolean)
         // @description
         // Sets whether the player is marked as AFK.
-        // @extensions
+        // @tags
         // <player.is_afk>
         // @plugin Depenizen, Essentials
         // -->
@@ -197,7 +197,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @input Element(Boolean)
         // @description
         // Sets whether the player has god mode enabled.
-        // @extensions
+        // @tags
         // <player.god_mode>
         // @plugin Depenizen, Essentials
         // -->
@@ -212,7 +212,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @description
         // Sets whether the player is muted. Optionally, you may also
         // specify a duration to set how long they are muted for.
-        // @extensions
+        // @tags
         // <player.is_muted>
         // <player.mute_timeout>
         // @plugin Depenizen, Essentials
@@ -239,7 +239,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @input Element(Boolean)
         // @description
         // Sets whether the player has SocialSpy enabled.
-        // @extensions
+        // @tags
         // <player.socialspy>
         // @plugin Depenizen, Essentials
         // -->

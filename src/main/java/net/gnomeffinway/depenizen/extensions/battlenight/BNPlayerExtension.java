@@ -65,7 +65,7 @@ public class BNPlayerExtension extends dObjectExtension {
             // <--[tag]
             // @attribute <p@player.bn.team>
             // @returns Element
-            // @decription
+            // @description
             // Returns the team the player is currenly on.
             // @plugin Depenizen, BattleNight
             // -->
