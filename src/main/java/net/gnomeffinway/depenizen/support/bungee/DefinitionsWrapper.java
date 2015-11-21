@@ -1,5 +1,6 @@
 package net.gnomeffinway.depenizen.support.bungee;
 
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.aufdemrand.denizencore.utilities.DefinitionProvider;
 
 import java.util.Map;
@@ -14,7 +15,7 @@ public class DefinitionsWrapper implements DefinitionProvider {
 
     @Override
     public void addDefinition(String definition, String value) {
-        this.definitions.put(definition, value);
+        this.definitions.put(CoreUtilities.toLowerCase(definition), value);
     }
 
     @Override
@@ -27,16 +28,16 @@ public class DefinitionsWrapper implements DefinitionProvider {
         if (definition == null) {
             return null;
         }
-        return this.definitions.get(definition);
+        return this.definitions.get(CoreUtilities.toLowerCase(definition));
     }
 
     @Override
     public boolean hasDefinition(String definition) {
-        return this.definitions.containsKey(definition);
+        return this.definitions.containsKey(CoreUtilities.toLowerCase(definition));
     }
 
     @Override
     public void removeDefinition(String definition) {
-        this.definitions.remove(definition);
+        this.definitions.remove(CoreUtilities.toLowerCase(definition));
     }
 }
