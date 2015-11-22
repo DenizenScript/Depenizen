@@ -12,6 +12,7 @@ import net.gnomeffinway.depenizen.commands.bungee.BungeeTagCommand;
 import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.events.bungee.ServerConnectedScriptEvent;
 import net.gnomeffinway.depenizen.events.bungee.ServerDisconnectScriptEvent;
+import net.gnomeffinway.depenizen.events.bungee.ServerSwitchScriptEvent;
 import net.gnomeffinway.depenizen.extensions.bungee.BungeePlayerExtension;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.Support;
@@ -29,6 +30,7 @@ public class BungeeSupport extends Support {
         ScriptEvent.registerScriptEvent(new ProxyPingScriptEvent());
         ScriptEvent.registerScriptEvent(new ServerConnectedScriptEvent());
         ScriptEvent.registerScriptEvent(new ServerDisconnectScriptEvent());
+        ScriptEvent.registerScriptEvent(new ServerSwitchScriptEvent());
         startSocket();
     }
 
