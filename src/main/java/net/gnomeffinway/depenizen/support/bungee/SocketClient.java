@@ -8,6 +8,7 @@ import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.Settings;
 import net.gnomeffinway.depenizen.commands.bungee.BungeeTagCommand;
+import net.gnomeffinway.depenizen.events.bungee.BungeeScriptEvent;
 import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.bungee.packets.*;
@@ -183,27 +184,13 @@ public class SocketClient implements Runnable {
                     else if (packetType == 0x03) {
                         ClientPacketInEvent packet = new ClientPacketInEvent();
                         packet.deserialize(data);
-                        if (packet.getEventName().equals("ProxyPing")) {
-                            ProxyPingScriptEvent event = ProxyPingScriptEvent.instance;
-                            if (event != null) {
-                                Map<String, String> context = packet.getContext();
-                                event.address = new Element(context.get("address"));
-                                event.numPlayers = new Element(context.get("num_players"));
-                                event.motd = new Element(context.get("motd"));
-                                event.maxPlayers = new Element(context.get("max_players"));
-                                event.version = new Element(context.get("version"));
-                                event.fire();
-                                if (packet.shouldSendResponse()) {
-                                    Map<String, String> determinations = new HashMap<String, String>();
-                                    determinations.put("num_players", event.numPlayers.asString());
-                                    determinations.put("max_players", event.maxPlayers.asString());
-                                    determinations.put("motd", event.motd.asString());
-                                    determinations.put("version", event.version.asString());
-                                    ClientPacketOutEventResponse response =
-                                            new ClientPacketOutEventResponse(packet.getEventId(), determinations);
-                                    send(response);
-                                }
-                            }
+                        long id = packet.getEventId();
+                        String name = packet.getEventName();
+                        Map<String, String> context = packet.getContext();
+                        Map<String, String> determinations = BungeeScriptEvent.fire(name, context);
+                        if (packet.shouldSendResponse() && determinations != null) {
+                            ClientPacketOutEventResponse response = new ClientPacketOutEventResponse(id, determinations);
+                            send(response);
                         }
                     }
                     // 0x04 (EventSubscribe) is outbound

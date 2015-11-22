@@ -1,18 +1,35 @@
 package net.gnomeffinway.depenizen.events.bungee;
 
-import net.aufdemrand.denizencore.events.ScriptEvent;
-import net.gnomeffinway.depenizen.Depenizen;
+import net.aufdemrand.denizen.events.BukkitScriptEvent;
+import net.aufdemrand.denizen.objects.dItem;
+import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
+import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.bungee.BungeeSupport;
 import net.gnomeffinway.depenizen.support.bungee.SocketClient;
 import net.gnomeffinway.depenizen.support.bungee.packets.ClientPacketOutEventSubscribe;
 
-public abstract class BungeeScriptEvent extends ScriptEvent {
+import java.util.HashMap;
+import java.util.Map;
+
+public abstract class BungeeScriptEvent extends BukkitScriptEvent {
+
+    private static Map<String, BungeeScriptEvent> initializedEvents = new HashMap<String, BungeeScriptEvent>();
+
+    public static Map<String, String> fire(String event, Map<String, String> context) {
+        if (initializedEvents.containsKey(event)) {
+            return initializedEvents.get(event).fire(context);
+        }
+        return null;
+    }
 
     @Override
     public void init() {
         SocketClient socketClient = BungeeSupport.getSocketClient();
         if (socketClient != null && socketClient.isConnected()) {
-            socketClient.send(new ClientPacketOutEventSubscribe(ClientPacketOutEventSubscribe.Action.SUBSCRIBE, getName()));
+            String name = getName();
+            initializedEvents.put(name, this);
+            socketClient.send(new ClientPacketOutEventSubscribe(ClientPacketOutEventSubscribe.Action.SUBSCRIBE, name));
         }
     }
 
@@ -20,7 +37,23 @@ public abstract class BungeeScriptEvent extends ScriptEvent {
     public void destroy() {
         SocketClient socketClient = BungeeSupport.getSocketClient();
         if (socketClient != null && socketClient.isConnected()) {
-            socketClient.send(new ClientPacketOutEventSubscribe(ClientPacketOutEventSubscribe.Action.UNSUBSCRIBE, getName()));
+            String name = getName();
+            initializedEvents.remove(name);
+            socketClient.send(new ClientPacketOutEventSubscribe(ClientPacketOutEventSubscribe.Action.UNSUBSCRIBE, name));
         }
+    }
+
+    public abstract Map<String, String> fire(Map<String, String> context);
+
+    public boolean tryServer(dServer server, String comparedto) {
+        comparedto = CoreUtilities.toLowerCase(comparedto);
+        if (comparedto.equals("server")) {
+            return true;
+        }
+        if (comparedto.length() == 0) {
+            dB.echoError("tryServer missing server value when compared to " + server.getName());
+            return false;
+        }
+        return CoreUtilities.toLowerCase(server.getName()).equals(comparedto);
     }
 }

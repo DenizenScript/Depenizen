@@ -7,8 +7,10 @@ import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
+import net.gnomeffinway.depenizen.support.bungee.packets.ClientPacketOutEventResponse;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ProxyPingScriptEvent extends BungeeScriptEvent {
 
@@ -111,5 +113,21 @@ public class ProxyPingScriptEvent extends BungeeScriptEvent {
         context.put("max_players", maxPlayers);
         context.put("version", version);
         return context;
+    }
+
+    @Override
+    public Map<String, String> fire(Map<String, String> context) {
+        address = new Element(context.get("address"));
+        numPlayers = new Element(context.get("num_players"));
+        motd = new Element(context.get("motd"));
+        maxPlayers = new Element(context.get("max_players"));
+        version = new Element(context.get("version"));
+        fire();
+        Map<String, String> determinations = new HashMap<String, String>();
+        determinations.put("num_players", numPlayers.asString());
+        determinations.put("max_players", maxPlayers.asString());
+        determinations.put("motd", motd.asString());
+        determinations.put("version", version.asString());
+        return determinations;
     }
 }
