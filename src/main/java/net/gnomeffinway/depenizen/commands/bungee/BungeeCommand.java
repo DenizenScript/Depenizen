@@ -4,6 +4,7 @@ import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.BracedCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
@@ -11,13 +12,15 @@ import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.bungee.BungeeSupport;
 import net.gnomeffinway.depenizen.support.bungee.packets.ClientPacketOutScript;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class BungeeCommand extends BracedCommand {
 
     // <--[command]
     // @Name Bungee
-    // @Syntax bungee [<server>/all] [<commands>]
+    // @Syntax bungee [<server>|...] [<commands>]
     // @Group Depenizen
     // @Plugin Depenizen, BungeeCord
     // @Required 2
@@ -37,7 +40,7 @@ public class BungeeCommand extends BracedCommand {
     // @Usage
     // Use to send network-wide join messages.
     // - define name <player.name.display>
-    // - bungee all {
+    // - bungee <bungee.list_servers> {
     //   - announce "<yellow>%name% has joined the network."
     //   }
 
@@ -58,13 +61,13 @@ public class BungeeCommand extends BracedCommand {
 
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
 
-            if (!scriptEntry.hasObject("server")
+            if (!scriptEntry.hasObject("servers")
                     && !scriptEntry.hasObject("all-servers")
-                    && arg.matchesArgumentType(dServer.class)) {
-                scriptEntry.addObject("server", arg.asType(dServer.class));
+                    && arg.matchesArgumentList(dServer.class)) {
+                scriptEntry.addObject("servers", arg.asType(dList.class));
             }
 
-            else if (!scriptEntry.hasObject("server")
+            else if (!scriptEntry.hasObject("servers")
                     && !scriptEntry.hasObject("all-servers")
                     && arg.matches("all")) {
                 scriptEntry.addObject("all-servers", new Element(true));
@@ -77,11 +80,11 @@ public class BungeeCommand extends BracedCommand {
 
         }
 
-        if (!scriptEntry.hasObject("server") && !scriptEntry.hasObject("all-servers"))
-            throw new InvalidArgumentsException("Must specify a valid server or 'ALL'.");
+        if (!scriptEntry.hasObject("servers") && !scriptEntry.hasObject("all-servers"))
+            throw new InvalidArgumentsException("Must specify valid server(s)!");
 
         if (!scriptEntry.hasObject("braces"))
-            throw new InvalidArgumentsException("Must have braces.");
+            throw new InvalidArgumentsException("Must have braces!");
 
         scriptEntry.defaultObject("all-servers", new Element(false));
     }
@@ -90,14 +93,29 @@ public class BungeeCommand extends BracedCommand {
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
 
         Element all = scriptEntry.getElement("all-servers");
-        dServer server = scriptEntry.getdObject("server");
+        dList servers = scriptEntry.getdObject("servers");
         List<ScriptEntry> bracedCommands = ((List<BracedData>) scriptEntry.getObject("braces")).get(0).value;
 
-        dB.report(scriptEntry, getName(), (server != null ? server.debug() : "") + all.debug());
+        List<String> serverNames = new ArrayList<String>();
+
+        if (all.asBoolean()) {
+            dB.echoError("Argument 'ALL' is deprecated and will be removed in the future. Please use <bungee.list_servers> instead!");
+            for (dServer server : dServer.getOnlineServers().values()) {
+                serverNames.add(server.getName());
+            }
+        }
+        else {
+            for (dServer server : servers.filter(dServer.class)) {
+                serverNames.add(server.getName());
+            }
+        }
+
+        dB.report(scriptEntry, getName(), servers.debug());
 
         if (BungeeSupport.isSocketConnected()) {
-            ClientPacketOutScript packet = new ClientPacketOutScript(all.asBoolean() ? "ALL" : server.getName(),
-                    scriptEntry.shouldDebug(), bracedCommands, scriptEntry.getResidingQueue().getAllDefinitions());
+            boolean debug = scriptEntry.shouldDebug();
+            Map<String, String> definitions = scriptEntry.getResidingQueue().getAllDefinitions();
+            ClientPacketOutScript packet = new ClientPacketOutScript(serverNames, debug, bracedCommands, definitions);
             BungeeSupport.getSocketClient().send(packet);
         }
         else {

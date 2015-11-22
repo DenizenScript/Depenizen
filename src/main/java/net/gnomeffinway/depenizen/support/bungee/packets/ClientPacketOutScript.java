@@ -7,14 +7,14 @@ import java.util.Map;
 
 public class ClientPacketOutScript extends Packet {
 
-    private String destination;
+    private List<String> destinations;
     private boolean shouldDebug;
     private List<ScriptEntry> scriptEntries;
     private Map<String, String> definitions;
 
-    public ClientPacketOutScript(String destination, boolean shouldDebug, List<ScriptEntry> scriptEntries,
+    public ClientPacketOutScript(List<String> destinations, boolean shouldDebug, List<ScriptEntry> scriptEntries,
                                  Map<String, String> definitions) {
-        this.destination = destination;
+        this.destinations = destinations;
         this.shouldDebug = shouldDebug;
         this.scriptEntries = scriptEntries;
         this.definitions = definitions;
@@ -23,7 +23,7 @@ public class ClientPacketOutScript extends Packet {
     @Override
     public void serialize(DataSerializer serializer) {
         serializer.writeInt(0x02);
-        serializer.writeString(destination);
+        serializer.writeStringList(destinations);
 
         DataSerializer scriptBox = new DataSerializer();
         scriptBox.writeBoolean(shouldDebug);
