@@ -96,7 +96,8 @@ public class BungeeCommand extends BracedCommand {
         dList servers = scriptEntry.getdObject("servers");
         List<ScriptEntry> bracedCommands = ((List<BracedData>) scriptEntry.getObject("braces")).get(0).value;
 
-        List<String> serverNames = new ArrayList<String>();
+        dList serverNames = new dList();
+        serverNames.setPrefix("servers");
 
         if (all.asBoolean()) {
             dB.echoError("Argument 'ALL' is deprecated and will be removed in the future. Please use <bungee.list_servers> instead!");
@@ -110,7 +111,7 @@ public class BungeeCommand extends BracedCommand {
             }
         }
 
-        dB.report(scriptEntry, getName(), servers.debug());
+        dB.report(scriptEntry, getName(), serverNames.debug());
 
         if (BungeeSupport.isSocketConnected()) {
             boolean debug = scriptEntry.shouldDebug();

@@ -1,15 +1,13 @@
 package net.gnomeffinway.depenizen.support.bungee;
 
-import net.aufdemrand.denizencore.tags.TagManager;
-import net.aufdemrand.denizencore.utilities.debugging.dB;
-import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
 import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
+import net.aufdemrand.denizencore.tags.TagManager;
+import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.Depenizen;
 import net.gnomeffinway.depenizen.Settings;
 import net.gnomeffinway.depenizen.commands.bungee.BungeeTagCommand;
 import net.gnomeffinway.depenizen.events.bungee.BungeeScriptEvent;
-import net.gnomeffinway.depenizen.events.bungee.ProxyPingScriptEvent;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.bungee.packets.*;
 import org.bukkit.Bukkit;
@@ -22,7 +20,6 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.security.MessageDigest;
-import java.util.HashMap;
 import java.util.Map;
 
 public class SocketClient implements Runnable {
