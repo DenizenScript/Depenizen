@@ -11,21 +11,19 @@ import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServerConnectedScriptEvent extends BungeeScriptEvent {
+public class PlayerDisconnectScriptEvent extends BungeeScriptEvent {
 
     // <--[event]
     // @Events
-    // bungee player joins server
-    // bungee player joins <server>
+    // bungee player leaves network
     //
-    // @Triggers when a player fully connects to a server on the BungeeCord network.
+    // @Triggers when a player leaves the BungeeCord network.
     //
     // @Cancellable false
     //
     // @Context
     // <context.uuid> returns an Element of the player's UUID.
     // <context.name> returns an Element of the player's current name.
-    // <context.server> returns the dServer the player has connected to.
 
     // @Determine
     // None
@@ -34,29 +32,29 @@ public class ServerConnectedScriptEvent extends BungeeScriptEvent {
     // -->
 
 
-    public ServerConnectedScriptEvent() {
+    public PlayerDisconnectScriptEvent() {
         instance = this;
     }
 
-    public static ServerConnectedScriptEvent instance;
+    public static PlayerDisconnectScriptEvent instance;
     public Element uuid;
     public Element name;
-    public dServer server;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("bungee player joins ");
+        return lower.startsWith("bungee player leaves ");
     }
 
     @Override
     public boolean matches(ScriptContainer scriptContainer, String s) {
-        return tryServer(server, CoreUtilities.getXthArg(3, s));
+        String lower = CoreUtilities.toLowerCase(s);
+        return lower.endsWith("network");
     }
 
     @Override
     public String getName() {
-        return "ServerConnected";
+        return "PlayerDisconnect";
     }
 
     @Override
@@ -69,7 +67,6 @@ public class ServerConnectedScriptEvent extends BungeeScriptEvent {
         HashMap<String, dObject> context = super.getContext();
         context.put("uuid", uuid);
         context.put("name", name);
-        context.put("server", server);
         return context;
     }
 
@@ -77,7 +74,6 @@ public class ServerConnectedScriptEvent extends BungeeScriptEvent {
     public Map<String, String> fire(Map<String, String> context) {
         uuid = new Element(context.get("uuid"));
         name = new Element(context.get("name"));
-        server = dServer.getServerFromName(context.get("server"));
         fire();
         return null;
     }
