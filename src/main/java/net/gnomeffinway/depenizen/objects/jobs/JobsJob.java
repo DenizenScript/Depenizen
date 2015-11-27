@@ -1,9 +1,9 @@
 package net.gnomeffinway.depenizen.objects.jobs;
 
-import me.zford.jobs.Jobs;
-import me.zford.jobs.container.Job;
-import me.zford.jobs.container.JobProgression;
-import me.zford.jobs.container.JobsPlayer;
+import com.gamingmesh.jobs.Jobs;
+import com.gamingmesh.jobs.container.Job;
+import com.gamingmesh.jobs.container.JobProgression;
+import com.gamingmesh.jobs.container.JobsPlayer;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Fetchable;

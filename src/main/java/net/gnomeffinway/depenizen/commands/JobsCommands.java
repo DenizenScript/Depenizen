@@ -1,7 +1,7 @@
 package net.gnomeffinway.depenizen.commands;
 
-import me.zford.jobs.Jobs;
-import me.zford.jobs.container.JobsPlayer;
+import com.gamingmesh.jobs.Jobs;
+import com.gamingmesh.jobs.container.JobsPlayer;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
@@ -93,7 +93,7 @@ public class JobsCommands extends AbstractCommand {
         switch (action) {
 
             case PROMOTE:
-                player.promoteJob(job.getJob(), number);
+                player.promoteJob(job.getJob(), number, player);
                 break;
 
             case DEMOTE:
@@ -101,7 +101,7 @@ public class JobsCommands extends AbstractCommand {
                 break;
 
             case JOIN:
-                player.joinJob(job.getJob());
+                player.joinJob(job.getJob(), player);
                 break;
 
             case QUIT:
