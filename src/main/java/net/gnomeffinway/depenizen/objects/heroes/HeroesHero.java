@@ -2,6 +2,7 @@ package net.gnomeffinway.depenizen.objects.heroes;
 
 import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.Hero;
+import com.herocraftonline.heroes.characters.party.HeroParty;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -167,13 +168,31 @@ public class HeroesHero implements dObject {
         }
 
         // <--[tag]
+        // @attribute <hero@hero.has_party>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the hero is in a party.
+        // @plugin Depenizen, Heroes
+        // -->
+        else if (attribute.startsWith("has_party")) {
+            return new Element(hero.hasParty()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <hero@hero.in_combat[<entity>]>
         // @returns Element(Boolean)
         // @description
-        // Returns whether the hero is currently in combat.
+        // Returns whether the hero is currently in combat, optionally with a specific entity.
         // @plugin Depenizen, Heroes
         // -->
         else if (attribute.startsWith("in_combat")) {
+            if (attribute.hasContext(1)) {
+                dEntity entity = dEntity.valueOf(attribute.getContext(1));
+                if (entity != null && entity.isLivingEntity()) {
+                    return new Element(hero.isInCombatWith(entity.getLivingEntity()))
+                            .getAttribute(attribute.fulfill(1));
+                }
+            }
             return new Element(hero.isInCombat()).getAttribute(attribute.fulfill(1));
         }
 
@@ -213,31 +232,37 @@ public class HeroesHero implements dObject {
             return list.getAttribute(attribute.fulfill(1));
         }
 
-        // <--[tag]
-        // @attribute <hero@hero.party.leader>
-        // @returns dPlayer
-        // @description
-        // Returns the leader of the hero's party.
-        // @plugin Depenizen, Heroes
-        // -->
-        if (attribute.startsWith("party.leader")) {
-            return dPlayer.mirrorBukkitPlayer(hero.getParty().getLeader().getPlayer())
-                    .getAttribute(attribute.fulfill(2));
-        }
+        if (attribute.startsWith("party") && hero.hasParty()) {
 
-        // <--[tag]
-        // @attribute <hero@hero.party.members>
-        // @returns dList(dPlayer)
-        // @description
-        // Returns a list of players currently in the hero's party.
-        // @plugin Depenizen, Heroes
-        // -->
-        if (attribute.startsWith("party.members")) {
-            dList members = new dList();
-            for (Hero member : hero.getParty().getMembers()) {
-                members.add(dPlayer.mirrorBukkitPlayer(member.getPlayer()).identify());
+            attribute = attribute.fulfill(1);
+
+            // <--[tag]
+            // @attribute <hero@hero.party.leader>
+            // @returns dPlayer
+            // @description
+            // Returns the leader of the hero's party.
+            // @plugin Depenizen, Heroes
+            // -->
+            if (attribute.startsWith("leader")) {
+                    return dPlayer.mirrorBukkitPlayer(hero.getParty().getLeader().getPlayer())
+                            .getAttribute(attribute.fulfill(1));
             }
-            return members.getAttribute(attribute.fulfill(2));
+
+            // <--[tag]
+            // @attribute <hero@hero.party.members>
+            // @returns dList(dPlayer)
+            // @description
+            // Returns a list of players currently in the hero's party.
+            // @plugin Depenizen, Heroes
+            // -->
+            if (attribute.startsWith("members")) {
+                dList members = new dList();
+                for (Hero member : hero.getParty().getMembers()) {
+                    members.add(dPlayer.mirrorBukkitPlayer(member.getPlayer()).identify());
+                }
+                return members.getAttribute(attribute.fulfill(1));
+            }
+
         }
 
         // <--[tag]
