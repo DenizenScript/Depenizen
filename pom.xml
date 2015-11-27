@@ -219,6 +219,13 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.khorn</groupId>
+            <artifactId>TerrainControl</artifactId>
+            <version>2.7.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/TerrainControl.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
