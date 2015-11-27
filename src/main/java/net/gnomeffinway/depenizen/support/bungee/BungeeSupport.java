@@ -115,7 +115,7 @@ public class BungeeSupport extends Support {
 
     public static void closeSocket() {
         if (socketClient != null) {
-            socketClient.close();
+            socketClient.stop();
         }
     }
 }

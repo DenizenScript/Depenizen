@@ -35,6 +35,7 @@ public class SocketClient implements Runnable {
     private DataOutputStream output;
     private DataInputStream input;
     private boolean isReconnecting;
+    private boolean shouldReconnect;
 
     public SocketClient(String ipAddress, int port, String password, String name, int timeout) {
         this.ipAddress = ipAddress;
@@ -111,6 +112,11 @@ public class SocketClient implements Runnable {
                 dB.echoError(e);
             }
         }
+    }
+
+    public void stop() {
+        shouldReconnect = false;
+        close();
     }
 
     @Override
@@ -247,11 +253,11 @@ public class SocketClient implements Runnable {
     }
 
     private void attemptReconnect() {
-        if (this.isReconnecting) {
+        if (!shouldReconnect || isReconnecting) {
             return;
         }
         final long delay = Settings.socketReconnectDelay();
-        this.isReconnecting = true;
+        isReconnecting = true;
         Bukkit.getServer().getScheduler().runTaskAsynchronously(Depenizen.getCurrentInstance(),
                 new Runnable() {
                     @Override
@@ -265,7 +271,7 @@ public class SocketClient implements Runnable {
                                 return;
                             }
                         }
-                        SocketClient.this.isReconnecting = false;
+                        isReconnecting = false;
                     }
                 });
     }
