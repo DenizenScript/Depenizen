@@ -99,7 +99,7 @@ public class BungeeCommand extends BracedCommand {
         dList serverNames = new dList();
         serverNames.setPrefix("servers");
 
-        if (all.asBoolean()) {
+        if (all != null && all.asBoolean()) {
             dB.echoError("Argument 'ALL' is deprecated and will be removed in the future. Please use <bungee.list_servers> instead!");
             for (dServer server : dServer.getOnlineServers().values()) {
                 serverNames.add(server.getName());
