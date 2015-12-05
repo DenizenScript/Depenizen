@@ -66,7 +66,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
             }
 
             else if (!scriptEntry.hasObject("tag")) {
-                scriptEntry.addObject("tag", arg.asElement());
+                scriptEntry.addObject("tag", new Element(arg.raw_value));
             }
 
         }
