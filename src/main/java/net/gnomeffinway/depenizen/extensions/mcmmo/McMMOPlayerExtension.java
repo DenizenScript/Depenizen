@@ -1,7 +1,6 @@
 package net.gnomeffinway.depenizen.extensions.mcmmo;
 
 import com.gmail.nossr50.api.ExperienceAPI;
-import com.gmail.nossr50.api.PartyAPI;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -9,6 +8,7 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
+import net.gnomeffinway.depenizen.objects.mcmmo.dParty;
 
 public class McMMOPlayerExtension extends dObjectExtension {
 
@@ -69,9 +69,12 @@ public class McMMOPlayerExtension extends dObjectExtension {
             // Returns the name of the player's party.
             // @plugin Depenizen, mcMMO
             // -->
-            else if (attribute.startsWith("party"))
-                return new Element(PartyAPI.getPartyName(p.getPlayerEntity()))
-                        .getAttribute(attribute.fulfill(1));
+            else if (attribute.startsWith("party")) {
+                dParty party = dParty.forPlayer(p);
+                if (party != null) {
+                    return party.getAttribute(attribute.fulfill(1));
+                }
+            }
 
             else if (attribute.startsWith("xp")) {
 

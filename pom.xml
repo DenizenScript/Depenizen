@@ -5,7 +5,7 @@
     <artifactId>Depenizen</artifactId>
     <version>0.2.2</version>
     <name>Depenizen</name>
-    <url>https://github.com/Morphan1/Depenizen</url>
+    <url>https://github.com/DenizenScript/Depenizen-For-Bukkit</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
