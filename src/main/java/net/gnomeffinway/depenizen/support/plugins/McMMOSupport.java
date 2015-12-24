@@ -36,7 +36,7 @@ public class McMMOSupport extends Support {
             // @plugin Depenizen, mcMMO
             // -->
             if (attribute.startsWith("leader"))
-                return dPlayer.valueOf(party.getLeader()).getAttribute(attribute.fulfill(1));
+                return dPlayer.valueOf(party.getLeader().getUniqueId().toString()).getAttribute(attribute.fulfill(1));
 
             // <--[tag]
             // @attribute <party[<party>].player_count>

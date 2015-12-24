@@ -116,9 +116,6 @@ public class HyperConomySupport extends Support {
 
             case SELL_TO_INVENTORY:
                 break;
-
-            case BUY_FROM_ITEM:
-                break;
         }
 
         OldEventManager.doEvents(events, new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(Bukkit.getServer()
