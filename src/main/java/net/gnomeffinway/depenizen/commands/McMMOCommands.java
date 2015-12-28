@@ -101,7 +101,7 @@ public class McMMOCommands extends AbstractCommand {
         if (!scriptEntry.hasObject("type"))
             throw new InvalidArgumentsException("Must specify a valid type!");
 
-        scriptEntry.defaultObject("state", State.TOGGLE)
+        scriptEntry.defaultObject("state", new Element("TOGGLE"))
                 .defaultObject("qty", new Element(-1));
 
     }
@@ -109,7 +109,7 @@ public class McMMOCommands extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
 
-        BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.getData();
+        BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.entryData;
 
         // Get objects
         Element action = scriptEntry.getElement("action");
@@ -122,7 +122,7 @@ public class McMMOCommands extends AbstractCommand {
         dPlayer player = scriptEntryData.getPlayer();
 
         // Report to dB
-        dB.report(scriptEntry, getName(), action.debug() + type.debug() + state.debug() + qty.debug()
+        dB.report(scriptEntry, getName(), action.debug() + type.debug() + (state != null ? state.debug() : "") + qty.debug()
                 + (party != null ? party.debug() : "") + (skill != null ? skill.debug() : ""));
 
         switch (Action.valueOf(action.asString().toUpperCase())) {
