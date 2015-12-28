@@ -1,8 +1,12 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.commands.McMMOCommands;
+import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerLevelChangeScriptEvent;
+import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerLevelDownScriptEvent;
+import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerLevelUpScriptEvent;
 import net.gnomeffinway.depenizen.extensions.mcmmo.McMMOPlayerExtension;
 import net.gnomeffinway.depenizen.objects.mcmmo.dParty;
 import net.gnomeffinway.depenizen.support.Support;
@@ -14,6 +18,9 @@ public class McMMOSupport extends Support {
         registerAdditionalTags("party");
         registerProperty(McMMOPlayerExtension.class, dPlayer.class);
         new McMMOCommands().activate().as("MCMMO").withOptions("see documentation", 1);
+        ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelChangeScriptEvent());
+        ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelUpScriptEvent());
+        ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelDownScriptEvent());
     }
 
     public String additionalTags(Attribute attribute) {
