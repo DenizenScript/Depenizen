@@ -85,6 +85,17 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         }
 
         // <--[tag]
+        // @attribute <p@player.is_vanished>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the player is vanished.
+        // @plugin Depenizen, Essentials
+        // -->
+        if (attribute.startsWith("is_vanished")) {
+            return new Element(essUser.isVanished()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <p@player.home_list>
         // @returns dList(Element/dLocation)
         // @description
