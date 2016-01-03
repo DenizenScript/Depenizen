@@ -37,13 +37,13 @@ public class PlotMeLocationExtension extends dObjectExtension {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <l@location.plot[<world>]>
+        // @attribute <l@location.plot>
         // @returns dPlot
         // @description
         // Returns the plot contained by this location.
         // @plugin Depenizen, PlotMe
         // -->
-        if (attribute.startsWith("plot_count")) {
+        if (attribute.startsWith("plot")) {
             Location l = new Location(new BukkitWorld(location.getWorld()), location.getX(), location.getY(), location.getZ());
             return new dPlot(PlotMeCoreManager.getInstance().getPlot(l)).getAttribute(attribute.fulfill(1));
         }
