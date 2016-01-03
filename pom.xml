@@ -64,6 +64,10 @@
             <id>prism-repo</id>
             <url>http://dhmc.us:8081/nexus/content/repositories/public/</url>
         </repository>
+        <repository>
+            <id>worldcretornica-repo</id>
+            <url>http://ci.worldcretornica.com:8080/plugin/repository/everything/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -226,6 +230,12 @@
             <version>2.7.2</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/TerrainControl.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.worldcretornica</groupId>
+            <artifactId>PlotMe-Core</artifactId>
+            <version>0.17-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
