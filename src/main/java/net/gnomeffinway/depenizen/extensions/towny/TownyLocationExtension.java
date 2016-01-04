@@ -53,7 +53,11 @@ public class TownyLocationExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("town")) {
             try {
-                return new dTown(TownyUniverse.getDataSource().getTown(TownyUniverse.getTownName(location)))
+                String town = TownyUniverse.getTownName(location);
+                if (town == null) {
+                    return null;
+                }
+                return new dTown(TownyUniverse.getDataSource().getTown(town))
                         .getAttribute(attribute.fulfill(1));
             }
             catch (NotRegisteredException ex) {
