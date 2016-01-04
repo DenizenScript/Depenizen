@@ -284,7 +284,7 @@ public class HeroesHero implements dObject {
         // @plugin Depenizen, Heroes
         // -->
         if (attribute.startsWith("secondary_class")) {
-            return new HeroesClass(hero.getHeroClass()).getAttribute(attribute.fulfill(1));
+            return new HeroesClass(hero.getSecondClass()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
