@@ -237,6 +237,13 @@
             <version>0.17-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>net.sacredlabyrinth.phaed</groupId>
+            <artifactId>simpleclans</artifactId>
+            <version>2.5.5</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/SimpleClans.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
