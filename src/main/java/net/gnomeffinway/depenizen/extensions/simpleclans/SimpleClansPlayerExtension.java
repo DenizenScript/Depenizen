@@ -2,10 +2,11 @@ package net.gnomeffinway.depenizen.extensions.simpleclans;
 
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
-import net.gnomeffinway.depenizen.objects.simpleclans.dClan;
+import net.gnomeffinway.depenizen.objects.dClan;
 import net.sacredlabyrinth.phaed.simpleclans.ClanPlayer;
 
 public class SimpleClansPlayerExtension extends dObjectExtension {
@@ -137,12 +138,49 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
                             + cplayer.getRivalKills()
                             + cplayer.getNeutralKills()).getAttribute(attribute.fulfill(1));
                 }
-                else {
+                return null;
+            }
+
+            // <--[tag]
+            // @attribute <p@player.simpleclans.rank>
+            // @returns Element
+            // @description
+            // Returns the player's rank within the clan.
+            // @plugin Depenizen, SimpleClans
+            // -->
+            else if (attribute.startsWith("rank")) {
+                String rank = cplayer.getRank();
+                if (rank == null) {
                     return null;
                 }
+                return new Element(rank).getAttribute(attribute.fulfill(1));
             }
-            else {
-                return null;
+
+            // <--[tag]
+            // @attribute <p@player.simpleclans.is_trusted>
+            // @returns Element(Boolean)
+            // @description
+            // Returns whether the player has trusted status in the clan.
+            // @plugin Depenizen, SimpleClans
+            // -->
+            else if (attribute.startsWith("is_trusted")) {
+                return new Element(cplayer.isTrusted()).getAttribute(attribute.fulfill(1));
+            }
+
+            // <--[tag]
+            // @attribute <p@player.simpleclans.past_clans>
+            // @returns dList(Element)
+            // @description
+            // Returns a list of the player's past clan names.
+            // NOTE: Due to a limitation of SimpleClans, we can only get names.
+            // @plugin Depenizen, SimpleClans
+            // -->
+            else if (attribute.startsWith("past_clans")) {
+                dList past = new dList();
+                for (String cl : cplayer.getPastClans()) {
+                    past.add(new Element(cl).identify());
+                }
+                return past.getAttribute(attribute.fulfill(1));
             }
         }
         return null;
