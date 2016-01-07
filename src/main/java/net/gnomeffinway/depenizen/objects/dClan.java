@@ -1,5 +1,6 @@
-package net.gnomeffinway.depenizen.objects.simpleclans;
+package net.gnomeffinway.depenizen.objects;
 
+import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Fetchable;
@@ -11,6 +12,7 @@ import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.sacredlabyrinth.phaed.simpleclans.Clan;
 import net.sacredlabyrinth.phaed.simpleclans.ClanPlayer;
 import net.sacredlabyrinth.phaed.simpleclans.SimpleClans;
+import org.bukkit.Location;
 
 public class dClan implements dObject {
 
@@ -92,6 +94,10 @@ public class dClan implements dObject {
     public dObject setPrefix(String s) {
         this.prefix = s;
         return this;
+    }
+
+    public Clan getClan() {
+        return clan;
     }
 
     @Override
@@ -245,6 +251,69 @@ public class dClan implements dObject {
         // -->
         else if (attribute.startsWith("kill_death_ratio")) {
             return new Element(clan.getTotalKDR()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <clan@clan.home_location>
+        // @returns dLocation
+        // @description
+        // Returns the clans home location if it has one.
+        // @plugin Depenizen, SimpleClans
+        // -->
+        else if (attribute.startsWith("home_location")) {
+            Location home = clan.getHomeLocation();
+            if (home == null) {
+                return null;
+            }
+            return new dLocation(home).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <clan@clan.name>
+        // @returns Element
+        // @description
+        // Returns the clan's name.
+        // @plugin Depenizen, SimpleClans
+        // -->
+        else if (attribute.startsWith("name")) {
+            return new Element(clan.getName()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <clan@clan.tag>
+        // @returns Element
+        // @description
+        // Returns the clan's tag.
+        // @plugin Depenizen, SimpleClans
+        // -->
+        else if (attribute.startsWith("tag")) {
+            return new Element(clan.getTag()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <clan@clan.warring_with[<clan>]>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the clan is at war with another clan.
+        // @plugin Depenizen, SimpleClans
+        // -->
+        else if (attribute.startsWith("warring_with") && attribute.hasContext(1)) {
+            dClan opponent = dClan.valueOf(attribute.getContext(1));
+            if (opponent == null) {
+                return null;
+            }
+            return new Element(clan.isWarring(opponent.getClan())).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <clan@clan.friendly_fire>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the clan has friendly fire enabled.
+        // @plugin Depenizen, SimpleClans
+        // -->
+        else if (attribute.startsWith("friendly_fire")) {
+            return new Element(clan.isFriendlyFire()).getAttribute(attribute.fulfill(1));
         }
 
         return new Element(identify()).getAttribute(attribute);

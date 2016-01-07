@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.objects.mcmmo;
+package net.gnomeffinway.depenizen.objects;
 
 import com.gmail.nossr50.datatypes.party.Party;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
@@ -21,7 +21,7 @@ public class dParty implements dObject {
         return dParty.valueOf(string, null);
     }
 
-    @Fetchable("dparty")
+    @Fetchable("party")
     public static dParty valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
@@ -30,7 +30,7 @@ public class dParty implements dObject {
         ////////
         // Match party name
 
-        string = string.replace("dparty@", "");
+        string = string.replace("party@", "");
         Party party = PartyManager.getParty(string);
         if (party == null) {
             return null;
@@ -39,7 +39,7 @@ public class dParty implements dObject {
     }
 
     public static boolean matches(String arg) {
-        arg = arg.replace("dparty@", "");
+        arg = arg.replace("party@", "");
         return PartyManager.getParty(arg) != null;
     }
 
@@ -66,7 +66,7 @@ public class dParty implements dObject {
         }
     }
 
-    String prefix = "dParty";
+    String prefix = "Party";
 
     @Override
     public String getPrefix() {
@@ -85,12 +85,12 @@ public class dParty implements dObject {
 
     @Override
     public String getObjectType() {
-        return "dParty";
+        return "Party";
     }
 
     @Override
     public String identify() {
-        return "dparty@" + party.getName();
+        return "party@" + party.getName();
     }
 
     @Override
@@ -129,7 +129,7 @@ public class dParty implements dObject {
         // @plugin Depenizen, mcMMO
         // -->
         else if (attribute.startsWith("leader")) {
-            return dPlayer.valueOf(party.getLeader().getUniqueId().toString()).getAttribute(attribute.fulfill(1));
+            return new dPlayer(party.getLeader().getUniqueId()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

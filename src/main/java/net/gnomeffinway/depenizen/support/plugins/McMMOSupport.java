@@ -8,7 +8,7 @@ import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerLevelChangeScriptEvent
 import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerLevelDownScriptEvent;
 import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerLevelUpScriptEvent;
 import net.gnomeffinway.depenizen.extensions.mcmmo.McMMOPlayerExtension;
-import net.gnomeffinway.depenizen.objects.mcmmo.dParty;
+import net.gnomeffinway.depenizen.objects.dParty;
 import net.gnomeffinway.depenizen.support.Support;
 
 public class McMMOSupport extends Support {

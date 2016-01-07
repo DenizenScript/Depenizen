@@ -4,7 +4,7 @@ import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.simpleclans.SimpleClansPlayerExtension;
-import net.gnomeffinway.depenizen.objects.simpleclans.dClan;
+import net.gnomeffinway.depenizen.objects.dClan;
 import net.gnomeffinway.depenizen.support.Support;
 import net.sacredlabyrinth.phaed.simpleclans.Clan;
 import net.sacredlabyrinth.phaed.simpleclans.ClanPlayer;
@@ -18,16 +18,20 @@ public class SimpleClansSupport extends Support {
         registerAdditionalTags("simpleclans");
     }
 
-    public ClanPlayer getFrom(dPlayer p) {
-        return new ClanPlayer(p.getOfflinePlayer().getUniqueId());
-    }
-
     @Override
     public String additionalTags(Attribute attribute) {
         if (attribute.startsWith("simpleclans")) {
             attribute = attribute.fulfill(1);
 
-            if (attribute.startsWith("list_clans")) {
+            if (attribute.startsWith("clan") && attribute.hasContext(1)) {
+                dClan c = dClan.valueOf(attribute.getContext(1));
+                if (c == null) {
+                    return null;
+                }
+                return c.getAttribute(attribute.fulfill(1));
+            }
+
+            else if (attribute.startsWith("list_clans")) {
                 dList clans = new dList();
                 for (Clan cl : SimpleClans.getInstance().getClanManager().getClans()) {
                     clans.add(new dClan(cl).identify());

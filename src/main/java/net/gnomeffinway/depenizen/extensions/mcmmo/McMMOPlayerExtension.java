@@ -8,7 +8,7 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
-import net.gnomeffinway.depenizen.objects.mcmmo.dParty;
+import net.gnomeffinway.depenizen.objects.dParty;
 
 public class McMMOPlayerExtension extends dObjectExtension {
 

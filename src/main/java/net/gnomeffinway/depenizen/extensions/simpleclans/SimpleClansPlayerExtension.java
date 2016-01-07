@@ -5,7 +5,7 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
-import net.gnomeffinway.depenizen.objects.simpleclans.dClan;
+import net.gnomeffinway.depenizen.objects.dClan;
 import net.sacredlabyrinth.phaed.simpleclans.ClanPlayer;
 
 public class SimpleClansPlayerExtension extends dObjectExtension {
@@ -141,6 +141,33 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
                     return null;
                 }
             }
+
+            // <--[tag]
+            // @attribute <p@player.simpleclans.rank>
+            // @returns Element
+            // @description
+            // Returns the player's rank within the clan.
+            // @plugin Depenizen, SimpleClans
+            // -->
+            else if (attribute.startsWith("rank")) {
+                String rank = cplayer.getRank();
+                if (rank == null) {
+                    return null;
+                }
+                return new Element(rank).getAttribute(attribute.fulfill(1));
+            }
+
+            // <--[tag]
+            // @attribute <p@player.simpleclans.is_trusted>
+            // @returns Element(Boolean)
+            // @description
+            // Returns whether the player has trusted status in the clan.
+            // @plugin Depenizen, SimpleClans
+            // -->
+            else if (attribute.startsWith("is_trusted")) {
+                return new Element(cplayer.isTrusted()).getAttribute(attribute.fulfill(1));
+            }
+
             else {
                 return null;
             }
