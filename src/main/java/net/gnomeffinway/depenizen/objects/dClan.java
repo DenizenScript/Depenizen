@@ -44,7 +44,8 @@ public class dClan implements dObject {
     }
 
     public static boolean matches(String tag) {
-        return valueOf(tag) != null;
+        tag = tag.replace("clan@", "");
+        return SimpleClans.getInstance().getClanManager().isClan(tag);
     }
 
     public dClan(Clan c) {
@@ -314,6 +315,21 @@ public class dClan implements dObject {
         // -->
         else if (attribute.startsWith("friendly_fire")) {
             return new Element(clan.isFriendlyFire()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <clan@clan.bulletin_board>
+        // @returns dList(Element)
+        // @description
+        // Returns a list of all bulletin board messages for the clan.
+        // @plugin Depenizen, SimpleClans
+        // -->
+        else if (attribute.startsWith("bulletin_board")) {
+            dList board = new dList();
+            for (String m : clan.getBb()) {
+                board.add(new Element(m).identify());
+            }
+            return board.getAttribute(attribute.fulfill(1));
         }
 
         return new Element(identify()).getAttribute(attribute);

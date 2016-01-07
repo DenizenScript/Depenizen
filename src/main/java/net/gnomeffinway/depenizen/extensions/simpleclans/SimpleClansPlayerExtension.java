@@ -2,6 +2,7 @@ package net.gnomeffinway.depenizen.extensions.simpleclans;
 
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
@@ -137,9 +138,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
                             + cplayer.getRivalKills()
                             + cplayer.getNeutralKills()).getAttribute(attribute.fulfill(1));
                 }
-                else {
-                    return null;
-                }
+                return null;
             }
 
             // <--[tag]
@@ -168,8 +167,20 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
                 return new Element(cplayer.isTrusted()).getAttribute(attribute.fulfill(1));
             }
 
-            else {
-                return null;
+            // <--[tag]
+            // @attribute <p@player.simpleclans.past_clans>
+            // @returns dList(Element)
+            // @description
+            // Returns a list of the player's past clan names.
+            // NOTE: Due to a limitation of SimpleClans, we can only get names.
+            // @plugin Depenizen, SimpleClans
+            // -->
+            else if (attribute.startsWith("past_clans")) {
+                dList past = new dList();
+                for (String cl : cplayer.getPastClans()) {
+                    past.add(new Element(cl).identify());
+                }
+                return past.getAttribute(attribute.fulfill(1));
             }
         }
         return null;
