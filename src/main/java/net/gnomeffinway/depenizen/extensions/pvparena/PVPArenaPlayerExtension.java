@@ -1,10 +1,12 @@
 package net.gnomeffinway.depenizen.extensions.pvparena;
 
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
+import net.gnomeffinway.depenizen.objects.pvparena.pvparena;
 import net.slipcor.pvparena.arena.ArenaPlayer;
 
 public class PVPArenaPlayerExtension extends dObjectExtension {
@@ -14,8 +16,12 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
     }
 
     public static PVPArenaPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new PVPArenaPlayerExtension((dPlayer) pl);
+        if (!describes(pl)) {
+            return null;
+        }
+        else {
+            return new PVPArenaPlayerExtension((dPlayer) pl);
+        }
     }
 
     private PVPArenaPlayerExtension(dPlayer pl) {
@@ -32,32 +38,41 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.pvparena.class>
-            // @returns Element
-            // @description
-            // Returns the player's class if they're in an arena. Otherwise, returns null.
-            // @plugin Depenizen, PvP Arena
-            // -->
-            if (attribute.startsWith("class")) {
-                return new Element(player.getArenaClass().getName()).getAttribute(attribute.fulfill(1));
-            }
-
-            // <--[tag]
-            // @attribute <p@player.pvparena.in_arena[<arena>]>
+            // @attribute <p@player.pvparena.in_arena[<pvparena>]>
             // @returns Element(Boolean)
             // @description
             // Returns true if the player is in the specified arena. If no arena is specified,
             // this returns true if the player is in any arena.
             // @plugin Depenizen, PvP Arena
             // -->
-            else if (attribute.startsWith("inarena") || attribute.startsWith("in_arena")) {
+            if (attribute.startsWith("inarena") || attribute.startsWith("in_arena")) {
+                if (player.getArena() == null) {
+                    return Element.FALSE.getAttribute(attribute.fulfill(1));
+                }
                 if (attribute.hasContext(1)) {
-                    return new Element(player.getArena().getName().equalsIgnoreCase(attribute.getContext(1)))
-                            .getAttribute(attribute.fulfill(1));
-                } else {
-                    return new Element(player.getStatus().equals(ArenaPlayer.Status.FIGHT))
+                    pvparena a = pvparena.valueOf(attribute.getContext(1));
+                    if (a == null) {
+                        return null;
+                    }
+                    return new Element(CoreUtilities.toLowerCase(player.getArena().getName())
+                            .equals(CoreUtilities.toLowerCase(a.getArena().getName())))
                             .getAttribute(attribute.fulfill(1));
                 }
+                else {
+                    return new Element(player.getArena() != null)
+                            .getAttribute(attribute.fulfill(1));
+                }
+            }
+
+            // <--[tag]
+            // @attribute <p@player.pvparena.class>
+            // @returns Element
+            // @description
+            // Returns the player's class if they're in an arena. Otherwise, returns null.
+            // @plugin Depenizen, PvP Arena
+            // -->
+            else if (attribute.startsWith("class")) {
+                return new Element(player.getArenaClass().getName()).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -89,21 +104,18 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.pvparena.team>
+                // @attribute <p@player.pvparena.team.name>
                 // @returns Element
                 // @description
                 // Returns the player's team name if they're in an arena. Otherwise, returns null.
                 // @plugin Depenizen, PvP Arena
                 // -->
-                return new Element(player.getArenaTeam().getName())
-                        .getAttribute(attribute.fulfill(1));
-
+                if (attribute.startsWith("name")) {
+                    return new Element(player.getArenaTeam().getName())
+                            .getAttribute(attribute.fulfill(1));
+                }
             }
-
         }
-
         return null;
-
     }
-
 }

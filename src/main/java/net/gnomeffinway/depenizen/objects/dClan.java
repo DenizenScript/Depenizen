@@ -332,6 +332,18 @@ public class dClan implements dObject {
             return board.getAttribute(attribute.fulfill(1));
         }
 
+        // <--[tag]
+        // @attribute <clan@clan.type>
+        // @returns Element
+        // @description
+        // Always returns 'Clan' for dClan objects. All objects fetchable by the Object Fetcher will return the
+        // type of object that is fulfilling this attribute.
+        // @plugin Depenizen, SimpleClans
+        // -->
+        else if (attribute.startsWith("type")) {
+            return new Element("Clan").getAttribute(attribute.fulfill(1));
+        }
+
         return new Element(identify()).getAttribute(attribute);
     }
 }
