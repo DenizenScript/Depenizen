@@ -4,6 +4,9 @@ import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.gnomeffinway.depenizen.events.MobArena.MobArenaEndsScriptEvent;
+import net.gnomeffinway.depenizen.events.MobArena.MobArenaStartsScriptEvent;
+import net.gnomeffinway.depenizen.events.MobArena.MobArenaWaveChangesScriptEvent;
 import net.gnomeffinway.depenizen.objects.mobarena.mobarena;
 import net.gnomeffinway.depenizen.support.Support;
 import org.bukkit.Bukkit;
@@ -16,6 +19,9 @@ public class MobArenaSupport extends Support {
         plugin = (MobArena) Bukkit.getPluginManager().getPlugin("MobArena");
         registerObjects(mobarena.class);
         registerAdditionalTags("mobarena");
+        registerEvents(MobArenaStartsScriptEvent.class);
+        registerEvents(MobArenaEndsScriptEvent.class);
+        registerEvents(MobArenaWaveChangesScriptEvent.class);
     }
 
     public static MobArena getPlugin() {

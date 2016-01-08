@@ -45,6 +45,10 @@ public class mobarena implements dObject {
         }
     }
 
+    public Arena getArena() {
+        return arena;
+    }
+
     @Override
     public String getPrefix() {
         return prefix;

@@ -20,12 +20,12 @@ public class PVPArenaEvents implements Listener {
 
     // <--[event]
     // @Events
-    // arena starts
+    // pvparena starts
     // @Triggers when an arena starts a round.
     // @Context
     // <context.arena> returns the arena name.
     // <context.fighters> returns a dList of the fighters in the round.
-    // @Plugin Depenizen, PvP Arena
+    // @Plugin Depenizen, PvPArena
     // -->
 
     @EventHandler
@@ -43,8 +43,7 @@ public class PVPArenaEvents implements Listener {
         context.put("fighters", new dList(fighters));
 
         OldEventManager.doEvents(Arrays.asList
-                        ("pvparena starts"),
-                null, context);
+                ("pvparena starts", "arena starts"), null, context);
 
     }
 }
