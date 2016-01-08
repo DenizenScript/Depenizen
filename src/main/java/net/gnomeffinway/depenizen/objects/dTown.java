@@ -38,7 +38,8 @@ public class dTown implements dObject {
         string = string.replace("town@", "");
         try {
             return new dTown(TownyUniverse.getDataSource().getTown(string));
-        } catch (NotRegisteredException e) {
+        }
+        catch (NotRegisteredException e) {
             return null;
         }
     }
@@ -114,7 +115,8 @@ public class dTown implements dObject {
         if (attribute.startsWith("balance")) {
             try {
                 return new Element(town.getHoldingBalance()).getAttribute(attribute.fulfill(1));
-            } catch (EconomyException e) {
+            }
+            catch (EconomyException e) {
                 if (!attribute.hasAlternative()) {
                     dB.echoError("Invalid economy response!");
                 }
@@ -192,7 +194,10 @@ public class dTown implements dObject {
             try {
                 return new dNation(town.getNation())
                         .getAttribute(attribute.fulfill(1));
-            } catch (NotRegisteredException e) {}
+            }
+            catch (NotRegisteredException e) {
+            }
+        }
 
         // <--[tag]
         // @attribute <town@town.player_count>
@@ -229,7 +234,9 @@ public class dTown implements dObject {
             try {
                 return new dLocation(town.getSpawn().getBlock().getLocation())
                         .getAttribute(attribute.fulfill(1));
-            } catch (TownyException e) {}
+            }
+            catch (TownyException e) {
+            }
         }
 
         // <--[tag]
