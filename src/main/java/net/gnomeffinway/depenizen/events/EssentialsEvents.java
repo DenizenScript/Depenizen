@@ -1,14 +1,20 @@
 package net.gnomeffinway.depenizen.events;
 
 import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.events.OldEventManager;
 import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizen.objects.dPlayer;
-import net.ess3.api.events.*;
+import net.ess3.api.events.AfkStatusChangeEvent;
+import net.ess3.api.events.GodStatusChangeEvent;
+import net.ess3.api.events.JailStatusChangeEvent;
+import net.ess3.api.events.MuteStatusChangeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class EssentialsEvents implements Listener {
 

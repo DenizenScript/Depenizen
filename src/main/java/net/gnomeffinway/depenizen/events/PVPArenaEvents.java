@@ -1,6 +1,5 @@
 package net.gnomeffinway.depenizen.events;
 
-import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.events.OldEventManager;
 import net.aufdemrand.denizencore.objects.Element;
@@ -12,7 +11,10 @@ import net.slipcor.pvparena.events.PAStartEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PVPArenaEvents implements Listener {
 
@@ -41,7 +43,7 @@ public class PVPArenaEvents implements Listener {
         context.put("fighters", new dList(fighters));
 
         OldEventManager.doEvents(Arrays.asList
-                        ("arena starts"),
+                        ("pvparena starts"),
                 null, context);
 
     }

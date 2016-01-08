@@ -10,7 +10,9 @@ import net.aufdemrand.denizencore.objects.dObject;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class VotifierEvents implements Listener {
 

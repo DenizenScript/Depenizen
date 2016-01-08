@@ -1,7 +1,6 @@
 package net.gnomeffinway.depenizen.events.bungee;
 
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.gnomeffinway.depenizen.objects.bungee.dServer;
