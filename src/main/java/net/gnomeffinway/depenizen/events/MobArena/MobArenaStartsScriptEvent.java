@@ -8,7 +8,7 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import net.gnomeffinway.depenizen.objects.mobarena.mobarena;
+import net.gnomeffinway.depenizen.objects.mobarena.MobArenaArena;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,7 +39,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     public MobArenaStartsScriptEvent instance;
     public ArenaStartEvent event;
-    public mobarena arena;
+    public MobArenaArena arena;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -51,7 +51,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
     public boolean matches(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
         String arenaname = CoreUtilities.getXthArg(2, lower).replace("mobarena@", "");
-        mobarena a = mobarena.valueOf(arenaname);
+        MobArenaArena a = MobArenaArena.valueOf(arenaname);
         return arena.equals("arena") || (a != null && a.getArena() == event.getArena());
     }
 
@@ -90,7 +90,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     @EventHandler
     public void onMobArenaStarts(ArenaStartEvent event) {
-        arena = new mobarena(event.getArena());
+        arena = new MobArenaArena(event.getArena());
         cancelled = event.isCancelled();
         this.event = event;
         fire();

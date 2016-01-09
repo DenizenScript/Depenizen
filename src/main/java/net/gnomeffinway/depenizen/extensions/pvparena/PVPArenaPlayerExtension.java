@@ -6,7 +6,7 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
-import net.gnomeffinway.depenizen.objects.pvparena.pvparena;
+import net.gnomeffinway.depenizen.objects.pvparena.PVPArenaArena;
 import net.slipcor.pvparena.arena.ArenaPlayer;
 
 public class PVPArenaPlayerExtension extends dObjectExtension {
@@ -50,7 +50,7 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
                     return Element.FALSE.getAttribute(attribute.fulfill(1));
                 }
                 if (attribute.hasContext(1)) {
-                    pvparena a = pvparena.valueOf(attribute.getContext(1));
+                    PVPArenaArena a = PVPArenaArena.valueOf(attribute.getContext(1));
                     if (a == null) {
                         return null;
                     }

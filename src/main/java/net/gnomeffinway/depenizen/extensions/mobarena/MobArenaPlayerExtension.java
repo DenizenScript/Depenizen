@@ -10,7 +10,7 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
-import net.gnomeffinway.depenizen.objects.mobarena.mobarena;
+import net.gnomeffinway.depenizen.objects.mobarena.MobArenaArena;
 import net.gnomeffinway.depenizen.support.plugins.MobArenaSupport;
 
 public class MobArenaPlayerExtension extends dObjectExtension {
@@ -71,7 +71,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 // @plugin Depenizen, MobArena
                 // -->
                 if (attribute.startsWith("current_arena")) {
-                    return new mobarena(arena).getAttribute(attribute.fulfill(1));
+                    return new MobArenaArena(arena).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -91,7 +91,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
             }
 
             else if (attribute.startsWith("stats") && attribute.hasContext(1)) {
-                mobarena a = mobarena.valueOf(attribute.getContext(1));
+                MobArenaArena a = MobArenaArena.valueOf(attribute.getContext(1));
                 if (a == null) {
                     return null;
                 }

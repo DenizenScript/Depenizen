@@ -11,7 +11,7 @@ import net.slipcor.pvparena.arena.Arena;
 import net.slipcor.pvparena.arena.ArenaPlayer;
 import net.slipcor.pvparena.managers.ArenaManager;
 
-public class pvparena implements dObject {
+public class PVPArenaArena implements dObject {
 
     String prefix = "PVPArena";
     Arena arena = null;
@@ -20,20 +20,20 @@ public class pvparena implements dObject {
         return valueOf(name) != null;
     }
 
-    public static pvparena valueOf(String name) {
+    public static PVPArenaArena valueOf(String name) {
         return valueOf(name, null);
     }
 
-    public static pvparena valueOf(String name, TagContext context) {
+    public static PVPArenaArena valueOf(String name, TagContext context) {
         name = name.replace("pvparena@", "");
         Arena a = ArenaManager.getArenaByName(name);
         if (a == null) {
             return null;
         }
-        return new pvparena(a);
+        return new PVPArenaArena(a);
     }
 
-    public pvparena(Arena a) {
+    public PVPArenaArena(Arena a) {
         if (a != null) {
             this.arena = a;
         }

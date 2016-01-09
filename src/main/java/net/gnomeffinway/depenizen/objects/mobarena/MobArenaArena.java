@@ -12,31 +12,31 @@ import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.support.plugins.MobArenaSupport;
 import org.bukkit.entity.Player;
 
-public class mobarena implements dObject {
+public class MobArenaArena implements dObject {
 
     String prefix = "MobArena";
     Arena arena = null;
 
     static MobArena plugin = MobArenaSupport.getPlugin();
 
-    public static mobarena valueOf(String name) {
+    public static MobArenaArena valueOf(String name) {
         return valueOf(name, null);
     }
 
-    public static mobarena valueOf(String name, TagContext context) {
+    public static MobArenaArena valueOf(String name, TagContext context) {
         name = name.replace("mobarena@", "");
         Arena arena = plugin.getArenaMaster().getArenaWithName(name);
         if (arena == null) {
             return null;
         }
-        return new mobarena(arena);
+        return new MobArenaArena(arena);
     }
 
     public static boolean matches(String name) {
         return valueOf(name) != null;
     }
 
-    public mobarena(Arena arena) {
+    public MobArenaArena(Arena arena) {
         if (arena != null) {
             this.arena = arena;
         }
