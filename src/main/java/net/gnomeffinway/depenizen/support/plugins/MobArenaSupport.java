@@ -2,11 +2,13 @@ package net.gnomeffinway.depenizen.support.plugins;
 
 import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.events.MobArena.MobArenaEndsScriptEvent;
 import net.gnomeffinway.depenizen.events.MobArena.MobArenaStartsScriptEvent;
 import net.gnomeffinway.depenizen.events.MobArena.MobArenaWaveChangesScriptEvent;
+import net.gnomeffinway.depenizen.extensions.mobarena.MobArenaPlayerExtension;
 import net.gnomeffinway.depenizen.objects.mobarena.mobarena;
 import net.gnomeffinway.depenizen.support.Support;
 import org.bukkit.Bukkit;
@@ -22,6 +24,7 @@ public class MobArenaSupport extends Support {
         registerEvents(MobArenaStartsScriptEvent.class);
         registerEvents(MobArenaEndsScriptEvent.class);
         registerEvents(MobArenaWaveChangesScriptEvent.class);
+        registerProperty(MobArenaPlayerExtension.class, dPlayer.class);
     }
 
     public static MobArena getPlugin() {
