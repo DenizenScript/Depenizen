@@ -57,7 +57,8 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
         String lower = CoreUtilities.toLowerCase(s);
         String arenaname = CoreUtilities.getXthArg(2, lower).replace("mobarena@", "");
         mobarena a = mobarena.valueOf(arenaname);
-        return arena.equals("arena") || (a != null && a.getArena() == event.getArena());
+        return (arena.equals("arena") || (a != null && a.getArena() == event.getArena()))
+                && event.getWave() != null;
     }
 
     @Override

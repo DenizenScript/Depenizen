@@ -129,9 +129,10 @@ public class mobarena implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the current wave number.
+        // NOTE: Requires the arena to be running.
         // @plugin Depenizen, MobArena
         // -->
-        else if (attribute.startsWith("current_wave")) {
+        else if (attribute.startsWith("current_wave") && arena.isRunning()) {
             return new Element(arena.getWaveManager().getWaveNumber()).getAttribute(attribute.fulfill(1));
         }
 
