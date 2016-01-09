@@ -244,6 +244,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/SimpleClans.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.garbagemule</groupId>
+            <artifactId>MobArena</artifactId>
+            <version>0.97.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/MobArena.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

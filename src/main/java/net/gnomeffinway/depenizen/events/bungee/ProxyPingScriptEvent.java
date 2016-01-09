@@ -7,7 +7,6 @@ import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
-import net.gnomeffinway.depenizen.support.bungee.packets.ClientPacketOutEventResponse;
 
 import java.util.HashMap;
 import java.util.Map;

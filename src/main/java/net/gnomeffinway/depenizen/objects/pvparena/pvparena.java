@@ -17,8 +17,7 @@ public class pvparena implements dObject {
     Arena arena = null;
 
     public static boolean matches(String name) {
-        name = name.replace("pvparena@", "");
-        return ArenaManager.getArenaByName(name) != null;
+        return valueOf(name) != null;
     }
 
     public static pvparena valueOf(String name) {
@@ -93,7 +92,7 @@ public class pvparena implements dObject {
         // @attribute <pvparena@pvparena.name>
         // @returns Element
         // @description
-        // Returns the name of the pvparena.
+        // Returns the name of the arena.
         // @plugin Depenizen, PVPArena
         if (attribute.startsWith("name")) {
             return new Element(arena.getName()).getAttribute(attribute.fulfill(1));

@@ -39,6 +39,8 @@ import org.bukkit.event.Listener;
 // @Determine
 // Element(Number) to set the number of levels to gain.
 //
+// @Plugin Depenizen, mcMMO
+//
 // -->
 
 public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements Listener {

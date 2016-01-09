@@ -1,9 +1,12 @@
 package net.gnomeffinway.depenizen.events;
 
-import com.herocraftonline.heroes.api.events.*;
+import com.herocraftonline.heroes.api.events.ClassChangeEvent;
+import com.herocraftonline.heroes.api.events.ExperienceChangeEvent;
+import com.herocraftonline.heroes.api.events.HeroChangeLevelEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.objects.dNPC;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.events.OldEventManager;
-import net.aufdemrand.denizen.objects.*;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesClass;
@@ -11,7 +14,10 @@ import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HeroesEvents implements Listener {
 
