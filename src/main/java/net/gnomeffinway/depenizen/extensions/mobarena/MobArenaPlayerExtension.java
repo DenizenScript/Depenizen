@@ -11,11 +11,12 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.mobarena.MobArenaArena;
+import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.plugins.MobArenaSupport;
 
 public class MobArenaPlayerExtension extends dObjectExtension {
 
-    MobArena plugin = MobArenaSupport.getPlugin();
+    MobArena plugin = (MobArena) Support.getPlugin(MobArenaSupport.class);
 
     public static boolean describes(dObject pl) {
         return pl instanceof dPlayer;

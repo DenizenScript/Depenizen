@@ -15,20 +15,13 @@ import org.bukkit.Bukkit;
 
 public class MobArenaSupport extends Support {
 
-    public static MobArena plugin;
-
     public MobArenaSupport() {
-        plugin = (MobArena) Bukkit.getPluginManager().getPlugin("MobArena");
         registerObjects(MobArenaArena.class);
         registerAdditionalTags("mobarena");
         registerEvents(MobArenaStartsScriptEvent.class);
         registerEvents(MobArenaEndsScriptEvent.class);
         registerEvents(MobArenaWaveChangesScriptEvent.class);
         registerProperty(MobArenaPlayerExtension.class, dPlayer.class);
-    }
-
-    public static MobArena getPlugin() {
-        return plugin;
     }
 
     @Override
@@ -51,7 +44,7 @@ public class MobArenaSupport extends Support {
 
             if (attribute.startsWith("list_arenas")) {
                 dList arenas = new dList();
-                for (Arena a : plugin.getArenaMaster().getArenas()) {
+                for (Arena a : ((MobArena) Support.getPlugin(MobArenaSupport.class)).getArenaMaster().getArenas()) {
                     arenas.add(new MobArenaArena(a).identify());
                 }
                 return arenas.getAttribute(attribute.fulfill(1));

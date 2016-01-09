@@ -9,6 +9,7 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
+import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.plugins.MobArenaSupport;
 import org.bukkit.entity.Player;
 
@@ -17,7 +18,7 @@ public class MobArenaArena implements dObject {
     String prefix = "MobArena";
     Arena arena = null;
 
-    static MobArena plugin = MobArenaSupport.getPlugin();
+    static MobArena plugin = Support.getPlugin(MobArenaSupport.class);
 
     public static MobArenaArena valueOf(String name) {
         return valueOf(name, null);
