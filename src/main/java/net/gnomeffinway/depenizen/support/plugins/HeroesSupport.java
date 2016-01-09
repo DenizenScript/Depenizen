@@ -2,6 +2,7 @@ package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.gnomeffinway.depenizen.commands.heroes.HeroesXPCommand;
 import net.gnomeffinway.depenizen.events.HeroesEvents;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesClass;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
@@ -14,5 +15,8 @@ public class HeroesSupport extends Support {
         registerEvents(HeroesEvents.class);
         registerObjects(HeroesClass.class, HeroesHero.class);
         registerProperty(HeroesPlayerNPCExtension.class, dNPC.class, dPlayer.class);
+        new HeroesXPCommand().activate().as("heroesxp")
+                .withOptions("[add/remove/set] <heroesclass> quantity:<#.#>", 3);
     }
+    
 }
