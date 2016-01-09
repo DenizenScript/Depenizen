@@ -121,7 +121,8 @@ public class mobarena implements dObject {
         // @plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("wave_count")) {
-            return new Element(arena.getWaveManager().getFinalWave()).getAttribute(attribute.fulfill(1));
+            return new Element(arena.getWaveManager().getFinalWave())
+                    .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -133,7 +134,21 @@ public class mobarena implements dObject {
         // @plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("current_wave") && arena.isRunning()) {
-            return new Element(arena.getWaveManager().getWaveNumber()).getAttribute(attribute.fulfill(1));
+            return new Element(arena.getWaveManager().getWaveNumber())
+                    .getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <mobarena@mobarena.wave_type>
+        // @returns Element
+        // @description
+        // Returns the type of the current wave.
+        // NOTE: Requires the arena to be running.
+        // @plugin Depenizen, MobArena
+        // -->
+        else if (attribute.startsWith("wave_type") && arena.isRunning()) {
+            return new Element(arena.getWaveManager().getCurrent().getType().toString())
+                    .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
