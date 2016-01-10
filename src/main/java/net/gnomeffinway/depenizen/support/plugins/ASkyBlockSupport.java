@@ -9,6 +9,7 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.askyblock.ASkyBlockLocationExtension;
 import net.gnomeffinway.depenizen.extensions.askyblock.ASkyBlockPlayerExtension;
+import net.gnomeffinway.depenizen.extensions.askyblock.ASkyBlockWorldExtension;
 import net.gnomeffinway.depenizen.support.Support;
 
 public class ASkyBlockSupport extends Support {
@@ -16,13 +17,14 @@ public class ASkyBlockSupport extends Support {
     public ASkyBlockSupport() {
         registerProperty(ASkyBlockPlayerExtension.class, dPlayer.class);
         registerProperty(ASkyBlockLocationExtension.class, dLocation.class);
+        registerProperty(ASkyBlockWorldExtension.class, dWorld.class);
     }
 
     ASkyBlockAPI api = ASkyBlockAPI.getInstance();
 
     @Override
     public String additionalTags(Attribute attribute) {
-        if (attribute == null ) {
+        if (attribute == null) {
             return null;
         }
 
