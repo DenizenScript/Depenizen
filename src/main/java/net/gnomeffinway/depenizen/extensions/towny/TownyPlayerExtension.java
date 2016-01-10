@@ -4,6 +4,7 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.tags.Attribute;
@@ -97,6 +98,21 @@ public class TownyPlayerExtension extends dObjectExtension {
                 if (!attribute.hasAlternative())
                     dB.echoError("'" + player.getName() + "' is not registered to a town in Towny!");
             }
+        }
+
+        // <--[tag]
+        // @attribute <p@player.mode_list>
+        // @returns dList(Element)
+        // @description
+        // Returns the player's towny modes as a list.
+        // @plugin Depenizen, Towny
+        // -->
+        else if (attribute.startsWith("mode_list")) {
+            dList modes = new dList();
+            for (String mode : resident.getModes()) {
+                modes.add(new Element(mode).identify());
+            }
+            return modes.getAttribute(attribute.fulfill(1));
         }
 
         return null;
