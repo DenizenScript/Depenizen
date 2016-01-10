@@ -1,5 +1,9 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.TownyUniverse;
+import com.palmergames.bukkit.towny.object.WorldCoord;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -11,6 +15,7 @@ import net.gnomeffinway.depenizen.objects.dTown;
 import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.extensions.towny.TownyLocationExtension;
 import net.gnomeffinway.depenizen.extensions.towny.TownyPlayerExtension;
+import org.bukkit.Location;
 
 public class TownySupport extends Support {
 
@@ -20,6 +25,23 @@ public class TownySupport extends Support {
         registerProperty(TownyLocationExtension.class, dLocation.class);
         registerProperty(TownyCuboidExtension.class, dCuboid.class);
         registerAdditionalTags("town", "nation");
+    }
+
+    public static Town fromWorldCoord(WorldCoord coord) {
+        if (coord == null) {
+            return null;
+        }
+        Location loc = new Location(coord.getBukkitWorld(), coord.getX(), 0, coord.getZ());
+        try {
+            String name = TownyUniverse.getTownName(loc);
+            if (name == null) {
+                return null;
+            }
+            return TownyUniverse.getDataSource().getTown(name);
+        }
+        catch (NotRegisteredException e) {
+            return null;
+        }
     }
 
     @Override
