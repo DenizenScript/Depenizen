@@ -66,6 +66,17 @@ public class TownyLocationExtension extends dObjectExtension {
             }
         }
 
+        // <--[tag]
+        // @attribute <l@location.is_wilderness>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the location is wilderness.
+        // @plugin Depenizen, Towny
+        // -->
+        else if (attribute.startsWith("is_wilderness")) {
+            return new Element(TownyUniverse.isWilderness(location.getBlock())).getAttribute(attribute.fulfill(1));
+        }
+
         return null;
 
     }
