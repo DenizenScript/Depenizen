@@ -9,6 +9,8 @@ import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.gnomeffinway.depenizen.events.Towny.PlayerEntersTownScriptEvent;
+import net.gnomeffinway.depenizen.events.Towny.PlayerExitsTownScriptEvent;
 import net.gnomeffinway.depenizen.extensions.towny.TownyCuboidExtension;
 import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
@@ -24,6 +26,8 @@ public class TownySupport extends Support {
         registerProperty(TownyPlayerExtension.class, dPlayer.class);
         registerProperty(TownyLocationExtension.class, dLocation.class);
         registerProperty(TownyCuboidExtension.class, dCuboid.class);
+        registerEvents(PlayerEntersTownScriptEvent.class);
+        registerEvents(PlayerExitsTownScriptEvent.class);
         registerAdditionalTags("town", "nation");
     }
 
