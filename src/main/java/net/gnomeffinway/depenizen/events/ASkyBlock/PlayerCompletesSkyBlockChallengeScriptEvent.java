@@ -105,9 +105,6 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
 
     @EventHandler
     public void onPlayerCompletesSkyBlockChallenge(ChallengeCompleteEvent event) {
-        if (dEntity.isNPC(event.getPlayer())) {
-            return;
-        }
         challenge = new Element(event.getChallengeName());
         xp_reward = new Element(event.getExpReward());
         money_reward = new Element(event.getMoneyReward());
