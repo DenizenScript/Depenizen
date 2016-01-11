@@ -98,9 +98,6 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
 
     @EventHandler
     public void onSkyBlockCreated(IslandNewEvent event) {
-        if (dEntity.isNPC(event.getPlayer())) {
-            return;
-        }
         location = new dLocation(event.getIslandLocation());
         schematic = new Element(event.getSchematicName().getName());
         owner = new dPlayer(event.getPlayer());

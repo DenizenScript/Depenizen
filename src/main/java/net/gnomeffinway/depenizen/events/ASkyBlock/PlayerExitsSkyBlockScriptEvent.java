@@ -98,9 +98,6 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
 
     @EventHandler
     public void onPlayerExitsSkyblock(IslandExitEvent event) {
-        if (dEntity.isNPC(event.getPlayer())) {
-            return;
-        }
         island_location = new dLocation(event.getIslandLocation());
         location = new dLocation(event.getLocation());
         owner = new dPlayer(event.getIslandOwner());
