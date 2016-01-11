@@ -7,6 +7,8 @@ import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.gnomeffinway.depenizen.events.ASkyBlock.*;
+import net.gnomeffinway.depenizen.events.Towny.PlayerExitsTownScriptEvent;
 import net.gnomeffinway.depenizen.extensions.askyblock.ASkyBlockLocationExtension;
 import net.gnomeffinway.depenizen.extensions.askyblock.ASkyBlockPlayerExtension;
 import net.gnomeffinway.depenizen.extensions.askyblock.ASkyBlockWorldExtension;
@@ -18,6 +20,12 @@ public class ASkyBlockSupport extends Support {
         registerProperty(ASkyBlockPlayerExtension.class, dPlayer.class);
         registerProperty(ASkyBlockLocationExtension.class, dLocation.class);
         registerProperty(ASkyBlockWorldExtension.class, dWorld.class);
+        registerEvents(SkyBlockCreatedScriptEvent.class);
+        registerEvents(SkyBlockResetScriptEvent.class);
+        registerEvents(PlayerEntersSkyBlockScriptEvent.class);
+        registerEvents(PlayerExitsSkyBlockScriptEvent.class);
+        registerEvents(PlayerCompletesSkyBlockChallengeScriptEvent.class);
+        // TODO: Skyblock Command
     }
 
     ASkyBlockAPI api = ASkyBlockAPI.getInstance();
