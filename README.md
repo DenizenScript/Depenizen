@@ -18,7 +18,7 @@ Depenizen
 - Jobs Reborn (https://www.spigotmc.org/resources/jobs-reborn.4216/)
 - mcMMO (https://www.spigotmc.org/resources/mcmmo.2445/)
 - MobArena (http://dev.bukkit.org/bukkit-plugins/mobarena/)
-- PVP Arena (http://dev.bukkit.org/bukkit-plugins/pvparena/)
+- PVP Arena (https://ci2.craftyn.com/job/PVP%20Arena/)
 - PVP Stats (http://dev.bukkit.org/bukkit-plugins/pvp-stats/)
 - SimpleClans (http://dev.bukkit.org/bukkit-plugins/simpleclans/)
 - SkillAPI (http://dev.bukkit.org/bukkit-plugins/skillapi/)
