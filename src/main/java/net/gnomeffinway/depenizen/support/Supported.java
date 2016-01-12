@@ -80,8 +80,13 @@ public class Supported {
                         if (name.startsWith(pkg) && name.endsWith("Support.class")) {
                             String key = name.replace("Support.class", "");
                             key = key.substring(key.lastIndexOf('.')+1).toUpperCase();
-                            supportClasses.put(key,
-                                    (Class<? extends Support>) Class.forName(name.substring(0, name.lastIndexOf('.'))));
+                            try {
+                                supportClasses.put(key,
+                                        (Class<? extends Support>) Class.forName(name.substring(0, name.lastIndexOf('.'))));
+                            }
+                            catch (Throwable e) {
+                                dB.echoError(e);
+                            }
                         }
                     }
                 }
