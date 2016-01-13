@@ -22,10 +22,10 @@ import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// player enters towny town
-// player enters towny <town>
+// towny player enters town
+// towny player enters <town>
 //
-// @Regex ^on player enters towny [^\s]+$
+// @Regex ^on towny player enters [^\s]+$
 //
 // @Cancellable false
 //
@@ -51,7 +51,7 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("player enters towny");
+        return CoreUtilities.toLowerCase(s).startsWith("towny player enters");
     }
 
     @Override
@@ -75,7 +75,7 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
 
     @Override
     public String getName() {
-        return "PlayerEntersTownyTown";
+        return "TownyPlayerEntersTown";
     }
 
     @Override
@@ -107,7 +107,7 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
     }
 
     @EventHandler
-    public void onPlayerEntersTownyTown(PlayerChangePlotEvent event) {
+    public void onTownyPlayerEntersTown(PlayerChangePlotEvent event) {
         try {
             if (!event.getTo().getTownyWorld().isUsingTowny() || new ChunkNotification(event.getFrom(), event.getTo()).getNotificationString() == null) {
                 return;
