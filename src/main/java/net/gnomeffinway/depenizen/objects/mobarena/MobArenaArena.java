@@ -42,10 +42,7 @@ public class MobArenaArena implements dObject {
     }
 
     public static boolean matches(String name) {
-        if (valueOf(name) == null) {
-            return false;
-        }
-        return true;
+        return valueOf(name) != null;
     }
 
     public MobArenaArena(Arena arena) {
@@ -89,7 +86,7 @@ public class MobArenaArena implements dObject {
 
     @Override
     public String identify() {
-        return "mobarena@" + arena.arenaName();
+        return "mobarena@" + arena.configName();
     }
 
     @Override
