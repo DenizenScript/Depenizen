@@ -4,6 +4,7 @@ import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.Fetchable;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
@@ -24,7 +25,14 @@ public class MobArenaArena implements dObject {
         return valueOf(name, null);
     }
 
+    @Fetchable("mobarena")
     public static MobArenaArena valueOf(String name, TagContext context) {
+        if (name == null) {
+            return null;
+        }
+
+        ////////
+        // Match Arena name
         name = name.replace("mobarena@", "");
         Arena arena = plugin.getArenaMaster().getArenaWithName(name);
         if (arena == null) {
@@ -34,7 +42,10 @@ public class MobArenaArena implements dObject {
     }
 
     public static boolean matches(String name) {
-        return valueOf(name) != null;
+        if (valueOf(name) == null) {
+            return false;
+        }
+        return true;
     }
 
     public MobArenaArena(Arena arena) {

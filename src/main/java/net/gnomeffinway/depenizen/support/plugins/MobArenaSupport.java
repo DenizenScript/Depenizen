@@ -11,9 +11,10 @@ import net.gnomeffinway.depenizen.events.MobArena.MobArenaWaveChangesScriptEvent
 import net.gnomeffinway.depenizen.extensions.mobarena.MobArenaPlayerExtension;
 import net.gnomeffinway.depenizen.objects.mobarena.MobArenaArena;
 import net.gnomeffinway.depenizen.support.Support;
-import org.bukkit.Bukkit;
 
 public class MobArenaSupport extends Support {
+
+    MobArena plugin;
 
     public MobArenaSupport() {
         registerObjects(MobArenaArena.class);
@@ -22,6 +23,7 @@ public class MobArenaSupport extends Support {
         registerEvents(MobArenaEndsScriptEvent.class);
         registerEvents(MobArenaWaveChangesScriptEvent.class);
         registerProperty(MobArenaPlayerExtension.class, dPlayer.class);
+        plugin = Support.getPlugin(MobArenaSupport.class);
     }
 
     @Override
@@ -42,9 +44,16 @@ public class MobArenaSupport extends Support {
 
             attribute = attribute.fulfill(1);
 
+            // <--[tag]
+            // @attribute <mobarena.list_arenas>
+            // @returns dList(MobArena)
+            // @description
+            // Returns a list of all MobArenas.
+            // @plugin Depenizen, MobArena
+            // -->
             if (attribute.startsWith("list_arenas")) {
                 dList arenas = new dList();
-                for (Arena a : ((MobArena) Support.getPlugin(MobArenaSupport.class)).getArenaMaster().getArenas()) {
+                for (Arena a : plugin.getArenaMaster().getArenas()) {
                     arenas.add(new MobArenaArena(a).identify());
                 }
                 return arenas.getAttribute(attribute.fulfill(1));
