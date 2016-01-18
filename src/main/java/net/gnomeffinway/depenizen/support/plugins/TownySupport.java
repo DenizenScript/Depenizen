@@ -1,23 +1,18 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.object.Town;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
-import com.palmergames.bukkit.towny.object.WorldCoord;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.events.Towny.PlayerEntersTownScriptEvent;
 import net.gnomeffinway.depenizen.events.Towny.PlayerExitsTownScriptEvent;
 import net.gnomeffinway.depenizen.extensions.towny.TownyCuboidExtension;
+import net.gnomeffinway.depenizen.extensions.towny.TownyLocationExtension;
+import net.gnomeffinway.depenizen.extensions.towny.TownyPlayerExtension;
 import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.extensions.towny.TownyLocationExtension;
-import net.gnomeffinway.depenizen.extensions.towny.TownyPlayerExtension;
-import org.bukkit.Location;
 
 public class TownySupport extends Support {
 
@@ -31,23 +26,6 @@ public class TownySupport extends Support {
         registerAdditionalTags("town", "nation");
     }
 
-    public static Town fromWorldCoord(WorldCoord coord) {
-        if (coord == null) {
-            return null;
-        }
-        Location loc = new Location(coord.getBukkitWorld(), coord.getX(), 0, coord.getZ());
-        try {
-            String name = TownyUniverse.getTownName(loc);
-            if (name == null) {
-                return null;
-            }
-            return TownyUniverse.getDataSource().getTown(name);
-        }
-        catch (NotRegisteredException e) {
-            return null;
-        }
-    }
-
     @Override
     public String additionalTags(Attribute attribute) {
 
@@ -58,7 +36,8 @@ public class TownySupport extends Support {
             if (attribute.hasContext(1)) {
                 if (dTown.matches(attribute.getContext(1))) {
                     town = dTown.valueOf(attribute.getContext(1));
-                } else {
+                }
+                else {
                     dB.echoError("Could not match '" + attribute.getContext(1) + "' to a valid town!");
                     return null;
                 }
@@ -80,7 +59,8 @@ public class TownySupport extends Support {
             if (attribute.hasContext(1)) {
                 if (dNation.matches(attribute.getContext(1))) {
                     nation = dNation.valueOf(attribute.getContext(1));
-                } else {
+                }
+                else {
                     dB.echoError("Could not match '" + attribute.getContext(1) + "' to a valid nation!");
                     return null;
                 }

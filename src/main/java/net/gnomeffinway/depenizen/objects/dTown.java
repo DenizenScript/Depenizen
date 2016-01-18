@@ -5,6 +5,7 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
+import com.palmergames.bukkit.towny.object.WorldCoord;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -57,6 +58,23 @@ public class dTown implements dObject {
 
     public dTown(Town town) {
         this.town = town;
+    }
+
+    public static dTown fromWorldCoord(WorldCoord coord) {
+        if (coord == null) {
+            return null;
+        }
+        Location loc = new Location(coord.getBukkitWorld(), coord.getX(), 0, coord.getZ());
+        try {
+            String name = TownyUniverse.getTownName(loc);
+            if (name == null) {
+                return null;
+            }
+            return new dTown(TownyUniverse.getDataSource().getTown(name));
+        }
+        catch (NotRegisteredException e) {
+            return null;
+        }
     }
 
     /////////////////////

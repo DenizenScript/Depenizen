@@ -15,7 +15,7 @@ import net.gnomeffinway.depenizen.support.plugins.EssentialsSupport;
 public class EssentialsItemExtension extends dObjectExtension {
 
     public static boolean describes(dObject item) {
-        return item instanceof dItem && ((dPlayer) item).isOnline();
+        return item instanceof dItem;
     }
 
     public static EssentialsItemExtension getFrom(dObject item) {
@@ -46,7 +46,7 @@ public class EssentialsItemExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("worth")) {
             // <--[tag]
-            // @attribute <i@item.worth.quantity[<Element>]>
+            // @attribute <i@item.worth.quantity[<#>]>
             // @returns Element(Decimal)
             // @description
             // Returns the amount of money the quantity specified of this item is worth in Essentials.
