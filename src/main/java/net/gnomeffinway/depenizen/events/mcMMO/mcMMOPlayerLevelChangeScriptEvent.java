@@ -60,9 +60,12 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
 
     @Override
     public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String skill = CoreUtilities.getXthArg(2, lower);
-        return skill.equals("level") || SkillType.valueOf(skill.toUpperCase()) != null;
+        String arg = CoreUtilities.getXthArg(2, s).toUpperCase();
+        SkillType eventSkill = SkillType.valueOf(arg);
+        if (arg.equals("SKILL") || (eventSkill != null && eventSkill == event.getSkill())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
