@@ -15,6 +15,7 @@ import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.Location;
 
 public class dTown implements dObject {
@@ -64,13 +65,8 @@ public class dTown implements dObject {
         if (coord == null) {
             return null;
         }
-        Location loc = new Location(coord.getBukkitWorld(), coord.getX(), 0, coord.getZ());
         try {
-            String name = TownyUniverse.getTownName(loc);
-            if (name == null) {
-                return null;
-            }
-            return new dTown(TownyUniverse.getDataSource().getTown(name));
+            return new dTown(coord.getTownBlock().getTown());
         }
         catch (NotRegisteredException e) {
             return null;
@@ -118,6 +114,14 @@ public class dTown implements dObject {
     public String identifySimple() {
         // TODO: Properties?
         return identify();
+    }
+
+    public Town getTown() {
+        return town;
+    }
+
+    public Boolean equals(dTown town) {
+        return CoreUtilities.toLowerCase(town.getTown().getName()).equals(CoreUtilities.toLowerCase(this.getTown().getName()));
     }
 
     @Override

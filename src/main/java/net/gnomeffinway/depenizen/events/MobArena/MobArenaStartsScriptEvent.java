@@ -52,7 +52,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
         String lower = CoreUtilities.toLowerCase(s);
         String arenaname = CoreUtilities.getXthArg(2, lower).replace("mobarena@", "");
         MobArenaArena a = MobArenaArena.valueOf(arenaname);
-        return arena.equals("arena") || (a != null && a.getArena() == event.getArena());
+        return arenaname.equals("arena") || (a != null && a.getArena() == event.getArena());
     }
 
     @Override

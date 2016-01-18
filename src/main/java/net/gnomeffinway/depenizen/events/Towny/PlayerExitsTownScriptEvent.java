@@ -53,12 +53,12 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public boolean matches(ScriptContainer scriptContainer, String s) {
         String name = CoreUtilities.getXthArg(3, CoreUtilities.toLowerCase(s));
-        if (name.equals("town")) {
+        dTown eventTown = dTown.fromWorldCoord(event.getFrom());
+        if (name.equals("town") && eventTown != null) {
             return true;
         }
         dTown givenTown = dTown.valueOf(name);
-        dTown eventTown = dTown.fromWorldCoord(event.getFrom());
-        if (eventTown != null && givenTown != null && eventTown == givenTown) {
+        if (eventTown != null && givenTown != null && eventTown.equals(givenTown)) {
             return true;
         }
         return false;
