@@ -26,8 +26,8 @@ public class TownySupport extends Support {
         registerProperty(TownyPlayerExtension.class, dPlayer.class);
         registerProperty(TownyLocationExtension.class, dLocation.class);
         registerProperty(TownyCuboidExtension.class, dCuboid.class);
-        registerEvents(PlayerEntersTownScriptEvent.class);
-        registerEvents(PlayerExitsTownScriptEvent.class);
+        registerScriptEvents(new PlayerEntersTownScriptEvent());
+        registerScriptEvents(new PlayerExitsTownScriptEvent());
         registerAdditionalTags("town", "nation");
     }
 

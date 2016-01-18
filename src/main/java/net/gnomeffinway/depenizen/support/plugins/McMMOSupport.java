@@ -18,9 +18,9 @@ public class McMMOSupport extends Support {
         registerAdditionalTags("party");
         registerProperty(McMMOPlayerExtension.class, dPlayer.class);
         new McMMOCommands().activate().as("MCMMO").withOptions("see documentation", 1);
-        ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelChangeScriptEvent());
-        ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelUpScriptEvent());
-        ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelDownScriptEvent());
+        registerScriptEvents(new mcMMOPlayerLevelChangeScriptEvent());
+        registerScriptEvents(new mcMMOPlayerLevelUpScriptEvent());
+        registerScriptEvents(new mcMMOPlayerLevelDownScriptEvent());
     }
 
     public String additionalTags(Attribute attribute) {

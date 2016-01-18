@@ -1,5 +1,6 @@
 package net.gnomeffinway.depenizen.support;
 
+import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.tags.Attribute;
@@ -20,6 +21,8 @@ public class Support {
             = new HashMap<Class<? extends Property>, Class<? extends dObject>[]>();
 
     private final List<Class<? extends Listener>> events = new ArrayList<Class<? extends Listener>>();
+
+    private final List<ScriptEvent> scriptevents = new ArrayList<ScriptEvent>();
 
     private final List<String> additionalTags = new ArrayList<String>();
 
@@ -48,6 +51,10 @@ public class Support {
         events.add(event);
     }
 
+    public void registerScriptEvents(ScriptEvent event) {
+        scriptevents.add(event);
+    }
+
     public void registerAdditionalTags(String... tags) {
         for (String tag : tags) {
             additionalTags.add(tag);
@@ -71,6 +78,10 @@ public class Support {
         return events;
     }
 
+    public List<ScriptEvent> getScriptEvents() {
+        return scriptevents;
+    }
+
     public List<String> getAdditionalTags() {
         return additionalTags;
     }
@@ -80,6 +91,8 @@ public class Support {
     public boolean hasProperties() { return !properties.isEmpty(); }
 
     public boolean hasEvents() { return !events.isEmpty(); }
+
+    public boolean hasScriptEvents() { return !scriptevents.isEmpty(); }
 
     public boolean hasAdditionalTags() { return !additionalTags.isEmpty(); }
 

@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.support;
 
 import net.aufdemrand.denizen.objects.dNPC;
+import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.ObjectFetcher;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.objects.properties.Property;
@@ -52,6 +53,15 @@ public class SupportManager {
             for (Class<? extends Listener> event : support.getEvents()) {
                 try {
                     depenizen.getServer().getPluginManager().registerEvents(event.newInstance(), depenizen);
+                } catch (Exception e) {
+                    dB.echoError(e);
+                }
+            }
+        }
+        if (support.hasScriptEvents()) {
+            for (ScriptEvent event : support.getScriptEvents()) {
+                try {
+                    ScriptEvent.registerScriptEvent(event);
                 } catch (Exception e) {
                     dB.echoError(e);
                 }
