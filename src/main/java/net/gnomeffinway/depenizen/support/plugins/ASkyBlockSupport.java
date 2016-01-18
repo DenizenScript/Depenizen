@@ -5,6 +5,7 @@ import com.wasteofplastic.askyblock.ASkyBlockAPI;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
+import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.events.ASkyBlock.*;
@@ -20,11 +21,11 @@ public class ASkyBlockSupport extends Support {
         registerProperty(ASkyBlockPlayerExtension.class, dPlayer.class);
         registerProperty(ASkyBlockLocationExtension.class, dLocation.class);
         registerProperty(ASkyBlockWorldExtension.class, dWorld.class);
-        registerEvents(SkyBlockCreatedScriptEvent.class);
-        registerEvents(SkyBlockResetScriptEvent.class);
-        registerEvents(PlayerEntersSkyBlockScriptEvent.class);
-        registerEvents(PlayerExitsSkyBlockScriptEvent.class);
-        registerEvents(PlayerCompletesSkyBlockChallengeScriptEvent.class);
+        registerScriptEvents(new SkyBlockCreatedScriptEvent());
+        registerScriptEvents(new SkyBlockResetScriptEvent());
+        registerScriptEvents(new PlayerEntersSkyBlockScriptEvent());
+        registerScriptEvents(new PlayerExitsSkyBlockScriptEvent());
+        registerScriptEvents(new PlayerCompletesSkyBlockChallengeScriptEvent());
         // TODO: Skyblock Command
     }
 

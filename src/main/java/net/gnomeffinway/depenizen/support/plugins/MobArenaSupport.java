@@ -3,6 +3,7 @@ package net.gnomeffinway.depenizen.support.plugins;
 import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.events.MobArena.MobArenaEndsScriptEvent;
@@ -19,9 +20,9 @@ public class MobArenaSupport extends Support {
     public MobArenaSupport() {
         registerObjects(MobArenaArena.class);
         registerAdditionalTags("mobarena");
-        registerEvents(MobArenaStartsScriptEvent.class);
-        registerEvents(MobArenaEndsScriptEvent.class);
-        registerEvents(MobArenaWaveChangesScriptEvent.class);
+        registerScriptEvents(new MobArenaStartsScriptEvent());
+        registerScriptEvents(new MobArenaEndsScriptEvent());
+        registerScriptEvents(new MobArenaWaveChangesScriptEvent());
         registerProperty(MobArenaPlayerExtension.class, dPlayer.class);
         plugin = Support.getPlugin(MobArenaSupport.class);
     }
