@@ -3,8 +3,6 @@ package net.gnomeffinway.depenizen.events.Towny;
 import com.palmergames.bukkit.towny.ChunkNotification;
 import com.palmergames.bukkit.towny.event.PlayerChangePlotEvent;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.object.Town;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -13,9 +11,7 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.dTown;
-import net.gnomeffinway.depenizen.support.plugins.TownySupport;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -60,15 +56,10 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
         if (name.equals("town")) {
             return true;
         }
-        try {
-            Town given = TownyUniverse.getDataSource().getTown(name);
-            Town eventTown = TownySupport.fromWorldCoord(event.getFrom());
-            if (given == eventTown) {
-                return true;
-            }
-        }
-        catch (NotRegisteredException e) {
-            dB.echoError("No town found by the name: " + name);
+        dTown givenTown = dTown.valueOf(name);
+        dTown eventTown = dTown.fromWorldCoord(event.getFrom());
+        if (eventTown != null && givenTown != null && eventTown == givenTown) {
+            return true;
         }
         return false;
     }
@@ -116,7 +107,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
         catch (NotRegisteredException e) {
             return;
         }
-        town = new dTown(TownySupport.fromWorldCoord(event.getFrom()));
+        town = dTown.fromWorldCoord(event.getFrom());
         this.event = event;
         fire();
     }
