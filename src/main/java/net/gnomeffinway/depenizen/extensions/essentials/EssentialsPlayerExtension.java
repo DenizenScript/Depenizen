@@ -43,6 +43,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // <--[tag]
         // @attribute <p@player.god_mode>
         // @returns Element(Boolean)
+        // @mechanism dPlayer.god_mode
         // @description
         // Returns whether the player is currently in god mode.
         // @plugin Depenizen, Essentials
@@ -65,6 +66,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // <--[tag]
         // @attribute <p@player.is_afk>
         // @returns Element(Boolean)
+        // @mechanism dPlayer.is_afk
         // @description
         // Returns whether the player is AFK.
         // @plugin Depenizen, Essentials
@@ -76,6 +78,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // <--[tag]
         // @attribute <p@player.is_muted>
         // @returns Element(Boolean)
+        // @mechanism dPlayer.is_muted
         // @description
         // Returns whether the player is muted.
         // @plugin Depenizen, Essentials
@@ -87,6 +90,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // <--[tag]
         // @attribute <p@player.is_vanished>
         // @returns Element(Boolean)
+        // @mechanism dPlayer.is_vanished
         // @description
         // Returns whether the player is vanished.
         // @plugin Depenizen, Essentials
@@ -172,6 +176,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // <--[tag]
         // @attribute <p@player.socialspy>
         // @returns Element(Boolean)
+        // @mechanism dPlayer.socialspy
         // @description
         // Returns whether the player has SocialSpy enabled.
         // @plugin Depenizen, Essentials
@@ -190,15 +195,15 @@ public class EssentialsPlayerExtension extends dObjectExtension {
 
         // <--[mechanism]
         // @object dPlayer
-        // @name afk
+        // @name is_afk
         // @input Element(Boolean)
         // @description
         // Sets whether the player is marked as AFK.
         // @tags
-        // <player.is_afk>
+        // <p@player.is_afk>
         // @plugin Depenizen, Essentials
         // -->
-        if (mechanism.matches("afk") && mechanism.requireBoolean()) {
+        if ((mechanism.matches("afk") || mechanism.matches("is_afk")) && mechanism.requireBoolean()) {
             essUser.setAfk(value.asBoolean());
         }
 
@@ -209,7 +214,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @description
         // Sets whether the player has god mode enabled.
         // @tags
-        // <player.god_mode>
+        // <p@player.god_mode>
         // @plugin Depenizen, Essentials
         // -->
         if (mechanism.matches("god_mode") && mechanism.requireBoolean()) {
@@ -218,17 +223,17 @@ public class EssentialsPlayerExtension extends dObjectExtension {
 
         // <--[mechanism]
         // @object dPlayer
-        // @name muted
+        // @name is_muted
         // @input Element(Boolean)(|Duration)
         // @description
         // Sets whether the player is muted. Optionally, you may also
         // specify a duration to set how long they are muted for.
         // @tags
-        // <player.is_muted>
-        // <player.mute_timeout>
+        // <p@player.is_muted>
+        // <p@player.mute_timeout>
         // @plugin Depenizen, Essentials
         // -->
-        if (mechanism.matches("muted") && mechanism.requireBoolean()) {
+        if ((mechanism.matches("muted") || mechanism.matches("is_muted")) && mechanism.requireBoolean()) {
             if (value.asString().length() > 0) {
                 String[] split = value.asString().split("[\\|" + dList.internal_escape + "]", 2);
                 if (split.length > 0 && new Element(split[0]).isBoolean()) {
@@ -251,7 +256,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @description
         // Sets whether the player has SocialSpy enabled.
         // @tags
-        // <player.socialspy>
+        // <p@player.socialspy>
         // @plugin Depenizen, Essentials
         // -->
         if (mechanism.matches("socialspy") && mechanism.requireBoolean()) {
