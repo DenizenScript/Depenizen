@@ -2,7 +2,6 @@ package net.gnomeffinway.depenizen.extensions.essentials;
 
 import com.earth2me.essentials.Essentials;
 import net.aufdemrand.denizen.objects.dItem;
-import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.aH;
@@ -19,8 +18,12 @@ public class EssentialsItemExtension extends dObjectExtension {
     }
 
     public static EssentialsItemExtension getFrom(dObject item) {
-        if (!describes(item)) return null;
-        else return new EssentialsItemExtension((dItem) item);
+        if (!describes(item)) {
+            return null;
+        }
+        else {
+            return new EssentialsItemExtension((dItem) item);
+        }
     }
 
     private EssentialsItemExtension(dItem item) {
@@ -35,7 +38,6 @@ public class EssentialsItemExtension extends dObjectExtension {
         if (attribute == null) {
             return null;
         }
-        Double price = ess.getWorth().getPrice(item.getItemStack()).doubleValue();
 
         // <--[tag]
         // @attribute <i@item.worth>
@@ -45,6 +47,7 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("worth")) {
+            double price = ess.getWorth().getPrice(item.getItemStack()).doubleValue();
             // <--[tag]
             // @attribute <i@item.worth.quantity[<#>]>
             // @returns Element(Decimal)
@@ -64,7 +67,6 @@ public class EssentialsItemExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-
         Element value = mechanism.getValue();
 
         // <--[mechanism]
