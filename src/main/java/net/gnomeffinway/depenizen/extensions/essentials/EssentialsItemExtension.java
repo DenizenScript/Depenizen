@@ -13,16 +13,16 @@ import net.gnomeffinway.depenizen.support.plugins.EssentialsSupport;
 
 public class EssentialsItemExtension extends dObjectExtension {
 
-    public static boolean describes(dObject item) {
-        return item instanceof dItem;
+    public static boolean describes(dObject object) {
+        return object instanceof dItem;
     }
 
-    public static EssentialsItemExtension getFrom(dObject item) {
-        if (!describes(item)) {
+    public static EssentialsItemExtension getFrom(dObject object) {
+        if (!describes(object)) {
             return null;
         }
         else {
-            return new EssentialsItemExtension((dItem) item);
+            return new EssentialsItemExtension((dItem) object);
         }
     }
 

@@ -116,7 +116,6 @@ public class HeroesXPCommand extends AbstractCommand {
 
         switch (Action.valueOf(action.asString().toUpperCase())) {
             case ADD:
-                dB.echoApproval("Added " + quantity + "XP to: " + player.getName() + "." + "To class: " + hclass.getHeroClass().getName());
                 hero.addExp(quantity.asDouble(), hclass.getHeroClass(), player.getLocation());
                 break;
             case REMOVE:
