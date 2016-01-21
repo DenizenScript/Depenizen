@@ -1,5 +1,6 @@
 package net.gnomeffinway.depenizen.commands.heroes;
 
+import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.Hero;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -12,6 +13,8 @@ import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesClass;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
+import net.gnomeffinway.depenizen.support.Support;
+import net.gnomeffinway.depenizen.support.plugins.HeroesSupport;
 
 // <--[command]
 // @Name HeroesXP
@@ -56,7 +59,8 @@ public class HeroesXPCommand extends AbstractCommand {
         SET
     }
 
-    @Override
+    Heroes heroes = Support.getPlugin(HeroesSupport.class);
+
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
             if (!scriptEntry.hasObject("action") && arg.matchesEnum(Action.values())) {
@@ -103,17 +107,25 @@ public class HeroesXPCommand extends AbstractCommand {
         dB.report(scriptEntry, getName(),
                 action.debug() + hclass.debug() + quantity.debug());
 
-        Hero hero = new HeroesHero(player).getHero();
+        if (!player.isOnline()) {
+            dB.echoError(scriptEntry.getResidingQueue(), "Attached player must be online!");
+            return;
+        }
+
+        Hero hero = heroes.getCharacterManager().getHero(player.getPlayerEntity());
 
         switch (Action.valueOf(action.asString().toUpperCase())) {
             case ADD:
+                dB.echoApproval("Added " + quantity + "XP to: " + player.getName() + "." + "To class: " + hclass.getHeroClass().getName());
                 hero.addExp(quantity.asDouble(), hclass.getHeroClass(), player.getLocation());
+                break;
             case REMOVE:
                 hero.setExperience(hclass.getHeroClass(),
                         hero.getExperience(hclass.getHeroClass()) - quantity.asDouble());
+                break;
             case SET:
                 hero.setExperience(hclass.getHeroClass(), quantity.asDouble());
-
+                break;
         }
     }
 }
