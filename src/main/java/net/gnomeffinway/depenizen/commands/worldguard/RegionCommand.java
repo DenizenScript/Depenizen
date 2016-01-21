@@ -47,7 +47,7 @@ public class RegionCommand extends AbstractCommand {
 
     // -->
 
-    private enum Action { ADD, REMOVE }
+    private enum Action {ADD, REMOVE}
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
@@ -55,36 +55,47 @@ public class RegionCommand extends AbstractCommand {
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("region_id")
-                    && arg.matchesPrefix("id"))
+                    && arg.matchesPrefix("id")) {
                 scriptEntry.addObject("region_id", arg.asElement());
+            }
 
             if (!scriptEntry.hasObject("cuboid")
-                    && arg.matchesArgumentType(dCuboid.class))
+                    && arg.matchesArgumentType(dCuboid.class)) {
                 scriptEntry.addObject("cuboid", arg.asType(dCuboid.class));
+            }
 
             if (!scriptEntry.hasObject("world")
-                    && arg.matchesArgumentType(dWorld.class))
+                    && arg.matchesArgumentType(dWorld.class)) {
                 scriptEntry.addObject("world", arg.asType(dWorld.class));
+            }
 
             if (!scriptEntry.hasObject("action")
-                    && arg.matchesEnum(Action.values()))
+                    && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
+            }
+            else {
+                arg.reportUnhandled();
+            }
 
         }
 
-        if (!scriptEntry.hasObject("region_id"))
+        if (!scriptEntry.hasObject("region_id")) {
             throw new InvalidArgumentsException("Must specify a region id!");
+        }
 
         if (!scriptEntry.hasObject("cuboid") && (!scriptEntry.hasObject("action")
-                || scriptEntry.getElement("action").asString().equalsIgnoreCase("ADD")))
+                || scriptEntry.getElement("action").asString().equalsIgnoreCase("ADD"))) {
             throw new InvalidArgumentsException("Must specify a valid cuboid!");
+        }
 
         if (!scriptEntry.hasObject("world") && scriptEntry.hasObject("action")
-                && scriptEntry.getElement("action").asString().equalsIgnoreCase("REMOVE"))
+                && scriptEntry.getElement("action").asString().equalsIgnoreCase("REMOVE")) {
             throw new InvalidArgumentsException("Must specify a valid world!");
+        }
 
-        if (!scriptEntry.hasObject("action"))
+        if (!scriptEntry.hasObject("action")) {
             scriptEntry.addObject("action", new Element("ADD"));
+        }
 
     }
 
@@ -97,8 +108,9 @@ public class RegionCommand extends AbstractCommand {
         World world = w != null ? w.getWorld() : cuboid != null ? cuboid.getWorld() : null;
         Element action = scriptEntry.getElement("action");
 
-        if (world == null)
+        if (world == null) {
             throw new CommandExecutionException("No valid world found!");
+        }
 
         dB.report(scriptEntry, getName(), region_id.debug() + (cuboid != null ? cuboid.debug() : "")
                 + aH.debugObj("world", world.getName()) + action.debug());

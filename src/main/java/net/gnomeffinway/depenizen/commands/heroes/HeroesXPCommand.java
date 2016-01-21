@@ -71,6 +71,9 @@ public class HeroesXPCommand extends AbstractCommand {
                     && arg.matchesPrimitive(aH.PrimitiveType.Double)) {
                 scriptEntry.addObject("quantity", arg.asElement());
             }
+            else {
+                arg.reportUnhandled();
+            }
         }
 
         if (!((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer()) {

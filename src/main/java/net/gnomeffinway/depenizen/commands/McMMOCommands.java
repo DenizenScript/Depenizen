@@ -68,38 +68,49 @@ public class McMMOCommands extends AbstractCommand {
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("action")
-                    && arg.matchesEnum(Action.values()))
+                    && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
+            }
 
             else if (!scriptEntry.hasObject("state")
                     && arg.matchesPrefix("state")
-                    && arg.matchesEnum(State.values()))
+                    && arg.matchesEnum(State.values())) {
                 scriptEntry.addObject("state", arg.asElement());
+            }
 
             else if (!scriptEntry.hasObject("party")
-                    && arg.matchesPrefix("party"))
+                    && arg.matchesPrefix("party")) {
                 scriptEntry.addObject("party", arg.asElement());
+            }
 
             else if (!scriptEntry.hasObject("skill")
-                    && arg.matchesPrefix("skill"))
+                    && arg.matchesPrefix("skill")) {
                 scriptEntry.addObject("skill", arg.asElement());
+            }
 
             else if (!scriptEntry.hasObject("qty")
                     && arg.matchesPrefix("q", "qty", "quantity")
-                    && arg.matchesPrimitive(aH.PrimitiveType.Double))
+                    && arg.matchesPrimitive(aH.PrimitiveType.Double)) {
                 scriptEntry.addObject("qty", arg.asElement());
+            }
 
             else if (!scriptEntry.hasObject("type")
-                    && arg.matchesEnum(Type.values()))
+                    && arg.matchesEnum(Type.values())) {
                 scriptEntry.addObject("type", arg.asElement());
+            }
+            else {
+                arg.reportUnhandled();
+            }
 
         }
 
-        if (!scriptEntry.hasObject("action"))
+        if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Must specify a valid action!");
+        }
 
-        if (!scriptEntry.hasObject("type"))
+        if (!scriptEntry.hasObject("type")) {
             throw new InvalidArgumentsException("Must specify a valid type!");
+        }
 
         scriptEntry.defaultObject("state", new Element("TOGGLE"))
                 .defaultObject("qty", new Element(-1));
@@ -134,7 +145,8 @@ public class McMMOCommands extends AbstractCommand {
                         case LEVELS: {
                             if (player.isOnline()) {
                                 ExperienceAPI.addLevel(player.getPlayerEntity(), skill.asString(), qty.asInt());
-                            } else {
+                            }
+                            else {
                                 ExperienceAPI.addLevelOffline(player.getName(), skill.asString(), qty.asInt());
                             }
                             break;
@@ -142,12 +154,14 @@ public class McMMOCommands extends AbstractCommand {
                         case XP: {
                             if (player.isOnline()) {
                                 ExperienceAPI.addRawXP(player.getPlayerEntity(), skill.asString(), qty.asFloat());
-                            } else {
+                            }
+                            else {
                                 ExperienceAPI.addRawXPOffline(player.getName(), skill.asString(), qty.asFloat());
                             }
                         }
                     }
-                } else if (party != null && PartyManager.getParty(party.asString()) != null) {
+                }
+                else if (party != null && PartyManager.getParty(party.asString()) != null) {
                     PartyAPI.addToParty(player.getPlayerEntity(), party.asString());
                 }
                 break;
@@ -160,7 +174,8 @@ public class McMMOCommands extends AbstractCommand {
                         case LEVELS: {
                             if (player.isOnline()) {
                                 ExperienceAPI.setLevel(player.getPlayerEntity(), skill.asString(), ExperienceAPI.getLevel(player.getPlayerEntity(), skill.asString()) - qty.asInt());
-                            } else {
+                            }
+                            else {
                                 ExperienceAPI.setLevelOffline(player.getName(), skill.asString(), ExperienceAPI.getLevelOffline(player.getName(), skill.asString()) - qty.asInt());
                             }
                             break;
@@ -168,7 +183,8 @@ public class McMMOCommands extends AbstractCommand {
                         case XP: {
                             if (player.isOnline()) {
                                 ExperienceAPI.removeXP(player.getPlayerEntity(), skill.asString(), qty.asInt());
-                            } else {
+                            }
+                            else {
                                 ExperienceAPI.removeXPOffline(player.getName(), skill.asString(), qty.asInt());
                             }
                             break;
@@ -176,11 +192,13 @@ public class McMMOCommands extends AbstractCommand {
                     }
                 }
                 else if (player != null && player.isOnline() && party != null && PartyManager.getParty(party.asString()) != null) {
-                    if (PartyAPI.getPartyLeader(party.asString()).equals(player.getName()))
+                    if (PartyAPI.getPartyLeader(party.asString()).equals(player.getName())) {
                         PartyManager.disbandParty(PartyManager.getParty(party.asString()));
+                    }
 
-                    else
+                    else {
                         PartyAPI.removeFromParty(player.getPlayerEntity());
+                    }
                 }
                 else if (player != null) {
                     DatabaseManagerFactory.getDatabaseManager().removeUser(player.getName());
@@ -195,7 +213,8 @@ public class McMMOCommands extends AbstractCommand {
                         case LEVELS: {
                             if (player.isOnline()) {
                                 ExperienceAPI.setLevel(player.getPlayerEntity(), skill.asString(), qty.asInt());
-                            } else {
+                            }
+                            else {
                                 ExperienceAPI.setLevelOffline(player.getName(), skill.asString(), qty.asInt());
                             }
                             break;
@@ -203,64 +222,74 @@ public class McMMOCommands extends AbstractCommand {
                         case XP: {
                             if (player.isOnline()) {
                                 ExperienceAPI.setXP(player.getPlayerEntity(), skill.asString(), qty.asInt());
-                            } else {
+                            }
+                            else {
                                 ExperienceAPI.setXPOffline(player.getName(), skill.asString(), qty.asInt());
                             }
                             break;
                         }
                     }
-                } else switch(Type.valueOf(type.asString().toUpperCase())) {
-                    case LEADER: {
-                        if (party != null && PartyManager.getParty(party.asString()) != null)
-                            PartyAPI.setPartyLeader(party.asString(), player.getName());
-                        break;
-                    }
-                    case XPRATE: {
-                        if (qty.asInt() > 0)
-                            ExperienceConfig.getInstance().setExperienceGainsGlobalMultiplier(qty.asInt());
-                        break;
-                    }
-                    case HARDCORE: {
-                        if (skill == null) return;
-                        SkillType skillType = SkillType.getSkill(skill.asString());
-                        boolean isEnabled = Config.getInstance().getHardcoreStatLossEnabled(skillType);
-
-                        switch (State.valueOf(state.asString().toUpperCase())) {
-                            case TOGGLE: {
-                                Config.getInstance().setHardcoreStatLossEnabled(skillType, !isEnabled);
-                                break;
+                }
+                else {
+                    switch (Type.valueOf(type.asString().toUpperCase())) {
+                        case LEADER: {
+                            if (party != null && PartyManager.getParty(party.asString()) != null) {
+                                PartyAPI.setPartyLeader(party.asString(), player.getName());
                             }
-                            case TRUE: {
-                                Config.getInstance().setHardcoreStatLossEnabled(skillType, true);
-                                break;
-                            }
-                            case FALSE: {
-                                Config.getInstance().setHardcoreStatLossEnabled(skillType, false);
-                                break;
-                            }
+                            break;
                         }
-                        break;
-                    }
-                    case VAMPIRISM: {
-                        if (skill == null) return;
-                        SkillType skillType = SkillType.getSkill(skill.asString());
-                        boolean isEnabled = Config.getInstance().getHardcoreVampirismEnabled(skillType);
-
-                        switch (State.valueOf(state.asString().toUpperCase())) {
-                            case TOGGLE: {
-                                Config.getInstance().setHardcoreVampirismEnabled(skillType, !isEnabled);
-                                break;
+                        case XPRATE: {
+                            if (qty.asInt() > 0) {
+                                ExperienceConfig.getInstance().setExperienceGainsGlobalMultiplier(qty.asInt());
                             }
-                            case TRUE: {
-                                Config.getInstance().setHardcoreVampirismEnabled(skillType, true);
-                                break;
-                            }
-                            case FALSE: {
-                                Config.getInstance().setHardcoreVampirismEnabled(skillType, false);
-                                break;
-                            }
+                            break;
                         }
-                        break;
+                        case HARDCORE: {
+                            if (skill == null) {
+                                return;
+                            }
+                            SkillType skillType = SkillType.getSkill(skill.asString());
+                            boolean isEnabled = Config.getInstance().getHardcoreStatLossEnabled(skillType);
+
+                            switch (State.valueOf(state.asString().toUpperCase())) {
+                                case TOGGLE: {
+                                    Config.getInstance().setHardcoreStatLossEnabled(skillType, !isEnabled);
+                                    break;
+                                }
+                                case TRUE: {
+                                    Config.getInstance().setHardcoreStatLossEnabled(skillType, true);
+                                    break;
+                                }
+                                case FALSE: {
+                                    Config.getInstance().setHardcoreStatLossEnabled(skillType, false);
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                        case VAMPIRISM: {
+                            if (skill == null) {
+                                return;
+                            }
+                            SkillType skillType = SkillType.getSkill(skill.asString());
+                            boolean isEnabled = Config.getInstance().getHardcoreVampirismEnabled(skillType);
+
+                            switch (State.valueOf(state.asString().toUpperCase())) {
+                                case TOGGLE: {
+                                    Config.getInstance().setHardcoreVampirismEnabled(skillType, !isEnabled);
+                                    break;
+                                }
+                                case TRUE: {
+                                    Config.getInstance().setHardcoreVampirismEnabled(skillType, true);
+                                    break;
+                                }
+                                case FALSE: {
+                                    Config.getInstance().setHardcoreVampirismEnabled(skillType, false);
+                                    break;
+                                }
+                            }
+                            break;
+                        }
                     }
                 }
                 break;
