@@ -4,6 +4,7 @@ import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.commands.McMMOCommands;
+import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerGainsXPScriptEvent;
 import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerLevelChangeScriptEvent;
 import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerLevelDownScriptEvent;
 import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerLevelUpScriptEvent;
@@ -21,6 +22,7 @@ public class McMMOSupport extends Support {
         registerScriptEvents(new mcMMOPlayerLevelChangeScriptEvent());
         registerScriptEvents(new mcMMOPlayerLevelUpScriptEvent());
         registerScriptEvents(new mcMMOPlayerLevelDownScriptEvent());
+        registerScriptEvents(new mcMMOPlayerGainsXPScriptEvent());
     }
 
     public String additionalTags(Attribute attribute) {
