@@ -3,10 +3,10 @@ package net.gnomeffinway.depenizen.extensions.factions;
 import com.massivecraft.factions.entity.MPlayer;
 import com.massivecraft.factions.entity.MPlayerColl;
 import com.massivecraft.massivecore.util.IdUtil;
-import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizen.objects.dNPC;
-import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
@@ -14,18 +14,22 @@ import net.gnomeffinway.depenizen.objects.dFaction;
 
 public class FactionsPlayerNPCExtension extends dObjectExtension {
 
-    public static boolean describes(dObject obj) {
-        return obj instanceof dPlayer || obj instanceof dNPC;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer || object instanceof dNPC;
     }
 
-    public static FactionsPlayerNPCExtension getFrom(dObject obj) {
-        if (!describes(obj)) return null;
-        else return new FactionsPlayerNPCExtension(obj);
+    public static FactionsPlayerNPCExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new FactionsPlayerNPCExtension(object);
+        }
     }
 
-    private FactionsPlayerNPCExtension(dObject obj) {
-        String name = obj instanceof dPlayer ? ((dPlayer) obj).getName()
-                : obj instanceof dNPC ? ((dNPC) obj).getName()
+    private FactionsPlayerNPCExtension(dObject object) {
+        String name = object instanceof dPlayer ? ((dPlayer) object).getName()
+                : object instanceof dNPC ? ((dNPC) object).getName()
                 : null;
         if (name == null) {
             dB.echoError("Invalid dObject! Must be a dPlayer or dNPC!");
@@ -82,8 +86,9 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
                 // @plugin Depenizen, Factions
                 // -->
                 if (attribute.startsWith("role")) {
-                    if (player.getRole() != null)
+                    if (player.getRole() != null) {
                         return new Element(player.getRole().toString()).getAttribute(attribute.fulfill(1));
+                    }
                 }
 
                 // <--[tag]
@@ -101,8 +106,9 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
                 // @plugin Depenizen, Factions
                 // -->
                 else if (attribute.startsWith("title")) {
-                    if (player.hasTitle())
+                    if (player.hasTitle()) {
                         return new Element(player.getTitle()).getAttribute(attribute.fulfill(1));
+                    }
                 }
             }
 

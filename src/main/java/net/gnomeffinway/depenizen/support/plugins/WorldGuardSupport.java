@@ -5,9 +5,9 @@ import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.commands.worldguard.RegionCommand;
 import net.gnomeffinway.depenizen.extensions.worldguard.WorldGuardCuboidExtension;
+import net.gnomeffinway.depenizen.extensions.worldguard.WorldGuardLocationExtension;
 import net.gnomeffinway.depenizen.objects.worldguard.WorldGuardRegion;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.extensions.worldguard.WorldGuardLocationExtension;
 
 public class WorldGuardSupport extends Support {
 

@@ -1,8 +1,8 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.extensions.worldedit.WorldEditPlayerExtension;
+import net.gnomeffinway.depenizen.support.Support;
 
 public class WorldEditSupport extends Support {
 

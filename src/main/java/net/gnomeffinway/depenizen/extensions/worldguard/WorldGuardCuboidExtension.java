@@ -27,8 +27,12 @@ public class WorldGuardCuboidExtension extends dObjectExtension {
     }
 
     public static WorldGuardCuboidExtension getFrom(dObject cuboid) {
-        if (!describes(cuboid)) return null;
-        else return new WorldGuardCuboidExtension((dCuboid) cuboid);
+        if (!describes(cuboid)) {
+            return null;
+        }
+        else {
+            return new WorldGuardCuboidExtension((dCuboid) cuboid);
+        }
     }
 
     private WorldGuardCuboidExtension(dCuboid cuboid) {

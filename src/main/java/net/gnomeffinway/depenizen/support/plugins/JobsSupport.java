@@ -1,8 +1,8 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.commands.JobsCommands;
 import net.gnomeffinway.depenizen.extensions.jobs.JobsPlayerExtension;
 import net.gnomeffinway.depenizen.objects.jobs.JobsJob;
@@ -28,8 +28,9 @@ public class JobsSupport extends Support {
             JobsJob j = null;
 
             // Job tag may specify a new job in the <jobs[context]...> portion of the tag.
-            if (attribute.hasContext(1))
-                // Check if this is a valid player and update the dPlayer object reference.
+
+            // Check if this is a valid player and update the dPlayer object reference.
+            if (attribute.hasContext(1)) {
                 if (JobsJob.matches(attribute.getContext(1))) {
                     j = JobsJob.valueOf(attribute.getContext(1));
                 }
@@ -37,6 +38,7 @@ public class JobsSupport extends Support {
                     dB.echoError("Could not match '" + attribute.getContext(1) + "' to a valid job!");
                     return null;
                 }
+            }
 
             if (j == null) {
                 dB.echoError("Invalid or missing job!");

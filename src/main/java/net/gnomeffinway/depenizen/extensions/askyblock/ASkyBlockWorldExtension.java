@@ -9,8 +9,8 @@ import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 
 public class ASkyBlockWorldExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dWorld;
+    public static boolean describes(dObject object) {
+        return object instanceof dWorld;
     }
 
     public static ASkyBlockWorldExtension getFrom(dObject object) {

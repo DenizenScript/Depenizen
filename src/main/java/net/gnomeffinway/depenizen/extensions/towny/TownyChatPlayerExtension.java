@@ -3,7 +3,6 @@ package net.gnomeffinway.depenizen.extensions.towny;
 import com.palmergames.bukkit.TownyChat.Chat;
 import com.palmergames.bukkit.TownyChat.channels.Channel;
 import com.palmergames.bukkit.TownyChat.channels.ChannelsHolder;
-import com.palmergames.bukkit.TownyChat.channels.channelTypes;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
@@ -17,12 +16,10 @@ import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.plugins.TownyChatSupport;
 
-import java.util.Map;
-
 public class TownyChatPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
     public static TownyChatPlayerExtension getFrom(dObject object) {
@@ -33,17 +30,10 @@ public class TownyChatPlayerExtension extends dObjectExtension {
     }
 
     private TownyChatPlayerExtension(dPlayer player) {
-        try {
-            this.resident = TownyUniverse.getDataSource().getResident(player.getName());
-            this.player = player;
-        }
-        catch (NotRegisteredException e) {
-            dB.echoError("Referenced player is not registered with towny.");
-        }
+        this.player = player;
     }
 
     dPlayer player;
-    Resident resident;
     Chat plugin = Support.getPlugin(TownyChatSupport.class);
     ChannelsHolder holder = plugin.getChannelsHandler();
 
@@ -66,7 +56,7 @@ public class TownyChatPlayerExtension extends dObjectExtension {
             if (attribute.startsWith("channel")) {
                 dList chans = new dList();
                 for (Channel c : holder.getAllChannels().values()) {
-                        chans.add(new Element(c.getName()).identify());
+                    chans.add(new Element(c.getName()).identify());
                 }
                 return chans.getAttribute(attribute.fulfill(1));
             }

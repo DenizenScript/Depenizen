@@ -1,21 +1,25 @@
 package net.gnomeffinway.depenizen.extensions.pvpstats;
 
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.slipcor.pvpstats.PVPData;
 
 public class PVPStatsPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
-    public static PVPStatsPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new PVPStatsPlayerExtension((dPlayer) pl);
+    public static PVPStatsPlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new PVPStatsPlayerExtension((dPlayer) object);
+        }
     }
 
     public PVPStatsPlayerExtension(dPlayer player) {
@@ -91,5 +95,5 @@ public class PVPStatsPlayerExtension extends dObjectExtension {
         return null;
 
     }
-    
+
 }

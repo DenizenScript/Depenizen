@@ -12,24 +12,27 @@ import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.prism.PrismAction;
 import net.gnomeffinway.depenizen.support.Support;
-import net.gnomeffinway.depenizen.support.Supported;
 import net.gnomeffinway.depenizen.support.plugins.PrismSupport;
 
 import java.util.List;
 
 public class PrismLocationExtension extends dObjectExtension {
 
-    public static boolean describes(dObject loc) {
-        return loc instanceof dLocation;
+    public static boolean describes(dObject object) {
+        return object instanceof dLocation;
     }
 
-    public static PrismLocationExtension getFrom(dObject loc) {
-        if (!describes(loc)) return null;
-        else return new PrismLocationExtension((dLocation) loc);
+    public static PrismLocationExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new PrismLocationExtension((dLocation) object);
+        }
     }
 
-    private PrismLocationExtension(dLocation loc) {
-        location = loc;
+    private PrismLocationExtension(dLocation location) {
+        this.location = location;
     }
 
     dLocation location = null;
@@ -111,10 +114,12 @@ public class PrismLocationExtension extends dObjectExtension {
 
 
             params.setWorld(location.getWorld().getName());
-            if (isRadius)
+            if (isRadius) {
                 params.setMinMaxVectorsFromPlayerLocation(location);
-            else
+            }
+            else {
                 params.setSpecificBlockLocation(location);
+            }
 
             ActionsQuery query = new ActionsQuery((Prism) Support.getPlugin(PrismSupport.class));
             List<Handler> results = query.lookup(params).getActionResults();
@@ -128,5 +133,5 @@ public class PrismLocationExtension extends dObjectExtension {
         return null;
 
     }
-    
+
 }

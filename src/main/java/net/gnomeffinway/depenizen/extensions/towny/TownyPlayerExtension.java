@@ -3,28 +3,34 @@ package net.gnomeffinway.depenizen.extensions.towny;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
+import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.tags.Attribute;
-import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.dNation;
 import net.gnomeffinway.depenizen.objects.dTown;
 
 public class TownyPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
-    public static TownyPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new TownyPlayerExtension((dPlayer) pl);
+    public static TownyPlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new TownyPlayerExtension((dPlayer) object);
+        }
     }
 
-    private TownyPlayerExtension(dPlayer pl) { player = pl; }
+    private TownyPlayerExtension(dPlayer player) {
+        this.player = player;
+    }
 
     dPlayer player = null;
 
@@ -34,9 +40,11 @@ public class TownyPlayerExtension extends dObjectExtension {
         Resident resident;
         try {
             resident = TownyUniverse.getDataSource().getResident(player.getName());
-        } catch (NotRegisteredException e) {
-            if (!attribute.hasAlternative())
+        }
+        catch (NotRegisteredException e) {
+            if (!attribute.hasAlternative()) {
                 dB.echoError("'" + player.getName() + "' is not registered in Towny!");
+            }
             return null;
         }
 
@@ -71,13 +79,17 @@ public class TownyPlayerExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("nation")) {
             try {
-                if (resident.hasNation())
+                if (resident.hasNation()) {
                     return new dNation(resident.getTown().getNation()).getAttribute(attribute.fulfill(1));
-                else
+                }
+                else {
                     return null;
-            } catch (NotRegisteredException e) {
-                if (!attribute.hasAlternative())
+                }
+            }
+            catch (NotRegisteredException e) {
+                if (!attribute.hasAlternative()) {
                     dB.echoError("'" + player.getName() + "' is not registered to a nation in Towny!");
+                }
             }
         }
 
@@ -90,13 +102,17 @@ public class TownyPlayerExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("town")) {
             try {
-                if (resident.hasTown())
+                if (resident.hasTown()) {
                     return new dTown(resident.getTown()).getAttribute(attribute.fulfill(1));
-                else
+                }
+                else {
                     return null;
-            } catch (NotRegisteredException e) {
-                if (!attribute.hasAlternative())
+                }
+            }
+            catch (NotRegisteredException e) {
+                if (!attribute.hasAlternative()) {
                     dB.echoError("'" + player.getName() + "' is not registered to a town in Towny!");
+                }
             }
         }
 

@@ -4,27 +4,30 @@ import me.limebyte.battlenight.api.BattleNightAPI;
 import me.limebyte.battlenight.api.battle.Battle;
 import me.limebyte.battlenight.api.battle.TeamedBattle;
 import me.limebyte.battlenight.core.BattleNight;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import org.bukkit.entity.Player;
 
 public class BNPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer
-                && ((dPlayer) pl).isOnline();
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer && ((dPlayer) object).isOnline();
     }
 
-    public static BNPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new BNPlayerExtension((dPlayer) pl);
+    public static BNPlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new BNPlayerExtension((dPlayer) object);
+        }
     }
 
-    private BNPlayerExtension(dPlayer pl) {
-        player = pl.getPlayerEntity();
+    private BNPlayerExtension(dPlayer player) {
+        this.player = player.getPlayerEntity();
     }
 
     Player player = null;
@@ -44,9 +47,10 @@ public class BNPlayerExtension extends dObjectExtension {
             // @plugin Depenizen, BattleNight
             // -->
             if (attribute.startsWith("class")) {
-                if (api.getPlayerClass(player) != null)
+                if (api.getPlayerClass(player) != null) {
                     return new Element(api.getPlayerClass(player).getName())
                             .getAttribute(attribute.fulfill(1));
+                }
             }
 
             // <--[tag]

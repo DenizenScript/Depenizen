@@ -24,8 +24,12 @@ public class WorldGuardLocationExtension extends dObjectExtension {
     }
 
     public static WorldGuardLocationExtension getFrom(dObject loc) {
-        if (!describes(loc)) return null;
-        else return new WorldGuardLocationExtension((dLocation) loc);
+        if (!describes(loc)) {
+            return null;
+        }
+        else {
+            return new WorldGuardLocationExtension((dLocation) loc);
+        }
     }
 
     private WorldGuardLocationExtension(dLocation loc) {
@@ -77,8 +81,9 @@ public class WorldGuardLocationExtension extends dObjectExtension {
             if (attribute.hasContext(1)) {
                 dList region_list = dList.valueOf(attribute.getContext(1));
                 for (String region : region_list) {
-                    if (inRegion(region))
+                    if (inRegion(region)) {
                         return Element.TRUE.getAttribute(attribute.fulfill(1));
+                    }
                 }
                 return Element.FALSE.getAttribute(attribute.fulfill(1));
             }

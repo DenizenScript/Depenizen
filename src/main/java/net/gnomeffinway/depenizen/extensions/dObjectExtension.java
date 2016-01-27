@@ -22,6 +22,7 @@ public class dObjectExtension implements Property {
     }
 
     @Override
-    public void adjust(Mechanism mechanism) {}
+    public void adjust(Mechanism mechanism) {
+    }
 
 }

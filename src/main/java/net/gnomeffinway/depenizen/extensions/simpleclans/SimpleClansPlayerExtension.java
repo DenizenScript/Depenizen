@@ -11,22 +11,22 @@ import net.sacredlabyrinth.phaed.simpleclans.ClanPlayer;
 
 public class SimpleClansPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
-    public static SimpleClansPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) {
+    public static SimpleClansPlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
             return null;
         }
         else {
-            return new SimpleClansPlayerExtension((dPlayer) pl);
+            return new SimpleClansPlayerExtension((dPlayer) object);
         }
     }
 
-    private SimpleClansPlayerExtension(dPlayer pl) {
-        this.player = pl;
-        this.cplayer = new ClanPlayer(pl.getOfflinePlayer().getUniqueId());
+    private SimpleClansPlayerExtension(dPlayer player) {
+        this.player = player;
+        this.cplayer = new ClanPlayer(player.getOfflinePlayer().getUniqueId());
     }
 
     dPlayer player;

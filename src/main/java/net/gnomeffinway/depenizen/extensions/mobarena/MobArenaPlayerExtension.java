@@ -18,8 +18,8 @@ public class MobArenaPlayerExtension extends dObjectExtension {
 
     MobArena plugin = (MobArena) Support.getPlugin(MobArenaSupport.class);
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
     public static MobArenaPlayerExtension getFrom(dObject object) {

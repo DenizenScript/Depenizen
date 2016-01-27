@@ -13,22 +13,28 @@ import org.bukkit.entity.Player;
 
 public class HeroesPlayerNPCExtension extends dObjectExtension {
 
-    public static boolean describes(dObject obj) {
-        return (obj instanceof dPlayer && ((dPlayer) obj).isOnline())
-                || (obj instanceof dNPC && ((dNPC) obj).isSpawned()
-                && ((dNPC) obj).getEntity() instanceof Player);
+    public static boolean describes(dObject object) {
+        return (object instanceof dPlayer && ((dPlayer) object).isOnline())
+                || (object instanceof dNPC && ((dNPC) object).isSpawned()
+                && ((dNPC) object).getEntity() instanceof Player);
     }
 
-    public static HeroesPlayerNPCExtension getFrom(dObject obj) {
-        if (!describes(obj)) return null;
-        else return new HeroesPlayerNPCExtension(obj);
+    public static HeroesPlayerNPCExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new HeroesPlayerNPCExtension(object);
+        }
     }
 
-    private HeroesPlayerNPCExtension(dObject obj) {
-        if (obj instanceof dPlayer)
-            player = ((dPlayer) obj).getPlayerEntity();
-        else if (obj instanceof dNPC)
-            player = (Player) ((dNPC) obj).getEntity();
+    private HeroesPlayerNPCExtension(dObject object) {
+        if (object instanceof dPlayer) {
+            player = ((dPlayer) object).getPlayerEntity();
+        }
+        else if (object instanceof dNPC) {
+            player = (Player) ((dNPC) object).getEntity();
+        }
     }
 
     Player player = null;

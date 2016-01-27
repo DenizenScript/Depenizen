@@ -9,17 +9,21 @@ import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 
 public class TCLocationExtension extends dObjectExtension {
 
-    public static boolean describes(dObject loc) {
-        return loc instanceof dLocation;
+    public static boolean describes(dObject object) {
+        return object instanceof dLocation;
     }
 
-    public static TCLocationExtension getFrom(dObject loc) {
-        if (!describes(loc)) return null;
-        else return new TCLocationExtension((dLocation) loc);
+    public static TCLocationExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new TCLocationExtension((dLocation) object);
+        }
     }
 
-    private TCLocationExtension(dLocation loc) {
-        location = loc;
+    private TCLocationExtension(dLocation object) {
+        location = object;
     }
 
     dLocation location = null;

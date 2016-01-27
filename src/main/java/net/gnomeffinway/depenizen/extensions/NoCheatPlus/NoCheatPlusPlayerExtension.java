@@ -11,7 +11,7 @@ import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 public class NoCheatPlusPlayerExtension extends dObjectExtension {
 
     public static boolean describes(dObject object) {
-        return object instanceof dPlayer && ((dPlayer) object).isOnline();
+        return object instanceof dPlayer;
     }
 
     public static NoCheatPlusPlayerExtension getFrom(dObject object) {

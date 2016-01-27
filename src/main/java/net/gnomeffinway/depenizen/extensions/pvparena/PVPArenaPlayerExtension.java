@@ -11,21 +11,21 @@ import net.slipcor.pvparena.arena.ArenaPlayer;
 
 public class PVPArenaPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
-    public static PVPArenaPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) {
+    public static PVPArenaPlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
             return null;
         }
         else {
-            return new PVPArenaPlayerExtension((dPlayer) pl);
+            return new PVPArenaPlayerExtension((dPlayer) object);
         }
     }
 
-    private PVPArenaPlayerExtension(dPlayer pl) {
-        player = ArenaPlayer.parsePlayer(pl.getName());
+    private PVPArenaPlayerExtension(dPlayer player) {
+        this.player = ArenaPlayer.parsePlayer(player.getName());
     }
 
     ArenaPlayer player = null;
