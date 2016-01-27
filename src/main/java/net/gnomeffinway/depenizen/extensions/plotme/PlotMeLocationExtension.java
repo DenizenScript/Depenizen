@@ -13,13 +13,17 @@ import net.gnomeffinway.depenizen.objects.dPlot;
 
 public class PlotMeLocationExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dLocation;
+    public static boolean describes(dObject object) {
+        return object instanceof dLocation;
     }
 
-    public static PlotMeLocationExtension getFrom(dObject loc) {
-        if (!describes(loc)) return null;
-        else return new PlotMeLocationExtension((dLocation) loc);
+    public static PlotMeLocationExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new PlotMeLocationExtension((dLocation) object);
+        }
     }
 
 
@@ -27,8 +31,8 @@ public class PlotMeLocationExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
-    private PlotMeLocationExtension(dLocation loc) {
-        location = loc;
+    private PlotMeLocationExtension(dLocation location) {
+        this.location = location;
     }
 
     dLocation location;

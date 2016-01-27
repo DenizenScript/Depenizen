@@ -13,18 +13,22 @@ import org.bukkit.entity.Player;
 
 public class WorldEditPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer
-                && ((dPlayer) pl).isOnline();
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer
+                && ((dPlayer) object).isOnline();
     }
 
-    public static WorldEditPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new WorldEditPlayerExtension((dPlayer) pl);
+    public static WorldEditPlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new WorldEditPlayerExtension((dPlayer) object);
+        }
     }
 
-    private WorldEditPlayerExtension(dPlayer pl) {
-        player = pl.getPlayerEntity();
+    private WorldEditPlayerExtension(dPlayer player) {
+        this.player = player.getPlayerEntity();
     }
 
     Player player = null;
@@ -42,8 +46,9 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         if (attribute.startsWith("selected_region")) {
             WorldEditPlugin worldEdit = Support.getPlugin(WorldEditSupport.class);
             Selection selection = worldEdit.getSelection(player);
-            if (selection != null)
+            if (selection != null) {
                 return new dCuboid(selection.getMinimumPoint(), selection.getMaximumPoint()).getAttribute(attribute.fulfill(1));
+            }
         }
 
         return null;

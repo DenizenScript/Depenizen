@@ -1,6 +1,5 @@
 package net.gnomeffinway.depenizen.extensions.askyblock;
 
-import com.sk89q.worldedit.util.Location;
 import com.wasteofplastic.askyblock.ASkyBlockAPI;
 import com.wasteofplastic.askyblock.Island;
 import net.aufdemrand.denizen.objects.dLocation;
@@ -15,16 +14,16 @@ import java.util.UUID;
 
 public class ASkyBlockPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
-    public static ASkyBlockPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) {
+    public static ASkyBlockPlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
             return null;
         }
         else {
-            return new ASkyBlockPlayerExtension((dPlayer) pl);
+            return new ASkyBlockPlayerExtension((dPlayer) object);
         }
     }
 

@@ -11,13 +11,17 @@ import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 
 public class PlotMeWorldExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dWorld;
+    public static boolean describes(dObject world) {
+        return world instanceof dWorld;
     }
 
-    public static PlotMeWorldExtension getFrom(dObject loc) {
-        if (!describes(loc)) return null;
-        else return new PlotMeWorldExtension((dWorld) loc);
+    public static PlotMeWorldExtension getFrom(dObject world) {
+        if (!describes(world)) {
+            return null;
+        }
+        else {
+            return new PlotMeWorldExtension((dWorld) world);
+        }
     }
 
 
@@ -25,11 +29,11 @@ public class PlotMeWorldExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
-    private PlotMeWorldExtension(dWorld loc) {
-        location = loc;
+    private PlotMeWorldExtension(dWorld world) {
+        this.world = world;
     }
 
-    dWorld location;
+    dWorld world;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -42,7 +46,7 @@ public class PlotMeWorldExtension extends dObjectExtension {
         // @plugin Depenizen, PlotMe
         // -->
         if (attribute.startsWith("is_plot_world")) {
-            return new Element(PlotMeCoreManager.getInstance().isPlotWorld(new BukkitWorld(location.getWorld()))).getAttribute(attribute.fulfill(1));
+            return new Element(PlotMeCoreManager.getInstance().isPlotWorld(new BukkitWorld(world.getWorld()))).getAttribute(attribute.fulfill(1));
         }
 
         return null;
@@ -50,6 +54,5 @@ public class PlotMeWorldExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

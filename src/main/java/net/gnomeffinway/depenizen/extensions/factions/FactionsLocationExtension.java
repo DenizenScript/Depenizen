@@ -10,13 +10,17 @@ import net.gnomeffinway.depenizen.objects.dFaction;
 
 public class FactionsLocationExtension extends dObjectExtension {
 
-    public static boolean describes(dObject obj) {
-        return obj instanceof dLocation;
+    public static boolean describes(dObject object) {
+        return object instanceof dLocation;
     }
 
-    public static FactionsLocationExtension getFrom(dObject obj) {
-        if (!describes(obj)) return null;
-        else return new FactionsLocationExtension((dLocation) obj);
+    public static FactionsLocationExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new FactionsLocationExtension((dLocation) object);
+        }
     }
 
     private FactionsLocationExtension(dLocation location) {
@@ -35,9 +39,10 @@ public class FactionsLocationExtension extends dObjectExtension {
         // Returns the faction at the location. (Can also be SafeZone, WarZone, or Wilderness)
         // @plugin Depenizen, Factions
         // -->
-        if (attribute.startsWith("faction"))
+        if (attribute.startsWith("faction")) {
             return new dFaction(BoardColl.get().getFactionAt(PS.valueOf(location)))
                     .getAttribute(attribute.fulfill(1));
+        }
 
         return null;
 

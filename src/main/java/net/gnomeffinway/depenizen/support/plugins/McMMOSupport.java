@@ -1,7 +1,6 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.commands.McMMOCommands;
 import net.gnomeffinway.depenizen.events.mcMMO.mcMMOPlayerGainsXPScriptEvent;

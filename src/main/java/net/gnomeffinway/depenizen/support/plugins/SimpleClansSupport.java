@@ -56,7 +56,7 @@ public class SimpleClansSupport extends Support {
             // Returns a list of all unverified clans.
             // @plugin Depenizen, SimpleClans
             // -->
-            else if(attribute.startsWith("list_unverified_clans")) {
+            else if (attribute.startsWith("list_unverified_clans")) {
                 dList clans = new dList();
                 for (Clan cl : sc.getClanManager().getClans()) {
                     if (!cl.isVerified()) {

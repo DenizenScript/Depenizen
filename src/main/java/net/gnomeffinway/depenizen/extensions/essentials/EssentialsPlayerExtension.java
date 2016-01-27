@@ -3,10 +3,10 @@ package net.gnomeffinway.depenizen.extensions.essentials;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.objects.*;
+import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.plugins.EssentialsSupport;
@@ -15,13 +15,17 @@ import java.util.GregorianCalendar;
 
 public class EssentialsPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer && ((dPlayer) pl).isOnline();
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer && ((dPlayer) object).isOnline();
     }
 
-    public static EssentialsPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new EssentialsPlayerExtension((dPlayer) pl);
+    public static EssentialsPlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new EssentialsPlayerExtension((dPlayer) object);
+        }
     }
 
 
@@ -29,10 +33,10 @@ public class EssentialsPlayerExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
-    private EssentialsPlayerExtension(dPlayer pl) {
+    private EssentialsPlayerExtension(dPlayer player) {
         // TODO: UUID
         Essentials essentials = Support.getPlugin(EssentialsSupport.class);
-        this.essUser = essentials.getUser(pl.getPlayerEntity());
+        this.essUser = essentials.getUser(player.getOfflinePlayer().getUniqueId());
     }
 
     User essUser = null;
@@ -111,9 +115,11 @@ public class EssentialsPlayerExtension extends dObjectExtension {
             for (String home : essUser.getHomes()) {
                 try {
                     homes.add(home + "/" + new dLocation(essUser.getHome(home)).identifySimple());
-                } catch (Exception e) {
-                    if (!attribute.hasAlternative())
+                }
+                catch (Exception e) {
+                    if (!attribute.hasAlternative()) {
                         dB.echoError(e);
+                    }
                 }
             }
             return homes.getAttribute(attribute.fulfill(1));
@@ -131,9 +137,11 @@ public class EssentialsPlayerExtension extends dObjectExtension {
             for (String home : essUser.getHomes()) {
                 try {
                     homes.add(new dLocation(essUser.getHome(home)).identifySimple());
-                } catch (Exception e) {
-                    if (!attribute.hasAlternative())
+                }
+                catch (Exception e) {
+                    if (!attribute.hasAlternative()) {
                         dB.echoError(e);
+                    }
                 }
             }
             return homes.getAttribute(attribute.fulfill(1));
@@ -169,7 +177,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("mute_timeout")) {
-            return new Duration((int) (essUser.getMuteTimeout() - new GregorianCalendar().getTimeInMillis())/1000)
+            return new Duration((int) (essUser.getMuteTimeout() - new GregorianCalendar().getTimeInMillis()) / 1000)
                     .getAttribute(attribute.fulfill(1));
         }
 

@@ -12,16 +12,22 @@ import net.gnomeffinway.depenizen.objects.bungee.dServer;
 
 public class BungeePlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
-    public static BungeePlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new BungeePlayerExtension((dPlayer) pl);
+    public static BungeePlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new BungeePlayerExtension((dPlayer) object);
+        }
     }
 
-    private BungeePlayerExtension(dPlayer pl) { player = pl; }
+    private BungeePlayerExtension(dPlayer player) {
+        this.player = player;
+    }
 
     dPlayer player = null;
 

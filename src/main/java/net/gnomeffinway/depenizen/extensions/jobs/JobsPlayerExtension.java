@@ -12,17 +12,21 @@ import net.gnomeffinway.depenizen.objects.jobs.JobsJob;
 
 public class JobsPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
-    public static JobsPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new JobsPlayerExtension((dPlayer) pl);
+    public static JobsPlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new JobsPlayerExtension((dPlayer) object);
+        }
     }
 
-    private JobsPlayerExtension(dPlayer pl) {
-        player = Jobs.getPlayerManager().getJobsPlayerOffline(pl.getOfflinePlayer());
+    private JobsPlayerExtension(dPlayer player) {
+        this.player = Jobs.getPlayerManager().getJobsPlayerOffline(player.getOfflinePlayer());
     }
 
     JobsPlayer player = null;
@@ -43,8 +47,9 @@ public class JobsPlayerExtension extends dObjectExtension {
                 job = Jobs.getJob(attribute.getContext(1));
             }
             if (job == null) {
-                if (!attribute.hasAlternative())
+                if (!attribute.hasAlternative()) {
                     dB.echoError("Invalid or missing job specified!");
+                }
                 return null;
             }
             return new JobsJob(job, player).getAttribute(attribute.fulfill(1));

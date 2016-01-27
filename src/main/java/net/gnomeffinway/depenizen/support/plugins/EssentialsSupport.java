@@ -4,8 +4,8 @@ import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.gnomeffinway.depenizen.events.EssentialsEvents;
 import net.gnomeffinway.depenizen.extensions.essentials.EssentialsItemExtension;
-import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.extensions.essentials.EssentialsPlayerExtension;
+import net.gnomeffinway.depenizen.support.Support;
 
 public class EssentialsSupport extends Support {
 

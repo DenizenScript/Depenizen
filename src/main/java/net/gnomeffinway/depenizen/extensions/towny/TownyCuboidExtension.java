@@ -16,13 +16,17 @@ import java.util.List;
 
 public class TownyCuboidExtension extends dObjectExtension {
 
-    public static boolean describes(dObject cuboid) {
-        return cuboid instanceof dCuboid;
+    public static boolean describes(dObject object) {
+        return object instanceof dCuboid;
     }
 
-    public static TownyCuboidExtension getFrom(dObject cuboid) {
-        if (!describes(cuboid)) return null;
-        else return new TownyCuboidExtension((dCuboid) cuboid);
+    public static TownyCuboidExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new TownyCuboidExtension((dCuboid) object);
+        }
     }
 
     private TownyCuboidExtension(dCuboid cuboid) {
@@ -43,8 +47,9 @@ public class TownyCuboidExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("has_town")) {
             for (Location location : cuboid.getBlockLocations()) {
-                if (TownyUniverse.getTownName(location) != null)
+                if (TownyUniverse.getTownName(location) != null) {
                     return new Element(true).getAttribute(attribute.fulfill(1));
+                }
             }
             return new Element(false).getAttribute(attribute.fulfill(1));
         }
@@ -67,7 +72,9 @@ public class TownyCuboidExtension extends dObjectExtension {
                         towns.add(townName);
                     }
                 }
-            } catch (NotRegisteredException e) {}
+            }
+            catch (NotRegisteredException e) {
+            }
             return list.getAttribute(attribute.fulfill(1));
         }
 

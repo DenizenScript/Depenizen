@@ -4,19 +4,25 @@ import com.worldcretornica.plotme_core.PlotMeCoreManager;
 import com.worldcretornica.plotme_core.bukkit.api.BukkitWorld;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
-import net.aufdemrand.denizencore.objects.*;
+import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.Mechanism;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 
 public class PlotMePlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
-    public static PlotMePlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new PlotMePlayerExtension((dPlayer) pl);
+    public static PlotMePlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new PlotMePlayerExtension((dPlayer) object);
+        }
     }
 
 
@@ -24,8 +30,8 @@ public class PlotMePlayerExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
-    private PlotMePlayerExtension(dPlayer pl) {
-        player = pl;
+    private PlotMePlayerExtension(dPlayer player) {
+        this.player = player;
     }
 
     dPlayer player;

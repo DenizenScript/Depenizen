@@ -40,8 +40,9 @@ public class FactionsSupport extends Support {
             if (attribute.startsWith("list_factions")) {
                 ArrayList<dFaction> factions = new ArrayList<dFaction>();
 
-                for (Faction f : FactionColl.get().getAll())
+                for (Faction f : FactionColl.get().getAll()) {
                     factions.add(new dFaction(f));
+                }
 
                 return new dList(factions).getAttribute(attribute.fulfill(1));
             }
@@ -52,10 +53,12 @@ public class FactionsSupport extends Support {
 
             String nameOrId = attribute.getContext(1);
             Faction f = FactionColl.get().getByName(nameOrId);
-            if (f == null && FactionColl.get().containsId(nameOrId))
+            if (f == null && FactionColl.get().containsId(nameOrId)) {
                 f = FactionColl.get().get(nameOrId);
-            if (f != null)
+            }
+            if (f != null) {
                 return new dFaction(f).getAttribute(attribute.fulfill(1));
+            }
 
         }
 

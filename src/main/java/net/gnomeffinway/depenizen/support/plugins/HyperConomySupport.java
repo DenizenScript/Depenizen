@@ -28,14 +28,17 @@ import java.util.Map;
 public class HyperConomySupport extends Support {
 
     private static final Field TRANSACTION_RESPONSE_PLAYER;
+
     static {
         Field field = null;
         try {
             field = TransactionResponse.class.getDeclaredField("hp");
             field.setAccessible(true);
-        } catch (NoClassDefFoundError e) {
+        }
+        catch (NoClassDefFoundError e) {
             // HyperConomy isn't enabled
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             dB.echoError(e);
         }
         TRANSACTION_RESPONSE_PLAYER = field;
@@ -55,7 +58,8 @@ public class HyperConomySupport extends Support {
     public static HyperPlayer getHyperPlayer(TransactionResponse transactionResponse) {
         try {
             return (HyperPlayer) TRANSACTION_RESPONSE_PLAYER.get(transactionResponse);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             dB.echoError(e);
         }
         return null;

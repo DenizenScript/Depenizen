@@ -12,20 +12,24 @@ import net.gnomeffinway.depenizen.objects.dParty;
 
 public class McMMOPlayerExtension extends dObjectExtension {
 
-    public static boolean describes(dObject pl) {
-        return pl instanceof dPlayer;
+    public static boolean describes(dObject object) {
+        return object instanceof dPlayer;
     }
 
-    public static McMMOPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new McMMOPlayerExtension((dPlayer) pl);
+    public static McMMOPlayerExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new McMMOPlayerExtension((dPlayer) object);
+        }
     }
 
-    private McMMOPlayerExtension(dPlayer pl) {
-        p = pl;
+    private McMMOPlayerExtension(dPlayer player) {
+        this.player = player;
     }
 
-    dPlayer p = null;
+    dPlayer player = null;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -44,19 +48,22 @@ public class McMMOPlayerExtension extends dObjectExtension {
             // -->
             if (attribute.startsWith("level")) {
                 if (!attribute.hasContext(1)) {
-                    if (p.isOnline()) {
-                        return new Element(ExperienceAPI.getPowerLevel(p.getPlayerEntity()))
-                                .getAttribute(attribute.fulfill(1));
-                    } else {
-                        return new Element(ExperienceAPI.getPowerLevelOffline(p.getPlayerEntity().getName()))
+                    if (player.isOnline()) {
+                        return new Element(ExperienceAPI.getPowerLevel(player.getPlayerEntity()))
                                 .getAttribute(attribute.fulfill(1));
                     }
-                } else {
-                    if (p.isOnline()) {
-                        return new Element(ExperienceAPI.getLevel(p.getPlayerEntity(), attribute.getContext(1)))
+                    else {
+                        return new Element(ExperienceAPI.getPowerLevelOffline(player.getOfflinePlayer().getUniqueId()))
                                 .getAttribute(attribute.fulfill(1));
-                    } else {
-                        return new Element(ExperienceAPI.getLevelOffline(p.getName(), attribute.getContext(1)))
+                    }
+                }
+                else {
+                    if (player.isOnline()) {
+                        return new Element(ExperienceAPI.getLevel(player.getPlayerEntity(), attribute.getContext(1)))
+                                .getAttribute(attribute.fulfill(1));
+                    }
+                    else {
+                        return new Element(ExperienceAPI.getLevelOffline(player.getOfflinePlayer().getUniqueId(), attribute.getContext(1)))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
@@ -70,7 +77,7 @@ public class McMMOPlayerExtension extends dObjectExtension {
             // @plugin Depenizen, mcMMO
             // -->
             else if (attribute.startsWith("party")) {
-                dParty party = dParty.forPlayer(p);
+                dParty party = dParty.forPlayer(player);
                 if (party != null) {
                     return party.getAttribute(attribute.fulfill(1));
                 }
@@ -90,11 +97,12 @@ public class McMMOPlayerExtension extends dObjectExtension {
                 // @plugin Depenizen, mcMMO
                 // -->
                 if (attribute.startsWith("tonextlevel") || attribute.startsWith("to_next_level")) {
-                    if (p.isOnline()) {
-                        return new Element(ExperienceAPI.getXPToNextLevel(p.getPlayerEntity(), skill))
+                    if (player.isOnline()) {
+                        return new Element(ExperienceAPI.getXPToNextLevel(player.getPlayerEntity(), skill))
                                 .getAttribute(attribute.fulfill(1));
-                    } else {
-                        return new Element(ExperienceAPI.getOfflineXPToNextLevel(p.getName(), skill))
+                    }
+                    else {
+                        return new Element(ExperienceAPI.getOfflineXPToNextLevel(player.getOfflinePlayer().getUniqueId(), skill))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
@@ -107,11 +115,12 @@ public class McMMOPlayerExtension extends dObjectExtension {
                 // @plugin Depenizen, mcMMO
                 // -->
                 else if (attribute.startsWith("level")) {
-                    if (p.isOnline()) {
-                        return new Element(ExperienceAPI.getLevel(p.getPlayerEntity(), skill))
+                    if (player.isOnline()) {
+                        return new Element(ExperienceAPI.getLevel(player.getPlayerEntity(), skill))
                                 .getAttribute(attribute.fulfill(1));
-                    } else {
-                        return new Element(ExperienceAPI.getLevelOffline(p.getName(), skill))
+                    }
+                    else {
+                        return new Element(ExperienceAPI.getLevelOffline(player.getOfflinePlayer().getUniqueId(), skill))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
@@ -123,11 +132,12 @@ public class McMMOPlayerExtension extends dObjectExtension {
                 // Returns the player's amount of experience in a skill.
                 // @plugin Depenizen, mcMMO
                 // -->
-                else if (p.isOnline()) {
-                    return new Element(ExperienceAPI.getXP(p.getPlayerEntity(), skill))
+                else if (player.isOnline()) {
+                    return new Element(ExperienceAPI.getXP(player.getPlayerEntity(), skill))
                             .getAttribute(attribute.fulfill(0));
-                } else {
-                    return new Element(ExperienceAPI.getOfflineXP(p.getName(), skill))
+                }
+                else {
+                    return new Element(ExperienceAPI.getOfflineXP(player.getOfflinePlayer().getUniqueId(), skill))
                             .getAttribute(attribute.fulfill(0));
                 }
 
@@ -144,14 +154,17 @@ public class McMMOPlayerExtension extends dObjectExtension {
             // -->
             else if (attribute.startsWith("rank")) {
                 if (!attribute.hasContext(1)) {
-                    return new Element(ExperienceAPI.getPlayerRankOverall(p.getName()))
+                    return new Element(ExperienceAPI.getPlayerRankOverall(player.getName()))
                             .getAttribute(attribute.fulfill(1));
-                } else {
-                    if (SkillType.getSkill(attribute.getContext(1)) != null)
-                        return new Element(ExperienceAPI.getPlayerRankSkill(p.getName(), attribute.getContext(1)))
+                }
+                else {
+                    if (SkillType.getSkill(attribute.getContext(1)) != null) {
+                        return new Element(ExperienceAPI.getPlayerRankSkill(player.getOfflinePlayer().getUniqueId(), attribute.getContext(1)))
                                 .getAttribute(attribute.fulfill(1));
-                    else if (!attribute.hasAlternative())
+                    }
+                    else if (!attribute.hasAlternative()) {
                         dB.echoError("Skill type '" + attribute.getContext(1) + "' does not exist!");
+                    }
                 }
             }
 

@@ -2,27 +2,31 @@ package net.gnomeffinway.depenizen.extensions.towny;
 
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizen.objects.dLocation;
+import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
-import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
 import net.gnomeffinway.depenizen.objects.dTown;
 
 public class TownyLocationExtension extends dObjectExtension {
 
-    public static boolean describes(dObject loc) {
-        return loc instanceof dLocation;
+    public static boolean describes(dObject object) {
+        return object instanceof dLocation;
     }
 
-    public static TownyLocationExtension getFrom(dObject loc) {
-        if (!describes(loc)) return null;
-        else return new TownyLocationExtension((dLocation) loc);
+    public static TownyLocationExtension getFrom(dObject object) {
+        if (!describes(object)) {
+            return null;
+        }
+        else {
+            return new TownyLocationExtension((dLocation) object);
+        }
     }
 
-    private TownyLocationExtension(dLocation loc) {
-        location = loc;
+    private TownyLocationExtension(dLocation location) {
+        this.location = location;
     }
 
     dLocation location = null;
@@ -38,10 +42,12 @@ public class TownyLocationExtension extends dObjectExtension {
         // @plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("has_town")) {
-            if (TownyUniverse.getTownName(location) != null)
+            if (TownyUniverse.getTownName(location) != null) {
                 return Element.TRUE.getAttribute(attribute.fulfill(1));
-            else
+            }
+            else {
                 return Element.FALSE.getAttribute(attribute.fulfill(1));
+            }
         }
 
         // <--[tag]
@@ -61,8 +67,9 @@ public class TownyLocationExtension extends dObjectExtension {
                         .getAttribute(attribute.fulfill(1));
             }
             catch (NotRegisteredException ex) {
-                if (!attribute.hasAlternative())
+                if (!attribute.hasAlternative()) {
                     dB.echoError(location.identifySimple() + " is not registered to a town!");
+                }
             }
         }
 
