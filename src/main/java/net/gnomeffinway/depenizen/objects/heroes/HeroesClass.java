@@ -27,7 +27,9 @@ public class HeroesClass implements dObject {
 
     @Fetchable("hclass")
     public static HeroesClass valueOf(String string, TagContext context) {
-        if (string == null) return null;
+        if (string == null) {
+            return null;
+        }
 
         string = string.replace("hclass@", "");
 
@@ -41,8 +43,9 @@ public class HeroesClass implements dObject {
     }
 
     public static boolean matches(String arg) {
-        if (valueOf(arg) != null)
+        if (valueOf(arg) != null) {
             return true;
+        }
 
         return false;
     }

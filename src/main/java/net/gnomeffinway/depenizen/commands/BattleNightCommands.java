@@ -85,8 +85,9 @@ public class BattleNightCommands extends AbstractCommand {
         }
 
         // Stash objects in scriptEntry for use in execute()
-        if (!scriptEntry.hasObject("action"))
+        if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Must specify an action!");
+        }
 
         // scriptEntry.defaultObject("spectator", Element.FALSE);
     }

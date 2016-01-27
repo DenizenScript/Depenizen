@@ -10,63 +10,67 @@ import net.gnomeffinway.depenizen.objects.prism.PrismAction;
 
 public class PrismActionPlayer implements Property {
 
-        public static boolean describes(dObject obj) {
-            return obj instanceof PrismAction;
-        }
+    public static boolean describes(dObject obj) {
+        return obj instanceof PrismAction;
+    }
 
-        public static PrismActionPlayer getFrom(dObject action) {
-            if (!describes(action)) return null;
-            else return new PrismActionPlayer((PrismAction) action);
-        }
-
-        ///////////////////
-        // Instance Fields and Methods
-        /////////////
-
-        PrismAction prismAction;
-        Handler action;
-
-        private PrismActionPlayer(PrismAction action) {
-            this.prismAction = action;
-            this.action = action.getAction();
-        }
-
-        @Override
-        public String getPropertyString() {
-            return "p@" + action.getPlayerName();
-        }
-
-        @Override
-        public String getPropertyId() {
-            return "player";
-        }
-
-        @Override
-        public String getAttribute(Attribute attribute) {
-
-            // <--[tag]
-            // @attribute <prism@action.player>
-            // @returns dPlayer
-            // @description
-            // Returns the player who performed this action.
-            // @plugin Depenizen, Prism
-            // -->
-            if (attribute.startsWith("player")) {
-                return dPlayer.valueOf(getPropertyString()).getAttribute(attribute.fulfill(1));
-            }
-
+    public static PrismActionPlayer getFrom(dObject action) {
+        if (!describes(action)) {
             return null;
+        }
+        else {
+            return new PrismActionPlayer((PrismAction) action);
+        }
+    }
 
+    ///////////////////
+    // Instance Fields and Methods
+    /////////////
+
+    PrismAction prismAction;
+    Handler action;
+
+    private PrismActionPlayer(PrismAction action) {
+        this.prismAction = action;
+        this.action = action.getAction();
+    }
+
+    @Override
+    public String getPropertyString() {
+        return "p@" + action.getPlayerName();
+    }
+
+    @Override
+    public String getPropertyId() {
+        return "player";
+    }
+
+    @Override
+    public String getAttribute(Attribute attribute) {
+
+        // <--[tag]
+        // @attribute <prism@action.player>
+        // @returns dPlayer
+        // @description
+        // Returns the player who performed this action.
+        // @plugin Depenizen, Prism
+        // -->
+        if (attribute.startsWith("player")) {
+            return dPlayer.valueOf(getPropertyString()).getAttribute(attribute.fulfill(1));
         }
 
-        @Override
-        public void adjust(Mechanism mechanism) {
+        return null;
 
-            // No documentation, internal only
-            if (mechanism.matches("player") && mechanism.requireObject(dPlayer.class)) {
-                prismAction.setPlayer(mechanism.getValue().asType(dPlayer.class).getName());
-            }
+    }
 
+    @Override
+    public void adjust(Mechanism mechanism) {
+
+        // No documentation, internal only
+        if (mechanism.matches("player") && mechanism.requireObject(dPlayer.class)) {
+            prismAction.setPlayer(mechanism.getValue().asType(dPlayer.class).getName());
         }
+
+    }
 
 }

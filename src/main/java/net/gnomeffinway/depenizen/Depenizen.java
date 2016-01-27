@@ -36,7 +36,7 @@ public class Depenizen extends JavaPlugin {
         if (cmd.getName().equalsIgnoreCase("depenizen")) {
             sender.sendMessage(ChatColor.UNDERLINE + "Depenizen");
             sender.sendMessage(ChatColor.GRAY + "Developers: " + ChatColor.AQUA + "Morphan1" + ChatColor.GRAY + ", " + ChatColor.GREEN + "Jeebiss" + ChatColor.GRAY + ", and GnomeffinWay");
-            sender.sendMessage(ChatColor.GRAY + "Current version: "+ ChatColor.GOLD + this.getDescription().getVersion());
+            sender.sendMessage(ChatColor.GRAY + "Current version: " + ChatColor.GOLD + this.getDescription().getVersion());
             return true;
         }
         return false;
@@ -53,7 +53,8 @@ public class Depenizen extends JavaPlugin {
 
         if (pm.getPlugin("Denizen") != null) {
             depenizenLog("Denizen hooked");
-        } else {
+        }
+        else {
             getServer().getLogger().severe("[Depenizen] Denizen not found, disabling");
             getPluginLoader().disablePlugin(this);
             return;

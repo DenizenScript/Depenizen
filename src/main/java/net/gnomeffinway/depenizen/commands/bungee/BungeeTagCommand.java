@@ -50,7 +50,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
 
     // -->
 
-    public BungeeTagCommand(){
+    public BungeeTagCommand() {
         setParseArgs(false);
     }
 

@@ -25,6 +25,7 @@ public class FakeHandler implements Handler {
     public FakeHandler(ActionType actionType) {
         this.actionType = actionType;
     }
+
     @Override
     public String getUnixEpoch() {
         return null;

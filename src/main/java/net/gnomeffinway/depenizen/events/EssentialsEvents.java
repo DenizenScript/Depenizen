@@ -42,18 +42,21 @@ public class EssentialsEvents implements Listener {
     public void afkStatusChange(AfkStatusChangeEvent event) {
 
         List<String> events = new ArrayList<String>();
-        if (event.getValue())
+        if (event.getValue()) {
             events.add("player goes afk");
-        else
+        }
+        else {
             events.add("player returns from afk");
+        }
 
         List<String> determinations = OldEventManager.doEvents(events,
                 new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), null), null);
 
         for (String determination : determinations) {
             determination = determination.toUpperCase();
-            if (determination.equals("CANCELLED"))
+            if (determination.equals("CANCELLED")) {
                 event.setCancelled(true);
+            }
         }
 
     }
@@ -82,22 +85,26 @@ public class EssentialsEvents implements Listener {
     public void godStatusChange(GodStatusChangeEvent event) {
 
         Map<String, dObject> context = new HashMap<String, dObject>();
-        if (event.getController() != null)
+        if (event.getController() != null) {
             context.put("controller", dPlayer.mirrorBukkitPlayer(event.getController().getBase()));
+        }
 
         List<String> events = new ArrayList<String>();
-        if (event.getValue())
+        if (event.getValue()) {
             events.add("player god mode enabled");
-        else
+        }
+        else {
             events.add("player god mode disabled");
+        }
 
         List<String> determinations = OldEventManager.doEvents(events,
                 new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), null), context);
 
         for (String determination : determinations) {
             determination = determination.toUpperCase();
-            if (determination.equals("CANCELLED"))
+            if (determination.equals("CANCELLED")) {
                 event.setCancelled(true);
+            }
         }
     }
 
@@ -125,22 +132,26 @@ public class EssentialsEvents implements Listener {
     public void jailStatusChange(JailStatusChangeEvent event) {
 
         Map<String, dObject> context = new HashMap<String, dObject>();
-        if (event.getController() != null)
+        if (event.getController() != null) {
             context.put("controller", dPlayer.mirrorBukkitPlayer(event.getController().getBase()));
+        }
 
         List<String> events = new ArrayList<String>();
-        if (event.getValue())
+        if (event.getValue()) {
             events.add("player jailed");
-        else
+        }
+        else {
             events.add("player unjailed");
+        }
 
         List<String> determinations = OldEventManager.doEvents(events,
                 new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), null), context);
 
         for (String determination : determinations) {
             determination = determination.toUpperCase();
-            if (determination.equals("CANCELLED"))
+            if (determination.equals("CANCELLED")) {
                 event.setCancelled(true);
+            }
         }
     }
 
@@ -168,22 +179,26 @@ public class EssentialsEvents implements Listener {
     public void muteStatusChange(MuteStatusChangeEvent event) {
 
         Map<String, dObject> context = new HashMap<String, dObject>();
-        if (event.getController() != null)
+        if (event.getController() != null) {
             context.put("controller", dPlayer.mirrorBukkitPlayer(event.getController().getBase()));
+        }
 
         List<String> events = new ArrayList<String>();
-        if (event.getValue())
+        if (event.getValue()) {
             events.add("player muted");
-        else
+        }
+        else {
             events.add("player unmuted");
+        }
 
         List<String> determinations = OldEventManager.doEvents(events,
                 new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getAffected().getBase()), null), context);
 
         for (String determination : determinations) {
             determination = determination.toUpperCase();
-            if (determination.equals("CANCELLED"))
+            if (determination.equals("CANCELLED")) {
                 event.setCancelled(true);
+            }
         }
     }
 

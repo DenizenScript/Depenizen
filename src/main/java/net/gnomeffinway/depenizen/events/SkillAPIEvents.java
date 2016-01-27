@@ -63,16 +63,17 @@ public class SkillAPIEvents implements Listener {
         context.put("skill_name", new Element(skill));
 
         List<String> determinations = OldEventManager.doEvents(Arrays.asList(
-                        "player upgrades skill in skillapi",
-                        "player upgrades " + skill + " in skillapi"),
+                "player upgrades skill in skillapi",
+                "player upgrades " + skill + " in skillapi"),
                 // NOTE: This code previously handled offline players, but SkillAPI no longer does?
                 new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer()), null),
                 context);
 
         for (String determination : determinations) {
             determination = determination.toUpperCase();
-            if (determination.startsWith("CANCELLED"))
+            if (determination.startsWith("CANCELLED")) {
                 event.setCancelled(true);
+            }
         }
     }
 
@@ -95,8 +96,8 @@ public class SkillAPIEvents implements Listener {
         context.put("skill_name", new Element(skill));
 
         OldEventManager.doEvents(Arrays.asList(
-                        "player downgrades skill in skillapi",
-                        "player downgrades " + skill + " in skillapi"),
+                "player downgrades skill in skillapi",
+                "player downgrades " + skill + " in skillapi"),
                 // NOTE: This code previously handled offline players, but SkillAPI no longer does?
                 new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer()), null),
                 context);
@@ -121,8 +122,8 @@ public class SkillAPIEvents implements Listener {
         context.put("skill_name", new Element(skill));
 
         OldEventManager.doEvents(Arrays.asList(
-                        "player unlocks skill in skillapi",
-                        "player unlocks " + skill + " in skillapi"),
+                "player unlocks skill in skillapi",
+                "player unlocks " + skill + " in skillapi"),
                 // NOTE: This code previously handled offline players, but SkillAPI no longer does?
                 new BukkitScriptEntryData(dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer()), null),
                 context);

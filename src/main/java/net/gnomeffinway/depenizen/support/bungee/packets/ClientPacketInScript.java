@@ -38,7 +38,8 @@ public class ClientPacketInScript extends Packet {
                 scriptEntry.fallbackDebug = shouldDebug;
                 scriptEntryList.add(scriptEntry);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             dB.echoError(e);
             return;
         }

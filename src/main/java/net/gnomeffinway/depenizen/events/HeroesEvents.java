@@ -47,10 +47,12 @@ public class HeroesEvents implements Listener {
         context.put("from", new HeroesClass(event.getFrom()));
         context.put("hero", hero);
 
-        if (hero.isNPC())
+        if (hero.isNPC()) {
             npc = (dNPC) hero.getDenizenObject();
-        else if (hero.isPlayer())
+        }
+        else if (hero.isPlayer()) {
             player = (dPlayer) hero.getDenizenObject();
+        }
 
         List<String> determinations = OldEventManager.doEvents(Arrays.asList
                         ("hero changes class",
@@ -59,8 +61,9 @@ public class HeroesEvents implements Listener {
 
         for (String determination : determinations) {
             determination = determination.toUpperCase();
-            if (determination.equals("CANCELLED"))
+            if (determination.equals("CANCELLED")) {
                 event.setCancelled(true);
+            }
         }
     }
 
@@ -90,18 +93,21 @@ public class HeroesEvents implements Listener {
         context.put("hero", hero);
         context.put("reason", new Element(event.getSource().name()));
 
-        if (hero.isNPC())
+        if (hero.isNPC()) {
             npc = (dNPC) hero.getDenizenObject();
-        else if (hero.isPlayer())
+        }
+        else if (hero.isPlayer()) {
             player = (dPlayer) hero.getDenizenObject();
+        }
 
         List<String> determinations = OldEventManager.doEvents(Arrays.asList("hero changes experience"),
                 new BukkitScriptEntryData(player, npc), context);
 
         for (String determination : determinations) {
             determination = determination.toUpperCase();
-            if (determination.equals("CANCELLED"))
+            if (determination.equals("CANCELLED")) {
                 event.setCancelled(true);
+            }
         }
     }
 
@@ -131,10 +137,12 @@ public class HeroesEvents implements Listener {
         context.put("hero", hero);
         context.put("level", new Element(event.getTo()));
 
-        if (hero.isNPC())
+        if (hero.isNPC()) {
             npc = (dNPC) hero.getDenizenObject();
-        else if (hero.isPlayer())
+        }
+        else if (hero.isPlayer()) {
             player = (dPlayer) hero.getDenizenObject();
+        }
 
         List<String> determinations = OldEventManager.doEvents(Arrays.asList
                         ("hero changes level",

@@ -31,7 +31,9 @@ public class dPlot implements dObject {
 
     @Fetchable("plot")
     public static dPlot valueOf(String string, TagContext context) {
-        if (string == null) return null;
+        if (string == null) {
+            return null;
+        }
 
         ////////
         // Match town name
@@ -42,7 +44,8 @@ public class dPlot implements dObject {
             return new dPlot(PlotMeCoreManager.getInstance().getPlotById(
                     new PlotId(aH.getIntegerFrom(split.get(0)), aH.getIntegerFrom(split.get(1))),
                     new BukkitWorld(dWorld.valueOf(split.get(3)).getWorld())));
-        } catch (Throwable e) {
+        }
+        catch (Throwable e) {
             return null;
         }
     }
@@ -95,7 +98,7 @@ public class dPlot implements dObject {
 
     @Override
     public String identify() {
-        return "plot@" + plot.getId().getX() + "," + plot.getId().getZ() +"," + plot.getWorld().getName();
+        return "plot@" + plot.getId().getX() + "," + plot.getId().getZ() + "," + plot.getWorld().getName();
     }
 
     @Override

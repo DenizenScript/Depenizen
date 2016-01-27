@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DataDeserializer  {
+public class DataDeserializer {
 
     private ByteArrayDataInput input;
 
@@ -38,7 +38,8 @@ public class DataDeserializer  {
     public String readString() {
         try {
             return new String(readByteArray(), "UTF-8");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             dB.echoError(e);
             return null;
         }

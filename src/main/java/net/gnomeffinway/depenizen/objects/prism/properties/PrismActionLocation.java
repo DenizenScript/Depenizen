@@ -16,8 +16,12 @@ public class PrismActionLocation implements Property {
     }
 
     public static PrismActionLocation getFrom(dObject action) {
-        if (!describes(action)) return null;
-        else return new PrismActionLocation((PrismAction) action);
+        if (!describes(action)) {
+            return null;
+        }
+        else {
+            return new PrismActionLocation((PrismAction) action);
+        }
     }
 
     ///////////////////

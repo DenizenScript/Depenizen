@@ -59,7 +59,8 @@ public class SocketClient implements Runnable {
             this.output.writeInt(encryptedData.length);
             this.output.write(encryptedData);
             this.output.flush();
-        } catch(Exception e) {
+        }
+        catch (Exception e) {
             dB.echoError(e);
             this.close("Error sending data to server: " + e.getMessage());
         }
@@ -76,7 +77,8 @@ public class SocketClient implements Runnable {
                 this.isConnected = true;
                 this.task = Bukkit.getServer().getScheduler().runTaskAsynchronously(Depenizen.getCurrentInstance(), this);
                 this.send(new ClientPacketOutRegister(this.registrationName));
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 dB.log("Error while connecting to BungeeCord Socket: " + e.getMessage());
                 if (socket.isConnected()) {
                     close();
@@ -108,7 +110,8 @@ public class SocketClient implements Runnable {
                 if (this.socket != null) {
                     this.socket.close();
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 dB.echoError(e);
             }
         }
@@ -157,8 +160,9 @@ public class SocketClient implements Runnable {
                                 }
                             }
                         }
-                        else
+                        else {
                             this.close("Specified name in config.yml is already registered to the server");
+                        }
                     }
                     else if (packetType == 0x01) {
                         ClientPacketInServer packet = new ClientPacketInServer();
@@ -214,15 +218,19 @@ public class SocketClient implements Runnable {
                     }
                 }
 
-            } catch (IllegalStateException e) {
+            }
+            catch (IllegalStateException e) {
                 this.close("Password is incorrect");
-            } catch (SocketTimeoutException e) {
+            }
+            catch (SocketTimeoutException e) {
                 this.close("Connection timed out");
                 attemptReconnect();
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 this.close("Server socket closed");
                 attemptReconnect();
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 this.close("Error receiving data from server: " + e.getMessage());
                 dB.echoError(e);
             }
@@ -234,8 +242,9 @@ public class SocketClient implements Runnable {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] bytes = md.digest(string.getBytes("UTF-8"));
             StringBuilder sb = new StringBuilder();
-            for (byte b : bytes)
+            for (byte b : bytes) {
                 sb.append(Integer.toHexString(b & 0xFF | 0x100)).substring(1, 3);
+            }
             return sb.toString();
         }
         catch (Exception e) {
@@ -247,8 +256,9 @@ public class SocketClient implements Runnable {
     private static byte[] encryptOrDecrypt(String password, byte[] data) throws Exception {
         byte[] result = new byte[data.length];
         byte[] passwordBytes = password.getBytes("UTF-8");
-        for (int i = 0; i < data.length; i++)
-            result[i] = ((byte)(data[i] ^ passwordBytes[(i % passwordBytes.length)]));
+        for (int i = 0; i < data.length; i++) {
+            result[i] = ((byte) (data[i] ^ passwordBytes[(i % passwordBytes.length)]));
+        }
         return result;
     }
 
@@ -266,7 +276,8 @@ public class SocketClient implements Runnable {
                             try {
                                 Thread.sleep(delay);
                                 SocketClient.this.connect();
-                            } catch (InterruptedException e) {
+                            }
+                            catch (InterruptedException e) {
                                 dB.echoError(e);
                                 return;
                             }

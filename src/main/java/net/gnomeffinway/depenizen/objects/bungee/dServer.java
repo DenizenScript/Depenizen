@@ -21,8 +21,9 @@ public class dServer implements dObject {
 
     public static void removeOnlineServer(String name) {
         name = CoreUtilities.toLowerCase(name);
-        if (onlineServers.containsKey(name))
+        if (onlineServers.containsKey(name)) {
             onlineServers.remove(name);
+        }
     }
 
     public static dServer getServerFromName(String name) {
@@ -47,7 +48,9 @@ public class dServer implements dObject {
 
     @Fetchable("server")
     public static dServer valueOf(String string, TagContext context) {
-        if (string == null) return null;
+        if (string == null) {
+            return null;
+        }
 
         dServer server = getServerFromName(CoreUtilities.toLowerCase(string).replace("server@", ""));
 
@@ -67,8 +70,9 @@ public class dServer implements dObject {
     }
 
     public static boolean matches(String arg) {
-        if (onlineServers.containsKey(CoreUtilities.toLowerCase(arg).replace("server@", "")))
+        if (onlineServers.containsKey(CoreUtilities.toLowerCase(arg).replace("server@", ""))) {
             return true;
+        }
 
         return false;
     }

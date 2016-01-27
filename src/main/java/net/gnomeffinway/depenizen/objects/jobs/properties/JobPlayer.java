@@ -14,8 +14,12 @@ public class JobPlayer implements Property {
     }
 
     public static JobPlayer getFrom(dObject job) {
-        if (!describes(job)) return null;
-        else return new JobPlayer((JobsJob) job);
+        if (!describes(job)) {
+            return null;
+        }
+        else {
+            return new JobPlayer((JobsJob) job);
+        }
     }
 
 
@@ -35,10 +39,12 @@ public class JobPlayer implements Property {
 
     @Override
     public String getPropertyString() {
-        if (job.hasOwner())
+        if (job.hasOwner()) {
             return job.getOwner().identify();
-        else
+        }
+        else {
             return null;
+        }
     }
 
     @Override

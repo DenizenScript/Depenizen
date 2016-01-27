@@ -44,7 +44,8 @@ public class DataSerializer {
         else {
             try {
                 writeByteArray(string.getBytes("UTF-8"));
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 dB.echoError(e);
             }
         }

@@ -37,42 +37,51 @@ public class TownyCommands extends AbstractCommand {
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("action")
-                    && arg.matchesEnum(Action.values()))
+                    && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
+            }
 
             else if (!scriptEntry.hasObject("state")
                     && arg.matchesPrefix("s", "state")
-                    && arg.matchesEnum(State.values()))
+                    && arg.matchesEnum(State.values())) {
                 scriptEntry.addObject("state", arg.asElement());
+            }
 
             else if (!scriptEntry.hasObject("town")
-                    && arg.matchesArgumentType(dTown.class))
+                    && arg.matchesArgumentType(dTown.class)) {
                 scriptEntry.addObject("town", arg.asType(dTown.class));
+            }
 
             else if (!scriptEntry.hasObject("nation")
-                    && arg.matchesArgumentType(dNation.class))
+                    && arg.matchesArgumentType(dNation.class)) {
                 scriptEntry.addObject("nation", arg.asType(dNation.class));
+            }
 
             else if (!scriptEntry.hasObject("location")
-                    && arg.matchesArgumentType(dLocation.class))
+                    && arg.matchesArgumentType(dLocation.class)) {
                 scriptEntry.addObject("location", arg.asType(dLocation.class));
+            }
 
             else if (!scriptEntry.hasObject("qty")
                     && arg.matchesPrefix("qty", "q", "quantity")
-                    && arg.matchesPrimitive(aH.PrimitiveType.Double))
+                    && arg.matchesPrimitive(aH.PrimitiveType.Double)) {
                 scriptEntry.addObject("qty", arg.asElement());
+            }
 
             else if (!scriptEntry.hasObject("type")
-                    && arg.matchesEnum(Type.values()))
+                    && arg.matchesEnum(Type.values())) {
                 scriptEntry.addObject("type", arg.asElement());
+            }
 
         }
 
-        if (!scriptEntry.hasObject("action"))
+        if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Must specify a valid action!");
+        }
 
-        if (!scriptEntry.hasObject("type"))
+        if (!scriptEntry.hasObject("type")) {
             throw new InvalidArgumentsException("Must specify a valid type!");
+        }
 
         scriptEntry.defaultObject("town", new Element("")).defaultObject("nation", "")
                 .defaultObject("state", new Element("TOGGLE"));
@@ -91,7 +100,7 @@ public class TownyCommands extends AbstractCommand {
         dLocation location = scriptEntry.getdObject("location");
 
         dB.report(scriptEntry, getName(), action.debug() + type.debug() + state.debug() + town.debug() + nation.debug()
-                + (qty != null ? qty.debug() : "") + (location != null ? location.debug() :""));
+                + (qty != null ? qty.debug() : "") + (location != null ? location.debug() : ""));
 
         switch (Type.valueOf(type.asString().toUpperCase())) {
             case RESIDENT:

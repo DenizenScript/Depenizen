@@ -15,8 +15,12 @@ public class PrismActionAggregate implements Property {
     }
 
     public static PrismActionAggregate getFrom(dObject action) {
-        if (!describes(action)) return null;
-        else return new PrismActionAggregate((PrismAction) action);
+        if (!describes(action)) {
+            return null;
+        }
+        else {
+            return new PrismActionAggregate((PrismAction) action);
+        }
     }
 
     ///////////////////

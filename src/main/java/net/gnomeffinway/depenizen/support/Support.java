@@ -86,15 +86,25 @@ public class Support {
         return additionalTags;
     }
 
-    public boolean hasObjects() { return !objects.isEmpty(); }
+    public boolean hasObjects() {
+        return !objects.isEmpty();
+    }
 
-    public boolean hasProperties() { return !properties.isEmpty(); }
+    public boolean hasProperties() {
+        return !properties.isEmpty();
+    }
 
-    public boolean hasEvents() { return !events.isEmpty(); }
+    public boolean hasEvents() {
+        return !events.isEmpty();
+    }
 
-    public boolean hasScriptEvents() { return !scriptevents.isEmpty(); }
+    public boolean hasScriptEvents() {
+        return !scriptevents.isEmpty();
+    }
 
-    public boolean hasAdditionalTags() { return !additionalTags.isEmpty(); }
+    public boolean hasAdditionalTags() {
+        return !additionalTags.isEmpty();
+    }
 
     public static Support setPlugin(Class<? extends Support> support, Plugin p)
             throws IllegalAccessException, InstantiationException {

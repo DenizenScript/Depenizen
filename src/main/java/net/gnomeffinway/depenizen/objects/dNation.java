@@ -24,7 +24,9 @@ public class dNation implements dObject {
 
     @Fetchable("nation")
     public static dNation valueOf(String string, TagContext context) {
-        if (string == null) return null;
+        if (string == null) {
+            return null;
+        }
 
         ////////
         // Match town name
@@ -32,7 +34,8 @@ public class dNation implements dObject {
         string = string.replace("nation@", "");
         try {
             return new dNation(TownyUniverse.getDataSource().getNation(string));
-        } catch (NotRegisteredException e) {
+        }
+        catch (NotRegisteredException e) {
             return null;
         }
     }
@@ -49,10 +52,12 @@ public class dNation implements dObject {
     Nation nation = null;
 
     public dNation(Nation nation) {
-        if (nation != null)
+        if (nation != null) {
             this.nation = nation;
-        else
+        }
+        else {
             dB.echoError("Nation referenced is null!");
+        }
     }
 
     /////////////////////
@@ -111,9 +116,11 @@ public class dNation implements dObject {
         if (attribute.startsWith("balance")) {
             try {
                 return new Element(nation.getHoldingBalance()).getAttribute(attribute.fulfill(1));
-            } catch (EconomyException e) {
-                if (!attribute.hasAlternative())
+            }
+            catch (EconomyException e) {
+                if (!attribute.hasAlternative()) {
                     dB.echoError("Invalid economy response!");
+                }
             }
         }
 
@@ -125,9 +132,10 @@ public class dNation implements dObject {
         // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("capital")) {
-            if (nation.hasCapital())
+            if (nation.hasCapital()) {
                 return new dTown(nation.getCapital())
                         .getAttribute(attribute.fulfill(1));
+            }
         }
 
         // <--[tag]
@@ -137,9 +145,10 @@ public class dNation implements dObject {
         // Returns true if the nation is neutral.
         // @plugin Depenizen, Towny
         // -->
-        else if (attribute.startsWith("isneutral") || attribute.startsWith("is_neutral"))
+        else if (attribute.startsWith("isneutral") || attribute.startsWith("is_neutral")) {
             return new Element(nation.isNeutral())
-                   .getAttribute(attribute.fulfill(1));
+                    .getAttribute(attribute.fulfill(1));
+        }
 
         // <--[tag]
         // @attribute <nation@nation.king>
@@ -148,9 +157,10 @@ public class dNation implements dObject {
         // Returns the king of the nation.
         // @plugin Depenizen, Towny
         // -->
-        else if (attribute.startsWith("king"))
+        else if (attribute.startsWith("king")) {
             return dPlayer.valueOf(nation.getCapital().getMayor().getName())
                     .getAttribute(attribute.fulfill(1));
+        }
 
         // <--[tag]
         // @attribute <nation@nation.name>
@@ -158,9 +168,10 @@ public class dNation implements dObject {
         // @description
         // Returns the nation's name.
         // @plugin Depenizen, Towny
-        else if (attribute.startsWith("name"))
+        else if (attribute.startsWith("name")) {
             return new Element(nation.getName())
                     .getAttribute(attribute.fulfill(1));
+        }
 
         // <--[tag]
         // @attribute <nation@nation.player_count>
@@ -169,9 +180,10 @@ public class dNation implements dObject {
         // Returns the amount of players in the nation.
         // @plugin Depenizen, Towny
         // -->
-        else if (attribute.startsWith("playercount") || attribute.startsWith("player_count"))
+        else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
             return new Element(nation.getNumResidents())
                     .getAttribute(attribute.fulfill(1));
+        }
 
         // <--[tag]
         // @attribute <nation@nation.relation[<nation>]>
@@ -185,14 +197,19 @@ public class dNation implements dObject {
             try {
                 dNation to = valueOf(attribute.getContext(1));
 
-                if (nation.hasAlly(to.nation))
+                if (nation.hasAlly(to.nation)) {
                     return new Element("allies").getAttribute(attribute.fulfill(1));
-                else if (nation.hasEnemy(to.nation))
+                }
+                else if (nation.hasEnemy(to.nation)) {
                     return new Element("enemies").getAttribute(attribute.fulfill(1));
-                else
+                }
+                else {
                     return new Element("neutral").getAttribute(attribute.fulfill(1));
+                }
 
-            } catch (Exception e) {}
+            }
+            catch (Exception e) {
+            }
 
         }
 
@@ -204,9 +221,10 @@ public class dNation implements dObject {
         // @plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("tag")) {
-            if (nation.hasTag())
+            if (nation.hasTag()) {
                 return new Element(nation.getTag())
                         .getAttribute(attribute.fulfill(1));
+            }
         }
 
         // <--[tag]
@@ -216,9 +234,10 @@ public class dNation implements dObject {
         // Returns the nation's current taxes.
         // @plugin Depenizen, Towny
         // -->
-        else if (attribute.startsWith("taxes"))
+        else if (attribute.startsWith("taxes")) {
             return new Element(nation.getTaxes())
                     .getAttribute(attribute.fulfill(1));
+        }
 
         // <--[tag]
         // @attribute <nation@nation.town_count>
@@ -227,9 +246,10 @@ public class dNation implements dObject {
         // Returns the number of towns in the nation.
         // @plugin Depenizen, Towny
         // -->
-        else if (attribute.startsWith("towncount") || attribute.startsWith("town_count"))
+        else if (attribute.startsWith("towncount") || attribute.startsWith("town_count")) {
             return new Element(nation.getNumTowns())
                     .getAttribute(attribute.fulfill(1));
+        }
 
         // <--[tag]
         // @attribute <nation@nation.type>

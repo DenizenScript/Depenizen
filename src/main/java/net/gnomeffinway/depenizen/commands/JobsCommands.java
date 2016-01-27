@@ -44,7 +44,7 @@ public class JobsCommands extends AbstractCommand {
 
     // -->
 
-    private enum Action { PROMOTE, DEMOTE, JOIN, QUIT }
+    private enum Action {PROMOTE, DEMOTE, JOIN, QUIT}
 
     public JobsCommands() {
 
@@ -73,10 +73,12 @@ public class JobsCommands extends AbstractCommand {
 
         }
 
-        if (!scriptEntry.hasObject("action"))
+        if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Must specify an action!");
-        if (!scriptEntry.hasObject("job"))
+        }
+        if (!scriptEntry.hasObject("job")) {
             throw new InvalidArgumentsException("Must specify a job!");
+        }
 
     }
 

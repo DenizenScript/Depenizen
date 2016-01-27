@@ -28,7 +28,9 @@ public class PrismAction implements dObject, Adjustable {
 
     @Fetchable("prism")
     public static PrismAction valueOf(String string, TagContext context) {
-        if (string == null) return null;
+        if (string == null) {
+            return null;
+        }
 
         Matcher m = ObjectFetcher.DESCRIBED_PATTERN.matcher(string);
         if (m.matches()) {
@@ -46,8 +48,9 @@ public class PrismAction implements dObject, Adjustable {
     }
 
     public static boolean matches(String arg) {
-        if (valueOf(arg) != null)
+        if (valueOf(arg) != null) {
             return true;
+        }
 
         return false;
     }
@@ -61,6 +64,7 @@ public class PrismAction implements dObject, Adjustable {
     public PrismAction(Handler action) {
         this.action = action;
     }
+
     public PrismAction(ActionType actionType) {
         this.action = new FakeHandler(actionType);
     }
@@ -162,7 +166,9 @@ public class PrismAction implements dObject, Adjustable {
         // Iterate through this object's properties' attributes
         for (Property property : PropertyParser.getProperties(this)) {
             String returned = property.getAttribute(attribute);
-            if (returned != null) return returned;
+            if (returned != null) {
+                return returned;
+            }
         }
 
         return new Element(identify()).getAttribute(attribute);
@@ -171,10 +177,12 @@ public class PrismAction implements dObject, Adjustable {
 
     @Override
     public void applyProperty(Mechanism mechanism) {
-        if (action.getWorldName() == null)
+        if (action.getWorldName() == null) {
             adjust(mechanism);
-        else
+        }
+        else {
             dB.echoError("Cannot adjust a PrismAction!");
+        }
     }
 
     @Override
@@ -183,12 +191,14 @@ public class PrismAction implements dObject, Adjustable {
         // Iterate through this object's properties' mechanisms
         for (Property property : PropertyParser.getProperties(this)) {
             property.adjust(mechanism);
-            if (mechanism.fulfilled())
+            if (mechanism.fulfilled()) {
                 break;
+            }
         }
 
-        if (!mechanism.fulfilled())
+        if (!mechanism.fulfilled()) {
             mechanism.reportInvalid();
+        }
 
     }
 }

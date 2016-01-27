@@ -27,7 +27,9 @@ public class JobsJob implements dObject {
 
     @Fetchable("job")
     public static JobsJob valueOf(String string, TagContext context) {
-        if (string == null) return null;
+        if (string == null) {
+            return null;
+        }
 
         ////////
         // Match job name
@@ -42,8 +44,9 @@ public class JobsJob implements dObject {
     }
 
     public static boolean matches(String arg) {
-        if (valueOf(arg) != null)
+        if (valueOf(arg) != null) {
             return true;
+        }
 
         return false;
     }
@@ -184,9 +187,10 @@ public class JobsJob implements dObject {
         // Returns the ChatColor of the job.
         // @plugin Depenizen, Jobs
         // -->
-        if (attribute.startsWith("color"))
+        if (attribute.startsWith("color")) {
             return new Element(job.getChatColor().toString())
                     .getAttribute(attribute.fulfill(1));
+        }
 
         // <--[tag]
         // @attribute <job@job.description>
@@ -195,8 +199,9 @@ public class JobsJob implements dObject {
         // Returns the description of the job.
         // @plugin Depenizen, Jobs
         // -->
-        else if (attribute.startsWith("description"))
+        else if (attribute.startsWith("description")) {
             return new Element(job.getDescription()).getAttribute(attribute.fulfill(1));
+        }
 
         else if (attribute.startsWith("name")) {
             attribute = attribute.fulfill(1);

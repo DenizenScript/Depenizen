@@ -42,18 +42,22 @@ public class HeroesHero implements dObject {
 
     @Fetchable("hero")
     public static HeroesHero valueOf(String string, TagContext context) {
-        if (string == null) return null;
+        if (string == null) {
+            return null;
+        }
 
         string = string.replace("hero@", "");
-        if (dPlayer.matches(string))
+        if (dPlayer.matches(string)) {
             return new HeroesHero(dPlayer.valueOf(string));
+        }
 
         if (Depends.citizens != null) {
             Matcher m = npc_pattern.matcher(string);
             if (m.matches()) {
                 NPC npc = CitizensAPI.getNPCRegistry().getById(Integer.valueOf(m.group(2)));
-                if (npc != null)
+                if (npc != null) {
                     return new HeroesHero(dNPC.mirrorCitizensNPC(npc));
+                }
             }
         }
 
@@ -61,8 +65,9 @@ public class HeroesHero implements dObject {
     }
 
     public static boolean matches(String arg) {
-        if (valueOf(arg) != null)
+        if (valueOf(arg) != null) {
             return true;
+        }
 
         return false;
     }
@@ -93,10 +98,12 @@ public class HeroesHero implements dObject {
 
     public HeroesHero(Hero hero) {
         this.hero = hero;
-        if (Depends.citizens != null && CitizensAPI.getNPCRegistry().isNPC(hero.getPlayer()))
+        if (Depends.citizens != null && CitizensAPI.getNPCRegistry().isNPC(hero.getPlayer())) {
             denizenObj = dNPC.fromEntity(hero.getPlayer());
-        else
+        }
+        else {
             denizenObj = dPlayer.mirrorBukkitPlayer(hero.getPlayer());
+        }
     }
 
     public Hero getHero() {
@@ -163,8 +170,9 @@ public class HeroesHero implements dObject {
     public String getAttribute(Attribute attribute) {
 
         if (hero == null) {
-            if (!attribute.hasAlternative())
+            if (!attribute.hasAlternative()) {
                 dB.echoError("Specified Hero is null! Are they online/spawned?");
+            }
         }
 
         // <--[tag]
@@ -204,14 +212,16 @@ public class HeroesHero implements dObject {
         // If no class is specified, returns the hero's current highest level.
         // @plugin Depenizen, Heroes
         // -->
-        else if(attribute.startsWith("level")) {
+        else if (attribute.startsWith("level")) {
             if (attribute.hasContext(1)) {
                 try {
                     return new Element(hero.getLevel(HeroesClass.valueOf(attribute.getContext(1)).getHeroClass()))
                             .getAttribute(attribute.fulfill(1));
-                } catch (Exception e) {
-                    if (!attribute.hasAlternative())
+                }
+                catch (Exception e) {
+                    if (!attribute.hasAlternative()) {
                         dB.echoError("'" + attribute.getContext(1) + "' is not a valid Heroes class!");
+                    }
                 }
             }
             return new Element(hero.getLevel()).getAttribute(attribute.fulfill(1));
@@ -244,8 +254,8 @@ public class HeroesHero implements dObject {
             // @plugin Depenizen, Heroes
             // -->
             if (attribute.startsWith("leader")) {
-                    return dPlayer.mirrorBukkitPlayer(hero.getParty().getLeader().getPlayer())
-                            .getAttribute(attribute.fulfill(1));
+                return dPlayer.mirrorBukkitPlayer(hero.getParty().getLeader().getPlayer())
+                        .getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]

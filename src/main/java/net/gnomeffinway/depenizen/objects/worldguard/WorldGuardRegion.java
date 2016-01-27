@@ -42,7 +42,9 @@ public class WorldGuardRegion implements dObject {
 
     @Fetchable("region")
     public static WorldGuardRegion valueOf(String string, TagContext context) {
-        if (string == null) return null;
+        if (string == null) {
+            return null;
+        }
 
         Matcher m = regionPattern.matcher(string);
         if (m.matches()) {
@@ -148,8 +150,9 @@ public class WorldGuardRegion implements dObject {
         // -->
         if (attribute.startsWith("cuboid") || attribute.startsWith("as_cuboid")) { // TODO: Scrap as_cuboid
             if (!(region instanceof ProtectedCuboidRegion)) {
-                if (!attribute.hasAlternative())
+                if (!attribute.hasAlternative()) {
                     dB.echoError("<region@region.as_cuboid> requires a Cuboid-shaped region!");
+                }
                 return null;
             }
             return new dCuboid(BukkitUtil.toLocation(world, region.getMinimumPoint()),

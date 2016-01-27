@@ -17,8 +17,12 @@ public class PrismActionBlock implements Property {
     }
 
     public static PrismActionBlock getFrom(dObject action) {
-        if (!describes(action)) return null;
-        else return new PrismActionBlock((PrismAction) action);
+        if (!describes(action)) {
+            return null;
+        }
+        else {
+            return new PrismActionBlock((PrismAction) action);
+        }
     }
 
     ///////////////////
@@ -35,7 +39,7 @@ public class PrismActionBlock implements Property {
 
     @Override
     public String getPropertyString() {
-        return action.getBlockId()  + "," + action.getBlockSubId() + "/"
+        return action.getBlockId() + "," + action.getBlockSubId() + "/"
                 + action.getOldBlockId() + "," + action.getOldBlockSubId();
     }
 
@@ -57,11 +61,13 @@ public class PrismActionBlock implements Property {
         if (attribute.startsWith("block")) {
             int id = action.getBlockId();
             int subId = action.getBlockSubId();
-            if (id == -1)
+            if (id == -1) {
                 return null;
-            else
+            }
+            else {
                 return dMaterial.getMaterialFrom(Material.getMaterial(id), subId > -1 ? subId : 0)
                         .getAttribute(attribute.fulfill(1));
+            }
         }
 
         // <--[tag]
@@ -74,11 +80,13 @@ public class PrismActionBlock implements Property {
         if (attribute.startsWith("alt_block")) {
             int id = action.getOldBlockId();
             int subId = action.getOldBlockSubId();
-            if (id == -1)
+            if (id == -1) {
                 return null;
-            else
+            }
+            else {
                 return dMaterial.getMaterialFrom(Material.getMaterial(id), subId > -1 ? subId : 0)
                         .getAttribute(attribute.fulfill(1));
+            }
         }
 
         return null;

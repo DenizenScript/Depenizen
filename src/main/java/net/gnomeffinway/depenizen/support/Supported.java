@@ -24,11 +24,14 @@ public class Supported {
         // Register plugin supports
         for (String name : depenizen.getDescription().getSoftDepend()) {
             try {
-                if (set(name.toUpperCase(), pluginManager.getPlugin(name)))
+                if (set(name.toUpperCase(), pluginManager.getPlugin(name))) {
                     Depenizen.depenizenLog(name + " hooked, enabling add-ons.");
-                else
+                }
+                else {
                     Depenizen.depenizenLog(name + " not found, add-ons will not enable.");
-            } catch (Exception e) {
+                }
+            }
+            catch (Exception e) {
                 dB.echoError("Error while hooking plugin '" + name + "'");
                 dB.echoError(e);
             }
@@ -48,13 +51,17 @@ public class Supported {
 
     private static boolean set(String name, Plugin plugin) {
         try {
-            if (plugin == null || !plugin.isEnabled()) return false;
+            if (plugin == null || !plugin.isEnabled()) {
+                return false;
+            }
             supportManager.register(Support.setPlugin(supportClasses.get(name), plugin));
             return true;
-        } catch (IllegalAccessException e) {
+        }
+        catch (IllegalAccessException e) {
             dB.echoError("Report this error to Morphan1 or the Denizen dev team: SupportedIllegalAccess-" + name);
             dB.echoError(e);
-        } catch (InstantiationException e) {
+        }
+        catch (InstantiationException e) {
             dB.echoError("Report this error to Morphan1 or the Denizen dev team: SupportedInstantiationSupport-" + name);
             dB.echoError(e);
         }
@@ -69,7 +76,9 @@ public class Supported {
             URL url;
             while (resources.hasMoreElements()) {
                 url = resources.nextElement();
-                if (url == null) continue;
+                if (url == null) {
+                    continue;
+                }
                 URLConnection conn = url.openConnection();
                 if (conn instanceof JarURLConnection) {
                     final JarFile jarFile = ((JarURLConnection) conn).getJarFile();
@@ -79,7 +88,7 @@ public class Supported {
                         name = entries.nextElement().getName().replace('/', '.');
                         if (name.startsWith(pkg) && name.endsWith("Support.class")) {
                             String key = name.replace("Support.class", "");
-                            key = key.substring(key.lastIndexOf('.')+1).toUpperCase();
+                            key = key.substring(key.lastIndexOf('.') + 1).toUpperCase();
                             try {
                                 supportClasses.put(key,
                                         (Class<? extends Support>) Class.forName(name.substring(0, name.lastIndexOf('.'))));
@@ -91,7 +100,8 @@ public class Supported {
                     }
                 }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             dB.echoError(e);
         }
     }

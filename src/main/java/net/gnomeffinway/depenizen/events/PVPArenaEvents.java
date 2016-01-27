@@ -37,8 +37,9 @@ public class PVPArenaEvents implements Listener {
         context.put("arena", new Element(arena.getName()));
 
         ArrayList<dPlayer> fighters = new ArrayList<dPlayer>();
-        for (ArenaPlayer player : event.getArena().getFighters())
+        for (ArenaPlayer player : event.getArena().getFighters()) {
             fighters.add(new dPlayer(player.get()));
+        }
 
         context.put("fighters", new dList(fighters));
 

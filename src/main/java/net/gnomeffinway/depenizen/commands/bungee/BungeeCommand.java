@@ -80,11 +80,13 @@ public class BungeeCommand extends BracedCommand {
 
         }
 
-        if (!scriptEntry.hasObject("servers") && !scriptEntry.hasObject("all-servers"))
+        if (!scriptEntry.hasObject("servers") && !scriptEntry.hasObject("all-servers")) {
             throw new InvalidArgumentsException("Must specify valid server(s)!");
+        }
 
-        if (!scriptEntry.hasObject("braces"))
+        if (!scriptEntry.hasObject("braces")) {
             throw new InvalidArgumentsException("Must have braces!");
+        }
 
         scriptEntry.defaultObject("all-servers", new Element(false));
     }

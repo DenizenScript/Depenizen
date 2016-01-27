@@ -44,7 +44,9 @@ public class SupportManager {
             for (Map.Entry<Class<? extends Property>, Class<? extends dObject>[]> prop
                     : support.getProperties().entrySet()) {
                 for (Class<? extends dObject> obj : prop.getValue()) {
-                    if (obj.equals(dNPC.class) && Depends.citizens == null) continue;
+                    if (obj.equals(dNPC.class) && Depends.citizens == null) {
+                        continue;
+                    }
                     propertyParser.registerProperty(prop.getKey(), obj);
                 }
             }
@@ -53,7 +55,8 @@ public class SupportManager {
             for (Class<? extends Listener> event : support.getEvents()) {
                 try {
                     depenizen.getServer().getPluginManager().registerEvents(event.newInstance(), depenizen);
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     dB.echoError(e);
                 }
             }
@@ -62,7 +65,8 @@ public class SupportManager {
             for (ScriptEvent event : support.getScriptEvents()) {
                 try {
                     ScriptEvent.registerScriptEvent(event);
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     dB.echoError(e);
                 }
             }
@@ -76,7 +80,9 @@ public class SupportManager {
 
     public void registerNewObjects() {
         if (hasNewObjects) {
-            try { ObjectFetcher._initialize(); }
+            try {
+                ObjectFetcher._initialize();
+            }
             catch (Exception e) {
                 dB.echoError(e);
             }
@@ -95,7 +101,9 @@ public class SupportManager {
 
     @TagManager.TagEvents
     public void tagListener(ReplaceableTagEvent event) {
-        if (event.replaced()) return;
+        if (event.replaced()) {
+            return;
+        }
         Attribute attribute = event.getAttributes();
         String replaced = null;
         String name = CoreUtilities.toLowerCase(event.getName());
