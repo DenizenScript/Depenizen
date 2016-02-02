@@ -25,7 +25,7 @@ import org.bukkit.event.Listener;
 //
 // @Cancellable true
 //
-// @Triggers when a player's jail status changes..
+// @Triggers when a player's jail status changes.
 //
 // @Context
 // <context.status> Returns the player's jail status.
