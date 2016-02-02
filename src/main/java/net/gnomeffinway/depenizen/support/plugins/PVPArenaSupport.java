@@ -2,7 +2,7 @@ package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.tags.Attribute;
-import net.gnomeffinway.depenizen.events.PVPArenaEvents;
+import net.gnomeffinway.depenizen.events.PVPArena.PVPArenaStartsScriptEvent;
 import net.gnomeffinway.depenizen.extensions.pvparena.PVPArenaPlayerExtension;
 import net.gnomeffinway.depenizen.objects.pvparena.PVPArenaArena;
 import net.gnomeffinway.depenizen.support.Support;
@@ -10,7 +10,7 @@ import net.gnomeffinway.depenizen.support.Support;
 public class PVPArenaSupport extends Support {
 
     public PVPArenaSupport() {
-        registerEvents(PVPArenaEvents.class);
+        registerScriptEvents(new PVPArenaStartsScriptEvent());
         registerProperty(PVPArenaPlayerExtension.class, dPlayer.class);
         registerObjects(PVPArenaArena.class);
         registerAdditionalTags("pvparena");
