@@ -54,7 +54,7 @@ public class MobArenaSupport extends Support {
             if (attribute.startsWith("list_arenas")) {
                 dList arenas = new dList();
                 for (Arena a : plugin.getArenaMaster().getArenas()) {
-                    if (plugin.getArenaMaster().getArenaWithName(a.arenaName()) == null) {
+                    if (plugin.getArenaMaster().getArenaWithName(a.configName()) == null) {
                         continue;
                     }
                     arenas.add(new MobArenaArena(a).identify());
