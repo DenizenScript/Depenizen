@@ -48,9 +48,9 @@ public class dClan implements dObject {
         return SimpleClans.getInstance().getClanManager().isClan(tag);
     }
 
-    public dClan(Clan c) {
-        if (c != null) {
-            clan = c;
+    public dClan(Clan clan) {
+        if (clan != null) {
+            this.clan = clan;
         }
         else {
             dB.echoError("Clan referenced is null");

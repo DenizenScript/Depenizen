@@ -1,16 +1,19 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
-import net.gnomeffinway.depenizen.events.PVPArenaEvents;
+import net.gnomeffinway.depenizen.events.PVPArena.PVPArenaStartsScriptEvent;
 import net.gnomeffinway.depenizen.extensions.pvparena.PVPArenaPlayerExtension;
 import net.gnomeffinway.depenizen.objects.pvparena.PVPArenaArena;
 import net.gnomeffinway.depenizen.support.Support;
+import net.slipcor.pvparena.arena.Arena;
+import net.slipcor.pvparena.managers.ArenaManager;
 
 public class PVPArenaSupport extends Support {
 
     public PVPArenaSupport() {
-        registerEvents(PVPArenaEvents.class);
+        registerScriptEvents(new PVPArenaStartsScriptEvent());
         registerProperty(PVPArenaPlayerExtension.class, dPlayer.class);
         registerObjects(PVPArenaArena.class);
         registerAdditionalTags("pvparena");
@@ -25,6 +28,22 @@ public class PVPArenaSupport extends Support {
                 return null;
             }
             return arena.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <pvparena.list_arenas>
+        // @returns dList(PVPArena)
+        // @description
+        // Returns a list of all PVPArenas.
+        // @plugin Depenizen, PVPArena
+        // -->
+        attribute = attribute.fulfill(1);
+        if (attribute.startsWith("list_arenas")) {
+            dList arenas = new dList();
+            for (Arena a : ArenaManager.getArenas()) {
+                arenas.add(new PVPArenaArena(a).identify());
+            }
+            return arenas.getAttribute(attribute.fulfill(1));
         }
 
         return null;

@@ -1,55 +1,52 @@
-package net.gnomeffinway.depenizen.events.ASkyBlock;
+package net.gnomeffinway.depenizen.events.PVPArena;
 
-import com.wasteofplastic.askyblock.events.IslandNewEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.objects.dEntity;
-import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizencore.objects.Element;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
+import net.gnomeffinway.depenizen.objects.pvparena.PVPArenaArena;
+import net.slipcor.pvparena.arena.ArenaPlayer;
+import net.slipcor.pvparena.events.PAStartEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// skyblock island created
+// on pvparena starts
 //
-// @Regex ^on skyblock island created$
+// @Regex ^on pvparena starts$
 //
-// @Cancellable false
+// @Cancellable true
 //
-// @Triggers when a new skyblock is created.
+// @Triggers when a pvparena starts.
 //
 // @Context
-// <context.owner> Returns the owner of the island.
-// <context.location> Returns the location of the island.
-// <context.schematic> Returns the name of the schematic used for the island.
+// <context.fighters> returns a list of all fighters in the arena.
 //
-// @Plugin Depenizen, A SkyBlock
+// @Plugin Depenizen, PVPArena
 //
 // -->
 
-public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Listener {
+public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public SkyBlockCreatedScriptEvent instance;
-    public IslandNewEvent event;
-    public dLocation location;
-    public Element schematic;
-    public dPlayer owner;
+    public PVPArenaStartsScriptEvent instance;
+    public PAStartEvent event;
+    public dList fighters;
+    public PVPArenaArena arena;
 
-    public SkyBlockCreatedScriptEvent() {
+    public PVPArenaStartsScriptEvent() {
         instance = this;
     }
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("skyblock island created");
+        return CoreUtilities.toLowerCase(s).startsWith("pvparena starts");
     }
 
     @Override
@@ -59,7 +56,7 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public String getName() {
-        return "SkyBlockCreated";
+        return "PVPArenaStarts";
     }
 
     @Override
@@ -69,7 +66,7 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public void destroy() {
-        IslandNewEvent.getHandlerList().unregister(this);
+        PAStartEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -84,25 +81,25 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public dObject getContext(String name) {
-        if (name.equals("owner")) {
-            return owner;
+        if (name.equals("fighters")) {
+            return fighters;
         }
-        else if (name.equals("location")) {
-            return location;
-        }
-        else if (name.equals("schematic")) {
-            return schematic;
+        else if (name.equals("arena")) {
+            return arena;
         }
         return super.getContext(name);
     }
 
     @EventHandler
-    public void onSkyBlockCreated(IslandNewEvent event) {
-        location = new dLocation(event.getIslandLocation());
-        schematic = new Element(event.getSchematicName().getName());
-        owner = dPlayer.mirrorBukkitPlayer(event.getPlayer());
+    public void onPVPArenaStart(PAStartEvent event) {
+        fighters = new dList();
+        for (ArenaPlayer p : event.getArena().getFighters()) {
+            fighters.add(new dPlayer(p.get()).identify());
+        }
+        arena = new PVPArenaArena(event.getArena());
+        cancelled = event.isCancelled();
         this.event = event;
         fire();
+        event.setCancelled(cancelled);
     }
-
 }

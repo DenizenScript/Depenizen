@@ -93,7 +93,7 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
     @EventHandler
     public void onSkyBlockReset(IslandResetEvent event) {
         location = new dLocation(event.getLocation());
-        owner = new dPlayer(event.getPlayer());
+        owner = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         this.event = event;
         fire();
     }
