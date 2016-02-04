@@ -41,10 +41,6 @@
             <url>http://repo.citizensnpcs.co</url>
         </repository>
         <repository>
-            <id>dynmap-repo</id>
-            <url>http://repo.mikeprimm.com/</url>
-        </repository>
-        <repository>
             <id>sk89q-repo</id>
             <url>http://maven.sk89q.com/artifactory/repo/</url>
         </repository>
@@ -171,13 +167,6 @@
             <groupId>net.citizensnpcs</groupId>
             <artifactId>citizens</artifactId>
             <version>${citizens.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.dynmap</groupId>
-            <artifactId>dynmap-api</artifactId>
-            <version>1.9.4</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
