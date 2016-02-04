@@ -112,6 +112,17 @@ public class MobArenaArena implements dObject {
         }
 
         // <--[tag]
+        // @attribute <mobarena@mobarena.config_name>
+        // @returns Element
+        // @description
+        // Returns the configuration name of the arena.
+        // @plugin Depenizen, MobArena
+        // -->
+        else if (attribute.startsWith("config_name")) {
+            return new Element(arena.configName()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <mobarena@mobarena.is_running>
         // @returns Element(Boolean)
         // @description
