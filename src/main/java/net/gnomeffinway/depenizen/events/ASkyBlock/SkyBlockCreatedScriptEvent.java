@@ -100,7 +100,7 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
     public void onSkyBlockCreated(IslandNewEvent event) {
         location = new dLocation(event.getIslandLocation());
         schematic = new Element(event.getSchematicName().getName());
-        owner = new dPlayer(event.getPlayer());
+        owner = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         this.event = event;
         fire();
     }

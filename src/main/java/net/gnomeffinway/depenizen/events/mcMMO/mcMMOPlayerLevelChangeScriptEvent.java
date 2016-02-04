@@ -19,10 +19,10 @@ import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// mcmmo player skill changes
-// mcmmo player <skill> changes
+// mcmmo player skill level changes (in <area>)
+// mcmmo player <skill> level changes (in <area>)
 //
-// @Regex ^on mcmmo player [^\s]+ changes$
+// @Regex ^on mcmmo player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
 //
 // @Cancellable true
 //
@@ -48,24 +48,29 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
 
     public static McMMOPlayerLevelChangeEvent event;
     public dPlayer player;
-    public String skill;
+    public Element skill;
     public int level;
     public String cause;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("mcmmo player") && CoreUtilities.getXthArg(3, lower).equals("changes");
+        return lower.startsWith("mcmmo player") && CoreUtilities.getXthArg(3, lower).equals("level");
     }
 
     @Override
     public boolean matches(ScriptContainer scriptContainer, String s) {
-        String arg = CoreUtilities.getXthArg(2, s).toUpperCase();
-        SkillType eventSkill = SkillType.valueOf(arg);
-        if (arg.equals("SKILL") || (eventSkill != null && eventSkill == event.getSkill())) {
-            return true;
+        String lower = CoreUtilities.toLowerCase(s);
+        String eSkill = CoreUtilities.getXthArg(2, lower);
+        if (!eSkill.equals("skill") && !eSkill.equals(CoreUtilities.toLowerCase(skill.asString()))) {
+            return false;
         }
-        return false;
+
+        if (!runInCheck(scriptContainer, s, CoreUtilities.toLowerCase(s), player.getLocation())) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -96,13 +101,13 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(dEntity.isPlayer(event.getPlayer()) ? dEntity.getPlayerFrom(event.getPlayer()) : null, null);
+        return new BukkitScriptEntryData(player, null);
     }
 
     @Override
     public dObject getContext(String name) {
         if (name.equals("skill")) {
-            return new Element(skill);
+            return skill;
         }
         else if (name.equals("level")) {
             return new Element(level);
@@ -118,9 +123,10 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
         if (dEntity.isNPC(event.getPlayer())) {
             return;
         }
+        player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         level = event.getSkillLevel();
         cause = event.getXpGainReason().toString();
-        skill = event.getSkill().getName();
+        skill = new Element(event.getSkill().getName());
         cancelled = event.isCancelled();
         this.event = event;
         fire();
