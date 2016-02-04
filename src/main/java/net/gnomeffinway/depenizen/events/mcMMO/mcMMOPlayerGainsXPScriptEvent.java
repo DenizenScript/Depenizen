@@ -69,7 +69,7 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
             return false;
         }
 
-        if (!runInCheck(scriptContainer, s, CoreUtilities.toLowerCase(s), player.getLocation())) {
+        if (!runInCheck(scriptContainer, s, lower, player.getLocation())) {
             return false;
         }
 

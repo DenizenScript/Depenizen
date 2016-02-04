@@ -66,7 +66,7 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
             return false;
         }
 
-        if (!runInCheck(scriptContainer, s, CoreUtilities.toLowerCase(s), player.getLocation())) {
+        if (!runInCheck(scriptContainer, s, lower, player.getLocation())) {
             return false;
         }
 
