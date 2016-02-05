@@ -15,7 +15,7 @@ public class BattleNightSupport extends Support {
     public BattleNightSupport() {
         registerProperty(BNPlayerExtension.class, dPlayer.class);
         registerAdditionalTags("battle");
-        new BattleNightCommands().activate().as("BN").withOptions("see documentation", 1);
+        new BattleNightCommands().activate().as("BN").withOptions("See Documentation.", 1);
     }
 
     @Override

@@ -16,7 +16,7 @@ public class JobsSupport extends Support {
         registerProperty(JobPlayer.class, JobsJob.class);
         registerProperty(JobsPlayerExtension.class, dPlayer.class);
         registerAdditionalTags("jobs");
-        new JobsCommands().activate().as("jobs").withOptions("see documentation", 2);
+        new JobsCommands().activate().as("jobs").withOptions("See Documentation.", 2);
     }
 
     @Override

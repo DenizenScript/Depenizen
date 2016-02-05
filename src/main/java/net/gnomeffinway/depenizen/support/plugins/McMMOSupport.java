@@ -17,7 +17,7 @@ public class McMMOSupport extends Support {
         registerObjects(dParty.class);
         registerAdditionalTags("party");
         registerProperty(McMMOPlayerExtension.class, dPlayer.class);
-        new McMMOCommands().activate().as("MCMMO").withOptions("see documentation", 1);
+        new McMMOCommands().activate().as("MCMMO").withOptions("See Documentation.", 1);
         registerScriptEvents(new mcMMOPlayerLevelChangeScriptEvent());
         registerScriptEvents(new mcMMOPlayerLevelUpScriptEvent());
         registerScriptEvents(new mcMMOPlayerLevelDownScriptEvent());

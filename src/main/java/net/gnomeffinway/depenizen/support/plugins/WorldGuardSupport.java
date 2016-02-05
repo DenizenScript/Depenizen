@@ -18,7 +18,7 @@ public class WorldGuardSupport extends Support {
         registerProperty(WorldGuardLocationExtension.class, dLocation.class);
         registerProperty(WorldGuardCuboidExtension.class, dCuboid.class);
         registerProperty(WorldGuardWorldExtension.class, dWorld.class);
-        new RegionCommand().activate().as("REGION").withOptions("see documentation", 2);
+        new RegionCommand().activate().as("REGION").withOptions("See Documentation.", 2);
         registerAdditionalTags("region");
     }
 

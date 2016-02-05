@@ -5,6 +5,7 @@ import com.garbagemule.MobArena.framework.Arena;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.gnomeffinway.depenizen.commands.MobArena.MobArenaCommand;
 import net.gnomeffinway.depenizen.events.MobArena.MobArenaEndsScriptEvent;
 import net.gnomeffinway.depenizen.events.MobArena.MobArenaStartsScriptEvent;
 import net.gnomeffinway.depenizen.events.MobArena.MobArenaWaveChangesScriptEvent;
@@ -19,6 +20,7 @@ public class MobArenaSupport extends Support {
     public MobArenaSupport() {
         registerObjects(MobArenaArena.class);
         registerAdditionalTags("mobarena");
+        new MobArenaCommand().activate().withOptions("See Documentation.", 1);
         registerScriptEvents(new MobArenaStartsScriptEvent());
         registerScriptEvents(new MobArenaEndsScriptEvent());
         registerScriptEvents(new MobArenaWaveChangesScriptEvent());
