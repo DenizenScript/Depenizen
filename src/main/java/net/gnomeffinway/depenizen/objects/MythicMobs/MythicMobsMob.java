@@ -11,6 +11,8 @@ import net.elseland.xikage.MythicLib.Adapters.AbstractEntity;
 import net.elseland.xikage.MythicMobs.API.IMobsAPI;
 import net.elseland.xikage.MythicMobs.Mobs.ActiveMob;
 import net.elseland.xikage.MythicMobs.MythicMobs;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 
 import java.util.UUID;
 
@@ -55,6 +57,14 @@ public class MythicMobsMob implements dObject {
 
     public ActiveMob getMob() {
         return mob;
+    }
+
+    public LivingEntity getLivingEntity() {
+        return mob.getLivingEntity();
+    }
+
+    public Entity getEntity() {
+        return mob.getEntity().getBukkitEntity();
     }
 
     String prefix;
@@ -192,7 +202,7 @@ public class MythicMobsMob implements dObject {
         // @plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("entity")) {
-            return new dEntity(mob.getLivingEntity()).getAttribute(attribute.fulfill(1));
+            return new dEntity(getLivingEntity()).getAttribute(attribute.fulfill(1));
         }
 
         else if (attribute.startsWith("type")) {
