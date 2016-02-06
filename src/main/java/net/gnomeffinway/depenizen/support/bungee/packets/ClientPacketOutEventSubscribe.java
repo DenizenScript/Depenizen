@@ -1,7 +1,5 @@
 package net.gnomeffinway.depenizen.support.bungee.packets;
 
-import java.util.List;
-
 public class ClientPacketOutEventSubscribe extends Packet {
 
     public static enum Action {

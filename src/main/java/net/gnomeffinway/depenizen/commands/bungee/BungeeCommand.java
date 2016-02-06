@@ -12,7 +12,6 @@ import net.gnomeffinway.depenizen.objects.bungee.dServer;
 import net.gnomeffinway.depenizen.support.bungee.BungeeSupport;
 import net.gnomeffinway.depenizen.support.bungee.packets.ClientPacketOutScript;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

@@ -253,6 +253,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/NoCheatPlus.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>net.elseland.xikage</groupId>
+            <artifactId>MythicMobs</artifactId>
+            <version>2.2.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/MythicMobs-2.2.0.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
