@@ -26,19 +26,18 @@ public class MythicMobsMob implements dObject, Adjustable {
         if (string == null) {
             return null;
         }
-        string = string.replace("e@", "").replace("mythicmob@", "");
-        UUID uuid;
         try {
-            uuid = UUID.fromString(string);
+            string = string.replace("e@", "").replace("mythicmob@", "");
+            UUID uuid = UUID.fromString(string);
+            IMobsAPI api = MythicMobs.inst().getAPI().getMobAPI();
+            if (!api.isMythicMob(uuid)) {
+                return null;
+            }
+            return new MythicMobsMob(api.getMythicMobInstance(dEntity.getEntityForID(uuid)));
         }
         catch (Exception e) {
             return null;
         }
-        IMobsAPI api = MythicMobs.inst().getAPI().getMobAPI();
-        if (!api.isMythicMob(uuid)) {
-            return null;
-        }
-        return new MythicMobsMob(api.getMythicMobInstance(dEntity.getEntityForID(uuid)));
     }
 
     public static boolean matches(String string) {
@@ -66,7 +65,7 @@ public class MythicMobsMob implements dObject, Adjustable {
         return mob.getEntity().getBukkitEntity();
     }
 
-    String prefix;
+    private String prefix;
     ActiveMob mob;
 
     @Override

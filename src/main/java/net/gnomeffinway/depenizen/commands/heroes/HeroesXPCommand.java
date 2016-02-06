@@ -12,7 +12,6 @@ import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.gnomeffinway.depenizen.objects.heroes.HeroesClass;
-import net.gnomeffinway.depenizen.objects.heroes.HeroesHero;
 import net.gnomeffinway.depenizen.support.Support;
 import net.gnomeffinway.depenizen.support.plugins.HeroesSupport;
 
