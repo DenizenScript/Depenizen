@@ -1,13 +1,12 @@
 package net.gnomeffinway.depenizen.objects.MythicMobs;
 
 import net.aufdemrand.denizen.objects.dEntity;
-import net.aufdemrand.denizencore.objects.Element;
-import net.aufdemrand.denizencore.objects.Fetchable;
-import net.aufdemrand.denizencore.objects.dObject;
+import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.elseland.xikage.MythicLib.Adapters.AbstractEntity;
+import net.elseland.xikage.MythicLib.Adapters.Bukkit.BukkitEntity;
 import net.elseland.xikage.MythicMobs.API.IMobsAPI;
 import net.elseland.xikage.MythicMobs.Mobs.ActiveMob;
 import net.elseland.xikage.MythicMobs.MythicMobs;
@@ -16,7 +15,7 @@ import org.bukkit.entity.LivingEntity;
 
 import java.util.UUID;
 
-public class MythicMobsMob implements dObject {
+public class MythicMobsMob implements dObject, Adjustable {
 
     public static MythicMobsMob valueOf(String uuid) {
         return valueOf(uuid, null);
@@ -30,7 +29,7 @@ public class MythicMobsMob implements dObject {
         string = string.replace("e@", "").replace("mythicmob@", "");
         UUID uuid;
         try {
-             uuid = UUID.fromString(string);
+            uuid = UUID.fromString(string);
         }
         catch (Exception e) {
             return null;
@@ -205,10 +204,85 @@ public class MythicMobsMob implements dObject {
             return new dEntity(getLivingEntity()).getAttribute(attribute.fulfill(1));
         }
 
+        // <--[tag]
+        // @attribute <mythicmob@mythicmob.global_cooldown>
+        // @returns Element(Number)
+        // @description
+        // Returns the MythicMob's global cooldown.
+        // @plugin Depenizen, MythicMobs
+        // -->
+        else if (attribute.startsWith("global_cooldown")) {
+            return new Duration(mob.getGlobalCooldown()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <mythicmob@mythicmob.type>
+        // @returns Element
+        // @description
+        // Always returns 'Mythic Mob' for MythicMob objects. All objects fetchable by the Object Fetcher will return the
+        // type of object that is fulfilling this attribute.
+        // @plugin Depenizen, MythicMobs
+        // -->
         else if (attribute.startsWith("type")) {
             return new Element("Mythic Mob").getAttribute(attribute.fulfill(1));
         }
 
         return new Element(identify()).getAttribute(attribute);
     }
+
+    @Override
+    public void adjust(Mechanism mechanism) {
+        Element value = mechanism.getValue();
+
+        // <--[mechanism]
+        // @object MythicMob
+        // @name global_cooldown
+        // @input Element(Number)
+        // @description
+        // Sets global cooldown of the MythicMob.
+        // @tags
+        // <mythicmob@mythicmob.global_cooldown>
+        // -->
+        if (mechanism.matches("global_cooldown") && mechanism.requireInteger()) {
+            mob.setGlobalCooldown(value.asInt());
+        }
+
+        // <--[mechanism]
+        // @object MythicMob
+        // @name reset_target
+        // @input None
+        // @description
+        // Reset the MythicMob's target.
+        // @tags
+        // <mythicmob@mythicmob.target>
+        // -->
+        else if (mechanism.matches("reset_target")) {
+            mob.resetTarget();
+        }
+
+        // <--[mechanism]
+        // @object MythicMob
+        // @name target
+        // @input dEntity
+        // @description
+        // Sets MythicMob's target.
+        // @tags
+        // <mythicmob@mythicmob.target>
+        // -->
+        else if (mechanism.matches("target") && mechanism.requireObject(dEntity.class)) {
+            dEntity mTarget = dEntity.valueOf(value.asString());
+            if (mTarget == null || !mTarget.isValid() || mTarget.getLivingEntity() == null) {
+                return;
+            }
+            BukkitEntity target = new BukkitEntity(mTarget.getBukkitEntity());
+            mob.setTarget(target);
+        }
+
+    }
+
+    @Override
+    public void applyProperty(Mechanism mechanism) {
+        dB.echoError("Cannot apply properties to a MythicMob!");
+    }
+
 }
