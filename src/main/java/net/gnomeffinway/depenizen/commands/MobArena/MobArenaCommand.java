@@ -21,7 +21,7 @@ import java.util.List;
 // @Required 1
 // @Stable untested
 // @Short Make a player join, remove a player from or make a player spectate a MobArena.
-// @Author Morphan1
+// @Author Fortifier42
 
 // @Description
 // This command allows you to make a player join an arena, make them leave an arena or make them spectate an arena.

@@ -1,23 +1,40 @@
 package net.gnomeffinway.depenizen.events.ShopKeepers;
 
-import com.nisovin.shopkeepers.Shopkeeper;
 import com.nisovin.shopkeepers.events.ShopkeeperTradeEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
+import net.gnomeffinway.depenizen.objects.ShopKeepers.ShopKeeper;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+
+// <--[event]
+// @Events
+// on shopkeeper trade
+//
+// @Regex ^on shopkeeper trade$
+//
+// @Cancellable true
+//
+// @Triggers when a trade with a shopkeeper is completed.
+//
+// @Context
+// <context.recipe> Returns the recipe for this trade.
+// <context.shopkeeper> Returns the ShopKeeper that the trade occured with.
+//
+// @Plugin Depenizen, ShopKeepers
+//
+// -->
 
 public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Listener {
 
@@ -27,7 +44,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
 
     ShopKeeperTradeScriptEvent instance;
     ShopkeeperTradeEvent event;
-    Shopkeeper keeper;
+    ShopKeeper keeper;
     dPlayer player;
     dList recipe;
 
@@ -71,8 +88,8 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
         if (name.startsWith("recipe")) {
             return recipe;
         }
-        else if (name.equals("keeper")) {
-            return new Element("");
+        else if (name.equals("shopkeeper")) {
+            return keeper;
         }
         return super.getContext(name);
     }
@@ -80,7 +97,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     @EventHandler
     public void onShopKeeperTrade(ShopkeeperTradeEvent event) {
         player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
-        keeper = event.getShopkeeper();
+        keeper = new ShopKeeper(event.getShopkeeper());
         recipe = new dList();
         for (ItemStack item : event.getTradeRecipe()) {
             if (item != null) {

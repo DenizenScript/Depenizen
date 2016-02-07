@@ -17,12 +17,9 @@ import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// on player jailed
-// on player unjailed
-// on player un-jailed
-// on player jail status changes
+// on mythicmob dies
+// on mythicmob death
 //
-// @Regex ^on player [^\s]+$
 // @Regex ^on mythicmob (dies|death)$
 //
 // @Cancellable false

@@ -81,7 +81,7 @@ public class MythicMobsMob implements dObject, Adjustable {
 
     @Override
     public String debug() {
-        return null;
+        return prefix + "='<A>" + identify() + "<G>' ";
     }
 
     @Override
@@ -96,7 +96,7 @@ public class MythicMobsMob implements dObject, Adjustable {
 
     @Override
     public String identify() {
-        return prefix + "='<A>" + identify() + "<G>' ";
+        return "mythicmob@" + mob.getUUID();
     }
 
     @Override
@@ -126,7 +126,6 @@ public class MythicMobsMob implements dObject, Adjustable {
         // @returns Element(Number)
         // @description
         // Returns the number of players the MythicMob has killed.
-        // NOTE: Untested and cannot guarantee accuracy of results.
         // @plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("players_killed")) {
@@ -276,6 +275,8 @@ public class MythicMobsMob implements dObject, Adjustable {
             BukkitEntity target = new BukkitEntity(mTarget.getBukkitEntity());
             mob.setTarget(target);
         }
+
+        mechanism.reportInvalid();
 
     }
 
