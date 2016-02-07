@@ -2,6 +2,8 @@ package net.gnomeffinway.depenizen.objects.MythicMobs;
 
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizencore.objects.*;
+import net.aufdemrand.denizencore.objects.properties.Property;
+import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
@@ -276,7 +278,17 @@ public class MythicMobsMob implements dObject, Adjustable {
             mob.setTarget(target);
         }
 
-        mechanism.reportInvalid();
+        // Iterate through this object's properties' mechanisms
+        for (Property property : PropertyParser.getProperties(this)) {
+            property.adjust(mechanism);
+            if (mechanism.fulfilled()) {
+                break;
+            }
+        }
+
+        if (!mechanism.fulfilled()) {
+            mechanism.reportInvalid();
+        }
 
     }
 
