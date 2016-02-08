@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.extensions.MythicMobs;
+package net.gnomeffinway.depenizen.extensions.mythicmobs;
 
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizencore.objects.Element;
@@ -7,7 +7,7 @@ import net.aufdemrand.denizencore.tags.Attribute;
 import net.elseland.xikage.MythicMobs.API.IMobsAPI;
 import net.elseland.xikage.MythicMobs.MythicMobs;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
-import net.gnomeffinway.depenizen.objects.MythicMobs.MythicMobsMob;
+import net.gnomeffinway.depenizen.objects.mythicmobs.MythicMobsMob;
 
 public class MythicMobsEntityExtension extends dObjectExtension {
 

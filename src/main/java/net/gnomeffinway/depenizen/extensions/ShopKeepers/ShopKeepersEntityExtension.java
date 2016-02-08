@@ -1,11 +1,11 @@
-package net.gnomeffinway.depenizen.extensions.ShopKeepers;
+package net.gnomeffinway.depenizen.extensions.shopkeepers;
 
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.dObjectExtension;
-import net.gnomeffinway.depenizen.objects.ShopKeepers.ShopKeeper;
+import net.gnomeffinway.depenizen.objects.shopkeepers.ShopKeeper;
 
 public class ShopKeepersEntityExtension extends dObjectExtension {
 

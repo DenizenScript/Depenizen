@@ -10,7 +10,7 @@ import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.elseland.xikage.MythicMobs.API.Bukkit.Events.MythicMobDeathEvent;
-import net.gnomeffinway.depenizen.objects.MythicMobs.MythicMobsMob;
+import net.gnomeffinway.depenizen.objects.mythicmobs.MythicMobsMob;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

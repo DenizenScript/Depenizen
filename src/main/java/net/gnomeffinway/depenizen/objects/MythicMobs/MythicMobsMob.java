@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.objects.MythicMobs;
+package net.gnomeffinway.depenizen.objects.mythicmobs;
 
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizencore.objects.*;

@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.extensions.NoCheatPlus;
+package net.gnomeffinway.depenizen.extensions.nocheatplus;
 
 import fr.neatmonster.nocheatplus.checks.ViolationHistory;
 import net.aufdemrand.denizen.objects.dPlayer;

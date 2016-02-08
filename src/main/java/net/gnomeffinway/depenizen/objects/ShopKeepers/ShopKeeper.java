@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.objects.ShopKeepers;
+package net.gnomeffinway.depenizen.objects.shopkeepers;
 
 import com.nisovin.shopkeepers.Shopkeeper;
 import com.nisovin.shopkeepers.ShopkeepersPlugin;
