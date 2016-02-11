@@ -35,11 +35,12 @@ public class WorldGuardWorldExtension extends dObjectExtension {
 
     private WorldGuardWorldExtension(dWorld world) {
         this.world = world.getWorld();
+        this.manager = ((WorldGuardPlugin) Support.getPlugin(WorldGuardSupport.class))
+                .getRegionManager(this.world);
     }
 
     World world;
-    RegionManager manager = ((WorldGuardPlugin) Support.getPlugin(WorldGuardSupport.class))
-            .getRegionManager(world);
+    RegionManager manager;
 
     @Override
     public String getAttribute(Attribute attribute) {
