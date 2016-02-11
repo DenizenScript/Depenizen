@@ -52,10 +52,10 @@
             <id>prism-repo</id>
             <url>http://dhmc.us:8081/nexus/content/repositories/public/</url>
         </repository>
-        <repository>
-            <id>worldcretornica-repo</id>
-            <url>http://ci.worldcretornica.com:8080/plugin/repository/everything/</url>
-        </repository>
+        <!--<repository>-->
+        <!--<id>worldcretornica-repo</id>-->
+        <!--<url>http://ci.worldcretornica.com:8080/plugin/repository/everything/</url>-->
+        <!--</repository>-->
     </repositories>
 
     <dependencies>
@@ -223,7 +223,8 @@
             <groupId>com.worldcretornica</groupId>
             <artifactId>PlotMe-Core</artifactId>
             <version>0.17-SNAPSHOT</version>
-            <scope>provided</scope>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/PlotMe-Core.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.sacredlabyrinth.phaed</groupId>
