@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.events.MythicMobs;
+package net.gnomeffinway.depenizen.events.mythicmobs;
 
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;

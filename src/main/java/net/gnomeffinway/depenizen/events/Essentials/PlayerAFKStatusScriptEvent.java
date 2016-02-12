@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.events.Essentials;
+package net.gnomeffinway.depenizen.events.essentials;
 
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;

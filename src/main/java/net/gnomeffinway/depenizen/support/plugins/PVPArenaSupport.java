@@ -3,7 +3,7 @@ package net.gnomeffinway.depenizen.support.plugins;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
-import net.gnomeffinway.depenizen.events.PVPArena.PVPArenaStartsScriptEvent;
+import net.gnomeffinway.depenizen.events.pvparena.PVPArenaStartsScriptEvent;
 import net.gnomeffinway.depenizen.extensions.pvparena.PVPArenaPlayerExtension;
 import net.gnomeffinway.depenizen.objects.pvparena.PVPArenaArena;
 import net.gnomeffinway.depenizen.support.Support;

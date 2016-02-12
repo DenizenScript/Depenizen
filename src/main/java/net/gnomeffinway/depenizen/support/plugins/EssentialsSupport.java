@@ -2,10 +2,10 @@ package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.gnomeffinway.depenizen.events.Essentials.PlayerAFKStatusScriptEvent;
-import net.gnomeffinway.depenizen.events.Essentials.PlayerGodModeStatusScriptEvent;
-import net.gnomeffinway.depenizen.events.Essentials.PlayerJailStatusScriptEvent;
-import net.gnomeffinway.depenizen.events.Essentials.PlayerMuteStatusScriptEvent;
+import net.gnomeffinway.depenizen.events.essentials.PlayerAFKStatusScriptEvent;
+import net.gnomeffinway.depenizen.events.essentials.PlayerGodModeStatusScriptEvent;
+import net.gnomeffinway.depenizen.events.essentials.PlayerJailStatusScriptEvent;
+import net.gnomeffinway.depenizen.events.essentials.PlayerMuteStatusScriptEvent;
 import net.gnomeffinway.depenizen.extensions.essentials.EssentialsItemExtension;
 import net.gnomeffinway.depenizen.extensions.essentials.EssentialsPlayerExtension;
 import net.gnomeffinway.depenizen.support.Support;

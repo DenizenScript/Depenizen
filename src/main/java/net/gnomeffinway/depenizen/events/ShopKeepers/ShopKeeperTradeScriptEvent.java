@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.events.ShopKeepers;
+package net.gnomeffinway.depenizen.events.shopkeepers;
 
 import com.nisovin.shopkeepers.events.ShopkeeperTradeEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;

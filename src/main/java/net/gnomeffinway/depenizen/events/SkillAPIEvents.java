@@ -9,6 +9,7 @@ import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.events.OldEventManager;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
+import net.gnomeffinway.depenizen.objects.skillapi.SkillAPIClass;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -26,6 +27,7 @@ public class SkillAPIEvents implements Listener {
     // @Context
     // <context.level> returns the level the player went up to.
     // <context.gained> returns how many levels the player gained.
+    // <context.class> returns the SkillAPIClass the player is leveling up in.
     // @Determine
     // NONE
     // @Plugin Depenizen, SkillAPI
@@ -35,6 +37,7 @@ public class SkillAPIEvents implements Listener {
         Map<String, dObject> context = new HashMap<String, dObject>();
         context.put("level", new Element(event.getLevel()));
         context.put("gained", new Element(event.getAmount()));
+        context.put("class", new SkillAPIClass(event.getPlayerClass().getData()));
 
         OldEventManager.doEvents(Arrays.asList("player levels up in skillapi"),
                 // NOTE: This code previously handled offline players, but SkillAPI no longer does?

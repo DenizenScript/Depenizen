@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.events.ASkyBlock;
+package net.gnomeffinway.depenizen.events.askyblock;
 
 import com.wasteofplastic.askyblock.events.IslandExitEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;

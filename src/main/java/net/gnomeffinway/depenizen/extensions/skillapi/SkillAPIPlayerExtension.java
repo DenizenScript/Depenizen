@@ -103,12 +103,18 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
 
             if (attribute.startsWith("class_") && attribute.hasContext(1)) {
 
-                PlayerClass playerClass;
+                PlayerClass playerClass = null;
                 SkillAPIClass skillAPIClass = SkillAPIClass.valueOf(attribute.getContext(1));
                 if (skillAPIClass != null) {
-                    playerClass = data.getClass(skillAPIClass.getRPGClass().getName());
+                    String name = skillAPIClass.getRPGClass().getName();
+                    for (PlayerClass plClass : data.getClasses()) {
+                        if (plClass.getData().getName().equals(name)) {
+                            playerClass = plClass;
+                            break;
+                        }
+                    }
                 }
-                else {
+                if (playerClass == null) {
                     return null;
                 }
 

@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.events.PVPArena;
+package net.gnomeffinway.depenizen.events.pvparena;
 
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;

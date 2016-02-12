@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.events.Towny;
+package net.gnomeffinway.depenizen.events.towny;
 
 import com.palmergames.bukkit.towny.ChunkNotification;
 import com.palmergames.bukkit.towny.event.PlayerChangePlotEvent;

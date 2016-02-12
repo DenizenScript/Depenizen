@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.events.mcMMO;
+package net.gnomeffinway.depenizen.events.mcmmo;
 
 import com.gmail.nossr50.events.experience.McMMOPlayerLevelDownEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;

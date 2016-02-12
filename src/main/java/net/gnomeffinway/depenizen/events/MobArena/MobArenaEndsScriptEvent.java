@@ -1,4 +1,4 @@
-package net.gnomeffinway.depenizen.events.MobArena;
+package net.gnomeffinway.depenizen.events.mobarena;
 
 import com.garbagemule.MobArena.events.ArenaEndEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
