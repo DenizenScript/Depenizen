@@ -51,7 +51,13 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
                 || attribute.startsWith("griefprotection")) {
             attribute = attribute.fulfill(1);
 
-            // TODO: Meta
+            // <--[tag]
+            // @attribute <p@player.griefprotection.list_claims>
+            // @returns dList(GriefPreventionClaim)
+            // @description
+            // Returns a list of all claims the player has.
+            // @plugin Depenizen, GriefPrevention
+            // -->
             if (attribute.startsWith("list_claims")) {
                 dList claims = new dList();
                 for (Claim claim : dataStore.getPlayerData(player.getOfflinePlayer().getUniqueId()).getClaims()) {
@@ -60,12 +66,21 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
                 return claims.getAttribute(attribute.fulfill(1));
             }
 
-            // TODO: Meta
+            // <--[tag]
+            // @attribute <p@player.griefprotection.claims>
+            // @returns Element(Number)
+            // @description
+            // Returns the number of claims the player has in GriefPrevention.
+            // @plugin Depenizen, GriefPrevention
+            // -->
             else if (attribute.startsWith("claims")) {
                 return new Element(dataStore.getPlayerData(player.getOfflinePlayer().getUniqueId())
                         .getClaims().size()).getAttribute(attribute.fulfill(1));
             }
 
+            else {
+                return null;
+            }
         }
         return null;
     }

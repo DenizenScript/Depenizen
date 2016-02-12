@@ -11,7 +11,6 @@ import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
-import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 
 public class GriefPreventionClaim implements dObject, Adjustable {
@@ -87,22 +86,55 @@ public class GriefPreventionClaim implements dObject, Adjustable {
             return null;
         }
 
-        // TODO: Meta
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.id>
+        // @returns Element(Number)
+        // @description
+        // Returns the GriefPreventionClaim's ID.
+        // @plugin Depenizen, GriefPrevention
+        // -->
         if (attribute.startsWith("id")) {
             return new Element(claim.getID()).getAttribute(attribute.fulfill(1));
         }
 
-        // TODO: Meta
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.owner>
+        // @returns dPlayer/Element
+        // @description
+        // Returns the GriefPreventionClaim's owner. Can be "Admin" or a dPlayer.
+        // @mechanism GriefPreventionClaim.owner
+        // @plugin Depenizen, GriefPrevention
+        // -->
         else if (attribute.startsWith("owner")) {
-            return new dPlayer(dPlayer.getAllPlayers().get(CoreUtilities.toLowerCase(claim.getOwnerName())))
+            if (claim.isAdminClaim()) {
+                return new Element("Admin").getAttribute(attribute.fulfill(1));
+            }
+            return new dPlayer(claim.ownerID)
                     .getAttribute(attribute.fulfill(1));
         }
 
-        // TODO: Meta
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.cuboid>
+        // @returns dCuboid
+        // @description
+        // Returns the GriefPreventionClaim's cuboid area.
+        // @plugin Depenizen, GriefPrevention
+        // -->
         else if (attribute.startsWith("cuboid")) {
             dCuboid cuboid = new dCuboid();
             cuboid.addPair(new dLocation(claim.getLesserBoundaryCorner()), new dLocation(claim.getGreaterBoundaryCorner()));
             return cuboid.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.is_adminclaim>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether GriefPreventionClaim is an Admin Claim.
+        // @plugin Depenizen, GriefPrevention
+        // -->
+        else if (attribute.startsWith("is_adminclaim") || attribute.startsWith("is_admin_claim")) {
+            return new Element(claim.isAdminClaim()).getAttribute(attribute.fulfill(1));
         }
 
         return null;

@@ -50,7 +50,13 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
                 || attribute.startsWith("griefprotection")) {
             attribute = attribute.fulfill(1);
 
-            // TODO: Meta
+            // <--[tag]
+            // @attribute <l@location.griefprotection.has_claim>
+            // @returns Element(Boolean)
+            // @description
+            // Returns whether there is a GriefPreventionClaim at this location.
+            // @plugin Depenizen, GriefPrevention
+            // -->
             if (attribute.startsWith("has_claim")) {
                 Element ignoreHeight = Element.TRUE;
                 if (attribute.hasContext(1)) {
@@ -62,7 +68,13 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
                 return new Element(dataStore.getClaimAt(location, ignoreHeight.asBoolean(), null) != null).getAttribute(attribute.fulfill(1));
             }
 
-            // TODO: Meta
+            // <--[tag]
+            // @attribute <l@location.griefprotection.get_claim>
+            // @returns GriefPreventionClaim
+            // @description
+            // Returns the GriefPreventionClaim at this location.
+            // @plugin Depenizen, GriefPrevention
+            // -->
             else if (attribute.startsWith("get_claim")) {
                 Claim claim = dataStore.getClaimAt(location, false, null);
                 if (claim == null) {
