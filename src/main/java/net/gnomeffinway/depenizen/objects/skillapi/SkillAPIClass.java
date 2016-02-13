@@ -76,7 +76,7 @@ public class SkillAPIClass implements dObject {
 
     @Override
     public String debug() {
-        return (prefix + "='<A>" + identify() + "<G>' ");
+        return prefix + "='<A>" + identify() + "<G>' ";
     }
 
     @Override
