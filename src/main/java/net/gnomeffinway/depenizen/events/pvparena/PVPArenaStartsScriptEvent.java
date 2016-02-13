@@ -35,7 +35,7 @@ import org.bukkit.event.Listener;
 
 public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public PVPArenaStartsScriptEvent instance;
+    public static PVPArenaStartsScriptEvent instance;
     public PAStartEvent event;
     public dList fighters;
     public PVPArenaArena arena;

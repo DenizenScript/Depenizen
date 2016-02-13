@@ -35,7 +35,7 @@ import org.bukkit.event.Listener;
 
 public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public PlayerGodModeStatusScriptEvent instance;
+    public static PlayerGodModeStatusScriptEvent instance;
     public GodStatusChangeEvent event;
     public Element god;
 

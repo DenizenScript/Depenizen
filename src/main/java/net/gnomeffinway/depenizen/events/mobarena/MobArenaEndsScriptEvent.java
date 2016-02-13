@@ -39,7 +39,7 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
         instance = this;
     }
 
-    public MobArenaEndsScriptEvent instance;
+    public static MobArenaEndsScriptEvent instance;
     public ArenaEndEvent event;
     public MobArenaArena arena;
     public Element wave;

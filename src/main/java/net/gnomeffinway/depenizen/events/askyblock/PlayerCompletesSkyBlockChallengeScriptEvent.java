@@ -39,7 +39,7 @@ import org.bukkit.event.Listener;
 
 public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public PlayerCompletesSkyBlockChallengeScriptEvent instance;
+    public static PlayerCompletesSkyBlockChallengeScriptEvent instance;
     public ChallengeCompleteEvent event;
     public Element challenge;
     public Element xp_reward;

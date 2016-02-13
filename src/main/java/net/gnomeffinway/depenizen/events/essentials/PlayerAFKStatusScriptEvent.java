@@ -35,7 +35,7 @@ import org.bukkit.event.Listener;
 
 public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public PlayerAFKStatusScriptEvent instance;
+    public static PlayerAFKStatusScriptEvent instance;
     public AfkStatusChangeEvent event;
     public Element afk;
 

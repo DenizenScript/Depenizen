@@ -36,7 +36,7 @@ import org.bukkit.event.Listener;
 
 public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public PlayerJailStatusScriptEvent instance;
+    public static PlayerJailStatusScriptEvent instance;
     public JailStatusChangeEvent event;
     public Element jailed;
 

@@ -54,15 +54,15 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         instance = this;
     }
 
-    MythicMobsDeathEvent instance;
-    MythicMobDeathEvent event;
-    MythicMobsMob mob;
-    dEntity entity;
-    dEntity killer;
-    Element level;
-    dList oldDrops;
-    Element experience;
-    List<ItemStack> newDrops;
+    public static MythicMobsDeathEvent instance;
+    public MythicMobDeathEvent event;
+    public MythicMobsMob mob;
+    public dEntity entity;
+    public dEntity killer;
+    public Element level;
+    public dList oldDrops;
+    public Element experience;
+    public List<ItemStack> newDrops;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {

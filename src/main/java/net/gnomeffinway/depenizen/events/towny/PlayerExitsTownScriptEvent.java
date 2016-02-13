@@ -40,7 +40,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
         instance = this;
     }
 
-    public PlayerExitsTownScriptEvent instance;
+    public static PlayerExitsTownScriptEvent instance;
     public PlayerChangePlotEvent event;
     public dTown town;
 
