@@ -3,6 +3,7 @@ package net.gnomeffinway.depenizen.objects.griefprevention;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
+import net.aufdemrand.denizen.objects.dChunk;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -12,6 +13,7 @@ import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
+import org.bukkit.Chunk;
 
 public class GriefPreventionClaim implements dObject, Adjustable {
 
@@ -101,7 +103,8 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // @attribute <gpclaim@gpclaim.owner>
         // @returns dPlayer/Element
         // @description
-        // Returns the GriefPreventionClaim's owner. Can be "Admin" or a dPlayer.
+        // Returns the GriefPreventionClaim's owner.
+        // Can be "Admin" or a dPlayer.
         // @mechanism GriefPreventionClaim.owner
         // @plugin Depenizen, GriefPrevention
         // -->
@@ -137,7 +140,22 @@ public class GriefPreventionClaim implements dObject, Adjustable {
             return new Element(claim.isAdminClaim()).getAttribute(attribute.fulfill(1));
         }
 
-        return null;
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.chunks>
+        // @returns dList(dChunk)
+        // @description
+        // Returns a list of all chunks in the GriefPreventionClaim.
+        // @plugin Depenizen, GriefPrevention
+        // -->
+        else if (attribute.startsWith("chunks")) {
+            dList chunks = new dList();
+            for (Chunk chunk : claim.getChunks()) {
+                chunks.add(new dChunk(chunk).identify());
+            }
+            return chunks.getAttribute(attribute.fulfill(1));
+        }
+
+        return new Element(identify()).getAttribute(attribute);
     }
 
     @Override
