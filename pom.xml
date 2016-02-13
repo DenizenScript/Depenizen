@@ -284,6 +284,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/GriefPrevention.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>me.blackvein</groupId>
+            <artifactId>quests</artifactId>
+            <version>2.5.5</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/Quests-2.5.5.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
