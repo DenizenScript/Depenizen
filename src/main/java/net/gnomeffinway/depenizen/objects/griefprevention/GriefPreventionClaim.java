@@ -19,6 +19,10 @@ public class GriefPreventionClaim implements dObject, Adjustable {
 
     static DataStore dataStore = GriefPrevention.instance.dataStore;
 
+    public static boolean matches(String id) {
+        return valueOf(id) != null;
+    }
+
     public static GriefPreventionClaim valueOf(String id) {
         return valueOf(id, null);
     }
@@ -26,6 +30,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
     @Fetchable("gpclaim")
     public static GriefPreventionClaim valueOf(String id, TagContext context) {
         long claimID;
+        id = id.replace("gpclaim@", "");
         try {
             claimID = Long.valueOf(id);
         }
