@@ -44,18 +44,6 @@
             <id>sk89q-repo</id>
             <url>http://maven.sk89q.com/artifactory/repo/</url>
         </repository>
-        <repository>
-            <id>ess-repo</id>
-            <url>http://repo.ess3.net/content/groups/essentials</url>
-        </repository>
-        <repository>
-            <id>prism-repo</id>
-            <url>http://dhmc.us:8081/nexus/content/repositories/public/</url>
-        </repository>
-        <!--<repository>-->
-        <!--<id>worldcretornica-repo</id>-->
-        <!--<url>http://ci.worldcretornica.com:8080/plugin/repository/everything/</url>-->
-        <!--</repository>-->
     </repositories>
 
     <dependencies>
@@ -197,8 +185,8 @@
             <groupId>net.ess3</groupId>
             <artifactId>Essentials</artifactId>
             <version>2.14-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/Essentials-2.x-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>regalowl.hyperconomy</groupId>
@@ -218,8 +206,8 @@
             <groupId>me.botsko</groupId>
             <artifactId>prism</artifactId>
             <version>2.0.4</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/prism-2.0.4.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.khorn</groupId>
