@@ -48,8 +48,7 @@ public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implement
     }
 
     public static mcMMOPlayerLevelDownScriptEvent instance;
-
-    public static McMMOPlayerLevelDownEvent event;
+    public McMMOPlayerLevelDownEvent event;
     public dPlayer player;
     public Element skill;
     public int new_level;

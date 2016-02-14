@@ -42,11 +42,11 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
         instance = this;
     }
 
-    ShopKeeperTradeScriptEvent instance;
-    ShopkeeperTradeEvent event;
-    ShopKeeper keeper;
-    dPlayer player;
-    dList recipe;
+    public static ShopKeeperTradeScriptEvent instance;
+    public ShopkeeperTradeEvent event;
+    public ShopKeeper keeper;
+    public dPlayer player;
+    public dList recipe;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {

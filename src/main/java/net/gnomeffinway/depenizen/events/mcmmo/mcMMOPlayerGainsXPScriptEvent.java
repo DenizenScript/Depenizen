@@ -45,8 +45,7 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     }
 
     public static mcMMOPlayerGainsXPScriptEvent instance;
-
-    public static McMMOPlayerXpGainEvent event;
+    public McMMOPlayerXpGainEvent event;
     public dPlayer player;
     public Element skill;
     public Element xp;

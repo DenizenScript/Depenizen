@@ -36,7 +36,7 @@ import org.bukkit.event.Listener;
 
 public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public PlayerMuteStatusScriptEvent instance;
+    public static PlayerMuteStatusScriptEvent instance;
     public MuteStatusChangeEvent event;
     public Element muted;
 

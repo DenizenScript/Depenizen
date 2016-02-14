@@ -36,7 +36,7 @@ import org.bukkit.event.Listener;
 
 public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public SkyBlockCreatedScriptEvent instance;
+    public static SkyBlockCreatedScriptEvent instance;
     public IslandNewEvent event;
     public dLocation location;
     public Element schematic;

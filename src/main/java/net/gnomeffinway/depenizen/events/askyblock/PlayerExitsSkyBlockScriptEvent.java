@@ -35,7 +35,7 @@ import org.bukkit.event.Listener;
 
 public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public PlayerExitsSkyBlockScriptEvent instance;
+    public static PlayerExitsSkyBlockScriptEvent instance;
     public IslandExitEvent event;
     public dLocation location;
     public dLocation island_location;

@@ -37,7 +37,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
         instance = this;
     }
 
-    public MobArenaStartsScriptEvent instance;
+    public static MobArenaStartsScriptEvent instance;
     public ArenaStartEvent event;
     public MobArenaArena arena;
 

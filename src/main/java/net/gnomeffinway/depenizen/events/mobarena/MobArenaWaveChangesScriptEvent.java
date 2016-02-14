@@ -39,7 +39,7 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
         instance = this;
     }
 
-    public MobArenaWaveChangesScriptEvent instance;
+    public static MobArenaWaveChangesScriptEvent instance;
     public NewWaveEvent event;
     public MobArenaArena arena;
     public Element wave;

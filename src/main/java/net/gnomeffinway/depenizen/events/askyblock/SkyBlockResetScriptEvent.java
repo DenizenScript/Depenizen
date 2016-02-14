@@ -34,7 +34,7 @@ import org.bukkit.event.Listener;
 
 public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public SkyBlockResetScriptEvent instance;
+    public static SkyBlockResetScriptEvent instance;
     public IslandResetEvent event;
     public dLocation location;
     public dPlayer owner;
