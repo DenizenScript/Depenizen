@@ -13,6 +13,7 @@ Depenizen
 - Dynmap (https://www.spigotmc.org/resources/dynmap.274/)
 - Essentials (https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/)
 - Factions (https://www.spigotmc.org/resources/factions.1900/)
+- GriefPrevention (https://www.spigotmc.org/resources/griefprevention.1884/)
 - Heroes (https://www.spigotmc.org/resources/heroes.305/)
 - HyperConomy (http://dev.bukkit.org/bukkit-plugins/hyperconomy/)
 - Jobs Reborn (https://www.spigotmc.org/resources/jobs-reborn.4216/)
