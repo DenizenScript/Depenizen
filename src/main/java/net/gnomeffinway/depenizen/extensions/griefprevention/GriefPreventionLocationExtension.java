@@ -45,13 +45,13 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
             return null;
         }
 
-        if (attribute.startsWith("grief_protection")
+        if (attribute.startsWith("grief_prevention")
                 || attribute.startsWith("gp")
-                || attribute.startsWith("griefprotection")) {
+                || attribute.startsWith("griefprevention")) {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <l@location.griefprotection.has_claim>
+            // @attribute <l@location.griefprevention.has_claim>
             // @returns Element(Boolean)
             // @description
             // Returns whether there is a GriefPreventionClaim at this location.
@@ -69,7 +69,7 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
             }
 
             // <--[tag]
-            // @attribute <l@location.griefprotection.get_claim>
+            // @attribute <l@location.griefprevention.get_claim>
             // @returns GriefPreventionClaim
             // @description
             // Returns the GriefPreventionClaim at this location.

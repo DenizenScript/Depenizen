@@ -46,13 +46,13 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
             return null;
         }
 
-        if (attribute.startsWith("grief_protection")
+        if (attribute.startsWith("grief_prevention")
                 || attribute.startsWith("gp")
-                || attribute.startsWith("griefprotection")) {
+                || attribute.startsWith("griefprevention")) {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.griefprotection.list_claims>
+            // @attribute <p@player.griefprevention.list_claims>
             // @returns dList(GriefPreventionClaim)
             // @description
             // Returns a list of all claims the player has.
@@ -67,7 +67,7 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
             }
 
             // <--[tag]
-            // @attribute <p@player.griefprotection.claims>
+            // @attribute <p@player.griefprevention.claims>
             // @returns Element(Number)
             // @description
             // Returns the number of claims the player has in GriefPrevention.
