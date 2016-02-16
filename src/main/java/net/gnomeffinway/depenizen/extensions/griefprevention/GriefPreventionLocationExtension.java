@@ -69,13 +69,13 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
             }
 
             // <--[tag]
-            // @attribute <l@location.griefprevention.get_claim>
+            // @attribute <l@location.griefprevention.claim>
             // @returns GriefPreventionClaim
             // @description
             // Returns the GriefPreventionClaim at this location.
             // @plugin Depenizen, GriefPrevention
             // -->
-            else if (attribute.startsWith("get_claim")) {
+            else if (attribute.startsWith("claim")) {
                 Claim claim = dataStore.getClaimAt(location, false, null);
                 if (claim == null) {
                     return null;
