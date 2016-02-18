@@ -160,6 +160,21 @@ public class GriefPreventionClaim implements dObject, Adjustable {
             return chunks.getAttribute(attribute.fulfill(1));
         }
 
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.can_siege[<player>]>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the GriefPreventionClaim can siege the player.
+        // @plugin Depenizen, GriefPrevention
+        // -->
+        else if (attribute.startsWith("can_seige") && attribute.hasContext(1)) {
+            dPlayer defender = dPlayer.valueOf(attribute.getContext(1));
+            if (defender == null) {
+                return null;
+            }
+            return new Element(claim.canSiege(defender.getPlayerEntity())).getAttribute(attribute.fulfill(1));
+        }
+
         return new Element(identify()).getAttribute(attribute);
     }
 
@@ -167,7 +182,15 @@ public class GriefPreventionClaim implements dObject, Adjustable {
     public void adjust(Mechanism mechanism) {
         Element value = mechanism.getValue();
 
-        // TODO: Meta
+        // <--[mechanism]
+        // @object GriefPreventionClaim
+        // @name owner
+        // @input dPlayer
+        // @description
+        // Sets the owner of the GriefPreventionClaim.
+        // @tags
+        // <gpclaim@gpclaim.owner>
+        // -->
         if (mechanism.matches("owner") && mechanism.requireObject(dPlayer.class)) {
             dPlayer player = value.asType(dPlayer.class);
             try {
@@ -176,6 +199,19 @@ public class GriefPreventionClaim implements dObject, Adjustable {
             catch (Exception e) {
                 dB.echoError("Unable to transfer ownership of claim: " + this.identify() + " to " + player.identify());
             }
+        }
+
+        // <--[mechanism]
+        // @object GriefPreventionClaim
+        // @name depth
+        // @input Element(Number)
+        // @description
+        // Sets the protection depth of the GriefPreventionClaim.
+        // @tags
+        // None
+        // -->
+        if (mechanism.matches("depth") && mechanism.requireInteger()) {
+            dataStore.extendClaim(claim, value.asInt());
         }
 
         // Iterate through this object's properties' mechanisms

@@ -3,6 +3,7 @@ package net.gnomeffinway.depenizen.extensions.griefprevention;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
+import me.ryanhamshire.GriefPrevention.PlayerData;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
@@ -36,8 +37,10 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
 
     private GriefPreventionPlayerExtension(dPlayer player) {
         this.player = player;
+        data = dataStore.getPlayerData(player.getOfflinePlayer().getUniqueId());
     }
 
+    PlayerData data;
     dPlayer player;
 
     @Override
@@ -60,7 +63,7 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
             // -->
             if (attribute.startsWith("list_claims")) {
                 dList claims = new dList();
-                for (Claim claim : dataStore.getPlayerData(player.getOfflinePlayer().getUniqueId()).getClaims()) {
+                for (Claim claim : data.getClaims()) {
                     claims.add(new GriefPreventionClaim(claim).identify());
                 }
                 return claims.getAttribute(attribute.fulfill(1));
@@ -74,12 +77,56 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
             // @plugin Depenizen, GriefPrevention
             // -->
             else if (attribute.startsWith("claims")) {
-                return new Element(dataStore.getPlayerData(player.getOfflinePlayer().getUniqueId())
-                        .getClaims().size()).getAttribute(attribute.fulfill(1));
+                return new Element(data.getClaims().size()).getAttribute(attribute.fulfill(1));
             }
 
-            else {
-                return null;
+            else if (attribute.startsWith("blocks")) {
+                attribute = attribute.fulfill(1);
+
+                // <--[tag]
+                // @attribute <p@player.griefprevention.blocks.remaining>
+                // @returns Element(Number)
+                // @description
+                // Returns the number of claim blocks the player has left.
+                // @plugin Depenizen, GriefPrevention
+                // -->
+                if (attribute.startsWith("remaining")) {
+                    return new Element(data.getRemainingClaimBlocks()).getAttribute(attribute.fulfill(1));
+                }
+
+                // <--[tag]
+                // @attribute <p@player.griefprevention.blocks.bonus>
+                // @returns Element(Number)
+                // @description
+                // Returns the number of bonus claim blocks the player has.
+                // @plugin Depenizen, GriefPrevention
+                // -->
+                else if (attribute.startsWith("bonus")) {
+                    return new Element(data.getBonusClaimBlocks()).getAttribute(attribute.fulfill(1));
+                }
+
+                // <--[tag]
+                // @attribute <p@player.griefprevention.blocks.total>
+                // @returns Element(Number)
+                // @description
+                // Returns the total number of claim blocks the player has.
+                // @plugin Depenizen, GriefPrevention
+                // -->
+                else if (attribute.startsWith("total")) {
+                    return new Element(data.getAccruedClaimBlocks() + data.getBonusClaimBlocks())
+                            .getAttribute(attribute.fulfill(1));
+                }
+
+                // <--[tag]
+                // @attribute <p@player.griefprevention.blocks>
+                // @returns Element(Number)
+                // @description
+                // Returns the number of normal claim blocks the payer has.
+                // @plugin Depenizen, GriefPrevention
+                // -->
+                else {
+                    return new Element(data.getAccruedClaimBlocks()).getAttribute(attribute);
+                }
             }
         }
         return null;
@@ -88,5 +135,13 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
     @Override
     public void adjust(Mechanism mechanism) {
         Element value = mechanism.getValue();
+
+        if (mechanism.matches("bonus_blocks") && mechanism.requireInteger()) {
+            data.setBonusClaimBlocks(value.asInt());
+        }
+
+        if (mechanism.matches("normal_blocks") && mechanism.requireInteger()) {
+            data.setAccruedClaimBlocks(value.asInt());
+        }
     }
 }
