@@ -12,6 +12,7 @@ import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import org.bukkit.Chunk;
 
@@ -185,19 +186,25 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // <--[mechanism]
         // @object GriefPreventionClaim
         // @name owner
-        // @input dPlayer
+        // @input dPlayer/Element
         // @description
         // Sets the owner of the GriefPreventionClaim.
+        // Accepts dPlayer or "admin" to set as admin claim.
         // @tags
         // <gpclaim@gpclaim.owner>
         // -->
-        if (mechanism.matches("owner") && mechanism.requireObject(dPlayer.class)) {
-            dPlayer player = value.asType(dPlayer.class);
+        if (mechanism.matches("owner")) {
             try {
-                dataStore.changeClaimOwner(claim, player.getOfflinePlayer().getUniqueId());
+                if (dPlayer.matches(value.asString())) {
+                    dPlayer player = dPlayer.valueOf(value.asString());
+                    dataStore.changeClaimOwner(claim, player.getOfflinePlayer().getUniqueId());
+                }
+                else if (CoreUtilities.toLowerCase(value.asString()).equals("admin")) {
+                    dataStore.changeClaimOwner(claim, null);
+                }
             }
             catch (Exception e) {
-                dB.echoError("Unable to transfer ownership of claim: " + this.identify() + " to " + player.identify());
+                dB.echoError("Unable to transfer ownership of claim: " + this.identify() + ".");
             }
         }
 
