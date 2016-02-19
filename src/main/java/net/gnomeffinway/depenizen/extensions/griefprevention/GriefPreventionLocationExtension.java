@@ -55,6 +55,7 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns whether there is a GriefPreventionClaim at this location.
+            // Optionally specify a Element(Boolean) for whether to ignore Y axis.
             // @plugin Depenizen, GriefPrevention
             // -->
             if (attribute.startsWith("has_claim")) {

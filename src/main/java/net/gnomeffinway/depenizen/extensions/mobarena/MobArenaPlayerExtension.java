@@ -99,6 +99,9 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 ArenaPlayerStatistics stats = new ArenaPlayer(player.getPlayerEntity(), a.getArena(), plugin).getStats();
 
                 attribute = attribute.fulfill(1);
+                if (stats == null) {
+                    return null;
+                }
 
                 // <--[tag]
                 // @attribute <p@player.mobarena.stats[<mobarena>].kills>
