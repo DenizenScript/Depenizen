@@ -24,11 +24,11 @@ import java.util.List;
 
 // <--[event]
 // @Events
-// on mythicmob mob dies (by <entity>) (in <area>)
-// on mythicmob mob death (by <entity>) (in <area>)
-// on mythicmob <mob> dies (by <entity>) (in <area>)
-// on mythicmob <mob> death (by <entity>) (in <area>)
-// on mythicmob <mob> killed (by <entity>) (in <area>)
+// mythicmob mob dies (by <entity>) (in <area>)
+// mythicmob mob death (by <entity>) (in <area>)
+// mythicmob <mob> dies (by <entity>) (in <area>)
+// mythicmob <mob> death (by <entity>) (in <area>)
+// mythicmob <mob> killed (by <entity>) (in <area>)
 
 //
 // @Regex ^on mythicmob( [^\s]+ )?(dies|death|killed)( by [^\s]+)?( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
