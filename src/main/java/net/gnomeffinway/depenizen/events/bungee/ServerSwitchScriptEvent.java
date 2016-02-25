@@ -26,9 +26,6 @@ public class ServerSwitchScriptEvent extends BungeeScriptEvent {
     // <context.uuid> returns an Element of the player's UUID.
     // <context.name> returns an Element of the player's current name.
     // <context.server> returns the dServer the player is switching to.
-
-    // @Determine
-    // None
     //
     // @Plugin Depenizen, BungeeCord
     // -->

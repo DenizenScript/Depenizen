@@ -23,9 +23,6 @@ public class PostLoginScriptEvent extends BungeeScriptEvent {
     // @Context
     // <context.uuid> returns an Element of the player's UUID.
     // <context.name> returns an Element of the player's current name.
-
-    // @Determine
-    // None
     //
     // @Plugin Depenizen, BungeeCord
     // -->

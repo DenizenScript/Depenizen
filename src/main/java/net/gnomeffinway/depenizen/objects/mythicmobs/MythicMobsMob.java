@@ -123,7 +123,7 @@ public class MythicMobsMob implements dObject, Adjustable {
         // @attribute <mythicmob@mythicmob.internal_name>
         // @returns Element
         // @description
-        // Returns the name MythicMobs identify's the MythicMob with.
+        // Returns the name MythicMobs identifies the MythicMob with.
         // @plugin Depenizen, MythicMobs
         // -->
         if (attribute.startsWith("internal_name")) {
