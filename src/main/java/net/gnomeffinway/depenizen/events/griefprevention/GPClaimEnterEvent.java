@@ -69,9 +69,9 @@ public class GPClaimEnterEvent extends ScriptEvent implements Listener {
         String claim_test = lower.substring(lower.lastIndexOf(" ") + 1);
         String direction = lower.substring(lower.indexOf(" ") + 1, lower.lastIndexOf(" ") - 1);
 
-        return claim_test.equals("gpclaim")
-                || (direction.equals("enters") && claim_test.equals(CoreUtilities.toLowerCase(new_claim.simple())))
-                || (direction.equals("exits") && claim_test.equals(CoreUtilities.toLowerCase(old_claim.simple())));
+        return (claim_test.equals("gpclaim") && ((direction.equals("enters") && new_claim != null) || (direction.equals("exits") && old_claim != null)))
+                || (direction.equals("enters") && new_claim != null && claim_test.equals(CoreUtilities.toLowerCase(new_claim.simple())))
+                || (direction.equals("exits") && old_claim != null && claim_test.equals(CoreUtilities.toLowerCase(old_claim.simple())));
     }
 
     @Override
