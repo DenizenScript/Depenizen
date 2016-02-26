@@ -172,7 +172,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // Returns whether the GriefPreventionClaim can siege the player.
         // @plugin Depenizen, GriefPrevention
         // -->
-        else if (attribute.startsWith("can_seige") && attribute.hasContext(1)) {
+        else if (attribute.startsWith("can_siege") && attribute.hasContext(1)) {
             dPlayer defender = dPlayer.valueOf(attribute.getContext(1));
             if (defender == null) {
                 return null;
