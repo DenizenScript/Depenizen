@@ -174,7 +174,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // -->
         else if (attribute.startsWith("can_siege") && attribute.hasContext(1)) {
             dPlayer defender = dPlayer.valueOf(attribute.getContext(1));
-            if (defender == null) {
+            if (defender == null || defender.getPlayerEntity() == null) {
                 return null;
             }
             return new Element(claim.canSiege(defender.getPlayerEntity())).getAttribute(attribute.fulfill(1));
