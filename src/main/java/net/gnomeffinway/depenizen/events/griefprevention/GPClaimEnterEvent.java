@@ -67,7 +67,7 @@ public class GPClaimEnterEvent extends ScriptEvent implements Listener {
     public boolean matches(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
         String claim_test = lower.substring(lower.lastIndexOf(' ') + 1);
-        String direction = lower.substring("gp player ".length(), lower.lastIndexOf(' ') - 1).trim();
+        String direction = lower.substring("gp player ".length(), lower.lastIndexOf(' ')).trim();
 
         return (claim_test.equals("gpclaim") && ((direction.equals("enters") && new_claim != null) || (direction.equals("exits") && old_claim != null)))
                 || (direction.equals("enters") && new_claim != null && claim_test.equals(CoreUtilities.toLowerCase(new_claim.simple())))
