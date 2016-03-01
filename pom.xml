@@ -9,9 +9,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <craftbukkit.version>1.8.8-R0.1-SNAPSHOT</craftbukkit.version>
+        <craftbukkit.version>1.9-SNAPSHOT</craftbukkit.version>
         <citizens.version>2.0.16-SNAPSHOT</citizens.version>
-        <denizen.version>0.9.7-SNAPSHOT</denizen.version>
+        <denizen.version>0.9.8-SNAPSHOT</denizen.version>
         <BUILD_NUMBER>Unknown</BUILD_NUMBER>
     </properties>
 
