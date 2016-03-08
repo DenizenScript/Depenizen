@@ -134,9 +134,11 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // @plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("cuboid")) {
-            dCuboid cuboid = new dCuboid();
-            cuboid.addPair(new dLocation(claim.getLesserBoundaryCorner()), new dLocation(claim.getGreaterBoundaryCorner()));
-            return cuboid.getAttribute(attribute.fulfill(1));
+            dLocation lower = new dLocation(claim.getLesserBoundaryCorner());
+            lower.setY(0);
+            dLocation upper = new dLocation(claim.getGreaterBoundaryCorner());
+            upper.setY(255);
+            return new dCuboid(lower, upper).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
