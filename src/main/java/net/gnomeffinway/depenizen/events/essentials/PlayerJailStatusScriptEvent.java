@@ -16,12 +16,12 @@ import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// on player jailed
-// on player unjailed
-// on player un-jailed
-// on player jail status changes
+// player jailed
+// player unjailed
+// player un-jailed
+// player jail status changes
 //
-// @Regex ^on player [^\s]+$
+// @Regex ^on player (jailed|unjailed|un-jailed|jail status changes)$
 //
 // @Cancellable true
 //

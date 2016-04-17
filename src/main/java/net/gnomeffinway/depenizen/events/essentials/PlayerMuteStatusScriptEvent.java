@@ -16,12 +16,12 @@ import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// on player muted
-// on player unmuted
-// on player un-muted
-// on player mute status changes
+// player muted
+// player unmuted
+// player un-muted
+// player mute status changes
 //
-// @Regex ^on player [^\s]+$
+// @Regex ^on player (muted|unmuted|un-muted|mute status changes)$
 //
 // @Cancellable true
 //

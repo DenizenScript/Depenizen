@@ -16,11 +16,11 @@ import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// on player goes afk
-// on player returns from afk
-// on player afk status changes
+// player goes afk
+// player returns from afk
+// player afk status changes
 //
-// @Regex ^on player [^\s]+$
+// @Regex ^on player (goes afk|returns from afk|afk status changes)$
 //
 // @Cancellable true
 //

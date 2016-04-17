@@ -16,11 +16,11 @@ import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// on player god mode enabled
-// on player god mode disabled
-// on player god mod status changes
+// player god mode enabled
+// player god mode disabled
+// player god mod status changes
 //
-// @Regex ^on player god mode [^\s]+$
+// @Regex ^on player god mode (enabled|disabled|status changes)$
 //
 // @Cancellable true
 //
