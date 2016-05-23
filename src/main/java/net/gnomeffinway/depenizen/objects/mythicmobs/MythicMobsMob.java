@@ -105,7 +105,7 @@ public class MythicMobsMob implements dObject, Adjustable {
 
     @Override
     public String identify() {
-        return "mythicmob@" + mob.getUUID();
+        return "mythicmob@" + mob.getUniqueId();
     }
 
     @Override

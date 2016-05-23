@@ -9,8 +9,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <craftbukkit.version>1.9-SNAPSHOT</craftbukkit.version>
-        <citizens.version>2.0.16-SNAPSHOT</citizens.version>
+        <craftbukkit.version>1.9.4-R0.1-SNAPSHOT</craftbukkit.version>
+        <citizens.version>2.0.18-SNAPSHOT</citizens.version>
         <denizen.version>0.9.8-SNAPSHOT</denizen.version>
         <BUILD_NUMBER>Unknown</BUILD_NUMBER>
     </properties>
@@ -254,9 +254,9 @@
         <dependency>
             <groupId>net.elseland.xikage</groupId>
             <artifactId>MythicMobs</artifactId>
-            <version>2.2.0</version>
+            <version>2.4.4</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/MythicMobs-2.2.0.jar</systemPath>
+            <systemPath>${basedir}/src/main/resources/MythicMobs-2.4.4.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.nisovin</groupId>
