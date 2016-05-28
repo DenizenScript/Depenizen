@@ -7,6 +7,7 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
+import net.aufdemrand.denizencore.utilities.debugging.dB;
 import net.elseland.xikage.MythicMobs.API.IMobsAPI;
 import net.elseland.xikage.MythicMobs.Mobs.MythicMob;
 import net.elseland.xikage.MythicMobs.MythicMobs;
@@ -77,6 +78,8 @@ public class MythicSpawnCommand extends AbstractCommand {
         dLocation location = scriptEntry.getdObject("location");
         Element level = scriptEntry.getElement("level");
 
+        dB.report(scriptEntry, getName(), name.debug() + location.debug() + level.debug());
+
         IMobsAPI api = MythicMobs.inst().getAPI().getMobAPI();
 
         try {
@@ -85,7 +88,7 @@ public class MythicSpawnCommand extends AbstractCommand {
             scriptEntry.addObject("spawned_mythicmob", new MythicMobsMob(api.getMythicMobInstance(entity)));
         }
         catch (Exception e) {
-            e.printStackTrace();
+            dB.echoError(e);
         }
 
     }
