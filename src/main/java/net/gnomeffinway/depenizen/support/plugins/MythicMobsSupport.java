@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dEntity;
+import net.gnomeffinway.depenizen.commands.mythicmobs.MythicSpawnCommand;
 import net.gnomeffinway.depenizen.events.mythicmobs.MythicMobsDeathEvent;
 import net.gnomeffinway.depenizen.extensions.mythicmobs.MythicMobsEntityExtension;
 import net.gnomeffinway.depenizen.objects.mythicmobs.MythicMobsMob;
@@ -12,6 +13,7 @@ public class MythicMobsSupport extends Support {
         registerObjects(MythicMobsMob.class);
         registerProperty(MythicMobsEntityExtension.class, dEntity.class);
         registerScriptEvents(new MythicMobsDeathEvent());
+        new MythicSpawnCommand().activate().withOptions("See Documentation", 2);
     }
 
 }
