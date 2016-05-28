@@ -55,7 +55,7 @@ public class Supported {
 
     private static boolean set(String name, Plugin plugin) {
         try {
-            if (plugin == null || !plugin.isEnabled()) {
+            if (plugin == null) {
                 return false;
             }
             supportManager.register(Support.setPlugin(supportClasses.get(name), plugin));
