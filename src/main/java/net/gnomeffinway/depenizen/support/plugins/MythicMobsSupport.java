@@ -13,7 +13,7 @@ public class MythicMobsSupport extends Support {
         registerObjects(MythicMobsMob.class);
         registerProperty(MythicMobsEntityExtension.class, dEntity.class);
         registerScriptEvents(new MythicMobsDeathEvent());
-        new MythicSpawnCommand().activate().withOptions("See Documentation", 2);
+        new MythicSpawnCommand().activate().as("mythicspawn").withOptions("See Documentation", 2);
     }
 
 }

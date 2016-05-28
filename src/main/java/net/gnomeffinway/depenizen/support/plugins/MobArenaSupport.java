@@ -20,7 +20,7 @@ public class MobArenaSupport extends Support {
     public MobArenaSupport() {
         registerObjects(MobArenaArena.class);
         registerAdditionalTags("mobarena");
-        new MobArenaCommand().activate().withOptions("See Documentation.", 1);
+        new MobArenaCommand().activate().as("mobarena").withOptions("See Documentation.", 1);
         registerScriptEvents(new MobArenaStartsScriptEvent());
         registerScriptEvents(new MobArenaEndsScriptEvent());
         registerScriptEvents(new MobArenaWaveChangesScriptEvent());
