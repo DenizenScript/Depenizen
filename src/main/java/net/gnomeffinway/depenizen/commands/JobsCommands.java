@@ -79,13 +79,16 @@ public class JobsCommands extends AbstractCommand {
         if (!scriptEntry.hasObject("job")) {
             throw new InvalidArgumentsException("Must specify a job!");
         }
+        if (!((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer()) {
+            throw new InvalidArgumentsException("Must have a player attached to the queue.");
+        }
 
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
 
-        BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.getData();
+        BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.entryData;
 
         Action action = (Action) scriptEntry.getObject("action");
         JobsJob job = (JobsJob) scriptEntry.getObject("job");
