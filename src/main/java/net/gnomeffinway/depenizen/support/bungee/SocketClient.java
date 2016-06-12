@@ -139,83 +139,90 @@ public class SocketClient implements Runnable {
                     this.input.read(buffer);
                     byte[] encryptedBytes = new byte[receivedEncryptedLength];
                     System.arraycopy(buffer, 0, encryptedBytes, 0, encryptedBytes.length);
-                    byte[] decryptedBytes = encryptOrDecrypt(this.password, encryptedBytes);
+                    final byte[] decryptedBytes = encryptOrDecrypt(this.password, encryptedBytes);
 
-                    DataDeserializer data = new DataDeserializer(decryptedBytes);
+                    final DataDeserializer data = new DataDeserializer(decryptedBytes);
 
-                    int packetType = data.readInt();
+                    final int packetType = data.readInt();
 
-                    if (packetType == 0x00) {
-                        ClientPacketInAcceptRegister packet = new ClientPacketInAcceptRegister();
-                        packet.deserialize(data);
-                        if (packet.isAccepted()) {
-                            dB.log("Successfully registered name with the server");
-                            dServer.addOnlineServer(this.registrationName);
-                            for (String server : packet.getServerList()) {
-                                if (!server.isEmpty()) {
-                                    if (dB.verbose) {
-                                        dB.log("[Bungee]: Registered with " + server);
+                    final SocketClient client = this;
+
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.getCurrentInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            if (packetType == 0x00) {
+                                ClientPacketInAcceptRegister packet = new ClientPacketInAcceptRegister();
+                                packet.deserialize(data);
+                                if (packet.isAccepted()) {
+                                    dB.log("Successfully registered name with the server");
+                                    dServer.addOnlineServer(client.registrationName);
+                                    for (String server : packet.getServerList()) {
+                                        if (!server.isEmpty()) {
+                                            if (dB.verbose) {
+                                                dB.log("[Bungee]: Registered with " + server);
+                                            }
+                                            dServer.addOnlineServer(server);
+                                        }
                                     }
-                                    dServer.addOnlineServer(server);
+                                }
+                                else {
+                                    client.close("Specified name in config.yml is already registered to the server");
                                 }
                             }
-                        }
-                        else {
-                            this.close("Specified name in config.yml is already registered to the server");
-                        }
-                    }
-                    else if (packetType == 0x01) {
-                        ClientPacketInServer packet = new ClientPacketInServer();
-                        packet.deserialize(data);
-                        if (packet.getAction() == ClientPacketInServer.Action.REGISTERED) {
-                            if (dB.verbose) {
-                                dB.log("[Bungee]: Registered with " + packet.getServerName());
+                            else if (packetType == 0x01) {
+                                ClientPacketInServer packet = new ClientPacketInServer();
+                                packet.deserialize(data);
+                                if (packet.getAction() == ClientPacketInServer.Action.REGISTERED) {
+                                    if (dB.verbose) {
+                                        dB.log("[Bungee]: Registered with " + packet.getServerName());
+                                    }
+                                    dServer.addOnlineServer(packet.getServerName());
+                                }
+                                else if (packet.getAction() == ClientPacketInServer.Action.DISCONNECTED) {
+                                    if (dB.verbose) {
+                                        dB.log("[Bungee]: Disconnected from " + packet.getServerName());
+                                    }
+                                    dServer.removeOnlineServer(packet.getServerName());
+                                }
                             }
-                            dServer.addOnlineServer(packet.getServerName());
-                        }
-                        else if (packet.getAction() == ClientPacketInServer.Action.DISCONNECTED) {
-                            if (dB.verbose) {
-                                dB.log("[Bungee]: Disconnected from " + packet.getServerName());
+                            else if (packetType == 0x02) {
+                                ClientPacketInScript packet = new ClientPacketInScript();
+                                packet.deserialize(data);
+                                InstantQueue queue = new InstantQueue(ScriptQueue.getNextId("BUNGEE_CMD"));
+                                queue.addEntries(packet.getScriptEntries());
+                                queue.getAllDefinitions().putAll(packet.getDefinitions());
+                                queue.start();
                             }
-                            dServer.removeOnlineServer(packet.getServerName());
+                            else if (packetType == 0x03) {
+                                ClientPacketInEvent packet = new ClientPacketInEvent();
+                                packet.deserialize(data);
+                                long id = packet.getEventId();
+                                String name = packet.getEventName();
+                                Map<String, String> context = packet.getContext();
+                                Map<String, String> determinations = BungeeScriptEvent.fire(name, context);
+                                if (packet.shouldSendResponse() && determinations != null) {
+                                    ClientPacketOutEventResponse response = new ClientPacketOutEventResponse(id, determinations);
+                                    send(response);
+                                }
+                            }
+                            // 0x04 (EventSubscribe) is outbound
+                            else if (packetType == 0x05) {
+                                ClientPacketInTag packet = new ClientPacketInTag();
+                                packet.deserialize(data);
+                                DefinitionsWrapper definitions = new DefinitionsWrapper(packet.getDefinitions());
+                                String parsed = TagManager.tag(packet.getTag(), new BungeeTagContext(packet.shouldDebug(), definitions));
+                                send(new ClientPacketOutTagParsed(packet.getId(), parsed, packet.getFrom()));
+                            }
+                            else if (packetType == 0x06) {
+                                ClientPacketInTagParsed packet = new ClientPacketInTagParsed();
+                                packet.deserialize(data);
+                                BungeeTagCommand.returnTag(packet.getId(), packet.getResult());
+                            }
+                            else {
+                                client.close("Received invalid packet from server: " + packetType);
+                            }
                         }
-                    }
-                    else if (packetType == 0x02) {
-                        ClientPacketInScript packet = new ClientPacketInScript();
-                        packet.deserialize(data);
-                        InstantQueue queue = new InstantQueue(ScriptQueue.getNextId("BUNGEE_CMD"));
-                        queue.addEntries(packet.getScriptEntries());
-                        queue.getAllDefinitions().putAll(packet.getDefinitions());
-                        queue.start();
-                    }
-                    else if (packetType == 0x03) {
-                        ClientPacketInEvent packet = new ClientPacketInEvent();
-                        packet.deserialize(data);
-                        long id = packet.getEventId();
-                        String name = packet.getEventName();
-                        Map<String, String> context = packet.getContext();
-                        Map<String, String> determinations = BungeeScriptEvent.fire(name, context);
-                        if (packet.shouldSendResponse() && determinations != null) {
-                            ClientPacketOutEventResponse response = new ClientPacketOutEventResponse(id, determinations);
-                            send(response);
-                        }
-                    }
-                    // 0x04 (EventSubscribe) is outbound
-                    else if (packetType == 0x05) {
-                        ClientPacketInTag packet = new ClientPacketInTag();
-                        packet.deserialize(data);
-                        DefinitionsWrapper definitions = new DefinitionsWrapper(packet.getDefinitions());
-                        String parsed = TagManager.tag(packet.getTag(), new BungeeTagContext(packet.shouldDebug(), definitions));
-                        send(new ClientPacketOutTagParsed(packet.getId(), parsed, packet.getFrom()));
-                    }
-                    else if (packetType == 0x06) {
-                        ClientPacketInTagParsed packet = new ClientPacketInTagParsed();
-                        packet.deserialize(data);
-                        BungeeTagCommand.returnTag(packet.getId(), packet.getResult());
-                    }
-                    else {
-                        this.close("Received invalid packet from server: " + packetType);
-                    }
+                    });
                 }
 
             }
