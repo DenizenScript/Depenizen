@@ -20,6 +20,8 @@ import net.gnomeffinway.depenizen.support.plugins.HeroesSupport;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -175,6 +177,28 @@ public class HeroesHero implements dObject {
         }
 
         // <--[tag]
+        // @attribute <hero@hero.delaying_skill>
+        // @returns Element(Boolean)
+        // @description
+        // Returns whether the hero is currently using a delayed skill.
+        // @plugin Depenizen, Heroes
+        // -->
+        else if (attribute.startsWith("delaying_skill")) {
+            return new Element(hero.getDelayedSkill() != null).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <hero@hero.delayed_skill>
+        // @returns Element
+        // @description
+        // Returns the delayed skill the hero is currently using.
+        // @plugin Depenizen, Heroes
+        // -->
+        else if (attribute.startsWith("delayed_skill")) {
+            return new Element(hero.getDelayedSkill().getSkill().getName()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <hero@hero.has_party>
         // @returns Element(Boolean)
         // @description
@@ -241,7 +265,40 @@ public class HeroesHero implements dObject {
             return list.getAttribute(attribute.fulfill(1));
         }
 
-        if (attribute.startsWith("party") && hero.hasParty()) {
+        // <--[tag]
+        // @attribute <hero@hero.mana>
+        // @returns Element(Number)
+        // @description
+        // Returns the hero's current amount of mana.
+        // @plugin Depenizen, Heroes
+        // -->
+        else if (attribute.startsWith("mana")) {
+            return new Element(hero.getMana()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <hero@hero.mana_regen>
+        // @returns Element(Number)
+        // @description
+        // Returns the hero's current amount of mana regeneration.
+        // @plugin Depenizen, Heroes
+        // -->
+        else if (attribute.startsWith("mana_regen")) {
+            return new Element(hero.getManaRegen()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <hero@hero.max_mana>
+        // @returns Element(Number)
+        // @description
+        // Returns the hero's maximum amount of mana.
+        // @plugin Depenizen, Heroes
+        // -->
+        else if (attribute.startsWith("max_mana")) {
+            return new Element(hero.getMaxMana()).getAttribute(attribute.fulfill(1));
+        }
+
+        else if (attribute.startsWith("party") && hero.hasParty()) {
 
             attribute = attribute.fulfill(1);
 
@@ -281,7 +338,7 @@ public class HeroesHero implements dObject {
         // Returns the primary class for the hero.
         // @plugin Depenizen, Heroes
         // -->
-        if (attribute.startsWith("primary_class")) {
+        else if (attribute.startsWith("primary_class")) {
             return new HeroesClass(hero.getHeroClass()).getAttribute(attribute.fulfill(1));
         }
 
@@ -292,8 +349,23 @@ public class HeroesHero implements dObject {
         // Returns the secondary class for the hero.
         // @plugin Depenizen, Heroes
         // -->
-        if (attribute.startsWith("secondary_class")) {
+        else if (attribute.startsWith("secondary_class")) {
             return new HeroesClass(hero.getSecondClass()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <hero@hero.skills>
+        // @returns dList
+        // @description
+        // Returns a list of skills the hero currently has access to.
+        // @plugin Depenizen, Heroes
+        // -->
+        else if (attribute.startsWith("skills")) {
+            Set<String> skills = new HashSet<String>();
+            skills.addAll(hero.getSkills().keySet());
+            skills.addAll(hero.getHeroClass().getSkillNames());
+            skills.addAll(hero.getSecondClass().getSkillNames());
+            return new dList(skills).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -304,7 +376,7 @@ public class HeroesHero implements dObject {
         // type of object that is fulfilling this attribute.
         // @plugin Depenizen, Heroes
         // -->
-        if (attribute.startsWith("type")) {
+        else if (attribute.startsWith("type")) {
             return new Element("Hero").getAttribute(attribute.fulfill(1));
         }
 
