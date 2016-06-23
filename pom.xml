@@ -254,9 +254,9 @@
         <dependency>
             <groupId>net.elseland.xikage</groupId>
             <artifactId>MythicMobs</artifactId>
-            <version>2.4.4</version>
+            <version>2.4.5</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/MythicMobs-2.4.4.jar</systemPath>
+            <systemPath>${basedir}/src/main/resources/MythicMobs-2.4.5.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.nisovin</groupId>
