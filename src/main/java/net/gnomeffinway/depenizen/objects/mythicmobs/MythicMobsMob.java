@@ -13,6 +13,7 @@ import net.elseland.xikage.MythicMobs.API.IMobsAPI;
 import net.elseland.xikage.MythicMobs.Mobs.ActiveMob;
 import net.elseland.xikage.MythicMobs.Mobs.MythicMob;
 import net.elseland.xikage.MythicMobs.MythicMobs;
+import net.gnomeffinway.depenizen.support.plugins.MythicMobsSupport;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
@@ -32,11 +33,10 @@ public class MythicMobsMob implements dObject, Adjustable {
         try {
             string = string.replace("mythicmob@", "");
             UUID uuid = UUID.fromString(string);
-            IMobsAPI api = MythicMobs.inst().getAPI().getMobAPI();
-            if (!api.isMythicMob(uuid)) {
+            if (!MythicMobsSupport.isMythicMob(uuid)) {
                 return null;
             }
-            return new MythicMobsMob(api.getMythicMobInstance(dEntity.getEntityForID(uuid)));
+            return new MythicMobsMob(MythicMobsSupport.getActiveMob(dEntity.getEntityForID(uuid)));
         }
         catch (Exception e) {
             return null;

@@ -54,15 +54,6 @@
             <scope>compile</scope>
             <version>${craftbukkit.version}</version>
         </dependency>
-        <!-- Remove when isn't needed anymore -->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>${craftbukkit.version}</version>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Remove when isn't needed anymore -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
