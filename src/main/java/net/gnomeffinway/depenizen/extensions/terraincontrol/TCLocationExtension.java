@@ -1,5 +1,6 @@
 package net.gnomeffinway.depenizen.extensions.terraincontrol;
 
+import com.khorn.terraincontrol.LocalBiome;
 import com.khorn.terraincontrol.TerrainControl;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizencore.objects.Element;
@@ -39,9 +40,8 @@ public class TCLocationExtension extends dObjectExtension {
         // @plugin Depenizen, TerrainControl
         // -->
         if (attribute.startsWith("tc_biome.name")) {
-            String biome = TerrainControl.getBiomeName(location.getWorld().getName(),
-                    location.getBlockX(), location.getBlockZ());
-            return new Element(biome).getAttribute(attribute.fulfill(2));
+            LocalBiome biome = TerrainControl.getWorld(location.getWorld().getName()).getBiome(location.getBlockX(), location.getBlockZ());
+            return new Element(biome.getName()).getAttribute(attribute.fulfill(2));
         }
 
         return null;
