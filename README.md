@@ -5,7 +5,8 @@ Depenizen
 
 **Wiki**: http://wiki.citizensnpcs.co/Depenizen  
 **IRC**: http://webchat.esper.net/?channels=denizen-dev  
-**Denizen For Bukkit**: https://github.com/DenizenScript/Denizen-For-Bukkit
+**Denizen For Bukkit**: https://github.com/DenizenScript/Denizen-For-Bukkit  
+**Builds**: http://ci.citizensnpcs.co/job/Depenizen/  
 
 **Supported Plugins**: (And the sources we acquired Jar files from.)
 - A SkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
@@ -31,3 +32,5 @@ Depenizen
 - TownyChat (http://towny.palmergames.com/)
 - Vault (http://dev.bukkit.org/bukkit-plugins/vault/)
 - Votifier (http://dev.bukkit.org/bukkit-plugins/votifier/)
+
+Also Bungee, using http://ci.citizensnpcs.co/job/DepenizenForBungee/
