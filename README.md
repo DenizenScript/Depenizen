@@ -3,10 +3,10 @@ Depenizen
 
 **Depenizen: An extension of Denizen**
 
-**Wiki**: http://wiki.citizensnpcs.co/Depenizen
-**IRC**: http://webchat.esper.net/?channels=denizen-dev
-**Denizen For Bukkit**: https://github.com/DenizenScript/Denizen-For-Bukkit
-**Builds**: http://ci.citizensnpcs.co/job/Depenizen/
+- **Wiki**: http://wiki.citizensnpcs.co/Depenizen
+- **IRC**: http://webchat.esper.net/?channels=denizen-dev
+- **Denizen For Bukkit**: https://github.com/DenizenScript/Denizen-For-Bukkit
+- **Builds**: http://ci.citizensnpcs.co/job/Depenizen/
 
 **Supported Plugins**: (And the sources we acquired Jar files from.)
 - A SkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
