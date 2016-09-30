@@ -1,8 +1,6 @@
-package net.gnomeffinway.depenizen.events.towny;
+package net.gnomeffinway.depenizen.events.residence;
 
-import com.palmergames.bukkit.towny.ChunkNotification;
-import com.palmergames.bukkit.towny.event.PlayerChangePlotEvent;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.bekvon.bukkit.residence.event.ResidenceChangedEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -11,54 +9,54 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import net.gnomeffinway.depenizen.objects.dTown;
+import net.gnomeffinway.depenizen.objects.residence.dResidence;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// towny player exits town
-// towny player exits <town>
+// residence player enters residence
+// residence player enters <residence>
 //
-// @Regex ^on towny player exits [^\s]+$
+// @Regex ^on residence player enters [^\s]+$
 //
 // @Cancellable false
 //
-// @Triggers when a player exits a Towny Town.
+// @Triggers when a player enters a Residence.
 //
 // @Context
-// <context.town> Returns the town the player exited.
+// <context.residence> Returns the Residence the player entered.
 //
-// @Plugin Depenizen, Towny
+// @Plugin Depenizen, Residence
 //
 // -->
 
-public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Listener {
+public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public PlayerExitsTownScriptEvent() {
+    public PlayerEntersResidenceScriptEvent() {
         instance = this;
     }
 
-    public static PlayerExitsTownScriptEvent instance;
-    public PlayerChangePlotEvent event;
-    public dTown town;
+    public static PlayerEntersResidenceScriptEvent instance;
+    public ResidenceChangedEvent event;
+    public dResidence residence;
 
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("towny player exits");
+        return CoreUtilities.toLowerCase(s).startsWith("residence player enters");
     }
 
     @Override
     public boolean matches(ScriptContainer scriptContainer, String s) {
         String name = CoreUtilities.getXthArg(3, CoreUtilities.toLowerCase(s));
-        dTown eventTown = dTown.fromWorldCoord(event.getFrom());
-        if (name.equals("town") && eventTown != null) {
+        dResidence eventResidence = event.getTo() != null ? new dResidence(event.getTo()) : null;
+        if (name.equals("residence") && eventResidence != null) {
             return true;
         }
-        dTown givenTown = dTown.valueOf(name);
-        if (eventTown != null && givenTown != null && eventTown.equals(givenTown)) {
+        dResidence givenResidence = dResidence.valueOf(name);
+        if (eventResidence != null && givenResidence != null && eventResidence.equals(givenResidence)) {
             return true;
         }
         return false;
@@ -66,7 +64,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public String getName() {
-        return "TownyPlayerExitsTown";
+        return "ResidencePlayerEntersResidence";
     }
 
     @Override
@@ -76,7 +74,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public void destroy() {
-        PlayerChangePlotEvent.getHandlerList().unregister(this);
+        ResidenceChangedEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -91,23 +89,18 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public dObject getContext(String name) {
-        if (name.equals("town")) {
-            return town;
+        if (name.equals("residence")) {
+            return residence;
         }
         return super.getContext(name);
     }
 
     @EventHandler
-    public void onTownyPlayerExitsTown(PlayerChangePlotEvent event) {
-        try {
-            if (!event.getFrom().getTownyWorld().isUsingTowny() || new ChunkNotification(event.getFrom(), event.getTo()).getNotificationString() == null) {
-                return;
-            }
-        }
-        catch (NotRegisteredException e) {
+    public void onResidencePlayerEntersResidence(ResidenceChangedEvent event) {
+        if (event.getTo() == null) {
             return;
         }
-        town = dTown.fromWorldCoord(event.getFrom());
+        residence = new dResidence(event.getTo());
         this.event = event;
         fire();
     }

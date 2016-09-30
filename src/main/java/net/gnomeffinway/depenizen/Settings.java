@@ -37,7 +37,7 @@ public class Settings {
     }
 
     public static int socketTimeout() {
-        return Depenizen.getCurrentInstance().getConfig().getInt(SOCKET_TIMEOUT, 3000);
+        return Depenizen.getCurrentInstance().getConfig().getInt(SOCKET_TIMEOUT, 0);
     }
 
     public static long socketReconnectDelay() {
