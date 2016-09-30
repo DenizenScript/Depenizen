@@ -12,6 +12,8 @@ import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.tags.core.EscapeTags;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
+import net.gnomeffinway.depenizen.support.Support;
+import net.gnomeffinway.depenizen.support.plugins.ShopKeepersSupport;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
@@ -47,7 +49,11 @@ public class ShopKeeper implements dObject {
     }
 
     public static boolean isShopKeeper(dEntity entity) {
-        return ShopkeepersPlugin.getInstance().isShopkeeper(entity.getBukkitEntity());
+        if (entity == null) {
+            return false;
+        }
+        ShopkeepersPlugin plugin = Support.getPlugin(ShopKeepersSupport.class);
+        return plugin != null && plugin.isShopkeeper(entity.getBukkitEntity());
     }
 
     public static ShopKeeper fromEntity(dEntity entity) {
