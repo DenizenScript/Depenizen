@@ -7,8 +7,10 @@ import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizen.utilities.depends.Depends;
+import net.aufdemrand.denizencore.objects.Adjustable;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Fetchable;
+import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
@@ -25,7 +27,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HeroesHero implements dObject {
+public class HeroesHero implements dObject, Adjustable {
 
     /////////////////////
     //   PATTERNS
@@ -381,5 +383,53 @@ public class HeroesHero implements dObject {
         }
 
         return new Element(identify()).getAttribute(attribute);
+    }
+
+    @Override
+    public void applyProperty(Mechanism mechanism) {
+        dB.echoError("Cannot apply properties to a hero!");
+    }
+
+    @Override
+    public void adjust(Mechanism mechanism) {
+
+        // <--[mechanism]
+        // @object HeroesHero
+        // @name mana
+        // @input Element(Integer)
+        // @description
+        // Sets the hero's current mana level.
+        // @tags
+        // <hero@hero.mana>
+        // -->
+        if (mechanism.matches("mana") && mechanism.requireInteger()) {
+            hero.setMana(mechanism.getValue().asInt());
+        }
+
+        // <--[mechanism]
+        // @object HeroesHero
+        // @name primary_class
+        // @input HeroesClass
+        // @description
+        // Sets the hero's primary class.
+        // @tags
+        // <hero@hero.primary_class>
+        // -->
+        else if (mechanism.matches("primary_class") && mechanism.requireObject(HeroesClass.class)) {
+            hero.setHeroClass(mechanism.getValue().asType(HeroesClass.class).getHeroClass(), false);
+        }
+
+        // <--[mechanism]
+        // @object HeroesHero
+        // @name secondary_class
+        // @input HeroesClass
+        // @description
+        // Sets the hero's secondary class.
+        // @tags
+        // <hero@hero.secondary_class>
+        // -->
+        else if (mechanism.matches("secondary_class") && mechanism.requireObject(HeroesClass.class)) {
+            hero.setHeroClass(mechanism.getValue().asType(HeroesClass.class).getHeroClass(), true);
+        }
     }
 }
