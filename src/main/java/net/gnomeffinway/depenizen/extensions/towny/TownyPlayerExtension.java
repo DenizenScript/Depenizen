@@ -71,6 +71,36 @@ public class TownyPlayerExtension extends dObjectExtension {
         }
 
         // <--[tag]
+        // @attribute <p@player.mode_list>
+        // @returns dList(Element)
+        // @description
+        // Returns the player's towny modes as a list.
+        // @plugin Depenizen, Towny
+        // -->
+        else if (attribute.startsWith("mode_list")) {
+            dList modes = new dList();
+            for (String mode : resident.getModes()) {
+                modes.add(new Element(mode).identify());
+            }
+            return modes.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <p@player.nation_ranks>
+        // @returns dList(Element)
+        // @description
+        // Returns the player's nation ranks.
+        // @plugin Depenizen, Towny
+        // -->
+        else if (attribute.startsWith("nation_ranks")) {
+            dList ranks = new dList();
+            for (String rank : resident.getNationRanks()) {
+                ranks.add(new Element(rank).identify());
+            }
+            return ranks.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <p@player.nation>
         // @returns dNation
         // @description
@@ -94,6 +124,21 @@ public class TownyPlayerExtension extends dObjectExtension {
         }
 
         // <--[tag]
+        // @attribute <p@player.town_ranks>
+        // @returns dList(Element)
+        // @description
+        // Returns the player's town ranks.
+        // @plugin Depenizen, Towny
+        // -->
+        else if (attribute.startsWith("town_ranks")) {
+            dList ranks = new dList();
+            for (String rank : resident.getTownRanks()) {
+                ranks.add(new Element(rank).identify());
+            }
+            return ranks.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <p@player.town>
         // @returns dTown
         // @description
@@ -114,21 +159,6 @@ public class TownyPlayerExtension extends dObjectExtension {
                     dB.echoError("'" + player.getName() + "' is not registered to a town in Towny!");
                 }
             }
-        }
-
-        // <--[tag]
-        // @attribute <p@player.mode_list>
-        // @returns dList(Element)
-        // @description
-        // Returns the player's towny modes as a list.
-        // @plugin Depenizen, Towny
-        // -->
-        else if (attribute.startsWith("mode_list")) {
-            dList modes = new dList();
-            for (String mode : resident.getModes()) {
-                modes.add(new Element(mode).identify());
-            }
-            return modes.getAttribute(attribute.fulfill(1));
         }
 
         return null;

@@ -3,11 +3,13 @@ package net.gnomeffinway.depenizen.objects;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
+import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Fetchable;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
@@ -105,6 +107,21 @@ public class dNation implements dObject {
 
     @Override
     public String getAttribute(Attribute attribute) {
+
+        // <--[tag]
+        // @attribute <nation@nation.assistants>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns a list of the nation's assistants.
+        // @plugin Depenizen, Towny
+        // -->
+        if (attribute.startsWith("assistants")) {
+            dList list = new dList();
+            for (Resident resident : nation.getAssistants()) {
+                list.add(dPlayer.valueOf(resident.getName()).identify());
+            }
+            return list.getAttribute(attribute.fulfill(1));
+        }
 
         // <--[tag]
         // @attribute <nation@nation.balance>
@@ -211,6 +228,21 @@ public class dNation implements dObject {
             catch (Exception e) {
             }
 
+        }
+
+        // <--[tag]
+        // @attribute <nation@nation.residents>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns a list of the nation's residents.
+        // @plugin Depenizen, Towny
+        // -->
+        if (attribute.startsWith("residents")) {
+            dList list = new dList();
+            for (Resident resident : nation.getResidents()) {
+                list.add(dPlayer.valueOf(resident.getName()).identify());
+            }
+            return list.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

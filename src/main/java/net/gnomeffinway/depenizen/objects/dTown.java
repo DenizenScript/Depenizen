@@ -3,6 +3,7 @@ package net.gnomeffinway.depenizen.objects;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
+import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.palmergames.bukkit.towny.object.WorldCoord;
@@ -128,13 +129,28 @@ public class dTown implements dObject {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
+        // @attribute <town@town.assistants>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns a list of the town's assistants.
+        // @plugin Depenizen, Towny
+        // -->
+        if (attribute.startsWith("assistants")) {
+            dList list = new dList();
+            for (Resident resident : town.getAssistants()) {
+                list.add(dPlayer.valueOf(resident.getName()).identify());
+            }
+            return list.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <town@town.balance>
         // @returns Element(Decimal)
         // @description
         // Returns the current money balance of the town.
         // @plugin Depenizen, Towny
         // -->
-        if (attribute.startsWith("balance")) {
+        else if (attribute.startsWith("balance")) {
             try {
                 return new Element(town.getHoldingBalance()).getAttribute(attribute.fulfill(1));
             }
@@ -231,6 +247,21 @@ public class dTown implements dObject {
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
             return new Element(town.getNumResidents())
                     .getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.residents>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns a list of the town's residents.
+        // @plugin Depenizen, Towny
+        // -->
+        else if (attribute.startsWith("residents")) {
+            dList list = new dList();
+            for (Resident resident : town.getResidents()) {
+                list.add(dPlayer.valueOf(resident.getName()).identify());
+            }
+            return list.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
