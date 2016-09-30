@@ -4,6 +4,7 @@ import com.wasteofplastic.askyblock.ASkyBlockAPI;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.events.askyblock.*;
@@ -29,7 +30,7 @@ public class ASkyBlockSupport extends Support {
     ASkyBlockAPI api = ASkyBlockAPI.getInstance();
 
     @Override
-    public String additionalTags(Attribute attribute) {
+    public String additionalTags(Attribute attribute, TagContext tagContext) {
         if (attribute == null) {
             return null;
         }

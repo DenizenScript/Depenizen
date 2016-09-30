@@ -1,5 +1,6 @@
 package net.gnomeffinway.depenizen.support;
 
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.objects.properties.Property;
@@ -120,7 +121,7 @@ public class Support {
     /// Tag Handlers
     ////////
 
-    public String additionalTags(Attribute attribute) {
+    public String additionalTags(Attribute attribute, TagContext tagContext) {
         return null;
     }
 }

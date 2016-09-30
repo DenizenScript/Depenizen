@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.support.bungee;
 
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.dList;
@@ -35,7 +36,7 @@ public class BungeeSupport extends Support {
     }
 
     @Override
-    public String additionalTags(Attribute attribute) {
+    public String additionalTags(Attribute attribute, TagContext tagContext) {
 
         if (attribute.startsWith("bungee")) {
 

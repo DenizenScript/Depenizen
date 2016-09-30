@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.simpleclans.SimpleClansPlayerExtension;
@@ -22,7 +23,7 @@ public class SimpleClansSupport extends Support {
     }
 
     @Override
-    public String additionalTags(Attribute attribute) {
+    public String additionalTags(Attribute attribute, TagContext tagContext) {
         if (attribute.startsWith("clan") && attribute.hasContext(1)) {
             dClan clan = dClan.valueOf(attribute.getContext(1));
             if (clan == null) {

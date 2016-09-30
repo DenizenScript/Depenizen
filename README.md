@@ -3,10 +3,10 @@ Depenizen
 
 **Depenizen: An extension of Denizen**
 
-**Wiki**: http://wiki.citizensnpcs.co/Depenizen  
-**IRC**: http://webchat.esper.net/?channels=denizen-dev  
-**Denizen For Bukkit**: https://github.com/DenizenScript/Denizen-For-Bukkit  
-**Builds**: http://ci.citizensnpcs.co/job/Depenizen/  
+**Wiki**: http://wiki.citizensnpcs.co/Depenizen
+**IRC**: http://webchat.esper.net/?channels=denizen-dev
+**Denizen For Bukkit**: https://github.com/DenizenScript/Denizen-For-Bukkit
+**Builds**: http://ci.citizensnpcs.co/job/Depenizen/
 
 **Supported Plugins**: (And the sources we acquired Jar files from.)
 - A SkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
@@ -22,6 +22,7 @@ Depenizen
 - MobArena (http://dev.bukkit.org/bukkit-plugins/mobarena/)
 - MythicMobs (https://www.spigotmc.org/resources/mythicmobs.5702/)
 - NoCheatPlus (http://ci.md-5.net/job/NoCheatPlus/)
+- PlaceholderAPI (https://www.spigotmc.org/resources/placeholderapi.6245/)
 - PlotMe (https://dev.bukkit.org/bukkit-plugins/plotme/)
 - Prism (https://dev.bukkit.org/bukkit-plugins/prism/)
 - PVP Arena (https://ci2.craftyn.com/job/PVP%20Arena/)

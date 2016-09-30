@@ -3,6 +3,7 @@ package net.gnomeffinway.depenizen.support.plugins;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.events.towny.PlayerEntersTownScriptEvent;
@@ -27,7 +28,7 @@ public class TownySupport extends Support {
     }
 
     @Override
-    public String additionalTags(Attribute attribute) {
+    public String additionalTags(Attribute attribute, TagContext tagContext) {
 
         if (attribute.startsWith("town")) {
 

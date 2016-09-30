@@ -3,6 +3,7 @@ package net.gnomeffinway.depenizen.support.plugins;
 import me.limebyte.battlenight.api.BattleNightAPI;
 import me.limebyte.battlenight.core.BattleNight;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.objects.Duration;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.tags.Attribute;
@@ -19,7 +20,7 @@ public class BattleNightSupport extends Support {
     }
 
     @Override
-    public String additionalTags(Attribute attribute) {
+    public String additionalTags(Attribute attribute, TagContext tagContext) {
 
         BattleNightAPI api = BattleNight.instance.getAPI();
 

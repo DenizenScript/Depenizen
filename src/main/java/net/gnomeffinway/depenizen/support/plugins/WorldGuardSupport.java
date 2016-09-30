@@ -3,6 +3,7 @@ package net.gnomeffinway.depenizen.support.plugins;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dWorld;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.commands.worldguard.RegionCommand;
 import net.gnomeffinway.depenizen.extensions.worldguard.WorldGuardCuboidExtension;
@@ -23,7 +24,7 @@ public class WorldGuardSupport extends Support {
     }
 
     @Override
-    public String additionalTags(Attribute attribute) {
+    public String additionalTags(Attribute attribute, TagContext tagContext) {
         if (attribute == null) {
             return null;
         }

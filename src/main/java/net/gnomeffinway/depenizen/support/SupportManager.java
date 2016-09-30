@@ -90,15 +90,6 @@ public class SupportManager {
         }
     }
 
-    private String findAdditionalTags(String name, Attribute attribute) {
-        for (String tag : additionalTags.keySet()) {
-            if (name.equalsIgnoreCase(tag)) {
-                return additionalTags.get(tag).additionalTags(attribute);
-            }
-        }
-        return null;
-    }
-
     @TagManager.TagEvents
     public void tagListener(ReplaceableTagEvent event) {
         if (event.replaced()) {
@@ -109,7 +100,7 @@ public class SupportManager {
         String name = CoreUtilities.toLowerCase(event.getName());
         for (String tag : additionalTags.keySet()) {
             if (name.startsWith(tag)) {
-                replaced = additionalTags.get(tag).additionalTags(attribute);
+                replaced = additionalTags.get(tag).additionalTags(attribute, event.getContext());
                 break;
             }
         }

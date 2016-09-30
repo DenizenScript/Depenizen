@@ -5,6 +5,7 @@ import com.massivecraft.factions.entity.FactionColl;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.extensions.factions.FactionsLocationExtension;
@@ -24,7 +25,7 @@ public class FactionsSupport extends Support {
     }
 
     @Override
-    public String additionalTags(Attribute attribute) {
+    public String additionalTags(Attribute attribute, TagContext tagContext) {
 
         if (attribute.startsWith("factions")) {
 

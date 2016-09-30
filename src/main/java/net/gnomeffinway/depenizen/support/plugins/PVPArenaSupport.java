@@ -1,6 +1,7 @@
 package net.gnomeffinway.depenizen.support.plugins;
 
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.events.pvparena.PVPArenaStartsScriptEvent;
@@ -20,7 +21,7 @@ public class PVPArenaSupport extends Support {
     }
 
     @Override
-    public String additionalTags(Attribute attribute) {
+    public String additionalTags(Attribute attribute, TagContext tagContext) {
 
         if (attribute.startsWith("pvparena") && attribute.hasContext(1)) {
             PVPArenaArena arena = PVPArenaArena.valueOf(attribute.getContext(1));

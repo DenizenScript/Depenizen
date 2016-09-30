@@ -3,6 +3,7 @@ package net.gnomeffinway.depenizen.support.plugins;
 import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.gnomeffinway.depenizen.commands.MobArena.MobArenaCommand;
@@ -29,7 +30,7 @@ public class MobArenaSupport extends Support {
     }
 
     @Override
-    public String additionalTags(Attribute attribute) {
+    public String additionalTags(Attribute attribute, TagContext tagContext) {
         if (attribute == null) {
             return null;
         }

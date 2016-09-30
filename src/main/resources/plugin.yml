@@ -3,7 +3,7 @@ authors: [GnomeffinWay, Morphan1]
 version: ${project.version} (build ${BUILD_NUMBER})
 main: net.gnomeffinway.depenizen.Depenizen
 depend: [Denizen]
-softdepend: [mcMMO, BattleNight, Towny, Factions, Votifier, Jobs, Heroes, pvparena, WorldEdit, WorldGuard, Essentials, pvpstats, HyperConomy, SkillAPI, Prism, TerrainControl, PlotMe, SimpleClans, MobArena, ASkyBlock, NoCheatPlus, MythicMobs, ShopKeepers, GriefPrevention, Quests]
+softdepend: [mcMMO, BattleNight, Towny, Factions, Votifier, Jobs, Heroes, pvparena, WorldEdit, WorldGuard, Essentials, pvpstats, HyperConomy, SkillAPI, Prism, TerrainControl, PlotMe, SimpleClans, MobArena, ASkyBlock, NoCheatPlus, MythicMobs, ShopKeepers, GriefPrevention, Quests, PlaceholderAPI]
 
 commands:
     depenizen:
