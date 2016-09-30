@@ -11,6 +11,7 @@ Depenizen
 **Supported Plugins**: (And the sources we acquired Jar files from.)
 - A SkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
 - BattleNight (http://dev.bukkit.org/bukkit-plugins/battlenight/) - **Very outdated, no evidence of further development**
+- dtlTraders (https://dev.bukkit.org/bukkit-plugins/dtltraders/)
 - Dynmap (https://www.spigotmc.org/resources/dynmap.274/)
 - Essentials (https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/)
 - Factions (https://www.spigotmc.org/resources/factions.1900/)
@@ -28,6 +29,7 @@ Depenizen
 - PVP Arena (https://ci2.craftyn.com/job/PVP%20Arena/)
 - PVP Stats (http://dev.bukkit.org/bukkit-plugins/pvp-stats/)
 - Quests (https://www.spigotmc.org/resources/quests.3711/)
+- Residence (https://www.spigotmc.org/resources/residence-1-7-10-up-to-1-10.11480/)
 - ShopKeepers (http://dev.bukkit.org/bukkit-plugins/shopkeepers/)
 - SimpleClans (http://dev.bukkit.org/bukkit-plugins/simpleclans/)
 - SkillAPI (http://dev.bukkit.org/bukkit-plugins/skillapi/)

@@ -287,6 +287,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/Residence.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>net.dandielo</groupId>
+            <artifactId>dtlTraders</artifactId>
+            <version>3.4.6</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/dtlTraders.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
