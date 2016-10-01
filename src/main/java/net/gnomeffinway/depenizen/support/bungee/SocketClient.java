@@ -70,8 +70,9 @@ public class SocketClient implements Runnable {
         if (!isConnected) {
             try {
                 this.socket = new Socket();
-                this.socket.connect(new InetSocketAddress(this.ipAddress, this.port), timeout);
                 this.socket.setSoTimeout(timeout);
+                this.socket.setKeepAlive(true);
+                this.socket.connect(new InetSocketAddress(this.ipAddress, this.port), timeout);
                 this.output = new DataOutputStream(this.socket.getOutputStream());
                 this.input = new DataInputStream(this.socket.getInputStream());
                 this.isConnected = true;
