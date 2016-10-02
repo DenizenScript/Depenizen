@@ -121,7 +121,7 @@ public class dResidence implements dObject {
         // Returns the owner of the residence.
         // @plugin Depenizen, Residence
         // -->
-        else if (attribute.startsWith("leader")) {
+        else if (attribute.startsWith("owner")) {
             return new dPlayer(residence.getOwnerUUID()).getAttribute(attribute.fulfill(1));
         }
 

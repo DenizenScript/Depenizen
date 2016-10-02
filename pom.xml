@@ -294,6 +294,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/dtlTraders.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>me.wiefferink</groupId>
+            <artifactId>areashop</artifactId>
+            <version>2.3.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/AreaShop.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
