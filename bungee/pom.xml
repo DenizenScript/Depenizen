@@ -20,6 +20,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.denizenscript</groupId>
+            <artifactId>depenizen-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
             <version>1.10-SNAPSHOT</version>

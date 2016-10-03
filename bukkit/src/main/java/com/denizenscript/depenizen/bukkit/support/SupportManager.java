@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.support;
 
-import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -21,12 +21,12 @@ import java.util.Map;
 
 public class SupportManager {
 
-    private final Depenizen depenizen;
+    private final DepenizenPlugin depenizen;
     private final PropertyParser propertyParser;
     private final Map<String, Support> additionalTags;
     private boolean hasNewObjects = false;
 
-    public SupportManager(Depenizen depenizen) {
+    public SupportManager(DepenizenPlugin depenizen) {
         this.depenizen = depenizen;
         this.propertyParser = DenizenAPI.getCurrentInstance().getPropertyParser();
         this.additionalTags = new HashMap<String, Support>();

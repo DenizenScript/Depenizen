@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.support.plugins;
 
-import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.external.EZPlaceholderHook;
@@ -18,7 +18,7 @@ public class PlaceholderAPISupport extends Support {
 
     public PlaceholderAPISupport() {
         if (!new PlaceholderHook().hook()) {
-            Depenizen.depenizenLog("Failed to register placeholder for identifier 'denizen'!" +
+            DepenizenPlugin.depenizenLog("Failed to register placeholder for identifier 'denizen'!" +
                     " Denizen PlaceholderAPI placeholders will not function.");
         }
         registerAdditionalTags("placeholder");
@@ -44,7 +44,7 @@ public class PlaceholderAPISupport extends Support {
 
     private static class PlaceholderHook extends EZPlaceholderHook {
         private PlaceholderHook() {
-            super(Depenizen.getCurrentInstance(), "denizen");
+            super(DepenizenPlugin.getCurrentInstance(), "denizen");
         }
 
         @Override

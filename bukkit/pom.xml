@@ -30,6 +30,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.denizenscript</groupId>
+            <artifactId>depenizen-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <type>jar</type>

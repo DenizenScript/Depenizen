@@ -1,9 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.bungee;
 
-import com.denizenscript.depenizen.bukkit.support.bungee.SocketClient;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
-import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
-import com.denizenscript.depenizen.bukkit.support.bungee.packets.ClientPacketOutEventSubscribe;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
@@ -24,22 +21,22 @@ public abstract class BungeeScriptEvent extends BukkitScriptEvent {
 
     @Override
     public void init() {
-        SocketClient socketClient = BungeeSupport.getSocketClient();
-        if (socketClient != null && socketClient.isConnected()) {
-            String name = getName();
-            initializedEvents.put(name, this);
-            socketClient.send(new ClientPacketOutEventSubscribe(ClientPacketOutEventSubscribe.Action.SUBSCRIBE, name));
-        }
+//        SocketClient socketClient = BungeeSupport.getSocketClient();
+//        if (socketClient != null && socketClient.isConnected()) {
+//            String name = getName();
+//            initializedEvents.put(name, this);
+//            socketClient.send(new ClientPacketOutEventSubscribe(ClientPacketOutEventSubscribe.Action.SUBSCRIBE, name));
+//        }
     }
 
     @Override
     public void destroy() {
-        SocketClient socketClient = BungeeSupport.getSocketClient();
-        if (socketClient != null && socketClient.isConnected()) {
-            String name = getName();
-            initializedEvents.remove(name);
-            socketClient.send(new ClientPacketOutEventSubscribe(ClientPacketOutEventSubscribe.Action.UNSUBSCRIBE, name));
-        }
+//        SocketClient socketClient = BungeeSupport.getSocketClient();
+//        if (socketClient != null && socketClient.isConnected()) {
+//            String name = getName();
+//            initializedEvents.remove(name);
+//            socketClient.send(new ClientPacketOutEventSubscribe(ClientPacketOutEventSubscribe.Action.UNSUBSCRIBE, name));
+//        }
     }
 
     public abstract Map<String, String> fire(Map<String, String> context);

@@ -1,13 +1,14 @@
 package com.denizenscript.depenizen.bungee;
 
-import com.denizenscript.depenizen.bungee.packets.ServerPacketOutEvent;
-import com.denizenscript.depenizen.bungee.sockets.ClientConnection;
-import com.denizenscript.depenizen.bungee.sockets.SocketServer;
+import com.denizenscript.depenizen.common.socket.server.ClientConnection;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.event.*;
+import net.md_5.bungee.api.event.PlayerDisconnectEvent;
+import net.md_5.bungee.api.event.PostLoginEvent;
+import net.md_5.bungee.api.event.ProxyPingEvent;
+import net.md_5.bungee.api.event.ServerSwitchEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
@@ -23,7 +24,7 @@ public class EventManager implements Listener {
     private static final Map<String, List<ClientConnection>> eventSubscriptions = new HashMap<String, List<ClientConnection>>();
 
     public EventManager() {
-        ProxyServer.getInstance().getPluginManager().registerListener(Depenizen.getCurrentInstance(), this);
+        ProxyServer.getInstance().getPluginManager().registerListener(DepenizenPlugin.getCurrentInstance(), this);
     }
 
     public static void subscribe(String event, ClientConnection client) {
@@ -103,19 +104,19 @@ public class EventManager implements Listener {
     }
 
     private static Map<String, String> sendEventPacket(boolean getResponse, String name, Map<String, String> context) {
-        long id = nextEventId;
-        nextEventId++;
-        ServerPacketOutEvent packet = new ServerPacketOutEvent(getResponse, id, name, context);
-        SocketServer socketServer = Depenizen.getCurrentInstance().getSocketServer();
-        if (socketServer != null) {
-            for (ClientConnection client : eventSubscriptions.get(name)) {
-                client.send(packet);
-            }
-            if (getResponse) {
-                waitForResponse(id);
-                return eventDeterminations.get(id);
-            }
-        }
+//        long id = nextEventId;
+//        nextEventId++;
+//        ServerPacketOutEvent packet = new ServerPacketOutEvent(getResponse, id, name, context);
+//        SocketServer socketServer = Depenizen.getCurrentInstance().getSocketServer();
+//        if (socketServer != null) {
+//            for (ClientConnection client : eventSubscriptions.get(name)) {
+//                client.send(packet);
+//            }
+//            if (getResponse) {
+//                waitForResponse(id);
+//                return eventDeterminations.get(id);
+//            }
+//        }
         return null;
     }
 

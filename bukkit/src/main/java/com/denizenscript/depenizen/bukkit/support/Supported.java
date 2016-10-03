@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.support;
 
-import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import com.denizenscript.depenizen.bukkit.Settings;
@@ -21,7 +21,7 @@ public class Supported {
     private static SupportManager supportManager;
     private static Map<String, Class<? extends Support>> supportClasses;
 
-    public static void setup(Depenizen depenizen, PluginManager pluginManager, ClassLoader loader) {
+    public static void setup(DepenizenPlugin depenizen, PluginManager pluginManager, ClassLoader loader) {
         getSupportClasses(loader);
         supportManager = new SupportManager(depenizen);
 
@@ -29,10 +29,10 @@ public class Supported {
         for (String name : depenizen.getDescription().getSoftDepend()) {
             try {
                 if (set(name.toUpperCase(), pluginManager.getPlugin(name))) {
-                    Depenizen.depenizenLog(name + " hooked, enabling add-ons.");
+                    DepenizenPlugin.depenizenLog(name + " hooked, enabling add-ons.");
                 }
                 else {
-                    Depenizen.depenizenLog(name + " not found, add-ons will not enable.");
+                    DepenizenPlugin.depenizenLog(name + " not found, add-ons will not enable.");
                 }
             }
             catch (Exception e) {
@@ -43,11 +43,11 @@ public class Supported {
 
         // Register BungeeCord support
         if (Settings.socketEnabled()) {
-            Depenizen.depenizenLog("BungeeCord socket enabled in config, enabling add-ons.");
+            DepenizenPlugin.depenizenLog("BungeeCord socket enabled in config, enabling add-ons.");
             supportManager.register(new BungeeSupport());
         }
         else {
-            Depenizen.depenizenLog("BungeeCord socket disabled in config, add-ons will not enable.");
+            DepenizenPlugin.depenizenLog("BungeeCord socket disabled in config, add-ons will not enable.");
         }
 
         supportManager.registerNewObjects();

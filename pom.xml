@@ -6,7 +6,7 @@
     <artifactId>depenizen-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Depenizen</name>
+    <name>DepenizenParent</name>
     <url>https://github.com/DenizenScript/Depenizen</url>
 
     <properties>
@@ -15,6 +15,7 @@
     </properties>
 
     <modules>
+        <module>common</module>
         <module>bukkit</module>
         <module>bungee</module>
     </modules>

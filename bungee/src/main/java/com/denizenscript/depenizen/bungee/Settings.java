@@ -11,7 +11,7 @@ public class Settings {
     private static final String DEBUG_ENABLED = "Debug.Enabled";
 
     public static boolean debugEnabled() {
-        return Depenizen.getCurrentInstance().getConfig().getBoolean(DEBUG_ENABLED, true);
+        return DepenizenPlugin.getCurrentInstance().getConfig().getBoolean(DEBUG_ENABLED, true);
     }
 
     /*
@@ -26,18 +26,18 @@ public class Settings {
     private static final String SOCKET_PASSWORD = "Socket.Password";
 
     public static boolean socketEnabled() {
-        return Depenizen.getCurrentInstance().getConfig().getBoolean(SOCKET_ENABLED, false);
+        return DepenizenPlugin.getCurrentInstance().getConfig().getBoolean(SOCKET_ENABLED, false);
     }
 
     public static int socketPort() {
-        return Depenizen.getCurrentInstance().getConfig().getInt(SOCKET_PORT, 25578);
+        return DepenizenPlugin.getCurrentInstance().getConfig().getInt(SOCKET_PORT, 25578);
     }
 
     public static int socketMaxClients() {
-        return Depenizen.getCurrentInstance().getConfig().getInt(SOCKET_MAX_CLIENTS, 3);
+        return DepenizenPlugin.getCurrentInstance().getConfig().getInt(SOCKET_MAX_CLIENTS, 3);
     }
 
     public static String socketPassword() {
-        return Depenizen.getCurrentInstance().getConfig().getString(SOCKET_PASSWORD, null);
+        return DepenizenPlugin.getCurrentInstance().getConfig().getString(SOCKET_PASSWORD, null);
     }
 }

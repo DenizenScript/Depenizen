@@ -1,4 +1,4 @@
 name: Depenizen
-main: com.denizenscript.depenizen.bungee.Depenizen
+main: com.denizenscript.depenizen.bungee.DepenizenPlugin
 version: ${project.version} (${BUILD_NUMBER})
 author: Morphan1

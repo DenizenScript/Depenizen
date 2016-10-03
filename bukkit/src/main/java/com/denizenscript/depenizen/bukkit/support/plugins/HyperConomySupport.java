@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.support.plugins;
 
-import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dItem;
@@ -52,7 +52,7 @@ public class HyperConomySupport extends Support {
                 HyperEventHandler eventHandler = hyperConomy.getHC().getHyperEventHandler();
                 eventHandler.registerListener(this);
             }
-        }.runTaskLaterAsynchronously(Depenizen.getCurrentInstance(), 1);
+        }.runTaskLaterAsynchronously(DepenizenPlugin.getCurrentInstance(), 1);
     }
 
     public static HyperPlayer getHyperPlayer(TransactionResponse transactionResponse) {

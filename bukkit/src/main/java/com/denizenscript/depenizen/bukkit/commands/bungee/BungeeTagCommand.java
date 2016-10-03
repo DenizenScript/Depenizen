@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.commands.bungee;
 
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
-import com.denizenscript.depenizen.bukkit.support.bungee.packets.ClientPacketOutTag;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
@@ -85,13 +84,14 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
         dB.report(scriptEntry, getName(), tag.debug() + server.debug());
 
         if (BungeeSupport.isSocketConnected()) {
-            if (!scriptEntry.shouldWaitFor()) {
-                throw new CommandExecutionException("You MUST ~wait for this command!");
-            }
-            int id = nextId++;
-            waitingEntries.put(id, scriptEntry);
-            BungeeSupport.getSocketClient().send(new ClientPacketOutTag(id, tag.asString(), scriptEntry.shouldDebug(),
-                    scriptEntry.getResidingQueue().getAllDefinitions(), server.getName()));
+            dB.echoError("Bungee tag command is currently not available.");
+//            if (!scriptEntry.shouldWaitFor()) {
+//                throw new CommandExecutionException("You MUST ~wait for this command!");
+//            }
+//            int id = nextId++;
+//            waitingEntries.put(id, scriptEntry);
+//            BungeeSupport.getSocketClient().send(new ClientPacketOutTag(id, tag.asString(), scriptEntry.shouldDebug(),
+//                    scriptEntry.getResidingQueue().getAllDefinitions(), server.getName()));
         }
         else {
             dB.echoError("Server is not connected to a BungeeCord Socket.");

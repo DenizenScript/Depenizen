@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.commands.bungee;
 
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
-import com.denizenscript.depenizen.bukkit.support.bungee.packets.ClientPacketOutScript;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
@@ -13,7 +12,6 @@ import net.aufdemrand.denizencore.scripts.commands.BracedCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 
 import java.util.List;
-import java.util.Map;
 
 public class BungeeCommand extends BracedCommand {
 
@@ -115,10 +113,11 @@ public class BungeeCommand extends BracedCommand {
         dB.report(scriptEntry, getName(), serverNames.debug());
 
         if (BungeeSupport.isSocketConnected()) {
-            boolean debug = scriptEntry.shouldDebug();
-            Map<String, String> definitions = scriptEntry.getResidingQueue().getAllDefinitions();
-            ClientPacketOutScript packet = new ClientPacketOutScript(serverNames, debug, bracedCommands, definitions);
-            BungeeSupport.getSocketClient().send(packet);
+            dB.echoError("Bungee command is currently not available.");
+//            boolean debug = scriptEntry.shouldDebug();
+//            Map<String, String> definitions = scriptEntry.getResidingQueue().getAllDefinitions();
+//            ClientPacketOutScript packet = new ClientPacketOutScript(serverNames, debug, bracedCommands, definitions);
+//            BungeeSupport.getSocketClient().send(packet);
         }
         else {
             dB.echoError("Server is not connected to a BungeeCord Socket.");
