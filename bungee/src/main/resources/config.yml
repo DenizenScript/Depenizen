@@ -1,0 +1,15 @@
+# Whether debug information about Depenizen should appear in the
+# BungeeCord console
+Debug:
+  Show: true
+
+# SocketServer configuration, required for sending information
+# between servers without the need for online players on each
+# sender and recipient
+Socket:
+  Enabled: false
+  Port: 25578
+  # How many servers are allowed to be connected to the socket
+  # at one time
+  Max clients: 3
+  Password: MySecretPassword
