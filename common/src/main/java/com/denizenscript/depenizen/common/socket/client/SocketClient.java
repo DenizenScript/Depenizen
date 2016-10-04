@@ -16,6 +16,7 @@ import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.util.List;
+import java.util.Map;
 
 public abstract class SocketClient implements Runnable {
 
@@ -113,7 +114,7 @@ public abstract class SocketClient implements Runnable {
                 byte[] iv = new byte[input.readInt()];
                 input.read(iv);
                 this.encryption = new Encryption(password, ENCRYPTION_SALT, iv);
-                send(new ClientPacketOutRegister(registrationName));
+                send(new ClientPacketOutRegister(registrationName, isBungeeScriptCompatible()));
                 connectionLoop:
                 while (isConnected) {
                     long timePassed;
@@ -189,6 +190,11 @@ public abstract class SocketClient implements Runnable {
                             updateServer.deserialize(data);
                             handleUpdateServer(updateServer.getName(), updateServer.isRegistered());
                             break;
+                        case SCRIPT:
+                            ClientPacketInScript script = new ClientPacketInScript();
+                            script.deserialize(data);
+                            handleScript(script.shouldDebug(), script.getScriptEntries(), script.getDefinitions());
+                            break;
                     }
                 }
                 listenThread = null;
@@ -211,7 +217,11 @@ public abstract class SocketClient implements Runnable {
         }
     }
 
-    public abstract void handleAcceptRegister(String registrationName, List<String> existingServers);
+    protected abstract boolean isBungeeScriptCompatible();
 
-    public abstract void handleUpdateServer(String serverName, boolean registered);
+    protected abstract void handleAcceptRegister(String registrationName, List<String> existingServers);
+
+    protected abstract void handleUpdateServer(String serverName, boolean registered);
+
+    protected abstract void handleScript(boolean shouldDebug, Map<String, List<String>> scriptEntries, Map<String, String> definitions);
 }

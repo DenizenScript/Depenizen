@@ -99,4 +99,15 @@ public class DataDeserializer {
         }
         return stringMap;
     }
+
+    public Map<String, List<String>> readStringListMap() {
+        Map<String, List<String>> stringListMap = new HashMap<String, List<String>>();
+        int size = readInt();
+        for (int i = 0; i < size; i++) {
+            String key = readString();
+            List<String> value = readStringList();
+            stringListMap.put(key, value);
+        }
+        return stringListMap;
+    }
 }

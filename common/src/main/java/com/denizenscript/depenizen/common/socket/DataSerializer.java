@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public class DataSerializer {
@@ -102,6 +103,19 @@ public class DataSerializer {
             for (Map.Entry<String, String> entry : stringMap.entrySet()) {
                 writeString(entry.getKey());
                 writeString(entry.getValue());
+            }
+        }
+    }
+
+    public void writeStringListMap(Map<String, List<String>> stringListMap) {
+        if (stringListMap == null) {
+            writeInt(0);
+        }
+        else {
+            writeInt(stringListMap.size());
+            for (Map.Entry<String, List<String>> entry : stringListMap.entrySet()) {
+                writeString(entry.getKey());
+                writeStringList(entry.getValue());
             }
         }
     }

@@ -6,13 +6,19 @@ import com.denizenscript.depenizen.common.socket.Packet;
 public class ServerPacketInRegister extends Packet {
 
     private String name;
+    private boolean bungeeScriptCompatible;
 
     @Override
     public void deserialize(DataDeserializer deserializer) {
-        this.name = deserializer.readString();
+        name = deserializer.readString();
+        bungeeScriptCompatible = deserializer.readBoolean();
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean isBungeeScriptCompatible() {
+        return bungeeScriptCompatible;
     }
 }

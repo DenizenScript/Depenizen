@@ -6,14 +6,17 @@ import com.denizenscript.depenizen.common.socket.Packet;
 public class ClientPacketOutRegister extends Packet {
 
     private String name;
+    private boolean bungeeScriptCompatible;
 
-    public ClientPacketOutRegister(String name) {
+    public ClientPacketOutRegister(String name, boolean bungeeScriptCompatible) {
         this.name = name;
+        this.bungeeScriptCompatible = bungeeScriptCompatible;
     }
 
     @Override
     public void serialize(DataSerializer serializer) {
         serializer.writeUnsignedByte(ServerBound.REGISTER.getId());
         serializer.writeString(name);
+        serializer.writeBoolean(bungeeScriptCompatible);
     }
 }

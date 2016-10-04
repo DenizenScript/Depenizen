@@ -95,7 +95,7 @@ public class SocketServer implements Runnable {
         Depenizen.getImplementation().debugMessage("New client connected: " + clientId + " (" + client.getInetAddress() + ")");
     }
 
-    public boolean registerClient(int clientId, String name) {
+    public boolean registerClient(int clientId, String name, boolean bungeeScriptCompatible) {
         String nameLwr = name.toLowerCase();
         ClientConnection client = clients[clientId];
         if (registeredClients.containsKey(nameLwr)) {
@@ -106,6 +106,7 @@ public class SocketServer implements Runnable {
         client.trySend(new ServerPacketOutAcceptRegister(true, registeredClients.keySet()));
         registeredClients.put(nameLwr, client);
         client.setClientName(name);
+        client.setBungeeScriptCompatible(bungeeScriptCompatible);
         Depenizen.getImplementation().debugMessage("Client " + clientId + " has registered as '" + name + "'");
         ServerPacketOutUpdateServer packet = new ServerPacketOutUpdateServer(name, true);
         for (ClientConnection clientConnection : new HashSet<ClientConnection>(registeredClients.values())) {

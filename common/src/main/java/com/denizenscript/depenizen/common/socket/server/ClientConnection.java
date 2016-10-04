@@ -4,11 +4,7 @@ import com.denizenscript.depenizen.common.Depenizen;
 import com.denizenscript.depenizen.common.socket.DataDeserializer;
 import com.denizenscript.depenizen.common.socket.DataSerializer;
 import com.denizenscript.depenizen.common.socket.Packet;
-import com.denizenscript.depenizen.common.socket.server.packet.ServerPacketInPing;
-import com.denizenscript.depenizen.common.socket.server.packet.ServerPacketInPong;
-import com.denizenscript.depenizen.common.socket.server.packet.ServerPacketInRegister;
-import com.denizenscript.depenizen.common.socket.server.packet.ServerPacketOutPing;
-import com.denizenscript.depenizen.common.socket.server.packet.ServerPacketOutPong;
+import com.denizenscript.depenizen.common.socket.server.packet.*;
 import com.denizenscript.depenizen.common.util.Utilities;
 
 import java.io.DataInputStream;
@@ -16,11 +12,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
+import java.util.Map;
 
 public class ClientConnection implements Runnable {
 
     private int clientId;
     private String clientName;
+    private boolean bungeeScriptCompatible;
     private SocketServer server;
     private Socket client;
     private Thread listenThread;
@@ -101,6 +99,14 @@ public class ClientConnection implements Runnable {
         return this.clientName != null;
     }
 
+    public void setBungeeScriptCompatible(boolean bungeeScriptCompatible) {
+        this.bungeeScriptCompatible = bungeeScriptCompatible;
+    }
+
+    public boolean isBungeeScriptCompatible() {
+        return bungeeScriptCompatible;
+    }
+
     private int lastPingBit;
 
     @Override
@@ -165,24 +171,39 @@ public class ClientConnection implements Runnable {
                                 server.removeClient(clientId, "Received a second registration packet");
                                 break connectionLoop;
                             }
-                            ServerPacketInRegister registerPacketIn = new ServerPacketInRegister();
-                            registerPacketIn.deserialize(data);
-                            String name = registerPacketIn.getName();
-                            if (!server.registerClient(clientId, name)) {
+                            ServerPacketInRegister register = new ServerPacketInRegister();
+                            register.deserialize(data);
+                            String name = register.getName();
+                            if (!server.registerClient(clientId, name, register.isBungeeScriptCompatible())) {
                                 break connectionLoop;
                             }
                             break;
                         case PING:
-                            ServerPacketInPing pingPacketIn = new ServerPacketInPing();
-                            pingPacketIn.deserialize(data);
-                            send(new ServerPacketOutPong(pingPacketIn.getBit()));
+                            ServerPacketInPing ping = new ServerPacketInPing();
+                            ping.deserialize(data);
+                            send(new ServerPacketOutPong(ping.getBit()));
                             break;
                         case PONG:
-                            ServerPacketInPong pongPacketIn = new ServerPacketInPong();
-                            pongPacketIn.deserialize(data);
-                            if (pongPacketIn.getBit() != lastPingBit) {
-                                server.removeClient(clientId, "Invalid ping bit: Expected " + lastPingBit + ", got " + pongPacketIn.getBit());
+                            ServerPacketInPong pong = new ServerPacketInPong();
+                            pong.deserialize(data);
+                            if (pong.getBit() != lastPingBit) {
+                                server.removeClient(clientId, "Invalid ping bit: Expected " + lastPingBit + ", got " + pong.getBit());
                                 break connectionLoop;
+                            }
+                            break;
+                        case SCRIPT:
+                            ServerPacketInScript script = new ServerPacketInScript();
+                            script.deserialize(data);
+                            ServerPacketOutScript scriptOut = new ServerPacketOutScript(script.getScriptData());
+                            Map<String, ClientConnection> clients = server.getRegisteredClients();
+                            for (String destination : script.getDestinations()) {
+                                destination = destination.toLowerCase();
+                                if (clients.containsKey(destination)) {
+                                    ClientConnection destClient = clients.get(destination);
+                                    if (destClient.isBungeeScriptCompatible()) {
+                                        destClient.trySend(scriptOut);
+                                    }
+                                }
                             }
                             break;
                     }

@@ -18,7 +18,8 @@ public abstract class Packet {
         REGISTER(0),
         PING(1),
         PONG(2),
-        UPDATE_SERVER(3);
+        SCRIPT(3),
+        RUN_SCRIPT(4);
 
         private final int id;
 
@@ -48,7 +49,9 @@ public abstract class Packet {
         ACCEPT_REGISTER(0),
         PING(1),
         PONG(2),
-        UPDATE_SERVER(3);
+        UPDATE_SERVER(3),
+        SCRIPT(4),
+        RUN_SCRIPT(5);
 
         private final int id;
 
