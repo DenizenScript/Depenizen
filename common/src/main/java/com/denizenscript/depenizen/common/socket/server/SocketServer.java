@@ -1,6 +1,8 @@
 package com.denizenscript.depenizen.common.socket.server;
 
 import com.denizenscript.depenizen.common.Depenizen;
+import com.denizenscript.depenizen.common.socket.server.packet.ServerPacketOutAcceptRegister;
+import com.denizenscript.depenizen.common.socket.server.packet.ServerPacketOutUpdateServer;
 import com.denizenscript.depenizen.common.util.Encryption;
 
 import java.io.IOException;
@@ -8,11 +10,15 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 public class SocketServer implements Runnable {
 
     private int port;
     private ClientConnection[] clients;
+    private Map<String, ClientConnection> registeredClients;
     private Encryption encryption;
     private ServerSocket socket;
     private Thread listenThread;
@@ -23,11 +29,13 @@ public class SocketServer implements Runnable {
     public SocketServer(int port, int maxClients, char[] password) throws GeneralSecurityException {
         this.port = port;
         this.clients = new ClientConnection[maxClients];
+        this.registeredClients = new HashMap<String, ClientConnection>();
         this.encryption = new Encryption(password, ENCRYPTION_SALT);
     }
 
     public void start() throws IOException {
         if (!isRunning) {
+            Depenizen.getImplementation().debugMessage("Starting SocketServer on port " + port);
             socket = new ServerSocket(port);
             listenThread = new Thread(this);
             listenThread.start();
@@ -52,6 +60,10 @@ public class SocketServer implements Runnable {
         }
     }
 
+    public Map<String, ClientConnection> getRegisteredClients() {
+        return registeredClients;
+    }
+
     public Encryption getEncryption() {
         return encryption;
     }
@@ -65,32 +77,57 @@ public class SocketServer implements Runnable {
     }
 
     private void addClient(Socket client) {
+        Depenizen.getImplementation().debugMessage("Client attempting to join");
         int clientId = getNewClientId();
         if (clientId == -1) {
             Depenizen.getImplementation().debugMessage("Refused client '" + client.getInetAddress() + "': Maximum clients reached.");
             return;
         }
         ClientConnection clientConnection = new ClientConnection(clientId, this, client);
+        try {
+            clientConnection.start();
+        }
+        catch (IOException e) {
+            Depenizen.getImplementation().debugMessage("Failed to accept client '" + client.getInetAddress() + "':");
+            Depenizen.getImplementation().debugException(e);
+        }
         this.clients[clientId] = clientConnection;
         Depenizen.getImplementation().debugMessage("New client connected: " + clientId + " (" + client.getInetAddress() + ")");
+    }
+
+    public boolean registerClient(int clientId, String name) {
+        String nameLwr = name.toLowerCase();
+        ClientConnection client = clients[clientId];
+        if (registeredClients.containsKey(nameLwr)) {
+            client.trySend(new ServerPacketOutAcceptRegister(false, null));
+            removeClient(clientId, "Tried to register with a name in use: " + name);
+            return false;
+        }
+        client.trySend(new ServerPacketOutAcceptRegister(true, registeredClients.keySet()));
+        registeredClients.put(nameLwr, client);
+        client.setClientName(name);
+        Depenizen.getImplementation().debugMessage("Client " + clientId + " has registered as '" + name + "'");
+        ServerPacketOutUpdateServer packet = new ServerPacketOutUpdateServer(name, true);
+        for (ClientConnection clientConnection : new HashSet<ClientConnection>(registeredClients.values())) {
+            clientConnection.trySend(packet);
+        }
+        return true;
     }
 
     public void removeClient(int clientId, String reason) {
         ClientConnection client = this.clients[clientId];
         client.stop();
-        Depenizen.getImplementation().debugMessage("Client " + (/*client.isRegistered() ? client.getClientName() : */clientId)
+        Depenizen.getImplementation().debugMessage("Client " + (client.isRegistered() ? client.getClientName() : clientId)
                 + " has disconnected from SocketServer: " + reason);
         this.clients[clientId] = null;
-        /*
         if (client.isRegistered()) {
             String name = client.getClientName();
             registeredClients.remove(name.toLowerCase());
-            ServerPacketOutServer packet = new ServerPacketOutServer(ServerPacketOutServer.Action.DISCONNECTED, name);
-            for (ClientConnection clientConnection : registeredClients.values()) {
-                clientConnection.send(packet);
+            ServerPacketOutUpdateServer packet = new ServerPacketOutUpdateServer(name, false);
+            for (ClientConnection clientConnection : new HashSet<ClientConnection>(registeredClients.values())) {
+                clientConnection.trySend(packet);
             }
         }
-        */
     }
 
     @Override
@@ -99,6 +136,7 @@ public class SocketServer implements Runnable {
             isRunning = true;
             while (isRunning) {
                 try {
+                    Depenizen.getImplementation().debugMessage("Waiting for next client...");
                     addClient(socket.accept());
                 }
                 catch (IOException e) {

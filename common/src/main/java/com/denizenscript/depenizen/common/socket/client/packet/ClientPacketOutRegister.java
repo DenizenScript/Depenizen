@@ -3,17 +3,17 @@ package com.denizenscript.depenizen.common.socket.client.packet;
 import com.denizenscript.depenizen.common.socket.DataSerializer;
 import com.denizenscript.depenizen.common.socket.Packet;
 
-public class ClientPingPacketOut extends Packet {
+public class ClientPacketOutRegister extends Packet {
 
-    private int bit;
+    private String name;
 
-    public ClientPingPacketOut(int bit) {
-        this.bit = bit;
+    public ClientPacketOutRegister(String name) {
+        this.name = name;
     }
 
     @Override
     public void serialize(DataSerializer serializer) {
-        serializer.writeUnsignedByte(ServerBound.PING.getId());
-        serializer.writeUnsignedByte(bit);
+        serializer.writeUnsignedByte(ServerBound.REGISTER.getId());
+        serializer.writeString(name);
     }
 }

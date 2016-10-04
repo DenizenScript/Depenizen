@@ -1,19 +1,19 @@
-package com.denizenscript.depenizen.common.socket.server.packet;
+package com.denizenscript.depenizen.common.socket.client.packet;
 
 import com.denizenscript.depenizen.common.socket.DataSerializer;
 import com.denizenscript.depenizen.common.socket.Packet;
 
-public class ServerPingPacketOut extends Packet {
+public class ClientPacketOutPong extends Packet {
 
     private int bit;
 
-    public ServerPingPacketOut(int bit) {
+    public ClientPacketOutPong(int bit) {
         this.bit = bit;
     }
 
     @Override
     public void serialize(DataSerializer serializer) {
-        serializer.writeUnsignedByte(ClientBound.PING.getId());
+        serializer.writeUnsignedByte(ServerBound.PONG.getId());
         serializer.writeUnsignedByte(bit);
     }
 }

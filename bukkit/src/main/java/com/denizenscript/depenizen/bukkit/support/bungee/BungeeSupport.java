@@ -102,7 +102,7 @@ public class BungeeSupport extends Support {
                 return;
             }
             try {
-                socketClient = new SocketClient(ipAddress, Settings.socketPort(), name, password.toCharArray());
+                socketClient = new BukkitSocketClient(ipAddress, Settings.socketPort(), name, password.toCharArray());
                 socketClient.connect();
             }
             catch (Exception e) {

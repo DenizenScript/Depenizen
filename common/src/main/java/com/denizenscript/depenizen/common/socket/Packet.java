@@ -15,7 +15,10 @@ public abstract class Packet {
 
     public enum ServerBound {
 
-        PING(0);
+        REGISTER(0),
+        PING(1),
+        PONG(2),
+        UPDATE_SERVER(3);
 
         private final int id;
 
@@ -42,7 +45,10 @@ public abstract class Packet {
 
     public enum ClientBound {
 
-        PING(0);
+        ACCEPT_REGISTER(0),
+        PING(1),
+        PONG(2),
+        UPDATE_SERVER(3);
 
         private final int id;
 

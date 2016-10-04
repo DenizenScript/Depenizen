@@ -12,23 +12,32 @@ import java.security.spec.KeySpec;
 
 public class Encryption {
 
-    private final SecretKey secret;
-    private final Cipher cipher;
-    private final byte[] iv;
+    private SecretKey secret;
+    private Cipher cipher;
+    private byte[] iv;
+
+    public Encryption(char[] password, byte[] salt, byte[] iv) throws GeneralSecurityException {
+        init(password, salt);
+        this.iv = iv;
+    }
 
     public Encryption(char[] password, byte[] salt) throws GeneralSecurityException {
-        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-        KeySpec spec = new PBEKeySpec(password, salt, 65536, 256);
-        SecretKey tmp = factory.generateSecret(spec);
-        this.secret = new SecretKeySpec(tmp.getEncoded(), "AES");
-        this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        init(password, salt);
         cipher.init(Cipher.ENCRYPT_MODE, secret);
         AlgorithmParameters params = cipher.getParameters();
         this.iv = params.getParameterSpec(IvParameterSpec.class).getIV();
     }
 
+    private void init(char[] password, byte[] salt) throws GeneralSecurityException {
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        KeySpec spec = new PBEKeySpec(password, salt, 65536, 128);
+        SecretKey tmp = factory.generateSecret(spec);
+        this.secret = new SecretKeySpec(tmp.getEncoded(), "AES");
+        this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+    }
+
     public byte[] encrypt(byte[] message) throws GeneralSecurityException {
-        cipher.init(Cipher.ENCRYPT_MODE, secret);
+        cipher.init(Cipher.ENCRYPT_MODE, secret, new IvParameterSpec(iv));
         return cipher.doFinal(message);
     }
 

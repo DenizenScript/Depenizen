@@ -1,9 +1,9 @@
-package com.denizenscript.depenizen.common.socket.client.packet;
+package com.denizenscript.depenizen.common.socket.server.packet;
 
 import com.denizenscript.depenizen.common.socket.DataDeserializer;
 import com.denizenscript.depenizen.common.socket.Packet;
 
-public class ClientPingPacketIn extends Packet {
+public class ServerPacketInPong extends Packet {
 
     private int bit;
 

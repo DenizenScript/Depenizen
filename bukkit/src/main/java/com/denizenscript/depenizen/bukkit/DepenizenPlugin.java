@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.support.Supported;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.common.Depenizen;
 import com.denizenscript.depenizen.common.DepenizenImplementation;
-import net.aufdemrand.denizencore.utilities.debugging.dB;
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

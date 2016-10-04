@@ -4,12 +4,10 @@ import com.denizenscript.depenizen.common.Depenizen;
 import com.denizenscript.depenizen.common.socket.DataDeserializer;
 import com.denizenscript.depenizen.common.socket.DataSerializer;
 import com.denizenscript.depenizen.common.socket.Packet;
-import com.denizenscript.depenizen.common.socket.client.packet.ClientPingPacketIn;
-import com.denizenscript.depenizen.common.socket.client.packet.ClientPingPacketOut;
+import com.denizenscript.depenizen.common.socket.client.packet.*;
 import com.denizenscript.depenizen.common.util.Encryption;
+import com.denizenscript.depenizen.common.util.Utilities;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -17,12 +15,15 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
+import java.util.List;
 
-public class SocketClient implements Runnable {
+public abstract class SocketClient implements Runnable {
 
     private String ipAddress;
     private int port;
     private String registrationName;
+    private boolean registered;
+    private char[] password;
     private Encryption encryption;
     private Socket socket;
     private Thread listenThread;
@@ -36,7 +37,7 @@ public class SocketClient implements Runnable {
         this.ipAddress = ipAddress;
         this.port = port;
         this.registrationName = name;
-        this.encryption = new Encryption(password, ENCRYPTION_SALT);
+        this.password = password;
     }
 
     public void connect() throws IOException {
@@ -44,8 +45,8 @@ public class SocketClient implements Runnable {
             socket = new Socket(ipAddress, port);
             listenThread = new Thread(this);
             listenThread.start();
-            output = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            output = new DataOutputStream(socket.getOutputStream());
+            input = new DataInputStream(socket.getInputStream());
         }
     }
 
@@ -53,17 +54,24 @@ public class SocketClient implements Runnable {
         return isConnected;
     }
 
-    public void send(Packet packet) {
+    public void send(Packet packet) throws GeneralSecurityException, IOException {
+        DataSerializer data = new DataSerializer();
+        packet.serialize(data);
+        byte[] encryptedData = encryption.encrypt(data.toByteArray());
+        output.writeInt(encryptedData.length);
+        output.write(encryptedData);
+        output.flush();
+    }
+
+    public void trySend(Packet packet) {
         try {
-            DataSerializer data = new DataSerializer();
-            packet.serialize(data);
-            byte[] encryptedData = encryption.encrypt(data.toByteArray());
-            output.writeInt(encryptedData.length);
-            output.write(encryptedData);
-            output.flush();
+            send(packet);
+        }
+        catch (IOException e) {
+            close("Server socket closed");
         }
         catch (Exception e) {
-            close("Error sending data to server: " + e.getMessage());
+            close("Failed to send data due to an exception");
             Depenizen.getImplementation().debugException(e);
         }
     }
@@ -91,8 +99,7 @@ public class SocketClient implements Runnable {
         }
     }
 
-    private long lastPingValue;
-    private long lastPingTime;
+    private int lastPingBit;
 
     @Override
     public void run() {
@@ -100,7 +107,35 @@ public class SocketClient implements Runnable {
             isConnected = true;
             byte[] buffer;
             try {
+                while (input.available() <= 0) {
+                    Thread.sleep(1);
+                }
+                byte[] iv = new byte[input.readInt()];
+                input.read(iv);
+                this.encryption = new Encryption(password, ENCRYPTION_SALT, iv);
+                send(new ClientPacketOutRegister(registrationName));
+                connectionLoop:
                 while (isConnected) {
+                    long timePassed;
+                    boolean pinged = false;
+                    long start = System.currentTimeMillis();
+                    while (input.available() <= 0) {
+                        if (!isConnected) {
+                            break connectionLoop;
+                        }
+                        timePassed = System.currentTimeMillis() - start;
+                        if (timePassed > 30 * 1000 && !pinged) {
+                            lastPingBit = Utilities.getRandomUnsignedByte();
+                            send(new ClientPacketOutPing(lastPingBit));
+                            Depenizen.getImplementation().debugMessage("Sent ping: " + lastPingBit);
+                            pinged = true;
+                        }
+                        if (timePassed > 60 * 1000) {
+                            close("Ping timed out!");
+                            break connectionLoop;
+                        }
+                        Thread.sleep(50);
+                    }
                     int receivedEncryptedLength = this.input.readInt();
                     if (receivedEncryptedLength == -1) {
                         close("Connection failed");
@@ -113,19 +148,46 @@ public class SocketClient implements Runnable {
                     byte[] decryptedBytes = encryption.decrypt(encryptedBytes);
                     DataDeserializer data = new DataDeserializer(decryptedBytes);
                     int packetId = data.readUnsignedByte();
-                    Packet.ServerBound packetType = Packet.ServerBound.getById(packetId);
+                    Packet.ClientBound packetType = Packet.ClientBound.getById(packetId);
                     if (packetType == null) {
                         close("Received invalid packet from server: " + packetId);
-                        return;
+                        break;
                     }
                     switch (packetType) {
+                        case ACCEPT_REGISTER:
+                            if (registered) {
+                                close("Server tried to accept registration twice");
+                                break connectionLoop;
+                            }
+                            ClientPacketInAcceptRegister acceptRegister = new ClientPacketInAcceptRegister();
+                            acceptRegister.deserialize(data);
+                            if (acceptRegister.isAccepted()) {
+                                Depenizen.getImplementation().debugMessage("Successfully registered as '" + registrationName + "'");
+                                handleAcceptRegister(registrationName, acceptRegister.getExistingServers());
+                                registered = true;
+                            }
+                            else {
+                                close("Specified name in config.yml is already registered to the server");
+                                break connectionLoop;
+                            }
+                            break;
                         case PING:
-                            ClientPingPacketIn pingPacketIn = new ClientPingPacketIn();
-                            pingPacketIn.deserialize(data);
-                            send(new ClientPingPacketOut(pingPacketIn.getBit()));
-                            long current = System.currentTimeMillis();
-                            lastPingValue = current - lastPingTime;
-                            lastPingTime = current;
+                            ClientPacketInPing ping = new ClientPacketInPing();
+                            ping.deserialize(data);
+                            send(new ClientPacketOutPong(ping.getBit()));
+                            break;
+                        case PONG:
+                            ClientPacketInPong pong = new ClientPacketInPong();
+                            pong.deserialize(data);
+                            if (pong.getBit() != lastPingBit) {
+                                close("Invalid ping bit: Expected " + lastPingBit + ", got " + pong.getBit());
+                                break connectionLoop;
+                            }
+                            break;
+                        case UPDATE_SERVER:
+                            ClientPacketInUpdateServer updateServer = new ClientPacketInUpdateServer();
+                            updateServer.deserialize(data);
+                            handleUpdateServer(updateServer.getName(), updateServer.isRegistered());
                             break;
                     }
                 }
@@ -148,4 +210,8 @@ public class SocketClient implements Runnable {
             }
         }
     }
+
+    public abstract void handleAcceptRegister(String registrationName, List<String> existingServers);
+
+    public abstract void handleUpdateServer(String serverName, boolean registered);
 }

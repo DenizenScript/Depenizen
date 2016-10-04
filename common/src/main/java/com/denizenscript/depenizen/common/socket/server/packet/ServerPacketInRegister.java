@@ -3,16 +3,16 @@ package com.denizenscript.depenizen.common.socket.server.packet;
 import com.denizenscript.depenizen.common.socket.DataDeserializer;
 import com.denizenscript.depenizen.common.socket.Packet;
 
-public class ServerPingPacketIn extends Packet {
+public class ServerPacketInRegister extends Packet {
 
-    private int bit;
+    private String name;
 
     @Override
     public void deserialize(DataDeserializer deserializer) {
-        bit = deserializer.readUnsignedByte();
+        this.name = deserializer.readString();
     }
 
-    public int getBit() {
-        return bit;
+    public String getName() {
+        return name;
     }
 }
