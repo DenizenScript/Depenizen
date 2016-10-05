@@ -5,7 +5,7 @@ import com.denizenscript.depenizen.common.Depenizen;
 import com.denizenscript.depenizen.common.DepenizenImplementation;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.game.state.GameStartedServerEvent;
+import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 
@@ -23,7 +23,7 @@ public class Depenizen2Sponge implements DepenizenImplementation {
     public static Depenizen2Sponge instance;
 
     @Listener
-    public void onServerStart(GameStartedServerEvent event) {
+    public void onServerStart(GameInitializationEvent event) {
         // Setup
         instance = this;
         plugin = Sponge.getPluginManager().getPlugin(PluginID).orElse(null);
