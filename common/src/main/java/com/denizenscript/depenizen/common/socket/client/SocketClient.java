@@ -212,6 +212,17 @@ public abstract class SocketClient implements Runnable {
                             runScript.deserialize(data);
                             handleRunScript(runScript.getScriptName(), runScript.getDefinitions(), runScript.shouldDebug());
                             break;
+                        case TAG:
+                            ClientPacketInTag tag = new ClientPacketInTag();
+                            tag.deserialize(data);
+                            String result = handleTag(tag.getTag(), tag.shouldDebug(), tag.getDefinitions());
+                            send(new ClientPacketOutParsedTag(tag.getFrom(), tag.getId(), result));
+                            break;
+                        case PARSED_TAG:
+                            ClientPacketInParsedTag parsedTag = new ClientPacketInParsedTag();
+                            parsedTag.deserialize(data);
+                            handleParsedTag(parsedTag.getId(), parsedTag.getResult());
+                            break;
                     }
                 }
                 listenThread = null;
@@ -249,4 +260,8 @@ public abstract class SocketClient implements Runnable {
     protected abstract void handleScript(boolean shouldDebug, Map<String, List<String>> scriptEntries, Map<String, String> definitions);
 
     protected abstract void handleRunScript(String scriptName, Map<String, String> definitions, boolean shouldDebug);
+
+    protected abstract String handleTag(String tag, boolean shouldDebug, Map<String, String> definitions);
+
+    protected abstract void handleParsedTag(int id, String result);
 }

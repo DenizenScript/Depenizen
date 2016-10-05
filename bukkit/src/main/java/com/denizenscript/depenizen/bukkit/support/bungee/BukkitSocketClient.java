@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.support.bungee;
 
 import com.denizenscript.depenizen.bukkit.Settings;
+import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
@@ -10,6 +11,7 @@ import net.aufdemrand.denizencore.scripts.ScriptRegistry;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
 import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
+import net.aufdemrand.denizencore.tags.TagManager;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 
 import java.security.GeneralSecurityException;
@@ -113,5 +115,15 @@ public class BukkitSocketClient extends SocketClient {
         ScriptQueue queue = InstantQueue.getQueue(ScriptQueue.getNextId(scriptContainer.getName())).addEntries(scriptEntries);
         queue.getAllDefinitions().putAll(definitions);
         queue.start();
+    }
+
+    @Override
+    protected String handleTag(String tag, boolean shouldDebug, Map<String, String> definitions) {
+        return TagManager.tag(tag, new BungeeTagContext(shouldDebug, new DefinitionsWrapper(definitions)));
+    }
+
+    @Override
+    protected void handleParsedTag(int id, String result) {
+        BungeeTagCommand.returnTag(id, result);
     }
 }

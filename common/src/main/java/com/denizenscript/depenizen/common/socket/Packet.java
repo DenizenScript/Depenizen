@@ -19,7 +19,9 @@ public abstract class Packet {
         PING(1),
         PONG(2),
         SCRIPT(3),
-        RUN_SCRIPT(4);
+        RUN_SCRIPT(4),
+        TAG(5),
+        PARSED_TAG(6);
 
         private final int id;
 
@@ -51,7 +53,9 @@ public abstract class Packet {
         PONG(2),
         UPDATE_SERVER(3),
         SCRIPT(4),
-        RUN_SCRIPT(5);
+        RUN_SCRIPT(5),
+        TAG(6),
+        PARSED_TAG(7);
 
         private final int id;
 

@@ -218,6 +218,26 @@ public class ClientConnection implements Runnable {
                                 }
                             }
                             break;
+                        case TAG:
+                            ServerPacketInTag tag = new ServerPacketInTag();
+                            tag.deserialize(data);
+                            Map<String, ClientConnection> tagClients = server.getRegisteredClients();
+                            String tagDestination = tag.getDestination().toLowerCase();
+                            if (tagClients.containsKey(tagDestination)) {
+                                ServerPacketOutTag tagOut = new ServerPacketOutTag(clientName, tag.getTagData());
+                                tagClients.get(tagDestination).send(tagOut);
+                            }
+                            break;
+                        case PARSED_TAG:
+                            ServerPacketInParsedTag parsedTag = new ServerPacketInParsedTag();
+                            parsedTag.deserialize(data);
+                            Map<String, ClientConnection> parsedTagClients = server.getRegisteredClients();
+                            String parsedTagDestination = parsedTag.getDestination().toLowerCase();
+                            if (parsedTagClients.containsKey(parsedTagDestination)) {
+                                ServerPacketOutParsedTag parsedTagOut = new ServerPacketOutParsedTag(parsedTag.getResultData());
+                                parsedTagClients.get(parsedTagDestination).send(parsedTagOut);
+                            }
+                            break;
                     }
                 }
                 listenThread = null;

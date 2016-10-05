@@ -32,7 +32,7 @@ public class DepenizenPlugin extends Plugin implements DepenizenImplementation {
             dB.echoError(e);
         }
         this.startSocket();
-        EventManager eventManager = new EventManager();
+        getProxy().getPluginManager().registerListener(this, new EventManager());
     }
 
     @Override

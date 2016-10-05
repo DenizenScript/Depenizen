@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bungee;
 
 import com.denizenscript.depenizen.common.socket.server.ClientConnection;
-import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -22,10 +21,6 @@ public class EventManager implements Listener {
     private static long nextEventId;
     private static final Map<Long, Map<String, String>> eventDeterminations = new HashMap<Long, Map<String, String>>();
     private static final Map<String, List<ClientConnection>> eventSubscriptions = new HashMap<String, List<ClientConnection>>();
-
-    public EventManager() {
-        ProxyServer.getInstance().getPluginManager().registerListener(DepenizenPlugin.getCurrentInstance(), this);
-    }
 
     public static void subscribe(String event, ClientConnection client) {
         if (!eventSubscriptions.containsKey(event))
