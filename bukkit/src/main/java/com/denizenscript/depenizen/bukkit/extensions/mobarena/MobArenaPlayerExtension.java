@@ -54,7 +54,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns whether the player is in an arena.
-            // @plugin Depenizen, MobArena
+            // @Plugin DepenizenBukkit, MobArena
             // -->
             if (attribute.startsWith("in_arena")) {
                 return new Element(arena != null)
@@ -69,7 +69,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 // @description
                 // Returns the arena the player is in.
                 // NOTE: requires the player to be in an arena.
-                // @plugin Depenizen, MobArena
+                // @Plugin DepenizenBukkit, MobArena
                 // -->
                 if (attribute.startsWith("current_arena")) {
                     return new MobArenaArena(arena).getAttribute(attribute.fulfill(1));
@@ -81,7 +81,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 // @description
                 // Returns the name of the class the player is using.
                 // NOTE: requires the player to be in an arena.
-                // @plugin Depenizen, MobArena
+                // @Plugin DepenizenBukkit, MobArena
                 // -->
                 else if (attribute.startsWith("class")) {
                     return new Element(new ArenaPlayer(player.getPlayerEntity(), arena, plugin).getStats().getClassName())
@@ -108,7 +108,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the number of kills the player has in the arena.
-                // @plugin Depenizen, MobArena
+                // @Plugin DepenizenBukkit, MobArena
                 // -->
                 if (attribute.startsWith("kills")) {
                     return new Element(stats.getInt("kills")).getAttribute(attribute.fulfill(1));
@@ -119,7 +119,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the amount of damage the player has dealt in the arena.
-                // @plugin Depenizen, MobArena
+                // @Plugin DepenizenBukkit, MobArena
                 // -->
                 else if (attribute.startsWith("damage_done")) {
                     return new Element(stats.getInt("dmgDone")).getAttribute(attribute.fulfill(1));
@@ -130,7 +130,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the amount of damage the player has taken in the arena.
-                // @plugin Depenizen, MobArena
+                // @Plugin DepenizenBukkit, MobArena
                 // -->
                 else if (attribute.startsWith("damage_taken")) {
                     return new Element(stats.getInt("dmgTaken")).getAttribute(attribute.fulfill(1));
@@ -141,7 +141,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the wave the player reached in their last match in the arena.
-                // @plugin Depenizen, MobArena
+                // @Plugin DepenizenBukkit, MobArena
                 // -->
                 else if (attribute.startsWith("last_wave")) {
                     return new Element(stats.getInt("lastWave")).getAttribute(attribute.fulfill(1));
@@ -152,7 +152,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the number of times the player has swung their weapon in the arena.
-                // @plugin Depenizen, MobArena
+                // @Plugin DepenizenBukkit, MobArena
                 // -->
                 else if (attribute.startsWith("times_swung")) {
                     return new Element(stats.getInt("swings")).getAttribute(attribute.fulfill(1));
@@ -163,7 +163,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the number of times the player has hit an enemy in the arena.
-                // @plugin Depenizen, MobArena
+                // @Plugin DepenizenBukkit, MobArena
                 // -->
                 else if (attribute.startsWith("times_hit")) {
                     return new Element(stats.getInt("hits")).getAttribute(attribute.fulfill(1));

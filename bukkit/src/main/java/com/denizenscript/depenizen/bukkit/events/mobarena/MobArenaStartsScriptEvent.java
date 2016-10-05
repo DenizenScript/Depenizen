@@ -27,7 +27,7 @@ import org.bukkit.event.Listener;
 // @Context
 // <context.arena> Returns the arena which started.
 //
-// @Plugin Depenizen, MobArena
+// @Plugin DepenizenBukkit, MobArena
 //
 // -->
 

@@ -43,7 +43,7 @@ public class TownyCuboidExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the cuboid contains any town at all.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         if (attribute.startsWith("has_town")) {
             for (Location location : cuboid.getBlockLocations()) {
@@ -59,7 +59,7 @@ public class TownyCuboidExtension extends dObjectExtension {
         // @returns dList(dTown)
         // @description
         // Returns all the towns within the cuboid.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         if (attribute.startsWith("list_towns")) {
             dList list = new dList();

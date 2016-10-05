@@ -150,7 +150,7 @@ public class JobsJob implements dObject {
                 // @returns Element(Number)
                 // @description
                 // Returns the maximum experience a player can get in a specified job.
-                // @plugin Depenizen, Jobs
+                // @Plugin DepenizenBukkit, Jobs
                 // -->
                 if (attribute.startsWith("max")) {
                     return new Element(jobProgression.getMaxExperience())
@@ -162,7 +162,7 @@ public class JobsJob implements dObject {
                 // @returns Element(Number)
                 // @description
                 // Returns the current experience level a player has in a specified job.
-                // @plugin Depenizen, Jobs
+                // @Plugin DepenizenBukkit, Jobs
                 // -->
                 if (attribute.startsWith("level")) {
                     return new Element(jobProgression.getLevel())
@@ -174,7 +174,7 @@ public class JobsJob implements dObject {
                 // @returns Element(Double)
                 // @description
                 // Returns the current experience a player has in a specified job.
-                // @plugin Depenizen, Jobs
+                // @Plugin DepenizenBukkit, Jobs
                 // -->
                 return new Element(jobProgression.getExperience()).getAttribute(attribute);
             }
@@ -185,7 +185,7 @@ public class JobsJob implements dObject {
         // @returns Element(ChatColor)
         // @description
         // Returns the ChatColor of the job.
-        // @plugin Depenizen, Jobs
+        // @Plugin DepenizenBukkit, Jobs
         // -->
         if (attribute.startsWith("color")) {
             return new Element(job.getChatColor().toString())
@@ -197,7 +197,7 @@ public class JobsJob implements dObject {
         // @returns Element
         // @description
         // Returns the description of the job.
-        // @plugin Depenizen, Jobs
+        // @Plugin DepenizenBukkit, Jobs
         // -->
         else if (attribute.startsWith("description")) {
             return new Element(job.getDescription()).getAttribute(attribute.fulfill(1));
@@ -211,7 +211,7 @@ public class JobsJob implements dObject {
             // @returns Element
             // @description
             // Returns the shortened name of the job.
-            // @plugin Depenizen, Jobs
+            // @Plugin DepenizenBukkit, Jobs
             // -->
             if (attribute.startsWith("short")) {
                 return new Element(job.getShortName())
@@ -223,7 +223,7 @@ public class JobsJob implements dObject {
             // @returns Element
             // @description
             // Returns the name of the job.
-            // @plugin Depenizen, Jobs
+            // @Plugin DepenizenBukkit, Jobs
             // -->
             return new Element(job.getName()).getAttribute(attribute);
         }
@@ -234,7 +234,7 @@ public class JobsJob implements dObject {
         // @description
         // Always returns 'Job' for JobsJob objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Depenizen, Jobs
+        // @Plugin DepenizenBukkit, Jobs
         // -->
         if (attribute.startsWith("type")) {
             return new Element("Job").getAttribute(attribute.fulfill(1));

@@ -146,7 +146,7 @@ public class WorldGuardRegion implements dObject {
         // @group conversion
         // @description
         // Converts a cuboid-shaped region to a dCuboid.
-        // @plugin Depenizen, WorldGuard
+        // @Plugin DepenizenBukkit, WorldGuard
         // -->
         if (attribute.startsWith("cuboid") || attribute.startsWith("as_cuboid")) { // TODO: Scrap as_cuboid
             if (!(region instanceof ProtectedCuboidRegion)) {
@@ -164,7 +164,7 @@ public class WorldGuardRegion implements dObject {
         // @returns Element
         // @description
         // Gets the ID name of the region.
-        // @plugin Depenizen, WorldGuard
+        // @Plugin DepenizenBukkit, WorldGuard
         // -->
         if (attribute.startsWith("id")) {
             return new Element(region.getId()).getAttribute(attribute.fulfill(1));
@@ -175,7 +175,7 @@ public class WorldGuardRegion implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Gets a list of all members of a region. (Members are permitted to build, etc.)
-        // @plugin Depenizen, WorldGuard
+        // @Plugin DepenizenBukkit, WorldGuard
         // -->
         if (attribute.startsWith("members")) {
             dList list = new dList();
@@ -190,7 +190,7 @@ public class WorldGuardRegion implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Gets a list of all owners of a region. (Owners are permitted to build, edit settings, etc.)
-        // @plugin Depenizen, WorldGuard
+        // @Plugin DepenizenBukkit, WorldGuard
         // -->
         if (attribute.startsWith("owners")) {
             dList list = new dList();
@@ -206,7 +206,7 @@ public class WorldGuardRegion implements dObject {
         // @description
         // Always returns 'Region' for WorldGuardRegion objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Depenizen, WorldGuard
+        // @Plugin DepenizenBukkit, WorldGuard
         // -->
         if (attribute.startsWith("type")) {
             return new Element("Region").getAttribute(attribute.fulfill(1));
@@ -217,7 +217,7 @@ public class WorldGuardRegion implements dObject {
         // @returns dWorld
         // @description
         // Gets the dWorld this region is in.
-        // @plugin Depenizen, WorldGuard
+        // @Plugin DepenizenBukkit, WorldGuard
         // -->
         if (attribute.startsWith("world")) {
             return new dWorld(world).getAttribute(attribute.fulfill(1));

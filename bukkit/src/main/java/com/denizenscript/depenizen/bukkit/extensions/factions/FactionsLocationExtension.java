@@ -37,7 +37,7 @@ public class FactionsLocationExtension extends dObjectExtension {
         // @returns dFaction
         // @description
         // Returns the faction at the location. (Can also be SafeZone, WarZone, or Wilderness)
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         if (attribute.startsWith("faction")) {
             return new dFaction(BoardColl.get().getFactionAt(PS.valueOf(location)))

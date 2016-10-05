@@ -46,7 +46,7 @@ public class AreaShopPlayerExtension extends dObjectExtension {
             // @returns dList(AreaShop)
             // @description
             // Returns a list of AreaShops the player owns.
-            // @Plugin Depenizen, AreaShop
+            // @Plugin DepenizenBukkit, AreaShop
             // -->
             if (attribute.startsWith("owned")) {
                 dList list = new dList();

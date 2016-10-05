@@ -35,7 +35,7 @@ public class ProxyPingScriptEvent extends BungeeScriptEvent {
     // "VERSION:" + Element to change the response for the server version.
     // "MOTD:" + Element to change the MOTD.
     //
-    // @Plugin Depenizen, BungeeCord
+    // @Plugin DepenizenBukkit, DepenizenBungee
     // -->
 
 

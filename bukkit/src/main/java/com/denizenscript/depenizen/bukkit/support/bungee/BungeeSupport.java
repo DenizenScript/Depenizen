@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.support.bungee;
 import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import com.denizenscript.depenizen.bukkit.Settings;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeCommand;
+import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeRunCommand;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
 import com.denizenscript.depenizen.bukkit.events.bungee.PlayerDisconnectScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.bungee.PostLoginScriptEvent;
@@ -23,7 +24,8 @@ import org.bukkit.Bukkit;
 public class BungeeSupport extends Support {
 
     public BungeeSupport() {
-        new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 2);
+        new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 1);
+        new BungeeRunCommand().activate().as("BUNGEERUN").withOptions("bungeerun [<server>|...] [<script_name>]", 2);
         new BungeeTagCommand().activate().as("BUNGEETAG").withOptions("bungeetag [<tag>] [server:<server>]", 2);
         registerObjects(dServer.class);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(DepenizenPlugin.getCurrentInstance(), "BungeeCord");
@@ -48,7 +50,7 @@ public class BungeeSupport extends Support {
             // @returns dServer
             // @description
             // Returns the current server as a BungeeCord dServer.
-            // @plugin Depenizen, BungeeCord
+            // @Plugin DepenizenBukkit, DepenizenBungee
             // -->
             if (attribute.startsWith("server")) {
                 dServer server = dServer.getServerFromName(Settings.socketName());
@@ -63,7 +65,7 @@ public class BungeeSupport extends Support {
             // @returns dList(dServer)
             // @description
             // Lists all servers connected to the BungeeCord network.
-            // @plugin Depenizen, BungeeCord
+            // @Plugin DepenizenBukkit, DepenizenBungee
             // -->
             if (attribute.startsWith("list_servers")) {
                 dList list = new dList();

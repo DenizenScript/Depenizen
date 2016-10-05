@@ -35,7 +35,7 @@ public class BattleNightSupport extends Support {
                 // @returns Element
                 // @description
                 // Returns the battle's arena name.
-                // @plugin Depenizen, BattleNight
+                // @Plugin DepenizenBukkit, BattleNight
                 // -->
                 if (attribute.startsWith("arena")) {
                     return new Element(api.getBattle().getArena().getName())
@@ -47,7 +47,7 @@ public class BattleNightSupport extends Support {
                 // @returns Duration
                 // @description
                 // Returns the amount of time the battle has left.
-                // @plugin Depenizen, BattleNight
+                // @Plugin DepenizenBukkit, BattleNight
                 // -->
                 else if (attribute.startsWith("timeremaining") || attribute.startsWith("time_remaining")) {
                     return new Duration(BattleNight.instance.getAPI().getBattle().getTimer().getTimeRemaining())
@@ -60,7 +60,7 @@ public class BattleNightSupport extends Support {
             // @returns Element
             // @description
             // Returns true if a battle is in progress.
-            // @plugin Depenizen, BattleNight
+            // @Plugin DepenizenBukkit, BattleNight
             // -->
             else if (attribute.startsWith("inprogress") || attribute.startsWith("in_progress")) {
                 return new Element(api.getBattle().isInProgress())

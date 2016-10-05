@@ -29,7 +29,7 @@ import org.bukkit.event.Listener;
 // @Context
 // <context.fighters> returns a list of all fighters in the arena.
 //
-// @Plugin Depenizen, PVPArena
+// @Plugin DepenizenBukkit, PVPArena
 //
 // -->
 

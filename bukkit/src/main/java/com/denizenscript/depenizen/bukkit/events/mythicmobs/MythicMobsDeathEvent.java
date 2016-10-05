@@ -44,7 +44,7 @@ import java.util.List;
 // <context.drops> Returns a list of items dropped.
 // <context.xp> Returns the xp dropped.
 //
-// @Plugin Depenizen, MythicMobs
+// @Plugin DepenizenBukkit, MythicMobs
 //
 // -->
 

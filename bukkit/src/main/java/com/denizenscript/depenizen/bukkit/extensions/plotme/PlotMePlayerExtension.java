@@ -44,7 +44,7 @@ public class PlotMePlayerExtension extends dObjectExtension {
         // @returns Element(Number)
         // @description
         // Returns the number of plots a player has in a world.
-        // @plugin Depenizen, PlotMe
+        // @Plugin DepenizenBukkit, PlotMe
         // -->
         if (attribute.startsWith("plot_count")
                 && attribute.hasContext(1)) {

@@ -56,7 +56,7 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
             // @description
             // Returns whether there is a GriefPreventionClaim at this location.
             // Optionally specify an Element(Boolean) for whether to ignore Y axis.
-            // @plugin Depenizen, GriefPrevention
+            // @Plugin DepenizenBukkit, GriefPrevention
             // -->
             if (attribute.startsWith("has_claim")) {
                 Element ignoreHeight = Element.TRUE;
@@ -74,7 +74,7 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
             // @returns GriefPreventionClaim
             // @description
             // Returns the GriefPreventionClaim at this location.
-            // @plugin Depenizen, GriefPrevention
+            // @Plugin DepenizenBukkit, GriefPrevention
             // -->
             else if (attribute.startsWith("claim")) {
                 Claim claim = dataStore.getClaimAt(location, false, null);

@@ -59,7 +59,7 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
             // @returns dList(GriefPreventionClaim)
             // @description
             // Returns a list of all claims the player has.
-            // @plugin Depenizen, GriefPrevention
+            // @Plugin DepenizenBukkit, GriefPrevention
             // -->
             if (attribute.startsWith("list_claims")) {
                 dList claims = new dList();
@@ -74,7 +74,7 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
             // @returns Element(Number)
             // @description
             // Returns the number of claims the player has in GriefPrevention.
-            // @plugin Depenizen, GriefPrevention
+            // @Plugin DepenizenBukkit, GriefPrevention
             // -->
             else if (attribute.startsWith("claims")) {
                 return new Element(data.getClaims().size()).getAttribute(attribute.fulfill(1));
@@ -88,7 +88,7 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the number of claim blocks the player has left.
-                // @plugin Depenizen, GriefPrevention
+                // @Plugin DepenizenBukkit, GriefPrevention
                 // -->
                 if (attribute.startsWith("remaining")) {
                     return new Element(data.getRemainingClaimBlocks()).getAttribute(attribute.fulfill(1));
@@ -99,7 +99,7 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the number of bonus claim blocks the player has.
-                // @plugin Depenizen, GriefPrevention
+                // @Plugin DepenizenBukkit, GriefPrevention
                 // -->
                 else if (attribute.startsWith("bonus")) {
                     return new Element(data.getBonusClaimBlocks()).getAttribute(attribute.fulfill(1));
@@ -110,7 +110,7 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the total number of claim blocks the player has.
-                // @plugin Depenizen, GriefPrevention
+                // @Plugin DepenizenBukkit, GriefPrevention
                 // -->
                 else if (attribute.startsWith("total")) {
                     return new Element(data.getAccruedClaimBlocks() + data.getBonusClaimBlocks())
@@ -122,7 +122,7 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the number of normal claim blocks the payer has.
-                // @plugin Depenizen, GriefPrevention
+                // @Plugin DepenizenBukkit, GriefPrevention
                 // -->
                 else {
                     return new Element(data.getAccruedClaimBlocks()).getAttribute(attribute);

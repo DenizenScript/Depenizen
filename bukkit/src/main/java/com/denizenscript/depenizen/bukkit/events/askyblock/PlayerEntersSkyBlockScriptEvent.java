@@ -29,7 +29,7 @@ import org.bukkit.event.Listener;
 // <context.island_location> Returns the location of the island.
 // <context.location> Returns the location the player entered at.
 //
-// @Plugin Depenizen, A SkyBlock
+// @Plugin DepenizenBukkit, A SkyBlock
 //
 // -->
 

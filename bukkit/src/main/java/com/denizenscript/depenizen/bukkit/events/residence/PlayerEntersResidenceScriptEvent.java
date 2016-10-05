@@ -28,7 +28,7 @@ import org.bukkit.event.Listener;
 // @Context
 // <context.residence> Returns the Residence the player entered.
 //
-// @Plugin Depenizen, Residence
+// @Plugin DepenizenBukkit, Residence
 //
 // -->
 

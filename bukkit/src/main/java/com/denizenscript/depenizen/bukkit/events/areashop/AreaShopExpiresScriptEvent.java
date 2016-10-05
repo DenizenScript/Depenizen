@@ -28,7 +28,7 @@ import org.bukkit.event.Listener;
 // @Context
 // <context.shop> Returns the AreaShop that's expiring.
 //
-// @Plugin Depenizen, AreaShop
+// @Plugin DepenizenBukkit, AreaShop
 //
 // -->
 

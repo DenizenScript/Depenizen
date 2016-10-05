@@ -34,7 +34,7 @@ import org.bukkit.event.Listener;
 // @Determine
 // None
 //
-// @Plugin Depenizen, SkillAPI
+// @Plugin DepenizenBukkit, SkillAPI
 // -->
 
 public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent implements Listener {

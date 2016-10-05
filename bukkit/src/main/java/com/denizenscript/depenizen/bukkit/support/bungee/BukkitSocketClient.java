@@ -2,8 +2,11 @@ package com.denizenscript.depenizen.bukkit.support.bungee;
 
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
+import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizencore.exceptions.ScriptEntryCreationException;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
+import net.aufdemrand.denizencore.scripts.ScriptRegistry;
+import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
 import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
@@ -68,8 +71,25 @@ public class BukkitSocketClient extends SocketClient {
             dB.echoError(e);
             return;
         }
-        InstantQueue queue = new InstantQueue(ScriptQueue.getNextId("BUNGEE_CMD"));
-        queue.addEntries(scriptEntryList);
+        ScriptQueue queue = InstantQueue.getQueue(ScriptQueue.getNextId("BUNGEE_CMD")).addEntries(scriptEntryList);
+        queue.getAllDefinitions().putAll(definitions);
+        queue.start();
+    }
+
+    @Override
+    protected void handleRunScript(String scriptName, Map<String, String> definitions, boolean shouldDebug) {
+        if (!ScriptRegistry.containsScript(scriptName)) {
+            if (shouldDebug) {
+                dB.echoError("[BungeeRun]: The script '" + scriptName + "' does not exist!");
+            }
+            return;
+        }
+        ScriptContainer scriptContainer = ScriptRegistry.getScriptContainer(scriptName);
+        List<ScriptEntry> scriptEntries = scriptContainer.getBaseEntries(new BukkitScriptEntryData(null, null));
+        for (ScriptEntry scriptEntry : scriptEntries) {
+            scriptEntry.setScript("").fallbackDebug = shouldDebug;
+        }
+        ScriptQueue queue = InstantQueue.getQueue(ScriptQueue.getNextId(scriptContainer.getName())).addEntries(scriptEntries);
         queue.getAllDefinitions().putAll(definitions);
         queue.start();
     }

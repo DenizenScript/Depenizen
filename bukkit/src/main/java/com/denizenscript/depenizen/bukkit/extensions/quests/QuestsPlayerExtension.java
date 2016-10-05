@@ -46,7 +46,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // @returns Element(Number)
             // @description
             // Returns the number of quest points the player has.
-            // @plugin Depenizen, Quests
+            // @Plugin DepenizenBukkit, Quests
             // -->
             if (attribute.startsWith("points")) {
                 if (quester.getBaseData().contains("quest-points")) {
@@ -60,7 +60,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // @returns Element(Number)
             // @description
             // Returns the number of quests the player has completed.
-            // @plugin Depenizen, Quests
+            // @Plugin DepenizenBukkit, Quests
             // -->
             else if (attribute.startsWith("completed")) {
                 return new Element(quester.completedQuests.size()).getAttribute(attribute.fulfill(1));
@@ -71,7 +71,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // @returns Element(Number)
             // @description
             // Returns the number of quests the player has active.
-            // @plugin Depenizen, Quests
+            // @Plugin DepenizenBukkit, Quests
             // -->
             else if (attribute.startsWith("active")) {
                 return new Element(quester.currentQuests.size()).getAttribute(attribute.fulfill(1));

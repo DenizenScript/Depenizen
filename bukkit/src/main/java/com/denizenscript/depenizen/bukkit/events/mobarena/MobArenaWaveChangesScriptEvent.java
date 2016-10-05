@@ -29,7 +29,7 @@ import org.bukkit.event.Listener;
 // <context.arena> Returns the arena in which the wave change occured.
 // <context.wave> Returns the number of the new wave.
 //
-// @Plugin Depenizen, MobArena
+// @Plugin DepenizenBukkit, MobArena
 //
 // -->
 

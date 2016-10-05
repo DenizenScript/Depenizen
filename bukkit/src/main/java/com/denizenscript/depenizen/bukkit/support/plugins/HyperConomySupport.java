@@ -86,7 +86,7 @@ public class HyperConomySupport extends Support {
             // <context.item> returns the dItem the player bought.
             // @Determine
             // NONE
-            // @Plugin Depenizen, HyperConomy
+            // @Plugin DepenizenBukkit, HyperConomy
             // -->
             case BUY:
                 context.put("item", item);
@@ -105,7 +105,7 @@ public class HyperConomySupport extends Support {
             // <context.item> returns the dItem the player sold.
             // @Determine
             // NONE
-            // @Plugin Depenizen, HyperConomy
+            // @Plugin DepenizenBukkit, HyperConomy
             // -->
             case SELL:
                 context.put("item", item);

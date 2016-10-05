@@ -105,7 +105,7 @@ public class MobArenaArena implements dObject {
         // @returns Element
         // @description
         // Returns the name of the arena.
-        // @plugin Depenizen, MobArena
+        // @Plugin DepenizenBukkit, MobArena
         // -->
         if (attribute.startsWith("name")) {
             return new Element(arena.arenaName()).getAttribute(attribute.fulfill(1));
@@ -116,7 +116,7 @@ public class MobArenaArena implements dObject {
         // @returns Element
         // @description
         // Returns the configuration name of the arena.
-        // @plugin Depenizen, MobArena
+        // @Plugin DepenizenBukkit, MobArena
         // -->
         else if (attribute.startsWith("config_name")) {
             return new Element(arena.configName()).getAttribute(attribute.fulfill(1));
@@ -127,7 +127,7 @@ public class MobArenaArena implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns whether the arena is running.
-        // @plugin Depenizen, MobArena
+        // @Plugin DepenizenBukkit, MobArena
         // -->
         else if (attribute.startsWith("is_running")) {
             return new Element(arena.isRunning()).getAttribute(attribute.fulfill(1));
@@ -138,7 +138,7 @@ public class MobArenaArena implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the number of waves this arena has in total.
-        // @plugin Depenizen, MobArena
+        // @Plugin DepenizenBukkit, MobArena
         // -->
         else if (attribute.startsWith("wave_count")) {
             return new Element(arena.getWaveManager().getFinalWave())
@@ -151,7 +151,7 @@ public class MobArenaArena implements dObject {
         // @description
         // Returns the current wave number.
         // NOTE: Requires the arena to be running.
-        // @plugin Depenizen, MobArena
+        // @Plugin DepenizenBukkit, MobArena
         // -->
         else if (attribute.startsWith("current_wave") && arena.isRunning()) {
             return new Element(arena.getWaveManager().getWaveNumber())
@@ -164,7 +164,7 @@ public class MobArenaArena implements dObject {
         // @description
         // Returns the type of the current wave.
         // NOTE: Requires the arena to be running.
-        // @plugin Depenizen, MobArena
+        // @Plugin DepenizenBukkit, MobArena
         // -->
         else if (attribute.startsWith("wave_type") && arena.isRunning()) {
             return new Element(arena.getWaveManager().getCurrent().getType().toString())
@@ -176,7 +176,7 @@ public class MobArenaArena implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns whether the arena is enabled.
-        // @plugin Depenizen, MobArena
+        // @Plugin DepenizenBukkit, MobArena
         // -->
         else if (attribute.startsWith("is_enabled")) {
             return new Element(arena.isEnabled()).getAttribute(attribute.fulfill(1));
@@ -188,7 +188,7 @@ public class MobArenaArena implements dObject {
         // @description
         // Returns the status of the arena.
         // Will return 'closed', 'open', or 'running'.
-        // @plugin Depenizen, MobArena
+        // @Plugin DepenizenBukkit, MobArena
         // -->
         else if (attribute.startsWith("status")) {
             if (!arena.isEnabled()) {
@@ -209,7 +209,7 @@ public class MobArenaArena implements dObject {
             // @returns dList(dPlayer)
             // @description
             // Returns a list of players in the arena.
-            // @plugin Depenizen, MobArena
+            // @Plugin DepenizenBukkit, MobArena
             // -->
             if (attribute.getAttribute(2).startsWith("in_arena")) {
                 dList players = new dList();
@@ -224,7 +224,7 @@ public class MobArenaArena implements dObject {
             // @returns dList(dPlayer)
             // @description
             // Returns a list of players in the lobby.
-            // @plugin Depenizen, MobArena
+            // @Plugin DepenizenBukkit, MobArena
             // -->
             else if (attribute.startsWith("in_lobby")) {
                 dList players = new dList();
@@ -239,7 +239,7 @@ public class MobArenaArena implements dObject {
             // @returns dList(dPlayer)
             // @description
             // Returns a list of all players in the arena (including the lobby).
-            // @plugin Depenizen, MobArena
+            // @Plugin DepenizenBukkit, MobArena
             // -->
             else {
                 dList players = new dList();
@@ -256,7 +256,7 @@ public class MobArenaArena implements dObject {
         // @description
         // Always returns 'MobArena' for MobArena objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Depenizen, MobArena
+        // @Plugin DepenizenBukkit, MobArena
         // -->
         else if (attribute.startsWith("type")) {
             return new Element("MobArena").getAttribute(attribute.fulfill(1));

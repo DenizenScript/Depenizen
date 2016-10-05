@@ -47,7 +47,7 @@ public class ASkyBlockSupport extends Support {
             // @returns dWorld
             // @description
             // Returns the world that A Skyblock uses for islands.
-            // @plugin Depenizen, A SkyBlock
+            // @Plugin DepenizenBukkit, A SkyBlock
             // -->
             if (attribute.startsWith("island_world")) {
                 return new dWorld(api.getIslandWorld()).getAttribute(attribute.fulfill(1));
@@ -58,7 +58,7 @@ public class ASkyBlockSupport extends Support {
             // @returns dWorld
             // @description
             // Returns the world that A Skyblock uses for the nether.
-            // @plugin Depenizen, A SkyBlock
+            // @Plugin DepenizenBukkit, A SkyBlock
             // -->
             else if (attribute.startsWith("nether_world")) {
                 return new dWorld(api.getNetherWorld()).getAttribute(attribute.fulfill(1));
@@ -69,7 +69,7 @@ public class ASkyBlockSupport extends Support {
             // @returns Element(Number)
             // @description
             // Returns the number of Skyblock Islands that exist.
-            // @plugin Depenizen, A SkyBlock
+            // @Plugin DepenizenBukkit, A SkyBlock
             // -->
             else if (attribute.startsWith("island_count")) {
                 return new Element(api.getIslandCount()).getAttribute(attribute.fulfill(1));

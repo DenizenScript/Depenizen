@@ -50,7 +50,7 @@ public class WorldGuardWorldExtension extends dObjectExtension {
         // @returns dList(Region)
         // @description
         // Returns a list of WorldGuard regions in this world.
-        // @plugin Depenizen, WorldGuard
+        // @Plugin DepenizenBukkit, WorldGuard
         // -->
         if (attribute.startsWith("list_regions")) {
             dList regions = new dList();

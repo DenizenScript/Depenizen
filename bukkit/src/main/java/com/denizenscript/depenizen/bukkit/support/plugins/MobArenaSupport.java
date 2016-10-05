@@ -52,7 +52,7 @@ public class MobArenaSupport extends Support {
             // @returns dList(MobArena)
             // @description
             // Returns a list of all MobArenas.
-            // @plugin Depenizen, MobArena
+            // @Plugin DepenizenBukkit, MobArena
             // -->
             if (attribute.startsWith("list_arenas")) {
                 dList arenas = new dList();

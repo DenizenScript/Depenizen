@@ -17,7 +17,7 @@ import java.util.List;
 // @Name MobArena
 // @Syntax mobarena [<mobarena>] (add:<player>|...) (remove:<player>|...) (spectate:<player>|...)
 // @Group Depenizen
-// @Plugin Depenizen, MobArena
+// @Plugin DepenizenBukkit, MobArena
 // @Required 1
 // @Stable untested
 // @Short Make a player join, remove a player from or make a player spectate a MobArena.

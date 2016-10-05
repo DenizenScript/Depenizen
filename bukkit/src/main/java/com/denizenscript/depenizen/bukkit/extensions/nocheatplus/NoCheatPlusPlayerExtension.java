@@ -44,7 +44,7 @@ public class NoCheatPlusPlayerExtension extends dObjectExtension {
             // @description
             // Returns the number of infractions this player has with NoCheatPlus
             // NOTE: Cannot guarantee the accuracy of this tag, due to lack of API in NoCheatPlus.
-            // @plugin Depenizen, NoCheatPlus.
+            // @Plugin DepenizenBukkit, NoCheatPlus.
             // -->
             if (attribute.startsWith("infractions")) {
                 ViolationHistory history = ViolationHistory.getHistory(player.getName(), false);

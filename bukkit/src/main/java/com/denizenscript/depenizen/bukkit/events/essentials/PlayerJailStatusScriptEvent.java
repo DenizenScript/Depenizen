@@ -30,7 +30,7 @@ import org.bukkit.event.Listener;
 // @Context
 // <context.status> Returns the player's jail status.
 //
-// @Plugin Depenizen, Essentials
+// @Plugin DepenizenBukkit, Essentials
 //
 // -->
 

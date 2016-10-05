@@ -30,7 +30,7 @@ import org.bukkit.event.Listener;
 // <context.location> Returns the location of the island.
 // <context.schematic> Returns the name of the schematic used for the island.
 //
-// @Plugin Depenizen, A SkyBlock
+// @Plugin DepenizenBukkit, A SkyBlock
 //
 // -->
 

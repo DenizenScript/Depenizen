@@ -36,7 +36,7 @@ public class FactionsSupport extends Support {
             // @returns dList(dFaction)
             // @description
             // Returns a list of all current factions.
-            // @plugin Depenizen, Factions
+            // @Plugin DepenizenBukkit, Factions
             // -->
             if (attribute.startsWith("list_factions")) {
                 ArrayList<dFaction> factions = new ArrayList<dFaction>();

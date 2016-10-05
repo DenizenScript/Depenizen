@@ -44,7 +44,7 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @returns Element(Decimal)
         // @description
         // Returns the amount of money one of this item is worth in Essentials.
-        // @plugin Depenizen, Essentials
+        // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("worth")) {
             double price = ess.getWorth().getPrice(item.getItemStack()).doubleValue();
@@ -53,7 +53,7 @@ public class EssentialsItemExtension extends dObjectExtension {
             // @returns Element(Decimal)
             // @description
             // Returns the amount of money the quantity specified of this item is worth in Essentials.
-            // @plugin Depenizen, Essentials
+            // @Plugin DepenizenBukkit, Essentials
             // -->
             if (attribute.getAttribute(2).startsWith("quantity") &&
                     attribute.hasContext(2) && aH.matchesInteger(attribute.getContext(2))) {
@@ -78,7 +78,7 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @tags
         // <i@item.worth>
         // <i@item.worth.quantity[<Element>]>
-        // @plugin Depenizen, Essentials
+        // @Plugin DepenizenBukkit, Essentials
         // -->
         if (mechanism.matches("worth") && value.isDouble()) {
             ess.getWorth().setPrice(item.getItemStack(), value.asDouble());

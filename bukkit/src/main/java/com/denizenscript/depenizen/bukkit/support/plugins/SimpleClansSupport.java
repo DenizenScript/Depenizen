@@ -40,7 +40,7 @@ public class SimpleClansSupport extends Support {
             // @returns dList(dClan)
             // @description
             // Returns a list of all clans.
-            // @plugin Depenizen, SimpleClans
+            // @Plugin DepenizenBukkit, SimpleClans
             // -->
             if (attribute.startsWith("list_clans")) {
                 dList clans = new dList();
@@ -55,7 +55,7 @@ public class SimpleClansSupport extends Support {
             // @returns dList(dClan)
             // @description
             // Returns a list of all unverified clans.
-            // @plugin Depenizen, SimpleClans
+            // @Plugin DepenizenBukkit, SimpleClans
             // -->
             else if (attribute.startsWith("list_unverified_clans")) {
                 dList clans = new dList();
@@ -72,7 +72,7 @@ public class SimpleClansSupport extends Support {
             // @returns dList(dClan)
             // @description
             // Returns a list of all verified clans.
-            // @plugin Depenizen, SimpleClans
+            // @Plugin DepenizenBukkit, SimpleClans
             // -->
             else if (attribute.startsWith("list_verified_clans")) {
                 dList clans = new dList();

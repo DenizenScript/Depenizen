@@ -30,7 +30,7 @@ import org.bukkit.event.Listener;
 // @Context
 // <context.town> Returns the town the player entered.
 //
-// @Plugin Depenizen, Towny
+// @Plugin DepenizenBukkit, Towny
 //
 // -->
 

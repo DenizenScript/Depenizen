@@ -33,7 +33,7 @@ import org.bukkit.event.Listener;
 // <context.item_rewards> Returns a list of items to be awarded.
 // NOTE: item rewards is dependant on how the plugin handles item rewards. Untested and no guarantee of working.
 //
-// @Plugin Depenizen, A SkyBlock
+// @Plugin DepenizenBukkit, A SkyBlock
 //
 // -->
 

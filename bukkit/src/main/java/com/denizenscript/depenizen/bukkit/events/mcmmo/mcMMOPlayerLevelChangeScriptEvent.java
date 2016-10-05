@@ -33,7 +33,7 @@ import org.bukkit.event.Listener;
 // <context.cause> returns the cause of the level change.
 // Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
 //
-// @Plugin Depenizen, mcMMO
+// @Plugin DepenizenBukkit, mcMMO
 //
 // -->
 

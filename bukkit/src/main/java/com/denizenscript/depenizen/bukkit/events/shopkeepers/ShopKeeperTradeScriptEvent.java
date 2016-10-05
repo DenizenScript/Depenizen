@@ -32,7 +32,7 @@ import org.bukkit.inventory.ItemStack;
 // <context.recipe> Returns the recipe for this trade.
 // <context.shopkeeper> Returns the ShopKeeper that the trade occured with.
 //
-// @Plugin Depenizen, ShopKeepers
+// @Plugin DepenizenBukkit, ShopKeepers
 //
 // -->
 

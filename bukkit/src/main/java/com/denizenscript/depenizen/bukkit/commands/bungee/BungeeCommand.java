@@ -21,17 +21,20 @@ public class BungeeCommand extends BracedCommand {
     // @Name Bungee
     // @Syntax bungee [<server>|...] [<commands>]
     // @Group Depenizen
-    // @Plugin Depenizen, BungeeCord
-    // @Required 2
+    // @Plugin DepenizenBukkit, DepenizenBungee
+    // @Required 1
     // @Stable stable
-    // @Short Sends commands to other servers via BungeeCord.
+    // @Short Sends commands to other Bukkit servers via BungeeCord.
     // @Author Morphan1
 
     // @Description
     // This command allows you to send multiple lines of script to your BungeeCord
-    // server, which then relays it to the dServer you specified. Tags and definitions
-    // will be parsed on the dServer, and the definitions in the current queue will
+    // server, which then relays it to the dServer(s) you specified. Tags and definitions
+    // will be parsed on the destination(s), and the definitions in the current queue will
     // carry over.
+    //
+    // NOTE: This command will only work for Bukkit servers. For a cross-compatible
+    // option, use the BungeeRun command.
 
     // @Tags
     // None
@@ -78,8 +81,6 @@ public class BungeeCommand extends BracedCommand {
 
     @Override
     public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
-
-        // TODO: deprecate
 
         dList servers = scriptEntry.getdObject("servers");
         List<ScriptEntry> bracedCommands = ((List<BracedData>) scriptEntry.getObject("braces")).get(0).value;

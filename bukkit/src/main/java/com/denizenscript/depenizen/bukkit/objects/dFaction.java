@@ -119,7 +119,7 @@ public class dFaction implements dObject {
         // @returns Element(Decimal)
         // @description
         // Returns the amount of money the faction currently has.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         if (attribute.startsWith("balance")) {
             return new Element(Money.get(faction))
@@ -131,7 +131,7 @@ public class dFaction implements dObject {
         // @returns dLocation
         // @description
         // Returns the location of the faction's home, if any.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("home")) {
             if (faction.hasHome()) {
@@ -145,7 +145,7 @@ public class dFaction implements dObject {
         // @returns Element
         // @description
         // Returns the unique ID for this faction.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("id")) {
             return new Element(faction.getId()).getAttribute(attribute.fulfill(1));
@@ -156,7 +156,7 @@ public class dFaction implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns true if the faction is open.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open")) {
             return new Element(faction.isOpen())
@@ -168,7 +168,7 @@ public class dFaction implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns true if the faction is peaceful.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("ispeaceful") || attribute.startsWith("is_peaceful")) {
             return new Element(faction.getFlag(MFlag.getFlagPeaceful()))
@@ -180,7 +180,7 @@ public class dFaction implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns true if the faction is permanent.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("ispermanent") || attribute.startsWith("is_permanent")) {
             return new Element(faction.getFlag(MFlag.getFlagPermanent()))
@@ -192,7 +192,7 @@ public class dFaction implements dObject {
         // @returns dPlayer
         // @description
         // Returns the faction's leader as a dPlayer.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("leader")) {
             if (faction.getLeader() != null) {
@@ -206,7 +206,7 @@ public class dFaction implements dObject {
         // @returns Element
         // @description
         // Returns the name of the faction.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("name")) {
             return new Element(faction.getName())
@@ -218,7 +218,7 @@ public class dFaction implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the number of players in the faction.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
             return new Element(faction.getMPlayers().size())
@@ -230,7 +230,7 @@ public class dFaction implements dObject {
         // @returns Element(Decimal)
         // @description
         // Returns the amount of power the faction currently has.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("power")) {
             return new Element(faction.getPower())
@@ -242,7 +242,7 @@ public class dFaction implements dObject {
         // @returns Element
         // @description
         // Returns the current relation between the faction and another faction.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("relation")) {
             dFaction to = valueOf(attribute.getContext(1));
@@ -258,7 +258,7 @@ public class dFaction implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the amount of land the faction has.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         else if (attribute.startsWith("size")) {
             return new Element(faction.getLandCount())
@@ -271,7 +271,7 @@ public class dFaction implements dObject {
         // @description
         // Always returns 'Faction' for dFaction objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Depenizen, Factions
+        // @Plugin DepenizenBukkit, Factions
         // -->
         if (attribute.startsWith("type")) {
             return new Element("Faction").getAttribute(attribute.fulfill(1));

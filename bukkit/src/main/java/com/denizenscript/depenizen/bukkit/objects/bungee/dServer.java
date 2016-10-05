@@ -138,7 +138,7 @@ public class dServer implements dObject {
         // <--[tag]
         // @attribute <server@server.name>
         // @returns Element
-        // @plugin Depenizen, BungeeCord
+        // @Plugin DepenizenBukkit, DepenizenBungee
         // @description
         // The name of the server as set by its Depenizen's config.yml file.
         // -->

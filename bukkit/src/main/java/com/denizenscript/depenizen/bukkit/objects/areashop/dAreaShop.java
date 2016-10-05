@@ -108,7 +108,7 @@ public class dAreaShop implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns whether this AreaShop has been bought.
-        // @plugin Depenizen, AreaShop
+        // @Plugin DepenizenBukkit, AreaShop
         // -->
         if (attribute.startsWith("is_bought")) {
             return new Element(areaShop.isBuyRegion()).getAttribute(attribute.fulfill(1));
@@ -119,7 +119,7 @@ public class dAreaShop implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns whether this AreaShop is being rented.
-        // @plugin Depenizen, AreaShop
+        // @Plugin DepenizenBukkit, AreaShop
         // -->
         else if (attribute.startsWith("is_rented")) {
             return new Element(areaShop.isRentRegion()).getAttribute(attribute.fulfill(1));
@@ -130,7 +130,7 @@ public class dAreaShop implements dObject {
         // @returns dList
         // @description
         // Returns a list of groups that control this AreaShop.
-        // @plugin Depenizen, AreaShop
+        // @Plugin DepenizenBukkit, AreaShop
         // -->
         else if (attribute.startsWith("groups")) {
             return new dList(areaShop.getGroupNames()).getAttribute(attribute.fulfill(1));
@@ -141,7 +141,7 @@ public class dAreaShop implements dObject {
         // @returns dPlayer
         // @description
         // Returns the landlord of the AreaShop.
-        // @plugin Depenizen, AreaShop
+        // @Plugin DepenizenBukkit, AreaShop
         // -->
         else if (attribute.startsWith("landlord")) {
             return new dPlayer(areaShop.getLandlord()).getAttribute(attribute.fulfill(1));
@@ -152,7 +152,7 @@ public class dAreaShop implements dObject {
         // @returns Element
         // @description
         // Returns the name of the AreaShop.
-        // @plugin Depenizen, AreaShop
+        // @Plugin DepenizenBukkit, AreaShop
         // -->
         else if (attribute.startsWith("name")) {
             return new Element(areaShop.getName()).getAttribute(attribute.fulfill(1));
@@ -163,7 +163,7 @@ public class dAreaShop implements dObject {
         // @returns dPlayer
         // @description
         // Returns the owner of the AreaShop.
-        // @plugin Depenizen, AreaShop
+        // @Plugin DepenizenBukkit, AreaShop
         // -->
         else if (attribute.startsWith("owner")) {
             return new dPlayer(areaShop.getOwner()).getAttribute(attribute.fulfill(1));
@@ -174,7 +174,7 @@ public class dAreaShop implements dObject {
         // @returns WorldGuardRegion
         // @description
         // Returns the WorldGuardRegion that holds the AreaShop.
-        // @plugin Depenizen, AreaShop
+        // @Plugin DepenizenBukkit, AreaShop
         // -->
         else if (attribute.startsWith("worldguard_region")) {
             return new WorldGuardRegion(areaShop.getRegion(), areaShop.getWorld()).getAttribute(attribute.fulfill(1));

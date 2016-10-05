@@ -24,7 +24,7 @@ public class PlayerDisconnectScriptEvent extends BungeeScriptEvent {
     // <context.uuid> returns an Element of the player's UUID.
     // <context.name> returns an Element of the player's current name.
     //
-    // @Plugin Depenizen, BungeeCord
+    // @Plugin DepenizenBukkit, DepenizenBungee
     // -->
 
 

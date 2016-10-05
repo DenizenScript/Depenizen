@@ -136,7 +136,7 @@ public class ShopKeeper implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns whether the Shopkeeper is active.
-        // @plugin Depenizen, ShopKeepers
+        // @Plugin DepenizenBukkit, ShopKeepers
         // -->
         if (attribute.startsWith("is_active")) {
             return new Element(shopkeeper.isActive()).getAttribute(attribute.fulfill(1));
@@ -147,7 +147,7 @@ public class ShopKeeper implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns whether the Shopkeeper is currently in a trade.
-        // @plugin Depenizen, ShopKeepers
+        // @Plugin DepenizenBukkit, ShopKeepers
         // -->
         else if (attribute.startsWith("is_ui_active")) {
             return new Element(shopkeeper.isUIActive()).getAttribute(attribute.fulfill(1));
@@ -159,7 +159,7 @@ public class ShopKeeper implements dObject {
         // @description
         // Returns an escaped dList of the Shopkeeper's trades.
         // NOTE: see '!language Property Escaping'.
-        // @plugin Depenizen, ShopKeepers
+        // @Plugin DepenizenBukkit, ShopKeepers
         // -->
         else if (attribute.startsWith("trades") || attribute.startsWith("recipes")) {
             dList trades = new dList();
@@ -183,7 +183,7 @@ public class ShopKeeper implements dObject {
         // @returns dEntity
         // @description
         // Returns the dEntity for this ShopKeeper.
-        // @plugin Depenizen, ShopKeepers
+        // @Plugin DepenizenBukkit, ShopKeepers
         // -->
         else if (attribute.startsWith("entity")) {
             return new dEntity(entity).getAttribute(attribute.fulfill(1));
@@ -195,7 +195,7 @@ public class ShopKeeper implements dObject {
         // @description
         // Always returns 'ShopKeeper' for ShopKeeper objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Depenizen, MythicMobs
+        // @Plugin DepenizenBukkit, MythicMobs
         // -->
         else if (attribute.startsWith("type")) {
             return new Element("ShopKeeper").getAttribute(attribute.fulfill(1));

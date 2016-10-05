@@ -40,7 +40,7 @@ public class ASkyBlockWorldExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the world is used by A SkyBlock.
-        // @plugin Depenizen, A SkyBlock
+        // @Plugin DepenizenBukkit, A SkyBlock
         // -->
         if (attribute.startsWith("is_skyblock_world")) {
             return new Element(api.getIslandWorld() == world.getWorld() ||

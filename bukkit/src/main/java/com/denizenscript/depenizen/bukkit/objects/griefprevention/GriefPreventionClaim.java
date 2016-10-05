@@ -103,7 +103,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // @returns Element(Number)
         // @description
         // Returns the GriefPreventionClaim's ID.
-        // @plugin Depenizen, GriefPrevention
+        // @Plugin DepenizenBukkit, GriefPrevention
         // -->
         if (attribute.startsWith("id")) {
             return new Element(claim.getID()).getAttribute(attribute.fulfill(1));
@@ -116,7 +116,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // Returns the GriefPreventionClaim's owner.
         // Can be "Admin" or a dPlayer.
         // @mechanism GriefPreventionClaim.owner
-        // @plugin Depenizen, GriefPrevention
+        // @Plugin DepenizenBukkit, GriefPrevention
         // -->
         else if (attribute.startsWith("owner")) {
             if (claim.isAdminClaim()) {
@@ -131,7 +131,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // @returns dCuboid
         // @description
         // Returns the GriefPreventionClaim's cuboid area.
-        // @plugin Depenizen, GriefPrevention
+        // @Plugin DepenizenBukkit, GriefPrevention
         // -->
         else if (attribute.startsWith("cuboid")) {
             dLocation lower = new dLocation(claim.getLesserBoundaryCorner());
@@ -146,7 +146,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // @returns Element(Boolean)
         // @description
         // Returns whether GriefPreventionClaim is an Admin Claim.
-        // @plugin Depenizen, GriefPrevention
+        // @Plugin DepenizenBukkit, GriefPrevention
         // -->
         else if (attribute.startsWith("is_adminclaim") || attribute.startsWith("is_admin_claim")) {
             return new Element(claim.isAdminClaim()).getAttribute(attribute.fulfill(1));
@@ -157,7 +157,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // @returns dList(dChunk)
         // @description
         // Returns a list of all chunks in the GriefPreventionClaim.
-        // @plugin Depenizen, GriefPrevention
+        // @Plugin DepenizenBukkit, GriefPrevention
         // -->
         else if (attribute.startsWith("chunks")) {
             dList chunks = new dList();
@@ -172,7 +172,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // @returns Element(Boolean)
         // @description
         // Returns whether the GriefPreventionClaim can siege the player.
-        // @plugin Depenizen, GriefPrevention
+        // @Plugin DepenizenBukkit, GriefPrevention
         // -->
         else if (attribute.startsWith("can_siege") && attribute.hasContext(1)) {
             dPlayer defender = dPlayer.valueOf(attribute.getContext(1));

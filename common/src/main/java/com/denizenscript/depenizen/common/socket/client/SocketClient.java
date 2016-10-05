@@ -120,7 +120,8 @@ public abstract class SocketClient implements Runnable {
                     long timePassed;
                     boolean pinged = false;
                     long start = System.currentTimeMillis();
-                    while (input.available() <= 0) {
+                    int receivedEncryptedLength;
+                    while ((receivedEncryptedLength = input.readInt()) == 0) {
                         if (!isConnected) {
                             break connectionLoop;
                         }
@@ -128,7 +129,6 @@ public abstract class SocketClient implements Runnable {
                         if (timePassed > 30 * 1000 && !pinged) {
                             lastPingBit = Utilities.getRandomUnsignedByte();
                             send(new ClientPacketOutPing(lastPingBit));
-                            Depenizen.getImplementation().debugMessage("Sent ping: " + lastPingBit);
                             pinged = true;
                         }
                         if (timePassed > 60 * 1000) {
@@ -137,7 +137,6 @@ public abstract class SocketClient implements Runnable {
                         }
                         Thread.sleep(50);
                     }
-                    int receivedEncryptedLength = this.input.readInt();
                     if (receivedEncryptedLength == -1) {
                         close("Connection failed");
                         break;
@@ -195,6 +194,11 @@ public abstract class SocketClient implements Runnable {
                             script.deserialize(data);
                             handleScript(script.shouldDebug(), script.getScriptEntries(), script.getDefinitions());
                             break;
+                        case RUN_SCRIPT:
+                            ClientPacketInRunScript runScript = new ClientPacketInRunScript();
+                            runScript.deserialize(data);
+                            handleRunScript(runScript.getScriptName(), runScript.getDefinitions(), runScript.shouldDebug());
+                            break;
                     }
                 }
                 listenThread = null;
@@ -224,4 +228,6 @@ public abstract class SocketClient implements Runnable {
     protected abstract void handleUpdateServer(String serverName, boolean registered);
 
     protected abstract void handleScript(boolean shouldDebug, Map<String, List<String>> scriptEntries, Map<String, String> definitions);
+
+    protected abstract void handleRunScript(String scriptName, Map<String, String> definitions, boolean shouldDebug);
 }

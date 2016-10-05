@@ -29,7 +29,7 @@ import org.bukkit.event.Listener;
 // @Context
 // <context.status> Returns the player's afk status.
 //
-// @Plugin Depenizen, Essentials
+// @Plugin DepenizenBukkit, Essentials
 //
 // -->
 

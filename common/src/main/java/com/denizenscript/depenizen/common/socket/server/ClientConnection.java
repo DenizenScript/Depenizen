@@ -124,7 +124,8 @@ public class ClientConnection implements Runnable {
                     long timePassed;
                     boolean pinged = false;
                     long start = System.currentTimeMillis();
-                    while (input.available() <= 0) {
+                    int receivedEncryptedLength;
+                    while ((receivedEncryptedLength = input.readInt()) == 0) {
                         if (!isConnected) {
                             break connectionLoop;
                         }
@@ -140,7 +141,6 @@ public class ClientConnection implements Runnable {
                         }
                         Thread.sleep(50);
                     }
-                    int receivedEncryptedLength = this.input.readInt();
                     if (receivedEncryptedLength == -1) {
                         server.removeClient(clientId, "Connection failed");
                         break;
@@ -195,14 +195,26 @@ public class ClientConnection implements Runnable {
                             ServerPacketInScript script = new ServerPacketInScript();
                             script.deserialize(data);
                             ServerPacketOutScript scriptOut = new ServerPacketOutScript(script.getScriptData());
-                            Map<String, ClientConnection> clients = server.getRegisteredClients();
+                            Map<String, ClientConnection> scriptClients = server.getRegisteredClients();
                             for (String destination : script.getDestinations()) {
                                 destination = destination.toLowerCase();
-                                if (clients.containsKey(destination)) {
-                                    ClientConnection destClient = clients.get(destination);
+                                if (scriptClients.containsKey(destination)) {
+                                    ClientConnection destClient = scriptClients.get(destination);
                                     if (destClient.isBungeeScriptCompatible()) {
                                         destClient.trySend(scriptOut);
                                     }
+                                }
+                            }
+                            break;
+                        case RUN_SCRIPT:
+                            ServerPacketInRunScript runScript = new ServerPacketInRunScript();
+                            runScript.deserialize(data);
+                            ServerPacketOutRunScript runScriptOut = new ServerPacketOutRunScript(runScript.getScriptData());
+                            Map<String, ClientConnection> runScriptClients = server.getRegisteredClients();
+                            for (String destination : runScript.getDestinations()) {
+                                destination = destination.toLowerCase();
+                                if (runScriptClients.containsKey(destination)) {
+                                    runScriptClients.get(destination).trySend(runScriptOut);
                                 }
                             }
                             break;

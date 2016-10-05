@@ -37,7 +37,7 @@ public class TCLocationExtension extends dObjectExtension {
         // @returns Element
         // @description
         // Returns the TerrainControl biome name at this location, if any.
-        // @plugin Depenizen, TerrainControl
+        // @Plugin DepenizenBukkit, TerrainControl
         // -->
         if (attribute.startsWith("tc_biome.name")) {
             LocalBiome biome = TerrainControl.getWorld(location.getWorld().getName()).getBiome(location.getBlockX(), location.getBlockZ());

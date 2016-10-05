@@ -44,7 +44,7 @@ public class ASkyBlockLocationExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns whether the location has a skyblock.
-            // @plugin Depenizen, A SkyBlock
+            // @Plugin DepenizenBukkit, A SkyBlock
             // -->
             if (attribute.startsWith("has_skyblock")) {
                 return new Element(api.getIslandAt(location) != null).getAttribute(attribute.fulfill(1));
@@ -55,7 +55,7 @@ public class ASkyBlockLocationExtension extends dObjectExtension {
             // @returns dPlayer
             // @description
             // Returns whether the owner of the skyblock at the location.
-            // @plugin Depenizen, A SkyBlock
+            // @Plugin DepenizenBukkit, A SkyBlock
             // -->
             else if (attribute.startsWith("get_owner")) {
                 Island i = api.getIslandAt(location);

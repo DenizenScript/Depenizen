@@ -43,7 +43,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
             // @returns SkillAPIClass
             // @description
             // Returns the player's main SkillAPI class.
-            // @plugin Depenizen, SkillAPI
+            // @Plugin DepenizenBukkit, SkillAPI
             // -->
             if (attribute.startsWith("main_class")) {
                 return new SkillAPIClass(data.getMainClass().getData()).getAttribute(attribute.fulfill(1));
@@ -55,7 +55,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
             // @description
             // Returns whether the player professes in the specified class. If none is specified, returns
             // whether the player professes in any class.
-            // @plugin Depenizen, SkillAPI
+            // @Plugin DepenizenBukkit, SkillAPI
             // -->
             if (attribute.startsWith("in_class")) {
                 if (attribute.hasContext(1)) {
@@ -73,7 +73,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns whether the player has the specified skill.
-            // @plugin Depenizen, SkillAPI
+            // @Plugin DepenizenBukkit, SkillAPI
             // -->
             if (attribute.startsWith("has_skill") && attribute.hasContext(1)) {
                 return new Element(data.hasSkill(attribute.getContext(1))).getAttribute(attribute.fulfill(1));
@@ -84,7 +84,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
             // @returns Element(Decimal)
             // @description
             // Returns the player's current amount of mana.
-            // @plugin Depenizen, SkillAPI
+            // @Plugin DepenizenBukkit, SkillAPI
             // -->
             if (attribute.startsWith("mana")) {
                 return new Element(data.getMana()).getAttribute(attribute.fulfill(1));
@@ -95,7 +95,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
             // @returns Element(Decimal)
             // @description
             // Returns the player's maximum amount of mana.
-            // @plugin Depenizen, SkillAPI
+            // @Plugin DepenizenBukkit, SkillAPI
             // -->
             if (attribute.startsWith("max_mana")) {
                 return new Element(data.getMaxMana()).getAttribute(attribute.fulfill(1));
@@ -123,7 +123,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Decimal)
                 // @description
                 // Returns the amount of experience the player has toward the next level in the specified class.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("class_exp")) {
                     return new Element(playerClass.getExp()).getAttribute(attribute.fulfill(1));
@@ -135,7 +135,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @description
                 // Returns the amount of experience the player must receive to get to the next level
                 // in the specified class.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("class_required_exp")) {
                     return new Element(playerClass.getRequiredExp()).getAttribute(attribute.fulfill(1));
@@ -146,7 +146,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Decimal)
                 // @description
                 // Returns the total amount of experience the player has in the specified class.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("class_total_exp")) {
                     return new Element(playerClass.getTotalExp()).getAttribute(attribute.fulfill(1));
@@ -157,7 +157,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the level the player is in the specified class.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("class_level")) {
                     return new Element(playerClass.getLevel()).getAttribute(attribute.fulfill(1));
@@ -168,7 +168,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the number of skill points the player has in the specified class.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("class_points")) {
                     return new Element(playerClass.getPoints()).getAttribute(attribute.fulfill(1));
@@ -179,7 +179,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Boolean)
                 // @description
                 // Returns whether the player has hit maximum level in the specified class.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("class_maxed")) {
                     return new Element(playerClass.isLevelMaxed()).getAttribute(attribute.fulfill(1));
@@ -190,7 +190,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Decimal)
                 // @description
                 // Returns the amount of health the player gets from the specified class.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("class_health")) {
                     return new Element(playerClass.getHealth()).getAttribute(attribute.fulfill(1));
@@ -201,7 +201,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Decimal)
                 // @description
                 // Returns the amount of mana the player gets from the specified class.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("class_mana")) {
                     return new Element(playerClass.getMana()).getAttribute(attribute.fulfill(1));
@@ -220,7 +220,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns dMaterial
                 // @description
                 // Returns the material this skill is currently bound to.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("skill_bind")) {
                     return dMaterial.getMaterialFrom(playerSkill.getBind()).getAttribute(attribute.fulfill(1));
@@ -231,7 +231,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the level the player must be to level up the specified skill.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("skill_level_req")) {
                     return new Element(playerSkill.getLevelReq()).getAttribute(attribute.fulfill(1));
@@ -242,7 +242,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the level the player is in the specified skill.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("skill_level")) {
                     return new Element(playerSkill.getLevel()).getAttribute(attribute.fulfill(1));
@@ -253,7 +253,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns how many skill points the player has invested in the specified skill.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("skill_points")) {
                     return new Element(playerSkill.getPoints()).getAttribute(attribute.fulfill(1));
@@ -264,7 +264,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the cost the for the player to level up the specified skill.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("skill_cost")) {
                     return new Element(playerSkill.getCost()).getAttribute(attribute.fulfill(1));
@@ -275,7 +275,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Boolean)
                 // @description
                 // Returns whether the specified skill is currently on cooldown for the player.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("skill_on_cooldown")) {
                     return new Element(playerSkill.getLevel()).getAttribute(attribute.fulfill(1));
@@ -286,7 +286,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Duration
                 // @description
                 // Returns the remaining cooldown the player has in the specified skill.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("skill_cooldown")) {
                     return new Duration(playerSkill.getCooldown()).getAttribute(attribute.fulfill(1));
@@ -297,7 +297,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @returns Element(Boolean)
                 // @description
                 // Returns whether the player has reached max level in the specified skill.
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("skill_maxed")) {
                     return new Element(playerSkill.isMaxed()).getAttribute(attribute.fulfill(1));
@@ -309,7 +309,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @description
                 // Returns the player's current status for the specified skill.
                 // Can be: ON_COOLDOWN, MISSING_MANA, or READY
-                // @plugin Depenizen, SkillAPI
+                // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("skill_status")) {
                     return new Element(playerSkill.getStatus().name()).getAttribute(attribute.fulfill(1));

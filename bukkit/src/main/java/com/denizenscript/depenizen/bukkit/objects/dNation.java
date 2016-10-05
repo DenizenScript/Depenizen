@@ -113,7 +113,7 @@ public class dNation implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Returns a list of the nation's assistants.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         if (attribute.startsWith("assistants")) {
             dList list = new dList();
@@ -128,7 +128,7 @@ public class dNation implements dObject {
         // @returns Element(Decimal)
         // @description
         // Returns the current money balance of the nation.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         if (attribute.startsWith("balance")) {
             try {
@@ -146,7 +146,7 @@ public class dNation implements dObject {
         // @returns dTown
         // @description
         // Returns the capital city of the nation as a dTown.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         else if (attribute.startsWith("capital")) {
             if (nation.hasCapital()) {
@@ -160,7 +160,7 @@ public class dNation implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns true if the nation is neutral.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         else if (attribute.startsWith("isneutral") || attribute.startsWith("is_neutral")) {
             return new Element(nation.isNeutral())
@@ -172,7 +172,7 @@ public class dNation implements dObject {
         // @returns dPlayer
         // @description
         // Returns the king of the nation.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         else if (attribute.startsWith("king")) {
             return dPlayer.valueOf(nation.getCapital().getMayor().getName())
@@ -184,7 +184,7 @@ public class dNation implements dObject {
         // @returns Element
         // @description
         // Returns the nation's name.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         else if (attribute.startsWith("name")) {
             return new Element(nation.getName())
                     .getAttribute(attribute.fulfill(1));
@@ -195,7 +195,7 @@ public class dNation implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the amount of players in the nation.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
             return new Element(nation.getNumResidents())
@@ -207,7 +207,7 @@ public class dNation implements dObject {
         // @returns Element
         // @description
         // Returns the nation's current relation with another nation.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         else if (attribute.startsWith("relation")) {
 
@@ -235,7 +235,7 @@ public class dNation implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Returns a list of the nation's residents.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         if (attribute.startsWith("residents")) {
             dList list = new dList();
@@ -250,7 +250,7 @@ public class dNation implements dObject {
         // @returns Element
         // @description
         // Returns the nation's tag.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         else if (attribute.startsWith("tag")) {
             if (nation.hasTag()) {
@@ -264,7 +264,7 @@ public class dNation implements dObject {
         // @returns Element(Decimal)
         // @description
         // Returns the nation's current taxes.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         else if (attribute.startsWith("taxes")) {
             return new Element(nation.getTaxes())
@@ -276,7 +276,7 @@ public class dNation implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the number of towns in the nation.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         else if (attribute.startsWith("towncount") || attribute.startsWith("town_count")) {
             return new Element(nation.getNumTowns())
@@ -289,7 +289,7 @@ public class dNation implements dObject {
         // @description
         // Always returns 'Nation' for dNation objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Depenizen, Towny
+        // @Plugin DepenizenBukkit, Towny
         // -->
         if (attribute.startsWith("type")) {
             return new Element("Nation").getAttribute(attribute.fulfill(1));

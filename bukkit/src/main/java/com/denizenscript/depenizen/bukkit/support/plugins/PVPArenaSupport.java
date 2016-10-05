@@ -36,7 +36,7 @@ public class PVPArenaSupport extends Support {
         // @returns dList(PVPArena)
         // @description
         // Returns a list of all PVPArenas.
-        // @plugin Depenizen, PVPArena
+        // @Plugin DepenizenBukkit, PVPArena
         // -->
         attribute = attribute.fulfill(1);
         if (attribute.startsWith("list_arenas")) {

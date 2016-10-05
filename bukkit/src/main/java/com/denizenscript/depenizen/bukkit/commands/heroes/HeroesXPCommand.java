@@ -19,7 +19,7 @@ import net.aufdemrand.denizencore.utilities.debugging.dB;
 // @Name HeroesXP
 // @Syntax heroesxp [add/remove/set] [<heroesclass>] [quantity:<#.#>]
 // @Group Depenizen
-// @Plugin Depenizen, Heroes
+// @Plugin DepenizenBukkit, Heroes
 // @Required 3
 // @Stable stable
 // @Short Manipulate Heroes' experience.

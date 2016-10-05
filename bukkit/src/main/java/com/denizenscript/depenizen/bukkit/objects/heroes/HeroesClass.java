@@ -116,7 +116,7 @@ public class HeroesClass implements dObject {
         // @returns dList(dMaterial)
         // @description
         // Lists the armor materials allowed in the class.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         if (attribute.startsWith("allowed_armor")) {
             Set<Material> allowed = heroClass.getAllowedArmor();
@@ -132,7 +132,7 @@ public class HeroesClass implements dObject {
         // @returns dList(dMaterial)
         // @description
         // Lists the weapon materials allowed in the class.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         if (attribute.startsWith("allowed_weapons")) {
             Set<Material> allowed = heroClass.getAllowedWeapons();
@@ -148,7 +148,7 @@ public class HeroesClass implements dObject {
         // @returns Element
         // @description
         // Returns the name of the hero class.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         if (attribute.startsWith("name")) {
             return new Element(heroClass.getName()).getAttribute(attribute.fulfill(1));
@@ -160,7 +160,7 @@ public class HeroesClass implements dObject {
         // @description
         // Always returns 'Hero Class' for HeroesClass objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         if (attribute.startsWith("type")) {
             return new Element("Hero Class").getAttribute(attribute.fulfill(1));

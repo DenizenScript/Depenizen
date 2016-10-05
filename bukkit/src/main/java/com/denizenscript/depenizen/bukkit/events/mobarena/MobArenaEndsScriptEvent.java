@@ -29,7 +29,7 @@ import org.bukkit.event.Listener;
 // <context.arena> Returns the arena which ended.
 // <context.wave> Returns the number of the final wave.
 //
-// @Plugin Depenizen, MobArena
+// @Plugin DepenizenBukkit, MobArena
 //
 // -->
 

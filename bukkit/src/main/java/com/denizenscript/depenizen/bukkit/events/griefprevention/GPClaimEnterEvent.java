@@ -41,7 +41,7 @@ public class GPClaimEnterEvent extends ScriptEvent implements Listener {
     // <context.new_claim> returns the gpclaim being entered.
     // <context.old_claim> returns the gpclaim being exited.
     //
-    // @Plugin Depenizen, GriefPrevention
+    // @Plugin DepenizenBukkit, GriefPrevention
     // -->
 
     public GPClaimEnterEvent() {

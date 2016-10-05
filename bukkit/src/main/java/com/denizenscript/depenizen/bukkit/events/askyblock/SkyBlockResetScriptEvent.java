@@ -28,7 +28,7 @@ import org.bukkit.event.Listener;
 // <context.owner> Returns the owner of the island.
 // <context.location> Returns the location of the island.
 //
-// @Plugin Depenizen, A SkyBlock
+// @Plugin DepenizenBukkit, A SkyBlock
 //
 // -->
 

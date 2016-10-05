@@ -71,7 +71,7 @@ public class WorldGuardCuboidExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the cuboid contains any region.
-        // @Plugin Depenizen, WorldGuard
+        // @Plugin DepenizenBukkit, WorldGuard
         // -->
         if (attribute.startsWith("has_region")) {
             return new Element(hasRegion()).getAttribute(attribute.fulfill(1));
@@ -82,7 +82,7 @@ public class WorldGuardCuboidExtension extends dObjectExtension {
         // @returns dList(Region)
         // @description
         // Returns a list of regions that are in this cuboid.
-        // @Plugin Depenizen, WorldGuard
+        // @Plugin DepenizenBukkit, WorldGuard
         // -->
         if (attribute.startsWith("regions")) {
             return getRegions(cuboid.getWorld()).getAttribute(attribute.fulfill(1));

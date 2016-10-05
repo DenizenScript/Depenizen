@@ -183,7 +183,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns Element(Boolean)
         // @description
         // Returns whether the hero is currently using a delayed skill.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("delaying_skill")) {
             return new Element(hero.getDelayedSkill() != null).getAttribute(attribute.fulfill(1));
@@ -194,7 +194,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns Element
         // @description
         // Returns the delayed skill the hero is currently using.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("delayed_skill")) {
             return new Element(hero.getDelayedSkill().getSkill().getName()).getAttribute(attribute.fulfill(1));
@@ -205,7 +205,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns Element(Boolean)
         // @description
         // Returns whether the hero is in a party.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("has_party")) {
             return new Element(hero.hasParty()).getAttribute(attribute.fulfill(1));
@@ -216,7 +216,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns Element(Boolean)
         // @description
         // Returns whether the hero is currently in combat, optionally with a specific entity.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("in_combat")) {
             if (attribute.hasContext(1)) {
@@ -235,7 +235,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @description
         // Returns the level of the hero for the specified class.
         // If no class is specified, returns the hero's current highest level.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("level")) {
             if (attribute.hasContext(1)) {
@@ -257,7 +257,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns dList(dEntity)
         // @description
         // Returns the list of entities the hero is currently in combat with.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("list_combatants")) {
             dList list = new dList();
@@ -272,7 +272,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns Element(Number)
         // @description
         // Returns the hero's current amount of mana.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("mana")) {
             return new Element(hero.getMana()).getAttribute(attribute.fulfill(1));
@@ -283,7 +283,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns Element(Number)
         // @description
         // Returns the hero's current amount of mana regeneration.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("mana_regen")) {
             return new Element(hero.getManaRegen()).getAttribute(attribute.fulfill(1));
@@ -294,7 +294,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns Element(Number)
         // @description
         // Returns the hero's maximum amount of mana.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("max_mana")) {
             return new Element(hero.getMaxMana()).getAttribute(attribute.fulfill(1));
@@ -309,7 +309,7 @@ public class HeroesHero implements dObject, Adjustable {
             // @returns dPlayer
             // @description
             // Returns the leader of the hero's party.
-            // @plugin Depenizen, Heroes
+            // @Plugin DepenizenBukkit, Heroes
             // -->
             if (attribute.startsWith("leader")) {
                 return dPlayer.mirrorBukkitPlayer(hero.getParty().getLeader().getPlayer())
@@ -321,7 +321,7 @@ public class HeroesHero implements dObject, Adjustable {
             // @returns dList(dPlayer)
             // @description
             // Returns a list of players currently in the hero's party.
-            // @plugin Depenizen, Heroes
+            // @Plugin DepenizenBukkit, Heroes
             // -->
             if (attribute.startsWith("members")) {
                 dList members = new dList();
@@ -338,7 +338,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns HeroesClass
         // @description
         // Returns the primary class for the hero.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("primary_class")) {
             return new HeroesClass(hero.getHeroClass()).getAttribute(attribute.fulfill(1));
@@ -349,7 +349,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns HeroesClass
         // @description
         // Returns the secondary class for the hero.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("secondary_class")) {
             return new HeroesClass(hero.getSecondClass()).getAttribute(attribute.fulfill(1));
@@ -360,7 +360,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @returns dList
         // @description
         // Returns a list of skills the hero currently has access to.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("skills")) {
             Set<String> skills = new HashSet<String>();
@@ -376,7 +376,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @description
         // Always returns 'Hero' for HeroesHero objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @plugin Depenizen, Heroes
+        // @Plugin DepenizenBukkit, Heroes
         // -->
         else if (attribute.startsWith("type")) {
             return new Element("Hero").getAttribute(attribute.fulfill(1));
