@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.support.bungee;
 
+import com.denizenscript.depenizen.bukkit.Settings;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
@@ -25,6 +26,26 @@ public class BukkitSocketClient extends SocketClient {
     @Override
     protected boolean isBungeeScriptCompatible() {
         return true;
+    }
+
+    @Override
+    protected long getPingDelay() {
+        return Settings.socketPingDelay().getMillis();
+    }
+
+    @Override
+    protected long getPingTimeout() {
+        return Settings.socketPingTimeout().getMillis();
+    }
+
+    @Override
+    protected int getReconnectAttempts() {
+        return Settings.socketReconnectAttempts();
+    }
+
+    @Override
+    protected long getReconnectDelay() {
+        return Settings.socketReconnectDelay().getMillis();
     }
 
     @Override

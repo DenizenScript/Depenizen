@@ -21,6 +21,8 @@ import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import org.bukkit.Bukkit;
 
+import java.io.IOException;
+
 public class BungeeSupport extends Support {
 
     public BungeeSupport() {
@@ -107,6 +109,10 @@ public class BungeeSupport extends Support {
                 socketClient = new BukkitSocketClient(ipAddress, Settings.socketPort(), name, password.toCharArray());
                 socketClient.connect();
             }
+            catch (IOException e) {
+                dB.echoError("BungeeCord Socket is not online.");
+                socketClient.attemptReconnect();
+            }
             catch (Exception e) {
                 dB.echoError("BungeeCord Socket failed to connect due to an exception.");
                 dB.echoError(e);
@@ -124,7 +130,7 @@ public class BungeeSupport extends Support {
 
     public static void closeSocket() {
         if (isSocketConnected()) {
-            socketClient.close("Closed.");
+            socketClient.close("Closed.", false);
         }
     }
 }

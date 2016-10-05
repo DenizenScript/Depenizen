@@ -1,5 +1,7 @@
 package com.denizenscript.depenizen.bukkit;
 
+import net.aufdemrand.denizencore.objects.Duration;
+
 public class Settings {
 
     /*
@@ -8,39 +10,43 @@ public class Settings {
 
      */
 
-    private static final String SOCKET_ENABLED = "Socket.Enabled";
-    private static final String SOCKET_IP_ADDRESS = "Socket.Ip address";
-    private static final String SOCKET_PORT = "Socket.Port";
-    private static final String SOCKET_PASSWORD = "Socket.Password";
-    private static final String SOCKET_NAME = "Socket.Name";
-    private static final String SOCKET_TIMEOUT = "Socket.Timeout";
-    private static final String SOCKET_RECONNECT_DELAY = "Socket.Reconnect Delay";
-
     public static boolean socketEnabled() {
-        return DepenizenPlugin.getCurrentInstance().getConfig().getBoolean(SOCKET_ENABLED, false);
+        return DepenizenPlugin.getCurrentInstance().getConfig().getBoolean("Socket.Enabled", false);
     }
 
     public static String socketIpAddress() {
-        return DepenizenPlugin.getCurrentInstance().getConfig().getString(SOCKET_IP_ADDRESS, null);
+        return DepenizenPlugin.getCurrentInstance().getConfig().getString("Socket.IP Address", null);
     }
 
     public static int socketPort() {
-        return DepenizenPlugin.getCurrentInstance().getConfig().getInt(SOCKET_PORT, 25578);
+        return DepenizenPlugin.getCurrentInstance().getConfig().getInt("Socket.Port", 25578);
     }
 
     public static String socketPassword() {
-        return DepenizenPlugin.getCurrentInstance().getConfig().getString(SOCKET_PASSWORD, null);
+        return DepenizenPlugin.getCurrentInstance().getConfig().getString("Socket.Password", null);
     }
 
     public static String socketName() {
-        return DepenizenPlugin.getCurrentInstance().getConfig().getString(SOCKET_NAME, null);
+        return DepenizenPlugin.getCurrentInstance().getConfig().getString("Socket.Name", null);
     }
 
-    public static int socketTimeout() {
-        return DepenizenPlugin.getCurrentInstance().getConfig().getInt(SOCKET_TIMEOUT, 0);
+    public static Duration socketPingDelay() {
+        return Duration.valueOf(DepenizenPlugin.getCurrentInstance().getConfig().getString("Socket.Ping Delay", "30s"));
     }
 
-    public static long socketReconnectDelay() {
-        return DepenizenPlugin.getCurrentInstance().getConfig().getLong(SOCKET_RECONNECT_DELAY, 10000);
+    public static Duration socketPingTimeout() {
+        return Duration.valueOf(DepenizenPlugin.getCurrentInstance().getConfig().getString("Socket.Ping Timeout", "30s"));
+    }
+
+    public static Duration socketReconnectDelay() {
+        if (DepenizenPlugin.getCurrentInstance().getConfig().contains("Socket.Reconnection Delay")) {
+            return Duration.valueOf(DepenizenPlugin.getCurrentInstance().getConfig().getString("Socket.Reconnection Delay", "10s"));
+        }
+        // For backwards compatibility
+        return new Duration((int) DepenizenPlugin.getCurrentInstance().getConfig().getLong("Socket.Reconnect Delay", 10000) / 1000);
+    }
+
+    public static int socketReconnectAttempts() {
+        return DepenizenPlugin.getCurrentInstance().getConfig().getInt("Socket.Reconnection Attempts", 10);
     }
 }

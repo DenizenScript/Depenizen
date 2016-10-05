@@ -28,6 +28,7 @@ public abstract class SocketClient implements Runnable {
     private Encryption encryption;
     private Socket socket;
     private Thread listenThread;
+    private Thread reconnectThread;
     private DataOutputStream output;
     private DataInputStream input;
     private boolean isConnected;
@@ -44,10 +45,10 @@ public abstract class SocketClient implements Runnable {
     public void connect() throws IOException {
         if (!isConnected) {
             socket = new Socket(ipAddress, port);
-            listenThread = new Thread(this);
-            listenThread.start();
             output = new DataOutputStream(socket.getOutputStream());
             input = new DataInputStream(socket.getInputStream());
+            listenThread = new Thread(this);
+            listenThread.start();
         }
     }
 
@@ -69,15 +70,15 @@ public abstract class SocketClient implements Runnable {
             send(packet);
         }
         catch (IOException e) {
-            close("Server socket closed");
+            close("Server socket closed", true);
         }
         catch (Exception e) {
-            close("Failed to send data due to an exception");
+            close("Failed to send data due to an exception", true);
             Depenizen.getImplementation().debugException(e);
         }
     }
 
-    public void close(String reason) {
+    public void close(String reason, boolean shouldReconnect) {
         if (isConnected) {
             if (reason != null) {
                 Depenizen.getImplementation().debugMessage("Disconnected from socket: " + reason);
@@ -93,10 +94,21 @@ public abstract class SocketClient implements Runnable {
                 if (socket != null) {
                     socket.close();
                 }
+                if (shouldReconnect) {
+                    attemptReconnect();
+                }
             }
             catch (Exception e) {
                 Depenizen.getImplementation().debugException(e);
             }
+        }
+    }
+
+    public void attemptReconnect() {
+        if (!isConnected && reconnectThread == null) {
+            Depenizen.getImplementation().debugMessage("Attempting to reconnect...");
+            reconnectThread = new Thread(new ReconnectTask(this, getReconnectAttempts(), getReconnectDelay()));
+            reconnectThread.start();
         }
     }
 
@@ -106,6 +118,7 @@ public abstract class SocketClient implements Runnable {
     public void run() {
         if (socket != null && socket.isConnected()) {
             isConnected = true;
+            reconnectThread = null;
             byte[] buffer;
             try {
                 while (input.available() <= 0) {
@@ -126,19 +139,19 @@ public abstract class SocketClient implements Runnable {
                             break connectionLoop;
                         }
                         timePassed = System.currentTimeMillis() - start;
-                        if (timePassed > 30 * 1000 && !pinged) {
+                        if (timePassed > getPingDelay() && !pinged) {
                             lastPingBit = Utilities.getRandomUnsignedByte();
                             send(new ClientPacketOutPing(lastPingBit));
                             pinged = true;
                         }
-                        if (timePassed > 60 * 1000) {
-                            close("Ping timed out!");
+                        if (timePassed > getPingDelay() + getPingTimeout()) {
+                            close("Ping timed out!", true);
                             break connectionLoop;
                         }
                         Thread.sleep(50);
                     }
                     if (receivedEncryptedLength == -1) {
-                        close("Connection failed");
+                        close("Connection failed", true);
                         break;
                     }
                     buffer = new byte[receivedEncryptedLength];
@@ -150,13 +163,13 @@ public abstract class SocketClient implements Runnable {
                     int packetId = data.readUnsignedByte();
                     Packet.ClientBound packetType = Packet.ClientBound.getById(packetId);
                     if (packetType == null) {
-                        close("Received invalid packet from server: " + packetId);
+                        close("Received invalid packet from server: " + packetId, true);
                         break;
                     }
                     switch (packetType) {
                         case ACCEPT_REGISTER:
                             if (registered) {
-                                close("Server tried to accept registration twice");
+                                close("Server tried to accept registration twice", true);
                                 break connectionLoop;
                             }
                             ClientPacketInAcceptRegister acceptRegister = new ClientPacketInAcceptRegister();
@@ -167,7 +180,7 @@ public abstract class SocketClient implements Runnable {
                                 registered = true;
                             }
                             else {
-                                close("Specified name in config.yml is already registered to the server");
+                                close("Specified name in config.yml is already registered to the server", false);
                                 break connectionLoop;
                             }
                             break;
@@ -180,7 +193,7 @@ public abstract class SocketClient implements Runnable {
                             ClientPacketInPong pong = new ClientPacketInPong();
                             pong.deserialize(data);
                             if (pong.getBit() != lastPingBit) {
-                                close("Invalid ping bit: Expected " + lastPingBit + ", got " + pong.getBit());
+                                close("Invalid ping bit: Expected " + lastPingBit + ", got " + pong.getBit(), true);
                                 break connectionLoop;
                             }
                             break;
@@ -204,24 +217,30 @@ public abstract class SocketClient implements Runnable {
                 listenThread = null;
             }
             catch (IllegalStateException e) {
-                close("Password is incorrect");
+                close("Password is incorrect", false);
             }
             catch (SocketTimeoutException e) {
-                close("Connection timed out");
-                //attemptReconnect();
+                close("Connection timed out", true);
             }
             catch (IOException e) {
-                close("Server socket closed");
-                //attemptReconnect();
+                close("Server socket closed", true);
             }
             catch (Exception e) {
-                close("Error receiving data from server: " + e.getMessage());
+                close("Error receiving data from server: " + e.getMessage(), true);
                 Depenizen.getImplementation().debugException(e);
             }
         }
     }
 
     protected abstract boolean isBungeeScriptCompatible();
+
+    protected abstract long getPingDelay();
+
+    protected abstract long getPingTimeout();
+
+    protected abstract int getReconnectAttempts();
+
+    protected abstract long getReconnectDelay();
 
     protected abstract void handleAcceptRegister(String registrationName, List<String> existingServers);
 
