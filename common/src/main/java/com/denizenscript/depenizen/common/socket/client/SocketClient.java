@@ -17,6 +17,7 @@ import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class SocketClient implements Runnable {
 
@@ -128,6 +129,9 @@ public abstract class SocketClient implements Runnable {
                 input.read(iv);
                 this.encryption = new Encryption(password, ENCRYPTION_SALT, iv);
                 send(new ClientPacketOutRegister(registrationName, isBungeeScriptCompatible()));
+                for (String event : getSubscribedEvents()) {
+                    send(new ClientPacketOutEventSubscription(event, true));
+                }
                 connectionLoop:
                 while (isConnected) {
                     long timePassed;
@@ -215,13 +219,21 @@ public abstract class SocketClient implements Runnable {
                         case TAG:
                             ClientPacketInTag tag = new ClientPacketInTag();
                             tag.deserialize(data);
-                            String result = handleTag(tag.getTag(), tag.shouldDebug(), tag.getDefinitions());
-                            send(new ClientPacketOutParsedTag(tag.getFrom(), tag.getId(), result));
+                            String tagResult = handleTag(tag.getTag(), tag.shouldDebug(), tag.getDefinitions());
+                            send(new ClientPacketOutParsedTag(tag.getFrom(), tag.getId(), tagResult));
                             break;
                         case PARSED_TAG:
                             ClientPacketInParsedTag parsedTag = new ClientPacketInParsedTag();
                             parsedTag.deserialize(data);
                             handleParsedTag(parsedTag.getId(), parsedTag.getResult());
+                            break;
+                        case EVENT:
+                            ClientPacketInEvent event = new ClientPacketInEvent();
+                            event.deserialize(data);
+                            Map<String, String> eventResponse = handleEvent(event.getEvent(), event.getContext());
+                            if (event.shouldRespond()) {
+                                send(new ClientPacketOutEventResponse(event.getId(), eventResponse));
+                            }
                             break;
                     }
                 }
@@ -253,6 +265,8 @@ public abstract class SocketClient implements Runnable {
 
     protected abstract long getReconnectDelay();
 
+    protected abstract Set<String> getSubscribedEvents();
+
     protected abstract void handleAcceptRegister(String registrationName, List<String> existingServers);
 
     protected abstract void handleUpdateServer(String serverName, boolean registered);
@@ -264,4 +278,6 @@ public abstract class SocketClient implements Runnable {
     protected abstract String handleTag(String tag, boolean shouldDebug, Map<String, String> definitions);
 
     protected abstract void handleParsedTag(int id, String result);
+
+    protected abstract Map<String, String> handleEvent(String event, Map<String, String> context);
 }

@@ -12,7 +12,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class ClientConnection implements Runnable {
 
@@ -24,12 +26,14 @@ public class ClientConnection implements Runnable {
     private Thread listenThread;
     private DataOutputStream output;
     private DataInputStream input;
+    private Set<String> eventSubscriptions;
     private boolean isConnected;
 
     public ClientConnection(int clientId, SocketServer server, Socket client) {
         this.clientId = clientId;
         this.server = server;
         this.client = client;
+        this.eventSubscriptions = new HashSet<String>();
     }
 
     public void start() throws IOException {
@@ -80,6 +84,10 @@ public class ClientConnection implements Runnable {
             catch (IOException e) {
                 Depenizen.getImplementation().debugException(e);
             }
+            for (String event : eventSubscriptions) {
+                server.handleEventSubscription(this, event, false);
+            }
+            eventSubscriptions.clear();
         }
     }
 
@@ -237,6 +245,24 @@ public class ClientConnection implements Runnable {
                                 ServerPacketOutParsedTag parsedTagOut = new ServerPacketOutParsedTag(parsedTag.getResultData());
                                 parsedTagClients.get(parsedTagDestination).send(parsedTagOut);
                             }
+                            break;
+                        case EVENT_SUBSCRIPTION:
+                            ServerPacketInEventSubscription eventSubscription = new ServerPacketInEventSubscription();
+                            eventSubscription.deserialize(data);
+                            String event = eventSubscription.getEvent();
+                            boolean subscribed = eventSubscription.isSubscribed();
+                            if (subscribed) {
+                                eventSubscriptions.add(event);
+                            }
+                            else {
+                                eventSubscriptions.remove(event);
+                            }
+                            server.handleEventSubscription(this, event, subscribed);
+                            break;
+                        case EVENT_RESPONSE:
+                            ServerPacketInEventResponse eventResponse = new ServerPacketInEventResponse();
+                            eventResponse.deserialize(data);
+                            server.handleEventResponse(this, eventResponse.getId(), eventResponse.getResponse());
                             break;
                     }
                 }

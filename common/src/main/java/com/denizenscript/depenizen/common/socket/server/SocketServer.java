@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-public class SocketServer implements Runnable {
+public abstract class SocketServer implements Runnable {
 
     private int port;
     private ClientConnection[] clients;
@@ -146,4 +146,8 @@ public class SocketServer implements Runnable {
             }
         }
     }
+
+    protected abstract void handleEventSubscription(ClientConnection client, String event, boolean subscribed);
+
+    protected abstract void handleEventResponse(ClientConnection client, long id, Map<String, String> response);
 }

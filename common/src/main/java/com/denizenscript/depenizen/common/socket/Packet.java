@@ -21,7 +21,9 @@ public abstract class Packet {
         SCRIPT(3),
         RUN_SCRIPT(4),
         TAG(5),
-        PARSED_TAG(6);
+        PARSED_TAG(6),
+        EVENT_SUBSCRIPTION(7),
+        EVENT_RESPONSE(8);
 
         private final int id;
 
@@ -55,7 +57,8 @@ public abstract class Packet {
         SCRIPT(4),
         RUN_SCRIPT(5),
         TAG(6),
-        PARSED_TAG(7);
+        PARSED_TAG(7),
+        EVENT(8);
 
         private final int id;
 

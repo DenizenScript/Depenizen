@@ -1,6 +1,8 @@
 package com.denizenscript.depenizen.bungee;
 
 import com.denizenscript.depenizen.common.socket.server.ClientConnection;
+import com.denizenscript.depenizen.common.socket.server.SocketServer;
+import com.denizenscript.depenizen.common.socket.server.packet.ServerPacketOutEvent;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -99,19 +101,19 @@ public class EventManager implements Listener {
     }
 
     private static Map<String, String> sendEventPacket(boolean getResponse, String name, Map<String, String> context) {
-//        long id = nextEventId;
-//        nextEventId++;
-//        ServerPacketOutEvent packet = new ServerPacketOutEvent(getResponse, id, name, context);
-//        SocketServer socketServer = Depenizen.getCurrentInstance().getSocketServer();
-//        if (socketServer != null) {
-//            for (ClientConnection client : eventSubscriptions.get(name)) {
-//                client.send(packet);
-//            }
-//            if (getResponse) {
-//                waitForResponse(id);
-//                return eventDeterminations.get(id);
-//            }
-//        }
+        long id = nextEventId;
+        nextEventId++;
+        ServerPacketOutEvent packet = new ServerPacketOutEvent(id, name, context, getResponse);
+        SocketServer socketServer = DepenizenPlugin.getCurrentInstance().getSocketServer();
+        if (socketServer != null) {
+            for (ClientConnection client : eventSubscriptions.get(name)) {
+                client.trySend(packet);
+            }
+            if (getResponse) {
+                waitForResponse(id);
+                return eventDeterminations.get(id);
+            }
+        }
         return null;
     }
 

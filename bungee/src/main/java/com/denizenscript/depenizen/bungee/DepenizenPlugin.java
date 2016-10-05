@@ -53,7 +53,7 @@ public class DepenizenPlugin extends Plugin implements DepenizenImplementation {
                 return;
             }
             try {
-                socketServer = new SocketServer(Settings.socketPort(), Settings.socketMaxClients(), password.toCharArray());
+                socketServer = new BungeeSocketServer(Settings.socketPort(), Settings.socketMaxClients(), password.toCharArray());
                 socketServer.start();
             }
             catch (Exception e) {

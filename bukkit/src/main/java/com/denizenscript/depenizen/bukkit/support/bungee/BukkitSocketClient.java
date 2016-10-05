@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.support.bungee;
 
 import com.denizenscript.depenizen.bukkit.Settings;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
+import com.denizenscript.depenizen.bukkit.events.bungee.BungeeScriptEvent;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
@@ -18,6 +19,7 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class BukkitSocketClient extends SocketClient {
 
@@ -48,6 +50,11 @@ public class BukkitSocketClient extends SocketClient {
     @Override
     protected long getReconnectDelay() {
         return Settings.socketReconnectDelay().getMillis();
+    }
+
+    @Override
+    protected Set<String> getSubscribedEvents() {
+        return BungeeScriptEvent.getInitializedEvents();
     }
 
     @Override
@@ -125,5 +132,10 @@ public class BukkitSocketClient extends SocketClient {
     @Override
     protected void handleParsedTag(int id, String result) {
         BungeeTagCommand.returnTag(id, result);
+    }
+
+    @Override
+    protected Map<String, String> handleEvent(String event, Map<String, String> context) {
+        return BungeeScriptEvent.fire(event, context);
     }
 }
