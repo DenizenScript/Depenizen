@@ -18,6 +18,7 @@
         <module>common</module>
         <module>bukkit</module>
         <module>bungee</module>
+        <module>sponge</module>
     </modules>
 
     <repositories>

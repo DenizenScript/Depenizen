@@ -48,11 +48,6 @@
             </goals>
             <configuration>
               <minimizeJar>true</minimizeJar>
-              <filters>
-                <filter>
-                  <artifact>com.denizenscript:depenizen-common</artifact>
-                </filter>
-              </filters>
             </configuration>
           </execution>
         </executions>

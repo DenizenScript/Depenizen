@@ -4,7 +4,7 @@ public interface DepenizenImplementation {
 
     void debugMessage(String message);
 
-    void debugException(Throwable ex);
+    void debugException(Exception exception);
 
     void debugError(String error);
 }

@@ -102,7 +102,7 @@ public class DepenizenPlugin extends Plugin implements DepenizenImplementation {
     }
 
     @Override
-    public void debugException(Throwable exception) {
+    public void debugException(Exception exception) {
         dB.echoError(exception);
     }
 

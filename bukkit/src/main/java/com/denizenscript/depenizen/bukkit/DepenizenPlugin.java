@@ -75,7 +75,7 @@ public class DepenizenPlugin extends JavaPlugin implements DepenizenImplementati
     }
 
     @Override
-    public void debugException(Throwable exception) {
+    public void debugException(Exception exception) {
         dB.echoError(exception);
     }
 
