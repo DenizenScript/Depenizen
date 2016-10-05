@@ -33,6 +33,7 @@ public class ReconnectTask implements Runnable {
             catch (IOException e) {
                 if (attemptsLeft <= 0) {
                     Depenizen.getImplementation().debugError("Failed to reconnect to BungeeCord Socket.");
+                    client.fireReconnectFailEvent();
                 }
             }
         }

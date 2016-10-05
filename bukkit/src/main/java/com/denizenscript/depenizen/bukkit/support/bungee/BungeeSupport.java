@@ -16,6 +16,7 @@ import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.events.ScriptEvent;
+import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
@@ -76,6 +77,28 @@ public class BungeeSupport extends Support {
                 }
                 return list.getAttribute(attribute.fulfill(1));
             }
+
+            // <--[tag]
+            // @attribute <bungee.connected>
+            // @returns Element(Boolean)
+            // @description
+            // Returns whether the server is connected to the BungeeCord socket.
+            // @Plugin DepenizenBukkit, DepenizenBungee
+            // -->
+            if (attribute.startsWith("connected")) {
+                return new Element(isSocketConnected()).getAttribute(attribute.fulfill(1));
+            }
+
+            // <--[tag]
+            // @attribute <bungee.reconnecting>
+            // @returns Element(Boolean)
+            // @description
+            // Returns whether the server is trying to reconnect to the BungeeCord socket.
+            // @Plugin DepenizenBukkit, DepenizenBungee
+            // -->
+            if (attribute.startsWith("reconnecting")) {
+                return new Element(isSocketReconnecting()).getAttribute(attribute.fulfill(1));
+            }
         }
 
         return null;
@@ -126,6 +149,14 @@ public class BungeeSupport extends Support {
 
     public static boolean isSocketConnected() {
         return socketClient != null && socketClient.isConnected();
+    }
+
+    public static boolean isSocketReconnecting() {
+        return socketClient != null && socketClient.isReconnecting();
+    }
+
+    public static void attemptReconnect() {
+        socketClient.attemptReconnect();
     }
 
     public static void closeSocket() {

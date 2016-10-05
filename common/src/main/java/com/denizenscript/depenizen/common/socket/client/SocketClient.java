@@ -113,6 +113,10 @@ public abstract class SocketClient implements Runnable {
         }
     }
 
+    public boolean isReconnecting() {
+        return reconnectThread != null;
+    }
+
     private int lastPingBit;
 
     @Override
@@ -266,6 +270,8 @@ public abstract class SocketClient implements Runnable {
     protected abstract long getReconnectDelay();
 
     protected abstract Set<String> getSubscribedEvents();
+
+    protected abstract void fireReconnectFailEvent();
 
     protected abstract void handleAcceptRegister(String registrationName, List<String> existingServers);
 

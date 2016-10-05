@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.support.bungee;
 import com.denizenscript.depenizen.bukkit.Settings;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeeScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.bungee.ReconnectFailScriptEvent;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
@@ -55,6 +56,11 @@ public class BukkitSocketClient extends SocketClient {
     @Override
     protected Set<String> getSubscribedEvents() {
         return BungeeScriptEvent.getInitializedEvents();
+    }
+
+    @Override
+    protected void fireReconnectFailEvent() {
+        ReconnectFailScriptEvent.instance.fire();
     }
 
     @Override

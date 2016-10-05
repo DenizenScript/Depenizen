@@ -9,13 +9,13 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
-import net.aufdemrand.denizencore.scripts.commands.BracedCommand;
+import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class BungeeRunCommand extends BracedCommand {
+public class BungeeRunCommand extends AbstractCommand {
 
     // <--[command]
     // @Name BungeeRun
