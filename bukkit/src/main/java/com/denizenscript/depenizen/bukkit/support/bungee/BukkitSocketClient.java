@@ -3,6 +3,8 @@ package com.denizenscript.depenizen.bukkit.support.bungee;
 import com.denizenscript.depenizen.bukkit.Settings;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeeScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerConnectScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerDisconnectScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.bungee.ReconnectFailScriptEvent;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
@@ -83,11 +85,17 @@ public class BukkitSocketClient extends SocketClient {
                 dB.log("[Bungee]: Registered with " + serverName);
             }
             dServer.addOnlineServer(serverName);
+            BungeeServerConnectScriptEvent event = BungeeServerConnectScriptEvent.instance;
+            event.server = dServer.getServerFromName(serverName);
+            event.fire();
         }
         else {
             if (dB.verbose) {
                 dB.log("[Bungee]: Disconnected from " + serverName);
             }
+            BungeeServerDisconnectScriptEvent event = BungeeServerDisconnectScriptEvent.instance;
+            event.server = dServer.getServerFromName(serverName);
+            event.fire();
             dServer.removeOnlineServer(serverName);
         }
     }

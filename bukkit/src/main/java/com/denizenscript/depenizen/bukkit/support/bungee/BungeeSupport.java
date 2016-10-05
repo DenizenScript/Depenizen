@@ -5,17 +5,13 @@ import com.denizenscript.depenizen.bukkit.Settings;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeCommand;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeRunCommand;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
-import com.denizenscript.depenizen.bukkit.events.bungee.PlayerDisconnectScriptEvent;
-import com.denizenscript.depenizen.bukkit.events.bungee.PostLoginScriptEvent;
-import com.denizenscript.depenizen.bukkit.events.bungee.ProxyPingScriptEvent;
-import com.denizenscript.depenizen.bukkit.events.bungee.ServerSwitchScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.bungee.*;
 import com.denizenscript.depenizen.bukkit.extensions.bungee.BungeePlayerExtension;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
@@ -34,10 +30,13 @@ public class BungeeSupport extends Support {
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(DepenizenPlugin.getCurrentInstance(), "BungeeCord");
         registerProperty(BungeePlayerExtension.class, dPlayer.class);
         registerAdditionalTags("bungee");
-        ScriptEvent.registerScriptEvent(new ProxyPingScriptEvent());
-        ScriptEvent.registerScriptEvent(new PostLoginScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerDisconnectScriptEvent());
-        ScriptEvent.registerScriptEvent(new ServerSwitchScriptEvent());
+        registerScriptEvents(new BungeeServerConnectScriptEvent());
+        registerScriptEvents(new BungeeServerDisconnectScriptEvent());
+        registerScriptEvents(new ProxyPingScriptEvent());
+        registerScriptEvents(new PostLoginScriptEvent());
+        registerScriptEvents(new PlayerDisconnectScriptEvent());
+        registerScriptEvents(new ReconnectFailScriptEvent());
+        registerScriptEvents(new ServerSwitchScriptEvent());
         startSocket();
     }
 
