@@ -10,7 +10,8 @@ public class ClientPacketInTag extends Packet {
     private String from;
     private int id;
     private String tag;
-    private boolean debug;
+    private boolean fullDebug;
+    private boolean minimalDebug;
     private Map<String, String> definitions;
 
     @Override
@@ -19,7 +20,8 @@ public class ClientPacketInTag extends Packet {
         DataDeserializer box = new DataDeserializer(deserializer.readByteArray());
         id = box.readInt();
         tag = box.readString();
-        debug = box.readBoolean();
+        fullDebug = box.readBoolean();
+        minimalDebug = box.readBoolean();
         definitions = box.readStringMap();
     }
 
@@ -35,8 +37,12 @@ public class ClientPacketInTag extends Packet {
         return tag;
     }
 
-    public boolean shouldDebug() {
-        return debug;
+    public boolean showFullDebug() {
+        return fullDebug;
+    }
+
+    public boolean showMinimalDebug() {
+        return minimalDebug;
     }
 
     public Map<String, String> getDefinitions() {

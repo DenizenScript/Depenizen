@@ -121,9 +121,9 @@ public class BukkitSocketClient extends SocketClient {
     }
 
     @Override
-    protected void handleRunScript(String scriptName, Map<String, String> definitions, boolean shouldDebug) {
+    protected void handleRunScript(String scriptName, Map<String, String> definitions, boolean fullDebug, boolean minimalDebug) {
         if (!ScriptRegistry.containsScript(scriptName)) {
-            if (shouldDebug) {
+            if (fullDebug) {
                 dB.echoError("[BungeeRun]: The script '" + scriptName + "' does not exist!");
             }
             return;
@@ -131,7 +131,7 @@ public class BukkitSocketClient extends SocketClient {
         ScriptContainer scriptContainer = ScriptRegistry.getScriptContainer(scriptName);
         List<ScriptEntry> scriptEntries = scriptContainer.getBaseEntries(new BukkitScriptEntryData(null, null));
         for (ScriptEntry scriptEntry : scriptEntries) {
-            scriptEntry.setScript("").fallbackDebug = shouldDebug;
+            scriptEntry.setScript("").fallbackDebug = fullDebug;
         }
         ScriptQueue queue = InstantQueue.getQueue(ScriptQueue.getNextId(scriptContainer.getName())).addEntries(scriptEntries);
         queue.getAllDefinitions().putAll(definitions);
@@ -139,8 +139,8 @@ public class BukkitSocketClient extends SocketClient {
     }
 
     @Override
-    protected String handleTag(String tag, boolean shouldDebug, Map<String, String> definitions) {
-        return TagManager.tag(tag, new BungeeTagContext(shouldDebug, new DefinitionsWrapper(definitions)));
+    protected String handleTag(String tag, boolean fullDebug, boolean minimalDebug, Map<String, String> definitions) {
+        return TagManager.tag(tag, new BungeeTagContext(fullDebug, new DefinitionsWrapper(definitions)));
     }
 
     @Override

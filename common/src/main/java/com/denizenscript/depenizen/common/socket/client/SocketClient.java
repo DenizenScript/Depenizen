@@ -218,12 +218,13 @@ public abstract class SocketClient implements Runnable {
                         case RUN_SCRIPT:
                             ClientPacketInRunScript runScript = new ClientPacketInRunScript();
                             runScript.deserialize(data);
-                            handleRunScript(runScript.getScriptName(), runScript.getDefinitions(), runScript.shouldDebug());
+                            handleRunScript(runScript.getScriptName(), runScript.getDefinitions(),
+                                    runScript.showFullDebug(), runScript.showMinimalDebug());
                             break;
                         case TAG:
                             ClientPacketInTag tag = new ClientPacketInTag();
                             tag.deserialize(data);
-                            String tagResult = handleTag(tag.getTag(), tag.shouldDebug(), tag.getDefinitions());
+                            String tagResult = handleTag(tag.getTag(), tag.showFullDebug(), tag.showMinimalDebug(), tag.getDefinitions());
                             send(new ClientPacketOutParsedTag(tag.getFrom(), tag.getId(), tagResult));
                             break;
                         case PARSED_TAG:
@@ -279,9 +280,9 @@ public abstract class SocketClient implements Runnable {
 
     protected abstract void handleScript(boolean shouldDebug, Map<String, List<String>> scriptEntries, Map<String, String> definitions);
 
-    protected abstract void handleRunScript(String scriptName, Map<String, String> definitions, boolean shouldDebug);
+    protected abstract void handleRunScript(String scriptName, Map<String, String> definitions, boolean fullDebug, boolean minimalDebug);
 
-    protected abstract String handleTag(String tag, boolean shouldDebug, Map<String, String> definitions);
+    protected abstract String handleTag(String tag, boolean fullDebug, boolean minimalDebug, Map<String, String> definitions);
 
     protected abstract void handleParsedTag(int id, String result);
 

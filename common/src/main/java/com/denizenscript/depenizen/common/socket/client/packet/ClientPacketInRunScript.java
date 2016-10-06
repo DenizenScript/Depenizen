@@ -9,25 +9,31 @@ public class ClientPacketInRunScript extends Packet {
 
     private String scriptName;
     private Map<String, String> definitions;
-    private boolean shouldDebug;
+    private boolean fullDebug;
+    private boolean minimalDebug;
 
     @Override
     public void deserialize(DataDeserializer deserializer) {
         DataDeserializer box = new DataDeserializer(deserializer.readByteArray());
         scriptName = box.readString();
         definitions = box.readStringMap();
-        shouldDebug = box.readBoolean();
+        fullDebug = box.readBoolean();
+        minimalDebug = box.readBoolean();
     }
 
     public String getScriptName() {
         return scriptName;
     }
 
-    public boolean shouldDebug() {
-        return shouldDebug;
-    }
-
     public Map<String, String> getDefinitions() {
         return definitions;
+    }
+
+    public boolean showFullDebug() {
+        return fullDebug;
+    }
+
+    public boolean showMinimalDebug() {
+        return minimalDebug;
     }
 }

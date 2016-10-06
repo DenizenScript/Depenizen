@@ -10,14 +10,16 @@ public class ClientPacketOutTag extends Packet {
     private String destination;
     private int id;
     private String tag;
-    private boolean debug;
+    private boolean fullDebug;
+    private boolean minimalDebug;
     private Map<String, String> definitions;
 
-    public ClientPacketOutTag(String destination, int id, String tag, boolean debug, Map<String, String> definitions) {
+    public ClientPacketOutTag(String destination, int id, String tag, boolean fullDebug, boolean minimalDebug, Map<String, String> definitions) {
         this.destination = destination;
         this.id = id;
         this.tag = tag;
-        this.debug = debug;
+        this.fullDebug = fullDebug;
+        this.minimalDebug = minimalDebug;
         this.definitions = definitions;
     }
 
@@ -28,7 +30,8 @@ public class ClientPacketOutTag extends Packet {
         DataSerializer box = new DataSerializer();
         box.writeInt(id);
         box.writeString(tag);
-        box.writeBoolean(debug);
+        box.writeBoolean(fullDebug);
+        box.writeBoolean(minimalDebug);
         box.writeStringMap(definitions);
         serializer.writeByteArray(box.toByteArray());
     }

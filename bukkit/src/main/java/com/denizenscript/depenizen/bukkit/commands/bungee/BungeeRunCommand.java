@@ -20,6 +20,7 @@ public class BungeeRunCommand extends AbstractCommand {
     // <--[command]
     // @Name BungeeRun
     // @Syntax bungeerun [<server>|...] [<script_name>] (def:<name>|<value>|...) (debug:<boolean>)
+    // @Group Depenizen
     // @Plugin DepenizenBukkit, DepenizenBungee
     // @Required 2
     // @Stable stable
@@ -40,13 +41,11 @@ public class BungeeRunCommand extends AbstractCommand {
 
     // @Usage
     // Use to send network-wide join messages with a script called JoinMessageScript that takes a definition of the player's name.
-    // - bungeerun <bungee.list_servers> JoinMessageScript def:<player.name.display>
+    // - bungeerun <bungee.list_servers> JoinMessageScript def:name|<player.name.display>
 
     // @Usage
-    // Use to keep a player's inventory consistent across 2 creative servers.
-    // - define player <player>
-    // - define contents <player.inventory.list_contents>
-    // - bungeerun creative2 UpdatePlayerInventory def:<player>|<player.inventory.list_contents>
+    // Use to keep a player's inventory consistent across 2 creative servers without debug.
+    // - bungeerun creative2 UpdatePlayerInventory def:player|<player>|contents|<player.inventory.list_contents> debug:false
 
     // -->
 
@@ -115,7 +114,7 @@ public class BungeeRunCommand extends AbstractCommand {
                 }
             }
             boolean finalDebug = debug != null ? debug.asBoolean() : scriptEntry.shouldDebug();
-            ClientPacketOutRunScript runScript = new ClientPacketOutRunScript(serverNames, scriptName.asString(), finalDefs, finalDebug);
+            ClientPacketOutRunScript runScript = new ClientPacketOutRunScript(serverNames, scriptName.asString(), finalDefs, finalDebug, finalDebug);
             BungeeSupport.getSocketClient().trySend(runScript);
         }
         else {

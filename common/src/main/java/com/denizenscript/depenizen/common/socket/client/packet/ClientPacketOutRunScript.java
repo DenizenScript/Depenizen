@@ -11,13 +11,15 @@ public class ClientPacketOutRunScript extends Packet {
     private List<String> destinations;
     private String scriptName;
     private Map<String, String> definitions;
-    private boolean shouldDebug;
+    private boolean fullDebug;
+    private boolean minimalDebug;
 
-    public ClientPacketOutRunScript(List<String> destinations, String scriptName, Map<String, String> definitions, boolean shouldDebug) {
+    public ClientPacketOutRunScript(List<String> destinations, String scriptName, Map<String, String> definitions, boolean fullDebug, boolean minimalDebug) {
         this.destinations = destinations;
         this.scriptName = scriptName;
         this.definitions = definitions;
-        this.shouldDebug = shouldDebug;
+        this.fullDebug = fullDebug;
+        this.minimalDebug = minimalDebug;
     }
 
     @Override
@@ -27,7 +29,8 @@ public class ClientPacketOutRunScript extends Packet {
         DataSerializer box = new DataSerializer();
         box.writeString(scriptName);
         box.writeStringMap(definitions);
-        box.writeBoolean(shouldDebug);
+        box.writeBoolean(fullDebug);
+        box.writeBoolean(minimalDebug);
         serializer.writeByteArray(box.toByteArray());
     }
 }

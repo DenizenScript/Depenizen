@@ -90,7 +90,8 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
             }
             int id = nextId++;
             waitingEntries.put(id, scriptEntry);
-            BungeeSupport.getSocketClient().trySend(new ClientPacketOutTag(server.getName(), id, tag.asString(), scriptEntry.shouldDebug(),
+            BungeeSupport.getSocketClient().trySend(new ClientPacketOutTag(server.getName(), id, tag.asString(),
+                    scriptEntry.shouldDebug(), scriptEntry.shouldDebug(),
                     scriptEntry.getResidingQueue().getAllDefinitions()));
         }
         else {

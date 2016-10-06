@@ -12,6 +12,7 @@ public class BungeeReconnectCommand extends AbstractCommand {
     // <--[command]
     // @Name BungeeReconnect
     // @Syntax bungeereconnect
+    // @Group Depenizen
     // @Plugin DepenizenBukkit, DepenizenBungee
     // @Required 0
     // @Stable stable

@@ -1,34 +1,107 @@
 package com.denizenscript.depenizen.sponge;
 
 import com.denizenscript.denizen2core.Denizen2Core;
+import com.denizenscript.denizen2core.utilities.CoreUtilities;
+import com.denizenscript.denizen2core.utilities.yaml.YAMLConfiguration;
+import com.denizenscript.denizen2sponge.Denizen2Sponge;
+import com.denizenscript.denizen2sponge.spongeevents.Denizen2SpongeLoadingEvent;
 import com.denizenscript.depenizen.common.Depenizen;
 import com.denizenscript.depenizen.common.DepenizenImplementation;
+import com.denizenscript.depenizen.sponge.commands.bungee.BungeeRunCommand;
+import com.denizenscript.depenizen.sponge.support.bungee.BungeeSupport;
+import com.denizenscript.depenizen.sponge.tags.bungee.handlers.BungeeServerTagBase;
+import com.google.inject.Inject;
+import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.game.state.GameInitializationEvent;
+import org.spongepowered.api.event.game.state.GameStoppingEvent;
+import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 
-@Plugin(id = Depenizen2Sponge.PluginID, name = Depenizen2Sponge.PluginName, version = Depenizen2Sponge.PluginVersionString)
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.nio.file.Path;
+
+@Plugin(
+        id = Depenizen2Sponge.PLUGIN_ID,
+        name = Depenizen2Sponge.PLUGIN_NAME,
+        version = Depenizen2Sponge.PLUGIN_VERSION,
+        dependencies = @Dependency(id = Denizen2Sponge.PLUGIN_ID)
+)
 public class Depenizen2Sponge implements DepenizenImplementation {
 
-    public final static String PluginID = "depenizen2sponge";
+    public final static String PLUGIN_ID = "depenizen2sponge";
 
-    public final static String PluginName = "Depenizen2Sponge";
+    public final static String PLUGIN_NAME = "Depenizen2Sponge";
 
-    public final static String PluginVersionString = PomData.VERSION + " (build " + PomData.BUILD_NUMBER + ")";
+    public final static String PLUGIN_VERSION = PomData.VERSION + " (build " + PomData.BUILD_NUMBER + ")";
 
     public static PluginContainer plugin;
 
     public static Depenizen2Sponge instance;
 
+    @Inject
+    @ConfigDir(sharedRoot = false)
+    private Path configDir;
+
+    private File configFile;
+
+    private YAMLConfigurationLoader configLoader;
+
+    public YAMLConfiguration config;
+
     @Listener
-    public void onServerStart(GameInitializationEvent event) {
+    public void onDenizenLoaded(Denizen2SpongeLoadingEvent event) {
         // Setup
         instance = this;
-        plugin = Sponge.getPluginManager().getPlugin(PluginID).orElse(null);
+        plugin = Sponge.getPluginManager().getPlugin(PLUGIN_ID).orElse(null);
+        configFile = configDir.resolve("config.yml").toFile();
+        saveDefaultConfig();
+        loadConfig();
         // Depenizen
         Depenizen.init(this);
+        if (Settings.socketEnabled()) {
+            // Bungee Commands
+            Denizen2Core.register(new BungeeRunCommand());
+            // Bungee Tag Handlers
+            Denizen2Core.register(new BungeeServerTagBase());
+            // Start BungeeCord socket
+            BungeeSupport.startSocket();
+        }
+    }
+
+    @Listener
+    public void onServerStop(GameStoppingEvent event) {
+        BungeeSupport.closeSocket();
+        instance = null;
+        plugin = null;
+    }
+
+    private void saveDefaultConfig() {
+        if (!configFile.exists()) {
+            configFile.getParentFile().mkdirs();
+            try (InputStream is = getClass().getResourceAsStream("defaultConfig.yml");
+                 PrintWriter writer = new PrintWriter(configFile)) {
+                writer.write(CoreUtilities.streamToString(is));
+            }
+            catch (IOException e) {
+                debugException(e);
+            }
+        }
+    }
+
+    private void loadConfig() {
+        try {
+            config = YAMLConfiguration.load(CoreUtilities.streamToString(new FileInputStream(configFile)));
+        }
+        catch (IOException e) {
+            debugException(e);
+        }
     }
 
     @Override
