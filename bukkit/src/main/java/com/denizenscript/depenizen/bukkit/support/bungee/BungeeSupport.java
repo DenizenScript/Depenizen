@@ -2,9 +2,7 @@ package com.denizenscript.depenizen.bukkit.support.bungee;
 
 import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import com.denizenscript.depenizen.bukkit.Settings;
-import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeCommand;
-import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeRunCommand;
-import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
+import com.denizenscript.depenizen.bukkit.commands.bungee.*;
 import com.denizenscript.depenizen.bukkit.events.bungee.*;
 import com.denizenscript.depenizen.bukkit.extensions.bungee.BungeePlayerExtension;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
@@ -26,6 +24,7 @@ public class BungeeSupport extends Support {
         new BungeeCommand().activate().as("BUNGEE").withOptions("bungee", 1);
         new BungeeRunCommand().activate().as("BUNGEERUN").withOptions("bungeerun [<server>|...] [<script_name>]", 2);
         new BungeeTagCommand().activate().as("BUNGEETAG").withOptions("bungeetag [<tag>] [server:<server>]", 2);
+        new BungeeReconnectCommand().activate().as("BUNGEERECONNECT").withOptions("bungeereconnect", 0);
         registerObjects(dServer.class);
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(DepenizenPlugin.getCurrentInstance(), "BungeeCord");
         registerProperty(BungeePlayerExtension.class, dPlayer.class);
