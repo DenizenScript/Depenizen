@@ -94,7 +94,7 @@ public class BungeeCommand extends BracedCommand {
 
         dB.report(scriptEntry, getName(), serverNames.debug());
 
-        if (BungeeSupport.isSocketConnected()) {
+        if (BungeeSupport.isSocketRegistered()) {
             boolean debug = scriptEntry.shouldDebug();
             Map<String, List<String>> scriptEntries = new HashMap<String, List<String>>();
             for (ScriptEntry entry : bracedCommands) {
@@ -105,7 +105,7 @@ public class BungeeCommand extends BracedCommand {
             BungeeSupport.getSocketClient().trySend(packet);
         }
         else {
-            dB.echoError("Server is not connected to a BungeeCord Socket.");
+            dB.echoError("Server is not registered to a BungeeCord Socket.");
         }
     }
 }

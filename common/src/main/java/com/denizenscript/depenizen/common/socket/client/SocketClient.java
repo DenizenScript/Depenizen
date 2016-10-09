@@ -113,6 +113,10 @@ public abstract class SocketClient implements Runnable {
         }
     }
 
+    public boolean isRegistered() {
+        return registered;
+    }
+
     public boolean isReconnecting() {
         return reconnectThread != null;
     }

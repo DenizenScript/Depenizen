@@ -81,11 +81,11 @@ public class BungeeSupport extends Support {
             // @attribute <bungee.connected>
             // @returns Element(Boolean)
             // @description
-            // Returns whether the server is connected to the BungeeCord socket.
+            // Returns whether the server is connected and registered to the BungeeCord socket.
             // @Plugin DepenizenBukkit, DepenizenBungee
             // -->
             if (attribute.startsWith("connected")) {
-                return new Element(isSocketConnected()).getAttribute(attribute.fulfill(1));
+                return new Element(isSocketRegistered()).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -148,6 +148,10 @@ public class BungeeSupport extends Support {
 
     public static boolean isSocketConnected() {
         return socketClient != null && socketClient.isConnected();
+    }
+
+    public static boolean isSocketRegistered() {
+        return isSocketConnected() && socketClient.isRegistered();
     }
 
     public static boolean isSocketReconnecting() {

@@ -95,6 +95,9 @@ public class BungeeRunCommand extends AbstractCommand {
                 }
             }
         }
+        if (!BungeeSupport.isSocketRegistered()) {
+            queue.handleError(entry, "Server is not registered to a BungeeCord Socket.");
+        }
         if (queue.shouldShowGood()) {
             queue.outGood("Running the script " + ColorSet.emphasis + scriptNameTag.getInternal() + ColorSet.good
                     + " on the specified servers with the specified debug mode.");

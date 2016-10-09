@@ -50,6 +50,10 @@ public class BungeeSupport {
         return socketClient != null && socketClient.isConnected();
     }
 
+    public static boolean isSocketRegistered() {
+        return isSocketConnected() && socketClient.isRegistered();
+    }
+
     public static boolean isSocketReconnecting() {
         return socketClient != null && socketClient.isReconnecting();
     }

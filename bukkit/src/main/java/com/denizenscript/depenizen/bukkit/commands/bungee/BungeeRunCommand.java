@@ -103,7 +103,7 @@ public class BungeeRunCommand extends AbstractCommand {
                 + (definitions != null ? definitions.debug() : "")
                 + (debug != null ? debug.debug() : ""));
 
-        if (BungeeSupport.isSocketConnected()) {
+        if (BungeeSupport.isSocketRegistered()) {
             Map<String, String> finalDefs = new HashMap<String, String>();
             if (definitions != null) {
                 if (definitions.size() % 2 != 0) {
@@ -118,7 +118,7 @@ public class BungeeRunCommand extends AbstractCommand {
             BungeeSupport.getSocketClient().trySend(runScript);
         }
         else {
-            dB.echoError("Server is not connected to a BungeeCord Socket.");
+            dB.echoError("Server is not registered to a BungeeCord Socket.");
         }
     }
 }

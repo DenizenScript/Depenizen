@@ -84,7 +84,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
 
         dB.report(scriptEntry, getName(), tag.debug() + server.debug());
 
-        if (BungeeSupport.isSocketConnected()) {
+        if (BungeeSupport.isSocketRegistered()) {
             if (!scriptEntry.shouldWaitFor()) {
                 throw new CommandExecutionException("You MUST ~wait for this command!");
             }

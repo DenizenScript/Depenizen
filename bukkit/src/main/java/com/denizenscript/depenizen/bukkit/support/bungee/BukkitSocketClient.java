@@ -75,9 +75,9 @@ public class BukkitSocketClient extends SocketClient {
                     dB.log("[Bungee]: Registered with " + server);
                 }
                 dServer.addOnlineServer(server);
-                BungeeRegisteredScriptEvent.instance.fire();
             }
         }
+        BungeeRegisteredScriptEvent.instance.fire();
     }
 
     @Override
