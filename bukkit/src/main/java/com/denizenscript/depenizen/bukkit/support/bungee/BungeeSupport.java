@@ -29,6 +29,7 @@ public class BungeeSupport extends Support {
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(DepenizenPlugin.getCurrentInstance(), "BungeeCord");
         registerProperty(BungeePlayerExtension.class, dPlayer.class);
         registerAdditionalTags("bungee");
+        registerScriptEvents(new BungeeRegisteredScriptEvent());
         registerScriptEvents(new BungeeServerConnectScriptEvent());
         registerScriptEvents(new BungeeServerDisconnectScriptEvent());
         registerScriptEvents(new ProxyPingScriptEvent());

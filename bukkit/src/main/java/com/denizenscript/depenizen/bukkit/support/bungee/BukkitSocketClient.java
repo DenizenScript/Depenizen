@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.support.bungee;
 
 import com.denizenscript.depenizen.bukkit.Settings;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
+import com.denizenscript.depenizen.bukkit.events.bungee.BungeeRegisteredScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeeScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerConnectScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerDisconnectScriptEvent;
@@ -74,6 +75,7 @@ public class BukkitSocketClient extends SocketClient {
                     dB.log("[Bungee]: Registered with " + server);
                 }
                 dServer.addOnlineServer(server);
+                BungeeRegisteredScriptEvent.instance.fire();
             }
         }
     }
