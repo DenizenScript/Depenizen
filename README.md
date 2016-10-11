@@ -13,7 +13,8 @@ Depenizen
   - Use DepenizenBungee for BungeeCord servers (see below.)
   - DepenizenBungee supports connections from both DepenizenBukkit and Depenizen2Sponge. It even allows you to use `bungeerun` for cross-compatible script running!
 
-**For communicating with a BungeeCord network, use the following instructions:**
+### DepenizenBungee
+For communicating with a BungeeCord network, use the following instructions:
 
 1. Install DepenizenBungee on BungeeCord (`your_bungee_directory/plugins`)
 2. Load your Bukkit/Spigot or Sponge server fully and stop it with `stop`.
@@ -34,7 +35,14 @@ Depenizen
 17. Set `Socket.Name` to a **unique** name to identify this server.
 18. Repeat steps 10 through 17 for each server on the network.
 
-**DepenizenBukkit Supported Plugins**: (And the sources we acquired Jar files from.)
+### Depenizen2Sponge
+Supported Plugins: (And the sources we acquired Jar files from.)
+
+- None yet! Please see http://forum.denizenscript.com/viewtopic.php?t=39
+
+### DepenizenBukkit
+Supported Plugins: (And the sources we acquired Jar files from.)
+
 - AreaShop (https://www.spigotmc.org/resources/areashop.2991/)
 - ASkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
 - BattleNight (http://dev.bukkit.org/bukkit-plugins/battlenight/) - **Very outdated, no evidence of further development**
