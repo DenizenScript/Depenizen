@@ -312,9 +312,16 @@
     <dependency>
       <groupId>net.elseland.xikage</groupId>
       <artifactId>MythicMobs</artifactId>
-      <version>2.4.5</version>
+      <version>2.5.0</version>
       <scope>system</scope>
-      <systemPath>C:\Users\Morphan1\Documents\GitHub\Depenizen-For-Bukkit\bukkit/src/main/resources/lib/MythicMobs-2.4.5.jar</systemPath>
+      <systemPath>C:\Users\Morphan1\Documents\GitHub\Depenizen-For-Bukkit\bukkit/src/main/resources/lib/MythicMobs-2.5.0.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>net.elseland.xikage</groupId>
+      <artifactId>MythicLib</artifactId>
+      <version>1.0.1</version>
+      <scope>system</scope>
+      <systemPath>C:\Users\Morphan1\Documents\GitHub\Depenizen-For-Bukkit\bukkit/src/main/resources/lib/MythicLib.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>com.nisovin</groupId>

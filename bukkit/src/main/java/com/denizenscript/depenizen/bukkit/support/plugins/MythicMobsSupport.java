@@ -5,7 +5,7 @@ import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand
 import com.denizenscript.depenizen.bukkit.extensions.mythicmobs.MythicMobsEntityExtension;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
 import net.aufdemrand.denizen.objects.dEntity;
-import net.elseland.xikage.MythicLib.Adapters.Bukkit.BukkitAdapter;
+import io.lumine.xikage.MythicLib.Adapters.Bukkit.BukkitAdapter;
 import net.elseland.xikage.MythicMobs.Mobs.ActiveMob;
 import net.elseland.xikage.MythicMobs.Mobs.ActiveMobHandler;
 import net.elseland.xikage.MythicMobs.Mobs.MobManager;
