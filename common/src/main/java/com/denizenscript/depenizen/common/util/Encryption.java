@@ -13,19 +13,21 @@ import java.security.spec.KeySpec;
 public class Encryption {
 
     private SecretKey secret;
-    private Cipher cipher;
+    private Cipher encryptCipher;
+    private Cipher decryptCipher;
     private byte[] iv;
 
     public Encryption(char[] password, byte[] salt, byte[] iv) throws GeneralSecurityException {
         init(password, salt);
         this.iv = iv;
+        finishInit();
     }
 
     public Encryption(char[] password, byte[] salt) throws GeneralSecurityException {
         init(password, salt);
-        cipher.init(Cipher.ENCRYPT_MODE, secret);
-        AlgorithmParameters params = cipher.getParameters();
+        AlgorithmParameters params = encryptCipher.getParameters();
         this.iv = params.getParameterSpec(IvParameterSpec.class).getIV();
+        finishInit();
     }
 
     private void init(char[] password, byte[] salt) throws GeneralSecurityException {
@@ -33,17 +35,21 @@ public class Encryption {
         KeySpec spec = new PBEKeySpec(password, salt, 65536, 128);
         SecretKey tmp = factory.generateSecret(spec);
         this.secret = new SecretKeySpec(tmp.getEncoded(), "AES");
-        this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        this.encryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+    }
+
+    private void finishInit() throws GeneralSecurityException {
+        encryptCipher.init(Cipher.ENCRYPT_MODE, secret, new IvParameterSpec(iv));
+        decryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        decryptCipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(iv));
     }
 
     public byte[] encrypt(byte[] message) throws GeneralSecurityException {
-        cipher.init(Cipher.ENCRYPT_MODE, secret, new IvParameterSpec(iv));
-        return cipher.doFinal(message);
+        return encryptCipher.doFinal(message);
     }
 
     public byte[] decrypt(byte[] message) throws GeneralSecurityException {
-        cipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(iv));
-        return cipher.doFinal(message);
+        return decryptCipher.doFinal(message);
     }
 
     public byte[] getIV() {

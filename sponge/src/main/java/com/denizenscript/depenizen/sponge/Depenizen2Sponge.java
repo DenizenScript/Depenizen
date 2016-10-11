@@ -56,7 +56,7 @@ public class Depenizen2Sponge implements DepenizenImplementation {
     public YAMLConfiguration config;
 
     @Listener
-    public void onDenizenLoaded(Denizen2SpongeLoadingEvent event) {
+    public void onDenizenLoading(Denizen2SpongeLoadingEvent event) {
         // Setup
         instance = this;
         plugin = Sponge.getPluginManager().getPlugin(PLUGIN_ID).orElse(null);

@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.events.bungee;
 
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
-import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import com.denizenscript.depenizen.common.socket.client.packet.ClientPacketOutEventSubscription;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -31,9 +30,8 @@ public abstract class BungeeScriptEvent extends BukkitScriptEvent {
     public void init() {
         String name = getName();
         initializedEvents.put(name, this);
-        SocketClient socketClient = BungeeSupport.getSocketClient();
-        if (socketClient != null && socketClient.isConnected()) {
-            socketClient.trySend(new ClientPacketOutEventSubscription(name, true));
+        if (BungeeSupport.isSocketRegistered()) {
+            BungeeSupport.getSocketClient().trySend(new ClientPacketOutEventSubscription(name, true));
         }
     }
 
@@ -41,9 +39,8 @@ public abstract class BungeeScriptEvent extends BukkitScriptEvent {
     public void destroy() {
         String name = getName();
         initializedEvents.remove(name);
-        SocketClient socketClient = BungeeSupport.getSocketClient();
-        if (socketClient != null && socketClient.isConnected()) {
-            socketClient.trySend(new ClientPacketOutEventSubscription(name, false));
+        if (BungeeSupport.isSocketRegistered()) {
+            BungeeSupport.getSocketClient().trySend(new ClientPacketOutEventSubscription(name, false));
         }
     }
 
