@@ -57,6 +57,10 @@ public abstract class SocketServer implements Runnable {
             catch (Exception e) {
                 Depenizen.getImplementation().debugException(e);
             }
+            if (listenThread != null) {
+                listenThread.interrupt();
+                listenThread = null;
+            }
         }
     }
 
@@ -116,6 +120,9 @@ public abstract class SocketServer implements Runnable {
     }
 
     public void removeClient(int clientId, String reason) {
+        if (clients.length <= clientId || clients[clientId] == null) {
+            return;
+        }
         ClientConnection client = this.clients[clientId];
         client.stop();
         Depenizen.getImplementation().debugMessage("Client " + (client.isRegistered() ? client.getClientName() : clientId)
@@ -145,6 +152,7 @@ public abstract class SocketServer implements Runnable {
                 }
             }
         }
+        listenThread = null;
     }
 
     protected abstract void handleEventSubscription(ClientConnection client, String event, boolean subscribed);

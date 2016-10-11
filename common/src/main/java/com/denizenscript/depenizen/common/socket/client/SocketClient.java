@@ -102,6 +102,14 @@ public abstract class SocketClient implements Runnable {
             catch (Exception e) {
                 Depenizen.getImplementation().debugException(e);
             }
+            if (listenThread != null) {
+                listenThread.interrupt();
+                listenThread = null;
+            }
+            if (reconnectThread != null) {
+                reconnectThread.interrupt();
+                reconnectThread = null;
+            }
         }
     }
 
@@ -130,10 +138,10 @@ public abstract class SocketClient implements Runnable {
             reconnectThread = null;
             byte[] buffer;
             try {
-                while (input.available() <= 0) {
+                while (input.available() < 16) {
                     Thread.sleep(1);
                 }
-                byte[] iv = new byte[input.readInt()];
+                byte[] iv = new byte[16];
                 input.read(iv);
                 this.encryption = new Encryption(password, ENCRYPTION_SALT, iv);
                 send(new ClientPacketOutRegister(registrationName, isBungeeScriptCompatible()));
@@ -256,6 +264,9 @@ public abstract class SocketClient implements Runnable {
             }
             catch (IOException e) {
                 close("Server socket closed", true);
+            }
+            catch (InterruptedException e) {
+                // Assume this is intentional
             }
             catch (Exception e) {
                 close("Error receiving data from server: " + e.getMessage(), true);

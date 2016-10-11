@@ -88,6 +88,10 @@ public class ClientConnection implements Runnable {
                 server.handleEventSubscription(this, event, false);
             }
             eventSubscriptions.clear();
+            if (listenThread != null) {
+                listenThread.interrupt();
+                listenThread = null;
+            }
         }
     }
 
@@ -123,9 +127,7 @@ public class ClientConnection implements Runnable {
             isConnected = true;
             byte[] buffer;
             try {
-                byte[] iv = server.getEncryption().getIV();
-                output.writeInt(iv.length);
-                output.write(iv);
+                output.write(server.getEncryption().getIV());
                 output.flush();
                 connectionLoop:
                 while (isConnected) {
@@ -266,7 +268,6 @@ public class ClientConnection implements Runnable {
                             break;
                     }
                 }
-                listenThread = null;
             }
             catch (IllegalStateException e) {
                 server.removeClient(clientId, "Password is incorrect");
@@ -274,10 +275,14 @@ public class ClientConnection implements Runnable {
             catch (IOException e) {
                 server.removeClient(clientId, "Client socket closed");
             }
+            catch (InterruptedException e) {
+                // Assume this is intentional
+            }
             catch (Exception e) {
                 server.removeClient(clientId, "Error receiving data from client: " + e.getMessage());
                 Depenizen.getImplementation().debugException(e);
             }
         }
+        listenThread = null;
     }
 }

@@ -23,8 +23,11 @@ public class ReconnectTask implements Runnable {
                 Thread.sleep(reconnectDelay);
             }
             catch (InterruptedException e) {
-                Depenizen.getImplementation().debugError("BungeeCord Socket failed to reconnect due to an exception.");
-                Depenizen.getImplementation().debugException(e);
+                // Assume this is intentional
+                return;
+            }
+            if (client.isConnected()) {
+                return;
             }
             try {
                 attemptsLeft--;
