@@ -36,7 +36,20 @@ public class dB {
 
     public static void echoError(Throwable throwable) {
         dB.echoError("Internal exception was thrown!");
-        throwable.printStackTrace();
+        trace(throwable);
+    }
+
+    private static void trace(Throwable e) {
+        if (e == null) {
+            return;
+        }
+        log("   " + e.getClass().getCanonicalName() + ": " + e.getMessage());
+        for (StackTraceElement ste : e.getStackTrace()) {
+            log("     " + ste.toString());
+        }
+        if (e.getCause() != e) {
+            trace(e.getCause());
+        }
     }
 
 }

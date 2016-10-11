@@ -8,6 +8,7 @@ import com.denizenscript.depenizen.common.util.Encryption;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
@@ -146,6 +147,9 @@ public abstract class SocketServer implements Runnable {
                 try {
                     Depenizen.getImplementation().debugMessage("Waiting for next client...");
                     addClient(socket.accept());
+                }
+                catch (SocketException e) {
+                    // That's all, folks!
                 }
                 catch (IOException e) {
                     Depenizen.getImplementation().debugException(e);
