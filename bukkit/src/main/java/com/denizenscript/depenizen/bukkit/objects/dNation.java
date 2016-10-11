@@ -109,6 +109,21 @@ public class dNation implements dObject {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
+        // @attribute <nation@nation.allies>
+        // @returns dList(dNation)
+        // @description
+        // Returns a list of the nation's allies.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        if (attribute.startsWith("allies")) {
+            dList list = new dList();
+            for (Nation ally : nation.getAllies()) {
+                list.add(new dNation(ally).identify());
+            }
+            return list.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <nation@nation.assistants>
         // @returns dList(dPlayer)
         // @description
@@ -153,6 +168,21 @@ public class dNation implements dObject {
                 return new dTown(nation.getCapital())
                         .getAttribute(attribute.fulfill(1));
             }
+        }
+
+        // <--[tag]
+        // @attribute <nation@nation.enemies>
+        // @returns dList(dNation)
+        // @description
+        // Returns a list of the nation's enemies.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        if (attribute.startsWith("enemies")) {
+            dList list = new dList();
+            for (Nation enemy : nation.getEnemies()) {
+                list.add(new dNation(enemy).identify());
+            }
+            return list.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
