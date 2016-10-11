@@ -6,9 +6,35 @@ Depenizen
 - **Wiki**: http://wiki.citizensnpcs.co/Depenizen
 - **IRC**: http://webchat.esper.net/?channels=denizen-dev
 - **Denizen For Bukkit**: https://github.com/DenizenScript/Denizen-For-Bukkit
+- **Denizen2Sponge**: https://github.com/DenizenScript/Denizen2Sponge
 - **Builds**: http://ci.citizensnpcs.co/job/Depenizen/
+  - Use DepenizenBukkit for Bukkit/Spigot servers (install to `your_server_directory/plugins`)
+  - Use Depenizen2Sponge for Sponge servers (install to `your_server_directory/mods`)
+  - Use DepenizenBungee for BungeeCord servers (see below.)
+  - DepenizenBungee supports connections from both DepenizenBukkit and Depenizen2Sponge. It even allows you to use `bungeerun` for cross-compatible script running!
 
-**Supported Plugins**: (And the sources we acquired Jar files from.)
+**For communicating with a BungeeCord network, use the following instructions:**
+
+1. Install DepenizenBungee on BungeeCord (`your_bungee_directory/plugins`)
+2. Load your Bukkit/Spigot or Sponge server fully and stop it with `stop`.
+3. Load BungeeCord fully and stop it with `end`.
+4. Navigate to `your_bungee_directory/plugins/Depenizen` and open `config.yml`.
+5. Set `Socket.Enabled` to `true`.
+6. Set `Socket.Port` to an unused port number. ***NOT* your usual BungeeCord port!!!**
+7. Set `Socket.Max Clients` to the number of Bukkit/Spigot/Sponge servers you're going to use to connect with.
+8. Set `Socket.Password` to whatever you want. **KEEP THIS PASSWORD A SECRET!**
+9. Save the file.
+10. Install DepenizenBukkit or Depenizen2Sponge, depending on your server brand.
+11. If using Bungee/Spigot, navigate to `your_server_directory/plugins/Depenizen`. If using Sponge, navigate to `your_server_directory/config/depenizen2sponge`.
+12. Open `config.yml`.
+13. Set `Socket.Enabled` to `true`.
+14. Set `Socket.IP Address` to the external IP address of your BungeeCord network.
+15. Set `Socket.Port` to the same value as in your BungeeCord `config.yml`.
+16. Set `Socket.Password` to the same value as in your BungeeCord `config.yml`.
+17. Set `Socket.Name` to a **unique** name to identify this server.
+18. Repeat steps 10 through 17 for each server on the network.
+
+**DepenizenBukkit Supported Plugins**: (And the sources we acquired Jar files from.)
 - AreaShop (https://www.spigotmc.org/resources/areashop.2991/)
 - ASkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
 - BattleNight (http://dev.bukkit.org/bukkit-plugins/battlenight/) - **Very outdated, no evidence of further development**
@@ -41,5 +67,3 @@ Depenizen
 - Votifier (http://dev.bukkit.org/bukkit-plugins/votifier/)
 - WorldEdit (https://dev.bukkit.org/bukkit-plugins/worldedit/)
 - WorldGuard (https://dev.bukkit.org/bukkit-plugins/worldguard/)
-
-Also Bungee, using http://ci.citizensnpcs.co/job/DepenizenForBungee/

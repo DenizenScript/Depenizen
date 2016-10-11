@@ -13,8 +13,8 @@ Socket:
   # YAML from thinking it's an invalid string (for example, if it's all numbers).
   Password: "MySecretPassword"
   # The name to connect with. Used for the Bungee dServer object.
-  # This does not have to be the same name that Bungee itself
-  # recognizes, but it is recommended to use that for consistency.
+  # This does not have to be the same name that Bungee itself recognizes,
+  # but it is recommended to use that for the sake of consistency.
   Name: "MyServer1"
   # The duration of inactivity that the client will send a ping
   # packet to the server after.
@@ -24,6 +24,8 @@ Socket:
   Ping Timeout: "30s"
   # The duration to wait between attempts at reconnecting to the socket.
   Reconnection Delay: "10s"
-  # The amount of times the socket should attempt to reconnect to the socket
-  # before giving up.
+  # The amount of times the client should attempt to reconnect to the socket
+  # before giving up. After the last try, the "bungee fails reconnect" event will fire,
+  # allowing for manual handling.
+  # Set to -1 to never stop trying to reconnect. (This also disables the fail event.)
   Reconnection Attempts: 10

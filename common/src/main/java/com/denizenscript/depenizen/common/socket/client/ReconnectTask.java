@@ -18,7 +18,7 @@ public class ReconnectTask implements Runnable {
 
     @Override
     public void run() {
-        while (attemptsLeft > 0 && !client.isConnected()) {
+        while (attemptsLeft != 0 && !client.isConnected()) {
             try {
                 Thread.sleep(reconnectDelay);
             }
@@ -30,11 +30,13 @@ public class ReconnectTask implements Runnable {
                 return;
             }
             try {
-                attemptsLeft--;
+                if (attemptsLeft > 0) {
+                    attemptsLeft--;
+                }
                 client.connect();
             }
             catch (IOException e) {
-                if (attemptsLeft <= 0) {
+                if (attemptsLeft == 0) {
                     Depenizen.getImplementation().debugError("Failed to reconnect to BungeeCord Socket.");
                     client.fireReconnectFailEvent();
                 }

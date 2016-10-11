@@ -31,6 +31,7 @@ import java.nio.file.Path;
         id = Depenizen2Sponge.PLUGIN_ID,
         name = Depenizen2Sponge.PLUGIN_NAME,
         version = Depenizen2Sponge.PLUGIN_VERSION,
+        authors = "Morphan1",
         dependencies = @Dependency(id = Denizen2Sponge.PLUGIN_ID)
 )
 public class Depenizen2Sponge implements DepenizenImplementation {

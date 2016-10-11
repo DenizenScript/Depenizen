@@ -7,9 +7,13 @@ Debug:
 # between servers without the need for online players on each
 # sender and recipient
 Socket:
+  # Whether the socket server is enabled and should automatically open on startup.
   Enabled: false
+  # The port on which to host the socket server.
+  # This should be an unused port, NOT your usual BungeeCord port!!!
   Port: 25578
-  # How many servers are allowed to be connected to the socket
-  # at one time
+  # How many servers are allowed to be connected to the socket at one time
   Max clients: 3
-  Password: MySecretPassword
+  # The password required to connect with. Please leave this in "quotes" to keep
+  # YAML from thinking it's an invalid string (for example, if it's all numbers).
+  Password: "MySecretPassword"
