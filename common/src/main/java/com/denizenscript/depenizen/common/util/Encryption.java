@@ -6,8 +6,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.AlgorithmParameters;
 import java.security.GeneralSecurityException;
+import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 
 public class Encryption {
@@ -25,8 +25,9 @@ public class Encryption {
 
     public Encryption(char[] password, byte[] salt) throws GeneralSecurityException {
         init(password, salt);
-        AlgorithmParameters params = encryptCipher.getParameters();
-        this.iv = params.getParameterSpec(IvParameterSpec.class).getIV();
+        SecureRandom secureRandom = new SecureRandom();
+        this.iv = new byte[16];
+        secureRandom.nextBytes(iv);
         finishInit();
     }
 
@@ -35,10 +36,10 @@ public class Encryption {
         KeySpec spec = new PBEKeySpec(password, salt, 65536, 128);
         SecretKey tmp = factory.generateSecret(spec);
         this.secret = new SecretKeySpec(tmp.getEncoded(), "AES");
-        this.encryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
     }
 
     private void finishInit() throws GeneralSecurityException {
+        encryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         encryptCipher.init(Cipher.ENCRYPT_MODE, secret, new IvParameterSpec(iv));
         decryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         decryptCipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(iv));
