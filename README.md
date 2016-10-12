@@ -33,12 +33,13 @@ For communicating with a BungeeCord network, use the following instructions:
 15. Set `Socket.Port` to the same value as in your BungeeCord `config.yml`.
 16. Set `Socket.Password` to the same value as in your BungeeCord `config.yml`.
 17. Set `Socket.Name` to a **unique** name to identify this server.
-18. Repeat steps 10 through 17 for each server on the network.
+18. Repeat steps 9 through 17 for each server on the network.
 
 ### Depenizen2Sponge
 Supported Plugins: (And the sources we acquired Jar files from.)
 
 - None yet! Please see http://forum.denizenscript.com/viewtopic.php?t=39
+- You may post an issue on the issues page to request support for a plugin!
 
 ### DepenizenBukkit
 Supported Plugins: (And the sources we acquired Jar files from.)
@@ -75,3 +76,4 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 - Votifier (http://dev.bukkit.org/bukkit-plugins/votifier/)
 - WorldEdit (https://dev.bukkit.org/bukkit-plugins/worldedit/)
 - WorldGuard (https://dev.bukkit.org/bukkit-plugins/worldguard/)
+- You may post an issue on the issues page to request support for a plugin!
