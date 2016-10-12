@@ -31,7 +31,7 @@ public class Encryption {
     }
 
     private void init(char[] password, byte[] salt) throws GeneralSecurityException {
-        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         KeySpec spec = new PBEKeySpec(password, salt, 65536, 128);
         SecretKey tmp = factory.generateSecret(spec);
         this.secret = new SecretKeySpec(tmp.getEncoded(), "AES");
