@@ -152,7 +152,7 @@ public class ClientConnection implements Runnable {
                         }
                         Thread.sleep(50);
                     }
-                    if (receivedEncryptedLength == -1) {
+                    if (receivedEncryptedLength < 0) {
                         server.removeClient(clientId, "Connection failed");
                         break;
                     }
@@ -169,7 +169,7 @@ public class ClientConnection implements Runnable {
                     int packetId = data.readUnsignedByte();
                     Packet.ServerBound packetType = Packet.ServerBound.getById(packetId);
                     if (packetType == null) {
-                        server.removeClient(clientId, "Received invalid packet from server: " + packetId);
+                        server.removeClient(clientId, "Received invalid packet from client: " + packetId);
                         break;
                     }
                     if (!isRegistered() && packetType != Packet.ServerBound.REGISTER) {

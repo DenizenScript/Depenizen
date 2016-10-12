@@ -169,7 +169,7 @@ public abstract class SocketClient implements Runnable {
                         }
                         Thread.sleep(50);
                     }
-                    if (receivedEncryptedLength == -1) {
+                    if (receivedEncryptedLength < 0) {
                         close("Connection failed", true);
                         break;
                     }
