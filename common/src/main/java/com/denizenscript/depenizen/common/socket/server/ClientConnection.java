@@ -7,6 +7,7 @@ import com.denizenscript.depenizen.common.socket.Packet;
 import com.denizenscript.depenizen.common.socket.server.packet.*;
 import com.denizenscript.depenizen.common.util.Utilities;
 
+import javax.crypto.BadPaddingException;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -269,7 +270,7 @@ public class ClientConnection implements Runnable {
                     }
                 }
             }
-            catch (IllegalStateException e) {
+            catch (BadPaddingException e) {
                 server.removeClient(clientId, "Password is incorrect");
             }
             catch (IOException e) {

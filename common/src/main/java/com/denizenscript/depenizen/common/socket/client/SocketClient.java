@@ -115,7 +115,6 @@ public abstract class SocketClient implements Runnable {
 
     public void attemptReconnect() {
         if (!isConnected && reconnectThread == null) {
-            Depenizen.getImplementation().debugMessage("Attempting to reconnect...");
             reconnectThread = new Thread(new ReconnectTask(this, getReconnectAttempts(), getReconnectDelay()));
             reconnectThread.start();
         }
@@ -256,14 +255,16 @@ public abstract class SocketClient implements Runnable {
                 }
                 listenThread = null;
             }
-            catch (IllegalStateException e) {
-                close("Password is incorrect", false);
-            }
             catch (SocketTimeoutException e) {
                 close("Connection timed out", true);
             }
             catch (IOException e) {
-                close("Server socket closed", true);
+                if (!isRegistered()) {
+                    close("Server socket closed the connection during registration. Incorrect password?", false);
+                }
+                else {
+                    close("Server socket closed", true);
+                }
             }
             catch (InterruptedException e) {
                 // Assume this is intentional
