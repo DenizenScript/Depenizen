@@ -95,9 +95,6 @@ public abstract class SocketClient implements Runnable {
                 if (socket != null) {
                     socket.close();
                 }
-                if (shouldReconnect) {
-                    attemptReconnect();
-                }
             }
             catch (Exception e) {
                 Depenizen.getImplementation().debugException(e);
@@ -109,6 +106,9 @@ public abstract class SocketClient implements Runnable {
             if (reconnectThread != null) {
                 reconnectThread.interrupt();
                 reconnectThread = null;
+            }
+            if (shouldReconnect) {
+                attemptReconnect();
             }
         }
     }
