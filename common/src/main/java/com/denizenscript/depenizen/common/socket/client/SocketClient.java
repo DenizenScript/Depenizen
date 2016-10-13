@@ -85,6 +85,8 @@ public abstract class SocketClient implements Runnable {
                 Depenizen.getImplementation().debugMessage("Disconnected from socket: " + reason);
             }
             isConnected = false;
+            registered = false;
+            encryption = null;
             try {
                 if (output != null) {
                     output.close();
