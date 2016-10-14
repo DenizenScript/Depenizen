@@ -11,9 +11,9 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class SocketServer implements Runnable {
 
@@ -30,7 +30,7 @@ public abstract class SocketServer implements Runnable {
     public SocketServer(int port, int maxClients, char[] password) throws GeneralSecurityException {
         this.port = port;
         this.clients = new ClientConnection[maxClients];
-        this.registeredClients = new HashMap<String, ClientConnection>();
+        this.registeredClients = new ConcurrentHashMap<String, ClientConnection>();
         this.encryption = new Encryption(password, ENCRYPTION_SALT);
     }
 
