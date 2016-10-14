@@ -10,6 +10,7 @@ import com.denizenscript.depenizen.bukkit.events.bungee.ReconnectFailScriptEvent
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.tags.BukkitTagContext;
 import net.aufdemrand.denizencore.exceptions.ScriptEntryCreationException;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.ScriptRegistry;
@@ -142,7 +143,9 @@ public class BukkitSocketClient extends SocketClient {
 
     @Override
     protected String handleTag(String tag, boolean fullDebug, boolean minimalDebug, Map<String, String> definitions) {
-        return TagManager.tag(tag, new BungeeTagContext(fullDebug, new DefinitionsWrapper(definitions)));
+        BukkitTagContext tagContext = new BukkitTagContext(null, null, false, null, fullDebug, null);
+        tagContext.definitionProvider.getAllDefinitions().putAll(definitions);
+        return TagManager.tag(tag, tagContext);
     }
 
     @Override
