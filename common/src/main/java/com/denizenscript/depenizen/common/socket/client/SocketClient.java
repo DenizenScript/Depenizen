@@ -187,73 +187,7 @@ public abstract class SocketClient implements Runnable {
                         close("Received invalid packet from server: " + packetId, true);
                         break;
                     }
-                    switch (packetType) {
-                        case ACCEPT_REGISTER:
-                            if (registered) {
-                                close("Server tried to accept registration twice", true);
-                                break connectionLoop;
-                            }
-                            ClientPacketInAcceptRegister acceptRegister = new ClientPacketInAcceptRegister();
-                            acceptRegister.deserialize(data);
-                            if (acceptRegister.isAccepted()) {
-                                Depenizen.getImplementation().debugMessage("Successfully registered as '" + registrationName + "'");
-                                handleAcceptRegister(registrationName, acceptRegister.getExistingServers());
-                                registered = true;
-                            }
-                            else {
-                                close("Specified name in config.yml is already registered to the server", false);
-                                break connectionLoop;
-                            }
-                            break;
-                        case PING:
-                            ClientPacketInPing ping = new ClientPacketInPing();
-                            ping.deserialize(data);
-                            send(new ClientPacketOutPong(ping.getBit()));
-                            break;
-                        case PONG:
-                            ClientPacketInPong pong = new ClientPacketInPong();
-                            pong.deserialize(data);
-                            if (pong.getBit() != lastPingBit) {
-                                close("Invalid ping bit: Expected " + lastPingBit + ", got " + pong.getBit(), true);
-                                break connectionLoop;
-                            }
-                            break;
-                        case UPDATE_SERVER:
-                            ClientPacketInUpdateServer updateServer = new ClientPacketInUpdateServer();
-                            updateServer.deserialize(data);
-                            handleUpdateServer(updateServer.getName(), updateServer.isRegistered());
-                            break;
-                        case SCRIPT:
-                            ClientPacketInScript script = new ClientPacketInScript();
-                            script.deserialize(data);
-                            handleScript(script.shouldDebug(), script.getScriptEntries(), script.getDefinitions());
-                            break;
-                        case RUN_SCRIPT:
-                            ClientPacketInRunScript runScript = new ClientPacketInRunScript();
-                            runScript.deserialize(data);
-                            handleRunScript(runScript.getScriptName(), runScript.getDefinitions(),
-                                    runScript.showFullDebug(), runScript.showMinimalDebug());
-                            break;
-                        case TAG:
-                            ClientPacketInTag tag = new ClientPacketInTag();
-                            tag.deserialize(data);
-                            String tagResult = handleTag(tag.getTag(), tag.showFullDebug(), tag.showMinimalDebug(), tag.getDefinitions());
-                            send(new ClientPacketOutParsedTag(tag.getFrom(), tag.getId(), tagResult));
-                            break;
-                        case PARSED_TAG:
-                            ClientPacketInParsedTag parsedTag = new ClientPacketInParsedTag();
-                            parsedTag.deserialize(data);
-                            handleParsedTag(parsedTag.getId(), parsedTag.getResult());
-                            break;
-                        case EVENT:
-                            ClientPacketInEvent event = new ClientPacketInEvent();
-                            event.deserialize(data);
-                            Map<String, String> eventResponse = handleEvent(event.getEvent(), event.getContext());
-                            if (event.shouldRespond()) {
-                                send(new ClientPacketOutEventResponse(event.getId(), eventResponse));
-                            }
-                            break;
-                    }
+                    receivePacket(packetType, data);
                 }
                 listenThread = null;
             }
@@ -275,6 +209,76 @@ public abstract class SocketClient implements Runnable {
                 close("Error receiving data from server: " + e.getMessage(), true);
                 Depenizen.getImplementation().debugException(e);
             }
+        }
+    }
+
+    protected void receivePacket(Packet.ClientBound packetType, DataDeserializer data) {
+        switch (packetType) {
+            case ACCEPT_REGISTER:
+                if (registered) {
+                    close("Server tried to accept registration twice", true);
+                    break;
+                }
+                ClientPacketInAcceptRegister acceptRegister = new ClientPacketInAcceptRegister();
+                acceptRegister.deserialize(data);
+                if (acceptRegister.isAccepted()) {
+                    Depenizen.getImplementation().debugMessage("Successfully registered as '" + registrationName + "'");
+                    handleAcceptRegister(registrationName, acceptRegister.getExistingServers());
+                    registered = true;
+                }
+                else {
+                    close("Specified name in config.yml is already registered to the server", false);
+                    break;
+                }
+                break;
+            case PING:
+                ClientPacketInPing ping = new ClientPacketInPing();
+                ping.deserialize(data);
+                trySend(new ClientPacketOutPong(ping.getBit()));
+                break;
+            case PONG:
+                ClientPacketInPong pong = new ClientPacketInPong();
+                pong.deserialize(data);
+                if (pong.getBit() != lastPingBit) {
+                    close("Invalid ping bit: Expected " + lastPingBit + ", got " + pong.getBit(), true);
+                    break;
+                }
+                break;
+            case UPDATE_SERVER:
+                ClientPacketInUpdateServer updateServer = new ClientPacketInUpdateServer();
+                updateServer.deserialize(data);
+                handleUpdateServer(updateServer.getName(), updateServer.isRegistered());
+                break;
+            case SCRIPT:
+                ClientPacketInScript script = new ClientPacketInScript();
+                script.deserialize(data);
+                handleScript(script.shouldDebug(), script.getScriptEntries(), script.getDefinitions());
+                break;
+            case RUN_SCRIPT:
+                ClientPacketInRunScript runScript = new ClientPacketInRunScript();
+                runScript.deserialize(data);
+                handleRunScript(runScript.getScriptName(), runScript.getDefinitions(),
+                        runScript.showFullDebug(), runScript.showMinimalDebug());
+                break;
+            case TAG:
+                ClientPacketInTag tag = new ClientPacketInTag();
+                tag.deserialize(data);
+                String tagResult = handleTag(tag.getTag(), tag.showFullDebug(), tag.showMinimalDebug(), tag.getDefinitions());
+                trySend(new ClientPacketOutParsedTag(tag.getFrom(), tag.getId(), tagResult));
+                break;
+            case PARSED_TAG:
+                ClientPacketInParsedTag parsedTag = new ClientPacketInParsedTag();
+                parsedTag.deserialize(data);
+                handleParsedTag(parsedTag.getId(), parsedTag.getResult());
+                break;
+            case EVENT:
+                ClientPacketInEvent event = new ClientPacketInEvent();
+                event.deserialize(data);
+                Map<String, String> eventResponse = handleEvent(event.getEvent(), event.getContext());
+                if (event.shouldRespond()) {
+                    trySend(new ClientPacketOutEventResponse(event.getId(), eventResponse));
+                }
+                break;
         }
     }
 

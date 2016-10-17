@@ -8,9 +8,12 @@ import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerConnectScrip
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerDisconnectScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.bungee.ReconnectFailScriptEvent;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
+import com.denizenscript.depenizen.common.socket.DataDeserializer;
+import com.denizenscript.depenizen.common.socket.Packet;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.tags.BukkitTagContext;
+import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.exceptions.ScriptEntryCreationException;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.ScriptRegistry;
@@ -19,6 +22,7 @@ import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
 import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
 import net.aufdemrand.denizencore.tags.TagManager;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
+import org.bukkit.Bukkit;
 
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -30,6 +34,16 @@ public class BukkitSocketClient extends SocketClient {
 
     public BukkitSocketClient(String ipAddress, int port, String name, char[] password) throws GeneralSecurityException {
         super(ipAddress, port, name, password);
+    }
+
+    @Override
+    protected void receivePacket(final Packet.ClientBound packetType, final DataDeserializer data) {
+        Bukkit.getScheduler().runTask(DenizenAPI.getCurrentInstance(), new Runnable() {
+            @Override
+            public void run() {
+                BukkitSocketClient.super.receivePacket(packetType, data);
+            }
+        });
     }
 
     @Override
