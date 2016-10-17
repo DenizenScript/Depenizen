@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.common.socket;
 
 import java.io.ByteArrayInputStream;
+import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 public class DataDeserializer {
 
-    private DataInputStream input;
+    private DataInput input;
 
     public DataDeserializer(byte[] data) {
         this.input = new DataInputStream(new ByteArrayInputStream(data));
@@ -65,7 +66,7 @@ public class DataDeserializer {
 
     public String readString() {
         try {
-            return input.readUTF();
+            return new String(readByteArray(), "UTF-8");
         }
         catch (IOException e) {
             throw new IllegalStateException(e);

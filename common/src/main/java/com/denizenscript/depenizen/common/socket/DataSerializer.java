@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.common.socket;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Collection;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 public class DataSerializer {
 
-    private DataOutputStream output;
+    private DataOutput output;
     private ByteArrayOutputStream byteArrayOutput;
 
     public DataSerializer() {
@@ -74,7 +75,7 @@ public class DataSerializer {
         }
         else {
             try {
-                output.writeUTF(string);
+                writeByteArray(string.getBytes("UTF-8"));
             }
             catch (IOException e) {
                 throw new IllegalStateException(e);
