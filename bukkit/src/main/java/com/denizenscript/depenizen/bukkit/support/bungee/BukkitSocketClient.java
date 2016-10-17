@@ -12,6 +12,7 @@ import com.denizenscript.depenizen.common.socket.DataDeserializer;
 import com.denizenscript.depenizen.common.socket.Packet;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.nms.util.ReflectionHelper;
 import net.aufdemrand.denizen.tags.BukkitTagContext;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.exceptions.ScriptEntryCreationException;
@@ -20,6 +21,7 @@ import net.aufdemrand.denizencore.scripts.ScriptRegistry;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
 import net.aufdemrand.denizencore.scripts.queues.core.InstantQueue;
+import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.tags.TagManager;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import org.bukkit.Bukkit;
@@ -158,7 +160,8 @@ public class BukkitSocketClient extends SocketClient {
     @Override
     protected String handleTag(String tag, boolean fullDebug, boolean minimalDebug, Map<String, String> definitions) {
         BukkitTagContext tagContext = new BukkitTagContext(null, null, false, null, fullDebug, null);
-        tagContext.definitionProvider.getAllDefinitions().putAll(definitions);
+        // Temp fix TODO
+        ReflectionHelper.setFieldValue(TagContext.class, "definitionProvider", tagContext, new DefinitionsWrapper(definitions));
         return TagManager.tag(tag, tagContext);
     }
 
