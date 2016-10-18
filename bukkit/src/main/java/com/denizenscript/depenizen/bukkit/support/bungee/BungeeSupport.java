@@ -1,8 +1,10 @@
 package com.denizenscript.depenizen.bukkit.support.bungee;
 
-import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import com.denizenscript.depenizen.bukkit.Settings;
-import com.denizenscript.depenizen.bukkit.commands.bungee.*;
+import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeCommand;
+import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeReconnectCommand;
+import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeRunCommand;
+import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
 import com.denizenscript.depenizen.bukkit.events.bungee.*;
 import com.denizenscript.depenizen.bukkit.extensions.bungee.BungeePlayerExtension;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
@@ -14,7 +16,6 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
-import org.bukkit.Bukkit;
 
 import java.io.IOException;
 
@@ -26,7 +27,6 @@ public class BungeeSupport extends Support {
         new BungeeTagCommand().activate().as("BUNGEETAG").withOptions("bungeetag [<tag>] [server:<server>]", 2);
         new BungeeReconnectCommand().activate().as("BUNGEERECONNECT").withOptions("bungeereconnect", 0);
         registerObjects(dServer.class);
-        Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(DepenizenPlugin.getCurrentInstance(), "BungeeCord");
         registerProperty(BungeePlayerExtension.class, dPlayer.class);
         registerAdditionalTags("bungee");
         registerScriptEvents(new BungeeRegisteredScriptEvent());
