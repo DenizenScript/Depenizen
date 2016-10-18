@@ -11,9 +11,13 @@ import com.denizenscript.denizen2core.tags.objects.TextTag;
 import com.denizenscript.denizen2core.utilities.Action;
 import com.denizenscript.denizen2core.utilities.CoreUtilities;
 import com.denizenscript.denizen2core.utilities.debugging.ColorSet;
+import com.denizenscript.denizen2sponge.Denizen2Sponge;
+import com.denizenscript.depenizen.common.socket.DataDeserializer;
+import com.denizenscript.depenizen.common.socket.Packet;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import com.denizenscript.depenizen.sponge.Settings;
 import com.denizenscript.depenizen.sponge.tags.bungee.objects.BungeeServerTag;
+import org.spongepowered.api.Sponge;
 
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
@@ -26,6 +30,13 @@ public class SpongeSocketClient extends SocketClient {
 
     public SpongeSocketClient(String ipAddress, int port, String name, char[] password) throws GeneralSecurityException {
         super(ipAddress, port, name, password);
+    }
+
+    @Override
+    protected void receivePacket(Packet.ClientBound packetType, DataDeserializer data) {
+        Sponge.getScheduler().createTaskBuilder()
+                .execute(() -> super.receivePacket(packetType, data))
+                .submit(Denizen2Sponge.instance);
     }
 
     @Override
@@ -125,7 +136,7 @@ public class SpongeSocketClient extends SocketClient {
         if (definitions.size() > 1) {
             Map<String, AbstractTagObject> defs = new HashMap<>();
             for (Map.Entry<String, String> entry : definitions.entrySet()) {
-                defs.put(entry.getKey(), new TextTag(entry.getValue())); // TODO: proper objects?
+                defs.put(entry.getKey(), new TextTag(entry.getValue()));
             }
             nq.commandStack.peek().definitions.putAll(defs);
         }
@@ -139,7 +150,7 @@ public class SpongeSocketClient extends SocketClient {
         // TODO: command for this
         HashMap<String, AbstractTagObject> defs = new HashMap<>();
         for (Map.Entry<String, String> entry : definitions.entrySet()) {
-            defs.put(entry.getKey(), new TextTag(entry.getValue())); // TODO: proper objects?
+            defs.put(entry.getKey(), new TextTag(entry.getValue()));
         }
         Action<String> error = (e) -> Denizen2Core.getImplementation().outputError(e);
         DebugMode debugMode = minimalDebug ? fullDebug ? DebugMode.FULL : DebugMode.MINIMAL : DebugMode.NONE;
