@@ -91,7 +91,7 @@ public class JobsJob implements dObject {
     }
 
     public void setOwner(dPlayer player) {
-        this.jobOwner = Jobs.getPlayerManager().getJobsPlayerOffline(player.getOfflinePlayer());
+        this.jobOwner = Jobs.getPlayerManager().getJobsPlayer(player.getName());
         this.jobProgression = jobOwner.getJobProgression(job);
     }
 

@@ -26,7 +26,7 @@ public class JobsPlayerExtension extends dObjectExtension {
     }
 
     private JobsPlayerExtension(dPlayer player) {
-        this.player = Jobs.getPlayerManager().getJobsPlayerOffline(player.getOfflinePlayer());
+        this.player = Jobs.getPlayerManager().getJobsPlayer(player.getName());
     }
 
     JobsPlayer player = null;

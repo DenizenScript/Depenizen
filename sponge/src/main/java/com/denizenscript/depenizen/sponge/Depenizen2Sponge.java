@@ -11,7 +11,6 @@ import com.denizenscript.depenizen.sponge.commands.bungee.BungeeRunCommand;
 import com.denizenscript.depenizen.sponge.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.sponge.tags.bungee.handlers.BungeeServerTagBase;
 import com.google.inject.Inject;
-import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.event.Listener;
@@ -51,8 +50,6 @@ public class Depenizen2Sponge implements DepenizenImplementation {
     private Path configDir;
 
     private File configFile;
-
-    private YAMLConfigurationLoader configLoader;
 
     public YAMLConfiguration config;
 

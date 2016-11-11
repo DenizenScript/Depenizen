@@ -93,12 +93,12 @@ public class JobsCommands extends AbstractCommand {
         Action action = (Action) scriptEntry.getObject("action");
         JobsJob job = (JobsJob) scriptEntry.getObject("job");
         int number = (scriptEntry.hasObject("number") ? scriptEntry.getElement("number").asInt() : 0);
-        JobsPlayer player = Jobs.getPlayerManager().getJobsPlayerOffline(scriptEntryData.getPlayer().getOfflinePlayer());
+        JobsPlayer player = Jobs.getPlayerManager().getJobsPlayer(scriptEntryData.getPlayer().getName());
 
         switch (action) {
 
             case PROMOTE:
-                player.promoteJob(job.getJob(), number, player);
+                player.promoteJob(job.getJob(), number);
                 break;
 
             case DEMOTE:
@@ -106,7 +106,7 @@ public class JobsCommands extends AbstractCommand {
                 break;
 
             case JOIN:
-                player.joinJob(job.getJob(), player);
+                player.joinJob(job.getJob());
                 break;
 
             case QUIT:
