@@ -32,16 +32,33 @@ public class TCLocationExtension extends dObjectExtension {
     @Override
     public String getAttribute(Attribute attribute) {
 
-        // <--[tag]
-        // @attribute <l@location.tc_biome.name>
-        // @returns Element
-        // @description
-        // Returns the TerrainControl biome name at this location, if any.
-        // @Plugin DepenizenBukkit, TerrainControl
-        // -->
-        if (attribute.startsWith("tc_biome.name")) {
-            LocalBiome biome = TerrainControl.getWorld(location.getWorld().getName()).getBiome(location.getBlockX(), location.getBlockZ());
-            return new Element(biome.getName()).getAttribute(attribute.fulfill(2));
+        if (attribute.startsWith("tc_biome")) {
+            attribute = attribute.fulfill(1);
+            LocalBiome biome = TerrainControl.getWorld(location.getWorld().getName())
+                    .getBiome(location.getBlockX(), location.getBlockZ());
+
+            // <--[tag]
+            // @attribute <l@location.tc_biome.name>
+            // @returns Element
+            // @description
+            // Returns the TerrainControl biome name at this location, if any.
+            // @Plugin DepenizenBukkit, TerrainControl
+            // -->
+            if (attribute.startsWith("name")) {
+                return new Element(biome.getName()).getAttribute(attribute.fulfill(1));
+            }
+
+            else if (attribute.startsWith("temperature")) {
+                // <--[tag]
+                // @attribute <l@location.tc_biome.temperature>
+                // @returns Element
+                // @description
+                // Returns the TerrainControl biome temperature at this location, if any.
+                // @Plugin DepenizenBukkit, TerrainControl
+                // -->
+                return new Element(biome.getTemperatureAt(location.getBlockX(), location.getBlockY(), location.getBlockZ()))
+                        .getAttribute(attribute.fulfill(1));
+            }
         }
 
         return null;
