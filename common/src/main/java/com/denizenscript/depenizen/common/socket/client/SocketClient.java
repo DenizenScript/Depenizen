@@ -6,6 +6,7 @@ import com.denizenscript.depenizen.common.socket.DataSerializer;
 import com.denizenscript.depenizen.common.socket.Packet;
 import com.denizenscript.depenizen.common.socket.client.packet.*;
 import com.denizenscript.depenizen.common.util.Encryption;
+import com.denizenscript.depenizen.common.util.SimpleScriptEntry;
 import com.denizenscript.depenizen.common.util.Utilities;
 
 import java.io.DataInputStream;
@@ -300,7 +301,7 @@ public abstract class SocketClient implements Runnable {
 
     protected abstract void handleUpdateServer(String serverName, boolean registered);
 
-    protected abstract void handleScript(boolean shouldDebug, Map<String, List<String>> scriptEntries, Map<String, String> definitions);
+    protected abstract void handleScript(boolean shouldDebug, List<SimpleScriptEntry> scriptEntries, Map<String, String> definitions);
 
     protected abstract void handleRunScript(String scriptName, Map<String, String> definitions, boolean fullDebug, boolean minimalDebug);
 

@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.common.socket.client.packet;
 
 import com.denizenscript.depenizen.common.socket.DataSerializer;
 import com.denizenscript.depenizen.common.socket.Packet;
+import com.denizenscript.depenizen.common.util.SimpleScriptEntry;
 
 import java.util.List;
 import java.util.Map;
@@ -10,10 +11,10 @@ public class ClientPacketOutScript extends Packet {
 
     private List<String> destinations;
     private boolean shouldDebug;
-    private Map<String, List<String>> scriptEntries;
+    private List<SimpleScriptEntry> scriptEntries;
     private Map<String, String> definitions;
 
-    public ClientPacketOutScript(List<String> destinations, boolean shouldDebug, Map<String, List<String>> scriptEntries,
+    public ClientPacketOutScript(List<String> destinations, boolean shouldDebug, List<SimpleScriptEntry> scriptEntries,
                                  Map<String, String> definitions) {
         this.destinations = destinations;
         this.shouldDebug = shouldDebug;
@@ -27,7 +28,11 @@ public class ClientPacketOutScript extends Packet {
         serializer.writeStringList(destinations);
         DataSerializer box = new DataSerializer();
         box.writeBoolean(shouldDebug);
-        box.writeStringListMap(scriptEntries);
+        box.writeInt(scriptEntries.size());
+        for (SimpleScriptEntry scriptEntry : scriptEntries) {
+            box.writeString(scriptEntry.getCommand());
+            box.writeStringList(scriptEntry.getArguments());
+        }
         box.writeStringMap(definitions);
         serializer.writeByteArray(box.toByteArray());
     }

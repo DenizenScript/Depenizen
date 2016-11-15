@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.commands.bungee;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.common.socket.client.packet.ClientPacketOutScript;
+import com.denizenscript.depenizen.common.util.SimpleScriptEntry;
 import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.aH;
@@ -11,7 +12,7 @@ import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.BracedCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -96,9 +97,9 @@ public class BungeeCommand extends BracedCommand {
 
         if (BungeeSupport.isSocketRegistered()) {
             boolean debug = scriptEntry.shouldDebug();
-            Map<String, List<String>> scriptEntries = new HashMap<String, List<String>>();
+            List<SimpleScriptEntry> scriptEntries = new ArrayList<SimpleScriptEntry>();
             for (ScriptEntry entry : bracedCommands) {
-                scriptEntries.put(entry.getCommandName(), entry.getOriginalArguments());
+                scriptEntries.add(new SimpleScriptEntry(entry.getCommandName(), entry.getOriginalArguments()));
             }
             Map<String, String> definitions = scriptEntry.getResidingQueue().getAllDefinitions();
             ClientPacketOutScript packet = new ClientPacketOutScript(serverNames, debug, scriptEntries, definitions);

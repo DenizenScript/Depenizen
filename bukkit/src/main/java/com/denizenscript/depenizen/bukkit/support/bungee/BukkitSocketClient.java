@@ -11,6 +11,7 @@ import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.common.socket.DataDeserializer;
 import com.denizenscript.depenizen.common.socket.Packet;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
+import com.denizenscript.depenizen.common.util.SimpleScriptEntry;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.tags.BukkitTagContext;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
@@ -118,12 +119,12 @@ public class BukkitSocketClient extends SocketClient {
     }
 
     @Override
-    protected void handleScript(boolean shouldDebug, Map<String, List<String>> scriptEntries, Map<String, String> definitions) {
+    protected void handleScript(boolean shouldDebug, List<SimpleScriptEntry> scriptEntries, Map<String, String> definitions) {
         List<ScriptEntry> scriptEntryList = new ArrayList<ScriptEntry>();
         try {
-            for (Map.Entry<String, List<String>> entry : scriptEntries.entrySet()) {
-                List<String> value = entry.getValue();
-                ScriptEntry scriptEntry = new ScriptEntry(entry.getKey(), value.toArray(new String[value.size()]), null);
+            for (SimpleScriptEntry entry : scriptEntries) {
+                List<String> args = entry.getArguments();
+                ScriptEntry scriptEntry = new ScriptEntry(entry.getCommand(), args.toArray(new String[args.size()]), null);
                 scriptEntry.fallbackDebug = shouldDebug;
                 scriptEntryList.add(scriptEntry);
             }

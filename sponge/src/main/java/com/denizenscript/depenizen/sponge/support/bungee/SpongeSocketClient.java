@@ -15,6 +15,7 @@ import com.denizenscript.denizen2sponge.Denizen2Sponge;
 import com.denizenscript.depenizen.common.socket.DataDeserializer;
 import com.denizenscript.depenizen.common.socket.Packet;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
+import com.denizenscript.depenizen.common.util.SimpleScriptEntry;
 import com.denizenscript.depenizen.sponge.Settings;
 import com.denizenscript.depenizen.sponge.tags.bungee.objects.BungeeServerTag;
 import org.spongepowered.api.Sponge;
@@ -102,7 +103,7 @@ public class SpongeSocketClient extends SocketClient {
     }
 
     @Override
-    protected void handleScript(boolean shouldDebug, Map<String, List<String>> scriptEntries, Map<String, String> definitions) {
+    protected void handleScript(boolean shouldDebug, List<SimpleScriptEntry> scriptEntries, Map<String, String> definitions) {
         // DepenizenBukkit only
     }
 
