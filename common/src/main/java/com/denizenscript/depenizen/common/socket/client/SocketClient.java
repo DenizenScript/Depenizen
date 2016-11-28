@@ -147,9 +147,6 @@ public abstract class SocketClient implements Runnable {
                 input.read(iv);
                 this.encryption = new Encryption(password, ENCRYPTION_SALT, iv);
                 send(new ClientPacketOutRegister(registrationName, isBungeeScriptCompatible()));
-                for (String event : getSubscribedEvents()) {
-                    send(new ClientPacketOutEventSubscription(event, true));
-                }
                 connectionLoop:
                 while (isConnected) {
                     long timePassed;
@@ -224,6 +221,9 @@ public abstract class SocketClient implements Runnable {
                 acceptRegister.deserialize(data);
                 if (acceptRegister.isAccepted()) {
                     Depenizen.getImplementation().debugMessage("Successfully registered as '" + registrationName + "'");
+                    for (String event : getSubscribedEvents()) {
+                        trySend(new ClientPacketOutEventSubscription(event, true));
+                    }
                     handleAcceptRegister(registrationName, acceptRegister.getExistingServers());
                     registered = true;
                 }
