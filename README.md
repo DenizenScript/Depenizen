@@ -26,7 +26,7 @@ For communicating with a BungeeCord network, use the following instructions:
 8. Save the file.
 9. Install DepenizenBukkit or Depenizen2Sponge, depending on your server brand.
 10. Load your Bukkit/Spigot or Sponge server fully and stop it with `stop`.
-11. If using Bungee/Spigot, navigate to `your_server_directory/plugins/Depenizen`. If using Sponge, navigate to `your_server_directory/config/depenizen2sponge`.
+11. If using Bukkit/Spigot, navigate to `your_server_directory/plugins/Depenizen`. If using Sponge, navigate to `your_server_directory/config/depenizen2sponge`.
 12. Open `config.yml`.
 13. Set `Socket.Enabled` to `true`.
 14. Set `Socket.IP Address` to the external IP address of your BungeeCord network.
@@ -66,6 +66,7 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 - PVP Stats (http://dev.bukkit.org/bukkit-plugins/pvp-stats/)
 - Quests (https://www.spigotmc.org/resources/quests.3711/)
 - Residence (https://www.spigotmc.org/resources/residence-1-7-10-up-to-1-10.11480/)
+- Sentinel (https://www.spigotmc.org/resources/sentinel.22017/)
 - ShopKeepers (http://dev.bukkit.org/bukkit-plugins/shopkeepers/)
 - SimpleClans (http://dev.bukkit.org/bukkit-plugins/simpleclans/)
 - SkillAPI (http://dev.bukkit.org/bukkit-plugins/skillapi/)
