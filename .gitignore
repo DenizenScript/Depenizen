@@ -39,3 +39,5 @@ manifest.mf
 # resource jars
 # *.jar
 *.exe
+
+dependency-reduced-pom.xml
