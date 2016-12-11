@@ -76,6 +76,40 @@ public class QuestsPlayerExtension extends dObjectExtension {
             else if (attribute.startsWith("active")) {
                 return new Element(quester.currentQuests.size()).getAttribute(attribute.fulfill(1));
             }
+
+            // <--[tag]
+            // @attribute <p@player.quests.listactive>
+            // @returns list(QuestName)
+            // @description
+            // Returns the quests the player has active.
+            // @Plugin DepenizenBukkit, Quests
+            // -->
+            else if (attribute.startsWith("listactive")) {
+                dList listactive = new dList();
+
+                for (dString quest : quester.currentQuests) {
+                    listactive.add(quest);
+                }
+
+                return listactive.getAttribute(attribute.fulfill(1));
+            }
+
+            // <--[tag]
+            // @attribute <p@player.quests.listcompleted>
+            // @returns list(QuestName)
+            // @description
+            // Returns the quests the player has completed.
+            // @Plugin DepenizenBukkit, Quests
+            // -->
+            else if (attribute.startsWith("listcompleted")) {
+                dList listcompleted = new dList();
+
+                for (dString quest : quester.completedQuests) {
+                    listcompleted.add(quest);
+                }
+
+                return listcompleted.getAttribute(attribute.fulfill(1));
+            }
             return null;
         }
         return null;
