@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.sponge.support.clientizen;
 import com.denizenscript.denizen2core.Denizen2Core;
 import com.denizenscript.denizen2core.utilities.CoreUtilities;
 import com.denizenscript.denizen2sponge.Denizen2Sponge;
-import com.denizenscript.denizen2sponge.spongeevents.Denizen2SpongeLoadedEvent;
+import com.denizenscript.denizen2sponge.spongeevents.Denizen2SpongeReloadEvent;
 import com.denizenscript.depenizen.common.socket.DataDeserializer;
 import com.denizenscript.depenizen.common.socket.DataSerializer;
 import com.denizenscript.depenizen.sponge.Depenizen2Sponge;
@@ -85,7 +85,7 @@ public class ClientizenSupport implements RawDataListener {
     }
 
     @Listener
-    public void onScriptReload(Denizen2SpongeLoadedEvent event) {
+    public void onScriptReload(Denizen2SpongeReloadEvent event) {
         reloadClientScripts();
         for (Player player : Sponge.getServer().getOnlinePlayers()) {
             if (playersWithMod.contains(player.getUniqueId())) {
