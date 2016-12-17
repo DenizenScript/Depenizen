@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.support;
 
 import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
+import com.denizenscript.depenizen.bukkit.support.clientizen.ClientizenSupport;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import com.denizenscript.depenizen.bukkit.Settings;
 import org.bukkit.plugin.Plugin;
@@ -49,6 +50,8 @@ public class Supported {
         else {
             DepenizenPlugin.depenizenLog("BungeeCord socket disabled in config, add-ons will not enable.");
         }
+
+        supportManager.register(new ClientizenSupport());
 
         supportManager.registerNewObjects();
     }

@@ -9,6 +9,7 @@ import com.denizenscript.depenizen.common.Depenizen;
 import com.denizenscript.depenizen.common.DepenizenImplementation;
 import com.denizenscript.depenizen.sponge.commands.bungee.BungeeRunCommand;
 import com.denizenscript.depenizen.sponge.support.bungee.BungeeSupport;
+import com.denizenscript.depenizen.sponge.support.clientizen.ClientizenSupport;
 import com.denizenscript.depenizen.sponge.tags.bungee.handlers.BungeeServerTagBase;
 import com.google.inject.Inject;
 import org.spongepowered.api.Sponge;
@@ -71,6 +72,7 @@ public class Depenizen2Sponge implements DepenizenImplementation {
             // Start BungeeCord socket
             BungeeSupport.startSocket();
         }
+        ClientizenSupport clientizenSupport = new ClientizenSupport(); // TODO: Support classes (register)
     }
 
     @Listener
