@@ -1,11 +1,13 @@
 package com.denizenscript.depenizen.bukkit.extensions.quests;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
+import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
 import me.blackvein.quests.Quests;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 
@@ -41,6 +43,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
 
         if (attribute.startsWith("quests")) {
             attribute = attribute.fulfill(1);
+
             // <--[tag]
             // @attribute <p@player.quests.points>
             // @returns Element(Number)
@@ -53,6 +56,36 @@ public class QuestsPlayerExtension extends dObjectExtension {
                     return new Element(quester.getBaseData().getInt("quest-points")).getAttribute(attribute.fulfill(1));
                 }
                 return new Element("0").getAttribute(attribute.fulfill(1));
+            }
+
+            // <--[tag]
+            // @attribute <p@player.quests.completed_names>
+            // @returns dList
+            // @description
+            // Returns the names of quests the player has completed.
+            // @Plugin DepenizenBukkit, Quests
+            // -->
+            if (attribute.startsWith("completed_names")) {
+                dList list = new dList();
+                for (String quest : quester.completedQuests) {
+                    list.add(quest);
+                }
+                return list.getAttribute(attribute.fulfill(1));
+            }
+
+            // <--[tag]
+            // @attribute <p@player.quests.active_names>
+            // @returns dList
+            // @description
+            // Returns the names of quests the player has active.
+            // @Plugin DepenizenBukkit, Quests
+            // -->
+            if (attribute.startsWith("active_names")) {
+                dList list = new dList();
+                for (Quest quest : quester.currentQuests.keySet()) {
+                    list.add(quest.getName());
+                }
+                return list.getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
