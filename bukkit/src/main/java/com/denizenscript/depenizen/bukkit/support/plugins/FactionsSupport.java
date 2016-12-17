@@ -18,10 +18,12 @@ import java.util.ArrayList;
 public class FactionsSupport extends Support {
 
     public FactionsSupport() {
-        registerObjects(dFaction.class);
-        registerProperty(FactionsPlayerNPCExtension.class, dPlayer.class, dNPC.class);
-        registerProperty(FactionsLocationExtension.class, dLocation.class);
-        registerAdditionalTags("factions", "faction");
+        if (!getPlugin(getClass()).getDescription().getVersion().startsWith("1.")) {
+            registerObjects(dFaction.class);
+            registerProperty(FactionsPlayerNPCExtension.class, dPlayer.class, dNPC.class);
+            registerProperty(FactionsLocationExtension.class, dLocation.class);
+            registerAdditionalTags("factions", "faction");
+        }
     }
 
     @Override
