@@ -40,4 +40,10 @@ public class BungeeSocketServer extends SocketServer {
             }
         }
     }
+
+    @Override
+    protected void handleExecute(ClientConnection client, String command) {
+        ProxyServer server = ProxyServer.getInstance();
+        server.getPluginManager().dispatchCommand(server.getConsole(), command);
+    }
 }

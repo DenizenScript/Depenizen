@@ -272,6 +272,11 @@ public class ClientConnection implements Runnable {
                             sendPlayer.deserialize(data);
                             server.handleSendPlayer(this, sendPlayer.getPlayer(), sendPlayer.getDestination());
                             break;
+                        case EXECUTE:
+                            ServerPacketInExecute execute = new ServerPacketInExecute();
+                            execute.deserialize(data);
+                            server.handleExecute(this, execute.getCommand());
+                            break;
                     }
                 }
             }

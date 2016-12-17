@@ -24,7 +24,8 @@ public abstract class Packet {
         PARSED_TAG(6),
         EVENT_SUBSCRIPTION(7),
         EVENT_RESPONSE(8),
-        SEND_PLAYER(9);
+        SEND_PLAYER(9),
+        EXECUTE(10);
 
         private final int id;
 

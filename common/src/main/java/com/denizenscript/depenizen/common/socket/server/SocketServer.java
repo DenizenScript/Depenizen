@@ -164,4 +164,6 @@ public abstract class SocketServer implements Runnable {
     protected abstract void handleEventResponse(ClientConnection client, long id, Map<String, String> response);
 
     protected abstract void handleSendPlayer(ClientConnection client, String player, String destination);
+
+    protected abstract void handleExecute(ClientConnection client, String command);
 }
