@@ -37,7 +37,7 @@ public class DepenizenPlugin extends JavaPlugin implements DepenizenImplementati
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("depenizen")) {
             sender.sendMessage(ChatColor.UNDERLINE + "Depenizen");
-            sender.sendMessage(ChatColor.GRAY + "Developer: " + ChatColor.AQUA + "Morphan1");
+            sender.sendMessage(ChatColor.GRAY + "Developer: " + ChatColor.AQUA + "Morphan1 and the DenizenScript team");
             sender.sendMessage(ChatColor.GRAY + "Current version: " + ChatColor.GOLD + this.getDescription().getVersion());
             return true;
         }

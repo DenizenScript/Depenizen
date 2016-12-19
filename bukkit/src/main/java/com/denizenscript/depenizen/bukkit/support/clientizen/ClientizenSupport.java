@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
@@ -70,11 +71,18 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
     @EventHandler
     public void onScriptReload(ScriptReloadEvent event) {
         reloadClientScripts();
+        int count = 0;
+        int ignored = 0;
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (playersWithMod.contains(player.getUniqueId())) {
                 sendAllScripts(player);
+                count++;
+            }
+            else {
+                ignored++;
             }
         }
+        DepenizenPlugin.depenizenLog("Sent client scripts to " + count + " and not to " + ignored + "!");
     }
 
     @EventHandler
@@ -83,6 +91,20 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
         if (playersWithMod.contains(uuid)) {
             playersWithMod.remove(uuid);
         }
+    }
+
+    @EventHandler
+    public void onPlayerJoin(final PlayerJoinEvent event) {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(DepenizenPlugin.getCurrentInstance(), new Runnable() {
+            @Override
+            public void run() {
+                if (event.getPlayer().isOnline()) {
+                    DataSerializer serializer = new DataSerializer();
+                    serializer.writeString("RequestConfirmation");
+                    send(event.getPlayer(), serializer);
+                }
+            }
+        }, 10);
     }
 
     public static void sendAllScripts(Player player) {

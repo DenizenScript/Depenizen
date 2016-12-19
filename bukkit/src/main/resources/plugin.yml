@@ -1,5 +1,5 @@
 name: Depenizen
-authors: [Morphan1]
+authors: ['Morphan1', 'DenizenScript team']
 version: ${project.version} (build ${BUILD_NUMBER})
 main: com.denizenscript.depenizen.bukkit.DepenizenPlugin
 depend: [Denizen]
