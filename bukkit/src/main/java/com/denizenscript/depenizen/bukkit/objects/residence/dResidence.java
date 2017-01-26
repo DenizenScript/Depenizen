@@ -28,7 +28,7 @@ public class dResidence implements dObject {
         // Match residence name
 
         string = string.replace("residence@", "");
-        ClaimedResidence residence = Residence.getResidenceManagerAPI().getByName(string);
+        ClaimedResidence residence = Residence.getInstance().getResidenceManagerAPI().getByName(string);
         if (residence == null) {
             return null;
         }
@@ -37,7 +37,7 @@ public class dResidence implements dObject {
 
     public static boolean matches(String arg) {
         arg = arg.replace("residence@", "");
-        return Residence.getResidenceManagerAPI().getByName(arg) != null;
+        return Residence.getInstance().getResidenceManagerAPI().getByName(arg) != null;
     }
 
     ClaimedResidence residence = null;

@@ -274,7 +274,7 @@
         <dependency>
             <groupId>com.bekvon.bukkit</groupId>
             <artifactId>residence</artifactId>
-            <version>4.5.7.7</version>
+            <version>4.5.13.4</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/lib/Residence.jar</systemPath>
         </dependency>

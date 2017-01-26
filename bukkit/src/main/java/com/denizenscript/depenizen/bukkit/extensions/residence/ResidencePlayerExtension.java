@@ -27,7 +27,7 @@ public class ResidencePlayerExtension extends dObjectExtension {
     }
 
     private ResidencePlayerExtension(dPlayer player) {
-        this.player = Residence.getPlayerManagerAPI().getResidencePlayer(player.getName());
+        this.player = Residence.getInstance().getPlayerManagerAPI().getResidencePlayer(player.getName());
     }
 
     ResidencePlayer player;
