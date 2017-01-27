@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.support.clientizen;
 
 import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import com.denizenscript.depenizen.bukkit.commands.clientizen.ClientRunCommand;
+import com.denizenscript.depenizen.bukkit.commands.clientizen.ClientScriptsCommand;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.common.socket.DataDeserializer;
 import com.denizenscript.depenizen.common.socket.DataSerializer;
@@ -30,17 +31,35 @@ import java.util.UUID;
 public class ClientizenSupport extends Support implements Listener, PluginMessageListener {
 
     private static final Map<String, String> clientScripts = new HashMap<String, String>();
+    private static final List<String> autoScripts = new ArrayList<String>();
     private static final List<UUID> playersWithMod = new ArrayList<UUID>();
+    private static final Map<UUID, List<String>> playerScripts = new HashMap<UUID, List<String>>();
 
     public static final File clientScriptsFolder;
+    public static final String clientScriptsPath;
+    public static final String autoScriptsPath;
 
     static {
         clientScriptsFolder = new File(DepenizenPlugin.getCurrentInstance().getDataFolder(), "client_scripts");
         clientScriptsFolder.mkdirs();
+        File autoScriptsFolder = new File(clientScriptsFolder, "auto");
+        autoScriptsFolder.mkdirs();
+        String scriptsPath = null;
+        String autoPath = null;
+        try {
+            scriptsPath = clientScriptsFolder.getCanonicalPath();
+            autoPath = autoScriptsFolder.getCanonicalPath();
+        }
+        catch (IOException e) {
+            DepenizenPlugin.getCurrentInstance().debugException(e);
+        }
+        clientScriptsPath = scriptsPath;
+        autoScriptsPath = autoPath;
     }
 
     public ClientizenSupport() {
         new ClientRunCommand().activate().as("CLIENTRUN").withOptions("clientrun [<script_name>] (def:<name>|<value>|...)", 1);
+        new ClientScriptsCommand().activate().as("CLIENTSCRIPTS").withOptions("clientscripts [add/remove] [<file_name>|...] (players:<player>|...)", 2);
         Bukkit.getMessenger().registerIncomingPluginChannel(DepenizenPlugin.getCurrentInstance(), "Clientizen", this);
         Bukkit.getMessenger().registerOutgoingPluginChannel(DepenizenPlugin.getCurrentInstance(), "Clientizen");
         Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
@@ -52,12 +71,25 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
         List<File> files = CoreUtilities.listDScriptFiles(clientScriptsFolder);
         for (File file : files) {
             try {
+                String path = file.getCanonicalPath();
+                String fileName = CoreUtilities.toLowerCase(file.getName());
+                if (clientScripts.containsKey(fileName)) {
+                    DepenizenPlugin.depenizenLog("Multiple files named '" + fileName + "' found! " +
+                            "Please remember Denizen is case-insensitive and client scripts do " +
+                            "not support similarly named files, even across subfolders.");
+                    continue;
+                }
                 FileInputStream fis = new FileInputStream(file);
                 String contents = ScriptHelper.convertStreamToString(fis);
                 fis.close();
-                String fileName = file.getName();
                 clientScripts.put(fileName, contents);
-                DepenizenPlugin.depenizenLog("Loaded client script file: " + fileName);
+                if (path.startsWith(autoScriptsPath)) {
+                    autoScripts.add(fileName);
+                    DepenizenPlugin.depenizenLog("Loaded auto-send client script file: " + fileName);
+                }
+                else {
+                    DepenizenPlugin.depenizenLog("Loaded dynamic client script file: " + fileName);
+                }
             }
             catch (FileNotFoundException e) {
                 DepenizenPlugin.getCurrentInstance().debugException(e);
@@ -75,7 +107,7 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
         int ignored = 0;
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (playersWithMod.contains(player.getUniqueId())) {
-                sendAllScripts(player);
+                resendAllScripts(player);
                 count++;
             }
             else {
@@ -90,6 +122,7 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
         UUID uuid = event.getPlayer().getUniqueId();
         if (playersWithMod.contains(uuid)) {
             playersWithMod.remove(uuid);
+            playerScripts.remove(uuid);
         }
     }
 
@@ -107,14 +140,82 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
         }, 10);
     }
 
-    public static void sendAllScripts(Player player) {
+    public static boolean isScriptLoaded(String scriptName) {
+        return clientScripts.containsKey(CoreUtilities.toLowerCase(scriptName));
+    }
+
+    public static void resendAllScripts(Player player) {
+        UUID uuid = player.getUniqueId();
+        if (!playersWithMod.contains(uuid)) {
+            return;
+        }
+        List<String> currentScripts = playerScripts.get(uuid);
+        Map<String, String> scripts = new HashMap<String, String>();
+        for (String scriptName : currentScripts) {
+            if (clientScripts.containsKey(scriptName)) {
+                scripts.put(scriptName, clientScripts.get(scriptName));
+            }
+        }
+        for (String autoScript : autoScripts) {
+            if (!scripts.containsKey(autoScript)) {
+                scripts.put(autoScript, clientScripts.get(autoScript));
+            }
+        }
+        currentScripts.clear();
+        for (String newScript : scripts.keySet()) {
+            currentScripts.add(newScript);
+        }
         DataSerializer serializer = new DataSerializer();
-        serializer.writeString("LoadAllScripts");
-        serializer.writeStringMap(clientScripts);
+        serializer.writeString("ClearAndLoadScripts");
+        serializer.writeStringMap(scripts);
+        send(player, serializer);
+    }
+
+    public static void sendAutoScripts(Player player) {
+        sendScripts(player, autoScripts);
+    }
+
+    public static void sendScripts(Player player, List<String> scriptNames) {
+        UUID uuid = player.getUniqueId();
+        if (!playersWithMod.contains(uuid)) {
+            return;
+        }
+        List<String> currentScripts = playerScripts.get(uuid);
+        Map<String, String> scripts = new HashMap<String, String>();
+        for (String scriptName : scriptNames) {
+            if (clientScripts.containsKey(scriptName) && !currentScripts.contains(scriptName)) {
+                scripts.put(scriptName, clientScripts.get(scriptName));
+                currentScripts.add(scriptName);
+            }
+        }
+        DataSerializer serializer = new DataSerializer();
+        serializer.writeString("LoadScripts");
+        serializer.writeStringMap(scripts);
+        send(player, serializer);
+    }
+
+    public static void removeScripts(Player player, List<String> scriptNames) {
+        UUID uuid = player.getUniqueId();
+        if (!playersWithMod.contains(uuid)) {
+            return;
+        }
+        List<String> currentScripts = playerScripts.get(uuid);
+        for (String scriptName : scriptNames) {
+            if (currentScripts.contains(scriptName)) {
+                currentScripts.remove(scriptName);
+            }
+        }
+        DataSerializer serializer = new DataSerializer();
+        serializer.writeString("RemoveScripts");
+        serializer.writeStringList(scriptNames);
         send(player, serializer);
     }
 
     public static void runScript(Player player, String script, Map<String, String> definitions) {
+        UUID uuid = player.getUniqueId();
+        if (!playersWithMod.contains(uuid)) {
+            return;
+        }
         DataSerializer serializer = new DataSerializer();
         serializer.writeString("RunScript");
         serializer.writeString(script);
@@ -135,7 +236,8 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
                 UUID uuid = player.getUniqueId();
                 if (!playersWithMod.contains(uuid)) {
                     playersWithMod.add(uuid);
-                    sendAllScripts(player);
+                    playerScripts.put(uuid, new ArrayList<String>());
+                    sendAutoScripts(player);
                 }
             }
         }

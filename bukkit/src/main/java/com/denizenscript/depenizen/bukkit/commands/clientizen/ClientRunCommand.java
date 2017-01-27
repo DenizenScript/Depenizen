@@ -27,7 +27,10 @@ public class ClientRunCommand extends AbstractCommand {
     // @Author Morphan1
 
     // @Description
-    // TODO
+    // This command is used to run a script on the Minecraft client by utilizing the Denizen2 Forge mod
+    // implementation, Clientizen.
+    // The script must be sent beforehand, either automatically when the player joined or sent by
+    // the <@link command ClientScripts> command.
 
     // @Tags
     // None
