@@ -17,7 +17,7 @@ import java.util.List;
 public class ClientScriptsCommand extends AbstractCommand {
 
     // <--[command]
-    // @Name ClientRun
+    // @Name ClientScripts
     // @Syntax clientscripts [add/remove] [<file_name>|...] (players:<player>|...)
     // @Group Depenizen
     // @Plugin DepenizenBukkit
