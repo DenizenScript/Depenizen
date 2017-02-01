@@ -183,6 +183,7 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
         List<String> currentScripts = playerScripts.get(uuid);
         Map<String, String> scripts = new HashMap<String, String>();
         for (String scriptName : scriptNames) {
+            scriptName = CoreUtilities.toLowerCase(scriptName);
             if (clientScripts.containsKey(scriptName) && !currentScripts.contains(scriptName)) {
                 scripts.put(scriptName, clientScripts.get(scriptName));
                 currentScripts.add(scriptName);
@@ -201,6 +202,7 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
         }
         List<String> currentScripts = playerScripts.get(uuid);
         for (String scriptName : scriptNames) {
+            scriptName = CoreUtilities.toLowerCase(scriptName);
             if (currentScripts.contains(scriptName)) {
                 currentScripts.remove(scriptName);
             }

@@ -48,7 +48,7 @@ public class ClientScriptsCommand extends AbstractCommand {
 
             if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
-                scriptEntry.addObject("action", Action.valueOf(arg.getValue()));
+                scriptEntry.addObject("action", Action.valueOf(arg.getValue().toUpperCase()));
             }
 
             else if (!scriptEntry.hasObject("players")
