@@ -26,6 +26,13 @@ public class PlaceholderAPISupport extends Support {
 
     @Override
     public String additionalTags(Attribute attribute, TagContext tagContext) {
+        // <--[tag]
+        // @attribute <placeholder[<name>]>
+        // @returns Element
+        // @description
+        // Returns the value of the placeholder.
+        // @Plugin DepenizenBukkit, PlaceholderAPI
+        // -->
         if (attribute.startsWith("placeholder")) {
             String placeholder = CoreUtilities.toLowerCase(attribute.getContext(1));
             if (placeholder.startsWith("denizen_")) {
