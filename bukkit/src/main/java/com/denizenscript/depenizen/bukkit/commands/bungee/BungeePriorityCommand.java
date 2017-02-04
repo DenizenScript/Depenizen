@@ -29,7 +29,7 @@ public class BungeePriorityCommand extends AbstractCommand {
     // @Description
     // With this command you can change the fallback server priority list in bungee.
     // The priority list is used for when a connecting player has no valid reconnect server defined.
-    // Bungee will try to connect the player to first responsive server in the list.
+    // Bungee will try to connect the player to the first responsive server in the list.
 
     // @Tags
     // <bungee.list_servers>
