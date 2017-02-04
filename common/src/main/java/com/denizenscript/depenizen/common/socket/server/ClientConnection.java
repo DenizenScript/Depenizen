@@ -277,6 +277,11 @@ public class ClientConnection implements Runnable {
                             execute.deserialize(data);
                             server.handleExecute(this, execute.getCommand());
                             break;
+                        case SET_PRIORITY:
+                            ServerPacketInSetPriority setpriority = new ServerPacketInSetPriority();
+                            setpriority.deserialize(data);
+                            server.handleSetPriority(this, setpriority.getPriorityList());
+                            break;
                     }
                 }
             }

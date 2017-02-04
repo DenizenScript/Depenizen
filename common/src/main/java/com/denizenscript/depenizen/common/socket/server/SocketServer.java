@@ -12,6 +12,7 @@ import java.net.SocketException;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -166,4 +167,6 @@ public abstract class SocketServer implements Runnable {
     protected abstract void handleSendPlayer(ClientConnection client, String player, String destination);
 
     protected abstract void handleExecute(ClientConnection client, String command);
+
+    protected abstract void handleSetPriority(ClientConnection client, List<String> prioritylist);
 }
