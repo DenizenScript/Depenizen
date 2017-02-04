@@ -25,7 +25,8 @@ public abstract class Packet {
         EVENT_SUBSCRIPTION(7),
         EVENT_RESPONSE(8),
         SEND_PLAYER(9),
-        EXECUTE(10);
+        EXECUTE(10),
+        SET_PRIORITY(11);
 
         private final int id;
 

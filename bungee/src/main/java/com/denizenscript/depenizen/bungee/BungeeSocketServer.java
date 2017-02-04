@@ -3,10 +3,12 @@ package com.denizenscript.depenizen.bungee;
 import com.denizenscript.depenizen.common.socket.server.ClientConnection;
 import com.denizenscript.depenizen.common.socket.server.SocketServer;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.config.ListenerInfo;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.security.GeneralSecurityException;
+import java.util.List;
 import java.util.Map;
 
 public class BungeeSocketServer extends SocketServer {
@@ -46,4 +48,22 @@ public class BungeeSocketServer extends SocketServer {
         ProxyServer server = ProxyServer.getInstance();
         server.getPluginManager().dispatchCommand(server.getConsole(), command);
     }
+
+    @Override
+    protected void handleSetPriority(ClientConnection client, List<String> prioritylist) {
+        for (String servername : prioritylist) {
+            ServerInfo server = ProxyServer.getInstance().getServerInfo(servername);
+            if (server == null) {
+                prioritylist.remove(servername);
+            }
+        }
+        if (prioritylist.isEmpty()) {
+            return;
+        }
+        for (ListenerInfo listener : ProxyServer.getInstance().getConfig().getListeners()) {
+            listener.getServerPriority().clear();
+            listener.getServerPriority().addAll(prioritylist);
+        }
+    }
+
 }
