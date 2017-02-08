@@ -26,12 +26,13 @@ import java.util.List;
 // @Events
 // mythicmob mob dies (by <entity>) (in <area>)
 // mythicmob mob death (by <entity>) (in <area>)
+// mythicmob mob killed (by <entity>) (in <area>)
 // mythicmob <mob> dies (by <entity>) (in <area>)
 // mythicmob <mob> death (by <entity>) (in <area>)
 // mythicmob <mob> killed (by <entity>) (in <area>)
 
 //
-// @Regex ^on mythicmob( [^\s]+ )?(dies|death|killed)( by [^\s]+)?( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+// @Regex ^on mythicmob [^\s]+ (dies|death|killed)( by [^\s]+)?( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
 //
 // @Cancellable false
 //
@@ -67,21 +68,22 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("mythicmob");
+        String cmd = CoreUtilities.getXthArg(2, lower);
+        return lower.startsWith("mythicmob")
+                && (cmd.equals("death") || cmd.equals("dies") || cmd.equals("killed"));
     }
 
     @Override
     public boolean matches(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        String mob = CoreUtilities.getXthArg(2, lower);
+        String mob = CoreUtilities.getXthArg(1, lower);
 
-        if (!mob.equals("dies")
-                && !mob.equals("death")
-                && !mob.equals("killed")
+        if (!mob.equals("mob")
                 && !mob.equals(CoreUtilities.toLowerCase(this.mob.getMobType().getInternalName()))) {
             return false;
         }
 
+        // TODO: Remove the stupid from this...
         if ((CoreUtilities.getXthArg(3, lower).equals("by") || CoreUtilities.getXthArg(4, lower).equals("by"))
                 && !tryEntity(killer, CoreUtilities.getXthArg(4, lower))
                 && !tryEntity(killer, CoreUtilities.getXthArg(5, lower))) {
@@ -89,7 +91,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         }
 
         if (!runInCheck(scriptContainer, s, lower, entity.getLocation())
-                || !runInCheck(scriptContainer, s, lower, killer.getLocation())) {
+                && !runInCheck(scriptContainer, s, lower, killer.getLocation())) {
             return false;
         }
 
