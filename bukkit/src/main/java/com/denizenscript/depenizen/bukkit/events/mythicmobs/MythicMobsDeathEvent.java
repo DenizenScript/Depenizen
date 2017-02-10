@@ -151,7 +151,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
 
     @EventHandler
     public void onMythicMobDeath(MythicMobDeathEvent event) {
-        mob = new MythicMobsMob(event.getMobInstance());
+        mob = new MythicMobsMob(event.getMob());
         entity = new dEntity(event.getEntity());
         killer = new dEntity(event.getKiller());
         level = new Element(event.getMobLevel());
