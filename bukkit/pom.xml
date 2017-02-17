@@ -231,11 +231,11 @@
             <systemPath>${basedir}/src/main/resources/lib/NoCheatPlus.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>net.elseland.xikage</groupId>
-            <artifactId>MythicMobs</artifactId>
-            <version>2.5.11</version>
+            <groupId>io.lumine.xikage</groupId>
+            <artifactId>mythicmobs</artifactId>
+            <version>4.0.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/MythicMobs-2.5.11.jar</systemPath>
+            <systemPath>${basedir}/src/main/resources/lib/MythicMobs.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.nisovin</groupId>

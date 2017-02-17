@@ -5,12 +5,11 @@ import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand
 import com.denizenscript.depenizen.bukkit.extensions.mythicmobs.MythicMobsEntityExtension;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
 import net.aufdemrand.denizen.objects.dEntity;
-import net.elseland.xikage.MythicMobs.Adapters.Bukkit.BukkitAdapter;
-import net.elseland.xikage.MythicMobs.Mobs.ActiveMob;
-import net.elseland.xikage.MythicMobs.Mobs.MobManager;
-import net.elseland.xikage.MythicMobs.Mobs.MythicMob;
+import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
+import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
-import net.elseland.xikage.MythicMobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.MythicMobs;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
@@ -26,19 +25,19 @@ public class MythicMobsSupport extends Support {
     }
 
     public static boolean isMythicMob(Entity entity) {
-        return MythicMobs.plugin.getMobManager().isActiveMob(BukkitAdapter.adapt(entity));
+        return MythicMobs.inst().getMobManager().isActiveMob(BukkitAdapter.adapt(entity));
     }
 
     public static boolean isMythicMob(UUID uuid) {
-        return MythicMobs.plugin.getMobManager().isActiveMob(uuid);
+        return MythicMobs.inst().getMobManager().isActiveMob(uuid);
     }
 
     public static ActiveMob getActiveMob(Entity entity) {
-        return MythicMobs.plugin.getMobManager().getActiveMob(entity.getUniqueId());
+        return MythicMobs.inst().getMobManager().getMythicMobInstance(entity);
     }
 
     public static MythicMob getMythicMob(String name) {
-        return MythicMobs.plugin.getMobManager().getMythicMob(name);
+        return MythicMobs.inst().getMobManager().getMythicMob(name);
     }
 
     public static Entity spawnMythicMob(MythicMob mythicMob, Location location, int level) {

@@ -9,7 +9,7 @@ import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
-import net.elseland.xikage.MythicMobs.Mobs.MythicMob;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
 import org.bukkit.entity.Entity;
 

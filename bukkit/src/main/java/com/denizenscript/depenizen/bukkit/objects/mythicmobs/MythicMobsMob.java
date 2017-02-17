@@ -8,10 +8,10 @@ import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
-import net.elseland.xikage.MythicMobs.Adapters.AbstractEntity;
-import net.elseland.xikage.MythicMobs.Adapters.Bukkit.BukkitEntity;
-import net.elseland.xikage.MythicMobs.Mobs.ActiveMob;
-import net.elseland.xikage.MythicMobs.Mobs.MythicMob;
+import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
+import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitEntity;
+import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
