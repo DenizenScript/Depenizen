@@ -226,7 +226,7 @@ public class MobArenaArena implements dObject {
             // Returns a list of players in the lobby.
             // @Plugin DepenizenBukkit, MobArena
             // -->
-            else if (attribute.startsWith("in_lobby")) {
+            else if (attribute.getAttribute(2).startsWith("in_lobby")) {
                 dList players = new dList();
                 for (Player p : arena.getPlayersInLobby()) {
                     players.add(new dPlayer(p).identify());
