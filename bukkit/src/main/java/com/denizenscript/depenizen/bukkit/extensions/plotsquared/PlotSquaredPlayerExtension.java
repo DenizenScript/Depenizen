@@ -59,14 +59,14 @@ public class PlotSquaredPlayerExtension extends dObjectExtension {
                 }
                 dList plots = new dList();
                 for (Plot plays : new PlotAPI().getPlayerPlots(world.getWorld(),player.getPlayerEntity())) {
-                    plots.add(dPlotSquaredPlot.valueOf(plays.toString()).identify());
+                    plots.add(new dPlotSquaredPlot(plays).identify());
                 }
                 return plots.getAttribute(attribute.fulfill(1));
             }
             else {
                 dList plots = new dList();
                 for (Plot plays : new PlotAPI().getPlayerPlots(player.getPlayerEntity())) {
-                    plots.add(dPlotSquaredPlot.valueOf(plays.toString()).identify());
+                    plots.add(new dPlotSquaredPlot(plays).identify());
                 }
                 return plots.getAttribute(attribute.fulfill(1));
             }
