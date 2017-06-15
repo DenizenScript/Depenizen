@@ -37,7 +37,7 @@ public class dPlotSquaredPlot implements dObject {
         string = string.replace("plotsquaredplot@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');
-            return new dPlotSquaredPlot(new PlotAPI().getPlot(dWorld.valueOf(split.get(3)).getWorld() ,aH.getIntegerFrom(split.get(0)), aH.getIntegerFrom(split.get(1))));
+            return new dPlotSquaredPlot(new PlotAPI().getPlot(dWorld.valueOf(split.get(2)).getWorld() ,aH.getIntegerFrom(split.get(0)), aH.getIntegerFrom(split.get(1))));
             //return new dPlot(PlotMeCoreManager.getInstance().getPlotById(
             //        new PlotId(aH.getIntegerFrom(split.get(0)), aH.getIntegerFrom(split.get(1))),
             //        new BukkitWorld(dWorld.valueOf(split.get(3)).getWorld())));
@@ -160,6 +160,22 @@ public class dPlotSquaredPlot implements dObject {
         if (attribute.startsWith("owners")) {
             dList players = new dList();
             for (UUID uuid : plot.getOwners()) {
+                players.add(dPlayer.valueOf(uuid.toString()).identify());
+            }
+            return players.getAttribute(attribute.fulfill(1));
+            //return dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <plotsquaredplot@plot.trusted>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns a list of all trusted of the plot.
+        // @Plugin DepenizenBukkit, PlotSquared
+        // -->
+        if (attribute.startsWith("trusted")) {
+            dList players = new dList();
+            for (UUID uuid : plot.getTrusted()) {
                 players.add(dPlayer.valueOf(uuid.toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
