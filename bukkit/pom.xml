@@ -26,10 +26,6 @@
             <id>placeholderapi</id>
             <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
-        <repository>
-            <id>plotsquared</id>
-            <url>http://ci.athion.net/job/PlotSquared/ws/mvn/</url>
-        </repository>
     </repositories>
 
     <dependencies>
