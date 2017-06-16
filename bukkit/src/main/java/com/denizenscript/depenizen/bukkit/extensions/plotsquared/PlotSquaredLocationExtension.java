@@ -47,10 +47,7 @@ public class PlotSquaredLocationExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("plotsquared_plot")) {
             org.bukkit.Location loca = new org.bukkit.Location(location.getWorld(),location.getBlockX(),location.getBlockY(),location.getBlockZ(),location.getYaw(),location.getPitch());
-
-            //return new dPlotSquaredPlot(new dPlotSquaredPlot(Plot.getPlot(location1)));
             return new dPlotSquaredPlot(new PlotAPI().getPlot(loca)).getAttribute(attribute.fulfill(1));
-            //return new dPlotSquaredPlot(plot.getPlot(loca));
         }
 
         return null;

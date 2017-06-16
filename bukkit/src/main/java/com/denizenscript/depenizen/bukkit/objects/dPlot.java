@@ -36,7 +36,7 @@ public class dPlot implements dObject {
         }
 
         ////////
-        // Match town name
+        // Match plot name
 
         string = string.replace("plot@", "");
         try {

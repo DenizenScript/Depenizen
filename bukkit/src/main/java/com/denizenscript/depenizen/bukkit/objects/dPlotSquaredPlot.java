@@ -32,15 +32,12 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         ////////
-        // Match town name
+        // Match plotsquaredplot name
 
         string = string.replace("plotsquaredplot@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');
             return new dPlotSquaredPlot(new PlotAPI().getPlot(dWorld.valueOf(split.get(2)).getWorld() ,aH.getIntegerFrom(split.get(0)), aH.getIntegerFrom(split.get(1))));
-            //return new dPlot(PlotMeCoreManager.getInstance().getPlotById(
-            //        new PlotId(aH.getIntegerFrom(split.get(0)), aH.getIntegerFrom(split.get(1))),
-            //        new BukkitWorld(dWorld.valueOf(split.get(3)).getWorld())));
         }
         catch (Throwable e) {
             return null;
@@ -111,9 +108,9 @@ public class dPlotSquaredPlot implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the plot's X coordinate portion of its ID.
-        // @Plugin DepenizenBukkit, PlotMe
+        // @Plugin DepenizenBukkit, PlotSquared
         // -->
-        if (attribute.startsWith("id_x")) {
+        if (attribute.startsWith("x")) {
             return new Element(plot.getId().x).getAttribute(attribute.fulfill(1));
         }
 
@@ -124,7 +121,7 @@ public class dPlotSquaredPlot implements dObject {
         // Returns the plot's Z coordinate portion of its ID.
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
-        if (attribute.startsWith("id_z")) {
+        if (attribute.startsWith("z")) {
             return new Element(plot.getId().y).getAttribute(attribute.fulfill(1));
         }
 
@@ -163,7 +160,6 @@ public class dPlotSquaredPlot implements dObject {
                 players.add(dPlayer.valueOf(uuid.toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
-            //return dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -179,7 +175,6 @@ public class dPlotSquaredPlot implements dObject {
                 players.add(dPlayer.valueOf(uuid.toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
-            //return dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -195,7 +190,6 @@ public class dPlotSquaredPlot implements dObject {
                 players.add(dPlayer.valueOf(uuid.toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
-            //return dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

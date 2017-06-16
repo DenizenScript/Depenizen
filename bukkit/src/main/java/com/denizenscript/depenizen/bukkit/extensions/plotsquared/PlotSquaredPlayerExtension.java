@@ -48,7 +48,7 @@ public class PlotSquaredPlayerExtension extends dObjectExtension {
         // @attribute <p@player.plotsquared_plots>
         // @returns dList(dPlotSquaredPlot)
         // @description
-        // Returns all the plots a player has. Add a world to only get plots in that specific world.
+        // Returns all the plots a player has. Add a world to only get the plots in that specific world.
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
         if (attribute.startsWith("plotsquared_plots")) {
