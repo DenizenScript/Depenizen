@@ -30,6 +30,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.plotsquared</groupId>
+            <artifactId>plotsquared-api</artifactId>
+            <version>3.5.0u2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/PlotSquared.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.denizenscript</groupId>
             <artifactId>depenizen-common</artifactId>
             <version>${project.version}</version>

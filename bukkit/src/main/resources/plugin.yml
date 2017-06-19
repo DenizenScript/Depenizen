@@ -3,7 +3,7 @@ authors: ['Morphan1', 'DenizenScript team']
 version: ${project.version} (build ${BUILD_NUMBER})
 main: com.denizenscript.depenizen.bukkit.DepenizenPlugin
 depend: [Denizen]
-softdepend: [mcMMO, BattleNight, Towny, Factions, Votifier, Jobs, Heroes, pvparena, WorldEdit, WorldGuard, Essentials, pvpstats, HyperConomy, SkillAPI, Prism, TerrainControl, PlotMe, SimpleClans, MobArena, ASkyBlock, NoCheatPlus, MythicMobs, Sentinel, ShopKeepers, GriefPrevention, Quests, PlaceholderAPI, Residence, dtlTraders, AreaShop]
+softdepend: [mcMMO, BattleNight, Towny, Factions, Votifier, Jobs, Heroes, pvparena, WorldEdit, WorldGuard, Essentials, pvpstats, HyperConomy, SkillAPI, Prism, TerrainControl, PlotMe, PlotSquared, SimpleClans, MobArena, ASkyBlock, NoCheatPlus, MythicMobs, Sentinel, ShopKeepers, GriefPrevention, Quests, PlaceholderAPI, Residence, dtlTraders, AreaShop]
 
 commands:
     depenizen:

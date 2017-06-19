@@ -31,7 +31,7 @@ public class dNation implements dObject {
         }
 
         ////////
-        // Match town name
+        // Match nation name
 
         string = string.replace("nation@", "");
         try {

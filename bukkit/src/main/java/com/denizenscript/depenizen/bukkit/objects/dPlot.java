@@ -36,7 +36,7 @@ public class dPlot implements dObject {
         }
 
         ////////
-        // Match town name
+        // Match plot name
 
         string = string.replace("plot@", "");
         try {
@@ -160,7 +160,7 @@ public class dPlot implements dObject {
         // Returns the plot's cuboid.
         // @Plugin DepenizenBukkit, PlotMe
         // -->
-        if (attribute.startsWith("owner")) {
+        if (attribute.startsWith("cuboid")) {
             dWorld world = dWorld.valueOf(plot.getWorld().getName());
             Location l1 = new Location(world.getWorld(), plot.getBottomX(), 0, plot.getBottomZ());
             Location l2 = new Location(world.getWorld(), plot.getTopX(), 255, plot.getTopZ());
