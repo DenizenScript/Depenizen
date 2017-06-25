@@ -6,6 +6,7 @@ import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
@@ -35,6 +36,7 @@ public class dPlotSquaredPlot implements dObject {
         // Match plotsquaredplot name
 
         string = string.replace("plotsquaredplot@", "");
+        dB.log(string);
         try {
             List<String> split = CoreUtilities.split(string, ',');
             return new dPlotSquaredPlot(new PlotAPI().getPlot(dWorld.valueOf(split.get(2)).getWorld() ,aH.getIntegerFrom(split.get(0)), aH.getIntegerFrom(split.get(1))));
@@ -73,6 +75,14 @@ public class dPlotSquaredPlot implements dObject {
     public dPlotSquaredPlot setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object a) {
+        if (a instanceof dPlotSquaredPlot) {
+            return ((dPlotSquaredPlot) a).plot.getId().equals(plot.getId());
+        }
+        return false;
     }
 
     @Override
@@ -134,6 +144,17 @@ public class dPlotSquaredPlot implements dObject {
         // -->
         if (attribute.startsWith("home")) {
             return new dLocation(new Location(Bukkit.getWorld(plot.getHome().getWorld()), plot.getHome().getX(),plot.getHome().getY(),plot.getHome().getZ())).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <plotsquaredplot@plot.default_home>
+        // @returns dLocation
+        // @description
+        // Returns the plot's default home location.
+        // @Plugin DepenizenBukkit, PlotSquared
+        // -->
+        if (attribute.startsWith("default_home")) {
+            return new dLocation(new Location(Bukkit.getWorld(plot.getDefaultHome().getWorld()), plot.getDefaultHome().getX(),plot.getDefaultHome().getY(),plot.getDefaultHome().getZ())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
