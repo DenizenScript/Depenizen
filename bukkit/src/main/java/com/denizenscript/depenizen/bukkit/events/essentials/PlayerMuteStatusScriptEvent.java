@@ -25,10 +25,10 @@ import org.bukkit.event.Listener;
 //
 // @Cancellable true
 //
-// @Triggers when a player's jail status changes.
+// @Triggers when a player is muted or un-muted.
 //
 // @Context
-// <context.status> Returns the player's jail status.
+// <context.status> Returns whether the player is muted.
 //
 // @Plugin DepenizenBukkit, Essentials
 //
