@@ -20,6 +20,7 @@ public class PVPArenaSupport extends Support {
         registerScriptEvents(new PVPArenaStartsScriptEvent());
         registerScriptEvents(new PlayerJoinsPVPArenaScriptEvent());
         registerScriptEvents(new PlayerLeavesPVPArenaScriptEvent());
+        registerScriptEvents(new PlayerExitsPVPArenaScriptEvent());
         registerProperty(PVPArenaPlayerExtension.class, dPlayer.class);
         registerObjects(PVPArenaArena.class);
         registerAdditionalTags("pvparena");
