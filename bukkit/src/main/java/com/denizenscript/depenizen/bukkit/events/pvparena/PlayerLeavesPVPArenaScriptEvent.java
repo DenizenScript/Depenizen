@@ -53,7 +53,7 @@ public class PlayerLeavesPVPArenaScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public String getName() {
-        return "PVPArenaLeaves";
+        return "PlayerLeavesPVPArena";
     }
 
     @Override

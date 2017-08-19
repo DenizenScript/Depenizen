@@ -44,7 +44,7 @@ public class PlayerExitsPVPArenaScriptEvent extends BukkitScriptEvent implements
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("pvparena player leaves");
+        return CoreUtilities.toLowerCase(s).startsWith("pvparena player exits");
     }
 
     @Override
@@ -54,7 +54,7 @@ public class PlayerExitsPVPArenaScriptEvent extends BukkitScriptEvent implements
 
     @Override
     public String getName() {
-        return "PVPArenaLeaves";
+        return "PlayerExitsPVPArena";
     }
 
     @Override
