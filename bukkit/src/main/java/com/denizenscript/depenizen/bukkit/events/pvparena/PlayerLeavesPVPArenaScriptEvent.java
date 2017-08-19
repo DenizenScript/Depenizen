@@ -22,7 +22,7 @@ import org.bukkit.event.Listener;
 //
 // @Cancellable true
 //
-// @Triggers when a pvparena leaves an arena.
+// @Triggers when a player leaves an pvparena.
 //
 // @Context
 // <context.fighters> returns a list of all fighters in the arena.
@@ -31,13 +31,13 @@ import org.bukkit.event.Listener;
 //
 // -->
 
-public class PVPArenaLeavesScriptEvent extends BukkitScriptEvent implements Listener {
+public class PlayerLeavesPVPArenaScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public static PVPArenaLeavesScriptEvent instance;
+    public static PlayerLeavesPVPArenaScriptEvent instance;
     public PALeaveEvent event;
     public PVPArenaArena arena;
 
-    public PVPArenaLeavesScriptEvent() {
+    public PlayerLeavesPVPArenaScriptEvent() {
         instance = this;
     }
 
@@ -85,7 +85,7 @@ public class PVPArenaLeavesScriptEvent extends BukkitScriptEvent implements List
     }
 
     @EventHandler
-    public void onPVPArenaLeave(PALeaveEvent event) {
+    public void onPlayerLeavesPVPArena(PALeaveEvent event) {
         arena = new PVPArenaArena(event.getArena());
         cancelled = false;
         this.event = event;

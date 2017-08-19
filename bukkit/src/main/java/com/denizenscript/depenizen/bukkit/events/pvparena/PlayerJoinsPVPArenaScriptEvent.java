@@ -22,7 +22,7 @@ import org.bukkit.event.Listener;
 //
 // @Cancellable true
 //
-// @Triggers when a pvparena joins an arena.
+// @Triggers when a player joins an pvparena.
 //
 // @Context
 // <context.fighters> returns a list of all fighters in the arena.
@@ -31,13 +31,13 @@ import org.bukkit.event.Listener;
 //
 // -->
 
-public class PVPArenaJoinsScriptEvent extends BukkitScriptEvent implements Listener {
+public class PlayerJoinsPVPArenaScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public static PVPArenaJoinsScriptEvent instance;
+    public static PlayerJoinsPVPArenaScriptEvent instance;
     public PAJoinEvent event;
     public PVPArenaArena arena;
 
-    public PVPArenaJoinsScriptEvent() {
+    public PlayerJoinsPVPArenaScriptEvent() {
         instance = this;
     }
 
@@ -85,7 +85,7 @@ public class PVPArenaJoinsScriptEvent extends BukkitScriptEvent implements Liste
     }
 
     @EventHandler
-    public void onPVPArenaJoin(PAJoinEvent event) {
+    public void onPlayerJoinsPVPArena(PAJoinEvent event) {
         arena = new PVPArenaArena(event.getArena());
         cancelled = event.isCancelled();
         this.event = event;
