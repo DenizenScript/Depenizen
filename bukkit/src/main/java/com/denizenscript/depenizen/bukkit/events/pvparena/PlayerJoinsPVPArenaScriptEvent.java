@@ -22,10 +22,10 @@ import org.bukkit.event.Listener;
 //
 // @Cancellable true
 //
-// @Triggers when a player joins an pvparena.
+// @Triggers when a player joins a pvparena.
 //
 // @Context
-// <context.fighters> returns a list of all fighters in the arena.
+// <context.arena> returns the arena denizen object.
 //
 // @Plugin DepenizenBukkit, PVPArena
 //

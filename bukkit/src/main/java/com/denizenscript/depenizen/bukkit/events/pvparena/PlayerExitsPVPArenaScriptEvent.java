@@ -21,12 +21,12 @@ import org.bukkit.event.Listener;
 //
 // @Regex ^on pvparena player exits$
 //
-// @Cancellable true
+// @Cancellable false
 //
-// @Triggers when a player exit an pvparena (won, loose, leave, disconnect etc.)
+// @Triggers when a player exit a pvparena (won, loose, leave, disconnect etc.)
 //
 // @Context
-// <context.fighters> returns a list of all fighters in the arena.
+// <context.arena> returns the arena denizen object.
 //
 // @Plugin DepenizenBukkit, PVPArena
 //
