@@ -114,7 +114,7 @@ public class dPlotSquaredPlot implements dObject {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.id_x>
+        // @attribute <plotsquaredplot@plotsquaredplot.id_x>
         // @returns Element(Number)
         // @description
         // Returns the plot's X coordinate portion of its ID.
@@ -125,7 +125,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.id_Z>
+        // @attribute <plotsquaredplot@plotsquaredplot.id_Z>
         // @returns Element(Number)
         // @description
         // Returns the plot's Z coordinate portion of its ID.
@@ -136,7 +136,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.home>
+        // @attribute <plotsquaredplot@plotsquaredplot.home>
         // @returns dLocation
         // @description
         // Returns the plot's current home location.
@@ -147,7 +147,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.default_home>
+        // @attribute <plotsquaredplot@plotsquaredplot.default_home>
         // @returns dLocation
         // @description
         // Returns the plot's default home location.
@@ -158,7 +158,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.world>
+        // @attribute <plotsquaredplot@plotsquaredplot.world>
         // @returns dWorld
         // @description
         // Returns the plot's world.
@@ -169,7 +169,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.owners>
+        // @attribute <plotsquaredplot@plotsquaredplot.owners>
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all owners of the plot.
@@ -184,7 +184,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.trusted>
+        // @attribute <plotsquaredplot@plotsquaredplot.trusted>
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all trusted of the plot.
@@ -199,7 +199,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.members>
+        // @attribute <plotsquaredplot@plotsquaredplot.members>
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all members of the plot.
@@ -214,7 +214,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.cuboid>
+        // @attribute <plotsquaredplot@plotsquaredplot.cuboid>
         // @returns dCuboid
         // @description
         // Returns the plot's cuboid.
