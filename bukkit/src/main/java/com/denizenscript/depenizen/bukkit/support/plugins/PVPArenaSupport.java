@@ -1,5 +1,8 @@
 package com.denizenscript.depenizen.bukkit.support.plugins;
 
+import com.denizenscript.depenizen.bukkit.events.pvparena.PlayerExitsPVPArenaScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.pvparena.PlayerJoinsPVPArenaScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.pvparena.PlayerLeavesPVPArenaScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.pvparena.PVPArenaStartsScriptEvent;
 import com.denizenscript.depenizen.bukkit.extensions.pvparena.PVPArenaPlayerExtension;
 import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
@@ -15,6 +18,9 @@ public class PVPArenaSupport extends Support {
 
     public PVPArenaSupport() {
         registerScriptEvents(new PVPArenaStartsScriptEvent());
+        registerScriptEvents(new PlayerJoinsPVPArenaScriptEvent());
+        registerScriptEvents(new PlayerLeavesPVPArenaScriptEvent());
+        registerScriptEvents(new PlayerExitsPVPArenaScriptEvent());
         registerProperty(PVPArenaPlayerExtension.class, dPlayer.class);
         registerObjects(PVPArenaArena.class);
         registerAdditionalTags("pvparena");

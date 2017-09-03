@@ -5,48 +5,45 @@ import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import net.slipcor.pvparena.arena.ArenaPlayer;
-import net.slipcor.pvparena.events.PAStartEvent;
+import net.slipcor.pvparena.events.PAJoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// pvparena starts
+// pvparena player joins
 //
-// @Regex ^on pvparena starts$
+// @Regex ^on pvparena player joins$
 //
 // @Cancellable true
 //
-// @Triggers when a pvparena starts.
+// @Triggers when a player joins a pvparena.
 //
 // @Context
-// <context.fighters> returns a list of all fighters in the arena.
+// <context.arena> returns the arena denizen object.
 //
 // @Plugin DepenizenBukkit, PVPArena
 //
 // -->
 
-public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements Listener {
+public class PlayerJoinsPVPArenaScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public static PVPArenaStartsScriptEvent instance;
-    public PAStartEvent event;
-    public dList fighters;
+    public static PlayerJoinsPVPArenaScriptEvent instance;
+    public PAJoinEvent event;
     public PVPArenaArena arena;
 
-    public PVPArenaStartsScriptEvent() {
+    public PlayerJoinsPVPArenaScriptEvent() {
         instance = this;
     }
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("pvparena starts");
+        return CoreUtilities.toLowerCase(s).startsWith("pvparena player joins");
     }
 
     @Override
@@ -56,7 +53,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     @Override
     public String getName() {
-        return "PVPArenaStarts";
+        return "PlayerJoinsPVPArena";
     }
 
     @Override
@@ -66,7 +63,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     @Override
     public void destroy() {
-        PAStartEvent.getHandlerList().unregister(this);
+        PAJoinEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -76,26 +73,19 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(null, null);
+        return new BukkitScriptEntryData(new dPlayer(event.getPlayer()), null);
     }
 
     @Override
     public dObject getContext(String name) {
-        if (name.equals("fighters")) {
-            return fighters;
-        }
-        else if (name.equals("arena")) {
+        if (name.equals("arena")) {
             return arena;
         }
         return super.getContext(name);
     }
 
     @EventHandler
-    public void onPVPArenaStart(PAStartEvent event) {
-        fighters = new dList();
-        for (ArenaPlayer p : event.getArena().getFighters()) {
-            fighters.add(new dPlayer(p.get()).identify());
-        }
+    public void onPlayerJoinsPVPArena(PAJoinEvent event) {
         arena = new PVPArenaArena(event.getArena());
         cancelled = event.isCancelled();
         this.event = event;
