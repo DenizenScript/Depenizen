@@ -34,6 +34,8 @@ public abstract class SocketClient implements Runnable {
     private DataOutputStream output;
     private DataInputStream input;
     private boolean isConnected;
+    private boolean isConnecting;
+    private boolean isDisconnecting;
 
     private static final byte[] ENCRYPTION_SALT = "m6n4sOqVxhIgIWA3yfJF".getBytes(Charset.forName("UTF-8"));
 
@@ -59,12 +61,14 @@ public abstract class SocketClient implements Runnable {
     }
 
     public void send(Packet packet) throws GeneralSecurityException, IOException {
-        DataSerializer data = new DataSerializer();
-        packet.serialize(data);
-        byte[] encryptedData = encryption.encrypt(data.toByteArray());
-        output.writeInt(encryptedData.length);
-        output.write(encryptedData);
-        output.flush();
+        if (isConnected) {
+            DataSerializer data = new DataSerializer();
+            packet.serialize(data);
+            byte[] encryptedData = encryption.encrypt(data.toByteArray());
+            output.writeInt(encryptedData.length);
+            output.write(encryptedData);
+            output.flush();
+        }
     }
 
     public void trySend(Packet packet) {
@@ -81,9 +85,12 @@ public abstract class SocketClient implements Runnable {
     }
 
     public void close(String reason, boolean shouldReconnect) {
-        if (isConnected) {
+        if (isConnected || isConnecting) {
             if (reason != null) {
                 Depenizen.getImplementation().debugMessage("Disconnected from socket: " + reason);
+            }
+            if (isConnecting) {
+                isDisconnecting = true;
             }
             isConnected = false;
             registered = false;
@@ -117,7 +124,7 @@ public abstract class SocketClient implements Runnable {
     }
 
     public void attemptReconnect() {
-        if (!isConnected && reconnectThread == null) {
+        if (!isConnected && !isConnecting && reconnectThread == null) {
             reconnectThread = new Thread(new ReconnectTask(this, getReconnectAttempts(), getReconnectDelay()));
             reconnectThread.start();
         }
@@ -136,56 +143,61 @@ public abstract class SocketClient implements Runnable {
     @Override
     public void run() {
         if (socket != null && socket.isConnected()) {
-            isConnected = true;
             reconnectThread = null;
+            isConnecting = true;
             byte[] buffer;
             try {
                 while (input.available() < 16) {
                     Thread.sleep(1);
                 }
-                byte[] iv = new byte[16];
-                input.read(iv);
-                this.encryption = new Encryption(password, ENCRYPTION_SALT, iv);
-                send(new ClientPacketOutRegister(registrationName, isBungeeScriptCompatible()));
-                connectionLoop:
-                while (isConnected) {
-                    long timePassed;
-                    boolean pinged = false;
-                    long start = System.currentTimeMillis();
-                    int receivedEncryptedLength;
-                    while ((receivedEncryptedLength = input.readInt()) == 0) {
-                        if (!isConnected) {
-                            break connectionLoop;
+                isConnecting = false;
+                // Check if closed during connection
+                if (!isDisconnecting) {
+                    byte[] iv = new byte[16];
+                    input.read(iv);
+                    this.encryption = new Encryption(password, ENCRYPTION_SALT, iv);
+                    isConnected = true;
+                    send(new ClientPacketOutRegister(registrationName, isBungeeScriptCompatible()));
+                    connectionLoop:
+                    while (isConnected) {
+                        long timePassed;
+                        boolean pinged = false;
+                        long start = System.currentTimeMillis();
+                        int receivedEncryptedLength;
+                        while ((receivedEncryptedLength = input.readInt()) == 0) {
+                            if (!isConnected) {
+                                break connectionLoop;
+                            }
+                            timePassed = System.currentTimeMillis() - start;
+                            if (timePassed > getPingDelay() && !pinged) {
+                                lastPingBit = Utilities.getRandomUnsignedByte();
+                                send(new ClientPacketOutPing(lastPingBit));
+                                pinged = true;
+                            }
+                            if (timePassed > getPingDelay() + getPingTimeout()) {
+                                close("Ping timed out!", true);
+                                break connectionLoop;
+                            }
+                            Thread.sleep(50);
                         }
-                        timePassed = System.currentTimeMillis() - start;
-                        if (timePassed > getPingDelay() && !pinged) {
-                            lastPingBit = Utilities.getRandomUnsignedByte();
-                            send(new ClientPacketOutPing(lastPingBit));
-                            pinged = true;
+                        if (receivedEncryptedLength < 0) {
+                            close("Connection failed", true);
+                            break;
                         }
-                        if (timePassed > getPingDelay() + getPingTimeout()) {
-                            close("Ping timed out!", true);
-                            break connectionLoop;
+                        buffer = new byte[receivedEncryptedLength];
+                        input.read(buffer);
+                        byte[] encryptedBytes = new byte[receivedEncryptedLength];
+                        System.arraycopy(buffer, 0, encryptedBytes, 0, encryptedBytes.length);
+                        byte[] decryptedBytes = encryption.decrypt(encryptedBytes);
+                        DataDeserializer data = new DataDeserializer(decryptedBytes);
+                        int packetId = data.readUnsignedByte();
+                        Packet.ClientBound packetType = Packet.ClientBound.getById(packetId);
+                        if (packetType == null) {
+                            close("Received invalid packet from server: " + packetId, true);
+                            break;
                         }
-                        Thread.sleep(50);
+                        receivePacket(packetType, data);
                     }
-                    if (receivedEncryptedLength < 0) {
-                        close("Connection failed", true);
-                        break;
-                    }
-                    buffer = new byte[receivedEncryptedLength];
-                    input.read(buffer);
-                    byte[] encryptedBytes = new byte[receivedEncryptedLength];
-                    System.arraycopy(buffer, 0, encryptedBytes, 0, encryptedBytes.length);
-                    byte[] decryptedBytes = encryption.decrypt(encryptedBytes);
-                    DataDeserializer data = new DataDeserializer(decryptedBytes);
-                    int packetId = data.readUnsignedByte();
-                    Packet.ClientBound packetType = Packet.ClientBound.getById(packetId);
-                    if (packetType == null) {
-                        close("Received invalid packet from server: " + packetId, true);
-                        break;
-                    }
-                    receivePacket(packetType, data);
                 }
                 listenThread = null;
             }
@@ -207,6 +219,7 @@ public abstract class SocketClient implements Runnable {
                 close("Error receiving data from server: " + e.getMessage(), true);
                 Depenizen.getImplementation().debugException(e);
             }
+            isDisconnecting = false;
         }
     }
 
