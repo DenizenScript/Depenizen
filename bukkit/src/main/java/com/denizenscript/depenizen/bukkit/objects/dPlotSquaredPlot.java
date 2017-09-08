@@ -2,6 +2,9 @@ package com.denizenscript.depenizen.bukkit.objects;
 
 import com.intellectualcrafters.plot.api.PlotAPI;
 import com.intellectualcrafters.plot.object.Plot;
+import com.intellectualcrafters.plot.object.PlotArea;
+import com.intellectualcrafters.plot.object.PlotId;
+import com.intellectualcrafters.plot.util.MainUtil;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -36,14 +39,13 @@ public class dPlotSquaredPlot implements dObject {
         // Match plotsquaredplot name
 
         string = string.replace("plotsquaredplot@", "");
-        dB.log(string);
         try {
             List<String> split = CoreUtilities.split(string, ',');
-            return new dPlotSquaredPlot(new PlotAPI().getPlot(dWorld.valueOf(split.get(2)).getWorld() ,aH.getIntegerFrom(split.get(0)), aH.getIntegerFrom(split.get(1))));
+            return new dPlotSquaredPlot(MainUtil.getPlotFromString(null, split.get(2)+";"+split.get(0)+";"+split.get(1),true));
         }
         catch (Throwable e) {
-            return null;
         }
+            return null;
     }
 
     public static boolean matches(String arg) {
