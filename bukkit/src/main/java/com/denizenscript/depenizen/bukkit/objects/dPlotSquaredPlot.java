@@ -1,15 +1,11 @@
 package com.denizenscript.depenizen.bukkit.objects;
 
-import com.intellectualcrafters.plot.api.PlotAPI;
 import com.intellectualcrafters.plot.object.Plot;
-import com.intellectualcrafters.plot.object.PlotArea;
-import com.intellectualcrafters.plot.object.PlotId;
 import com.intellectualcrafters.plot.util.MainUtil;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
-import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
@@ -80,6 +76,11 @@ public class dPlotSquaredPlot implements dObject {
     }
 
     @Override
+    public int hashCode() {
+        return plot.getId().hashCode();
+    }
+
+    @Override
     public boolean equals(Object a) {
         if (a instanceof dPlotSquaredPlot) {
             return ((dPlotSquaredPlot) a).plot.getId().equals(plot.getId());
@@ -104,7 +105,7 @@ public class dPlotSquaredPlot implements dObject {
 
     @Override
     public String identify() {
-        return "plotsquaredplot@" + plot.getId().x + "," + plot.getId().y + "," + plot.getDefaultHome().getWorld();
+        return "plotsquaredplot@" + plot.getId().x + "," + plot.getId().y + "," + plot.getArea().worldname;
     }
 
     @Override
@@ -145,7 +146,8 @@ public class dPlotSquaredPlot implements dObject {
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
         if (attribute.startsWith("home")) {
-            return new dLocation(new Location(Bukkit.getWorld(plot.getHome().getWorld()), plot.getHome().getX(),plot.getHome().getY(),plot.getHome().getZ())).getAttribute(attribute.fulfill(1));
+            com.intellectualcrafters.plot.object.Location loca = plot.getHome();
+            return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(),loca.getY(),loca.getZ())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -156,7 +158,8 @@ public class dPlotSquaredPlot implements dObject {
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
         if (attribute.startsWith("default_home")) {
-            return new dLocation(new Location(Bukkit.getWorld(plot.getDefaultHome().getWorld()), plot.getDefaultHome().getX(),plot.getDefaultHome().getY(),plot.getDefaultHome().getZ())).getAttribute(attribute.fulfill(1));
+            com.intellectualcrafters.plot.object.Location loca = plot.getDefaultHome();
+            return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(),loca.getY(),loca.getZ())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -167,7 +170,7 @@ public class dPlotSquaredPlot implements dObject {
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
         if (attribute.startsWith("world")) {
-            return dWorld.valueOf(plot.getDefaultHome().getWorld()).getAttribute(attribute.fulfill(1));
+            return dWorld.valueOf(plot.getArea().worldname).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -223,7 +226,7 @@ public class dPlotSquaredPlot implements dObject {
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
         if (attribute.startsWith("cuboid")) {
-            dWorld world = dWorld.valueOf(plot.getCenter().getWorld());
+            dWorld world = dWorld.valueOf(plot.getArea().worldname);
             Location l1 = new Location(world.getWorld(), plot.getBottomAbs().getX(), 0, plot.getBottomAbs().getZ());
             Location l2 = new Location(world.getWorld(), plot.getTopAbs().getX(), 255, plot.getTopAbs().getZ());
             return new dCuboid(l1, l2).getAttribute(attribute.fulfill(1));
