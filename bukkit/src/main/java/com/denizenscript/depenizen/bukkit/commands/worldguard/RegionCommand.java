@@ -58,20 +58,21 @@ public class RegionCommand extends AbstractCommand {
                 scriptEntry.addObject("region_id", arg.asElement());
             }
 
-            if (!scriptEntry.hasObject("cuboid")
+            else if (!scriptEntry.hasObject("cuboid")
                     && arg.matchesArgumentType(dCuboid.class)) {
                 scriptEntry.addObject("cuboid", arg.asType(dCuboid.class));
             }
 
-            if (!scriptEntry.hasObject("world")
+            else if (!scriptEntry.hasObject("world")
                     && arg.matchesArgumentType(dWorld.class)) {
                 scriptEntry.addObject("world", arg.asType(dWorld.class));
             }
 
-            if (!scriptEntry.hasObject("action")
+            else if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
             }
+
             else {
                 arg.reportUnhandled();
             }
