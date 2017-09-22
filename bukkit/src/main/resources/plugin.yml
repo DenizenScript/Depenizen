@@ -9,5 +9,6 @@ commands:
     depenizen:
         description: Prints out the current Depenizen version.
         usage: /depenizen
+        permission: depenizen.command
 
 permissions: {}
