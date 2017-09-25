@@ -8,6 +8,7 @@ import com.denizenscript.denizen2sponge.spongeevents.Denizen2SpongeLoadingEvent;
 import com.denizenscript.depenizen.common.Depenizen;
 import com.denizenscript.depenizen.common.DepenizenImplementation;
 import com.denizenscript.depenizen.sponge.commands.bungee.BungeeRunCommand;
+import com.denizenscript.depenizen.sponge.events.bungee.*;
 import com.denizenscript.depenizen.sponge.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.sponge.support.clientizen.ClientizenSupport;
 import com.denizenscript.depenizen.sponge.tags.bungee.handlers.BungeeServerTagBase;
@@ -69,6 +70,15 @@ public class Depenizen2Sponge implements DepenizenImplementation {
             Denizen2Core.register(new BungeeRunCommand());
             // Bungee Tag Handlers
             Denizen2Core.register(new BungeeServerTagBase());
+            // Bungee Events
+            Denizen2Core.register(new BungeeRegisteredScriptEvent());
+            Denizen2Core.register(new BungeeServerConnectScriptEvent());
+            Denizen2Core.register(new BungeeServerDisconnectScriptEvent());
+            Denizen2Core.register(new ProxyPingScriptEvent());
+            Denizen2Core.register(new PostLoginScriptEvent());
+            Denizen2Core.register(new PlayerDisconnectScriptEvent());
+            Denizen2Core.register(new ReconnectFailScriptEvent());
+            Denizen2Core.register(new ServerSwitchScriptEvent());
             // Start BungeeCord socket
             BungeeSupport.startSocket();
         }

@@ -8,7 +8,6 @@ import com.denizenscript.denizen2core.scripts.CommandScript;
 import com.denizenscript.denizen2core.scripts.commontypes.TaskScript;
 import com.denizenscript.denizen2core.tags.AbstractTagObject;
 import com.denizenscript.denizen2core.tags.objects.TextTag;
-import com.denizenscript.denizen2core.utilities.Action;
 import com.denizenscript.denizen2core.utilities.CoreUtilities;
 import com.denizenscript.denizen2core.utilities.debugging.ColorSet;
 import com.denizenscript.denizen2sponge.Denizen2Sponge;
@@ -17,12 +16,16 @@ import com.denizenscript.depenizen.common.socket.Packet;
 import com.denizenscript.depenizen.common.socket.client.SocketClient;
 import com.denizenscript.depenizen.common.util.SimpleScriptEntry;
 import com.denizenscript.depenizen.sponge.Settings;
+import com.denizenscript.depenizen.sponge.events.bungee.BungeeRegisteredScriptEvent;
+import com.denizenscript.depenizen.sponge.events.bungee.BungeeScriptEvent;
+import com.denizenscript.depenizen.sponge.events.bungee.BungeeServerConnectScriptEvent;
+import com.denizenscript.depenizen.sponge.events.bungee.BungeeServerDisconnectScriptEvent;
+import com.denizenscript.depenizen.sponge.events.bungee.ReconnectFailScriptEvent;
 import com.denizenscript.depenizen.sponge.tags.bungee.objects.BungeeServerTag;
 import org.spongepowered.api.Sponge;
 
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,6 +34,10 @@ public class SpongeSocketClient extends SocketClient {
 
     public SpongeSocketClient(String ipAddress, int port, String name, char[] password) throws GeneralSecurityException {
         super(ipAddress, port, name, password);
+    }
+
+    private void error(String e) {
+        Denizen2Core.getImplementation().outputError(e);
     }
 
     @Override
@@ -67,12 +74,12 @@ public class SpongeSocketClient extends SocketClient {
 
     @Override
     protected Set<String> getSubscribedEvents() {
-        return new HashSet<>();
+        return BungeeScriptEvent.getInitializedEvents();
     }
 
     @Override
     protected void fireReconnectFailEvent() {
-        // TODO: event
+        ReconnectFailScriptEvent.instance.run();
     }
 
     @Override
@@ -83,21 +90,21 @@ public class SpongeSocketClient extends SocketClient {
                 BungeeServerTag.addOnlineServer(server);
             }
         }
+        BungeeRegisteredScriptEvent.instance.run();
     }
 
     @Override
     public void handleUpdateServer(String serverName, boolean registered) {
-        // TODO: events
         if (registered) {
             BungeeServerTag.addOnlineServer(serverName);
-            //BungeeServerConnectScriptEvent event = BungeeServerConnectScriptEvent.instance;
-            //event.server = dServer.getServerFromName(serverName);
-            //event.fire();
+            BungeeServerConnectScriptEvent event = BungeeServerConnectScriptEvent.instance;
+            event.server = BungeeServerTag.getFor(this::error, serverName);
+            event.run();
         }
         else {
-            //BungeeServerDisconnectScriptEvent event = BungeeServerDisconnectScriptEvent.instance;
-            //event.server = dServer.getServerFromName(serverName);
-            //event.fire();
+            BungeeServerDisconnectScriptEvent event = BungeeServerDisconnectScriptEvent.instance;
+            event.server = BungeeServerTag.getFor(this::error, serverName);
+            event.run();
             BungeeServerTag.removeOnlineServer(serverName);
         }
     }
@@ -153,9 +160,8 @@ public class SpongeSocketClient extends SocketClient {
         for (Map.Entry<String, String> entry : definitions.entrySet()) {
             defs.put(entry.getKey(), new TextTag(entry.getValue()));
         }
-        Action<String> error = (e) -> Denizen2Core.getImplementation().outputError(e);
         DebugMode debugMode = minimalDebug ? fullDebug ? DebugMode.FULL : DebugMode.MINIMAL : DebugMode.NONE;
-        return Denizen2Core.splitToArgument(tag, false, false, error).parse(null, defs, debugMode, error).toString();
+        return Denizen2Core.splitToArgument(tag, false, false, this::error).parse(null, defs, debugMode, this::error).toString();
     }
 
     @Override
@@ -165,7 +171,6 @@ public class SpongeSocketClient extends SocketClient {
 
     @Override
     protected Map<String, String> handleEvent(String event, Map<String, String> context) {
-        //return BungeeScriptEvent.fire(event, context);
-        return new HashMap<>();
+        return BungeeScriptEvent.fire(event, context);
     }
 }

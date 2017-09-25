@@ -44,8 +44,10 @@ public class EventManager implements Listener {
         Map<String, String> context = new HashMap<String, String>();
         PendingConnection connection = event.getConnection();
         context.put("address", connection.getAddress().toString());
-        context.put("version", String.valueOf(connection.getVersion()));
         ServerPing ping = event.getResponse();
+        context.put("protocol", String.valueOf(ping.getVersion().getProtocol()));
+        context.put("true-version", ping.getVersion().getName()); // true version name
+        context.put("version", String.valueOf(connection.getVersion())); // legacy protocol version
         ServerPing.Players players = ping.getPlayers();
         context.put("num_players", String.valueOf(players.getOnline()));
         context.put("max_players", String.valueOf(players.getMax()));
