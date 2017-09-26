@@ -1,28 +1,24 @@
 package com.denizenscript.depenizen.bukkit.extensions.plotsquared;
 
-
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.objects.dPlotSquaredPlot;
-import com.intellectualcrafters.plot.api.PlotAPI;
-import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 
-public class PlotSquaredLocationExtension extends dObjectExtension {
-
+public class PlotSquaredElementExtension extends dObjectExtension {
     public static boolean describes(dObject object) {
-        return object instanceof dLocation;
+        return object instanceof Element;
     }
 
-    public static PlotSquaredLocationExtension getFrom(dObject object) {
+    public static PlotSquaredElementExtension getFrom(dObject object) {
         if (!describes(object)) {
             return null;
         }
         else {
-            return new PlotSquaredLocationExtension((dLocation) object);
+            return new PlotSquaredElementExtension((Element) object);
         }
     }
 
@@ -30,25 +26,25 @@ public class PlotSquaredLocationExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
-    private PlotSquaredLocationExtension(dLocation location) {
-        this.location = location;
+    private PlotSquaredElementExtension(Element element) {
+        this.element = element;
     }
 
-    dLocation location;
+    Element element;
 
     @Override
     public String getAttribute(Attribute attribute) {
         // <--[tag]
-        // @attribute <l@location.plotsquared_plot>
+        // @attribute <el@element.as_plotsquared_plot>
         // @returns dPlotSquaredPlot
         // @description
-        // Returns the plot contained by this location.
+        // Returns the element as a dPlotSquaredPlot.
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
-        if (attribute.startsWith("plotsquared_plot")) {
-            org.bukkit.Location loca = new org.bukkit.Location(location.getWorld(),location.getBlockX(),location.getBlockY(),location.getBlockZ(),location.getYaw(),location.getPitch());
+        if (attribute.startsWith("as_plotsquared_plot")) {
             try {
-                return new dPlotSquaredPlot(new PlotAPI().getPlot(loca)).getAttribute(attribute.fulfill(1));
+                dB.log(element.toString());
+                return dPlotSquaredPlot.valueOf(element.toString()).getAttribute(attribute.fulfill(1));
             }
             catch (Exception e) {
                 if (!attribute.hasAlternative()) {

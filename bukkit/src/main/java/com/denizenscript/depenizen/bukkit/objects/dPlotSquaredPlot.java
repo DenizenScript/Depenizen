@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.objects;
 
-import com.intellectualcrafters.plot.api.PlotAPI;
 import com.intellectualcrafters.plot.object.Plot;
+import com.intellectualcrafters.plot.util.MainUtil;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -37,11 +37,11 @@ public class dPlotSquaredPlot implements dObject {
         string = string.replace("plotsquaredplot@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');
-            return new dPlotSquaredPlot(new PlotAPI().getPlot(dWorld.valueOf(split.get(2)).getWorld() ,aH.getIntegerFrom(split.get(0)), aH.getIntegerFrom(split.get(1))));
+            return new dPlotSquaredPlot(MainUtil.getPlotFromString(null, split.get(2)+";"+split.get(0)+";"+split.get(1),true));
         }
         catch (Throwable e) {
-            return null;
         }
+            return null;
     }
 
     public static boolean matches(String arg) {
@@ -76,6 +76,19 @@ public class dPlotSquaredPlot implements dObject {
     }
 
     @Override
+    public int hashCode() {
+        return plot.getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object a) {
+        if (a instanceof dPlotSquaredPlot) {
+            return ((dPlotSquaredPlot) a).plot.getId().equals(plot.getId());
+        }
+        return false;
+    }
+
+    @Override
     public String debug() {
         return (prefix + "='<A>" + identify() + "<G>' ");
     }
@@ -92,7 +105,7 @@ public class dPlotSquaredPlot implements dObject {
 
     @Override
     public String identify() {
-        return "plotsquaredplot@" + plot.getId().x + "," + plot.getId().y + "," + plot.getDefaultHome().getWorld();
+        return "plotsquaredplot@" + plot.getId().x + "," + plot.getId().y + "," + plot.getArea().worldname;
     }
 
     @Override
@@ -104,7 +117,7 @@ public class dPlotSquaredPlot implements dObject {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.id_x>
+        // @attribute <plotsquaredplot@plotsquaredplot.id_x>
         // @returns Element(Number)
         // @description
         // Returns the plot's X coordinate portion of its ID.
@@ -115,7 +128,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.id_Z>
+        // @attribute <plotsquaredplot@plotsquaredplot.id_Z>
         // @returns Element(Number)
         // @description
         // Returns the plot's Z coordinate portion of its ID.
@@ -126,29 +139,42 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.home>
+        // @attribute <plotsquaredplot@plotsquaredplot.home>
         // @returns dLocation
         // @description
         // Returns the plot's current home location.
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
         if (attribute.startsWith("home")) {
-            return new dLocation(new Location(Bukkit.getWorld(plot.getHome().getWorld()), plot.getHome().getX(),plot.getHome().getY(),plot.getHome().getZ())).getAttribute(attribute.fulfill(1));
+            com.intellectualcrafters.plot.object.Location loca = plot.getHome();
+            return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(),loca.getY(),loca.getZ())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.world>
+        // @attribute <plotsquaredplot@plotsquaredplot.default_home>
+        // @returns dLocation
+        // @description
+        // Returns the plot's default home location.
+        // @Plugin DepenizenBukkit, PlotSquared
+        // -->
+        if (attribute.startsWith("default_home")) {
+            com.intellectualcrafters.plot.object.Location loca = plot.getDefaultHome();
+            return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(),loca.getY(),loca.getZ())).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <plotsquaredplot@plotsquaredplot.world>
         // @returns dWorld
         // @description
         // Returns the plot's world.
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
         if (attribute.startsWith("world")) {
-            return dWorld.valueOf(plot.getDefaultHome().getWorld()).getAttribute(attribute.fulfill(1));
+            return dWorld.valueOf(plot.getArea().worldname).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.owners>
+        // @attribute <plotsquaredplot@plotsquaredplot.owners>
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all owners of the plot.
@@ -163,7 +189,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.trusted>
+        // @attribute <plotsquaredplot@plotsquaredplot.trusted>
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all trusted of the plot.
@@ -178,7 +204,7 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.members>
+        // @attribute <plotsquaredplot@plotsquaredplot.members>
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all members of the plot.
@@ -193,14 +219,14 @@ public class dPlotSquaredPlot implements dObject {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plot.cuboid>
+        // @attribute <plotsquaredplot@plotsquaredplot.cuboid>
         // @returns dCuboid
         // @description
         // Returns the plot's cuboid.
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
         if (attribute.startsWith("cuboid")) {
-            dWorld world = dWorld.valueOf(plot.getCenter().getWorld());
+            dWorld world = dWorld.valueOf(plot.getArea().worldname);
             Location l1 = new Location(world.getWorld(), plot.getBottomAbs().getX(), 0, plot.getBottomAbs().getZ());
             Location l2 = new Location(world.getWorld(), plot.getTopAbs().getX(), 255, plot.getTopAbs().getZ());
             return new dCuboid(l1, l2).getAttribute(attribute.fulfill(1));

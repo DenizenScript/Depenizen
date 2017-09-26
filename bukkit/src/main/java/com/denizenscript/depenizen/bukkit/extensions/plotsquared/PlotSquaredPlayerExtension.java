@@ -45,10 +45,10 @@ public class PlotSquaredPlayerExtension extends dObjectExtension {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <p@player.plotsquared_plots>
+        // @attribute <p@player.plotsquared_plots[<w@world>]>
         // @returns dList(dPlotSquaredPlot)
         // @description
-        // Returns all the plots a player has. Add a world to only get the plots in that specific world.
+        // Returns a list of plots a player has in a world. Exclude the context to get plots in all worlds.
         // @Plugin DepenizenBukkit, PlotSquared
         // -->
         if (attribute.startsWith("plotsquared_plots")) {
