@@ -271,5 +271,19 @@ public class EssentialsPlayerExtension extends dObjectExtension {
             essUser.setSocialSpyEnabled(value.asBoolean());
         }
 
+        // <--[mechanism]
+        // @object dPlayer
+        // @name vanish
+        // @input Element(Boolean)
+        // @description
+        // Sets whether the player has vanish enabled.
+        // @tags
+        // <p@player.is_vanished>
+        // @Plugin DepenizenBukkit, Essentials
+        // -->
+        if (mechanism.matches("vanish") && mechanism.requireBoolean()) {
+            essUser.setVanished(value.asBoolean());
+        }
+
     }
 }
