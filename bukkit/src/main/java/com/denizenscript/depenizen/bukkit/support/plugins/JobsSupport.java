@@ -4,7 +4,10 @@ import com.denizenscript.depenizen.bukkit.objects.jobs.properties.JobPlayer;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.commands.JobsCommands;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
+import com.gamingmesh.jobs.Jobs;
+import com.gamingmesh.jobs.container.Job;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.tags.Attribute;
@@ -39,6 +42,20 @@ public class JobsSupport extends Support {
                     dB.echoError("Could not match '" + attribute.getContext(1) + "' to a valid job!");
                     return null;
                 }
+            }
+            else {
+                // <--[tag]
+                // @attribute <jobs>
+                // @returns dList
+                // @description
+                // Returns a list of all known dJobs.
+                // @Plugin DepenizenBukkit, Jobs
+                // -->
+                dList jobList = new dList();
+                for (Job jb : Jobs.getJobs()) {
+                    jobList.add(new JobsJob(jb).identify());
+                }
+                return jobList.getAttribute(attribute.fulfill(1));
             }
 
             if (j == null) {
