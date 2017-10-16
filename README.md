@@ -47,6 +47,7 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 - AreaShop (https://www.spigotmc.org/resources/areashop.2991/)
 - ASkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
 - BattleNight (http://dev.bukkit.org/bukkit-plugins/battlenight/) - **Very outdated, no evidence of further development**
+- Lib's Disguises (https://www.spigotmc.org/resources/libs-disguises.32453/)
 - dtlTraders (https://dev.bukkit.org/bukkit-plugins/dtltraders/)
 - Dynmap (https://www.spigotmc.org/resources/dynmap.274/)
 - Essentials (https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/)
