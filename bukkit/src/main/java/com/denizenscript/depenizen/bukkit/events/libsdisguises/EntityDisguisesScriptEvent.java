@@ -15,6 +15,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import java.util.logging.Level;
+
 // <--[event]
 // @Events
 // entity disguises
@@ -48,14 +50,13 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("entity disguises")
-                || lower.startsWith("entity disguise");
+        return lower.startsWith("libsdisguises disguise");
     }
 
     @Override
     public boolean matches(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        String disguiseName = CoreUtilities.getXthArg(1, lower);
+        String disguiseName = CoreUtilities.getXthArg(3, lower);
         if (disguiseName.equals("disguise")) {
             return true;
         }
@@ -105,10 +106,8 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @EventHandler
-    public void onEntityDisguise(DisguiseEvent event) {
-        if (dEntity.isNPC(event.getEntity())) {
-            return;
-        }
+    public void onDisguise(DisguiseEvent event) {
+        Bukkit.getServer().getLogger().log(Level.INFO, "Disguise event called!");
         disguise = new dLibsDisguise(event.getDisguise());
         entity = new dEntity(event.getEntity());
         cancelled = event.isCancelled();
