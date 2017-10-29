@@ -112,9 +112,9 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
 
     @EventHandler
     public void onDisguise(DisguiseEvent event) {
-
         disguise = new dLibsDisguise(event.getDisguise());
         entity = new dEntity(event.getEntity());
+
         cancelled = event.isCancelled();
         this.event = event;
         fire();
