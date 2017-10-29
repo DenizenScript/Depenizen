@@ -16,7 +16,7 @@ import net.aufdemrand.denizencore.utilities.debugging.dB;
 public class DisguiseCommands extends AbstractCommand {
     // <--[command]
     // @Name disguise
-    // @Syntax disguise [REMOVE/PLAYER/MOB/MISC] [target:<entity>] [type:<entity type>] [baby:true/false] [id:<number>] [data:<number>]
+    // @Syntax disguise [remove/player/mob/misc] [target:<entity>] [type:<entity type>] [baby:true/false] [id:<number>] [data:<number>]
     // @Group Depenizen
     // @Plugin DepenizenBukkit, LibsDisguises
     // @Required 2
