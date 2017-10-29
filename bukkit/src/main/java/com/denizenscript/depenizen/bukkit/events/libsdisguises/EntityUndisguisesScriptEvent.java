@@ -17,12 +17,34 @@ import org.bukkit.event.Listener;
 
 import java.util.logging.Level;
 
+// <--[event]
+// @Events
+// libsdisguises undisguises disguise
+// libsdisguises undisguise disguise
+// libsdisguises undisguises <dLibsDisguises>
+// libsdisguises undisguise <dLibsDisguises>
+//
+// @Regex ^on libsdisguises [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+//
+// @Cancellable true
+//
+// @Triggers when a entity undisguises.
+//
+// @Context
+// <context.entity> returns the entity who undisguised.
+// <context.disguise> returns the disguise in use.
+//
+// @Plugin DepenizenBukkit, LibsDisguises
+//
+// -->
+
 public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements Listener {
     public EntityUndisguisesScriptEvent() {
         instance = this;
     }
 
     public static EntityUndisguisesScriptEvent instance;
+
     public UndisguiseEvent event;
     public dEntity entity;
     public dLibsDisguise disguise;
@@ -36,12 +58,14 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
     @Override
     public boolean matches(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        String disguiseName = CoreUtilities.getXthArg(3, lower);
+        String disguiseName = CoreUtilities.getXthArg(2, lower);
+
         if (disguiseName.equals("disguise")) {
             return true;
         }
-        dLibsDisguise ddisguise = dLibsDisguise.valueOf(disguiseName);
-        return ddisguise != null && ddisguise.equals(disguise);
+
+        dLibsDisguise dDisguise = dLibsDisguise.valueOf(disguiseName);
+        return dDisguise != null && dDisguise.equals(disguise);
     }
 
     @Override
@@ -87,12 +111,9 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
 
     @EventHandler
     public void onUndisguise(UndisguiseEvent event) {
-        Bukkit.getServer().getLogger().log(Level.INFO, "Undisguise event called!");
-        //if (dEntity.isNPC(event.getEntity())) {
-        //    return;
-        //}
         disguise = new dLibsDisguise(event.getDisguise());
         entity = new dEntity(event.getEntity());
+
         cancelled = event.isCancelled();
         this.event = event;
         fire();

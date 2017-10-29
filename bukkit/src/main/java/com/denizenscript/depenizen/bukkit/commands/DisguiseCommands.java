@@ -169,7 +169,12 @@ public class DisguiseCommands extends AbstractCommand {
                 watcher.setCustomNameVisible(true);
                 watcher.setCustomName(name.toString());
             }
-            DisguiseAPI.disguiseToAll(target.getBukkitEntity(),mobDisguise);
+            if (target.isPlayer()) {
+                DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), mobDisguise, target.getPlayer());
+            }
+            else {
+                DisguiseAPI.disguiseToAll(target.getBukkitEntity(), mobDisguise);
+            }
         }
 
         else if (action.asString().equalsIgnoreCase("PLAYER")) {
@@ -178,7 +183,12 @@ public class DisguiseCommands extends AbstractCommand {
                 return;
             }
             PlayerDisguise playerDisguise = new PlayerDisguise(name.toString());
-            DisguiseAPI.disguiseToAll(target.getBukkitEntity(),playerDisguise);
+            if (target.isPlayer()) {
+                DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), playerDisguise, target.getPlayer());
+            }
+            else {
+                DisguiseAPI.disguiseToAll(target.getBukkitEntity(), playerDisguise);
+            }
         }
 
         else if (action.asString().equalsIgnoreCase("MISC")) {
@@ -192,7 +202,12 @@ public class DisguiseCommands extends AbstractCommand {
                 watcher.setCustomNameVisible(true);
                 watcher.setCustomName(name.toString());
             }
-            DisguiseAPI.disguiseToAll(target.getBukkitEntity(),miscDisguise);
+            if (target.isPlayer()) {
+                DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), miscDisguise, target.getPlayer());
+            }
+            else {
+                DisguiseAPI.disguiseToAll(target.getBukkitEntity(),miscDisguise);
+            }
         }
     }
 }

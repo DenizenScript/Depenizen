@@ -19,10 +19,12 @@ import java.util.logging.Level;
 
 // <--[event]
 // @Events
-// entity disguises
-// entity disguise
+// libsdisguises disguises disguise
+// libsdisguises disguise disguise
+// libsdisguises disguises <dLibsDisguises>
+// libsdisguises disguise <dLibsDisguises>
 //
-// @Regex ^on entity [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+// @Regex ^on libsdisguises [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
 //
 // @Cancellable true
 //
@@ -43,6 +45,7 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     public static EntityDisguisesScriptEvent instance;
+
     public DisguiseEvent event;
     public dEntity entity;
     public dLibsDisguise disguise;
@@ -56,12 +59,14 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public boolean matches(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        String disguiseName = CoreUtilities.getXthArg(3, lower);
+        String disguiseName = CoreUtilities.getXthArg(2, lower);
+
         if (disguiseName.equals("disguise")) {
             return true;
         }
-        dLibsDisguise ddisguise = dLibsDisguise.valueOf(disguiseName);
-        return ddisguise != null && ddisguise.equals(disguise);
+
+        dLibsDisguise dDisguise = dLibsDisguise.valueOf(disguiseName);
+        return dDisguise != null && dDisguise.equals(disguise);
     }
 
     @Override
@@ -107,7 +112,7 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
 
     @EventHandler
     public void onDisguise(DisguiseEvent event) {
-        Bukkit.getServer().getLogger().log(Level.INFO, "Disguise event called!");
+
         disguise = new dLibsDisguise(event.getDisguise());
         entity = new dEntity(event.getEntity());
         cancelled = event.isCancelled();
