@@ -201,7 +201,7 @@ public class WorldGuardRegion implements dObject {
         }
 
         // <--[tag]
-        // @attribute <hclass@class.type>
+        // @attribute <region@region.type>
         // @returns Element
         // @description
         // Always returns 'Region' for WorldGuardRegion objects. All objects fetchable by the Object Fetcher will return the
