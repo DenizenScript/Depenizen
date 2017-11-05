@@ -24,7 +24,7 @@ import java.util.logging.Level;
 // libsdisguises disguises <dLibsDisguises>
 // libsdisguises disguise <dLibsDisguises>
 //
-// @Regex ^on libsdisguises [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+// @Regex ^on libsdisguises [^\s]+ disguise$
 //
 // @Cancellable true
 //

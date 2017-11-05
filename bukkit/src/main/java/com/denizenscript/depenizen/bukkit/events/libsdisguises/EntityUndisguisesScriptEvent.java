@@ -24,7 +24,7 @@ import java.util.logging.Level;
 // libsdisguises undisguises <dLibsDisguises>
 // libsdisguises undisguise <dLibsDisguises>
 //
-// @Regex ^on libsdisguises [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+// @Regex ^on libsdisguises [^\s]+ undisguise$
 //
 // @Cancellable true
 //
@@ -39,6 +39,7 @@ import java.util.logging.Level;
 // -->
 
 public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements Listener {
+
     public EntityUndisguisesScriptEvent() {
         instance = this;
     }

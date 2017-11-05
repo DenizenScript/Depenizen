@@ -16,7 +16,7 @@ import net.aufdemrand.denizencore.utilities.debugging.dB;
 public class DisguiseCommands extends AbstractCommand {
     // <--[command]
     // @Name disguise
-    // @Syntax disguise [remove/player/mob/misc] [target:<entity>] [type:<entity type>] [baby:true/false] [id:<number>] [data:<number>]
+    // @Syntax disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<number>) (data:<number>)
     // @Group Depenizen
     // @Plugin DepenizenBukkit, LibsDisguises
     // @Required 2
@@ -28,40 +28,48 @@ public class DisguiseCommands extends AbstractCommand {
     // Disguises an entity using Lib's Disguises.
     // This hides the true entity and replaces it with a fake entity as a disguise.
     // The entity mimics the same actions and movement as the entity in a disguise.
-    // Specify for MOB if baby or adult, otherwise its default adult.
-    // Specify id and/or data for MISC disguises. Default is 1 and 0 respectively.
-    // Removing a digsuise shows the true entity again for all players.
+    //
+    // The required arguement depends on the first arguement:
+    // If the disguise is a mob, a type is required.
+    // If the disguise is a misc, a type is required.
+    // If the disguise is a player, a name is required instead of a type.
+    //
+    // Specify if mob is a baby or not, otherwise its default adult.
+    // Specify id and/or data for misc disguises. Default is 1 and 0 respectively.
+    // Removing a disgsuise shows the true entity again for all players.
     // Only one disguise can be allowed, if another one is set, the preious disguise is removed.
 
-    // @Tags <e@entity.is_disguised> <e@entity.disguise>
+    // @Tags
+    // <e@entity.is_disguised>
+    // <e@entity.disguise>
 
     // @Usage
     // Use to disguise the attached player in the queue as a Player.
-    // - disguise PLAYER name:Bob
+    // - disguise player name:Bob
 
     // @Usage
     // Use to disguise the attached player in the queue as a Zombie.
-    // - disguise MOB entity:ZOMBIE baby:true
+    // - disguise mob type:ZOMBIE baby:true
 
     // @Usage
     // Use to disguise the attached player in the queue as a Boat.
-    // - disguise MISC entity:Boat
+    // - disguise misc type:Boat
 
     // @Usage
     // Use to disguise the attached player in the queue as a Sponge Block.
-    // - disguise MISC entity:Falling_Block id:19 data:0
+    // - disguise misc type:Falling_Block id:19 data:0
 
     // @Usage
     // Use to remove the disguise from the attached player in the queue.
-    // - disguise REMOVE
+    // - disguise remove
 
     // @Usage
     // Use to diguise a entity.
-    // - disguise PLAYER target:<player.target> name:Bob
+    // - disguise player target:<player.target> name:Bob
 
     // @Usage
     // Use to remove a diguise from a entity.
-    // - disguise REMOVE target:<player.target>
+    // - disguise remove target:<player.target>
 
     // -->
 
@@ -71,7 +79,6 @@ public class DisguiseCommands extends AbstractCommand {
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
-
 
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
@@ -103,7 +110,8 @@ public class DisguiseCommands extends AbstractCommand {
                 scriptEntry.addObject("baby", arg.asElement());
             }
 
-            else if (!scriptEntry.hasObject("action")) {
+            else if (!scriptEntry.hasObject("action")
+                    && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
             }
 
@@ -113,7 +121,7 @@ public class DisguiseCommands extends AbstractCommand {
 
         }
         if (!scriptEntry.hasObject("action")) {
-            throw new InvalidArgumentsException("Action not specified! (ADD/REMOVE)");
+            throw new InvalidArgumentsException("Action not specified! (add/remove)");
         }
 
         if (!scriptEntry.hasObject("baby")) {
@@ -149,16 +157,25 @@ public class DisguiseCommands extends AbstractCommand {
         Element data = scriptEntry.getdObject("data");
         Element baby = scriptEntry.getdObject("baby");
 
+        // Report to dB
+        dB.report(scriptEntry, getName(), action.debug()
+                + (target != null ? target.debug() : "")
+                + (type != null ? type.debug() : "")
+                + (name != null ? name.debug() : "")
+                + (id != null ? id.debug() : "")
+                + (data != null ? data.debug() : "")
+                + (baby != null ? baby.debug() : ""));
+
         if (action == null) {
-            dB.echoError(scriptEntry.getResidingQueue(), "Type not specified! (REMOVE/MOB/PLAYER/MISC)");
+            dB.echoError(scriptEntry.getResidingQueue(), "Action not specified! (remove/mob/player/misc)");
             return;
         }
 
-        if (action.asString().equalsIgnoreCase("REMOVE")) {
+        if (action.asString().equalsIgnoreCase("remove")) {
             DisguiseAPI.undisguiseToAll(target.getBukkitEntity());
         }
 
-        else if (action.asString().equalsIgnoreCase("MOB")) {
+        else if (action.asString().equalsIgnoreCase("mob")) {
             if (type == null) {
                 dB.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
                 return;
@@ -177,7 +194,7 @@ public class DisguiseCommands extends AbstractCommand {
             }
         }
 
-        else if (action.asString().equalsIgnoreCase("PLAYER")) {
+        else if (action.asString().equalsIgnoreCase("player")) {
             if (name == null) {
                 dB.echoError(scriptEntry.getResidingQueue(), "Name not specified!");
                 return;
@@ -191,7 +208,7 @@ public class DisguiseCommands extends AbstractCommand {
             }
         }
 
-        else if (action.asString().equalsIgnoreCase("MISC")) {
+        else if (action.asString().equalsIgnoreCase("misc")) {
             if (type == null) {
                 dB.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
                 return;
