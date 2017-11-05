@@ -43,7 +43,6 @@ public class PlotSquaredElementExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("as_plotsquared_plot")) {
             try {
-                dB.log(element.toString());
                 return dPlotSquaredPlot.valueOf(element.toString()).getAttribute(attribute.fulfill(1));
             }
             catch (Exception e) {

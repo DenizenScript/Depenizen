@@ -37,11 +37,16 @@ public class dPlotSquaredPlot implements dObject {
         string = string.replace("plotsquaredplot@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');
-            return new dPlotSquaredPlot(MainUtil.getPlotFromString(null, split.get(2)+";"+split.get(0)+";"+split.get(1),true));
+            Plot p = MainUtil.getPlotFromString(null, split.get(2) + ";" + split.get(0) + ";" + split.get(1), false);
+            if (p == null) {
+                return null;
+            }
+            return new dPlotSquaredPlot(p);
         }
         catch (Throwable e) {
+            // Do nothing.
         }
-            return null;
+        return null;
     }
 
     public static boolean matches(String arg) {
