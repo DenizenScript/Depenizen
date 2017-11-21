@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.support.plugins;
 
-import com.denizenscript.depenizen.bukkit.commands.DisguiseCommands;
+import com.denizenscript.depenizen.bukkit.commands.libsdisguises.DisguiseCommands;
 import com.denizenscript.depenizen.bukkit.events.libsdisguises.EntityDisguisesScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.libsdisguises.EntityUndisguisesScriptEvent;
 import com.denizenscript.depenizen.bukkit.extensions.libsdisguise.LibsDisguiseEntityExtension;

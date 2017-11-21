@@ -30,7 +30,7 @@ public class dLibsDisguise implements dObject {
         ////////
         // Match disguise name
 
-        string = string.replace("dlibsdisguise@", "");
+        string = string.replace("libsdisguise@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');
             return new dLibsDisguise(DisguiseAPI.getCustomDisguise(split.get(0)));
@@ -113,7 +113,7 @@ public class dLibsDisguise implements dObject {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <dlibsdisguise@dlibsdisguise.type>
+        // @attribute <libsdisguise@libsdisguise.type>
         // @returns Element
         // @description
         // Returns the type of the disguise.
@@ -124,7 +124,7 @@ public class dLibsDisguise implements dObject {
         }
 
         // <--[tag]
-        // @attribute <dlibsdisguise@dlibsdisguise.type>
+        // @attribute <libsdisguise@libsdisguise.type>
         // @returns dEntity
         // @description
         // Returns the entity of the disguise.
@@ -135,7 +135,7 @@ public class dLibsDisguise implements dObject {
         }
 
         // <--[tag]
-        // @attribute <dlibsdisguise@dlibsdisguise.display_name>
+        // @attribute <libsdisguise@libsdisguise.display_name>
         // @returns Element
         // @description
         // Returns the display name of the disguise.

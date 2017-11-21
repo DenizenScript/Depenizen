@@ -1,6 +1,5 @@
-package com.denizenscript.depenizen.bukkit.commands;
+package com.denizenscript.depenizen.bukkit.commands.libsdisguises;
 
-import com.sun.scenario.effect.Effect;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.*;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
