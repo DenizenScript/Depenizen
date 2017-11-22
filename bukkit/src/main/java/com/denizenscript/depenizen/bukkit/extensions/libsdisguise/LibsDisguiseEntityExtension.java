@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.extensions.libsdisguise;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.objects.dLibsDisguise;
+import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguise;
 import me.libraryaddict.disguise.DisguiseAPI;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizencore.objects.Element;
@@ -54,7 +54,7 @@ public class LibsDisguiseEntityExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("disguise")
             && DisguiseAPI.isDisguised(entity.getBukkitEntity())) {
-            return new dLibsDisguise(DisguiseAPI.getDisguise(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
+            return new LibsDisguise(DisguiseAPI.getDisguise(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
         }
 
         return null;

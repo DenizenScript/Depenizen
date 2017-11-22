@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.objects;
+package com.denizenscript.depenizen.bukkit.objects.libsdisguises;
 
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
@@ -12,17 +12,17 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 
 import java.util.List;
 
-public class dLibsDisguise implements dObject {
+public class LibsDisguise implements dObject {
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
 
-    public static dLibsDisguise valueOf(String string) {
+    public static LibsDisguise valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("libsdisguise")
-    public static dLibsDisguise valueOf(String string, TagContext context) {
+    public static LibsDisguise valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -33,7 +33,7 @@ public class dLibsDisguise implements dObject {
         string = string.replace("libsdisguise@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');
-            return new dLibsDisguise(DisguiseAPI.getCustomDisguise(split.get(0)));
+            return new LibsDisguise(DisguiseAPI.getCustomDisguise(split.get(0)));
         }
         catch (Throwable e) {
         }
@@ -50,7 +50,7 @@ public class dLibsDisguise implements dObject {
 
     Disguise disguise = null;
 
-    public dLibsDisguise(Disguise pl) {
+    public LibsDisguise(Disguise pl) {
         disguise = pl;
     }
 
@@ -66,7 +66,7 @@ public class dLibsDisguise implements dObject {
     }
 
     @Override
-    public dLibsDisguise setPrefix(String prefix) {
+    public LibsDisguise setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -78,8 +78,8 @@ public class dLibsDisguise implements dObject {
 
     @Override
     public boolean equals(Object a) {
-        if (a instanceof dLibsDisguise) {
-            return ((dLibsDisguise) a).disguise.equals(disguise);
+        if (a instanceof LibsDisguise) {
+            return ((LibsDisguise) a).disguise.equals(disguise);
         }
         return false;
     }
