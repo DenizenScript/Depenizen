@@ -195,7 +195,7 @@
         <dependency>
             <groupId>regalowl.hyperconomy</groupId>
             <artifactId>Hyperconomy</artifactId>
-            <version>0.975.5-SNAPSHOT</version>
+            <version>0.975.7-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/lib/HyperConomy.jar</systemPath>
         </dependency>

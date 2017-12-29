@@ -14,7 +14,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import regalowl.hyperconomy.account.HyperPlayer;
 import regalowl.hyperconomy.bukkit.BukkitConnector;
+import regalowl.hyperconomy.event.HyperEvent;
 import regalowl.hyperconomy.event.HyperEventHandler;
+import regalowl.hyperconomy.event.HyperEventListener;
+import regalowl.hyperconomy.event.TransactionEvent;
 import regalowl.hyperconomy.inventory.HItemStack;
 import regalowl.hyperconomy.transaction.PlayerTransaction;
 import regalowl.hyperconomy.transaction.TransactionResponse;
@@ -25,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HyperConomySupport extends Support {
+public class HyperConomySupport extends Support implements HyperEventListener {
 
     private static final Field TRANSACTION_RESPONSE_PLAYER;
 
@@ -50,7 +53,7 @@ public class HyperConomySupport extends Support {
             public void run() {
                 BukkitConnector hyperConomy = Support.getPlugin(HyperConomySupport.class);
                 HyperEventHandler eventHandler = hyperConomy.getHC().getHyperEventHandler();
-                eventHandler.registerListener(this);
+                eventHandler.registerListener(HyperConomySupport.this);
             }
         }.runTaskLaterAsynchronously(DepenizenPlugin.getCurrentInstance(), 1);
     }
@@ -114,11 +117,11 @@ public class HyperConomySupport extends Support {
                 events.add("player sells " + item.identifyMaterial());
                 break;
 
-            // TODO: are these actually used?
-            case BUY_FROM_INVENTORY:
-                break;
+            // TODO: implement?
 
-            case SELL_TO_INVENTORY:
+            case BUY_CUSTOM:
+                break;
+            case SELL_CUSTOM:
                 break;
         }
 
@@ -126,4 +129,11 @@ public class HyperConomySupport extends Support {
                 .getPlayer(hyperPlayer.getUUID())), null), context);
     }
 
+    @Override
+    public void handleHyperEvent(HyperEvent hyperEvent) {
+        if (hyperEvent instanceof TransactionEvent) {
+            TransactionEvent event = (TransactionEvent) hyperEvent;
+            onTransaction(event.getTransaction(), event.getTransactionResponse());
+        }
+    }
 }
