@@ -37,8 +37,15 @@
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
             <version>9.5.0</version>
-            <type>jar</type>
-            <scope>provided</scope>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/LibsDisguises.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>ProtocolLib</groupId>
+            <artifactId>protocollib</artifactId>
+            <version>4.3.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/ProtocolLib.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.plotsquared</groupId>
