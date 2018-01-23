@@ -216,7 +216,7 @@ public class dTown implements dObject {
         // Returns true if the dTown has explosions enabled.
         // @Plugin DepenizenBukkit, Towny
         // -->
-        else if (attribute.startsWith("is_explosions")) {
+        else if (attribute.startsWith("is_explosions") || attribute.startsWith("is_bang")) {
             return new Element(town.isBANG())
                     .getAttribute(attribute.fulfill(1));
         }
