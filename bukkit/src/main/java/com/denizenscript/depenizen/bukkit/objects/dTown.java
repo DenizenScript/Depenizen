@@ -163,7 +163,7 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.board>
-        // @returns Element
+        // @returns Element(String)
         // @description
         // Returns the town's current board.
         // @Plugin DepenizenBukkit, Towny
@@ -182,6 +182,102 @@ public class dTown implements dObject {
         // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open")) {
             return new Element(town.isOpen())
+                    .getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.is_taxpercentage>
+        // @returns Element (Boolean)
+        // @description
+        // Returns true if the dTown has taxing by percentage enabled.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("is_taxpercent") || attribute.startsWith("is_taxpercentage")) {
+            return new Element(town.isTaxPercentage())
+                    .getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.is_firespread>
+        // @returns Element (Boolean)
+        // @description
+        // Returns true if the dTown has firespread enabled.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("is_fire") || attribute.startsWith("is_firespread")) {
+            return new Element(town.isFire())
+                    .getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.is_explosions>
+        // @returns Element (Boolean)
+        // @description
+        // Returns true if the dTown has explosions enabled.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("is_explosions") || attribute.startsWith("is_bang")) {
+            return new Element(town.isBANG())
+                    .getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.is_pvp>
+        // @returns Element (Boolean)
+        // @description
+        // Returns true if the dTown has PvP enabled.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("is_pvp")) {
+            return new Element(town.isPVP())
+                    .getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.has_mobs>
+        // @returns Element (Boolean)
+        // @description
+        // Returns true if the dTown has Mob spawning enabled.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("has_mobs")) {
+            return new Element(town.hasMobs())
+                    .getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.bonusblock_price>
+        // @returns Element (Decimal)
+        // @description
+        // Returns the cost of the next bonus Townblock.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("bonusblock_price")) {
+            return new Element(town.getBonusBlockCost())
+                    .getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.bonusblock_price>
+        // @returns Element (Decimal)
+        // @description
+        // Returns the plot taxing of the defined dTown.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("plot_tax")) {
+            return new Element(town.getPlotTax())
+                    .getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.bonusblock_price>
+        // @returns Element (Decimal)
+        // @description
+        // Returns the default plot price of the defined dTown.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("plot_price")) {
+            return new Element(town.getPlotPrice())
                     .getAttribute(attribute.fulfill(1));
         }
 
