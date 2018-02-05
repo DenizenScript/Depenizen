@@ -10,6 +10,7 @@ import net.aufdemrand.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.support.plugins.EssentialsSupport;
+import org.bukkit.entity.Player;
 
 import java.util.GregorianCalendar;
 
@@ -145,6 +146,29 @@ public class EssentialsPlayerExtension extends dObjectExtension {
                 }
             }
             return homes.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <p@player.ignored_players>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns a list of the ignored players of the player.
+        // @Plugin DepenizenBukkit, Essentials
+        // -->
+        if (attribute.startsWith("ignored_players")) {
+            dList players = new dList();
+            Essentials essentials = Support.getPlugin(EssentialsSupport.class);
+            for (String player : essUser._getIgnoredPlayers()) {
+                try {
+                    players.add(new dPlayer(essentials.getOfflineUser(player).getBase()).identifySimple());
+                }
+                catch (Exception e) {
+                    if (!attribute.hasAlternative()) {
+                        dB.echoError(e);
+                    }
+                }
+            }
+            return players.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -284,6 +308,32 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         if (mechanism.matches("vanish") && mechanism.requireBoolean()) {
             essUser.setVanished(value.asBoolean());
         }
+
+
+        // <--[mechanism]
+        // @object dPlayer
+        // @name essentials_ignore
+        // @input Element(dPlayer)(|Boolean)
+        // @description
+        // Sets whether the player should ignore anther player. If no boolean is provided, it is by default true.
+        // @tags
+        // <p@player.ignored_players>
+        // @Plugin DepenizenBukkit, Essentials
+        // -->
+        if (mechanism.matches("essentials_ignore")) {
+            Essentials essentials = Support.getPlugin(EssentialsSupport.class);
+            if (value.asString().contains("|")) {
+                int split = value.asString().indexOf("|");
+                int len = value.asString().length();
+                String after = value.asString().substring(split + 1 , len);
+                String before = value.asString().substring(0, split - 1);
+                essUser.setIgnoredPlayer(essentials.getUser(new Element (before).asType(dPlayer.class).getOfflinePlayer().getUniqueId()) ,new Element (after).asBoolean());
+            }
+            else {
+                essUser.setIgnoredPlayer(essentials.getUser(value.asType(dPlayer.class).getOfflinePlayer().getUniqueId()) ,true);
+            }
+        }
+
 
     }
 }
