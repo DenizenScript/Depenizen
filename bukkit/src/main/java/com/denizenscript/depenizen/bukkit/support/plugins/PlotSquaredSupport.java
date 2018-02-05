@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.support.plugins;
 
 import com.denizenscript.depenizen.bukkit.events.plotsquared.PlayerEntersPlotScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.plotsquared.PlayerLeavePlotScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.plotsquared.PlotClearScriptEvent;
 import com.denizenscript.depenizen.bukkit.extensions.plotsquared.PlotSquaredElementExtension;
 import com.denizenscript.depenizen.bukkit.extensions.plotsquared.PlotSquaredLocationExtension;
 import com.denizenscript.depenizen.bukkit.extensions.plotsquared.PlotSquaredPlayerExtension;
@@ -17,6 +18,7 @@ public class PlotSquaredSupport extends Support {
     public PlotSquaredSupport() {
         registerScriptEvents(new PlayerEntersPlotScriptEvent());
         registerScriptEvents(new PlayerLeavePlotScriptEvent());
+        registerScriptEvents(new PlotClearScriptEvent());
         registerObjects(dPlotSquaredPlot.class);
         registerProperty(PlotSquaredPlayerExtension.class, dPlayer.class);
         registerProperty(PlotSquaredElementExtension.class, Element.class);
