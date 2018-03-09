@@ -265,7 +265,7 @@
         <dependency>
             <groupId>com.nisovin</groupId>
             <artifactId>shopkeepers</artifactId>
-            <version>1.76</version>
+            <version>1.86</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/lib/Shopkeepers.jar</systemPath>
         </dependency>
