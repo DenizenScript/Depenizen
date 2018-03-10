@@ -84,4 +84,9 @@ public class BungeeServerTag extends AbstractTagObject {
     public String toString() {
         return internal;
     }
+
+    @Override
+    public String getTagTypeName() {
+        return "BungeeServerTag";
+    }
 }

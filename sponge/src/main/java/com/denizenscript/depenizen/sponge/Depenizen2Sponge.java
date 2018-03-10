@@ -12,6 +12,7 @@ import com.denizenscript.depenizen.sponge.events.bungee.*;
 import com.denizenscript.depenizen.sponge.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.sponge.support.clientizen.ClientizenSupport;
 import com.denizenscript.depenizen.sponge.tags.bungee.handlers.BungeeServerTagBase;
+import com.denizenscript.depenizen.sponge.tags.bungee.objects.BungeeServerTag;
 import com.google.inject.Inject;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.config.ConfigDir;
@@ -79,6 +80,8 @@ public class Depenizen2Sponge implements DepenizenImplementation {
             Denizen2Core.register(new PlayerDisconnectScriptEvent());
             Denizen2Core.register(new ReconnectFailScriptEvent());
             Denizen2Core.register(new ServerSwitchScriptEvent());
+            // Bungee Tags
+            Denizen2Core.customSaveLoaders.put("BungeeServerTag", BungeeServerTag::getFor);
             // Start BungeeCord socket
             BungeeSupport.startSocket();
         }
