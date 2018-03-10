@@ -1,8 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.towny;
 
 import com.denizenscript.depenizen.bukkit.objects.dTown;
-import com.palmergames.bukkit.towny.ChunkNotification;
-import com.palmergames.bukkit.towny.event.PlayerChangePlotEvent;
+import com.palmergames.bukkit.towny.event.PlayerLeaveTownEvent;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
@@ -41,7 +40,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     public static PlayerExitsTownScriptEvent instance;
-    public PlayerChangePlotEvent event;
+    public PlayerLeaveTownEvent event;
     public dTown town;
 
 
@@ -58,10 +57,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
             return true;
         }
         dTown givenTown = dTown.valueOf(name);
-        if (eventTown != null && givenTown != null && eventTown.equals(givenTown)) {
-            return true;
-        }
-        return false;
+        return eventTown != null && givenTown != null && eventTown.equals(givenTown);
     }
 
     @Override
@@ -76,7 +72,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public void destroy() {
-        PlayerChangePlotEvent.getHandlerList().unregister(this);
+        PlayerLeaveTownEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -98,7 +94,15 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @EventHandler
-    public void onTownyPlayerExitsTown(PlayerChangePlotEvent event) {
+    public void onTownyPlayerExitsTown(PlayerLeaveTownEvent event) {
+        try {
+            if (!event.getTo().getTownyWorld().isUsingTowny()) {
+                return;
+            }
+        }
+        catch (NotRegisteredException e) {
+            return;
+        }
         town = dTown.fromWorldCoord(event.getFrom());
         this.event = event;
         fire();
