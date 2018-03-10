@@ -21,8 +21,8 @@ public class Support {
 
     private final List<Class<? extends dObject>> objects = new ArrayList<Class<? extends dObject>>();
 
-    private final Map<Class<? extends Property>, Class<? extends dObject>[]> properties
-            = new HashMap<Class<? extends Property>, Class<? extends dObject>[]>();
+    private final Map<Class<? extends Property>, Class<? extends dObject>> properties
+            = new HashMap<Class<? extends Property>, Class<? extends dObject>>();
 
     private final List<Class<? extends Listener>> events = new ArrayList<Class<? extends Listener>>();
 
@@ -47,7 +47,7 @@ public class Support {
         }
     }
 
-    public void registerProperty(Class<? extends Property> property, Class<? extends dObject>... objects) {
+    public void registerProperty(Class<? extends Property> property, Class<? extends dObject> objects) {
         properties.put(property, objects);
     }
 
@@ -74,7 +74,7 @@ public class Support {
         return objects;
     }
 
-    public Map<Class<? extends Property>, Class<? extends dObject>[]> getProperties() {
+    public Map<Class<? extends Property>, Class<? extends dObject>> getProperties() {
         return properties;
     }
 

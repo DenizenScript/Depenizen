@@ -20,7 +20,8 @@ public class FactionsSupport extends Support {
     public FactionsSupport() {
         if (!getPlugin(getClass()).getDescription().getVersion().startsWith("1.")) {
             registerObjects(dFaction.class);
-            registerProperty(FactionsPlayerNPCExtension.class, dPlayer.class, dNPC.class);
+            registerProperty(FactionsPlayerNPCExtension.class, dNPC.class);
+            registerProperty(FactionsPlayerNPCExtension.class, dPlayer.class);
             registerProperty(FactionsLocationExtension.class, dLocation.class);
             registerAdditionalTags("factions", "faction");
         }

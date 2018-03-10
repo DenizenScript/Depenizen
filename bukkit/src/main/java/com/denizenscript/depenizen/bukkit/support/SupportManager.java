@@ -41,14 +41,13 @@ public class SupportManager {
             hasNewObjects = true;
         }
         if (support.hasProperties()) {
-            for (Map.Entry<Class<? extends Property>, Class<? extends dObject>[]> prop
+            for (Map.Entry<Class<? extends Property>, Class<? extends dObject>> prop
                     : support.getProperties().entrySet()) {
-                for (Class<? extends dObject> obj : prop.getValue()) {
-                    if (obj.equals(dNPC.class) && Depends.citizens == null) {
-                        continue;
-                    }
-                    propertyParser.registerProperty(prop.getKey(), obj);
+                Class<? extends dObject> obj = prop.getValue();
+                if (obj.equals(dNPC.class) && Depends.citizens == null) {
+                    continue;
                 }
+                propertyParser.registerProperty(prop.getKey(), obj);
             }
         }
         if (support.hasEvents()) {
