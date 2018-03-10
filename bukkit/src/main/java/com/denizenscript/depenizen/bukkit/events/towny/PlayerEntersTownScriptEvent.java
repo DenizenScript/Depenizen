@@ -99,14 +99,6 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
 
     @EventHandler
     public void onTownyPlayerEntersTown(PlayerChangePlotEvent event) {
-        try {
-            if (!event.getTo().getTownyWorld().isUsingTowny() || new ChunkNotification(event.getFrom(), event.getTo()).getNotificationString() == null) {
-                return;
-            }
-        }
-        catch (NotRegisteredException e) {
-            return;
-        }
         town = dTown.fromWorldCoord(event.getTo());
         this.event = event;
         fire();

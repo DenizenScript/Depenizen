@@ -343,6 +343,83 @@ public class dTown implements dObject {
             return new Element("Town").getAttribute(attribute.fulfill(1));
         }
 
+        // <--[tag]
+        // @attribute <town@town.has_explosions>
+        // @returns Element(Boolean)
+        // @description
+        // Returns if the town has explosions turned on.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("has_explosions")) {
+            return new Element(town.isBANG()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.has_mobs>
+        // @returns Element(Boolean)
+        // @description
+        // Returns if the town has mobs turned on.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("has_mobs")) {
+            return new Element(town.hasMobs()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.has_pvp>
+        // @returns Element(Boolean)
+        // @description
+        // Returns if the town has PvP turned on.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("has_pvp")) {
+            return new Element(town.isPVP()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.has_firespread>
+        // @returns Element(Boolean)
+        // @description
+        // Returns if the town has firespread turned on.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("has_firespread")) {
+            return new Element(town.isFire()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.has_taxpercent>
+        // @returns Element(Boolean)
+        // @description
+        // Returns if the town has taxes in percentage.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("has_taxpercent")) {
+            return new Element(town.isTaxPercentage()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.has_taxpercent>
+        // @returns Element(Decimal)
+        // @description
+        // Returns the amount of taxes collected from plots.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("plottax")) {
+            return new Element(town.getPlotTax()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <town@town.plotprice>
+        // @returns Element(Decimal)
+        // @description
+        // Returns the price of a plot.
+        // @Plugin DepenizenBukkit, Towny
+        // -->
+        else if (attribute.startsWith("plotprice")) {
+            return new Element(town.getPlotPrice()).getAttribute(attribute.fulfill(1));
+        }
+
         return new Element(identify()).getAttribute(attribute);
 
     }

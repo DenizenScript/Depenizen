@@ -69,7 +69,7 @@
         <dependency>
             <groupId>com.palmergames</groupId>
             <artifactId>Towny</artifactId>
-            <version>0.90</version>
+            <version>0.92</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/lib/Towny.jar</systemPath>
         </dependency>
