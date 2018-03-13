@@ -14,6 +14,8 @@ import net.aufdemrand.denizencore.utilities.debugging.dB;
 
 public class FactionsPlayerNPCExtension extends dObjectExtension {
 
+    // TODO: Refactor this into two separate extension classes you psychotic idiots.
+
     public static boolean describes(dObject object) {
         return object instanceof dPlayer || object instanceof dNPC;
     }

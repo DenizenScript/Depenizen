@@ -13,6 +13,8 @@ import org.bukkit.entity.Player;
 
 public class HeroesPlayerNPCExtension extends dObjectExtension {
 
+    // TODO: Refactor this into two separate extension classes you psychotic idiots.
+
     public static boolean describes(dObject object) {
         return (object instanceof dPlayer && ((dPlayer) object).isOnline())
                 || (object instanceof dNPC && ((dNPC) object).isSpawned()
