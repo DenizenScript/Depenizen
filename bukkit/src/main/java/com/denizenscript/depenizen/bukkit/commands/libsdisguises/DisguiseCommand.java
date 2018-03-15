@@ -12,7 +12,7 @@ import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 
-public class DisguiseCommands extends AbstractCommand {
+public class DisguiseCommand extends AbstractCommand {
     // <--[command]
     // @Name disguise
     // @Syntax disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<number>) (data:<number>) (self:true/false)
