@@ -30,6 +30,11 @@
             <id>placeholderapi</id>
             <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>dakani</id>
+            <name>Dakani Nexus Repo</name>
+            <url>http://repo.dakanilabs.com/content/repositories/public</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -39,6 +44,13 @@
             <version>9.5.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/lib/LibsDisguises.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.black_ixx</groupId>
+            <artifactId>PlayerPoints</artifactId>
+            <version>2.1.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/PlayerPoints.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>ProtocolLib</groupId>
