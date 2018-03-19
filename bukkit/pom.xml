@@ -53,6 +53,12 @@
             <systemPath>${project.basedir}/src/main/resources/lib/PlayerPoints.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>me.lucko.luckperms</groupId>
+            <artifactId>luckperms-api</artifactId>
+            <version>4.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>ProtocolLib</groupId>
             <artifactId>protocollib</artifactId>
             <version>4.3.0</version>
