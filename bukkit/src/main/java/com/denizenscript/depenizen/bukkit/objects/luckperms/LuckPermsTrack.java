@@ -4,6 +4,7 @@ import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.Group;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Fetchable;
 import net.aufdemrand.denizencore.objects.dList;
@@ -39,7 +40,7 @@ public class LuckPermsTrack implements dObject {
             return new LuckPermsTrack(track);
         }
         catch (Throwable e) {
-            // Do nothing.
+            dB.echoError(e);
         }
         return null;
     }

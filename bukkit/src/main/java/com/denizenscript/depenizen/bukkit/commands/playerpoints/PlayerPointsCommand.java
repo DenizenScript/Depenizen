@@ -16,7 +16,7 @@ import org.bukkit.plugin.Plugin;
 
 public class PlayerPointsCommand extends AbstractCommand {
     // <--[command]
-    // @Name disguise
+    // @Name playerpoints
     // @Syntax playerpoints [set/give/take] (amount:<amount>) (target:<player>)
     // @Group Depenizen
     // @Plugin DepenizenBukkit, PlayerPoints

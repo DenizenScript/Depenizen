@@ -49,6 +49,7 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 - BattleNight (http://dev.bukkit.org/bukkit-plugins/battlenight/) - **Very outdated, no evidence of further development**
 - dtlTraders (https://dev.bukkit.org/bukkit-plugins/dtltraders/)
 - Dynmap (https://www.spigotmc.org/resources/dynmap.274/)
+- EffectLib (https://dev.bukkit.org/projects/effectlib)
 - Essentials (https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/)
 - Factions (https://www.spigotmc.org/resources/factions.1900/)
 - GriefPrevention (https://www.spigotmc.org/resources/griefprevention.1884/)

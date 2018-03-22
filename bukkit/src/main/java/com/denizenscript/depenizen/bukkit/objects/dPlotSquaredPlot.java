@@ -7,6 +7,7 @@ import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
@@ -45,7 +46,7 @@ public class dPlotSquaredPlot implements dObject {
             return new dPlotSquaredPlot(p);
         }
         catch (Throwable e) {
-            // Do nothing.
+            dB.echoError(e);
         }
         return null;
     }

@@ -14,6 +14,7 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
@@ -46,8 +47,9 @@ public class dPlot implements dObject {
                     new BukkitWorld(dWorld.valueOf(split.get(3)).getWorld())));
         }
         catch (Throwable e) {
-            return null;
+            dB.echoError(e);
         }
+        return null;
     }
 
     public static boolean matches(String arg) {

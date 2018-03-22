@@ -46,6 +46,13 @@
             <systemPath>${project.basedir}/src/main/resources/lib/LibsDisguises.jar</systemPath>
         </dependency>
         <dependency>
+         	<groupId>de.slikey</groupId>
+         	<artifactId>EffectLib</artifactId>
+         	<version>5.8</version>
+         	<scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/EffectLib-5.8.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>org.black_ixx</groupId>
             <artifactId>PlayerPoints</artifactId>
             <version>2.1.5</version>
