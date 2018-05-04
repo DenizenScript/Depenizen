@@ -39,6 +39,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.black_ixx</groupId>
+            <artifactId>BossShop</artifactId>
+            <version>2.7.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/BossShop.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
             <version>9.5.0</version>

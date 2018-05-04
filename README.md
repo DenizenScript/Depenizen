@@ -47,6 +47,7 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 - AreaShop (https://www.spigotmc.org/resources/areashop.2991/)
 - ASkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
 - BattleNight (http://dev.bukkit.org/bukkit-plugins/battlenight/) - **Very outdated, no evidence of further development**
+- BossShop (https://www.spigotmc.org/resources/bossshop-powerful-and-playerfriendly-chest-gui-shop-menu-plugin.222/)
 - dtlTraders (https://dev.bukkit.org/bukkit-plugins/dtltraders/)
 - Dynmap (https://www.spigotmc.org/resources/dynmap.274/)
 - EffectLib (https://dev.bukkit.org/projects/effectlib)
