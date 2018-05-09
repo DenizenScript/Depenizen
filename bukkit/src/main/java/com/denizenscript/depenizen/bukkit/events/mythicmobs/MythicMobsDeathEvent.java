@@ -45,6 +45,10 @@ import java.util.List;
 // <context.drops> Returns a list of items dropped.
 // <context.xp> Returns the xp dropped.
 //
+// @Determine
+// Element(Number) to specify the new amount of XP to be dropped.
+// dList(dItem) to specify new items to be dropped.
+//
 // @Plugin DepenizenBukkit, MythicMobs
 //
 // -->
@@ -115,11 +119,18 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public boolean applyDetermination(ScriptContainer container, String determination) {
-        if (aH.Argument.valueOf(determination).matchesArgumentList(dItem.class)) {
+        String lower = CoreUtilities.toLowerCase(determination);
+
+        if (aH.matchesInteger(lower)) {
+            experience = new Element(lower);
+            return true;
+        }
+        else if (aH.Argument.valueOf(determination).matchesArgumentList(dItem.class)) {
             List<dItem> items = dList.valueOf(determination).filter(dItem.class);
             for (dItem i : items) {
                 newDrops.add(i.getItemStack());
             }
+            return true;
         }
         return super.applyDetermination(container, determination);
     }
@@ -166,5 +177,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         if (!newDrops.isEmpty()) {
             event.setDrops(newDrops);
         }
+        event.setExp(experience.asInt());
     }
 }
