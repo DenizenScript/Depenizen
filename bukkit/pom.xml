@@ -121,6 +121,13 @@
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
+            <artifactId>Vampire</artifactId>
+            <version>2.13.7</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/lib/Vampire.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.massivecraft</groupId>
             <artifactId>MassiveCore</artifactId>
             <version>2.9.0</version>
             <scope>system</scope>
