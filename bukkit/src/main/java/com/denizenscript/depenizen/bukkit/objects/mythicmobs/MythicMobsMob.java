@@ -140,13 +140,14 @@ public class MythicMobsMob implements dObject, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.spawner>
+        // @attribute <mythicmob@mythicmob.spawner_name>
         // @returns Element
         // @description
-        // Returns the spawner of the MythicMob.
+        // Returns the name of the spawner (as set on creation in-game) that spawned this mob.
+        // Returns null, if the mob was spawned by something other than a spawner.
         // @Plugin DepenizenBukkit, MythicMobs
         // -->
-        if (attribute.startsWith("spawner")) {
+        if (attribute.startsWith("spawner_name")) {
             return new Element(mob.getSpawner().getName()).getAttribute(attribute.fulfill(1));
         }
 
