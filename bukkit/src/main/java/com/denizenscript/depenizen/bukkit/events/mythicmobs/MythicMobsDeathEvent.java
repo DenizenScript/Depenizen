@@ -40,6 +40,7 @@ import java.util.List;
 //
 // @Context
 // <context.mob> Returns the MythicMob that has been killed.
+// <context.spawner> Returns the spawner of this MythicMob.
 // <context.entity> Returns the dEntity for the MythicMob.
 // <context.level> Returns the level of the MythicMob.
 // <context.drops> Returns a list of items dropped.
@@ -58,6 +59,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     public static MythicMobsDeathEvent instance;
     public MythicMobDeathEvent event;
     public MythicMobsMob mob;
+    public Element spawner;
     public dEntity entity;
     public dEntity killer;
     public Element level;
@@ -134,6 +136,9 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         if (name.equals("mob")) {
             return mob;
         }
+        else if (name.equals("spawner")) {
+            return spawner;
+        }
         else if (name.equals("killer")) {
             return killer;
         }
@@ -152,6 +157,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     @EventHandler
     public void onMythicMobDeath(MythicMobDeathEvent event) {
         mob = new MythicMobsMob(event.getMob());
+        spawner = new Element(event.getMob().getSpawner() == null ? null : event.getMob().getSpawner().getName());
         entity = new dEntity(event.getEntity());
         killer = new dEntity(event.getKiller());
         level = new Element(event.getMobLevel());
