@@ -140,6 +140,17 @@ public class MythicMobsMob implements dObject, Adjustable {
         }
 
         // <--[tag]
+        // @attribute <mythicmob@mythicmob.spawner>
+        // @returns Element
+        // @description
+        // Returns the spawner of the MythicMob.
+        // @Plugin DepenizenBukkit, MythicMobs
+        // -->
+        if (attribute.startsWith("spawner")) {
+            return new Element(mob.getSpawner().getName()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <mythicmob@mythicmob.level>
         // @returns Element(Number)
         // @description
