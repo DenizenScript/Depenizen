@@ -81,11 +81,6 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public boolean applyDetermination(ScriptContainer container, String determination) {
-        String lower = CoreUtilities.toLowerCase(determination);
-
-        if (aH.matchesInteger(lower)) {
-            return true;
-        }
         return super.applyDetermination(container, determination);
     }
 

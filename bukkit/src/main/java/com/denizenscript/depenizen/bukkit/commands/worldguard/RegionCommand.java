@@ -25,7 +25,7 @@ public class RegionCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, WorldGuard
     // @Required 2
-    // @Stable untested
+    // @Stable stable
     // @Short Adds or removes a protected region.
     // @Author Morphan1
 

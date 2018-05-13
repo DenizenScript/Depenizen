@@ -28,7 +28,7 @@ public class JobsCommands extends AbstractCommand {
     // to force a player to join or quit a job.
 
     // @Tags
-    // TODO
+    // <p@player.jobs[<job>]>
 
     // @Usage
     // Use to promote a player.

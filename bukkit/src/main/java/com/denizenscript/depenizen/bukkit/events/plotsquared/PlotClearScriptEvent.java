@@ -78,11 +78,6 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public boolean applyDetermination(ScriptContainer container, String determination) {
-        String lower = CoreUtilities.toLowerCase(determination);
-
-        if (aH.matchesInteger(lower)) {
-            return true;
-        }
         return super.applyDetermination(container, determination);
     }
 

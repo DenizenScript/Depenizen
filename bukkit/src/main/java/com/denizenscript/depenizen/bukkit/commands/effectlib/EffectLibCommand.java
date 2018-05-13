@@ -26,7 +26,7 @@ public class EffectLibCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, EffectLib
     // @Required 1
-    // @Stable Stable
+    // @Stable stable
     // @Short Show custom effects using EffectLib
     // @Author Mwthorn
 

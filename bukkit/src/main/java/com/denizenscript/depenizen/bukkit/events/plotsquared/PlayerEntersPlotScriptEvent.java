@@ -79,11 +79,6 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
 
     @Override
     public boolean applyDetermination(ScriptContainer container, String determination) {
-        String lower = CoreUtilities.toLowerCase(determination);
-
-        if (aH.matchesInteger(lower)) {
-            return true;
-        }
         return super.applyDetermination(container, determination);
     }
 
@@ -94,10 +89,7 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
 
     @Override
     public dObject getContext(String name) {
-        if (name.equals("player")) {
-            return player;
-        }
-        else if (name.equals("plot")) {
+        if (name.equals("plot")) {
             return plot;
         }
         return super.getContext(name);

@@ -21,7 +21,7 @@ public class PlayerPointsCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, PlayerPoints
     // @Required 2
-    // @Stable Stable
+    // @Stable stable
     // @Short Adjusts the amount of points the player has.
     // @Author Mwthorn
 
