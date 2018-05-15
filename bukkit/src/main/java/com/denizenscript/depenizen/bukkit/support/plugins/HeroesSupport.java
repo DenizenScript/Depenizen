@@ -14,7 +14,8 @@ public class HeroesSupport extends Support {
     public HeroesSupport() {
         registerEvents(HeroesEvents.class);
         registerObjects(HeroesClass.class, HeroesHero.class);
-        registerProperty(HeroesPlayerNPCExtension.class, dNPC.class, dPlayer.class);
+        registerProperty(HeroesPlayerNPCExtension.class, dNPC.class);
+        registerProperty(HeroesPlayerNPCExtension.class, dPlayer.class);
         new HeroesXPCommand().activate().as("heroesxp")
                 .withOptions("[add/remove/set] <heroesclass> quantity:<#.#>", 3);
     }
