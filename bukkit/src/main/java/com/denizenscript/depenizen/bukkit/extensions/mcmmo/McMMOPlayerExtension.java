@@ -92,7 +92,7 @@ public class McMMOPlayerExtension extends dObjectExtension {
                 // @attribute <p@player.mcmmo.xp[<skill>].to_next_level>
                 // @returns Element(Integer)
                 // @description
-                // Returns the amount of experience a player has left to level up
+                // Returns the amount of experience a player needs to level up
                 // in a skill.
                 // @Plugin DepenizenBukkit, mcMMO
                 // -->
