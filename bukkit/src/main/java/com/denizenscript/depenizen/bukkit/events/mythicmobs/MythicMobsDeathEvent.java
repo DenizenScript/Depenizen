@@ -41,6 +41,7 @@ import java.util.List;
 // @Context
 // <context.mob> Returns the MythicMob that has been killed.
 // <context.entity> Returns the dEntity for the MythicMob.
+// <context.killer> returns the dEntity that killed the MythicMob (if available).
 // <context.level> Returns the level of the MythicMob.
 // <context.drops> Returns a list of items dropped.
 // <context.xp> Returns the xp dropped.
@@ -145,6 +146,9 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         }
         else if (name.equals("drops")) {
             return oldDrops;
+        }
+        else if (name.equals("level")) {
+            return level;
         }
         return super.getContext(name);
     }
