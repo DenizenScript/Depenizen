@@ -148,6 +148,9 @@ public class MythicMobsMob implements dObject, Adjustable {
         // @Plugin DepenizenBukkit, MythicMobs
         // -->
         if (attribute.startsWith("spawner_name")) {
+            if (mob.getSpawner() == null) {
+                return null;
+            }
             return new Element(mob.getSpawner().getName()).getAttribute(attribute.fulfill(1));
         }
 
