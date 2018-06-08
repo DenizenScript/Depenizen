@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.luckperms;
 
 import me.lucko.luckperms.LuckPerms;
-import me.lucko.luckperms.api.Group;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
 import net.aufdemrand.denizen.utilities.debugging.dB;
