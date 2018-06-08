@@ -1,11 +1,13 @@
 package com.denizenscript.depenizen.bukkit.objects;
 
 import com.intellectualcrafters.plot.object.Plot;
+import com.intellectualcrafters.plot.object.RegionWrapper;
 import com.intellectualcrafters.plot.util.MainUtil;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
@@ -44,7 +46,7 @@ public class dPlotSquaredPlot implements dObject {
             return new dPlotSquaredPlot(p);
         }
         catch (Throwable e) {
-            // Do nothing.
+            dB.echoError(e);
         }
         return null;
     }
@@ -235,6 +237,24 @@ public class dPlotSquaredPlot implements dObject {
             Location l1 = new Location(world.getWorld(), plot.getBottomAbs().getX(), 0, plot.getBottomAbs().getZ());
             Location l2 = new Location(world.getWorld(), plot.getTopAbs().getX(), 255, plot.getTopAbs().getZ());
             return new dCuboid(l1, l2).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <plotsquaredplot@plotsquaredplot.all_cuboids>
+        // @returns dList(dCuboid)
+        // @description
+        // Returns all the plot's cuboids in a list. Useful for merged plots.
+        // @Plugin DepenizenBukkit, PlotSquared
+        // -->
+        if (attribute.startsWith("all_cuboids")) {
+            dList cuboids = new dList();
+            dWorld world = dWorld.valueOf(plot.getArea().worldname);
+            for (RegionWrapper region : plot.getRegions()) {
+                Location l1 = new Location(world.getWorld(), region.minX, region.minY, region.minZ);
+                Location l2 = new Location(world.getWorld(), region.maxX, region.maxY, region.maxZ);
+                cuboids.add(new dCuboid(l1, l2).identify());
+            }
+            return cuboids.getAttribute(attribute.fulfill(1));
         }
 
         return new Element(identify()).getAttribute(attribute);

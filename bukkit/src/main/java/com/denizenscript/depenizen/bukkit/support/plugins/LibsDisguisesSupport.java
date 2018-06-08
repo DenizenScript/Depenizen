@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.support.plugins;
 
-import com.denizenscript.depenizen.bukkit.commands.libsdisguises.DisguiseCommands;
+import com.denizenscript.depenizen.bukkit.commands.libsdisguises.DisguiseCommand;
 import com.denizenscript.depenizen.bukkit.events.libsdisguises.EntityDisguisesScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.libsdisguises.EntityUndisguisesScriptEvent;
 import com.denizenscript.depenizen.bukkit.extensions.libsdisguise.LibsDisguiseEntityExtension;
@@ -15,6 +15,6 @@ public class LibsDisguisesSupport extends Support {
         registerScriptEvents(new EntityUndisguisesScriptEvent());
         registerObjects(LibsDisguise.class);
         registerProperty(LibsDisguiseEntityExtension.class, dEntity.class);
-        new DisguiseCommands().activate().as("DISGUISE").withOptions("See Documentation.", 1);
+        new DisguiseCommand().activate().as("DISGUISE").withOptions("See Documentation.", 1);
     }
 }

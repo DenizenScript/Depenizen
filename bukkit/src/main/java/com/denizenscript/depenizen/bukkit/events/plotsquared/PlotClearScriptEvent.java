@@ -1,11 +1,9 @@
 package com.denizenscript.depenizen.bukkit.events.plotsquared;
 
 import com.denizenscript.depenizen.bukkit.objects.dPlotSquaredPlot;
-import com.plotsquared.bukkit.events.PlayerEnterPlotEvent;
+import com.plotsquared.bukkit.events.PlotClearEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.objects.dEntity;
-import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.objects.dObject;
@@ -18,37 +16,38 @@ import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// plotsquared player enters plotsquaredplot
-// plotsquared player enters <dplotsquaredplot>
+// plotsquared plot clear plotsquaredplot
+// plotsquared plot clears plotsquaredplot
+// plotsquared plot clear <dplotsquaredplot>
+// plotsquared plot clears <dplotsquaredplot>
 //
-// @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+// @Regex ^on plotsquared plot [^\s]+ clears( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
 //
-// @Cancellable false
+// @Cancellable true
 //
-// @Triggers when a player enters a plot.
+// @Triggers when a plot is cleared.
 //
 // @Context
-// <context.plot> returns the plot the player entered.
+// <context.plot> returns the plot that is cleared.
 //
 // @Plugin DepenizenBukkit, PlotSquared
 //
 // -->
 
-public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Listener {
+public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public PlayerEntersPlotScriptEvent() {
+    public PlotClearScriptEvent() {
         instance = this;
     }
 
-    public static PlayerEntersPlotScriptEvent instance;
-    public PlayerEnterPlotEvent event;
-    public dPlayer player;
+    public static PlotClearScriptEvent instance;
+    public PlotClearEvent event;
     public dPlotSquaredPlot plot;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("plotsquared player enters");
+        return lower.startsWith("plotsquared plot clear") || lower.startsWith("plotsquared plot clears");
     }
 
     @Override
@@ -64,7 +63,7 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
 
     @Override
     public String getName() {
-        return "PlayerEnterPlotEvent";
+        return "PlotClearEvent";
     }
 
     @Override
@@ -74,7 +73,7 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
 
     @Override
     public void destroy() {
-        PlayerEnterPlotEvent.getHandlerList().unregister(this);
+        PlotClearEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -84,7 +83,7 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(player, null);
+        return new BukkitScriptEntryData(null, null);
     }
 
     @Override
@@ -96,13 +95,12 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
     }
 
     @EventHandler
-    public void onPlotEnter(PlayerEnterPlotEvent event) {
-        if (dEntity.isNPC(event.getPlayer())) {
-            return;
-        }
-        player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
+    public void onPlotClear(PlotClearEvent event) {
         plot = new dPlotSquaredPlot(event.getPlot());
+
+        cancelled = event.isCancelled();
         this.event = event;
         fire();
+        event.setCancelled(cancelled);
     }
 }

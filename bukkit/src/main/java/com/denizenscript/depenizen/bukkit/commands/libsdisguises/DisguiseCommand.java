@@ -12,14 +12,14 @@ import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 
-public class DisguiseCommands extends AbstractCommand {
+public class DisguiseCommand extends AbstractCommand {
     // <--[command]
     // @Name disguise
-    // @Syntax disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<number>) (data:<number>)
+    // @Syntax disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<number>) (data:<number>) (self:true/false)
     // @Group Depenizen
     // @Plugin DepenizenBukkit, LibsDisguises
     // @Required 2
-    // @Stable Stable
+    // @Stable stable
     // @Short Disguises an entity as a different entity.
     // @Author Mwthorn
 
@@ -37,6 +37,8 @@ public class DisguiseCommands extends AbstractCommand {
     // Specify id and/or data for misc disguises. Default is 1 and 0 respectively.
     // Removing a disgsuise shows the true entity again for all players.
     // Only one disguise can be allowed, if another one is set, the preious disguise is removed.
+    // Specify self arguement, if it is set to true, the disguise will be hidden from the player who is disguised.
+    // Otherwise it is default set to false, showing the disguised character the player is disguising as.
 
     // @Tags
     // <e@entity.is_disguised>
@@ -48,7 +50,7 @@ public class DisguiseCommands extends AbstractCommand {
 
     // @Usage
     // Use to disguise the attached player in the queue as a Zombie.
-    // - disguise mob type:ZOMBIE baby:true
+    // - disguise mob type:ZOMBIE baby:true self:true
 
     // @Usage
     // Use to disguise the attached player in the queue as a Boat.
@@ -109,6 +111,11 @@ public class DisguiseCommands extends AbstractCommand {
                 scriptEntry.addObject("baby", arg.asElement());
             }
 
+            else if (!scriptEntry.hasObject("self")
+                    && arg.matchesPrefix("self")) {
+                scriptEntry.addObject("self", arg.asElement());
+            }
+
             else if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
@@ -120,7 +127,7 @@ public class DisguiseCommands extends AbstractCommand {
 
         }
         if (!scriptEntry.hasObject("action")) {
-            throw new InvalidArgumentsException("Action not specified! (add/remove)");
+            throw new InvalidArgumentsException("Action not specified! (remove/mob/player/misc)");
         }
 
         if (!scriptEntry.hasObject("baby")) {
@@ -133,6 +140,10 @@ public class DisguiseCommands extends AbstractCommand {
 
         if (!scriptEntry.hasObject("data")) {
             scriptEntry.addObject("data", new Element(0));
+        }
+
+        if (!scriptEntry.hasObject("self")) {
+            scriptEntry.addObject("self", new Element(false));
         }
 
         if (!scriptEntry.hasObject("target")) {
@@ -155,6 +166,7 @@ public class DisguiseCommands extends AbstractCommand {
         Element id = scriptEntry.getdObject("id");
         Element data = scriptEntry.getdObject("data");
         Element baby = scriptEntry.getdObject("baby");
+        Element self = scriptEntry.getdObject("self");
 
         // Report to dB
         dB.report(scriptEntry, getName(), action.debug()
@@ -165,8 +177,13 @@ public class DisguiseCommands extends AbstractCommand {
                 + (data != null ? data.debug() : "")
                 + (baby != null ? baby.debug() : ""));
 
-        if (action == null) {
-            dB.echoError(scriptEntry.getResidingQueue(), "Action not specified! (remove/mob/player/misc)");
+        if (target == null) {
+            dB.echoError(scriptEntry.getResidingQueue(), "Target not found!");
+            return;
+        }
+
+        if (baby == null) {
+            dB.echoError(scriptEntry.getResidingQueue(), "Baby not specified!");
             return;
         }
 
@@ -185,7 +202,7 @@ public class DisguiseCommands extends AbstractCommand {
                 watcher.setCustomNameVisible(true);
                 watcher.setCustomName(name.toString());
             }
-            if (target.isPlayer()) {
+            if (target.isPlayer() && self.asBoolean()) {
                 DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), mobDisguise, target.getPlayer());
             }
             else {
@@ -199,7 +216,7 @@ public class DisguiseCommands extends AbstractCommand {
                 return;
             }
             PlayerDisguise playerDisguise = new PlayerDisguise(name.toString());
-            if (target.isPlayer()) {
+            if (target.isPlayer() && self.asBoolean()) {
                 DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), playerDisguise, target.getPlayer());
             }
             else {
@@ -212,13 +229,21 @@ public class DisguiseCommands extends AbstractCommand {
                 dB.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
                 return;
             }
+            if (id == null) {
+                dB.echoError(scriptEntry.getResidingQueue(), "ID not specified!");
+                return;
+            }
+            if (data == null) {
+                dB.echoError(scriptEntry.getResidingQueue(), "Data not specified!");
+                return;
+            }
             MiscDisguise miscDisguise = new MiscDisguise(DisguiseType.valueOf(type.toString().toUpperCase()),id.asInt(),data.asInt());
             FlagWatcher watcher = miscDisguise.getWatcher();
             if (name != null) {
                 watcher.setCustomNameVisible(true);
                 watcher.setCustomName(name.toString());
             }
-            if (target.isPlayer()) {
+            if (target.isPlayer() && self.asBoolean()) {
                 DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), miscDisguise, target.getPlayer());
             }
             else {

@@ -19,7 +19,7 @@ import java.util.List;
 // @Group Depenizen
 // @Plugin DepenizenBukkit, MobArena
 // @Required 1
-// @Stable untested
+// @Stable stable
 // @Short Make a player join, remove a player from or make a player spectate a MobArena.
 // @Author Fortifier42
 
