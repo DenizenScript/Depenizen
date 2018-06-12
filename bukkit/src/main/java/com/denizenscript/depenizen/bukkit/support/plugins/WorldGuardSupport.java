@@ -6,10 +6,12 @@ import com.denizenscript.depenizen.bukkit.extensions.worldguard.WorldGuardWorldE
 import com.denizenscript.depenizen.bukkit.support.Support;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.extensions.worldguard.WorldGuardLocationExtension;
+import com.denizenscript.depenizen.bukkit.extensions.worldguard.WorldGuardPlayerExtension;
 import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
 
 public class WorldGuardSupport extends Support {
@@ -17,6 +19,7 @@ public class WorldGuardSupport extends Support {
     public WorldGuardSupport() {
         registerObjects(WorldGuardRegion.class);
         registerProperty(WorldGuardLocationExtension.class, dLocation.class);
+        registerProperty(WorldGuardPlayerExtension.class, dPlayer.class);
         registerProperty(WorldGuardCuboidExtension.class, dCuboid.class);
         registerProperty(WorldGuardWorldExtension.class, dWorld.class);
         new RegionCommand().activate().as("REGION").withOptions("See Documentation.", 2);
