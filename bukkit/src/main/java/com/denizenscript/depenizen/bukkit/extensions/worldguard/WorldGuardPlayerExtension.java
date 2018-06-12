@@ -46,9 +46,9 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
     }
 
     // The original flag-reference without fuzziness
-    private StateFlag getStateFlag(String string) {
+    private StateFlag getStateFlag(String s) {
         for (Flag<?> flag : DefaultFlag.getFlags()) {
-            if (flag.getName().equalsIgnoreCase(string)) {
+            if (flag instanceof StateFlag && flag.getName().equalsIgnoreCase(s)) {
                 return (StateFlag) flag;
             }
         }
