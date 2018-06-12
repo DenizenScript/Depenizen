@@ -6,12 +6,15 @@ import com.denizenscript.depenizen.bukkit.support.plugins.WorldGuardSupport;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.flags.Flag;
+import com.sk89q.worldguard.protection.flags.StateFlag;
 
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.utilities.debugging.dB;
 
 import org.bukkit.entity.Player;
 
@@ -37,15 +40,31 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
     Player player = null;
     WorldGuardPlugin wgp = null;
 
+    // All regions at the players location
     private ApplicableRegionSet getApplicableRegions() {
         return wgp.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation());
+    }
+
+    // The original flag-reference without fuzziness
+    private StateFlag getStateFlag(String string) {
+        for (Flag<?> flag : DefaultFlag.getFlags()) {
+            if (flag.getName().equalsIgnoreCase(string)) {
+                return (StateFlag) flag;
+            }
+        }
+        return null;
     }
 
     @Override
     public String getAttribute(Attribute attribute) {
 
+        if (!attribute.startsWith("worldguard") && !attribute.startsWith("wg") ) {
+            return null;
+        }
+        attribute = attribute.fulfill(1);
+
         // <--[tag]
-        // @attribute <p@player.can_build[<l@location>]>
+        // @attribute <p@player.worldguard.can_build[<l@location>]>
         // @returns Element(Boolean)
         // @description
         // Whether WorldGuard allows to build at a location.
@@ -53,28 +72,37 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("can_build") && attribute.hasContext(1)) {
             dLocation location = dLocation.valueOf(attribute.getContext(1));
-            if (location == null ) {
+            if (location == null) {
                 return null;
             }
             if (wgp.canBuild(player, location)) {
-                return Element.TRUE.getAttribute(attribute.fulfill(1));
+                return new Element(true).getAttribute(attribute.fulfill(1));
             }
-            return Element.FALSE.getAttribute(attribute.fulfill(1));
+            return new Element(false).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
-        // @attribute <p@player.can_pvp>
+        // @attribute <p@player.worldguard.test_flag[<name>]>
         // @returns Element(Boolean)
         // @description
-        // Whether WorldGuard allows to pvp at the players location.
+        // Returns the state of a flag at the players location.
         // @Plugin DepenizenBukkit, WorldGuard
         // -->
-        if (attribute.startsWith("can_pvp")) {
-            ApplicableRegionSet set = getApplicableRegions();
-            if (set.testState(wgp.wrapPlayer(player), DefaultFlag.PVP)) {
-                return Element.TRUE.getAttribute(attribute.fulfill(1));
+        if (attribute.startsWith("test_flag")) {
+            if (!attribute.hasContext(1)) {
+                dB.echoError("The tag p@player.worlduard.test_flag[...] must have a value.");
+                return null;
             }
-            return Element.FALSE.getAttribute(attribute.fulfill(1));
+            StateFlag flag = getStateFlag(attribute.getContext(1));
+            if (flag == null) {
+                dB.echoError("The tag p@player.worlduard.test_flag[...] has an invalid value: " + attribute.getContext(1));
+                return null;
+            }
+            ApplicableRegionSet set = getApplicableRegions();
+            if (set.testState(wgp.wrapPlayer(player), flag)) {
+                return new Element(true).getAttribute(attribute.fulfill(1));
+            }
+            return new Element(false).getAttribute(attribute.fulfill(1));
         }
 
         return null;
