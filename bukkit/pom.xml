@@ -30,6 +30,10 @@
             <id>placeholderapi</id>
             <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>shopkeepers</id>
+            <url>http://nexus3.cube-nation.de/repository/snapshots/</url>
+        </repository>
         <!--
         <repository>
             <id>dakani</id>
@@ -305,11 +309,10 @@
             <systemPath>${basedir}/src/main/resources/lib/MythicMobs.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.nisovin</groupId>
-            <artifactId>ShopkeepersAPI</artifactId>
-            <version>2.1.0-beta</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/ShopkeepersAPI-2.1.0-beta.jar</systemPath>
+            <groupId>com.nisovin.shopkeepers</groupId>
+            <artifactId>Shopkeepers</artifactId>
+            <version>2.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>me.ryanhamshire</groupId>
