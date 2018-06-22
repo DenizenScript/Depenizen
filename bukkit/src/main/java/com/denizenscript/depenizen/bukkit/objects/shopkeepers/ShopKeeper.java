@@ -2,8 +2,10 @@ package com.denizenscript.depenizen.bukkit.objects.shopkeepers;
 
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.support.plugins.ShopKeepersSupport;
-import com.nisovin.shopkeepers.Shopkeeper;
-import com.nisovin.shopkeepers.ShopkeepersPlugin;
+import com.nisovin.shopkeepers.api.shopkeeper.Shopkeeper;
+import com.nisovin.shopkeepers.api.shopkeeper.TradingRecipe;
+import com.nisovin.shopkeepers.api.ShopkeepersAPI;
+import com.nisovin.shopkeepers.api.ShopkeepersPlugin;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizencore.objects.Element;
@@ -33,7 +35,7 @@ public class ShopKeeper implements dObject {
         }
         try {
             UUID uuid = UUID.fromString(string);
-            Shopkeeper keeper = ShopkeepersPlugin.getInstance().getShopkeeper(uuid);
+            Shopkeeper keeper = ShopkeepersAPI.getShopkeeperRegistry().getShopkeeperByUniqueId(uuid);
             if (keeper == null) {
                 return null;
             }
@@ -53,14 +55,14 @@ public class ShopKeeper implements dObject {
             return false;
         }
         ShopkeepersPlugin plugin = Support.getPlugin(ShopKeepersSupport.class);
-        return plugin != null && plugin.isShopkeeper(entity.getBukkitEntity());
+        return plugin != null && plugin.getShopkeeperRegistry().isShopkeeper(entity.getBukkitEntity());
     }
 
     public static ShopKeeper fromEntity(dEntity entity) {
         if (!isShopKeeper(entity)) {
             return null;
         }
-        return new ShopKeeper(ShopkeepersPlugin.getInstance().getShopkeeperByEntity(entity.getBukkitEntity()));
+        return new ShopKeeper(ShopkeepersAPI.getShopkeeperRegistry().getShopkeeperByEntity(entity.getBukkitEntity()));
     }
 
     public ShopKeeper(Shopkeeper shopkeeper) {
@@ -163,16 +165,8 @@ public class ShopKeeper implements dObject {
         // -->
         else if (attribute.startsWith("trades") || attribute.startsWith("recipes")) {
             dList trades = new dList();
-            for (ItemStack[] trade : shopkeeper.getRecipes()) {
-                dList recipe = new dList();
-                for (ItemStack item : trade) {
-                    if (item != null) {
-                        recipe.add(new dItem(item).identify());
-                    }
-                    else {
-                        recipe.add(new dItem(Material.AIR).identify());
-                    }
-                }
+            for (TradingRecipe trade : shopkeeper.getTradingRecipes(null)) {
+                dList recipe = wrapTradingRecipe(trade);
                 trades.add(EscapeTags.Escape(recipe.identify()));
             }
             return trades.getAttribute(attribute.fulfill(1));
@@ -202,5 +196,25 @@ public class ShopKeeper implements dObject {
         }
 
         return null;
+    }
+
+    public static dList wrapTradingRecipe(TradingRecipe tradingRecipe) {
+        ItemStack item1 = tradingRecipe.getItem1();
+        ItemStack item2 = tradingRecipe.getItem2();
+        ItemStack resultItem = tradingRecipe.getResultItem();
+
+        dList recipe = new dList();
+        recipe.add(wrapTradeItem(item1).identify());
+        recipe.add(wrapTradeItem(item2).identify());
+        recipe.add(wrapTradeItem(resultItem).identify());
+        return recipe;
+    }
+
+    private static dItem wrapTradeItem(ItemStack itemStack) {
+        if (itemStack != null) {
+            return new dItem(itemStack);
+        } else {
+            return new dItem(Material.AIR);
+        }
     }
 }

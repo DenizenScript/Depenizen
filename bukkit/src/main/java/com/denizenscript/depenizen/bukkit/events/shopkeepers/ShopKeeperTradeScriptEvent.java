@@ -1,9 +1,8 @@
 package com.denizenscript.depenizen.bukkit.events.shopkeepers;
 
-import com.nisovin.shopkeepers.events.ShopkeeperTradeEvent;
+import com.nisovin.shopkeepers.api.events.ShopkeeperTradeEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dList;
@@ -13,10 +12,8 @@ import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeper;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
 
 // <--[event]
 // @Events
@@ -98,15 +95,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     public void onShopKeeperTrade(ShopkeeperTradeEvent event) {
         player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         keeper = new ShopKeeper(event.getShopkeeper());
-        recipe = new dList();
-        for (ItemStack item : event.getTradeRecipe()) {
-            if (item != null) {
-                recipe.add(new dItem(item).identify());
-            }
-            else {
-                recipe.add(new dItem(Material.AIR).identify());
-            }
-        }
+        recipe = ShopKeeper.wrapTradingRecipe(event.getTradingRecipe());
         cancelled = event.isCancelled();
         this.event = event;
         fire();

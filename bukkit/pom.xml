@@ -306,10 +306,10 @@
         </dependency>
         <dependency>
             <groupId>com.nisovin</groupId>
-            <artifactId>shopkeepers</artifactId>
-            <version>1.86</version>
+            <artifactId>ShopkeepersAPI</artifactId>
+            <version>2.1.0-beta</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Shopkeepers.jar</systemPath>
+            <systemPath>${basedir}/src/main/resources/lib/ShopkeepersAPI-2.1.0-beta.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.ryanhamshire</groupId>
