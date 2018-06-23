@@ -6,7 +6,8 @@ import com.nisovin.shopkeepers.api.shopkeeper.Shopkeeper;
 import com.nisovin.shopkeepers.api.shopkeeper.TradingRecipe;
 import com.nisovin.shopkeepers.api.ShopkeepersAPI;
 import com.nisovin.shopkeepers.api.ShopkeepersPlugin;
-import com.nisovin.shopkeepers.api.shopobjects.ShopObject;
+import com.nisovin.shopkeepers.api.shopobjects.entity.EntityShopObject;
+
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizencore.objects.Element;
@@ -17,8 +18,6 @@ import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.tags.core.EscapeTags;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
@@ -68,38 +67,6 @@ public class ShopKeeper implements dObject {
         return new ShopKeeper(ShopkeepersAPI.getShopkeeperRegistry().getShopkeeperByEntity(entity.getBukkitEntity()));
     }
 
-    public static Entity getEntity(Shopkeeper keeper) {
-        try {
-            ShopObject obj = keeper.getShopObject();
-            if (obj == null) {
-                return null;
-            }
-            String id = obj.getId();
-            if (id == null) {
-                return null;
-            }
-            if (obj == ShopkeepersAPI.getDefaultShopObjectTypes().getCitizensShopObjectType()) { // For lack of equals() or is*() API options...
-                if (id.startsWith("NPC-")) { // For lack of getInternalRepresentation API options...
-                    int idNum = Integer.parseInt(id.substring("NPC-".length()));
-                    NPC npc = CitizensAPI.getNPCRegistry().getById(idNum); // This is entirely wrong - NPCs are not guaranteed unique on their integer ID. But it's all we have.
-                    if (npc.isSpawned()) {
-                        return npc.getEntity();
-                    }
-                    return null;
-                }
-            }
-            if (id.startsWith("entity")) {
-                UUID uuid = UUID.fromString(id.substring("entity".length()));
-                return dEntity.getEntityForID(uuid);
-            }
-        }
-        catch (Exception ex) {
-            dB.echoError("Failed while searching entity for Shopkeeper: " + keeper);
-            dB.echoError(ex);
-        }
-        return null;
-    }
-
     public ShopKeeper(Shopkeeper shopkeeper) {
         if (shopkeeper != null) {
             this.shopkeeper = shopkeeper;
@@ -121,7 +88,10 @@ public class ShopKeeper implements dObject {
     }
 
     public Entity getBukkitEntity() {
-        return getEntity(shopkeeper);
+        if (shopkeeper.getShopObject() instanceof EntityShopObject) {
+            return ((EntityShopObject) shopkeeper.getShopObject()).getEntity();
+        }
+        return null;
     }
 
     @Override
