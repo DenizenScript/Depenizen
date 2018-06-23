@@ -7,7 +7,6 @@ import com.nisovin.shopkeepers.api.shopkeeper.TradingRecipe;
 import com.nisovin.shopkeepers.api.ShopkeepersAPI;
 import com.nisovin.shopkeepers.api.ShopkeepersPlugin;
 import com.nisovin.shopkeepers.api.shopobjects.entity.EntityShopObject;
-
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizencore.objects.Element;
