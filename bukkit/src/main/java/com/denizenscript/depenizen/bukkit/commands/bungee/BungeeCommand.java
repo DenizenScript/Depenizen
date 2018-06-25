@@ -8,11 +8,13 @@ import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.objects.dList;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.BracedCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -101,8 +103,12 @@ public class BungeeCommand extends BracedCommand {
             for (ScriptEntry entry : bracedCommands) {
                 scriptEntries.add(new SimpleScriptEntry(entry.getCommandName(), entry.getOriginalArguments()));
             }
-            Map<String, String> definitions = scriptEntry.getResidingQueue().getAllDefinitions();
-            ClientPacketOutScript packet = new ClientPacketOutScript(serverNames, debug, scriptEntries, definitions);
+            Map<String, dObject> definitions = scriptEntry.getResidingQueue().getAllDefinitions();
+            Map<String, String> toSend = new HashMap<String, String>();
+            for (Map.Entry<String, dObject> def : definitions.entrySet()) {
+                toSend.put(def.getKey(), def.getValue().toString());
+            }
+            ClientPacketOutScript packet = new ClientPacketOutScript(serverNames, debug, scriptEntries, toSend);
             BungeeSupport.getSocketClient().trySend(packet);
         }
         else {

@@ -16,6 +16,8 @@ import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.tags.BukkitTagContext;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.exceptions.ScriptEntryCreationException;
+import net.aufdemrand.denizencore.objects.ObjectFetcher;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.ScriptRegistry;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
@@ -26,10 +28,7 @@ import net.aufdemrand.denizencore.utilities.debugging.dB;
 import org.bukkit.Bukkit;
 
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class BukkitSocketClient extends SocketClient {
 
@@ -118,6 +117,14 @@ public class BukkitSocketClient extends SocketClient {
         }
     }
 
+    public Map<String, dObject> objectify(Map<String, String> defs) {
+        Map<String, dObject> toret = new HashMap<String, dObject>();
+        for (Map.Entry<String, String> def : defs.entrySet()) {
+            toret.put(def.getKey(), ObjectFetcher.pickObjectFor(def.getValue()));
+        }
+        return toret;
+    }
+
     @Override
     protected void handleScript(boolean shouldDebug, List<SimpleScriptEntry> scriptEntries, Map<String, String> definitions) {
         List<ScriptEntry> scriptEntryList = new ArrayList<ScriptEntry>();
@@ -134,7 +141,7 @@ public class BukkitSocketClient extends SocketClient {
             return;
         }
         ScriptQueue queue = InstantQueue.getQueue(ScriptQueue.getNextId("BUNGEE_CMD")).addEntries(scriptEntryList);
-        queue.getAllDefinitions().putAll(definitions);
+        queue.getAllDefinitions().putAll(objectify(definitions));
         queue.start();
     }
 
@@ -152,14 +159,14 @@ public class BukkitSocketClient extends SocketClient {
             scriptEntry.setScript("").fallbackDebug = fullDebug;
         }
         ScriptQueue queue = InstantQueue.getQueue(ScriptQueue.getNextId(scriptContainer.getName())).addEntries(scriptEntries);
-        queue.getAllDefinitions().putAll(definitions);
+        queue.getAllDefinitions().putAll(objectify(definitions));
         queue.start();
     }
 
     @Override
     protected String handleTag(String tag, boolean fullDebug, boolean minimalDebug, Map<String, String> definitions) {
         BukkitTagContext tagContext = new BukkitTagContext(null, null, false, null, fullDebug, null);
-        tagContext.definitionProvider.getAllDefinitions().putAll(definitions);
+        tagContext.definitionProvider.getAllDefinitions().putAll(objectify(definitions));
         return TagManager.tag(tag, tagContext);
     }
 

@@ -22,13 +22,11 @@ import java.util.Map;
 public class SupportManager {
 
     private final DepenizenPlugin depenizen;
-    private final PropertyParser propertyParser;
     private final Map<String, Support> additionalTags;
     private boolean hasNewObjects = false;
 
     public SupportManager(DepenizenPlugin depenizen) {
         this.depenizen = depenizen;
-        this.propertyParser = DenizenAPI.getCurrentInstance().getPropertyParser();
         this.additionalTags = new HashMap<String, Support>();
         TagManager.registerTagEvents(this);
     }
@@ -47,7 +45,7 @@ public class SupportManager {
                 if (obj.equals(dNPC.class) && Depends.citizens == null) {
                     continue;
                 }
-                propertyParser.registerProperty(prop.getKey(), obj);
+                PropertyParser.registerProperty(prop.getKey(), obj);
             }
         }
         if (support.hasEvents()) {

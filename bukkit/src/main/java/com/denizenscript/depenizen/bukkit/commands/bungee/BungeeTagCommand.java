@@ -9,6 +9,7 @@ import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.ObjectFetcher;
 import net.aufdemrand.denizencore.objects.aH;
+import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizencore.scripts.commands.Holdable;
@@ -90,9 +91,14 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
             }
             int id = nextId++;
             waitingEntries.put(id, scriptEntry);
+            Map<String, dObject> definitions = scriptEntry.getResidingQueue().getAllDefinitions();
+            Map<String, String> toSend = new HashMap<String, String>();
+            for (Map.Entry<String, dObject> def : definitions.entrySet()) {
+                toSend.put(def.getKey(), def.getValue().toString());
+            }
             BungeeSupport.getSocketClient().trySend(new ClientPacketOutTag(server.getName(), id, tag.asString(),
                     scriptEntry.shouldDebug(), scriptEntry.shouldDebug(),
-                    scriptEntry.getResidingQueue().getAllDefinitions()));
+                   toSend));
         }
         else {
             dB.echoError("Server is not connected to a BungeeCord Socket.");
