@@ -10,6 +10,7 @@ import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
+import org.bukkit.Bukkit;
 
 public class QuestsPlayerExtension extends dObjectExtension {
 
@@ -28,7 +29,9 @@ public class QuestsPlayerExtension extends dObjectExtension {
 
     private QuestsPlayerExtension(dPlayer player) {
         this.player = player;
-        this.quester = Quests.getInstance().getQuester(player.getOfflinePlayer().getUniqueId());
+        Quests quests = (Quests) Bukkit.getPluginManager().getPlugin("Quests");
+        // This would be Quests.getInstance() but the developers of Quests did a stupid and broke that method.
+        this.quester = quests.getQuester(player.getOfflinePlayer().getUniqueId());
     }
 
     dPlayer player = null;

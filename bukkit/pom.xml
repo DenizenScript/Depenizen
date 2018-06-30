@@ -19,6 +19,10 @@
 
     <repositories>
         <repository>
+            <id>everything</id>
+            <url>http://repo.citizensnpcs.co</url>
+        </repository>
+        <repository>
             <id>sk89q-repo</id>
             <url>http://maven.sk89q.com/artifactory/repo/</url>
         </repository>
@@ -324,9 +328,9 @@
         <dependency>
             <groupId>me.blackvein</groupId>
             <artifactId>quests</artifactId>
-            <version>2.5.5</version>
+            <version>3.3.4</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Quests-2.5.5.jar</systemPath>
+            <systemPath>${basedir}/src/main/resources/lib/Quests-3.3.4.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>
