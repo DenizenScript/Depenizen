@@ -76,8 +76,9 @@ public abstract class SocketServer implements Runnable {
 
     private int getNewClientId() {
         for (int id = 0; id < clients.length; id++) {
-            if (clients[id] == null)
+            if (clients[id] == null) {
                 return id;
+            }
         }
         return -1;
     }

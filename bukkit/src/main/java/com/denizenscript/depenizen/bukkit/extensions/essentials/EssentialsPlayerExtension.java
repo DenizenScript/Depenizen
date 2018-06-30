@@ -325,12 +325,12 @@ public class EssentialsPlayerExtension extends dObjectExtension {
             if (value.asString().contains("|")) {
                 int split = value.asString().indexOf("|");
                 int len = value.asString().length();
-                String after = value.asString().substring(split + 1 , len);
+                String after = value.asString().substring(split + 1, len);
                 String before = value.asString().substring(0, split - 1);
-                essUser.setIgnoredPlayer(essentials.getUser(new Element (before).asType(dPlayer.class).getOfflinePlayer().getUniqueId()) ,new Element (after).asBoolean());
+                essUser.setIgnoredPlayer(essentials.getUser(new Element(before).asType(dPlayer.class).getOfflinePlayer().getUniqueId()), new Element(after).asBoolean());
             }
             else {
-                essUser.setIgnoredPlayer(essentials.getUser(value.asType(dPlayer.class).getOfflinePlayer().getUniqueId()) ,true);
+                essUser.setIgnoredPlayer(essentials.getUser(value.asType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);
             }
         }
 

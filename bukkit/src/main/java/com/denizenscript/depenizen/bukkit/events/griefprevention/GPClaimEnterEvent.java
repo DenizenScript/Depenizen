@@ -129,8 +129,8 @@ public class GPClaimEnterEvent extends ScriptEvent implements Listener {
         if (tclaim == fclaim) {
             return;
         }
-        new_claim = tclaim == null ? null: new GriefPreventionClaim(tclaim);
-        old_claim = fclaim == null ? null: new GriefPreventionClaim(fclaim);
+        new_claim = tclaim == null ? null : new GriefPreventionClaim(tclaim);
+        old_claim = fclaim == null ? null : new GriefPreventionClaim(fclaim);
         cancelled = event.isCancelled();
         this.event = event;
         fire();

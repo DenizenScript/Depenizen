@@ -85,7 +85,8 @@ public class PlayerPointsCommand extends AbstractCommand {
         if (!scriptEntry.hasObject("target")) {
             if (((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer()) {
                 scriptEntry.addObject("target", ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer());
-            } else {
+            }
+            else {
                 throw new InvalidArgumentsException("This command does not have a player attached!");
             }
         }
@@ -116,17 +117,17 @@ public class PlayerPointsCommand extends AbstractCommand {
 
         if (action.asString().equalsIgnoreCase("give")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            PlayerPoints.class.cast(plugin).getAPI().give(target.getOfflinePlayer().getUniqueId(),amount.asInt());
+            PlayerPoints.class.cast(plugin).getAPI().give(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
         else if (action.asString().equalsIgnoreCase("take")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            PlayerPoints.class.cast(plugin).getAPI().take(target.getOfflinePlayer().getUniqueId(),amount.asInt());
+            PlayerPoints.class.cast(plugin).getAPI().take(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
         else if (action.asString().equalsIgnoreCase("set")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            PlayerPoints.class.cast(plugin).getAPI().set(target.getOfflinePlayer().getUniqueId(),amount.asInt());
+            PlayerPoints.class.cast(plugin).getAPI().set(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
     }

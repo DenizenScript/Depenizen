@@ -18,13 +18,15 @@ public class dB {
     }
 
     public static void log(String message) {
-        if (!Settings.debugEnabled())
+        if (!Settings.debugEnabled()) {
             return;
+        }
         Class<?> caller = sun.reflect.Reflection.getCallerClass(2);
         String callerName = classNameCache.get(caller);
-        if (callerName == null)
+        if (callerName == null) {
             classNameCache.put(caller, (callerName = caller.getSimpleName()).length() > 16
                     ? callerName.substring(0, 12) + "..." : callerName);
+        }
         console.sendMessage(new ComponentBuilder("+> [" + callerName + "] ").color(ChatColor.YELLOW)
                 .append(message).color(ChatColor.WHITE).create());
     }

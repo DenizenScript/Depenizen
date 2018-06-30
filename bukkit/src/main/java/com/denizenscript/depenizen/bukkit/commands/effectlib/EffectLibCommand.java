@@ -144,7 +144,7 @@ public class EffectLibCommand extends AbstractCommand {
                     effect.setEntity(target.getBukkitEntity());
                 }
                 else {
-                    effect.setLocation(new Location(location.getWorld(),location.getX(),location.getY(),location.getZ()));
+                    effect.setLocation(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()));
                 }
                 // Add a callback to the effect
                 effect.callback = new Runnable() {
@@ -167,7 +167,7 @@ public class EffectLibCommand extends AbstractCommand {
                     effect.setEntity(target.getBukkitEntity());
                 }
                 else {
-                    effect.setLocation(new Location(location.getWorld(),location.getX(),location.getY(),location.getZ()));
+                    effect.setLocation(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()));
                 }
                 // Add a callback to the effect
                 effect.callback = new Runnable() {
@@ -190,7 +190,7 @@ public class EffectLibCommand extends AbstractCommand {
                     effect.setEntity(target.getBukkitEntity());
                 }
                 else {
-                    effect.setLocation(new Location(location.getWorld(),location.getX(),location.getY(),location.getZ()));
+                    effect.setLocation(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()));
                 }
                 // Add a callback to the effect
                 effect.callback = new Runnable() {

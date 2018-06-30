@@ -53,7 +53,7 @@ public class LibsDisguiseEntityExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, LibsDisguises
         // -->
         if (attribute.startsWith("disguise")
-            && DisguiseAPI.isDisguised(entity.getBukkitEntity())) {
+                && DisguiseAPI.isDisguised(entity.getBukkitEntity())) {
             return new LibsDisguise(DisguiseAPI.getDisguise(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
         }
 

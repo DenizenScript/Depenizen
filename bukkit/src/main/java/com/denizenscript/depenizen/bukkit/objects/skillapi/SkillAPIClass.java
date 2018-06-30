@@ -21,7 +21,9 @@ public class SkillAPIClass implements dObject {
 
     @Fetchable("skillapiclass")
     public static SkillAPIClass valueOf(String string, TagContext context) {
-        if (string == null) return null;
+        if (string == null) {
+            return null;
+        }
 
         string = string.replace("skillapiclass@", "");
 

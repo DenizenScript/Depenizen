@@ -71,7 +71,8 @@ public class BossShopCommand extends AbstractCommand {
         if (!scriptEntry.hasObject("target")) {
             if (((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer()) {
                 scriptEntry.addObject("target", ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer());
-            } else {
+            }
+            else {
                 throw new InvalidArgumentsException("This command does not have a player attached!");
             }
         }
@@ -87,7 +88,7 @@ public class BossShopCommand extends AbstractCommand {
         // Report to dB
         dB.report(scriptEntry, getName(),
                 (target != null ? target.debug() : "")
-                + (dshop != null ? dshop.debug() : ""));
+                        + (dshop != null ? dshop.debug() : ""));
 
         if (target == null) {
             dB.echoError(scriptEntry.getResidingQueue(), "Target not found!");
@@ -101,7 +102,7 @@ public class BossShopCommand extends AbstractCommand {
 
         BossShop bs = Support.getPlugin(BossShopSupport.class);
         BSShop shop = bs.getAPI().getShop(dshop.asString());
-        if(shop==null){
+        if (shop == null) {
             dB.echoError(scriptEntry.getResidingQueue(), "Shop not found!");
             return;
         }

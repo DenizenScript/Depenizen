@@ -215,7 +215,8 @@ public class ShopKeeper implements dObject {
     private static dItem wrapTradeItem(ItemStack itemStack) {
         if (itemStack != null) {
             return new dItem(itemStack);
-        } else {
+        }
+        else {
             return new dItem(Material.AIR);
         }
     }

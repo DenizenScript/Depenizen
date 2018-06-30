@@ -98,7 +98,7 @@ public class TraderCommand extends AbstractCommand {
                 + aH.debugObj("Context", context));
 
         // Do the execution
-        switch(action) {
+        switch (action) {
             case OPEN:
                 TraderAPI.openTrader(((BukkitScriptEntryData) scriptEntry.entryData).getPlayer().getPlayerEntity(), trait, status, context == Context.STOCK);
                 break;
@@ -113,6 +113,7 @@ public class TraderCommand extends AbstractCommand {
     private enum Context {
         STOCK, RELATION
     }
+
     private enum Action {
         OPEN, CLOSE
     }

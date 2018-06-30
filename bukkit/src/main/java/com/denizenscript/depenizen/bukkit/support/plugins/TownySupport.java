@@ -49,16 +49,17 @@ public class TownySupport extends Support {
                 dList towns = new dList();
                 if (attribute.hasContext(1)) {
                     try {
-                        for(Town town : TownyUniverse.getDataSource().getWorld(attribute.getContext(1)).getTowns()) {
+                        for (Town town : TownyUniverse.getDataSource().getWorld(attribute.getContext(1)).getTowns()) {
                             towns.add(new dTown(town).identify());
                         }
-                    } catch (NotRegisteredException e) {
+                    }
+                    catch (NotRegisteredException e) {
                         dB.echoError("World specified is not a registered towny world!");
                         return null;
                     }
                 }
                 else {
-                    for(Town town : TownyUniverse.getDataSource().getTowns()) {
+                    for (Town town : TownyUniverse.getDataSource().getTowns()) {
                         towns.add(new dTown(town).identify());
                     }
                 }

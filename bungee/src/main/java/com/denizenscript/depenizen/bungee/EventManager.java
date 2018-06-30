@@ -25,8 +25,9 @@ public class EventManager implements Listener {
     private static final Map<String, List<ClientConnection>> eventSubscriptions = new HashMap<String, List<ClientConnection>>();
 
     public static void subscribe(String event, ClientConnection client) {
-        if (!eventSubscriptions.containsKey(event))
+        if (!eventSubscriptions.containsKey(event)) {
             eventSubscriptions.put(event, new ArrayList<ClientConnection>());
+        }
         eventSubscriptions.get(event).add(client);
     }
 
@@ -126,7 +127,8 @@ public class EventManager implements Listener {
                     eventDeterminations.wait();
                 }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             dB.echoError(e);
         }
     }

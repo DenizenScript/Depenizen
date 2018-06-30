@@ -54,10 +54,12 @@ public class EssentialsSupport extends Support {
                     try {
                         Location loc = essentials.getWarps().getWarp(attribute.getContext(1));
                         return new dLocation(loc).getAttribute(attribute.fulfill(1));
-                    } catch (WarpNotFoundException e) {
+                    }
+                    catch (WarpNotFoundException e) {
                         dB.echoError("Warp not found");
                         return null;
-                    } catch (InvalidWorldException e) {
+                    }
+                    catch (InvalidWorldException e) {
                         dB.echoError("Invalid world for getting warp");
                         return null;
                     }

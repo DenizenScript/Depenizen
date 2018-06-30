@@ -149,7 +149,8 @@ public class DisguiseCommand extends AbstractCommand {
         if (!scriptEntry.hasObject("target")) {
             if (((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer()) {
                 scriptEntry.addObject("target", ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer().getDenizenEntity());
-            } else {
+            }
+            else {
                 throw new InvalidArgumentsException("This command does not have a player attached!");
             }
         }
@@ -196,7 +197,7 @@ public class DisguiseCommand extends AbstractCommand {
                 dB.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
                 return;
             }
-            MobDisguise mobDisguise = new MobDisguise(DisguiseType.valueOf(type.toString().toUpperCase()),!baby.asBoolean());
+            MobDisguise mobDisguise = new MobDisguise(DisguiseType.valueOf(type.toString().toUpperCase()), !baby.asBoolean());
             FlagWatcher watcher = mobDisguise.getWatcher();
             if (name != null) {
                 watcher.setCustomNameVisible(true);
@@ -237,7 +238,7 @@ public class DisguiseCommand extends AbstractCommand {
                 dB.echoError(scriptEntry.getResidingQueue(), "Data not specified!");
                 return;
             }
-            MiscDisguise miscDisguise = new MiscDisguise(DisguiseType.valueOf(type.toString().toUpperCase()),id.asInt(),data.asInt());
+            MiscDisguise miscDisguise = new MiscDisguise(DisguiseType.valueOf(type.toString().toUpperCase()), id.asInt(), data.asInt());
             FlagWatcher watcher = miscDisguise.getWatcher();
             if (name != null) {
                 watcher.setCustomNameVisible(true);
@@ -247,7 +248,7 @@ public class DisguiseCommand extends AbstractCommand {
                 DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), miscDisguise, target.getPlayer());
             }
             else {
-                DisguiseAPI.disguiseToAll(target.getBukkitEntity(),miscDisguise);
+                DisguiseAPI.disguiseToAll(target.getBukkitEntity(), miscDisguise);
             }
         }
     }

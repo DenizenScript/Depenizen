@@ -20,8 +20,12 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
     }
 
     public static SkillAPIPlayerExtension getFrom(dObject pl) {
-        if (!describes(pl)) return null;
-        else return new SkillAPIPlayerExtension((dPlayer) pl);
+        if (!describes(pl)) {
+            return null;
+        }
+        else {
+            return new SkillAPIPlayerExtension((dPlayer) pl);
+        }
     }
 
     public SkillAPIPlayerExtension(dPlayer player) {

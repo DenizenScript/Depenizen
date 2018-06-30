@@ -58,7 +58,7 @@ public class PlotSquaredPlayerExtension extends dObjectExtension {
                     return null;
                 }
                 dList plots = new dList();
-                for (Plot plays : new PlotAPI().getPlayerPlots(world.getWorld(),player.getPlayerEntity())) {
+                for (Plot plays : new PlotAPI().getPlayerPlots(world.getWorld(), player.getPlayerEntity())) {
                     plots.add(new dPlotSquaredPlot(plays).identify());
                 }
                 return plots.getAttribute(attribute.fulfill(1));

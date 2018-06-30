@@ -98,7 +98,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
             }
             BungeeSupport.getSocketClient().trySend(new ClientPacketOutTag(server.getName(), id, tag.asString(),
                     scriptEntry.shouldDebug(), scriptEntry.shouldDebug(),
-                   toSend));
+                    toSend));
         }
         else {
             dB.echoError("Server is not connected to a BungeeCord Socket.");

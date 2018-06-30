@@ -65,7 +65,6 @@ public class LuckPermsPlayerExtension extends dObjectExtension {
         }
 
 
-
         return null;
     }
 

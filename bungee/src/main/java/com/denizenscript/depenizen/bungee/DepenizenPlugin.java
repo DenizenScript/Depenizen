@@ -28,7 +28,8 @@ public class DepenizenPlugin extends Plugin implements DepenizenImplementation {
         instance = this;
         try {
             this.loadConfig();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             dB.echoError(e);
         }
         this.startSocket();
@@ -73,7 +74,7 @@ public class DepenizenPlugin extends Plugin implements DepenizenImplementation {
         return this.socketServer;
     }
 
-    public void loadConfig() throws Exception{
+    public void loadConfig() throws Exception {
 
         if (!getDataFolder().exists()) {
             getDataFolder().mkdir();

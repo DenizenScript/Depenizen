@@ -58,7 +58,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
     @Override
     public String getAttribute(Attribute attribute) {
 
-        if (!attribute.startsWith("worldguard") && !attribute.startsWith("wg") ) {
+        if (!attribute.startsWith("worldguard") && !attribute.startsWith("wg")) {
             return null;
         }
         attribute = attribute.fulfill(1);

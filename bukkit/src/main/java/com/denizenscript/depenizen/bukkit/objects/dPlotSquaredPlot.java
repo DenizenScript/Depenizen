@@ -154,7 +154,7 @@ public class dPlotSquaredPlot implements dObject {
         // -->
         if (attribute.startsWith("home")) {
             com.intellectualcrafters.plot.object.Location loca = plot.getHome();
-            return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(),loca.getY(),loca.getZ())).getAttribute(attribute.fulfill(1));
+            return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -166,7 +166,7 @@ public class dPlotSquaredPlot implements dObject {
         // -->
         if (attribute.startsWith("default_home")) {
             com.intellectualcrafters.plot.object.Location loca = plot.getDefaultHome();
-            return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(),loca.getY(),loca.getZ())).getAttribute(attribute.fulfill(1));
+            return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
