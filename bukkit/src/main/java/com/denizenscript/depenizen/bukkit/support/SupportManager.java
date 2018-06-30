@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.support;
 
 import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import net.aufdemrand.denizen.objects.dNPC;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizen.utilities.depends.Depends;
 import net.aufdemrand.denizencore.events.ScriptEvent;

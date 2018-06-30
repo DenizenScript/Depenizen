@@ -10,7 +10,6 @@ import net.aufdemrand.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.support.plugins.EssentialsSupport;
-import org.bukkit.entity.Player;
 
 import java.util.GregorianCalendar;
 
