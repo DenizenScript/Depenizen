@@ -19,10 +19,6 @@
 
     <repositories>
         <repository>
-            <id>md_5-public</id>
-            <url>http://repo.md-5.net/content/groups/public/</url>
-        </repository>
-        <repository>
             <id>sk89q-repo</id>
             <url>http://maven.sk89q.com/artifactory/repo/</url>
         </repository>
@@ -41,6 +37,10 @@
             <url>http://repo.dakanilabs.com/content/repositories/public</url>
         </repository>
         -->
+        <repository>
+            <id>md_5-public</id>
+            <url>http://repo.md-5.net/content/groups/public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
