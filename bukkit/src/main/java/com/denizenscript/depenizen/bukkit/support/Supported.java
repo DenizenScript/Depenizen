@@ -8,6 +8,8 @@ import com.denizenscript.depenizen.bukkit.Settings;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
+import java.util.HashMap;
+
 public class Supported {
 
     public static void setup(DepenizenPlugin depenizen, PluginManager pluginManager) {
@@ -62,9 +64,18 @@ public class Supported {
 
     private static final String pkg = "com.denizenscript.depenizen.bukkit.support.plugins.";
 
+    private static HashMap<String, String> casingFixes = new HashMap<String, String>();
+
+    static {
+        casingFixes.put("mcMMO", "McMMO");
+        casingFixes.put("pvparena", "PVPArena");
+        casingFixes.put("pvpstats", "PVPStats");
+    }
+
     private static Class<? extends Support> getSupportClass(String name) {
         try {
-            return (Class<? extends Support>) Class.forName(pkg + name + "Support");
+            String patched = casingFixes.get(name);
+            return (Class<? extends Support>) Class.forName(pkg + (patched == null ? name : patched) + "Support");
         }
         catch (Throwable ex) {
             dB.echoError("Critical error loading Depenizen support for " + name);
