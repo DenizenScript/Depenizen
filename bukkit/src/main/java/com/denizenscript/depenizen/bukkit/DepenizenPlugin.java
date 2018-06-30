@@ -62,7 +62,7 @@ public class DepenizenPlugin extends JavaPlugin implements DepenizenImplementati
             return;
         }
 
-        Supported.setup(this, pm, getClassLoader());
+        Supported.setup(this, pm);
     }
 
     public static void depenizenLog(String message) {

@@ -6,7 +6,7 @@ Socket:
   # connect on server startup.
   Enabled: false
   # The IP address that is hosting a DepenizenBungee socket server.
-  IP Address: "bungee.mcmonkey.org"
+  IP Address: "bungee.denizenscript.com"
   # The port at the IP address that is hosting a DepenizenBungee socket server.
   Port: 25578
   # The password to connect with. Please leave this in "quotes" to keep
