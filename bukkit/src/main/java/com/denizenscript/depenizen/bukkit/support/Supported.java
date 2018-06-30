@@ -16,7 +16,7 @@ public class Supported {
         SupportManager supportManager = new SupportManager(depenizen);
         for (String name : depenizen.getDescription().getSoftDepend()) {
             try {
-                if (set(name.toUpperCase(), pluginManager.getPlugin(name), supportManager)) {
+                if (set(name, pluginManager.getPlugin(name), supportManager)) {
                     DepenizenPlugin.depenizenLog(name + " hooked, enabling add-ons.");
                 }
                 else {
