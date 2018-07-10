@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.extensions.quests;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
+import com.denizenscript.depenizen.bukkit.support.plugins.QuestsSupport;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
 import me.blackvein.quests.Quests;
@@ -29,7 +30,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
 
     private QuestsPlayerExtension(dPlayer player) {
         this.player = player;
-        Quests quests = (Quests) Bukkit.getPluginManager().getPlugin("Quests");
+        Quests quests = (Quests) QuestsSupport.questsPlugin;
         // This would be Quests.getInstance() but the developers of Quests did a stupid and broke that method.
         this.quester = quests.getQuester(player.getOfflinePlayer().getUniqueId());
     }
