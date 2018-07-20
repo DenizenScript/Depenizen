@@ -83,6 +83,11 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         return "gpclaim@" + claim.getID();
     }
 
+    @Override
+    public String toString() {
+        return identify();
+    }
+
     public String simple() {
         return String.valueOf(claim.getID());
     }
