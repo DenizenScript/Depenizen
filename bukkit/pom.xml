@@ -12,9 +12,9 @@
     <name>DepenizenBukkit</name>
 
     <properties>
-        <craftbukkit.version>1.11-R0.1-SNAPSHOT</craftbukkit.version>
-        <citizens.version>2.0.21-SNAPSHOT</citizens.version>
-        <denizen.version>1.0.2-SNAPSHOT</denizen.version>
+        <craftbukkit.version>1.11.2-R0.1-SNAPSHOT</craftbukkit.version>
+        <citizens.version>2.0.24-SNAPSHOT</citizens.version>
+        <denizen.version>1.0.3-SNAPSHOT</denizen.version>
     </properties>
 
     <repositories>

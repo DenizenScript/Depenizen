@@ -7,6 +7,8 @@ import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.common.socket.DataDeserializer;
 import com.denizenscript.depenizen.common.socket.DataSerializer;
 import net.aufdemrand.denizen.events.bukkit.ScriptReloadEvent;
+import net.aufdemrand.denizen.nms.NMSHandler;
+import net.aufdemrand.denizen.nms.NMSVersion;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.scripts.ScriptHelper;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
@@ -60,8 +62,9 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
     public ClientizenSupport() {
         new ClientRunCommand().activate().as("CLIENTRUN").withOptions("clientrun [<script_name>] (def:<name>|<value>|...)", 1);
         new ClientScriptsCommand().activate().as("CLIENTSCRIPTS").withOptions("clientscripts [add/remove] [<file_name>|...] (players:<player>|...)", 2);
-        Bukkit.getMessenger().registerIncomingPluginChannel(DepenizenPlugin.getCurrentInstance(), "Clientizen", this);
-        Bukkit.getMessenger().registerOutgoingPluginChannel(DepenizenPlugin.getCurrentInstance(), "Clientizen");
+        String channelId = NMSHandler.getVersion().isAtLeast(NMSVersion.v1_13_R1) ? "depenizen:clientizen" : "Clientizen";
+        Bukkit.getMessenger().registerIncomingPluginChannel(DepenizenPlugin.getCurrentInstance(), channelId, this);
+        Bukkit.getMessenger().registerOutgoingPluginChannel(DepenizenPlugin.getCurrentInstance(), channelId);
         Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
         reloadClientScripts();
     }
