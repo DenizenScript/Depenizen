@@ -23,7 +23,7 @@ public class Supported {
                     DepenizenPlugin.depenizenLog(name + " not found, add-ons will not enable.");
                 }
             }
-            catch (Exception e) {
+            catch (Throwable e) {
                 dB.echoError("Error while hooking plugin '" + name + "'");
                 dB.echoError(e);
             }
