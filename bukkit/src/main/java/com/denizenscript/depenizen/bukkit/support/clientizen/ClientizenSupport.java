@@ -62,7 +62,7 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
     public ClientizenSupport() {
         new ClientRunCommand().activate().as("CLIENTRUN").withOptions("clientrun [<script_name>] (def:<name>|<value>|...)", 1);
         new ClientScriptsCommand().activate().as("CLIENTSCRIPTS").withOptions("clientscripts [add/remove] [<file_name>|...] (players:<player>|...)", 2);
-        String channelId = NMSHandler.getVersion().isAtLeast(NMSVersion.v1_13_R1) ? "depenizen:clientizen" : "Clientizen";
+        String channelId = NMSHandler.getVersion().isAtLeast(NMSVersion.v1_13_R2) ? "depenizen:clientizen" : "Clientizen";
         Bukkit.getMessenger().registerIncomingPluginChannel(DepenizenPlugin.getCurrentInstance(), channelId, this);
         Bukkit.getMessenger().registerOutgoingPluginChannel(DepenizenPlugin.getCurrentInstance(), channelId);
         Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
