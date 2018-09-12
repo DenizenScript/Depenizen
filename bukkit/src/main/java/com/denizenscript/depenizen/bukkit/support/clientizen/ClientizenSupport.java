@@ -59,10 +59,16 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
         autoScriptsPath = autoPath;
     }
 
+    public static String getChannelId() {
+        return NMSHandler.getVersion().isAtLeast(NMSVersion.v1_13_R2) ? "depenizen:clientizen" : "Clientizen";
+    }
+
+    private String channelId;
+
     public ClientizenSupport() {
         new ClientRunCommand().activate().as("CLIENTRUN").withOptions("clientrun [<script_name>] (def:<name>|<value>|...)", 1);
         new ClientScriptsCommand().activate().as("CLIENTSCRIPTS").withOptions("clientscripts [add/remove] [<file_name>|...] (players:<player>|...)", 2);
-        String channelId = NMSHandler.getVersion().isAtLeast(NMSVersion.v1_13_R2) ? "depenizen:clientizen" : "Clientizen";
+        channelId = getChannelId();
         Bukkit.getMessenger().registerIncomingPluginChannel(DepenizenPlugin.getCurrentInstance(), channelId, this);
         Bukkit.getMessenger().registerOutgoingPluginChannel(DepenizenPlugin.getCurrentInstance(), channelId);
         Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
@@ -229,12 +235,12 @@ public class ClientizenSupport extends Support implements Listener, PluginMessag
     }
 
     private static void send(Player player, DataSerializer serializer) {
-        player.sendPluginMessage(DepenizenPlugin.getCurrentInstance(), "Clientizen", serializer.toByteArray());
+        player.sendPluginMessage(DepenizenPlugin.getCurrentInstance(), getChannelId(), serializer.toByteArray());
     }
 
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] bytes) {
-        if (channel.equals("Clientizen")) {
+        if (channel.equals(channelId)) {
             DataDeserializer deserializer = new DataDeserializer(bytes);
             String subchannel = deserializer.readString();
             if (subchannel.equals("READY")) {
