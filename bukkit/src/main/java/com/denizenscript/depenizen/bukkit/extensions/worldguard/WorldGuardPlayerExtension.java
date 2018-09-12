@@ -60,7 +60,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
         attribute = attribute.fulfill(1);
 
         // <--[tag]
-        // @attribute <p@player.worldguard.can_build[<l@location>]>
+        // @attribute <p@player.worldguard.can_build[<location>]>
         // @returns Element(Boolean)
         // @description
         // Whether WorldGuard allows to build at a location.
@@ -79,7 +79,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
         // @attribute <p@player.worldguard.test_flag[<name>]>
         // @returns Element(Boolean)
         // @description
-        // Returns the state of a flag for that player at his location.
+        // Returns the state of a flag for that player at their location.
         // For example: .test_flag[pvp] returns 'true' when the player can be attacked.
         // @Plugin DepenizenBukkit, WorldGuard
         // -->
@@ -99,7 +99,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
             int args = 1;
             
             // <--[tag]
-            // @attribute <p@player.worldguard.test_flag[<name>].at[<l@location>]>
+            // @attribute <p@player.worldguard.test_flag[<name>].at[<location>]>
             // @returns Element(Boolean)
             // @description
             // Returns the state of a flag for that player at the specified location.
