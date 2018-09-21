@@ -48,10 +48,6 @@
             <id>md_5-public</id>
             <url>http://repo.md-5.net/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -59,6 +55,8 @@
             <groupId>com.github.koca2000</groupId>
             <artifactId>NoteBlockAPI</artifactId>
             <version>1.2.2.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/NoteBlockAPI.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.black_ixx</groupId>
@@ -334,6 +332,8 @@
             <groupId>com.github.TechFortress</groupId>
             <artifactId>GriefPrevention</artifactId>
             <version>16.10</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/lib/GriefPrevention.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.blackvein</groupId>
