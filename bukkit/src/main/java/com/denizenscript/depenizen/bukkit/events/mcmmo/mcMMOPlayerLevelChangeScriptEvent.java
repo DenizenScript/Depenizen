@@ -83,7 +83,7 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
 
     @Override
     public void destroy() {
-        //McMMOPlayerLevelChangeEvent.getHandlerList().unregister(this);
+        McMMOPlayerLevelChangeEvent.getHandlerList().unregister(this);
     }
 
     @Override
