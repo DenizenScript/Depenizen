@@ -331,11 +331,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>me.ryanhamshire</groupId>
+            <groupId>com.github.TechFortress</groupId>
             <artifactId>GriefPrevention</artifactId>
-            <version>13.9.1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/GriefPrevention.jar</systemPath>
+            <version>16.10</version>
         </dependency>
         <dependency>
             <groupId>me.blackvein</groupId>

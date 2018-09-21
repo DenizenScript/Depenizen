@@ -16,6 +16,9 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import org.bukkit.Chunk;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 public class GriefPreventionClaim implements dObject, Adjustable {
 
     static DataStore dataStore = GriefPrevention.instance.dataStore;
@@ -112,6 +115,89 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // -->
         if (attribute.startsWith("id")) {
             return new Element(claim.getID()).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.managers>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns the GriefPreventionClaim's managers.
+        // @Plugin DepenizenBukkit, GriefPrevention
+        // -->
+        if (attribute.startsWith("managers")) {
+            dList managers = new dList();
+            for (String manager : claim.managers) {
+                managers.add(new dPlayer(UUID.fromString(manager)).identify());
+            }
+            return managers.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.trusted>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns the GriefPreventionClaim's trusted.
+        // @Plugin DepenizenBukkit, GriefPrevention
+        // -->
+        if (attribute.startsWith("trusted")) {
+            dList trusted = new dList();
+            ArrayList<String> b = new ArrayList<String>();
+            claim.getPermissions(b,new ArrayList<String>(),new ArrayList<String>(),new ArrayList<String>());
+            for (String trust : b) {
+                trusted.add(new dPlayer(UUID.fromString(trust)).identify());
+            }
+            return trusted.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.builders>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns the GriefPreventionClaim's builders.
+        // @Plugin DepenizenBukkit, GriefPrevention
+        // -->
+        if (attribute.startsWith("builders")) {
+            dList trusted = new dList();
+            ArrayList<String> b = new ArrayList<String>();
+            claim.getPermissions(b,new ArrayList<String>(),new ArrayList<String>(),new ArrayList<String>());
+            for (String trust : b) {
+                trusted.add(new dPlayer(UUID.fromString(trust)).identify());
+            }
+            return trusted.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.containers>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns the GriefPreventionClaim's containers.
+        // @Plugin DepenizenBukkit, GriefPrevention
+        // -->
+        if (attribute.startsWith("containers")) {
+            dList trusted = new dList();
+            ArrayList<String> c = new ArrayList<String>();
+            claim.getPermissions(new ArrayList<String>(),c,new ArrayList<String>(),new ArrayList<String>());
+            for (String container : c) {
+                trusted.add(new dPlayer(UUID.fromString(container)).identify());
+            }
+            return trusted.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <gpclaim@gpclaim.accessors>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns the GriefPreventionClaim's accessors.
+        // @Plugin DepenizenBukkit, GriefPrevention
+        // -->
+        if (attribute.startsWith("accessors")) {
+            dList trusted = new dList();
+            ArrayList<String> a = new ArrayList<String>();
+            claim.getPermissions(new ArrayList<String>(),new ArrayList<String>(),a,new ArrayList<String>());
+            for (String access : a) {
+                trusted.add(new dPlayer(UUID.fromString(access)).identify());
+            }
+            return trusted.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
