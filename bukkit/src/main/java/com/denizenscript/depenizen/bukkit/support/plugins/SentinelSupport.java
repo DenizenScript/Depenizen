@@ -90,7 +90,7 @@ public class SentinelSupport extends Support {
                             def_name = definition_names.get(0);
                         }
                     }
-                    queue.addDefinition(def_name, new dEntity(ent));
+                    queue.addDefinition(def_name, new dEntity(ent).getDenizenObject());
                     queue.start();
                     if (DetermineCommand.hasOutcome(id)) {
                         return CoreUtilities.toLowerCase(DetermineCommand.getOutcome(id).get(0)).equals("true");
