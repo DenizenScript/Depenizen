@@ -24,7 +24,7 @@ import java.util.List;
 public class NBSCommand extends AbstractCommand {
     // <--[command]
     // @Name nbs
-    // @Syntax nbt [play/stop] (file:<file path>) [targets:<entity>|...]
+    // @Syntax nbs [play/stop] (file:<file path>) [targets:<entity>|...]
     // @Group Depenizen
     // @Plugin DepenizenBukkit, NoteBlockAPI
     // @Required 2
