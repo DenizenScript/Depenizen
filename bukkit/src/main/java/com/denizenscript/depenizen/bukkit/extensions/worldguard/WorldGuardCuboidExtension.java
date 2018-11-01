@@ -1,6 +1,12 @@
 package com.denizenscript.depenizen.bukkit.extensions.worldguard;
 
-import com.sk89q.worldedit.BlockVector;
+import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
+import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
+import com.denizenscript.depenizen.bukkit.support.Support;
+import com.denizenscript.depenizen.bukkit.support.plugins.WorldGuardSupport;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
@@ -11,10 +17,6 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
-import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.WorldGuardSupport;
 import org.bukkit.World;
 
 import java.util.ArrayList;
@@ -45,10 +47,10 @@ public class WorldGuardCuboidExtension extends dObjectExtension {
         WorldGuardPlugin worldGuard = Support.getPlugin(WorldGuardSupport.class);
         dLocation low = cuboid.getLow(0);
         dLocation high = cuboid.getHigh(0);
-        BlockVector vecLow = new BlockVector(low.getX(), low.getY(), low.getZ());
-        BlockVector vecHigh = new BlockVector(high.getX(), high.getY(), high.getZ());
+        BlockVector3 vecLow = BlockVector3.at(low.getX(), low.getY(), low.getZ());
+        BlockVector3 vecHigh = BlockVector3.at(high.getX(), high.getY(), high.getZ());
         ProtectedCuboidRegion region = new ProtectedCuboidRegion("FAKE_REGION", vecLow, vecHigh);
-        return worldGuard.getRegionManager(cuboid.getWorld()).getApplicableRegions(region);
+        return WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(cuboid.getWorld())).getApplicableRegions(region);
     }
 
     private boolean hasRegion() {

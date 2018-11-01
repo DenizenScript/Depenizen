@@ -1,9 +1,9 @@
 package com.denizenscript.depenizen.bukkit.extensions.worldguard;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.WorldGuardSupport;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.aufdemrand.denizen.objects.dLocation;
@@ -11,7 +11,6 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
-import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
 import org.bukkit.World;
 
 import java.util.ArrayList;
@@ -39,8 +38,8 @@ public class WorldGuardLocationExtension extends dObjectExtension {
     dLocation location = null;
 
     private ApplicableRegionSet getApplicableRegions() {
-        WorldGuardPlugin worldGuard = Support.getPlugin(WorldGuardSupport.class);
-        return worldGuard.getRegionManager(location.getWorld()).getApplicableRegions(location);
+        return WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(location.getWorld()))
+                .getApplicableRegions(BukkitAdapter.asBlockVector(location));
     }
 
     private boolean inRegion() {

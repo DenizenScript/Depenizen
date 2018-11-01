@@ -3,19 +3,20 @@ package com.denizenscript.depenizen.bukkit.extensions.worldguard;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.support.plugins.WorldGuardSupport;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.Flag;
+import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
-
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
-
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class WorldGuardPlayerExtension extends dObjectExtension {
@@ -40,19 +41,10 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
     Player player = null;
     WorldGuardPlugin wgp = null;
 
-    // All regions at the players location
-    private ApplicableRegionSet getApplicableRegions() {
-        return wgp.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation());
-    }
-
     // The original flag-reference without fuzziness
     private StateFlag getStateFlag(String s) {
-        for (Flag<?> flag : DefaultFlag.getFlags()) {
-            if (flag instanceof StateFlag && flag.getName().equalsIgnoreCase(s)) {
-                return (StateFlag) flag;
-            }
-        }
-        return null;
+        Flag flag = Flags.get(s);
+        return flag instanceof StateFlag ? (StateFlag) flag : null;
     }
 
     @Override
@@ -64,7 +56,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
         attribute = attribute.fulfill(1);
 
         // <--[tag]
-        // @attribute <p@player.worldguard.can_build[<l@location>]>
+        // @attribute <p@player.worldguard.can_build[<location>]>
         // @returns Element(Boolean)
         // @description
         // Whether WorldGuard allows to build at a location.
@@ -75,17 +67,16 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
             if (location == null) {
                 return null;
             }
-            if (wgp.canBuild(player, location)) {
-                return new Element(true).getAttribute(attribute.fulfill(1));
-            }
-            return new Element(false).getAttribute(attribute.fulfill(1));
+            return new Element(WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), wgp.wrapPlayer(player)))
+            		  .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.worldguard.test_flag[<name>]>
         // @returns Element(Boolean)
         // @description
-        // Returns the state of a flag at the players location.
+        // Returns the state of a flag for that player at their location.
+        // For example: .test_flag[pvp] returns 'true' when the player can be attacked.
         // @Plugin DepenizenBukkit, WorldGuard
         // -->
         if (attribute.startsWith("test_flag")) {
@@ -98,11 +89,27 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
                 dB.echoError("The tag p@player.worlduard.test_flag[...] has an invalid value: " + attribute.getContext(1));
                 return null;
             }
-            ApplicableRegionSet set = getApplicableRegions();
-            if (set.testState(wgp.wrapPlayer(player), flag)) {
-                return new Element(true).getAttribute(attribute.fulfill(1));
+
+            RegionQuery query = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
+            Location loc = player.getLocation();
+            int args = 1;
+
+            // <--[tag]
+            // @attribute <p@player.worldguard.test_flag[<name>].at[<location>]>
+            // @returns Element(Boolean)
+            // @description
+            // Returns the state of a flag for that player at the specified location.
+            // @Plugin DepenizenBukkit, WorldGuard
+            // -->
+            if (attribute.getAttribute(2).startsWith("at") && attribute.hasContext(2)) {
+                loc = dLocation.valueOf(attribute.getContext(2));
+                args = 2;
+                if (loc == null) {
+                    return null;
+                }
             }
-            return new Element(false).getAttribute(attribute.fulfill(1));
+            return new Element(query.testState(BukkitAdapter.adapt(loc), wgp.wrapPlayer(player), flag))
+                      .getAttribute(attribute.fulfill(args));
         }
 
         return null;

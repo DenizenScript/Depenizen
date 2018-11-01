@@ -89,6 +89,11 @@ public class dAreaShop implements dObject {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return identify();
+    }
+
     public GeneralRegion getAreaShop() {
         return areaShop;
     }
