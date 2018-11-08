@@ -8,7 +8,6 @@ import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.tags.Attribute;
-import org.bukkit.Material;
 
 public class PrismActionBlock implements Property {
 
@@ -65,7 +64,7 @@ public class PrismActionBlock implements Property {
                 return null;
             }
             else {
-                return dMaterial.getMaterialFrom(Material.getMaterial(id), subId > -1 ? subId : 0)
+                return dMaterial.getMaterialFrom(dMaterial.getLegacyMaterial(id), subId > -1 ? subId : 0)
                         .getAttribute(attribute.fulfill(1));
             }
         }
@@ -84,7 +83,7 @@ public class PrismActionBlock implements Property {
                 return null;
             }
             else {
-                return dMaterial.getMaterialFrom(Material.getMaterial(id), subId > -1 ? subId : 0)
+                return dMaterial.getMaterialFrom(dMaterial.getLegacyMaterial(id), subId > -1 ? subId : 0)
                         .getAttribute(attribute.fulfill(1));
             }
         }

@@ -1,9 +1,9 @@
 package com.denizenscript.depenizen.bukkit.extensions.worldguard;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.support.plugins.WorldGuardSupport;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.aufdemrand.denizen.objects.dWorld;
@@ -11,7 +11,6 @@ import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
-import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
 import org.bukkit.World;
 
 public class WorldGuardWorldExtension extends dObjectExtension {
@@ -35,8 +34,7 @@ public class WorldGuardWorldExtension extends dObjectExtension {
 
     private WorldGuardWorldExtension(dWorld world) {
         this.world = world.getWorld();
-        this.manager = ((WorldGuardPlugin) Support.getPlugin(WorldGuardSupport.class))
-                .getRegionManager(this.world);
+        this.manager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(this.world));
     }
 
     World world;

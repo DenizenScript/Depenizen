@@ -1,8 +1,9 @@
 package com.denizenscript.depenizen.bukkit.commands.worldguard;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.sk89q.worldedit.BlockVector;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dWorld;
@@ -13,7 +14,6 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
-import com.denizenscript.depenizen.bukkit.support.plugins.WorldGuardSupport;
 import org.bukkit.Location;
 import org.bukkit.World;
 
@@ -115,20 +115,20 @@ public class RegionCommand extends AbstractCommand {
         dB.report(scriptEntry, getName(), region_id.debug() + (cuboid != null ? cuboid.debug() : "")
                 + aH.debugObj("world", world.getName()) + action.debug());
 
+        RegionManager regionManager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
+
         if (action.asString().equalsIgnoreCase("REMOVE")) {
-            WorldGuardPlugin worldGuard = Support.getPlugin(WorldGuardSupport.class);
-            worldGuard.getRegionManager(world).removeRegion(region_id.asString());
+            regionManager.removeRegion(region_id.asString());
             return;
         }
 
         Location low = cuboid.getLow(0);
         Location high = cuboid.getHigh(0);
         ProtectedCuboidRegion region = new ProtectedCuboidRegion(region_id.asString(),
-                new BlockVector(low.getX(), low.getY(), low.getZ()),
-                new BlockVector(high.getX(), high.getY(), high.getZ()));
+                BlockVector3.at(low.getX(), low.getY(), low.getZ()),
+                BlockVector3.at(high.getX(), high.getY(), high.getZ()));
 
-        WorldGuardPlugin worldGuard = Support.getPlugin(WorldGuardSupport.class);
-        worldGuard.getRegionManager(cuboid.getWorld()).addRegion(region);
+        regionManager.addRegion(region);
 
     }
 }
