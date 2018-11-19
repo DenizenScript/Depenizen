@@ -3,8 +3,9 @@ package com.denizenscript.depenizen.bukkit.extensions.worldedit;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.support.plugins.WorldEditSupport;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.bukkit.selections.Selection;
+import com.sk89q.worldedit.regions.RegionSelector;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.dObject;
@@ -45,9 +46,11 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("selected_region")) {
             WorldEditPlugin worldEdit = Support.getPlugin(WorldEditSupport.class);
-            Selection selection = worldEdit.getSelection(player);
+            RegionSelector selection = worldEdit.getSession(player).getRegionSelector(BukkitAdapter.adapt(player.getWorld()));
             if (selection != null) {
-                return new dCuboid(selection.getMinimumPoint(), selection.getMaximumPoint()).getAttribute(attribute.fulfill(1));
+                return new dCuboid(BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
+                        BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMaximumPoint()))
+                            .getAttribute(attribute.fulfill(1));
             }
         }
 

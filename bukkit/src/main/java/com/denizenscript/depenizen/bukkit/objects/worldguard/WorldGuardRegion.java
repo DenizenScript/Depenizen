@@ -1,9 +1,7 @@
 package com.denizenscript.depenizen.bukkit.objects.worldguard;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.WorldGuardSupport;
-import com.sk89q.worldguard.bukkit.BukkitUtil;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -55,8 +53,7 @@ public class WorldGuardRegion implements dObject {
                 dB.echoError("valueOf WorldGuard region returning null: Invalid world '" + worldName + "'");
                 return null;
             }
-            WorldGuardPlugin plugin = Support.getPlugin(WorldGuardSupport.class);
-            RegionManager manager = plugin.getRegionManager(world);
+            RegionManager manager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
             if (!manager.hasRegion(regionName)) {
                 dB.echoError("valueOf WorldGuard region returning null: Invalid region '" + regionName
                         + "' for world '" + worldName + "'");
@@ -155,8 +152,8 @@ public class WorldGuardRegion implements dObject {
                 }
                 return null;
             }
-            return new dCuboid(BukkitUtil.toLocation(world, region.getMinimumPoint()),
-                    BukkitUtil.toLocation(world, region.getMaximumPoint())).getAttribute(attribute.fulfill(1));
+            return new dCuboid(BukkitAdapter.adapt(world, region.getMinimumPoint()),
+                    BukkitAdapter.adapt(world, region.getMaximumPoint())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

@@ -3,19 +3,19 @@ package com.denizenscript.depenizen.bukkit.extensions.worldguard;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.support.plugins.WorldGuardSupport;
-import com.sk89q.worldguard.bukkit.RegionQuery;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.Flag;
+import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
-
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -43,12 +43,8 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
 
     // The original flag-reference without fuzziness
     private StateFlag getStateFlag(String s) {
-        for (Flag<?> flag : DefaultFlag.getFlags()) {
-            if (flag instanceof StateFlag && flag.getName().equalsIgnoreCase(s)) {
-                return (StateFlag) flag;
-            }
-        }
-        return null;
+        Flag flag = Flags.get(s);
+        return flag instanceof StateFlag ? (StateFlag) flag : null;
     }
 
     @Override
@@ -71,7 +67,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
             if (location == null) {
                 return null;
             }
-            return new Element(wgp.canBuild(player, location))
+            return new Element(WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), wgp.wrapPlayer(player)))
             		  .getAttribute(attribute.fulfill(1));
         }
 
@@ -93,11 +89,11 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
                 dB.echoError("The tag p@player.worlduard.test_flag[...] has an invalid value: " + attribute.getContext(1));
                 return null;
             }
-            
-            RegionQuery query = wgp.getRegionContainer().createQuery();
+
+            RegionQuery query = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
             Location loc = player.getLocation();
             int args = 1;
-            
+
             // <--[tag]
             // @attribute <p@player.worldguard.test_flag[<name>].at[<location>]>
             // @returns Element(Boolean)
@@ -111,8 +107,8 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
                 if (loc == null) {
                     return null;
                 }
-            }    
-            return new Element(query.testState(loc, player, flag))
+            }
+            return new Element(query.testState(BukkitAdapter.adapt(loc), wgp.wrapPlayer(player), flag))
                       .getAttribute(attribute.fulfill(args));
         }
 
