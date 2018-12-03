@@ -121,6 +121,11 @@ public class HeroesHero implements dObject, Adjustable {
         return denizenObj instanceof dNPC;
     }
 
+    @Override
+    public String toString() {
+        return identify();
+    }
+
     public dObject getDenizenObject() {
         return denizenObj;
     }

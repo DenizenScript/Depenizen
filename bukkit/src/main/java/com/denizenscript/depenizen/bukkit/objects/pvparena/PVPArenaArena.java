@@ -83,6 +83,11 @@ public class PVPArenaArena implements dObject {
     }
 
     @Override
+    public String toString() {
+        return identify();
+    }
+
+    @Override
     public String getAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;

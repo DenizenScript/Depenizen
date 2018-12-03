@@ -112,6 +112,11 @@ public class MythicMobsMob implements dObject, Adjustable {
     }
 
     @Override
+    public String toString() {
+        return identify();
+    }
+
+    @Override
     public String getAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;

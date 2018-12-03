@@ -97,6 +97,11 @@ public class dClan implements dObject {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return identify();
+    }
+
     public Clan getClan() {
         return clan;
     }

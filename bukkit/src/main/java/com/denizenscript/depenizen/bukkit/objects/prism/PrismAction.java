@@ -137,6 +137,11 @@ public class PrismAction implements dObject, Adjustable {
     }
 
     @Override
+    public String toString() {
+        return identify();
+    }
+
+    @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
