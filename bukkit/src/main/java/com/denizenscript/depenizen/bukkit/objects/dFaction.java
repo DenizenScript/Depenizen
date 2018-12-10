@@ -115,6 +115,11 @@ public class dFaction implements dObject {
     }
 
     @Override
+    public String toString() {
+        return identify();
+    }
+
+    @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
@@ -281,13 +286,13 @@ public class dFaction implements dObject {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.chunks>
+        // @attribute <faction@faction.claimed_chunks>
         // @returns dList(dChunk)
         // @description
         // Returns a list of all chunks claimed in the faction.
         // @Plugin DepenizenBukkit, Factions
         // -->
-        if (attribute.startsWith("chunks")) {
+        if (attribute.startsWith("claimed_chunks")) {
             Set<PS> chunks = BoardColl.get().getChunks(faction);
             dList dchunks = new dList();
             for (PS ps : chunks) {
@@ -297,17 +302,17 @@ public class dFaction implements dObject {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.players>
+        // @attribute <faction@faction.list_players>
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all players in the faction.
         // @Plugin DepenizenBukkit, Factions
         // -->
-        if (attribute.startsWith("players")) {
+        if (attribute.startsWith("list_players")) {
             Set<PS> chunks = BoardColl.get().getChunks(faction);
             dList players = new dList();
             for (MPlayer ps : faction.getMPlayers()) {
-                players.add(dPlayer.valueOf(faction.getLeader().getName()).identify());
+                players.add(dPlayer.valueOf(faction.getLeader().getUuid().toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
         }

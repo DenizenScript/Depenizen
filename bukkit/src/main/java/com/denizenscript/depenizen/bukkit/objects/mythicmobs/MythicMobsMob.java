@@ -112,6 +112,11 @@ public class MythicMobsMob implements dObject, Adjustable {
     }
 
     @Override
+    public String toString() {
+        return identify();
+    }
+
+    @Override
     public String getAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
@@ -274,8 +279,6 @@ public class MythicMobsMob implements dObject, Adjustable {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
-
         // <--[mechanism]
         // @object MythicMob
         // @name global_cooldown
@@ -286,7 +289,7 @@ public class MythicMobsMob implements dObject, Adjustable {
         // <mythicmob@mythicmob.global_cooldown>
         // -->
         if (mechanism.matches("global_cooldown") && mechanism.requireInteger()) {
-            mob.setGlobalCooldown(value.asInt());
+            mob.setGlobalCooldown(mechanism.getValue().asInt());
         }
 
         // <--[mechanism]
@@ -312,7 +315,7 @@ public class MythicMobsMob implements dObject, Adjustable {
         // <mythicmob@mythicmob.target>
         // -->
         else if (mechanism.matches("target") && mechanism.requireObject(dEntity.class)) {
-            dEntity mTarget = dEntity.valueOf(value.asString());
+            dEntity mTarget = dEntity.valueOf(mechanism.getValue().asString());
             if (mTarget == null || !mTarget.isValid() || mTarget.getLivingEntity() == null) {
                 return;
             }

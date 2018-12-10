@@ -22,6 +22,13 @@ public class ASkyBlockWorldExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "is_skyblock_world"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public ASkyBlockWorldExtension(dWorld world) {
         this.world = world;
     }

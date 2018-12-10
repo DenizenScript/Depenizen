@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.dtltraders;
 
 import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
@@ -84,7 +83,7 @@ public class TraderCommand extends AbstractCommand {
 
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         // Fetch required objects
         Action action = (Action) scriptEntry.getObject("action");

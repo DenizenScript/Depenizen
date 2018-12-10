@@ -18,6 +18,8 @@ public class ServerSwitchScriptEvent extends BungeeScriptEvent {
     // bungee player switches to server
     // bungee player switches to <server>
     //
+    // @Regex ^on bungee player switches to [^\s]+$
+    //
     // @Triggers when a player switches to a different server on the BungeeCord network.
     //
     // @Cancellable false
@@ -47,8 +49,8 @@ public class ServerSwitchScriptEvent extends BungeeScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        return tryServer(server, CoreUtilities.getXthArg(4, s));
+    public boolean matches(ScriptPath path) {
+        return tryServer(server, path.eventArgLowerAt(4));
     }
 
     @Override

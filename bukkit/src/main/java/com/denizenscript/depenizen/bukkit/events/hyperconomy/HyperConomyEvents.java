@@ -68,11 +68,17 @@ public class HyperConomyEvents implements HyperEventListener {
             // player buys item
             // player buys <item>
             // player buys <material>
+            //
+            // @Regex ^on player buys [^\s]+$
+            //
             // @Triggers when a player buys an item from a HyperConomy shop.
+            //
             // @Context
             // <context.item> returns the dItem the player bought.
+            //
             // @Determine
             // NONE
+            //
             // @Plugin DepenizenBukkit, HyperConomy
             // -->
             case BUY:
@@ -87,11 +93,17 @@ public class HyperConomyEvents implements HyperEventListener {
             // player sells item
             // player sells <item>
             // player sells <material>
+            //
+            // @Regex ^on player sells [^\s]+$
+            //
             // @Triggers when a player sells an item to a HyperConomy shop.
+            //
             // @Context
             // <context.item> returns the dItem the player sold.
+            //
             // @Determine
             // NONE
+            //
             // @Plugin DepenizenBukkit, HyperConomy
             // -->
             case SELL:

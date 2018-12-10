@@ -4,36 +4,34 @@ import com.nisovin.shopkeepers.api.events.ShopkeeperTradeEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeper;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// on shopkeeper trade
-//
-// @Regex ^on shopkeeper trade$
-//
-// @Cancellable true
-//
-// @Triggers when a trade with a shopkeeper is completed.
-//
-// @Context
-// <context.recipe> Returns the recipe for this trade.
-// <context.shopkeeper> Returns the ShopKeeper that the trade occured with.
-//
-// @Plugin DepenizenBukkit, ShopKeepers
-//
-// -->
-
 public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // shopkeeper trade
+    //
+    // @Regex ^on shopkeeper trade$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a trade with a shopkeeper is completed.
+    //
+    // @Context
+    // <context.recipe> Returns the recipe for this trade.
+    // <context.shopkeeper> Returns the ShopKeeper that the trade occured with.
+    //
+    // @Plugin DepenizenBukkit, ShopKeepers
+    //
+    // -->
 
     public ShopKeeperTradeScriptEvent() {
         instance = this;
@@ -51,23 +49,13 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
+    public boolean matches(ScriptPath path) {
         return true;
     }
 
     @Override
     public String getName() {
         return "ShopKeeperTrade";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        ShopkeeperTradeEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -96,9 +84,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
         player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         keeper = new ShopKeeper(event.getShopkeeper());
         recipe = ShopKeeper.wrapTradingRecipe(event.getTradingRecipe());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

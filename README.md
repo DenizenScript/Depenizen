@@ -3,11 +3,11 @@ Depenizen
 
 **Depenizen: An extension of Denizen**
 
-- **Wiki**: http://wiki.citizensnpcs.co/Depenizen
-- **IRC**: http://webchat.esper.net/?channels=denizen-dev
+- **Wiki (old)**: https://wiki.citizensnpcs.co/Depenizen
+- **Discord**: https://discord.gg/Q6pZGSR
 - **Denizen For Bukkit**: https://github.com/DenizenScript/Denizen-For-Bukkit
 - **Denizen2Sponge**: https://github.com/DenizenScript/Denizen2Sponge
-- **Builds**: http://ci.citizensnpcs.co/job/Depenizen/
+- **Builds**: https://ci.citizensnpcs.co/job/Depenizen/
   - Use DepenizenBukkit for Bukkit/Spigot servers (install to `your_server_directory/plugins`)
   - Use Depenizen2Sponge for Sponge servers (install to `your_server_directory/mods`)
   - Use DepenizenBungee for BungeeCord servers (see below.)
@@ -51,7 +51,7 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 - dtlTraders (https://dev.bukkit.org/bukkit-plugins/dtltraders/)
 - Dynmap (https://www.spigotmc.org/resources/dynmap.274/)
 - EffectLib (https://dev.bukkit.org/projects/effectlib)
-- Essentials (https://hub.spigotmc.org/jenkins/job/Spigot-Essentials/)
+- EssentialsX (https://www.spigotmc.org/resources/essentialsx.9089/)
 - Factions (https://www.spigotmc.org/resources/factions.1900/)
 - GriefPrevention (https://www.spigotmc.org/resources/griefprevention.1884/)
 - Heroes (https://www.spigotmc.org/resources/heroes.305/)
@@ -59,10 +59,12 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 - Jobs Reborn (https://www.spigotmc.org/resources/jobs-reborn.4216/)
 - Lib's Disguises (https://www.spigotmc.org/resources/libs-disguises.32453/)
 - LuckPerms (https://www.spigotmc.org/resources/luckperms-an-advanced-permissions-plugin.28140/)
+- MagicSpells (https://github.com/TheComputerGeek2/MagicSpells/releases)
 - mcMMO (https://www.spigotmc.org/resources/mcmmo.2445/)
 - MobArena (http://dev.bukkit.org/bukkit-plugins/mobarena/)
 - MythicMobs (https://www.spigotmc.org/resources/mythicmobs.5702/)
 - NoCheatPlus (http://ci.md-5.net/job/NoCheatPlus/)
+- NoteBlockAPI (https://www.spigotmc.org/resources/noteblockapi.19287/)
 - PlaceholderAPI (https://www.spigotmc.org/resources/placeholderapi.6245/)
 - PlayerPoints (https://dev.bukkit.org/projects/playerpoints)
 - PlotMe (https://dev.bukkit.org/bukkit-plugins/plotme/)

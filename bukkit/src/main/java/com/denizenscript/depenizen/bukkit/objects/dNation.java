@@ -106,6 +106,11 @@ public class dNation implements dObject {
     }
 
     @Override
+    public String toString() {
+        return identify();
+    }
+
+    @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
@@ -215,6 +220,7 @@ public class dNation implements dObject {
         // @description
         // Returns the nation's name.
         // @Plugin DepenizenBukkit, Towny
+        // -->
         else if (attribute.startsWith("name")) {
             return new Element(nation.getName())
                     .getAttribute(attribute.fulfill(1));

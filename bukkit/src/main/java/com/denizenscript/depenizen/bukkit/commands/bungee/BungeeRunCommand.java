@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.commands.bungee;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.common.socket.client.packet.ClientPacketOutRunScript;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -85,7 +84,7 @@ public class BungeeRunCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         dList servers = scriptEntry.getdObject("servers");
         Element scriptName = scriptEntry.getElement("script_name");
@@ -95,7 +94,7 @@ public class BungeeRunCommand extends AbstractCommand {
         dList serverNames = new dList();
         serverNames.setPrefix("servers");
 
-        for (dServer server : servers.filter(dServer.class)) {
+        for (dServer server : servers.filter(dServer.class, scriptEntry)) {
             serverNames.add(server.getName());
         }
 
@@ -107,7 +106,8 @@ public class BungeeRunCommand extends AbstractCommand {
             Map<String, String> finalDefs = new HashMap<String, String>();
             if (definitions != null) {
                 if (definitions.size() % 2 != 0) {
-                    throw new CommandExecutionException("Uneven number of elements in definitions list!");
+                    dB.echoError("Uneven number of elements in definitions list!");
+                    return;
                 }
                 for (int i = 0; i < definitions.size(); i++) {
                     finalDefs.put(definitions.get(i), definitions.get(++i));

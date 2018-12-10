@@ -12,6 +12,8 @@ public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
     // @Events
     // bungee server disconnects
     //
+    // @Regex ^on bungee server disconnects$
+    //
     // @Triggers when another server disconnects from the BungeeCord socket.
     //
     // @Cancellable false
@@ -36,7 +38,7 @@ public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
+    public boolean matches(ScriptPath path) {
         return true;
     }
 

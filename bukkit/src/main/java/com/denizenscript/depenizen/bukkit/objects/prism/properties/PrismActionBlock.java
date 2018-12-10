@@ -2,12 +2,12 @@ package com.denizenscript.depenizen.bukkit.objects.prism.properties;
 
 import com.denizenscript.depenizen.bukkit.objects.prism.PrismAction;
 import me.botsko.prism.actions.Handler;
-import net.aufdemrand.denizen.objects.dMaterial;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizen.utilities.blocks.OldMaterialsHelper;
 
 public class PrismActionBlock implements Property {
 
@@ -64,7 +64,7 @@ public class PrismActionBlock implements Property {
                 return null;
             }
             else {
-                return dMaterial.getMaterialFrom(dMaterial.getLegacyMaterial(id), subId > -1 ? subId : 0)
+                return OldMaterialsHelper.getMaterialFrom(OldMaterialsHelper.getLegacyMaterial(id), subId > -1 ? subId : 0)
                         .getAttribute(attribute.fulfill(1));
             }
         }
@@ -83,7 +83,7 @@ public class PrismActionBlock implements Property {
                 return null;
             }
             else {
-                return dMaterial.getMaterialFrom(dMaterial.getLegacyMaterial(id), subId > -1 ? subId : 0)
+                return OldMaterialsHelper.getMaterialFrom(OldMaterialsHelper.getLegacyMaterial(id), subId > -1 ? subId : 0)
                         .getAttribute(attribute.fulfill(1));
             }
         }

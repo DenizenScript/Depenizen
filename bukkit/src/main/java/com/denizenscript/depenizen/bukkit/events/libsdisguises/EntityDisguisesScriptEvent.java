@@ -5,37 +5,35 @@ import me.libraryaddict.disguise.events.DisguiseEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dEntity;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// libsdisguises disguises disguise
-// libsdisguises disguise disguise
-// libsdisguises disguises <dLibsDisguises>
-// libsdisguises disguise <dLibsDisguises>
-//
-// @Regex ^on libsdisguises [^\s]+ disguise$
-//
-// @Cancellable true
-//
-// @Triggers when a entity disguises.
-//
-// @Context
-// <context.entity> returns the entity who disguised.
-// <context.disguise> returns the disguise in use.
-//
-// @Plugin DepenizenBukkit, LibsDisguises
-//
-// -->
-
 public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // libsdisguises disguises disguise
+    // libsdisguises disguise disguise
+    // libsdisguises disguises <dLibsDisguises>
+    // libsdisguises disguise <dLibsDisguises>
+    //
+    // @Regex ^on libsdisguises [^\s]+ disguise$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a entity disguises.
+    //
+    // @Context
+    // <context.entity> returns the entity who disguised.
+    // <context.disguise> returns the disguise in use.
+    //
+    // @Plugin DepenizenBukkit, LibsDisguises
+    //
+    // -->
 
     public EntityDisguisesScriptEvent() {
         instance = this;
@@ -54,9 +52,8 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String disguiseName = CoreUtilities.getXthArg(2, lower);
+    public boolean matches(ScriptPath path) {
+        String disguiseName = path.eventArgLowerAt(2);
 
         if (disguiseName.equals("disguise")) {
             return true;
@@ -69,16 +66,6 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public String getName() {
         return "DisguiseEvent";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        DisguiseEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -106,10 +93,7 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     public void onDisguise(DisguiseEvent event) {
         disguise = new LibsDisguise(event.getDisguise());
         entity = new dEntity(event.getEntity());
-
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

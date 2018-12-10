@@ -26,6 +26,13 @@ public class BNPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "bn"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private BNPlayerExtension(dPlayer player) {
         this.player = player.getPlayerEntity();
     }

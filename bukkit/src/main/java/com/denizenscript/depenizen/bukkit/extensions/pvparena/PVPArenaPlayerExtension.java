@@ -24,6 +24,13 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "pvparena"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private PVPArenaPlayerExtension(dPlayer player) {
         this.player = ArenaPlayer.parsePlayer(player.getName());
     }
@@ -47,7 +54,7 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
             // -->
             if (attribute.startsWith("inarena") || attribute.startsWith("in_arena")) {
                 if (player.getArena() == null) {
-                    return Element.FALSE.getAttribute(attribute.fulfill(1));
+                    return new Element(false).getAttribute(attribute.fulfill(1));
                 }
                 if (attribute.hasContext(1)) {
                     PVPArenaArena a = PVPArenaArena.valueOf(attribute.getContext(1));

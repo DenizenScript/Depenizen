@@ -6,7 +6,6 @@ import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
@@ -31,6 +30,13 @@ public class LuckPermsPlayerExtension extends dObjectExtension {
     ///////////////////
     // Instance Fields and Methods
     /////////////
+
+    public static final String[] handledTags = new String[] {
+            "luckperms_tracks"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
 
     private LuckPermsPlayerExtension(dPlayer player) {
         this.player = player;
@@ -69,7 +75,6 @@ public class LuckPermsPlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }
 

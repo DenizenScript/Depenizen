@@ -4,36 +4,34 @@ import com.denizenscript.depenizen.bukkit.objects.dPlotSquaredPlot;
 import com.plotsquared.bukkit.events.PlotClearEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// plotsquared plot clear plotsquaredplot
-// plotsquared plot clears plotsquaredplot
-// plotsquared plot clear <dplotsquaredplot>
-// plotsquared plot clears <dplotsquaredplot>
-//
-// @Regex ^on plotsquared plot [^\s]+ clears( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable true
-//
-// @Triggers when a plot is cleared.
-//
-// @Context
-// <context.plot> returns the plot that is cleared.
-//
-// @Plugin DepenizenBukkit, PlotSquared
-//
-// -->
-
 public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // plotsquared plot clear plotsquaredplot
+    // plotsquared plot clears plotsquaredplot
+    // plotsquared plot clear <dplotsquaredplot>
+    // plotsquared plot clears <dplotsquaredplot>
+    //
+    // @Regex ^on plotsquared plot [^\s]+ clears( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a plot is cleared.
+    //
+    // @Context
+    // <context.plot> returns the plot that is cleared.
+    //
+    // @Plugin DepenizenBukkit, PlotSquared
+    //
+    // -->
 
     public PlotClearScriptEvent() {
         instance = this;
@@ -50,9 +48,8 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String plotName = CoreUtilities.getXthArg(3, lower);
+    public boolean matches(ScriptPath path) {
+        String plotName = path.eventArgLowerAt(3);
         if (plotName.equals("plotsquaredplot")) {
             return true;
         }
@@ -63,16 +60,6 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
     @Override
     public String getName() {
         return "PlotClearEvent";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        PlotClearEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -96,10 +83,7 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
     @EventHandler
     public void onPlotClear(PlotClearEvent event) {
         plot = new dPlotSquaredPlot(event.getPlot());
-
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

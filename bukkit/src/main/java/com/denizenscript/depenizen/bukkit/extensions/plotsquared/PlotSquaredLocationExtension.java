@@ -6,7 +6,6 @@ import com.denizenscript.depenizen.bukkit.objects.dPlotSquaredPlot;
 import com.intellectualcrafters.plot.api.PlotAPI;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
@@ -29,6 +28,13 @@ public class PlotSquaredLocationExtension extends dObjectExtension {
     ///////////////////
     // Instance Fields and Methods
     /////////////
+
+    public static final String[] handledTags = new String[] {
+            "plotsquared_plot"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
 
     private PlotSquaredLocationExtension(dLocation location) {
         this.location = location;
@@ -62,6 +68,5 @@ public class PlotSquaredLocationExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

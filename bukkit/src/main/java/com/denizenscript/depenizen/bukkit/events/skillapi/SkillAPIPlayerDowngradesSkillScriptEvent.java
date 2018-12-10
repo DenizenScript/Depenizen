@@ -5,39 +5,37 @@ import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// skillapi player downgrades skill (in <area>)
-// skillapi player downgrades <skill> (in <area>)
-//
-// @Regex ^on skillapi player downgrades [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable false
-//
-// @Triggers when a player downgrades a skill in SkillAPI.
-//
-// @Context
-// <context.level> returns the level the player went down to.
-// <context.refund> returns how much the the player was refunded.
-// <context.skill_name> returns the name of the skill downgraded.
-//
-// @Determine
-// None
-//
-// @Plugin DepenizenBukkit, SkillAPI
-// -->
-
 public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // skillapi player downgrades skill (in <area>)
+    // skillapi player downgrades <skill> (in <area>)
+    //
+    // @Regex ^on skillapi player downgrades [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player downgrades a skill in SkillAPI.
+    //
+    // @Context
+    // <context.level> returns the level the player went down to.
+    // <context.refund> returns how much the the player was refunded.
+    // <context.skill_name> returns the name of the skill downgraded.
+    //
+    // @Determine
+    // None
+    //
+    // @Plugin DepenizenBukkit, SkillAPI
+    // -->
 
     public SkillAPIPlayerDowngradesSkillScriptEvent() {
         instance = this;
@@ -57,15 +55,14 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String skill = CoreUtilities.getXthArg(3, lower);
+    public boolean matches(ScriptPath path) {
+        String skill = path.eventArgLowerAt(3);
 
         if (!skill.equals("skill") && !skill.equals(CoreUtilities.toLowerCase(this.skill.asString()))) {
             return false;
         }
 
-        if (!runInCheck(scriptContainer, s, lower, player.getLocation())) {
+        if (!runInCheck(path, player.getLocation())) {
             return false;
         }
 
@@ -75,16 +72,6 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
     @Override
     public String getName() {
         return "SkillAPIPlayerDowngradesSkill";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        PlayerSkillDowngradeEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -120,9 +107,7 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
         level = new Element(event.getDowngradedSkill().getLevel());
         refund = new Element(event.getRefund());
         skill = new Element(event.getDowngradedSkill().getData().getName());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

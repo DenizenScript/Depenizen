@@ -6,7 +6,6 @@ import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.common.socket.Packet;
 import com.denizenscript.depenizen.common.socket.client.packet.ClientPacketOutSendPlayer;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
@@ -26,6 +25,13 @@ public class BungeePlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+    }; // None
+
+    public static final String[] handledMechs = new String[] {
+            "send_to"
+    };
+
     private BungeePlayerExtension(dPlayer player) {
         this.player = player;
     }
@@ -34,8 +40,6 @@ public class BungeePlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-
-        Element value = mechanism.getValue();
 
         // <--[mechanism]
         // @object dPlayer
@@ -50,7 +54,7 @@ public class BungeePlayerExtension extends dObjectExtension {
         if (mechanism.matches("send_to")
                 && mechanism.requireObject(dServer.class)) {
             if (BungeeSupport.isSocketRegistered()) {
-                Packet packet = new ClientPacketOutSendPlayer(player.getName(), value.asType(dServer.class).getName());
+                Packet packet = new ClientPacketOutSendPlayer(player.getName(), mechanism.valueAsType(dServer.class).getName());
                 BungeeSupport.getSocketClient().trySend(packet);
             }
             else {

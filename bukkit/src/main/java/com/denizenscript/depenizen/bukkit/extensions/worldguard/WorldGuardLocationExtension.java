@@ -31,6 +31,13 @@ public class WorldGuardLocationExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "in_region", "regions"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private WorldGuardLocationExtension(dLocation loc) {
         location = loc;
     }
@@ -81,10 +88,10 @@ public class WorldGuardLocationExtension extends dObjectExtension {
                 dList region_list = dList.valueOf(attribute.getContext(1));
                 for (String region : region_list) {
                     if (inRegion(region)) {
-                        return Element.TRUE.getAttribute(attribute.fulfill(1));
+                        return new Element(true).getAttribute(attribute.fulfill(1));
                     }
                 }
-                return Element.FALSE.getAttribute(attribute.fulfill(1));
+                return new Element(false).getAttribute(attribute.fulfill(1));
             }
 
             // Check if the location is in any region

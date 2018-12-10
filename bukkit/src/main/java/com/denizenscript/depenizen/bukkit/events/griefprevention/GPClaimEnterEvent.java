@@ -4,20 +4,18 @@ import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventio
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizen.objects.dEntity;
+import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizencore.events.ScriptEvent;
+import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-public class GPClaimEnterEvent extends ScriptEvent implements Listener {
+public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
 
     // TODO: in area?
     // <--[event]
@@ -64,29 +62,22 @@ public class GPClaimEnterEvent extends ScriptEvent implements Listener {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String claim_test = lower.substring(lower.lastIndexOf(' ') + 1);
-        String direction = lower.substring("gp player ".length(), lower.lastIndexOf(' ')).trim();
+    public boolean matches(ScriptPath path) {
+        String direction = path.eventArgAt(2);
+        String claim_test = path.eventArgLowerAt(3);
 
-        return (claim_test.equals("gpclaim") && ((direction.equals("enters") && new_claim != null) || (direction.equals("exits") && old_claim != null)))
-                || (direction.equals("enters") && new_claim != null && claim_test.equals(CoreUtilities.toLowerCase(new_claim.simple())))
-                || (direction.equals("exits") && old_claim != null && claim_test.equals(CoreUtilities.toLowerCase(old_claim.simple())));
+        if (direction.equals("enters") && new_claim != null) {
+            return claim_test.equals("gpclaim") || claim_test.equals(CoreUtilities.toLowerCase(new_claim.simple()));
+        }
+        else if (direction.equals("exits") && old_claim != null) {
+            return claim_test.equals("gpclaim") || claim_test.equals(CoreUtilities.toLowerCase(old_claim.simple()));
+        }
+        return false;
     }
 
     @Override
     public String getName() {
         return "GPClaimEnter";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        PlayerMoveEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -97,7 +88,7 @@ public class GPClaimEnterEvent extends ScriptEvent implements Listener {
     @Override
     public ScriptEntryData getScriptEntryData() {
         // TODO: Store the player?
-        return new BukkitScriptEntryData(event != null ? dEntity.getPlayerFrom(event.getPlayer()) : null, null);
+        return new BukkitScriptEntryData(event != null ? new dPlayer(event.getPlayer()) : null, null);
     }
 
     @Override
@@ -131,9 +122,7 @@ public class GPClaimEnterEvent extends ScriptEvent implements Listener {
         }
         new_claim = tclaim == null ? null : new GriefPreventionClaim(tclaim);
         old_claim = fclaim == null ? null : new GriefPreventionClaim(fclaim);
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

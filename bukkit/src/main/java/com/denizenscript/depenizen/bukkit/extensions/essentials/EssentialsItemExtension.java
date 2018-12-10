@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.extensions.essentials;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.earth2me.essentials.Essentials;
 import net.aufdemrand.denizen.objects.dItem;
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.aH;
@@ -10,6 +11,8 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.plugins.EssentialsSupport;
+
+import java.math.BigDecimal;
 
 public class EssentialsItemExtension extends dObjectExtension {
 
@@ -26,12 +29,19 @@ public class EssentialsItemExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "worth"
+    };
+
+    public static final String[] handledMechs = new String[] {
+            "worth"
+    };
+
     private EssentialsItemExtension(dItem item) {
         this.item = item;
     }
 
     dItem item;
-    Essentials ess = Support.getPlugin(EssentialsSupport.class);
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -47,7 +57,15 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("worth")) {
-            double price = ess.getWorth().getPrice(item.getItemStack()).doubleValue();
+            Essentials ess = Support.getPlugin(EssentialsSupport.class);
+            BigDecimal priceBD = ess.getWorth().getPrice(ess, item.getItemStack());
+            if (priceBD == null) {
+                if (!attribute.hasAlternative()) {
+                    dB.echoError("Item does not have a worth value: " + item.identify());
+                }
+                return null;
+            }
+            double price = priceBD.doubleValue();
             // <--[tag]
             // @attribute <i@item.worth.quantity[<#>]>
             // @returns Element(Decimal)
@@ -67,8 +85,6 @@ public class EssentialsItemExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
-
         // <--[mechanism]
         // @object dItem
         // @name worth
@@ -80,8 +96,9 @@ public class EssentialsItemExtension extends dObjectExtension {
         // <i@item.worth.quantity[<Element>]>
         // @Plugin DepenizenBukkit, Essentials
         // -->
-        if (mechanism.matches("worth") && value.isDouble()) {
-            ess.getWorth().setPrice(item.getItemStack(), value.asDouble());
+        if (mechanism.matches("worth") && mechanism.getValue().isDouble()) {
+            Essentials ess = Support.getPlugin(EssentialsSupport.class);
+            ess.getWorth().setPrice(ess, item.getItemStack(), mechanism.getValue().asDouble());
         }
 
     }

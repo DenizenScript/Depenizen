@@ -9,7 +9,6 @@ import de.slikey.effectlib.effect.BleedEffect;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Duration;
 import net.aufdemrand.denizencore.objects.aH;
@@ -103,9 +102,8 @@ public class EffectLibCommand extends AbstractCommand {
 
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void execute(final ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(final ScriptEntry scriptEntry) {
 
         dEntity target = (dEntity) scriptEntry.getObject("target");
         Action action = (Action) scriptEntry.getObject("action");

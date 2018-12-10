@@ -31,6 +31,13 @@ public class PlayerPointsPlayerExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[] {
+            "playerpoints_points"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private PlayerPointsPlayerExtension(dPlayer player) {
         this.player = player;
     }
@@ -49,7 +56,7 @@ public class PlayerPointsPlayerExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("playerpoints_points")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            return new Element(PlayerPoints.class.cast(plugin).getAPI().look(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
+            return new Element(((PlayerPoints) plugin).getAPI().look(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
         }
 
         return null;
@@ -57,6 +64,5 @@ public class PlayerPointsPlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

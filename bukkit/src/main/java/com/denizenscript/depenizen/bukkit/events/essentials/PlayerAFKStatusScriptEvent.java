@@ -3,37 +3,35 @@ package com.denizenscript.depenizen.bukkit.events.essentials;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.ess3.api.events.AfkStatusChangeEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// player goes afk
-// player returns from afk
-// player afk status changes
-//
-// @Regex ^on player (goes afk|returns from afk|afk status changes)$
-//
-// @Cancellable true
-//
-// @Triggers when a player's afk status changes.
-//
-// @Context
-// <context.status> Returns the player's afk status.
-//
-// @Plugin DepenizenBukkit, Essentials
-//
-// -->
-
 public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // player goes afk
+    // player returns from afk
+    // player afk status changes
+    //
+    // @Regex ^on player (goes afk|returns from afk|afk status changes)$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player's afk status changes.
+    //
+    // @Context
+    // <context.status> Returns the player's afk status.
+    //
+    // @Plugin DepenizenBukkit, Essentials
+    //
+    // -->
 
     public static PlayerAFKStatusScriptEvent instance;
     public AfkStatusChangeEvent event;
@@ -52,32 +50,21 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        if (lower.startsWith("player goes afk") && afk.asBoolean()) {
+    public boolean matches(ScriptPath path) {
+        if (path.eventArgLowerAt(1).equals("goes") && afk.asBoolean()) {
             return true;
         }
-        else if (lower.startsWith("player returns from afk") && !afk.asBoolean()) {
+        else if (path.eventArgLowerAt(1).equals("returns") && !afk.asBoolean()) {
             return true;
         }
         else {
-            return lower.startsWith("player afk status changes");
+            return path.eventArgLowerAt(1).equals("afk");
         }
     }
 
     @Override
     public String getName() {
         return "PlayerAFKStatus";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        AfkStatusChangeEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -101,9 +88,7 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
     @EventHandler
     public void onPlayerAFKStatus(AfkStatusChangeEvent event) {
         afk = new Element(event.getValue());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

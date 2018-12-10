@@ -4,34 +4,32 @@ import com.garbagemule.MobArena.events.ArenaStartEvent;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// mobarena arena starts
-// mobarena <arena> starts
-//
-// @Regex ^on mobarena [^\s]+ starts$
-//
-// @Cancellable true
-//
-// @Triggers when a mobarena starts.
-//
-// @Context
-// <context.arena> Returns the arena which started.
-//
-// @Plugin DepenizenBukkit, MobArena
-//
-// -->
-
 public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // mobarena arena starts
+    // mobarena <arena> starts
+    //
+    // @Regex ^on mobarena [^\s]+ starts$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a mobarena starts.
+    //
+    // @Context
+    // <context.arena> Returns the arena which started.
+    //
+    // @Plugin DepenizenBukkit, MobArena
+    //
+    // -->
 
     public MobArenaStartsScriptEvent() {
         instance = this;
@@ -44,13 +42,12 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return s.startsWith("mobarena") && CoreUtilities.getXthArg(2, lower).equals("starts");
+        return s.startsWith("mobarena") && CoreUtilities.xthArgEquals(2, lower, "starts");
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String arenaname = CoreUtilities.getXthArg(2, lower).replace("mobarena@", "");
+    public boolean matches(ScriptPath path) {
+        String arenaname = path.eventArgLowerAt(2).replace("mobarena@", "");
         MobArenaArena a = MobArenaArena.valueOf(arenaname);
         return arenaname.equals("arena") || (a != null && a.getArena() == event.getArena());
     }
@@ -58,16 +55,6 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
     @Override
     public String getName() {
         return "MobArenaStarts";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        ArenaStartEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -91,9 +78,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
     @EventHandler
     public void onMobArenaStarts(ArenaStartEvent event) {
         arena = new MobArenaArena(event.getArena());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

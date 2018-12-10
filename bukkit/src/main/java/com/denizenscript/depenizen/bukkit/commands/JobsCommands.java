@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.commands;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.JobsPlayer;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -86,7 +85,7 @@ public class JobsCommands extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.entryData;
 

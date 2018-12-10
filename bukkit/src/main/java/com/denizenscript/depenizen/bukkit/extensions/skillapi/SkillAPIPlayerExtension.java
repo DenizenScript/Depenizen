@@ -6,12 +6,12 @@ import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.player.PlayerClass;
 import com.sucy.skill.api.player.PlayerData;
 import com.sucy.skill.api.player.PlayerSkill;
-import net.aufdemrand.denizen.objects.dMaterial;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Duration;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizen.utilities.blocks.OldMaterialsHelper;
 
 public class SkillAPIPlayerExtension extends dObjectExtension {
 
@@ -27,6 +27,13 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
             return new SkillAPIPlayerExtension((dPlayer) pl);
         }
     }
+
+    public static final String[] handledTags = new String[] {
+            "skillapi"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
 
     public SkillAPIPlayerExtension(dPlayer player) {
         this.player = player;
@@ -50,6 +57,9 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
             // @Plugin DepenizenBukkit, SkillAPI
             // -->
             if (attribute.startsWith("main_class")) {
+                if (data == null || data.getMainClass() == null) {
+                    return null;
+                }
                 return new SkillAPIClass(data.getMainClass().getData()).getAttribute(attribute.fulfill(1));
             }
 
@@ -227,7 +237,7 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
                 // @Plugin DepenizenBukkit, SkillAPI
                 // -->
                 if (attribute.startsWith("skill_bind")) {
-                    return dMaterial.getMaterialFrom(playerSkill.getBind()).getAttribute(attribute.fulfill(1));
+                    return OldMaterialsHelper.getMaterialFrom(playerSkill.getBind()).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]

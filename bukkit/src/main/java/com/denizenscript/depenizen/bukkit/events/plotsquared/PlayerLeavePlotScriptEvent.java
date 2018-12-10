@@ -6,36 +6,34 @@ import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// plotsquared player leaves plotsquaredplot
-// plotsquared player exits plotsquaredplot
-// plotsquared player leaves <dplotsquaredplot>
-// plotsquared player exits <dplotsquaredplot>
-//
-// @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable false
-//
-// @Triggers when a player leaves a plot.
-//
-// @Context
-// <context.plot> returns the plot the player left.
-//
-// @Plugin DepenizenBukkit, PlotSquared
-//
-// -->
-
 public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // plotsquared player leaves plotsquaredplot
+    // plotsquared player exits plotsquaredplot
+    // plotsquared player leaves <dplotsquaredplot>
+    // plotsquared player exits <dplotsquaredplot>
+    //
+    // @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player leaves a plot.
+    //
+    // @Context
+    // <context.plot> returns the plot the player left.
+    //
+    // @Plugin DepenizenBukkit, PlotSquared
+    //
+    // -->
 
     public PlayerLeavePlotScriptEvent() {
         instance = this;
@@ -53,9 +51,8 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String plotName = CoreUtilities.getXthArg(3, lower);
+    public boolean matches(ScriptPath path) {
+        String plotName = path.eventArgLowerAt(3);
         if (plotName.equals("plotsquaredplot")) {
             return true;
         }
@@ -66,16 +63,6 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public String getName() {
         return "PlayerLeavePlotEvent";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        PlayerLeavePlotEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -104,6 +91,6 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
         player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         plot = new dPlotSquaredPlot(event.getPlot());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

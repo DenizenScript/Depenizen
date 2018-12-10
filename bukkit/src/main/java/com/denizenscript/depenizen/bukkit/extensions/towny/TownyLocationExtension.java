@@ -25,6 +25,13 @@ public class TownyLocationExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "has_town", "town", "is_wilderness"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private TownyLocationExtension(dLocation location) {
         this.location = location;
     }
@@ -43,10 +50,10 @@ public class TownyLocationExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("has_town")) {
             if (TownyUniverse.getTownName(location) != null) {
-                return Element.TRUE.getAttribute(attribute.fulfill(1));
+                return new Element(true).getAttribute(attribute.fulfill(1));
             }
             else {
-                return Element.FALSE.getAttribute(attribute.fulfill(1));
+                return new Element(false).getAttribute(attribute.fulfill(1));
             }
         }
 

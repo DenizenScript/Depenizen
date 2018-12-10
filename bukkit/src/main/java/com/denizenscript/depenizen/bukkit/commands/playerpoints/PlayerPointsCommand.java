@@ -4,7 +4,6 @@ import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.support.plugins.PlayerPointsSupport;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
@@ -94,7 +93,7 @@ public class PlayerPointsCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         dPlayer target = scriptEntry.getdObject("target");
         Element action = scriptEntry.getdObject("action");
@@ -117,17 +116,17 @@ public class PlayerPointsCommand extends AbstractCommand {
 
         if (action.asString().equalsIgnoreCase("give")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            PlayerPoints.class.cast(plugin).getAPI().give(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            ((PlayerPoints) plugin).getAPI().give(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
         else if (action.asString().equalsIgnoreCase("take")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            PlayerPoints.class.cast(plugin).getAPI().take(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            ((PlayerPoints) plugin).getAPI().take(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
         else if (action.asString().equalsIgnoreCase("set")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            PlayerPoints.class.cast(plugin).getAPI().set(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            ((PlayerPoints) plugin).getAPI().set(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
     }

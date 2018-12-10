@@ -6,7 +6,6 @@ import com.intellectualcrafters.plot.api.PlotAPI;
 import com.intellectualcrafters.plot.object.Plot;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
-import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
@@ -31,6 +30,13 @@ public class PlotSquaredPlayerExtension extends dObjectExtension {
     ///////////////////
     // Instance Fields and Methods
     /////////////
+
+    public static final String[] handledTags = new String[] {
+            "plotsquared_plots"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
 
     private PlotSquaredPlayerExtension(dPlayer player) {
         this.player = player;
@@ -74,6 +80,5 @@ public class PlotSquaredPlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

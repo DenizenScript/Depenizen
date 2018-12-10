@@ -5,35 +5,33 @@ import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.mcmonkey.sentinel.SentinelTrait;
 import org.mcmonkey.sentinel.events.SentinelAttackEvent;
 
-// <--[event]
-// @Events
-// on sentinel npc attacks
-//
-// @Regex ^on sentinel npc attacks$
-//
-// @Cancellable true
-//
-// @Triggers when a Sentinel-powered NPC attacks a target.
-//
-// @Context
-// <context.entity> returns the entity that the NPC is attacking.
-//
-// @Plugin DepenizenBukkit, Sentinel
-//
-// -->
-
 public class SentinelAttackScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // sentinel npc attacks
+    //
+    // @Regex ^on sentinel npc attacks$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a Sentinel-powered NPC attacks a target.
+    //
+    // @Context
+    // <context.entity> returns the entity that the NPC is attacking.
+    //
+    // @Plugin DepenizenBukkit, Sentinel
+    //
+    // -->
 
     public SentinelAttackScriptEvent() {
         instance = this;
@@ -50,23 +48,13 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
+    public boolean matches(ScriptPath path) {
         return true;
     }
 
     @Override
     public String getName() {
         return "SentinelAttack";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        SentinelAttackEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -91,9 +79,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     public void onSentinelAttack(SentinelAttackEvent event) {
         npc = new dNPC(event.getNPC());
         entity = new dEntity(event.getNPC().getTrait(SentinelTrait.class).chasing).getDenizenObject();
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

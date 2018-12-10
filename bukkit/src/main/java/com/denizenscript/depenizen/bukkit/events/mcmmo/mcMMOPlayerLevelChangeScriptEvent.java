@@ -5,39 +5,37 @@ import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// mcmmo player skill level changes (in <area>)
-// mcmmo player <skill> level changes (in <area>)
-//
-// @Regex ^on mcmmo player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable true
-//
-// @Triggers when a player's mcmmo skill level changes.
-//
-// @Context
-// <context.skill> returns the name of the skill that changed level. (Based on the mcMMO language file).
-// <context.level> returns the level the skill changed to.
-// <context.cause> returns the cause of the level change.
-// Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
-//
-// @Plugin DepenizenBukkit, mcMMO
-//
-// -->
-
 public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // mcmmo player skill level changes (in <area>)
+    // mcmmo player <skill> level changes (in <area>)
+    //
+    // @Regex ^on mcmmo player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player's mcmmo skill level changes.
+    //
+    // @Context
+    // <context.skill> returns the name of the skill that changed level. (Based on the mcMMO language file).
+    // <context.level> returns the level the skill changed to.
+    // <context.cause> returns the cause of the level change.
+    // Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
+    //
+    // @Plugin DepenizenBukkit, mcMMO
+    //
+    // -->
 
     public mcMMOPlayerLevelChangeScriptEvent() {
         instance = this;
@@ -53,18 +51,17 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("mcmmo player") && CoreUtilities.getXthArg(3, lower).equals("level");
+        return lower.startsWith("mcmmo player") && CoreUtilities.xthArgEquals(3, lower, "level");
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String eSkill = CoreUtilities.getXthArg(2, lower);
+    public boolean matches(ScriptPath path) {
+        String eSkill = path.eventArgLowerAt(2);
         if (!eSkill.equals("skill") && !eSkill.equals(CoreUtilities.toLowerCase(skill.asString()))) {
             return false;
         }
 
-        if (!runInCheck(scriptContainer, s, lower, player.getLocation())) {
+        if (!runInCheck(path, player.getLocation())) {
             return false;
         }
 
@@ -74,16 +71,6 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
     @Override
     public String getName() {
         return "mcMMOPlayerLevelChanges";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        McMMOPlayerLevelChangeEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -125,9 +112,7 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
         level = event.getSkillLevel();
         cause = event.getXpGainReason().toString();
         skill = new Element(event.getSkill().getName());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

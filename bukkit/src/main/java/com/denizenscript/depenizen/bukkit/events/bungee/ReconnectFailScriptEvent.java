@@ -10,6 +10,8 @@ public class ReconnectFailScriptEvent extends BukkitScriptEvent {
     // @Events
     // bungee fails reconnect
     //
+    // @Regex ^on bungee fails reconnect$
+    //
     // @Triggers when the socket client fails all of its reconnect attempts.
     //
     // @Cancellable false
@@ -33,7 +35,7 @@ public class ReconnectFailScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
+    public boolean matches(ScriptPath path) {
         return true;
     }
 

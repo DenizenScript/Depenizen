@@ -121,6 +121,11 @@ public class HeroesHero implements dObject, Adjustable {
         return denizenObj instanceof dNPC;
     }
 
+    @Override
+    public String toString() {
+        return identify();
+    }
+
     public dObject getDenizenObject() {
         return denizenObj;
     }
@@ -416,7 +421,7 @@ public class HeroesHero implements dObject, Adjustable {
         // <hero@hero.primary_class>
         // -->
         else if (mechanism.matches("primary_class") && mechanism.requireObject(HeroesClass.class)) {
-            hero.setHeroClass(mechanism.getValue().asType(HeroesClass.class).getHeroClass(), false);
+            hero.setHeroClass(mechanism.valueAsType(HeroesClass.class).getHeroClass(), false);
         }
 
         // <--[mechanism]
@@ -429,7 +434,7 @@ public class HeroesHero implements dObject, Adjustable {
         // <hero@hero.secondary_class>
         // -->
         else if (mechanism.matches("secondary_class") && mechanism.requireObject(HeroesClass.class)) {
-            hero.setHeroClass(mechanism.getValue().asType(HeroesClass.class).getHeroClass(), true);
+            hero.setHeroClass(mechanism.valueAsType(HeroesClass.class).getHeroClass(), true);
         }
     }
 }

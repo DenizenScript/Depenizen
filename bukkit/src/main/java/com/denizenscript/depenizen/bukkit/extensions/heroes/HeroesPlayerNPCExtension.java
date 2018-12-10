@@ -30,6 +30,13 @@ public class HeroesPlayerNPCExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "heroes"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private HeroesPlayerNPCExtension(dObject object) {
         if (object instanceof dPlayer) {
             player = ((dPlayer) object).getPlayerEntity();

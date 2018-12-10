@@ -11,7 +11,6 @@ import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
-import org.bukkit.Bukkit;
 
 public class QuestsPlayerExtension extends dObjectExtension {
 
@@ -27,6 +26,13 @@ public class QuestsPlayerExtension extends dObjectExtension {
             return new QuestsPlayerExtension((dPlayer) object);
         }
     }
+
+    public static final String[] handledTags = new String[] {
+            "quests"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
 
     private QuestsPlayerExtension(dPlayer player) {
         this.player = player;
@@ -120,6 +126,5 @@ public class QuestsPlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

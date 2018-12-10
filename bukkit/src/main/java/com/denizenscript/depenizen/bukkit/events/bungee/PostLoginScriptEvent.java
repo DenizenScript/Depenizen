@@ -16,6 +16,8 @@ public class PostLoginScriptEvent extends BungeeScriptEvent {
     // @Events
     // bungee player joins network
     //
+    // @Regex ^on bungee player joins network$
+    //
     // @Triggers when a player is connected to the BungeeCord network and is ready to join a server.
     //
     // @Cancellable false
@@ -43,9 +45,8 @@ public class PostLoginScriptEvent extends BungeeScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        return lower.endsWith("network");
+    public boolean matches(ScriptPath path) {
+        return path.eventArgLowerAt(3).equals("network");
     }
 
     @Override

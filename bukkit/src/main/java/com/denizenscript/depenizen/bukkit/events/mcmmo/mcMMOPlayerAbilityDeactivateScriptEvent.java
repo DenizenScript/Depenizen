@@ -15,30 +15,30 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// mcmmo player deactivates ability for skill (in <area>)
-// mcmmo player deactivates <ability> for skill (in <area>)
-// mcmmo player deactivates ability for <skill> (in <area>)
-// mcmmo player deactivates <ability> for <skill> (in <area>)
-//
-// @Regex ^on mcmmo player deactivates [^\s]+( for [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable false
-//
-// @Triggers when a player deactivates mcmmo ability.
-//
-// @Context
-// <context.skill> returns the name of the skill that the ability comes from.
-// (Based on the mcMMO language file).
-// <context.ability> returns the name of the ability.
-// <context.skill_level> returns the skill level from the ability.
-//
-// @Plugin DepenizenBukkit, mcMMO
-//
-// -->
-
 public class mcMMOPlayerAbilityDeactivateScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // mcmmo player deactivates ability for skill (in <area>)
+    // mcmmo player deactivates <ability> for skill (in <area>)
+    // mcmmo player deactivates ability for <skill> (in <area>)
+    // mcmmo player deactivates <ability> for <skill> (in <area>)
+    //
+    // @Regex ^on mcmmo player deactivates [^\s]+( for [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player deactivates mcmmo ability.
+    //
+    // @Context
+    // <context.skill> returns the name of the skill that the ability comes from.
+    // (Based on the mcMMO language file).
+    // <context.ability> returns the name of the ability.
+    // <context.skill_level> returns the skill level from the ability.
+    //
+    // @Plugin DepenizenBukkit, mcMMO
+    //
+    // -->
 
     public mcMMOPlayerAbilityDeactivateScriptEvent() {
         instance = this;
@@ -58,10 +58,9 @@ public class mcMMOPlayerAbilityDeactivateScriptEvent extends BukkitScriptEvent i
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String eAbility = CoreUtilities.getXthArg(3, lower);
-        String eSkill = CoreUtilities.getXthArg(5, lower);
+    public boolean matches(ScriptPath path) {
+        String eAbility = path.eventArgLowerAt(3);
+        String eSkill = path.eventArgLowerAt(5);
         if (!eSkill.equals("skill") && !eSkill.equals(CoreUtilities.toLowerCase(skill.asString()))) {
             return false;
         }
@@ -69,7 +68,7 @@ public class mcMMOPlayerAbilityDeactivateScriptEvent extends BukkitScriptEvent i
             return false;
         }
 
-        if (!runInCheck(scriptContainer, s, lower, player.getLocation())) {
+        if (!runInCheck(path, player.getLocation())) {
             return false;
         }
 
@@ -79,16 +78,6 @@ public class mcMMOPlayerAbilityDeactivateScriptEvent extends BukkitScriptEvent i
     @Override
     public String getName() {
         return "McMMOPlayerAbilityDeactivateEvent";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        McMMOPlayerAbilityDeactivateEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -125,6 +114,6 @@ public class mcMMOPlayerAbilityDeactivateScriptEvent extends BukkitScriptEvent i
         skill = new Element(event.getSkill().getName());
         skill_level = new Element(event.getSkillLevel());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

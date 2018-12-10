@@ -4,7 +4,6 @@ import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.common.socket.client.packet.ClientPacketOutTag;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.ObjectFetcher;
@@ -78,7 +77,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         Element tag = scriptEntry.getElement("tag");
         dServer server = scriptEntry.getdObject("server");
@@ -87,7 +86,8 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
 
         if (BungeeSupport.isSocketRegistered()) {
             if (!scriptEntry.shouldWaitFor()) {
-                throw new CommandExecutionException("You MUST ~wait for this command!");
+                dB.echoError("You MUST ~wait for this command!");
+                return;
             }
             int id = nextId++;
             waitingEntries.put(id, scriptEntry);

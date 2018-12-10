@@ -5,35 +5,33 @@ import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// player exits skyblock
-//
-// @Regex ^on player exits skyblock$
-//
-// @Cancellable false
-//
-// @Triggers when a player leaves a skyblock island.
-//
-// @Context
-// <context.owner> Returns the owner of the island.
-// <context.island_location> Returns the location of the island.
-// <context.location> Returns the location the player exited at.
-//
-// @Plugin DepenizenBukkit, A SkyBlock
-//
-// -->
-
 public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // player exits skyblock
+    //
+    // @Regex ^on player exits skyblock$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player leaves a skyblock island.
+    //
+    // @Context
+    // <context.owner> Returns the owner of the island.
+    // <context.island_location> Returns the location of the island.
+    // <context.location> Returns the location the player exited at.
+    //
+    // @Plugin DepenizenBukkit, A SkyBlock
+    //
+    // -->
 
     public static PlayerExitsSkyBlockScriptEvent instance;
     public IslandExitEvent event;
@@ -51,23 +49,13 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
+    public boolean matches(ScriptPath path) {
         return true;
     }
 
     @Override
     public String getName() {
         return "PlayerEntersSkyBlock";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        IslandExitEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -100,6 +88,6 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
         location = new dLocation(event.getLocation());
         owner = new dPlayer(event.getIslandOwner());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

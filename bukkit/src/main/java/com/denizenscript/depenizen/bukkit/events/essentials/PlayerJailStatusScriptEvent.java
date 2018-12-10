@@ -3,38 +3,36 @@ package com.denizenscript.depenizen.bukkit.events.essentials;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.ess3.api.events.JailStatusChangeEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// player jailed
-// player unjailed
-// player un-jailed
-// player jail status changes
-//
-// @Regex ^on player (jailed|unjailed|un-jailed|jail status changes)$
-//
-// @Cancellable true
-//
-// @Triggers when a player's jail status changes.
-//
-// @Context
-// <context.status> Returns the player's jail status.
-//
-// @Plugin DepenizenBukkit, Essentials
-//
-// -->
-
 public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // player jailed
+    // player unjailed
+    // player un-jailed
+    // player jail status changes
+    //
+    // @Regex ^on player (jailed|unjailed|un-jailed|jail status changes)$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player's jail status changes.
+    //
+    // @Context
+    // <context.status> Returns the player's jail status.
+    //
+    // @Plugin DepenizenBukkit, Essentials
+    //
+    // -->
 
     public static PlayerJailStatusScriptEvent instance;
     public JailStatusChangeEvent event;
@@ -53,9 +51,8 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String status = CoreUtilities.getXthArg(1, lower);
+    public boolean matches(ScriptPath path) {
+        String status = path.eventArgLowerAt(1);
         if (status.equals("jailed") && jailed.asBoolean()) {
             return true;
         }
@@ -63,23 +60,13 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
             return true;
         }
         else {
-            return lower.startsWith("player jail status changes");
+            return status.equals("status");
         }
     }
 
     @Override
     public String getName() {
         return "PlayerJailStatus";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        JailStatusChangeEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -103,9 +90,7 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
     @EventHandler
     public void onPlayerAFKStatus(JailStatusChangeEvent event) {
         jailed = new Element(event.getValue());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

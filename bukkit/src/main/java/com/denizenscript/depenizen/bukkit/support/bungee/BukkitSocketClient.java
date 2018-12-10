@@ -15,7 +15,6 @@ import com.denizenscript.depenizen.common.util.SimpleScriptEntry;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.tags.BukkitTagContext;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizencore.exceptions.ScriptEntryCreationException;
 import net.aufdemrand.denizencore.objects.ObjectFetcher;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
@@ -128,17 +127,11 @@ public class BukkitSocketClient extends SocketClient {
     @Override
     protected void handleScript(boolean shouldDebug, List<SimpleScriptEntry> scriptEntries, Map<String, String> definitions) {
         List<ScriptEntry> scriptEntryList = new ArrayList<ScriptEntry>();
-        try {
-            for (SimpleScriptEntry entry : scriptEntries) {
-                List<String> args = entry.getArguments();
-                ScriptEntry scriptEntry = new ScriptEntry(entry.getCommand(), args.toArray(new String[args.size()]), null);
-                scriptEntry.fallbackDebug = shouldDebug;
-                scriptEntryList.add(scriptEntry);
-            }
-        }
-        catch (ScriptEntryCreationException e) {
-            dB.echoError(e);
-            return;
+        for (SimpleScriptEntry entry : scriptEntries) {
+            List<String> args = entry.getArguments();
+            ScriptEntry scriptEntry = new ScriptEntry(entry.getCommand(), args.toArray(new String[args.size()]), null);
+            scriptEntry.fallbackDebug = shouldDebug;
+            scriptEntryList.add(scriptEntry);
         }
         ScriptQueue queue = InstantQueue.getQueue(ScriptQueue.getNextId("BUNGEE_CMD")).addEntries(scriptEntryList);
         queue.getAllDefinitions().putAll(objectify(definitions));

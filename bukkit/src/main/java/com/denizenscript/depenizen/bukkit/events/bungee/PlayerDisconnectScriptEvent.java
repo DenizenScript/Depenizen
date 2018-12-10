@@ -16,6 +16,8 @@ public class PlayerDisconnectScriptEvent extends BungeeScriptEvent {
     // @Events
     // bungee player leaves network
     //
+    // @Regex ^on bungee player leaves network$
+    //
     // @Triggers when a player leaves the BungeeCord network.
     //
     // @Cancellable false
@@ -43,9 +45,8 @@ public class PlayerDisconnectScriptEvent extends BungeeScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        return lower.endsWith("network");
+    public boolean matches(ScriptPath path) {
+        return path.eventArgLowerAt(3).equals("network");
     }
 
     @Override

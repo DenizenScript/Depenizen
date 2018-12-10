@@ -68,7 +68,7 @@ public class PrismActionPlayer implements Property {
 
         // No documentation, internal only
         if (mechanism.matches("player") && mechanism.requireObject(dPlayer.class)) {
-            prismAction.setPlayer(mechanism.getValue().asType(dPlayer.class).getName());
+            prismAction.setPlayer(mechanism.valueAsType(dPlayer.class).getName());
         }
 
     }

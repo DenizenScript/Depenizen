@@ -5,34 +5,32 @@ import com.denizenscript.depenizen.bukkit.objects.residence.dResidence;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// residence player enters residence
-// residence player enters <residence>
-//
-// @Regex ^on residence player enters [^\s]+$
-//
-// @Cancellable false
-//
-// @Triggers when a player enters a Residence.
-//
-// @Context
-// <context.residence> Returns the Residence the player entered.
-//
-// @Plugin DepenizenBukkit, Residence
-//
-// -->
-
 public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // residence player enters residence
+    // residence player enters <residence>
+    //
+    // @Regex ^on residence player enters [^\s]+$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player enters a Residence.
+    //
+    // @Context
+    // <context.residence> Returns the Residence the player entered.
+    //
+    // @Plugin DepenizenBukkit, Residence
+    //
+    // -->
 
     public PlayerEntersResidenceScriptEvent() {
         instance = this;
@@ -49,8 +47,8 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String name = CoreUtilities.getXthArg(3, CoreUtilities.toLowerCase(s));
+    public boolean matches(ScriptPath path) {
+        String name = path.eventArgLowerAt(3);
         dResidence eventResidence = event.getTo() != null ? new dResidence(event.getTo()) : null;
         if (name.equals("residence") && eventResidence != null) {
             return true;
@@ -65,16 +63,6 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
     @Override
     public String getName() {
         return "ResidencePlayerEntersResidence";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        ResidenceChangedEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -102,6 +90,6 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
         }
         residence = new dResidence(event.getTo());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

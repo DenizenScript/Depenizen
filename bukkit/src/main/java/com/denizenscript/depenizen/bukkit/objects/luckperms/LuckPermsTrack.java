@@ -27,7 +27,7 @@ public class LuckPermsTrack implements dObject {
         }
 
         ////////
-        // Match plotsquaredplot name
+        // Match luckpermstrack name
 
         string = string.replace("luckpermstrack@", "");
         try {
@@ -110,6 +110,11 @@ public class LuckPermsTrack implements dObject {
 
     @Override
     public String identifySimple() {
+        return identify();
+    }
+
+    @Override
+    public String toString() {
         return identify();
     }
 

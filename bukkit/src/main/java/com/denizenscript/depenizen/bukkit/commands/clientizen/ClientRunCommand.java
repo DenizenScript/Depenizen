@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.commands.clientizen;
 
 import com.denizenscript.depenizen.bukkit.support.clientizen.ClientizenSupport;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -68,7 +67,7 @@ public class ClientRunCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         Element scriptName = scriptEntry.getElement("script_name");
         dList definitions = scriptEntry.getdObject("definitions");
@@ -79,7 +78,8 @@ public class ClientRunCommand extends AbstractCommand {
         Map<String, String> finalDefs = new HashMap<String, String>();
         if (definitions != null) {
             if (definitions.size() % 2 != 0) {
-                throw new CommandExecutionException("Uneven number of elements in definitions list!");
+                dB.echoError("Uneven number of elements in definitions list!");
+                return;
             }
             for (int i = 0; i < definitions.size(); i++) {
                 finalDefs.put(definitions.get(i), definitions.get(++i));

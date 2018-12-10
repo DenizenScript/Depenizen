@@ -12,6 +12,8 @@ public class BungeeServerConnectScriptEvent extends BukkitScriptEvent {
     // @Events
     // bungee server connects
     //
+    // @Regex ^on bungee server connects$
+    //
     // @Triggers when another server connects to the BungeeCord socket.
     //
     // @Cancellable false
@@ -36,7 +38,7 @@ public class BungeeServerConnectScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
+    public boolean matches(ScriptPath path) {
         return true;
     }
 

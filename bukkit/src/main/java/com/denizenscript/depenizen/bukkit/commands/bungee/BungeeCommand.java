@@ -4,7 +4,6 @@ import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.common.socket.client.packet.ClientPacketOutScript;
 import com.denizenscript.depenizen.common.util.SimpleScriptEntry;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.objects.dList;
@@ -83,7 +82,7 @@ public class BungeeCommand extends BracedCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         dList servers = scriptEntry.getdObject("servers");
         List<ScriptEntry> bracedCommands = ((List<BracedData>) scriptEntry.getObject("braces")).get(0).value;
@@ -91,7 +90,7 @@ public class BungeeCommand extends BracedCommand {
         dList serverNames = new dList();
         serverNames.setPrefix("servers");
 
-        for (dServer server : servers.filter(dServer.class)) {
+        for (dServer server : servers.filter(dServer.class, scriptEntry)) {
             serverNames.add(server.getName());
         }
 

@@ -102,10 +102,15 @@ public class SkillAPIClass implements dObject {
     }
 
     @Override
+    public String toString() {
+        return identify();
+    }
+
+    @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <skillapiclass@class.name>
+        // @attribute <skillapiclass@skill_class.name>
         // @returns Element
         // @description
         // Returns the name of this SkillAPI class.
@@ -116,7 +121,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.prefix_color>
+        // @attribute <skillapiclass@skill_class.prefix_color>
         // @returns Element
         // @description
         // Returns the color of the prefix of this SkillAPI class.
@@ -127,7 +132,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.prefix>
+        // @attribute <skillapiclass@skill_class.prefix>
         // @returns Element
         // @description
         // Returns the prefix of this SkillAPI class.
@@ -138,7 +143,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.needs_permission>
+        // @attribute <skillapiclass@skill_class.needs_permission>
         // @returns Element(Boolean)
         // @description
         // Returns whether this SkillAPI class requires permission to profess as it.
@@ -149,7 +154,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.group.name>
+        // @attribute <skillapiclass@skill_class.group.name>
         // @returns Element
         // @description
         // Returns the name of the group that this SkillAPI class falls into.
@@ -160,7 +165,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.has_parent>
+        // @attribute <skillapiclass@skill_class.has_parent>
         // @returns Element(Boolean)
         // @description
         // Returns the whether this SkillAPI class has a parent class.
@@ -171,7 +176,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.parent>
+        // @attribute <skillapiclass@skill_class.parent>
         // @returns SkillAPIClass
         // @description
         // Returns the parent class of this SkillAPI class.
@@ -182,7 +187,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.icon>
+        // @attribute <skillapiclass@skill_class.icon>
         // @returns dItem
         // @description
         // Returns the item icon representing this SkillAPI class in menus.
@@ -193,7 +198,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.max_level>
+        // @attribute <skillapiclass@skill_class.max_level>
         // @returns Element(Decimal)
         // @description
         // Returns the maximum level that this SkillAPI class can reach.
@@ -204,7 +209,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.base_health>
+        // @attribute <skillapiclass@skill_class.base_health>
         // @returns Element(Decimal)
         // @description
         // Returns the base amount of health for this SkillAPI class.
@@ -215,7 +220,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.health_scale>
+        // @attribute <skillapiclass@skill_class.health_scale>
         // @returns Element(Decimal)
         // @description
         // Returns the amount of health gained per level for this SkillAPI class.
@@ -226,7 +231,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.base_mana>
+        // @attribute <skillapiclass@skill_class.base_mana>
         // @returns Element(Decimal)
         // @description
         // Returns the base amount of mana for this SkillAPI class.
@@ -237,7 +242,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.mana_scale>
+        // @attribute <skillapiclass@skill_class.mana_scale>
         // @returns Element(Decimal)
         // @description
         // Returns the amount of mana gained per level for this SkillAPI class.
@@ -248,7 +253,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.mana_name>
+        // @attribute <skillapiclass@skill_class.mana_name>
         // @returns Element
         // @description
         // Returns the alias for mana that this SkillAPI class uses.
@@ -259,7 +264,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.has_mana_regen>
+        // @attribute <skillapiclass@skill_class.has_mana_regen>
         // @returns Element(Boolean)
         // @description
         // Returns whether this SkillAPI class has mana regeneration.
@@ -270,7 +275,7 @@ public class SkillAPIClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@class.mana_regen>
+        // @attribute <skillapiclass@skill_class.mana_regen>
         // @returns Element(Decimal)
         // @description
         // Returns the amount of mana regeneration that this SkillAPI class has.
@@ -279,7 +284,6 @@ public class SkillAPIClass implements dObject {
         if (attribute.startsWith("mana_regen")) {
             return new Element(rpgClass.getManaRegen()).getAttribute(attribute.fulfill(1));
         }
-
 
         return new Element(identify()).getAttribute(attribute);
 

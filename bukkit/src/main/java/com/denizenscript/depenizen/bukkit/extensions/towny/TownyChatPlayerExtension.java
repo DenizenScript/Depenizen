@@ -26,6 +26,13 @@ public class TownyChatPlayerExtension extends dObjectExtension {
         return new TownyChatPlayerExtension((dPlayer) object);
     }
 
+    public static final String[] handledTags = new String[] {
+            "townychat"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private TownyChatPlayerExtension(dPlayer player) {
         this.player = player;
     }
@@ -87,7 +94,7 @@ public class TownyChatPlayerExtension extends dObjectExtension {
                 }
                 String perm = c.getPermission();
                 if (perm == null || !plugin.getTowny().isPermissions()) {
-                    return Element.TRUE.getAttribute(attribute.fulfill(1));
+                    return new Element(true).getAttribute(attribute.fulfill(1));
                 }
                 return new Element(TownyUniverse.getPermissionSource().has(player.getPlayerEntity(), perm))
                         .getAttribute(attribute.fulfill(1));
