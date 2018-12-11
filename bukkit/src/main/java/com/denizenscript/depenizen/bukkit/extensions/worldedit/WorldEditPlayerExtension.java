@@ -5,12 +5,24 @@ import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.support.plugins.WorldEditSupport;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldedit.command.tool.BrushTool;
+import com.sk89q.worldedit.command.tool.InvalidToolBindException;
+import com.sk89q.worldedit.command.tool.brush.Brush;
+import com.sk89q.worldedit.function.pattern.BlockPattern;
+import com.sk89q.worldedit.function.pattern.Pattern;
 import com.sk89q.worldedit.regions.RegionSelector;
+import com.sk89q.worldedit.world.item.ItemType;
 import net.aufdemrand.denizen.objects.dCuboid;
+import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class WorldEditPlayerExtension extends dObjectExtension {
 
@@ -36,6 +48,52 @@ public class WorldEditPlayerExtension extends dObjectExtension {
 
     @Override
     public String getAttribute(Attribute attribute) {
+
+        // <--[tag]
+        // @attribute <p@player.we_brush_info[(<item>)]>
+        // @returns dList
+        // @description
+        // Returns information about a player's current brush for an item.
+        // If no item is specified, will be based on their held item.
+        // Output is in format: type|size|range|material
+        //
+        // Note that some values may be listed as "unknown" or strange values due to WorldEdit having a messy API (no way to automatically stringify brush data).
+        // @Plugin DepenizenBukkit, WorldEdit
+        // -->
+        if (attribute.startsWith("we_brush_info")) {
+            WorldEditPlugin worldEdit = Support.getPlugin(WorldEditSupport.class);
+            ItemType itemType;
+            if (attribute.hasContext(1)) {
+                itemType = BukkitAdapter.asItemType(dItem.valueOf(attribute.getContext(1)).getMaterial().getMaterial());
+            }
+            else {
+                ItemStack itm = player.getEquipment().getItemInMainHand();
+                itemType = BukkitAdapter.asItemType(itm == null ? Material.AIR : itm.getType());
+            }
+            try {
+                BrushTool brush = worldEdit.getSession(player).getBrushTool(itemType);
+                Brush btype = brush.getBrush();
+                String brushType = CoreUtilities.toLowerCase(btype.getClass().getSimpleName());
+                String materialInfo = "unknown";
+                Pattern materialPattern = brush.getMaterial();
+                if (materialPattern instanceof BlockPattern) {
+                    ((BlockPattern) materialPattern).getBlock().getAsString();
+                }
+                // TODO: other patterns?
+                // TODO: mask?
+                dList info = new dList();
+                info.add(brushType);
+                info.add(String.valueOf(brush.getSize()));
+                info.add(String.valueOf(brush.getRange()));
+                info.add(materialInfo);
+                return info.getAttribute(attribute.fulfill(1));
+            }
+            catch (InvalidToolBindException ex) {
+                if (!attribute.hasAlternative()) {
+                    dB.echoError("Player " + player.getName() + " does not have a WE brush for " + itemType.getName());
+                }
+            }
+        }
 
         // <--[tag]
         // @attribute <p@player.selected_region>
