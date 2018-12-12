@@ -115,6 +115,11 @@ public class dFaction implements dObject {
     }
 
     @Override
+    public String toString() {
+        return identify();
+    }
+
+    @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]

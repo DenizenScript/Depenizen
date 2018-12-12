@@ -109,10 +109,15 @@ public class HeroesClass implements dObject {
     }
 
     @Override
+    public String toString() {
+        return identify();
+    }
+
+    @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <hclass@class.allowed_armor>
+        // @attribute <hclass@hero_class.allowed_armor>
         // @returns dList(dMaterial)
         // @description
         // Lists the armor materials allowed in the class.
@@ -128,7 +133,7 @@ public class HeroesClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <hclass@class.allowed_weapons>
+        // @attribute <hclass@hero_class.allowed_weapons>
         // @returns dList(dMaterial)
         // @description
         // Lists the weapon materials allowed in the class.
@@ -144,7 +149,7 @@ public class HeroesClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <hclass@class.name>
+        // @attribute <hclass@hero_class.name>
         // @returns Element
         // @description
         // Returns the name of the hero class.
@@ -155,7 +160,7 @@ public class HeroesClass implements dObject {
         }
 
         // <--[tag]
-        // @attribute <hclass@class.type>
+        // @attribute <hclass@hero_class.type>
         // @returns Element
         // @description
         // Always returns 'Hero Class' for HeroesClass objects. All objects fetchable by the Object Fetcher will return the
