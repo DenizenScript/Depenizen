@@ -41,7 +41,7 @@ public class SentinelSupport extends Support {
             try {
                 if (text.startsWith("held_denizen_item:") && ent.getEquipment() != null) {
                     String targetItemRegex = text.substring("held_denizen_item:".length());
-                    if (SentinelUtilities.regexFor(targetItemRegex).matcher(new dItem(SentinelUtilities.getHeldItem(ent)).identifySimpleNoIdentifier()).matches()) {
+                    if (SentinelUtilities.regexFor(targetItemRegex).matcher(new dItem(SentinelUtilities.getHeldItem(ent)).identifySimple().replace("i@", "")).matches()) {
                         return true;
                     }
                 }
