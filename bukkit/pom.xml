@@ -397,6 +397,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
+                    <finalName>DepenizenBukkit-${version}-b${BUILD_NUMBER}</finalName>
                     <outputDirectory>../target</outputDirectory>
                 </configuration>
             </plugin>
