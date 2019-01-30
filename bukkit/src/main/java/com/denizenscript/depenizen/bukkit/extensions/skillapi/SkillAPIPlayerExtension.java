@@ -50,6 +50,9 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
             // @Plugin DepenizenBukkit, SkillAPI
             // -->
             if (attribute.startsWith("main_class")) {
+                if (data == null || data.getMainClass() == null) {
+                    return null;
+                }
                 return new SkillAPIClass(data.getMainClass().getData()).getAttribute(attribute.fulfill(1));
             }
 
