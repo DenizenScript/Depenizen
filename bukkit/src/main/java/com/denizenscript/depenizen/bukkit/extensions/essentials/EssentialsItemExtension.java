@@ -31,7 +31,6 @@ public class EssentialsItemExtension extends dObjectExtension {
     }
 
     dItem item;
-    Essentials ess = Support.getPlugin(EssentialsSupport.class);
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -47,7 +46,8 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("worth")) {
-            double price = ess.getWorth().getPrice(item.getItemStack()).doubleValue();
+            Essentials ess = Support.getPlugin(EssentialsSupport.class);
+            double price = ess.getWorth().getPrice(ess, item.getItemStack()).doubleValue();
             // <--[tag]
             // @attribute <i@item.worth.quantity[<#>]>
             // @returns Element(Decimal)
@@ -81,7 +81,8 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (mechanism.matches("worth") && value.isDouble()) {
-            ess.getWorth().setPrice(item.getItemStack(), value.asDouble());
+            Essentials ess = Support.getPlugin(EssentialsSupport.class);
+            ess.getWorth().setPrice(ess, item.getItemStack(), value.asDouble());
         }
 
     }
