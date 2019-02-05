@@ -24,6 +24,13 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "simpleclans"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private SimpleClansPlayerExtension(dPlayer player) {
         this.player = player;
         this.cplayer = new ClanPlayer(player.getOfflinePlayer().getUniqueId());

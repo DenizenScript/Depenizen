@@ -26,6 +26,14 @@ public class EssentialsItemExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "worth"
+    };
+
+    public static final String[] handledMechs = new String[] {
+            "worth"
+    };
+
     private EssentialsItemExtension(dItem item) {
         this.item = item;
     }

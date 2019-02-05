@@ -25,6 +25,13 @@ public class TownyLocationExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "has_town", "town", "is_wilderness"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private TownyLocationExtension(dLocation location) {
         this.location = location;
     }

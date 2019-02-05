@@ -43,6 +43,13 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "we_brush_info", "selected_region"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private WorldEditPlayerExtension(dPlayer player) {
         this.player = player.getPlayerEntity();
     }

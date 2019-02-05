@@ -28,6 +28,13 @@ public class SkillAPIPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "skillapi"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public SkillAPIPlayerExtension(dPlayer player) {
         this.player = player;
     }

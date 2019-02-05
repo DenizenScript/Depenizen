@@ -23,6 +23,13 @@ public class NoCheatPlusPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "ncp"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private NoCheatPlusPlayerExtension(dPlayer player) {
         this.player = player;
     }

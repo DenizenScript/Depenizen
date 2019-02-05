@@ -33,6 +33,13 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
         return new WorldGuardPlayerExtension((dPlayer) object);
     }
 
+    public static final String[] handledTags = new String[] {
+            "worldguard"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private WorldGuardPlayerExtension(dPlayer player) {
         this.player = player.getPlayerEntity();
         this.wgp = Support.getPlugin(WorldGuardSupport.class);

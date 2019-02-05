@@ -37,6 +37,13 @@ public class WorldGuardCuboidExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "has_region", "regions"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private WorldGuardCuboidExtension(dCuboid cuboid) {
         this.cuboid = cuboid;
     }

@@ -27,6 +27,13 @@ public class ASkyBlockPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "skyblock"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public ASkyBlockPlayerExtension(dPlayer player) {
         this.player = player;
         skyblock = api.getIslandOwnedBy(player.getOfflinePlayer().getUniqueId());
