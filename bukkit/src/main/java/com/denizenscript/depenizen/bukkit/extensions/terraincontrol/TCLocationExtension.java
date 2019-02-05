@@ -23,7 +23,7 @@ public class TCLocationExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "tc_biome"
     };
 

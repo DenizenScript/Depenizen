@@ -25,7 +25,7 @@ public class TownyLocationExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "has_town", "town", "is_wilderness"
     };
 

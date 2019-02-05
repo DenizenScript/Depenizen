@@ -33,7 +33,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
         return new WorldGuardPlayerExtension((dPlayer) object);
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "worldguard"
     };
 

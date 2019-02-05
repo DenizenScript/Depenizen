@@ -33,7 +33,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "god_mode", "has_home", "is_afk", "is_muted", "is_vanished", "home_list", "home_location_list",
             "ignored_players", "home_name_list", "mail_list", "mute_timout", "socialspy"
     };

@@ -22,7 +22,7 @@ public class ASkyBlockLocationExtension extends dObjectExtension {
         return new ASkyBlockLocationExtension((dLocation) object);
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "skyblock"
     };
 

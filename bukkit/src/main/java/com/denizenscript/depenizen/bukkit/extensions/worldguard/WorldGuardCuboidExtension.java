@@ -37,7 +37,7 @@ public class WorldGuardCuboidExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "has_region", "regions"
     };
 

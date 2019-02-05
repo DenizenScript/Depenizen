@@ -31,7 +31,7 @@ public class PrismLocationExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "prism_logs"
     };
 

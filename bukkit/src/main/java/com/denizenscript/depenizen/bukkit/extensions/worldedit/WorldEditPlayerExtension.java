@@ -43,7 +43,7 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "we_brush_info", "selected_region"
     };
 

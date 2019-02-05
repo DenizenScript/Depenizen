@@ -32,7 +32,7 @@ public class WorldGuardWorldExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "list_regions"
     };
 

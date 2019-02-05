@@ -28,7 +28,7 @@ public class TownyPlayerExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "has_nation", "has_town", "mode_list", "nation_ranks", "nation", "town_ranks", "town"
     };
 

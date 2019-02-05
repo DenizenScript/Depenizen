@@ -30,7 +30,7 @@ public class HeroesPlayerNPCExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "heroes"
     };
 

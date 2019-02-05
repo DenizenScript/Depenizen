@@ -23,7 +23,7 @@ public class NoCheatPlusPlayerExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "ncp"
     };
 

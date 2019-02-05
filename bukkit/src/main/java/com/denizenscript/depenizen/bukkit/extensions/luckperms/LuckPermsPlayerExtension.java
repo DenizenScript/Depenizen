@@ -32,7 +32,7 @@ public class LuckPermsPlayerExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "luckperms_tracks"
     };
 

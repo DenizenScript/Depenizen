@@ -23,7 +23,7 @@ public class BossShopInventoryExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "is_bossshop"
     };
 

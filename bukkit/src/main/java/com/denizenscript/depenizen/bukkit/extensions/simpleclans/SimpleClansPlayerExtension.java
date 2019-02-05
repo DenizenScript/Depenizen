@@ -24,7 +24,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "simpleclans"
     };
 

@@ -31,7 +31,7 @@ public class WorldGuardLocationExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "in_region", "regions"
     };
 

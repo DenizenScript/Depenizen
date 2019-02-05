@@ -28,7 +28,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "quests"
     };
 

@@ -25,7 +25,7 @@ public class JobsPlayerExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "jobs"
     };
 

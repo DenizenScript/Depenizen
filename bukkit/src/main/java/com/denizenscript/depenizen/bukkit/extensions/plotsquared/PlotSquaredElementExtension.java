@@ -26,7 +26,7 @@ public class PlotSquaredElementExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "as_plotsquared_plot"
     };
 

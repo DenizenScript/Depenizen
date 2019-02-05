@@ -31,7 +31,7 @@ public class PlotMeLocationExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "plot"
     };
 

@@ -26,7 +26,7 @@ public class ResidencePlayerExtension extends dObjectExtension {
         }
     }
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "has_main_residence", "main_residence", "residences"
     };
 
