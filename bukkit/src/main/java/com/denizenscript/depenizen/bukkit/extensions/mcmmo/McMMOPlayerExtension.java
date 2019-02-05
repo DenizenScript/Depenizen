@@ -25,6 +25,13 @@ public class McMMOPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "mcmmo"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private McMMOPlayerExtension(dPlayer player) {
         this.player = player;
     }

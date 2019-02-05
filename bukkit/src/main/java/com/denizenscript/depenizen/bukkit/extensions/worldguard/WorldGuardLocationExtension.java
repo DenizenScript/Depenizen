@@ -31,6 +31,13 @@ public class WorldGuardLocationExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "in_region", "regions"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private WorldGuardLocationExtension(dLocation loc) {
         location = loc;
     }

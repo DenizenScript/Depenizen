@@ -29,6 +29,13 @@ public class TownyCuboidExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "has_town", "list_towns"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private TownyCuboidExtension(dCuboid cuboid) {
         this.cuboid = cuboid;
     }

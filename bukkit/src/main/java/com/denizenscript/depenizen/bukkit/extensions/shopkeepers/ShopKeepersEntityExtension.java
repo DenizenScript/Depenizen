@@ -22,6 +22,13 @@ public class ShopKeepersEntityExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "is_shopkeeper", "shopkeeper"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public ShopKeepersEntityExtension(dEntity entity) {
         this.entity = entity;
         this.isShopKeeper = ShopKeeper.isShopKeeper(entity);

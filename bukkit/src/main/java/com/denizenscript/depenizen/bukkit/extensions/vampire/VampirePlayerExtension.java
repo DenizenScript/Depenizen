@@ -22,6 +22,13 @@ public class VampirePlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "is_vampire", "is_infected", "combat_infect", "combat_damage"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public VampirePlayerExtension(dPlayer player) {
         this.uPlayer = UPlayer.get(player.getPlayerEntity());
     }

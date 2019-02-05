@@ -25,6 +25,13 @@ public class JobsPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "jobs"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private JobsPlayerExtension(dPlayer player) {
         this.player = Jobs.getPlayerManager().getJobsPlayer(player.getName());
     }

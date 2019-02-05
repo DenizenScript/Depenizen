@@ -32,6 +32,13 @@ public class WorldGuardWorldExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[]{
+            "list_regions"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private WorldGuardWorldExtension(dWorld world) {
         this.world = world.getWorld();
         this.manager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(this.world));

@@ -35,6 +35,14 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[]{
+            "griefprevention"
+    };
+
+    public static final String[] handledMechs = new String[] {
+            "bonus_blocks", "normal_blocks"
+    };
+
     private GriefPreventionPlayerExtension(dPlayer player) {
         this.player = player;
         data = dataStore.getPlayerData(player.getOfflinePlayer().getUniqueId());

@@ -23,6 +23,13 @@ public class BossShopInventoryExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "is_bossshop"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public BossShopInventoryExtension(dInventory inventory) {
         this.inv = inventory;
     }

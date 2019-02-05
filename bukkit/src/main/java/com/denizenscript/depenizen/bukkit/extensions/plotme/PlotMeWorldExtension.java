@@ -29,6 +29,13 @@ public class PlotMeWorldExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[]{
+            "is_plot_world"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private PlotMeWorldExtension(dWorld world) {
         this.world = world;
     }

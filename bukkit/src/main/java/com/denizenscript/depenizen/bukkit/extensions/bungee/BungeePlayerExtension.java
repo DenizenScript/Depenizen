@@ -26,6 +26,13 @@ public class BungeePlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+    }; // None
+
+    public static final String[] handledMechs = new String[] {
+            "send_to"
+    };
+
     private BungeePlayerExtension(dPlayer player) {
         this.player = player;
     }

@@ -31,6 +31,13 @@ public class PlayerPointsPlayerExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[]{
+            "playerpoints_points"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private PlayerPointsPlayerExtension(dPlayer player) {
         this.player = player;
     }

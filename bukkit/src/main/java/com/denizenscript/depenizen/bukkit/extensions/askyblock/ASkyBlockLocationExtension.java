@@ -22,6 +22,13 @@ public class ASkyBlockLocationExtension extends dObjectExtension {
         return new ASkyBlockLocationExtension((dLocation) object);
     }
 
+    public static final String[] handledTags = new String[]{
+            "skyblock"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public ASkyBlockLocationExtension(dLocation location) {
         this.location = location;
     }

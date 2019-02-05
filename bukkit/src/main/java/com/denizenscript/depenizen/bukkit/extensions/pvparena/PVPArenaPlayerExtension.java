@@ -24,6 +24,13 @@ public class PVPArenaPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "pvparena"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private PVPArenaPlayerExtension(dPlayer player) {
         this.player = ArenaPlayer.parsePlayer(player.getName());
     }

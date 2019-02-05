@@ -26,6 +26,13 @@ public class ResidencePlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "has_main_residence", "main_residence", "residences"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private ResidencePlayerExtension(dPlayer player) {
         this.player = Residence.getInstance().getPlayerManagerAPI().getResidencePlayer(player.getName());
     }

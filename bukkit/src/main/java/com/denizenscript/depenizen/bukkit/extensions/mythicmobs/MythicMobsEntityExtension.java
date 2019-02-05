@@ -23,6 +23,13 @@ public class MythicMobsEntityExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "is_mythicmob", "mythicmob"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public MythicMobsEntityExtension(dEntity entity) {
         this.entity = entity;
     }

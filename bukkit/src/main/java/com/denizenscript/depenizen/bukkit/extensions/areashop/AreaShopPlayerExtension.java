@@ -26,6 +26,13 @@ public class AreaShopPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "areashop"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private AreaShopPlayerExtension(dPlayer player) {
         this.player = player;
     }

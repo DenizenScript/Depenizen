@@ -29,6 +29,13 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "factions", "faction"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private FactionsPlayerNPCExtension(dObject object) {
         String name = object instanceof dPlayer ? ((dPlayer) object).getName()
                 : object instanceof dNPC ? ((dNPC) object).getName()

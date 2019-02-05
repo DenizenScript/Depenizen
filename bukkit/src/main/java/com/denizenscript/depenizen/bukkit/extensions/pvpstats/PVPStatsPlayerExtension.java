@@ -22,6 +22,13 @@ public class PVPStatsPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "pvpstats"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public PVPStatsPlayerExtension(dPlayer player) {
         this.playerName = player.getName();
     }

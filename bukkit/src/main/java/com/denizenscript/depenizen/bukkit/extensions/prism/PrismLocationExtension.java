@@ -31,6 +31,13 @@ public class PrismLocationExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "prism_logs"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private PrismLocationExtension(dLocation location) {
         this.location = location;
     }

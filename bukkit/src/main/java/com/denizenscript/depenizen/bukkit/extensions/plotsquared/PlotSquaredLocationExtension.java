@@ -30,6 +30,13 @@ public class PlotSquaredLocationExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[]{
+            "plotsquared_plot"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private PlotSquaredLocationExtension(dLocation location) {
         this.location = location;
     }

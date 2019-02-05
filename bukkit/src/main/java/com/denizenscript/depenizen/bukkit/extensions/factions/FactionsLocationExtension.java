@@ -23,6 +23,13 @@ public class FactionsLocationExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[]{
+            "faction"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private FactionsLocationExtension(dLocation location) {
         this.location = location;
     }
