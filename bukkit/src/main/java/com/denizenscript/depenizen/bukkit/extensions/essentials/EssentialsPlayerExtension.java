@@ -336,10 +336,10 @@ public class EssentialsPlayerExtension extends dObjectExtension {
                 int len = mechanism.getValue().asString().length();
                 String after = mechanism.getValue().asString().substring(split + 1, len);
                 String before = mechanism.getValue().asString().substring(0, split - 1);
-                getUser().setIgnoredPlayer(essentials.getUser(new Element(before).asType(dPlayer.class).getOfflinePlayer().getUniqueId()), new Element(after).asBoolean());
+                getUser().setIgnoredPlayer(essentials.getUser(new Element(before).asType(dPlayer.class, mechanism.context).getOfflinePlayer().getUniqueId()), new Element(after).asBoolean());
             }
             else {
-                getUser().setIgnoredPlayer(essentials.getUser(mechanism.getValue().asType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);
+                getUser().setIgnoredPlayer(essentials.getUser(mechanism.valueAsType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);
             }
         }
 

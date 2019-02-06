@@ -55,7 +55,7 @@ public class BungeePlayerExtension extends dObjectExtension {
         if (mechanism.matches("send_to")
                 && mechanism.requireObject(dServer.class)) {
             if (BungeeSupport.isSocketRegistered()) {
-                Packet packet = new ClientPacketOutSendPlayer(player.getName(), mechanism.getValue().asType(dServer.class).getName());
+                Packet packet = new ClientPacketOutSendPlayer(player.getName(), mechanism.valueAsType(dServer.class).getName());
                 BungeeSupport.getSocketClient().trySend(packet);
             }
             else {
