@@ -76,7 +76,6 @@ public class LuckPermsPlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }
 

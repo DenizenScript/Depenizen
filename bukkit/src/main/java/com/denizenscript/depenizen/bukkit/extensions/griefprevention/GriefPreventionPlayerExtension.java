@@ -142,14 +142,12 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
-
         if (mechanism.matches("bonus_blocks") && mechanism.requireInteger()) {
-            data.setBonusClaimBlocks(value.asInt());
+            data.setBonusClaimBlocks(mechanism.getValue().asInt());
         }
 
         if (mechanism.matches("normal_blocks") && mechanism.requireInteger()) {
-            data.setAccruedClaimBlocks(value.asInt());
+            data.setAccruedClaimBlocks(mechanism.getValue().asInt());
         }
     }
 }

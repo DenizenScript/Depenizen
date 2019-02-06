@@ -64,6 +64,5 @@ public class PlotSquaredElementExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

@@ -75,8 +75,6 @@ public class EssentialsItemExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
-
         // <--[mechanism]
         // @object dItem
         // @name worth
@@ -88,9 +86,9 @@ public class EssentialsItemExtension extends dObjectExtension {
         // <i@item.worth.quantity[<Element>]>
         // @Plugin DepenizenBukkit, Essentials
         // -->
-        if (mechanism.matches("worth") && value.isDouble()) {
+        if (mechanism.matches("worth") && mechanism.getValue().isDouble()) {
             Essentials ess = Support.getPlugin(EssentialsSupport.class);
-            ess.getWorth().setPrice(ess, item.getItemStack(), value.asDouble());
+            ess.getWorth().setPrice(ess, item.getItemStack(), mechanism.getValue().asDouble());
         }
 
     }

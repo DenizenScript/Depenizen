@@ -98,6 +98,5 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

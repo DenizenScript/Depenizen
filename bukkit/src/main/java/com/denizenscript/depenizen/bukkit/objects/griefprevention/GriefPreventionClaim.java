@@ -192,8 +192,6 @@ public class GriefPreventionClaim implements dObject, Adjustable {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
-
         // <--[mechanism]
         // @object GriefPreventionClaim
         // @name owner
@@ -206,11 +204,11 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // -->
         if (mechanism.matches("owner")) {
             try {
-                if (dPlayer.matches(value.asString())) {
-                    dPlayer player = dPlayer.valueOf(value.asString());
+                if (dPlayer.matches(mechanism.getValue().asString())) {
+                    dPlayer player = dPlayer.valueOf(mechanism.getValue().asString());
                     dataStore.changeClaimOwner(claim, player.getOfflinePlayer().getUniqueId());
                 }
-                else if (CoreUtilities.toLowerCase(value.asString()).equals("admin")) {
+                else if (CoreUtilities.toLowerCase(mechanism.getValue().asString()).equals("admin")) {
                     dataStore.changeClaimOwner(claim, null);
                 }
             }
@@ -229,7 +227,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // None
         // -->
         if (mechanism.matches("depth") && mechanism.requireInteger()) {
-            dataStore.extendClaim(claim, value.asInt());
+            dataStore.extendClaim(claim, mechanism.getValue().asInt());
         }
 
         // Iterate through this object's properties' mechanisms

@@ -234,8 +234,6 @@ public class EssentialsPlayerExtension extends dObjectExtension {
     @Override
     public void adjust(Mechanism mechanism) {
 
-        Element value = mechanism.getValue();
-
         // <--[mechanism]
         // @object dPlayer
         // @name is_afk
@@ -247,7 +245,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if ((mechanism.matches("afk") || mechanism.matches("is_afk")) && mechanism.requireBoolean()) {
-            getUser().setAfk(value.asBoolean());
+            getUser().setAfk(mechanism.getValue().asBoolean());
         }
 
         // <--[mechanism]
@@ -261,7 +259,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (mechanism.matches("god_mode") && mechanism.requireBoolean()) {
-            getUser().setGodModeEnabled(value.asBoolean());
+            getUser().setGodModeEnabled(mechanism.getValue().asBoolean());
         }
 
         // <--[mechanism]
@@ -277,8 +275,8 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if ((mechanism.matches("muted") || mechanism.matches("is_muted")) && mechanism.requireBoolean()) {
-            if (value.asString().length() > 0) {
-                String[] split = value.asString().split("[\\|" + dList.internal_escape + "]", 2);
+            if (mechanism.getValue().asString().length() > 0) {
+                String[] split = mechanism.getValue().asString().split("[\\|" + dList.internal_escape + "]", 2);
                 if (split.length > 0 && new Element(split[0]).isBoolean()) {
                     getUser().setMuted(new Element(split[0]).asBoolean());
                     if (split.length > 1 && Duration.matches(split[1])) {
@@ -303,7 +301,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (mechanism.matches("socialspy") && mechanism.requireBoolean()) {
-            getUser().setSocialSpyEnabled(value.asBoolean());
+            getUser().setSocialSpyEnabled(mechanism.getValue().asBoolean());
         }
 
         // <--[mechanism]
@@ -317,7 +315,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (mechanism.matches("vanish") && mechanism.requireBoolean()) {
-            getUser().setVanished(value.asBoolean());
+            getUser().setVanished(mechanism.getValue().asBoolean());
         }
 
 
@@ -333,15 +331,15 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // -->
         if (mechanism.matches("essentials_ignore")) {
             Essentials essentials = Support.getPlugin(EssentialsSupport.class);
-            if (value.asString().contains("|")) {
-                int split = value.asString().indexOf("|");
-                int len = value.asString().length();
-                String after = value.asString().substring(split + 1, len);
-                String before = value.asString().substring(0, split - 1);
+            if (mechanism.getValue().asString().contains("|")) {
+                int split = mechanism.getValue().asString().indexOf("|");
+                int len = mechanism.getValue().asString().length();
+                String after = mechanism.getValue().asString().substring(split + 1, len);
+                String before = mechanism.getValue().asString().substring(0, split - 1);
                 getUser().setIgnoredPlayer(essentials.getUser(new Element(before).asType(dPlayer.class).getOfflinePlayer().getUniqueId()), new Element(after).asBoolean());
             }
             else {
-                getUser().setIgnoredPlayer(essentials.getUser(value.asType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);
+                getUser().setIgnoredPlayer(essentials.getUser(mechanism.getValue().asType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);
             }
         }
 
