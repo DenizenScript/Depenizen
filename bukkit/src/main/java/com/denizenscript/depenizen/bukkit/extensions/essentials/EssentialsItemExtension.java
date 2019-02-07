@@ -26,12 +26,19 @@ public class EssentialsItemExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "worth"
+    };
+
+    public static final String[] handledMechs = new String[] {
+            "worth"
+    };
+
     private EssentialsItemExtension(dItem item) {
         this.item = item;
     }
 
     dItem item;
-    Essentials ess = Support.getPlugin(EssentialsSupport.class);
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -47,7 +54,8 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("worth")) {
-            double price = ess.getWorth().getPrice(item.getItemStack()).doubleValue();
+            Essentials ess = Support.getPlugin(EssentialsSupport.class);
+            double price = ess.getWorth().getPrice(ess, item.getItemStack()).doubleValue();
             // <--[tag]
             // @attribute <i@item.worth.quantity[<#>]>
             // @returns Element(Decimal)
@@ -67,8 +75,6 @@ public class EssentialsItemExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
-
         // <--[mechanism]
         // @object dItem
         // @name worth
@@ -80,8 +86,9 @@ public class EssentialsItemExtension extends dObjectExtension {
         // <i@item.worth.quantity[<Element>]>
         // @Plugin DepenizenBukkit, Essentials
         // -->
-        if (mechanism.matches("worth") && value.isDouble()) {
-            ess.getWorth().setPrice(item.getItemStack(), value.asDouble());
+        if (mechanism.matches("worth") && mechanism.getValue().isDouble()) {
+            Essentials ess = Support.getPlugin(EssentialsSupport.class);
+            ess.getWorth().setPrice(ess, item.getItemStack(), mechanism.getValue().asDouble());
         }
 
     }

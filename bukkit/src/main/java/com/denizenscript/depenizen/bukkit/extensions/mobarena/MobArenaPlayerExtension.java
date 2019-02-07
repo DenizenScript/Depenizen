@@ -31,6 +31,13 @@ public class MobArenaPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "mobarena"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public MobArenaPlayerExtension(dPlayer player) {
         this.player = player;
         this.arena = plugin.getArenaMaster().getArenaWithPlayer(player.getPlayerEntity());

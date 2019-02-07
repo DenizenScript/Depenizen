@@ -12,6 +12,8 @@ import com.sk89q.worldedit.function.pattern.BlockPattern;
 import com.sk89q.worldedit.function.pattern.Pattern;
 import com.sk89q.worldedit.regions.RegionSelector;
 import com.sk89q.worldedit.world.item.ItemType;
+import net.aufdemrand.denizen.nms.NMSHandler;
+import net.aufdemrand.denizen.nms.NMSVersion;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -20,6 +22,7 @@ import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -40,11 +43,25 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "we_brush_info", "selected_region"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private WorldEditPlayerExtension(dPlayer player) {
         this.player = player.getPlayerEntity();
     }
 
     Player player = null;
+
+    public static Material deLegacy(Material mat) {
+        if (NMSHandler.getVersion().isAtLeast(NMSVersion.v1_13_R2) && mat.isLegacy()) {
+            return Bukkit.getUnsafe().fromLegacy(mat);
+        }
+        return mat;
+    }
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -64,11 +81,11 @@ public class WorldEditPlayerExtension extends dObjectExtension {
             WorldEditPlugin worldEdit = Support.getPlugin(WorldEditSupport.class);
             ItemType itemType;
             if (attribute.hasContext(1)) {
-                itemType = BukkitAdapter.asItemType(dItem.valueOf(attribute.getContext(1)).getMaterial().getMaterial());
+                itemType = BukkitAdapter.asItemType(deLegacy(dItem.valueOf(attribute.getContext(1)).getMaterial().getMaterial()));
             }
             else {
                 ItemStack itm = player.getEquipment().getItemInMainHand();
-                itemType = BukkitAdapter.asItemType(itm == null ? Material.AIR : itm.getType());
+                itemType = BukkitAdapter.asItemType(deLegacy(itm == null ? Material.AIR : itm.getType()));
             }
             try {
                 BrushTool brush = worldEdit.getSession(player).getBrushTool(itemType);

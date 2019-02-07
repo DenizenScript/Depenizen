@@ -28,6 +28,13 @@ public class QuestsPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "quests"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private QuestsPlayerExtension(dPlayer player) {
         this.player = player;
         Quests quests = (Quests) QuestsSupport.questsPlugin;
@@ -120,6 +127,5 @@ public class QuestsPlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

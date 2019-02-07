@@ -31,6 +31,13 @@ public class PlotMeLocationExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[] {
+            "plot"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private PlotMeLocationExtension(dLocation location) {
         this.location = location;
     }
@@ -57,6 +64,5 @@ public class PlotMeLocationExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

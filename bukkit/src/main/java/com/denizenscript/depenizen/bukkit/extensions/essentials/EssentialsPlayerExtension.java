@@ -33,13 +33,25 @@ public class EssentialsPlayerExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[] {
+            "god_mode", "has_home", "is_afk", "is_muted", "is_vanished", "home_list", "home_location_list",
+            "ignored_players", "home_name_list", "mail_list", "mute_timout", "socialspy"
+    };
+
+    public static final String[] handledMechs = new String[] {
+            "is_afk", "god_mode", "is_muted", "socialspy", "vanish", "essentials_ignore"
+    };
+
     private EssentialsPlayerExtension(dPlayer player) {
-        // TODO: UUID
-        Essentials essentials = Support.getPlugin(EssentialsSupport.class);
-        this.essUser = essentials.getUser(player.getOfflinePlayer().getUniqueId());
+        this.player = player;
     }
 
-    User essUser = null;
+    public User getUser() {
+        Essentials essentials = Support.getPlugin(EssentialsSupport.class);
+        return essentials.getUser(player.getOfflinePlayer().getUniqueId());
+    }
+
+    dPlayer player;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -53,7 +65,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("god_mode")) {
-            return new Element(essUser.isGodModeEnabled()).getAttribute(attribute.fulfill(1));
+            return new Element(getUser().isGodModeEnabled()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -64,7 +76,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("has_home")) {
-            return new Element(essUser.hasHome()).getAttribute(attribute.fulfill(1));
+            return new Element(getUser().hasHome()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -76,7 +88,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("is_afk")) {
-            return new Element(essUser.isAfk()).getAttribute(attribute.fulfill(1));
+            return new Element(getUser().isAfk()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -88,7 +100,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("is_muted")) {
-            return new Element(essUser.isMuted()).getAttribute(attribute.fulfill(1));
+            return new Element(getUser().isMuted()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -100,7 +112,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("is_vanished")) {
-            return new Element(essUser.isVanished()).getAttribute(attribute.fulfill(1));
+            return new Element(getUser().isVanished()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -112,9 +124,9 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("home_list")) {
             dList homes = new dList();
-            for (String home : essUser.getHomes()) {
+            for (String home : getUser().getHomes()) {
                 try {
-                    homes.add(home + "/" + new dLocation(essUser.getHome(home)).identifySimple());
+                    homes.add(home + "/" + new dLocation(getUser().getHome(home)).identifySimple());
                 }
                 catch (Exception e) {
                     if (!attribute.hasAlternative()) {
@@ -134,9 +146,9 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("home_location_list")) {
             dList homes = new dList();
-            for (String home : essUser.getHomes()) {
+            for (String home : getUser().getHomes()) {
                 try {
-                    homes.add(new dLocation(essUser.getHome(home)).identifySimple());
+                    homes.add(new dLocation(getUser().getHome(home)).identifySimple());
                 }
                 catch (Exception e) {
                     if (!attribute.hasAlternative()) {
@@ -157,7 +169,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         if (attribute.startsWith("ignored_players")) {
             dList players = new dList();
             Essentials essentials = Support.getPlugin(EssentialsSupport.class);
-            for (String player : essUser._getIgnoredPlayers()) {
+            for (String player : getUser()._getIgnoredPlayers()) {
                 try {
                     players.add(new dPlayer(essentials.getOfflineUser(player).getBase()).identifySimple());
                 }
@@ -178,7 +190,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("home_name_list")) {
-            return new dList(essUser.getHomes()).getAttribute(attribute.fulfill(1));
+            return new dList(getUser().getHomes()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -189,7 +201,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("mail_list")) {
-            return new dList(essUser.getMails()).getAttribute(attribute.fulfill(1));
+            return new dList(getUser().getMails()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -200,7 +212,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("mute_timeout")) {
-            return new Duration((int) (essUser.getMuteTimeout() - new GregorianCalendar().getTimeInMillis()) / 1000)
+            return new Duration((int) (getUser().getMuteTimeout() - new GregorianCalendar().getTimeInMillis()) / 1000)
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -213,7 +225,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("socialspy")) {
-            return new Element(essUser.isSocialSpyEnabled()).getAttribute(attribute.fulfill(1));
+            return new Element(getUser().isSocialSpyEnabled()).getAttribute(attribute.fulfill(1));
         }
 
         return null;
@@ -221,8 +233,6 @@ public class EssentialsPlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-
-        Element value = mechanism.getValue();
 
         // <--[mechanism]
         // @object dPlayer
@@ -235,7 +245,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if ((mechanism.matches("afk") || mechanism.matches("is_afk")) && mechanism.requireBoolean()) {
-            essUser.setAfk(value.asBoolean());
+            getUser().setAfk(mechanism.getValue().asBoolean());
         }
 
         // <--[mechanism]
@@ -249,7 +259,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (mechanism.matches("god_mode") && mechanism.requireBoolean()) {
-            essUser.setGodModeEnabled(value.asBoolean());
+            getUser().setGodModeEnabled(mechanism.getValue().asBoolean());
         }
 
         // <--[mechanism]
@@ -265,12 +275,12 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if ((mechanism.matches("muted") || mechanism.matches("is_muted")) && mechanism.requireBoolean()) {
-            if (value.asString().length() > 0) {
-                String[] split = value.asString().split("[\\|" + dList.internal_escape + "]", 2);
+            if (mechanism.getValue().asString().length() > 0) {
+                String[] split = mechanism.getValue().asString().split("[\\|" + dList.internal_escape + "]", 2);
                 if (split.length > 0 && new Element(split[0]).isBoolean()) {
-                    essUser.setMuted(new Element(split[0]).asBoolean());
+                    getUser().setMuted(new Element(split[0]).asBoolean());
                     if (split.length > 1 && Duration.matches(split[1])) {
-                        essUser.setMuteTimeout(new GregorianCalendar().getTimeInMillis()
+                        getUser().setMuteTimeout(new GregorianCalendar().getTimeInMillis()
                                 + Duration.valueOf(split[1]).getMillis());
                     }
                 }
@@ -291,7 +301,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (mechanism.matches("socialspy") && mechanism.requireBoolean()) {
-            essUser.setSocialSpyEnabled(value.asBoolean());
+            getUser().setSocialSpyEnabled(mechanism.getValue().asBoolean());
         }
 
         // <--[mechanism]
@@ -305,7 +315,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (mechanism.matches("vanish") && mechanism.requireBoolean()) {
-            essUser.setVanished(value.asBoolean());
+            getUser().setVanished(mechanism.getValue().asBoolean());
         }
 
 
@@ -321,15 +331,15 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // -->
         if (mechanism.matches("essentials_ignore")) {
             Essentials essentials = Support.getPlugin(EssentialsSupport.class);
-            if (value.asString().contains("|")) {
-                int split = value.asString().indexOf("|");
-                int len = value.asString().length();
-                String after = value.asString().substring(split + 1, len);
-                String before = value.asString().substring(0, split - 1);
-                essUser.setIgnoredPlayer(essentials.getUser(new Element(before).asType(dPlayer.class).getOfflinePlayer().getUniqueId()), new Element(after).asBoolean());
+            if (mechanism.getValue().asString().contains("|")) {
+                int split = mechanism.getValue().asString().indexOf("|");
+                int len = mechanism.getValue().asString().length();
+                String after = mechanism.getValue().asString().substring(split + 1, len);
+                String before = mechanism.getValue().asString().substring(0, split - 1);
+                getUser().setIgnoredPlayer(essentials.getUser(new Element(before).asType(dPlayer.class, mechanism.context).getOfflinePlayer().getUniqueId()), new Element(after).asBoolean());
             }
             else {
-                essUser.setIgnoredPlayer(essentials.getUser(value.asType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);
+                getUser().setIgnoredPlayer(essentials.getUser(mechanism.valueAsType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);
             }
         }
 

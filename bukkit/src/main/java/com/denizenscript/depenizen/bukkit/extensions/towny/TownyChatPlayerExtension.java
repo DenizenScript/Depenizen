@@ -26,6 +26,13 @@ public class TownyChatPlayerExtension extends dObjectExtension {
         return new TownyChatPlayerExtension((dPlayer) object);
     }
 
+    public static final String[] handledTags = new String[] {
+            "townychat"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private TownyChatPlayerExtension(dPlayer player) {
         this.player = player;
     }

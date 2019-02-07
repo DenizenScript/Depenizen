@@ -71,7 +71,7 @@ public class JobPlayer implements Property {
         // @Plugin DepenizenBukkit, Jobs
         // -->
         if (mechanism.matches("player") && mechanism.requireObject(dPlayer.class)) {
-            job.setOwner(mechanism.getValue().asType(dPlayer.class));
+            job.setOwner(mechanism.valueAsType(dPlayer.class));
         }
 
     }

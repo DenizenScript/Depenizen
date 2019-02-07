@@ -32,6 +32,13 @@ public class PlotSquaredPlayerExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[] {
+            "plotsquared_plots"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private PlotSquaredPlayerExtension(dPlayer player) {
         this.player = player;
     }
@@ -74,6 +81,5 @@ public class PlotSquaredPlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

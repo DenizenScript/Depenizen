@@ -30,6 +30,13 @@ public class PlotMePlayerExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[] {
+            "plot_count"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private PlotMePlayerExtension(dPlayer player) {
         this.player = player;
     }
@@ -62,6 +69,5 @@ public class PlotMePlayerExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

@@ -33,6 +33,13 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[] {
+            "griefprevention"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private GriefPreventionLocationExtension(dLocation location) {
         this.location = location;
     }
@@ -91,6 +98,5 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
     }
 }

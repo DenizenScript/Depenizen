@@ -22,6 +22,13 @@ public class LibsDisguiseEntityExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "is_disguised", "disguise"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     public LibsDisguiseEntityExtension(dEntity entity) {
         this.entity = entity;
     }
