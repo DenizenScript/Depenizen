@@ -61,17 +61,17 @@ public class MobArenaCommand extends AbstractCommand {
             else if (!scriptEntry.hasObject("add")
                     && arg.matchesPrefix("add", "join")
                     && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("add", arg.asType(dList.class).filter(dPlayer.class));
+                scriptEntry.addObject("add", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("remove")
                     && arg.matchesPrefix("remove", "leave")
                     && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("remove", arg.asType(dList.class).filter(dPlayer.class));
+                scriptEntry.addObject("remove", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("spectate")
                     && arg.matchesPrefix("spectate", "spec")
                     && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("spectate", arg.asType(dList.class).filter(dPlayer.class));
+                scriptEntry.addObject("spectate", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
             }
             else {
                 arg.reportUnhandled();

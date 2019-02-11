@@ -46,7 +46,7 @@ public class BungeePriorityCommand extends AbstractCommand {
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("list")) {
-                scriptEntry.addObject("list", arg.asType(dList.class).filter(dServer.class));
+                scriptEntry.addObject("list", arg.asType(dList.class).filter(dServer.class, scriptEntry));
             }
             else {
                 arg.reportUnhandled();

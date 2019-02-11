@@ -91,7 +91,7 @@ public class BungeeCommand extends BracedCommand {
         dList serverNames = new dList();
         serverNames.setPrefix("servers");
 
-        for (dServer server : servers.filter(dServer.class)) {
+        for (dServer server : servers.filter(dServer.class, scriptEntry)) {
             serverNames.add(server.getName());
         }
 

@@ -53,7 +53,7 @@ public class ClientScriptsCommand extends AbstractCommand {
 
             else if (!scriptEntry.hasObject("players")
                     && arg.matchesPrefix("players")) {
-                scriptEntry.addObject("players", arg.asType(dList.class).filter(dPlayer.class));
+                scriptEntry.addObject("players", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
             }
 
             else if (!scriptEntry.hasObject("files")) {
