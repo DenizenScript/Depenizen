@@ -17,7 +17,7 @@ import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// on shopkeeper trade
+// shopkeeper trade
 //
 // @Regex ^on shopkeeper trade$
 //
