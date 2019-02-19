@@ -99,6 +99,7 @@ public class PVPArenaArena implements dObject {
         // @description
         // Returns the name of the arena.
         // @Plugin DepenizenBukkit, PVPArena
+        // -->
         if (attribute.startsWith("name")) {
             return new Element(arena.getName()).getAttribute(attribute.fulfill(1));
         }
