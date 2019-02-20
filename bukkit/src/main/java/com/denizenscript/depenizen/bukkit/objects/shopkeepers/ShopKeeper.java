@@ -196,7 +196,7 @@ public class ShopKeeper implements dObject {
         // @description
         // Always returns 'ShopKeeper' for ShopKeeper objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin DepenizenBukkit, MythicMobs
+        // @Plugin DepenizenBukkit, ShopKeepers
         // -->
         else if (attribute.startsWith("type")) {
             return new Element("ShopKeeper").getAttribute(attribute.fulfill(1));
