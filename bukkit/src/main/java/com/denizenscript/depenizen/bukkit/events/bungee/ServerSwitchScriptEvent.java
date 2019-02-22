@@ -18,6 +18,8 @@ public class ServerSwitchScriptEvent extends BungeeScriptEvent {
     // bungee player switches to server
     // bungee player switches to <server>
     //
+    // @Regex ^on bungee player switches to [^\s]+$
+    //
     // @Triggers when a player switches to a different server on the BungeeCord network.
     //
     // @Cancellable false

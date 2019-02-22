@@ -24,14 +24,20 @@ public class HeroesEvents implements Listener {
     // <--[event]
     // @Events
     // hero changes class (to <class>)
+    //
+    // @Regex ^on hero changes class( to [^\s]+)?$
+    //
     // @Triggers when a Hero changes classes.
+    //
     // @Context
     // <context.class> returns the class that the Hero is changing to.
     // <context.cost> returns the cost of changing the class.
     // <context.from> returns the class that the Hero is changing from.
     // <context.hero> returns the Hero changing classes.
+    //
     // @Determine
     // "CANCELLED" to stop the hero from changing classes.
+    //
     // @Plugin DepenizenBukkit, Heroes
     // -->
     @EventHandler
@@ -70,14 +76,20 @@ public class HeroesEvents implements Listener {
     // <--[event]
     // @Events
     // hero changes experience
+    //
+    // @Regex ^on hero changes experience$
+    //
     // @Triggers when a Hero changes the experience.
+    //
     // @Context
     // <context.amount> returns the amount the Hero's experience is changing.
     // <context.class> returns the class that the Hero is changing experience in.
     // <context.hero> returns the Hero that is changing experience.
     // <context.reason> returns the reason the Hero is changing experience.
+    //
     // @Determine
     // "CANCELLED" to stop the hero from gaining experience.
+    //
     // @Plugin DepenizenBukkit, Heroes
     // -->
     @EventHandler
@@ -114,14 +126,20 @@ public class HeroesEvents implements Listener {
     // <--[event]
     // @Events
     // hero changes level (to <level>)
+    //
+    // @Regex ^on hero changes levels( to [^\s]+)?$
+    //
     // @Triggers when a Hero changes the level.
+    //
     // @Context
     // <context.class> returns the class that the Hero is changing levels in.
     // <context.from> returns the level that the Hero is changing from.
     // <context.hero> returns the Hero that is changing levels.
     // <context.level> returns the level the Hero is changing to.
+    //
     // @Determine
     // None
+    //
     // @Plugin DepenizenBukkit, Heroes
     // -->
     @EventHandler

@@ -10,6 +10,8 @@ public class BungeeRegisteredScriptEvent extends BukkitScriptEvent {
     // @Events
     // bungee registered
     //
+    // @Regex ^on bungee registered$
+    //
     // @Triggers when the socket client successfully registers with the BungeeCord socket.
     //
     // @Cancellable false
