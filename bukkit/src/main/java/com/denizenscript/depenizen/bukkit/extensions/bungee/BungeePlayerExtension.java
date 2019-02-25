@@ -6,7 +6,6 @@ import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.common.socket.Packet;
 import com.denizenscript.depenizen.common.socket.client.packet.ClientPacketOutSendPlayer;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.utilities.debugging.dB;

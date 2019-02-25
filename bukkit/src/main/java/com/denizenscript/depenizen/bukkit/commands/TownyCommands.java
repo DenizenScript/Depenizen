@@ -4,7 +4,6 @@ import com.denizenscript.depenizen.bukkit.objects.dNation;
 import com.denizenscript.depenizen.bukkit.objects.dTown;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -89,7 +88,7 @@ public class TownyCommands extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         Element action = scriptEntry.getElement("action");
         Element state = scriptEntry.getElement("state");

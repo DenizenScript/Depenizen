@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
 import com.denizenscript.depenizen.bukkit.support.plugins.MythicMobsSupport;
 import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -71,7 +70,7 @@ public class MythicSpawnCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         Element name = scriptEntry.getElement("name");
         dLocation location = scriptEntry.getdObject("location");

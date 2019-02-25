@@ -4,7 +4,6 @@ import com.denizenscript.depenizen.bukkit.support.Support;
 import com.denizenscript.depenizen.bukkit.support.plugins.BossShopSupport;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -80,7 +79,7 @@ public class BossShopCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         dPlayer target = scriptEntry.getdObject("target");
         Element dshop = scriptEntry.getdObject("shop");
