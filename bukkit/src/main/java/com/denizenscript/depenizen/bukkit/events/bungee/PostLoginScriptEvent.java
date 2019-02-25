@@ -16,6 +16,8 @@ public class PostLoginScriptEvent extends BungeeScriptEvent {
     // @Events
     // bungee player joins network
     //
+    // @Regex ^on bungee player joins network$
+    //
     // @Triggers when a player is connected to the BungeeCord network and is ready to join a server.
     //
     // @Cancellable false

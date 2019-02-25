@@ -6,7 +6,6 @@ import com.worldcretornica.plotme_core.PlotMeCoreManager;
 import com.worldcretornica.plotme_core.api.Location;
 import com.worldcretornica.plotme_core.bukkit.api.BukkitWorld;
 import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;

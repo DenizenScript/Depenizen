@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.commands.bungee;
 
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.common.socket.client.packet.ClientPacketOutExecute;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -52,7 +51,7 @@ public class BungeeExecuteCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         Element command = scriptEntry.getElement("command");
 

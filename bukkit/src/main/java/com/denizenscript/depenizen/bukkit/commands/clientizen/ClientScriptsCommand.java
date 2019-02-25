@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.commands.clientizen;
 import com.denizenscript.depenizen.bukkit.support.clientizen.ClientizenSupport;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.objects.dList;
@@ -53,7 +52,7 @@ public class ClientScriptsCommand extends AbstractCommand {
 
             else if (!scriptEntry.hasObject("players")
                     && arg.matchesPrefix("players")) {
-                scriptEntry.addObject("players", arg.asType(dList.class).filter(dPlayer.class));
+                scriptEntry.addObject("players", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
             }
 
             else if (!scriptEntry.hasObject("files")) {
@@ -72,7 +71,7 @@ public class ClientScriptsCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         Action action = (Action) scriptEntry.getObject("action");
         dList files = scriptEntry.getdObject("files");

@@ -14,7 +14,7 @@ import java.util.Set;
 
 public abstract class BungeeScriptEvent extends ScriptEvent {
 
-    private static Map<String, BungeeScriptEvent> initializedEvents = new HashMap<String, BungeeScriptEvent>();
+    private static Map<String, BungeeScriptEvent> initializedEvents = new HashMap<>();
 
     public static Map<String, String> fire(String event, Map<String, String> context) {
         if (initializedEvents.containsKey(event)) {

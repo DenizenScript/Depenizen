@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.commands.bungee;
 import com.denizenscript.depenizen.bukkit.objects.bungee.dServer;
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
 import com.denizenscript.depenizen.common.socket.client.packet.ClientPacketOutSetPriority;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.objects.dList;
@@ -46,7 +45,7 @@ public class BungeePriorityCommand extends AbstractCommand {
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("list")) {
-                scriptEntry.addObject("list", arg.asType(dList.class).filter(dServer.class));
+                scriptEntry.addObject("list", arg.asType(dList.class).filter(dServer.class, scriptEntry));
             }
             else {
                 arg.reportUnhandled();
@@ -60,7 +59,7 @@ public class BungeePriorityCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         List<dServer> serverlist = (List<dServer>) scriptEntry.getObject("list");
 

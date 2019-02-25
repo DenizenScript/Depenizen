@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.bungee;
 
 import com.denizenscript.depenizen.bukkit.support.bungee.BungeeSupport;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
@@ -39,7 +38,7 @@ public class BungeeReconnectCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         dB.report(scriptEntry, getName(), "");
 

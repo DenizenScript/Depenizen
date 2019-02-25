@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.commands.mobarena;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
 import com.garbagemule.MobArena.framework.Arena;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.objects.dList;
@@ -61,17 +60,17 @@ public class MobArenaCommand extends AbstractCommand {
             else if (!scriptEntry.hasObject("add")
                     && arg.matchesPrefix("add", "join")
                     && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("add", arg.asType(dList.class).filter(dPlayer.class));
+                scriptEntry.addObject("add", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("remove")
                     && arg.matchesPrefix("remove", "leave")
                     && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("remove", arg.asType(dList.class).filter(dPlayer.class));
+                scriptEntry.addObject("remove", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("spectate")
                     && arg.matchesPrefix("spectate", "spec")
                     && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("spectate", arg.asType(dList.class).filter(dPlayer.class));
+                scriptEntry.addObject("spectate", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
             }
             else {
                 arg.reportUnhandled();
@@ -88,7 +87,7 @@ public class MobArenaCommand extends AbstractCommand {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
         MobArenaArena arena = scriptEntry.getdObject("arena");
         List<dPlayer> add = (List<dPlayer>) scriptEntry.getObject("add");
         List<dPlayer> remove = (List<dPlayer>) scriptEntry.getObject("remove");

@@ -12,6 +12,8 @@ public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
     // @Events
     // bungee server disconnects
     //
+    // @Regex ^on bungee server disconnects$
+    //
     // @Triggers when another server disconnects from the BungeeCord socket.
     //
     // @Cancellable false

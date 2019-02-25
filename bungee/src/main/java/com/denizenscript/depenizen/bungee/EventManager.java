@@ -21,8 +21,8 @@ import java.util.Map;
 public class EventManager implements Listener {
 
     private static long nextEventId;
-    private static final Map<Long, Map<String, String>> eventDeterminations = new HashMap<Long, Map<String, String>>();
-    private static final Map<String, List<ClientConnection>> eventSubscriptions = new HashMap<String, List<ClientConnection>>();
+    private static final Map<Long, Map<String, String>> eventDeterminations = new HashMap<>();
+    private static final Map<String, List<ClientConnection>> eventSubscriptions = new HashMap<>();
 
     public static void subscribe(String event, ClientConnection client) {
         if (!eventSubscriptions.containsKey(event)) {
@@ -42,7 +42,7 @@ public class EventManager implements Listener {
         if (!isSubscribedTo("ProxyPing")) {
             return;
         }
-        Map<String, String> context = new HashMap<String, String>();
+        Map<String, String> context = new HashMap<>();
         PendingConnection connection = event.getConnection();
         context.put("address", connection.getAddress().toString());
         ServerPing ping = event.getResponse();
@@ -67,7 +67,7 @@ public class EventManager implements Listener {
         if (!isSubscribedTo("PostLogin")) {
             return;
         }
-        Map<String, String> context = new HashMap<String, String>();
+        Map<String, String> context = new HashMap<>();
         ProxiedPlayer player = event.getPlayer();
         context.put("uuid", player.getUniqueId().toString());
         context.put("name", player.getName());
@@ -79,7 +79,7 @@ public class EventManager implements Listener {
         if (!isSubscribedTo("PlayerDisconnect")) {
             return;
         }
-        Map<String, String> context = new HashMap<String, String>();
+        Map<String, String> context = new HashMap<>();
         ProxiedPlayer player = event.getPlayer();
         context.put("uuid", player.getUniqueId().toString());
         context.put("name", player.getName());
@@ -91,7 +91,7 @@ public class EventManager implements Listener {
         if (!isSubscribedTo("ServerSwitch")) {
             return;
         }
-        Map<String, String> context = new HashMap<String, String>();
+        Map<String, String> context = new HashMap<>();
         ProxiedPlayer player = event.getPlayer();
         context.put("uuid", player.getUniqueId().toString());
         context.put("name", player.getName());

@@ -8,7 +8,6 @@ import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dWorld;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizencore.exceptions.CommandExecutionException;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -100,7 +99,7 @@ public class RegionCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         Element region_id = scriptEntry.getElement("region_id");
         dCuboid cuboid = scriptEntry.getdObject("cuboid");
@@ -109,7 +108,8 @@ public class RegionCommand extends AbstractCommand {
         Element action = scriptEntry.getElement("action");
 
         if (world == null) {
-            throw new CommandExecutionException("No valid world found!");
+            dB.echoError("No valid world found!");
+            return;
         }
 
         dB.report(scriptEntry, getName(), region_id.debug() + (cuboid != null ? cuboid.debug() : "")

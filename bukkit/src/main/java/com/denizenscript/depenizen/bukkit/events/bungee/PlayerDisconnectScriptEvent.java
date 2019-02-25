@@ -16,6 +16,8 @@ public class PlayerDisconnectScriptEvent extends BungeeScriptEvent {
     // @Events
     // bungee player leaves network
     //
+    // @Regex ^on bungee player leaves network$
+    //
     // @Triggers when a player leaves the BungeeCord network.
     //
     // @Cancellable false

@@ -19,11 +19,16 @@ public class VotifierEvents implements Listener {
     // <--[event]
     // @Events
     // votifier vote
+    //
+    // @Regex ^on votifier vote$
+    //
     // @Triggers when a Votifier vote is made.
+    //
     // @Context
     // <context.time> returns the time the vote was sent.
     // <context.service> returns what service was used to send the vote.
     // <context.username> returns the username input with the vote.
+    //
     // @Plugin DepenizenBukkit, Votifier
     // -->
     @EventHandler

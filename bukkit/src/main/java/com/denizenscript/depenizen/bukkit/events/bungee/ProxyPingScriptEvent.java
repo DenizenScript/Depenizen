@@ -17,6 +17,8 @@ public class ProxyPingScriptEvent extends BungeeScriptEvent {
     // @Events
     // proxy server list ping
     //
+    // @Regex ^on proxy server list ping$
+    //
     // @Triggers when the BungeeCord proxy is pinged from a client's server list.
     //
     // @Cancellable false

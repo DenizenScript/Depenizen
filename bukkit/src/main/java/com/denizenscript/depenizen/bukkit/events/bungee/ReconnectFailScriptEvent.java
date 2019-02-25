@@ -10,6 +10,8 @@ public class ReconnectFailScriptEvent extends BukkitScriptEvent {
     // @Events
     // bungee fails reconnect
     //
+    // @Regex ^on bungee fails reconnect$
+    //
     // @Triggers when the socket client fails all of its reconnect attempts.
     //
     // @Cancellable false

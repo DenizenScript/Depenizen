@@ -18,7 +18,7 @@ import org.mcmonkey.sentinel.events.SentinelAttackEvent;
 
 // <--[event]
 // @Events
-// on sentinel npc attacks
+// sentinel npc attacks
 //
 // @Regex ^on sentinel npc attacks$
 //

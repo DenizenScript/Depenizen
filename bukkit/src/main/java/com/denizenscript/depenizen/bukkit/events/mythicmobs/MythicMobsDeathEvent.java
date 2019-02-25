@@ -127,7 +127,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
             return true;
         }
         else if (aH.Argument.valueOf(determination).matchesArgumentList(dItem.class)) {
-            List<dItem> items = dList.valueOf(determination).filter(dItem.class);
+            List<dItem> items = dList.valueOf(determination).filter(dItem.class, container);
             for (dItem i : items) {
                 newDrops.add(i.getItemStack());
             }
