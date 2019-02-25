@@ -174,7 +174,7 @@ public class ShopKeeper implements dObject {
             dList trades = new dList();
             for (TradingRecipe trade : shopkeeper.getTradingRecipes(null)) {
                 dList recipe = wrapTradingRecipe(trade);
-                trades.add(EscapeTags.Escape(recipe.identify()));
+                trades.add(EscapeTags.escape(recipe.identify()));
             }
             return trades.getAttribute(attribute.fulfill(1));
         }
