@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.support.bungee;
 
+import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import com.denizenscript.depenizen.bukkit.Settings;
 import com.denizenscript.depenizen.bukkit.commands.bungee.*;
 import com.denizenscript.depenizen.bukkit.events.bungee.*;
@@ -13,6 +14,7 @@ import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
+import org.bukkit.Bukkit;
 
 import java.io.IOException;
 
@@ -36,7 +38,13 @@ public class BungeeSupport extends Support {
         registerScriptEvents(new PlayerDisconnectScriptEvent());
         registerScriptEvents(new ReconnectFailScriptEvent());
         registerScriptEvents(new ServerSwitchScriptEvent());
-        startSocket();
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(DepenizenPlugin.getCurrentInstance(), new Runnable() {
+            @Override
+            public void run() {
+                startSocket();
+            }
+        }, 2);
     }
 
     @Override
