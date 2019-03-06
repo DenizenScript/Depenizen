@@ -4,20 +4,18 @@ import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventio
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-public class GPClaimEnterEvent extends ScriptEvent implements Listener {
+public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
 
     // TODO: in area?
     // <--[event]
@@ -77,16 +75,6 @@ public class GPClaimEnterEvent extends ScriptEvent implements Listener {
     @Override
     public String getName() {
         return "GPClaimEnter";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        PlayerMoveEvent.getHandlerList().unregister(this);
     }
 
     @Override

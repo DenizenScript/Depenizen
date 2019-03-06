@@ -56,7 +56,7 @@ public class PlayerPointsPlayerExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("playerpoints_points")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            return new Element(PlayerPoints.class.cast(plugin).getAPI().look(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
+            return new Element(((PlayerPoints) plugin).getAPI().look(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
         }
 
         return null;

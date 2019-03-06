@@ -37,8 +37,7 @@ public class PrismAction implements dObject, Adjustable {
         }
 
         string = string.replace("prism@", "");
-        Prism prism = Support.getPlugin(PrismSupport.class);
-        ActionType actionType = prism.getActionRegistry().getAction(string);
+        ActionType actionType = Prism.getActionRegistry().getAction(string);
         if (actionType != null) {
             return new PrismAction(actionType);
         }

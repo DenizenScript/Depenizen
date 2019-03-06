@@ -4,14 +4,12 @@ import com.nisovin.shopkeepers.api.events.ShopkeeperTradeEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeper;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -58,16 +56,6 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public String getName() {
         return "ShopKeeperTrade";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        ShopkeeperTradeEvent.getHandlerList().unregister(this);
     }
 
     @Override
