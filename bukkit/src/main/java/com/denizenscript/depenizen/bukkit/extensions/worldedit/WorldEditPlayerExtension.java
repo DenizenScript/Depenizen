@@ -94,7 +94,7 @@ public class WorldEditPlayerExtension extends dObjectExtension {
                 String materialInfo = "unknown";
                 Pattern materialPattern = brush.getMaterial();
                 if (materialPattern instanceof BlockPattern) {
-                    ((BlockPattern) materialPattern).getBlock().getAsString();
+                    materialInfo = ((BlockPattern) materialPattern).getBlock().getAsString();
                 }
                 // TODO: other patterns?
                 // TODO: mask?
