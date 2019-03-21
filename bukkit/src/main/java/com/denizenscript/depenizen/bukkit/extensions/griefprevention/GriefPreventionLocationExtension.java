@@ -58,7 +58,7 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <l@location.griefprevention.has_claim>
+            // @attribute <l@location.griefprevention.has_claim[(<ignore_height>)]>
             // @returns Element(Boolean)
             // @description
             // Returns whether there is a GriefPreventionClaim at this location.
@@ -66,11 +66,11 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
             // @Plugin DepenizenBukkit, GriefPrevention
             // -->
             if (attribute.startsWith("has_claim")) {
-                Element ignoreHeight = Element.TRUE;
+                Element ignoreHeight = new Element(false);
                 if (attribute.hasContext(1)) {
                     ignoreHeight = new Element(attribute.getContext(1));
                     if (!ignoreHeight.asString().isEmpty() || !ignoreHeight.isBoolean()) {
-                        ignoreHeight = Element.TRUE;
+                        ignoreHeight = new Element(true);
                     }
                 }
                 return new Element(dataStore.getClaimAt(location, ignoreHeight.asBoolean(), null) != null).getAttribute(attribute.fulfill(1));

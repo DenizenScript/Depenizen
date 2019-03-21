@@ -94,7 +94,7 @@ public class TownyChatPlayerExtension extends dObjectExtension {
                 }
                 String perm = c.getPermission();
                 if (perm == null || !plugin.getTowny().isPermissions()) {
-                    return Element.TRUE.getAttribute(attribute.fulfill(1));
+                    return new Element(true).getAttribute(attribute.fulfill(1));
                 }
                 return new Element(TownyUniverse.getPermissionSource().has(player.getPlayerEntity(), perm))
                         .getAttribute(attribute.fulfill(1));
