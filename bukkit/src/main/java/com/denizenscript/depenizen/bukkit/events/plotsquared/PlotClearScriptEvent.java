@@ -48,9 +48,8 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String plotName = CoreUtilities.getXthArg(3, lower);
+    public boolean matches(ScriptPath path) {
+        String plotName = path.eventArgLowerAt(3);
         if (plotName.equals("plotsquaredplot")) {
             return true;
         }

@@ -59,9 +59,8 @@ public class ProxyPingScriptEvent extends BungeeScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        return CoreUtilities.xthArgEquals(3, lower, "ping");
+    public boolean matches(ScriptPath path) {
+        return path.eventArgLowerAt(3).equals("ping");
     }
 
     @Override

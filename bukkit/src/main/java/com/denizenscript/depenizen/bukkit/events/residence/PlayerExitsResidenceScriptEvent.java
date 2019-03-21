@@ -47,8 +47,8 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String name = CoreUtilities.getXthArg(3, CoreUtilities.toLowerCase(s));
+    public boolean matches(ScriptPath path) {
+        String name = path.eventArgLowerAt(3);
         dResidence eventResidence = event.getFrom() != null ? new dResidence(event.getFrom()) : null;
         if (name.equals("residence") && eventResidence != null) {
             return true;

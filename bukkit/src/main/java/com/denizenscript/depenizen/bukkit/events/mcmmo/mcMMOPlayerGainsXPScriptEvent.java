@@ -56,14 +56,13 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String eSkill = CoreUtilities.getXthArg(5, lower);
+    public boolean matches(ScriptPath path) {
+        String eSkill = path.eventArgLowerAt(5);
         if (!eSkill.equals("skill") && !eSkill.equals(CoreUtilities.toLowerCase(skill.asString()))) {
             return false;
         }
 
-        if (!runInCheck(scriptContainer, s, lower, player.getLocation())) {
+        if (!runInCheck(path, player.getLocation())) {
             return false;
         }
 

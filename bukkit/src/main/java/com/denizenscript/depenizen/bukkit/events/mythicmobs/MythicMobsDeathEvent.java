@@ -77,9 +77,8 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String mob = CoreUtilities.getXthArg(1, lower);
+    public boolean matches(ScriptPath path) {
+        String mob = path.eventArgLowerAt(1);
 
         if (!mob.equals("mob")
                 && !mob.equals(CoreUtilities.toLowerCase(this.mob.getMobType().getInternalName()))) {
@@ -87,14 +86,14 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         }
 
         // TODO: Remove the stupid from this...
-        if ((CoreUtilities.getXthArg(3, lower).equals("by") || CoreUtilities.getXthArg(4, lower).equals("by"))
-                && !tryEntity(killer, CoreUtilities.getXthArg(4, lower))
-                && !tryEntity(killer, CoreUtilities.getXthArg(5, lower))) {
+        if ((path.eventArgLowerAt(3).equals("by") || path.eventArgLowerAt(4).equals("by"))
+                && !tryEntity(killer, path.eventArgLowerAt(4))
+                && !tryEntity(killer, path.eventArgLowerAt(5))) {
             return false;
         }
 
-        if (!runInCheck(scriptContainer, s, lower, entity.getLocation())
-                && !runInCheck(scriptContainer, s, lower, killer.getLocation())) {
+        if (!runInCheck(path, entity.getLocation())
+                && !runInCheck(path, killer.getLocation())) {
             return false;
         }
 

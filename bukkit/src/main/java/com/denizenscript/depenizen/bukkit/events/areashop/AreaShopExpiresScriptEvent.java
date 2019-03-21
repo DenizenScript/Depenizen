@@ -43,13 +43,12 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return s.startsWith("areashop") && CoreUtilities.getXthArg(2, lower).equals("expires");
+        return s.startsWith("areashop") && CoreUtilities.xthArgEquals(2, lower, "expires");
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String shopName = CoreUtilities.getXthArg(2, lower).replace("areashop@", "");
+    public boolean matches(ScriptPath path) {
+        String shopName = path.eventArgLowerAt(2).replace("areashop@", "");
         if (shopName.equals("shop")) {
             return true;
         }

@@ -52,9 +52,8 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String disguiseName = CoreUtilities.getXthArg(2, lower);
+    public boolean matches(ScriptPath path) {
+        String disguiseName = path.eventArgLowerAt(2);
 
         if (disguiseName.equals("disguise")) {
             return true;

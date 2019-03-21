@@ -45,13 +45,12 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return s.startsWith("mobarena") && CoreUtilities.getXthArg(2, lower).equals("ends");
+        return s.startsWith("mobarena") && CoreUtilities.xthArgEquals(2, lower, "ends");
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String arenaname = CoreUtilities.getXthArg(2, lower);
+    public boolean matches(ScriptPath path) {
+        String arenaname = path.eventArgLowerAt(2);
         MobArenaArena a = MobArenaArena.valueOf(arenaname);
         return arenaname.equals("arena") || (a != null && a.getArena() == event.getArena());
     }

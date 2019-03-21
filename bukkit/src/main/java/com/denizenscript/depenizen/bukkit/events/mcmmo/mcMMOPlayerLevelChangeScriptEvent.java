@@ -51,18 +51,17 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("mcmmo player") && CoreUtilities.getXthArg(3, lower).equals("level");
+        return lower.startsWith("mcmmo player") && CoreUtilities.xthArgEquals(3, lower, "level");
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String eSkill = CoreUtilities.getXthArg(2, lower);
+    public boolean matches(ScriptPath path) {
+        String eSkill = path.eventArgLowerAt(2);
         if (!eSkill.equals("skill") && !eSkill.equals(CoreUtilities.toLowerCase(skill.asString()))) {
             return false;
         }
 
-        if (!runInCheck(scriptContainer, s, lower, player.getLocation())) {
+        if (!runInCheck(path, player.getLocation())) {
             return false;
         }
 

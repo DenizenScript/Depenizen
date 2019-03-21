@@ -46,14 +46,13 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
         return s.startsWith("mobarena")
-                && CoreUtilities.getXthArg(2, lower).equals("wave")
-                && CoreUtilities.getXthArg(3, lower).equals("changes");
+                && CoreUtilities.xthArgEquals(2, lower, "wave")
+                && CoreUtilities.xthArgEquals(3, lower, "changes");
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String arenaname = CoreUtilities.getXthArg(2, lower).replace("mobarena@", "");
+    public boolean matches(ScriptPath path) {
+        String arenaname = path.eventArgLowerAt(2).replace("mobarena@", "");
         MobArenaArena a = MobArenaArena.valueOf(arenaname);
         return (arenaname.equals("arena") || (a != null && a.getArena() == event.getArena()))
                 && event.getWave() != null;

@@ -50,16 +50,15 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        if (lower.startsWith("player goes afk") && afk.asBoolean()) {
+    public boolean matches(ScriptPath path) {
+        if (path.eventArgLowerAt(1).equals("goes") && afk.asBoolean()) {
             return true;
         }
-        else if (lower.startsWith("player returns from afk") && !afk.asBoolean()) {
+        else if (path.eventArgLowerAt(1).equals("returns") && !afk.asBoolean()) {
             return true;
         }
         else {
-            return lower.startsWith("player afk status changes");
+            return path.eventArgLowerAt(1).equals("afk");
         }
     }
 

@@ -16,7 +16,7 @@ import org.bukkit.event.Listener;
 // @Events
 // player god mode enabled
 // player god mode disabled
-// player god mod status changes
+// player god mode status changes
 //
 // @Regex ^on player god mode (enabled|disabled|status changes)$
 //
@@ -47,9 +47,8 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String status = CoreUtilities.getXthArg(3, lower);
+    public boolean matches(ScriptPath path) {
+        String status = path.eventArgLowerAt(3);
         if (status.equals("enabled") && god.asBoolean()) {
             return true;
         }
@@ -57,7 +56,7 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
             return true;
         }
         else {
-            return lower.startsWith("player god mod status changes");
+            return status.equals("status");
         }
     }
 

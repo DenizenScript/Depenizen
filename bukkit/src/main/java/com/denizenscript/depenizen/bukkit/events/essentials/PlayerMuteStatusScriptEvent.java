@@ -51,9 +51,8 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String status = CoreUtilities.getXthArg(1, lower);
+    public boolean matches(ScriptPath path) {
+        String status = path.eventArgLowerAt(1);
         if (status.equals("muted") && muted.asBoolean()) {
             return true;
         }
@@ -61,7 +60,7 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
             return true;
         }
         else {
-            return lower.startsWith("player mute status changes");
+            return status.equals("status");
         }
     }
 

@@ -54,7 +54,7 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
+    public boolean matches(ScriptPath path) {
         return true;
     }
 

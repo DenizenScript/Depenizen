@@ -59,14 +59,13 @@ public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implement
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String eSkill = CoreUtilities.getXthArg(4, lower);
+    public boolean matches(ScriptPath path) {
+        String eSkill = path.eventArgLowerAt(4);
         if (!eSkill.equals("skill") && !eSkill.equals(CoreUtilities.toLowerCase(skill.asString()))) {
             return false;
         }
 
-        if (!runInCheck(scriptContainer, s, lower, player.getLocation())) {
+        if (!runInCheck(path, player.getLocation())) {
             return false;
         }
 
