@@ -25,7 +25,7 @@ public class SentinelSupport extends Support {
 
     public SentinelSupport() {
         registerScriptEvents(new SentinelAttackScriptEvent());
-        SentinelPlugin.integrations.add(new DenizenSentinelTargets());
+        SentinelPlugin.instance.registerIntegration(new DenizenSentinelTargets());
     }
 
     public class DenizenSentinelTargets extends SentinelIntegration {
@@ -43,7 +43,7 @@ public class SentinelSupport extends Support {
         @Override
         public boolean isTarget(LivingEntity ent, String prefix, String value) {
             try {
-                if (prefix.equals("held_denizen_item:") && ent.getEquipment() != null) {
+                if (prefix.equals("held_denizen_item") && ent.getEquipment() != null) {
                     if (SentinelUtilities.regexFor(value).matcher(new dItem(SentinelUtilities.getHeldItem(ent)).identifySimple().replace("i@", "")).matches()) {
                         return true;
                     }
