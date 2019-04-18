@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.objects.heroes;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.classes.HeroClass;
-import net.aufdemrand.denizen.objects.dMaterial;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Fetchable;
 import net.aufdemrand.denizencore.objects.dList;
@@ -12,6 +11,7 @@ import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
 import com.denizenscript.depenizen.bukkit.support.plugins.HeroesSupport;
 import org.bukkit.Material;
+import net.aufdemrand.denizen.utilities.blocks.OldMaterialsHelper;
 
 import java.util.Set;
 
@@ -127,7 +127,7 @@ public class HeroesClass implements dObject {
             Set<Material> allowed = heroClass.getAllowedArmor();
             dList list = new dList();
             for (Material armor : allowed) {
-                list.add(dMaterial.getMaterialFrom(armor).identify());
+                list.add(OldMaterialsHelper.getMaterialFrom(armor).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -143,7 +143,7 @@ public class HeroesClass implements dObject {
             Set<Material> allowed = heroClass.getAllowedWeapons();
             dList list = new dList();
             for (Material armor : allowed) {
-                list.add(dMaterial.getMaterialFrom(armor).identify());
+                list.add(OldMaterialsHelper.getMaterialFrom(armor).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }

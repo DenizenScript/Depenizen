@@ -5,7 +5,6 @@ import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dItem;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.objects.dList;
@@ -14,7 +13,6 @@ import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -79,9 +77,8 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String mob = CoreUtilities.getXthArg(1, lower);
+    public boolean matches(ScriptPath path) {
+        String mob = path.eventArgLowerAt(1);
 
         if (!mob.equals("mob")
                 && !mob.equals(CoreUtilities.toLowerCase(this.mob.getMobType().getInternalName()))) {
@@ -89,14 +86,14 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         }
 
         // TODO: Remove the stupid from this...
-        if ((CoreUtilities.getXthArg(3, lower).equals("by") || CoreUtilities.getXthArg(4, lower).equals("by"))
-                && !tryEntity(killer, CoreUtilities.getXthArg(4, lower))
-                && !tryEntity(killer, CoreUtilities.getXthArg(5, lower))) {
+        if ((path.eventArgLowerAt(3).equals("by") || path.eventArgLowerAt(4).equals("by"))
+                && !tryEntity(killer, path.eventArgLowerAt(4))
+                && !tryEntity(killer, path.eventArgLowerAt(5))) {
             return false;
         }
 
-        if (!runInCheck(scriptContainer, s, lower, entity.getLocation())
-                && !runInCheck(scriptContainer, s, lower, killer.getLocation())) {
+        if (!runInCheck(path, entity.getLocation())
+                && !runInCheck(path, killer.getLocation())) {
             return false;
         }
 
@@ -106,16 +103,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     @Override
     public String getName() {
         return "MythicMobsDeath";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        MythicMobDeathEvent.getHandlerList().unregister(this);
     }
 
     @Override

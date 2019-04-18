@@ -38,7 +38,7 @@ public class BungeeServerConnectScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
+    public boolean matches(ScriptPath path) {
         return true;
     }
 

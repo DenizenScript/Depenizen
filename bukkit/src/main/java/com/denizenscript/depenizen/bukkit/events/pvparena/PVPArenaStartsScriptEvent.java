@@ -4,7 +4,6 @@ import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
@@ -12,7 +11,6 @@ import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.slipcor.pvparena.arena.ArenaPlayer;
 import net.slipcor.pvparena.events.PAStartEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -50,23 +48,13 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
+    public boolean matches(ScriptPath path) {
         return true;
     }
 
     @Override
     public String getName() {
         return "PVPArenaStarts";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        PAStartEvent.getHandlerList().unregister(this);
     }
 
     @Override

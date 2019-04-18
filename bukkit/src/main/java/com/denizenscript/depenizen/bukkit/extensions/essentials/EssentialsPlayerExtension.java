@@ -276,16 +276,16 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // -->
         if ((mechanism.matches("muted") || mechanism.matches("is_muted")) && mechanism.requireBoolean()) {
             if (mechanism.getValue().asString().length() > 0) {
-                String[] split = mechanism.getValue().asString().split("[\\|" + dList.internal_escape + "]", 2);
-                if (split.length > 0 && new Element(split[0]).isBoolean()) {
-                    getUser().setMuted(new Element(split[0]).asBoolean());
-                    if (split.length > 1 && Duration.matches(split[1])) {
+                dList split = mechanism.valueAsType(dList.class);
+                if (split.size() > 0 && new Element(split.get(0)).isBoolean()) {
+                    getUser().setMuted(new Element(split.get(0)).asBoolean());
+                    if (split.size() > 1 && Duration.matches(split.get(1))) {
                         getUser().setMuteTimeout(new GregorianCalendar().getTimeInMillis()
-                                + Duration.valueOf(split[1]).getMillis());
+                                + Duration.valueOf(split.get(1)).getMillis());
                     }
                 }
                 else {
-                    dB.echoError("'" + split[0] + "' is not a valid boolean!");
+                    dB.echoError("'" + split.get(0) + "' is not a valid boolean!");
                 }
             }
         }

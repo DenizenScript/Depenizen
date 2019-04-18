@@ -25,53 +25,37 @@ public class SentinelSupport extends Support {
 
     public SentinelSupport() {
         registerScriptEvents(new SentinelAttackScriptEvent());
-        SentinelPlugin.integrations.add(new HeldScriptItemTarget());
-        SentinelPlugin.integrations.add(new DenizenProcedureTarget());
+        SentinelPlugin.instance.registerIntegration(new DenizenSentinelTargets());
     }
 
-    public class HeldScriptItemTarget extends SentinelIntegration {
+    public class DenizenSentinelTargets extends SentinelIntegration {
 
         @Override
         public String getTargetHelp() {
-            return "held_denizen_item:DENIZEN_ITEM_NAME";
+            return "denizen_proc:PROCEDURE_SCRIPT_NAME, held_denizen_item:DENIZEN_ITEM_NAME";
         }
 
         @Override
-        public boolean isTarget(LivingEntity ent, String text) {
+        public String[] getTargetPrefixes() {
+            return new String[] { "denizen_proc", "held_denizen_item" };
+        }
+
+        @Override
+        public boolean isTarget(LivingEntity ent, String prefix, String value) {
             try {
-                if (text.startsWith("held_denizen_item:") && ent.getEquipment() != null) {
-                    String targetItemRegex = text.substring("held_denizen_item:".length());
-                    if (SentinelUtilities.regexFor(targetItemRegex).matcher(new dItem(SentinelUtilities.getHeldItem(ent)).identifySimple().replace("i@", "")).matches()) {
+                if (prefix.equals("held_denizen_item") && ent.getEquipment() != null) {
+                    if (SentinelUtilities.regexFor(value).matcher(new dItem(SentinelUtilities.getHeldItem(ent)).identifySimple().replace("i@", "")).matches()) {
                         return true;
                     }
                 }
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            return false;
-        }
-    }
-
-    public class DenizenProcedureTarget extends SentinelIntegration {
-
-        @Override
-        public String getTargetHelp() {
-            return "denizen_proc:PROCEDURE_SCRIPT_NAME";
-        }
-
-        @Override
-        public boolean isTarget(LivingEntity ent, String text) {
-            try {
-                if (text.startsWith("denizen_proc:") && ent.getEquipment() != null) {
-                    String procName = text.substring("denizen_proc:".length());
-                    dScript script = dScript.valueOf(procName);
+                if (prefix.equals("denizen_proc") && ent.getEquipment() != null) {
+                    dScript script = dScript.valueOf(value);
                     if (script == null) {
-                        dB.echoError("Invalid procedure script name '" + procName + "' (non-existent) in a Sentinel NPC target.");
+                        dB.echoError("Invalid procedure script name '" + value + "' (non-existent) in a Sentinel NPC target.");
                         return false;
                     }
                     if (!(script.getContainer() instanceof ProcedureScriptContainer)) {
-                        dB.echoError("Invalid procedure script name '" + procName + "' (not a procedure) in a Sentinel NPC target.");
+                        dB.echoError("Invalid procedure script name '" + value + "' (not a procedure) in a Sentinel NPC target.");
                         return false;
                     }
                     List<ScriptEntry> entries = script.getContainer().getBaseEntries(DenizenCore.getImplementation().getEmptyScriptEntryData());

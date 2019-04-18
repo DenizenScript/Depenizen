@@ -4,13 +4,11 @@ import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.slipcor.pvparena.events.PAJoinEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -47,23 +45,13 @@ public class PlayerJoinsPVPArenaScriptEvent extends BukkitScriptEvent implements
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
+    public boolean matches(ScriptPath path) {
         return true;
     }
 
     @Override
     public String getName() {
         return "PlayerJoinsPVPArena";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        PAJoinEvent.getHandlerList().unregister(this);
     }
 
     @Override

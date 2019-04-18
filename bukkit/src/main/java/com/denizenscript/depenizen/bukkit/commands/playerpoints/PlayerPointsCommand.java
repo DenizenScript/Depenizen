@@ -116,17 +116,17 @@ public class PlayerPointsCommand extends AbstractCommand {
 
         if (action.asString().equalsIgnoreCase("give")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            PlayerPoints.class.cast(plugin).getAPI().give(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            ((PlayerPoints) plugin).getAPI().give(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
         else if (action.asString().equalsIgnoreCase("take")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            PlayerPoints.class.cast(plugin).getAPI().take(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            ((PlayerPoints) plugin).getAPI().take(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
         else if (action.asString().equalsIgnoreCase("set")) {
             Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            PlayerPoints.class.cast(plugin).getAPI().set(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            ((PlayerPoints) plugin).getAPI().set(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
     }

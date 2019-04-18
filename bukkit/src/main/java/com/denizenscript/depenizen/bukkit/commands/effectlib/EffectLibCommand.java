@@ -102,7 +102,6 @@ public class EffectLibCommand extends AbstractCommand {
 
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void execute(final ScriptEntry scriptEntry) {
 

@@ -3,14 +3,12 @@ package com.denizenscript.depenizen.bukkit.events.essentials;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.ess3.api.events.GodStatusChangeEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -18,7 +16,7 @@ import org.bukkit.event.Listener;
 // @Events
 // player god mode enabled
 // player god mode disabled
-// player god mod status changes
+// player god mode status changes
 //
 // @Regex ^on player god mode (enabled|disabled|status changes)$
 //
@@ -49,9 +47,8 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String status = CoreUtilities.getXthArg(3, lower);
+    public boolean matches(ScriptPath path) {
+        String status = path.eventArgLowerAt(3);
         if (status.equals("enabled") && god.asBoolean()) {
             return true;
         }
@@ -59,23 +56,13 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
             return true;
         }
         else {
-            return lower.startsWith("player god mod status changes");
+            return status.equals("status");
         }
     }
 
     @Override
     public String getName() {
         return "PlayerGodModeStatus";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        GodStatusChangeEvent.getHandlerList().unregister(this);
     }
 
     @Override

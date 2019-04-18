@@ -49,8 +49,8 @@ public class ServerSwitchScriptEvent extends BungeeScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        return tryServer(server, CoreUtilities.getXthArg(4, s));
+    public boolean matches(ScriptPath path) {
+        return tryServer(server, path.eventArgLowerAt(4));
     }
 
     @Override

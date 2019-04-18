@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.extensions.essentials;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import com.earth2me.essentials.Essentials;
 import net.aufdemrand.denizen.objects.dItem;
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.aH;
@@ -10,6 +11,8 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.plugins.EssentialsSupport;
+
+import java.math.BigDecimal;
 
 public class EssentialsItemExtension extends dObjectExtension {
 
@@ -55,7 +58,14 @@ public class EssentialsItemExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("worth")) {
             Essentials ess = Support.getPlugin(EssentialsSupport.class);
-            double price = ess.getWorth().getPrice(ess, item.getItemStack()).doubleValue();
+            BigDecimal priceBD = ess.getWorth().getPrice(ess, item.getItemStack());
+            if (priceBD == null) {
+                if (!attribute.hasAlternative()) {
+                    dB.echoError("Item does not have a worth value: " + item.identify());
+                }
+                return null;
+            }
+            double price = priceBD.doubleValue();
             // <--[tag]
             // @attribute <i@item.worth.quantity[<#>]>
             // @returns Element(Decimal)

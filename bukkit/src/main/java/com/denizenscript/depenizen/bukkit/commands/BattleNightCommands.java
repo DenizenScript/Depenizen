@@ -72,7 +72,7 @@ public class BattleNightCommands extends AbstractCommand {
             Allow - bn (spectator), which is more 0.9-like.
             else if (!scriptEntry.hasObject("spectator")
                     && arg.matches("spectator"))
-                scriptEntry.addObject("spectator", Element.TRUE);
+                scriptEntry.addObject("spectator", new Element(true));
 
             // Keep old format for backwards compatibility
             else if (!scriptEntry.hasObject("spectator")
@@ -88,7 +88,7 @@ public class BattleNightCommands extends AbstractCommand {
             throw new InvalidArgumentsException("Must specify an action!");
         }
 
-        // scriptEntry.defaultObject("spectator", Element.FALSE);
+        // scriptEntry.defaultObject("spectator", new Element(false));
     }
 
     @Override

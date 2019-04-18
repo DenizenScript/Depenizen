@@ -50,10 +50,10 @@ public class TownyLocationExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("has_town")) {
             if (TownyUniverse.getTownName(location) != null) {
-                return Element.TRUE.getAttribute(attribute.fulfill(1));
+                return new Element(true).getAttribute(attribute.fulfill(1));
             }
             else {
-                return Element.FALSE.getAttribute(attribute.fulfill(1));
+                return new Element(false).getAttribute(attribute.fulfill(1));
             }
         }
 

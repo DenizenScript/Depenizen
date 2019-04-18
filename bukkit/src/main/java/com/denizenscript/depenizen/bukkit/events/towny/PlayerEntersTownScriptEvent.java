@@ -6,12 +6,10 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -50,8 +48,8 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String name = CoreUtilities.getXthArg(3, CoreUtilities.toLowerCase(s));
+    public boolean matches(ScriptPath path) {
+        String name = path.eventArgAt(3);
         dTown eventTown = dTown.fromWorldCoord(event.getTo());
         if (name.equals("town") && eventTown != null) {
             return true;
@@ -63,16 +61,6 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
     @Override
     public String getName() {
         return "TownyPlayerEntersTown";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        PlayerEnterTownEvent.getHandlerList().unregister(this);
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.prism;
 
 import com.denizenscript.depenizen.bukkit.objects.prism.fake.FakeHandler;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.PrismSupport;
 import me.botsko.prism.Prism;
 import me.botsko.prism.actionlibs.ActionType;
 import me.botsko.prism.actions.Handler;
@@ -37,8 +35,7 @@ public class PrismAction implements dObject, Adjustable {
         }
 
         string = string.replace("prism@", "");
-        Prism prism = Support.getPlugin(PrismSupport.class);
-        ActionType actionType = prism.getActionRegistry().getAction(string);
+        ActionType actionType = Prism.getActionRegistry().getAction(string);
         if (actionType != null) {
             return new PrismAction(actionType);
         }

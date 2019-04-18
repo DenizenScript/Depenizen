@@ -4,13 +4,11 @@ import com.garbagemule.MobArena.events.ArenaEndEvent;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.scripts.ScriptEntryData;
 import net.aufdemrand.denizencore.scripts.containers.ScriptContainer;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -47,13 +45,12 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return s.startsWith("mobarena") && CoreUtilities.getXthArg(2, lower).equals("ends");
+        return s.startsWith("mobarena") && CoreUtilities.xthArgEquals(2, lower, "ends");
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String arenaname = CoreUtilities.getXthArg(2, lower);
+    public boolean matches(ScriptPath path) {
+        String arenaname = path.eventArgLowerAt(2);
         MobArenaArena a = MobArenaArena.valueOf(arenaname);
         return arenaname.equals("arena") || (a != null && a.getArena() == event.getArena());
     }
@@ -61,16 +58,6 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     @Override
     public String getName() {
         return "MobArenaEnds";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        ArenaEndEvent.getHandlerList().unregister(this);
     }
 
     @Override

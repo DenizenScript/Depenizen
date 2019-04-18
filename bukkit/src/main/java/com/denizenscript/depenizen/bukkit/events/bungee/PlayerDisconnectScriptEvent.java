@@ -45,9 +45,8 @@ public class PlayerDisconnectScriptEvent extends BungeeScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        return lower.endsWith("network");
+    public boolean matches(ScriptPath path) {
+        return path.eventArgLowerAt(3).equals("network");
     }
 
     @Override
