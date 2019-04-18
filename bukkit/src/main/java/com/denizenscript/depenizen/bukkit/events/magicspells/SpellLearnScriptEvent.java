@@ -16,7 +16,7 @@ import org.bukkit.event.Listener;
 
 // <--[event]
 // @Events
-// magicspells magicspells player learns spell
+// magicspells player learns spell
 //
 // @Regex ^on magicspells [^\s]+ learns spell$
 //
