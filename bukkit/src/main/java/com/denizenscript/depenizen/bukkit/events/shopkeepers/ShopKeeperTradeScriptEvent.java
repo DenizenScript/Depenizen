@@ -84,9 +84,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
         player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         keeper = new ShopKeeper(event.getShopkeeper());
         recipe = ShopKeeper.wrapTradingRecipe(event.getTradingRecipe());
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
     }
 }

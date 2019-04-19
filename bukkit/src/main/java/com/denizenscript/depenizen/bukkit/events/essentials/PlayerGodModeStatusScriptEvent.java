@@ -86,9 +86,7 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
     @EventHandler
     public void onPlayerAFKStatus(GodStatusChangeEvent event) {
         god = new Element(event.getValue());
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
     }
 }

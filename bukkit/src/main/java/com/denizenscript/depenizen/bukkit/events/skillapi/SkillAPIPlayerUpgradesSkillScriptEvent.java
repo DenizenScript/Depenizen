@@ -107,9 +107,7 @@ public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent im
         level = new Element(event.getUpgradedSkill().getLevel());
         cost = new Element(event.getCost());
         skill = new Element(event.getUpgradedSkill().getData().getName());
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
     }
 }

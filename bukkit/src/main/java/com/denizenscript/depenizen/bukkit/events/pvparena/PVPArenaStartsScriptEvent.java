@@ -85,9 +85,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
             fighters.add(new dPlayer(p.get()).identify());
         }
         arena = new PVPArenaArena(event.getArena());
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
     }
 }

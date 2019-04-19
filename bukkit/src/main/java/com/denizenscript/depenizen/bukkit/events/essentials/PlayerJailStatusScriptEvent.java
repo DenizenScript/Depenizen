@@ -90,9 +90,7 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
     @EventHandler
     public void onPlayerAFKStatus(JailStatusChangeEvent event) {
         jailed = new Element(event.getValue());
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
     }
 }

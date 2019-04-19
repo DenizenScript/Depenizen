@@ -113,10 +113,8 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
         cause = new Element(event.getXpGainReason().toString());
         skill = new Element(event.getSkill().getName());
         xp = new Element(event.getRawXpGained());
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
         event.setRawXpGained(xp.asFloat());
     }
 }

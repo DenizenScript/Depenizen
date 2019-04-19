@@ -78,9 +78,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
     @EventHandler
     public void onMobArenaStarts(ArenaStartEvent event) {
         arena = new MobArenaArena(event.getArena());
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
     }
 }

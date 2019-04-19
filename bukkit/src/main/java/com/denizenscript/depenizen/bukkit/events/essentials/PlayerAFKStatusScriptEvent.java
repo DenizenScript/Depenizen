@@ -88,9 +88,7 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
     @EventHandler
     public void onPlayerAFKStatus(AfkStatusChangeEvent event) {
         afk = new Element(event.getValue());
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
     }
 }

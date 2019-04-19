@@ -75,9 +75,7 @@ public class PlayerJoinsPVPArenaScriptEvent extends BukkitScriptEvent implements
     @EventHandler
     public void onPlayerJoinsPVPArena(PAJoinEvent event) {
         arena = new PVPArenaArena(event.getArena());
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
     }
 }

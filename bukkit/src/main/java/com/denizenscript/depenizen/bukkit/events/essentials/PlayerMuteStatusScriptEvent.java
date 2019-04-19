@@ -90,9 +90,7 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
     @EventHandler
     public void onPlayerAFKStatus(MuteStatusChangeEvent event) {
         muted = new Element(event.getValue());
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
     }
 }

@@ -83,10 +83,7 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
     @EventHandler
     public void onPlotClear(PlotClearEvent event) {
         plot = new dPlotSquaredPlot(event.getPlot());
-
-        cancelled = event.isCancelled();
         this.event = event;
         fire(event);
-         fire(event);;
     }
 }
