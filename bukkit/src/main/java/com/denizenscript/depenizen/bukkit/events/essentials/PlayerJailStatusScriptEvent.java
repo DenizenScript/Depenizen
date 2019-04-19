@@ -12,27 +12,27 @@ import net.ess3.api.events.JailStatusChangeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// player jailed
-// player unjailed
-// player un-jailed
-// player jail status changes
-//
-// @Regex ^on player (jailed|unjailed|un-jailed|jail status changes)$
-//
-// @Cancellable true
-//
-// @Triggers when a player's jail status changes.
-//
-// @Context
-// <context.status> Returns the player's jail status.
-//
-// @Plugin DepenizenBukkit, Essentials
-//
-// -->
-
 public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // player jailed
+    // player unjailed
+    // player un-jailed
+    // player jail status changes
+    //
+    // @Regex ^on player (jailed|unjailed|un-jailed|jail status changes)$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player's jail status changes.
+    //
+    // @Context
+    // <context.status> Returns the player's jail status.
+    //
+    // @Plugin DepenizenBukkit, Essentials
+    //
+    // -->
 
     public static PlayerJailStatusScriptEvent instance;
     public JailStatusChangeEvent event;

@@ -12,26 +12,26 @@ import net.ess3.api.events.AfkStatusChangeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// player goes afk
-// player returns from afk
-// player afk status changes
-//
-// @Regex ^on player (goes afk|returns from afk|afk status changes)$
-//
-// @Cancellable true
-//
-// @Triggers when a player's afk status changes.
-//
-// @Context
-// <context.status> Returns the player's afk status.
-//
-// @Plugin DepenizenBukkit, Essentials
-//
-// -->
-
 public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // player goes afk
+    // player returns from afk
+    // player afk status changes
+    //
+    // @Regex ^on player (goes afk|returns from afk|afk status changes)$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player's afk status changes.
+    //
+    // @Context
+    // <context.status> Returns the player's afk status.
+    //
+    // @Plugin DepenizenBukkit, Essentials
+    //
+    // -->
 
     public static PlayerAFKStatusScriptEvent instance;
     public AfkStatusChangeEvent event;

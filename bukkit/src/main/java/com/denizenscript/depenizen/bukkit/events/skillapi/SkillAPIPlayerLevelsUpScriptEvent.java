@@ -14,28 +14,28 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// skillapi player levels up (in <area>)
-//
-// @Regex ^on skillapi player levels up( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable false
-//
-// @Triggers when a player levels up in SkillAPI.
-//
-// @Context
-// <context.level> returns the level the player went up to.
-// <context.gained> returns how many levels the player gained.
-// <context.class> returns the SkillAPIClass the player is leveling up in.
-//
-// @Determine
-// None
-//
-// @Plugin DepenizenBukkit, SkillAPI
-// -->
-
 public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // skillapi player levels up (in <area>)
+    //
+    // @Regex ^on skillapi player levels up( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player levels up in SkillAPI.
+    //
+    // @Context
+    // <context.level> returns the level the player went up to.
+    // <context.gained> returns how many levels the player gained.
+    // <context.class> returns the SkillAPIClass the player is leveling up in.
+    //
+    // @Determine
+    // None
+    //
+    // @Plugin DepenizenBukkit, SkillAPI
+    // -->
 
     public SkillAPIPlayerLevelsUpScriptEvent() {
         instance = this;

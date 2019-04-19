@@ -12,26 +12,26 @@ import net.ess3.api.events.GodStatusChangeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// player god mode enabled
-// player god mode disabled
-// player god mode status changes
-//
-// @Regex ^on player god mode (enabled|disabled|status changes)$
-//
-// @Cancellable true
-//
-// @Triggers when a player's god mode status changes.
-//
-// @Context
-// <context.status> Returns the player's god mode status.
-//
-// @Plugin DepenizenBukkit, Essentials
-//
-// -->
-
 public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // player god mode enabled
+    // player god mode disabled
+    // player god mode status changes
+    //
+    // @Regex ^on player god mode (enabled|disabled|status changes)$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player's god mode status changes.
+    //
+    // @Context
+    // <context.status> Returns the player's god mode status.
+    //
+    // @Plugin DepenizenBukkit, Essentials
+    //
+    // -->
 
     public static PlayerGodModeStatusScriptEvent instance;
     public GodStatusChangeEvent event;

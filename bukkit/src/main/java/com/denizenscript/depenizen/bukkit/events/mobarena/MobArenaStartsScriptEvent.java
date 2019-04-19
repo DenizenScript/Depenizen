@@ -11,25 +11,25 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// mobarena arena starts
-// mobarena <arena> starts
-//
-// @Regex ^on mobarena [^\s]+ starts$
-//
-// @Cancellable true
-//
-// @Triggers when a mobarena starts.
-//
-// @Context
-// <context.arena> Returns the arena which started.
-//
-// @Plugin DepenizenBukkit, MobArena
-//
-// -->
-
 public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // mobarena arena starts
+    // mobarena <arena> starts
+    //
+    // @Regex ^on mobarena [^\s]+ starts$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a mobarena starts.
+    //
+    // @Context
+    // <context.arena> Returns the arena which started.
+    //
+    // @Plugin DepenizenBukkit, MobArena
+    //
+    // -->
 
     public MobArenaStartsScriptEvent() {
         instance = this;

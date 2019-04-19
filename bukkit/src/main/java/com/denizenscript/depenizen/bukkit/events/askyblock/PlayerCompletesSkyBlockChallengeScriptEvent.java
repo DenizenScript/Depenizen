@@ -14,28 +14,28 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// player completes skyblock challenge
-//
-// @Regex ^on player completes skyblock challenge$
-//
-// @Cancellable false
-//
-// @Triggers when a player completes a skyblock challenge.
-//
-// @Context
-// <context.challenge> Returns the name of the challenge.
-// <context.xp_reward> Return the amount of experience to be rewarded.
-// <context.money_reward> Returns the amount of money to be rewarded.
-// <context.item_rewards> Returns a list of items to be awarded.
-// NOTE: item rewards is dependant on how the plugin handles item rewards. Untested and no guarantee of working.
-//
-// @Plugin DepenizenBukkit, A SkyBlock
-//
-// -->
-
 public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // player completes skyblock challenge
+    //
+    // @Regex ^on player completes skyblock challenge$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player completes a skyblock challenge.
+    //
+    // @Context
+    // <context.challenge> Returns the name of the challenge.
+    // <context.xp_reward> Return the amount of experience to be rewarded.
+    // <context.money_reward> Returns the amount of money to be rewarded.
+    // <context.item_rewards> Returns a list of items to be awarded.
+    // NOTE: item rewards is dependant on how the plugin handles item rewards. Untested and no guarantee of working.
+    //
+    // @Plugin DepenizenBukkit, A SkyBlock
+    //
+    // -->
 
     public static PlayerCompletesSkyBlockChallengeScriptEvent instance;
     public ChallengeCompleteEvent event;

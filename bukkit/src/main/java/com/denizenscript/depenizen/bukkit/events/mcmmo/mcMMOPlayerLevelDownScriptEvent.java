@@ -14,32 +14,32 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// mcmmo player levels down skill (in <area>)
-// mcmmo player levels down <skill> (in <area>)
-//
-// @Regex ^on mcmmo player levels down [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable true
-//
-// @Triggers when a player loses levels for an mcMMO skill.
-//
-// @Context
-// <context.skill> returns the name of the skill that lost levels. (Based on the mcMMO language file).
-// <context.levels_lost> returns the number of levels lost.
-// <context.old_level> returns the old level of the skill.
-// <context.new_level> returns the new level of the skill.
-// <context.cause> returns the cause of the level loss.
-// Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
-//
-// @Determine
-// Element(Number) to set the number of levels to gain.
-//
-// @Plugin DepenizenBukkit, mcMMO
-// -->
-
 public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // mcmmo player levels down skill (in <area>)
+    // mcmmo player levels down <skill> (in <area>)
+    //
+    // @Regex ^on mcmmo player levels down [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player loses levels for an mcMMO skill.
+    //
+    // @Context
+    // <context.skill> returns the name of the skill that lost levels. (Based on the mcMMO language file).
+    // <context.levels_lost> returns the number of levels lost.
+    // <context.old_level> returns the old level of the skill.
+    // <context.new_level> returns the new level of the skill.
+    // <context.cause> returns the cause of the level loss.
+    // Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
+    //
+    // @Determine
+    // Element(Number) to set the number of levels to gain.
+    //
+    // @Plugin DepenizenBukkit, mcMMO
+    // -->
 
     public mcMMOPlayerLevelDownScriptEvent() {
         instance = this;

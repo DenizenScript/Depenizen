@@ -12,25 +12,25 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// residence player exits residence
-// residence player exits <residence>
-//
-// @Regex ^on residence player exits [^\s]+$
-//
-// @Cancellable false
-//
-// @Triggers when a player exits a Residence.
-//
-// @Context
-// <context.residence> Returns the Residence the player exited.
-//
-// @Plugin DepenizenBukkit, Residence
-//
-// -->
-
 public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // residence player exits residence
+    // residence player exits <residence>
+    //
+    // @Regex ^on residence player exits [^\s]+$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player exits a Residence.
+    //
+    // @Context
+    // <context.residence> Returns the Residence the player exited.
+    //
+    // @Plugin DepenizenBukkit, Residence
+    //
+    // -->
 
     public PlayerExitsResidenceScriptEvent() {
         instance = this;

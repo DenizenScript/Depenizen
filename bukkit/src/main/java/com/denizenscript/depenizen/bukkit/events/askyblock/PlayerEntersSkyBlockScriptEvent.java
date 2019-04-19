@@ -12,26 +12,26 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// player enters skyblock
-//
-// @Regex ^on player enters skyblock$
-//
-// @Cancellable false
-//
-// @Triggers when a player goes to a skyblock island.
-//
-// @Context
-// <context.owner> Returns the owner of the island.
-// <context.island_location> Returns the location of the island.
-// <context.location> Returns the location the player entered at.
-//
-// @Plugin DepenizenBukkit, A SkyBlock
-//
-// -->
-
 public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // player enters skyblock
+    //
+    // @Regex ^on player enters skyblock$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player goes to a skyblock island.
+    //
+    // @Context
+    // <context.owner> Returns the owner of the island.
+    // <context.island_location> Returns the location of the island.
+    // <context.location> Returns the location the player entered at.
+    //
+    // @Plugin DepenizenBukkit, A SkyBlock
+    //
+    // -->
 
     public PlayerEntersSkyBlockScriptEvent instance;
     public IslandEnterEvent event;

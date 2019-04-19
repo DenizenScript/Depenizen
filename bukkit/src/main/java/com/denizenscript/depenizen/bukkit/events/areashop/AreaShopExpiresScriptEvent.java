@@ -12,25 +12,25 @@ import com.denizenscript.depenizen.bukkit.objects.areashop.dAreaShop;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// areashop shop expires
-// areashop <shop> expires
-//
-// @Regex ^on areashop [^\s]+ expires$
-//
-// @Cancellable false
-//
-// @Triggers when an AreaShop's rent expires.
-//
-// @Context
-// <context.shop> Returns the AreaShop that's expiring.
-//
-// @Plugin DepenizenBukkit, AreaShop
-//
-// -->
-
 public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // areashop shop expires
+    // areashop <shop> expires
+    //
+    // @Regex ^on areashop [^\s]+ expires$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when an AreaShop's rent expires.
+    //
+    // @Context
+    // <context.shop> Returns the AreaShop that's expiring.
+    //
+    // @Plugin DepenizenBukkit, AreaShop
+    //
+    // -->
 
     public AreaShopExpiresScriptEvent() {
         instance = this;

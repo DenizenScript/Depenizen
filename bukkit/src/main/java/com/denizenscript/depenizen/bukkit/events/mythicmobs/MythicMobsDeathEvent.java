@@ -20,39 +20,39 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-// <--[event]
-// @Events
-// mythicmob mob dies (by <entity>) (in <area>)
-// mythicmob mob death (by <entity>) (in <area>)
-// mythicmob mob killed (by <entity>) (in <area>)
-// mythicmob <mob> dies (by <entity>) (in <area>)
-// mythicmob <mob> death (by <entity>) (in <area>)
-// mythicmob <mob> killed (by <entity>) (in <area>)
-
-//
-// @Regex ^on mythicmob [^\s]+ (dies|death|killed)( by [^\s]+)?( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable false
-//
-// @Triggers when a MythicMob dies.
-//
-// @Context
-// <context.mob> Returns the MythicMob that has been killed.
-// <context.entity> Returns the dEntity for the MythicMob.
-// <context.killer> returns the dEntity that killed the MythicMob (if available).
-// <context.level> Returns the level of the MythicMob.
-// <context.drops> Returns a list of items dropped.
-// <context.xp> Returns the xp dropped.
-//
-// @Determine
-// Element(Number) to specify the new amount of XP to be dropped.
-// dList(dItem) to specify new items to be dropped.
-//
-// @Plugin DepenizenBukkit, MythicMobs
-//
-// -->
-
 public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // mythicmob mob dies (by <entity>) (in <area>)
+    // mythicmob mob death (by <entity>) (in <area>)
+    // mythicmob mob killed (by <entity>) (in <area>)
+    // mythicmob <mob> dies (by <entity>) (in <area>)
+    // mythicmob <mob> death (by <entity>) (in <area>)
+    // mythicmob <mob> killed (by <entity>) (in <area>)
+
+    //
+    // @Regex ^on mythicmob [^\s]+ (dies|death|killed)( by [^\s]+)?( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a MythicMob dies.
+    //
+    // @Context
+    // <context.mob> Returns the MythicMob that has been killed.
+    // <context.entity> Returns the dEntity for the MythicMob.
+    // <context.killer> returns the dEntity that killed the MythicMob (if available).
+    // <context.level> Returns the level of the MythicMob.
+    // <context.drops> Returns a list of items dropped.
+    // <context.xp> Returns the xp dropped.
+    //
+    // @Determine
+    // Element(Number) to specify the new amount of XP to be dropped.
+    // dList(dItem) to specify new items to be dropped.
+    //
+    // @Plugin DepenizenBukkit, MythicMobs
+    //
+    // -->
 
     public MythicMobsDeathEvent() {
         instance = this;

@@ -13,29 +13,29 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// skillapi player downgrades skill (in <area>)
-// skillapi player downgrades <skill> (in <area>)
-//
-// @Regex ^on skillapi player downgrades [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable false
-//
-// @Triggers when a player downgrades a skill in SkillAPI.
-//
-// @Context
-// <context.level> returns the level the player went down to.
-// <context.refund> returns how much the the player was refunded.
-// <context.skill_name> returns the name of the skill downgraded.
-//
-// @Determine
-// None
-//
-// @Plugin DepenizenBukkit, SkillAPI
-// -->
-
 public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // skillapi player downgrades skill (in <area>)
+    // skillapi player downgrades <skill> (in <area>)
+    //
+    // @Regex ^on skillapi player downgrades [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player downgrades a skill in SkillAPI.
+    //
+    // @Context
+    // <context.level> returns the level the player went down to.
+    // <context.refund> returns how much the the player was refunded.
+    // <context.skill_name> returns the name of the skill downgraded.
+    //
+    // @Determine
+    // None
+    //
+    // @Plugin DepenizenBukkit, SkillAPI
+    // -->
 
     public SkillAPIPlayerDowngradesSkillScriptEvent() {
         instance = this;

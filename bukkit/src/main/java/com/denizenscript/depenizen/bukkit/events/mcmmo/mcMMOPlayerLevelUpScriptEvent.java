@@ -14,33 +14,33 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// mcmmo player levels up skill (in <area>)
-// mcmmo player levels up <skill> (in <area>)
-//
-// @Regex ^on mcmmo player levels up [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable true
-//
-// @Triggers when a player levels up an mcMMO skill.
-//
-// @Context
-// <context.skill> returns the name of the skill that levelled up. (Based on the mcMMO language file).
-// <context.levels_gained> returns the number of levels gained.
-// <context.old_level> returns the old level of the skill.
-// <context.new_level> returns the new level of the skill.
-// <context.cause> returns the cause of the level gain.
-// Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
-//
-// @Determine
-// Element(Number) to set the number of levels to gain.
-//
-// @Plugin DepenizenBukkit, mcMMO
-//
-// -->
-
 public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // mcmmo player levels up skill (in <area>)
+    // mcmmo player levels up <skill> (in <area>)
+    //
+    // @Regex ^on mcmmo player levels up [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player levels up an mcMMO skill.
+    //
+    // @Context
+    // <context.skill> returns the name of the skill that levelled up. (Based on the mcMMO language file).
+    // <context.levels_gained> returns the number of levels gained.
+    // <context.old_level> returns the old level of the skill.
+    // <context.new_level> returns the new level of the skill.
+    // <context.cause> returns the cause of the level gain.
+    // Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
+    //
+    // @Determine
+    // Element(Number) to set the number of levels to gain.
+    //
+    // @Plugin DepenizenBukkit, mcMMO
+    //
+    // -->
 
     public mcMMOPlayerLevelUpScriptEvent() {
         instance = this;

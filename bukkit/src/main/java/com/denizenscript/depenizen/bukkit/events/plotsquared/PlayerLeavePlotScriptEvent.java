@@ -13,27 +13,27 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// plotsquared player leaves plotsquaredplot
-// plotsquared player exits plotsquaredplot
-// plotsquared player leaves <dplotsquaredplot>
-// plotsquared player exits <dplotsquaredplot>
-//
-// @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable false
-//
-// @Triggers when a player leaves a plot.
-//
-// @Context
-// <context.plot> returns the plot the player left.
-//
-// @Plugin DepenizenBukkit, PlotSquared
-//
-// -->
-
 public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // plotsquared player leaves plotsquaredplot
+    // plotsquared player exits plotsquaredplot
+    // plotsquared player leaves <dplotsquaredplot>
+    // plotsquared player exits <dplotsquaredplot>
+    //
+    // @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player leaves a plot.
+    //
+    // @Context
+    // <context.plot> returns the plot the player left.
+    //
+    // @Plugin DepenizenBukkit, PlotSquared
+    //
+    // -->
 
     public PlayerLeavePlotScriptEvent() {
         instance = this;

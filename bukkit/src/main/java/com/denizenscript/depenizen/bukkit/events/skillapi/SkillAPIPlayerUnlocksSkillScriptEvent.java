@@ -13,27 +13,27 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// skillapi player unlocks skill (in <area>)
-// skillapi player unlocks <skill> (in <area>)
-//
-// @Regex ^on skillapi player unlocks [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable false
-//
-// @Triggers when a player unlocks a skill in SkillAPI.
-//
-// @Context
-// <context.skill_name> returns the name of the skill unlocked.
-//
-// @Determine
-// None
-//
-// @Plugin DepenizenBukkit, SkillAPI
-// -->
-
 public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // skillapi player unlocks skill (in <area>)
+    // skillapi player unlocks <skill> (in <area>)
+    //
+    // @Regex ^on skillapi player unlocks [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player unlocks a skill in SkillAPI.
+    //
+    // @Context
+    // <context.skill_name> returns the name of the skill unlocked.
+    //
+    // @Determine
+    // None
+    //
+    // @Plugin DepenizenBukkit, SkillAPI
+    // -->
 
     public SkillAPIPlayerUnlocksSkillScriptEvent() {
         instance = this;

@@ -13,25 +13,25 @@ import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeper;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// shopkeeper trade
-//
-// @Regex ^on shopkeeper trade$
-//
-// @Cancellable true
-//
-// @Triggers when a trade with a shopkeeper is completed.
-//
-// @Context
-// <context.recipe> Returns the recipe for this trade.
-// <context.shopkeeper> Returns the ShopKeeper that the trade occured with.
-//
-// @Plugin DepenizenBukkit, ShopKeepers
-//
-// -->
-
 public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // shopkeeper trade
+    //
+    // @Regex ^on shopkeeper trade$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a trade with a shopkeeper is completed.
+    //
+    // @Context
+    // <context.recipe> Returns the recipe for this trade.
+    // <context.shopkeeper> Returns the ShopKeeper that the trade occured with.
+    //
+    // @Plugin DepenizenBukkit, ShopKeepers
+    //
+    // -->
 
     public ShopKeeperTradeScriptEvent() {
         instance = this;

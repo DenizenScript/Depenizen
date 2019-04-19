@@ -12,25 +12,25 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// skyblock island reset
-//
-// @Regex ^on skyblock island reset$
-//
-// @Cancellable false
-//
-// @Triggers when a new skyblock is reset.
-//
-// @Context
-// <context.owner> Returns the owner of the island.
-// <context.location> Returns the location of the island.
-//
-// @Plugin DepenizenBukkit, A SkyBlock
-//
-// -->
-
 public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // skyblock island reset
+    //
+    // @Regex ^on skyblock island reset$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a new skyblock is reset.
+    //
+    // @Context
+    // <context.owner> Returns the owner of the island.
+    // <context.location> Returns the location of the island.
+    //
+    // @Plugin DepenizenBukkit, A SkyBlock
+    //
+    // -->
 
     public static SkyBlockResetScriptEvent instance;
     public IslandResetEvent event;

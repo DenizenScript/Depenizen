@@ -13,25 +13,25 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// towny player exits town
-// towny player exits <town>
-//
-// @Regex ^on towny player exits [^\s]+$
-//
-// @Cancellable false
-//
-// @Triggers when a player exits a Towny Town.
-//
-// @Context
-// <context.town> Returns the town the player exited.
-//
-// @Plugin DepenizenBukkit, Towny
-//
-// -->
-
 public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // towny player exits town
+    // towny player exits <town>
+    //
+    // @Regex ^on towny player exits [^\s]+$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player exits a Towny Town.
+    //
+    // @Context
+    // <context.town> Returns the town the player exited.
+    //
+    // @Plugin DepenizenBukkit, Towny
+    //
+    // -->
 
     public PlayerExitsTownScriptEvent() {
         instance = this;

@@ -14,28 +14,28 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// mcmmo player skill level changes (in <area>)
-// mcmmo player <skill> level changes (in <area>)
-//
-// @Regex ^on mcmmo player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable true
-//
-// @Triggers when a player's mcmmo skill level changes.
-//
-// @Context
-// <context.skill> returns the name of the skill that changed level. (Based on the mcMMO language file).
-// <context.level> returns the level the skill changed to.
-// <context.cause> returns the cause of the level change.
-// Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
-//
-// @Plugin DepenizenBukkit, mcMMO
-//
-// -->
-
 public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // mcmmo player skill level changes (in <area>)
+    // mcmmo player <skill> level changes (in <area>)
+    //
+    // @Regex ^on mcmmo player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player's mcmmo skill level changes.
+    //
+    // @Context
+    // <context.skill> returns the name of the skill that changed level. (Based on the mcMMO language file).
+    // <context.level> returns the level the skill changed to.
+    // <context.cause> returns the cause of the level change.
+    // Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
+    //
+    // @Plugin DepenizenBukkit, mcMMO
+    //
+    // -->
 
     public mcMMOPlayerLevelChangeScriptEvent() {
         instance = this;
