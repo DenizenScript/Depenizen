@@ -88,7 +88,7 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
         god = new Element(event.getValue());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

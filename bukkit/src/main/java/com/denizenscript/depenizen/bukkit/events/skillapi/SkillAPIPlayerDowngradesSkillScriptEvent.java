@@ -109,7 +109,7 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
         skill = new Element(event.getDowngradedSkill().getData().getName());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

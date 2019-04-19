@@ -103,6 +103,6 @@ public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent impleme
         gained = event.getAmount();
         skillAPIClass = new SkillAPIClass(event.getPlayerClass().getData());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

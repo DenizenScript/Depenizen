@@ -86,6 +86,6 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
         }
         areaShop = new dAreaShop(event.getRegion());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

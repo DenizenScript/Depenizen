@@ -92,7 +92,7 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
         jailed = new Element(event.getValue());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

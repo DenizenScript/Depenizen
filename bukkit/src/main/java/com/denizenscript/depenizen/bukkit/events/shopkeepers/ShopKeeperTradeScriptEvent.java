@@ -86,7 +86,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
         recipe = ShopKeeper.wrapTradingRecipe(event.getTradingRecipe());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

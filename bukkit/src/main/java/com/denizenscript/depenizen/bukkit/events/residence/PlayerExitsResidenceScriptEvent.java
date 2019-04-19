@@ -90,6 +90,6 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
         }
         residence = new dResidence(event.getFrom());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

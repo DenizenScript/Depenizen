@@ -88,6 +88,6 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
         location = new dLocation(event.getLocation());
         owner = new dPlayer(event.getIslandOwner());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

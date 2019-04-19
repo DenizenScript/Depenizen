@@ -126,8 +126,8 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
         skill = new Element(event.getSkill().getName());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
         event.setLevelsGained(levels_gained);
     }
 }

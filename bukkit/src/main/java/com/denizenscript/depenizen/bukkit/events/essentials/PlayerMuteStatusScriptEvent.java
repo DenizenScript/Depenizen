@@ -92,7 +92,7 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
         muted = new Element(event.getValue());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

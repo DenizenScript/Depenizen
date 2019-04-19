@@ -96,7 +96,7 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
 
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

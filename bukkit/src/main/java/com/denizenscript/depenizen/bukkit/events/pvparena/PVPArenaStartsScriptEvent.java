@@ -87,7 +87,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
         arena = new PVPArenaArena(event.getArena());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

@@ -89,6 +89,6 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
         player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         plot = new dPlotSquaredPlot(event.getPlot());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

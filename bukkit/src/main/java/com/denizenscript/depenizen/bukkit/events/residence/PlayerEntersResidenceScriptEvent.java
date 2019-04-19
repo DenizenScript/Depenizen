@@ -90,6 +90,6 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
         }
         residence = new dResidence(event.getTo());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

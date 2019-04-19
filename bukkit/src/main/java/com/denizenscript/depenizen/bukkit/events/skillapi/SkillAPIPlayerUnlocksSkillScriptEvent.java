@@ -96,6 +96,6 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
         player = dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer());
         skill = new Element(event.getUnlockedSkill().getData().getName());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

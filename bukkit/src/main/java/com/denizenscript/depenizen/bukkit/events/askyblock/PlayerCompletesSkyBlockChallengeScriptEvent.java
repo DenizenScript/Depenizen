@@ -103,7 +103,7 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
             }
         }
         this.event = event;
-        fire();
+        fire(event);
     }
 
 }

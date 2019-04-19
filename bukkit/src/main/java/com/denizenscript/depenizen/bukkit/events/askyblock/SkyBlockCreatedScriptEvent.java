@@ -89,7 +89,7 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
         schematic = new Element(event.getSchematicName().getName());
         owner = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         this.event = event;
-        fire();
+        fire(event);
     }
 
 }

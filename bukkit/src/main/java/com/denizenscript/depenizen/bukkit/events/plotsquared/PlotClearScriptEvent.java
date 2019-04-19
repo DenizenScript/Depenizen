@@ -86,7 +86,7 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
 
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

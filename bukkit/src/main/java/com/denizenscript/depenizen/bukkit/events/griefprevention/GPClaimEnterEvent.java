@@ -124,7 +124,7 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
         old_claim = fclaim == null ? null : new GriefPreventionClaim(fclaim);
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

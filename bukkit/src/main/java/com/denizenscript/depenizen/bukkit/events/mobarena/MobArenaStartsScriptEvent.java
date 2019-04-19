@@ -80,7 +80,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
         arena = new MobArenaArena(event.getArena());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

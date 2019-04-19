@@ -90,7 +90,7 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
         afk = new Element(event.getValue());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

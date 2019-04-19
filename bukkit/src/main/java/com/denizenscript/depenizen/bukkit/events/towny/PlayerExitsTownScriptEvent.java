@@ -93,6 +93,6 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
         }
         town = dTown.fromWorldCoord(event.getFrom());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

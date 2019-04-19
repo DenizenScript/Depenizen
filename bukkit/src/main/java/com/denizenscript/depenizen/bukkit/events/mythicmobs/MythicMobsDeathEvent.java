@@ -164,7 +164,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
             oldDrops.add(new dItem(i).identify());
         }
         this.event = event;
-        fire();
+        fire(event);
         if (!newDrops.isEmpty()) {
             event.setDrops(newDrops);
         }

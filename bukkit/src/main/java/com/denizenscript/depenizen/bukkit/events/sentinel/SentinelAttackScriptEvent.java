@@ -81,7 +81,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
         entity = new dEntity(event.getNPC().getTrait(SentinelTrait.class).chasing).getDenizenObject();
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
+         fire(event);;
     }
 }

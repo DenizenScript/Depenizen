@@ -77,6 +77,6 @@ public class PlayerLeavesPVPArenaScriptEvent extends BukkitScriptEvent implement
         arena = new PVPArenaArena(event.getArena());
         cancelled = false;
         this.event = event;
-        fire();
+        fire(event);
     }
 }

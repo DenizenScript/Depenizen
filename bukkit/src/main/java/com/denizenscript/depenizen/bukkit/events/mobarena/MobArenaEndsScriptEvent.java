@@ -86,6 +86,6 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
         arena = new MobArenaArena(event.getArena());
         wave = new Element(event.getArena().getWaveManager().getWaveNumber());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

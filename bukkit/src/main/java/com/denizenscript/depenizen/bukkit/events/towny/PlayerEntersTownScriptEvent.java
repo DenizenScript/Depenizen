@@ -93,6 +93,6 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
         }
         town = dTown.fromWorldCoord(event.getTo());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

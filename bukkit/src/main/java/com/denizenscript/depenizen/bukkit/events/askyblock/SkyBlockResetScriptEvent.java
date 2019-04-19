@@ -82,7 +82,7 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
         location = new dLocation(event.getLocation());
         owner = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         this.event = event;
-        fire();
+        fire(event);
     }
 
 }
