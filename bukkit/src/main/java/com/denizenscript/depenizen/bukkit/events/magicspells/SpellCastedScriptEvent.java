@@ -14,26 +14,27 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// magicspells player completes spell
-//
-// @Regex ^on magicspells [^\s]+ spell$
-//
-// @Triggers when the spell is done and everything has been handled.
-//
-// @Cancellable false
-//
-// @Context
-// <context.spell_name> returns the name of the spell.
-// <context.power> returns an Element(Decimal) of the power of the spell.
-// <context.cooldown> returns an Element(Decimal) of the cooldown of the spell.
-//
-// @Plugin DepenizenBukkit, MagicSpells
-//
-// -->
 
 public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // magicspells player completes spell
+    //
+    // @Regex ^on magicspells [^\s]+ spell$
+    //
+    // @Triggers when the spell is done and everything has been handled.
+    //
+    // @Cancellable false
+    //
+    // @Context
+    // <context.spell_name> returns the name of the spell.
+    // <context.power> returns an Element(Decimal) of the power of the spell.
+    // <context.cooldown> returns an Element(Decimal) of the cooldown of the spell.
+    //
+    // @Plugin DepenizenBukkit, MagicSpells
+    //
+    // -->
 
     public SpellCastedScriptEvent() {
         instance = this;
@@ -54,24 +55,14 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
+    public boolean matches(ScriptPath path) {
+        String lower = path.eventArgLowerAt(3);
         return lower.startsWith("magicspells player completes spell");
     }
 
     @Override
     public String getName() {
         return "SpellCastedEvent";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        SpellCastedEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -104,8 +95,7 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
         power = event.getPower();
         cooldown = event.getCooldown();
         spell = new Element(event.getSpell().getName());
-
         this.event = event;
-        fire();
+        fire(event);
     }
 }

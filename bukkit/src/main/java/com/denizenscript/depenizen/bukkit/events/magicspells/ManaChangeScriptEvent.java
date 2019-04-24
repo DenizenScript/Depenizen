@@ -15,30 +15,30 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// magicspells player mana change
-//
-// @Regex ^on magicspells [^\s]+ mana change$
-//
-// @Triggers when a player's mana value changes.
-//
-// @Cancellable false
-//
-// @Context
-// <context.old_mana> returns the old amount of mana.
-// <context.new_mana> returns the new amount of mana.
-// <context.max_mana> returns maximum mana the player can have.
-// <context.reason> returns the reason of the change. Can either be POTION, REGEN, SPELL_COST or OTHER
-//
-// @Determine
-// Element(Number) to set a new mana value.
-//
-// @Plugin DepenizenBukkit, MagicSpells
-//
-// -->
-
 public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // magicspells player mana change
+    //
+    // @Regex ^on magicspells [^\s]+ mana change$
+    //
+    // @Triggers when a player's mana value changes.
+    //
+    // @Cancellable false
+    //
+    // @Context
+    // <context.old_mana> returns the old amount of mana.
+    // <context.new_mana> returns the new amount of mana.
+    // <context.max_mana> returns maximum mana the player can have.
+    // <context.reason> returns the reason of the change. Can either be POTION, REGEN, SPELL_COST or OTHER
+    //
+    // @Determine
+    // Element(Number) to set a new mana value.
+    //
+    // @Plugin DepenizenBukkit, MagicSpells
+    //
+    // -->
 
     public ManaChangeScriptEvent() {
         instance = this;
@@ -60,24 +60,14 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
+    public boolean matches(ScriptPath path) {
+        String lower = path.eventArgLowerAt(3);
         return lower.startsWith("magicspells player mana change");
     }
 
     @Override
     public String getName() {
         return "ManaChangeEvent";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        ManaChangeEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -121,7 +111,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
         max_mana = event.getMaxMana();
         reason = new Element(event.getReason().name());
         this.event = event;
-        fire();
+        fire(event);
         event.setNewAmount(new_mana);
     }
 }

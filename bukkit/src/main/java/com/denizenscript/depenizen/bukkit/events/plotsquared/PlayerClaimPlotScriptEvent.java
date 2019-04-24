@@ -16,26 +16,26 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// plotsquared player claims plotsquaredplot
-// plotsquared player claims <dplotsquaredplot>
-//
-// @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable true
-//
-// @Triggers when a player claims a plot.
-//
-// @Context
-// <context.plot> returns the plot the player claimed.
-// <context.auto> returns true if the plot was claimed automatic.
-//
-// @Plugin DepenizenBukkit, PlotSquared
-//
-// -->
-
 public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // plotsquared player claims plotsquaredplot
+    // plotsquared player claims <dplotsquaredplot>
+    //
+    // @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player claims a plot.
+    //
+    // @Context
+    // <context.plot> returns the plot the player claimed.
+    // <context.auto> returns true if the plot was claimed automatic.
+    //
+    // @Plugin DepenizenBukkit, PlotSquared
+    //
+    // -->
 
     public PlayerClaimPlotScriptEvent() {
         instance = this;
@@ -54,9 +54,8 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String plotName = CoreUtilities.getXthArg(3, lower);
+    public boolean matches(ScriptPath path) {
+        String plotName = path.eventArgLowerAt(3);
         if (plotName.equals("plotsquaredplot")) {
             return true;
         }
@@ -67,16 +66,6 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public String getName() {
         return "PlayerClaimPlotEvent";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        PlayerClaimPlotEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -110,7 +99,7 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
         auto = new Element(event.wasAuto());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
+        fire(event);
         event.setCancelled(cancelled);
     }
 }

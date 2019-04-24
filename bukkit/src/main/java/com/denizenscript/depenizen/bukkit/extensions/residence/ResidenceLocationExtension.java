@@ -29,6 +29,13 @@ public class ResidenceLocationExtension extends dObjectExtension {
     // Instance Fields and Methods
     /////////////
 
+    public static final String[] handledTags = new String[] {
+            "has_residence", "residence"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private ResidenceLocationExtension(dLocation location) {
         this.location = location;
     }

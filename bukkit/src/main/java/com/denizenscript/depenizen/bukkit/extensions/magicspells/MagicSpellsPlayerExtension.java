@@ -23,6 +23,13 @@ public class MagicSpellsPlayerExtension extends dObjectExtension {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+            "magicspells"
+    };
+
+    public static final String[] handledMechs = new String[] {
+    }; // None
+
     private MagicSpellsPlayerExtension(dPlayer player) {
         this.player = player;
     }

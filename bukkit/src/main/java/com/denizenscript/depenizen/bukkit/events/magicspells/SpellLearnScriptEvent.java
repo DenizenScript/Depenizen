@@ -14,25 +14,25 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// magicspells player learns spell
-//
-// @Regex ^on magicspells [^\s]+ learns spell$
-//
-// @Triggers when a player is about to learn a spell.
-//
-// @Cancellable true
-//
-// @Context
-// <context.spell_name> returns the name of the spell.
-// <context.source> returns the source. Can either be SPELLBOOK, TEACH, TOME or OTHER
-//
-// @Plugin DepenizenBukkit, MagicSpells
-//
-// -->
-
 public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // magicspells player learns spell
+    //
+    // @Regex ^on magicspells [^\s]+ learns spell$
+    //
+    // @Triggers when a player is about to learn a spell.
+    //
+    // @Cancellable true
+    //
+    // @Context
+    // <context.spell_name> returns the name of the spell.
+    // <context.source> returns the source. Can either be SPELLBOOK, TEACH, TOME or OTHER
+    //
+    // @Plugin DepenizenBukkit, MagicSpells
+    //
+    // -->
 
     public SpellLearnScriptEvent() {
         instance = this;
@@ -52,24 +52,14 @@ public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
+    public boolean matches(ScriptPath path) {
+        String lower = path.eventArgLowerAt(3);
         return lower.startsWith("magicspells player learns spell");
     }
 
     @Override
     public String getName() {
         return "SpellLearnEvent";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        SpellLearnEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -100,7 +90,7 @@ public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener
         source = new Element(event.getSource().name());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
+        fire(event);
         event.setCancelled(cancelled);
     }
 }

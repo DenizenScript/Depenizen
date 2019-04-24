@@ -15,32 +15,33 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// magicspells player casts spell
-//
-// @Regex ^on magicspells [^\s]+ spell$
-//
-// @Triggers when a player starts to casts a spell.
-//
-// @Cancellable true
-//
-// @Context
-// <context.spell_name> returns the name of the spell.
-// <context.power> returns an Element(Decimal) of the power of the spell.
-// <context.cast_time> returns an Element(Number) of the cast time of the spell.
-// <context.cooldown> returns an Element(Decimal) of the cooldown of the spell.
-//
-// @Determine
-// "POWER:" + Element(Number) to change the power of the spell.
-// "CAST_TIME:" + Element(Decimal) to change the cast time.
-// "COOLDOWN:" + Element(Number) to change the cooldown.
-//
-// @Plugin DepenizenBukkit, MagicSpells
-//
-// -->
 
 public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // magicspells player casts spell
+    //
+    // @Regex ^on magicspells [^\s]+ spell$
+    //
+    // @Triggers when a player starts to casts a spell.
+    //
+    // @Cancellable true
+    //
+    // @Context
+    // <context.spell_name> returns the name of the spell.
+    // <context.power> returns an Element(Decimal) of the power of the spell.
+    // <context.cast_time> returns an Element(Number) of the cast time of the spell.
+    // <context.cooldown> returns an Element(Decimal) of the cooldown of the spell.
+    //
+    // @Determine
+    // "POWER:" + Element(Number) to change the power of the spell.
+    // "CAST_TIME:" + Element(Decimal) to change the cast time.
+    // "COOLDOWN:" + Element(Number) to change the cooldown.
+    //
+    // @Plugin DepenizenBukkit, MagicSpells
+    //
+    // -->
 
     public SpellCastScriptEvent() {
         instance = this;
@@ -62,24 +63,14 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     }
 
     @Override
-    public boolean matches(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
+    public boolean matches(ScriptPath path) {
+        String lower = path.eventArgLowerAt(3);
         return lower.startsWith("magicspells player casts spell");
     }
 
     @Override
     public String getName() {
         return "SpellCastEvent";
-    }
-
-    @Override
-    public void init() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
-    }
-
-    @Override
-    public void destroy() {
-        SpellCastEvent.getHandlerList().unregister(this);
     }
 
     @Override
@@ -143,7 +134,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
         spell = new Element(event.getSpell().getName());
         cancelled = event.isCancelled();
         this.event = event;
-        fire();
+        fire(event);
         event.setCancelled(cancelled);
         event.setPower(power);
         event.setCastTime(castTime);
