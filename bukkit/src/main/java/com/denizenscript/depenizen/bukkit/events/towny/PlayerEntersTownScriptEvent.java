@@ -13,25 +13,25 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// towny player enters town
-// towny player enters <town>
-//
-// @Regex ^on towny player enters [^\s]+$
-//
-// @Cancellable false
-//
-// @Triggers when a player enters a Towny Town.
-//
-// @Context
-// <context.town> Returns the town the player entered.
-//
-// @Plugin DepenizenBukkit, Towny
-//
-// -->
-
 public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // towny player enters town
+    // towny player enters <town>
+    //
+    // @Regex ^on towny player enters [^\s]+$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player enters a Towny Town.
+    //
+    // @Context
+    // <context.town> Returns the town the player entered.
+    //
+    // @Plugin DepenizenBukkit, Towny
+    //
+    // -->
 
     public PlayerEntersTownScriptEvent() {
         instance = this;
@@ -93,6 +93,6 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
         }
         town = dTown.fromWorldCoord(event.getTo());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

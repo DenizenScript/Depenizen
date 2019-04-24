@@ -12,26 +12,26 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// player exits skyblock
-//
-// @Regex ^on player exits skyblock$
-//
-// @Cancellable false
-//
-// @Triggers when a player leaves a skyblock island.
-//
-// @Context
-// <context.owner> Returns the owner of the island.
-// <context.island_location> Returns the location of the island.
-// <context.location> Returns the location the player exited at.
-//
-// @Plugin DepenizenBukkit, A SkyBlock
-//
-// -->
-
 public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // player exits skyblock
+    //
+    // @Regex ^on player exits skyblock$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player leaves a skyblock island.
+    //
+    // @Context
+    // <context.owner> Returns the owner of the island.
+    // <context.island_location> Returns the location of the island.
+    // <context.location> Returns the location the player exited at.
+    //
+    // @Plugin DepenizenBukkit, A SkyBlock
+    //
+    // -->
 
     public static PlayerExitsSkyBlockScriptEvent instance;
     public IslandExitEvent event;
@@ -88,6 +88,6 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
         location = new dLocation(event.getLocation());
         owner = new dPlayer(event.getIslandOwner());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

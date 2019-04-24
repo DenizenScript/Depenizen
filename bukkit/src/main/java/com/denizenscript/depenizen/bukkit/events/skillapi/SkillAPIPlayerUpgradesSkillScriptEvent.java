@@ -13,29 +13,29 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// skillapi player upgrades skill (in <area>)
-// skillapi player upgrades <skill> (in <area>)
-//
-// @Regex ^on skillapi player upgrades [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable false
-//
-// @Triggers when a player upgrades a skill in SkillAPI.
-//
-// @Context
-// <context.level> returns the level the player went up to.
-// <context.cost> returns how much the upgrade cost.
-// <context.skill_name> returns the name of the skill upgraded.
-//
-// @Determine
-// None
-//
-// @Plugin DepenizenBukkit, SkillAPI
-// -->
-
 public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // skillapi player upgrades skill (in <area>)
+    // skillapi player upgrades <skill> (in <area>)
+    //
+    // @Regex ^on skillapi player upgrades [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player upgrades a skill in SkillAPI.
+    //
+    // @Context
+    // <context.level> returns the level the player went up to.
+    // <context.cost> returns how much the upgrade cost.
+    // <context.skill_name> returns the name of the skill upgraded.
+    //
+    // @Determine
+    // None
+    //
+    // @Plugin DepenizenBukkit, SkillAPI
+    // -->
 
     public SkillAPIPlayerUpgradesSkillScriptEvent() {
         instance = this;
@@ -107,9 +107,7 @@ public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent im
         level = new Element(event.getUpgradedSkill().getLevel());
         cost = new Element(event.getCost());
         skill = new Element(event.getUpgradedSkill().getData().getName());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

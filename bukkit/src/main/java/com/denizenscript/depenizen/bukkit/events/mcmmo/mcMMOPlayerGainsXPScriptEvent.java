@@ -14,29 +14,29 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// mcmmo player gains xp for skill (in <area>)
-// mcmmo player gains xp for <skill> (in <area>)
-//
-// @Regex ^on mcmmo player gains xp for [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable true
-//
-// @Triggers when a player gains mcMMO xp.
-//
-// @Context
-// <context.skill> returns the name of the skill that the player gained xp for.
-// (Based on the mcMMO language file).
-// <context.xp> returns the amount of xp gained.
-// <context.cause> returns the cause of the xp gain.
-// Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
-//
-// @Plugin DepenizenBukkit, mcMMO
-//
-// -->
-
 public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // mcmmo player gains xp for skill (in <area>)
+    // mcmmo player gains xp for <skill> (in <area>)
+    //
+    // @Regex ^on mcmmo player gains xp for [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player gains mcMMO xp.
+    //
+    // @Context
+    // <context.skill> returns the name of the skill that the player gained xp for.
+    // (Based on the mcMMO language file).
+    // <context.xp> returns the amount of xp gained.
+    // <context.cause> returns the cause of the xp gain.
+    // Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
+    //
+    // @Plugin DepenizenBukkit, mcMMO
+    //
+    // -->
 
     public mcMMOPlayerGainsXPScriptEvent() {
         instance = this;
@@ -113,10 +113,8 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
         cause = new Element(event.getXpGainReason().toString());
         skill = new Element(event.getSkill().getName());
         xp = new Element(event.getRawXpGained());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
         event.setRawXpGained(xp.asFloat());
     }
 }

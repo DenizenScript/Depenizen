@@ -13,25 +13,25 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// plotsquared player enters plotsquaredplot
-// plotsquared player enters <dplotsquaredplot>
-//
-// @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable false
-//
-// @Triggers when a player enters a plot.
-//
-// @Context
-// <context.plot> returns the plot the player entered.
-//
-// @Plugin DepenizenBukkit, PlotSquared
-//
-// -->
-
 public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // plotsquared player enters plotsquaredplot
+    // plotsquared player enters <dplotsquaredplot>
+    //
+    // @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player enters a plot.
+    //
+    // @Context
+    // <context.plot> returns the plot the player entered.
+    //
+    // @Plugin DepenizenBukkit, PlotSquared
+    //
+    // -->
 
     public PlayerEntersPlotScriptEvent() {
         instance = this;
@@ -89,6 +89,6 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
         player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         plot = new dPlotSquaredPlot(event.getPlot());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

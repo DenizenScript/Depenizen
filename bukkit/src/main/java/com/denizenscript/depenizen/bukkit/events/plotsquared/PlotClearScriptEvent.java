@@ -11,27 +11,27 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// plotsquared plot clear plotsquaredplot
-// plotsquared plot clears plotsquaredplot
-// plotsquared plot clear <dplotsquaredplot>
-// plotsquared plot clears <dplotsquaredplot>
-//
-// @Regex ^on plotsquared plot [^\s]+ clears( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
-//
-// @Cancellable true
-//
-// @Triggers when a plot is cleared.
-//
-// @Context
-// <context.plot> returns the plot that is cleared.
-//
-// @Plugin DepenizenBukkit, PlotSquared
-//
-// -->
-
 public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // plotsquared plot clear plotsquaredplot
+    // plotsquared plot clears plotsquaredplot
+    // plotsquared plot clear <dplotsquaredplot>
+    // plotsquared plot clears <dplotsquaredplot>
+    //
+    // @Regex ^on plotsquared plot [^\s]+ clears( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a plot is cleared.
+    //
+    // @Context
+    // <context.plot> returns the plot that is cleared.
+    //
+    // @Plugin DepenizenBukkit, PlotSquared
+    //
+    // -->
 
     public PlotClearScriptEvent() {
         instance = this;
@@ -83,10 +83,7 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
     @EventHandler
     public void onPlotClear(PlotClearEvent event) {
         plot = new dPlotSquaredPlot(event.getPlot());
-
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

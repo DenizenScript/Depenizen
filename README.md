@@ -3,11 +3,11 @@ Depenizen
 
 **Depenizen: An extension of Denizen**
 
-- **Wiki**: http://wiki.citizensnpcs.co/Depenizen
-- **IRC**: http://webchat.esper.net/?channels=denizen-dev
+- **Wiki (old)**: https://wiki.citizensnpcs.co/Depenizen
+- **Discord**: https://discord.gg/Q6pZGSR
 - **Denizen For Bukkit**: https://github.com/DenizenScript/Denizen-For-Bukkit
 - **Denizen2Sponge**: https://github.com/DenizenScript/Denizen2Sponge
-- **Builds**: http://ci.citizensnpcs.co/job/Depenizen/
+- **Builds**: https://ci.citizensnpcs.co/job/Depenizen/
   - Use DepenizenBukkit for Bukkit/Spigot servers (install to `your_server_directory/plugins`)
   - Use Depenizen2Sponge for Sponge servers (install to `your_server_directory/mods`)
   - Use DepenizenBungee for BungeeCord servers (see below.)

@@ -12,26 +12,26 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// mobarena arena wave changes
-// mobarena <arena> wave changes
-//
-// @Regex ^on mobarena [^\s]+ wave changes$
-//
-// @Cancellable false
-//
-// @Triggers when a wave changes in a MobArena.
-//
-// @Context
-// <context.arena> Returns the arena in which the wave change occured.
-// <context.wave> Returns the number of the new wave.
-//
-// @Plugin DepenizenBukkit, MobArena
-//
-// -->
-
 public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // mobarena arena wave changes
+    // mobarena <arena> wave changes
+    //
+    // @Regex ^on mobarena [^\s]+ wave changes$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a wave changes in a MobArena.
+    //
+    // @Context
+    // <context.arena> Returns the arena in which the wave change occured.
+    // <context.wave> Returns the number of the new wave.
+    //
+    // @Plugin DepenizenBukkit, MobArena
+    //
+    // -->
 
     public MobArenaWaveChangesScriptEvent() {
         instance = this;
@@ -89,6 +89,6 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
         arena = new MobArenaArena(event.getArena());
         wave = new Element(event.getWaveNumber());
         this.event = event;
-        fire();
+        fire(event);
     }
 }

@@ -12,24 +12,24 @@ import net.slipcor.pvparena.events.PAExitEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// pvparena player exits
-//
-// @Regex ^on pvparena player exits$
-//
-// @Cancellable false
-//
-// @Triggers when a player exit a pvparena (won, loose, leave, disconnect etc.)
-//
-// @Context
-// <context.arena> returns the arena denizen object.
-//
-// @Plugin DepenizenBukkit, PVPArena
-//
-// -->
-
 public class PlayerExitsPVPArenaScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // pvparena player exits
+    //
+    // @Regex ^on pvparena player exits$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a player exit a pvparena (won, loose, leave, disconnect etc.)
+    //
+    // @Context
+    // <context.arena> returns the arena denizen object.
+    //
+    // @Plugin DepenizenBukkit, PVPArena
+    //
+    // -->
 
     public static PlayerExitsPVPArenaScriptEvent instance;
     public PAExitEvent event;
@@ -77,6 +77,6 @@ public class PlayerExitsPVPArenaScriptEvent extends BukkitScriptEvent implements
         arena = new PVPArenaArena(event.getArena());
         cancelled = false;
         this.event = event;
-        fire();
+        fire(event);
     }
 }

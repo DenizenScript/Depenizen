@@ -12,28 +12,28 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// libsdisguises undisguises disguise
-// libsdisguises undisguise disguise
-// libsdisguises undisguises <dLibsDisguises>
-// libsdisguises undisguise <dLibsDisguises>
-//
-// @Regex ^on libsdisguises [^\s]+ undisguise$
-//
-// @Cancellable true
-//
-// @Triggers when a entity undisguises.
-//
-// @Context
-// <context.entity> returns the entity who undisguised.
-// <context.disguise> returns the disguise in use.
-//
-// @Plugin DepenizenBukkit, LibsDisguises
-//
-// -->
-
 public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // libsdisguises undisguises disguise
+    // libsdisguises undisguise disguise
+    // libsdisguises undisguises <dLibsDisguises>
+    // libsdisguises undisguise <dLibsDisguises>
+    //
+    // @Regex ^on libsdisguises [^\s]+ undisguise$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a entity undisguises.
+    //
+    // @Context
+    // <context.entity> returns the entity who undisguised.
+    // <context.disguise> returns the disguise in use.
+    //
+    // @Plugin DepenizenBukkit, LibsDisguises
+    //
+    // -->
 
     public EntityUndisguisesScriptEvent() {
         instance = this;
@@ -93,10 +93,7 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
     public void onUndisguise(UndisguiseEvent event) {
         disguise = new LibsDisguise(event.getDisguise());
         entity = new dEntity(event.getEntity());
-
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

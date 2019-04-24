@@ -14,24 +14,24 @@ import org.bukkit.event.Listener;
 import org.mcmonkey.sentinel.SentinelTrait;
 import org.mcmonkey.sentinel.events.SentinelAttackEvent;
 
-// <--[event]
-// @Events
-// sentinel npc attacks
-//
-// @Regex ^on sentinel npc attacks$
-//
-// @Cancellable true
-//
-// @Triggers when a Sentinel-powered NPC attacks a target.
-//
-// @Context
-// <context.entity> returns the entity that the NPC is attacking.
-//
-// @Plugin DepenizenBukkit, Sentinel
-//
-// -->
-
 public class SentinelAttackScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // sentinel npc attacks
+    //
+    // @Regex ^on sentinel npc attacks$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a Sentinel-powered NPC attacks a target.
+    //
+    // @Context
+    // <context.entity> returns the entity that the NPC is attacking.
+    //
+    // @Plugin DepenizenBukkit, Sentinel
+    //
+    // -->
 
     public SentinelAttackScriptEvent() {
         instance = this;
@@ -79,9 +79,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     public void onSentinelAttack(SentinelAttackEvent event) {
         npc = new dNPC(event.getNPC());
         entity = new dEntity(event.getNPC().getTrait(SentinelTrait.class).chasing).getDenizenObject();
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

@@ -13,26 +13,26 @@ import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// skyblock island created
-//
-// @Regex ^on skyblock island created$
-//
-// @Cancellable false
-//
-// @Triggers when a new skyblock is created.
-//
-// @Context
-// <context.owner> Returns the owner of the island.
-// <context.location> Returns the location of the island.
-// <context.schematic> Returns the name of the schematic used for the island.
-//
-// @Plugin DepenizenBukkit, A SkyBlock
-//
-// -->
-
 public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // skyblock island created
+    //
+    // @Regex ^on skyblock island created$
+    //
+    // @Cancellable false
+    //
+    // @Triggers when a new skyblock is created.
+    //
+    // @Context
+    // <context.owner> Returns the owner of the island.
+    // <context.location> Returns the location of the island.
+    // <context.schematic> Returns the name of the schematic used for the island.
+    //
+    // @Plugin DepenizenBukkit, A SkyBlock
+    //
+    // -->
 
     public static SkyBlockCreatedScriptEvent instance;
     public IslandNewEvent event;
@@ -89,7 +89,7 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
         schematic = new Element(event.getSchematicName().getName());
         owner = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         this.event = event;
-        fire();
+        fire(event);
     }
 
 }

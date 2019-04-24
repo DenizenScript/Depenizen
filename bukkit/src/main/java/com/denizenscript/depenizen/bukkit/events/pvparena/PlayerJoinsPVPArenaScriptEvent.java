@@ -12,24 +12,24 @@ import net.slipcor.pvparena.events.PAJoinEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// pvparena player joins
-//
-// @Regex ^on pvparena player joins$
-//
-// @Cancellable true
-//
-// @Triggers when a player joins a pvparena.
-//
-// @Context
-// <context.arena> returns the arena denizen object.
-//
-// @Plugin DepenizenBukkit, PVPArena
-//
-// -->
-
 public class PlayerJoinsPVPArenaScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // pvparena player joins
+    //
+    // @Regex ^on pvparena player joins$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player joins a pvparena.
+    //
+    // @Context
+    // <context.arena> returns the arena denizen object.
+    //
+    // @Plugin DepenizenBukkit, PVPArena
+    //
+    // -->
 
     public static PlayerJoinsPVPArenaScriptEvent instance;
     public PAJoinEvent event;
@@ -75,9 +75,7 @@ public class PlayerJoinsPVPArenaScriptEvent extends BukkitScriptEvent implements
     @EventHandler
     public void onPlayerJoinsPVPArena(PAJoinEvent event) {
         arena = new PVPArenaArena(event.getArena());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

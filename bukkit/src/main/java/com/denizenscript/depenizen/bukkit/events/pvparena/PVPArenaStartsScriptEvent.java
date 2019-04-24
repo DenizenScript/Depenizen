@@ -14,24 +14,24 @@ import net.slipcor.pvparena.events.PAStartEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// pvparena starts
-//
-// @Regex ^on pvparena starts$
-//
-// @Cancellable true
-//
-// @Triggers when a pvparena starts.
-//
-// @Context
-// <context.fighters> returns a list of all fighters in the arena.
-//
-// @Plugin DepenizenBukkit, PVPArena
-//
-// -->
-
 public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // pvparena starts
+    //
+    // @Regex ^on pvparena starts$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a pvparena starts.
+    //
+    // @Context
+    // <context.fighters> returns a list of all fighters in the arena.
+    //
+    // @Plugin DepenizenBukkit, PVPArena
+    //
+    // -->
 
     public static PVPArenaStartsScriptEvent instance;
     public PAStartEvent event;
@@ -85,9 +85,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
             fighters.add(new dPlayer(p.get()).identify());
         }
         arena = new PVPArenaArena(event.getArena());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }

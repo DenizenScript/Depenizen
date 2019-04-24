@@ -12,27 +12,27 @@ import net.ess3.api.events.MuteStatusChangeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-// <--[event]
-// @Events
-// player muted
-// player unmuted
-// player un-muted
-// player mute status changes
-//
-// @Regex ^on player (muted|unmuted|un-muted|mute status changes)$
-//
-// @Cancellable true
-//
-// @Triggers when a player is muted or un-muted.
-//
-// @Context
-// <context.status> Returns whether the player is muted.
-//
-// @Plugin DepenizenBukkit, Essentials
-//
-// -->
-
 public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Listener {
+
+    // <--[event]
+    // @Events
+    // player muted
+    // player unmuted
+    // player un-muted
+    // player mute status changes
+    //
+    // @Regex ^on player (muted|unmuted|un-muted|mute status changes)$
+    //
+    // @Cancellable true
+    //
+    // @Triggers when a player is muted or un-muted.
+    //
+    // @Context
+    // <context.status> Returns whether the player is muted.
+    //
+    // @Plugin DepenizenBukkit, Essentials
+    //
+    // -->
 
     public static PlayerMuteStatusScriptEvent instance;
     public MuteStatusChangeEvent event;
@@ -90,9 +90,7 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
     @EventHandler
     public void onPlayerAFKStatus(MuteStatusChangeEvent event) {
         muted = new Element(event.getValue());
-        cancelled = event.isCancelled();
         this.event = event;
-        fire();
-        event.setCancelled(cancelled);
+        fire(event);
     }
 }
