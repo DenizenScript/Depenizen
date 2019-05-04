@@ -75,30 +75,30 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public boolean applyDetermination(ScriptContainer container, String determination) {
-        String lower = CoreUtilities.toLowerCase(determination);
-        if (lower.startsWith("power:")) {
-            Element num = new Element(determination.substring(6));
-            if (!num.isFloat()) {
-                dB.echoError("Determination for 'power' must be a valid decimal number.");
-                return false;
+        if (determination.length() > 0 && !isDefaultDetermination(determination)) {
+            String lower = CoreUtilities.toLowerCase(determination);
+            if (lower.startsWith("power:")) {
+                Element num = new Element(determination.substring(6));
+                if (!num.isFloat()) {
+                    dB.echoError("Determination for 'power' must be a valid decimal number.");
+                    return false;
+                }
+                power = num.asFloat();
+            } else if (lower.startsWith("cast_time:")) {
+                Element max = new Element(determination.substring(10));
+                if (!max.isInt()) {
+                    dB.echoError("Determination for 'cast_time' must be a valid number.");
+                    return false;
+                }
+                castTime = max.asInt();
+            } else if (lower.startsWith("cooldown:")) {
+                Element num = new Element(determination.substring(9));
+                if (!num.isFloat()) {
+                    dB.echoError("Determination for 'cooldown' must be a valid decimal number.");
+                    return false;
+                }
+                cooldown = num.asFloat();
             }
-            power = num.asFloat();
-        }
-        else if (lower.startsWith("cast_time:")) {
-            Element max = new Element(determination.substring(10));
-            if (!max.isInt()) {
-                dB.echoError("Determination for 'cast_time' must be a valid number.");
-                return false;
-            }
-            castTime = max.asInt();
-        }
-        else if (lower.startsWith("cooldown:")) {
-            Element num = new Element(determination.substring(9));
-            if (!num.isFloat()) {
-                dB.echoError("Determination for 'cooldown' must be a valid decimal number.");
-                return false;
-            }
-            cooldown = num.asFloat();
         }
         return super.applyDetermination(container, determination);
     }
