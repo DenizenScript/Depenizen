@@ -6,9 +6,9 @@ import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeper;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import net.aufdemrand.denizen.objects.dEntity;
 
-public class ShopKeepersSupport extends Support {
+public class ShopkeepersSupport extends Support {
 
-    public ShopKeepersSupport() {
+    public ShopkeepersSupport() {
         registerObjects(ShopKeeper.class);
         registerScriptEvents(new ShopKeeperTradeScriptEvent());
         registerProperty(ShopKeepersEntityExtension.class, dEntity.class);
