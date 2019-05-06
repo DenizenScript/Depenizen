@@ -52,8 +52,7 @@ public class ResidenceLocationExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Residence
         // -->
         if (attribute.startsWith("has_residence")) {
-            org.bukkit.Location loc = new org.bukkit.Location(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getYaw(), location.getPitch());
-            ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(loc);
+            ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);
             return new Element(res != null).getAttribute(attribute.fulfill(1));
         }
 
@@ -65,8 +64,7 @@ public class ResidenceLocationExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Residence
         // -->
         if (attribute.startsWith("residence")) {
-            org.bukkit.Location loc = new org.bukkit.Location(location.getWorld(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getYaw(), location.getPitch());
-            ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(loc);
+            ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);
             if (res != null) {
                 return new dResidence(res).getAttribute(attribute.fulfill(1));
             }
