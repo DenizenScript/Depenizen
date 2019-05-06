@@ -77,7 +77,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // -->
             if (attribute.startsWith("completed_names")) {
                 dList list = new dList();
-                for (String quest : quester.completedQuests) {
+                for (String quest : quester.getCompletedQuests()) {
                     list.add(quest);
                 }
                 return list.getAttribute(attribute.fulfill(1));
@@ -92,7 +92,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // -->
             if (attribute.startsWith("active_names")) {
                 dList list = new dList();
-                for (Quest quest : quester.currentQuests.keySet()) {
+                for (Quest quest : quester.getCurrentQuests().keySet()) {
                     list.add(quest.getName());
                 }
                 return list.getAttribute(attribute.fulfill(1));
@@ -106,7 +106,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // @Plugin DepenizenBukkit, Quests
             // -->
             else if (attribute.startsWith("completed")) {
-                return new Element(quester.completedQuests.size()).getAttribute(attribute.fulfill(1));
+                return new Element(quester.getCompletedQuests().size()).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -117,7 +117,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // @Plugin DepenizenBukkit, Quests
             // -->
             else if (attribute.startsWith("active")) {
-                return new Element(quester.currentQuests.size()).getAttribute(attribute.fulfill(1));
+                return new Element(quester.getCurrentQuests().size()).getAttribute(attribute.fulfill(1));
             }
             return null;
         }
