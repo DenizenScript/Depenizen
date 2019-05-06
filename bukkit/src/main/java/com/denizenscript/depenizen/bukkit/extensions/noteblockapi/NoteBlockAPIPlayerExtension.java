@@ -52,7 +52,7 @@ public class NoteBlockAPIPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, NoteBlockAPI
         // -->
         if (attribute.startsWith("nbs_is_playing")) {
-            return new Element( NoteBlockAPI.isReceivingSong(player.getPlayerEntity())).getAttribute(attribute.fulfill(1));
+            return new Element(NoteBlockAPI.isReceivingSong(player.getPlayerEntity())).getAttribute(attribute.fulfill(1));
         }
 
         return null;
