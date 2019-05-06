@@ -346,7 +346,7 @@
         <dependency>
             <groupId>io.lumine.xikage</groupId>
             <artifactId>mythicmobs</artifactId>
-            <version>4.0.0</version>
+            <version>4.5.9</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/lib/MythicMobs.jar</systemPath>
         </dependency>

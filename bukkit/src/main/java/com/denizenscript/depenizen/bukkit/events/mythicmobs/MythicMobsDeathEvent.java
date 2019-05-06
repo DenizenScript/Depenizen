@@ -45,9 +45,11 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     // <context.level> Returns the level of the MythicMob.
     // <context.drops> Returns a list of items dropped.
     // <context.xp> Returns the xp dropped.
+    // <context.currency> returns the currency dropped.
     //
     // @Determine
-    // Element(Number) to specify the new amount of XP to be dropped.
+    // "XP:" + Element(Number) to specify the new amount of XP to be dropped.
+    // "CURRENCY:" + Element(Decimal) to specify the new amount of currency to be dropped.
     // dList(dItem) to specify new items to be dropped.
     //
     // @Plugin DepenizenBukkit, MythicMobs
@@ -66,6 +68,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     public Element level;
     public dList oldDrops;
     public Element experience;
+    public Element currency;
     public List<ItemStack> newDrops;
 
     @Override
@@ -107,18 +110,23 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public boolean applyDetermination(ScriptContainer container, String determination) {
-        String lower = CoreUtilities.toLowerCase(determination);
-
-        if (aH.matchesInteger(lower)) {
-            experience = new Element(lower);
-            return true;
-        }
-        else if (aH.Argument.valueOf(determination).matchesArgumentList(dItem.class)) {
-            List<dItem> items = dList.valueOf(determination).filter(dItem.class, container);
-            for (dItem i : items) {
-                newDrops.add(i.getItemStack());
+        if (isDefaultDetermination(determination)) {
+            aH.Argument arg = new aH.Argument(determination);
+            if (arg.matchesPrefix("currency") && arg.matchesPrimitive(aH.PrimitiveType.Double)) {
+                currency = new Element(determination);
+                return true;
             }
-            return true;
+            else if (aH.matchesInteger(determination)) { // "xp" prefix, but not required for back support reasons.
+                experience = new Element(determination);
+                return true;
+            }
+            else if (aH.Argument.valueOf(determination).matchesArgumentList(dItem.class)) {
+                List<dItem> items = dList.valueOf(determination).filter(dItem.class, container);
+                for (dItem i : items) {
+                    newDrops.add(i.getItemStack());
+                }
+                return true;
+            }
         }
         return super.applyDetermination(container, determination);
     }
@@ -142,6 +150,9 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         else if (name.equals("xp")) {
             return experience;
         }
+        else if (name.equals("currency")) {
+            return currency;
+        }
         else if (name.equals("drops")) {
             return oldDrops;
         }
@@ -158,6 +169,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         killer = new dEntity(event.getKiller());
         level = new Element(event.getMobLevel());
         experience = new Element(event.getExp());
+        currency = new Element(event.getCurrency());
         oldDrops = new dList();
         newDrops = new ArrayList<ItemStack>();
         for (ItemStack i : event.getDrops()) {
@@ -169,5 +181,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
             event.setDrops(newDrops);
         }
         event.setExp(experience.asInt());
+        event.setCurrency(currency.asDouble());
     }
 }
