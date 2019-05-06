@@ -27,7 +27,7 @@ public class LuckPermsTrack implements dObject {
         }
 
         ////////
-        // Match plotsquaredplot name
+        // Match luckpermstrack name
 
         string = string.replace("luckpermstrack@", "");
         try {

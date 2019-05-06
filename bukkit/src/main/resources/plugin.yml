@@ -42,6 +42,8 @@ softdepend:
     - EffectLib
     - BossShop
     - Vampire
+    - NoteBlockAPI
+    - MagicSpells
 
 commands:
     depenizen:

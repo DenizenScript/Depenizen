@@ -52,6 +52,20 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.TheComputerGeek2</groupId>
+            <artifactId>MagicSpells</artifactId>
+            <version>3.5-Release</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/MagicSpells.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.github.koca2000</groupId>
+            <artifactId>NoteBlockAPI</artifactId>
+            <version>1.2.2.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/NoteBlockAPI.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>org.black_ixx</groupId>
             <artifactId>BossShop</artifactId>
             <version>2.7.5</version>
@@ -345,7 +359,7 @@
         <dependency>
             <groupId>me.ryanhamshire</groupId>
             <artifactId>GriefPrevention</artifactId>
-            <version>13.9.1</version>
+            <version>16.10</version>
             <scope>system</scope>
             <systemPath>${basedir}/src/main/resources/lib/GriefPrevention.jar</systemPath>
         </dependency>

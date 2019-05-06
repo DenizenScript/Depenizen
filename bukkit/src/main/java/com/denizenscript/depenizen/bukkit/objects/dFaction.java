@@ -1,17 +1,20 @@
 package com.denizenscript.depenizen.bukkit.objects;
 
-import com.massivecraft.factions.entity.Faction;
-import com.massivecraft.factions.entity.FactionColl;
-import com.massivecraft.factions.entity.MFlag;
+import com.massivecraft.factions.entity.*;
 import com.massivecraft.massivecore.money.Money;
+import com.massivecraft.massivecore.ps.PS;
+import net.aufdemrand.denizen.objects.dChunk;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Fetchable;
+import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
+
+import java.util.Set;
 
 public class dFaction implements dObject {
 
@@ -280,6 +283,38 @@ public class dFaction implements dObject {
         // -->
         if (attribute.startsWith("type")) {
             return new Element("Faction").getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <faction@faction.claimed_chunks>
+        // @returns dList(dChunk)
+        // @description
+        // Returns a list of all chunks claimed in the faction.
+        // @Plugin DepenizenBukkit, Factions
+        // -->
+        if (attribute.startsWith("claimed_chunks")) {
+            Set<PS> chunks = BoardColl.get().getChunks(faction);
+            dList dchunks = new dList();
+            for (PS ps : chunks) {
+                dchunks.add(new dChunk(ps.asBukkitChunk()).identify());
+            }
+            return dchunks.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <faction@faction.list_players>
+        // @returns dList(dPlayer)
+        // @description
+        // Returns a list of all players in the faction.
+        // @Plugin DepenizenBukkit, Factions
+        // -->
+        if (attribute.startsWith("list_players")) {
+            Set<PS> chunks = BoardColl.get().getChunks(faction);
+            dList players = new dList();
+            for (MPlayer ps : faction.getMPlayers()) {
+                players.add(dPlayer.valueOf(faction.getLeader().getUuid().toString()).identify());
+            }
+            return players.getAttribute(attribute.fulfill(1));
         }
 
         return new Element(identify()).getAttribute(attribute);

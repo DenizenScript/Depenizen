@@ -1,10 +1,7 @@
 package com.denizenscript.depenizen.bukkit.support.plugins;
 
 import com.denizenscript.depenizen.bukkit.commands.McMMOCommands;
-import com.denizenscript.depenizen.bukkit.events.mcmmo.mcMMOPlayerGainsXPScriptEvent;
-import com.denizenscript.depenizen.bukkit.events.mcmmo.mcMMOPlayerLevelChangeScriptEvent;
-import com.denizenscript.depenizen.bukkit.events.mcmmo.mcMMOPlayerLevelDownScriptEvent;
-import com.denizenscript.depenizen.bukkit.events.mcmmo.mcMMOPlayerLevelUpScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.mcmmo.*;
 import com.denizenscript.depenizen.bukkit.extensions.mcmmo.McMMOPlayerExtension;
 import com.denizenscript.depenizen.bukkit.objects.dParty;
 import com.denizenscript.depenizen.bukkit.support.Support;
@@ -22,6 +19,8 @@ public class McMMOSupport extends Support {
         registerScriptEvents(new mcMMOPlayerLevelUpScriptEvent());
         registerScriptEvents(new mcMMOPlayerLevelDownScriptEvent());
         registerScriptEvents(new mcMMOPlayerGainsXPScriptEvent());
+        registerScriptEvents(new mcMMOPlayerAbilityActivateScriptEvent());
+        registerScriptEvents(new mcMMOPlayerAbilityDeactivateScriptEvent());
     }
 
     public String additionalTags(Attribute attribute) {
