@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.support.plugins;
 import com.denizenscript.depenizen.bukkit.DepenizenPlugin;
 import com.denizenscript.depenizen.bukkit.support.Support;
 import me.clip.placeholderapi.PlaceholderAPI;
-import me.clip.placeholderapi.external.EZPlaceholderHook;
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.tags.BukkitTagContext;
 import net.aufdemrand.denizencore.objects.Element;
@@ -12,12 +12,13 @@ import net.aufdemrand.denizencore.tags.TagContext;
 import net.aufdemrand.denizencore.tags.TagManager;
 import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class PlaceholderAPISupport extends Support {
 
     public PlaceholderAPISupport() {
-        if (!new PlaceholderHook().hook()) {
+        if (!new PlaceholderHook().register()) {
             DepenizenPlugin.depenizenLog("Failed to register placeholder for identifier 'denizen'!" +
                     " Denizen PlaceholderAPI placeholders will not function.");
         }
@@ -49,13 +50,30 @@ public class PlaceholderAPISupport extends Support {
         return null;
     }
 
-    private static class PlaceholderHook extends EZPlaceholderHook {
-        private PlaceholderHook() {
-            super(DepenizenPlugin.getCurrentInstance(), "denizen");
+    private static class PlaceholderHook extends PlaceholderExpansion {
+
+        @Override
+        public boolean canRegister() {
+            return true;
         }
 
         @Override
-        public String onPlaceholderRequest(Player player, String identifier) {
+        public String getAuthor() {
+            return "The DenizenScript Team";
+        }
+
+        @Override
+        public String getIdentifier() {
+            return "denizen";
+        }
+
+        @Override
+        public String getVersion() {
+            return "1.0.0";
+        }
+
+        @Override
+        public String onRequest(OfflinePlayer player, String identifier) {
             return TagManager.tag(identifier, new BukkitTagContext(dPlayer.mirrorBukkitPlayer(player), null, false, null, false, null));
         }
     }
