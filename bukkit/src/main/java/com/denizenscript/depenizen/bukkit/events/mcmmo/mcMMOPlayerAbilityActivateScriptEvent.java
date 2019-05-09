@@ -22,7 +22,7 @@ public class mcMMOPlayerAbilityActivateScriptEvent extends BukkitScriptEvent imp
     // mcmmo player activates ability for <skill> (in <area>)
     // mcmmo player activates <ability> for <skill> (in <area>)
     //
-    // @Regex ^on mcmmo player activates [^\s]+( for [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // @Regex ^on mcmmo player activates [^\s]+ for [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
     //
     // @Cancellable true
     //
