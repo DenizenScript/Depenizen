@@ -20,9 +20,7 @@ public class MobArenaCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, MobArena
     // @Required 1
-    // @Stable stable
     // @Short Make a player join, remove a player from or make a player spectate a MobArena.
-    // @Author Fortifier42
 
     // @Description
     // This command allows you to make a player join an arena, make them leave an arena or make them spectate an arena.

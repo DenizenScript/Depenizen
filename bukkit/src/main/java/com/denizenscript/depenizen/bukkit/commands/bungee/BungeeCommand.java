@@ -25,9 +25,7 @@ public class BungeeCommand extends BracedCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, DepenizenBungee
     // @Required 1
-    // @Stable stable
     // @Short Sends commands to other Bukkit servers via BungeeCord.
-    // @Author Morphan1
 
     // @Description
     // This command allows you to send multiple lines of script to your BungeeCord

@@ -20,9 +20,7 @@ public class MythicSpawnCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, MythicMobs
     // @Required 2
-    // @Stable untested
     // @Short Spawns a MythicMob at a location.
-    // @Author Morphan1
     //
     // @Description
     // This allows you to spawn a MythicMob at a location using the mob's internal name.

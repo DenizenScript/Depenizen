@@ -25,9 +25,7 @@ public class EffectLibCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, EffectLib
     // @Required 1
-    // @Stable stable
     // @Short Show custom effects using EffectLib
-    // @Author Mwthorn
 
     // @Description
     // Use to show custom effects in a easier way using the config file in EffectLib.

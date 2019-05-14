@@ -24,9 +24,7 @@ public class RegionCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, WorldGuard
     // @Required 2
-    // @Stable stable
     // @Short Adds or removes a protected region.
-    // @Author Morphan1
 
     // @Description
     // Adds a protected region to a region manager based on the specified cuboid,

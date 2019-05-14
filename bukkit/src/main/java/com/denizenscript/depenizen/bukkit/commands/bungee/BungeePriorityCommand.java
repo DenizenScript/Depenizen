@@ -21,9 +21,7 @@ public class BungeePriorityCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, DepenizenBungee
     // @Required 1
-    // @Stable unknown
     // @Short Sets the server priority list for the bungee connection handler.
-    // @Author BlackCoyote
 
     // @Description
     // With this command you can change the fallback server priority list in bungee.

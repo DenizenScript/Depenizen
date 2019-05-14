@@ -14,9 +14,7 @@ public class BungeeReconnectCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, DepenizenBungee
     // @Required 0
-    // @Stable stable
     // @Short Attempts to reconnect to the BungeeCord socket server.
-    // @Author Morphan1
 
     // @Description
     // This command allows you to try to manually reconnect to the server.

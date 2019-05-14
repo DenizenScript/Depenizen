@@ -20,9 +20,7 @@ public class BossShopCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, BossShop
     // @Required 1
-    // @Stable untested
     // @Short Opens a BossShop inventory for a player.
-    // @Author Mwthorn
 
     // @Description
     // Use to open up a BossShop inventory for either

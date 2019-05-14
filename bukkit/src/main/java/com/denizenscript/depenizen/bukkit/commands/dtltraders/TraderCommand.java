@@ -19,9 +19,7 @@ public class TraderCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, dtlTraders
     // @Required 1
-    // @Stable stable
     // @Short Opens or closes an NPC's trading menu.
-    // @Author Dandielo
 
     // @Description
     // This command allows you to open or close the trading menu of an NPC

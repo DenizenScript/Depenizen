@@ -18,9 +18,7 @@ public class JobsCommands extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, Jobs
     // @Required 2
-    // @Stable untested
     // @Short Modifies the specified job of a player.
-    // @Author Morphan1
 
     // @Description
     // This allows you to promote or demote a player's job level. This also allows you

@@ -26,9 +26,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, DepenizenBungee
     // @Required 2
-    // @Stable stable
     // @Short Gets tags from other servers on the BungeeCord network. Requires you ~wait for it.
-    // @Author Morphan1
 
     // @Description
     // This command allows you to request and receive data from Denizen tags on other servers

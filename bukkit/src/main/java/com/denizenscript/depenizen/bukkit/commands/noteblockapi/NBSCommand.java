@@ -28,9 +28,7 @@ public class NBSCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, NoteBlockAPI
     // @Required 2
-    // @Stable stable
     // @Short Plays or stops a noteblock song.
-    // @Author Mwthorn
 
     // @Description
     // Plays a .nbs file for the targets, being players specified.

@@ -18,9 +18,7 @@ public class DisguiseCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, LibsDisguises
     // @Required 2
-    // @Stable stable
     // @Short Disguises an entity as a different entity.
-    // @Author Mwthorn
 
     // @Description
     // Disguises an entity using Lib's Disguises.

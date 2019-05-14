@@ -22,9 +22,7 @@ public class BungeeRunCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, DepenizenBungee
     // @Required 2
-    // @Stable stable
     // @Short Runs a script on other servers by name via BungeeCord socket.
-    // @Author Morphan1
 
     // @Description
     // This command allows you to run a named script on the specified servers

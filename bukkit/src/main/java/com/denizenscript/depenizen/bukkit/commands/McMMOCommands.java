@@ -24,9 +24,7 @@ public class McMMOCommands extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, mcMMO
     // @Required 1
-    // @Stable untested
     // @Short Edits mcMMO information.
-    // @Author GnomeffinWay
 
     // @Description
     // This command allows you to add or remove skill levels and experience for players, add or remove

@@ -22,9 +22,7 @@ public class HeroesXPCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, Heroes
     // @Required 3
-    // @Stable stable
     // @Short Manipulate Heroes' experience.
-    // @Author Fortifier42
 
     // @Description
     // This command allows you add, remove or set experience of a player's Hero.

@@ -17,9 +17,7 @@ public class BungeeExecuteCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, DepenizenBungee
     // @Required 1
-    // @Stable stable
     // @Short Executes a command on the BungeeCord proxy server.
-    // @Author Morphan1
 
     // @Description
     // This command allows you to execute a BungeeCord command, as if it

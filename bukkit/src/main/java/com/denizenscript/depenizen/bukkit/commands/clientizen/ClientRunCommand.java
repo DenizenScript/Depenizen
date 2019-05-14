@@ -21,9 +21,7 @@ public class ClientRunCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit
     // @Required 1
-    // @Stable stable
     // @Short Runs a client script on a client, assuming they have the Forge mod 'Clientizen'.
-    // @Author Morphan1
 
     // @Description
     // This command is used to run a script on the Minecraft client by utilizing the Denizen2 Forge mod

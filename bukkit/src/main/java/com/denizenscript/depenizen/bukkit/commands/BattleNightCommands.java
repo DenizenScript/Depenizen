@@ -17,9 +17,7 @@ public class BattleNightCommands extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit, BattleNight
     // @Required 1
-    // @Stable stable
     // @Short Adds/kicks player, starts/ends battle.
-    // @Author GnomeffinWay
 
     // @Description
     // With this command, you can add or kick players to/from the current battle. By default,

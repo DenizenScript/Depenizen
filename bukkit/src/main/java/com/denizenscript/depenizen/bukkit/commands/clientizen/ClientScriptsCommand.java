@@ -21,9 +21,7 @@ public class ClientScriptsCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin DepenizenBukkit
     // @Required 2
-    // @Stable stable
     // @Short Sends or removes client scripts, assuming they have the Forge mod 'Clientizen'.
-    // @Author Morphan1
 
     // @Description
     // This command allows dynamic control of loading and unloading client scripts.
