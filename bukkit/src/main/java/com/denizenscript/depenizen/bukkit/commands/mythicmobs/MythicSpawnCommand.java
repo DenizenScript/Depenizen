@@ -23,17 +23,17 @@ public class MythicSpawnCommand extends AbstractCommand {
     // @Stable untested
     // @Short Spawns a MythicMob at a location.
     // @Author Morphan1
-
+    //
     // @Description
     // This allows you to spawn a MythicMob at a location using the mob's internal name.
-
+    //
     // @Tags
     // <entry[saveName].spawned_mythicmob> returns the spawned MythicMobsMob.
-
+    //
     // @Usage
     // Use to spawn a BarbarianMinion at a player's location.
     // - mythicspawn BarbarianMinion <player.location>
-
+    //
     // -->
 
     @Override

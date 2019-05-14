@@ -66,7 +66,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     public dEntity entity;
     public dEntity killer;
     public Element level;
-    public dList oldDrops;
     public Element experience;
     public Element currency;
     public List<ItemStack> newDrops;
@@ -121,6 +120,9 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
                 return true;
             }
             else if (aH.Argument.valueOf(determination).matchesArgumentList(dItem.class)) {
+                if (newDrops == null) {
+                    newDrops = new ArrayList<>();
+                }
                 List<dItem> items = dList.valueOf(determination).filter(dItem.class, container);
                 for (dItem i : items) {
                     newDrops.add(i.getItemStack());
@@ -154,6 +156,10 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
             return currency;
         }
         else if (name.equals("drops")) {
+            dList oldDrops = new dList();
+            for (ItemStack i : event.getDrops()) {
+                oldDrops.add(new dItem(i).identify());
+            }
             return oldDrops;
         }
         else if (name.equals("level")) {
@@ -170,14 +176,10 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         level = new Element(event.getMobLevel());
         experience = new Element(event.getExp());
         currency = new Element(event.getCurrency());
-        oldDrops = new dList();
-        newDrops = new ArrayList<ItemStack>();
-        for (ItemStack i : event.getDrops()) {
-            oldDrops.add(new dItem(i).identify());
-        }
+        newDrops = null;
         this.event = event;
         fire(event);
-        if (!newDrops.isEmpty()) {
+        if (newDrops != null && !newDrops.isEmpty()) {
             event.setDrops(newDrops);
         }
         event.setExp(experience.asInt());

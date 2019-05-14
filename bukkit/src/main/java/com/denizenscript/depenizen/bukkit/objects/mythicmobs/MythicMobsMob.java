@@ -3,10 +3,9 @@ package com.denizenscript.depenizen.bukkit.objects.mythicmobs;
 import com.denizenscript.depenizen.bukkit.support.plugins.MythicMobsSupport;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizencore.objects.*;
-import net.aufdemrand.denizencore.objects.properties.Property;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitEntity;
@@ -118,6 +117,7 @@ public class MythicMobsMob implements dObject, Adjustable {
 
     @Override
     public String getAttribute(Attribute attribute) {
+
         if (attribute == null) {
             return null;
         }
@@ -274,11 +274,17 @@ public class MythicMobsMob implements dObject, Adjustable {
             return new Element("Mythic Mob").getAttribute(attribute.fulfill(1));
         }
 
+        String returned = CoreUtilities.autoPropertyTag(this, attribute);
+        if (returned != null) {
+            return returned;
+        }
+
         return new Element(identify()).getAttribute(attribute);
     }
 
     @Override
     public void adjust(Mechanism mechanism) {
+
         // <--[mechanism]
         // @object MythicMob
         // @name global_cooldown
@@ -323,13 +329,7 @@ public class MythicMobsMob implements dObject, Adjustable {
             mob.setTarget(target);
         }
 
-        // Iterate through this object's properties' mechanisms
-        for (Property property : PropertyParser.getProperties(this)) {
-            property.adjust(mechanism);
-            if (mechanism.fulfilled()) {
-                break;
-            }
-        }
+        CoreUtilities.autoPropertyMechanism(this, mechanism);
 
         if (!mechanism.fulfilled()) {
             mechanism.reportInvalid();
@@ -341,5 +341,4 @@ public class MythicMobsMob implements dObject, Adjustable {
     public void applyProperty(Mechanism mechanism) {
         dB.echoError("Cannot apply properties to a MythicMob!");
     }
-
 }
