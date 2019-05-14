@@ -48,9 +48,8 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
     Player player = null;
     WorldGuardPlugin wgp = null;
 
-    // The original flag-reference without fuzziness
     private StateFlag getStateFlag(String s) {
-        Flag flag = Flags.get(s);
+        Flag flag = Flags.fuzzyMatchFlag(WorldGuard.getInstance().getFlagRegistry(), s);
         return flag instanceof StateFlag ? (StateFlag) flag : null;
     }
 
