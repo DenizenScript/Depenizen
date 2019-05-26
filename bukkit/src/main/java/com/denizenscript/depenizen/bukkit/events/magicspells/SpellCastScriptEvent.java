@@ -51,6 +51,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     // "REAGENT:<TYPE>:" + Element(Number) to change the reagent cost of the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
     // "REAGANT:VARIABLE:<NAME>:" + Element(Decimal) to change the reagant cost for the given variable name.
     // "REAGENT:ITEMS:" + dList(dItem) to change the reagent item cost.
+    // "CLEAR_REAGENTS" to clear away all reagent costs.
     //
     // @Plugin DepenizenBukkit, MagicSpells
     //
@@ -97,6 +98,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     return false;
                 }
                 power = num.asFloat();
+                return true;
             }
             else if (lower.startsWith("cast_time:")) {
                 Element max = new Element(determination.substring("cast_time:".length()));
@@ -105,6 +107,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     return false;
                 }
                 castTime = max.asInt();
+                return true;
             }
             else if (lower.startsWith("cooldown:")) {
                 Element num = new Element(determination.substring("cooldown:".length()));
@@ -113,6 +116,11 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     return false;
                 }
                 cooldown = num.asFloat();
+                return true;
+            }
+            else if (lower.equals("clear_reagents")) {
+                event.setReagents(new SpellReagents());
+                return true;
             }
             else if (lower.startsWith("reagent:")) {
                 String type = determination.substring("reagent:".length());
@@ -158,6 +166,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     reagents.setItems(itemsToSet);
                 }
                 event.setReagents(reagents);
+                return true;
             }
         }
         return super.applyDetermination(container, determination);
