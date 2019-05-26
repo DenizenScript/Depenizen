@@ -28,8 +28,9 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     // <--[event]
     // @Events
     // magicspells player casts spell
+    // magicspells player casts <spell>
     //
-    // @Regex ^on magicspells [^\s]+ spell$
+    // @Regex ^on magicspells casts [^\s]+$
     //
     // @Triggers when a player starts to casts a spell.
     //
@@ -65,21 +66,21 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
 
     public SpellCastEvent event;
     public dPlayer player;
-    private float power;
-    private float cooldown;
-    private int castTime;
     private Element spell;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("magicspells player casts spell");
+        return lower.startsWith("magicspells player casts");
     }
 
     @Override
     public boolean matches(ScriptPath path) {
-        String lower = path.eventArgLowerAt(3);
-        return lower.startsWith("magicspells player casts spell");
+        String spellName = path.eventArgLowerAt(3);
+        if (spellName.equals("spell") || spellName.equalsIgnoreCase(spell.asString())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -97,7 +98,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     dB.echoError("Determination for 'power' must be a valid decimal number.");
                     return false;
                 }
-                power = num.asFloat();
+                event.setPower(num.asFloat());
                 return true;
             }
             else if (lower.startsWith("cast_time:")) {
@@ -106,7 +107,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     dB.echoError("Determination for 'cast_time' must be a valid number.");
                     return false;
                 }
-                castTime = max.asInt();
+                event.setCastTime(max.asInt());
                 return true;
             }
             else if (lower.startsWith("cooldown:")) {
@@ -115,7 +116,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     dB.echoError("Determination for 'cooldown' must be a valid decimal number.");
                     return false;
                 }
-                cooldown = num.asFloat();
+                event.setCooldown(num.asFloat());
                 return true;
             }
             else if (lower.equals("clear_reagents")) {
@@ -180,13 +181,13 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     @Override
     public dObject getContext(String name) {
         if (name.equals("power")) {
-            return new Element(power);
+            return new Element(event.getPower());
         }
         else if (name.equals("cast_time")) {
-            return new Element(castTime);
+            return new Element(event.getCastTime());
         }
         else if (name.equals("cooldown")) {
-            return new Element(cooldown);
+            return new Element(event.getCooldown());
         }
         else if (name.equals("spell_name")) {
             return spell;
@@ -241,14 +242,8 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     @EventHandler
     public void onPlayerCastsSpell(SpellCastEvent event) {
         player = dPlayer.mirrorBukkitPlayer(event.getCaster());
-        power = event.getPower();
-        castTime = event.getCastTime();
-        cooldown = event.getCooldown();
         spell = new Element(event.getSpell().getName());
         this.event = event;
         fire(event);
-        event.setPower(power);
-        event.setCastTime(castTime);
-        event.setCooldown(cooldown);
     }
 }
