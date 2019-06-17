@@ -1,8 +1,9 @@
 name: Depenizen
 authors: ['The DenizenScript Team']
 version: ${project.version} (build ${BUILD_NUMBER})
-main: com.denizenscript.depenizen.bukkit.DepenizenPlugin
+main: com.denizenscript.depenizen.bukkit.Depenizen
 depend: [Denizen]
+
 softdepend:
     - mcMMO
     - BattleNight
