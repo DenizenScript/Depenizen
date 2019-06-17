@@ -1,11 +1,20 @@
 Depenizen
 ---------
 
-**Depenizen: Adds support for external plugins to Denizen!**
+**Depenizen: Adds bridges between external plugins and Denizen!**
 
 - **Support Discord**: https://discord.gg/Q6pZGSR
 - **Builds (Download)**: https://ci.citizensnpcs.co/job/Depenizen/
 - **Supported Plugin List**: [Docs/BukkitPlugins.md](Docs/BukkitPlugins.md)
+
+### Version 2.x notice:
+
+Depenizen version 2.x is a rewrite of many of the core functions of Depenizen.
+
+If you need the 1.x (legacy) version, you can find the last official build of that here: https://ci.citizensnpcs.co/job/Depenizen/476/
+
+**Status:** Depenizen 2.x rewrite has rewritten all the basic core functionality, but the Bungee bridge rebuild is pending.
+The plan for this bungee bridge is to be significantly different from a usage perspective, so you **will** have to change configuration details when this is available.
 
 ### Licensing pre-note:
 
