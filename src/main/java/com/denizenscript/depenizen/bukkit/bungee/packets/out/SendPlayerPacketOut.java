@@ -1,12 +1,12 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.out;
 
-import com.denizenscript.depenizen.bukkit.bungee.Packet;
+import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
 import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
 
 import java.util.UUID;
 
-public class SendPlayerPacket extends Packet {
+public class SendPlayerPacketOut extends PacketOut {
 
     public UUID playerToSend;
 

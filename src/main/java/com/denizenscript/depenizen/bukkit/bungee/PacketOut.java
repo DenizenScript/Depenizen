@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.bungee;
 
 import io.netty.buffer.ByteBuf;
 
-public abstract class Packet {
+public abstract class PacketOut {
 
     public abstract int getPacketId();
 
