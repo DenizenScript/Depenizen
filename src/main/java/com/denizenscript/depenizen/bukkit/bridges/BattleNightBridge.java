@@ -5,13 +5,14 @@ import com.denizenscript.depenizen.bukkit.Bridge;
 import me.limebyte.battlenight.api.BattleNightAPI;
 import me.limebyte.battlenight.core.BattleNight;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.TagRunnable;
 import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.ReplaceableTagEvent;
 import net.aufdemrand.denizencore.objects.Duration;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.tags.Attribute;
-import com.denizenscript.depenizen.bukkit.commands.BattleNightCommands;
+import com.denizenscript.depenizen.bukkit.commands.battlenight.BattleNightCommand;
 import net.aufdemrand.denizencore.tags.TagManager;
 
 public class BattleNightBridge extends Bridge {
@@ -25,7 +26,7 @@ public class BattleNightBridge extends Bridge {
                 tagEvent(event);
             }
         }, "battle");
-        new BattleNightCommands().activate().as("BN").withOptions("See Documentation.", 1);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BattleNightCommand.class, "BN", "bn [add/kick/start/end]", 1);
     }
 
     public void tagEvent(ReplaceableTagEvent event) {

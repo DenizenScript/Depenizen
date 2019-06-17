@@ -8,6 +8,7 @@ import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
+import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.ObjectFetcher;
 import net.aufdemrand.denizencore.objects.TagRunnable;
@@ -31,7 +32,8 @@ public class WorldGuardBridge extends Bridge {
         PropertyParser.registerProperty(WorldGuardPlayerProperties.class, dPlayer.class);
         PropertyParser.registerProperty(WorldGuardCuboidProperties.class, dCuboid.class);
         PropertyParser.registerProperty(WorldGuardWorldProperties.class, dWorld.class);
-        new RegionCommand().activate().as("REGION").withOptions("See Documentation.", 2);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(RegionCommand.class,
+                "REGION", "region [{add} <cuboid>/remove <world>] [id:<name>]", 2);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

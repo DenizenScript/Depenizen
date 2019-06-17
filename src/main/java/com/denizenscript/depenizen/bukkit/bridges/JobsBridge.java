@@ -2,11 +2,12 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.properties.jobs.JobPlayer;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.depenizen.bukkit.commands.JobsCommands;
+import com.denizenscript.depenizen.bukkit.commands.jobs.JobsCommand;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.ObjectFetcher;
 import net.aufdemrand.denizencore.objects.TagRunnable;
 import net.aufdemrand.denizencore.objects.dList;
@@ -30,7 +31,8 @@ public class JobsBridge extends Bridge {
                 tagEvent(event);
             }
         }, "jobs");
-        new JobsCommands().activate().as("jobs").withOptions("See Documentation.", 2);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(JobsCommand.class,
+                "JOBS", "jobs [promote/demote/join/quit] [<job>] (<#>)", 2);
     }
 
     public void tagEvent(ReplaceableTagEvent event) {

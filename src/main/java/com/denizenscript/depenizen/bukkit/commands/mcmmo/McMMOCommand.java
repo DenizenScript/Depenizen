@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.commands;
+package com.denizenscript.depenizen.bukkit.commands.mcmmo;
 
 import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.api.PartyAPI;
@@ -16,7 +16,7 @@ import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 
-public class McMMOCommands extends AbstractCommand {
+public class McMMOCommand extends AbstractCommand {
 
     // <--[command]
     // @Name mcMMO
@@ -54,7 +54,7 @@ public class McMMOCommands extends AbstractCommand {
 
     private enum Type {XP, LEVELS, TOGGLE, XPRATE, LEADER, VAMPIRISM, HARDCORE}
 
-    public McMMOCommands() {
+    public McMMOCommand() {
 
     }
 

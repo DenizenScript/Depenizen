@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.commands;
+package com.denizenscript.depenizen.bukkit.commands.towny;
 
 import com.denizenscript.depenizen.bukkit.objects.dNation;
 import com.denizenscript.depenizen.bukkit.objects.dTown;
@@ -10,7 +10,7 @@ import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 
-public class TownyCommands extends AbstractCommand {
+public class TownyCommand extends AbstractCommand {
 
     // TODO: make this work
 
@@ -25,7 +25,7 @@ public class TownyCommands extends AbstractCommand {
         CAPITAL, OPEN, PUBLIC, MAYOR, SURNAME, TITLE, RANK, BOARD, WAR, MAXSIZE, TAXES, TAG, SPAWN, PERM, RELATION
     }
 
-    public TownyCommands() {
+    public TownyCommand() {
 
     }
 

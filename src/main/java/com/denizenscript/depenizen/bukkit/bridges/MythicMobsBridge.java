@@ -10,6 +10,7 @@ import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
 import io.lumine.xikage.mythicmobs.MythicMobs;
+import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.ObjectFetcher;
 import net.aufdemrand.denizencore.objects.properties.PropertyParser;
@@ -25,7 +26,8 @@ public class MythicMobsBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(MythicMobsMob.class);
         PropertyParser.registerProperty(MythicMobsEntityProperties.class, dEntity.class);
         ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
-        new MythicSpawnCommand().activate().as("mythicspawn").withOptions("See Documentation", 2);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(MythicSpawnCommand.class,
+                "MYTHICSPAWN", "mythicspawn [<name>] [<location>] (level:<#>)", 2);
     }
 
     public static boolean isMythicMob(Entity entity) {

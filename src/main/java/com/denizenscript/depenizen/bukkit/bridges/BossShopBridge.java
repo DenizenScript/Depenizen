@@ -4,6 +4,7 @@ import com.denizenscript.depenizen.bukkit.commands.bossshop.BossShopCommand;
 import com.denizenscript.depenizen.bukkit.properties.bossshop.BossShopInventoryProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizen.objects.dInventory;
+import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 
 public class BossShopBridge extends Bridge {
@@ -13,7 +14,7 @@ public class BossShopBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        new BossShopCommand().activate().as("bossshop").withOptions("See Documentation.", 1);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BossShopCommand.class, "BOSSSHOP", "bosshop [<shop name>] (target:<player>)", 1);
         PropertyParser.registerProperty(BossShopInventoryProperties.class, dInventory.class);
     }
 }

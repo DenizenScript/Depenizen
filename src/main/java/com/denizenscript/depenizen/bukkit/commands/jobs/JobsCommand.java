@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.commands;
+package com.denizenscript.depenizen.bukkit.commands.jobs;
 
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.JobsPlayer;
@@ -10,7 +10,7 @@ import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
 
-public class JobsCommands extends AbstractCommand {
+public class JobsCommand extends AbstractCommand {
 
     // <--[command]
     // @Name Jobs
@@ -43,7 +43,7 @@ public class JobsCommands extends AbstractCommand {
 
     private enum Action {PROMOTE, DEMOTE, JOIN, QUIT}
 
-    public JobsCommands() {
+    public JobsCommand() {
 
     }
 

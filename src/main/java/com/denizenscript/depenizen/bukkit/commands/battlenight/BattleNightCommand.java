@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.commands;
+package com.denizenscript.depenizen.bukkit.commands.battlenight;
 
 import me.limebyte.battlenight.core.BattleNight;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
@@ -9,7 +9,7 @@ import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 
-public class BattleNightCommands extends AbstractCommand {
+public class BattleNightCommand extends AbstractCommand {
 
     // <--[command]
     // @Name BN

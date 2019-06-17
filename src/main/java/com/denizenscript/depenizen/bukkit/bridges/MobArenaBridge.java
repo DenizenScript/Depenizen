@@ -9,6 +9,7 @@ import com.denizenscript.depenizen.bukkit.events.mobarena.MobArenaEndsScriptEven
 import com.denizenscript.depenizen.bukkit.properties.mobarena.MobArenaPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.ObjectFetcher;
@@ -34,7 +35,8 @@ public class MobArenaBridge extends Bridge {
                 tagEvent(event);
             }
         }, "mobarena");
-        new MobArenaCommand().activate().as("mobarena").withOptions("See Documentation.", 1);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(MobArenaCommand.class,
+                "MOBARENA", "mobarena [<mobarena>] (add:<player>|...) (remove:<player>|...) (spectate:<player>|...)", 1);
         ScriptEvent.registerScriptEvent(new MobArenaStartsScriptEvent());
         ScriptEvent.registerScriptEvent(new MobArenaEndsScriptEvent());
         ScriptEvent.registerScriptEvent(new MobArenaWaveChangesScriptEvent());

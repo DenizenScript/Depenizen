@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.commands.effectlib.EffectLibCommand;
 import com.denizenscript.depenizen.bukkit.Bridge;
+import net.aufdemrand.denizen.utilities.DenizenAPI;
 
 public class EffectLibBridge extends Bridge {
 
@@ -10,6 +11,7 @@ public class EffectLibBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        new EffectLibCommand().activate().as("effectlib").withOptions("See Documentation.", 1);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(EffectLibCommand.class,
+                "EFFECTLIB", "effectlib (type:<effect name>) (duration:<duration>) (target:<entity>)", 1);
     }
 }
