@@ -1,5 +1,5 @@
 name: Depenizen
-authors: ['Morphan1', 'DenizenScript team']
+authors: ['The DenizenScript Team']
 version: ${project.version} (build ${BUILD_NUMBER})
 main: com.denizenscript.depenizen.bukkit.DepenizenPlugin
 depend: [Denizen]
@@ -44,11 +44,3 @@ softdepend:
     - Vampire
     - NoteBlockAPI
     - MagicSpells
-
-commands:
-    depenizen:
-        description: Prints out the current Depenizen version.
-        usage: /depenizen
-        permission: depenizen.command
-
-permissions: {}
