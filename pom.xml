@@ -16,7 +16,6 @@
 
     <modules>
         <module>bukkit</module>
-        <module>bungee</module>
     </modules>
 
     <repositories>
