@@ -3,21 +3,21 @@ package com.denizenscript.depenizen.bukkit.bungee.packets.out;
 import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
 import io.netty.buffer.ByteBuf;
 
-public class MyInfoPacketOut extends PacketOut {
+public class ControlsProxyPingPacketOut extends PacketOut {
 
-    public MyInfoPacketOut(int port) {
-        this.port = port;
+    public ControlsProxyPingPacketOut(boolean control) {
+        this.control = control;
     }
 
-    public int port;
+    public boolean control;
 
     @Override
     public int getPacketId() {
-        return 11;
+        return 12;
     }
 
     @Override
     public void writeTo(ByteBuf buf) {
-        buf.writeInt(port);
+        buf.writeByte(control ? 1 : 0);
     }
 }

@@ -1,10 +1,8 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
-import com.denizenscript.depenizen.bukkit.bungee.packets.in.AddServerPacketIn;
-import com.denizenscript.depenizen.bukkit.bungee.packets.in.RemoveServerPacketIn;
-import com.denizenscript.depenizen.bukkit.bungee.packets.in.YourInfoPacketIn;
-import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerConnectScriptEvent;
-import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerDisconnectScriptEvent;
+import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
+import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyPingPacketOut;
+import com.denizenscript.depenizen.bukkit.events.bungee.*;
 import com.denizenscript.depenizen.bukkit.properties.bungee.BungeePlayerProperties;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -48,10 +46,22 @@ public class BungeeBridge {
 
     public boolean connected = false;
 
+    public boolean controlsProxyPing = false;
+
+    public void checkBroadcastProxyPing() {
+        if (connected) {
+            sendPacket(new ControlsProxyPingPacketOut(controlsProxyPing));
+        }
+    }
+
     public void registerPackets() {
         packets.put(50, new YourInfoPacketIn());
         packets.put(51, new AddServerPacketIn());
         packets.put(52, new RemoveServerPacketIn());
+        packets.put(53, new PlayerJoinPacketIn());
+        packets.put(54, new PlayerQuitPacketIn());
+        packets.put(55, new PlayerSwitchServerPacketIn());
+        packets.put(56, new ProxyPingPacketIn());
     }
 
     public void sendPacket(PacketOut packet) {
@@ -93,6 +103,10 @@ public class BungeeBridge {
 
     public void successInit() {
         instance = this;
+        ScriptEvent.registerScriptEvent(new BungeePlayerJoinsScriptEvent());
+        ScriptEvent.registerScriptEvent(new BungeePlayerQuitsScriptEvent());
+        ScriptEvent.registerScriptEvent(new BungeePlayerServerSwitchScriptEvent());
+        ScriptEvent.registerScriptEvent(new BungeeProxyServerListPingScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeeServerConnectScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeeServerDisconnectScriptEvent());
         PropertyParser.registerProperty(BungeePlayerProperties.class, dPlayer.class);
