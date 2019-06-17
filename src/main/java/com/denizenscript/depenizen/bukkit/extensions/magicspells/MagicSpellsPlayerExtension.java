@@ -64,5 +64,4 @@ public class MagicSpellsPlayerExtension extends dObjectExtension {
         return null;
 
     }
-
 }

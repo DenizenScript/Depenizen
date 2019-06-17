@@ -56,5 +56,4 @@ public class ASkyBlockWorldExtension extends dObjectExtension {
 
         return null;
     }
-
 }

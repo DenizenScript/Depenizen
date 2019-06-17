@@ -94,5 +94,4 @@ public class TownyLocationExtension extends dObjectExtension {
         return null;
 
     }
-
 }

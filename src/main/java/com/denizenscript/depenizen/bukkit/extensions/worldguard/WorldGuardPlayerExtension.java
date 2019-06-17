@@ -120,5 +120,4 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
         return null;
 
     }
-
 }

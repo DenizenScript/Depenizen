@@ -91,5 +91,4 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
         this.event = event;
         fire(event);
     }
-
 }

@@ -265,6 +265,5 @@ public class dPlotSquaredPlot implements dObject {
         return new Element(identify()).getAttribute(attribute);
 
     }
-
 }
 

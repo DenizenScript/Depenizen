@@ -68,5 +68,4 @@ public class MythicMobsEntityExtension extends dObjectExtension {
 
         return null;
     }
-
 }

@@ -77,5 +77,4 @@ public class HeroesPlayerNPCExtension extends dObjectExtension {
         return null;
 
     }
-
 }

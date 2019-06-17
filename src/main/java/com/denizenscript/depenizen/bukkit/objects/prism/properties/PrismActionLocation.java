@@ -75,5 +75,4 @@ public class PrismActionLocation implements Property {
         }
 
     }
-
 }

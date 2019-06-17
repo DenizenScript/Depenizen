@@ -72,5 +72,4 @@ public class PrismActionPlayer implements Property {
         }
 
     }
-
 }

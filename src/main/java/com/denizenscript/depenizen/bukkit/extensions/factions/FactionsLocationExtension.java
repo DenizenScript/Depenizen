@@ -54,5 +54,4 @@ public class FactionsLocationExtension extends dObjectExtension {
         return null;
 
     }
-
 }

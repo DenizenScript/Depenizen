@@ -68,5 +68,4 @@ public class ShopKeepersEntityExtension extends dObjectExtension {
 
         return null;
     }
-
 }

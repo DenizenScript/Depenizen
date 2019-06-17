@@ -153,5 +153,4 @@ public class LibsDisguise implements dObject {
         return new Element(identify()).getAttribute(attribute);
 
     }
-
 }

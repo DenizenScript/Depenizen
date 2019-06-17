@@ -144,5 +144,4 @@ public class FactionsPlayerNPCExtension extends dObjectExtension {
         return null;
 
     }
-
 }

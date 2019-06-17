@@ -73,5 +73,4 @@ public class ASkyBlockLocationExtension extends dObjectExtension {
         }
         return null;
     }
-
 }

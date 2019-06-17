@@ -138,5 +138,4 @@ public class PrismLocationExtension extends dObjectExtension {
         return null;
 
     }
-
 }

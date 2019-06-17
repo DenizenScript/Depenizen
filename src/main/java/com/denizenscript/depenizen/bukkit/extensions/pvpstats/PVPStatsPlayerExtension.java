@@ -102,5 +102,4 @@ public class PVPStatsPlayerExtension extends dObjectExtension {
         return null;
 
     }
-
 }

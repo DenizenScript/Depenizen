@@ -179,5 +179,4 @@ public class McMMOPlayerExtension extends dObjectExtension {
         return null;
 
     }
-
 }

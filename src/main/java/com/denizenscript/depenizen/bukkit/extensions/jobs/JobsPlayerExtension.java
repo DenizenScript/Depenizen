@@ -65,5 +65,4 @@ public class JobsPlayerExtension extends dObjectExtension {
         return null;
 
     }
-
 }

@@ -84,5 +84,4 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
         this.event = event;
         fire(event);
     }
-
 }

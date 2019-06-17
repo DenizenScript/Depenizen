@@ -114,5 +114,4 @@ public class WorldGuardLocationExtension extends dObjectExtension {
         return null;
 
     }
-
 }

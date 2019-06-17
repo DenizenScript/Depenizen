@@ -171,5 +171,4 @@ public class TownyPlayerExtension extends dObjectExtension {
         return null;
 
     }
-
 }

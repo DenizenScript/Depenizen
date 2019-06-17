@@ -107,5 +107,4 @@ public class PrismActionBlock implements Property {
         }
 
     }
-
 }
