@@ -55,7 +55,7 @@ public class SimpleClansBridge extends Bridge {
         }
     }
 
-        public void tagEvent(ReplaceableTagEvent event) {
+    public void tagEvent(ReplaceableTagEvent event) {
         Attribute attribute = event.getAttributes().fulfill(1);
 
         // <--[tag]

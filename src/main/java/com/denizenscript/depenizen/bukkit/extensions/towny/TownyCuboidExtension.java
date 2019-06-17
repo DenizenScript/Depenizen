@@ -70,7 +70,7 @@ public class TownyCuboidExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("list_towns")) {
             dList list = new dList();
-            List<String> towns = new ArrayList<String>();
+            List<String> towns = new ArrayList<>();
             try {
                 for (Location location : cuboid.getBlockLocations()) {
                     String townName = TownyUniverse.getTownName(location);

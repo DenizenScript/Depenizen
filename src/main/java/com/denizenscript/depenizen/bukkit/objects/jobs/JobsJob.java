@@ -38,7 +38,7 @@ public class JobsJob implements dObject {
 
         Matcher m = ObjectFetcher.DESCRIBED_PATTERN.matcher(string);
         if (m.matches()) {
-            return ObjectFetcher.getObjectFrom(JobsJob.class, string);
+            return ObjectFetcher.getObjectFrom(JobsJob.class, string, context);
         }
         return new JobsJob(Jobs.getJob(string.replace("job@", "")));
     }

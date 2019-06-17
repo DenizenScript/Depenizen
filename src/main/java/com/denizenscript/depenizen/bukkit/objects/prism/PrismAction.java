@@ -31,7 +31,7 @@ public class PrismAction implements dObject, Adjustable {
 
         Matcher m = ObjectFetcher.DESCRIBED_PATTERN.matcher(string);
         if (m.matches()) {
-            return ObjectFetcher.getObjectFrom(PrismAction.class, string);
+            return ObjectFetcher.getObjectFrom(PrismAction.class, string, context);
         }
 
         string = string.replace("prism@", "");

@@ -34,7 +34,7 @@ public class FactionsBridge extends Bridge {
             public void run(ReplaceableTagEvent event) {
                 factionTagEvent(event);
             }
-        },  "faction");
+        }, "faction");
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

@@ -39,7 +39,7 @@ public class SentinelBridge extends Bridge {
 
         @Override
         public String[] getTargetPrefixes() {
-            return new String[] { "denizen_proc", "held_denizen_item" };
+            return new String[] {"denizen_proc", "held_denizen_item"};
         }
 
         @Override

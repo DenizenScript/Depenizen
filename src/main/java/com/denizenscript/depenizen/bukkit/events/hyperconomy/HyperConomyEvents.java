@@ -55,8 +55,8 @@ public class HyperConomyEvents implements HyperEventListener {
     public void onTransaction(PlayerTransaction playerTransaction, TransactionResponse transactionResponse) {
         HyperPlayer hyperPlayer = getHyperPlayer(transactionResponse);
 
-        List<String> events = new ArrayList<String>();
-        Map<String, dObject> context = new HashMap<String, dObject>();
+        List<String> events = new ArrayList<>();
+        Map<String, dObject> context = new HashMap<>();
 
         HItemStack his = playerTransaction.getHyperObject().getItem();
         dItem item = new dItem(new ItemStack(Material.valueOf(his.getMaterial().toUpperCase()),

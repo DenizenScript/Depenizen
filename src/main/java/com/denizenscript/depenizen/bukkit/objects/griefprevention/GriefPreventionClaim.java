@@ -141,8 +141,8 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // -->
         if (attribute.startsWith("trusted")) {
             dList trusted = new dList();
-            ArrayList<String> b = new ArrayList<String>();
-            claim.getPermissions(b,new ArrayList<String>(),new ArrayList<String>(),new ArrayList<String>());
+            ArrayList<String> b = new ArrayList<>();
+            claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             for (String trust : b) {
                 trusted.add(new dPlayer(UUID.fromString(trust)).identify());
             }
@@ -158,8 +158,8 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // -->
         if (attribute.startsWith("builders")) {
             dList trusted = new dList();
-            ArrayList<String> b = new ArrayList<String>();
-            claim.getPermissions(b,new ArrayList<String>(),new ArrayList<String>(),new ArrayList<String>());
+            ArrayList<String> b = new ArrayList<>();
+            claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             for (String trust : b) {
                 trusted.add(new dPlayer(UUID.fromString(trust)).identify());
             }
@@ -175,8 +175,8 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // -->
         if (attribute.startsWith("containers")) {
             dList trusted = new dList();
-            ArrayList<String> c = new ArrayList<String>();
-            claim.getPermissions(new ArrayList<String>(),c,new ArrayList<String>(),new ArrayList<String>());
+            ArrayList<String> c = new ArrayList<>();
+            claim.getPermissions(new ArrayList<>(), c, new ArrayList<>(), new ArrayList<>());
             for (String container : c) {
                 trusted.add(new dPlayer(UUID.fromString(container)).identify());
             }
@@ -192,8 +192,8 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // -->
         if (attribute.startsWith("accessors")) {
             dList trusted = new dList();
-            ArrayList<String> a = new ArrayList<String>();
-            claim.getPermissions(new ArrayList<String>(),new ArrayList<String>(),a,new ArrayList<String>());
+            ArrayList<String> a = new ArrayList<>();
+            claim.getPermissions(new ArrayList<>(), new ArrayList<>(), a, new ArrayList<>());
             for (String access : a) {
                 trusted.add(new dPlayer(UUID.fromString(access)).identify());
             }

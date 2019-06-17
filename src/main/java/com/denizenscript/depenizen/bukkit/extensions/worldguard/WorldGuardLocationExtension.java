@@ -63,7 +63,7 @@ public class WorldGuardLocationExtension extends dObjectExtension {
     }
 
     private dList getRegions(World world) {
-        List<String> regionList = new ArrayList<String>();
+        List<String> regionList = new ArrayList<>();
         for (ProtectedRegion protectedRegion : getApplicableRegions()) {
             regionList.add(new WorldGuardRegion(protectedRegion, world).identify());
         }

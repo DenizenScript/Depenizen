@@ -124,7 +124,7 @@ public class WorldEditPlayerExtension extends dObjectExtension {
             if (selection != null) {
                 return new dCuboid(BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
                         BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMaximumPoint()))
-                            .getAttribute(attribute.fulfill(1));
+                        .getAttribute(attribute.fulfill(1));
             }
         }
 

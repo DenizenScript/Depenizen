@@ -100,7 +100,7 @@ public class NBSCommand extends AbstractCommand {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void execute(ScriptEntry scriptEntry) throws CommandExecutionException {
+    public void execute(ScriptEntry scriptEntry) {
 
         Element file = scriptEntry.getdObject("file");
         Element action = scriptEntry.getdObject("action");

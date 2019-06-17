@@ -114,7 +114,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
             }
             WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
             return new Element(query.testState(BukkitAdapter.adapt(loc), worldGuard.wrapPlayer(player), flag))
-                      .getAttribute(attribute.fulfill(args));
+                    .getAttribute(attribute.fulfill(args));
         }
 
         return null;

@@ -366,7 +366,7 @@ public class HeroesHero implements dObject, Adjustable {
         // @Plugin Depenizen, Heroes
         // -->
         else if (attribute.startsWith("skills")) {
-            Set<String> skills = new HashSet<String>();
+            Set<String> skills = new HashSet<>();
             skills.addAll(hero.getSkills().keySet());
             skills.addAll(hero.getHeroClass().getSkillNames());
             skills.addAll(hero.getSecondClass().getSkillNames());
