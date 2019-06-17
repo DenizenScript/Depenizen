@@ -4,6 +4,8 @@ version: ${project.version} (build ${BUILD_NUMBER})
 main: com.denizenscript.depenizen.bukkit.Depenizen
 depend: [Denizen]
 
+api-version: 1.13
+
 softdepend:
     - mcMMO
     - BattleNight
