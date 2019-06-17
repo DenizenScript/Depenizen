@@ -4,8 +4,8 @@ import com.denizenscript.depenizen.bukkit.events.essentials.PlayerAFKStatusScrip
 import com.denizenscript.depenizen.bukkit.events.essentials.PlayerGodModeStatusScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.essentials.PlayerJailStatusScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.essentials.PlayerMuteStatusScriptEvent;
-import com.denizenscript.depenizen.bukkit.extensions.essentials.EssentialsItemExtension;
-import com.denizenscript.depenizen.bukkit.extensions.essentials.EssentialsPlayerExtension;
+import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsItemProperties;
+import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.commands.WarpNotFoundException;
@@ -40,8 +40,8 @@ public class EssentialsBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new PlayerGodModeStatusScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerJailStatusScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerMuteStatusScriptEvent());
-        PropertyParser.registerProperty(EssentialsPlayerExtension.class, dPlayer.class);
-        PropertyParser.registerProperty(EssentialsItemExtension.class, dItem.class);
+        PropertyParser.registerProperty(EssentialsPlayerProperties.class, dPlayer.class);
+        PropertyParser.registerProperty(EssentialsItemProperties.class, dItem.class);
     }
 
     public void tagEvent(ReplaceableTagEvent event) {

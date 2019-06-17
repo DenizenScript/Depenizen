@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.depenizen.bukkit.extensions.simpleclans.SimpleClansPlayerExtension;
+import com.denizenscript.depenizen.bukkit.properties.simpleclans.SimpleClansPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.dClan;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -20,7 +20,7 @@ public class SimpleClansBridge extends Bridge {
     @Override
     public void init() {
         ObjectFetcher.registerWithObjectFetcher(dClan.class);
-        PropertyParser.registerProperty(SimpleClansPlayerExtension.class, dPlayer.class);
+        PropertyParser.registerProperty(SimpleClansPlayerProperties.class, dPlayer.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

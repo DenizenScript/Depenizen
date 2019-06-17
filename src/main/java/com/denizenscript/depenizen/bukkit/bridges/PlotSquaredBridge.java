@@ -4,9 +4,9 @@ import com.denizenscript.depenizen.bukkit.events.plotsquared.PlayerClaimPlotScri
 import com.denizenscript.depenizen.bukkit.events.plotsquared.PlayerEntersPlotScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.plotsquared.PlayerLeavePlotScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.plotsquared.PlotClearScriptEvent;
-import com.denizenscript.depenizen.bukkit.extensions.plotsquared.PlotSquaredElementExtension;
-import com.denizenscript.depenizen.bukkit.extensions.plotsquared.PlotSquaredLocationExtension;
-import com.denizenscript.depenizen.bukkit.extensions.plotsquared.PlotSquaredPlayerExtension;
+import com.denizenscript.depenizen.bukkit.properties.plotsquared.PlotSquaredElementProperties;
+import com.denizenscript.depenizen.bukkit.properties.plotsquared.PlotSquaredLocationProperties;
+import com.denizenscript.depenizen.bukkit.properties.plotsquared.PlotSquaredPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.dPlotSquaredPlot;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizen.objects.dLocation;
@@ -25,8 +25,8 @@ public class PlotSquaredBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new PlayerClaimPlotScriptEvent());
         ScriptEvent.registerScriptEvent(new PlotClearScriptEvent());
         ObjectFetcher.registerWithObjectFetcher(dPlotSquaredPlot.class);
-        PropertyParser.registerProperty(PlotSquaredPlayerExtension.class, dPlayer.class);
-        PropertyParser.registerProperty(PlotSquaredElementExtension.class, Element.class);
-        PropertyParser.registerProperty(PlotSquaredLocationExtension.class, dLocation.class);
+        PropertyParser.registerProperty(PlotSquaredPlayerProperties.class, dPlayer.class);
+        PropertyParser.registerProperty(PlotSquaredElementProperties.class, Element.class);
+        PropertyParser.registerProperty(PlotSquaredLocationProperties.class, dLocation.class);
     }
 }

@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.depenizen.bukkit.extensions.battlenight.BNPlayerExtension;
+import com.denizenscript.depenizen.bukkit.properties.battlenight.BNPlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import me.limebyte.battlenight.api.BattleNightAPI;
 import me.limebyte.battlenight.core.BattleNight;
@@ -18,7 +18,7 @@ public class BattleNightBridge extends Bridge {
 
     @Override
     public void init() {
-        PropertyParser.registerProperty(BNPlayerExtension.class, dPlayer.class);
+        PropertyParser.registerProperty(BNPlayerProperties.class, dPlayer.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

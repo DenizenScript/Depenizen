@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.events.pvparena.PlayerExitsPVPArenaScr
 import com.denizenscript.depenizen.bukkit.events.pvparena.PlayerJoinsPVPArenaScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.pvparena.PlayerLeavesPVPArenaScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.pvparena.PVPArenaStartsScriptEvent;
-import com.denizenscript.depenizen.bukkit.extensions.pvparena.PVPArenaPlayerExtension;
+import com.denizenscript.depenizen.bukkit.properties.pvparena.PVPArenaPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -28,7 +28,7 @@ public class PVPArenaBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new PlayerJoinsPVPArenaScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerLeavesPVPArenaScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerExitsPVPArenaScriptEvent());
-        PropertyParser.registerProperty(PVPArenaPlayerExtension.class, dPlayer.class);
+        PropertyParser.registerProperty(PVPArenaPlayerProperties.class, dPlayer.class);
         ObjectFetcher.registerWithObjectFetcher(PVPArenaArena.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override

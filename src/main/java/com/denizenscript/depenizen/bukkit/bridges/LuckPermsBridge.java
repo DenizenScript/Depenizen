@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.depenizen.bukkit.extensions.luckperms.LuckPermsPlayerExtension;
+import com.denizenscript.depenizen.bukkit.properties.luckperms.LuckPermsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrack;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import me.lucko.luckperms.LuckPerms;
@@ -26,7 +26,7 @@ public class LuckPermsBridge extends Bridge {
             }
         }, "luckperms");
         ObjectFetcher.registerWithObjectFetcher(LuckPermsTrack.class);
-        PropertyParser.registerProperty(LuckPermsPlayerExtension.class, dPlayer.class);
+        PropertyParser.registerProperty(LuckPermsPlayerProperties.class, dPlayer.class);
     }
 
     public void tagEvent(ReplaceableTagEvent event) {

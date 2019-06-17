@@ -2,12 +2,12 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.events.towny.PlayerEntersTownScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.towny.PlayerExitsTownScriptEvent;
-import com.denizenscript.depenizen.bukkit.extensions.towny.TownyCuboidExtension;
-import com.denizenscript.depenizen.bukkit.extensions.towny.TownyLocationExtension;
+import com.denizenscript.depenizen.bukkit.properties.towny.TownyCuboidProperties;
+import com.denizenscript.depenizen.bukkit.properties.towny.TownyLocationProperties;
 import com.denizenscript.depenizen.bukkit.objects.dNation;
 import com.denizenscript.depenizen.bukkit.objects.dTown;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.depenizen.bukkit.extensions.towny.TownyPlayerExtension;
+import com.denizenscript.depenizen.bukkit.properties.towny.TownyPlayerProperties;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
@@ -30,9 +30,9 @@ public class TownyBridge extends Bridge {
     public void init() {
         ObjectFetcher.registerWithObjectFetcher(dTown.class);
         ObjectFetcher.registerWithObjectFetcher(dNation.class);
-        PropertyParser.registerProperty(TownyPlayerExtension.class, dPlayer.class);
-        PropertyParser.registerProperty(TownyLocationExtension.class, dLocation.class);
-        PropertyParser.registerProperty(TownyCuboidExtension.class, dCuboid.class);
+        PropertyParser.registerProperty(TownyPlayerProperties.class, dPlayer.class);
+        PropertyParser.registerProperty(TownyLocationProperties.class, dLocation.class);
+        PropertyParser.registerProperty(TownyCuboidProperties.class, dCuboid.class);
         ScriptEvent.registerScriptEvent(new PlayerEntersTownScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerExitsTownScriptEvent());
         TagManager.registerTagHandler(new TagRunnable.RootForm() {

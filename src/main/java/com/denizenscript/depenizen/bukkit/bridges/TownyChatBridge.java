@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizen.objects.dPlayer;
-import com.denizenscript.depenizen.bukkit.extensions.towny.TownyChatPlayerExtension;
+import com.denizenscript.depenizen.bukkit.properties.towny.TownyChatPlayerProperties;
 import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 
 public class TownyChatBridge extends Bridge {
@@ -12,6 +12,6 @@ public class TownyChatBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        PropertyParser.registerProperty(TownyChatPlayerExtension.class, dPlayer.class);
+        PropertyParser.registerProperty(TownyChatPlayerProperties.class, dPlayer.class);
     }
 }

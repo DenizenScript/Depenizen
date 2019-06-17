@@ -15,9 +15,9 @@ import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.ReplaceableTagEvent;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.tags.Attribute;
-import com.denizenscript.depenizen.bukkit.extensions.askyblock.ASkyBlockLocationExtension;
-import com.denizenscript.depenizen.bukkit.extensions.askyblock.ASkyBlockPlayerExtension;
-import com.denizenscript.depenizen.bukkit.extensions.askyblock.ASkyBlockWorldExtension;
+import com.denizenscript.depenizen.bukkit.properties.askyblock.ASkyBlockLocationProperties;
+import com.denizenscript.depenizen.bukkit.properties.askyblock.ASkyBlockPlayerProperties;
+import com.denizenscript.depenizen.bukkit.properties.askyblock.ASkyBlockWorldProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizencore.tags.TagManager;
 
@@ -26,9 +26,9 @@ public class ASkyBlockBridge extends Bridge {
     @Override
     public void init() {
         api = ASkyBlockAPI.getInstance();
-        PropertyParser.registerProperty(ASkyBlockPlayerExtension.class, dPlayer.class);
-        PropertyParser.registerProperty(ASkyBlockLocationExtension.class, dLocation.class);
-        PropertyParser.registerProperty(ASkyBlockWorldExtension.class, dWorld.class);
+        PropertyParser.registerProperty(ASkyBlockPlayerProperties.class, dPlayer.class);
+        PropertyParser.registerProperty(ASkyBlockLocationProperties.class, dLocation.class);
+        PropertyParser.registerProperty(ASkyBlockWorldProperties.class, dWorld.class);
         ScriptEvent.registerScriptEvent(new SkyBlockCreatedScriptEvent());
         ScriptEvent.registerScriptEvent(new SkyBlockResetScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerEntersSkyBlockScriptEvent());

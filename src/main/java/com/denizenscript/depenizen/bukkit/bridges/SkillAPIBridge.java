@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.depenizen.bukkit.extensions.skillapi.SkillAPIPlayerExtension;
+import com.denizenscript.depenizen.bukkit.properties.skillapi.SkillAPIPlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerLevelsUpScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerUnlocksSkillScriptEvent;
@@ -17,7 +17,7 @@ public class SkillAPIBridge extends Bridge {
     @Override
     public void init() {
         ObjectFetcher.registerWithObjectFetcher(SkillAPIClass.class);
-        PropertyParser.registerProperty(SkillAPIPlayerExtension.class, dPlayer.class);
+        PropertyParser.registerProperty(SkillAPIPlayerProperties.class, dPlayer.class);
         ScriptEvent.registerScriptEvent(new SkillAPIPlayerUnlocksSkillScriptEvent());
         ScriptEvent.registerScriptEvent(new SkillAPIPlayerUpgradesSkillScriptEvent());
         ScriptEvent.registerScriptEvent(new SkillAPIPlayerDowngradesSkillScriptEvent());

@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.commands.McMMOCommands;
 import com.denizenscript.depenizen.bukkit.events.mcmmo.*;
-import com.denizenscript.depenizen.bukkit.extensions.mcmmo.McMMOPlayerExtension;
+import com.denizenscript.depenizen.bukkit.properties.mcmmo.McMMOPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.dParty;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -26,7 +26,7 @@ public class McMMOBridge extends Bridge {
                 tagEvent(event);
             }
         }, "party");
-        PropertyParser.registerProperty(McMMOPlayerExtension.class, dPlayer.class);
+        PropertyParser.registerProperty(McMMOPlayerProperties.class, dPlayer.class);
         new McMMOCommands().activate().as("MCMMO").withOptions("See Documentation.", 1);
         ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelChangeScriptEvent());
         ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelUpScriptEvent());

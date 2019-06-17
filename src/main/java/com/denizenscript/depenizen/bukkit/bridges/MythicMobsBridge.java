@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand;
-import com.denizenscript.depenizen.bukkit.extensions.mythicmobs.MythicMobsEntityExtension;
+import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
 import net.aufdemrand.denizen.objects.dEntity;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
@@ -23,7 +23,7 @@ public class MythicMobsBridge extends Bridge {
     @Override
     public void init() {
         ObjectFetcher.registerWithObjectFetcher(MythicMobsMob.class);
-        PropertyParser.registerProperty(MythicMobsEntityExtension.class, dEntity.class);
+        PropertyParser.registerProperty(MythicMobsEntityProperties.class, dEntity.class);
         ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
         new MythicSpawnCommand().activate().as("mythicspawn").withOptions("See Documentation", 2);
     }
