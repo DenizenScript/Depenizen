@@ -29,7 +29,7 @@ public class Depenizen extends JavaPlugin {
     public void loadBridge(String name, Supplier<Bridge> bridgeSupplier) {
         Plugin plugin = Bukkit.getPluginManager().getPlugin(name);
         if (plugin == null) {
-            dB.log("<G>Depenizen will not load support for '" + name + "'.");
+            dB.log("<G>Depenizen will not load bridge for '" + name + "'.");
             return;
         }
         Bridge newBridge;
@@ -37,7 +37,7 @@ public class Depenizen extends JavaPlugin {
             newBridge = bridgeSupplier.get();
         }
         catch (Throwable ex) {
-            dB.echoError("Cannot load Depenizen support for '" + name + "': fundamental loading error: " + ex.getMessage());
+            dB.echoError("Cannot load Depenizen bridge for '" + name + "': fundamental loading error: " + ex.getMessage());
             return;
         }
         newBridge.name = name;
@@ -46,16 +46,16 @@ public class Depenizen extends JavaPlugin {
             newBridge.init();
         }
         catch (BridgeLoadException ex) {
-            dB.echoError("Cannot load Depenizen support for '" + name + "': " + ex.getMessage());
+            dB.echoError("Cannot load Depenizen bridge for '" + name + "': " + ex.getMessage());
             return;
         }
         catch (Throwable ex) {
-            dB.echoError("Cannot load Depenizen support for '" + name + "': Internal exception was thrown!");
+            dB.echoError("Cannot load Depenizen bridge for '" + name + "': Internal exception was thrown!");
             dB.echoError(ex);
             return;
         }
         loadedBridges.put(name, newBridge);
-        dB.log("Depenizen loaded support for '" + name + "'!");
+        dB.log("Depenizen loaded bridge for '" + name + "'!");
     }
 
     public void registerCoreBridges() {
