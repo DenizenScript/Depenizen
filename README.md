@@ -6,7 +6,7 @@ Depenizen
 - **Support Discord**: https://discord.gg/Q6pZGSR
 - **Builds (Download)**: https://ci.citizensnpcs.co/job/Depenizen/
 - **Supported Plugin List**: [Docs/BukkitPlugins.md](Docs/BukkitPlugins.md)
-- **DepenizenBungee**: https://github.com/DenizenScript/DepenizenBungee
+- **Bungee Bridge**: [Docs/Bungee.md](Docs/Bungee.md)
 
 ### Version 2.x notice:
 
