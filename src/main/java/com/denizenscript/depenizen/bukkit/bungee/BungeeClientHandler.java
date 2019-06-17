@@ -1,10 +1,13 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
+import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.bungee.packets.out.MyInfoPacketOut;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import org.bukkit.Bukkit;
 
 public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
 
@@ -50,6 +53,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         dB.log("Depenizen-Bungee connection ended.");
         tmp.release();
         tmp = null;
+        BungeeBridge.instance.connected = false;
         // TODO: trigger reconnect (after a delay)
     }
 
@@ -60,6 +64,13 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         ByteBuf handshake = ctx.alloc().buffer(FAKE_HANDSHAKE.length);
         handshake.writeBytes(FAKE_HANDSHAKE);
         ctx.writeAndFlush(handshake); // Will release handshake
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
+            @Override
+            public void run() {
+                BungeeBridge.instance.sendPacket(new MyInfoPacketOut(Bukkit.getPort()));
+                BungeeBridge.instance.connected = true;
+            }
+        }, 30);
     }
 
     @Override
@@ -72,16 +83,17 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
                 waitingLength = tmp.readInt();
                 packetId = tmp.readInt();
                 currentStage = Stage.AWAIT_DATA;
-                    /*if (!DepenizenBungee.instance.packets.containsKey(packetId)) {
+                    if (!BungeeBridge.instance.packets.containsKey(packetId)) {
                         fail("Invalid packet id: " + packetId);
                         return;
-                    }*/
+                    }
             }
         }
         if (currentStage == Stage.AWAIT_DATA) {
             if (tmp.readableBytes() >= waitingLength) {
                 try {
-                    //DepenizenBungee.instance.packets.get(packetId).process(this, tmp);
+                    PacketIn packet = BungeeBridge.instance.packets.get(packetId);
+                    packet.process(tmp);
                     currentStage = Stage.AWAIT_HEADER;
                 }
                 catch (Throwable ex) {
