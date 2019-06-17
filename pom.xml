@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>depenizen</artifactId>
-        <groupId>com.denizenscript</groupId>
-        <version>2.0.0</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>depenizen-bukkit</artifactId>
-    <name>DepenizenBukkit</name>
+    <groupId>com.denizenscript</groupId>
+    <artifactId>depenizen</artifactId>
+    <packaging>pom</packaging>
+    <version>2.0.0</version>
+    <name>Depenizen</name>
+    <url>https://github.com/DenizenScript/Depenizen</url>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <craftbukkit.version>1.14.2-R0.1-SNAPSHOT</craftbukkit.version>
         <citizens.version>2.0.25-SNAPSHOT</citizens.version>
         <denizen.version>1.0.6-SNAPSHOT</denizen.version>
+        <BUILD_NUMBER>Unknown</BUILD_NUMBER>
     </properties>
 
     <repositories>
@@ -37,13 +38,6 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <!--
-        <repository>
-            <id>dakani</id>
-            <name>Dakani Nexus Repo</name>
-            <url>http://repo.dakanilabs.com/content/repositories/public</url>
-        </repository>
-        -->
         <repository>
             <id>md_5-public</id>
             <url>http://repo.md-5.net/content/groups/public/</url>
@@ -51,6 +45,29 @@
     </repositories>
 
     <dependencies>
+        <!-- Core Requirements -->
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <type>jar</type>
+            <scope>provided</scope>
+            <version>${craftbukkit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.aufdemrand</groupId>
+            <artifactId>denizen</artifactId>
+            <version>${denizen.version}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.citizensnpcs</groupId>
+            <artifactId>citizens</artifactId>
+            <version>${citizens.version}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Support Targets (Optional) -->
         <dependency>
             <groupId>com.github.TheComputerGeek2</groupId>
             <artifactId>MagicSpells</artifactId>
@@ -115,18 +132,6 @@
             <systemPath>${project.basedir}/lib/PlotSquared.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.denizenscript</groupId>
-            <artifactId>depenizen-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <type>jar</type>
-            <scope>provided</scope>
-            <version>${craftbukkit.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.palmergames</groupId>
             <artifactId>Towny</artifactId>
             <version>0.92</version>
@@ -169,20 +174,6 @@
             <systemPath>${basedir}/lib/BattleNight.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>net.milkbowl.vault</groupId>
-            <artifactId>Vault</artifactId>
-            <version>1.5.6</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Vault.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>net.aufdemrand</groupId>
-            <artifactId>denizen</artifactId>
-            <version>${denizen.version}</version>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.gmail.nossr50</groupId>
             <artifactId>mcMMO</artifactId>
             <version>1.5.04</version>
@@ -223,13 +214,6 @@
             <version>1.5.57</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Heroes.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>net.citizensnpcs</groupId>
-            <artifactId>citizens</artifactId>
-            <version>${citizens.version}</version>
-            <type>jar</type>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.mcmonkey</groupId>
@@ -400,6 +384,7 @@
     </dependencies>
 
     <build>
+        <defaultGoal>clean package install</defaultGoal>
         <finalName>Depenizen</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
@@ -437,6 +422,15 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
