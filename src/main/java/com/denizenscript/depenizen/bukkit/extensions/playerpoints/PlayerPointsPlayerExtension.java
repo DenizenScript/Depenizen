@@ -1,15 +1,13 @@
 package com.denizenscript.depenizen.bukkit.extensions.playerpoints;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsBridge;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import org.black_ixx.playerpoints.PlayerPoints;
-import org.bukkit.plugin.Plugin;
 
 public class PlayerPointsPlayerExtension extends dObjectExtension {
 
@@ -55,8 +53,8 @@ public class PlayerPointsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, PlayerPoints
         // -->
         if (attribute.startsWith("playerpoints_points")) {
-            Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            return new Element(((PlayerPoints) plugin).getAPI().look(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
+            return new Element(((PlayerPoints) PlayerPointsBridge.instance.plugin).getAPI()
+                    .look(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
         }
 
         return null;

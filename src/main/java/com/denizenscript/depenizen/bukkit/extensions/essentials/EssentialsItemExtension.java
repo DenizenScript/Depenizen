@@ -1,6 +1,5 @@
 package com.denizenscript.depenizen.bukkit.extensions.essentials;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
 import com.earth2me.essentials.Essentials;
 import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizen.utilities.debugging.dB;
@@ -10,7 +9,7 @@ import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.bridges.EssentialsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.EssentialsBridge;
 
 import java.math.BigDecimal;
 
@@ -57,7 +56,7 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (attribute.startsWith("worth")) {
-            Essentials ess = Support.getPlugin(EssentialsSupport.class);
+            Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
             BigDecimal priceBD = ess.getWorth().getPrice(ess, item.getItemStack());
             if (priceBD == null) {
                 if (!attribute.hasAlternative()) {
@@ -97,7 +96,7 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (mechanism.matches("worth") && mechanism.getValue().isDouble()) {
-            Essentials ess = Support.getPlugin(EssentialsSupport.class);
+            Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
             ess.getWorth().setPrice(ess, item.getItemStack(), mechanism.getValue().asDouble());
         }
 

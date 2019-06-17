@@ -1,8 +1,7 @@
 package com.denizenscript.depenizen.bukkit.extensions.towny;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.TownyChatSupport;
+import com.denizenscript.depenizen.bukkit.bridges.TownyChatBridge;
 import com.palmergames.bukkit.TownyChat.Chat;
 import com.palmergames.bukkit.TownyChat.channels.Channel;
 import com.palmergames.bukkit.TownyChat.channels.ChannelsHolder;
@@ -38,8 +37,6 @@ public class TownyChatPlayerExtension extends dObjectExtension {
     }
 
     dPlayer player;
-    Chat plugin = Support.getPlugin(TownyChatSupport.class);
-    ChannelsHolder holder = plugin.getChannelsHandler();
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -48,6 +45,8 @@ public class TownyChatPlayerExtension extends dObjectExtension {
         }
 
         if (attribute.startsWith("townychat")) {
+            Chat plugin = (Chat) TownyChatBridge.instance.plugin;
+            ChannelsHolder holder = plugin.getChannelsHandler();
             attribute = attribute.fulfill(1);
 
             // <--[tag]

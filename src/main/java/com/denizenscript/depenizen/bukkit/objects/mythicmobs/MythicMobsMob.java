@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.mythicmobs;
 
-import com.denizenscript.depenizen.bukkit.bridges.MythicMobsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizencore.tags.Attribute;
@@ -30,10 +30,10 @@ public class MythicMobsMob implements dObject, Adjustable {
         try {
             string = string.replace("mythicmob@", "");
             UUID uuid = UUID.fromString(string);
-            if (!MythicMobsSupport.isMythicMob(uuid)) {
+            if (!MythicMobsBridge.isMythicMob(uuid)) {
                 return null;
             }
-            return new MythicMobsMob(MythicMobsSupport.getActiveMob(dEntity.getEntityForID(uuid)));
+            return new MythicMobsMob(MythicMobsBridge.getActiveMob(dEntity.getEntityForID(uuid)));
         }
         catch (Exception e) {
             return null;

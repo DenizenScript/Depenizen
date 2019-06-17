@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.shopkeepers;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.ShopkeepersSupport;
+import com.denizenscript.depenizen.bukkit.bridges.ShopkeepersBridge;
 import com.nisovin.shopkeepers.api.shopkeeper.Shopkeeper;
 import com.nisovin.shopkeepers.api.shopkeeper.TradingRecipe;
 import com.nisovin.shopkeepers.api.ShopkeepersAPI;
@@ -55,8 +54,7 @@ public class ShopKeeper implements dObject {
         if (entity == null) {
             return false;
         }
-        ShopkeepersPlugin plugin = Support.getPlugin(ShopkeepersSupport.class);
-        return plugin != null && plugin.getShopkeeperRegistry().isShopkeeper(entity.getBukkitEntity());
+        return ((ShopkeepersPlugin) ShopkeepersBridge.instance.plugin).getShopkeeperRegistry().isShopkeeper(entity.getBukkitEntity());
     }
 
     public static ShopKeeper fromEntity(dEntity entity) {

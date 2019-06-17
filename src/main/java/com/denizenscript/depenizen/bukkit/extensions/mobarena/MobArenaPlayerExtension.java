@@ -1,8 +1,6 @@
 package com.denizenscript.depenizen.bukkit.extensions.mobarena;
 
-
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.MobArenaSupport;
+import com.denizenscript.depenizen.bukkit.bridges.MobArenaBridge;
 import com.garbagemule.MobArena.ArenaPlayer;
 import com.garbagemule.MobArena.ArenaPlayerStatistics;
 import com.garbagemule.MobArena.MobArena;
@@ -15,8 +13,6 @@ import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 
 public class MobArenaPlayerExtension extends dObjectExtension {
-
-    MobArena plugin = (MobArena) Support.getPlugin(MobArenaSupport.class);
 
     public static boolean describes(dObject object) {
         return object instanceof dPlayer;
@@ -40,7 +36,7 @@ public class MobArenaPlayerExtension extends dObjectExtension {
 
     public MobArenaPlayerExtension(dPlayer player) {
         this.player = player;
-        this.arena = plugin.getArenaMaster().getArenaWithPlayer(player.getPlayerEntity());
+        this.arena = ((MobArena) MobArenaBridge.instance.plugin).getArenaMaster().getArenaWithPlayer(player.getPlayerEntity());
     }
 
     dPlayer player = null;
@@ -91,7 +87,8 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 // @Plugin DepenizenBukkit, MobArena
                 // -->
                 else if (attribute.startsWith("class")) {
-                    return new Element(new ArenaPlayer(player.getPlayerEntity(), arena, plugin).getStats().getClassName())
+                    return new Element(new ArenaPlayer(player.getPlayerEntity(), arena,
+                            ((MobArena) MobArenaBridge.instance.plugin)).getStats().getClassName())
                             .getAttribute(attribute.fulfill(1));
                 }
 
@@ -103,7 +100,8 @@ public class MobArenaPlayerExtension extends dObjectExtension {
                 if (a == null) {
                     return null;
                 }
-                ArenaPlayerStatistics stats = new ArenaPlayer(player.getPlayerEntity(), a.getArena(), plugin).getStats();
+                ArenaPlayerStatistics stats = new ArenaPlayer(player.getPlayerEntity(),
+                        a.getArena(), ((MobArena) MobArenaBridge.instance.plugin)).getStats();
 
                 attribute = attribute.fulfill(1);
                 if (stats == null) {

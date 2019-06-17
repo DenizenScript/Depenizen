@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
-import com.denizenscript.depenizen.bukkit.bridges.MythicMobsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
@@ -77,13 +77,13 @@ public class MythicSpawnCommand extends AbstractCommand {
         dB.report(scriptEntry, getName(), name.debug() + location.debug() + level.debug());
 
         try {
-            MythicMob mob = MythicMobsSupport.getMythicMob(name.asString());
+            MythicMob mob = MythicMobsBridge.getMythicMob(name.asString());
             if (mob == null) {
                 dB.echoError("MythicMob does not exist: " + name.asString());
                 return;
             }
-            Entity entity = MythicMobsSupport.spawnMythicMob(mob, location, level.asInt());
-            scriptEntry.addObject("spawned_mythicmob", new MythicMobsMob(MythicMobsSupport.getActiveMob(entity)));
+            Entity entity = MythicMobsBridge.spawnMythicMob(mob, location, level.asInt());
+            scriptEntry.addObject("spawned_mythicmob", new MythicMobsMob(MythicMobsBridge.getActiveMob(entity)));
         }
         catch (Exception e) {
             dB.echoError(e);

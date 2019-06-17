@@ -2,8 +2,7 @@ package com.denizenscript.depenizen.bukkit.extensions.worldguard;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.WorldGuardSupport;
+import com.denizenscript.depenizen.bukkit.bridges.WorldGuardBridge;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.WorldGuard;
@@ -51,7 +50,7 @@ public class WorldGuardCuboidExtension extends dObjectExtension {
     dCuboid cuboid = null;
 
     private ApplicableRegionSet getApplicableRegions() {
-        WorldGuardPlugin worldGuard = Support.getPlugin(WorldGuardSupport.class);
+        WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
         dLocation low = cuboid.getLow(0);
         dLocation high = cuboid.getHigh(0);
         BlockVector3 vecLow = BlockVector3.at(low.getX(), low.getY(), low.getZ());

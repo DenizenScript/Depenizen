@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.effectlib;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.EffectLibSupport;
+import com.denizenscript.depenizen.bukkit.bridges.EffectLibBridge;
 import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.ArcEffect;
 import de.slikey.effectlib.effect.AtomEffect;
@@ -16,7 +15,6 @@ import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
 import org.bukkit.Location;
-import org.bukkit.plugin.Plugin;
 
 public class EffectLibCommand extends AbstractCommand {
     // <--[command]
@@ -128,8 +126,7 @@ public class EffectLibCommand extends AbstractCommand {
         }
 
         int ticks = duration.getTicksAsInt();
-        Plugin plugin = Support.getPlugin(EffectLibSupport.class);
-        EffectManager effectManager = new EffectManager(plugin);
+        EffectManager effectManager = new EffectManager(EffectLibBridge.instance.plugin);
 
         // TODO: Find a better way to handle all effects and add custom ones as well
         switch (action) {

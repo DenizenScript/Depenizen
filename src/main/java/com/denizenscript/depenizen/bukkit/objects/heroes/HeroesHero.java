@@ -1,9 +1,8 @@
 package com.denizenscript.depenizen.bukkit.objects.heroes;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
 import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.Hero;
-import com.denizenscript.depenizen.bukkit.bridges.HeroesSupport;
+import com.denizenscript.depenizen.bukkit.bridges.HeroesBridge;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -86,7 +85,7 @@ public class HeroesHero implements dObject, Adjustable {
     public HeroesHero(dPlayer player) {
         denizenObj = player;
         if (player.isOnline()) {
-            Heroes heroes = Support.getPlugin(HeroesSupport.class);
+            Heroes heroes = (Heroes) HeroesBridge.instance.plugin;
             hero = heroes.getCharacterManager().getHero(player.getPlayerEntity());
         }
     }
@@ -94,7 +93,7 @@ public class HeroesHero implements dObject, Adjustable {
     public HeroesHero(dNPC npc) {
         denizenObj = npc;
         if (npc.isSpawned() && npc.getEntity() instanceof Player) {
-            Heroes heroes = Support.getPlugin(HeroesSupport.class);
+            Heroes heroes = (Heroes) HeroesBridge.instance.plugin;
             hero = heroes.getCharacterManager().getHero((Player) npc.getEntity());
         }
     }

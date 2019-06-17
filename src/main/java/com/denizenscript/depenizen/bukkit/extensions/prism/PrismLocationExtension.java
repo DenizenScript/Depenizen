@@ -2,8 +2,7 @@ package com.denizenscript.depenizen.bukkit.extensions.prism;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.objects.prism.PrismAction;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.PrismSupport;
+import com.denizenscript.depenizen.bukkit.bridges.PrismBridge;
 import me.botsko.prism.Prism;
 import me.botsko.prism.actionlibs.ActionsQuery;
 import me.botsko.prism.actionlibs.QueryParameters;
@@ -128,7 +127,7 @@ public class PrismLocationExtension extends dObjectExtension {
                 params.setSpecificBlockLocation(location);
             }
 
-            ActionsQuery query = new ActionsQuery((Prism) Support.getPlugin(PrismSupport.class));
+            ActionsQuery query = new ActionsQuery((Prism) PrismBridge.instance.plugin);
             List<Handler> results = query.lookup(params).getActionResults();
             dList list = new dList();
             for (Handler action : results) {

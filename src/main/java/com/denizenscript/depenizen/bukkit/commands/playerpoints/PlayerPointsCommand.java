@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.playerpoints;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsBridge;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
@@ -11,7 +10,6 @@ import net.aufdemrand.denizencore.objects.aH;
 import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
 import org.black_ixx.playerpoints.PlayerPoints;
 import net.aufdemrand.denizencore.utilities.debugging.dB;
-import org.bukkit.plugin.Plugin;
 
 public class PlayerPointsCommand extends AbstractCommand {
     // <--[command]
@@ -112,19 +110,17 @@ public class PlayerPointsCommand extends AbstractCommand {
             return;
         }
 
+        PlayerPoints plugin = (PlayerPoints) PlayerPointsBridge.instance.plugin;
         if (action.asString().equalsIgnoreCase("give")) {
-            Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            ((PlayerPoints) plugin).getAPI().give(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            plugin.getAPI().give(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
         else if (action.asString().equalsIgnoreCase("take")) {
-            Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            ((PlayerPoints) plugin).getAPI().take(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            plugin.getAPI().take(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
         else if (action.asString().equalsIgnoreCase("set")) {
-            Plugin plugin = Support.getPlugin(PlayerPointsSupport.class);
-            ((PlayerPoints) plugin).getAPI().set(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            plugin.getAPI().set(target.getOfflinePlayer().getUniqueId(), amount.asInt());
         }
 
     }

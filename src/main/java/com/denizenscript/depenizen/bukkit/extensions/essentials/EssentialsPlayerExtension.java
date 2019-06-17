@@ -8,8 +8,7 @@ import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.EssentialsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.EssentialsBridge;
 
 import java.util.GregorianCalendar;
 
@@ -47,8 +46,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
     }
 
     public User getUser() {
-        Essentials essentials = Support.getPlugin(EssentialsSupport.class);
-        return essentials.getUser(player.getOfflinePlayer().getUniqueId());
+        return ((Essentials) EssentialsBridge.instance.plugin).getUser(player.getOfflinePlayer().getUniqueId());
     }
 
     dPlayer player;
@@ -168,10 +166,10 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // -->
         if (attribute.startsWith("ignored_players")) {
             dList players = new dList();
-            Essentials essentials = Support.getPlugin(EssentialsSupport.class);
+            Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
             for (String player : getUser()._getIgnoredPlayers()) {
                 try {
-                    players.add(new dPlayer(essentials.getOfflineUser(player).getBase()).identifySimple());
+                    players.add(new dPlayer(ess.getOfflineUser(player).getBase()).identifySimple());
                 }
                 catch (Exception e) {
                     if (!attribute.hasAlternative()) {
@@ -330,16 +328,16 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Essentials
         // -->
         if (mechanism.matches("essentials_ignore")) {
-            Essentials essentials = Support.getPlugin(EssentialsSupport.class);
+            Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
             if (mechanism.getValue().asString().contains("|")) {
                 int split = mechanism.getValue().asString().indexOf("|");
                 int len = mechanism.getValue().asString().length();
                 String after = mechanism.getValue().asString().substring(split + 1, len);
                 String before = mechanism.getValue().asString().substring(0, split - 1);
-                getUser().setIgnoredPlayer(essentials.getUser(new Element(before).asType(dPlayer.class, mechanism.context).getOfflinePlayer().getUniqueId()), new Element(after).asBoolean());
+                getUser().setIgnoredPlayer(ess.getUser(new Element(before).asType(dPlayer.class, mechanism.context).getOfflinePlayer().getUniqueId()), new Element(after).asBoolean());
             }
             else {
-                getUser().setIgnoredPlayer(essentials.getUser(mechanism.valueAsType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);
+                getUser().setIgnoredPlayer(ess.getUser(mechanism.valueAsType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);
             }
         }
 

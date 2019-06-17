@@ -1,6 +1,5 @@
 package com.denizenscript.depenizen.bukkit.objects.heroes;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
 import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.classes.HeroClass;
 import net.aufdemrand.denizencore.objects.Element;
@@ -9,7 +8,7 @@ import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
-import com.denizenscript.depenizen.bukkit.bridges.HeroesSupport;
+import com.denizenscript.depenizen.bukkit.bridges.HeroesBridge;
 import org.bukkit.Material;
 import net.aufdemrand.denizen.utilities.blocks.OldMaterialsHelper;
 
@@ -33,7 +32,7 @@ public class HeroesClass implements dObject {
 
         string = string.replace("hclass@", "");
 
-        Heroes heroes = Support.getPlugin(HeroesSupport.class);
+        Heroes heroes = (Heroes) HeroesBridge.instance.plugin;
         HeroClass heroClass = heroes.getClassManager().getClass(string);
         if (heroClass != null) {
             return new HeroesClass(heroClass);

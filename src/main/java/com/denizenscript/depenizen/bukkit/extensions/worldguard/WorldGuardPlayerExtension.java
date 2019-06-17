@@ -1,8 +1,7 @@
 package com.denizenscript.depenizen.bukkit.extensions.worldguard;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.WorldGuardSupport;
+import com.denizenscript.depenizen.bukkit.bridges.WorldGuardBridge;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -42,11 +41,9 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
 
     private WorldGuardPlayerExtension(dPlayer player) {
         this.player = player.getPlayerEntity();
-        this.wgp = Support.getPlugin(WorldGuardSupport.class);
     }
 
     Player player = null;
-    WorldGuardPlugin wgp = null;
 
     private StateFlag getStateFlag(String s) {
         Flag flag = Flags.fuzzyMatchFlag(WorldGuard.getInstance().getFlagRegistry(), s);
@@ -73,8 +70,9 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
             if (location == null) {
                 return null;
             }
-            return new Element(WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), wgp.wrapPlayer(player)))
-            		  .getAttribute(attribute.fulfill(1));
+            WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
+            return new Element(WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), worldGuard.wrapPlayer(player)))
+                    .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -114,7 +112,8 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
                     return null;
                 }
             }
-            return new Element(query.testState(BukkitAdapter.adapt(loc), wgp.wrapPlayer(player), flag))
+            WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
+            return new Element(query.testState(BukkitAdapter.adapt(loc), worldGuard.wrapPlayer(player), flag))
                       .getAttribute(attribute.fulfill(args));
         }
 

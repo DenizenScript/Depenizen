@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.extensions.mythicmobs;
 
-import com.denizenscript.depenizen.bukkit.bridges.MythicMobsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
@@ -50,7 +50,7 @@ public class MythicMobsEntityExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, MythicMobs
         // -->
         if (attribute.startsWith("is_mythic_mob") || attribute.startsWith("is_mythicmob")) {
-            return new Element(MythicMobsSupport.isMythicMob(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
+            return new Element(MythicMobsBridge.isMythicMob(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -61,8 +61,8 @@ public class MythicMobsEntityExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, MythicMobs
         // -->
         else if ((attribute.startsWith("mythicmob") || attribute.startsWith("mythic_mob"))
-                && MythicMobsSupport.isMythicMob(entity.getBukkitEntity())) {
-            return new MythicMobsMob(MythicMobsSupport.getActiveMob(entity.getBukkitEntity()))
+                && MythicMobsBridge.isMythicMob(entity.getBukkitEntity())) {
+            return new MythicMobsMob(MythicMobsBridge.getActiveMob(entity.getBukkitEntity()))
                     .getAttribute(attribute.fulfill(1));
         }
 

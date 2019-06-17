@@ -1,8 +1,7 @@
 package com.denizenscript.depenizen.bukkit.commands.heroes;
 
 import com.denizenscript.depenizen.bukkit.objects.heroes.HeroesClass;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.HeroesSupport;
+import com.denizenscript.depenizen.bukkit.bridges.HeroesBridge;
 import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.Hero;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
@@ -55,8 +54,6 @@ public class HeroesXPCommand extends AbstractCommand {
         SET
     }
 
-    Heroes heroes = Support.getPlugin(HeroesSupport.class);
-
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
         for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
             if (!scriptEntry.hasObject("action") && arg.matchesEnum(Action.values())) {
@@ -108,7 +105,7 @@ public class HeroesXPCommand extends AbstractCommand {
             return;
         }
 
-        Hero hero = heroes.getCharacterManager().getHero(player.getPlayerEntity());
+        Hero hero = ((Heroes) HeroesBridge.instance.plugin).getCharacterManager().getHero(player.getPlayerEntity());
 
         switch (Action.valueOf(action.asString().toUpperCase())) {
             case ADD:

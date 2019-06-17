@@ -1,8 +1,7 @@
 package com.denizenscript.depenizen.bukkit.extensions.worldedit;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.WorldEditSupport;
+import com.denizenscript.depenizen.bukkit.bridges.WorldEditBridge;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.command.tool.BrushTool;
@@ -78,7 +77,7 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, WorldEdit
         // -->
         if (attribute.startsWith("we_brush_info")) {
-            WorldEditPlugin worldEdit = Support.getPlugin(WorldEditSupport.class);
+            WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             ItemType itemType;
             if (attribute.hasContext(1)) {
                 itemType = BukkitAdapter.asItemType(deLegacy(dItem.valueOf(attribute.getContext(1)).getMaterial().getMaterial()));
@@ -120,7 +119,7 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, WorldEdit
         // -->
         if (attribute.startsWith("selected_region")) {
-            WorldEditPlugin worldEdit = Support.getPlugin(WorldEditSupport.class);
+            WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             RegionSelector selection = worldEdit.getSession(player).getRegionSelector(BukkitAdapter.adapt(player.getWorld()));
             if (selection != null) {
                 return new dCuboid(BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),

@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.mobarena;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.MobArenaSupport;
+import com.denizenscript.depenizen.bukkit.bridges.MobArenaBridge;
 import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -19,8 +18,6 @@ public class MobArenaArena implements dObject {
     String prefix = "MobArena";
     Arena arena = null;
 
-    static MobArena plugin = Support.getPlugin(MobArenaSupport.class);
-
     public static MobArenaArena valueOf(String name) {
         return valueOf(name, null);
     }
@@ -34,7 +31,7 @@ public class MobArenaArena implements dObject {
         ////////
         // Match Arena name
         name = name.replace("mobarena@", "");
-        Arena arena = plugin.getArenaMaster().getArenaWithName(name);
+        Arena arena = ((MobArena) MobArenaBridge.instance.plugin).getArenaMaster().getArenaWithName(name);
         if (arena == null) {
             return null;
         }

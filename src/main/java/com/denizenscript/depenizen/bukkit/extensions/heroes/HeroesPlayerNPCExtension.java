@@ -2,8 +2,7 @@ package com.denizenscript.depenizen.bukkit.extensions.heroes;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.objects.heroes.HeroesHero;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.HeroesSupport;
+import com.denizenscript.depenizen.bukkit.bridges.HeroesBridge;
 import com.herocraftonline.heroes.Heroes;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -70,7 +69,7 @@ public class HeroesPlayerNPCExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, Heroes
         // -->
         if (attribute.startsWith("heroes")) {
-            Heroes heroes = Support.getPlugin(HeroesSupport.class);
+            Heroes heroes = (Heroes) HeroesBridge.instance.plugin;
             return new HeroesHero(heroes.getCharacterManager().getHero(player))
                     .getAttribute(attribute.fulfill(1));
         }

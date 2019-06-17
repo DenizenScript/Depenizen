@@ -1,8 +1,7 @@
 package com.denizenscript.depenizen.bukkit.extensions.bossshop;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.BossShopSupport;
+import com.denizenscript.depenizen.bukkit.bridges.BossShopBridge;
 import net.aufdemrand.denizen.objects.dInventory;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
@@ -50,8 +49,7 @@ public class BossShopInventoryExtension extends dObjectExtension {
         // @Plugin DepenizenBukkit, BossShop
         // -->
         if (attribute.startsWith("is_bossshop")) {
-            BossShop bs = Support.getPlugin(BossShopSupport.class);
-
+            BossShop bs = (BossShop) BossShopBridge.instance.plugin;
 
             return new Element(bs.getAPI().isValidShop(inv.getInventory())).getAttribute(attribute.fulfill(1));
         }

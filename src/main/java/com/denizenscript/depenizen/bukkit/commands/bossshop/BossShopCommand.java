@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.bossshop;
 
-import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.bridges.BossShopSupport;
+import com.denizenscript.depenizen.bukkit.bridges.BossShopBridge;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
@@ -97,7 +96,7 @@ public class BossShopCommand extends AbstractCommand {
             return;
         }
 
-        BossShop bs = Support.getPlugin(BossShopSupport.class);
+        BossShop bs = (BossShop) BossShopBridge.instance.plugin;
         BSShop shop = bs.getAPI().getShop(dshop.asString());
         if (shop == null) {
             dB.echoError(scriptEntry.getResidingQueue(), "Shop not found!");
