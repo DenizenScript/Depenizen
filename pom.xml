@@ -5,7 +5,7 @@
 
     <groupId>com.denizenscript</groupId>
     <artifactId>depenizen</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>2.0.0</version>
     <name>Depenizen</name>
     <url>https://github.com/DenizenScript/Depenizen</url>
@@ -403,8 +403,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <finalName>Depenizen-${version}-b${BUILD_NUMBER}</finalName>
-                    <outputDirectory>../target</outputDirectory>
+                    <finalName>Depenizen-${project.version}-b${BUILD_NUMBER}</finalName>
                 </configuration>
             </plugin>
             <plugin>
