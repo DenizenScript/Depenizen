@@ -30,7 +30,7 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
     // @Context
     // <context.status> Returns the player's jail status.
     //
-    // @Plugin DepenizenBukkit, Essentials
+    // @Plugin Depenizen, Essentials
     //
     // -->
 

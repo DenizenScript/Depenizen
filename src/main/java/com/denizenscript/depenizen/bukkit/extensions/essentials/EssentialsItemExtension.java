@@ -53,7 +53,7 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @returns Element(Decimal)
         // @description
         // Returns the amount of money one of this item is worth in Essentials.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("worth")) {
             Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
@@ -70,7 +70,7 @@ public class EssentialsItemExtension extends dObjectExtension {
             // @returns Element(Decimal)
             // @description
             // Returns the amount of money the quantity specified of this item is worth in Essentials.
-            // @Plugin DepenizenBukkit, Essentials
+            // @Plugin Depenizen, Essentials
             // -->
             if (attribute.getAttribute(2).startsWith("quantity") &&
                     attribute.hasContext(2) && aH.matchesInteger(attribute.getContext(2))) {
@@ -93,7 +93,7 @@ public class EssentialsItemExtension extends dObjectExtension {
         // @tags
         // <i@item.worth>
         // <i@item.worth.quantity[<Element>]>
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (mechanism.matches("worth") && mechanism.getValue().isDouble()) {
             Essentials ess = (Essentials) EssentialsBridge.instance.plugin;

@@ -59,7 +59,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // @returns Element(Number)
             // @description
             // Returns the number of quest points the player has.
-            // @Plugin DepenizenBukkit, Quests
+            // @Plugin Depenizen, Quests
             // -->
             if (attribute.startsWith("points")) {
                 if (quester.getBaseData().contains("quest-points")) {
@@ -73,7 +73,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // @returns dList
             // @description
             // Returns the names of quests the player has completed.
-            // @Plugin DepenizenBukkit, Quests
+            // @Plugin Depenizen, Quests
             // -->
             if (attribute.startsWith("completed_names")) {
                 dList list = new dList();
@@ -88,7 +88,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // @returns dList
             // @description
             // Returns the names of quests the player has active.
-            // @Plugin DepenizenBukkit, Quests
+            // @Plugin Depenizen, Quests
             // -->
             if (attribute.startsWith("active_names")) {
                 dList list = new dList();
@@ -103,7 +103,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // @returns Element(Number)
             // @description
             // Returns the number of quests the player has completed.
-            // @Plugin DepenizenBukkit, Quests
+            // @Plugin Depenizen, Quests
             // -->
             else if (attribute.startsWith("completed")) {
                 return new Element(quester.getCompletedQuests().size()).getAttribute(attribute.fulfill(1));
@@ -114,7 +114,7 @@ public class QuestsPlayerExtension extends dObjectExtension {
             // @returns Element(Number)
             // @description
             // Returns the number of quests the player has active.
-            // @Plugin DepenizenBukkit, Quests
+            // @Plugin Depenizen, Quests
             // -->
             else if (attribute.startsWith("active")) {
                 return new Element(quester.getCurrentQuests().size()).getAttribute(attribute.fulfill(1));

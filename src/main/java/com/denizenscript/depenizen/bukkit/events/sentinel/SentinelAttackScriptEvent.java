@@ -29,7 +29,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     // @Context
     // <context.entity> returns the entity that the NPC is attacking.
     //
-    // @Plugin DepenizenBukkit, Sentinel
+    // @Plugin Depenizen, Sentinel
     //
     // -->
 

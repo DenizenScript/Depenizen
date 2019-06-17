@@ -38,7 +38,7 @@ public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implement
     // @Determine
     // Element(Number) to set the number of levels to gain.
     //
-    // @Plugin DepenizenBukkit, mcMMO
+    // @Plugin Depenizen, mcMMO
     // -->
 
     public mcMMOPlayerLevelDownScriptEvent() {

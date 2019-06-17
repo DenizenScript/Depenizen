@@ -54,7 +54,7 @@ public class TownyPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns whether the player is part of a nation.
-            // @Plugin DepenizenBukkit, Towny
+            // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("has_nation")) {
                 return new Element(getResident().hasNation()).getAttribute(attribute.fulfill(1));
@@ -65,7 +65,7 @@ public class TownyPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns whether the player is part of a town.
-            // @Plugin DepenizenBukkit, Towny
+            // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("has_town")) {
                 return new Element(getResident().hasTown()).getAttribute(attribute.fulfill(1));
@@ -76,7 +76,7 @@ public class TownyPlayerExtension extends dObjectExtension {
             // @returns dList(Element)
             // @description
             // Returns the player's towny modes as a list.
-            // @Plugin DepenizenBukkit, Towny
+            // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("mode_list")) {
                 dList modes = new dList();
@@ -91,7 +91,7 @@ public class TownyPlayerExtension extends dObjectExtension {
             // @returns dList(Element)
             // @description
             // Returns the player's nation ranks.
-            // @Plugin DepenizenBukkit, Towny
+            // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("nation_ranks")) {
                 dList ranks = new dList();
@@ -106,7 +106,7 @@ public class TownyPlayerExtension extends dObjectExtension {
             // @returns dNation
             // @description
             // Returns the player's nation.
-            // @Plugin DepenizenBukkit, Towny
+            // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("nation")) {
                 try {
@@ -129,7 +129,7 @@ public class TownyPlayerExtension extends dObjectExtension {
             // @returns dList(Element)
             // @description
             // Returns the player's town ranks.
-            // @Plugin DepenizenBukkit, Towny
+            // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("town_ranks")) {
                 dList ranks = new dList();
@@ -144,7 +144,7 @@ public class TownyPlayerExtension extends dObjectExtension {
             // @returns dTown
             // @description
             // Returns the player's town.
-            // @Plugin DepenizenBukkit, Towny
+            // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("town")) {
                 try {

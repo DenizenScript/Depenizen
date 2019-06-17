@@ -121,7 +121,7 @@ public class dPlot implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the plot's X coordinate portion of its ID.
-        // @Plugin DepenizenBukkit, PlotMe
+        // @Plugin Depenizen, PlotMe
         // -->
         if (attribute.startsWith("id_x")) {
             return new Element(plot.getId().getX()).getAttribute(attribute.fulfill(1));
@@ -132,7 +132,7 @@ public class dPlot implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the plot's Z coordinate portion of its ID.
-        // @Plugin DepenizenBukkit, PlotMe
+        // @Plugin Depenizen, PlotMe
         // -->
         if (attribute.startsWith("id_z")) {
             return new Element(plot.getId().getZ()).getAttribute(attribute.fulfill(1));
@@ -143,7 +143,7 @@ public class dPlot implements dObject {
         // @returns dWorld
         // @description
         // Returns the plot's world.
-        // @Plugin DepenizenBukkit, PlotMe
+        // @Plugin Depenizen, PlotMe
         // -->
         if (attribute.startsWith("world")) {
             return dWorld.valueOf(plot.getWorld().getName()).getAttribute(attribute.fulfill(1));
@@ -154,7 +154,7 @@ public class dPlot implements dObject {
         // @returns dPlayer
         // @description
         // Returns the plot's owner.
-        // @Plugin DepenizenBukkit, PlotMe
+        // @Plugin Depenizen, PlotMe
         // -->
         if (attribute.startsWith("owner")) {
             return dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(plot.getOwnerId())).getAttribute(attribute.fulfill(1));
@@ -165,7 +165,7 @@ public class dPlot implements dObject {
         // @returns dCuboid
         // @description
         // Returns the plot's cuboid.
-        // @Plugin DepenizenBukkit, PlotMe
+        // @Plugin Depenizen, PlotMe
         // -->
         if (attribute.startsWith("cuboid")) {
             dWorld world = dWorld.valueOf(plot.getWorld().getName());

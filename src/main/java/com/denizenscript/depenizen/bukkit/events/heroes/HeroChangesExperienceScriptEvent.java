@@ -41,7 +41,7 @@ public class HeroChangesExperienceScriptEvent extends BukkitScriptEvent implemen
     // @Determine
     // "CANCELLED" to stop the hero from gaining experience.
     //
-    // @Plugin DepenizenBukkit, Heroes
+    // @Plugin Depenizen, Heroes
     // -->
 
     public HeroesHero hero;

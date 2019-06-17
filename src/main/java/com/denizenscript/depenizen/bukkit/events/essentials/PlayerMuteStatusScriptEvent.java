@@ -30,7 +30,7 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
     // @Context
     // <context.status> Returns whether the player is muted.
     //
-    // @Plugin DepenizenBukkit, Essentials
+    // @Plugin Depenizen, Essentials
     //
     // -->
 

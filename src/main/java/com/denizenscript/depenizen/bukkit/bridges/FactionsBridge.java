@@ -50,7 +50,7 @@ public class FactionsBridge extends Bridge {
         // @returns dFaction
         // @description
         // Returns the faction for the input name.
-        // @Plugin DepenizenBukkit, Factions
+        // @Plugin Depenizen, Factions
         // -->
         String nameOrId = attribute.getContext(1);
         Faction f = FactionColl.get().getByName(nameOrId);
@@ -71,7 +71,7 @@ public class FactionsBridge extends Bridge {
         // @returns dList(dFaction)
         // @description
         // Returns a list of all current factions.
-        // @Plugin DepenizenBukkit, Factions
+        // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("list_factions")) {
             dList factions = new dList();

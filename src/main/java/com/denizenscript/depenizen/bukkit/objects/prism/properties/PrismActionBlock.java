@@ -55,7 +55,7 @@ public class PrismActionBlock implements Property {
         // @returns dMaterial
         // @description
         // Returns the main material for this action.
-        // @Plugin DepenizenBukkit, Prism
+        // @Plugin Depenizen, Prism
         // -->
         if (attribute.startsWith("block")) {
             int id = action.getBlockId();
@@ -74,7 +74,7 @@ public class PrismActionBlock implements Property {
         // @returns dMaterial
         // @description
         // Returns the alternate material for this action.
-        // @Plugin DepenizenBukkit, Prism
+        // @Plugin Depenizen, Prism
         // -->
         if (attribute.startsWith("alt_block")) {
             int id = action.getOldBlockId();

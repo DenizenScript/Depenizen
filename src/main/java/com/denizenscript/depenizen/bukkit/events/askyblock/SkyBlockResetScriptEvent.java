@@ -28,7 +28,7 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
     // <context.owner> Returns the owner of the island.
     // <context.location> Returns the location of the island.
     //
-    // @Plugin DepenizenBukkit, A SkyBlock
+    // @Plugin Depenizen, A SkyBlock
     //
     // -->
 

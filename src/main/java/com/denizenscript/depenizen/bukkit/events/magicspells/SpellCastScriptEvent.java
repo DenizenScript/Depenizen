@@ -54,7 +54,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     // "REAGENT:ITEMS:" + dList(dItem) to change the reagent item cost.
     // "CLEAR_REAGENTS" to clear away all reagent costs.
     //
-    // @Plugin DepenizenBukkit, MagicSpells
+    // @Plugin Depenizen, MagicSpells
     //
     // -->
 

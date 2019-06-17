@@ -27,7 +27,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
     // @Context
     // <context.arena> Returns the arena which started.
     //
-    // @Plugin DepenizenBukkit, MobArena
+    // @Plugin Depenizen, MobArena
     //
     // -->
 

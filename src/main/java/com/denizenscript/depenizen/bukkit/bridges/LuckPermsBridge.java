@@ -37,7 +37,7 @@ public class LuckPermsBridge extends Bridge {
         // @returns dList(luckpermstrack)
         // @description
         // Returns a list of all tracks.
-        // @Plugin DepenizenBukkit, LuckPerms
+        // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("list_tracks")) {
             dList tracks = new dList();
@@ -53,7 +53,7 @@ public class LuckPermsBridge extends Bridge {
         // @returns luckpermstrack
         // @description
         // Returns the track from the name given.
-        // @Plugin DepenizenBukkit, LuckPerms
+        // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("track")) {
             if (attribute.hasContext(1)) {

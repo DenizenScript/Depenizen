@@ -47,7 +47,7 @@ public class ResidencePlayerExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the player has a main Residence.
-        // @Plugin DepenizenBukkit, Residence
+        // @Plugin Depenizen, Residence
         // -->
         if (attribute.startsWith("has_main_residence")) {
             ClaimedResidence residence = player.getMainResidence();
@@ -59,7 +59,7 @@ public class ResidencePlayerExtension extends dObjectExtension {
         // @returns dResidence
         // @description
         // Returns the player's current main Residence if they have one.
-        // @Plugin DepenizenBukkit, Residence
+        // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("main_residence")) {
             ClaimedResidence residence = player.getMainResidence();
@@ -73,7 +73,7 @@ public class ResidencePlayerExtension extends dObjectExtension {
         // @returns dList(dResidence)
         // @description
         // Returns the player's current list of Residences.
-        // @Plugin DepenizenBukkit, Residence
+        // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("residences")) {
             dList list = new dList();

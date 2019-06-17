@@ -46,7 +46,7 @@ public class VampirePlayerExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns true if the player is a vampire.
-        // @Plugin DepenizenBukkit, Vampire
+        // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("is_vampire")) {
             return new Element(uPlayer.isVampire()).getAttribute(attribute.fulfill(1));
@@ -57,7 +57,7 @@ public class VampirePlayerExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns true if the player is infected.
-        // @Plugin DepenizenBukkit, Vampire
+        // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("is_ínfected")) {
             return new Element(uPlayer.isInfected()).getAttribute(attribute.fulfill(1));
@@ -68,7 +68,7 @@ public class VampirePlayerExtension extends dObjectExtension {
         // @returns Element(Double)
         // @description
         // Returns the value of the combat infection risk.
-        // @Plugin DepenizenBukkit, Vampire
+        // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("combat_infect")) {
             return new Element(uPlayer.combatInfectRisk()).getAttribute(attribute.fulfill(1));
@@ -79,7 +79,7 @@ public class VampirePlayerExtension extends dObjectExtension {
         // @returns Element(Double)
         // @description
         // Returns the value of the combat damage factor.
-        // @Plugin DepenizenBukkit, Vampire
+        // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("combat_damage")) {
             return new Element(uPlayer.combatDamageFactor()).getAttribute(attribute.fulfill(1));

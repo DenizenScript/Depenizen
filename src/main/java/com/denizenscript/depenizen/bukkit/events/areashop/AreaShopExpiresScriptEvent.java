@@ -28,7 +28,7 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
     // @Context
     // <context.shop> Returns the AreaShop that's expiring.
     //
-    // @Plugin DepenizenBukkit, AreaShop
+    // @Plugin Depenizen, AreaShop
     //
     // -->
 

@@ -28,7 +28,7 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
     // @Context
     // <context.residence> Returns the Residence the player entered.
     //
-    // @Plugin DepenizenBukkit, Residence
+    // @Plugin Depenizen, Residence
     //
     // -->
 

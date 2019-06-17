@@ -28,7 +28,7 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
     // @Context
     // <context.residence> Returns the Residence the player exited.
     //
-    // @Plugin DepenizenBukkit, Residence
+    // @Plugin Depenizen, Residence
     //
     // -->
 

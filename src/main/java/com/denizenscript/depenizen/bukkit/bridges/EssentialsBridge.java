@@ -52,7 +52,7 @@ public class EssentialsBridge extends Bridge {
         // @returns dLocation
         // @description
         // Returns the location of the warp name.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("warp")) {
             if (attribute.hasContext(1)) {
@@ -75,7 +75,7 @@ public class EssentialsBridge extends Bridge {
         // @returns dList(Element)
         // @description
         // Returns a list of all Warp names.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("list_warps")) {
             Essentials essentials = (Essentials) plugin;

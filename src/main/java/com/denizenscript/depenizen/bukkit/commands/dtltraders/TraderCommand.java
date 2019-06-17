@@ -17,7 +17,7 @@ public class TraderCommand extends AbstractCommand {
     // @Name Trader
     // @Syntax trader [open/close] ({buy}/sell) ({stock}/relation)
     // @Group Depenizen
-    // @Plugin DepenizenBukkit, dtlTraders
+    // @Plugin Depenizen, dtlTraders
     // @Required 1
     // @Short Opens or closes an NPC's trading menu.
 

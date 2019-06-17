@@ -28,7 +28,7 @@ public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener
     // <context.spell_name> returns the name of the spell.
     // <context.source> returns the source. Can either be SPELLBOOK, TEACH, TOME or OTHER
     //
-    // @Plugin DepenizenBukkit, MagicSpells
+    // @Plugin Depenizen, MagicSpells
     //
     // -->
 

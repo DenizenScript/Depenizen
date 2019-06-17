@@ -19,7 +19,7 @@ public class HeroesXPCommand extends AbstractCommand {
     // @Name HeroesXP
     // @Syntax heroesxp [add/remove/set] [<heroesclass>] [quantity:<#.#>]
     // @Group Depenizen
-    // @Plugin DepenizenBukkit, Heroes
+    // @Plugin Depenizen, Heroes
     // @Required 3
     // @Short Manipulate Heroes' experience.
 

@@ -63,7 +63,7 @@ public class TownyBridge extends Bridge {
         // @returns dList(Element)
         // @description
         // Returns a list of all towns. Optionally specify a world name.
-        // @Plugin DepenizenBukkit, Towny
+        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("list_towns")) {
             dList towns = new dList();
@@ -95,7 +95,7 @@ public class TownyBridge extends Bridge {
         // @returns dTown
         // @description
         // Returns the town by the input name.
-        // @Plugin DepenizenBukkit, Towny
+        // @Plugin Depenizen, Towny
         // -->
         if (attribute.hasContext(1)) {
             dTown town;
@@ -123,7 +123,7 @@ public class TownyBridge extends Bridge {
         // @returns dNation
         // @description
         // Returns the nation by the input name.
-        // @Plugin DepenizenBukkit, Towny
+        // @Plugin Depenizen, Towny
         // -->
         if (attribute.hasContext(1)) {
             dNation nation;

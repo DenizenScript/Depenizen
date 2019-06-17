@@ -31,7 +31,7 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     // <context.entity> returns the entity who disguised.
     // <context.disguise> returns the disguise in use.
     //
-    // @Plugin DepenizenBukkit, LibsDisguises
+    // @Plugin Depenizen, LibsDisguises
     //
     // -->
 

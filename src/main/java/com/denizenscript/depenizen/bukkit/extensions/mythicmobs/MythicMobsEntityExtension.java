@@ -47,7 +47,7 @@ public class MythicMobsEntityExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the entity is a MythicMob.
-        // @Plugin DepenizenBukkit, MythicMobs
+        // @Plugin Depenizen, MythicMobs
         // -->
         if (attribute.startsWith("is_mythic_mob") || attribute.startsWith("is_mythicmob")) {
             return new Element(MythicMobsBridge.isMythicMob(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
@@ -58,7 +58,7 @@ public class MythicMobsEntityExtension extends dObjectExtension {
         // @returns MythicMobsMob
         // @description
         // Returns the MythicMob for this entity.
-        // @Plugin DepenizenBukkit, MythicMobs
+        // @Plugin Depenizen, MythicMobs
         // -->
         else if ((attribute.startsWith("mythicmob") || attribute.startsWith("mythic_mob"))
                 && MythicMobsBridge.isMythicMob(entity.getBukkitEntity())) {

@@ -46,7 +46,7 @@ public class JobsPlayerExtension extends dObjectExtension {
         // @returns dJob
         // @description
         // Returns the job specified with the player's information attached.
-        // @Plugin DepenizenBukkit, Jobs
+        // @Plugin Depenizen, Jobs
         // -->
         if (attribute.startsWith("jobs")) {
             Job job = null;

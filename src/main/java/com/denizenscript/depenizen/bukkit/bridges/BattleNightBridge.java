@@ -40,7 +40,7 @@ public class BattleNightBridge extends Bridge {
             // @returns Element
             // @description
             // Returns the battle's arena name.
-            // @Plugin DepenizenBukkit, BattleNight
+            // @Plugin Depenizen, BattleNight
             // -->
             if (attribute.startsWith("arena")) {
                 event.setReplacedObject(new Element(api.getBattle().getArena().getName())
@@ -52,7 +52,7 @@ public class BattleNightBridge extends Bridge {
             // @returns Duration
             // @description
             // Returns the amount of time the battle has left.
-            // @Plugin DepenizenBukkit, BattleNight
+            // @Plugin Depenizen, BattleNight
             // -->
             else if (attribute.startsWith("timeremaining") || attribute.startsWith("time_remaining")) {
                 event.setReplacedObject(new Duration(BattleNight.instance.getAPI().getBattle().getTimer().getTimeRemaining())
@@ -65,7 +65,7 @@ public class BattleNightBridge extends Bridge {
         // @returns Element
         // @description
         // Returns true if a battle is in progress.
-        // @Plugin DepenizenBukkit, BattleNight
+        // @Plugin Depenizen, BattleNight
         // -->
         else if (attribute.startsWith("inprogress") || attribute.startsWith("in_progress")) {
             event.setReplacedObject(new Element(api.getBattle().isInProgress())

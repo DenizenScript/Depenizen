@@ -46,7 +46,7 @@ public class PlotSquaredElementExtension extends dObjectExtension {
         // @returns dPlotSquaredPlot
         // @description
         // Returns the element as a dPlotSquaredPlot.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("as_plotsquared_plot")) {
             try {

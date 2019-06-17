@@ -36,7 +36,7 @@ public class HeroChangesLevelScriptEvent extends BukkitScriptEvent implements Li
     // <context.hero> returns the Hero that is changing levels.
     // <context.level> returns the level the Hero is changing to.
     //
-    // @Plugin DepenizenBukkit, Heroes
+    // @Plugin Depenizen, Heroes
     // -->
 
     public HeroesHero hero;

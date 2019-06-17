@@ -38,7 +38,7 @@ public class HeroChangesClassScriptEvent extends BukkitScriptEvent implements Li
     // <context.from> returns the class that the Hero is changing from.
     // <context.hero> returns the Hero changing classes.
     //
-    // @Plugin DepenizenBukkit, Heroes
+    // @Plugin Depenizen, Heroes
     // -->
 
     public HeroesHero hero;

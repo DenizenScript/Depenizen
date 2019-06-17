@@ -60,7 +60,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @mechanism dPlayer.god_mode
         // @description
         // Returns whether the player is currently in god mode.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("god_mode")) {
             return new Element(getUser().isGodModeEnabled()).getAttribute(attribute.fulfill(1));
@@ -71,7 +71,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the player has set at least one home.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("has_home")) {
             return new Element(getUser().hasHome()).getAttribute(attribute.fulfill(1));
@@ -83,7 +83,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @mechanism dPlayer.is_afk
         // @description
         // Returns whether the player is AFK.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("is_afk")) {
             return new Element(getUser().isAfk()).getAttribute(attribute.fulfill(1));
@@ -95,7 +95,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @mechanism dPlayer.is_muted
         // @description
         // Returns whether the player is muted.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("is_muted")) {
             return new Element(getUser().isMuted()).getAttribute(attribute.fulfill(1));
@@ -107,7 +107,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @mechanism dPlayer.is_vanished
         // @description
         // Returns whether the player is vanished.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("is_vanished")) {
             return new Element(getUser().isVanished()).getAttribute(attribute.fulfill(1));
@@ -118,7 +118,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @returns dList(Element/dLocation)
         // @description
         // Returns a list of the homes of the player, in the format "HomeName/l@x,y,z,world".
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("home_list")) {
             dList homes = new dList();
@@ -140,7 +140,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @returns dList(dLocation)
         // @description
         // Returns a list of the locations of homes of the player.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("home_location_list")) {
             dList homes = new dList();
@@ -162,7 +162,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @returns dList(dPlayer)
         // @description
         // Returns a list of the ignored players of the player.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("ignored_players")) {
             dList players = new dList();
@@ -185,7 +185,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @returns dList(Element)
         // @description
         // Returns a list of the names of homes of the player.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("home_name_list")) {
             return new dList(getUser().getHomes()).getAttribute(attribute.fulfill(1));
@@ -196,7 +196,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @returns dList(Element)
         // @description
         // Returns a list of mail the player currently has.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("mail_list")) {
             return new dList(getUser().getMails()).getAttribute(attribute.fulfill(1));
@@ -207,7 +207,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @returns Duration
         // @description
         // Returns how much time is left until the player is muted.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("mute_timeout")) {
             return new Duration((int) (getUser().getMuteTimeout() - new GregorianCalendar().getTimeInMillis()) / 1000)
@@ -220,7 +220,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @mechanism dPlayer.socialspy
         // @description
         // Returns whether the player has SocialSpy enabled.
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("socialspy")) {
             return new Element(getUser().isSocialSpyEnabled()).getAttribute(attribute.fulfill(1));
@@ -240,7 +240,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // Sets whether the player is marked as AFK.
         // @tags
         // <p@player.is_afk>
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if ((mechanism.matches("afk") || mechanism.matches("is_afk")) && mechanism.requireBoolean()) {
             getUser().setAfk(mechanism.getValue().asBoolean());
@@ -254,7 +254,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // Sets whether the player has god mode enabled.
         // @tags
         // <p@player.god_mode>
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (mechanism.matches("god_mode") && mechanism.requireBoolean()) {
             getUser().setGodModeEnabled(mechanism.getValue().asBoolean());
@@ -270,7 +270,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // @tags
         // <p@player.is_muted>
         // <p@player.mute_timeout>
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if ((mechanism.matches("muted") || mechanism.matches("is_muted")) && mechanism.requireBoolean()) {
             if (mechanism.getValue().asString().length() > 0) {
@@ -296,7 +296,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // Sets whether the player has SocialSpy enabled.
         // @tags
         // <p@player.socialspy>
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (mechanism.matches("socialspy") && mechanism.requireBoolean()) {
             getUser().setSocialSpyEnabled(mechanism.getValue().asBoolean());
@@ -310,7 +310,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // Sets whether the player has vanish enabled.
         // @tags
         // <p@player.is_vanished>
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (mechanism.matches("vanish") && mechanism.requireBoolean()) {
             getUser().setVanished(mechanism.getValue().asBoolean());
@@ -325,7 +325,7 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         // Sets whether the player should ignore anther player. If no boolean is provided, it is by default true.
         // @tags
         // <p@player.ignored_players>
-        // @Plugin DepenizenBukkit, Essentials
+        // @Plugin Depenizen, Essentials
         // -->
         if (mechanism.matches("essentials_ignore")) {
             Essentials ess = (Essentials) EssentialsBridge.instance.plugin;

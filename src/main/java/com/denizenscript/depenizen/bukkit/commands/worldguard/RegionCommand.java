@@ -22,7 +22,7 @@ public class RegionCommand extends AbstractCommand {
     // @Name region
     // @Syntax region [{add} <cuboid>/remove <world>] [id:<name>]
     // @Group Depenizen
-    // @Plugin DepenizenBukkit, WorldGuard
+    // @Plugin Depenizen, WorldGuard
     // @Required 2
     // @Short Adds or removes a protected region.
 

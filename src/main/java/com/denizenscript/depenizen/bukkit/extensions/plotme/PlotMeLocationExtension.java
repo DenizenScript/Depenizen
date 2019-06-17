@@ -51,7 +51,7 @@ public class PlotMeLocationExtension extends dObjectExtension {
         // @returns dPlot
         // @description
         // Returns the plot contained by this location.
-        // @Plugin DepenizenBukkit, PlotMe
+        // @Plugin Depenizen, PlotMe
         // -->
         if (attribute.startsWith("plot")) {
             Location l = new Location(new BukkitWorld(location.getWorld()), location.getX(), location.getY(), location.getZ());

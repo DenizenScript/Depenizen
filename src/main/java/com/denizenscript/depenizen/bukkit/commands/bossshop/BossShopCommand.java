@@ -17,7 +17,7 @@ public class BossShopCommand extends AbstractCommand {
     // @Name bossshop
     // @Syntax bossshop [<shop name>] (target:<player>)
     // @Group Depenizen
-    // @Plugin DepenizenBukkit, BossShop
+    // @Plugin Depenizen, BossShop
     // @Required 1
     // @Short Opens a BossShop inventory for a player.
 

@@ -34,7 +34,7 @@ public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent impleme
     // @Determine
     // None
     //
-    // @Plugin DepenizenBukkit, SkillAPI
+    // @Plugin Depenizen, SkillAPI
     // -->
 
     public SkillAPIPlayerLevelsUpScriptEvent() {

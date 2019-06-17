@@ -63,7 +63,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Whether WorldGuard allows to build at a location.
-        // @Plugin DepenizenBukkit, WorldGuard
+        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("can_build") && attribute.hasContext(1)) {
             dLocation location = dLocation.valueOf(attribute.getContext(1));
@@ -81,7 +81,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
         // @description
         // Returns the state of a flag for that player at their location.
         // For example: .test_flag[pvp] returns 'true' when the player can be attacked.
-        // @Plugin DepenizenBukkit, WorldGuard
+        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("test_flag")) {
             if (!attribute.hasContext(1)) {
@@ -103,7 +103,7 @@ public class WorldGuardPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns the state of a flag for that player at the specified location.
-            // @Plugin DepenizenBukkit, WorldGuard
+            // @Plugin Depenizen, WorldGuard
             // -->
             if (attribute.getAttribute(2).startsWith("at") && attribute.hasContext(2)) {
                 loc = dLocation.valueOf(attribute.getContext(2));

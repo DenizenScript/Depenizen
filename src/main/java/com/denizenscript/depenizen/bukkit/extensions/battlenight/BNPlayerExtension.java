@@ -51,7 +51,7 @@ public class BNPlayerExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the player's class.
-            // @Plugin DepenizenBukkit, BattleNight
+            // @Plugin Depenizen, BattleNight
             // -->
             if (attribute.startsWith("class")) {
                 if (api.getPlayerClass(player) != null) {
@@ -65,7 +65,7 @@ public class BNPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns true if the player is in battle.
-            // @Plugin DepenizenBukkit, BattleNight
+            // @Plugin Depenizen, BattleNight
             // -->
             else if (attribute.startsWith("inbattle") || attribute.startsWith("in_battle")) {
                 Battle battle = api.getBattle();
@@ -78,7 +78,7 @@ public class BNPlayerExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the team the player is currenly on.
-            // @Plugin DepenizenBukkit, BattleNight
+            // @Plugin Depenizen, BattleNight
             // -->
             else if (attribute.startsWith("team")) {
                 Battle battle = api.getBattle();

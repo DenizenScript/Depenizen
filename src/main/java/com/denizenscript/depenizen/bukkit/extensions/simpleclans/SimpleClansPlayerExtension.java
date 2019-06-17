@@ -54,7 +54,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
             // @returns dClan
             // @description
             // Returns the clan the player is in, if any.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             if (attribute.startsWith("clan")) {
                 dClan clan = dClan.forPlayer(player);
@@ -69,7 +69,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
             // @returns dClan
             // @description
             // Returns whether the player is in a clan.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             else if (attribute.startsWith("has_clan")) {
                 return new Element(dClan.forPlayer(player) != null).getAttribute(attribute.fulfill(1));
@@ -80,7 +80,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
             // @returns Element(Decimal)
             // @description
             // Returns the player's kill-death ratio.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             else if (attribute.startsWith("kill_death_ratio")) {
                 return new Element(cplayer.getKDR()).getAttribute(attribute.fulfill(1));
@@ -91,7 +91,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
             // @returns Element(Number)
             // @description
             // Returns the number of deaths the player has.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             else if (attribute.startsWith("deaths")) {
                 return new Element(cplayer.getDeaths()).getAttribute(attribute.fulfill(1));
@@ -105,7 +105,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the total number of civilian kills the player has.
-                // @Plugin DepenizenBukkit, SimpleClans
+                // @Plugin Depenizen, SimpleClans
                 // -->
                 if (attribute.startsWith("civilian")) {
                     return new Element(cplayer.getCivilianKills()).getAttribute(attribute.fulfill(1));
@@ -116,7 +116,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the total number of rival kills the player has.
-                // @Plugin DepenizenBukkit, SimpleClans
+                // @Plugin Depenizen, SimpleClans
                 // -->
                 else if (attribute.startsWith("rivals")) {
                     return new Element(cplayer.getRivalKills()).getAttribute(attribute.fulfill(1));
@@ -127,7 +127,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the total number of neutral kills the player has.
-                // @Plugin DepenizenBukkit, SimpleClans
+                // @Plugin Depenizen, SimpleClans
                 // -->
                 else if (attribute.startsWith("neutral")) {
                     return new Element(cplayer.getNeutralKills()).getAttribute(attribute.fulfill(1));
@@ -138,7 +138,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the total number of kills the player has.
-                // @Plugin DepenizenBukkit, SimpleClans
+                // @Plugin Depenizen, SimpleClans
                 // -->
                 else if (attribute.startsWith("total")) {
                     return new Element(cplayer.getCivilianKills()
@@ -153,7 +153,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the player's rank within the clan.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             else if (attribute.startsWith("rank")) {
                 String rank = cplayer.getRank();
@@ -168,7 +168,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns whether the player has trusted status in the clan.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             else if (attribute.startsWith("is_trusted")) {
                 return new Element(cplayer.isTrusted()).getAttribute(attribute.fulfill(1));
@@ -180,7 +180,7 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
             // @description
             // Returns a list of the player's past clan names.
             // NOTE: Due to a limitation of SimpleClans, we can only get names.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             else if (attribute.startsWith("past_clans")) {
                 dList past = new dList();

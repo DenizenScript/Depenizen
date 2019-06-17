@@ -122,7 +122,7 @@ public class LibsDisguise implements dObject {
         // @returns Element
         // @description
         // Returns the type of the disguise.
-        // @Plugin DepenizenBukkit, LibsDisguises
+        // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("type")) {
             return new Element(disguise.getType().toString()).getAttribute(attribute.fulfill(1));
@@ -133,7 +133,7 @@ public class LibsDisguise implements dObject {
         // @returns dEntity
         // @description
         // Returns the entity of the disguise.
-        // @Plugin DepenizenBukkit, LibsDisguises
+        // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("entity")) {
             return new dEntity(disguise.getEntity()).getAttribute(attribute.fulfill(1));
@@ -144,7 +144,7 @@ public class LibsDisguise implements dObject {
         // @returns Element
         // @description
         // Returns the display name of the disguise.
-        // @Plugin DepenizenBukkit, LibsDisguises
+        // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("display_name")) {
             return new Element(disguise.getWatcher().getCustomName()).getAttribute(attribute.fulfill(1));

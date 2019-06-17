@@ -49,7 +49,7 @@ public class TCLocationExtension extends dObjectExtension {
             // @returns Element
             // @description
             // Returns the TerrainControl biome name at this location, if any.
-            // @Plugin DepenizenBukkit, TerrainControl
+            // @Plugin Depenizen, TerrainControl
             // -->
             if (attribute.startsWith("name")) {
                 return new Element(biome.getName()).getAttribute(attribute.fulfill(1));
@@ -61,7 +61,7 @@ public class TCLocationExtension extends dObjectExtension {
                 // @returns Element
                 // @description
                 // Returns the TerrainControl biome temperature at this location, if any.
-                // @Plugin DepenizenBukkit, TerrainControl
+                // @Plugin Depenizen, TerrainControl
                 // -->
                 return new Element(biome.getTemperatureAt(location.getBlockX(), location.getBlockY(), location.getBlockZ()))
                         .getAttribute(attribute.fulfill(1));

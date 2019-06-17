@@ -29,7 +29,7 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
     // @Context
     // <context.town> Returns the town the player entered.
     //
-    // @Plugin DepenizenBukkit, Towny
+    // @Plugin Depenizen, Towny
     //
     // -->
 

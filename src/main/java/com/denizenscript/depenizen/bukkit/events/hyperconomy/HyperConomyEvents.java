@@ -79,7 +79,7 @@ public class HyperConomyEvents implements HyperEventListener {
             // @Determine
             // NONE
             //
-            // @Plugin DepenizenBukkit, HyperConomy
+            // @Plugin Depenizen, HyperConomy
             // -->
             case BUY:
                 context.put("item", item);
@@ -104,7 +104,7 @@ public class HyperConomyEvents implements HyperEventListener {
             // @Determine
             // NONE
             //
-            // @Plugin DepenizenBukkit, HyperConomy
+            // @Plugin Depenizen, HyperConomy
             // -->
             case SELL:
                 context.put("item", item);

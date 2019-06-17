@@ -1,4 +1,4 @@
-# DepenizenBukkit
+# Depenizen
 Supported Plugins: (And the sources we acquired Jar files from.)
 
 - AreaShop (https://www.spigotmc.org/resources/areashop.2991/)

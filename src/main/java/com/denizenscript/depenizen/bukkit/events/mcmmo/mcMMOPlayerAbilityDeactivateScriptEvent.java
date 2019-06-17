@@ -36,7 +36,7 @@ public class mcMMOPlayerAbilityDeactivateScriptEvent extends BukkitScriptEvent i
     // <context.ability> returns the name of the ability.
     // <context.skill_level> returns the skill level from the ability.
     //
-    // @Plugin DepenizenBukkit, mcMMO
+    // @Plugin Depenizen, mcMMO
     //
     // -->
 

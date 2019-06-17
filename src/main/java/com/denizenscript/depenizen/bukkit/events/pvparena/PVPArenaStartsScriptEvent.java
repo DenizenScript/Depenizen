@@ -29,7 +29,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
     // @Context
     // <context.fighters> returns a list of all fighters in the arena.
     //
-    // @Plugin DepenizenBukkit, PVPArena
+    // @Plugin Depenizen, PVPArena
     //
     // -->
 

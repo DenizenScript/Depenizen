@@ -52,7 +52,7 @@ public class PlotSquaredPlayerExtension extends dObjectExtension {
         // @returns dList(dPlotSquaredPlot)
         // @description
         // Returns a list of plots a player has in a world. Exclude the context to get plots in all worlds.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("plotsquared_plots")) {
             if (attribute.hasContext(1)) {

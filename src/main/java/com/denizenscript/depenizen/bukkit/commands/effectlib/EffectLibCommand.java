@@ -21,7 +21,7 @@ public class EffectLibCommand extends AbstractCommand {
     // @Name effectlib
     // @Syntax effectlib (type:<effect name>) (duration:<duration>) (target:<entity>)
     // @Group Depenizen
-    // @Plugin DepenizenBukkit, EffectLib
+    // @Plugin Depenizen, EffectLib
     // @Required 1
     // @Short Show custom effects using EffectLib
 

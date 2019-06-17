@@ -48,7 +48,7 @@ public class MagicSpellsPlayerExtension extends dObjectExtension {
             // @returns Element(Number)
             // @description
             // Returns the mana of the player.
-            // @Plugin DepenizenBukkit, MagicSpells
+            // @Plugin Depenizen, MagicSpells
             // -->
             if (attribute.startsWith("mana")) {
                 ManaHandler mH = MagicSpells.getManaHandler();

@@ -120,7 +120,7 @@ public class dParty implements dObject {
         // @returns Element
         // @description
         // Returns the name of the party.
-        // @Plugin DepenizenBukkit, mcMMO
+        // @Plugin Depenizen, mcMMO
         // -->
         if (attribute.startsWith("name")) {
             return new Element(party.getName()).getAttribute(attribute.fulfill(1));
@@ -131,7 +131,7 @@ public class dParty implements dObject {
         // @returns dPlayer
         // @description
         // Returns the leader of the party.
-        // @Plugin DepenizenBukkit, mcMMO
+        // @Plugin Depenizen, mcMMO
         // -->
         else if (attribute.startsWith("leader")) {
             return new dPlayer(party.getLeader().getUniqueId()).getAttribute(attribute.fulfill(1));
@@ -142,7 +142,7 @@ public class dParty implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all party members.
-        // @Plugin DepenizenBukkit, mcMMO
+        // @Plugin Depenizen, mcMMO
         // -->
         else if (attribute.startsWith("members")) {
             dList players = new dList();

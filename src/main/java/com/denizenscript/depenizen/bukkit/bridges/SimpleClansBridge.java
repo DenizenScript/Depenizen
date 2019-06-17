@@ -41,7 +41,7 @@ public class SimpleClansBridge extends Bridge {
         // @returns dClan
         // @description
         // Returns the clan for the input name.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         Attribute attribute = event.getAttributes();
         if (attribute.startsWith("clan") && attribute.hasContext(1)) {
@@ -63,7 +63,7 @@ public class SimpleClansBridge extends Bridge {
         // @returns dList(dClan)
         // @description
         // Returns a list of all clans.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         if (attribute.startsWith("list_clans")) {
             dList clans = new dList();
@@ -78,7 +78,7 @@ public class SimpleClansBridge extends Bridge {
         // @returns dList(dClan)
         // @description
         // Returns a list of all unverified clans.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("list_unverified_clans")) {
             dList clans = new dList();
@@ -95,7 +95,7 @@ public class SimpleClansBridge extends Bridge {
         // @returns dList(dClan)
         // @description
         // Returns a list of all verified clans.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("list_verified_clans")) {
             dList clans = new dList();

@@ -31,7 +31,7 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
     // @Context
     // <context.plot> returns the plot the player left.
     //
-    // @Plugin DepenizenBukkit, PlotSquared
+    // @Plugin Depenizen, PlotSquared
     //
     // -->
 

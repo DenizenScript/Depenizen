@@ -36,7 +36,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     // @Determine
     // Element(Number) to set a new mana value.
     //
-    // @Plugin DepenizenBukkit, MagicSpells
+    // @Plugin Depenizen, MagicSpells
     //
     // -->
 

@@ -46,7 +46,7 @@ public class TownyLocationExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the location is within a town.
-        // @Plugin DepenizenBukkit, Towny
+        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("has_town")) {
             if (TownyUniverse.getTownName(location) != null) {
@@ -62,7 +62,7 @@ public class TownyLocationExtension extends dObjectExtension {
         // @returns dTown
         // @description
         // Returns the town at the specified location.
-        // @Plugin DepenizenBukkit, Towny
+        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("town")) {
             try {
@@ -85,7 +85,7 @@ public class TownyLocationExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the location is wilderness.
-        // @Plugin DepenizenBukkit, Towny
+        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("is_wilderness")) {
             return new Element(TownyUniverse.isWilderness(location.getBlock())).getAttribute(attribute.fulfill(1));

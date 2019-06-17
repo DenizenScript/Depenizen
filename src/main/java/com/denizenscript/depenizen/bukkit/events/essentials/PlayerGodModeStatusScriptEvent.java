@@ -29,7 +29,7 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
     // @Context
     // <context.status> Returns the player's god mode status.
     //
-    // @Plugin DepenizenBukkit, Essentials
+    // @Plugin Depenizen, Essentials
     //
     // -->
 

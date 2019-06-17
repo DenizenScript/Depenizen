@@ -52,7 +52,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     // "CURRENCY:" + Element(Decimal) to specify the new amount of currency to be dropped.
     // dList(dItem) to specify new items to be dropped.
     //
-    // @Plugin DepenizenBukkit, MythicMobs
+    // @Plugin Depenizen, MythicMobs
     //
     // -->
 

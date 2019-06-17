@@ -48,7 +48,7 @@ public class ShopKeepersEntityExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the entity is a Shopkeeper.
-        // @Plugin DepenizenBukkit, ShopKeepers
+        // @Plugin Depenizen, ShopKeepers
         // -->
         if (attribute.startsWith("is_shopkeeper")) {
             return new Element(isShopKeeper)
@@ -60,7 +60,7 @@ public class ShopKeepersEntityExtension extends dObjectExtension {
         // @returns ShopKeeper
         // @description
         // Returns the ShopKeeper for this entity.
-        // @Plugin DepenizenBukkit, ShopKeepers
+        // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("shopkeeper") && isShopKeeper) {
             return ShopKeeper.fromEntity(entity).getAttribute(attribute.fulfill(1));

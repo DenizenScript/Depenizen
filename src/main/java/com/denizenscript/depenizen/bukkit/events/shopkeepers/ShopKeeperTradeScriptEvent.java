@@ -29,7 +29,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     // <context.recipe> Returns the recipe for this trade.
     // <context.shopkeeper> Returns the ShopKeeper that the trade occured with.
     //
-    // @Plugin DepenizenBukkit, ShopKeepers
+    // @Plugin Depenizen, ShopKeepers
     //
     // -->
 

@@ -113,7 +113,7 @@ public class dResidence implements dObject {
         // @returns Element
         // @description
         // Returns the name of the residence.
-        // @Plugin DepenizenBukkit, Residence
+        // @Plugin Depenizen, Residence
         // -->
         if (attribute.startsWith("name")) {
             return new Element(residence.getName()).getAttribute(attribute.fulfill(1));
@@ -124,7 +124,7 @@ public class dResidence implements dObject {
         // @returns dPlayer
         // @description
         // Returns the owner of the residence.
-        // @Plugin DepenizenBukkit, Residence
+        // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("owner")) {
             return new dPlayer(residence.getOwnerUUID()).getAttribute(attribute.fulfill(1));
@@ -135,7 +135,7 @@ public class dResidence implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns whether the specified location is within this Residence.
-        // @Plugin DepenizenBukkit, Residence
+        // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("is_within") && attribute.hasContext(1)) {
             dLocation location = dLocation.valueOf(attribute.getContext(1));

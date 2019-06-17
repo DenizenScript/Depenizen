@@ -50,7 +50,7 @@ public class PlayerPointsPlayerExtension extends dObjectExtension {
         // @returns Element(Number)
         // @description
         // Returns the amount of points the player has. Only works on online players.
-        // @Plugin DepenizenBukkit, PlayerPoints
+        // @Plugin Depenizen, PlayerPoints
         // -->
         if (attribute.startsWith("playerpoints_points")) {
             return new Element(((PlayerPoints) PlayerPointsBridge.instance.plugin).getAPI()

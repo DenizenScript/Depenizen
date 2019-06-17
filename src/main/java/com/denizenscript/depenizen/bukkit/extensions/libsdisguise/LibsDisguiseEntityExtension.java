@@ -46,7 +46,7 @@ public class LibsDisguiseEntityExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the entity is in a disguise.
-        // @Plugin DepenizenBukkit, LibsDisguises
+        // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("is_disguised") || attribute.startsWith("is_disguise")) {
             return new Element(DisguiseAPI.isDisguised(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
@@ -57,7 +57,7 @@ public class LibsDisguiseEntityExtension extends dObjectExtension {
         // @returns dlibsdisguise
         // @description
         // Returns the disguise of the entity.
-        // @Plugin DepenizenBukkit, LibsDisguises
+        // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("disguise")
                 && DisguiseAPI.isDisguised(entity.getBukkitEntity())) {

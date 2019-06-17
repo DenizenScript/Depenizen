@@ -74,7 +74,7 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         // Output is in format: type|size|range|material
         //
         // Note that some values may be listed as "unknown" or strange values due to WorldEdit having a messy API (no way to automatically stringify brush data).
-        // @Plugin DepenizenBukkit, WorldEdit
+        // @Plugin Depenizen, WorldEdit
         // -->
         if (attribute.startsWith("we_brush_info")) {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
@@ -116,7 +116,7 @@ public class WorldEditPlayerExtension extends dObjectExtension {
         // @returns dCuboid
         // @description
         // Returns the player's current region selection, as a dCuboid.
-        // @Plugin DepenizenBukkit, WorldEdit
+        // @Plugin Depenizen, WorldEdit
         // -->
         if (attribute.startsWith("selected_region")) {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;

@@ -133,7 +133,7 @@ public class dPlotSquaredPlot implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the plot's X coordinate portion of its ID.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("x")) {
             return new Element(plot.getId().x).getAttribute(attribute.fulfill(1));
@@ -144,7 +144,7 @@ public class dPlotSquaredPlot implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the plot's Z coordinate portion of its ID.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("z")) {
             return new Element(plot.getId().y).getAttribute(attribute.fulfill(1));
@@ -155,7 +155,7 @@ public class dPlotSquaredPlot implements dObject {
         // @returns dLocation
         // @description
         // Returns the plot's current home location.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("home")) {
             com.intellectualcrafters.plot.object.Location loca = plot.getHome();
@@ -167,7 +167,7 @@ public class dPlotSquaredPlot implements dObject {
         // @returns dLocation
         // @description
         // Returns the plot's default home location.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("default_home")) {
             com.intellectualcrafters.plot.object.Location loca = plot.getDefaultHome();
@@ -179,7 +179,7 @@ public class dPlotSquaredPlot implements dObject {
         // @returns dWorld
         // @description
         // Returns the plot's world.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("world")) {
             return dWorld.valueOf(plot.getArea().worldname).getAttribute(attribute.fulfill(1));
@@ -190,7 +190,7 @@ public class dPlotSquaredPlot implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all owners of the plot.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("owners")) {
             dList players = new dList();
@@ -205,7 +205,7 @@ public class dPlotSquaredPlot implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all trusted of the plot.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("trusted")) {
             dList players = new dList();
@@ -220,7 +220,7 @@ public class dPlotSquaredPlot implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all members of the plot.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("members")) {
             dList players = new dList();
@@ -235,7 +235,7 @@ public class dPlotSquaredPlot implements dObject {
         // @returns dCuboid
         // @description
         // Returns the plot's cuboid.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("cuboid")) {
             dWorld world = dWorld.valueOf(plot.getArea().worldname);
@@ -249,7 +249,7 @@ public class dPlotSquaredPlot implements dObject {
         // @returns dList(dCuboid)
         // @description
         // Returns all the plot's cuboids in a list. Useful for merged plots.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("all_cuboids")) {
             dList cuboids = new dList();

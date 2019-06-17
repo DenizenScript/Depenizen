@@ -29,7 +29,7 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
     // @Context
     // <context.status> Returns the player's afk status.
     //
-    // @Plugin DepenizenBukkit, Essentials
+    // @Plugin Depenizen, Essentials
     //
     // -->
 

@@ -29,7 +29,7 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
     // <context.island_location> Returns the location of the island.
     // <context.location> Returns the location the player exited at.
     //
-    // @Plugin DepenizenBukkit, A SkyBlock
+    // @Plugin Depenizen, A SkyBlock
     //
     // -->
 

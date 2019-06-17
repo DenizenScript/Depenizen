@@ -32,7 +32,7 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
     // @Determine
     // None
     //
-    // @Plugin DepenizenBukkit, SkillAPI
+    // @Plugin Depenizen, SkillAPI
     // -->
 
     public SkillAPIPlayerUnlocksSkillScriptEvent() {

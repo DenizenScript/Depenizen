@@ -35,7 +35,7 @@ public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listen
     // <context.service> returns what service was used to send the vote.
     // <context.username> returns the username input with the vote.
     //
-    // @Plugin DepenizenBukkit, Votifier
+    // @Plugin Depenizen, Votifier
     // -->
 
     public Vote vote;

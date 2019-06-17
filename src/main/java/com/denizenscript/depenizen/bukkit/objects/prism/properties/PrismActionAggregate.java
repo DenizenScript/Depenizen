@@ -53,7 +53,7 @@ public class PrismActionAggregate implements Property {
         // @returns dMaterial
         // @description
         // Returns the new material for this action.
-        // @Plugin DepenizenBukkit, Prism
+        // @Plugin Depenizen, Prism
         // -->
         if (attribute.startsWith("aggregate")) {
             return new Element(action.getAggregateCount()).getAttribute(attribute.fulfill(1));

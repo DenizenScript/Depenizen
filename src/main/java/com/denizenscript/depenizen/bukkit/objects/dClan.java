@@ -117,7 +117,7 @@ public class dClan implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Returns the leaders of the clan.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         if (attribute.startsWith("leaders")) {
             dList leaders = new dList();
@@ -132,7 +132,7 @@ public class dClan implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Returns all the members of the clan (including leaders).
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("members")) {
             dList members = new dList();
@@ -147,7 +147,7 @@ public class dClan implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns the whether the clan is verified.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("is_verified")) {
             return new Element(clan.isVerified()).getAttribute(attribute.fulfill(1));
@@ -158,7 +158,7 @@ public class dClan implements dObject {
         // @returns dList(dClan)
         // @description
         // Returns the ally clans of the clan.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("allies")) {
             dList allies = new dList();
@@ -173,7 +173,7 @@ public class dClan implements dObject {
         // @returns dList(dClan)
         // @description
         // Returns the rival clans of the clan.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("rivals")) {
             dList rivals = new dList();
@@ -189,7 +189,7 @@ public class dClan implements dObject {
         // @returns Element(Number)
         // @description
         // Returns the total number of deaths the clan has.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("deaths")) {
             return new Element(clan.getTotalDeaths()).getAttribute(attribute.fulfill(1));
@@ -203,7 +203,7 @@ public class dClan implements dObject {
             // @returns Element(Number)
             // @description
             // Returns the total number of civilian kills the clan has.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             if (attribute.startsWith("civilian")) {
                 return new Element(clan.getTotalCivilian()).getAttribute(attribute.fulfill(1));
@@ -214,7 +214,7 @@ public class dClan implements dObject {
             // @returns Element(Number)
             // @description
             // Returns the total number of rival kills the clan has.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             else if (attribute.startsWith("rivals")) {
                 return new Element(clan.getTotalRival()).getAttribute(attribute.fulfill(1));
@@ -225,7 +225,7 @@ public class dClan implements dObject {
             // @returns Element(Number)
             // @description
             // Returns the total number of neutral kills the clan has.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             else if (attribute.startsWith("neutral")) {
                 return new Element(clan.getTotalNeutral()).getAttribute(attribute.fulfill(1));
@@ -236,7 +236,7 @@ public class dClan implements dObject {
             // @returns Element(Number)
             // @description
             // Returns the total number of kills the clan has.
-            // @Plugin DepenizenBukkit, SimpleClans
+            // @Plugin Depenizen, SimpleClans
             // -->
             else if (attribute.startsWith("total")) {
                 return new Element(clan.getTotalCivilian()
@@ -253,7 +253,7 @@ public class dClan implements dObject {
         // @returns Element(Decimal)
         // @description
         // Returns the kill death ratio of the clan.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("kill_death_ratio")) {
             return new Element(clan.getTotalKDR()).getAttribute(attribute.fulfill(1));
@@ -264,7 +264,7 @@ public class dClan implements dObject {
         // @returns dLocation
         // @description
         // Returns the clans home location if it has one.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("home_location")) {
             Location home = clan.getHomeLocation();
@@ -279,7 +279,7 @@ public class dClan implements dObject {
         // @returns Element
         // @description
         // Returns the clan's name.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("name")) {
             return new Element(clan.getName()).getAttribute(attribute.fulfill(1));
@@ -290,7 +290,7 @@ public class dClan implements dObject {
         // @returns Element
         // @description
         // Returns the clan's tag.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("tag")) {
             return new Element(clan.getTag()).getAttribute(attribute.fulfill(1));
@@ -301,7 +301,7 @@ public class dClan implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns whether the clan is at war with another clan.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("warring_with") && attribute.hasContext(1)) {
             dClan opponent = dClan.valueOf(attribute.getContext(1));
@@ -316,7 +316,7 @@ public class dClan implements dObject {
         // @returns Element(Boolean)
         // @description
         // Returns whether the clan has friendly fire enabled.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("friendly_fire")) {
             return new Element(clan.isFriendlyFire()).getAttribute(attribute.fulfill(1));
@@ -327,7 +327,7 @@ public class dClan implements dObject {
         // @returns dList(Element)
         // @description
         // Returns a list of all bulletin board messages for the clan.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("bulletin_board")) {
             dList board = new dList();
@@ -343,7 +343,7 @@ public class dClan implements dObject {
         // @description
         // Always returns 'Clan' for dClan objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin DepenizenBukkit, SimpleClans
+        // @Plugin Depenizen, SimpleClans
         // -->
         else if (attribute.startsWith("type")) {
             return new Element("Clan").getAttribute(attribute.fulfill(1));

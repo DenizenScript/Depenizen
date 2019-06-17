@@ -31,7 +31,7 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
     // <context.plot> returns the plot the player claimed.
     // <context.auto> returns true if the plot was claimed automatic.
     //
-    // @Plugin DepenizenBukkit, PlotSquared
+    // @Plugin Depenizen, PlotSquared
     //
     // -->
 

@@ -126,7 +126,7 @@ public class LuckPermsTrack implements dObject {
         // @returns Element
         // @description
         // Returns the name of the track.
-        // @Plugin DepenizenBukkit, LuckPerms
+        // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("name")) {
             return new Element(track.getName()).getAttribute(attribute.fulfill(1));
@@ -137,7 +137,7 @@ public class LuckPermsTrack implements dObject {
         // @returns dList(Element)
         // @description
         // Returns the list of groups in the track.
-        // @Plugin DepenizenBukkit, LuckPerms
+        // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("groups")) {
             dList groups = new dList();

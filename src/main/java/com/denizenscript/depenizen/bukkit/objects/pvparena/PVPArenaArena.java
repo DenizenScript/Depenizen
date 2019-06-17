@@ -98,7 +98,7 @@ public class PVPArenaArena implements dObject {
         // @returns Element
         // @description
         // Returns the name of the arena.
-        // @Plugin DepenizenBukkit, PVPArena
+        // @Plugin Depenizen, PVPArena
         // -->
         if (attribute.startsWith("name")) {
             return new Element(arena.getName()).getAttribute(attribute.fulfill(1));
@@ -109,7 +109,7 @@ public class PVPArenaArena implements dObject {
         // @returns dList(dPlayer)
         // @description
         // Returns a list of all fighters in the arena.
-        // @Plugin DepenizenBukkit, PvPArena
+        // @Plugin Depenizen, PvPArena
         // -->
         else if (attribute.startsWith("fighters")) {
             dList fighters = new dList();
@@ -130,7 +130,7 @@ public class PVPArenaArena implements dObject {
         // @description
         // Always returns 'PVPArena' for PVPArena objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin DepenizenBukkit, PVPArena
+        // @Plugin Depenizen, PVPArena
         // -->
         else if (attribute.startsWith("type")) {
             return new Element("PVPArena").getAttribute(attribute.fulfill(1));

@@ -29,7 +29,7 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
     // @Context
     // <context.plot> returns the plot that is cleared.
     //
-    // @Plugin DepenizenBukkit, PlotSquared
+    // @Plugin Depenizen, PlotSquared
     //
     // -->
 

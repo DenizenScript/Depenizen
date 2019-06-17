@@ -57,7 +57,7 @@ public class ASkyBlockPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns whether the player has a skyblock.
-            // @Plugin DepenizenBukkit, A SkyBlock
+            // @Plugin Depenizen, A SkyBlock
             // -->
             if (attribute.startsWith("has_skyblock")) {
                 return new Element(api.hasIsland(player.getOfflinePlayer().getUniqueId()))
@@ -70,7 +70,7 @@ public class ASkyBlockPlayerExtension extends dObjectExtension {
                 // @returns dLocation
                 // @description
                 // Returns the centre of the player's skyblock.
-                // @Plugin DepenizenBukkit, A SkyBlock
+                // @Plugin Depenizen, A SkyBlock
                 // -->
                 if (attribute.startsWith("center") || attribute.startsWith("centre")) {
                     return new dLocation(skyblock.getCenter()).getAttribute(attribute.fulfill(1));
@@ -81,7 +81,7 @@ public class ASkyBlockPlayerExtension extends dObjectExtension {
                 // @returns dLocation
                 // @description
                 // Returns the spawnpoint of the player's skyblock.
-                // @Plugin DepenizenBukkit, A SkyBlock
+                // @Plugin Depenizen, A SkyBlock
                 // -->
                 else if (attribute.startsWith("spawn_point")) {
                     return new dLocation(skyblock.getSpawnPoint()).getAttribute(attribute.fulfill(1));
@@ -92,7 +92,7 @@ public class ASkyBlockPlayerExtension extends dObjectExtension {
                 // @returns dList(dPlayer)
                 // @description
                 // Returns a list of members of the player's skyblock.
-                // @Plugin DepenizenBukkit, A SkyBlock
+                // @Plugin Depenizen, A SkyBlock
                 // -->
                 else if (attribute.startsWith("members")) {
                     dList m = new dList();
@@ -107,7 +107,7 @@ public class ASkyBlockPlayerExtension extends dObjectExtension {
                 // @returns Element(Number)
                 // @description
                 // Returns the level of the player's skyblock.
-                // @Plugin DepenizenBukkit, A SkyBlock
+                // @Plugin Depenizen, A SkyBlock
                 // -->
                 else if (attribute.startsWith("level")) {
                     return new Element(api.getIslandLevel(player.getOfflinePlayer().getUniqueId()))

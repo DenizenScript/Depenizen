@@ -29,7 +29,7 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
     // @Context
     // <context.plot> returns the plot the player entered.
     //
-    // @Plugin DepenizenBukkit, PlotSquared
+    // @Plugin Depenizen, PlotSquared
     //
     // -->
 

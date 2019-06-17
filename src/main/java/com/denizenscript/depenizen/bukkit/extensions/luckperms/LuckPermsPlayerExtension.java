@@ -52,7 +52,7 @@ public class LuckPermsPlayerExtension extends dObjectExtension {
         // @returns dList(luckpermstrack)
         // @description
         // Returns a list of tracks the player is in.
-        // @Plugin DepenizenBukkit, LuckPerms
+        // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("luckperms_tracks")) {
             dList tracks = new dList();

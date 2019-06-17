@@ -18,7 +18,7 @@ public class MythicSpawnCommand extends AbstractCommand {
     // @Name MythicSpawn
     // @Syntax mythicspawn [<name>] [<location>] (level:<#>)
     // @Group Depenizen
-    // @Plugin DepenizenBukkit, MythicMobs
+    // @Plugin Depenizen, MythicMobs
     // @Required 2
     // @Short Spawns a MythicMob at a location.
     //

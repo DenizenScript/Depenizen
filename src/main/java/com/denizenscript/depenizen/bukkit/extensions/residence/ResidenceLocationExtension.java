@@ -49,7 +49,7 @@ public class ResidenceLocationExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns if the location has a residence.
-        // @Plugin DepenizenBukkit, Residence
+        // @Plugin Depenizen, Residence
         // -->
         if (attribute.startsWith("has_residence")) {
             ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);
@@ -61,7 +61,7 @@ public class ResidenceLocationExtension extends dObjectExtension {
         // @returns dResidence
         // @description
         // Returns the residence contained by this location.
-        // @Plugin DepenizenBukkit, Residence
+        // @Plugin Depenizen, Residence
         // -->
         if (attribute.startsWith("residence")) {
             ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);

@@ -16,7 +16,7 @@ public class PlayerPointsCommand extends AbstractCommand {
     // @Name playerpoints
     // @Syntax playerpoints [set/give/take] (amount:<amount>) (target:<player>)
     // @Group Depenizen
-    // @Plugin DepenizenBukkit, PlayerPoints
+    // @Plugin Depenizen, PlayerPoints
     // @Required 2
     // @Short Adjusts the amount of points the player has.
 

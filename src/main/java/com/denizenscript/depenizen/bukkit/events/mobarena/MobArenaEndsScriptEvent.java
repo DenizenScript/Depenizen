@@ -29,7 +29,7 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     // <context.arena> Returns the arena which ended.
     // <context.wave> Returns the number of the final wave.
     //
-    // @Plugin DepenizenBukkit, MobArena
+    // @Plugin Depenizen, MobArena
     //
     // -->
 

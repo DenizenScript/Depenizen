@@ -29,7 +29,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     // @Context
     // <context.town> Returns the town the player exited.
     //
-    // @Plugin DepenizenBukkit, Towny
+    // @Plugin Depenizen, Towny
     //
     // -->
 

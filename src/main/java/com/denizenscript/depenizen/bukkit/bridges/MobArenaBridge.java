@@ -49,7 +49,7 @@ public class MobArenaBridge extends Bridge {
         // @returns MobArena
         // @description
         // Returns the mob arena for the input name.
-        // @Plugin DepenizenBukkit, MobArena
+        // @Plugin Depenizen, MobArena
         // -->
         if (attribute.hasContext(1)) {
             MobArenaArena arena = MobArenaArena.valueOf(attribute.getContext(1));
@@ -69,7 +69,7 @@ public class MobArenaBridge extends Bridge {
         // @returns dList(MobArena)
         // @description
         // Returns a list of all MobArenas.
-        // @Plugin DepenizenBukkit, MobArena
+        // @Plugin Depenizen, MobArena
         // -->
         if (attribute.startsWith("list_arenas")) {
             dList arenas = new dList();

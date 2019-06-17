@@ -31,7 +31,7 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
     // <context.entity> returns the entity who undisguised.
     // <context.disguise> returns the disguise in use.
     //
-    // @Plugin DepenizenBukkit, LibsDisguises
+    // @Plugin Depenizen, LibsDisguises
     //
     // -->
 

@@ -55,7 +55,7 @@ public class PrismActionLocation implements Property {
         // @returns dLocation
         // @description
         // Returns the location this action occurred at.
-        // @Plugin DepenizenBukkit, Prism
+        // @Plugin Depenizen, Prism
         // -->
         if (attribute.startsWith("location")) {
             return new dLocation(Bukkit.getServer().getWorld(action.getWorldName()),

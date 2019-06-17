@@ -27,7 +27,7 @@ public class PlayerLeavesPVPArenaScriptEvent extends BukkitScriptEvent implement
     // @Context
     // <context.arena> returns the arena denizen object.
     //
-    // @Plugin DepenizenBukkit, PVPArena
+    // @Plugin Depenizen, PVPArena
     //
     // -->
 

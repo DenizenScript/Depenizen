@@ -33,7 +33,7 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
     // <context.cause> returns the cause of the level change.
     // Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
     //
-    // @Plugin DepenizenBukkit, mcMMO
+    // @Plugin Depenizen, mcMMO
     //
     // -->
 

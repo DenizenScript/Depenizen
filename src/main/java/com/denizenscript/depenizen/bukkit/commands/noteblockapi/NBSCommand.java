@@ -26,7 +26,7 @@ public class NBSCommand extends AbstractCommand {
     // @Name nbs
     // @Syntax nbs [play/stop] (file:<file path>) [targets:<entity>|...]
     // @Group Depenizen
-    // @Plugin DepenizenBukkit, NoteBlockAPI
+    // @Plugin Depenizen, NoteBlockAPI
     // @Required 2
     // @Short Plays or stops a noteblock song.
 

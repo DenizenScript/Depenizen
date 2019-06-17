@@ -49,7 +49,7 @@ public class NoteBlockAPIPlayerExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns true if the player is currently listening to a note block song.
-        // @Plugin DepenizenBukkit, NoteBlockAPI
+        // @Plugin Depenizen, NoteBlockAPI
         // -->
         if (attribute.startsWith("nbs_is_playing")) {
             return new Element(NoteBlockAPI.isReceivingSong(player.getPlayerEntity())).getAttribute(attribute.fulfill(1));

@@ -50,7 +50,7 @@ public class PlotMeWorldExtension extends dObjectExtension {
         // @returns Element(Boolean)
         // @description
         // Returns whether the world is a plot world.
-        // @Plugin DepenizenBukkit, PlotMe
+        // @Plugin Depenizen, PlotMe
         // -->
         if (attribute.startsWith("is_plot_world")) {
             return new Element(PlotMeCoreManager.getInstance().isPlotWorld(new BukkitWorld(world.getWorld()))).getAttribute(attribute.fulfill(1));

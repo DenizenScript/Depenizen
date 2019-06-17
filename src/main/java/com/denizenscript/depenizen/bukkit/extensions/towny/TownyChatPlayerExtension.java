@@ -54,7 +54,7 @@ public class TownyChatPlayerExtension extends dObjectExtension {
             // @returns dList(Element)
             // @description
             // Returns a list of all channels the player is in.
-            // @Plugin DepenizenBukkit, Towny
+            // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("channel")) {
                 dList chans = new dList();
@@ -69,7 +69,7 @@ public class TownyChatPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns whether the player is muted in the specified channel.
-            // @Plugin DepenizenBukkit, Towny
+            // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("muted_in") && attribute.hasContext(1)) {
                 Channel c = holder.getChannel(attribute.getAttribute(1));
@@ -84,7 +84,7 @@ public class TownyChatPlayerExtension extends dObjectExtension {
             // @returns Element(Boolean)
             // @description
             // Returns whether the player has permissions to join the specified channel.
-            // @Plugin DepenizenBukkit, Towny
+            // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("has_permission") && attribute.hasContext(1)) {
                 Channel c = holder.getChannel(attribute.getContext(1));

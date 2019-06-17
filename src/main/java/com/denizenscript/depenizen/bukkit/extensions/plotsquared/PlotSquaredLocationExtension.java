@@ -49,7 +49,7 @@ public class PlotSquaredLocationExtension extends dObjectExtension {
         // @returns dPlotSquaredPlot
         // @description
         // Returns the plot contained by this location.
-        // @Plugin DepenizenBukkit, PlotSquared
+        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("plotsquared_plot")) {
             try {

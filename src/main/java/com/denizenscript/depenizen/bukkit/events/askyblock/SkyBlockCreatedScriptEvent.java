@@ -30,7 +30,7 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
     // <context.location> Returns the location of the island.
     // <context.schematic> Returns the name of the schematic used for the island.
     //
-    // @Plugin DepenizenBukkit, A SkyBlock
+    // @Plugin Depenizen, A SkyBlock
     //
     // -->
 

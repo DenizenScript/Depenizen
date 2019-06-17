@@ -54,7 +54,7 @@ public class JobsBridge extends Bridge {
             // @returns dList(dJob)/dJob
             // @description
             // Returns a list of all known dJobs, or the job by the given input name if one is given.
-            // @Plugin DepenizenBukkit, Jobs
+            // @Plugin Depenizen, Jobs
             // -->
             dList jobList = new dList();
             for (Job jb : Jobs.getJobs()) {
