@@ -9,7 +9,7 @@ import net.aufdemrand.denizencore.objects.dList;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.TagContext;
-import com.denizenscript.depenizen.bukkit.support.plugins.HeroesSupport;
+import com.denizenscript.depenizen.bukkit.bridges.HeroesSupport;
 import org.bukkit.Material;
 import net.aufdemrand.denizen.utilities.blocks.OldMaterialsHelper;
 

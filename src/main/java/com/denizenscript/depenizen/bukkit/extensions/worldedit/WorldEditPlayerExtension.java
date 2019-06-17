@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.extensions.worldedit;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.WorldEditSupport;
+import com.denizenscript.depenizen.bukkit.bridges.WorldEditSupport;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.command.tool.BrushTool;

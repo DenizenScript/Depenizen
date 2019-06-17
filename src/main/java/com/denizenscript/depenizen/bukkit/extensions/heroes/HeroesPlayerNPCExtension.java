@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.extensions.heroes;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.objects.heroes.HeroesHero;
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.HeroesSupport;
+import com.denizenscript.depenizen.bukkit.bridges.HeroesSupport;
 import com.herocraftonline.heroes.Heroes;
 import net.aufdemrand.denizen.objects.dNPC;
 import net.aufdemrand.denizen.objects.dPlayer;

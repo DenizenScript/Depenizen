@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.extensions.prism;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.objects.prism.PrismAction;
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.PrismSupport;
+import com.denizenscript.depenizen.bukkit.bridges.PrismSupport;
 import me.botsko.prism.Prism;
 import me.botsko.prism.actionlibs.ActionsQuery;
 import me.botsko.prism.actionlibs.QueryParameters;

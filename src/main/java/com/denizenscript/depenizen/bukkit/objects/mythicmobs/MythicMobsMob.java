@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.mythicmobs;
 
-import com.denizenscript.depenizen.bukkit.support.plugins.MythicMobsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.MythicMobsSupport;
 import net.aufdemrand.denizen.objects.dEntity;
 import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizencore.tags.Attribute;

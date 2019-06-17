@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.commands.effectlib;
 
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.EffectLibSupport;
+import com.denizenscript.depenizen.bukkit.bridges.EffectLibSupport;
 import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.ArcEffect;
 import de.slikey.effectlib.effect.AtomEffect;

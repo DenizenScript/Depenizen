@@ -9,7 +9,7 @@ import net.aufdemrand.denizencore.objects.*;
 import net.aufdemrand.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.EssentialsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.EssentialsSupport;
 
 import java.util.GregorianCalendar;
 

@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.extensions.towny;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.TownyChatSupport;
+import com.denizenscript.depenizen.bukkit.bridges.TownyChatSupport;
 import com.palmergames.bukkit.TownyChat.Chat;
 import com.palmergames.bukkit.TownyChat.channels.Channel;
 import com.palmergames.bukkit.TownyChat.channels.ChannelsHolder;

@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.extensions.quests;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
-import com.denizenscript.depenizen.bukkit.support.plugins.QuestsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.QuestsSupport;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
 import me.blackvein.quests.Quests;

@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.objects.shopkeepers;
 
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.ShopkeepersSupport;
+import com.denizenscript.depenizen.bukkit.bridges.ShopkeepersSupport;
 import com.nisovin.shopkeepers.api.shopkeeper.Shopkeeper;
 import com.nisovin.shopkeepers.api.shopkeeper.TradingRecipe;
 import com.nisovin.shopkeepers.api.ShopkeepersAPI;

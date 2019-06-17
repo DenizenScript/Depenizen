@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.commands.heroes;
 
 import com.denizenscript.depenizen.bukkit.objects.heroes.HeroesClass;
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.HeroesSupport;
+import com.denizenscript.depenizen.bukkit.bridges.HeroesSupport;
 import com.herocraftonline.heroes.Heroes;
 import com.herocraftonline.heroes.characters.Hero;
 import net.aufdemrand.denizen.BukkitScriptEntryData;

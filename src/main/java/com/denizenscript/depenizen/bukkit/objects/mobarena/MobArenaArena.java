@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.objects.mobarena;
 
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.MobArenaSupport;
+import com.denizenscript.depenizen.bukkit.bridges.MobArenaSupport;
 import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
 import net.aufdemrand.denizen.objects.dPlayer;

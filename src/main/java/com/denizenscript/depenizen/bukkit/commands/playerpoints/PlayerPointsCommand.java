@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.commands.playerpoints;
 
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.PlayerPointsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsSupport;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;

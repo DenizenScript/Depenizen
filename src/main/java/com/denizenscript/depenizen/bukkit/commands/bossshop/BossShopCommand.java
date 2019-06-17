@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.commands.bossshop;
 
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.BossShopSupport;
+import com.denizenscript.depenizen.bukkit.bridges.BossShopSupport;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;

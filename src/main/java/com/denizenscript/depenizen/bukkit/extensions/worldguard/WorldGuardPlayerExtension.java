@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.extensions.worldguard;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.WorldGuardSupport;
+import com.denizenscript.depenizen.bukkit.bridges.WorldGuardSupport;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;

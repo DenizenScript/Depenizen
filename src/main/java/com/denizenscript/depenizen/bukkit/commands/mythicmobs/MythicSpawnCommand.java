@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
-import com.denizenscript.depenizen.bukkit.support.plugins.MythicMobsSupport;
+import com.denizenscript.depenizen.bukkit.bridges.MythicMobsSupport;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;

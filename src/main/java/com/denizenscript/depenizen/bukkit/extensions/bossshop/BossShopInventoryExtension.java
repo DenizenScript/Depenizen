@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.extensions.bossshop;
 
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.support.Support;
-import com.denizenscript.depenizen.bukkit.support.plugins.BossShopSupport;
+import com.denizenscript.depenizen.bukkit.bridges.BossShopSupport;
 import net.aufdemrand.denizen.objects.dInventory;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
