@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.events;
+package com.denizenscript.depenizen.bukkit.events.votifier;
 
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
@@ -14,13 +14,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class VotifierScriptEvent extends BukkitScriptEvent implements Listener {
+public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public VotifierScriptEvent() {
+    public VotifierVoteScriptEvent() {
         instance = this;
     }
 
-    public static VotifierScriptEvent instance;
+    public static VotifierVoteScriptEvent instance;
 
     // <--[event]
     // @Events
