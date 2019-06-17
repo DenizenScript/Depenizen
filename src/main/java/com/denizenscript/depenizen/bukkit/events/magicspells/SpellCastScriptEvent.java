@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]

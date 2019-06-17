@@ -26,7 +26,6 @@ public class LuckPermsPlayerExtension extends dObjectExtension {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////
@@ -68,7 +67,6 @@ public class LuckPermsPlayerExtension extends dObjectExtension {
             }
             return tracks.getAttribute(attribute.fulfill(1));
         }
-
 
         return null;
     }

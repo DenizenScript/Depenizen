@@ -41,7 +41,6 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     public PlayerLeaveTownEvent event;
     public dTown town;
 
-
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         return CoreUtilities.toLowerCase(s).startsWith("towny player exits");

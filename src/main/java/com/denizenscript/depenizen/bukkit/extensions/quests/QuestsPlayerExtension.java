@@ -50,7 +50,6 @@ public class QuestsPlayerExtension extends dObjectExtension {
             return null;
         }
 
-
         if (attribute.startsWith("quests")) {
             attribute = attribute.fulfill(1);
 

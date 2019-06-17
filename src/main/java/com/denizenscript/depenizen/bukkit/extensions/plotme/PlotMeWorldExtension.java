@@ -24,7 +24,6 @@ public class PlotMeWorldExtension extends dObjectExtension {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////

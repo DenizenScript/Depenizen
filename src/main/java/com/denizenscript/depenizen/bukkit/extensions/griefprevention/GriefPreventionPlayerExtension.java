@@ -30,7 +30,6 @@ public class GriefPreventionPlayerExtension extends dObjectExtension {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////

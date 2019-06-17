@@ -1,6 +1,5 @@
 package com.denizenscript.depenizen.bukkit.extensions.plotsquared;
 
-
 import com.denizenscript.depenizen.bukkit.extensions.dObjectExtension;
 import com.denizenscript.depenizen.bukkit.objects.dPlotSquaredPlot;
 import com.intellectualcrafters.plot.api.PlotAPI;

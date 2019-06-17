@@ -22,7 +22,6 @@ public class JobPlayer implements Property {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////

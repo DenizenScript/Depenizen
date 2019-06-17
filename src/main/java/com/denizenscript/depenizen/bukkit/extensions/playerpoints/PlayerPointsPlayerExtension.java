@@ -24,7 +24,6 @@ public class PlayerPointsPlayerExtension extends dObjectExtension {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////

@@ -41,7 +41,6 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
     public PlayerEnterTownEvent event;
     public dTown town;
 
-
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         return CoreUtilities.toLowerCase(s).startsWith("towny player enters");

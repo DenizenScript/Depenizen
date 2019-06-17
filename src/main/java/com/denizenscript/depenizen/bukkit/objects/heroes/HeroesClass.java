@@ -49,7 +49,6 @@ public class HeroesClass implements dObject {
         return false;
     }
 
-
     /////////////////////
     //   CONSTRUCTORS
     /////////////////
@@ -63,7 +62,6 @@ public class HeroesClass implements dObject {
     public HeroClass getHeroClass() {
         return heroClass;
     }
-
 
     /////////////////////
     //   dObject Methods

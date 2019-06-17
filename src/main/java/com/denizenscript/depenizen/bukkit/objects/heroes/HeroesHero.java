@@ -74,7 +74,6 @@ public class HeroesHero implements dObject, Adjustable {
         return false;
     }
 
-
     /////////////////////
     //   CONSTRUCTORS
     /////////////////

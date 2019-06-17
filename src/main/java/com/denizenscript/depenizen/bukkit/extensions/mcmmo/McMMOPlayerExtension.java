@@ -148,7 +148,6 @@ public class McMMOPlayerExtension extends dObjectExtension {
                             .getAttribute(attribute.fulfill(0));
                 }
 
-
             }
 
             // <--[tag]

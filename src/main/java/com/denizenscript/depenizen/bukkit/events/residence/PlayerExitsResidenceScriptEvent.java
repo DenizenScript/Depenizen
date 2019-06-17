@@ -40,7 +40,6 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
     public ResidenceChangedEvent event;
     public dResidence residence;
 
-
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
         return CoreUtilities.toLowerCase(s).startsWith("residence player exits");

@@ -36,7 +36,6 @@ public class ASkyBlockLocationExtension extends dObjectExtension {
     dLocation location;
     ASkyBlockAPI api = ASkyBlockAPI.getInstance();
 
-
     @Override
     public String getAttribute(Attribute attribute) {
         if (attribute == null) {

@@ -26,7 +26,6 @@ public class PlotSquaredPlayerExtension extends dObjectExtension {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////

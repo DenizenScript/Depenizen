@@ -69,7 +69,6 @@ public class WorldGuardRegion implements dObject {
         return regionPattern.matcher(arg).matches();
     }
 
-
     /////////////////////
     //   STATIC CONSTRUCTORS
     /////////////////
@@ -82,7 +81,6 @@ public class WorldGuardRegion implements dObject {
         this.world = world;
     }
 
-
     /////////////////////
     //   INSTANCE FIELDS/METHODS
     /////////////////
@@ -90,7 +88,6 @@ public class WorldGuardRegion implements dObject {
     public ProtectedRegion getRegion() {
         return region;
     }
-
 
     /////////////////////
     //   dObject Methods

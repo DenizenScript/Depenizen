@@ -27,7 +27,6 @@ public class EssentialsPlayerExtension extends dObjectExtension {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////
@@ -316,7 +315,6 @@ public class EssentialsPlayerExtension extends dObjectExtension {
             getUser().setVanished(mechanism.getValue().asBoolean());
         }
 
-
         // <--[mechanism]
         // @object dPlayer
         // @name essentials_ignore
@@ -340,7 +338,6 @@ public class EssentialsPlayerExtension extends dObjectExtension {
                 getUser().setIgnoredPlayer(ess.getUser(mechanism.valueAsType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);
             }
         }
-
 
     }
 }

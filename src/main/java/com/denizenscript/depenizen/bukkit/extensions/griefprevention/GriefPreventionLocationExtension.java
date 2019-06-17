@@ -28,7 +28,6 @@ public class GriefPreventionLocationExtension extends dObjectExtension {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////

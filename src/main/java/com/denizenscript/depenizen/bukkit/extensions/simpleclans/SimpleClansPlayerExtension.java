@@ -39,7 +39,6 @@ public class SimpleClansPlayerExtension extends dObjectExtension {
     dPlayer player;
     ClanPlayer cplayer;
 
-
     @Override
     public String getAttribute(Attribute attribute) {
         if (attribute == null) {

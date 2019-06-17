@@ -60,7 +60,6 @@ public class TraderCommand extends AbstractCommand {
             }
         }
 
-
         BukkitScriptEntryData data = (BukkitScriptEntryData) scriptEntry.entryData;
 
         if (!scriptEntry.hasObject("action")) {
@@ -78,7 +77,6 @@ public class TraderCommand extends AbstractCommand {
 
         scriptEntry.defaultObject("status", TEntityStatus.BUY).defaultObject("context", Context.STOCK);
     }
-
 
     @Override
     public void execute(ScriptEntry scriptEntry) {

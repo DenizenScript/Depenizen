@@ -183,7 +183,6 @@ public class dClan implements dObject {
             return rivals.getAttribute(attribute.fulfill(1));
         }
 
-
         // <--[tag]
         // @attribute <clan@clan.deaths>
         // @returns Element(Number)

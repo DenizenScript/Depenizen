@@ -25,7 +25,6 @@ public class PlotMePlayerExtension extends dObjectExtension {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////

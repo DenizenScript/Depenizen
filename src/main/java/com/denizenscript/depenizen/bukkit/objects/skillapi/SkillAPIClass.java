@@ -43,7 +43,6 @@ public class SkillAPIClass implements dObject {
         return false;
     }
 
-
     /////////////////////
     //   CONSTRUCTORS
     /////////////////
@@ -57,7 +56,6 @@ public class SkillAPIClass implements dObject {
     public RPGClass getRPGClass() {
         return rpgClass;
     }
-
 
     /////////////////////
     //   dObject Methods

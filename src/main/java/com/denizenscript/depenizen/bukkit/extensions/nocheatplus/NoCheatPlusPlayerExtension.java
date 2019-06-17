@@ -59,7 +59,6 @@ public class NoCheatPlusPlayerExtension extends dObjectExtension {
             }
         }
 
-
         return null;
     }
 

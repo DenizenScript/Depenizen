@@ -118,7 +118,6 @@ public class PrismLocationExtension extends dObjectExtension {
                 }
             }
 
-
             params.setWorld(location.getWorld().getName());
             if (isRadius) {
                 params.setMinMaxVectorsFromPlayerLocation(location);

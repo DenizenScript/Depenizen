@@ -25,7 +25,6 @@ public class PlotMeLocationExtension extends dObjectExtension {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////

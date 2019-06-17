@@ -23,7 +23,6 @@ public class NoteBlockAPIPlayerExtension extends dObjectExtension {
         }
     }
 
-
     ///////////////////
     // Instance Fields and Methods
     /////////////
