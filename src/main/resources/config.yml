@@ -1,0 +1,8 @@
+# Depenizen config
+
+# Bungee server address (if any). Exclude the port.
+# For example: "localhost"
+# Use "none" to disable Bungee support functionality.
+Bungee server address: none
+# Set to the bungee server's primary port (if in use).
+Bungee server port: 22565

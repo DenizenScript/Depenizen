@@ -67,6 +67,14 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
+        <!-- Special Support Targets -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.34.Final</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
         <!-- Support Targets (Optional) -->
         <dependency>
             <groupId>com.github.TheComputerGeek2</groupId>

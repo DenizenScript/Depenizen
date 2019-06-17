@@ -1,8 +1,10 @@
 package com.denizenscript.depenizen.bukkit;
 
 import com.denizenscript.depenizen.bukkit.bridges.*;
+import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.utilities.BridgeLoadException;
 import net.aufdemrand.denizen.utilities.debugging.dB;
+import net.aufdemrand.denizencore.utilities.CoreUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,12 +24,30 @@ public class Depenizen extends JavaPlugin {
     @Override
     public void onEnable() {
         dB.log("Depenizen loading...");
+        saveDefaultConfig();
         instance = this;
         registerCoreBridges();
         for (Map.Entry<String, Supplier<Bridge>> bridge : allBridges.entrySet()) {
             loadBridge(bridge.getKey(), bridge.getValue());
         }
-        dB.log("Depenizen loaded! " + loadedBridges.size() + " bridges loaded (of " + allBridges.size() + " available)");
+        try {
+            checkLoadBungeeBridge();
+        }
+        catch (Throwable ex) {
+            dB.echoError("Cannot load Depenizen-Bungee bridge: Internal exception was thrown!");
+            dB.echoError(ex);
+        }
+        dB.log("Depenizen loaded! " + loadedBridges.size() + " plugin bridge(s) loaded (of " + allBridges.size() + " available)");
+    }
+
+    public void checkLoadBungeeBridge() {
+        String bungeeServer = getConfig().getString("Bungee server address", "none");
+        if (CoreUtilities.toLowerCase(bungeeServer).equals("none")) {
+            dB.log("<G>Depenizen will not load bungee bridge.");
+            return;
+        }
+        new BungeeBridge().init(bungeeServer, getConfig().getInt("Bungee server port", 25565));
+        dB.log("Depenizen loaded bungee bridge!");
     }
 
     public void loadBridge(String name, Supplier<Bridge> bridgeSupplier) {
