@@ -1,43 +1,4 @@
-# Eclipse stuff
-.classpath
-.project
-.settings
-
-# netbeans
-nbproject
-
-# we use maven!
-build.xml
-
-# maven
-target
-
-# vim
-.*.sw[a-p]
-
-# various other potential build files
-build
-bin
-dist
-manifest.mf
-
-/world
-
-# filesystem dust, random side files
-*.DS_Store
-*.exe
-
-# intellij
+target/
 *.iml
-*.ipr
-*.iws
 .idea/
-
-# Atlassian Stuff
-/atlassian-ide-plugin.xml
-
-# resource jars
-# *.jar
-*.exe
-
 dependency-reduced-pom.xml

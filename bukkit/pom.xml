@@ -56,63 +56,63 @@
             <artifactId>MagicSpells</artifactId>
             <version>3.5-Release</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/MagicSpells.jar</systemPath>
+            <systemPath>${project.basedir}/lib/MagicSpells.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.github.koca2000</groupId>
             <artifactId>NoteBlockAPI</artifactId>
             <version>1.2.2.1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/NoteBlockAPI.jar</systemPath>
+            <systemPath>${project.basedir}/lib/NoteBlockAPI.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.black_ixx</groupId>
             <artifactId>BossShop</artifactId>
             <version>2.7.5</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/BossShop.jar</systemPath>
+            <systemPath>${project.basedir}/lib/BossShop.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
             <version>9.5.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/LibsDisguises.jar</systemPath>
+            <systemPath>${project.basedir}/lib/LibsDisguises.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>de.slikey</groupId>
             <artifactId>EffectLib</artifactId>
             <version>5.8</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/EffectLib-5.8.jar</systemPath>
+            <systemPath>${project.basedir}/lib/EffectLib-5.8.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.black_ixx</groupId>
             <artifactId>PlayerPoints</artifactId>
             <version>2.1.5</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/PlayerPoints.jar</systemPath>
+            <systemPath>${project.basedir}/lib/PlayerPoints.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.lucko.luckperms</groupId>
             <artifactId>luckperms-api</artifactId>
             <version>4.2.17</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/LuckPerms-Bukkit-4.2.17.jar</systemPath>
+            <systemPath>${project.basedir}/lib/LuckPerms-Bukkit-4.2.17.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>ProtocolLib</groupId>
             <artifactId>protocollib</artifactId>
             <version>4.3.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/ProtocolLib.jar</systemPath>
+            <systemPath>${project.basedir}/lib/ProtocolLib.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.plotsquared</groupId>
             <artifactId>plotsquared-api</artifactId>
             <version>3.5.0u2</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/PlotSquared.jar</systemPath>
+            <systemPath>${project.basedir}/lib/PlotSquared.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.denizenscript</groupId>
@@ -131,49 +131,49 @@
             <artifactId>Towny</artifactId>
             <version>0.92</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Towny.jar</systemPath>
+            <systemPath>${basedir}/lib/Towny.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.palmergames</groupId>
             <artifactId>TownyChat</artifactId>
             <version>0.45</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/TownyChat.jar</systemPath>
+            <systemPath>${basedir}/lib/TownyChat.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>Factions</artifactId>
             <version>2.9.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Factions.jar</systemPath>
+            <systemPath>${basedir}/lib/Factions.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>Vampire</artifactId>
             <version>2.13.7</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Vampire.jar</systemPath>
+            <systemPath>${basedir}/lib/Vampire.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>MassiveCore</artifactId>
             <version>2.9.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/MassiveCore.jar</systemPath>
+            <systemPath>${basedir}/lib/MassiveCore.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.limebyte</groupId>
             <artifactId>BattleNight</artifactId>
             <version>1.11.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/BattleNight.jar</systemPath>
+            <systemPath>${basedir}/lib/BattleNight.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
             <version>1.5.6</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Vault.jar</systemPath>
+            <systemPath>${basedir}/lib/Vault.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.aufdemrand</groupId>
@@ -187,42 +187,42 @@
             <artifactId>mcMMO</artifactId>
             <version>1.5.04</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/mcMMO.jar</systemPath>
+            <systemPath>${basedir}/lib/mcMMO.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.vexsoftware</groupId>
             <artifactId>Votifier</artifactId>
             <version>1.9</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Votifier.jar</systemPath>
+            <systemPath>${basedir}/lib/Votifier.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.gamingmesh</groupId>
             <artifactId>Jobs</artifactId>
             <version>3.6.3</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Jobs.jar</systemPath>
+            <systemPath>${basedir}/lib/Jobs.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.slipcor</groupId>
             <artifactId>pvparena</artifactId>
             <version>1.3.2.58</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/pvparena.jar</systemPath>
+            <systemPath>${basedir}/lib/pvparena.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>praxis.slipcor</groupId>
             <artifactId>pvpstats</artifactId>
             <version>0.8.18</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/pvpstats.jar</systemPath>
+            <systemPath>${basedir}/lib/pvpstats.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.herocraftonline</groupId>
             <artifactId>Heroes</artifactId>
             <version>1.5.57</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Heroes.jar</systemPath>
+            <systemPath>${basedir}/lib/Heroes.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.citizensnpcs</groupId>
@@ -278,77 +278,77 @@
             <artifactId>Essentials</artifactId>
             <version>2.16-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/EssentialsX-2.jar</systemPath>
+            <systemPath>${basedir}/lib/EssentialsX-2.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>regalowl.hyperconomy</groupId>
             <artifactId>Hyperconomy</artifactId>
             <version>0.975.7-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/HyperConomy.jar</systemPath>
+            <systemPath>${basedir}/lib/HyperConomy.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.sucy</groupId>
             <artifactId>SkillAPI</artifactId>
             <version>3.37</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/SkillAPI.jar</systemPath>
+            <systemPath>${basedir}/lib/SkillAPI.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.botsko</groupId>
             <artifactId>prism</artifactId>
             <version>2.0.4</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/prism-2.0.4.jar</systemPath>
+            <systemPath>${basedir}/lib/prism-2.0.4.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.khorn</groupId>
             <artifactId>TerrainControl</artifactId>
             <version>2.7.2</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/TerrainControl.jar</systemPath>
+            <systemPath>${basedir}/lib/TerrainControl.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.worldcretornica</groupId>
             <artifactId>PlotMe-Core</artifactId>
             <version>0.17-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/PlotMe-Core.jar</systemPath>
+            <systemPath>${basedir}/lib/PlotMe-Core.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.sacredlabyrinth.phaed</groupId>
             <artifactId>simpleclans</artifactId>
             <version>2.5.5</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/SimpleClans.jar</systemPath>
+            <systemPath>${basedir}/lib/SimpleClans.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.garbagemule</groupId>
             <artifactId>MobArena</artifactId>
             <version>0.97.1</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/MobArena.jar</systemPath>
+            <systemPath>${basedir}/lib/MobArena.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.wasteofplastic</groupId>
             <artifactId>askyblock</artifactId>
             <version>2.9.8.1</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/askyblock.jar</systemPath>
+            <systemPath>${basedir}/lib/askyblock.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>fr.neatmonster</groupId>
             <artifactId>nocheatplus</artifactId>
             <version>3.13.6-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/NoCheatPlus.jar</systemPath>
+            <systemPath>${basedir}/lib/NoCheatPlus.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>io.lumine.xikage</groupId>
             <artifactId>mythicmobs</artifactId>
             <version>4.5.9</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/MythicMobs.jar</systemPath>
+            <systemPath>${basedir}/lib/MythicMobs.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.nisovin.shopkeepers</groupId>
@@ -361,14 +361,14 @@
             <artifactId>GriefPrevention</artifactId>
             <version>16.10</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/GriefPrevention.jar</systemPath>
+            <systemPath>${basedir}/lib/GriefPrevention.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.blackvein</groupId>
             <artifactId>quests</artifactId>
             <version>3.6.6</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Quests.jar</systemPath>
+            <systemPath>${basedir}/lib/Quests.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>
@@ -381,21 +381,21 @@
             <artifactId>residence</artifactId>
             <version>4.5.13.4</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/Residence.jar</systemPath>
+            <systemPath>${basedir}/lib/Residence.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.dandielo</groupId>
             <artifactId>dtlTraders</artifactId>
             <version>3.4.6</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/dtlTraders.jar</systemPath>
+            <systemPath>${basedir}/lib/dtlTraders.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.wiefferink</groupId>
             <artifactId>areashop</artifactId>
             <version>2.4.0</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/lib/AreaShop.jar</systemPath>
+            <systemPath>${basedir}/lib/AreaShop.jar</systemPath>
         </dependency>
     </dependencies>
 
