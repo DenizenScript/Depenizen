@@ -266,13 +266,6 @@
             <systemPath>${basedir}/lib/EssentialsX-2.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>regalowl.hyperconomy</groupId>
-            <artifactId>Hyperconomy</artifactId>
-            <version>0.975.7-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/HyperConomy.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>com.sucy</groupId>
             <artifactId>SkillAPI</artifactId>
             <version>3.37</version>

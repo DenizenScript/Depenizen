@@ -18,7 +18,6 @@ softdepend:
     - WorldGuard
     - Essentials
     - pvpstats
-    - HyperConomy
     - SkillAPI
     - TerrainControl
     - PlotMe
