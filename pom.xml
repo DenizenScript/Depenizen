@@ -210,13 +210,6 @@
             <systemPath>${basedir}/lib/pvpstats.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.herocraftonline</groupId>
-            <artifactId>Heroes</artifactId>
-            <version>1.5.57</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Heroes.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>org.mcmonkey</groupId>
             <artifactId>sentinel</artifactId>
             <version>1.8.5</version>

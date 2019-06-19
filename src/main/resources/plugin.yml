@@ -12,7 +12,6 @@ softdepend:
     - Factions
     - Votifier
     - Jobs
-    - Heroes
     - pvparena
     - WorldEdit
     - WorldGuard
