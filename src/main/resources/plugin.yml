@@ -8,7 +8,6 @@ api-version: 1.13
 
 softdepend:
     - mcMMO
-    - BattleNight
     - Towny
     - Factions
     - Votifier
