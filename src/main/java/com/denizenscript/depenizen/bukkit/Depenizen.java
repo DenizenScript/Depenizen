@@ -107,7 +107,6 @@ public class Depenizen extends JavaPlugin {
         registerBridge("PlayerPoints", () -> new PlayerPointsBridge());
         registerBridge("PlotMe", () -> new PlotMeBridge());
         registerBridge("PlotSquared", () -> new PlotSquaredBridge());
-        registerBridge("Prism", () -> new PrismBridge());
         registerBridge("PVPArena", () -> new PVPArenaBridge());
         registerBridge("PVPStats", () -> new PVPStatsBridge());
         registerBridge("Quests", () -> new QuestsBridge());
