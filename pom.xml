@@ -369,13 +369,6 @@
             <systemPath>${basedir}/lib/Residence.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>net.dandielo</groupId>
-            <artifactId>dtlTraders</artifactId>
-            <version>3.4.6</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/dtlTraders.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>me.wiefferink</groupId>
             <artifactId>areashop</artifactId>
             <version>2.4.0</version>

@@ -35,7 +35,6 @@ softdepend:
     - Quests
     - PlaceholderAPI
     - Residence
-    - dtlTraders
     - AreaShop
     - LibsDisguises
     - OpenTerrainGenerator
