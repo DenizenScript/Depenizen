@@ -67,7 +67,7 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
-        <!-- Special Support Targets -->
+        <!-- Used For Special Support Targets -->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
@@ -75,13 +75,132 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
+        <!-- Important Bridges -->
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.10.0</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- Support Targets (Optional) -->
+        <dependency>
+            <groupId>me.wiefferink</groupId>
+            <artifactId>areashop</artifactId>
+            <version>2.4.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/AreaShop.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.wasteofplastic</groupId>
+            <artifactId>askyblock</artifactId>
+            <version>2.9.8.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/askyblock.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.black_ixx</groupId>
+            <artifactId>BossShop</artifactId>
+            <version>2.7.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/BossShop.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>de.slikey</groupId>
+            <artifactId>EffectLib</artifactId>
+            <version>5.8</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/EffectLib-5.8.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>net.ess3</groupId>
+            <artifactId>Essentials</artifactId>
+            <version>2.16-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/EssentialsX-2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.massivecraft</groupId>
+            <artifactId>MassiveCore</artifactId>
+            <version>2.9.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/MassiveCore.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.massivecraft</groupId>
+            <artifactId>Factions</artifactId>
+            <version>2.9.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/Factions.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>me.ryanhamshire</groupId>
+            <artifactId>GriefPrevention</artifactId>
+            <version>16.10</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/GriefPrevention.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.gamingmesh</groupId>
+            <artifactId>Jobs</artifactId>
+            <version>3.6.3</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/Jobs.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>ProtocolLib</groupId>
+            <artifactId>protocollib</artifactId>
+            <version>4.3.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/ProtocolLib.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>LibsDisguises</groupId>
+            <artifactId>LibsDisguises</artifactId>
+            <version>9.5.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/LibsDisguises.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>me.lucko.luckperms</groupId>
+            <artifactId>luckperms-api</artifactId>
+            <version>4.2.17</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/LuckPerms-Bukkit-4.2.17.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>com.github.TheComputerGeek2</groupId>
             <artifactId>MagicSpells</artifactId>
             <version>3.5-Release</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/MagicSpells.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.gmail.nossr50</groupId>
+            <artifactId>mcMMO</artifactId>
+            <version>1.5.04</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/mcMMO.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.garbagemule</groupId>
+            <artifactId>MobArena</artifactId>
+            <version>0.97.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/MobArena.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>io.lumine.xikage</groupId>
+            <artifactId>mythicmobs</artifactId>
+            <version>4.5.9</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/MythicMobs.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>fr.neatmonster</groupId>
+            <artifactId>nocheatplus</artifactId>
+            <version>3.13.6-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/NoCheatPlus.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.github.koca2000</groupId>
@@ -92,45 +211,17 @@
         </dependency>
         <dependency>
             <groupId>org.black_ixx</groupId>
-            <artifactId>BossShop</artifactId>
-            <version>2.7.5</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/BossShop.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>LibsDisguises</groupId>
-            <artifactId>LibsDisguises</artifactId>
-            <version>9.5.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/LibsDisguises.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>de.slikey</groupId>
-            <artifactId>EffectLib</artifactId>
-            <version>5.8</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/EffectLib-5.8.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.black_ixx</groupId>
             <artifactId>PlayerPoints</artifactId>
             <version>2.1.5</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/PlayerPoints.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>me.lucko.luckperms</groupId>
-            <artifactId>luckperms-api</artifactId>
-            <version>4.2.17</version>
+            <groupId>com.worldcretornica</groupId>
+            <artifactId>PlotMe-Core</artifactId>
+            <version>0.17-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/LuckPerms-Bukkit-4.2.17.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>ProtocolLib</groupId>
-            <artifactId>protocollib</artifactId>
-            <version>4.3.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/ProtocolLib.jar</systemPath>
+            <systemPath>${basedir}/lib/PlotMe-Core.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.plotsquared</groupId>
@@ -138,6 +229,68 @@
             <version>3.5.0u2</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/PlotSquared.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>net.slipcor</groupId>
+            <artifactId>pvparena</artifactId>
+            <version>1.3.2.58</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/pvparena.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>praxis.slipcor</groupId>
+            <artifactId>pvpstats</artifactId>
+            <version>0.8.18</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/pvpstats.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>me.blackvein</groupId>
+            <artifactId>quests</artifactId>
+            <version>3.6.6</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/Quests.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.bekvon.bukkit</groupId>
+            <artifactId>residence</artifactId>
+            <version>4.5.13.4</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/Residence.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.mcmonkey</groupId>
+            <artifactId>sentinel</artifactId>
+            <version>1.8.5</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.nisovin.shopkeepers</groupId>
+            <artifactId>Shopkeepers</artifactId>
+            <version>2.2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sacredlabyrinth.phaed</groupId>
+            <artifactId>simpleclans</artifactId>
+            <version>2.5.5</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/SimpleClans.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.sucy</groupId>
+            <artifactId>SkillAPI</artifactId>
+            <version>3.37</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/SkillAPI.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.khorn</groupId>
+            <artifactId>TerrainControl</artifactId>
+            <version>2.7.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/TerrainControl.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.palmergames</groupId>
@@ -155,31 +308,10 @@
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
-            <artifactId>Factions</artifactId>
-            <version>2.9.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Factions.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.massivecraft</groupId>
             <artifactId>Vampire</artifactId>
             <version>2.13.7</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Vampire.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.massivecraft</groupId>
-            <artifactId>MassiveCore</artifactId>
-            <version>2.9.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MassiveCore.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.gmail.nossr50</groupId>
-            <artifactId>mcMMO</artifactId>
-            <version>1.5.04</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/mcMMO.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.vexsoftware</groupId>
@@ -187,34 +319,6 @@
             <version>1.9</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Votifier.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.gamingmesh</groupId>
-            <artifactId>Jobs</artifactId>
-            <version>3.6.3</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Jobs.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>net.slipcor</groupId>
-            <artifactId>pvparena</artifactId>
-            <version>1.3.2.58</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/pvparena.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>praxis.slipcor</groupId>
-            <artifactId>pvpstats</artifactId>
-            <version>0.8.18</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/pvpstats.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.mcmonkey</groupId>
-            <artifactId>sentinel</artifactId>
-            <version>1.8.5</version>
-            <type>jar</type>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
@@ -250,109 +354,6 @@
                     <artifactId>bStats-Metrics</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>net.ess3</groupId>
-            <artifactId>Essentials</artifactId>
-            <version>2.16-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/EssentialsX-2.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.sucy</groupId>
-            <artifactId>SkillAPI</artifactId>
-            <version>3.37</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/SkillAPI.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.khorn</groupId>
-            <artifactId>TerrainControl</artifactId>
-            <version>2.7.2</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/TerrainControl.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.worldcretornica</groupId>
-            <artifactId>PlotMe-Core</artifactId>
-            <version>0.17-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/PlotMe-Core.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>net.sacredlabyrinth.phaed</groupId>
-            <artifactId>simpleclans</artifactId>
-            <version>2.5.5</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/SimpleClans.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.garbagemule</groupId>
-            <artifactId>MobArena</artifactId>
-            <version>0.97.1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MobArena.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.wasteofplastic</groupId>
-            <artifactId>askyblock</artifactId>
-            <version>2.9.8.1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/askyblock.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>fr.neatmonster</groupId>
-            <artifactId>nocheatplus</artifactId>
-            <version>3.13.6-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/NoCheatPlus.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>io.lumine.xikage</groupId>
-            <artifactId>mythicmobs</artifactId>
-            <version>4.5.9</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MythicMobs.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.nisovin.shopkeepers</groupId>
-            <artifactId>Shopkeepers</artifactId>
-            <version>2.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>me.ryanhamshire</groupId>
-            <artifactId>GriefPrevention</artifactId>
-            <version>16.10</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/GriefPrevention.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>me.blackvein</groupId>
-            <artifactId>quests</artifactId>
-            <version>3.6.6</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Quests.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>me.clip</groupId>
-            <artifactId>placeholderapi</artifactId>
-            <version>2.10.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.bekvon.bukkit</groupId>
-            <artifactId>residence</artifactId>
-            <version>4.5.13.4</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Residence.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>me.wiefferink</groupId>
-            <artifactId>areashop</artifactId>
-            <version>2.4.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/AreaShop.jar</systemPath>
         </dependency>
     </dependencies>
 

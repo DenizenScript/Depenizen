@@ -7,38 +7,39 @@ depend: [Denizen]
 api-version: 1.13
 
 softdepend:
-    - mcMMO
-    - Towny
-    - Factions
-    - Votifier
-    - Jobs
-    - pvparena
-    - WorldEdit
-    - WorldGuard
+    - AreaShop
+    - ASkyBlock
+    - BossShop
+    - EffectLib
     - Essentials
-    - pvpstats
-    - SkillAPI
-    - TerrainControl
+    - Factions
+    - GriefPrevention
+    - Jobs
+    - LibsDisguises
+    - LuckPerms
+    - MagicSpells
+    - mcMMO
+    - MobArena
+    - MythicMobs
+    - NoCheatPlus
+    - NoteBlockAPI
+    - OpenTerrainGenerator
+    - PlaceholderAPI
+    - PlayerPoints
     - PlotMe
     - PlotSquared
-    - SimpleClans
-    - MobArena
-    - ASkyBlock
-    - NoCheatPlus
-    - MythicMobs
+    - pvparena
+    - pvpstats
+    - Quests
+    - Residence
     - Sentinel
     - Shopkeepers
-    - GriefPrevention
-    - Quests
-    - PlaceholderAPI
-    - Residence
-    - AreaShop
-    - LibsDisguises
-    - OpenTerrainGenerator
-    - PlayerPoints
-    - LuckPerms
-    - EffectLib
-    - BossShop
+    - SimpleClans
+    - SkillAPI
+    - TerrainControl
+    - Towny
+    - TownyChat
     - Vampire
-    - NoteBlockAPI
-    - MagicSpells
+    - Votifier
+    - WorldEdit
+    - WorldGuard
