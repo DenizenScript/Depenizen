@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.towny;
 
 import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.dTown;
+import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import net.aufdemrand.denizen.objects.dCuboid;

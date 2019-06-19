@@ -4,8 +4,8 @@ import com.denizenscript.depenizen.bukkit.events.towny.PlayerEntersTownScriptEve
 import com.denizenscript.depenizen.bukkit.events.towny.PlayerExitsTownScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyCuboidProperties;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyLocationProperties;
-import com.denizenscript.depenizen.bukkit.objects.dNation;
-import com.denizenscript.depenizen.bukkit.objects.dTown;
+import com.denizenscript.depenizen.bukkit.factions.dNation;
+import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyPlayerProperties;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;

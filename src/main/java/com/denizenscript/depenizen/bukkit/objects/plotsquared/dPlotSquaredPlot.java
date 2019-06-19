@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.objects;
+package com.denizenscript.depenizen.bukkit.objects.plotsquared;
 
 import com.intellectualcrafters.plot.object.Plot;
 import com.intellectualcrafters.plot.object.RegionWrapper;

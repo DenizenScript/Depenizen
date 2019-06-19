@@ -7,7 +7,7 @@ import com.denizenscript.depenizen.bukkit.events.plotsquared.PlotClearScriptEven
 import com.denizenscript.depenizen.bukkit.properties.plotsquared.PlotSquaredElementProperties;
 import com.denizenscript.depenizen.bukkit.properties.plotsquared.PlotSquaredLocationProperties;
 import com.denizenscript.depenizen.bukkit.properties.plotsquared.PlotSquaredPlayerProperties;
-import com.denizenscript.depenizen.bukkit.objects.dPlotSquaredPlot;
+import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;

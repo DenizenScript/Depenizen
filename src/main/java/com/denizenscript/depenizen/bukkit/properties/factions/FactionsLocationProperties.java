@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.factions;
 
 import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.dFaction;
+import com.denizenscript.depenizen.bukkit.factions.dFaction;
 import com.massivecraft.factions.entity.BoardColl;
 import com.massivecraft.massivecore.ps.PS;
 import net.aufdemrand.denizen.objects.dLocation;

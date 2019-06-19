@@ -1,5 +1,6 @@
-package com.denizenscript.depenizen.bukkit.objects;
+package com.denizenscript.depenizen.bukkit.factions;
 
+import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;

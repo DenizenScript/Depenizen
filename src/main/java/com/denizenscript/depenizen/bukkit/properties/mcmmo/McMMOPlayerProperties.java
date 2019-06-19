@@ -9,7 +9,7 @@ import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
 import net.aufdemrand.denizencore.tags.Attribute;
-import com.denizenscript.depenizen.bukkit.objects.dParty;
+import com.denizenscript.depenizen.bukkit.objects.mcmmo.dParty;
 
 public class McMMOPlayerProperties implements Property {
 

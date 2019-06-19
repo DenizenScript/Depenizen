@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.properties.factions.FactionsPlayerNPCProperties;
-import com.denizenscript.depenizen.bukkit.objects.dFaction;
+import com.denizenscript.depenizen.bukkit.factions.dFaction;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.utilities.BridgeLoadException;
 import com.massivecraft.factions.entity.Faction;

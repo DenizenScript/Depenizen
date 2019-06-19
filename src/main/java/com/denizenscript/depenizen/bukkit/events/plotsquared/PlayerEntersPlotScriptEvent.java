@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.plotsquared;
 
-import com.denizenscript.depenizen.bukkit.objects.dPlotSquaredPlot;
+import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.plotsquared.bukkit.events.PlayerEnterPlotEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;

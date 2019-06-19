@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.plotsquared;
 
 import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.dPlotSquaredPlot;
+import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;

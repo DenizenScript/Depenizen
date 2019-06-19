@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 import com.denizenscript.depenizen.bukkit.commands.mcmmo.McMMOCommand;
 import com.denizenscript.depenizen.bukkit.events.mcmmo.*;
 import com.denizenscript.depenizen.bukkit.properties.mcmmo.McMMOPlayerProperties;
-import com.denizenscript.depenizen.bukkit.objects.dParty;
+import com.denizenscript.depenizen.bukkit.objects.mcmmo.dParty;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.DenizenAPI;

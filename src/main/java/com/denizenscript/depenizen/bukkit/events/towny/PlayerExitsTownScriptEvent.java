@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.towny;
 
-import com.denizenscript.depenizen.bukkit.objects.dTown;
+import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
 import com.palmergames.bukkit.towny.event.PlayerLeaveTownEvent;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import net.aufdemrand.denizen.BukkitScriptEntryData;

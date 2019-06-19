@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.objects;
+package com.denizenscript.depenizen.bukkit.factions;
 
 import com.massivecraft.factions.entity.*;
 import com.massivecraft.massivecore.money.Money;
