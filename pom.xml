@@ -217,13 +217,6 @@
             <systemPath>${project.basedir}/lib/PlayerPoints.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.worldcretornica</groupId>
-            <artifactId>PlotMe-Core</artifactId>
-            <version>0.17-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/PlotMe-Core.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>com.plotsquared</groupId>
             <artifactId>plotsquared-api</artifactId>
             <version>3.5.0u2</version>

@@ -26,7 +26,6 @@ softdepend:
     - OpenTerrainGenerator
     - PlaceholderAPI
     - PlayerPoints
-    - PlotMe
     - PlotSquared
     - pvparena
     - pvpstats
