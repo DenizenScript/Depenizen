@@ -33,7 +33,6 @@ softdepend:
     - Residence
     - Sentinel
     - Shopkeepers
-    - SimpleClans
     - SkillAPI
     - TerrainControl
     - Towny

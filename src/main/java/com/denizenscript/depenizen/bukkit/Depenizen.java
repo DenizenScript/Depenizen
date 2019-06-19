@@ -110,7 +110,6 @@ public class Depenizen extends JavaPlugin {
         registerBridge("Residence", () -> new ResidenceBridge());
         registerBridge("Sentinel", () -> new SentinelBridge());
         registerBridge("Shopkeepers", () -> new ShopkeepersBridge());
-        registerBridge("SimpleClans", () -> new SimpleClansBridge());
         registerBridge("SkillAPI", () -> new SkillAPIBridge());
         registerBridge("TerrainControl", () -> new TerrainControlBridge());
         registerBridge("TownyChat", () -> new TownyChatBridge());
