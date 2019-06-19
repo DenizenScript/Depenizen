@@ -12,6 +12,9 @@ Depenizen
 
 Depenizen version 2.x is a rewrite of many of the core functions of Depenizen.
 
+2.x version does not include support for the following previously supported plugins
+due to the plugins being unmaintained or unavailable for modern servers: PlotMe, SimpleClans, Heroes, HyperConomy, Prism, dtlTraders, BattleNight.
+
 If you need the 1.x (legacy) version, you can find the last official build of that here: https://ci.citizensnpcs.co/job/Depenizen/476/
 
 **Status:** Depenizen 2.x rewrite has rewritten all the basic core functionality, but the Bungee bridge rebuild is incomplete.
