@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.out;
 
 import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
-import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
 
 public class ProxyPingResultPacketOut extends PacketOut {
@@ -23,11 +22,7 @@ public class ProxyPingResultPacketOut extends PacketOut {
     public void writeTo(ByteBuf buf) {
         buf.writeLong(id);
         buf.writeInt(maxPlayers);
-        byte[] versionBytes = version.getBytes(Charsets.UTF_8);
-        buf.writeInt(versionBytes.length);
-        buf.writeBytes(versionBytes);
-        byte[] motdBytes = motd.getBytes(Charsets.UTF_8);
-        buf.writeInt(motdBytes.length);
-        buf.writeBytes(motdBytes);
+        writeString(buf, version);
+        writeString(buf, motd);
     }
 }

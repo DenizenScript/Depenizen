@@ -5,7 +5,6 @@ import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ProxyPingResultPacketOut;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeeProxyServerListPingScriptEvent;
-import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
 import org.bukkit.Bukkit;
 
@@ -28,28 +27,22 @@ public class ProxyPingPacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid ProxyPingPacket (address bytes requested: " + addressLength + ")");
             return;
         }
-        byte[] addressBytes = new byte[addressLength];
-        data.readBytes(addressBytes, 0, addressLength);
-        String address = new String(addressBytes, Charsets.UTF_8);
+        String address = readString(data, addressLength);
         int currentPlayers = data.readInt();
         int maxPlayers = data.readInt();
         int motdLength = data.readInt();
         if (data.readableBytes() < motdLength || motdLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ProxyPingPacket (motod bytes requested: " + motdLength + ")");
+            BungeeBridge.instance.handler.fail("Invalid ProxyPingPacket (motd bytes requested: " + motdLength + ")");
             return;
         }
-        byte[] motdBytes = new byte[motdLength];
-        data.readBytes(motdBytes, 0, motdLength);
-        String motd = new String(motdBytes, Charsets.UTF_8);
+        String motd = readString(data, motdLength);
         int protocol = data.readInt();
         int versionLength = data.readInt();
         if (data.readableBytes() < versionLength || versionLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ProxyPingPacket (motod bytes requested: " + versionLength + ")");
+            BungeeBridge.instance.handler.fail("Invalid ProxyPingPacket (motd bytes requested: " + versionLength + ")");
             return;
         }
-        byte[] versionBytes = new byte[versionLength];
-        data.readBytes(versionBytes, 0, versionLength);
-        String version = new String(versionBytes, Charsets.UTF_8);
+        String version = readString(data, versionLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {

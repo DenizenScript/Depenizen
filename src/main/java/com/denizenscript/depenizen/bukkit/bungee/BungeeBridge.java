@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.bungee;
 
 import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyPingPacketOut;
+import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeRunCommand;
 import com.denizenscript.depenizen.bukkit.events.bungee.*;
 import com.denizenscript.depenizen.bukkit.properties.bungee.BungeePlayerProperties;
 import io.netty.bootstrap.Bootstrap;
@@ -11,6 +12,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.TagRunnable;
@@ -62,6 +64,7 @@ public class BungeeBridge {
         packets.put(54, new PlayerQuitPacketIn());
         packets.put(55, new PlayerSwitchServerPacketIn());
         packets.put(56, new ProxyPingPacketIn());
+        packets.put(57, new RunScriptPacketIn());
     }
 
     public void sendPacket(PacketOut packet) {
@@ -110,6 +113,8 @@ public class BungeeBridge {
         ScriptEvent.registerScriptEvent(new BungeeServerConnectScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeeServerDisconnectScriptEvent());
         PropertyParser.registerProperty(BungeePlayerProperties.class, dPlayer.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeRunCommand.class, "BUNGEERUN",
+                "bungeerun [<server>|...] [<script name>] (def:<definition>|...)", 1);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {
