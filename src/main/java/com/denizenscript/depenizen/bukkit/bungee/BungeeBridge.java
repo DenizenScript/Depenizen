@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.bungee;
 
 import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyPingPacketOut;
+import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeExecuteCommand;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeRunCommand;
 import com.denizenscript.depenizen.bukkit.events.bungee.*;
 import com.denizenscript.depenizen.bukkit.properties.bungee.BungeePlayerProperties;
@@ -114,7 +115,9 @@ public class BungeeBridge {
         ScriptEvent.registerScriptEvent(new BungeeServerDisconnectScriptEvent());
         PropertyParser.registerProperty(BungeePlayerProperties.class, dPlayer.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeRunCommand.class, "BUNGEERUN",
-                "bungeerun [<server>|...] [<script name>] (def:<definition>|...)", 1);
+                "bungeerun [<server>|...] [<script name>] (def:<definition>|...)", 2);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeExecuteCommand.class, "BUNGEEEXECUTE",
+                "bungeeexecute [<command>]", 1);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

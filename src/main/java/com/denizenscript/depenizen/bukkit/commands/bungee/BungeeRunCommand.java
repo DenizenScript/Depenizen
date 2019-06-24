@@ -16,24 +16,25 @@ import java.util.UUID;
 
 public class BungeeRunCommand extends AbstractCommand {
 
-        // <--[command]
-        // @Name BungeeRun
-        // @Syntax bungeerun [<server>|...] [<script name>] (def:<definition>|...)
-        // @Group Depenizen
-        // @Plugin Depenizen, BungeeCord
-        // @Required 2
-        // @Short Runs a task script on another server.
-        //
-        // @Description
-        // This command runs a task on another server on the Bungee network. Works similarly to the 'run' command.
-        //
-        // @Tags
-        //
-        // @Usage
-        // Use to run a simple task on another server.
-        // - bungeerun lobby my_script def:32
-        //
-        // -->
+    // <--[command]
+    // @Name BungeeRun
+    // @Syntax bungeerun [<server>|...] [<script name>] (def:<definition>|...)
+    // @Group Depenizen
+    // @Plugin Depenizen, BungeeCord
+    // @Required 2
+    // @Short Runs a task script on another server.
+    //
+    // @Description
+    // This command runs a task on another server on the Bungee network. Works similarly to the 'run' command.
+    //
+    // @Tags
+    // None
+    //
+    // @Usage
+    // Use to run a simple task on another server.
+    // - bungeerun lobby my_script def:32
+    //
+    // -->
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {

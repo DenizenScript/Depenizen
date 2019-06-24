@@ -10,4 +10,4 @@ Bungee Bridge
 
 ### Related Links:
 
-- **DepenizenBukkit on GitHub**: https://github.com/DenizenScript/DepenizenBungee
+- **DepenizenBungee on GitHub**: https://github.com/DenizenScript/DepenizenBungee
