@@ -7,8 +7,6 @@ import io.netty.buffer.ByteBuf;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizencore.objects.dList;
-import net.aufdemrand.denizencore.objects.dScript;
 import net.aufdemrand.denizencore.scripts.ScriptBuilder;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
 import net.aufdemrand.denizencore.scripts.queues.ScriptQueue;
