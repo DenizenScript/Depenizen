@@ -15,8 +15,11 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
+import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.events.ScriptEvent;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.TagRunnable;
@@ -59,6 +62,8 @@ public class BungeeBridge {
 
     public int ticksTilKeepalive = 0;
 
+    public long lastPacketReceived = 0;
+
     public void checkBroadcastProxyPing() {
         if (connected) {
             sendPacket(new ControlsProxyPingPacketOut(controlsProxyPing));
@@ -66,6 +71,7 @@ public class BungeeBridge {
     }
 
     public void registerPackets() {
+        packets.put(0, new KeepAlivePacketIn());
         packets.put(50, new YourInfoPacketIn());
         packets.put(51, new AddServerPacketIn());
         packets.put(52, new RemoveServerPacketIn());
@@ -97,22 +103,65 @@ public class BungeeBridge {
         successInit();
     }
 
-    public void connect() {
-        knownServers.clear();
-        Bootstrap b = new Bootstrap();
-        b.group(workerGroup);
-        b.channel(NioSocketChannel.class);
-        b.option(ChannelOption.SO_KEEPALIVE, true);
-        b.handler(new ChannelInitializer<SocketChannel>() {
+    public boolean reconnectPending = false;
+
+    public void reconnect() {
+        if (reconnectPending) {
+            return;
+        }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
             @Override
-            public void initChannel(SocketChannel ch) {
-                handler = new BungeeClientHandler();
-                handler.channel = ch;
-                ch.pipeline().addLast(handler).addLast(new NettyExceptionHandler());
-                channel = ch;
+            public void run() {
+                reconnectPending = false;
+                connect();
             }
-        });
-        b.connect(address, port);
+        }, 20 * 5);
+    }
+
+    private boolean showedLastError = false;
+
+    private boolean hasConnectionLoading = false;
+
+    public void connect() {
+        try {
+            hasConnectionLoading = false;
+            knownServers.clear();
+            Bootstrap b = new Bootstrap();
+            b.group(workerGroup);
+            b.channel(NioSocketChannel.class);
+            b.option(ChannelOption.SO_KEEPALIVE, true);
+            b.handler(new ChannelInitializer<SocketChannel>() {
+                @Override
+                public void initChannel(SocketChannel ch) {
+                    hasConnectionLoading = true;
+                    handler = new BungeeClientHandler();
+                    handler.channel = ch;
+                    ch.pipeline().addLast(handler).addLast(new NettyExceptionHandler());
+                    channel = ch;
+                }
+            });
+            b.connect(address, port).addListener(new GenericFutureListener<Future<? super Void>>() {
+                @Override
+                public void operationComplete(Future<? super Void> future) {
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!connected && !hasConnectionLoading) {
+                                reconnect();
+                            }
+                        }
+                    }, 10);
+                }
+            });
+            showedLastError = false;
+        }
+        catch (Throwable ex) {
+            if (!showedLastError) {
+                showedLastError = true;
+                dB.echoError(ex);
+            }
+            reconnect();
+        }
     }
 
     public void successInit() {
@@ -140,6 +189,11 @@ public class BungeeBridge {
             @Override
             public void run() {
                 if (!connected) {
+                    return;
+                }
+                if (System.currentTimeMillis() > lastPacketReceived + 20 * 1000) {
+                    // 20 seconds without a packet = connection lost!
+                    handler.fail("Connection time out.");
                     return;
                 }
                 ticksTilKeepalive--;

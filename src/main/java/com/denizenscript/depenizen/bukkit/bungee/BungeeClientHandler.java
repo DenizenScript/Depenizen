@@ -29,6 +29,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
     public void fail(String reason) {
         dB.echoError("Depenizen-Bungee connection failed: " + reason);
         channel.close();
+        BungeeBridge.instance.connected = false;
     }
 
     public static enum Stage {
@@ -55,12 +56,11 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         tmp.release();
         tmp = null;
         BungeeBridge.instance.connected = false;
-        // TODO: trigger reconnect (after a delay)
+        BungeeBridge.instance.reconnect();
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        dB.log("Depenizen-Bungee bridge sending handshake...");
         // Send a fake minecraft handshake to get us in
         ByteBuf handshake = ctx.alloc().buffer(FAKE_HANDSHAKE.length);
         handshake.writeBytes(FAKE_HANDSHAKE);
@@ -68,6 +68,8 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
             @Override
             public void run() {
+                dB.log("Depenizen now connected to Bungee server.");
+                BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
                 BungeeBridge.instance.sendPacket(new MyInfoPacketOut(Bukkit.getPort()));
                 BungeeBridge.instance.sendPacket(new ControlsProxyPingPacketOut(BungeeBridge.instance.controlsProxyPing));
                 BungeeBridge.instance.connected = true;
@@ -94,6 +96,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         if (currentStage == Stage.AWAIT_DATA) {
             if (tmp.readableBytes() >= waitingLength) {
                 try {
+                    BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
                     PacketIn packet = BungeeBridge.instance.packets.get(packetId);
                     packet.process(tmp);
                     currentStage = Stage.AWAIT_HEADER;
