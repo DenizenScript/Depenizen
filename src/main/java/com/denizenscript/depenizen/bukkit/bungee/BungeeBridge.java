@@ -155,5 +155,17 @@ public class BungeeBridge {
             event.setReplacedObject(new dList(knownServers)
                     .getObjectAttribute(attribute.fulfill(1)));
         }
+
+        // <--[tag]
+        // @attribute <bungee.connected>
+        // @returns Element(Boolean)
+        // @description
+        // Returns this server is currently connected to the BungeeCord proxy server.
+        // @Plugin Depenizen, BungeeCord
+        // -->
+        if (attribute.startsWith("connected")) {
+            event.setReplacedObject(new Element(connected)
+                    .getObjectAttribute(attribute.fulfill(1)));
+        }
     }
 }
