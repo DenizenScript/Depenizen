@@ -24,12 +24,9 @@ public class RedirectPacketOut extends PacketOut {
         writeString(buf, server);
         ByteBuf nbuf = buf.alloc().buffer();
         toSend.writeTo(nbuf);
-        ByteBuf header = buf.alloc().buffer();
-        header.writeInt(nbuf.writerIndex());
-        header.writeInt(toSend.getPacketId());
-        buf.writeBytes(header);
+        buf.writeInt(nbuf.writerIndex());
+        buf.writeInt(toSend.getPacketId());
         buf.writeBytes(nbuf);
-        header.release();
         nbuf.release();
     }
 }

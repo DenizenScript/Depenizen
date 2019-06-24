@@ -1,7 +1,9 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
+import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyPingPacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeCommand;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeExecuteCommand;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeRunCommand;
@@ -23,6 +25,7 @@ import net.aufdemrand.denizencore.objects.properties.PropertyParser;
 import net.aufdemrand.denizencore.tags.Attribute;
 import net.aufdemrand.denizencore.tags.ReplaceableTagEvent;
 import net.aufdemrand.denizencore.tags.TagManager;
+import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +55,10 @@ public class BungeeBridge {
 
     public boolean controlsProxyPing = false;
 
+    public int keepAliveTickRate = 10;
+
+    public int ticksTilKeepalive = 0;
+
     public void checkBroadcastProxyPing() {
         if (connected) {
             sendPacket(new ControlsProxyPingPacketOut(controlsProxyPing));
@@ -67,6 +74,7 @@ public class BungeeBridge {
         packets.put(55, new PlayerSwitchServerPacketIn());
         packets.put(56, new ProxyPingPacketIn());
         packets.put(57, new RunScriptPacketIn());
+        packets.put(58, new RunCommandsPacketIn());
     }
 
     public void sendPacket(PacketOut packet) {
@@ -75,8 +83,9 @@ public class BungeeBridge {
         ByteBuf header = channel.alloc().buffer();
         header.writeInt(buf.writerIndex());
         header.writeInt(packet.getPacketId());
-        channel.write(header);
+        channel.writeAndFlush(header);
         channel.writeAndFlush(buf);
+        ticksTilKeepalive = 0;
     }
 
     public void init(String address, int port) {
@@ -127,6 +136,19 @@ public class BungeeBridge {
                 tagEvent(event);
             }
         }, "bungee");
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Depenizen.instance, new Runnable() {
+            @Override
+            public void run() {
+                if (!connected) {
+                    return;
+                }
+                ticksTilKeepalive--;
+                if (ticksTilKeepalive <= 0) {
+                    sendPacket(new KeepAlivePacketOut());
+                    ticksTilKeepalive = keepAliveTickRate;
+                }
+            }
+        }, 1, 1);
     }
 
     public void tagEvent(ReplaceableTagEvent event) {

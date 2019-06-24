@@ -23,9 +23,7 @@ public class YourInfoPacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid YourInfoPacket (name bytes requested: " + yourNameLength + ")");
             return;
         }
-        byte[] serverNameBytes = new byte[yourNameLength];
-        data.readBytes(serverNameBytes, 0, yourNameLength);
-        String serverName = new String(serverNameBytes, Charsets.UTF_8);
+        String serverName = readString(data, yourNameLength);
         BungeeBridge.instance.serverName = serverName;
     }
 }

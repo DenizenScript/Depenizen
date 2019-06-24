@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.commands.bungee;
 
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
+import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.RunScriptPacketOut;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
@@ -83,6 +84,7 @@ public class BungeeRunCommand extends AbstractCommand {
         for (String server : servers) {
             RedirectPacketOut packet = new RedirectPacketOut(server, packetScript);
             BungeeBridge.instance.sendPacket(packet);
+            BungeeBridge.instance.sendPacket(new KeepAlivePacketOut());
         }
     }
 }

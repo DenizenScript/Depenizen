@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.commands.bungee;
 
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ExecuteCommandPacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
@@ -58,5 +59,6 @@ public class BungeeExecuteCommand extends AbstractCommand {
         }
         ExecuteCommandPacketOut packet = new ExecuteCommandPacketOut(command.asString());
         BungeeBridge.instance.sendPacket(packet);
+        BungeeBridge.instance.sendPacket(new KeepAlivePacketOut());
     }
 }
