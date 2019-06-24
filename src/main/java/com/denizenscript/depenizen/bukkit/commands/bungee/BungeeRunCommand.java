@@ -74,13 +74,13 @@ public class BungeeRunCommand extends AbstractCommand {
             dB.echoError("Cannot BungeeRun: bungee is not connected!");
             return;
         }
+        RunScriptPacketOut packetScript = new RunScriptPacketOut();
+        packetScript.playerUUID = ((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer() ?
+                ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer().getOfflinePlayer().getUniqueId()
+                : new UUID(0, 0);
+        packetScript.scriptName = scriptName.asString();
+        packetScript.defs = def.asString();
         for (String server : servers) {
-            RunScriptPacketOut packetScript = new RunScriptPacketOut();
-            packetScript.playerUUID = ((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer() ?
-                    ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer().getOfflinePlayer().getUniqueId()
-                    : new UUID(0, 0);
-            packetScript.scriptName = scriptName.asString();
-            packetScript.defs = def.asString();
             RedirectPacketOut packet = new RedirectPacketOut(server, packetScript);
             BungeeBridge.instance.sendPacket(packet);
         }

@@ -16,7 +16,7 @@ Depenizen version 2.x is a rewrite of many of the core functions of Depenizen.
 due to the plugins being unmaintained or unavailable for modern servers: PlotMe, SimpleClans, Heroes, HyperConomy, Prism, dtlTraders, BattleNight.
 
 2.x version has a completely redesigned Bungee system. Most (but not all!) script tags/events/commands have been kept available to be called in the same way
-(though you should review the new bungee meta docs to be sure, as there are some changes).
+(though you should review the new bungee meta docs to be sure, as there are some changes - of particular note, 'server@' is no longer used, and 'bungeerun' is now more standardized).
 The configuration / setup of Bungee is significantly different, and you will have to redo the setup. Refer to [the new Bungee setup doc](Docs/Bungee.md).
 This change is due to the unnecessary complexity of the old system being not worthy of any replication. The new system is much cleaner and easier to work with.
 
