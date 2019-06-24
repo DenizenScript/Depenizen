@@ -33,13 +33,13 @@ public class RunScriptPacketIn extends PacketIn {
         }
         int nameLength = data.readInt();
         if (data.readableBytes() < nameLength || nameLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid RunScriptPacket (address bytes requested: " + nameLength + ")");
+            BungeeBridge.instance.handler.fail("Invalid RunScriptPacket (name bytes requested: " + nameLength + ")");
             return;
         }
         String scriptName = readString(data, nameLength);
         int defsLength = data.readInt();
         if (data.readableBytes() < defsLength || defsLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid RunScriptPacket (address bytes requested: " + defsLength + ")");
+            BungeeBridge.instance.handler.fail("Invalid RunScriptPacket (def bytes requested: " + defsLength + ")");
             return;
         }
         String defs = readString(data, defsLength);

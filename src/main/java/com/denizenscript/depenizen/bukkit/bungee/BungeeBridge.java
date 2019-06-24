@@ -7,6 +7,7 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeCommand;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeExecuteCommand;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeRunCommand;
+import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
 import com.denizenscript.depenizen.bukkit.events.bungee.*;
 import com.denizenscript.depenizen.bukkit.properties.bungee.BungeePlayerProperties;
 import io.netty.bootstrap.Bootstrap;
@@ -81,9 +82,15 @@ public class BungeeBridge {
         packets.put(56, new ProxyPingPacketIn());
         packets.put(57, new RunScriptPacketIn());
         packets.put(58, new RunCommandsPacketIn());
+        packets.put(59, new ReadTagPacketIn());
+        packets.put(60, new TagResponsePacketIn());
     }
 
     public void sendPacket(PacketOut packet) {
+        if (!connected) {
+            dB.echoError("BungeeBridge tried to send packet while not connected.");
+            return;
+        }
         ByteBuf buf = channel.alloc().buffer();
         packet.writeTo(buf);
         ByteBuf header = channel.alloc().buffer();
@@ -179,6 +186,8 @@ public class BungeeBridge {
                 "bungeeexecute [<command>]", 1);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeCommand.class, "BUNGEE",
                 "bungee [<server>|...] [<commands>]", 1);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeTagCommand.class, "BUNGEETAG",
+                "bungeetag [server:<server>] [<tag>]", 2);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

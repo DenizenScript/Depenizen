@@ -34,13 +34,13 @@ public class RunCommandsPacketIn extends PacketIn {
         }
         int commamndsLength = data.readInt();
         if (data.readableBytes() < commamndsLength || commamndsLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid RunCommandsPacket (address bytes requested: " + commamndsLength + ")");
+            BungeeBridge.instance.handler.fail("Invalid RunCommandsPacket (command bytes requested: " + commamndsLength + ")");
             return;
         }
         String commands = readString(data, commamndsLength);
         int defsLength = data.readInt();
         if (data.readableBytes() < defsLength || defsLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid RunCommandsPacket (address bytes requested: " + defsLength + ")");
+            BungeeBridge.instance.handler.fail("Invalid RunCommandsPacket (def bytes requested: " + defsLength + ")");
             return;
         }
         String defs = readString(data, defsLength);

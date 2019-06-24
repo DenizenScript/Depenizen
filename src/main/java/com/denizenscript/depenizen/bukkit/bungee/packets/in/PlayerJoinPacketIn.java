@@ -4,7 +4,6 @@ import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeePlayerJoinsScriptEvent;
-import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
 import org.bukkit.Bukkit;
 
@@ -31,9 +30,7 @@ public class PlayerJoinPacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid PlayerJoinPacket (name bytes requested: " + nameLength + ")");
             return;
         }
-        byte[] nameBytes = new byte[nameLength];
-        data.readBytes(nameBytes, 0, nameLength);
-        String name = new String(nameBytes, Charsets.UTF_8);
+        String name = readString(data, nameLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {

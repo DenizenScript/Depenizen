@@ -4,7 +4,6 @@ import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerConnectScriptEvent;
-import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
 import org.bukkit.Bukkit;
 
@@ -26,9 +25,7 @@ public class AddServerPacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid AddServerPacket (name bytes requested: " + yourNameLength + ")");
             return;
         }
-        byte[] serverNameBytes = new byte[yourNameLength];
-        data.readBytes(serverNameBytes, 0, yourNameLength);
-        String serverName = new String(serverNameBytes, Charsets.UTF_8);
+        String serverName = readString(data, yourNameLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {

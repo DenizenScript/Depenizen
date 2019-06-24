@@ -4,7 +4,6 @@ import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerDisconnectScriptEvent;
-import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
 import org.bukkit.Bukkit;
 
@@ -21,14 +20,14 @@ public class RemoveServerPacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid RemoveServerPacket (bytes available: " + data.readableBytes() + ")");
             return;
         }
-        int yourNameLength = data.readInt();
-        if (data.readableBytes() < yourNameLength || yourNameLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid RemoveServerPacket (name bytes requested: " + yourNameLength + ")");
+        int serverNameLength = data.readInt();
+        if (data.readableBytes() < serverNameLength || serverNameLength < 0) {
+            BungeeBridge.instance.handler.fail("Invalid RemoveServerPacket (name bytes requested: " + serverNameLength + ")");
             return;
         }
-        byte[] serverNameBytes = new byte[yourNameLength];
-        data.readBytes(serverNameBytes, 0, yourNameLength);
-        String serverName = new String(serverNameBytes, Charsets.UTF_8);
+        byte[] serverNameBytes = new byte[serverNameLength];
+        data.readBytes(serverNameBytes, 0, serverNameLength);
+        String serverName = readString(data, serverNameLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {

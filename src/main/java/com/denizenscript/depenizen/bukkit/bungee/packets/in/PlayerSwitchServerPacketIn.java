@@ -4,7 +4,6 @@ import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeePlayerServerSwitchScriptEvent;
-import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
 import org.bukkit.Bukkit;
 
@@ -31,17 +30,13 @@ public class PlayerSwitchServerPacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid PlayerSwitchServerPacket (name bytes requested: " + nameLength + ")");
             return;
         }
-        byte[] nameBytes = new byte[nameLength];
-        data.readBytes(nameBytes, 0, nameLength);
-        String name = new String(nameBytes, Charsets.UTF_8);
+        String name = readString(data, nameLength);
         int serverNameLength = data.readInt();
         if (data.readableBytes() < serverNameLength || serverNameLength < 0) {
             BungeeBridge.instance.handler.fail("Invalid PlayerSwitchServerPacket (name bytes requested: " + serverNameLength + ")");
             return;
         }
-        byte[] serverNameBytes = new byte[serverNameLength];
-        data.readBytes(serverNameBytes, 0, serverNameLength);
-        String serverName = new String(serverNameBytes, Charsets.UTF_8);
+        String serverName = readString(data, serverNameLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {

@@ -39,7 +39,7 @@ public class ProxyPingPacketIn extends PacketIn {
         int protocol = data.readInt();
         int versionLength = data.readInt();
         if (data.readableBytes() < versionLength || versionLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ProxyPingPacket (motd bytes requested: " + versionLength + ")");
+            BungeeBridge.instance.handler.fail("Invalid ProxyPingPacket (version bytes requested: " + versionLength + ")");
             return;
         }
         String version = readString(data, versionLength);
