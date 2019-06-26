@@ -25,8 +25,6 @@ public class RemoveServerPacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid RemoveServerPacket (name bytes requested: " + serverNameLength + ")");
             return;
         }
-        byte[] serverNameBytes = new byte[serverNameLength];
-        data.readBytes(serverNameBytes, 0, serverNameLength);
         String serverName = readString(data, serverNameLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
