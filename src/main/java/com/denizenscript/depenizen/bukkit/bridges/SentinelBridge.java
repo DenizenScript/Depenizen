@@ -64,11 +64,8 @@ public class SentinelBridge extends Bridge {
                     if (entries.isEmpty()) {
                         return false;
                     }
-                    long id = DetermineCommand.getNewId();
-                    ScriptBuilder.addObjectToEntries(entries, "reqid", id);
                     InstantQueue queue = InstantQueue.getQueue(ScriptQueue.getNextId(script.getContainer().getName()));
                     queue.addEntries(entries);
-                    queue.setReqId(id);
                     String def_name = "entity";
                     if (script.getContainer().getContents().contains("definitions")) {
                         List<String> definition_names = CoreUtilities.split(script.getContainer().getString("definitions"), '|');
@@ -78,8 +75,8 @@ public class SentinelBridge extends Bridge {
                     }
                     queue.addDefinition(def_name, new dEntity(ent).getDenizenObject());
                     queue.start();
-                    if (DetermineCommand.hasOutcome(id)) {
-                        return CoreUtilities.toLowerCase(DetermineCommand.getOutcome(id).get(0)).equals("true");
+                    if (queue.determinations != null && queue.determinations.size() > 0) {
+                        return CoreUtilities.toLowerCase(queue.determinations.get(0)).equals("true");
                     }
                 }
             }
