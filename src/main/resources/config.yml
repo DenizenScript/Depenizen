@@ -5,4 +5,4 @@
 # Use "none" to disable Bungee support functionality.
 Bungee server address: none
 # Set to the bungee server's primary port (if in use).
-Bungee server port: 22565
+Bungee server port: 25565
