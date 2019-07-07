@@ -116,7 +116,7 @@ public class PVPArenaPlayerProperties implements Property {
 
                 // <--[tag]
                 // @attribute <p@player.pvparena.team.player_count>
-                // @returns Element(Integer)
+                // @returns Element(Number)
                 // @description
                 // Returns the number of players in the team.
                 // @Plugin Depenizen, PvP Arena

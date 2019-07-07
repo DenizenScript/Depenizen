@@ -78,14 +78,14 @@ public class FactionsPlayerNPCProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.factions.power>
-            // @returns Element(Double)
+            // @returns Element(Decimal)
             // @description
             // Returns the player's power level.
             // @Plugin Depenizen, Factions
             // -->
             // <--[tag]
             // @attribute <n@npc.factions.power>
-            // @returns Element(Double)
+            // @returns Element(Decimal)
             // @description
             // Returns the NPC's power level.
             // @Plugin Depenizen, Factions

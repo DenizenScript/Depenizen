@@ -81,7 +81,7 @@ public class VampirePlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.combat_infect>
-        // @returns Element(Double)
+        // @returns Element(Decimal)
         // @description
         // Returns the value of the combat infection risk.
         // @Plugin Depenizen, Vampire
@@ -92,7 +92,7 @@ public class VampirePlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.combat_damage>
-        // @returns Element(Double)
+        // @returns Element(Decimal)
         // @description
         // Returns the value of the combat damage factor.
         // @Plugin Depenizen, Vampire

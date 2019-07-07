@@ -63,7 +63,7 @@ public class McMMOPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.mcmmo.level[<skill>]>
-            // @returns Element(Integer)
+            // @returns Element(Number)
             // @description
             // Returns the player's level in a skill. If no skill is specified,
             // this returns the player's overall level.
@@ -113,7 +113,7 @@ public class McMMOPlayerProperties implements Property {
 
                 // <--[tag]
                 // @attribute <p@player.mcmmo.xp[<skill>].to_next_level>
-                // @returns Element(Integer)
+                // @returns Element(Number)
                 // @description
                 // Returns the amount of experience a player needs to level up
                 // in a skill.
@@ -132,7 +132,7 @@ public class McMMOPlayerProperties implements Property {
 
                 // <--[tag]
                 // @attribute <p@player.mcmmo.xp[<skill>].level>
-                // @returns Element(Integer)
+                // @returns Element(Number)
                 // @description
                 // Returns the player's experience level in a skill.
                 // @Plugin Depenizen, mcMMO
@@ -150,7 +150,7 @@ public class McMMOPlayerProperties implements Property {
 
                 // <--[tag]
                 // @attribute <p@player.mcmmo.xp[<skill>]>
-                // @returns Element(Integer)
+                // @returns Element(Number)
                 // @description
                 // Returns the player's amount of experience in a skill.
                 // @Plugin Depenizen, mcMMO
@@ -168,7 +168,7 @@ public class McMMOPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.mcmmo.rank[<skill>]>
-            // @returns Element(Integer)
+            // @returns Element(Number)
             // @description
             // Returns the player's current rank in a skill. If no skill is specified,
             // this returns the player's overall rank.

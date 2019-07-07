@@ -176,7 +176,7 @@ public class JobsJob implements dObject {
 
                 // <--[tag]
                 // @attribute <job@job[<player>].xp>
-                // @returns Element(Double)
+                // @returns Element(Decimal)
                 // @description
                 // Returns the current experience a player has in a specified job.
                 // @Plugin Depenizen, Jobs
@@ -187,7 +187,7 @@ public class JobsJob implements dObject {
 
         // <--[tag]
         // @attribute <job@job.color>
-        // @returns Element(ChatColor)
+        // @returns Element
         // @description
         // Returns the ChatColor of the job.
         // @Plugin Depenizen, Jobs
