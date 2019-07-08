@@ -1,10 +1,10 @@
 package com.denizenscript.depenizen.bukkit.properties.plotsquared;
 
+import com.github.intellectualsites.plotsquared.plot.object.PlotPlayer;
 import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
-import com.intellectualcrafters.plot.api.PlotAPI;
-import com.intellectualcrafters.plot.object.Plot;
+import com.github.intellectualsites.plotsquared.plot.object.Plot;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
 import net.aufdemrand.denizencore.objects.dList;
@@ -70,14 +70,14 @@ public class PlotSquaredPlayerProperties implements Property {
                     return null;
                 }
                 dList plots = new dList();
-                for (Plot plays : new PlotAPI().getPlayerPlots(world.getWorld(), player.getPlayerEntity())) {
+                for (Plot plays : PlotPlayer.wrap(player.getPlayerEntity()).getPlots(world.getName())) {
                     plots.add(new dPlotSquaredPlot(plays).identify());
                 }
                 return plots.getAttribute(attribute.fulfill(1));
             }
             else {
                 dList plots = new dList();
-                for (Plot plays : new PlotAPI().getPlayerPlots(player.getPlayerEntity())) {
+                for (Plot plays : PlotPlayer.wrap(player.getPlayerEntity()).getPlots()) {
                     plots.add(new dPlotSquaredPlot(plays).identify());
                 }
                 return plots.getAttribute(attribute.fulfill(1));

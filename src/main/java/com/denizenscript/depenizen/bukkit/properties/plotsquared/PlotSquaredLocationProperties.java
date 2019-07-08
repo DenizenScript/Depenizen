@@ -1,9 +1,10 @@
 package com.denizenscript.depenizen.bukkit.properties.plotsquared;
 
+import com.github.intellectualsites.plotsquared.plot.object.Location;
 import net.aufdemrand.denizencore.objects.properties.Property;
 import net.aufdemrand.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
-import com.intellectualcrafters.plot.api.PlotAPI;
+import com.github.intellectualsites.plotsquared.api.PlotAPI;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.objects.dObject;
@@ -51,6 +52,10 @@ public class PlotSquaredLocationProperties implements Property {
 
     dLocation location;
 
+    public Location getPlotSquaredLocation() {
+        return new Location(location.getWorldName(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getYaw(), location.getPitch());
+    }
+
     @Override
     public String getAttribute(Attribute attribute) {
         // <--[tag]
@@ -62,7 +67,8 @@ public class PlotSquaredLocationProperties implements Property {
         // -->
         if (attribute.startsWith("plotsquared_plot")) {
             try {
-                return new dPlotSquaredPlot(new PlotAPI().getPlot(location)).getAttribute(attribute.fulfill(1));
+                return new dPlotSquaredPlot(new PlotAPI().getPlotSquared().getPlotAreaAbs(getPlotSquaredLocation())
+                        .getPlot(getPlotSquaredLocation())).getAttribute(attribute.fulfill(1));
             }
             catch (Exception e) {
                 if (!attribute.hasAlternative()) {

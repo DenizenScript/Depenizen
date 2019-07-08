@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.plotsquared;
 
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
-import com.plotsquared.bukkit.events.PlayerClaimPlotEvent;
+import com.github.intellectualsites.plotsquared.bukkit.events.PlayerClaimPlotEvent;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.events.BukkitScriptEvent;
 import net.aufdemrand.denizen.objects.dEntity;

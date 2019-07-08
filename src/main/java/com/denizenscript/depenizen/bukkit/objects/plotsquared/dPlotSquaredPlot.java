@@ -1,8 +1,8 @@
 package com.denizenscript.depenizen.bukkit.objects.plotsquared;
 
-import com.intellectualcrafters.plot.object.Plot;
-import com.intellectualcrafters.plot.object.RegionWrapper;
-import com.intellectualcrafters.plot.util.MainUtil;
+import com.github.intellectualsites.plotsquared.plot.object.Plot;
+import com.github.intellectualsites.plotsquared.plot.object.RegionWrapper;
+import com.github.intellectualsites.plotsquared.plot.util.MainUtil;
 import net.aufdemrand.denizen.objects.dCuboid;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
@@ -158,7 +158,7 @@ public class dPlotSquaredPlot implements dObject {
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("home")) {
-            com.intellectualcrafters.plot.object.Location loca = plot.getHome();
+            com.github.intellectualsites.plotsquared.plot.object.Location loca = plot.getHome();
             return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getAttribute(attribute.fulfill(1));
         }
 
@@ -170,7 +170,7 @@ public class dPlotSquaredPlot implements dObject {
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("default_home")) {
-            com.intellectualcrafters.plot.object.Location loca = plot.getDefaultHome();
+            com.github.intellectualsites.plotsquared.plot.object.Location loca = plot.getDefaultHome();
             return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getAttribute(attribute.fulfill(1));
         }
 

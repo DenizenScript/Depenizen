@@ -225,9 +225,9 @@
             <systemPath>${project.basedir}/lib/PlayerPoints.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.plotsquared</groupId>
-            <artifactId>plotsquared-api</artifactId>
-            <version>3.5.0u2</version>
+            <groupId>com.github.intellectualsites</groupId>
+            <artifactId>plotsquared</artifactId>
+            <version>4.298</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/PlotSquared.jar</systemPath>
         </dependency>
