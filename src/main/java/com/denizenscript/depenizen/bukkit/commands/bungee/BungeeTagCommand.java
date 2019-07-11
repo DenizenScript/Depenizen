@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.ReadTagPacketOut;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.utilities.Utilities;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.dObject;
@@ -110,8 +110,8 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
             defValues.append(BungeeCommand.escape(def.getValue().toString())).append("\n");
         }
         ReadTagPacketOut packetTag = new ReadTagPacketOut();
-        packetTag.playerUUID = ((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer() ?
-                ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer().getOfflinePlayer().getUniqueId()
+        packetTag.playerUUID = Utilities.entryHasPlayer(scriptEntry) ?
+                Utilities.getEntryPlayer(scriptEntry).getOfflinePlayer().getUniqueId()
                 : new UUID(0, 0);
         packetTag.tag = tag.asString();
         packetTag.id = newId;

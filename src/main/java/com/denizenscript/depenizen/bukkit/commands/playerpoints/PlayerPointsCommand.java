@@ -1,8 +1,8 @@
 package com.denizenscript.depenizen.bukkit.commands.playerpoints;
 
 import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsBridge;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.utilities.Utilities;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.scripts.ScriptEntry;
@@ -78,8 +78,8 @@ public class PlayerPointsCommand extends AbstractCommand {
         }
 
         if (!scriptEntry.hasObject("target")) {
-            if (((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer()) {
-                scriptEntry.addObject("target", ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer());
+            if (Utilities.entryHasPlayer(scriptEntry)) {
+                scriptEntry.addObject("target", Utilities.getEntryPlayer(scriptEntry));
             }
             else {
                 throw new InvalidArgumentsException("This command does not have a player attached!");

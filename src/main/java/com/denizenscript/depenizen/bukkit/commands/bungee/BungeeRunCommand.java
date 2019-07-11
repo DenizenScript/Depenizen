@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.RunScriptPacketOut;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.utilities.Utilities;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
@@ -76,8 +76,8 @@ public class BungeeRunCommand extends AbstractCommand {
             return;
         }
         RunScriptPacketOut packetScript = new RunScriptPacketOut();
-        packetScript.playerUUID = ((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer() ?
-                ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer().getOfflinePlayer().getUniqueId()
+        packetScript.playerUUID = Utilities.entryHasPlayer(scriptEntry) ?
+                Utilities.getEntryPlayer(scriptEntry).getOfflinePlayer().getUniqueId()
                 : new UUID(0, 0);
         packetScript.scriptName = scriptName.asString();
         packetScript.defs = def.asString();

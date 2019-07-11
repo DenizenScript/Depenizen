@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.RunCommandsPacketOut;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.utilities.Utilities;
 import net.aufdemrand.denizen.utilities.debugging.dB;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.aH;
@@ -99,8 +99,8 @@ public class BungeeCommand extends BracedCommand {
         }
         RunCommandsPacketOut packetScript = new RunCommandsPacketOut(toSend.toString(),
                 defNames.toString() + "\r" + defValues.toString(), scriptEntry.shouldDebug(),
-                ((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer() ?
-                ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer().getOfflinePlayer().getUniqueId()
+                Utilities.entryHasPlayer(scriptEntry) ?
+                Utilities.getEntryPlayer(scriptEntry).getOfflinePlayer().getUniqueId()
                 : new UUID(0, 0));
         for (String server : servers) {
             RedirectPacketOut packet = new RedirectPacketOut(server, packetScript);

@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.commands.jobs;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.JobsPlayer;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
+import net.aufdemrand.denizen.utilities.Utilities;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -76,7 +77,7 @@ public class JobsCommand extends AbstractCommand {
         if (!scriptEntry.hasObject("job")) {
             throw new InvalidArgumentsException("Must specify a job!");
         }
-        if (!((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer()) {
+        if (!Utilities.entryHasPlayer(scriptEntry)) {
             throw new InvalidArgumentsException("Must have a player attached to the queue.");
         }
 

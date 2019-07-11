@@ -5,8 +5,8 @@ import com.xxmicloxx.NoteBlockAPI.model.Song;
 import com.xxmicloxx.NoteBlockAPI.songplayer.RadioSongPlayer;
 import com.xxmicloxx.NoteBlockAPI.songplayer.SongPlayer;
 import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
+import net.aufdemrand.denizen.utilities.Utilities;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -88,8 +88,8 @@ public class NBSCommand extends AbstractCommand {
             throw new InvalidArgumentsException("Action not specified! (play/stop)");
         }
         else if (!scriptEntry.hasObject("targets")) {
-            if (((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer()) {
-                scriptEntry.addObject("targets", Collections.singletonList(((BukkitScriptEntryData) scriptEntry.entryData).getPlayer()));
+            if (Utilities.entryHasPlayer(scriptEntry)) {
+                scriptEntry.addObject("targets", Collections.singletonList(Utilities.getEntryPlayer(scriptEntry)));
             }
             else {
                 throw new InvalidArgumentsException("Must specify players to add, remove or spectate!");

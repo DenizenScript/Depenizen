@@ -2,8 +2,8 @@ package com.denizenscript.depenizen.bukkit.commands.libsdisguises;
 
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.*;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dEntity;
+import net.aufdemrand.denizen.utilities.Utilities;
 import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
 import net.aufdemrand.denizencore.objects.Element;
 import net.aufdemrand.denizencore.objects.aH;
@@ -144,8 +144,8 @@ public class DisguiseCommand extends AbstractCommand {
         }
 
         if (!scriptEntry.hasObject("target")) {
-            if (((BukkitScriptEntryData) scriptEntry.entryData).hasPlayer()) {
-                scriptEntry.addObject("target", ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer().getDenizenEntity());
+            if (Utilities.entryHasPlayer(scriptEntry)) {
+                scriptEntry.addObject("target", Utilities.getEntryPlayer(scriptEntry).getDenizenEntity());
             }
             else {
                 throw new InvalidArgumentsException("This command does not have a player attached!");
