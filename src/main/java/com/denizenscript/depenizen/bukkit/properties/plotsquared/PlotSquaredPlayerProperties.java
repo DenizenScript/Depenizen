@@ -7,7 +7,7 @@ import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.github.intellectualsites.plotsquared.plot.object.Plot;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.objects.dWorld;
-import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 

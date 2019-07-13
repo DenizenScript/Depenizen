@@ -7,7 +7,7 @@ import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
-import com.denizenscript.denizencore.objects.ScriptTag;
+import com.denizenscript.denizencore.objects.core.ScriptTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.containers.core.ProcedureScriptContainer;
 import com.denizenscript.denizencore.scripts.queues.ScriptQueue;

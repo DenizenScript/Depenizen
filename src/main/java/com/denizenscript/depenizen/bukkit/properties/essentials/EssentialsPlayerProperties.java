@@ -1,6 +1,9 @@
 package com.denizenscript.depenizen.bukkit.properties.essentials;
 
 import com.denizenscript.denizencore.objects.*;
+import com.denizenscript.denizencore.objects.core.DurationTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 import com.denizenscript.denizen.objects.dLocation;

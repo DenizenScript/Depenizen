@@ -1,6 +1,8 @@
 package com.denizenscript.depenizen.bukkit.objects.griefprevention;
 
 import com.denizenscript.denizencore.objects.*;
+import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;

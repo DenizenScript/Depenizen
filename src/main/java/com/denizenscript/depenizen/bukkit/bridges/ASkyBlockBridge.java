@@ -13,7 +13,7 @@ import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
-import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.properties.askyblock.ASkyBlockLocationProperties;
 import com.denizenscript.depenizen.bukkit.properties.askyblock.ASkyBlockPlayerProperties;

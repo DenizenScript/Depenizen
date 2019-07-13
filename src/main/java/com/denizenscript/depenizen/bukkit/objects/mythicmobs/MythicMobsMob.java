@@ -1,6 +1,8 @@
 package com.denizenscript.depenizen.bukkit.objects.mythicmobs;
 
 import com.denizenscript.denizencore.objects.*;
+import com.denizenscript.denizencore.objects.core.DurationTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizencore.tags.Attribute;

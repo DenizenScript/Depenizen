@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.essentials;
 import com.earth2me.essentials.Essentials;
 import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.ObjectTag;

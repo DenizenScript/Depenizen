@@ -5,7 +5,7 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.nisovin.magicspells.MagicSpells;
 import com.nisovin.magicspells.mana.ManaHandler;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
