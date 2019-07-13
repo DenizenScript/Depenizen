@@ -5,7 +5,7 @@ import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.residence.dResidence;
-import net.aufdemrand.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;

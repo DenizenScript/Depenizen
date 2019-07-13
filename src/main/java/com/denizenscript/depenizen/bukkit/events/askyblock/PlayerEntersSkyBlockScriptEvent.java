@@ -1,10 +1,10 @@
 package com.denizenscript.depenizen.bukkit.events.askyblock;
 
 import com.wasteofplastic.askyblock.events.IslandEnterEvent;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;

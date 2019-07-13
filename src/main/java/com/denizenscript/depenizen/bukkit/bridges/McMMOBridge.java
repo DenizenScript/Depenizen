@@ -6,10 +6,10 @@ import com.denizenscript.depenizen.bukkit.properties.mcmmo.McMMOEntityProperties
 import com.denizenscript.depenizen.bukkit.properties.mcmmo.McMMOPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.mcmmo.dParty;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import net.aufdemrand.denizen.objects.dEntity;
-import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.utilities.DenizenAPI;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;

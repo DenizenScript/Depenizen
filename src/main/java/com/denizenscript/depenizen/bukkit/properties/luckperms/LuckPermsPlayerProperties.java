@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrack;
 import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;

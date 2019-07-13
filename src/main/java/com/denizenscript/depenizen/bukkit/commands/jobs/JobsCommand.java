@@ -2,8 +2,8 @@ package com.denizenscript.depenizen.bukkit.commands.jobs;
 
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.JobsPlayer;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizen.utilities.Utilities;
+import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.aH;

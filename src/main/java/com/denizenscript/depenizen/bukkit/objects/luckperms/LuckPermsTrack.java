@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.objects.luckperms;
 import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.dList;

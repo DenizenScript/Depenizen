@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.Bridge;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.depenizen.bukkit.properties.nocheatplus.NoCheatPlusPlayerProperties;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 

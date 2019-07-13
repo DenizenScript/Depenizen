@@ -2,8 +2,8 @@ package com.denizenscript.depenizen.bukkit.commands.libsdisguises;
 
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.*;
-import net.aufdemrand.denizen.objects.dEntity;
-import net.aufdemrand.denizen.utilities.Utilities;
+import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.aH;

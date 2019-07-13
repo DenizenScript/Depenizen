@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerLevelsUp
 import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerUnlocksSkillScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerUpgradesSkillScriptEvent;
 import com.denizenscript.depenizen.bukkit.objects.skillapi.SkillAPIClass;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerDowngradesSkillScriptEvent;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;

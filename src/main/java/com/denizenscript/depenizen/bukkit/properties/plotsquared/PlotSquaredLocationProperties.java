@@ -5,8 +5,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.github.intellectualsites.plotsquared.api.PlotAPI;
-import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 

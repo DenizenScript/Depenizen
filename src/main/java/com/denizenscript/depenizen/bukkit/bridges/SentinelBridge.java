@@ -2,9 +2,9 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.events.sentinel.SentinelAttackScriptEvent;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import net.aufdemrand.denizen.objects.dEntity;
-import net.aufdemrand.denizen.objects.dItem;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.dItem;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.dScript;

@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.objects.libsdisguises;
 
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
-import net.aufdemrand.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.dObject;

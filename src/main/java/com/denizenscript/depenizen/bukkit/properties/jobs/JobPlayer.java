@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.jobs;
 
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.objects.properties.Property;

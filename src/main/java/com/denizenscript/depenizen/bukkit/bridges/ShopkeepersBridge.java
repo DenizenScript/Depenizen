@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.events.shopkeepers.ShopKeeperTradeScri
 import com.denizenscript.depenizen.bukkit.properties.shopkeepers.ShopKeepersEntityProperties;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeper;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import net.aufdemrand.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;

@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.areashop;
 import com.denizenscript.depenizen.bukkit.objects.areashop.dAreaShop;
 import me.wiefferink.areashop.AreaShop;
 import me.wiefferink.areashop.regions.GeneralRegion;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.objects.properties.Property;

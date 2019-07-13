@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.objects.mobarena;
 import com.denizenscript.depenizen.bukkit.bridges.MobArenaBridge;
 import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.dList;

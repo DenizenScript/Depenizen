@@ -6,8 +6,8 @@ import com.denizenscript.depenizen.bukkit.properties.residence.ResidencePlayerPr
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.events.residence.PlayerEntersResidenceScriptEvent;
 import com.denizenscript.depenizen.bukkit.objects.residence.dResidence;
-import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;

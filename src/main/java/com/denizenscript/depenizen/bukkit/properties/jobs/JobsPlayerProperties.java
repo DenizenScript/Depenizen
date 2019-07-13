@@ -6,8 +6,8 @@ import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobsPlayer;
-import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 

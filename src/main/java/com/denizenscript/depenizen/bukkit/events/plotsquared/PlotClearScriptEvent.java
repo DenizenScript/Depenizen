@@ -2,8 +2,8 @@ package com.denizenscript.depenizen.bukkit.events.plotsquared;
 
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.github.intellectualsites.plotsquared.bukkit.events.PlotClearEvent;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;

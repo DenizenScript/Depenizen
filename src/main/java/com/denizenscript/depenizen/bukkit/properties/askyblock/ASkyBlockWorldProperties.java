@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.askyblock;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.wasteofplastic.askyblock.ASkyBlockAPI;
-import net.aufdemrand.denizen.objects.dWorld;
+import com.denizenscript.denizen.objects.dWorld;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;

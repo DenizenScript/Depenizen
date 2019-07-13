@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.bungee;
 
-import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;

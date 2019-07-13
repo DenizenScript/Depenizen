@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.commands.mobarena;
 
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
 import com.garbagemule.MobArena.framework.Arena;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.aH;
 import com.denizenscript.denizencore.objects.dList;

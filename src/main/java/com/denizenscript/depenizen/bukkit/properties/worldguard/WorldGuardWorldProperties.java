@@ -7,7 +7,7 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import net.aufdemrand.denizen.objects.dWorld;
+import com.denizenscript.denizen.objects.dWorld;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;

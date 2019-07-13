@@ -1,10 +1,10 @@
 package com.denizenscript.depenizen.bukkit.events.mythicmobs;
 
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.objects.dEntity;
-import net.aufdemrand.denizen.objects.dItem;
+import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.aH;
 import com.denizenscript.denizencore.objects.dList;

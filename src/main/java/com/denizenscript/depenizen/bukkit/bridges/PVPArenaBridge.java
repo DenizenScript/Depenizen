@@ -7,8 +7,8 @@ import com.denizenscript.depenizen.bukkit.events.pvparena.PVPArenaStartsScriptEv
 import com.denizenscript.depenizen.bukkit.properties.pvparena.PVPArenaPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;

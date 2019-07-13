@@ -9,10 +9,10 @@ import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsPlayer
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.commands.WarpNotFoundException;
-import net.aufdemrand.denizen.objects.dItem;
-import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.objects.dItem;
+import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.dList;

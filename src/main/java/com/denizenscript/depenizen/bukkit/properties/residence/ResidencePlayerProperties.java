@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.residence;
 import com.bekvon.bukkit.residence.Residence;
 import com.bekvon.bukkit.residence.containers.ResidencePlayer;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;

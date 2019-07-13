@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.properties.mcmmo;
 
 import com.gmail.nossr50.mcMMO;
-import net.aufdemrand.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.dObject;

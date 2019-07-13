@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.pvparena;
 
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;

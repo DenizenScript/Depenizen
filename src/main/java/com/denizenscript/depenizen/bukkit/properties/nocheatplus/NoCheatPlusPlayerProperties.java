@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.nocheatplus;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import fr.neatmonster.nocheatplus.checks.ViolationHistory;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;

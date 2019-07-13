@@ -2,9 +2,9 @@ package com.denizenscript.depenizen.bukkit.events.libsdisguises;
 
 import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguise;
 import me.libraryaddict.disguise.events.DisguiseEvent;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.objects.dEntity;
+import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;

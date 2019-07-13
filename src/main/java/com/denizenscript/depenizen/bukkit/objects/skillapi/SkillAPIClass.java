@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.objects.skillapi;
 
 import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.classes.RPGClass;
-import net.aufdemrand.denizen.objects.dItem;
+import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.dObject;

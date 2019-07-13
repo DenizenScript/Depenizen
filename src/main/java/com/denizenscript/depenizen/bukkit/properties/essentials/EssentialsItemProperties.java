@@ -1,8 +1,8 @@
 package com.denizenscript.depenizen.bukkit.properties.essentials;
 
 import com.earth2me.essentials.Essentials;
-import net.aufdemrand.denizen.objects.dItem;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.objects.dItem;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.aH;

@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.ReadTagPacketOut;
-import net.aufdemrand.denizen.utilities.Utilities;
+import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;

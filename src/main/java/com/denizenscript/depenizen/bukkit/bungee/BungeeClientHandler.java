@@ -7,7 +7,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import org.bukkit.Bukkit;
 
 public class BungeeClientHandler extends ChannelInboundHandlerAdapter {

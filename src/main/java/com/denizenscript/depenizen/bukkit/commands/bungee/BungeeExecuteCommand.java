@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.commands.bungee;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ExecuteCommandPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.aH;

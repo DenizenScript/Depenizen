@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.events.areashop.AreaShopExpiresScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.areashop.AreaShopPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.areashop.dAreaShop;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;

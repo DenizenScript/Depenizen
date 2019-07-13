@@ -7,7 +7,7 @@ import com.palmergames.bukkit.TownyChat.Chat;
 import com.palmergames.bukkit.TownyChat.channels.Channel;
 import com.palmergames.bukkit.TownyChat.channels.ChannelsHolder;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;

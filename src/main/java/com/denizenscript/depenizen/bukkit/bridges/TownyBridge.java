@@ -11,16 +11,16 @@ import com.denizenscript.depenizen.bukkit.properties.towny.TownyPlayerProperties
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import net.aufdemrand.denizen.objects.dCuboid;
-import net.aufdemrand.denizen.objects.dLocation;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dCuboid;
+import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
-import net.aufdemrand.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagManager;
 

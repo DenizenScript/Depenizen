@@ -2,8 +2,8 @@ package com.denizenscript.depenizen.bukkit.events.mobarena;
 
 import com.garbagemule.MobArena.events.ArenaStartEvent;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;

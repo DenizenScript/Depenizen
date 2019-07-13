@@ -4,7 +4,7 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.khorn.terraincontrol.LocalBiome;
 import com.khorn.terraincontrol.TerrainControl;
-import net.aufdemrand.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;

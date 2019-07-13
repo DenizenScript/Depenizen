@@ -62,7 +62,7 @@
             <version>${craftbukkit.version}</version>
         </dependency>
         <dependency>
-            <groupId>net.aufdemrand</groupId>
+            <groupId>com.denizenscript</groupId>
             <artifactId>denizen</artifactId>
             <version>${denizen.version}</version>
             <type>jar</type>

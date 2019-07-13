@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventio
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
-import net.aufdemrand.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;

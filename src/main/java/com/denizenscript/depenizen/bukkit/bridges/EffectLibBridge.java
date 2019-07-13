@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.commands.effectlib.EffectLibCommand;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import net.aufdemrand.denizen.utilities.DenizenAPI;
+import com.denizenscript.denizen.utilities.DenizenAPI;
 
 public class EffectLibBridge extends Bridge {
 

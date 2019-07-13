@@ -7,12 +7,12 @@ import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.player.PlayerClass;
 import com.sucy.skill.api.player.PlayerData;
 import com.sucy.skill.api.player.PlayerSkill;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Duration;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
-import net.aufdemrand.denizen.utilities.blocks.OldMaterialsHelper;
+import com.denizenscript.denizen.utilities.blocks.OldMaterialsHelper;
 
 public class SkillAPIPlayerProperties implements Property {
 

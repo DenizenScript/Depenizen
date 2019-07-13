@@ -5,7 +5,7 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.factions.dFaction;
 import com.massivecraft.factions.entity.BoardColl;
 import com.massivecraft.massivecore.ps.PS;
-import net.aufdemrand.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 

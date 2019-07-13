@@ -1,9 +1,9 @@
 package com.denizenscript.depenizen.bukkit.events.shopkeepers;
 
 import com.nisovin.shopkeepers.api.events.ShopkeeperTradeEvent;
-import net.aufdemrand.denizen.BukkitScriptEntryData;
-import net.aufdemrand.denizen.events.BukkitScriptEvent;
-import net.aufdemrand.denizen.objects.dPlayer;
+import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;

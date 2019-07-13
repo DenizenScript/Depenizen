@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.bossshop;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.bridges.BossShopBridge;
-import net.aufdemrand.denizen.objects.dInventory;
+import com.denizenscript.denizen.objects.dInventory;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;

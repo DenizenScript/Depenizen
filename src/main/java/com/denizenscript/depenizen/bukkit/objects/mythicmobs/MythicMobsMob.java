@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.objects.mythicmobs;
 
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
-import net.aufdemrand.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
