@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventio
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
-import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -26,7 +26,7 @@ public class GriefPreventionLocationProperties implements Property {
     static DataStore dataStore = GriefPrevention.instance.dataStore;
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dLocation;
+        return object instanceof LocationTag;
     }
 
     public static GriefPreventionLocationProperties getFrom(ObjectTag object) {
@@ -34,7 +34,7 @@ public class GriefPreventionLocationProperties implements Property {
             return null;
         }
         else {
-            return new GriefPreventionLocationProperties((dLocation) object);
+            return new GriefPreventionLocationProperties((LocationTag) object);
         }
     }
 
@@ -49,11 +49,11 @@ public class GriefPreventionLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private GriefPreventionLocationProperties(dLocation location) {
+    private GriefPreventionLocationProperties(LocationTag location) {
         this.location = location;
     }
 
-    dLocation location;
+    LocationTag location;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -67,7 +67,7 @@ public class GriefPreventionLocationProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <l@location.griefprevention.has_claim[(<ignore_height>)]>
+            // @attribute <LocationTag.griefprevention.has_claim[(<ignore_height>)]>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether there is a GriefPreventionClaim at this location.
@@ -86,7 +86,7 @@ public class GriefPreventionLocationProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <l@location.griefprevention.claim>
+            // @attribute <LocationTag.griefprevention.claim>
             // @returns GriefPreventionClaim
             // @description
             // Returns the GriefPreventionClaim at this location.

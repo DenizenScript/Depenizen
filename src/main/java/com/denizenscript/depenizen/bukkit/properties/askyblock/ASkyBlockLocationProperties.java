@@ -4,8 +4,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.wasteofplastic.askyblock.ASkyBlockAPI;
 import com.wasteofplastic.askyblock.Island;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -28,14 +28,14 @@ public class ASkyBlockLocationProperties implements Property {
     }
 
     public static boolean describes(ObjectTag pl) {
-        return pl instanceof dLocation;
+        return pl instanceof LocationTag;
     }
 
     public static ASkyBlockLocationProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
-        return new ASkyBlockLocationProperties((dLocation) object);
+        return new ASkyBlockLocationProperties((LocationTag) object);
     }
 
     public static final String[] handledTags = new String[] {
@@ -45,11 +45,11 @@ public class ASkyBlockLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public ASkyBlockLocationProperties(dLocation location) {
+    public ASkyBlockLocationProperties(LocationTag location) {
         this.location = location;
     }
 
-    dLocation location;
+    LocationTag location;
     ASkyBlockAPI api = ASkyBlockAPI.getInstance();
 
     @Override
@@ -62,7 +62,7 @@ public class ASkyBlockLocationProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <l@location.skyblock.has_skyblock>
+            // @attribute <LocationTag.skyblock.has_skyblock>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether the location has a skyblock.
@@ -73,8 +73,8 @@ public class ASkyBlockLocationProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <l@location.skyblock.get_owner>
-            // @returns dPlayer
+            // @attribute <LocationTag.skyblock.get_owner>
+            // @returns PlayerTag
             // @description
             // Returns whether the owner of the skyblock at the location.
             // @Plugin Depenizen, A SkyBlock
@@ -84,7 +84,7 @@ public class ASkyBlockLocationProperties implements Property {
                 if (i == null) {
                     return null;
                 }
-                return new dPlayer(i.getOwner()).getAttribute(attribute.fulfill(1));
+                return new PlayerTag(i.getOwner()).getAttribute(attribute.fulfill(1));
             }
         }
         return null;

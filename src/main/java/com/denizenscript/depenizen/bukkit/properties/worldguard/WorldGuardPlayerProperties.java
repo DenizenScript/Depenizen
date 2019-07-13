@@ -10,8 +10,8 @@ import com.sk89q.worldguard.protection.flags.Flag;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -37,15 +37,15 @@ public class WorldGuardPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer
-                && ((dPlayer) object).isOnline();
+        return object instanceof PlayerTag
+                && ((PlayerTag) object).isOnline();
     }
 
     public static WorldGuardPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
-        return new WorldGuardPlayerProperties((dPlayer) object);
+        return new WorldGuardPlayerProperties((PlayerTag) object);
     }
 
     public static final String[] handledTags = new String[] {
@@ -55,7 +55,7 @@ public class WorldGuardPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private WorldGuardPlayerProperties(dPlayer player) {
+    private WorldGuardPlayerProperties(PlayerTag player) {
         this.player = player.getPlayerEntity();
     }
 
@@ -75,14 +75,14 @@ public class WorldGuardPlayerProperties implements Property {
         attribute = attribute.fulfill(1);
 
         // <--[tag]
-        // @attribute <p@player.worldguard.can_build[<location>]>
+        // @attribute <PlayerTag.worldguard.can_build[<location>]>
         // @returns ElementTag(Boolean)
         // @description
         // Whether WorldGuard allows to build at a location.
         // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("can_build") && attribute.hasContext(1)) {
-            dLocation location = dLocation.valueOf(attribute.getContext(1));
+            LocationTag location = LocationTag.valueOf(attribute.getContext(1));
             if (location == null) {
                 return null;
             }
@@ -92,7 +92,7 @@ public class WorldGuardPlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.worldguard.test_flag[<name>]>
+        // @attribute <PlayerTag.worldguard.test_flag[<name>]>
         // @returns ElementTag(Boolean)
         // @description
         // Returns the state of a flag for that player at their location.
@@ -101,12 +101,12 @@ public class WorldGuardPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("test_flag")) {
             if (!attribute.hasContext(1)) {
-                Debug.echoError("The tag p@player.worlduard.test_flag[...] must have a value.");
+                Debug.echoError("The tag PlayerTag.worlduard.test_flag[...] must have a value.");
                 return null;
             }
             StateFlag flag = getStateFlag(attribute.getContext(1));
             if (flag == null) {
-                Debug.echoError("The tag p@player.worlduard.test_flag[...] has an invalid value: " + attribute.getContext(1));
+                Debug.echoError("The tag PlayerTag.worlduard.test_flag[...] has an invalid value: " + attribute.getContext(1));
                 return null;
             }
 
@@ -115,14 +115,14 @@ public class WorldGuardPlayerProperties implements Property {
             int args = 1;
 
             // <--[tag]
-            // @attribute <p@player.worldguard.test_flag[<name>].at[<location>]>
+            // @attribute <PlayerTag.worldguard.test_flag[<name>].at[<location>]>
             // @returns ElementTag(Boolean)
             // @description
             // Returns the state of a flag for that player at the specified location.
             // @Plugin Depenizen, WorldGuard
             // -->
             if (attribute.getAttribute(2).startsWith("at") && attribute.hasContext(2)) {
-                loc = dLocation.valueOf(attribute.getContext(2));
+                loc = LocationTag.valueOf(attribute.getContext(2));
                 args = 2;
                 if (loc == null) {
                     return null;

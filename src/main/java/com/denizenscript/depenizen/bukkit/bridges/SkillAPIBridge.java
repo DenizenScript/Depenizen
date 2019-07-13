@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerLevelsUp
 import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerUnlocksSkillScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerUpgradesSkillScriptEvent;
 import com.denizenscript.depenizen.bukkit.objects.skillapi.SkillAPIClass;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerDowngradesSkillScriptEvent;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
@@ -17,7 +17,7 @@ public class SkillAPIBridge extends Bridge {
     @Override
     public void init() {
         ObjectFetcher.registerWithObjectFetcher(SkillAPIClass.class);
-        PropertyParser.registerProperty(SkillAPIPlayerProperties.class, dPlayer.class);
+        PropertyParser.registerProperty(SkillAPIPlayerProperties.class, PlayerTag.class);
         ScriptEvent.registerScriptEvent(new SkillAPIPlayerUnlocksSkillScriptEvent());
         ScriptEvent.registerScriptEvent(new SkillAPIPlayerUpgradesSkillScriptEvent());
         ScriptEvent.registerScriptEvent(new SkillAPIPlayerDowngradesSkillScriptEvent());

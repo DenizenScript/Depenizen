@@ -8,7 +8,7 @@ import com.garbagemule.MobArena.framework.Arena;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -31,7 +31,7 @@ public class MobArenaPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static MobArenaPlayerProperties getFrom(ObjectTag object) {
@@ -39,7 +39,7 @@ public class MobArenaPlayerProperties implements Property {
             return null;
         }
         else {
-            return new MobArenaPlayerProperties((dPlayer) object);
+            return new MobArenaPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -50,12 +50,12 @@ public class MobArenaPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public MobArenaPlayerProperties(dPlayer player) {
+    public MobArenaPlayerProperties(PlayerTag player) {
         this.player = player;
         this.arena = ((MobArena) MobArenaBridge.instance.plugin).getArenaMaster().getArenaWithPlayer(player.getPlayerEntity());
     }
 
-    dPlayer player = null;
+    PlayerTag player = null;
     Arena arena = null;
 
     @Override
@@ -69,7 +69,7 @@ public class MobArenaPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.mobarena.in_arena>
+            // @attribute <PlayerTag.mobarena.in_arena>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player is in an arena.
@@ -83,7 +83,7 @@ public class MobArenaPlayerProperties implements Property {
             else if (arena != null) {
 
                 // <--[tag]
-                // @attribute <p@player.mobarena.current_arena>
+                // @attribute <PlayerTag.mobarena.current_arena>
                 // @returns mobarena
                 // @description
                 // Returns the arena the player is in.
@@ -95,7 +95,7 @@ public class MobArenaPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.mobarena.class>
+                // @attribute <PlayerTag.mobarena.class>
                 // @returns ElementTag
                 // @description
                 // Returns the name of the class the player is using.
@@ -125,7 +125,7 @@ public class MobArenaPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.mobarena.stats[<mobarena>].kills>
+                // @attribute <PlayerTag.mobarena.stats[<mobarena>].kills>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the number of kills the player has in the arena.
@@ -136,7 +136,7 @@ public class MobArenaPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.mobarena.stats[<mobarena>].damage_done>
+                // @attribute <PlayerTag.mobarena.stats[<mobarena>].damage_done>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the amount of damage the player has dealt in the arena.
@@ -147,7 +147,7 @@ public class MobArenaPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.mobarena.stats[<mobarena>].damage_taken>
+                // @attribute <PlayerTag.mobarena.stats[<mobarena>].damage_taken>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the amount of damage the player has taken in the arena.
@@ -158,7 +158,7 @@ public class MobArenaPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.mobarena.stats[<mobarena>].last_wave>
+                // @attribute <PlayerTag.mobarena.stats[<mobarena>].last_wave>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the wave the player reached in their last match in the arena.
@@ -169,7 +169,7 @@ public class MobArenaPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.mobarena.stats[<mobarena>].times_swung>
+                // @attribute <PlayerTag.mobarena.stats[<mobarena>].times_swung>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the number of times the player has swung their weapon in the arena.
@@ -180,7 +180,7 @@ public class MobArenaPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.mobarena.stats[<mobarena>].times_hit>
+                // @attribute <PlayerTag.mobarena.stats[<mobarena>].times_hit>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the number of times the player has hit an enemy in the arena.

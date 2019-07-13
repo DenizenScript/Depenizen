@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
-import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.EntityTag;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
@@ -24,7 +24,7 @@ public class MythicMobsBridge extends Bridge {
     @Override
     public void init() {
         ObjectFetcher.registerWithObjectFetcher(MythicMobsMob.class);
-        PropertyParser.registerProperty(MythicMobsEntityProperties.class, dEntity.class);
+        PropertyParser.registerProperty(MythicMobsEntityProperties.class, EntityTag.class);
         ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(MythicSpawnCommand.class,
                 "MYTHICSPAWN", "mythicspawn [<name>] [<location>] (level:<#>)", 2);

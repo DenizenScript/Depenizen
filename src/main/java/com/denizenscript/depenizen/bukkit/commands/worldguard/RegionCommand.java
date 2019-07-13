@@ -6,8 +6,8 @@ import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
-import com.denizenscript.denizen.objects.dCuboid;
-import com.denizenscript.denizen.objects.dWorld;
+import com.denizenscript.denizen.objects.CuboidTag;
+import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -40,7 +40,7 @@ public class RegionCommand extends AbstractCommand {
 
     // @Usage
     // Use to remove a region from a world.
-    // - region remove w@world id:MyRegion
+    // - region remove WorldTag id:MyRegion
 
     // -->
 
@@ -57,13 +57,13 @@ public class RegionCommand extends AbstractCommand {
             }
 
             else if (!scriptEntry.hasObject("cuboid")
-                    && arg.matchesArgumentType(dCuboid.class)) {
-                scriptEntry.addObject("cuboid", arg.asType(dCuboid.class));
+                    && arg.matchesArgumentType(CuboidTag.class)) {
+                scriptEntry.addObject("cuboid", arg.asType(CuboidTag.class));
             }
 
             else if (!scriptEntry.hasObject("world")
-                    && arg.matchesArgumentType(dWorld.class)) {
-                scriptEntry.addObject("world", arg.asType(dWorld.class));
+                    && arg.matchesArgumentType(WorldTag.class)) {
+                scriptEntry.addObject("world", arg.asType(WorldTag.class));
             }
 
             else if (!scriptEntry.hasObject("action")
@@ -101,8 +101,8 @@ public class RegionCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) {
 
         ElementTag region_id = scriptEntry.getElement("region_id");
-        dCuboid cuboid = scriptEntry.getdObject("cuboid");
-        dWorld w = scriptEntry.getdObject("world");
+        CuboidTag cuboid = scriptEntry.getdObject("cuboid");
+        WorldTag w = scriptEntry.getdObject("world");
         World world = w != null ? w.getWorld() : cuboid != null ? cuboid.getWorld() : null;
         ElementTag action = scriptEntry.getElement("action");
 

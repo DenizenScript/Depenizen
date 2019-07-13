@@ -2,8 +2,8 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.events.sentinel.SentinelAttackScriptEvent;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizen.objects.dItem;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
@@ -44,7 +44,7 @@ public class SentinelBridge extends Bridge {
         public boolean isTarget(LivingEntity ent, String prefix, String value) {
             try {
                 if (prefix.equals("held_denizen_item") && ent.getEquipment() != null) {
-                    if (SentinelUtilities.regexFor(value).matcher(new dItem(SentinelUtilities.getHeldItem(ent)).identifySimple().replace("i@", "")).matches()) {
+                    if (SentinelUtilities.regexFor(value).matcher(new ItemTag(SentinelUtilities.getHeldItem(ent)).identifySimple().replace("i@", "")).matches()) {
                         return true;
                     }
                 }
@@ -71,7 +71,7 @@ public class SentinelBridge extends Bridge {
                             def_name = definition_names.get(0);
                         }
                     }
-                    queue.addDefinition(def_name, new dEntity(ent).getDenizenObject());
+                    queue.addDefinition(def_name, new EntityTag(ent).getDenizenObject());
                     queue.start();
                     if (queue.determinations != null && queue.determinations.size() > 0) {
                         return CoreUtilities.toLowerCase(queue.determinations.get(0)).equals("true");

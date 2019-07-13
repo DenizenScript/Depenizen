@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.objects.areashop;
 
 import me.wiefferink.areashop.AreaShop;
 import me.wiefferink.areashop.regions.GeneralRegion;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -143,13 +143,13 @@ public class dAreaShop implements ObjectTag {
 
         // <--[tag]
         // @attribute <areashop@areashop.landlord>
-        // @returns dPlayer
+        // @returns PlayerTag
         // @description
         // Returns the landlord of the AreaShop.
         // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("landlord")) {
-            return new dPlayer(areaShop.getLandlord()).getAttribute(attribute.fulfill(1));
+            return new PlayerTag(areaShop.getLandlord()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -165,13 +165,13 @@ public class dAreaShop implements ObjectTag {
 
         // <--[tag]
         // @attribute <areashop@areashop.owner>
-        // @returns dPlayer
+        // @returns PlayerTag
         // @description
         // Returns the owner of the AreaShop.
         // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("owner")) {
-            return new dPlayer(areaShop.getOwner()).getAttribute(attribute.fulfill(1));
+            return new PlayerTag(areaShop.getOwner()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

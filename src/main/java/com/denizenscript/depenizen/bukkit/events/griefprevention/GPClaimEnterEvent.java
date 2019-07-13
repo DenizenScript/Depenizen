@@ -5,8 +5,8 @@ import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -48,8 +48,8 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
 
     public static GPClaimEnterEvent instance;
 
-    public dLocation from;
-    public dLocation to;
+    public LocationTag from;
+    public LocationTag to;
     public GriefPreventionClaim new_claim;
     public GriefPreventionClaim old_claim;
     public PlayerMoveEvent event;
@@ -88,7 +88,7 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
     @Override
     public ScriptEntryData getScriptEntryData() {
         // TODO: Store the player?
-        return new BukkitScriptEntryData(event != null ? new dPlayer(event.getPlayer()) : null, null);
+        return new BukkitScriptEntryData(event != null ? new PlayerTag(event.getPlayer()) : null, null);
     }
 
     @Override
@@ -113,8 +113,8 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
         if (event.getTo().getBlock().getLocation().equals(event.getFrom().getBlock().getLocation())) {
             return;
         }
-        from = new dLocation(event.getFrom());
-        to = new dLocation(event.getTo());
+        from = new LocationTag(event.getFrom());
+        to = new LocationTag(event.getTo());
         Claim fclaim = GriefPrevention.instance.dataStore.getClaimAt(from, false, null);
         Claim tclaim = GriefPrevention.instance.dataStore.getClaimAt(to, false, null);
         if (tclaim == fclaim) {

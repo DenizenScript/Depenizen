@@ -4,7 +4,7 @@ import com.gmail.nossr50.datatypes.party.Party;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
 import com.gmail.nossr50.party.PartyManager;
 import com.gmail.nossr50.util.player.UserManager;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -43,7 +43,7 @@ public class dParty implements ObjectTag {
         return PartyManager.getParty(arg) != null;
     }
 
-    public static dParty forPlayer(dPlayer player) {
+    public static dParty forPlayer(PlayerTag player) {
         McMMOPlayer pl = UserManager.getOfflinePlayer(player.getOfflinePlayer());
         if (pl == null) {
             return null;
@@ -128,18 +128,18 @@ public class dParty implements ObjectTag {
 
         // <--[tag]
         // @attribute <party@party.leader>
-        // @returns dPlayer
+        // @returns PlayerTag
         // @description
         // Returns the leader of the party.
         // @Plugin Depenizen, mcMMO
         // -->
         else if (attribute.startsWith("leader")) {
-            return new dPlayer(party.getLeader().getUniqueId()).getAttribute(attribute.fulfill(1));
+            return new PlayerTag(party.getLeader().getUniqueId()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <party@party.members>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all party members.
         // @Plugin Depenizen, mcMMO
@@ -147,7 +147,7 @@ public class dParty implements ObjectTag {
         else if (attribute.startsWith("members")) {
             ListTag players = new ListTag();
             for (UUID uuid : party.getMembers().keySet()) {
-                players.add(dPlayer.valueOf(uuid.toString()).identify());
+                players.add(PlayerTag.valueOf(uuid.toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
         }

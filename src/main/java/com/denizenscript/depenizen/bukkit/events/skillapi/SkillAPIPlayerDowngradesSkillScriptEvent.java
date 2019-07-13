@@ -3,8 +3,8 @@ package com.denizenscript.depenizen.bukkit.events.skillapi;
 import com.sucy.skill.api.event.PlayerSkillDowngradeEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -43,7 +43,7 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
 
     public static SkillAPIPlayerDowngradesSkillScriptEvent instance;
     public PlayerSkillDowngradeEvent event;
-    public dPlayer player;
+    public PlayerTag player;
     public ElementTag level;
     public ElementTag skill;
     public ElementTag refund;
@@ -100,10 +100,10 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
 
     @EventHandler
     public void onSkillAPIPlayerDowngradesSkill(PlayerSkillDowngradeEvent event) {
-        if (!dEntity.isPlayer(event.getPlayerData().getPlayer())) {
+        if (!EntityTag.isPlayer(event.getPlayerData().getPlayer())) {
             return;
         }
-        player = dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer());
+        player = PlayerTag.mirrorBukkitPlayer(event.getPlayerData().getPlayer());
         level = new ElementTag(event.getDowngradedSkill().getLevel());
         refund = new ElementTag(event.getRefund());
         skill = new ElementTag(event.getDowngradedSkill().getData().getName());

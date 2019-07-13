@@ -7,7 +7,7 @@ import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -32,7 +32,7 @@ public class TownyPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static TownyPlayerProperties getFrom(ObjectTag object) {
@@ -40,7 +40,7 @@ public class TownyPlayerProperties implements Property {
             return null;
         }
         else {
-            return new TownyPlayerProperties((dPlayer) object);
+            return new TownyPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -51,11 +51,11 @@ public class TownyPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private TownyPlayerProperties(dPlayer player) {
+    private TownyPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    dPlayer player = null;
+    PlayerTag player = null;
 
     public Resident getResident() throws NotRegisteredException {
         return TownyUniverse.getDataSource().getResident(player.getName());
@@ -66,7 +66,7 @@ public class TownyPlayerProperties implements Property {
 
         try {
             // <--[tag]
-            // @attribute <p@player.has_nation>
+            // @attribute <PlayerTag.has_nation>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player is part of a nation.
@@ -77,7 +77,7 @@ public class TownyPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.has_town>
+            // @attribute <PlayerTag.has_town>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player is part of a town.
@@ -88,7 +88,7 @@ public class TownyPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.mode_list>
+            // @attribute <PlayerTag.mode_list>
             // @returns ListTag(Element)
             // @description
             // Returns the player's towny modes as a list.
@@ -103,7 +103,7 @@ public class TownyPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.nation_ranks>
+            // @attribute <PlayerTag.nation_ranks>
             // @returns ListTag(Element)
             // @description
             // Returns the player's nation ranks.
@@ -118,7 +118,7 @@ public class TownyPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.nation>
+            // @attribute <PlayerTag.nation>
             // @returns dNation
             // @description
             // Returns the player's nation.
@@ -141,7 +141,7 @@ public class TownyPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.town_ranks>
+            // @attribute <PlayerTag.town_ranks>
             // @returns ListTag(Element)
             // @description
             // Returns the player's town ranks.
@@ -156,7 +156,7 @@ public class TownyPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.town>
+            // @attribute <PlayerTag.town>
             // @returns dTown
             // @description
             // Returns the player's town.

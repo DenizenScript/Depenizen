@@ -5,8 +5,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.github.intellectualsites.plotsquared.plot.object.Plot;
-import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.objects.dWorld;
+import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -24,7 +24,7 @@ public class PlotSquaredPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static PlotSquaredPlayerProperties getFrom(ObjectTag object) {
@@ -32,7 +32,7 @@ public class PlotSquaredPlayerProperties implements Property {
             return null;
         }
         else {
-            return new PlotSquaredPlayerProperties((dPlayer) object);
+            return new PlotSquaredPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -47,17 +47,17 @@ public class PlotSquaredPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private PlotSquaredPlayerProperties(dPlayer player) {
+    private PlotSquaredPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    dPlayer player;
+    PlayerTag player;
 
     @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <p@player.plotsquared_plots[<w@world>]>
+        // @attribute <PlayerTag.plotsquared_plots[<WorldTag>]>
         // @returns ListTag(dPlotSquaredPlot)
         // @description
         // Returns a list of plots a player has in a world. Exclude the context to get plots in all worlds.
@@ -65,7 +65,7 @@ public class PlotSquaredPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("plotsquared_plots")) {
             if (attribute.hasContext(1)) {
-                dWorld world = dWorld.valueOf(attribute.getContext(1));
+                WorldTag world = WorldTag.valueOf(attribute.getContext(1));
                 if (world == null) {
                     return null;
                 }

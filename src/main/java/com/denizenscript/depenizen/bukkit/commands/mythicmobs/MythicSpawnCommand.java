@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
 import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
-import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
@@ -41,8 +41,8 @@ public class MythicSpawnCommand extends AbstractCommand {
         for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("location")
-                    && arg.matchesArgumentType(dLocation.class)) {
-                scriptEntry.addObject("location", arg.asType(dLocation.class));
+                    && arg.matchesArgumentType(LocationTag.class)) {
+                scriptEntry.addObject("location", arg.asType(LocationTag.class));
             }
 
             else if (!scriptEntry.hasObject("level")
@@ -72,7 +72,7 @@ public class MythicSpawnCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) {
 
         ElementTag name = scriptEntry.getElement("name");
-        dLocation location = scriptEntry.getdObject("location");
+        LocationTag location = scriptEntry.getdObject("location");
         ElementTag level = scriptEntry.getElement("level");
 
         Debug.report(scriptEntry, getName(), name.debug() + location.debug() + level.debug());

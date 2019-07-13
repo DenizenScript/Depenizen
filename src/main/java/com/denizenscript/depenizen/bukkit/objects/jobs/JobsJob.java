@@ -4,7 +4,7 @@ import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobProgression;
 import com.gamingmesh.jobs.container.JobsPlayer;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
@@ -86,11 +86,11 @@ public class JobsJob implements ObjectTag {
         return jobOwner != null;
     }
 
-    public dPlayer getOwner() {
-        return new dPlayer(jobOwner.getPlayerUUID());
+    public PlayerTag getOwner() {
+        return new PlayerTag(jobOwner.getPlayerUUID());
     }
 
-    public void setOwner(dPlayer player) {
+    public void setOwner(PlayerTag player) {
         this.jobOwner = Jobs.getPlayerManager().getJobsPlayer(player.getName());
         this.jobProgression = jobOwner.getJobProgression(job);
     }

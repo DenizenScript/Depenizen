@@ -6,8 +6,8 @@ import com.denizenscript.depenizen.bukkit.factions.dFaction;
 import com.massivecraft.factions.entity.MPlayer;
 import com.massivecraft.factions.entity.MPlayerColl;
 import com.massivecraft.massivecore.util.IdUtil;
-import com.denizenscript.denizen.objects.dNPC;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.NPCTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -33,7 +33,7 @@ public class FactionsPlayerNPCProperties implements Property {
     // TODO: Refactor this into two separate extension classes you psychotic idiots.
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer || object instanceof dNPC;
+        return object instanceof PlayerTag || object instanceof NPCTag;
     }
 
     public static FactionsPlayerNPCProperties getFrom(ObjectTag object) {
@@ -53,11 +53,11 @@ public class FactionsPlayerNPCProperties implements Property {
     }; // None
 
     private FactionsPlayerNPCProperties(ObjectTag object) {
-        String name = object instanceof dPlayer ? ((dPlayer) object).getName()
-                : object instanceof dNPC ? ((dNPC) object).getName()
+        String name = object instanceof PlayerTag ? ((PlayerTag) object).getName()
+                : object instanceof NPCTag ? ((NPCTag) object).getName()
                 : null;
         if (name == null) {
-            Debug.echoError("Invalid ObjectTag! Must be a dPlayer or dNPC!");
+            Debug.echoError("Invalid ObjectTag! Must be a PlayerTag or NPCTag!");
             return;
         }
         player = MPlayer.get(IdUtil.getId(name));
@@ -77,14 +77,14 @@ public class FactionsPlayerNPCProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.factions.power>
+            // @attribute <PlayerTag.factions.power>
             // @returns ElementTag(Decimal)
             // @description
             // Returns the player's power level.
             // @Plugin Depenizen, Factions
             // -->
             // <--[tag]
-            // @attribute <n@npc.factions.power>
+            // @attribute <NPCTag.factions.power>
             // @returns ElementTag(Decimal)
             // @description
             // Returns the NPC's power level.
@@ -97,14 +97,14 @@ public class FactionsPlayerNPCProperties implements Property {
             else if (player.hasFaction()) {
 
                 // <--[tag]
-                // @attribute <p@player.factions.role>
+                // @attribute <PlayerTag.factions.role>
                 // @returns ElementTag
                 // @description
                 // Returns the player's role in their faction.
                 // @Plugin Depenizen, Factions
                 // -->
                 // <--[tag]
-                // @attribute <n@npc.factions.role>
+                // @attribute <NPCTag.factions.role>
                 // @returns ElementTag
                 // @description
                 // Returns the NPC's role in their faction.
@@ -117,14 +117,14 @@ public class FactionsPlayerNPCProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.factions.title>
+                // @attribute <PlayerTag.factions.title>
                 // @returns ElementTag
                 // @description
                 // Returns the player's title.
                 // @Plugin Depenizen, Factions
                 // -->
                 // <--[tag]
-                // @attribute <n@npc.factions.title>
+                // @attribute <NPCTag.factions.title>
                 // @returns ElementTag
                 // @description
                 // Returns the NPC's title.
@@ -140,14 +140,14 @@ public class FactionsPlayerNPCProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.faction>
+        // @attribute <PlayerTag.faction>
         // @returns dFaction
         // @description
         // Returns the player's faction.
         // @Plugin Depenizen, Factions
         // -->
         // <--[tag]
-        // @attribute <n@npc.faction>
+        // @attribute <NPCTag.faction>
         // @returns dFaction
         // @description
         // Returns the NPC's faction.

@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.properties.quests.QuestsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 
 public class QuestsBridge extends Bridge {
@@ -12,6 +12,6 @@ public class QuestsBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        PropertyParser.registerProperty(QuestsPlayerProperties.class, dPlayer.class);
+        PropertyParser.registerProperty(QuestsPlayerProperties.class, PlayerTag.class);
     }
 }

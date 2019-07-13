@@ -4,7 +4,7 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguise;
 import me.libraryaddict.disguise.DisguiseAPI;
-import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -26,7 +26,7 @@ public class LibsDisguiseEntityProperties implements Property {
         // None
     }
     public static boolean describes(ObjectTag object) {
-        return object instanceof dEntity;
+        return object instanceof EntityTag;
     }
 
     public static LibsDisguiseEntityProperties getFrom(ObjectTag object) {
@@ -34,7 +34,7 @@ public class LibsDisguiseEntityProperties implements Property {
             return null;
         }
         else {
-            return new LibsDisguiseEntityProperties((dEntity) object);
+            return new LibsDisguiseEntityProperties((EntityTag) object);
         }
     }
 
@@ -45,11 +45,11 @@ public class LibsDisguiseEntityProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public LibsDisguiseEntityProperties(dEntity entity) {
+    public LibsDisguiseEntityProperties(EntityTag entity) {
         this.entity = entity;
     }
 
-    dEntity entity;
+    EntityTag entity;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -58,7 +58,7 @@ public class LibsDisguiseEntityProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <e@entity.is_disguised>
+        // @attribute <EntityTag.is_disguised>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the entity is in a disguise.
@@ -69,7 +69,7 @@ public class LibsDisguiseEntityProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <e@entity.disguise>
+        // @attribute <EntityTag.disguise>
         // @returns dlibsdisguise
         // @description
         // Returns the disguise of the entity.

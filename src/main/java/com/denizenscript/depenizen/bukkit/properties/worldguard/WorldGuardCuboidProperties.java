@@ -11,8 +11,8 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import com.denizenscript.denizen.objects.dCuboid;
-import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.CuboidTag;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -40,7 +40,7 @@ public class WorldGuardCuboidProperties implements Property {
     }
 
     public static boolean describes(ObjectTag cuboid) {
-        return cuboid instanceof dCuboid;
+        return cuboid instanceof CuboidTag;
     }
 
     public static WorldGuardCuboidProperties getFrom(ObjectTag cuboid) {
@@ -48,7 +48,7 @@ public class WorldGuardCuboidProperties implements Property {
             return null;
         }
         else {
-            return new WorldGuardCuboidProperties((dCuboid) cuboid);
+            return new WorldGuardCuboidProperties((CuboidTag) cuboid);
         }
     }
 
@@ -59,16 +59,16 @@ public class WorldGuardCuboidProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private WorldGuardCuboidProperties(dCuboid cuboid) {
+    private WorldGuardCuboidProperties(CuboidTag cuboid) {
         this.cuboid = cuboid;
     }
 
-    dCuboid cuboid = null;
+    CuboidTag cuboid = null;
 
     private ApplicableRegionSet getApplicableRegions() {
         WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
-        dLocation low = cuboid.getLow(0);
-        dLocation high = cuboid.getHigh(0);
+        LocationTag low = cuboid.getLow(0);
+        LocationTag high = cuboid.getHigh(0);
         BlockVector3 vecLow = BlockVector3.at(low.getX(), low.getY(), low.getZ());
         BlockVector3 vecHigh = BlockVector3.at(high.getX(), high.getY(), high.getZ());
         ProtectedCuboidRegion region = new ProtectedCuboidRegion("FAKE_REGION", vecLow, vecHigh);
@@ -91,7 +91,7 @@ public class WorldGuardCuboidProperties implements Property {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <cu@cuboid.has_region>
+        // @attribute <CuboidTag.has_region>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the cuboid contains any region.
@@ -102,7 +102,7 @@ public class WorldGuardCuboidProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <cu@cuboid.regions>
+        // @attribute <CuboidTag.regions>
         // @returns ListTag(Region)
         // @description
         // Returns a list of regions that are in this cuboid.

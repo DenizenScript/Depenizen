@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.playerpoints;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsBridge;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -22,7 +22,7 @@ public class PlayerPointsPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static PlayerPointsPlayerProperties getFrom(ObjectTag object) {
@@ -30,7 +30,7 @@ public class PlayerPointsPlayerProperties implements Property {
             return null;
         }
         else {
-            return new PlayerPointsPlayerProperties((dPlayer) object);
+            return new PlayerPointsPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -45,17 +45,17 @@ public class PlayerPointsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private PlayerPointsPlayerProperties(dPlayer player) {
+    private PlayerPointsPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    dPlayer player;
+    PlayerTag player;
 
     @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <p@player.playerpoints_points>
+        // @attribute <PlayerTag.playerpoints_points>
         // @returns ElementTag(Number)
         // @description
         // Returns the amount of points the player has. Only works on online players.

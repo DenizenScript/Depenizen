@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.tags.BukkitTagContext;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.TagRunnable;
@@ -75,7 +75,7 @@ public class PlaceholderAPIBridge extends Bridge {
 
         @Override
         public String onRequest(OfflinePlayer player, String identifier) {
-            return TagManager.tag(identifier, new BukkitTagContext(dPlayer.mirrorBukkitPlayer(player), null, false, null, false, null));
+            return TagManager.tag(identifier, new BukkitTagContext(PlayerTag.mirrorBukkitPlayer(player), null, false, null, false, null));
         }
     }
 }

@@ -3,8 +3,8 @@ package com.denizenscript.depenizen.bukkit.events.askyblock;
 import com.wasteofplastic.askyblock.events.ChallengeCompleteEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dItem;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.ItemTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -70,7 +70,7 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(new dPlayer(event.getPlayer()), null);
+        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()), null);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
         money_reward = new ElementTag(event.getMoneyReward());
         item_rewards = new ListTag();
         for (String i : event.getItemRewards()) {
-            dItem item = dItem.valueOf(i);
+            ItemTag item = ItemTag.valueOf(i);
             if (item != null) {
                 item_rewards.add(item.identify());
             }

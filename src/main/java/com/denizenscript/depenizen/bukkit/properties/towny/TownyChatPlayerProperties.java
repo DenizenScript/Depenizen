@@ -7,7 +7,7 @@ import com.palmergames.bukkit.TownyChat.Chat;
 import com.palmergames.bukkit.TownyChat.channels.Channel;
 import com.palmergames.bukkit.TownyChat.channels.ChannelsHolder;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -31,14 +31,14 @@ public class TownyChatPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static TownyChatPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
-        return new TownyChatPlayerProperties((dPlayer) object);
+        return new TownyChatPlayerProperties((PlayerTag) object);
     }
 
     public static final String[] handledTags = new String[] {
@@ -48,11 +48,11 @@ public class TownyChatPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private TownyChatPlayerProperties(dPlayer player) {
+    private TownyChatPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    dPlayer player;
+    PlayerTag player;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -66,7 +66,7 @@ public class TownyChatPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.townychat.channels>
+            // @attribute <PlayerTag.townychat.channels>
             // @returns ListTag(Element)
             // @description
             // Returns a list of all channels the player is in.
@@ -81,7 +81,7 @@ public class TownyChatPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.townychat.muted_in[<channel name>]>
+            // @attribute <PlayerTag.townychat.muted_in[<channel name>]>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player is muted in the specified channel.
@@ -96,7 +96,7 @@ public class TownyChatPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.townychat.has_permission[<channel name>]>
+            // @attribute <PlayerTag.townychat.has_permission[<channel name>]>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player has permissions to join the specified channel.

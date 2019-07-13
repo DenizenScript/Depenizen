@@ -6,8 +6,8 @@ import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.ArcEffect;
 import de.slikey.effectlib.effect.AtomEffect;
 import de.slikey.effectlib.effect.BleedEffect;
-import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.DurationTag;
@@ -59,7 +59,7 @@ public class EffectLibCommand extends AbstractCommand {
 
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
-                scriptEntry.addObject("target", arg.asType(dEntity.class));
+                scriptEntry.addObject("target", arg.asType(EntityTag.class));
             }
 
             else if (!scriptEntry.hasObject("duration")
@@ -102,10 +102,10 @@ public class EffectLibCommand extends AbstractCommand {
     @Override
     public void execute(final ScriptEntry scriptEntry) {
 
-        dEntity target = (dEntity) scriptEntry.getObject("target");
+        EntityTag target = (EntityTag) scriptEntry.getObject("target");
         Action action = (Action) scriptEntry.getObject("action");
         DurationTag duration = (DurationTag) scriptEntry.getObject("duration");
-        dLocation location = (dLocation) scriptEntry.getObject("location");
+        LocationTag location = (LocationTag) scriptEntry.getObject("location");
 
         // Report to dB
         Debug.report(scriptEntry, getName(), (target != null ? target.debug() : "")

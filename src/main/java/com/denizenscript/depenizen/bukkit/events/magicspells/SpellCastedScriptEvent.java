@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.events.magicspells;
 import com.nisovin.magicspells.events.SpellCastedEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -40,7 +40,7 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     public static SpellCastedScriptEvent instance;
 
     public SpellCastedEvent event;
-    public dPlayer player;
+    public PlayerTag player;
     private float power;
     private float cooldown;
     private ElementTag spell;
@@ -88,7 +88,7 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
 
     @EventHandler
     public void onPlayerCastsSpell(SpellCastedEvent event) {
-        player = dPlayer.mirrorBukkitPlayer(event.getCaster());
+        player = PlayerTag.mirrorBukkitPlayer(event.getCaster());
         power = event.getPower();
         cooldown = event.getCooldown();
         spell = new ElementTag(event.getSpell().getName());

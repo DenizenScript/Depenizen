@@ -18,7 +18,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
@@ -179,7 +179,7 @@ public class BungeeBridge {
         ScriptEvent.registerScriptEvent(new BungeeProxyServerListPingScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeeServerConnectScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeeServerDisconnectScriptEvent());
-        PropertyParser.registerProperty(BungeePlayerProperties.class, dPlayer.class);
+        PropertyParser.registerProperty(BungeePlayerProperties.class, PlayerTag.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeRunCommand.class, "BUNGEERUN",
                 "bungeerun [<server>|...] [<script name>] (def:<definition>|...)", 2);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeExecuteCommand.class, "BUNGEEEXECUTE",

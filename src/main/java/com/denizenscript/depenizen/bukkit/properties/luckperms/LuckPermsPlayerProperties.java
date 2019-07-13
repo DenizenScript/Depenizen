@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrack;
 import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -24,7 +24,7 @@ public class LuckPermsPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static LuckPermsPlayerProperties getFrom(ObjectTag object) {
@@ -32,7 +32,7 @@ public class LuckPermsPlayerProperties implements Property {
             return null;
         }
         else {
-            return new LuckPermsPlayerProperties((dPlayer) object);
+            return new LuckPermsPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -47,17 +47,17 @@ public class LuckPermsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private LuckPermsPlayerProperties(dPlayer player) {
+    private LuckPermsPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    dPlayer player;
+    PlayerTag player;
 
     @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <p@player.luckperms_tracks>
+        // @attribute <PlayerTag.luckperms_tracks>
         // @returns ListTag(luckpermstrack)
         // @description
         // Returns a list of tracks the player is in.

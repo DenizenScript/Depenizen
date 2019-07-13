@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.areashop;
 import com.denizenscript.depenizen.bukkit.objects.areashop.dAreaShop;
 import me.wiefferink.areashop.AreaShop;
 import me.wiefferink.areashop.regions.GeneralRegion;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
@@ -30,7 +30,7 @@ public class AreaShopPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static AreaShopPlayerProperties getFrom(ObjectTag object) {
@@ -38,7 +38,7 @@ public class AreaShopPlayerProperties implements Property {
             return null;
         }
         else {
-            return new AreaShopPlayerProperties((dPlayer) object);
+            return new AreaShopPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -49,11 +49,11 @@ public class AreaShopPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private AreaShopPlayerProperties(dPlayer player) {
+    private AreaShopPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    dPlayer player = null;
+    PlayerTag player = null;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -65,7 +65,7 @@ public class AreaShopPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.areashop.owned>
+            // @attribute <PlayerTag.areashop.owned>
             // @returns ListTag(AreaShop)
             // @description
             // Returns a list of AreaShops the player owns.

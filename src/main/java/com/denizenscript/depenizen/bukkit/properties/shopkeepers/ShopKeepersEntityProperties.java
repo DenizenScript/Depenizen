@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.shopkeepers;
 
-import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -26,7 +26,7 @@ public class ShopKeepersEntityProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dEntity;
+        return object instanceof EntityTag;
     }
 
     public static ShopKeepersEntityProperties getFrom(ObjectTag object) {
@@ -34,7 +34,7 @@ public class ShopKeepersEntityProperties implements Property {
             return null;
         }
         else {
-            return new ShopKeepersEntityProperties((dEntity) object);
+            return new ShopKeepersEntityProperties((EntityTag) object);
         }
     }
 
@@ -45,12 +45,12 @@ public class ShopKeepersEntityProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public ShopKeepersEntityProperties(dEntity entity) {
+    public ShopKeepersEntityProperties(EntityTag entity) {
         this.entity = entity;
         this.isShopKeeper = ShopKeeper.isShopKeeper(entity);
     }
 
-    dEntity entity;
+    EntityTag entity;
     boolean isShopKeeper = false;
 
     @Override
@@ -60,7 +60,7 @@ public class ShopKeepersEntityProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <e@entity.is_shopkeeper>
+        // @attribute <EntityTag.is_shopkeeper>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the entity is a Shopkeeper.
@@ -72,7 +72,7 @@ public class ShopKeepersEntityProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <e@entity.shopkeeper>
+        // @attribute <EntityTag.shopkeeper>
         // @returns ShopKeeper
         // @description
         // Returns the ShopKeeper for this entity.

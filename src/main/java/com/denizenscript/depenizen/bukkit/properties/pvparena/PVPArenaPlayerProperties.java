@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.pvparena;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -28,7 +28,7 @@ public class PVPArenaPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static PVPArenaPlayerProperties getFrom(ObjectTag object) {
@@ -36,7 +36,7 @@ public class PVPArenaPlayerProperties implements Property {
             return null;
         }
         else {
-            return new PVPArenaPlayerProperties((dPlayer) object);
+            return new PVPArenaPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -47,7 +47,7 @@ public class PVPArenaPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private PVPArenaPlayerProperties(dPlayer player) {
+    private PVPArenaPlayerProperties(PlayerTag player) {
         this.player = ArenaPlayer.parsePlayer(player.getName());
     }
 
@@ -61,7 +61,7 @@ public class PVPArenaPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.pvparena.in_arena[<pvparena>]>
+            // @attribute <PlayerTag.pvparena.in_arena[<pvparena>]>
             // @returns ElementTag(Boolean)
             // @description
             // Returns true if the player is in the specified arena. If no arena is specified,
@@ -88,7 +88,7 @@ public class PVPArenaPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.pvparena.class>
+            // @attribute <PlayerTag.pvparena.class>
             // @returns ElementTag
             // @description
             // Returns the player's class if they're in an arena. Otherwise, returns null.
@@ -99,7 +99,7 @@ public class PVPArenaPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.pvparena.is_ready>
+            // @attribute <PlayerTag.pvparena.is_ready>
             // @returns ElementTag(Boolean)
             // @description
             // Returns true if the player is ready.
@@ -115,7 +115,7 @@ public class PVPArenaPlayerProperties implements Property {
                 attribute = attribute.fulfill(1);
 
                 // <--[tag]
-                // @attribute <p@player.pvparena.team.player_count>
+                // @attribute <PlayerTag.pvparena.team.player_count>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the number of players in the team.
@@ -127,7 +127,7 @@ public class PVPArenaPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.pvparena.team.name>
+                // @attribute <PlayerTag.pvparena.team.name>
                 // @returns ElementTag
                 // @description
                 // Returns the player's team name if they're in an arena. Otherwise, returns null.

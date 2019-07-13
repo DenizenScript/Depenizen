@@ -2,9 +2,9 @@ package com.denizenscript.depenizen.bukkit.events.sentinel;
 
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizen.objects.dNPC;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.NPCTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -40,7 +40,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     public static SentinelAttackScriptEvent instance;
     public SentinelAttackEvent event;
     public ObjectTag entity;
-    public dNPC npc;
+    public NPCTag npc;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -64,7 +64,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(entity instanceof dPlayer ? (dPlayer) entity : null, npc);
+        return new BukkitScriptEntryData(entity instanceof PlayerTag ? (PlayerTag) entity : null, npc);
     }
 
     @Override
@@ -77,8 +77,8 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
 
     @EventHandler
     public void onSentinelAttack(SentinelAttackEvent event) {
-        npc = new dNPC(event.getNPC());
-        entity = new dEntity(event.getNPC().getTrait(SentinelTrait.class).chasing).getDenizenObject();
+        npc = new NPCTag(event.getNPC());
+        entity = new EntityTag(event.getNPC().getTrait(SentinelTrait.class).chasing).getDenizenObject();
         this.event = event;
         fire(event);
     }

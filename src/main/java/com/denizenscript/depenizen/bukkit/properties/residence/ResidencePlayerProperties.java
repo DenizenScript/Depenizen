@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.residence;
 import com.bekvon.bukkit.residence.Residence;
 import com.bekvon.bukkit.residence.containers.ResidencePlayer;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -30,7 +30,7 @@ public class ResidencePlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static ResidencePlayerProperties getFrom(ObjectTag object) {
@@ -38,7 +38,7 @@ public class ResidencePlayerProperties implements Property {
             return null;
         }
         else {
-            return new ResidencePlayerProperties((dPlayer) object);
+            return new ResidencePlayerProperties((PlayerTag) object);
         }
     }
 
@@ -49,7 +49,7 @@ public class ResidencePlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private ResidencePlayerProperties(dPlayer player) {
+    private ResidencePlayerProperties(PlayerTag player) {
         this.player = Residence.getInstance().getPlayerManagerAPI().getResidencePlayer(player.getName());
     }
 
@@ -59,7 +59,7 @@ public class ResidencePlayerProperties implements Property {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <p@player.has_main_residence>
+        // @attribute <PlayerTag.has_main_residence>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the player has a main Residence.
@@ -71,7 +71,7 @@ public class ResidencePlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.main_residence>
+        // @attribute <PlayerTag.main_residence>
         // @returns dResidence
         // @description
         // Returns the player's current main Residence if they have one.
@@ -85,7 +85,7 @@ public class ResidencePlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.residences>
+        // @attribute <PlayerTag.residences>
         // @returns ListTag(dResidence)
         // @description
         // Returns the player's current list of Residences.

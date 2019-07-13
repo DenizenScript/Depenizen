@@ -3,8 +3,8 @@ package com.denizenscript.depenizen.bukkit.events.skillapi;
 import com.sucy.skill.api.event.PlayerSkillUnlockEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -41,7 +41,7 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
 
     public static SkillAPIPlayerUnlocksSkillScriptEvent instance;
     public PlayerSkillUnlockEvent event;
-    public dPlayer player;
+    public PlayerTag player;
     public ElementTag skill;
 
     @Override
@@ -90,10 +90,10 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
 
     @EventHandler
     public void onSkillAPIPlayerUnlocksSkill(PlayerSkillUnlockEvent event) {
-        if (!dEntity.isPlayer(event.getPlayerData().getPlayer())) {
+        if (!EntityTag.isPlayer(event.getPlayerData().getPlayer())) {
             return;
         }
-        player = dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer());
+        player = PlayerTag.mirrorBukkitPlayer(event.getPlayerData().getPlayer());
         skill = new ElementTag(event.getUnlockedSkill().getData().getName());
         this.event = event;
         fire(event);

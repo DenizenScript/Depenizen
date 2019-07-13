@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.properties.essentials;
 
 import com.earth2me.essentials.Essentials;
-import com.denizenscript.denizen.objects.dItem;
+import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Mechanism;
@@ -26,7 +26,7 @@ public class EssentialsItemProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dItem;
+        return object instanceof ItemTag;
     }
 
     public static EssentialsItemProperties getFrom(ObjectTag object) {
@@ -34,7 +34,7 @@ public class EssentialsItemProperties implements Property {
             return null;
         }
         else {
-            return new EssentialsItemProperties((dItem) object);
+            return new EssentialsItemProperties((ItemTag) object);
         }
     }
 
@@ -46,11 +46,11 @@ public class EssentialsItemProperties implements Property {
             "worth"
     };
 
-    private EssentialsItemProperties(dItem item) {
+    private EssentialsItemProperties(ItemTag item) {
         this.item = item;
     }
 
-    dItem item;
+    ItemTag item;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -59,7 +59,7 @@ public class EssentialsItemProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <i@item.worth>
+        // @attribute <ItemTag.worth>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of money one of this item is worth in Essentials.
@@ -76,7 +76,7 @@ public class EssentialsItemProperties implements Property {
             }
             double price = priceBD.doubleValue();
             // <--[tag]
-            // @attribute <i@item.worth.quantity[<#>]>
+            // @attribute <ItemTag.worth.quantity[<#>]>
             // @returns ElementTag(Decimal)
             // @description
             // Returns the amount of money the quantity specified of this item is worth in Essentials.
@@ -95,14 +95,14 @@ public class EssentialsItemProperties implements Property {
     @Override
     public void adjust(Mechanism mechanism) {
         // <--[mechanism]
-        // @object dItem
+        // @object ItemTag
         // @name worth
         // @input Element(Decimal)
         // @description
         // Sets the worth of this item in Essentials.
         // @tags
-        // <i@item.worth>
-        // <i@item.worth.quantity[<Element>]>
+        // <ItemTag.worth>
+        // <ItemTag.worth.quantity[<Element>]>
         // @Plugin Depenizen, Essentials
         // -->
         if (mechanism.matches("worth") && mechanism.getValue().isDouble()) {

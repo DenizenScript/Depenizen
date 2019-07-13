@@ -6,8 +6,8 @@ import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizen.objects.dItem;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -39,8 +39,8 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     //
     // @Context
     // <context.mob> Returns the MythicMob that has been killed.
-    // <context.entity> Returns the dEntity for the MythicMob.
-    // <context.killer> returns the dEntity that killed the MythicMob (if available).
+    // <context.entity> Returns the EntityTag for the MythicMob.
+    // <context.killer> returns the EntityTag that killed the MythicMob (if available).
     // <context.level> Returns the level of the MythicMob.
     // <context.drops> Returns a list of items dropped.
     // <context.xp> Returns the xp dropped.
@@ -49,7 +49,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     // @Determine
     // "XP:" + Element(Number) to specify the new amount of XP to be dropped.
     // "CURRENCY:" + Element(Decimal) to specify the new amount of currency to be dropped.
-    // ListTag(dItem) to specify new items to be dropped.
+    // ListTag(ItemTag) to specify new items to be dropped.
     //
     // @Plugin Depenizen, MythicMobs
     //
@@ -62,8 +62,8 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     public static MythicMobsDeathEvent instance;
     public MythicMobDeathEvent event;
     public MythicMobsMob mob;
-    public dEntity entity;
-    public dEntity killer;
+    public EntityTag entity;
+    public EntityTag killer;
     public ElementTag level;
     public ElementTag experience;
     public ElementTag currency;
@@ -118,12 +118,12 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
                 experience = new ElementTag(determination);
                 return true;
             }
-            else if (Argument.valueOf(determination).matchesArgumentList(dItem.class)) {
+            else if (Argument.valueOf(determination).matchesArgumentList(ItemTag.class)) {
                 if (newDrops == null) {
                     newDrops = new ArrayList<>();
                 }
-                List<dItem> items = ListTag.valueOf(determination).filter(dItem.class, container);
-                for (dItem i : items) {
+                List<ItemTag> items = ListTag.valueOf(determination).filter(ItemTag.class, container);
+                for (ItemTag i : items) {
                     newDrops.add(i.getItemStack());
                 }
                 return true;
@@ -157,7 +157,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         else if (name.equals("drops")) {
             ListTag oldDrops = new ListTag();
             for (ItemStack i : event.getDrops()) {
-                oldDrops.add(new dItem(i).identify());
+                oldDrops.add(new ItemTag(i).identify());
             }
             return oldDrops;
         }
@@ -170,8 +170,8 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     @EventHandler
     public void onMythicMobDeath(MythicMobDeathEvent event) {
         mob = new MythicMobsMob(event.getMob());
-        entity = new dEntity(event.getEntity());
-        killer = new dEntity(event.getKiller());
+        entity = new EntityTag(event.getEntity());
+        killer = new EntityTag(event.getKiller());
         level = new ElementTag(event.getMobLevel());
         experience = new ElementTag(event.getExp());
         currency = new ElementTag(event.getCurrency());

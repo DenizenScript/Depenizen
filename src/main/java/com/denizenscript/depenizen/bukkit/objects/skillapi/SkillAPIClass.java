@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.objects.skillapi;
 
 import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.classes.RPGClass;
-import com.denizenscript.denizen.objects.dItem;
+import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -186,13 +186,13 @@ public class SkillAPIClass implements ObjectTag {
 
         // <--[tag]
         // @attribute <skillapiclass@skill_class.icon>
-        // @returns dItem
+        // @returns ItemTag
         // @description
         // Returns the item icon representing this SkillAPI class in menus.
         // @Plugin Depenizen, SkillAPI
         // -->
         if (attribute.startsWith("icon")) {
-            return new dItem(rpgClass.getIcon()).getAttribute(attribute.fulfill(1));
+            return new ItemTag(rpgClass.getIcon()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

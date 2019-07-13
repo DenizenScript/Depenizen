@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.commands.playerpoints;
 
 import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsBridge;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -28,7 +28,7 @@ public class PlayerPointsCommand extends AbstractCommand {
     // This works for offline players.
 
     // @Tags
-    // <p@player.playerpoints_points>
+    // <PlayerTag.playerpoints_points>
 
     // @Usage
     // Use to give 5 points to the player
@@ -53,7 +53,7 @@ public class PlayerPointsCommand extends AbstractCommand {
 
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
-                scriptEntry.addObject("target", arg.asType(dPlayer.class));
+                scriptEntry.addObject("target", arg.asType(PlayerTag.class));
             }
 
             else if (!scriptEntry.hasObject("action")
@@ -92,7 +92,7 @@ public class PlayerPointsCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        dPlayer target = scriptEntry.getdObject("target");
+        PlayerTag target = scriptEntry.getdObject("target");
         ElementTag action = scriptEntry.getdObject("action");
         ElementTag amount = scriptEntry.getdObject("amount");
 

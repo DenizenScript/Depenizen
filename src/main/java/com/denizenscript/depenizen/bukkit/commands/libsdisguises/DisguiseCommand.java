@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.commands.libsdisguises;
 import com.denizenscript.denizencore.objects.Argument;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.*;
-import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -39,8 +39,8 @@ public class DisguiseCommand extends AbstractCommand {
     // Otherwise it is default set to false, showing the disguised character the player is disguising as.
 
     // @Tags
-    // <e@entity.is_disguised>
-    // <e@entity.disguise>
+    // <EntityTag.is_disguised>
+    // <EntityTag.disguise>
 
     // @Usage
     // Use to disguise the attached player in the queue as a Player.
@@ -81,7 +81,7 @@ public class DisguiseCommand extends AbstractCommand {
 
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
-                scriptEntry.addObject("target", arg.asType(dEntity.class));
+                scriptEntry.addObject("target", arg.asType(EntityTag.class));
             }
 
             else if (!scriptEntry.hasObject("name")
@@ -158,7 +158,7 @@ public class DisguiseCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        dEntity target = scriptEntry.getdObject("target");
+        EntityTag target = scriptEntry.getdObject("target");
         ElementTag type = scriptEntry.getdObject("type");
         ElementTag name = scriptEntry.getdObject("name");
         ElementTag action = scriptEntry.getdObject("action");

@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.properties.mcmmo;
 
 import com.gmail.nossr50.mcMMO;
-import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -26,7 +26,7 @@ public class McMMOEntityProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dEntity;
+        return object instanceof EntityTag;
     }
 
     public static McMMOEntityProperties getFrom(ObjectTag object) {
@@ -34,7 +34,7 @@ public class McMMOEntityProperties implements Property {
             return null;
         }
         else {
-            return new McMMOEntityProperties((dEntity) object);
+            return new McMMOEntityProperties((EntityTag) object);
         }
     }
 
@@ -45,11 +45,11 @@ public class McMMOEntityProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private McMMOEntityProperties(dEntity entity) {
+    private McMMOEntityProperties(EntityTag entity) {
         this.entity = entity;
     }
 
-    dEntity entity = null;
+    EntityTag entity = null;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -59,7 +59,7 @@ public class McMMOEntityProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <e@entity.mcmmo.is_spawned_mob>
+            // @attribute <EntityTag.mcmmo.is_spawned_mob>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether the entity is tracked by McMMO as a 'spawned' mob (one from a spawner block or spawn egg).

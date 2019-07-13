@@ -4,8 +4,8 @@ import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.github.intellectualsites.plotsquared.bukkit.events.PlayerClaimPlotEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -41,7 +41,7 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
 
     public static PlayerClaimPlotScriptEvent instance;
     public PlayerClaimPlotEvent event;
-    public dPlayer player;
+    public PlayerTag player;
     public dPlotSquaredPlot plot;
     public ElementTag auto;
 
@@ -89,10 +89,10 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
 
     @EventHandler
     public void onPlotEnter(PlayerClaimPlotEvent event) {
-        if (dEntity.isNPC(event.getPlayer())) {
+        if (EntityTag.isNPC(event.getPlayer())) {
             return;
         }
-        player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
+        player = PlayerTag.mirrorBukkitPlayer(event.getPlayer());
         plot = new dPlotSquaredPlot(event.getPlot());
         auto = new ElementTag(event.wasAuto());
         this.event = event;

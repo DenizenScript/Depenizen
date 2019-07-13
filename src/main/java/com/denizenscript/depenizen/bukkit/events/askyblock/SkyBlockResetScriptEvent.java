@@ -3,8 +3,8 @@ package com.denizenscript.depenizen.bukkit.events.askyblock;
 import com.wasteofplastic.askyblock.events.IslandResetEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -34,8 +34,8 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
 
     public static SkyBlockResetScriptEvent instance;
     public IslandResetEvent event;
-    public dLocation location;
-    public dPlayer owner;
+    public LocationTag location;
+    public PlayerTag owner;
 
     public SkyBlockResetScriptEvent() {
         instance = this;
@@ -79,8 +79,8 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
 
     @EventHandler
     public void onSkyBlockReset(IslandResetEvent event) {
-        location = new dLocation(event.getLocation());
-        owner = dPlayer.mirrorBukkitPlayer(event.getPlayer());
+        location = new LocationTag(event.getLocation());
+        owner = PlayerTag.mirrorBukkitPlayer(event.getPlayer());
         this.event = event;
         fire(event);
     }

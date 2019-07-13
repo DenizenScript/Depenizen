@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.events.libsdisguises.EntityUndisguises
 import com.denizenscript.depenizen.bukkit.properties.libsdisguise.LibsDisguiseEntityProperties;
 import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguise;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
@@ -19,7 +19,7 @@ public class LibsDisguisesBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new EntityDisguisesScriptEvent());
         ScriptEvent.registerScriptEvent(new EntityUndisguisesScriptEvent());
         ObjectFetcher.registerWithObjectFetcher(LibsDisguise.class);
-        PropertyParser.registerProperty(LibsDisguiseEntityProperties.class, dEntity.class);
+        PropertyParser.registerProperty(LibsDisguiseEntityProperties.class, EntityTag.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(DisguiseCommand.class, "DISGUISE",
                 "disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<number>) (data:<number>) (self:true/false)", 1);
     }

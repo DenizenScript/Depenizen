@@ -4,8 +4,8 @@ import com.nisovin.magicspells.events.SpellCastEvent;
 import com.nisovin.magicspells.util.SpellReagents;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dItem;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.ItemTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -42,7 +42,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     // <context.cooldown> returns an Element(Decimal) of the cooldown of the spell.
     // <context.spell_reagent_TYPE> returns an Element(Number) of the reagent cost for the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
     // <context.spell_reagent_variables> returns a ListTag in the form variable/cost|...
-    // <context.spell_reagent_items> returns a ListTag of dItems of reagent cost.
+    // <context.spell_reagent_items> returns a ListTag of ItemTags of reagent cost.
     //
     // @Determine
     // "POWER:" + Element(Number) to change the power of the spell.
@@ -50,7 +50,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     // "COOLDOWN:" + Element(Number) to change the cooldown.
     // "REAGENT:<TYPE>:" + Element(Number) to change the reagent cost of the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
     // "REAGANT:VARIABLE:<NAME>:" + Element(Decimal) to change the reagant cost for the given variable name.
-    // "REAGENT:ITEMS:" + ListTag(dItem) to change the reagent item cost.
+    // "REAGENT:ITEMS:" + ListTag(ItemTag) to change the reagent item cost.
     // "CLEAR_REAGENTS" to clear away all reagent costs.
     //
     // @Plugin Depenizen, MagicSpells
@@ -64,7 +64,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     public static SpellCastScriptEvent instance;
 
     public SpellCastEvent event;
-    public dPlayer player;
+    public PlayerTag player;
     private ElementTag spell;
 
     @Override
@@ -160,7 +160,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                 }
                 else if (typeLower.startsWith("items:")) {
                     List<ItemStack> itemsToSet = new ArrayList<>();
-                    for (dItem item : new ListTag(type.substring("items:".length())).filter(dItem.class)) {
+                    for (ItemTag item : new ListTag(type.substring("items:".length())).filter(ItemTag.class)) {
                         itemsToSet.add(item.getItemStack());
                     }
                     reagents.setItems(itemsToSet);
@@ -228,7 +228,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     ListTag list = new ListTag();
                     if (reagents.getItems() != null) {
                         for (ItemStack item : reagents.getItems()) {
-                            list.addObject(new dItem(item));
+                            list.addObject(new ItemTag(item));
                         }
                     }
                     return list;
@@ -240,7 +240,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
 
     @EventHandler
     public void onPlayerCastsSpell(SpellCastEvent event) {
-        player = dPlayer.mirrorBukkitPlayer(event.getCaster());
+        player = PlayerTag.mirrorBukkitPlayer(event.getCaster());
         spell = new ElementTag(event.getSpell().getName());
         this.event = event;
         fire(event);

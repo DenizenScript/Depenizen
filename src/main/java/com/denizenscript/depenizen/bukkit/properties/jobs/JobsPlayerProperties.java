@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobsPlayer;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -29,7 +29,7 @@ public class JobsPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static JobsPlayerProperties getFrom(ObjectTag object) {
@@ -37,7 +37,7 @@ public class JobsPlayerProperties implements Property {
             return null;
         }
         else {
-            return new JobsPlayerProperties((dPlayer) object);
+            return new JobsPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -48,7 +48,7 @@ public class JobsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private JobsPlayerProperties(dPlayer player) {
+    private JobsPlayerProperties(PlayerTag player) {
         this.player = Jobs.getPlayerManager().getJobsPlayer(player.getName());
     }
 
@@ -58,7 +58,7 @@ public class JobsPlayerProperties implements Property {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <p@player.jobs[<job>]>
+        // @attribute <PlayerTag.jobs[<job>]>
         // @returns dJob
         // @description
         // Returns the job specified with the player's information attached.

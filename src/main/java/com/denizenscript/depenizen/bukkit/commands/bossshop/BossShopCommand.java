@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.commands.bossshop;
 
 import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.bridges.BossShopBridge;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -29,7 +29,7 @@ public class BossShopCommand extends AbstractCommand {
     // Shops are made with the BossShop system.
     //
     // @Tags
-    // <in@inventory.is_bossshop>
+    // <InventoryTag.is_bossshop>
 
     // @Usage
     // Use to open a bossshop inventory for the player in the queue as a Player.
@@ -48,7 +48,7 @@ public class BossShopCommand extends AbstractCommand {
 
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
-                scriptEntry.addObject("target", arg.asType(dPlayer.class));
+                scriptEntry.addObject("target", arg.asType(PlayerTag.class));
             }
 
             else if (!scriptEntry.hasObject("shop")) {
@@ -79,7 +79,7 @@ public class BossShopCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        dPlayer target = scriptEntry.getdObject("target");
+        PlayerTag target = scriptEntry.getdObject("target");
         ElementTag dshop = scriptEntry.getdObject("shop");
 
         // Report to dB

@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.objects.mobarena;
 import com.denizenscript.depenizen.bukkit.bridges.MobArenaBridge;
 import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -208,7 +208,7 @@ public class MobArenaArena implements ObjectTag {
 
             // <--[tag]
             // @attribute <mobarena@mobarena.players.in_arena>
-            // @returns ListTag(dPlayer)
+            // @returns ListTag(PlayerTag)
             // @description
             // Returns a list of players in the arena.
             // @Plugin Depenizen, MobArena
@@ -216,14 +216,14 @@ public class MobArenaArena implements ObjectTag {
             if (attribute.getAttribute(2).startsWith("in_arena")) {
                 ListTag players = new ListTag();
                 for (Player p : arena.getPlayersInArena()) {
-                    players.add(new dPlayer(p).identify());
+                    players.add(new PlayerTag(p).identify());
                 }
                 return players.getAttribute(attribute.fulfill(2));
             }
 
             // <--[tag]
             // @attribute <mobarena@mobarena.players.in_lobby>
-            // @returns ListTag(dPlayer)
+            // @returns ListTag(PlayerTag)
             // @description
             // Returns a list of players in the lobby.
             // @Plugin Depenizen, MobArena
@@ -231,14 +231,14 @@ public class MobArenaArena implements ObjectTag {
             else if (attribute.getAttribute(2).startsWith("in_lobby")) {
                 ListTag players = new ListTag();
                 for (Player p : arena.getPlayersInLobby()) {
-                    players.add(new dPlayer(p).identify());
+                    players.add(new PlayerTag(p).identify());
                 }
                 return players.getAttribute(attribute.fulfill(2));
             }
 
             // <--[tag]
             // @attribute <mobarena@mobarena.players>
-            // @returns ListTag(dPlayer)
+            // @returns ListTag(PlayerTag)
             // @description
             // Returns a list of all players in the arena (including the lobby).
             // @Plugin Depenizen, MobArena
@@ -246,7 +246,7 @@ public class MobArenaArena implements ObjectTag {
             else {
                 ListTag players = new ListTag();
                 for (Player p : arena.getAllPlayers()) {
-                    players.add(new dPlayer(p).identify());
+                    players.add(new PlayerTag(p).identify());
                 }
                 return players.getAttribute(attribute.fulfill(1));
             }

@@ -4,7 +4,7 @@ import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import me.ryanhamshire.GriefPrevention.PlayerData;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -28,7 +28,7 @@ public class GriefPreventionPlayerProperties implements Property {
     static DataStore dataStore = GriefPrevention.instance.dataStore;
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static GriefPreventionPlayerProperties getFrom(ObjectTag object) {
@@ -36,7 +36,7 @@ public class GriefPreventionPlayerProperties implements Property {
             return null;
         }
         else {
-            return new GriefPreventionPlayerProperties((dPlayer) object);
+            return new GriefPreventionPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -52,13 +52,13 @@ public class GriefPreventionPlayerProperties implements Property {
             "bonus_blocks", "normal_blocks"
     };
 
-    private GriefPreventionPlayerProperties(dPlayer player) {
+    private GriefPreventionPlayerProperties(PlayerTag player) {
         this.player = player;
         data = dataStore.getPlayerData(player.getOfflinePlayer().getUniqueId());
     }
 
     PlayerData data;
-    dPlayer player;
+    PlayerTag player;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -72,7 +72,7 @@ public class GriefPreventionPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.griefprevention.list_claims>
+            // @attribute <PlayerTag.griefprevention.list_claims>
             // @returns ListTag(GriefPreventionClaim)
             // @description
             // Returns a list of all claims the player has.
@@ -87,7 +87,7 @@ public class GriefPreventionPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.griefprevention.claims>
+            // @attribute <PlayerTag.griefprevention.claims>
             // @returns ElementTag(Number)
             // @description
             // Returns the number of claims the player has in GriefPrevention.
@@ -101,7 +101,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 attribute = attribute.fulfill(1);
 
                 // <--[tag]
-                // @attribute <p@player.griefprevention.blocks.remaining>
+                // @attribute <PlayerTag.griefprevention.blocks.remaining>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the number of claim blocks the player has left.
@@ -112,7 +112,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.griefprevention.blocks.bonus>
+                // @attribute <PlayerTag.griefprevention.blocks.bonus>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the number of bonus claim blocks the player has.
@@ -123,7 +123,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.griefprevention.blocks.total>
+                // @attribute <PlayerTag.griefprevention.blocks.total>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the total number of claim blocks the player has.
@@ -135,7 +135,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.griefprevention.blocks>
+                // @attribute <PlayerTag.griefprevention.blocks>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the number of normal claim blocks the payer has.

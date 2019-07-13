@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.commands.mobarena;
 import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
 import com.garbagemule.MobArena.framework.Arena;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -58,18 +58,18 @@ public class MobArenaCommand extends AbstractCommand {
             }
             else if (!scriptEntry.hasObject("add")
                     && arg.matchesPrefix("add", "join")
-                    && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("add", arg.asType(ListTag.class).filter(dPlayer.class, scriptEntry));
+                    && arg.matchesArgumentList(PlayerTag.class)) {
+                scriptEntry.addObject("add", arg.asType(ListTag.class).filter(PlayerTag.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("remove")
                     && arg.matchesPrefix("remove", "leave")
-                    && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("remove", arg.asType(ListTag.class).filter(dPlayer.class, scriptEntry));
+                    && arg.matchesArgumentList(PlayerTag.class)) {
+                scriptEntry.addObject("remove", arg.asType(ListTag.class).filter(PlayerTag.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("spectate")
                     && arg.matchesPrefix("spectate", "spec")
-                    && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("spectate", arg.asType(ListTag.class).filter(dPlayer.class, scriptEntry));
+                    && arg.matchesArgumentList(PlayerTag.class)) {
+                scriptEntry.addObject("spectate", arg.asType(ListTag.class).filter(PlayerTag.class, scriptEntry));
             }
             else {
                 arg.reportUnhandled();
@@ -88,9 +88,9 @@ public class MobArenaCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
         MobArenaArena arena = scriptEntry.getdObject("arena");
-        List<dPlayer> add = (List<dPlayer>) scriptEntry.getObject("add");
-        List<dPlayer> remove = (List<dPlayer>) scriptEntry.getObject("remove");
-        List<dPlayer> spectate = (List<dPlayer>) scriptEntry.getObject("spectate");
+        List<PlayerTag> add = (List<PlayerTag>) scriptEntry.getObject("add");
+        List<PlayerTag> remove = (List<PlayerTag>) scriptEntry.getObject("remove");
+        List<PlayerTag> spectate = (List<PlayerTag>) scriptEntry.getObject("spectate");
 
         Debug.report(scriptEntry, getName(), arena.debug()
                 + ArgumentHelper.debugList("Add Players", add)
@@ -100,21 +100,21 @@ public class MobArenaCommand extends AbstractCommand {
         Arena mobArena = arena.getArena();
 
         if (add != null && !add.isEmpty()) {
-            for (dPlayer p : add) {
+            for (PlayerTag p : add) {
                 if (mobArena.canJoin(p.getPlayerEntity())) {
                     mobArena.playerJoin(p.getPlayerEntity(), p.getLocation());
                 }
             }
         }
         if (remove != null && !remove.isEmpty()) {
-            for (dPlayer p : remove) {
+            for (PlayerTag p : remove) {
                 if (mobArena.getAllPlayers().contains(p.getPlayerEntity())) {
                     mobArena.playerLeave(p.getPlayerEntity());
                 }
             }
         }
         if (spectate != null && !spectate.isEmpty()) {
-            for (dPlayer p : spectate) {
+            for (PlayerTag p : spectate) {
                 if (mobArena.canSpec(p.getPlayerEntity())) {
                     mobArena.playerSpec(p.getPlayerEntity(), p.getLocation());
                 }

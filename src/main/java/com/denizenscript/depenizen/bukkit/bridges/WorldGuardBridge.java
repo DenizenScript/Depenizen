@@ -4,10 +4,10 @@ import com.denizenscript.depenizen.bukkit.commands.worldguard.RegionCommand;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardCuboidProperties;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardWorldProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.denizen.objects.dCuboid;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.objects.dWorld;
+import com.denizenscript.denizen.objects.CuboidTag;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
@@ -28,10 +28,10 @@ public class WorldGuardBridge extends Bridge {
     public void init() {
         instance = this;
         ObjectFetcher.registerWithObjectFetcher(WorldGuardRegion.class);
-        PropertyParser.registerProperty(WorldGuardLocationProperties.class, dLocation.class);
-        PropertyParser.registerProperty(WorldGuardPlayerProperties.class, dPlayer.class);
-        PropertyParser.registerProperty(WorldGuardCuboidProperties.class, dCuboid.class);
-        PropertyParser.registerProperty(WorldGuardWorldProperties.class, dWorld.class);
+        PropertyParser.registerProperty(WorldGuardLocationProperties.class, LocationTag.class);
+        PropertyParser.registerProperty(WorldGuardPlayerProperties.class, PlayerTag.class);
+        PropertyParser.registerProperty(WorldGuardCuboidProperties.class, CuboidTag.class);
+        PropertyParser.registerProperty(WorldGuardWorldProperties.class, WorldTag.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(RegionCommand.class,
                 "REGION", "region [{add} <cuboid>/remove <world>] [id:<name>]", 2);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {

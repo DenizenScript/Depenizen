@@ -4,7 +4,7 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.nisovin.magicspells.MagicSpells;
 import com.nisovin.magicspells.mana.ManaHandler;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -27,7 +27,7 @@ public class MagicSpellsPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static MagicSpellsPlayerProperties getFrom(ObjectTag object) {
@@ -35,7 +35,7 @@ public class MagicSpellsPlayerProperties implements Property {
             return null;
         }
         else {
-            return new MagicSpellsPlayerProperties((dPlayer) object);
+            return new MagicSpellsPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -46,11 +46,11 @@ public class MagicSpellsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private MagicSpellsPlayerProperties(dPlayer player) {
+    private MagicSpellsPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    private dPlayer player;
+    private PlayerTag player;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -60,7 +60,7 @@ public class MagicSpellsPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.magicspells.mana>
+            // @attribute <PlayerTag.magicspells.mana>
             // @returns ElementTag(Number)
             // @description
             // Returns the mana of the player.

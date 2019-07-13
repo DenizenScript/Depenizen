@@ -9,9 +9,9 @@ import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsPlayer
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.commands.WarpNotFoundException;
-import com.denizenscript.denizen.objects.dItem;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.ItemTag;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.TagRunnable;
@@ -40,8 +40,8 @@ public class EssentialsBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new PlayerGodModeStatusScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerJailStatusScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerMuteStatusScriptEvent());
-        PropertyParser.registerProperty(EssentialsPlayerProperties.class, dPlayer.class);
-        PropertyParser.registerProperty(EssentialsItemProperties.class, dItem.class);
+        PropertyParser.registerProperty(EssentialsPlayerProperties.class, PlayerTag.class);
+        PropertyParser.registerProperty(EssentialsItemProperties.class, ItemTag.class);
     }
 
     public void tagEvent(ReplaceableTagEvent event) {
@@ -49,7 +49,7 @@ public class EssentialsBridge extends Bridge {
 
         // <--[tag]
         // @attribute <essentials.warp[<warp name>]>
-        // @returns dLocation
+        // @returns LocationTag
         // @description
         // Returns the location of the warp name.
         // @Plugin Depenizen, Essentials
@@ -59,7 +59,7 @@ public class EssentialsBridge extends Bridge {
                 Essentials essentials = (Essentials) plugin;
                 try {
                     Location loc = essentials.getWarps().getWarp(attribute.getContext(1));
-                    event.setReplacedObject(new dLocation(loc).getObjectAttribute(attribute.fulfill(1)));
+                    event.setReplacedObject(new LocationTag(loc).getObjectAttribute(attribute.fulfill(1)));
                 }
                 catch (WarpNotFoundException e) {
                     Debug.echoError("Warp not found");

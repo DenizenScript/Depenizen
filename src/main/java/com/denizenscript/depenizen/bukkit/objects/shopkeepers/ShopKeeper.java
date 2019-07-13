@@ -6,8 +6,8 @@ import com.nisovin.shopkeepers.api.shopkeeper.TradingRecipe;
 import com.nisovin.shopkeepers.api.ShopkeepersAPI;
 import com.nisovin.shopkeepers.api.ShopkeepersPlugin;
 import com.nisovin.shopkeepers.api.shopobjects.entity.EntityShopObject;
-import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizen.objects.dItem;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -50,14 +50,14 @@ public class ShopKeeper implements ObjectTag {
         return valueOf(string) != null;
     }
 
-    public static boolean isShopKeeper(dEntity entity) {
+    public static boolean isShopKeeper(EntityTag entity) {
         if (entity == null) {
             return false;
         }
         return ((ShopkeepersPlugin) ShopkeepersBridge.instance.plugin).getShopkeeperRegistry().isShopkeeper(entity.getBukkitEntity());
     }
 
-    public static ShopKeeper fromEntity(dEntity entity) {
+    public static ShopKeeper fromEntity(EntityTag entity) {
         if (!isShopKeeper(entity)) {
             return null;
         }
@@ -80,8 +80,8 @@ public class ShopKeeper implements ObjectTag {
         return shopkeeper;
     }
 
-    public dEntity getDenizenEntity() {
-        return new dEntity(getBukkitEntity());
+    public EntityTag getDenizenEntity() {
+        return new EntityTag(getBukkitEntity());
     }
 
     public Entity getBukkitEntity() {
@@ -179,9 +179,9 @@ public class ShopKeeper implements ObjectTag {
 
         // <--[tag]
         // @attribute <shopkeeper@shopkeeper.entity>
-        // @returns dEntity
+        // @returns EntityTag
         // @description
-        // Returns the dEntity for this ShopKeeper.
+        // Returns the EntityTag for this ShopKeeper.
         // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("entity")) {
@@ -215,12 +215,12 @@ public class ShopKeeper implements ObjectTag {
         return recipe;
     }
 
-    private static dItem wrapTradeItem(ItemStack itemStack) {
+    private static ItemTag wrapTradeItem(ItemStack itemStack) {
         if (itemStack != null) {
-            return new dItem(itemStack);
+            return new ItemTag(itemStack);
         }
         else {
-            return new dItem(Material.AIR);
+            return new ItemTag(Material.AIR);
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.pvpstats;
 
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -26,7 +26,7 @@ public class PVPStatsPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static PVPStatsPlayerProperties getFrom(ObjectTag object) {
@@ -34,7 +34,7 @@ public class PVPStatsPlayerProperties implements Property {
             return null;
         }
         else {
-            return new PVPStatsPlayerProperties((dPlayer) object);
+            return new PVPStatsPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -45,7 +45,7 @@ public class PVPStatsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public PVPStatsPlayerProperties(dPlayer player) {
+    public PVPStatsPlayerProperties(PlayerTag player) {
         this.playerName = player.getName();
     }
 
@@ -59,7 +59,7 @@ public class PVPStatsPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.pvpstats.deaths>
+            // @attribute <PlayerTag.pvpstats.deaths>
             // @returns ElementTag
             // @description
             // Returns the number of times the player has died.
@@ -70,7 +70,7 @@ public class PVPStatsPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.pvpstats.elo>
+            // @attribute <PlayerTag.pvpstats.elo>
             // @returns ElementTag
             // @description
             // Returns the Elo rating of the player.
@@ -81,7 +81,7 @@ public class PVPStatsPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.pvpstats.kills>
+            // @attribute <PlayerTag.pvpstats.kills>
             // @returns ElementTag
             // @description
             // Returns the number of players the player has killed.
@@ -92,7 +92,7 @@ public class PVPStatsPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.pvpstats.streak>
+            // @attribute <PlayerTag.pvpstats.streak>
             // @returns ElementTag
             // @description
             // Returns the current kill streak of the player.
@@ -103,7 +103,7 @@ public class PVPStatsPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.pvpstats.max_streak>
+            // @attribute <PlayerTag.pvpstats.max_streak>
             // @returns ElementTag
             // @description
             // Returns the highest kill streak of the player.

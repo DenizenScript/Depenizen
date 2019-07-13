@@ -14,9 +14,9 @@ import com.sk89q.worldedit.regions.RegionSelector;
 import com.sk89q.worldedit.world.item.ItemType;
 import com.denizenscript.denizen.nms.NMSHandler;
 import com.denizenscript.denizen.nms.NMSVersion;
-import com.denizenscript.denizen.objects.dCuboid;
-import com.denizenscript.denizen.objects.dItem;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.CuboidTag;
+import com.denizenscript.denizen.objects.ItemTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -45,8 +45,8 @@ public class WorldEditPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer
-                && ((dPlayer) object).isOnline();
+        return object instanceof PlayerTag
+                && ((PlayerTag) object).isOnline();
     }
 
     public static WorldEditPlayerProperties getFrom(ObjectTag object) {
@@ -54,7 +54,7 @@ public class WorldEditPlayerProperties implements Property {
             return null;
         }
         else {
-            return new WorldEditPlayerProperties((dPlayer) object);
+            return new WorldEditPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -65,7 +65,7 @@ public class WorldEditPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private WorldEditPlayerProperties(dPlayer player) {
+    private WorldEditPlayerProperties(PlayerTag player) {
         this.player = player.getPlayerEntity();
     }
 
@@ -82,7 +82,7 @@ public class WorldEditPlayerProperties implements Property {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <p@player.we_brush_info[(<item>)]>
+        // @attribute <PlayerTag.we_brush_info[(<item>)]>
         // @returns ListTag
         // @description
         // Returns information about a player's current brush for an item.
@@ -96,7 +96,7 @@ public class WorldEditPlayerProperties implements Property {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             ItemType itemType;
             if (attribute.hasContext(1)) {
-                itemType = BukkitAdapter.asItemType(deLegacy(dItem.valueOf(attribute.getContext(1)).getMaterial().getMaterial()));
+                itemType = BukkitAdapter.asItemType(deLegacy(ItemTag.valueOf(attribute.getContext(1)).getMaterial().getMaterial()));
             }
             else {
                 ItemStack itm = player.getEquipment().getItemInMainHand();
@@ -128,17 +128,17 @@ public class WorldEditPlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.selected_region>
-        // @returns dCuboid
+        // @attribute <PlayerTag.selected_region>
+        // @returns CuboidTag
         // @description
-        // Returns the player's current region selection, as a dCuboid.
+        // Returns the player's current region selection, as a CuboidTag.
         // @Plugin Depenizen, WorldEdit
         // -->
         if (attribute.startsWith("selected_region")) {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             RegionSelector selection = worldEdit.getSession(player).getRegionSelector(BukkitAdapter.adapt(player.getWorld()));
             if (selection != null) {
-                return new dCuboid(BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
+                return new CuboidTag(BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
                         BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMaximumPoint()))
                         .getAttribute(attribute.fulfill(1));
             }

@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.commands.jobs.JobsCommand;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
@@ -24,7 +24,7 @@ public class JobsBridge extends Bridge {
     public void init() {
         ObjectFetcher.registerWithObjectFetcher(JobsJob.class);
         PropertyParser.registerProperty(JobPlayer.class, JobsJob.class);
-        PropertyParser.registerProperty(JobsPlayerProperties.class, dPlayer.class);
+        PropertyParser.registerProperty(JobsPlayerProperties.class, PlayerTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

@@ -4,8 +4,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.wasteofplastic.askyblock.ASkyBlockAPI;
 import com.wasteofplastic.askyblock.Island;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -31,7 +31,7 @@ public class ASkyBlockPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static ASkyBlockPlayerProperties getFrom(ObjectTag object) {
@@ -39,7 +39,7 @@ public class ASkyBlockPlayerProperties implements Property {
             return null;
         }
         else {
-            return new ASkyBlockPlayerProperties((dPlayer) object);
+            return new ASkyBlockPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -50,13 +50,13 @@ public class ASkyBlockPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public ASkyBlockPlayerProperties(dPlayer player) {
+    public ASkyBlockPlayerProperties(PlayerTag player) {
         this.player = player;
         skyblock = api.getIslandOwnedBy(player.getOfflinePlayer().getUniqueId());
     }
 
     ASkyBlockAPI api = ASkyBlockAPI.getInstance();
-    dPlayer player;
+    PlayerTag player;
     Island skyblock;
 
     @Override
@@ -69,7 +69,7 @@ public class ASkyBlockPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.skyblock.has_skyblock>
+            // @attribute <PlayerTag.skyblock.has_skyblock>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player has a skyblock.
@@ -82,30 +82,30 @@ public class ASkyBlockPlayerProperties implements Property {
 
             if (skyblock != null) {
                 // <--[tag]
-                // @attribute <p@player.skyblock.center>
-                // @returns dLocation
+                // @attribute <PlayerTag.skyblock.center>
+                // @returns LocationTag
                 // @description
                 // Returns the centre of the player's skyblock.
                 // @Plugin Depenizen, A SkyBlock
                 // -->
                 if (attribute.startsWith("center") || attribute.startsWith("centre")) {
-                    return new dLocation(skyblock.getCenter()).getAttribute(attribute.fulfill(1));
+                    return new LocationTag(skyblock.getCenter()).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skyblock.spawn_point>
-                // @returns dLocation
+                // @attribute <PlayerTag.skyblock.spawn_point>
+                // @returns LocationTag
                 // @description
                 // Returns the spawnpoint of the player's skyblock.
                 // @Plugin Depenizen, A SkyBlock
                 // -->
                 else if (attribute.startsWith("spawn_point")) {
-                    return new dLocation(skyblock.getSpawnPoint()).getAttribute(attribute.fulfill(1));
+                    return new LocationTag(skyblock.getSpawnPoint()).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skyblock.members>
-                // @returns ListTag(dPlayer)
+                // @attribute <PlayerTag.skyblock.members>
+                // @returns ListTag(PlayerTag)
                 // @description
                 // Returns a list of members of the player's skyblock.
                 // @Plugin Depenizen, A SkyBlock
@@ -113,13 +113,13 @@ public class ASkyBlockPlayerProperties implements Property {
                 else if (attribute.startsWith("members")) {
                     ListTag m = new ListTag();
                     for (UUID u : skyblock.getMembers()) {
-                        m.add(new dPlayer(u).identify());
+                        m.add(new PlayerTag(u).identify());
                     }
                     return m.getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skyblock.level>
+                // @attribute <PlayerTag.skyblock.level>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the level of the player's skyblock.

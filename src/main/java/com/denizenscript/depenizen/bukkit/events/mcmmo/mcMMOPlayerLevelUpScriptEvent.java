@@ -3,8 +3,8 @@ package com.denizenscript.depenizen.bukkit.events.mcmmo;
 import com.gmail.nossr50.events.experience.McMMOPlayerLevelUpEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -48,7 +48,7 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
 
     public static mcMMOPlayerLevelUpScriptEvent instance;
     public McMMOPlayerLevelUpEvent event;
-    public dPlayer player;
+    public PlayerTag player;
     public ElementTag skill;
     public int new_level;
     public int levels_gained;
@@ -116,10 +116,10 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
 
     @EventHandler
     public void onmcMMOPlayerLevelUp(McMMOPlayerLevelUpEvent event) {
-        if (dEntity.isNPC(event.getPlayer())) {
+        if (EntityTag.isNPC(event.getPlayer())) {
             return;
         }
-        player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
+        player = PlayerTag.mirrorBukkitPlayer(event.getPlayer());
         levels_gained = event.getLevelsGained();
         new_level = event.getSkillLevel();
         cause = event.getXpGainReason().toString();

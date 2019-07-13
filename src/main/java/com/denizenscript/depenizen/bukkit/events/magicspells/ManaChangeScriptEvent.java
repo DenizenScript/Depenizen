@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.events.magicspells;
 import com.nisovin.magicspells.events.ManaChangeEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -45,7 +45,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     public static ManaChangeScriptEvent instance;
 
     public ManaChangeEvent event;
-    public dPlayer player;
+    public PlayerTag player;
     private int new_mana;
     private int old_mana;
     private int max_mana;
@@ -105,7 +105,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
 
     @EventHandler
     public void onPlayerCastsSpell(ManaChangeEvent event) {
-        player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
+        player = PlayerTag.mirrorBukkitPlayer(event.getPlayer());
         new_mana = event.getNewAmount();
         old_mana = event.getOldAmount();
         max_mana = event.getMaxMana();

@@ -2,8 +2,8 @@ package com.denizenscript.depenizen.bukkit.objects.residence;
 
 import com.bekvon.bukkit.residence.Residence;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -121,13 +121,13 @@ public class dResidence implements ObjectTag {
 
         // <--[tag]
         // @attribute <residence@residence.owner>
-        // @returns dPlayer
+        // @returns PlayerTag
         // @description
         // Returns the owner of the residence.
         // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("owner")) {
-            return new dPlayer(residence.getOwnerUUID()).getAttribute(attribute.fulfill(1));
+            return new PlayerTag(residence.getOwnerUUID()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -138,7 +138,7 @@ public class dResidence implements ObjectTag {
         // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("is_within") && attribute.hasContext(1)) {
-            dLocation location = dLocation.valueOf(attribute.getContext(1));
+            LocationTag location = LocationTag.valueOf(attribute.getContext(1));
             return new ElementTag(residence.containsLoc(location)).getAttribute(attribute.fulfill(1));
         }
 

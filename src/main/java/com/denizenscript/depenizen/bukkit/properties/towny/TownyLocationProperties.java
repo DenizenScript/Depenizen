@@ -5,7 +5,7 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -29,7 +29,7 @@ public class TownyLocationProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dLocation;
+        return object instanceof LocationTag;
     }
 
     public static TownyLocationProperties getFrom(ObjectTag object) {
@@ -37,7 +37,7 @@ public class TownyLocationProperties implements Property {
             return null;
         }
         else {
-            return new TownyLocationProperties((dLocation) object);
+            return new TownyLocationProperties((LocationTag) object);
         }
     }
 
@@ -48,17 +48,17 @@ public class TownyLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private TownyLocationProperties(dLocation location) {
+    private TownyLocationProperties(LocationTag location) {
         this.location = location;
     }
 
-    dLocation location = null;
+    LocationTag location = null;
 
     @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <l@location.has_town>
+        // @attribute <LocationTag.has_town>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the location is within a town.
@@ -74,7 +74,7 @@ public class TownyLocationProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <l@location.town>
+        // @attribute <LocationTag.town>
         // @returns dTown
         // @description
         // Returns the town at the specified location.
@@ -97,7 +97,7 @@ public class TownyLocationProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <l@location.is_wilderness>
+        // @attribute <LocationTag.is_wilderness>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the location is wilderness.

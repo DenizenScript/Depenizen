@@ -5,7 +5,7 @@ import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.residence.dResidence;
-import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -23,7 +23,7 @@ public class ResidenceLocationProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dLocation;
+        return object instanceof LocationTag;
     }
 
     public static ResidenceLocationProperties getFrom(ObjectTag object) {
@@ -31,7 +31,7 @@ public class ResidenceLocationProperties implements Property {
             return null;
         }
         else {
-            return new ResidenceLocationProperties((dLocation) object);
+            return new ResidenceLocationProperties((LocationTag) object);
         }
     }
 
@@ -46,16 +46,16 @@ public class ResidenceLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private ResidenceLocationProperties(dLocation location) {
+    private ResidenceLocationProperties(LocationTag location) {
         this.location = location;
     }
 
-    dLocation location;
+    LocationTag location;
 
     @Override
     public String getAttribute(Attribute attribute) {
         // <--[tag]
-        // @attribute <l@location.has_residence>
+        // @attribute <LocationTag.has_residence>
         // @returns ElementTag(Boolean)
         // @description
         // Returns if the location has a residence.
@@ -67,7 +67,7 @@ public class ResidenceLocationProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <l@location.residence>
+        // @attribute <LocationTag.residence>
         // @returns dResidence
         // @description
         // Returns the residence contained by this location.

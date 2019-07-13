@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.events.bungee;
 
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -69,7 +69,7 @@ public class BungeePlayerServerSwitchScriptEvent extends BukkitScriptEvent {
         catch (IllegalArgumentException ex) {
             // Ignore.
         }
-        return new BukkitScriptEntryData(player == null ? null : new dPlayer(player), null);
+        return new BukkitScriptEntryData(player == null ? null : new PlayerTag(player), null);
     }
 
     @Override

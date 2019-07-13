@@ -5,7 +5,7 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import com.denizenscript.denizen.objects.dCuboid;
+import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -33,7 +33,7 @@ public class TownyCuboidProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dCuboid;
+        return object instanceof CuboidTag;
     }
 
     public static TownyCuboidProperties getFrom(ObjectTag object) {
@@ -41,7 +41,7 @@ public class TownyCuboidProperties implements Property {
             return null;
         }
         else {
-            return new TownyCuboidProperties((dCuboid) object);
+            return new TownyCuboidProperties((CuboidTag) object);
         }
     }
 
@@ -52,17 +52,17 @@ public class TownyCuboidProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private TownyCuboidProperties(dCuboid cuboid) {
+    private TownyCuboidProperties(CuboidTag cuboid) {
         this.cuboid = cuboid;
     }
 
-    dCuboid cuboid = null;
+    CuboidTag cuboid = null;
 
     @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <cu@cuboid.has_town>
+        // @attribute <CuboidTag.has_town>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the cuboid contains any town at all.
@@ -78,7 +78,7 @@ public class TownyCuboidProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <cu@cuboid.list_towns>
+        // @attribute <CuboidTag.list_towns>
         // @returns ListTag(dTown)
         // @description
         // Returns all the towns within the cuboid.

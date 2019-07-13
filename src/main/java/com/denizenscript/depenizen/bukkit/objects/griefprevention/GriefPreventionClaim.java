@@ -6,10 +6,10 @@ import com.denizenscript.denizencore.objects.core.ListTag;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
-import com.denizenscript.denizen.objects.dChunk;
-import com.denizenscript.denizen.objects.dCuboid;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.ChunkTag;
+import com.denizenscript.denizen.objects.CuboidTag;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -121,7 +121,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.managers>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns the GriefPreventionClaim's managers.
         // @Plugin Depenizen, GriefPrevention
@@ -129,14 +129,14 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         if (attribute.startsWith("managers")) {
             ListTag managers = new ListTag();
             for (String manager : claim.managers) {
-                managers.add(new dPlayer(UUID.fromString(manager)).identify());
+                managers.add(new PlayerTag(UUID.fromString(manager)).identify());
             }
             return managers.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.trusted>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns the GriefPreventionClaim's trusted.
         // @Plugin Depenizen, GriefPrevention
@@ -146,14 +146,14 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
             ArrayList<String> b = new ArrayList<>();
             claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             for (String trust : b) {
-                trusted.add(new dPlayer(UUID.fromString(trust)).identify());
+                trusted.add(new PlayerTag(UUID.fromString(trust)).identify());
             }
             return trusted.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.builders>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns the GriefPreventionClaim's builders.
         // @Plugin Depenizen, GriefPrevention
@@ -163,14 +163,14 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
             ArrayList<String> b = new ArrayList<>();
             claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             for (String trust : b) {
-                trusted.add(new dPlayer(UUID.fromString(trust)).identify());
+                trusted.add(new PlayerTag(UUID.fromString(trust)).identify());
             }
             return trusted.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.containers>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns the GriefPreventionClaim's containers.
         // @Plugin Depenizen, GriefPrevention
@@ -180,14 +180,14 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
             ArrayList<String> c = new ArrayList<>();
             claim.getPermissions(new ArrayList<>(), c, new ArrayList<>(), new ArrayList<>());
             for (String container : c) {
-                trusted.add(new dPlayer(UUID.fromString(container)).identify());
+                trusted.add(new PlayerTag(UUID.fromString(container)).identify());
             }
             return trusted.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.accessors>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns the GriefPreventionClaim's accessors.
         // @Plugin Depenizen, GriefPrevention
@@ -197,17 +197,17 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
             ArrayList<String> a = new ArrayList<>();
             claim.getPermissions(new ArrayList<>(), new ArrayList<>(), a, new ArrayList<>());
             for (String access : a) {
-                trusted.add(new dPlayer(UUID.fromString(access)).identify());
+                trusted.add(new PlayerTag(UUID.fromString(access)).identify());
             }
             return trusted.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.owner>
-        // @returns dPlayer/Element
+        // @returns PlayerTag/Element
         // @description
         // Returns the GriefPreventionClaim's owner.
-        // Can be "Admin" or a dPlayer.
+        // Can be "Admin" or a PlayerTag.
         // @mechanism GriefPreventionClaim.owner
         // @Plugin Depenizen, GriefPrevention
         // -->
@@ -215,23 +215,23 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
             if (claim.isAdminClaim()) {
                 return new ElementTag("Admin").getAttribute(attribute.fulfill(1));
             }
-            return new dPlayer(claim.ownerID)
+            return new PlayerTag(claim.ownerID)
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.cuboid>
-        // @returns dCuboid
+        // @returns CuboidTag
         // @description
         // Returns the GriefPreventionClaim's cuboid area.
         // @Plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("cuboid")) {
-            dLocation lower = new dLocation(claim.getLesserBoundaryCorner());
+            LocationTag lower = new LocationTag(claim.getLesserBoundaryCorner());
             lower.setY(0);
-            dLocation upper = new dLocation(claim.getGreaterBoundaryCorner());
+            LocationTag upper = new LocationTag(claim.getGreaterBoundaryCorner());
             upper.setY(255);
-            return new dCuboid(lower, upper).getAttribute(attribute.fulfill(1));
+            return new CuboidTag(lower, upper).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -247,7 +247,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.chunks>
-        // @returns ListTag(dChunk)
+        // @returns ListTag(ChunkTag)
         // @description
         // Returns a list of all chunks in the GriefPreventionClaim.
         // @Plugin Depenizen, GriefPrevention
@@ -255,7 +255,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         else if (attribute.startsWith("chunks")) {
             ListTag chunks = new ListTag();
             for (Chunk chunk : claim.getChunks()) {
-                chunks.add(new dChunk(chunk).identify());
+                chunks.add(new ChunkTag(chunk).identify());
             }
             return chunks.getAttribute(attribute.fulfill(1));
         }
@@ -268,7 +268,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         // @Plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("can_siege") && attribute.hasContext(1)) {
-            dPlayer defender = dPlayer.valueOf(attribute.getContext(1));
+            PlayerTag defender = PlayerTag.valueOf(attribute.getContext(1));
             if (defender == null || defender.getPlayerEntity() == null) {
                 return null;
             }
@@ -283,17 +283,17 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object GriefPreventionClaim
         // @name owner
-        // @input dPlayer/Element
+        // @input PlayerTag/Element
         // @description
         // Sets the owner of the GriefPreventionClaim.
-        // Accepts dPlayer or "admin" to set as admin claim.
+        // Accepts PlayerTag or "admin" to set as admin claim.
         // @tags
         // <gpclaim@gpclaim.owner>
         // -->
         if (mechanism.matches("owner")) {
             try {
-                if (dPlayer.matches(mechanism.getValue().asString())) {
-                    dPlayer player = dPlayer.valueOf(mechanism.getValue().asString());
+                if (PlayerTag.matches(mechanism.getValue().asString())) {
+                    PlayerTag player = PlayerTag.valueOf(mechanism.getValue().asString());
                     dataStore.changeClaimOwner(claim, player.getOfflinePlayer().getUniqueId());
                 }
                 else if (CoreUtilities.toLowerCase(mechanism.getValue().asString()).equals("admin")) {

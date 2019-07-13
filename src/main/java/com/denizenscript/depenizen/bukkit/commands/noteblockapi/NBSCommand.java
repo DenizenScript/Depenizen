@@ -6,7 +6,7 @@ import com.xxmicloxx.NoteBlockAPI.model.Song;
 import com.xxmicloxx.NoteBlockAPI.songplayer.RadioSongPlayer;
 import com.xxmicloxx.NoteBlockAPI.songplayer.SongPlayer;
 import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -37,7 +37,7 @@ public class NBSCommand extends AbstractCommand {
     // The file path starts in the denizen folder: /plugins/Denizen/
 
     // @Tags
-    // <p@player.nbs_is_playing>
+    // <PlayerTag.nbs_is_playing>
 
     // @Usage
     // Use to play a song to the linked player in a queue.
@@ -66,8 +66,8 @@ public class NBSCommand extends AbstractCommand {
 
             if (!scriptEntry.hasObject("targets")
                     && arg.matchesPrefix("targets", "targets")
-                    && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("targets", arg.asType(ListTag.class).filter(dPlayer.class));
+                    && arg.matchesArgumentList(PlayerTag.class)) {
+                scriptEntry.addObject("targets", arg.asType(ListTag.class).filter(PlayerTag.class));
             }
 
             else if (!scriptEntry.hasObject("file")
@@ -104,7 +104,7 @@ public class NBSCommand extends AbstractCommand {
 
         ElementTag file = scriptEntry.getdObject("file");
         ElementTag action = scriptEntry.getdObject("action");
-        List<dPlayer> targets = (List<dPlayer>) scriptEntry.getObject("targets");
+        List<PlayerTag> targets = (List<PlayerTag>) scriptEntry.getObject("targets");
 
         // Report to dB
         Debug.report(scriptEntry, getName(), action.debug()
@@ -125,14 +125,14 @@ public class NBSCommand extends AbstractCommand {
             Song s = NBSDecoder.parse(new File(directory + "/plugins/Denizen/" + file + ".nbs"));
             SongPlayer sp = new RadioSongPlayer(s);
             sp.setAutoDestroy(true);
-            for (dPlayer p : targets) {
+            for (PlayerTag p : targets) {
                 sp.addPlayer(p.getPlayerEntity());
             }
             sp.setPlaying(true);
         }
 
         else if (action.asString().equalsIgnoreCase("stop")) {
-            for (dPlayer p : targets) {
+            for (PlayerTag p : targets) {
                 NoteBlockAPI.stopPlaying(p.getPlayerEntity());
             }
         }

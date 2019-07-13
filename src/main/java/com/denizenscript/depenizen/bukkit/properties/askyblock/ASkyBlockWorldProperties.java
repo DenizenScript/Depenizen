@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.askyblock;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.wasteofplastic.askyblock.ASkyBlockAPI;
-import com.denizenscript.denizen.objects.dWorld;
+import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -26,7 +26,7 @@ public class ASkyBlockWorldProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dWorld;
+        return object instanceof WorldTag;
     }
 
     public static ASkyBlockWorldProperties getFrom(ObjectTag object) {
@@ -34,7 +34,7 @@ public class ASkyBlockWorldProperties implements Property {
             return null;
         }
         else {
-            return new ASkyBlockWorldProperties((dWorld) object);
+            return new ASkyBlockWorldProperties((WorldTag) object);
         }
     }
 
@@ -45,11 +45,11 @@ public class ASkyBlockWorldProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public ASkyBlockWorldProperties(dWorld world) {
+    public ASkyBlockWorldProperties(WorldTag world) {
         this.world = world;
     }
 
-    dWorld world;
+    WorldTag world;
     ASkyBlockAPI api = ASkyBlockAPI.getInstance();
 
     @Override
@@ -59,7 +59,7 @@ public class ASkyBlockWorldProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <w@world.is_skyblock_world>
+        // @attribute <WorldTag.is_skyblock_world>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the world is used by A SkyBlock.

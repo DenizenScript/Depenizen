@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.bossshop;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.bridges.BossShopBridge;
-import com.denizenscript.denizen.objects.dInventory;
+import com.denizenscript.denizen.objects.InventoryTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -26,7 +26,7 @@ public class BossShopInventoryProperties implements Property {
         // None
     }
     public static boolean describes(ObjectTag object) {
-        return object instanceof dInventory;
+        return object instanceof InventoryTag;
     }
 
     public static BossShopInventoryProperties getFrom(ObjectTag object) {
@@ -34,7 +34,7 @@ public class BossShopInventoryProperties implements Property {
             return null;
         }
         else {
-            return new BossShopInventoryProperties((dInventory) object);
+            return new BossShopInventoryProperties((InventoryTag) object);
         }
     }
 
@@ -45,11 +45,11 @@ public class BossShopInventoryProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public BossShopInventoryProperties(dInventory inventory) {
+    public BossShopInventoryProperties(InventoryTag inventory) {
         this.inv = inventory;
     }
 
-    dInventory inv;
+    InventoryTag inv;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -58,7 +58,7 @@ public class BossShopInventoryProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <in@inventory.is_bossshop>
+        // @attribute <InventoryTag.is_bossshop>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the inventory is a BossShop.

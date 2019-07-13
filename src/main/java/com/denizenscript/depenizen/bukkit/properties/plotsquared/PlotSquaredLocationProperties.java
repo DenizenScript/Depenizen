@@ -5,7 +5,7 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.github.intellectualsites.plotsquared.api.PlotAPI;
-import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -23,7 +23,7 @@ public class PlotSquaredLocationProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dLocation;
+        return object instanceof LocationTag;
     }
 
     public static PlotSquaredLocationProperties getFrom(ObjectTag object) {
@@ -31,7 +31,7 @@ public class PlotSquaredLocationProperties implements Property {
             return null;
         }
         else {
-            return new PlotSquaredLocationProperties((dLocation) object);
+            return new PlotSquaredLocationProperties((LocationTag) object);
         }
     }
 
@@ -46,11 +46,11 @@ public class PlotSquaredLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private PlotSquaredLocationProperties(dLocation location) {
+    private PlotSquaredLocationProperties(LocationTag location) {
         this.location = location;
     }
 
-    dLocation location;
+    LocationTag location;
 
     public Location getPlotSquaredLocation() {
         return new Location(location.getWorldName(), location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getYaw(), location.getPitch());
@@ -59,7 +59,7 @@ public class PlotSquaredLocationProperties implements Property {
     @Override
     public String getAttribute(Attribute attribute) {
         // <--[tag]
-        // @attribute <l@location.plotsquared_plot>
+        // @attribute <LocationTag.plotsquared_plot>
         // @returns dPlotSquaredPlot
         // @description
         // Returns the plot contained by this location.

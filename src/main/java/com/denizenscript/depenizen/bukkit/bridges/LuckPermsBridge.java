@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.Bridge;
 import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -26,7 +26,7 @@ public class LuckPermsBridge extends Bridge {
             }
         }, "luckperms");
         ObjectFetcher.registerWithObjectFetcher(LuckPermsTrack.class);
-        PropertyParser.registerProperty(LuckPermsPlayerProperties.class, dPlayer.class);
+        PropertyParser.registerProperty(LuckPermsPlayerProperties.class, PlayerTag.class);
     }
 
     public void tagEvent(ReplaceableTagEvent event) {

@@ -7,7 +7,7 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.TagResponsePacketOut;
 import io.netty.buffer.ByteBuf;
 import com.denizenscript.denizen.BukkitScriptEntryData;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -54,13 +54,13 @@ public class ReadTagPacketIn extends PacketIn {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
             @Override
             public void run() {
-                dPlayer linkedPlayer = null;
+                PlayerTag linkedPlayer = null;
                 if (uuidMost != 0 || uuidLeast != 0) {
                     UUID uuid = new UUID(uuidMost, uuidLeast);
                     try {
                         OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
                         if (player != null) {
-                            linkedPlayer = new dPlayer(player);
+                            linkedPlayer = new PlayerTag(player);
                         }
                     }
                     catch (Exception ex) {

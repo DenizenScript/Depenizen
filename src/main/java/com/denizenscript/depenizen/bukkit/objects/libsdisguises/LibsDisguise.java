@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.objects.libsdisguises;
 
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
-import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -130,13 +130,13 @@ public class LibsDisguise implements ObjectTag {
 
         // <--[tag]
         // @attribute <libsdisguise@libsdisguise.type>
-        // @returns dEntity
+        // @returns EntityTag
         // @description
         // Returns the entity of the disguise.
         // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("entity")) {
-            return new dEntity(disguise.getEntity()).getAttribute(attribute.fulfill(1));
+            return new EntityTag(disguise.getEntity()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

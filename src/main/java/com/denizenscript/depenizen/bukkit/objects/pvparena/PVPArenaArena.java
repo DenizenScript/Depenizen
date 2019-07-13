@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.pvparena;
 
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -106,7 +106,7 @@ public class PVPArenaArena implements ObjectTag {
 
         // <--[tag]
         // @attribute <pvparena@pvparena.fighters>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all fighters in the arena.
         // @Plugin Depenizen, PvPArena
@@ -114,7 +114,7 @@ public class PVPArenaArena implements ObjectTag {
         else if (attribute.startsWith("fighters")) {
             ListTag fighters = new ListTag();
             for (ArenaPlayer p : arena.getFighters()) {
-                fighters.add(new dPlayer(p.get()).identify());
+                fighters.add(new PlayerTag(p.get()).identify());
             }
             return fighters.getAttribute(attribute.fulfill(1));
         }

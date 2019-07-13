@@ -5,7 +5,7 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.factions.dFaction;
 import com.massivecraft.factions.entity.BoardColl;
 import com.massivecraft.massivecore.ps.PS;
-import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
@@ -27,7 +27,7 @@ public class FactionsLocationProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dLocation;
+        return object instanceof LocationTag;
     }
 
     public static FactionsLocationProperties getFrom(ObjectTag object) {
@@ -35,7 +35,7 @@ public class FactionsLocationProperties implements Property {
             return null;
         }
         else {
-            return new FactionsLocationProperties((dLocation) object);
+            return new FactionsLocationProperties((LocationTag) object);
         }
     }
 
@@ -46,17 +46,17 @@ public class FactionsLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private FactionsLocationProperties(dLocation location) {
+    private FactionsLocationProperties(LocationTag location) {
         this.location = location;
     }
 
-    dLocation location = null;
+    LocationTag location = null;
 
     @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <l@location.faction>
+        // @attribute <LocationTag.faction>
         // @returns dFaction
         // @description
         // Returns the faction at the location. (Can also be SafeZone, WarZone, or Wilderness)

@@ -8,8 +8,8 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.palmergames.bukkit.towny.object.WorldCoord;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
@@ -136,7 +136,7 @@ public class dTown implements ObjectTag {
 
         // <--[tag]
         // @attribute <town@town.assistants>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of the town's assistants.
         // @Plugin Depenizen, Towny
@@ -144,7 +144,7 @@ public class dTown implements ObjectTag {
         if (attribute.startsWith("assistants")) {
             ListTag list = new ListTag();
             for (Resident resident : town.getAssistants()) {
-                list.add(dPlayer.valueOf(resident.getName()).identify());
+                list.add(PlayerTag.valueOf(resident.getName()).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -205,13 +205,13 @@ public class dTown implements ObjectTag {
 
         // <--[tag]
         // @attribute <town@town.mayor>
-        // @returns dPlayer
+        // @returns PlayerTag
         // @description
         // Returns the mayor of the town.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("mayor")) {
-            return dPlayer.valueOf(town.getMayor().getName())
+            return PlayerTag.valueOf(town.getMayor().getName())
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -257,7 +257,7 @@ public class dTown implements ObjectTag {
 
         // <--[tag]
         // @attribute <town@town.residents>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of the town's residents.
         // @Plugin Depenizen, Towny
@@ -265,7 +265,7 @@ public class dTown implements ObjectTag {
         else if (attribute.startsWith("residents")) {
             ListTag list = new ListTag();
             for (Resident resident : town.getResidents()) {
-                list.add(dPlayer.valueOf(resident.getName()).identify());
+                list.add(PlayerTag.valueOf(resident.getName()).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -284,14 +284,14 @@ public class dTown implements ObjectTag {
 
         // <--[tag]
         // @attribute <town@town.spawn>
-        // @returns dLocation
+        // @returns LocationTag
         // @description
         // Returns the spawn point of the town.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("spawn")) {
             try {
-                return new dLocation(town.getSpawn().getBlock().getLocation())
+                return new LocationTag(town.getSpawn().getBlock().getLocation())
                         .getAttribute(attribute.fulfill(1));
             }
             catch (TownyException e) {
@@ -324,7 +324,7 @@ public class dTown implements ObjectTag {
 
         // <--[tag]
         // @attribute <town@town.outposts>
-        // @returns ListTag(dLocation)
+        // @returns ListTag(LocationTag)
         // @description
         // Returns a list of the town's outpost locations.
         // @Plugin Depenizen, Towny
@@ -332,7 +332,7 @@ public class dTown implements ObjectTag {
         else if (attribute.startsWith("outposts")) {
             ListTag posts = new ListTag();
             for (Location p : town.getAllOutpostSpawns()) {
-                posts.add(new dLocation(p).identify());
+                posts.add(new LocationTag(p).identify());
             }
             return posts.getAttribute(attribute.fulfill(1));
         }

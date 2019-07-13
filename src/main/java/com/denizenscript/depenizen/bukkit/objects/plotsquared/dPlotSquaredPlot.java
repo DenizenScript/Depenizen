@@ -7,10 +7,10 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.github.intellectualsites.plotsquared.plot.object.Plot;
 import com.github.intellectualsites.plotsquared.plot.object.RegionWrapper;
 import com.github.intellectualsites.plotsquared.plot.util.MainUtil;
-import com.denizenscript.denizen.objects.dCuboid;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.objects.dWorld;
+import com.denizenscript.denizen.objects.CuboidTag;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
@@ -155,42 +155,42 @@ public class dPlotSquaredPlot implements ObjectTag {
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.home>
-        // @returns dLocation
+        // @returns LocationTag
         // @description
         // Returns the plot's current home location.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("home")) {
             com.github.intellectualsites.plotsquared.plot.object.Location loca = plot.getHome();
-            return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getAttribute(attribute.fulfill(1));
+            return new LocationTag(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.default_home>
-        // @returns dLocation
+        // @returns LocationTag
         // @description
         // Returns the plot's default home location.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("default_home")) {
             com.github.intellectualsites.plotsquared.plot.object.Location loca = plot.getDefaultHome();
-            return new dLocation(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getAttribute(attribute.fulfill(1));
+            return new LocationTag(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.world>
-        // @returns dWorld
+        // @returns WorldTag
         // @description
         // Returns the plot's world.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("world")) {
-            return dWorld.valueOf(plot.getArea().worldname).getAttribute(attribute.fulfill(1));
+            return WorldTag.valueOf(plot.getArea().worldname).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.owners>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all owners of the plot.
         // @Plugin Depenizen, PlotSquared
@@ -198,14 +198,14 @@ public class dPlotSquaredPlot implements ObjectTag {
         if (attribute.startsWith("owners")) {
             ListTag players = new ListTag();
             for (UUID uuid : plot.getOwners()) {
-                players.add(dPlayer.valueOf(uuid.toString()).identify());
+                players.add(PlayerTag.valueOf(uuid.toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.trusted>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all trusted of the plot.
         // @Plugin Depenizen, PlotSquared
@@ -213,14 +213,14 @@ public class dPlotSquaredPlot implements ObjectTag {
         if (attribute.startsWith("trusted")) {
             ListTag players = new ListTag();
             for (UUID uuid : plot.getTrusted()) {
-                players.add(dPlayer.valueOf(uuid.toString()).identify());
+                players.add(PlayerTag.valueOf(uuid.toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.members>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all members of the plot.
         // @Plugin Depenizen, PlotSquared
@@ -228,39 +228,39 @@ public class dPlotSquaredPlot implements ObjectTag {
         if (attribute.startsWith("members")) {
             ListTag players = new ListTag();
             for (UUID uuid : plot.getMembers()) {
-                players.add(dPlayer.valueOf(uuid.toString()).identify());
+                players.add(PlayerTag.valueOf(uuid.toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.cuboid>
-        // @returns dCuboid
+        // @returns CuboidTag
         // @description
         // Returns the plot's cuboid.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("cuboid")) {
-            dWorld world = dWorld.valueOf(plot.getArea().worldname);
+            WorldTag world = WorldTag.valueOf(plot.getArea().worldname);
             Location l1 = new Location(world.getWorld(), plot.getBottomAbs().getX(), 0, plot.getBottomAbs().getZ());
             Location l2 = new Location(world.getWorld(), plot.getTopAbs().getX(), 255, plot.getTopAbs().getZ());
-            return new dCuboid(l1, l2).getAttribute(attribute.fulfill(1));
+            return new CuboidTag(l1, l2).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.all_cuboids>
-        // @returns ListTag(dCuboid)
+        // @returns ListTag(CuboidTag)
         // @description
         // Returns all the plot's cuboids in a list. Useful for merged plots.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("all_cuboids")) {
             ListTag cuboids = new ListTag();
-            dWorld world = dWorld.valueOf(plot.getArea().worldname);
+            WorldTag world = WorldTag.valueOf(plot.getArea().worldname);
             for (RegionWrapper region : plot.getRegions()) {
                 Location l1 = new Location(world.getWorld(), region.minX, region.minY, region.minZ);
                 Location l2 = new Location(world.getWorld(), region.maxX, region.maxY, region.maxZ);
-                cuboids.add(new dCuboid(l1, l2).identify());
+                cuboids.add(new CuboidTag(l1, l2).identify());
             }
             return cuboids.getAttribute(attribute.fulfill(1));
         }

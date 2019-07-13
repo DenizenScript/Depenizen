@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguise;
 import me.libraryaddict.disguise.events.UndisguiseEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -42,7 +42,7 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
     public static EntityUndisguisesScriptEvent instance;
 
     public UndisguiseEvent event;
-    public dEntity entity;
+    public EntityTag entity;
     public LibsDisguise disguise;
 
     @Override
@@ -92,7 +92,7 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
     @EventHandler
     public void onUndisguise(UndisguiseEvent event) {
         disguise = new LibsDisguise(event.getDisguise());
-        entity = new dEntity(event.getEntity());
+        entity = new EntityTag(event.getEntity());
         this.event = event;
         fire(event);
     }

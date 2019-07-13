@@ -3,8 +3,8 @@ package com.denizenscript.depenizen.bukkit.events.askyblock;
 import com.wasteofplastic.askyblock.events.IslandNewEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -36,9 +36,9 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
 
     public static SkyBlockCreatedScriptEvent instance;
     public IslandNewEvent event;
-    public dLocation location;
+    public LocationTag location;
     public ElementTag schematic;
-    public dPlayer owner;
+    public PlayerTag owner;
 
     public SkyBlockCreatedScriptEvent() {
         instance = this;
@@ -85,9 +85,9 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
 
     @EventHandler
     public void onSkyBlockCreated(IslandNewEvent event) {
-        location = new dLocation(event.getIslandLocation());
+        location = new LocationTag(event.getIslandLocation());
         schematic = new ElementTag(event.getSchematicName().getName());
-        owner = dPlayer.mirrorBukkitPlayer(event.getPlayer());
+        owner = PlayerTag.mirrorBukkitPlayer(event.getPlayer());
         this.event = event;
         fire(event);
     }

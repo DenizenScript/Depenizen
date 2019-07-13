@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.properties.bungee;
 
 import com.denizenscript.depenizen.bukkit.bungee.BungeeHelpers;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
@@ -10,7 +10,7 @@ import com.denizenscript.denizencore.tags.Attribute;
 public class BungeePlayerProperties implements Property {
 
         public static boolean describes(ObjectTag entity) {
-            return entity instanceof dPlayer;
+            return entity instanceof PlayerTag;
         }
 
         public static BungeePlayerProperties getFrom(ObjectTag player) {
@@ -18,7 +18,7 @@ public class BungeePlayerProperties implements Property {
                 return null;
             }
             else {
-                return new BungeePlayerProperties((dPlayer) player);
+                return new BungeePlayerProperties((PlayerTag) player);
             }
         }
 
@@ -34,11 +34,11 @@ public class BungeePlayerProperties implements Property {
         // Instance Fields and Methods
         /////////////
 
-        private BungeePlayerProperties(dPlayer plr) {
+        private BungeePlayerProperties(PlayerTag plr) {
             player = plr;
         }
 
-        dPlayer player;
+        PlayerTag player;
 
         /////////
         // Property Methods
@@ -68,7 +68,7 @@ public class BungeePlayerProperties implements Property {
         public void adjust(Mechanism mechanism) {
 
             // <--[mechanism]
-            // @object dPlayer
+            // @object PlayerTag
             // @name send_to
             // @input Element
             // @description

@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.noteblockapi;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -21,7 +21,7 @@ public class NoteBlockAPIPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static NoteBlockAPIPlayerProperties getFrom(ObjectTag object) {
@@ -29,7 +29,7 @@ public class NoteBlockAPIPlayerProperties implements Property {
             return null;
         }
         else {
-            return new NoteBlockAPIPlayerProperties((dPlayer) object);
+            return new NoteBlockAPIPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -44,17 +44,17 @@ public class NoteBlockAPIPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private NoteBlockAPIPlayerProperties(dPlayer player) {
+    private NoteBlockAPIPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    dPlayer player;
+    PlayerTag player;
 
     @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <p@player.nbs_is_playing>
+        // @attribute <PlayerTag.nbs_is_playing>
         // @returns ElementTag(Boolean)
         // @description
         // Returns true if the player is currently listening to a note block song.

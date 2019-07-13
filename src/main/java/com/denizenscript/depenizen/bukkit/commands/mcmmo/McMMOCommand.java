@@ -9,7 +9,7 @@ import com.gmail.nossr50.database.DatabaseManagerFactory;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.party.PartyManager;
 import com.denizenscript.denizen.BukkitScriptEntryData;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -128,7 +128,7 @@ public class McMMOCommand extends AbstractCommand {
         ElementTag party = scriptEntry.getElement("party");
         ElementTag skill = scriptEntry.getElement("skill");
 
-        dPlayer player = scriptEntryData.getPlayer();
+        PlayerTag player = scriptEntryData.getPlayer();
 
         // Report to dB
         Debug.report(scriptEntry, getName(), action.debug() + type.debug() + (state != null ? state.debug() : "") + qty.debug()

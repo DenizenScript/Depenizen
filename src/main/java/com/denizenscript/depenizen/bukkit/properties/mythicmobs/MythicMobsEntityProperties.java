@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.properties.mythicmobs;
 
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
-import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -27,7 +27,7 @@ public class MythicMobsEntityProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dEntity;
+        return object instanceof EntityTag;
     }
 
     public static MythicMobsEntityProperties getFrom(ObjectTag object) {
@@ -35,7 +35,7 @@ public class MythicMobsEntityProperties implements Property {
             return null;
         }
         else {
-            return new MythicMobsEntityProperties((dEntity) object);
+            return new MythicMobsEntityProperties((EntityTag) object);
         }
     }
 
@@ -46,11 +46,11 @@ public class MythicMobsEntityProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public MythicMobsEntityProperties(dEntity entity) {
+    public MythicMobsEntityProperties(EntityTag entity) {
         this.entity = entity;
     }
 
-    dEntity entity;
+    EntityTag entity;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -59,7 +59,7 @@ public class MythicMobsEntityProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <e@entity.is_mythicmob>
+        // @attribute <EntityTag.is_mythicmob>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the entity is a MythicMob.
@@ -70,7 +70,7 @@ public class MythicMobsEntityProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <e@entity.mythicmob>
+        // @attribute <EntityTag.mythicmob>
         // @returns MythicMobsMob
         // @description
         // Returns the MythicMob for this entity.

@@ -5,7 +5,7 @@ import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
 import io.netty.buffer.ByteBuf;
 import com.denizenscript.denizen.BukkitScriptEntryData;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.scripts.ScriptBuilder;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
@@ -48,13 +48,13 @@ public class RunCommandsPacketIn extends PacketIn {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
             @Override
             public void run() {
-                dPlayer linkedPlayer = null;
+                PlayerTag linkedPlayer = null;
                 if (uuidMost != 0 || uuidLeast != 0) {
                     UUID uuid = new UUID(uuidMost, uuidLeast);
                     try {
                         OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
                         if (player != null) {
-                            linkedPlayer = new dPlayer(player);
+                            linkedPlayer = new PlayerTag(player);
                         }
                     }
                     catch (Exception ex) {

@@ -7,7 +7,7 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import com.denizenscript.denizen.objects.dWorld;
+import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -26,7 +26,7 @@ public class WorldGuardWorldProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dWorld;
+        return object instanceof WorldTag;
     }
 
     public static WorldGuardWorldProperties getFrom(ObjectTag object) {
@@ -34,7 +34,7 @@ public class WorldGuardWorldProperties implements Property {
             return null;
         }
         else {
-            return new WorldGuardWorldProperties((dWorld) object);
+            return new WorldGuardWorldProperties((WorldTag) object);
         }
     }
 
@@ -49,7 +49,7 @@ public class WorldGuardWorldProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private WorldGuardWorldProperties(dWorld world) {
+    private WorldGuardWorldProperties(WorldTag world) {
         this.world = world.getWorld();
         this.manager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(this.world));
     }
@@ -61,7 +61,7 @@ public class WorldGuardWorldProperties implements Property {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <w@world.list_regions>
+        // @attribute <WorldTag.list_regions>
         // @returns ListTag(Region)
         // @description
         // Returns a list of WorldGuard regions in this world.

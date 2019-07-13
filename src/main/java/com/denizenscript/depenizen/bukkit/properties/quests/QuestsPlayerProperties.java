@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.bridges.QuestsBridge;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
 import me.blackvein.quests.Quests;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -25,7 +25,7 @@ public class QuestsPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static QuestsPlayerProperties getFrom(ObjectTag object) {
@@ -33,7 +33,7 @@ public class QuestsPlayerProperties implements Property {
             return null;
         }
         else {
-            return new QuestsPlayerProperties((dPlayer) object);
+            return new QuestsPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -44,14 +44,14 @@ public class QuestsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private QuestsPlayerProperties(dPlayer player) {
+    private QuestsPlayerProperties(PlayerTag player) {
         this.player = player;
         Quests quests = (Quests) QuestsBridge.instance.plugin;
         // This would be Quests.getInstance() but the developers of Quests did a stupid and broke that method.
         this.quester = quests.getQuester(player.getOfflinePlayer().getUniqueId());
     }
 
-    dPlayer player = null;
+    PlayerTag player = null;
     Quester quester;
 
     @Override
@@ -64,7 +64,7 @@ public class QuestsPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.quests.points>
+            // @attribute <PlayerTag.quests.points>
             // @returns ElementTag(Number)
             // @description
             // Returns the number of quest points the player has.
@@ -78,7 +78,7 @@ public class QuestsPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.quests.completed_names>
+            // @attribute <PlayerTag.quests.completed_names>
             // @returns ListTag
             // @description
             // Returns the names of quests the player has completed.
@@ -93,7 +93,7 @@ public class QuestsPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.quests.active_names>
+            // @attribute <PlayerTag.quests.active_names>
             // @returns ListTag
             // @description
             // Returns the names of quests the player has active.
@@ -108,7 +108,7 @@ public class QuestsPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.quests.completed>
+            // @attribute <PlayerTag.quests.completed>
             // @returns ElementTag(Number)
             // @description
             // Returns the number of quests the player has completed.
@@ -119,7 +119,7 @@ public class QuestsPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.quests.active>
+            // @attribute <PlayerTag.quests.active>
             // @returns ElementTag(Number)
             // @description
             // Returns the number of quests the player has active.

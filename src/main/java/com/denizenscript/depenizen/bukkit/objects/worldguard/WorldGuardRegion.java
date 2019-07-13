@@ -5,9 +5,9 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import com.denizenscript.denizen.objects.dCuboid;
-import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.objects.dWorld;
+import com.denizenscript.denizen.objects.CuboidTag;
+import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
@@ -141,10 +141,10 @@ public class WorldGuardRegion implements ObjectTag {
 
         // <--[tag]
         // @attribute <region@region.cuboid>
-        // @returns dCuboid
+        // @returns CuboidTag
         // @group conversion
         // @description
-        // Converts a cuboid-shaped region to a dCuboid.
+        // Converts a cuboid-shaped region to a CuboidTag.
         // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("cuboid") || attribute.startsWith("as_cuboid")) { // TODO: Scrap as_cuboid
@@ -154,7 +154,7 @@ public class WorldGuardRegion implements ObjectTag {
                 }
                 return null;
             }
-            return new dCuboid(BukkitAdapter.adapt(world, region.getMinimumPoint()),
+            return new CuboidTag(BukkitAdapter.adapt(world, region.getMinimumPoint()),
                     BukkitAdapter.adapt(world, region.getMaximumPoint())).getAttribute(attribute.fulfill(1));
         }
 
@@ -171,7 +171,7 @@ public class WorldGuardRegion implements ObjectTag {
 
         // <--[tag]
         // @attribute <region@region.members>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Gets a list of all members of a region. (Members are permitted to build, etc.)
         // @Plugin Depenizen, WorldGuard
@@ -179,14 +179,14 @@ public class WorldGuardRegion implements ObjectTag {
         if (attribute.startsWith("members")) {
             ListTag list = new ListTag();
             for (UUID uuid : region.getMembers().getUniqueIds()) {
-                list.add(dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)).identify());
+                list.add(PlayerTag.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <region@region.owners>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Gets a list of all owners of a region. (Owners are permitted to build, edit settings, etc.)
         // @Plugin Depenizen, WorldGuard
@@ -194,7 +194,7 @@ public class WorldGuardRegion implements ObjectTag {
         if (attribute.startsWith("owners")) {
             ListTag list = new ListTag();
             for (UUID uuid : region.getOwners().getUniqueIds()) {
-                list.add(dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)).identify());
+                list.add(PlayerTag.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -213,13 +213,13 @@ public class WorldGuardRegion implements ObjectTag {
 
         // <--[tag]
         // @attribute <region@region.world>
-        // @returns dWorld
+        // @returns WorldTag
         // @description
-        // Gets the dWorld this region is in.
+        // Gets the WorldTag this region is in.
         // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("world")) {
-            return new dWorld(world).getAttribute(attribute.fulfill(1));
+            return new WorldTag(world).getAttribute(attribute.fulfill(1));
         }
 
         return new ElementTag(identify()).getAttribute(attribute);

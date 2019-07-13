@@ -4,7 +4,7 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.datatypes.skills.SkillType;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -29,7 +29,7 @@ public class McMMOPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static McMMOPlayerProperties getFrom(ObjectTag object) {
@@ -37,7 +37,7 @@ public class McMMOPlayerProperties implements Property {
             return null;
         }
         else {
-            return new McMMOPlayerProperties((dPlayer) object);
+            return new McMMOPlayerProperties((PlayerTag) object);
         }
     }
 
@@ -48,11 +48,11 @@ public class McMMOPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private McMMOPlayerProperties(dPlayer player) {
+    private McMMOPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    dPlayer player = null;
+    PlayerTag player = null;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -62,7 +62,7 @@ public class McMMOPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.mcmmo.level[<skill>]>
+            // @attribute <PlayerTag.mcmmo.level[<skill>]>
             // @returns ElementTag(Number)
             // @description
             // Returns the player's level in a skill. If no skill is specified,
@@ -93,7 +93,7 @@ public class McMMOPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.mcmmo.party>
+            // @attribute <PlayerTag.mcmmo.party>
             // @returns ElementTag
             // @description
             // Returns the name of the player's party.
@@ -112,7 +112,7 @@ public class McMMOPlayerProperties implements Property {
                 attribute = attribute.fulfill(1);
 
                 // <--[tag]
-                // @attribute <p@player.mcmmo.xp[<skill>].to_next_level>
+                // @attribute <PlayerTag.mcmmo.xp[<skill>].to_next_level>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the amount of experience a player needs to level up
@@ -131,7 +131,7 @@ public class McMMOPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.mcmmo.xp[<skill>].level>
+                // @attribute <PlayerTag.mcmmo.xp[<skill>].level>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the player's experience level in a skill.
@@ -149,7 +149,7 @@ public class McMMOPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.mcmmo.xp[<skill>]>
+                // @attribute <PlayerTag.mcmmo.xp[<skill>]>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the player's amount of experience in a skill.
@@ -167,7 +167,7 @@ public class McMMOPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.mcmmo.rank[<skill>]>
+            // @attribute <PlayerTag.mcmmo.rank[<skill>]>
             // @returns ElementTag(Number)
             // @description
             // Returns the player's current rank in a skill. If no skill is specified,

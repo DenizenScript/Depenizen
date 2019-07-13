@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.jobs;
 
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
@@ -62,15 +62,15 @@ public class JobPlayer implements Property {
         // <--[mechanism]
         // @object dJob
         // @name player
-        // @input dPlayer
+        // @input PlayerTag
         // @description
         // Sets the owner of the job, to enable player-required tags.
         // @tags
         // None
         // @Plugin Depenizen, Jobs
         // -->
-        if (mechanism.matches("player") && mechanism.requireObject(dPlayer.class)) {
-            job.setOwner(mechanism.valueAsType(dPlayer.class));
+        if (mechanism.matches("player") && mechanism.requireObject(PlayerTag.class)) {
+            job.setOwner(mechanism.valueAsType(PlayerTag.class));
         }
 
     }

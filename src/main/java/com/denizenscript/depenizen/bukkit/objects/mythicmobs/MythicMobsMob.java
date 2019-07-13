@@ -4,7 +4,7 @@ import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
-import com.denizenscript.denizen.objects.dEntity;
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -35,7 +35,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
             if (!MythicMobsBridge.isMythicMob(uuid)) {
                 return null;
             }
-            return new MythicMobsMob(MythicMobsBridge.getActiveMob(dEntity.getEntityForID(uuid)));
+            return new MythicMobsMob(MythicMobsBridge.getActiveMob(EntityTag.getEntityForID(uuid)));
         }
         catch (Exception e) {
             return null;
@@ -218,7 +218,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.target>
-        // @returns dEntity
+        // @returns EntityTag
         // @description
         // Returns the MythicMob's target.
         // @Plugin Depenizen, MythicMobs
@@ -228,7 +228,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
             if (target == null) {
                 return null;
             }
-            return new dEntity(target.getBukkitEntity()).getAttribute(attribute.fulfill(1));
+            return new EntityTag(target.getBukkitEntity()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -244,13 +244,13 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.entity>
-        // @returns dEntity
+        // @returns EntityTag
         // @description
-        // Returns the dEntity for the MythicMob.
+        // Returns the EntityTag for the MythicMob.
         // @Plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("entity")) {
-            return new dEntity(getLivingEntity()).getAttribute(attribute.fulfill(1));
+            return new EntityTag(getLivingEntity()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -316,14 +316,14 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object MythicMob
         // @name target
-        // @input dEntity
+        // @input EntityTag
         // @description
         // Sets MythicMob's target.
         // @tags
         // <mythicmob@mythicmob.target>
         // -->
-        else if (mechanism.matches("target") && mechanism.requireObject(dEntity.class)) {
-            dEntity mTarget = dEntity.valueOf(mechanism.getValue().asString());
+        else if (mechanism.matches("target") && mechanism.requireObject(EntityTag.class)) {
+            EntityTag mTarget = EntityTag.valueOf(mechanism.getValue().asString());
             if (mTarget == null || !mTarget.isValid() || mTarget.getLivingEntity() == null) {
                 return;
             }

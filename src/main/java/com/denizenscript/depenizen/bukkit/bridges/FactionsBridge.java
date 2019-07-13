@@ -7,9 +7,9 @@ import com.denizenscript.depenizen.bukkit.utilities.BridgeLoadException;
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
 import com.denizenscript.depenizen.bukkit.properties.factions.FactionsLocationProperties;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dNPC;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.NPCTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
@@ -26,9 +26,9 @@ public class FactionsBridge extends Bridge {
             throw new BridgeLoadException("Only Factions 1.x.x is supported.");
         }
         ObjectFetcher.registerWithObjectFetcher(dFaction.class);
-        PropertyParser.registerProperty(FactionsPlayerNPCProperties.class, dNPC.class);
-        PropertyParser.registerProperty(FactionsPlayerNPCProperties.class, dPlayer.class);
-        PropertyParser.registerProperty(FactionsLocationProperties.class, dLocation.class);
+        PropertyParser.registerProperty(FactionsPlayerNPCProperties.class, NPCTag.class);
+        PropertyParser.registerProperty(FactionsPlayerNPCProperties.class, PlayerTag.class);
+        PropertyParser.registerProperty(FactionsLocationProperties.class, LocationTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

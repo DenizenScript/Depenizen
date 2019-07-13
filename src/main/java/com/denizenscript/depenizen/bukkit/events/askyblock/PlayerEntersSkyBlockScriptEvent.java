@@ -3,8 +3,8 @@ package com.denizenscript.depenizen.bukkit.events.askyblock;
 import com.wasteofplastic.askyblock.events.IslandEnterEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -35,9 +35,9 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
 
     public PlayerEntersSkyBlockScriptEvent instance;
     public IslandEnterEvent event;
-    public dLocation location;
-    public dLocation island_location;
-    public dPlayer owner;
+    public LocationTag location;
+    public LocationTag island_location;
+    public PlayerTag owner;
 
     public PlayerEntersSkyBlockScriptEvent() {
         instance = this;
@@ -65,7 +65,7 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(new dPlayer(event.getPlayer()), null);
+        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()), null);
     }
 
     @Override
@@ -84,9 +84,9 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
 
     @EventHandler
     public void onPlayerEntersSkyblock(IslandEnterEvent event) {
-        island_location = new dLocation(event.getIslandLocation());
-        location = new dLocation(event.getLocation());
-        owner = new dPlayer(event.getIslandOwner());
+        island_location = new LocationTag(event.getIslandLocation());
+        location = new LocationTag(event.getLocation());
+        owner = new PlayerTag(event.getIslandOwner());
         this.event = event;
         fire(event);
     }

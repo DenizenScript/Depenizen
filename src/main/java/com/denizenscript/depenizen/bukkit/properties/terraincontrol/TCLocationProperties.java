@@ -4,7 +4,7 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.khorn.terraincontrol.LocalBiome;
 import com.khorn.terraincontrol.TerrainControl;
-import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -27,7 +27,7 @@ public class TCLocationProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dLocation;
+        return object instanceof LocationTag;
     }
 
     public static TCLocationProperties getFrom(ObjectTag object) {
@@ -35,7 +35,7 @@ public class TCLocationProperties implements Property {
             return null;
         }
         else {
-            return new TCLocationProperties((dLocation) object);
+            return new TCLocationProperties((LocationTag) object);
         }
     }
 
@@ -46,11 +46,11 @@ public class TCLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private TCLocationProperties(dLocation object) {
+    private TCLocationProperties(LocationTag object) {
         location = object;
     }
 
-    dLocation location = null;
+    LocationTag location = null;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -61,7 +61,7 @@ public class TCLocationProperties implements Property {
                     .getBiome(location.getBlockX(), location.getBlockZ());
 
             // <--[tag]
-            // @attribute <l@location.tc_biome.name>
+            // @attribute <LocationTag.tc_biome.name>
             // @returns ElementTag
             // @description
             // Returns the TerrainControl biome name at this location, if any.
@@ -73,7 +73,7 @@ public class TCLocationProperties implements Property {
 
             else if (attribute.startsWith("temperature")) {
                 // <--[tag]
-                // @attribute <l@location.tc_biome.temperature>
+                // @attribute <LocationTag.tc_biome.temperature>
                 // @returns ElementTag
                 // @description
                 // Returns the TerrainControl biome temperature at this location, if any.

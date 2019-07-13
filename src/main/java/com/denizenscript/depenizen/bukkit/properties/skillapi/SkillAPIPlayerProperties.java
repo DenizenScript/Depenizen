@@ -7,7 +7,7 @@ import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.player.PlayerClass;
 import com.sucy.skill.api.player.PlayerData;
 import com.sucy.skill.api.player.PlayerSkill;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -32,7 +32,7 @@ public class SkillAPIPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag pl) {
-        return pl instanceof dPlayer;
+        return pl instanceof PlayerTag;
     }
 
     public static SkillAPIPlayerProperties getFrom(ObjectTag pl) {
@@ -40,7 +40,7 @@ public class SkillAPIPlayerProperties implements Property {
             return null;
         }
         else {
-            return new SkillAPIPlayerProperties((dPlayer) pl);
+            return new SkillAPIPlayerProperties((PlayerTag) pl);
         }
     }
 
@@ -51,11 +51,11 @@ public class SkillAPIPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public SkillAPIPlayerProperties(dPlayer player) {
+    public SkillAPIPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    dPlayer player;
+    PlayerTag player;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -66,7 +66,7 @@ public class SkillAPIPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <p@player.skillapi.main_class>
+            // @attribute <PlayerTag.skillapi.main_class>
             // @returns SkillAPIClass
             // @description
             // Returns the player's main SkillAPI class.
@@ -80,7 +80,7 @@ public class SkillAPIPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.skillapi.in_class[<class>]>
+            // @attribute <PlayerTag.skillapi.in_class[<class>]>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player professes in the specified class. If none is specified, returns
@@ -99,7 +99,7 @@ public class SkillAPIPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.skillapi.has_skill[<skill>]>
+            // @attribute <PlayerTag.skillapi.has_skill[<skill>]>
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player has the specified skill.
@@ -110,7 +110,7 @@ public class SkillAPIPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.skillapi.mana>
+            // @attribute <PlayerTag.skillapi.mana>
             // @returns ElementTag(Decimal)
             // @description
             // Returns the player's current amount of mana.
@@ -121,7 +121,7 @@ public class SkillAPIPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <p@player.skillapi.max_mana>
+            // @attribute <PlayerTag.skillapi.max_mana>
             // @returns ElementTag(Decimal)
             // @description
             // Returns the player's maximum amount of mana.
@@ -149,7 +149,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.class_exp[<class>]>
+                // @attribute <PlayerTag.skillapi.class_exp[<class>]>
                 // @returns ElementTag(Decimal)
                 // @description
                 // Returns the amount of experience the player has toward the next level in the specified class.
@@ -160,7 +160,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.class_required_exp[<class>]>
+                // @attribute <PlayerTag.skillapi.class_required_exp[<class>]>
                 // @returns ElementTag(Decimal)
                 // @description
                 // Returns the amount of experience the player must receive to get to the next level
@@ -172,7 +172,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.class_total_exp[<class>]>
+                // @attribute <PlayerTag.skillapi.class_total_exp[<class>]>
                 // @returns ElementTag(Decimal)
                 // @description
                 // Returns the total amount of experience the player has in the specified class.
@@ -183,7 +183,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.class_level[<class>]>
+                // @attribute <PlayerTag.skillapi.class_level[<class>]>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the level the player is in the specified class.
@@ -194,7 +194,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.class_points[<class>]>
+                // @attribute <PlayerTag.skillapi.class_points[<class>]>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the number of skill points the player has in the specified class.
@@ -205,7 +205,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.class_maxed[<class>]>
+                // @attribute <PlayerTag.skillapi.class_maxed[<class>]>
                 // @returns ElementTag(Boolean)
                 // @description
                 // Returns whether the player has hit maximum level in the specified class.
@@ -216,7 +216,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.class_health[<class>]>
+                // @attribute <PlayerTag.skillapi.class_health[<class>]>
                 // @returns ElementTag(Decimal)
                 // @description
                 // Returns the amount of health the player gets from the specified class.
@@ -227,7 +227,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.class_mana[<class>]>
+                // @attribute <PlayerTag.skillapi.class_mana[<class>]>
                 // @returns ElementTag(Decimal)
                 // @description
                 // Returns the amount of mana the player gets from the specified class.
@@ -246,8 +246,8 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.skill_bind[<skill>]>
-                // @returns dMaterial
+                // @attribute <PlayerTag.skillapi.skill_bind[<skill>]>
+                // @returns MaterialTag
                 // @description
                 // Returns the material this skill is currently bound to.
                 // @Plugin Depenizen, SkillAPI
@@ -257,7 +257,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.skill_level_requirement[<skill>]>
+                // @attribute <PlayerTag.skillapi.skill_level_requirement[<skill>]>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the level the player must be to level up the specified skill.
@@ -268,7 +268,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.skill_level[<skill>]>
+                // @attribute <PlayerTag.skillapi.skill_level[<skill>]>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the level the player is in the specified skill.
@@ -279,7 +279,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.skill_points[<skill>]>
+                // @attribute <PlayerTag.skillapi.skill_points[<skill>]>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns how many skill points the player has invested in the specified skill.
@@ -290,7 +290,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.skill_cost[<skill>]>
+                // @attribute <PlayerTag.skillapi.skill_cost[<skill>]>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the cost the for the player to level up the specified skill.
@@ -301,7 +301,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.skill_on_cooldown[<skill>]>
+                // @attribute <PlayerTag.skillapi.skill_on_cooldown[<skill>]>
                 // @returns ElementTag(Boolean)
                 // @description
                 // Returns whether the specified skill is currently on cooldown for the player.
@@ -312,7 +312,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.skill_cooldown[<skill>]>
+                // @attribute <PlayerTag.skillapi.skill_cooldown[<skill>]>
                 // @returns DurationTag
                 // @description
                 // Returns the remaining cooldown the player has in the specified skill.
@@ -323,7 +323,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.skill_maxed[<skill>]>
+                // @attribute <PlayerTag.skillapi.skill_maxed[<skill>]>
                 // @returns ElementTag(Boolean)
                 // @description
                 // Returns whether the player has reached max level in the specified skill.
@@ -334,7 +334,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
 
                 // <--[tag]
-                // @attribute <p@player.skillapi.skill_status[<skill>]>
+                // @attribute <PlayerTag.skillapi.skill_status[<skill>]>
                 // @returns ElementTag
                 // @description
                 // Returns the player's current status for the specified skill.

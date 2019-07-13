@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.events.pvparena;
 import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -82,7 +82,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
     public void onPVPArenaStart(PAStartEvent event) {
         fighters = new ListTag();
         for (ArenaPlayer p : event.getArena().getFighters()) {
-            fighters.add(new dPlayer(p.get()).identify());
+            fighters.add(new PlayerTag(p.get()).identify());
         }
         arena = new PVPArenaArena(event.getArena());
         this.event = event;

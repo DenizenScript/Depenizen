@@ -6,7 +6,7 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
@@ -131,7 +131,7 @@ public class dNation implements ObjectTag {
 
         // <--[tag]
         // @attribute <nation@nation.assistants>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of the nation's assistants.
         // @Plugin Depenizen, Towny
@@ -139,7 +139,7 @@ public class dNation implements ObjectTag {
         if (attribute.startsWith("assistants")) {
             ListTag list = new ListTag();
             for (Resident resident : nation.getAssistants()) {
-                list.add(dPlayer.valueOf(resident.getName()).identify());
+                list.add(PlayerTag.valueOf(resident.getName()).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -205,13 +205,13 @@ public class dNation implements ObjectTag {
 
         // <--[tag]
         // @attribute <nation@nation.king>
-        // @returns dPlayer
+        // @returns PlayerTag
         // @description
         // Returns the king of the nation.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("king")) {
-            return dPlayer.valueOf(nation.getCapital().getMayor().getName())
+            return PlayerTag.valueOf(nation.getCapital().getMayor().getName())
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -269,7 +269,7 @@ public class dNation implements ObjectTag {
 
         // <--[tag]
         // @attribute <nation@nation.residents>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of the nation's residents.
         // @Plugin Depenizen, Towny
@@ -277,7 +277,7 @@ public class dNation implements ObjectTag {
         if (attribute.startsWith("residents")) {
             ListTag list = new ListTag();
             for (Resident resident : nation.getResidents()) {
-                list.add(dPlayer.valueOf(resident.getName()).identify());
+                list.add(PlayerTag.valueOf(resident.getName()).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }

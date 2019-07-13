@@ -7,7 +7,7 @@ import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import com.denizenscript.denizen.objects.dLocation;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -35,7 +35,7 @@ public class WorldGuardLocationProperties implements Property {
     }
 
     public static boolean describes(ObjectTag loc) {
-        return loc instanceof dLocation;
+        return loc instanceof LocationTag;
     }
 
     public static WorldGuardLocationProperties getFrom(ObjectTag loc) {
@@ -43,7 +43,7 @@ public class WorldGuardLocationProperties implements Property {
             return null;
         }
         else {
-            return new WorldGuardLocationProperties((dLocation) loc);
+            return new WorldGuardLocationProperties((LocationTag) loc);
         }
     }
 
@@ -54,11 +54,11 @@ public class WorldGuardLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private WorldGuardLocationProperties(dLocation loc) {
+    private WorldGuardLocationProperties(LocationTag loc) {
         location = loc;
     }
 
-    dLocation location = null;
+    LocationTag location = null;
 
     private ApplicableRegionSet getApplicableRegions() {
         return WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(location.getWorld()))
@@ -90,7 +90,7 @@ public class WorldGuardLocationProperties implements Property {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <l@location.in_region[<name>|...]>
+        // @attribute <LocationTag.in_region[<name>|...]>
         // @returns ElementTag(Boolean)
         // @description
         // If a region name or list of names is specified, returns whether the
@@ -117,7 +117,7 @@ public class WorldGuardLocationProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <l@location.regions>
+        // @attribute <LocationTag.regions>
         // @returns ListTag(Region)
         // @description
         // Returns a list of regions that the location is in.

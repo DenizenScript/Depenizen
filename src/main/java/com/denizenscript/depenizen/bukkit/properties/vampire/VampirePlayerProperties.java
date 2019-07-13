@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.vampire;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.massivecraft.vampire.entity.UPlayer;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -26,7 +26,7 @@ public class VampirePlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof dPlayer;
+        return object instanceof PlayerTag;
     }
 
     public static VampirePlayerProperties getFrom(ObjectTag object) {
@@ -34,7 +34,7 @@ public class VampirePlayerProperties implements Property {
             return null;
         }
         else {
-            return new VampirePlayerProperties((dPlayer) object);
+            return new VampirePlayerProperties((PlayerTag) object);
         }
     }
 
@@ -45,7 +45,7 @@ public class VampirePlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    public VampirePlayerProperties(dPlayer player) {
+    public VampirePlayerProperties(PlayerTag player) {
         this.uPlayer = UPlayer.get(player.getPlayerEntity());
     }
 
@@ -58,7 +58,7 @@ public class VampirePlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.is_vampire>
+        // @attribute <PlayerTag.is_vampire>
         // @returns ElementTag(Boolean)
         // @description
         // Returns true if the player is a vampire.
@@ -69,7 +69,7 @@ public class VampirePlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.is_ínfected>
+        // @attribute <PlayerTag.is_ínfected>
         // @returns ElementTag(Boolean)
         // @description
         // Returns true if the player is infected.
@@ -80,7 +80,7 @@ public class VampirePlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.combat_infect>
+        // @attribute <PlayerTag.combat_infect>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the value of the combat infection risk.
@@ -91,7 +91,7 @@ public class VampirePlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <p@player.combat_damage>
+        // @attribute <PlayerTag.combat_damage>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the value of the combat damage factor.

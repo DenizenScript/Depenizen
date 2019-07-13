@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.events.areashop;
 import me.wiefferink.areashop.events.notify.UnrentedRegionEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -68,7 +68,7 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(new dPlayer(event.getOldRenter()), null);
+        return new BukkitScriptEntryData(new PlayerTag(event.getOldRenter()), null);
     }
 
     @Override

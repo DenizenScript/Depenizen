@@ -3,9 +3,9 @@ package com.denizenscript.depenizen.bukkit.factions;
 import com.massivecraft.factions.entity.*;
 import com.massivecraft.massivecore.money.Money;
 import com.massivecraft.massivecore.ps.PS;
-import com.denizenscript.denizen.objects.dChunk;
-import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.ChunkTag;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
@@ -136,14 +136,14 @@ public class dFaction implements ObjectTag {
 
         // <--[tag]
         // @attribute <faction@faction.home>
-        // @returns dLocation
+        // @returns LocationTag
         // @description
         // Returns the location of the faction's home, if any.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("home")) {
             if (faction.hasHome()) {
-                return new dLocation(faction.getHome().asBukkitLocation())
+                return new LocationTag(faction.getHome().asBukkitLocation())
                         .getAttribute(attribute.fulfill(1));
             }
         }
@@ -197,14 +197,14 @@ public class dFaction implements ObjectTag {
 
         // <--[tag]
         // @attribute <faction@faction.leader>
-        // @returns dPlayer
+        // @returns PlayerTag
         // @description
-        // Returns the faction's leader as a dPlayer.
+        // Returns the faction's leader as a PlayerTag.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("leader")) {
             if (faction.getLeader() != null) {
-                return dPlayer.valueOf(faction.getLeader().getName())
+                return PlayerTag.valueOf(faction.getLeader().getName())
                         .getAttribute(attribute.fulfill(1));
             }
         }
@@ -287,7 +287,7 @@ public class dFaction implements ObjectTag {
 
         // <--[tag]
         // @attribute <faction@faction.claimed_chunks>
-        // @returns ListTag(dChunk)
+        // @returns ListTag(ChunkTag)
         // @description
         // Returns a list of all chunks claimed in the faction.
         // @Plugin Depenizen, Factions
@@ -296,14 +296,14 @@ public class dFaction implements ObjectTag {
             Set<PS> chunks = BoardColl.get().getChunks(faction);
             ListTag dchunks = new ListTag();
             for (PS ps : chunks) {
-                dchunks.add(new dChunk(ps.asBukkitChunk()).identify());
+                dchunks.add(new ChunkTag(ps.asBukkitChunk()).identify());
             }
             return dchunks.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <faction@faction.list_players>
-        // @returns ListTag(dPlayer)
+        // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all players in the faction.
         // @Plugin Depenizen, Factions
@@ -312,7 +312,7 @@ public class dFaction implements ObjectTag {
             Set<PS> chunks = BoardColl.get().getChunks(faction);
             ListTag players = new ListTag();
             for (MPlayer ps : faction.getMPlayers()) {
-                players.add(dPlayer.valueOf(faction.getLeader().getUuid().toString()).identify());
+                players.add(PlayerTag.valueOf(faction.getLeader().getUuid().toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
         }

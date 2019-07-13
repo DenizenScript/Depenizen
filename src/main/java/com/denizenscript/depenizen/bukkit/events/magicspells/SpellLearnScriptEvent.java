@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.events.magicspells;
 import com.nisovin.magicspells.events.SpellLearnEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.dPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -39,7 +39,7 @@ public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener
     public static SpellLearnScriptEvent instance;
 
     public SpellLearnEvent event;
-    public dPlayer player;
+    public PlayerTag player;
     private ElementTag source;
     private ElementTag spell;
 
@@ -83,7 +83,7 @@ public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener
 
     @EventHandler
     public void onPlayerCastsSpell(SpellLearnEvent event) {
-        player = dPlayer.mirrorBukkitPlayer(event.getLearner());
+        player = PlayerTag.mirrorBukkitPlayer(event.getLearner());
         spell = new ElementTag(event.getSpell().getName());
         source = new ElementTag(event.getSource().name());
         this.event = event;
