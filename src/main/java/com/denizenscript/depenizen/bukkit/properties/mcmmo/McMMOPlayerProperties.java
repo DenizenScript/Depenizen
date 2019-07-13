@@ -1,14 +1,14 @@
 package com.denizenscript.depenizen.bukkit.properties.mcmmo;
 
-import net.aufdemrand.denizencore.objects.properties.Property;
-import net.aufdemrand.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.properties.Property;
+import com.denizenscript.denizencore.objects.Mechanism;
 import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizencore.objects.Element;
-import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.objects.mcmmo.dParty;
 
 public class McMMOPlayerProperties implements Property {

@@ -3,12 +3,12 @@ package com.denizenscript.depenizen.bukkit.properties.essentials;
 import com.earth2me.essentials.Essentials;
 import net.aufdemrand.denizen.objects.dItem;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizencore.objects.Element;
-import net.aufdemrand.denizencore.objects.Mechanism;
-import net.aufdemrand.denizencore.objects.aH;
-import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizencore.tags.Attribute;
-import net.aufdemrand.denizencore.objects.properties.Property;
+import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.depenizen.bukkit.bridges.EssentialsBridge;
 
 import java.math.BigDecimal;

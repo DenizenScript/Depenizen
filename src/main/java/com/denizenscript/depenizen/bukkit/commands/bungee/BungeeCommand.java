@@ -6,12 +6,12 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.RunCommandsPacketOut;
 import net.aufdemrand.denizen.utilities.Utilities;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
-import net.aufdemrand.denizencore.objects.aH;
-import net.aufdemrand.denizencore.objects.dList;
-import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizencore.scripts.ScriptEntry;
-import net.aufdemrand.denizencore.scripts.commands.BracedCommand;
+import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
+import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.scripts.ScriptEntry;
+import com.denizenscript.denizencore.scripts.commands.BracedCommand;
 
 import java.util.List;
 import java.util.Map;
@@ -79,12 +79,12 @@ public class BungeeCommand extends BracedCommand {
         }
         List<BracedCommand.BracedData> bdlist = (List<BracedData>) scriptEntry.getObject("braces");
         if (bdlist == null || bdlist.isEmpty()) {
-            net.aufdemrand.denizencore.utilities.debugging.dB.echoError(scriptEntry.getResidingQueue(), "Empty braces (internal)!");
+            com.denizenscript.denizencore.utilities.debugging.dB.echoError(scriptEntry.getResidingQueue(), "Empty braces (internal)!");
             return;
         }
         List<ScriptEntry> bracedCommandsList = bdlist.get(0).value;
         if (bracedCommandsList == null || bracedCommandsList.isEmpty()) {
-            net.aufdemrand.denizencore.utilities.debugging.dB.echoError(scriptEntry.getResidingQueue(), "Empty braces!");
+            com.denizenscript.denizencore.utilities.debugging.dB.echoError(scriptEntry.getResidingQueue(), "Empty braces!");
             return;
         }
         StringBuilder toSend = new StringBuilder();

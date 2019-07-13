@@ -10,15 +10,15 @@ import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizencore.objects.ObjectFetcher;
-import net.aufdemrand.denizencore.objects.TagRunnable;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
-import net.aufdemrand.denizencore.tags.ReplaceableTagEvent;
-import net.aufdemrand.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.TagRunnable;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
+import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardLocationProperties;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
-import net.aufdemrand.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.tags.TagManager;
 
 public class WorldGuardBridge extends Bridge {
 

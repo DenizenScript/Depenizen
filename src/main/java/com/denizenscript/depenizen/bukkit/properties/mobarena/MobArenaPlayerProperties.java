@@ -5,13 +5,13 @@ import com.garbagemule.MobArena.ArenaPlayer;
 import com.garbagemule.MobArena.ArenaPlayerStatistics;
 import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
-import net.aufdemrand.denizencore.objects.properties.Property;
-import net.aufdemrand.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.properties.Property;
+import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.objects.Element;
-import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.tags.Attribute;
 
 public class MobArenaPlayerProperties implements Property {
 

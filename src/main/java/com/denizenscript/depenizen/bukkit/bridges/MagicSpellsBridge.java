@@ -4,8 +4,8 @@ import com.denizenscript.depenizen.bukkit.events.magicspells.*;
 import com.denizenscript.depenizen.bukkit.properties.magicspells.MagicSpellsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.events.ScriptEvent;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 
 public class MagicSpellsBridge extends Bridge {
 

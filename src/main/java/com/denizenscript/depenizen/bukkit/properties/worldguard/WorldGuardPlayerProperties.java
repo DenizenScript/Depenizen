@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.properties.worldguard;
 
-import net.aufdemrand.denizencore.objects.properties.Property;
-import net.aufdemrand.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.properties.Property;
+import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.bridges.WorldGuardBridge;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
@@ -12,10 +12,10 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.objects.Element;
-import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizencore.tags.Attribute;
-import net.aufdemrand.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.utilities.debugging.dB;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

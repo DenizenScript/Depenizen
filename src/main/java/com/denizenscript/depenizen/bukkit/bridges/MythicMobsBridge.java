@@ -11,9 +11,9 @@ import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizencore.events.ScriptEvent;
-import net.aufdemrand.denizencore.objects.ObjectFetcher;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 

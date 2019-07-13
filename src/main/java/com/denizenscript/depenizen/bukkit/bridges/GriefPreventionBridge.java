@@ -7,9 +7,9 @@ import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import com.denizenscript.depenizen.bukkit.events.griefprevention.GPClaimEnterEvent;
 import com.denizenscript.depenizen.bukkit.properties.griefprevention.GriefPreventionLocationProperties;
-import net.aufdemrand.denizencore.events.ScriptEvent;
-import net.aufdemrand.denizencore.objects.ObjectFetcher;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 
 public class GriefPreventionBridge extends Bridge {
 

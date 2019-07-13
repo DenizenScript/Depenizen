@@ -1,12 +1,12 @@
 package com.denizenscript.depenizen.bukkit.objects.mythicmobs;
 
+import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import net.aufdemrand.denizen.objects.dEntity;
-import net.aufdemrand.denizencore.objects.*;
-import net.aufdemrand.denizencore.tags.Attribute;
-import net.aufdemrand.denizencore.tags.TagContext;
-import net.aufdemrand.denizencore.utilities.CoreUtilities;
-import net.aufdemrand.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.tags.TagContext;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.debugging.dB;
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitEntity;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;

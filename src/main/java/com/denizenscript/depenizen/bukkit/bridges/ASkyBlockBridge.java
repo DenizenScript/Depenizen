@@ -9,17 +9,17 @@ import com.wasteofplastic.askyblock.ASkyBlockAPI;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.objects.dWorld;
-import net.aufdemrand.denizencore.events.ScriptEvent;
-import net.aufdemrand.denizencore.objects.TagRunnable;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
-import net.aufdemrand.denizencore.tags.ReplaceableTagEvent;
-import net.aufdemrand.denizencore.objects.Element;
-import net.aufdemrand.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.TagRunnable;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
+import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.properties.askyblock.ASkyBlockLocationProperties;
 import com.denizenscript.depenizen.bukkit.properties.askyblock.ASkyBlockPlayerProperties;
 import com.denizenscript.depenizen.bukkit.properties.askyblock.ASkyBlockWorldProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import net.aufdemrand.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.tags.TagManager;
 
 public class ASkyBlockBridge extends Bridge {
 

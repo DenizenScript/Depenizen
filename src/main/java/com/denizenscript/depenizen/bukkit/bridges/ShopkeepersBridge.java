@@ -5,9 +5,9 @@ import com.denizenscript.depenizen.bukkit.properties.shopkeepers.ShopKeepersEnti
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeper;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizen.objects.dEntity;
-import net.aufdemrand.denizencore.events.ScriptEvent;
-import net.aufdemrand.denizencore.objects.ObjectFetcher;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 
 public class ShopkeepersBridge extends Bridge {
 

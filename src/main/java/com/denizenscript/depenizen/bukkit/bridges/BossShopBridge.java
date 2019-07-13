@@ -5,7 +5,7 @@ import com.denizenscript.depenizen.bukkit.properties.bossshop.BossShopInventoryP
 import com.denizenscript.depenizen.bukkit.Bridge;
 import net.aufdemrand.denizen.objects.dInventory;
 import net.aufdemrand.denizen.utilities.DenizenAPI;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 
 public class BossShopBridge extends Bridge {
 

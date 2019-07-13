@@ -3,13 +3,13 @@ package com.denizenscript.depenizen.bukkit.commands.playerpoints;
 import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsBridge;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.Utilities;
-import net.aufdemrand.denizencore.exceptions.InvalidArgumentsException;
-import net.aufdemrand.denizencore.objects.Element;
-import net.aufdemrand.denizencore.scripts.ScriptEntry;
-import net.aufdemrand.denizencore.objects.aH;
-import net.aufdemrand.denizencore.scripts.commands.AbstractCommand;
+import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
+import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.scripts.ScriptEntry;
+import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import org.black_ixx.playerpoints.PlayerPoints;
-import net.aufdemrand.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.dB;
 
 public class PlayerPointsCommand extends AbstractCommand {
     // <--[command]

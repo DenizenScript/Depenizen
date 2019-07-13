@@ -2,10 +2,10 @@ package com.denizenscript.depenizen.bukkit.properties.bungee;
 
 import com.denizenscript.depenizen.bukkit.bungee.BungeeHelpers;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.objects.Mechanism;
-import net.aufdemrand.denizencore.objects.dObject;
-import net.aufdemrand.denizencore.objects.properties.Property;
-import net.aufdemrand.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.properties.Property;
+import com.denizenscript.denizencore.tags.Attribute;
 
 public class BungeePlayerProperties implements Property {
 

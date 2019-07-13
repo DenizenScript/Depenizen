@@ -1,13 +1,13 @@
 package com.denizenscript.depenizen.bukkit.properties.essentials;
 
+import com.denizenscript.denizencore.objects.*;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
 import net.aufdemrand.denizen.utilities.debugging.dB;
-import net.aufdemrand.denizencore.objects.*;
-import net.aufdemrand.denizencore.tags.Attribute;
-import net.aufdemrand.denizencore.objects.properties.Property;
+import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.depenizen.bukkit.bridges.EssentialsBridge;
 
 import java.util.GregorianCalendar;

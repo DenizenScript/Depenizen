@@ -8,9 +8,9 @@ import com.denizenscript.depenizen.bukkit.events.residence.PlayerEntersResidence
 import com.denizenscript.depenizen.bukkit.objects.residence.dResidence;
 import net.aufdemrand.denizen.objects.dLocation;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.events.ScriptEvent;
-import net.aufdemrand.denizencore.objects.ObjectFetcher;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 
 public class ResidenceBridge extends Bridge {
 

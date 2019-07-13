@@ -8,9 +8,9 @@ import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerUpgrades
 import com.denizenscript.depenizen.bukkit.objects.skillapi.SkillAPIClass;
 import net.aufdemrand.denizen.objects.dPlayer;
 import com.denizenscript.depenizen.bukkit.events.skillapi.SkillAPIPlayerDowngradesSkillScriptEvent;
-import net.aufdemrand.denizencore.events.ScriptEvent;
-import net.aufdemrand.denizencore.objects.ObjectFetcher;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 
 public class SkillAPIBridge extends Bridge {
 

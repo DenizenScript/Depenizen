@@ -8,9 +8,9 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.TagRes
 import io.netty.buffer.ByteBuf;
 import net.aufdemrand.denizen.BukkitScriptEntryData;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.tags.TagContext;
-import net.aufdemrand.denizencore.tags.TagManager;
-import net.aufdemrand.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.tags.TagContext;
+import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 

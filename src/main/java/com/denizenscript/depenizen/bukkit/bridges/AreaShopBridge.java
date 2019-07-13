@@ -5,9 +5,9 @@ import com.denizenscript.depenizen.bukkit.events.areashop.AreaShopExpiresScriptE
 import com.denizenscript.depenizen.bukkit.properties.areashop.AreaShopPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.areashop.dAreaShop;
 import net.aufdemrand.denizen.objects.dPlayer;
-import net.aufdemrand.denizencore.events.ScriptEvent;
-import net.aufdemrand.denizencore.objects.ObjectFetcher;
-import net.aufdemrand.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 
 public class AreaShopBridge extends Bridge {
 

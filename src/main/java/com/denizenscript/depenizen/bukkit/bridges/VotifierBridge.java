@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.events.votifier.VotifierVoteScriptEvent;
-import net.aufdemrand.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.events.ScriptEvent;
 
 public class VotifierBridge extends Bridge {
 
