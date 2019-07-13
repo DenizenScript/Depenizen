@@ -7,7 +7,7 @@ import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobsPlayer;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 
@@ -71,7 +71,7 @@ public class JobsPlayerProperties implements Property {
             }
             if (job == null) {
                 if (!attribute.hasAlternative()) {
-                    dB.echoError("Invalid or missing job specified!");
+                    Debug.echoError("Invalid or missing job specified!");
                 }
                 return null;
             }

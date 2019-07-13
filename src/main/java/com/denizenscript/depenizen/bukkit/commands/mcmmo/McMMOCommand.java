@@ -10,7 +10,7 @@ import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.party.PartyManager;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
@@ -131,7 +131,7 @@ public class McMMOCommand extends AbstractCommand {
         dPlayer player = scriptEntryData.getPlayer();
 
         // Report to dB
-        dB.report(scriptEntry, getName(), action.debug() + type.debug() + (state != null ? state.debug() : "") + qty.debug()
+        Debug.report(scriptEntry, getName(), action.debug() + type.debug() + (state != null ? state.debug() : "") + qty.debug()
                 + (party != null ? party.debug() : "") + (skill != null ? skill.debug() : ""));
 
         switch (Action.valueOf(action.asString().toUpperCase())) {

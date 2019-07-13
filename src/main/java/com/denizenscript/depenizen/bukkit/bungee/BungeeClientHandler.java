@@ -7,7 +7,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import org.bukkit.Bukkit;
 
 public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
@@ -27,7 +27,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
     public ByteBuf tmp;
 
     public void fail(String reason) {
-        dB.echoError("Depenizen-Bungee connection failed: " + reason);
+        Debug.echoError("Depenizen-Bungee connection failed: " + reason);
         channel.close();
         BungeeBridge.instance.connected = false;
     }
@@ -52,7 +52,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
-        dB.log("Depenizen-Bungee connection ended.");
+        Debug.log("Depenizen-Bungee connection ended.");
         tmp.release();
         tmp = null;
         BungeeBridge.instance.connected = false;
@@ -68,7 +68,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
             @Override
             public void run() {
-                dB.log("Depenizen now connected to Bungee server.");
+                Debug.log("Depenizen now connected to Bungee server.");
                 BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
                 BungeeBridge.instance.connected = true;
                 BungeeBridge.instance.sendPacket(new MyInfoPacketOut(Bukkit.getPort()));

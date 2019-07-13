@@ -8,7 +8,7 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;
@@ -135,7 +135,7 @@ public class TownyPlayerProperties implements Property {
                 }
                 catch (NotRegisteredException e) {
                     if (!attribute.hasAlternative()) {
-                        dB.echoError("'" + player.getName() + "' is not registered to a nation in Towny!");
+                        Debug.echoError("'" + player.getName() + "' is not registered to a nation in Towny!");
                     }
                 }
             }
@@ -173,14 +173,14 @@ public class TownyPlayerProperties implements Property {
                 }
                 catch (NotRegisteredException e) {
                     if (!attribute.hasAlternative()) {
-                        dB.echoError("'" + player.getName() + "' is not registered to a town in Towny!");
+                        Debug.echoError("'" + player.getName() + "' is not registered to a town in Towny!");
                     }
                 }
             }
         }
         catch (NotRegisteredException e) {
             if (!attribute.hasAlternative()) {
-                dB.echoError("'" + player.getName() + "' is not registered in Towny!");
+                Debug.echoError("'" + player.getName() + "' is not registered in Towny!");
             }
         }
 

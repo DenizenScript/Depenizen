@@ -13,7 +13,7 @@ import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.properties.jobs.JobsPlayerProperties;
 import com.denizenscript.denizencore.tags.TagManager;
@@ -46,7 +46,7 @@ public class JobsBridge extends Bridge {
                 j = JobsJob.valueOf(attribute.getContext(1));
             }
             else {
-                dB.echoError("Could not match '" + attribute.getContext(1) + "' to a valid job!");
+                Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid job!");
                 return;
             }
         }
@@ -66,7 +66,7 @@ public class JobsBridge extends Bridge {
         }
 
         if (j == null) {
-            dB.echoError("Invalid or missing job!");
+            Debug.echoError("Invalid or missing job!");
             return;
         }
 

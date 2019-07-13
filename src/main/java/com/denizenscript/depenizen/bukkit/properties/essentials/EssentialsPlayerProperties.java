@@ -5,7 +5,7 @@ import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.depenizen.bukkit.bridges.EssentialsBridge;
@@ -137,7 +137,7 @@ public class EssentialsPlayerProperties implements Property {
                 }
                 catch (Exception e) {
                     if (!attribute.hasAlternative()) {
-                        dB.echoError(e);
+                        Debug.echoError(e);
                     }
                 }
             }
@@ -159,7 +159,7 @@ public class EssentialsPlayerProperties implements Property {
                 }
                 catch (Exception e) {
                     if (!attribute.hasAlternative()) {
-                        dB.echoError(e);
+                        Debug.echoError(e);
                     }
                 }
             }
@@ -182,7 +182,7 @@ public class EssentialsPlayerProperties implements Property {
                 }
                 catch (Exception e) {
                     if (!attribute.hasAlternative()) {
-                        dB.echoError(e);
+                        Debug.echoError(e);
                     }
                 }
             }
@@ -292,7 +292,7 @@ public class EssentialsPlayerProperties implements Property {
                     }
                 }
                 else {
-                    dB.echoError("'" + split.get(0) + "' is not a valid boolean!");
+                    Debug.echoError("'" + split.get(0) + "' is not a valid boolean!");
                 }
             }
         }

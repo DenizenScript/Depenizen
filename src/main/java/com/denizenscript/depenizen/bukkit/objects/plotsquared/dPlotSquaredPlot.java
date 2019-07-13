@@ -11,7 +11,7 @@ import com.denizenscript.denizen.objects.dCuboid;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.objects.dWorld;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -49,7 +49,7 @@ public class dPlotSquaredPlot implements dObject {
             return new dPlotSquaredPlot(p);
         }
         catch (Throwable e) {
-            dB.echoError(e);
+            Debug.echoError(e);
         }
         return null;
     }

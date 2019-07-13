@@ -10,7 +10,7 @@ import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.palmergames.bukkit.towny.object.WorldCoord;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.dList;
@@ -162,7 +162,7 @@ public class dTown implements dObject {
             }
             catch (EconomyException e) {
                 if (!attribute.hasAlternative()) {
-                    dB.echoError("Invalid economy response!");
+                    Debug.echoError("Invalid economy response!");
                 }
             }
         }

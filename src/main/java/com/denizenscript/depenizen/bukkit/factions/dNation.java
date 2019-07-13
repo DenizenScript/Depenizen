@@ -7,7 +7,7 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.dList;
@@ -59,7 +59,7 @@ public class dNation implements dObject {
             this.nation = nation;
         }
         else {
-            dB.echoError("Nation referenced is null!");
+            Debug.echoError("Nation referenced is null!");
         }
     }
 
@@ -157,7 +157,7 @@ public class dNation implements dObject {
             }
             catch (EconomyException e) {
                 if (!attribute.hasAlternative()) {
-                    dB.echoError("Invalid economy response!");
+                    Debug.echoError("Invalid economy response!");
                 }
             }
         }

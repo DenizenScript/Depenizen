@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.objects.luckperms;
 import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.dList;
@@ -39,7 +39,7 @@ public class LuckPermsTrack implements dObject {
             return new LuckPermsTrack(track);
         }
         catch (Throwable e) {
-            dB.echoError(e);
+            Debug.echoError(e);
         }
         return null;
     }

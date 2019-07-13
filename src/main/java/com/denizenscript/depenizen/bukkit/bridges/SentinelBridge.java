@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.events.sentinel.SentinelAttackScriptEv
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dItem;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.dScript;
@@ -51,11 +51,11 @@ public class SentinelBridge extends Bridge {
                 if (prefix.equals("denizen_proc") && ent.getEquipment() != null) {
                     dScript script = dScript.valueOf(value);
                     if (script == null) {
-                        dB.echoError("Invalid procedure script name '" + value + "' (non-existent) in a Sentinel NPC target.");
+                        Debug.echoError("Invalid procedure script name '" + value + "' (non-existent) in a Sentinel NPC target.");
                         return false;
                     }
                     if (!(script.getContainer() instanceof ProcedureScriptContainer)) {
-                        dB.echoError("Invalid procedure script name '" + value + "' (not a procedure) in a Sentinel NPC target.");
+                        Debug.echoError("Invalid procedure script name '" + value + "' (not a procedure) in a Sentinel NPC target.");
                         return false;
                     }
                     List<ScriptEntry> entries = script.getContainer().getBaseEntries(DenizenCore.getImplementation().getEmptyScriptEntryData());

@@ -6,7 +6,7 @@ import com.massivecraft.massivecore.ps.PS;
 import com.denizenscript.denizen.objects.dChunk;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.dList;
@@ -63,7 +63,7 @@ public class dFaction implements dObject {
             this.faction = faction;
         }
         else {
-            dB.echoError("Faction referenced is null!");
+            Debug.echoError("Faction referenced is null!");
         }
     }
 

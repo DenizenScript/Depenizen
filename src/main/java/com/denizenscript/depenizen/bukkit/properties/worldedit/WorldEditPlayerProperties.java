@@ -17,7 +17,7 @@ import com.denizenscript.denizen.nms.NMSVersion;
 import com.denizenscript.denizen.objects.dCuboid;
 import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -122,7 +122,7 @@ public class WorldEditPlayerProperties implements Property {
             }
             catch (InvalidToolBindException ex) {
                 if (!attribute.hasAlternative()) {
-                    dB.echoError("Player " + player.getName() + " does not have a WE brush for " + itemType.getName());
+                    Debug.echoError("Player " + player.getName() + " does not have a WE brush for " + itemType.getName());
                 }
             }
         }

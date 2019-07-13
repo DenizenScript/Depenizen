@@ -4,7 +4,7 @@ import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ExecuteCommandPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
@@ -52,10 +52,10 @@ public class BungeeExecuteCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) {
         Element command = scriptEntry.getElement("command");
         if (scriptEntry.dbCallShouldDebug()) {
-            dB.report(scriptEntry, getName(), command.debug());
+            Debug.report(scriptEntry, getName(), command.debug());
         }
         if (!BungeeBridge.instance.connected) {
-            dB.echoError("Cannot BungeeExecute: bungee is not connected!");
+            Debug.echoError("Cannot BungeeExecute: bungee is not connected!");
             return;
         }
         ExecuteCommandPacketOut packet = new ExecuteCommandPacketOut(command.asString());

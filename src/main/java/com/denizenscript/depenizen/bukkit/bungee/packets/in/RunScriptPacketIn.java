@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
 import io.netty.buffer.ByteBuf;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dScript;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
@@ -85,7 +85,7 @@ public class RunScriptPacketIn extends PacketIn {
                     String name = definition_names != null && definition_names.length >= x ?
                             definition_names[x - 1].trim() : String.valueOf(x);
                     queue.addDefinition(name, definition);
-                    dB.echoDebug(entries.get(0), "Adding definition '" + name + "' as " + definition);
+                    Debug.echoDebug(entries.get(0), "Adding definition '" + name + "' as " + definition);
                     x++;
                 }
                 queue.addDefinition("raw_context", defs);

@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.essentials;
 
 import com.earth2me.essentials.Essentials;
 import com.denizenscript.denizen.objects.dItem;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
@@ -70,7 +70,7 @@ public class EssentialsItemProperties implements Property {
             BigDecimal priceBD = ess.getWorth().getPrice(ess, item.getItemStack());
             if (priceBD == null) {
                 if (!attribute.hasAlternative()) {
-                    dB.echoError("Item does not have a worth value: " + item.identify());
+                    Debug.echoError("Item does not have a worth value: " + item.identify());
                 }
                 return null;
             }

@@ -20,7 +20,7 @@ import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagManager;
 
@@ -74,7 +74,7 @@ public class TownyBridge extends Bridge {
                     }
                 }
                 catch (NotRegisteredException e) {
-                    dB.echoError("World specified is not a registered towny world!");
+                    Debug.echoError("World specified is not a registered towny world!");
                     return;
                 }
             }
@@ -103,14 +103,14 @@ public class TownyBridge extends Bridge {
                 town = dTown.valueOf(attribute.getContext(1));
             }
             else {
-                dB.echoError("Could not match '" + attribute.getContext(1) + "' to a valid town!");
+                Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid town!");
                 return;
             }
             if (town != null) {
                 event.setReplacedObject(town.getObjectAttribute(attribute.fulfill(1)));
             }
             else if (!event.hasAlternative()) {
-                dB.echoError("Unknown town '" + attribute.getContext(1) + "' for town[] tag.");
+                Debug.echoError("Unknown town '" + attribute.getContext(1) + "' for town[] tag.");
             }
         }
     }
@@ -131,7 +131,7 @@ public class TownyBridge extends Bridge {
                 nation = dNation.valueOf(attribute.getContext(1));
             }
             else {
-                dB.echoError("Could not match '" + attribute.getContext(1) + "' to a valid nation!");
+                Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid nation!");
                 return;
             }
 
@@ -139,7 +139,7 @@ public class TownyBridge extends Bridge {
                 event.setReplacedObject(nation.getObjectAttribute(attribute.fulfill(1)));
             }
             else if (!event.hasAlternative()) {
-                dB.echoError("Unknown nation '" + attribute.getContext(1) + "' for nation[] tag.");
+                Debug.echoError("Unknown nation '" + attribute.getContext(1) + "' for nation[] tag.");
             }
         }
 

@@ -6,7 +6,7 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.github.intellectualsites.plotsquared.api.PlotAPI;
 import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 
@@ -72,7 +72,7 @@ public class PlotSquaredLocationProperties implements Property {
             }
             catch (Exception e) {
                 if (!attribute.hasAlternative()) {
-                    dB.echoError(e);
+                    Debug.echoError(e);
                 }
             }
         }

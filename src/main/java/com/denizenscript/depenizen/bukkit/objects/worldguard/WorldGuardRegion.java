@@ -8,7 +8,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.denizenscript.denizen.objects.dCuboid;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.objects.dWorld;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.dList;
@@ -50,12 +50,12 @@ public class WorldGuardRegion implements dObject {
             String worldName = m.group(2);
             World world = Bukkit.getWorld(worldName);
             if (world == null) {
-                dB.echoError("valueOf WorldGuard region returning null: Invalid world '" + worldName + "'");
+                Debug.echoError("valueOf WorldGuard region returning null: Invalid world '" + worldName + "'");
                 return null;
             }
             RegionManager manager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
             if (!manager.hasRegion(regionName)) {
-                dB.echoError("valueOf WorldGuard region returning null: Invalid region '" + regionName
+                Debug.echoError("valueOf WorldGuard region returning null: Invalid region '" + regionName
                         + "' for world '" + worldName + "'");
                 return null;
             }
@@ -150,7 +150,7 @@ public class WorldGuardRegion implements dObject {
         if (attribute.startsWith("cuboid") || attribute.startsWith("as_cuboid")) { // TODO: Scrap as_cuboid
             if (!(region instanceof ProtectedCuboidRegion)) {
                 if (!attribute.hasAlternative()) {
-                    dB.echoError("<region@region.as_cuboid> requires a Cuboid-shaped region!");
+                    Debug.echoError("<region@region.as_cuboid> requires a Cuboid-shaped region!");
                 }
                 return null;
             }

@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -91,7 +91,7 @@ public class TownyLocationProperties implements Property {
             }
             catch (NotRegisteredException ex) {
                 if (!attribute.hasAlternative()) {
-                    dB.echoError(location.identifySimple() + " is not registered to a town!");
+                    Debug.echoError(location.identifySimple() + " is not registered to a town!");
                 }
             }
         }

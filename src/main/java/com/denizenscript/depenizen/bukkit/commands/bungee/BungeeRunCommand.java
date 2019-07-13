@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.RunScriptPacketOut;
 import com.denizenscript.denizen.utilities.Utilities;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
@@ -70,10 +70,10 @@ public class BungeeRunCommand extends AbstractCommand {
         dList servers = scriptEntry.getdObject("servers");
         Element scriptName = scriptEntry.getElement("script_name");
         if (scriptEntry.dbCallShouldDebug()) {
-            dB.report(scriptEntry, getName(), def.debug() + servers.debug() + scriptName.debug());
+            Debug.report(scriptEntry, getName(), def.debug() + servers.debug() + scriptName.debug());
         }
         if (!BungeeBridge.instance.connected) {
-            dB.echoError("Cannot BungeeRun: bungee is not connected!");
+            Debug.echoError("Cannot BungeeRun: bungee is not connected!");
             return;
         }
         RunScriptPacketOut packetScript = new RunScriptPacketOut();

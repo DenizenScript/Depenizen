@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.plotsquared;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -65,7 +65,7 @@ public class PlotSquaredElementProperties implements Property {
             }
             catch (Exception e) {
                 if (!attribute.hasAlternative()) {
-                    dB.echoError(e);
+                    Debug.echoError(e);
                 }
             }
         }

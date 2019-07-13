@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
 import io.netty.channel.*;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 
 import java.net.SocketAddress;
 
@@ -9,7 +9,7 @@ public class NettyExceptionHandler extends ChannelDuplexHandler {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        dB.echoError(cause);
+        Debug.echoError(cause);
     }
 
     @Override
@@ -18,7 +18,7 @@ public class NettyExceptionHandler extends ChannelDuplexHandler {
             @Override
             public void operationComplete(ChannelFuture future) {
                 if (!future.isSuccess()) {
-                    dB.echoError(future.cause());
+                    Debug.echoError(future.cause());
                 }
             }
         }));
@@ -30,7 +30,7 @@ public class NettyExceptionHandler extends ChannelDuplexHandler {
             @Override
             public void operationComplete(ChannelFuture future) {
                 if (!future.isSuccess()) {
-                    dB.echoError(future.cause());
+                    Debug.echoError(future.cause());
                 }
             }
         }));

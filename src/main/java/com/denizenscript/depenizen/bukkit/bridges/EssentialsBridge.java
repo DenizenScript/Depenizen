@@ -12,7 +12,7 @@ import com.earth2me.essentials.commands.WarpNotFoundException;
 import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.dList;
@@ -62,10 +62,10 @@ public class EssentialsBridge extends Bridge {
                     event.setReplacedObject(new dLocation(loc).getObjectAttribute(attribute.fulfill(1)));
                 }
                 catch (WarpNotFoundException e) {
-                    dB.echoError("Warp not found");
+                    Debug.echoError("Warp not found");
                 }
                 catch (InvalidWorldException e) {
-                    dB.echoError("Invalid world for getting warp");
+                    Debug.echoError("Invalid world for getting warp");
                 }
             }
         }

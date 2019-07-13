@@ -9,7 +9,7 @@ import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.DenizenAPI;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
@@ -50,7 +50,7 @@ public class McMMOBridge extends Bridge {
                 event.setReplacedObject(party.getObjectAttribute(attribute.fulfill(1)));
             }
             else if (!event.hasAlternative()) {
-                dB.echoError("Unknown party '" + attribute.getContext(1) + "' for party[] tag.");
+                Debug.echoError("Unknown party '" + attribute.getContext(1) + "' for party[] tag.");
             }
         }
     }

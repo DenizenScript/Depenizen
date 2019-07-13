@@ -5,7 +5,7 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -185,7 +185,7 @@ public class McMMOPlayerProperties implements Property {
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else if (!attribute.hasAlternative()) {
-                        dB.echoError("Skill type '" + attribute.getContext(1) + "' does not exist!");
+                        Debug.echoError("Skill type '" + attribute.getContext(1) + "' does not exist!");
                     }
                 }
             }

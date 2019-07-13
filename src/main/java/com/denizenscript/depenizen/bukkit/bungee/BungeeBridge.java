@@ -20,7 +20,7 @@ import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.DenizenAPI;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.TagRunnable;
@@ -88,7 +88,7 @@ public class BungeeBridge {
 
     public void sendPacket(PacketOut packet) {
         if (!connected) {
-            dB.echoError("BungeeBridge tried to send packet while not connected.");
+            Debug.echoError("BungeeBridge tried to send packet while not connected.");
             return;
         }
         ByteBuf buf = channel.alloc().buffer();
@@ -165,7 +165,7 @@ public class BungeeBridge {
         catch (Throwable ex) {
             if (!showedLastError) {
                 showedLastError = true;
-                dB.echoError(ex);
+                Debug.echoError(ex);
             }
             reconnect();
         }

@@ -8,7 +8,7 @@ import com.denizenscript.depenizen.bukkit.properties.pvparena.PVPArenaPlayerProp
 import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
@@ -54,7 +54,7 @@ public class PVPArenaBridge extends Bridge {
                 event.setReplacedObject(arena.getObjectAttribute(attribute.fulfill(1)));
             }
             else if (!event.hasAlternative()) {
-                dB.echoError("Unknown arena '" + attribute.getContext(1) + "' for pvparena[] tag.");
+                Debug.echoError("Unknown arena '" + attribute.getContext(1) + "' for pvparena[] tag.");
             }
             return;
         }

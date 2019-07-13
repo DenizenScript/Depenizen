@@ -8,7 +8,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.denizenscript.denizen.objects.dCuboid;
 import com.denizenscript.denizen.objects.dWorld;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
@@ -107,11 +107,11 @@ public class RegionCommand extends AbstractCommand {
         Element action = scriptEntry.getElement("action");
 
         if (world == null) {
-            dB.echoError("No valid world found!");
+            Debug.echoError("No valid world found!");
             return;
         }
 
-        dB.report(scriptEntry, getName(), region_id.debug() + (cuboid != null ? cuboid.debug() : "")
+        Debug.report(scriptEntry, getName(), region_id.debug() + (cuboid != null ? cuboid.debug() : "")
                 + ArgumentHelper.debugObj("world", world.getName()) + action.debug());
 
         RegionManager regionManager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));

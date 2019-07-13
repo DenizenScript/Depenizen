@@ -1,13 +1,12 @@
 package com.denizenscript.depenizen.bukkit.commands.bungee;
 
 import com.denizenscript.denizencore.objects.Argument;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.RunCommandsPacketOut;
 import com.denizenscript.denizen.utilities.Utilities;
-import com.denizenscript.denizen.utilities.debugging.dB;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.dList;
@@ -73,20 +72,20 @@ public class BungeeCommand extends BracedCommand {
     public void execute(ScriptEntry scriptEntry) {
         dList servers = scriptEntry.getdObject("servers");
         if (scriptEntry.dbCallShouldDebug()) {
-            dB.report(scriptEntry, getName(), servers.debug());
+            Debug.report(scriptEntry, getName(), servers.debug());
         }
         if (!BungeeBridge.instance.connected) {
-            dB.echoError("Cannot Bungee command: bungee is not connected!");
+            Debug.echoError("Cannot Bungee command: bungee is not connected!");
             return;
         }
         List<BracedCommand.BracedData> bdlist = (List<BracedData>) scriptEntry.getObject("braces");
         if (bdlist == null || bdlist.isEmpty()) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Empty braces (internal)!");
+            com.denizenscript.denizencore.utilities.debugging.Debug.echoError(scriptEntry.getResidingQueue(), "Empty braces (internal)!");
             return;
         }
         List<ScriptEntry> bracedCommandsList = bdlist.get(0).value;
         if (bracedCommandsList == null || bracedCommandsList.isEmpty()) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Empty braces!");
+            com.denizenscript.denizencore.utilities.debugging.Debug.echoError(scriptEntry.getResidingQueue(), "Empty braces!");
             return;
         }
         StringBuilder toSend = new StringBuilder();
