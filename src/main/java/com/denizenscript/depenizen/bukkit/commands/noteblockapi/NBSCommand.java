@@ -9,9 +9,9 @@ import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
@@ -67,7 +67,7 @@ public class NBSCommand extends AbstractCommand {
             if (!scriptEntry.hasObject("targets")
                     && arg.matchesPrefix("targets", "targets")
                     && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("targets", arg.asType(dList.class).filter(dPlayer.class));
+                scriptEntry.addObject("targets", arg.asType(ListTag.class).filter(dPlayer.class));
             }
 
             else if (!scriptEntry.hasObject("file")
@@ -102,8 +102,8 @@ public class NBSCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        Element file = scriptEntry.getdObject("file");
-        Element action = scriptEntry.getdObject("action");
+        ElementTag file = scriptEntry.getdObject("file");
+        ElementTag action = scriptEntry.getdObject("action");
         List<dPlayer> targets = (List<dPlayer>) scriptEntry.getObject("targets");
 
         // Report to dB

@@ -4,8 +4,8 @@ import com.nisovin.magicspells.events.ManaChangeEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -49,7 +49,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     private int new_mana;
     private int old_mana;
     private int max_mana;
-    private Element reason;
+    private ElementTag reason;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -71,7 +71,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     @Override
     public boolean applyDetermination(ScriptContainer container, String determination) {
         if (determination.length() > 0 && !isDefaultDetermination(determination)) {
-            Element mana = new Element(determination);
+            ElementTag mana = new ElementTag(determination);
             if (!mana.isInt()) {
                 Debug.echoError("Determination for 'mana' must be a valid number.");
                 return false;
@@ -87,15 +87,15 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("new_mana")) {
-            return new Element(new_mana);
+            return new ElementTag(new_mana);
         }
         else if (name.equals("old_mana")) {
-            return new Element(old_mana);
+            return new ElementTag(old_mana);
         }
         else if (name.equals("max_mana")) {
-            return new Element(max_mana);
+            return new ElementTag(max_mana);
         }
         else if (name.equals("reason")) {
             return reason;
@@ -109,7 +109,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
         new_mana = event.getNewAmount();
         old_mana = event.getOldAmount();
         max_mana = event.getMaxMana();
-        reason = new Element(event.getReason().name());
+        reason = new ElementTag(event.getReason().name());
         this.event = event;
         fire(event);
         event.setNewAmount(new_mana);

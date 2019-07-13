@@ -6,9 +6,9 @@ import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -46,9 +46,9 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     public static mcMMOPlayerGainsXPScriptEvent instance;
     public McMMOPlayerXpGainEvent event;
     public dPlayer player;
-    public Element skill;
-    public Element xp;
-    public Element cause;
+    public ElementTag skill;
+    public ElementTag xp;
+    public ElementTag cause;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -80,7 +80,7 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
         String lower = CoreUtilities.toLowerCase(determination);
 
         if (Argument.valueOf(lower).matchesPrimitive(ArgumentHelper.PrimitiveType.Float)) {
-            xp = new Element(lower);
+            xp = new ElementTag(lower);
             return true;
         }
         return super.applyDetermination(container, determination);
@@ -92,7 +92,7 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("skill")) {
             return skill;
         }
@@ -111,9 +111,9 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
             return;
         }
         player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
-        cause = new Element(event.getXpGainReason().toString());
-        skill = new Element(event.getSkill().getName());
-        xp = new Element(event.getRawXpGained());
+        cause = new ElementTag(event.getXpGainReason().toString());
+        skill = new ElementTag(event.getSkill().getName());
+        xp = new ElementTag(event.getRawXpGained());
         this.event = event;
         fire(event);
         event.setRawXpGained(xp.asFloat());

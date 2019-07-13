@@ -6,7 +6,7 @@ import com.gamingmesh.jobs.container.JobsPlayer;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
@@ -67,7 +67,7 @@ public class JobsCommand extends AbstractCommand {
 
             else if (!scriptEntry.hasObject("number")
                     && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Integer)) {
-                scriptEntry.addObject("number", new Element(arg.getValue()));
+                scriptEntry.addObject("number", new ElementTag(arg.getValue()));
             }
 
         }

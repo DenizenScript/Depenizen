@@ -7,7 +7,7 @@ import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.github.intellectualsites.plotsquared.api.PlotAPI;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class PlotSquaredLocationProperties implements Property {
@@ -22,11 +22,11 @@ public class PlotSquaredLocationProperties implements Property {
         return "PlotSquaredLocation";
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dLocation;
     }
 
-    public static PlotSquaredLocationProperties getFrom(dObject object) {
+    public static PlotSquaredLocationProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }

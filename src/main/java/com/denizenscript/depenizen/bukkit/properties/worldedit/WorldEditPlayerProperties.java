@@ -18,8 +18,8 @@ import com.denizenscript.denizen.objects.dCuboid;
 import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Bukkit;
@@ -44,12 +44,12 @@ public class WorldEditPlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer
                 && ((dPlayer) object).isOnline();
     }
 
-    public static WorldEditPlayerProperties getFrom(dObject object) {
+    public static WorldEditPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -83,7 +83,7 @@ public class WorldEditPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.we_brush_info[(<item>)]>
-        // @returns dList
+        // @returns ListTag
         // @description
         // Returns information about a player's current brush for an item.
         // If no item is specified, will be based on their held item.
@@ -113,7 +113,7 @@ public class WorldEditPlayerProperties implements Property {
                 }
                 // TODO: other patterns?
                 // TODO: mask?
-                dList info = new dList();
+                ListTag info = new ListTag();
                 info.add(brushType);
                 info.add(String.valueOf(brush.getSize()));
                 info.add(String.valueOf(brush.getRange()));

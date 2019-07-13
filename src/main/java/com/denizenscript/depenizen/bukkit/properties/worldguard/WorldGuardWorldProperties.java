@@ -8,8 +8,8 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.denizenscript.denizen.objects.dWorld;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import org.bukkit.World;
 
@@ -25,11 +25,11 @@ public class WorldGuardWorldProperties implements Property {
         return "WorldGuardWorld";
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dWorld;
     }
 
-    public static WorldGuardWorldProperties getFrom(dObject object) {
+    public static WorldGuardWorldProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -62,13 +62,13 @@ public class WorldGuardWorldProperties implements Property {
 
         // <--[tag]
         // @attribute <w@world.list_regions>
-        // @returns dList(Region)
+        // @returns ListTag(Region)
         // @description
         // Returns a list of WorldGuard regions in this world.
         // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("list_regions")) {
-            dList regions = new dList();
+            ListTag regions = new ListTag();
             for (ProtectedRegion r : manager.getRegions().values()) {
                 regions.add(new WorldGuardRegion(r, world).identify());
             }

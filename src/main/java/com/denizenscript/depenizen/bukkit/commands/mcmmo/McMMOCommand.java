@@ -12,7 +12,7 @@ import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
@@ -110,8 +110,8 @@ public class McMMOCommand extends AbstractCommand {
             throw new InvalidArgumentsException("Must specify a valid type!");
         }
 
-        scriptEntry.defaultObject("state", new Element("TOGGLE"))
-                .defaultObject("qty", new Element(-1));
+        scriptEntry.defaultObject("state", new ElementTag("TOGGLE"))
+                .defaultObject("qty", new ElementTag(-1));
 
     }
 
@@ -121,12 +121,12 @@ public class McMMOCommand extends AbstractCommand {
         BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.entryData;
 
         // Get objects
-        Element action = scriptEntry.getElement("action");
-        Element state = scriptEntry.getElement("state");
-        Element type = scriptEntry.getElement("type");
-        Element qty = scriptEntry.getElement("qty");
-        Element party = scriptEntry.getElement("party");
-        Element skill = scriptEntry.getElement("skill");
+        ElementTag action = scriptEntry.getElement("action");
+        ElementTag state = scriptEntry.getElement("state");
+        ElementTag type = scriptEntry.getElement("type");
+        ElementTag qty = scriptEntry.getElement("qty");
+        ElementTag party = scriptEntry.getElement("party");
+        ElementTag skill = scriptEntry.getElement("skill");
 
         dPlayer player = scriptEntryData.getPlayer();
 

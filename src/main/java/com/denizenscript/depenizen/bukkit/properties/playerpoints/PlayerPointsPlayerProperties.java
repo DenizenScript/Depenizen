@@ -4,8 +4,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsBridge;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import org.black_ixx.playerpoints.PlayerPoints;
 
@@ -21,11 +21,11 @@ public class PlayerPointsPlayerProperties implements Property {
         return "PlayerPointsPlayer";
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static PlayerPointsPlayerProperties getFrom(dObject object) {
+    public static PlayerPointsPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -56,13 +56,13 @@ public class PlayerPointsPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.playerpoints_points>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the amount of points the player has. Only works on online players.
         // @Plugin Depenizen, PlayerPoints
         // -->
         if (attribute.startsWith("playerpoints_points")) {
-            return new Element(((PlayerPoints) PlayerPointsBridge.instance.plugin).getAPI()
+            return new ElementTag(((PlayerPoints) PlayerPointsBridge.instance.plugin).getAPI()
                     .look(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
         }
 

@@ -7,7 +7,7 @@ import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
-import com.denizenscript.denizencore.objects.dScript;
+import com.denizenscript.denizencore.objects.ScriptTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.containers.core.ProcedureScriptContainer;
 import com.denizenscript.denizencore.scripts.queues.ScriptQueue;
@@ -49,7 +49,7 @@ public class SentinelBridge extends Bridge {
                     }
                 }
                 if (prefix.equals("denizen_proc") && ent.getEquipment() != null) {
-                    dScript script = dScript.valueOf(value);
+                    ScriptTag script = ScriptTag.valueOf(value);
                     if (script == null) {
                         Debug.echoError("Invalid procedure script name '" + value + "' (non-existent) in a Sentinel NPC target.");
                         return false;

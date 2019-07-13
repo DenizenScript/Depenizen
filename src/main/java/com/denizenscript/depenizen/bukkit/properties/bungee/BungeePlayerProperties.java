@@ -3,17 +3,17 @@ package com.denizenscript.depenizen.bukkit.properties.bungee;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeHelpers;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class BungeePlayerProperties implements Property {
 
-        public static boolean describes(dObject entity) {
+        public static boolean describes(ObjectTag entity) {
             return entity instanceof dPlayer;
         }
 
-        public static BungeePlayerProperties getFrom(dObject player) {
+        public static BungeePlayerProperties getFrom(ObjectTag player) {
             if (!describes(player)) {
                 return null;
             }
@@ -56,7 +56,7 @@ public class BungeePlayerProperties implements Property {
 
 
         ///////////
-        // dObject Attributes
+        // ObjectTag Attributes
         ////////
 
         @Override

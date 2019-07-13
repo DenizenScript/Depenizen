@@ -8,9 +8,9 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.RunScr
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 
@@ -46,7 +46,7 @@ public class BungeeRunCommand extends AbstractCommand {
                 scriptEntry.addObject("def", arg.asElement());
             }
             else if (!scriptEntry.hasObject("servers")) {
-                scriptEntry.addObject("servers", arg.asType(dList.class));
+                scriptEntry.addObject("servers", arg.asType(ListTag.class));
             }
             else if (!scriptEntry.hasObject("script_name")) {
                 scriptEntry.addObject("script_name", arg.asElement());
@@ -61,14 +61,14 @@ public class BungeeRunCommand extends AbstractCommand {
         if (!scriptEntry.hasObject("servers")) {
             throw new InvalidArgumentsException("Must define servers to run the script on.");
         }
-        scriptEntry.defaultObject("def", new Element(""));
+        scriptEntry.defaultObject("def", new ElementTag(""));
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-        Element def = scriptEntry.getElement("def");
-        dList servers = scriptEntry.getdObject("servers");
-        Element scriptName = scriptEntry.getElement("script_name");
+        ElementTag def = scriptEntry.getElement("def");
+        ListTag servers = scriptEntry.getdObject("servers");
+        ElementTag scriptName = scriptEntry.getElement("script_name");
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), def.debug() + servers.debug() + scriptName.debug());
         }

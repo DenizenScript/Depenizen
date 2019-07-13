@@ -6,7 +6,7 @@ import com.garbagemule.MobArena.framework.Arena;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
@@ -59,17 +59,17 @@ public class MobArenaCommand extends AbstractCommand {
             else if (!scriptEntry.hasObject("add")
                     && arg.matchesPrefix("add", "join")
                     && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("add", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
+                scriptEntry.addObject("add", arg.asType(ListTag.class).filter(dPlayer.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("remove")
                     && arg.matchesPrefix("remove", "leave")
                     && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("remove", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
+                scriptEntry.addObject("remove", arg.asType(ListTag.class).filter(dPlayer.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("spectate")
                     && arg.matchesPrefix("spectate", "spec")
                     && arg.matchesArgumentList(dPlayer.class)) {
-                scriptEntry.addObject("spectate", arg.asType(dList.class).filter(dPlayer.class, scriptEntry));
+                scriptEntry.addObject("spectate", arg.asType(ListTag.class).filter(dPlayer.class, scriptEntry));
             }
             else {
                 arg.reportUnhandled();

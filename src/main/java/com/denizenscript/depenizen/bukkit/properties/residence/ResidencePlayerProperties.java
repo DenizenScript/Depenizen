@@ -4,9 +4,9 @@ import com.bekvon.bukkit.residence.Residence;
 import com.bekvon.bukkit.residence.containers.ResidencePlayer;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
@@ -29,11 +29,11 @@ public class ResidencePlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static ResidencePlayerProperties getFrom(dObject object) {
+    public static ResidencePlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -60,14 +60,14 @@ public class ResidencePlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.has_main_residence>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the player has a main Residence.
         // @Plugin Depenizen, Residence
         // -->
         if (attribute.startsWith("has_main_residence")) {
             ClaimedResidence residence = player.getMainResidence();
-            return new Element(residence != null).getAttribute(attribute.fulfill(1));
+            return new ElementTag(residence != null).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -86,13 +86,13 @@ public class ResidencePlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.residences>
-        // @returns dList(dResidence)
+        // @returns ListTag(dResidence)
         // @description
         // Returns the player's current list of Residences.
         // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("residences")) {
-            dList list = new dList();
+            ListTag list = new ListTag();
             for (ClaimedResidence residence : player.getResList()) {
                 list.add(new dResidence(residence).identify());
             }

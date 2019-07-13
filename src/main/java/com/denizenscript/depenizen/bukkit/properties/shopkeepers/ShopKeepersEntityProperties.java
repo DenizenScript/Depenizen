@@ -1,8 +1,8 @@
 package com.denizenscript.depenizen.bukkit.properties.shopkeepers;
 
 import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
@@ -25,11 +25,11 @@ public class ShopKeepersEntityProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dEntity;
     }
 
-    public static ShopKeepersEntityProperties getFrom(dObject object) {
+    public static ShopKeepersEntityProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -61,13 +61,13 @@ public class ShopKeepersEntityProperties implements Property {
 
         // <--[tag]
         // @attribute <e@entity.is_shopkeeper>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the entity is a Shopkeeper.
         // @Plugin Depenizen, ShopKeepers
         // -->
         if (attribute.startsWith("is_shopkeeper")) {
-            return new Element(isShopKeeper)
+            return new ElementTag(isShopKeeper)
                     .getAttribute(attribute.fulfill(1));
         }
 

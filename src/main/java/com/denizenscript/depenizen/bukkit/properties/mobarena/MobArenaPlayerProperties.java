@@ -9,8 +9,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class MobArenaPlayerProperties implements Property {
@@ -30,11 +30,11 @@ public class MobArenaPlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static MobArenaPlayerProperties getFrom(dObject object) {
+    public static MobArenaPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -70,13 +70,13 @@ public class MobArenaPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.mobarena.in_arena>
-            // @returns Element(Boolean)
+            // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player is in an arena.
             // @Plugin Depenizen, MobArena
             // -->
             if (attribute.startsWith("in_arena")) {
-                return new Element(arena != null)
+                return new ElementTag(arena != null)
                         .getAttribute(attribute.fulfill(1));
             }
 
@@ -96,14 +96,14 @@ public class MobArenaPlayerProperties implements Property {
 
                 // <--[tag]
                 // @attribute <p@player.mobarena.class>
-                // @returns Element
+                // @returns ElementTag
                 // @description
                 // Returns the name of the class the player is using.
                 // NOTE: requires the player to be in an arena.
                 // @Plugin Depenizen, MobArena
                 // -->
                 else if (attribute.startsWith("class")) {
-                    return new Element(new ArenaPlayer(player.getPlayerEntity(), arena,
+                    return new ElementTag(new ArenaPlayer(player.getPlayerEntity(), arena,
                             ((MobArena) MobArenaBridge.instance.plugin)).getStats().getClassName())
                             .getAttribute(attribute.fulfill(1));
                 }
@@ -126,68 +126,68 @@ public class MobArenaPlayerProperties implements Property {
 
                 // <--[tag]
                 // @attribute <p@player.mobarena.stats[<mobarena>].kills>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the number of kills the player has in the arena.
                 // @Plugin Depenizen, MobArena
                 // -->
                 if (attribute.startsWith("kills")) {
-                    return new Element(stats.getInt("kills")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("kills")).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
                 // @attribute <p@player.mobarena.stats[<mobarena>].damage_done>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the amount of damage the player has dealt in the arena.
                 // @Plugin Depenizen, MobArena
                 // -->
                 else if (attribute.startsWith("damage_done")) {
-                    return new Element(stats.getInt("dmgDone")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("dmgDone")).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
                 // @attribute <p@player.mobarena.stats[<mobarena>].damage_taken>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the amount of damage the player has taken in the arena.
                 // @Plugin Depenizen, MobArena
                 // -->
                 else if (attribute.startsWith("damage_taken")) {
-                    return new Element(stats.getInt("dmgTaken")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("dmgTaken")).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
                 // @attribute <p@player.mobarena.stats[<mobarena>].last_wave>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the wave the player reached in their last match in the arena.
                 // @Plugin Depenizen, MobArena
                 // -->
                 else if (attribute.startsWith("last_wave")) {
-                    return new Element(stats.getInt("lastWave")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("lastWave")).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
                 // @attribute <p@player.mobarena.stats[<mobarena>].times_swung>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the number of times the player has swung their weapon in the arena.
                 // @Plugin Depenizen, MobArena
                 // -->
                 else if (attribute.startsWith("times_swung")) {
-                    return new Element(stats.getInt("swings")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("swings")).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
                 // @attribute <p@player.mobarena.stats[<mobarena>].times_hit>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the number of times the player has hit an enemy in the arena.
                 // @Plugin Depenizen, MobArena
                 // -->
                 else if (attribute.startsWith("times_hit")) {
-                    return new Element(stats.getInt("hits")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("hits")).getAttribute(attribute.fulfill(1));
                 }
 
                 return null;

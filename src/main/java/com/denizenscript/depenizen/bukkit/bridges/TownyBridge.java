@@ -17,7 +17,7 @@ import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizen.utilities.debugging.Debug;
@@ -60,13 +60,13 @@ public class TownyBridge extends Bridge {
 
         // <--[tag]
         // @attribute <towny.list_towns[<world name>]>
-        // @returns dList(Element)
+        // @returns ListTag(Element)
         // @description
         // Returns a list of all towns. Optionally specify a world name.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("list_towns")) {
-            dList towns = new dList();
+            ListTag towns = new ListTag();
             if (attribute.hasContext(1)) {
                 try {
                     for (Town town : TownyUniverse.getDataSource().getWorld(attribute.getContext(1)).getTowns()) {

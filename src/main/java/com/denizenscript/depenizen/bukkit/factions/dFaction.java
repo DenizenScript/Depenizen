@@ -7,16 +7,16 @@ import com.denizenscript.denizen.objects.dChunk;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
 import java.util.Set;
 
-public class dFaction implements dObject {
+public class dFaction implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
@@ -72,7 +72,7 @@ public class dFaction implements dObject {
     }
 
     /////////////////////
-    //   dObject Methods
+    //   ObjectTag Methods
     /////////////////
 
     private String prefix = "Faction";
@@ -83,7 +83,7 @@ public class dFaction implements dObject {
     }
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -124,13 +124,13 @@ public class dFaction implements dObject {
 
         // <--[tag]
         // @attribute <faction@faction.balance>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of money the faction currently has.
         // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("balance")) {
-            return new Element(Money.get(faction))
+            return new ElementTag(Money.get(faction))
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -150,48 +150,48 @@ public class dFaction implements dObject {
 
         // <--[tag]
         // @attribute <faction@faction.id>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the unique ID for this faction.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("id")) {
-            return new Element(faction.getId()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(faction.getId()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <faction@faction.is_open>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns true if the faction is open.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open")) {
-            return new Element(faction.isOpen())
+            return new ElementTag(faction.isOpen())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <faction@faction.is_peaceful>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns true if the faction is peaceful.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("ispeaceful") || attribute.startsWith("is_peaceful")) {
-            return new Element(faction.getFlag(MFlag.getFlagPeaceful()))
+            return new ElementTag(faction.getFlag(MFlag.getFlagPeaceful()))
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <faction@faction.is_permanent>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns true if the faction is permanent.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("ispermanent") || attribute.startsWith("is_permanent")) {
-            return new Element(faction.getFlag(MFlag.getFlagPermanent()))
+            return new ElementTag(faction.getFlag(MFlag.getFlagPermanent()))
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -211,43 +211,43 @@ public class dFaction implements dObject {
 
         // <--[tag]
         // @attribute <faction@faction.name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the name of the faction.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("name")) {
-            return new Element(faction.getName())
+            return new ElementTag(faction.getName())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <faction@faction.player_count>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the number of players in the faction.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
-            return new Element(faction.getMPlayers().size())
+            return new ElementTag(faction.getMPlayers().size())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <faction@faction.power>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of power the faction currently has.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("power")) {
-            return new Element(faction.getPower())
+            return new ElementTag(faction.getPower())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <faction@faction.relation[<faction>]>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the current relation between the faction and another faction.
         // @Plugin Depenizen, Factions
@@ -256,45 +256,45 @@ public class dFaction implements dObject {
             dFaction to = valueOf(attribute.getContext(1));
 
             if (to != null) {
-                return new Element(faction.getRelationTo(to.getFaction()).toString())
+                return new ElementTag(faction.getRelationTo(to.getFaction()).toString())
                         .getAttribute(attribute.fulfill(1));
             }
         }
 
         // <--[tag]
         // @attribute <faction@faction.size>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the amount of land the faction has.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("size")) {
-            return new Element(faction.getLandCount())
+            return new ElementTag(faction.getLandCount())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <faction@faction.type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Always returns 'Faction' for dFaction objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
         // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("type")) {
-            return new Element("Faction").getAttribute(attribute.fulfill(1));
+            return new ElementTag("Faction").getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <faction@faction.claimed_chunks>
-        // @returns dList(dChunk)
+        // @returns ListTag(dChunk)
         // @description
         // Returns a list of all chunks claimed in the faction.
         // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("claimed_chunks")) {
             Set<PS> chunks = BoardColl.get().getChunks(faction);
-            dList dchunks = new dList();
+            ListTag dchunks = new ListTag();
             for (PS ps : chunks) {
                 dchunks.add(new dChunk(ps.asBukkitChunk()).identify());
             }
@@ -303,21 +303,21 @@ public class dFaction implements dObject {
 
         // <--[tag]
         // @attribute <faction@faction.list_players>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of all players in the faction.
         // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("list_players")) {
             Set<PS> chunks = BoardColl.get().getChunks(faction);
-            dList players = new dList();
+            ListTag players = new ListTag();
             for (MPlayer ps : faction.getMPlayers()) {
                 players.add(dPlayer.valueOf(faction.getLeader().getUuid().toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
 
     }
 }

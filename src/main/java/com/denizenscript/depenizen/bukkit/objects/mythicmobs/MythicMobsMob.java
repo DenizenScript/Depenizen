@@ -16,7 +16,7 @@ import org.bukkit.entity.LivingEntity;
 
 import java.util.UUID;
 
-public class MythicMobsMob implements dObject, Adjustable {
+public class MythicMobsMob implements ObjectTag, Adjustable {
 
     public static MythicMobsMob valueOf(String uuid) {
         return valueOf(uuid, null);
@@ -75,7 +75,7 @@ public class MythicMobsMob implements dObject, Adjustable {
     MythicMob mobType;
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -124,29 +124,29 @@ public class MythicMobsMob implements dObject, Adjustable {
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.internal_name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the name MythicMobs identifies the MythicMob with.
         // @Plugin Depenizen, MythicMobs
         // -->
         if (attribute.startsWith("internal_name")) {
-            return new Element(mobType.getInternalName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(mobType.getInternalName()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.display_name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the display name of the MythicMob.
         // @Plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("display_name")) {
-            return new Element(mobType.getDisplayName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(mobType.getDisplayName()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.spawner_name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the name of the spawner (as set on creation in-game) that spawned this mob.
         // Returns null, if the mob was spawned by something other than a spawner.
@@ -156,62 +156,62 @@ public class MythicMobsMob implements dObject, Adjustable {
             if (mob.getSpawner() == null) {
                 return null;
             }
-            return new Element(mob.getSpawner().getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(mob.getSpawner().getName()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.level>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the level of the MythicMob.
         // @Plugin Depenizen, MythicMobs
         // -->
         if (attribute.startsWith("level")) {
-            return new Element(mob.getLevel()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(mob.getLevel()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.players_killed>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the number of players the MythicMob has killed.
         // @Plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("players_killed")) {
-            return new Element(mob.getPlayerKills()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(mob.getPlayerKills()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.damage>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the damage the MythicMob deals.
         // @Plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("damage")) {
-            return new Element(mob.getDamage()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(mob.getDamage()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.armor>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the armor the MythicMob has.
         // @Plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("armor") || attribute.startsWith("armour")) {
-            return new Element(mob.getArmor()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(mob.getArmor()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.has_target>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the MythicMob has a target.
         // @Plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("has_target")) {
-            return new Element(mob.hasTarget()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(mob.hasTarget()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -231,13 +231,13 @@ public class MythicMobsMob implements dObject, Adjustable {
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.is_damaging>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the MythicMob is using its damaging skill.
         // @Plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("is_damaging")) {
-            return new Element(mob.isUsingDamageSkill()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(mob.isUsingDamageSkill()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -253,25 +253,25 @@ public class MythicMobsMob implements dObject, Adjustable {
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.global_cooldown>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the MythicMob's global cooldown.
         // @Plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("global_cooldown")) {
-            return new Duration(mob.getGlobalCooldown()).getAttribute(attribute.fulfill(1));
+            return new DurationTag(mob.getGlobalCooldown()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mythicmob@mythicmob.type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Always returns 'Mythic Mob' for MythicMob objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
         // @Plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("type")) {
-            return new Element("Mythic Mob").getAttribute(attribute.fulfill(1));
+            return new ElementTag("Mythic Mob").getAttribute(attribute.fulfill(1));
         }
 
         String returned = CoreUtilities.autoPropertyTag(this, attribute);
@@ -279,7 +279,7 @@ public class MythicMobsMob implements dObject, Adjustable {
             return returned;
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
     }
 
     @Override

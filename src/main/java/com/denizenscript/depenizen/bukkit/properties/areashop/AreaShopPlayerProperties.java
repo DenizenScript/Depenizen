@@ -4,8 +4,8 @@ import com.denizenscript.depenizen.bukkit.objects.areashop.dAreaShop;
 import me.wiefferink.areashop.AreaShop;
 import me.wiefferink.areashop.regions.GeneralRegion;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -29,11 +29,11 @@ public class AreaShopPlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static AreaShopPlayerProperties getFrom(dObject object) {
+    public static AreaShopPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -66,13 +66,13 @@ public class AreaShopPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.areashop.owned>
-            // @returns dList(AreaShop)
+            // @returns ListTag(AreaShop)
             // @description
             // Returns a list of AreaShops the player owns.
             // @Plugin Depenizen, AreaShop
             // -->
             if (attribute.startsWith("owned")) {
-                dList list = new dList();
+                ListTag list = new ListTag();
                 UUID uuid = player.getOfflinePlayer().getUniqueId();
                 for (GeneralRegion region : AreaShop.getInstance().getFileManager().getRegions()) {
                     if (uuid.equals(region.getOwner())) {

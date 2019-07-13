@@ -6,8 +6,8 @@ import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.objects.mcmmo.dParty;
 
@@ -28,11 +28,11 @@ public class McMMOPlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static McMMOPlayerProperties getFrom(dObject object) {
+    public static McMMOPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -63,7 +63,7 @@ public class McMMOPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.mcmmo.level[<skill>]>
-            // @returns Element(Number)
+            // @returns ElementTag(Number)
             // @description
             // Returns the player's level in a skill. If no skill is specified,
             // this returns the player's overall level.
@@ -72,21 +72,21 @@ public class McMMOPlayerProperties implements Property {
             if (attribute.startsWith("level")) {
                 if (!attribute.hasContext(1)) {
                     if (player.isOnline()) {
-                        return new Element(ExperienceAPI.getPowerLevel(player.getPlayerEntity()))
+                        return new ElementTag(ExperienceAPI.getPowerLevel(player.getPlayerEntity()))
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else {
-                        return new Element(ExperienceAPI.getPowerLevelOffline(player.getOfflinePlayer().getUniqueId()))
+                        return new ElementTag(ExperienceAPI.getPowerLevelOffline(player.getOfflinePlayer().getUniqueId()))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
                 else {
                     if (player.isOnline()) {
-                        return new Element(ExperienceAPI.getLevel(player.getPlayerEntity(), attribute.getContext(1)))
+                        return new ElementTag(ExperienceAPI.getLevel(player.getPlayerEntity(), attribute.getContext(1)))
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else {
-                        return new Element(ExperienceAPI.getLevelOffline(player.getOfflinePlayer().getUniqueId(), attribute.getContext(1)))
+                        return new ElementTag(ExperienceAPI.getLevelOffline(player.getOfflinePlayer().getUniqueId(), attribute.getContext(1)))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
@@ -94,7 +94,7 @@ public class McMMOPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.mcmmo.party>
-            // @returns Element
+            // @returns ElementTag
             // @description
             // Returns the name of the player's party.
             // @Plugin Depenizen, mcMMO
@@ -113,7 +113,7 @@ public class McMMOPlayerProperties implements Property {
 
                 // <--[tag]
                 // @attribute <p@player.mcmmo.xp[<skill>].to_next_level>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the amount of experience a player needs to level up
                 // in a skill.
@@ -121,46 +121,46 @@ public class McMMOPlayerProperties implements Property {
                 // -->
                 if (attribute.startsWith("tonextlevel") || attribute.startsWith("to_next_level")) {
                     if (player.isOnline()) {
-                        return new Element(ExperienceAPI.getXPToNextLevel(player.getPlayerEntity(), skill))
+                        return new ElementTag(ExperienceAPI.getXPToNextLevel(player.getPlayerEntity(), skill))
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else {
-                        return new Element(ExperienceAPI.getOfflineXPToNextLevel(player.getOfflinePlayer().getUniqueId(), skill))
+                        return new ElementTag(ExperienceAPI.getOfflineXPToNextLevel(player.getOfflinePlayer().getUniqueId(), skill))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
 
                 // <--[tag]
                 // @attribute <p@player.mcmmo.xp[<skill>].level>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the player's experience level in a skill.
                 // @Plugin Depenizen, mcMMO
                 // -->
                 else if (attribute.startsWith("level")) {
                     if (player.isOnline()) {
-                        return new Element(ExperienceAPI.getLevel(player.getPlayerEntity(), skill))
+                        return new ElementTag(ExperienceAPI.getLevel(player.getPlayerEntity(), skill))
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else {
-                        return new Element(ExperienceAPI.getLevelOffline(player.getOfflinePlayer().getUniqueId(), skill))
+                        return new ElementTag(ExperienceAPI.getLevelOffline(player.getOfflinePlayer().getUniqueId(), skill))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
 
                 // <--[tag]
                 // @attribute <p@player.mcmmo.xp[<skill>]>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the player's amount of experience in a skill.
                 // @Plugin Depenizen, mcMMO
                 // -->
                 else if (player.isOnline()) {
-                    return new Element(ExperienceAPI.getXP(player.getPlayerEntity(), skill))
+                    return new ElementTag(ExperienceAPI.getXP(player.getPlayerEntity(), skill))
                             .getAttribute(attribute.fulfill(0));
                 }
                 else {
-                    return new Element(ExperienceAPI.getOfflineXP(player.getOfflinePlayer().getUniqueId(), skill))
+                    return new ElementTag(ExperienceAPI.getOfflineXP(player.getOfflinePlayer().getUniqueId(), skill))
                             .getAttribute(attribute.fulfill(0));
                 }
 
@@ -168,7 +168,7 @@ public class McMMOPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.mcmmo.rank[<skill>]>
-            // @returns Element(Number)
+            // @returns ElementTag(Number)
             // @description
             // Returns the player's current rank in a skill. If no skill is specified,
             // this returns the player's overall rank.
@@ -176,12 +176,12 @@ public class McMMOPlayerProperties implements Property {
             // -->
             else if (attribute.startsWith("rank")) {
                 if (!attribute.hasContext(1)) {
-                    return new Element(ExperienceAPI.getPlayerRankOverall(player.getName()))
+                    return new ElementTag(ExperienceAPI.getPlayerRankOverall(player.getName()))
                             .getAttribute(attribute.fulfill(1));
                 }
                 else {
                     if (SkillType.getSkill(attribute.getContext(1)) != null) {
-                        return new Element(ExperienceAPI.getPlayerRankSkill(player.getOfflinePlayer().getUniqueId(), attribute.getContext(1)))
+                        return new ElementTag(ExperienceAPI.getPlayerRankSkill(player.getOfflinePlayer().getUniqueId(), attribute.getContext(1)))
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else if (!attribute.hasAlternative()) {

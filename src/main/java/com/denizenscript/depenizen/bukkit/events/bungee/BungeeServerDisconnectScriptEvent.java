@@ -2,8 +2,8 @@ package com.denizenscript.depenizen.bukkit.events.bungee;
 
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 
@@ -51,9 +51,9 @@ public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("server")) {
-            return new Element(serverName);
+            return new ElementTag(serverName);
         }
         return super.getContext(name);
     }

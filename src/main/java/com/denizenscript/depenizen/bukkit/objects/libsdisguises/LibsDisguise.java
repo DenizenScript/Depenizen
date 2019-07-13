@@ -3,16 +3,16 @@ package com.denizenscript.depenizen.bukkit.objects.libsdisguises;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.Disguise;
 import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 
 import java.util.List;
 
-public class LibsDisguise implements dObject {
+public class LibsDisguise implements ObjectTag {
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
@@ -55,7 +55,7 @@ public class LibsDisguise implements dObject {
     }
 
     /////////////////////
-    //   dObject Methods
+    //   ObjectTag Methods
     /////////////////
 
     private String prefix = "LibsDisguise";
@@ -119,13 +119,13 @@ public class LibsDisguise implements dObject {
 
         // <--[tag]
         // @attribute <libsdisguise@libsdisguise.type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the type of the disguise.
         // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("type")) {
-            return new Element(disguise.getType().toString()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(disguise.getType().toString()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -141,16 +141,16 @@ public class LibsDisguise implements dObject {
 
         // <--[tag]
         // @attribute <libsdisguise@libsdisguise.display_name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the display name of the disguise.
         // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("display_name")) {
-            return new Element(disguise.getWatcher().getCustomName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(disguise.getWatcher().getCustomName()).getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
 
     }
 }

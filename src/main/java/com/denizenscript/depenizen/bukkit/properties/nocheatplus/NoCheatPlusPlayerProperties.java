@@ -4,8 +4,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import fr.neatmonster.nocheatplus.checks.ViolationHistory;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class NoCheatPlusPlayerProperties implements Property {
@@ -20,11 +20,11 @@ public class NoCheatPlusPlayerProperties implements Property {
         return "NoCheatPlusPlayer";
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static NoCheatPlusPlayerProperties getFrom(dObject object) {
+    public static NoCheatPlusPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -57,7 +57,7 @@ public class NoCheatPlusPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.ncp.infractions>
-            // @returns Element(Number)
+            // @returns ElementTag(Number)
             // @description
             // Returns the number of infractions this player has with NoCheatPlus
             // NOTE: Cannot guarantee the accuracy of this tag, due to lack of API in NoCheatPlus.
@@ -65,7 +65,7 @@ public class NoCheatPlusPlayerProperties implements Property {
             // -->
             if (attribute.startsWith("infractions")) {
                 ViolationHistory history = ViolationHistory.getHistory(player.getName(), false);
-                return new Element(history != null ? history.getViolationLevels().length : 0).getAttribute(attribute.fulfill(1));
+                return new ElementTag(history != null ? history.getViolationLevels().length : 0).getAttribute(attribute.fulfill(1));
             }
         }
 

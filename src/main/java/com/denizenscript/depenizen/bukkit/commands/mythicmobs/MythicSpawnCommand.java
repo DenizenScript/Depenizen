@@ -4,7 +4,7 @@ import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
@@ -65,15 +65,15 @@ public class MythicSpawnCommand extends AbstractCommand {
             throw new InvalidArgumentsException("Must specify a name and location.");
         }
 
-        scriptEntry.defaultObject("level", new Element(1));
+        scriptEntry.defaultObject("level", new ElementTag(1));
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        Element name = scriptEntry.getElement("name");
+        ElementTag name = scriptEntry.getElement("name");
         dLocation location = scriptEntry.getdObject("location");
-        Element level = scriptEntry.getElement("level");
+        ElementTag level = scriptEntry.getElement("level");
 
         Debug.report(scriptEntry, getName(), name.debug() + location.debug() + level.debug());
 

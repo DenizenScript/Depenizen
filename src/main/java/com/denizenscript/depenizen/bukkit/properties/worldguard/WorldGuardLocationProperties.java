@@ -8,9 +8,9 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import org.bukkit.World;
 
@@ -34,11 +34,11 @@ public class WorldGuardLocationProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject loc) {
+    public static boolean describes(ObjectTag loc) {
         return loc instanceof dLocation;
     }
 
-    public static WorldGuardLocationProperties getFrom(dObject loc) {
+    public static WorldGuardLocationProperties getFrom(ObjectTag loc) {
         if (!describes(loc)) {
             return null;
         }
@@ -78,12 +78,12 @@ public class WorldGuardLocationProperties implements Property {
         return false;
     }
 
-    private dList getRegions(World world) {
+    private ListTag getRegions(World world) {
         List<String> regionList = new ArrayList<>();
         for (ProtectedRegion protectedRegion : getApplicableRegions()) {
             regionList.add(new WorldGuardRegion(protectedRegion, world).identify());
         }
-        return new dList(regionList);
+        return new ListTag(regionList);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class WorldGuardLocationProperties implements Property {
 
         // <--[tag]
         // @attribute <l@location.in_region[<name>|...]>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // If a region name or list of names is specified, returns whether the
         // location is in one of the listed regions, otherwise returns whether
@@ -101,24 +101,24 @@ public class WorldGuardLocationProperties implements Property {
         if (attribute.startsWith("in_region")) {
             // Check if the location is in the specified region
             if (attribute.hasContext(1)) {
-                dList region_list = dList.valueOf(attribute.getContext(1));
+                ListTag region_list = ListTag.valueOf(attribute.getContext(1));
                 for (String region : region_list) {
                     if (inRegion(region)) {
-                        return new Element(true).getAttribute(attribute.fulfill(1));
+                        return new ElementTag(true).getAttribute(attribute.fulfill(1));
                     }
                 }
-                return new Element(false).getAttribute(attribute.fulfill(1));
+                return new ElementTag(false).getAttribute(attribute.fulfill(1));
             }
 
             // Check if the location is in any region
             else {
-                return new Element(inRegion()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(inRegion()).getAttribute(attribute.fulfill(1));
             }
         }
 
         // <--[tag]
         // @attribute <l@location.regions>
-        // @returns dList(Region)
+        // @returns ListTag(Region)
         // @description
         // Returns a list of regions that the location is in.
         // @Plugin Depenizen, WorldGuard

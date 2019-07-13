@@ -11,16 +11,16 @@ import com.palmergames.bukkit.towny.object.WorldCoord;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Location;
 
-public class dTown implements dObject {
+public class dTown implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
@@ -76,7 +76,7 @@ public class dTown implements dObject {
     }
 
     /////////////////////
-    //   dObject Methods
+    //   ObjectTag Methods
     /////////////////
 
     private String prefix = "Town";
@@ -136,13 +136,13 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.assistants>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of the town's assistants.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("assistants")) {
-            dList list = new dList();
+            ListTag list = new ListTag();
             for (Resident resident : town.getAssistants()) {
                 list.add(dPlayer.valueOf(resident.getName()).identify());
             }
@@ -151,14 +151,14 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.balance>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the current money balance of the town.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("balance")) {
             try {
-                return new Element(town.getHoldingBalance()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(town.getHoldingBalance()).getAttribute(attribute.fulfill(1));
             }
             catch (EconomyException e) {
                 if (!attribute.hasAlternative()) {
@@ -169,37 +169,37 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.board>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the town's current board.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("board")) {
-            return new Element(town.getTownBoard())
+            return new ElementTag(town.getTownBoard())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.is_open>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns true if the town is currently open.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open")) {
-            return new Element(town.isOpen())
+            return new ElementTag(town.isOpen())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.is_public>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns true if the town is currently public.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("ispublic") || attribute.startsWith("is_public")) {
-            return new Element(town.isPublic())
+            return new ElementTag(town.isPublic())
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -217,13 +217,13 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the town's names.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("name")) {
-            return new Element(town.getName())
+            return new ElementTag(town.getName())
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -245,25 +245,25 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.player_count>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the number of players in the town.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
-            return new Element(town.getNumResidents())
+            return new ElementTag(town.getNumResidents())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.residents>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of the town's residents.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("residents")) {
-            dList list = new dList();
+            ListTag list = new ListTag();
             for (Resident resident : town.getResidents()) {
                 list.add(dPlayer.valueOf(resident.getName()).identify());
             }
@@ -272,13 +272,13 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.size>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the number of blocks the town owns.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("size")) {
-            return new Element(town.getPurchasedBlocks())
+            return new ElementTag(town.getPurchasedBlocks())
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -300,37 +300,37 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.tag>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the town's tag.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("tag")) {
-            return new Element(town.getTag())
+            return new ElementTag(town.getTag())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.taxes>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the town's current taxes.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("taxes")) {
-            return new Element(town.getTaxes())
+            return new ElementTag(town.getTaxes())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.outposts>
-        // @returns dList(dLocation)
+        // @returns ListTag(dLocation)
         // @description
         // Returns a list of the town's outpost locations.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("outposts")) {
-            dList posts = new dList();
+            ListTag posts = new ListTag();
             for (Location p : town.getAllOutpostSpawns()) {
                 posts.add(new dLocation(p).identify());
             }
@@ -339,94 +339,94 @@ public class dTown implements dObject {
 
         // <--[tag]
         // @attribute <town@town.type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Always returns 'Town' for dTown objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("type")) {
-            return new Element("Town").getAttribute(attribute.fulfill(1));
+            return new ElementTag("Town").getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.has_explosions>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns if the town has explosions turned on.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("has_explosions")) {
-            return new Element(town.isBANG()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(town.isBANG()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.has_mobs>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns if the town has mobs turned on.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("has_mobs")) {
-            return new Element(town.hasMobs()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(town.hasMobs()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.has_pvp>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns if the town has PvP turned on.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("has_pvp")) {
-            return new Element(town.isPVP()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(town.isPVP()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.has_firespread>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns if the town has firespread turned on.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("has_firespread")) {
-            return new Element(town.isFire()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(town.isFire()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.has_taxpercent>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns if the town has taxes in percentage.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("has_taxpercent")) {
-            return new Element(town.isTaxPercentage()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(town.isTaxPercentage()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.has_taxpercent>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of taxes collected from plots.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("plottax")) {
-            return new Element(town.getPlotTax()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(town.getPlotTax()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <town@town.plotprice>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the price of a plot.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("plotprice")) {
-            return new Element(town.getPlotPrice()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(town.getPlotPrice()).getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
 
     }
 }

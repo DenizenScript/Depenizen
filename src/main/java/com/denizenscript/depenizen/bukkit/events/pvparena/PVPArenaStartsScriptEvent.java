@@ -4,8 +4,8 @@ import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -35,7 +35,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     public static PVPArenaStartsScriptEvent instance;
     public PAStartEvent event;
-    public dList fighters;
+    public ListTag fighters;
     public PVPArenaArena arena;
 
     public PVPArenaStartsScriptEvent() {
@@ -68,7 +68,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("fighters")) {
             return fighters;
         }
@@ -80,7 +80,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     @EventHandler
     public void onPVPArenaStart(PAStartEvent event) {
-        fighters = new dList();
+        fighters = new ListTag();
         for (ArenaPlayer p : event.getArena().getFighters()) {
             fighters.add(new dPlayer(p.get()).identify());
         }

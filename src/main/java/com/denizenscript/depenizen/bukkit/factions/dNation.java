@@ -8,14 +8,14 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
-public class dNation implements dObject {
+public class dNation implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
@@ -64,7 +64,7 @@ public class dNation implements dObject {
     }
 
     /////////////////////
-    //   dObject Methods
+    //   ObjectTag Methods
     /////////////////
 
     private String prefix = "Nation";
@@ -116,13 +116,13 @@ public class dNation implements dObject {
 
         // <--[tag]
         // @attribute <nation@nation.allies>
-        // @returns dList(dNation)
+        // @returns ListTag(dNation)
         // @description
         // Returns a list of the nation's allies.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("allies")) {
-            dList list = new dList();
+            ListTag list = new ListTag();
             for (Nation ally : nation.getAllies()) {
                 list.add(new dNation(ally).identify());
             }
@@ -131,13 +131,13 @@ public class dNation implements dObject {
 
         // <--[tag]
         // @attribute <nation@nation.assistants>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of the nation's assistants.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("assistants")) {
-            dList list = new dList();
+            ListTag list = new ListTag();
             for (Resident resident : nation.getAssistants()) {
                 list.add(dPlayer.valueOf(resident.getName()).identify());
             }
@@ -146,14 +146,14 @@ public class dNation implements dObject {
 
         // <--[tag]
         // @attribute <nation@nation.balance>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the current money balance of the nation.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("balance")) {
             try {
-                return new Element(nation.getHoldingBalance()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(nation.getHoldingBalance()).getAttribute(attribute.fulfill(1));
             }
             catch (EconomyException e) {
                 if (!attribute.hasAlternative()) {
@@ -178,13 +178,13 @@ public class dNation implements dObject {
 
         // <--[tag]
         // @attribute <nation@nation.enemies>
-        // @returns dList(dNation)
+        // @returns ListTag(dNation)
         // @description
         // Returns a list of the nation's enemies.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("enemies")) {
-            dList list = new dList();
+            ListTag list = new ListTag();
             for (Nation enemy : nation.getEnemies()) {
                 list.add(new dNation(enemy).identify());
             }
@@ -193,13 +193,13 @@ public class dNation implements dObject {
 
         // <--[tag]
         // @attribute <nation@nation.is_neutral>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns true if the nation is neutral.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("isneutral") || attribute.startsWith("is_neutral")) {
-            return new Element(nation.isNeutral())
+            return new ElementTag(nation.isNeutral())
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -217,31 +217,31 @@ public class dNation implements dObject {
 
         // <--[tag]
         // @attribute <nation@nation.name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the nation's name.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("name")) {
-            return new Element(nation.getName())
+            return new ElementTag(nation.getName())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <nation@nation.player_count>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the amount of players in the nation.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
-            return new Element(nation.getNumResidents())
+            return new ElementTag(nation.getNumResidents())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <nation@nation.relation[<nation>]>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the nation's current relation with another nation.
         // @Plugin Depenizen, Towny
@@ -252,13 +252,13 @@ public class dNation implements dObject {
                 dNation to = valueOf(attribute.getContext(1));
 
                 if (nation.hasAlly(to.nation)) {
-                    return new Element("allies").getAttribute(attribute.fulfill(1));
+                    return new ElementTag("allies").getAttribute(attribute.fulfill(1));
                 }
                 else if (nation.hasEnemy(to.nation)) {
-                    return new Element("enemies").getAttribute(attribute.fulfill(1));
+                    return new ElementTag("enemies").getAttribute(attribute.fulfill(1));
                 }
                 else {
-                    return new Element("neutral").getAttribute(attribute.fulfill(1));
+                    return new ElementTag("neutral").getAttribute(attribute.fulfill(1));
                 }
 
             }
@@ -269,13 +269,13 @@ public class dNation implements dObject {
 
         // <--[tag]
         // @attribute <nation@nation.residents>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of the nation's residents.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("residents")) {
-            dList list = new dList();
+            ListTag list = new ListTag();
             for (Resident resident : nation.getResidents()) {
                 list.add(dPlayer.valueOf(resident.getName()).identify());
             }
@@ -284,55 +284,55 @@ public class dNation implements dObject {
 
         // <--[tag]
         // @attribute <nation@nation.tag>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the nation's tag.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("tag")) {
             if (nation.hasTag()) {
-                return new Element(nation.getTag())
+                return new ElementTag(nation.getTag())
                         .getAttribute(attribute.fulfill(1));
             }
         }
 
         // <--[tag]
         // @attribute <nation@nation.taxes>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the nation's current taxes.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("taxes")) {
-            return new Element(nation.getTaxes())
+            return new ElementTag(nation.getTaxes())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <nation@nation.town_count>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the number of towns in the nation.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("towncount") || attribute.startsWith("town_count")) {
-            return new Element(nation.getNumTowns())
+            return new ElementTag(nation.getNumTowns())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <nation@nation.type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Always returns 'Nation' for dNation objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("type")) {
-            return new Element("Nation").getAttribute(attribute.fulfill(1));
+            return new ElementTag("Nation").getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
 
     }
 }

@@ -22,9 +22,9 @@ import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.TagRunnable;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
@@ -219,37 +219,37 @@ public class BungeeBridge {
 
         // <--[tag]
         // @attribute <bungee.server>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the name of the current server (according to the Bungee proxy config).
         // @Plugin Depenizen, BungeeCord
         // -->
         if (attribute.startsWith("server")) {
-            event.setReplacedObject(new Element(serverName)
+            event.setReplacedObject(new ElementTag(serverName)
                     .getObjectAttribute(attribute.fulfill(1)));
         }
 
         // <--[tag]
         // @attribute <bungee.list_servers>
-        // @returns dList
+        // @returns ListTag
         // @description
         // Returns a list of known bungee server names.
         // @Plugin Depenizen, BungeeCord
         // -->
         if (attribute.startsWith("list_servers")) {
-            event.setReplacedObject(new dList(knownServers)
+            event.setReplacedObject(new ListTag(knownServers)
                     .getObjectAttribute(attribute.fulfill(1)));
         }
 
         // <--[tag]
         // @attribute <bungee.connected>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns this server is currently connected to the BungeeCord proxy server.
         // @Plugin Depenizen, BungeeCord
         // -->
         if (attribute.startsWith("connected")) {
-            event.setReplacedObject(new Element(connected)
+            event.setReplacedObject(new ElementTag(connected)
                     .getObjectAttribute(attribute.fulfill(1)));
         }
     }

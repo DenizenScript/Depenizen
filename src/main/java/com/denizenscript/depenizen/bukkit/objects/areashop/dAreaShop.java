@@ -3,16 +3,16 @@ package com.denizenscript.depenizen.bukkit.objects.areashop;
 import me.wiefferink.areashop.AreaShop;
 import me.wiefferink.areashop.regions.GeneralRegion;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
 
-public class dAreaShop implements dObject {
+public class dAreaShop implements ObjectTag {
 
     public static dAreaShop valueOf(String string) {
         return dAreaShop.valueOf(string, null);
@@ -84,7 +84,7 @@ public class dAreaShop implements dObject {
     }
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -110,35 +110,35 @@ public class dAreaShop implements dObject {
 
         // <--[tag]
         // @attribute <areashop@areashop.is_bought>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether this AreaShop has been bought.
         // @Plugin Depenizen, AreaShop
         // -->
         if (attribute.startsWith("is_bought")) {
-            return new Element(areaShop.isBuyRegion()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(areaShop.isBuyRegion()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <areashop@areashop.is_rented>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether this AreaShop is being rented.
         // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("is_rented")) {
-            return new Element(areaShop.isRentRegion()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(areaShop.isRentRegion()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <areashop@areashop.groups>
-        // @returns dList
+        // @returns ListTag
         // @description
         // Returns a list of groups that control this AreaShop.
         // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("groups")) {
-            return new dList(areaShop.getGroupNames()).getAttribute(attribute.fulfill(1));
+            return new ListTag(areaShop.getGroupNames()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -154,13 +154,13 @@ public class dAreaShop implements dObject {
 
         // <--[tag]
         // @attribute <areashop@areashop.name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the name of the AreaShop.
         // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("name")) {
-            return new Element(areaShop.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(areaShop.getName()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -185,6 +185,6 @@ public class dAreaShop implements dObject {
             return new WorldGuardRegion(areaShop.getRegion(), areaShop.getWorld()).getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
     }
 }

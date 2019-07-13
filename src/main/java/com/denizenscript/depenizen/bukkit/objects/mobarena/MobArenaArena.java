@@ -4,16 +4,16 @@ import com.denizenscript.depenizen.bukkit.bridges.MobArenaBridge;
 import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.entity.Player;
 
-public class MobArenaArena implements dObject {
+public class MobArenaArena implements ObjectTag {
 
     String prefix = "MobArena";
     Arena arena = null;
@@ -61,7 +61,7 @@ public class MobArenaArena implements dObject {
     }
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -104,89 +104,89 @@ public class MobArenaArena implements dObject {
 
         // <--[tag]
         // @attribute <mobarena@mobarena.name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the name of the arena.
         // @Plugin Depenizen, MobArena
         // -->
         if (attribute.startsWith("name")) {
-            return new Element(arena.arenaName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.arenaName()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mobarena@mobarena.config_name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the configuration name of the arena.
         // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("config_name")) {
-            return new Element(arena.configName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.configName()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mobarena@mobarena.is_running>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the arena is running.
         // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("is_running")) {
-            return new Element(arena.isRunning()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.isRunning()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mobarena@mobarena.wave_count>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the number of waves this arena has in total.
         // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("wave_count")) {
-            return new Element(arena.getWaveManager().getFinalWave())
+            return new ElementTag(arena.getWaveManager().getFinalWave())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mobarena@mobarena.current_wave>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the current wave number.
         // NOTE: Requires the arena to be running.
         // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("current_wave") && arena.isRunning()) {
-            return new Element(arena.getWaveManager().getWaveNumber())
+            return new ElementTag(arena.getWaveManager().getWaveNumber())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mobarena@mobarena.wave_type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the type of the current wave.
         // NOTE: Requires the arena to be running.
         // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("wave_type") && arena.isRunning()) {
-            return new Element(arena.getWaveManager().getCurrent().getType().toString())
+            return new ElementTag(arena.getWaveManager().getCurrent().getType().toString())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mobarena@mobarena.is_enabled>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the arena is enabled.
         // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("is_enabled")) {
-            return new Element(arena.isEnabled()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.isEnabled()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <mobarena@mobarena.status>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the status of the arena.
         // Will return 'closed', 'open', or 'running'.
@@ -194,13 +194,13 @@ public class MobArenaArena implements dObject {
         // -->
         else if (attribute.startsWith("status")) {
             if (!arena.isEnabled()) {
-                return new Element("closed").getAttribute(attribute.fulfill(1));
+                return new ElementTag("closed").getAttribute(attribute.fulfill(1));
             }
             else if (!arena.isRunning()) {
-                return new Element("open").getAttribute(attribute.fulfill(1));
+                return new ElementTag("open").getAttribute(attribute.fulfill(1));
             }
             else {
-                return new Element("running").getAttribute(attribute.fulfill(1));
+                return new ElementTag("running").getAttribute(attribute.fulfill(1));
             }
         }
 
@@ -208,13 +208,13 @@ public class MobArenaArena implements dObject {
 
             // <--[tag]
             // @attribute <mobarena@mobarena.players.in_arena>
-            // @returns dList(dPlayer)
+            // @returns ListTag(dPlayer)
             // @description
             // Returns a list of players in the arena.
             // @Plugin Depenizen, MobArena
             // -->
             if (attribute.getAttribute(2).startsWith("in_arena")) {
-                dList players = new dList();
+                ListTag players = new ListTag();
                 for (Player p : arena.getPlayersInArena()) {
                     players.add(new dPlayer(p).identify());
                 }
@@ -223,13 +223,13 @@ public class MobArenaArena implements dObject {
 
             // <--[tag]
             // @attribute <mobarena@mobarena.players.in_lobby>
-            // @returns dList(dPlayer)
+            // @returns ListTag(dPlayer)
             // @description
             // Returns a list of players in the lobby.
             // @Plugin Depenizen, MobArena
             // -->
             else if (attribute.getAttribute(2).startsWith("in_lobby")) {
-                dList players = new dList();
+                ListTag players = new ListTag();
                 for (Player p : arena.getPlayersInLobby()) {
                     players.add(new dPlayer(p).identify());
                 }
@@ -238,13 +238,13 @@ public class MobArenaArena implements dObject {
 
             // <--[tag]
             // @attribute <mobarena@mobarena.players>
-            // @returns dList(dPlayer)
+            // @returns ListTag(dPlayer)
             // @description
             // Returns a list of all players in the arena (including the lobby).
             // @Plugin Depenizen, MobArena
             // -->
             else {
-                dList players = new dList();
+                ListTag players = new ListTag();
                 for (Player p : arena.getAllPlayers()) {
                     players.add(new dPlayer(p).identify());
                 }
@@ -254,16 +254,16 @@ public class MobArenaArena implements dObject {
 
         // <--[tag]
         // @attribute <mobarena@mobarena.type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Always returns 'MobArena' for MobArena objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
         // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("type")) {
-            return new Element("MobArena").getAttribute(attribute.fulfill(1));
+            return new ElementTag("MobArena").getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
     }
 }

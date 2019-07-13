@@ -10,7 +10,7 @@ import com.denizenscript.denizen.objects.dCuboid;
 import com.denizenscript.denizen.objects.dWorld;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
@@ -92,7 +92,7 @@ public class RegionCommand extends AbstractCommand {
         }
 
         if (!scriptEntry.hasObject("action")) {
-            scriptEntry.addObject("action", new Element("ADD"));
+            scriptEntry.addObject("action", new ElementTag("ADD"));
         }
 
     }
@@ -100,11 +100,11 @@ public class RegionCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        Element region_id = scriptEntry.getElement("region_id");
+        ElementTag region_id = scriptEntry.getElement("region_id");
         dCuboid cuboid = scriptEntry.getdObject("cuboid");
         dWorld w = scriptEntry.getdObject("world");
         World world = w != null ? w.getWorld() : cuboid != null ? cuboid.getWorld() : null;
-        Element action = scriptEntry.getElement("action");
+        ElementTag action = scriptEntry.getElement("action");
 
         if (world == null) {
             Debug.echoError("No valid world found!");

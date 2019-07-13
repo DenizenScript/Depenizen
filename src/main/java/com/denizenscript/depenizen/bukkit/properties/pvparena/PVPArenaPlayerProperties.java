@@ -4,8 +4,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import net.slipcor.pvparena.arena.ArenaPlayer;
@@ -27,11 +27,11 @@ public class PVPArenaPlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static PVPArenaPlayerProperties getFrom(dObject object) {
+    public static PVPArenaPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -62,7 +62,7 @@ public class PVPArenaPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.pvparena.in_arena[<pvparena>]>
-            // @returns Element(Boolean)
+            // @returns ElementTag(Boolean)
             // @description
             // Returns true if the player is in the specified arena. If no arena is specified,
             // this returns true if the player is in any arena.
@@ -70,43 +70,43 @@ public class PVPArenaPlayerProperties implements Property {
             // -->
             if (attribute.startsWith("inarena") || attribute.startsWith("in_arena")) {
                 if (player.getArena() == null) {
-                    return new Element(false).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(false).getAttribute(attribute.fulfill(1));
                 }
                 if (attribute.hasContext(1)) {
                     PVPArenaArena a = PVPArenaArena.valueOf(attribute.getContext(1));
                     if (a == null) {
                         return null;
                     }
-                    return new Element(CoreUtilities.toLowerCase(player.getArena().getName())
+                    return new ElementTag(CoreUtilities.toLowerCase(player.getArena().getName())
                             .equals(CoreUtilities.toLowerCase(a.getArena().getName())))
                             .getAttribute(attribute.fulfill(1));
                 }
                 else {
-                    return new Element(player.getArena() != null)
+                    return new ElementTag(player.getArena() != null)
                             .getAttribute(attribute.fulfill(1));
                 }
             }
 
             // <--[tag]
             // @attribute <p@player.pvparena.class>
-            // @returns Element
+            // @returns ElementTag
             // @description
             // Returns the player's class if they're in an arena. Otherwise, returns null.
             // @Plugin Depenizen, PvP Arena
             // -->
             else if (attribute.startsWith("class")) {
-                return new Element(player.getArenaClass().getName()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(player.getArenaClass().getName()).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
             // @attribute <p@player.pvparena.is_ready>
-            // @returns Element(Boolean)
+            // @returns ElementTag(Boolean)
             // @description
             // Returns true if the player is ready.
             // @Plugin Depenizen, PvP Arena
             // -->
             else if (attribute.startsWith("isready") || attribute.startsWith("is_ready")) {
-                return new Element(player.getStatus().equals(ArenaPlayer.Status.READY))
+                return new ElementTag(player.getStatus().equals(ArenaPlayer.Status.READY))
                         .getAttribute(attribute.fulfill(1));
             }
 
@@ -116,25 +116,25 @@ public class PVPArenaPlayerProperties implements Property {
 
                 // <--[tag]
                 // @attribute <p@player.pvparena.team.player_count>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the number of players in the team.
                 // @Plugin Depenizen, PvP Arena
                 // -->
                 if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
-                    return new Element(player.getArenaTeam().getTeamMembers().size())
+                    return new ElementTag(player.getArenaTeam().getTeamMembers().size())
                             .getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
                 // @attribute <p@player.pvparena.team.name>
-                // @returns Element
+                // @returns ElementTag
                 // @description
                 // Returns the player's team name if they're in an arena. Otherwise, returns null.
                 // @Plugin Depenizen, PvP Arena
                 // -->
                 if (attribute.startsWith("name")) {
-                    return new Element(player.getArenaTeam().getName())
+                    return new ElementTag(player.getArenaTeam().getName())
                             .getAttribute(attribute.fulfill(1));
                 }
             }

@@ -9,9 +9,9 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class TownyPlayerProperties implements Property {
@@ -31,11 +31,11 @@ public class TownyPlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static TownyPlayerProperties getFrom(dObject object) {
+    public static TownyPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -67,52 +67,52 @@ public class TownyPlayerProperties implements Property {
         try {
             // <--[tag]
             // @attribute <p@player.has_nation>
-            // @returns Element(Boolean)
+            // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player is part of a nation.
             // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("has_nation")) {
-                return new Element(getResident().hasNation()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(getResident().hasNation()).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
             // @attribute <p@player.has_town>
-            // @returns Element(Boolean)
+            // @returns ElementTag(Boolean)
             // @description
             // Returns whether the player is part of a town.
             // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("has_town")) {
-                return new Element(getResident().hasTown()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(getResident().hasTown()).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
             // @attribute <p@player.mode_list>
-            // @returns dList(Element)
+            // @returns ListTag(Element)
             // @description
             // Returns the player's towny modes as a list.
             // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("mode_list")) {
-                dList modes = new dList();
+                ListTag modes = new ListTag();
                 for (String mode : getResident().getModes()) {
-                    modes.add(new Element(mode).identify());
+                    modes.add(new ElementTag(mode).identify());
                 }
                 return modes.getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
             // @attribute <p@player.nation_ranks>
-            // @returns dList(Element)
+            // @returns ListTag(Element)
             // @description
             // Returns the player's nation ranks.
             // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("nation_ranks")) {
-                dList ranks = new dList();
+                ListTag ranks = new ListTag();
                 for (String rank : getResident().getNationRanks()) {
-                    ranks.add(new Element(rank).identify());
+                    ranks.add(new ElementTag(rank).identify());
                 }
                 return ranks.getAttribute(attribute.fulfill(1));
             }
@@ -142,15 +142,15 @@ public class TownyPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.town_ranks>
-            // @returns dList(Element)
+            // @returns ListTag(Element)
             // @description
             // Returns the player's town ranks.
             // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("town_ranks")) {
-                dList ranks = new dList();
+                ListTag ranks = new ListTag();
                 for (String rank : getResident().getTownRanks()) {
-                    ranks.add(new Element(rank).identify());
+                    ranks.add(new ElementTag(rank).identify());
                 }
                 return ranks.getAttribute(attribute.fulfill(1));
             }

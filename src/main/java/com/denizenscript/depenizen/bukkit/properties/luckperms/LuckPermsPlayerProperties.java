@@ -7,8 +7,8 @@ import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class LuckPermsPlayerProperties implements Property {
@@ -23,11 +23,11 @@ public class LuckPermsPlayerProperties implements Property {
         return "LuckPermsPlayer";
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static LuckPermsPlayerProperties getFrom(dObject object) {
+    public static LuckPermsPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -58,13 +58,13 @@ public class LuckPermsPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.luckperms_tracks>
-        // @returns dList(luckpermstrack)
+        // @returns ListTag(luckpermstrack)
         // @description
         // Returns a list of tracks the player is in.
         // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("luckperms_tracks")) {
-            dList tracks = new dList();
+            ListTag tracks = new ListTag();
             LuckPermsApi api = LuckPerms.getApi();
             for (Track track : api.getTracks()) {
                 for (String group : track.getGroups()) {

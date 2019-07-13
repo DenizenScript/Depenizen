@@ -7,8 +7,8 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class TownyLocationProperties implements Property {
@@ -28,11 +28,11 @@ public class TownyLocationProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dLocation;
     }
 
-    public static TownyLocationProperties getFrom(dObject object) {
+    public static TownyLocationProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -59,17 +59,17 @@ public class TownyLocationProperties implements Property {
 
         // <--[tag]
         // @attribute <l@location.has_town>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the location is within a town.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("has_town")) {
             if (TownyUniverse.getTownName(location) != null) {
-                return new Element(true).getAttribute(attribute.fulfill(1));
+                return new ElementTag(true).getAttribute(attribute.fulfill(1));
             }
             else {
-                return new Element(false).getAttribute(attribute.fulfill(1));
+                return new ElementTag(false).getAttribute(attribute.fulfill(1));
             }
         }
 
@@ -98,13 +98,13 @@ public class TownyLocationProperties implements Property {
 
         // <--[tag]
         // @attribute <l@location.is_wilderness>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the location is wilderness.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("is_wilderness")) {
-            return new Element(TownyUniverse.isWilderness(location.getBlock())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(TownyUniverse.isWilderness(location.getBlock())).getAttribute(attribute.fulfill(1));
         }
 
         return null;

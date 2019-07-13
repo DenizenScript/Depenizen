@@ -6,7 +6,7 @@ import me.libraryaddict.disguise.disguisetypes.*;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
@@ -129,19 +129,19 @@ public class DisguiseCommand extends AbstractCommand {
         }
 
         if (!scriptEntry.hasObject("baby")) {
-            scriptEntry.addObject("baby", new Element(false));
+            scriptEntry.addObject("baby", new ElementTag(false));
         }
 
         if (!scriptEntry.hasObject("id")) {
-            scriptEntry.addObject("id", new Element(1));
+            scriptEntry.addObject("id", new ElementTag(1));
         }
 
         if (!scriptEntry.hasObject("data")) {
-            scriptEntry.addObject("data", new Element(0));
+            scriptEntry.addObject("data", new ElementTag(0));
         }
 
         if (!scriptEntry.hasObject("self")) {
-            scriptEntry.addObject("self", new Element(false));
+            scriptEntry.addObject("self", new ElementTag(false));
         }
 
         if (!scriptEntry.hasObject("target")) {
@@ -159,13 +159,13 @@ public class DisguiseCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) {
 
         dEntity target = scriptEntry.getdObject("target");
-        Element type = scriptEntry.getdObject("type");
-        Element name = scriptEntry.getdObject("name");
-        Element action = scriptEntry.getdObject("action");
-        Element id = scriptEntry.getdObject("id");
-        Element data = scriptEntry.getdObject("data");
-        Element baby = scriptEntry.getdObject("baby");
-        Element self = scriptEntry.getdObject("self");
+        ElementTag type = scriptEntry.getdObject("type");
+        ElementTag name = scriptEntry.getdObject("name");
+        ElementTag action = scriptEntry.getdObject("action");
+        ElementTag id = scriptEntry.getdObject("id");
+        ElementTag data = scriptEntry.getdObject("data");
+        ElementTag baby = scriptEntry.getdObject("baby");
+        ElementTag self = scriptEntry.getdObject("self");
 
         // Report to dB
         Debug.report(scriptEntry, getName(), action.debug()

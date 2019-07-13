@@ -5,7 +5,7 @@ import com.denizenscript.depenizen.bukkit.bridges.BossShopBridge;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
@@ -80,7 +80,7 @@ public class BossShopCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) {
 
         dPlayer target = scriptEntry.getdObject("target");
-        Element dshop = scriptEntry.getdObject("shop");
+        ElementTag dshop = scriptEntry.getdObject("shop");
 
         // Report to dB
         Debug.report(scriptEntry, getName(),

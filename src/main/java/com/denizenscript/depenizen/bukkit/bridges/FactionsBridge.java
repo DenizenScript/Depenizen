@@ -14,7 +14,7 @@ import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagManager;
 
@@ -68,13 +68,13 @@ public class FactionsBridge extends Bridge {
 
         // <--[tag]
         // @attribute <factions.list_factions>
-        // @returns dList(dFaction)
+        // @returns ListTag(dFaction)
         // @description
         // Returns a list of all current factions.
         // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("list_factions")) {
-            dList factions = new dList();
+            ListTag factions = new ListTag();
             for (Faction f : FactionColl.get().getAll()) {
                 factions.addObject(new dFaction(f));
             }

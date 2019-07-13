@@ -24,11 +24,11 @@ public class EssentialsPlayerProperties implements Property {
         return "EssentialsPlayer";
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer && ((dPlayer) object).isOnline();
     }
 
-    public static EssentialsPlayerProperties getFrom(dObject object) {
+    public static EssentialsPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -65,72 +65,72 @@ public class EssentialsPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.god_mode>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @mechanism dPlayer.god_mode
         // @description
         // Returns whether the player is currently in god mode.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("god_mode")) {
-            return new Element(getUser().isGodModeEnabled()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().isGodModeEnabled()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.has_home>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the player has set at least one home.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("has_home")) {
-            return new Element(getUser().hasHome()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().hasHome()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.is_afk>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @mechanism dPlayer.is_afk
         // @description
         // Returns whether the player is AFK.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("is_afk")) {
-            return new Element(getUser().isAfk()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().isAfk()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.is_muted>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @mechanism dPlayer.is_muted
         // @description
         // Returns whether the player is muted.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("is_muted")) {
-            return new Element(getUser().isMuted()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().isMuted()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.is_vanished>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @mechanism dPlayer.is_vanished
         // @description
         // Returns whether the player is vanished.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("is_vanished")) {
-            return new Element(getUser().isVanished()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().isVanished()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.home_list>
-        // @returns dList(Element/dLocation)
+        // @returns ListTag(Element/dLocation)
         // @description
         // Returns a list of the homes of the player, in the format "HomeName/l@x,y,z,world".
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("home_list")) {
-            dList homes = new dList();
+            ListTag homes = new ListTag();
             for (String home : getUser().getHomes()) {
                 try {
                     homes.add(home + "/" + new dLocation(getUser().getHome(home)).identifySimple());
@@ -146,13 +146,13 @@ public class EssentialsPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.home_location_list>
-        // @returns dList(dLocation)
+        // @returns ListTag(dLocation)
         // @description
         // Returns a list of the locations of homes of the player.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("home_location_list")) {
-            dList homes = new dList();
+            ListTag homes = new ListTag();
             for (String home : getUser().getHomes()) {
                 try {
                     homes.add(new dLocation(getUser().getHome(home)).identifySimple());
@@ -168,13 +168,13 @@ public class EssentialsPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.ignored_players>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of the ignored players of the player.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("ignored_players")) {
-            dList players = new dList();
+            ListTag players = new ListTag();
             Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
             for (String player : getUser()._getIgnoredPlayers()) {
                 try {
@@ -191,48 +191,48 @@ public class EssentialsPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.home_name_list>
-        // @returns dList(Element)
+        // @returns ListTag(Element)
         // @description
         // Returns a list of the names of homes of the player.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("home_name_list")) {
-            return new dList(getUser().getHomes()).getAttribute(attribute.fulfill(1));
+            return new ListTag(getUser().getHomes()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.mail_list>
-        // @returns dList(Element)
+        // @returns ListTag(Element)
         // @description
         // Returns a list of mail the player currently has.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("mail_list")) {
-            return new dList(getUser().getMails()).getAttribute(attribute.fulfill(1));
+            return new ListTag(getUser().getMails()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.mute_timeout>
-        // @returns Duration
+        // @returns DurationTag
         // @description
         // Returns how much time is left until the player is muted.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("mute_timeout")) {
-            return new Duration((int) (getUser().getMuteTimeout() - new GregorianCalendar().getTimeInMillis()) / 1000)
+            return new DurationTag((int) (getUser().getMuteTimeout() - new GregorianCalendar().getTimeInMillis()) / 1000)
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.socialspy>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @mechanism dPlayer.socialspy
         // @description
         // Returns whether the player has SocialSpy enabled.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("socialspy")) {
-            return new Element(getUser().isSocialSpyEnabled()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().isSocialSpyEnabled()).getAttribute(attribute.fulfill(1));
         }
 
         return null;
@@ -283,12 +283,12 @@ public class EssentialsPlayerProperties implements Property {
         // -->
         if ((mechanism.matches("muted") || mechanism.matches("is_muted")) && mechanism.requireBoolean()) {
             if (mechanism.getValue().asString().length() > 0) {
-                dList split = mechanism.valueAsType(dList.class);
-                if (split.size() > 0 && new Element(split.get(0)).isBoolean()) {
-                    getUser().setMuted(new Element(split.get(0)).asBoolean());
-                    if (split.size() > 1 && Duration.matches(split.get(1))) {
+                ListTag split = mechanism.valueAsType(ListTag.class);
+                if (split.size() > 0 && new ElementTag(split.get(0)).isBoolean()) {
+                    getUser().setMuted(new ElementTag(split.get(0)).asBoolean());
+                    if (split.size() > 1 && DurationTag.matches(split.get(1))) {
                         getUser().setMuteTimeout(new GregorianCalendar().getTimeInMillis()
-                                + Duration.valueOf(split.get(1)).getMillis());
+                                + DurationTag.valueOf(split.get(1)).getMillis());
                     }
                 }
                 else {
@@ -342,7 +342,7 @@ public class EssentialsPlayerProperties implements Property {
                 int len = mechanism.getValue().asString().length();
                 String after = mechanism.getValue().asString().substring(split + 1, len);
                 String before = mechanism.getValue().asString().substring(0, split - 1);
-                getUser().setIgnoredPlayer(ess.getUser(new Element(before).asType(dPlayer.class, mechanism.context).getOfflinePlayer().getUniqueId()), new Element(after).asBoolean());
+                getUser().setIgnoredPlayer(ess.getUser(new ElementTag(before).asType(dPlayer.class, mechanism.context).getOfflinePlayer().getUniqueId()), new ElementTag(after).asBoolean());
             }
             else {
                 getUser().setIgnoredPlayer(ess.getUser(mechanism.valueAsType(dPlayer.class).getOfflinePlayer().getUniqueId()), true);

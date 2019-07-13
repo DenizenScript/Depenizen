@@ -16,7 +16,7 @@ import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.events.mobarena.MobArenaWaveChangesScriptEvent;
 import com.denizenscript.denizencore.tags.TagManager;
@@ -68,13 +68,13 @@ public class MobArenaBridge extends Bridge {
 
         // <--[tag]
         // @attribute <mobarena.list_arenas>
-        // @returns dList(MobArena)
+        // @returns ListTag(MobArena)
         // @description
         // Returns a list of all MobArenas.
         // @Plugin Depenizen, MobArena
         // -->
         if (attribute.startsWith("list_arenas")) {
-            dList arenas = new dList();
+            ListTag arenas = new ListTag();
             for (Arena a : ((MobArena) plugin).getArenaMaster().getArenas()) {
                 if (((MobArena) plugin).getArenaMaster().getArenaWithName(a.configName()) == null) {
                     continue;

@@ -12,7 +12,7 @@ import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.events.ScriptEvent;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 
@@ -26,7 +26,7 @@ public class PlotSquaredBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new PlotClearScriptEvent());
         ObjectFetcher.registerWithObjectFetcher(dPlotSquaredPlot.class);
         PropertyParser.registerProperty(PlotSquaredPlayerProperties.class, dPlayer.class);
-        PropertyParser.registerProperty(PlotSquaredElementProperties.class, Element.class);
+        PropertyParser.registerProperty(PlotSquaredElementProperties.class, ElementTag.class);
         PropertyParser.registerProperty(PlotSquaredLocationProperties.class, dLocation.class);
     }
 }

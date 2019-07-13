@@ -8,10 +8,10 @@ import com.nisovin.shopkeepers.api.ShopkeepersPlugin;
 import com.nisovin.shopkeepers.api.shopobjects.entity.EntityShopObject;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dItem;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.core.EscapeTags;
@@ -22,7 +22,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
-public class ShopKeeper implements dObject {
+public class ShopKeeper implements ObjectTag {
 
     public static ShopKeeper valueOf(String string) {
         return valueOf(string, null);
@@ -92,7 +92,7 @@ public class ShopKeeper implements dObject {
     }
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -140,38 +140,38 @@ public class ShopKeeper implements dObject {
 
         // <--[tag]
         // @attribute <shopkeeper@shopkeeper.is_active>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the Shopkeeper is active.
         // @Plugin Depenizen, ShopKeepers
         // -->
         if (attribute.startsWith("is_active")) {
-            return new Element(shopkeeper.isActive()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(shopkeeper.isActive()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <shopkeeper@shopkeeper.is_ui_active>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the Shopkeeper is currently in a trade.
         // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("is_ui_active")) {
-            return new Element(shopkeeper.isUIActive()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(shopkeeper.isUIActive()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <shopkeeper@shopkeeper.trades>
-        // @returns dList(dList)
+        // @returns ListTag(dList)
         // @description
-        // Returns an escaped dList of the Shopkeeper's trades.
+        // Returns an escaped ListTag of the Shopkeeper's trades.
         // NOTE: see '!language Property Escaping'.
         // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("trades") || attribute.startsWith("recipes")) {
-            dList trades = new dList();
+            ListTag trades = new ListTag();
             for (TradingRecipe trade : shopkeeper.getTradingRecipes(null)) {
-                dList recipe = wrapTradingRecipe(trade);
+                ListTag recipe = wrapTradingRecipe(trade);
                 trades.add(EscapeTags.escape(recipe.identify()));
             }
             return trades.getAttribute(attribute.fulfill(1));
@@ -190,25 +190,25 @@ public class ShopKeeper implements dObject {
 
         // <--[tag]
         // @attribute <shopkeeper@shopkeeper.type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Always returns 'ShopKeeper' for ShopKeeper objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
         // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("type")) {
-            return new Element("ShopKeeper").getAttribute(attribute.fulfill(1));
+            return new ElementTag("ShopKeeper").getAttribute(attribute.fulfill(1));
         }
 
         return null;
     }
 
-    public static dList wrapTradingRecipe(TradingRecipe tradingRecipe) {
+    public static ListTag wrapTradingRecipe(TradingRecipe tradingRecipe) {
         ItemStack item1 = tradingRecipe.getItem1();
         ItemStack item2 = tradingRecipe.getItem2();
         ItemStack resultItem = tradingRecipe.getResultItem();
 
-        dList recipe = new dList();
+        ListTag recipe = new ListTag();
         recipe.add(wrapTradeItem(item1).identify());
         recipe.add(wrapTradeItem(item2).identify());
         recipe.add(wrapTradeItem(resultItem).identify());

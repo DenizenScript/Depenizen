@@ -9,7 +9,7 @@ import me.lucko.luckperms.api.Track;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
@@ -34,13 +34,13 @@ public class LuckPermsBridge extends Bridge {
 
         // <--[tag]
         // @attribute <luckperms.list_tracks>
-        // @returns dList(luckpermstrack)
+        // @returns ListTag(luckpermstrack)
         // @description
         // Returns a list of all tracks.
         // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("list_tracks")) {
-            dList tracks = new dList();
+            ListTag tracks = new ListTag();
             LuckPermsApi api = LuckPerms.getApi();
             for (Track track : api.getTracks()) {
                 tracks.add(new LuckPermsTrack(track).identify());

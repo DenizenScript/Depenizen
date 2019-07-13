@@ -7,8 +7,8 @@ import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class GriefPreventionLocationProperties implements Property {
@@ -25,11 +25,11 @@ public class GriefPreventionLocationProperties implements Property {
 
     static DataStore dataStore = GriefPrevention.instance.dataStore;
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dLocation;
     }
 
-    public static GriefPreventionLocationProperties getFrom(dObject object) {
+    public static GriefPreventionLocationProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -68,21 +68,21 @@ public class GriefPreventionLocationProperties implements Property {
 
             // <--[tag]
             // @attribute <l@location.griefprevention.has_claim[(<ignore_height>)]>
-            // @returns Element(Boolean)
+            // @returns ElementTag(Boolean)
             // @description
             // Returns whether there is a GriefPreventionClaim at this location.
             // Optionally specify an Element(Boolean) for whether to ignore Y axis.
             // @Plugin Depenizen, GriefPrevention
             // -->
             if (attribute.startsWith("has_claim")) {
-                Element ignoreHeight = new Element(false);
+                ElementTag ignoreHeight = new ElementTag(false);
                 if (attribute.hasContext(1)) {
-                    ignoreHeight = new Element(attribute.getContext(1));
+                    ignoreHeight = new ElementTag(attribute.getContext(1));
                     if (!ignoreHeight.asString().isEmpty() || !ignoreHeight.isBoolean()) {
-                        ignoreHeight = new Element(true);
+                        ignoreHeight = new ElementTag(true);
                     }
                 }
-                return new Element(dataStore.getClaimAt(location, ignoreHeight.asBoolean(), null) != null).getAttribute(attribute.fulfill(1));
+                return new ElementTag(dataStore.getClaimAt(location, ignoreHeight.asBoolean(), null) != null).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]

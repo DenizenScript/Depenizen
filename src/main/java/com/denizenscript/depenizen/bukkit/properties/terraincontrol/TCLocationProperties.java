@@ -5,8 +5,8 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.khorn.terraincontrol.LocalBiome;
 import com.khorn.terraincontrol.TerrainControl;
 import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class TCLocationProperties implements Property {
@@ -26,11 +26,11 @@ public class TCLocationProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dLocation;
     }
 
-    public static TCLocationProperties getFrom(dObject object) {
+    public static TCLocationProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -62,24 +62,24 @@ public class TCLocationProperties implements Property {
 
             // <--[tag]
             // @attribute <l@location.tc_biome.name>
-            // @returns Element
+            // @returns ElementTag
             // @description
             // Returns the TerrainControl biome name at this location, if any.
             // @Plugin Depenizen, TerrainControl
             // -->
             if (attribute.startsWith("name")) {
-                return new Element(biome.getName()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(biome.getName()).getAttribute(attribute.fulfill(1));
             }
 
             else if (attribute.startsWith("temperature")) {
                 // <--[tag]
                 // @attribute <l@location.tc_biome.temperature>
-                // @returns Element
+                // @returns ElementTag
                 // @description
                 // Returns the TerrainControl biome temperature at this location, if any.
                 // @Plugin Depenizen, TerrainControl
                 // -->
-                return new Element(biome.getTemperatureAt(location.getBlockX(), location.getBlockY(), location.getBlockZ()))
+                return new ElementTag(biome.getTemperatureAt(location.getBlockX(), location.getBlockY(), location.getBlockZ()))
                         .getAttribute(attribute.fulfill(1));
             }
         }

@@ -4,15 +4,15 @@ import com.bekvon.bukkit.residence.Residence;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
-public class dResidence implements dObject {
+public class dResidence implements ObjectTag {
 
     public static dResidence valueOf(String string) {
         return dResidence.valueOf(string, null);
@@ -84,7 +84,7 @@ public class dResidence implements dObject {
     }
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -110,13 +110,13 @@ public class dResidence implements dObject {
 
         // <--[tag]
         // @attribute <residence@residence.name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the name of the residence.
         // @Plugin Depenizen, Residence
         // -->
         if (attribute.startsWith("name")) {
-            return new Element(residence.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(residence.getName()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -132,16 +132,16 @@ public class dResidence implements dObject {
 
         // <--[tag]
         // @attribute <residence@residence.is_within[<location>]>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the specified location is within this Residence.
         // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("is_within") && attribute.hasContext(1)) {
             dLocation location = dLocation.valueOf(attribute.getContext(1));
-            return new Element(residence.containsLoc(location)).getAttribute(attribute.fulfill(1));
+            return new ElementTag(residence.containsLoc(location)).getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
     }
 }

@@ -5,9 +5,9 @@ import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -49,7 +49,7 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
     public static mcMMOPlayerLevelUpScriptEvent instance;
     public McMMOPlayerLevelUpEvent event;
     public dPlayer player;
-    public Element skill;
+    public ElementTag skill;
     public int new_level;
     public int levels_gained;
     public String cause;
@@ -95,21 +95,21 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("skill")) {
             return skill;
         }
         else if (name.equals("new_level")) {
-            return new Element(new_level);
+            return new ElementTag(new_level);
         }
         else if (name.equals("old_level")) {
-            return new Element(new_level - levels_gained);
+            return new ElementTag(new_level - levels_gained);
         }
         else if (name.equals("levels_gained")) {
-            return new Element(levels_gained);
+            return new ElementTag(levels_gained);
         }
         else if (name.equals("cause")) {
-            return new Element(cause);
+            return new ElementTag(cause);
         }
         return super.getContext(name);
     }
@@ -123,7 +123,7 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
         levels_gained = event.getLevelsGained();
         new_level = event.getSkillLevel();
         cause = event.getXpGainReason().toString();
-        skill = new Element(event.getSkill().getName());
+        skill = new ElementTag(event.getSkill().getName());
         this.event = event;
         fire(event);
         event.setLevelsGained(levels_gained);

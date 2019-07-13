@@ -5,8 +5,8 @@ import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -37,7 +37,7 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
     public static SkyBlockCreatedScriptEvent instance;
     public IslandNewEvent event;
     public dLocation location;
-    public Element schematic;
+    public ElementTag schematic;
     public dPlayer owner;
 
     public SkyBlockCreatedScriptEvent() {
@@ -70,7 +70,7 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("owner")) {
             return owner;
         }
@@ -86,7 +86,7 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
     @EventHandler
     public void onSkyBlockCreated(IslandNewEvent event) {
         location = new dLocation(event.getIslandLocation());
-        schematic = new Element(event.getSchematicName().getName());
+        schematic = new ElementTag(event.getSchematicName().getName());
         owner = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         this.event = event;
         fire(event);

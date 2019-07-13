@@ -5,8 +5,8 @@ import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -42,7 +42,7 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
     public static SkillAPIPlayerUnlocksSkillScriptEvent instance;
     public PlayerSkillUnlockEvent event;
     public dPlayer player;
-    public Element skill;
+    public ElementTag skill;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -81,7 +81,7 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("skill_name")) {
             return skill;
         }
@@ -94,7 +94,7 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
             return;
         }
         player = dPlayer.mirrorBukkitPlayer(event.getPlayerData().getPlayer());
-        skill = new Element(event.getUnlockedSkill().getData().getName());
+        skill = new ElementTag(event.getUnlockedSkill().getData().getName());
         this.event = event;
         fire(event);
     }

@@ -15,7 +15,7 @@ import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.TagRunnable;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
@@ -72,14 +72,14 @@ public class EssentialsBridge extends Bridge {
 
         // <--[tag]
         // @attribute <essentials.list_warps>
-        // @returns dList(Element)
+        // @returns ListTag(Element)
         // @description
         // Returns a list of all Warp names.
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("list_warps")) {
             Essentials essentials = (Essentials) plugin;
-            dList warps = new dList();
+            ListTag warps = new ListTag();
             warps.addAll(essentials.getWarps().getList());
             event.setReplacedObject(warps.getObjectAttribute(attribute.fulfill(1)));
         }

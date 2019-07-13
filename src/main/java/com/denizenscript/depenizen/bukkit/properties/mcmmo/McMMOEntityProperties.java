@@ -2,9 +2,9 @@ package com.denizenscript.depenizen.bukkit.properties.mcmmo;
 
 import com.gmail.nossr50.mcMMO;
 import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.tags.Attribute;
 
@@ -25,11 +25,11 @@ public class McMMOEntityProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dEntity;
     }
 
-    public static McMMOEntityProperties getFrom(dObject object) {
+    public static McMMOEntityProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -60,13 +60,13 @@ public class McMMOEntityProperties implements Property {
 
             // <--[tag]
             // @attribute <e@entity.mcmmo.is_spawned_mob>
-            // @returns Element(Boolean)
+            // @returns ElementTag(Boolean)
             // @description
             // Returns whether the entity is tracked by McMMO as a 'spawned' mob (one from a spawner block or spawn egg).
             // @Plugin Depenizen, mcMMO
             // -->
             if (attribute.startsWith("is_spawned_mob")) {
-                return new Element(entity.getBukkitEntity().hasMetadata(mcMMO.entityMetadataKey))
+                return new ElementTag(entity.getBukkitEntity().hasMetadata(mcMMO.entityMetadataKey))
                         .getAttribute(attribute.fulfill(1));
             }
         }

@@ -5,17 +5,17 @@ import com.gmail.nossr50.datatypes.player.McMMOPlayer;
 import com.gmail.nossr50.party.PartyManager;
 import com.gmail.nossr50.util.player.UserManager;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 import java.util.UUID;
 
-public class dParty implements dObject {
+public class dParty implements ObjectTag {
 
     public static dParty valueOf(String string) {
         return dParty.valueOf(string, null);
@@ -99,7 +99,7 @@ public class dParty implements dObject {
     }
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -117,13 +117,13 @@ public class dParty implements dObject {
 
         // <--[tag]
         // @attribute <party@party.name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the name of the party.
         // @Plugin Depenizen, mcMMO
         // -->
         if (attribute.startsWith("name")) {
-            return new Element(party.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(party.getName()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -139,19 +139,19 @@ public class dParty implements dObject {
 
         // <--[tag]
         // @attribute <party@party.members>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of all party members.
         // @Plugin Depenizen, mcMMO
         // -->
         else if (attribute.startsWith("members")) {
-            dList players = new dList();
+            ListTag players = new ListTag();
             for (UUID uuid : party.getMembers().keySet()) {
                 players.add(dPlayer.valueOf(uuid.toString()).identify());
             }
             return players.getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
     }
 }

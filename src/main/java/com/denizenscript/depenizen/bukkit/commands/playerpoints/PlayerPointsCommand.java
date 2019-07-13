@@ -5,7 +5,7 @@ import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsBridge;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
@@ -93,8 +93,8 @@ public class PlayerPointsCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) {
 
         dPlayer target = scriptEntry.getdObject("target");
-        Element action = scriptEntry.getdObject("action");
-        Element amount = scriptEntry.getdObject("amount");
+        ElementTag action = scriptEntry.getdObject("action");
+        ElementTag amount = scriptEntry.getdObject("amount");
 
         // Report to dB
         Debug.report(scriptEntry, getName(), action.debug()

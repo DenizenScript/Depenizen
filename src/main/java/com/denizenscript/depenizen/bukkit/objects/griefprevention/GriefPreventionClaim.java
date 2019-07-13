@@ -19,7 +19,7 @@ import org.bukkit.Chunk;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class GriefPreventionClaim implements dObject, Adjustable {
+public class GriefPreventionClaim implements ObjectTag, Adjustable {
 
     static DataStore dataStore = GriefPrevention.instance.dataStore;
 
@@ -56,7 +56,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
     Claim claim;
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -108,24 +108,24 @@ public class GriefPreventionClaim implements dObject, Adjustable {
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.id>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the GriefPreventionClaim's ID.
         // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("id")) {
-            return new Element(claim.getID()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(claim.getID()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.managers>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns the GriefPreventionClaim's managers.
         // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("managers")) {
-            dList managers = new dList();
+            ListTag managers = new ListTag();
             for (String manager : claim.managers) {
                 managers.add(new dPlayer(UUID.fromString(manager)).identify());
             }
@@ -134,13 +134,13 @@ public class GriefPreventionClaim implements dObject, Adjustable {
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.trusted>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns the GriefPreventionClaim's trusted.
         // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("trusted")) {
-            dList trusted = new dList();
+            ListTag trusted = new ListTag();
             ArrayList<String> b = new ArrayList<>();
             claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             for (String trust : b) {
@@ -151,13 +151,13 @@ public class GriefPreventionClaim implements dObject, Adjustable {
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.builders>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns the GriefPreventionClaim's builders.
         // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("builders")) {
-            dList trusted = new dList();
+            ListTag trusted = new ListTag();
             ArrayList<String> b = new ArrayList<>();
             claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             for (String trust : b) {
@@ -168,13 +168,13 @@ public class GriefPreventionClaim implements dObject, Adjustable {
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.containers>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns the GriefPreventionClaim's containers.
         // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("containers")) {
-            dList trusted = new dList();
+            ListTag trusted = new ListTag();
             ArrayList<String> c = new ArrayList<>();
             claim.getPermissions(new ArrayList<>(), c, new ArrayList<>(), new ArrayList<>());
             for (String container : c) {
@@ -185,13 +185,13 @@ public class GriefPreventionClaim implements dObject, Adjustable {
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.accessors>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns the GriefPreventionClaim's accessors.
         // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("accessors")) {
-            dList trusted = new dList();
+            ListTag trusted = new ListTag();
             ArrayList<String> a = new ArrayList<>();
             claim.getPermissions(new ArrayList<>(), new ArrayList<>(), a, new ArrayList<>());
             for (String access : a) {
@@ -211,7 +211,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
         // -->
         else if (attribute.startsWith("owner")) {
             if (claim.isAdminClaim()) {
-                return new Element("Admin").getAttribute(attribute.fulfill(1));
+                return new ElementTag("Admin").getAttribute(attribute.fulfill(1));
             }
             return new dPlayer(claim.ownerID)
                     .getAttribute(attribute.fulfill(1));
@@ -234,24 +234,24 @@ public class GriefPreventionClaim implements dObject, Adjustable {
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.is_adminclaim>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether GriefPreventionClaim is an Admin Claim.
         // @Plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("is_adminclaim") || attribute.startsWith("is_admin_claim")) {
-            return new Element(claim.isAdminClaim()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(claim.isAdminClaim()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.chunks>
-        // @returns dList(dChunk)
+        // @returns ListTag(dChunk)
         // @description
         // Returns a list of all chunks in the GriefPreventionClaim.
         // @Plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("chunks")) {
-            dList chunks = new dList();
+            ListTag chunks = new ListTag();
             for (Chunk chunk : claim.getChunks()) {
                 chunks.add(new dChunk(chunk).identify());
             }
@@ -260,7 +260,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
 
         // <--[tag]
         // @attribute <gpclaim@gpclaim.can_siege[<player>]>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the GriefPreventionClaim can siege the player.
         // @Plugin Depenizen, GriefPrevention
@@ -270,10 +270,10 @@ public class GriefPreventionClaim implements dObject, Adjustable {
             if (defender == null || defender.getPlayerEntity() == null) {
                 return null;
             }
-            return new Element(claim.canSiege(defender.getPlayerEntity())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(claim.canSiege(defender.getPlayerEntity())).getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
     }
 
     @Override

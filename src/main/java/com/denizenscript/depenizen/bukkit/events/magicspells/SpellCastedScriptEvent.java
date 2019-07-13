@@ -4,8 +4,8 @@ import com.nisovin.magicspells.events.SpellCastedEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -43,7 +43,7 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     public dPlayer player;
     private float power;
     private float cooldown;
-    private Element spell;
+    private ElementTag spell;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -73,12 +73,12 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("power")) {
-            return new Element(power);
+            return new ElementTag(power);
         }
         else if (name.equals("cooldown")) {
-            return new Element(cooldown);
+            return new ElementTag(cooldown);
         }
         else if (name.equals("spell_name")) {
             return spell;
@@ -91,7 +91,7 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
         player = dPlayer.mirrorBukkitPlayer(event.getCaster());
         power = event.getPower();
         cooldown = event.getCooldown();
-        spell = new Element(event.getSpell().getName());
+        spell = new ElementTag(event.getSpell().getName());
         this.event = event;
         fire(event);
     }

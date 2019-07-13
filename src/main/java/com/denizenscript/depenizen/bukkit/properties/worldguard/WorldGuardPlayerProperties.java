@@ -12,8 +12,8 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.Location;
@@ -36,12 +36,12 @@ public class WorldGuardPlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer
                 && ((dPlayer) object).isOnline();
     }
 
-    public static WorldGuardPlayerProperties getFrom(dObject object) {
+    public static WorldGuardPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -76,7 +76,7 @@ public class WorldGuardPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.worldguard.can_build[<location>]>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Whether WorldGuard allows to build at a location.
         // @Plugin Depenizen, WorldGuard
@@ -87,13 +87,13 @@ public class WorldGuardPlayerProperties implements Property {
                 return null;
             }
             WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
-            return new Element(WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), worldGuard.wrapPlayer(player)))
+            return new ElementTag(WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), worldGuard.wrapPlayer(player)))
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.worldguard.test_flag[<name>]>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns the state of a flag for that player at their location.
         // For example: .test_flag[pvp] returns 'true' when the player can be attacked.
@@ -116,7 +116,7 @@ public class WorldGuardPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.worldguard.test_flag[<name>].at[<location>]>
-            // @returns Element(Boolean)
+            // @returns ElementTag(Boolean)
             // @description
             // Returns the state of a flag for that player at the specified location.
             // @Plugin Depenizen, WorldGuard
@@ -129,7 +129,7 @@ public class WorldGuardPlayerProperties implements Property {
                 }
             }
             WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
-            return new Element(query.testState(BukkitAdapter.adapt(loc), worldGuard.wrapPlayer(player), flag))
+            return new ElementTag(query.testState(BukkitAdapter.adapt(loc), worldGuard.wrapPlayer(player), flag))
                     .getAttribute(attribute.fulfill(args));
         }
 

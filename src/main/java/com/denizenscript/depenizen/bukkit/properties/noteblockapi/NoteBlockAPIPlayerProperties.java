@@ -4,8 +4,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class NoteBlockAPIPlayerProperties implements Property {
@@ -20,11 +20,11 @@ public class NoteBlockAPIPlayerProperties implements Property {
         return "NoteBlockAPIPlayer";
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static NoteBlockAPIPlayerProperties getFrom(dObject object) {
+    public static NoteBlockAPIPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -55,13 +55,13 @@ public class NoteBlockAPIPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.nbs_is_playing>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns true if the player is currently listening to a note block song.
         // @Plugin Depenizen, NoteBlockAPI
         // -->
         if (attribute.startsWith("nbs_is_playing")) {
-            return new Element(NoteBlockAPI.isReceivingSong(player.getPlayerEntity())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(NoteBlockAPI.isReceivingSong(player.getPlayerEntity())).getAttribute(attribute.fulfill(1));
         }
 
         return null;
@@ -69,6 +69,6 @@ public class NoteBlockAPIPlayerProperties implements Property {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
+        ElementTag value = mechanism.getValue();
     }
 }

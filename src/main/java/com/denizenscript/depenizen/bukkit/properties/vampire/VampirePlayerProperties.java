@@ -4,8 +4,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.massivecraft.vampire.entity.UPlayer;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class VampirePlayerProperties implements Property {
@@ -25,11 +25,11 @@ public class VampirePlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static VampirePlayerProperties getFrom(dObject object) {
+    public static VampirePlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -59,46 +59,46 @@ public class VampirePlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.is_vampire>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns true if the player is a vampire.
         // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("is_vampire")) {
-            return new Element(uPlayer.isVampire()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(uPlayer.isVampire()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.is_ínfected>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns true if the player is infected.
         // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("is_ínfected")) {
-            return new Element(uPlayer.isInfected()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(uPlayer.isInfected()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.combat_infect>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the value of the combat infection risk.
         // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("combat_infect")) {
-            return new Element(uPlayer.combatInfectRisk()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(uPlayer.combatInfectRisk()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <p@player.combat_damage>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the value of the combat damage factor.
         // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("combat_damage")) {
-            return new Element(uPlayer.combatDamageFactor()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(uPlayer.combatDamageFactor()).getAttribute(attribute.fulfill(1));
         }
 
         return null;

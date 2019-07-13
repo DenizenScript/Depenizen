@@ -4,8 +4,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.wasteofplastic.askyblock.ASkyBlockAPI;
 import com.denizenscript.denizen.objects.dWorld;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class ASkyBlockWorldProperties implements Property {
@@ -25,11 +25,11 @@ public class ASkyBlockWorldProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dWorld;
     }
 
-    public static ASkyBlockWorldProperties getFrom(dObject object) {
+    public static ASkyBlockWorldProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -60,13 +60,13 @@ public class ASkyBlockWorldProperties implements Property {
 
         // <--[tag]
         // @attribute <w@world.is_skyblock_world>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the world is used by A SkyBlock.
         // @Plugin Depenizen, A SkyBlock
         // -->
         if (attribute.startsWith("is_skyblock_world")) {
-            return new Element(api.getIslandWorld() == world.getWorld() ||
+            return new ElementTag(api.getIslandWorld() == world.getWorld() ||
                     api.getNetherWorld() == world.getWorld()).getAttribute(attribute.fulfill(1));
         }
 

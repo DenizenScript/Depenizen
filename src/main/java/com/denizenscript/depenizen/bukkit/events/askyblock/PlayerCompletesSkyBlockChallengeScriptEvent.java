@@ -5,9 +5,9 @@ import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -39,10 +39,10 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
 
     public static PlayerCompletesSkyBlockChallengeScriptEvent instance;
     public ChallengeCompleteEvent event;
-    public Element challenge;
-    public Element xp_reward;
-    public Element money_reward;
-    public dList item_rewards;
+    public ElementTag challenge;
+    public ElementTag xp_reward;
+    public ElementTag money_reward;
+    public ListTag item_rewards;
 
     public PlayerCompletesSkyBlockChallengeScriptEvent() {
         instance = this;
@@ -74,7 +74,7 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("challenge")) {
             return challenge;
         }
@@ -92,10 +92,10 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
 
     @EventHandler
     public void onPlayerCompletesSkyBlockChallenge(ChallengeCompleteEvent event) {
-        challenge = new Element(event.getChallengeName());
-        xp_reward = new Element(event.getExpReward());
-        money_reward = new Element(event.getMoneyReward());
-        item_rewards = new dList();
+        challenge = new ElementTag(event.getChallengeName());
+        xp_reward = new ElementTag(event.getExpReward());
+        money_reward = new ElementTag(event.getMoneyReward());
+        item_rewards = new ListTag();
         for (String i : event.getItemRewards()) {
             dItem item = dItem.valueOf(i);
             if (item != null) {

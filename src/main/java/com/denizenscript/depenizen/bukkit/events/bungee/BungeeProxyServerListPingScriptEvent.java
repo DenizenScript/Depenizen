@@ -3,9 +3,9 @@ package com.denizenscript.depenizen.bukkit.events.bungee;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -30,8 +30,8 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     //
     // @Determine
     // "MAX_PLAYERS:" + Element(Number) to change the listed maximum number of players.
-    // "VERSION:" + Element to change the listed server version.
-    // "MOTD:" + Element to change the server MOTD that will be displayed.
+    // "VERSION:" + ElementTag to change the listed server version.
+    // "MOTD:" + ElementTag to change the server MOTD that will be displayed.
     //
     // -->
 
@@ -101,24 +101,24 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
 
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("address")) {
-            return new Element(address);
+            return new ElementTag(address);
         }
         else if (name.equals("num_players") || name.equals("current_players")) {
-            return new Element(currentPlayers);
+            return new ElementTag(currentPlayers);
         }
         else if (name.equals("max_players")) {
-            return new Element(maxPlayers);
+            return new ElementTag(maxPlayers);
         }
         else if (name.equals("motd")) {
-            return new Element(motd);
+            return new ElementTag(motd);
         }
         else if (name.equals("protocol")) {
-            return new Element(protocol);
+            return new ElementTag(protocol);
         }
         else if (name.equals("version")) {
-            return new Element(version);
+            return new ElementTag(version);
         }
         return super.getContext(name);
     }

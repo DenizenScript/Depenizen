@@ -9,8 +9,8 @@ import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.BracedCommand;
 
@@ -53,7 +53,7 @@ public class BungeeCommand extends BracedCommand {
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
         for (Argument arg : ArgumentHelper.interpretArguments(scriptEntry.aHArgs)) {
             if (!scriptEntry.hasObject("servers")) {
-                scriptEntry.addObject("servers", arg.asType(dList.class));
+                scriptEntry.addObject("servers", arg.asType(ListTag.class));
             }
             else if (arg.matchesOne("{")) {
                 break;
@@ -70,7 +70,7 @@ public class BungeeCommand extends BracedCommand {
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-        dList servers = scriptEntry.getdObject("servers");
+        ListTag servers = scriptEntry.getdObject("servers");
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), servers.debug());
         }
@@ -94,7 +94,7 @@ public class BungeeCommand extends BracedCommand {
         }
         StringBuilder defNames = new StringBuilder();
         StringBuilder defValues = new StringBuilder();
-        for (Map.Entry<String, dObject> def : scriptEntry.getResidingQueue().getAllDefinitions().entrySet()) {
+        for (Map.Entry<String, ObjectTag> def : scriptEntry.getResidingQueue().getAllDefinitions().entrySet()) {
             defNames.append(escape(def.getKey())).append("\n");
             defValues.append(escape(def.getValue().toString())).append("\n");
         }

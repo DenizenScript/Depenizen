@@ -6,8 +6,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.residence.dResidence;
 import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class ResidenceLocationProperties implements Property {
@@ -22,11 +22,11 @@ public class ResidenceLocationProperties implements Property {
         return "ResidenceLocation";
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dLocation;
     }
 
-    public static ResidenceLocationProperties getFrom(dObject object) {
+    public static ResidenceLocationProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -56,14 +56,14 @@ public class ResidenceLocationProperties implements Property {
     public String getAttribute(Attribute attribute) {
         // <--[tag]
         // @attribute <l@location.has_residence>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns if the location has a residence.
         // @Plugin Depenizen, Residence
         // -->
         if (attribute.startsWith("has_residence")) {
             ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);
-            return new Element(res != null).getAttribute(attribute.fulfill(1));
+            return new ElementTag(res != null).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -86,6 +86,6 @@ public class ResidenceLocationProperties implements Property {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        Element value = mechanism.getValue();
+        ElementTag value = mechanism.getValue();
     }
 }

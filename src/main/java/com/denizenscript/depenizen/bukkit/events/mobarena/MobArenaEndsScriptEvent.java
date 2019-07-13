@@ -4,8 +4,8 @@ import com.garbagemule.MobArena.events.ArenaEndEvent;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -40,7 +40,7 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     public static MobArenaEndsScriptEvent instance;
     public ArenaEndEvent event;
     public MobArenaArena arena;
-    public Element wave;
+    public ElementTag wave;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -71,7 +71,7 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("arena")) {
             return arena;
         }
@@ -84,7 +84,7 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     @EventHandler
     public void onMobArenaEnds(ArenaEndEvent event) {
         arena = new MobArenaArena(event.getArena());
-        wave = new Element(event.getArena().getWaveManager().getWaveNumber());
+        wave = new ElementTag(event.getArena().getWaveManager().getWaveNumber());
         this.event = event;
         fire(event);
     }

@@ -1,8 +1,8 @@
 package com.denizenscript.depenizen.bukkit.properties.pvpstats;
 
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
@@ -25,11 +25,11 @@ public class PVPStatsPlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static PVPStatsPlayerProperties getFrom(dObject object) {
+    public static PVPStatsPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -60,57 +60,57 @@ public class PVPStatsPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <p@player.pvpstats.deaths>
-            // @returns Element
+            // @returns ElementTag
             // @description
             // Returns the number of times the player has died.
             // @Plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("deaths")) {
-                return new Element(PVPData.getDeaths(playerName)).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PVPData.getDeaths(playerName)).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
             // @attribute <p@player.pvpstats.elo>
-            // @returns Element
+            // @returns ElementTag
             // @description
             // Returns the Elo rating of the player.
             // @Plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("elo")) {
-                return new Element(PVPData.getEloScore(playerName)).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PVPData.getEloScore(playerName)).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
             // @attribute <p@player.pvpstats.kills>
-            // @returns Element
+            // @returns ElementTag
             // @description
             // Returns the number of players the player has killed.
             // @Plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("kills")) {
-                return new Element(PVPData.getKills(playerName)).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PVPData.getKills(playerName)).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
             // @attribute <p@player.pvpstats.streak>
-            // @returns Element
+            // @returns ElementTag
             // @description
             // Returns the current kill streak of the player.
             // @Plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("streak")) {
-                return new Element(PVPData.getStreak(playerName)).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PVPData.getStreak(playerName)).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
             // @attribute <p@player.pvpstats.max_streak>
-            // @returns Element
+            // @returns ElementTag
             // @description
             // Returns the highest kill streak of the player.
             // @Plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("max_streak")) {
-                return new Element(PVPData.getMaxStreak(playerName)).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PVPData.getMaxStreak(playerName)).getAttribute(attribute.fulfill(1));
             }
 
         }

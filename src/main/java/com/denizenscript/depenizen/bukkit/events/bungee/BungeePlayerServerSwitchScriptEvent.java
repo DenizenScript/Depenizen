@@ -3,8 +3,8 @@ package com.denizenscript.depenizen.bukkit.events.bungee;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import org.bukkit.Bukkit;
@@ -73,15 +73,15 @@ public class BungeePlayerServerSwitchScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("name")) {
-            return new Element(name);
+            return new ElementTag(name);
         }
         else if (name.equals("uuid")) {
-            return new Element(uuid.toString());
+            return new ElementTag(uuid.toString());
         }
         else if (name.equals("server")) {
-            return new Element(newServer);
+            return new ElementTag(newServer);
         }
         return super.getContext(name);
     }

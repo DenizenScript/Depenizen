@@ -7,8 +7,8 @@ import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.github.intellectualsites.plotsquared.plot.object.Plot;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.objects.dWorld;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class PlotSquaredPlayerProperties implements Property {
@@ -23,11 +23,11 @@ public class PlotSquaredPlayerProperties implements Property {
         return "PlotSquaredPlayer";
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static PlotSquaredPlayerProperties getFrom(dObject object) {
+    public static PlotSquaredPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -58,7 +58,7 @@ public class PlotSquaredPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <p@player.plotsquared_plots[<w@world>]>
-        // @returns dList(dPlotSquaredPlot)
+        // @returns ListTag(dPlotSquaredPlot)
         // @description
         // Returns a list of plots a player has in a world. Exclude the context to get plots in all worlds.
         // @Plugin Depenizen, PlotSquared
@@ -69,14 +69,14 @@ public class PlotSquaredPlayerProperties implements Property {
                 if (world == null) {
                     return null;
                 }
-                dList plots = new dList();
+                ListTag plots = new ListTag();
                 for (Plot plays : PlotPlayer.wrap(player.getPlayerEntity()).getPlots(world.getName())) {
                     plots.add(new dPlotSquaredPlot(plays).identify());
                 }
                 return plots.getAttribute(attribute.fulfill(1));
             }
             else {
-                dList plots = new dList();
+                ListTag plots = new ListTag();
                 for (Plot plays : PlotPlayer.wrap(player.getPlayerEntity()).getPlots()) {
                     plots.add(new dPlotSquaredPlot(plays).identify());
                 }

@@ -6,9 +6,9 @@ import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -41,8 +41,8 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     // <context.cast_time> returns an Element(Number) of the cast time of the spell.
     // <context.cooldown> returns an Element(Decimal) of the cooldown of the spell.
     // <context.spell_reagent_TYPE> returns an Element(Number) of the reagent cost for the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
-    // <context.spell_reagent_variables> returns a dList in the form variable/cost|...
-    // <context.spell_reagent_items> returns a dList of dItems of reagent cost.
+    // <context.spell_reagent_variables> returns a ListTag in the form variable/cost|...
+    // <context.spell_reagent_items> returns a ListTag of dItems of reagent cost.
     //
     // @Determine
     // "POWER:" + Element(Number) to change the power of the spell.
@@ -50,7 +50,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     // "COOLDOWN:" + Element(Number) to change the cooldown.
     // "REAGENT:<TYPE>:" + Element(Number) to change the reagent cost of the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
     // "REAGANT:VARIABLE:<NAME>:" + Element(Decimal) to change the reagant cost for the given variable name.
-    // "REAGENT:ITEMS:" + dList(dItem) to change the reagent item cost.
+    // "REAGENT:ITEMS:" + ListTag(dItem) to change the reagent item cost.
     // "CLEAR_REAGENTS" to clear away all reagent costs.
     //
     // @Plugin Depenizen, MagicSpells
@@ -65,7 +65,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
 
     public SpellCastEvent event;
     public dPlayer player;
-    private Element spell;
+    private ElementTag spell;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -92,7 +92,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
         if (determination.length() > 0 && !isDefaultDetermination(determination)) {
             String lower = CoreUtilities.toLowerCase(determination);
             if (lower.startsWith("power:")) {
-                Element num = new Element(determination.substring("power:".length()));
+                ElementTag num = new ElementTag(determination.substring("power:".length()));
                 if (!num.isFloat()) {
                     Debug.echoError("Determination for 'power' must be a valid decimal number.");
                     return false;
@@ -101,7 +101,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                 return true;
             }
             else if (lower.startsWith("cast_time:")) {
-                Element max = new Element(determination.substring("cast_time:".length()));
+                ElementTag max = new ElementTag(determination.substring("cast_time:".length()));
                 if (!max.isInt()) {
                     Debug.echoError("Determination for 'cast_time' must be a valid number.");
                     return false;
@@ -110,7 +110,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                 return true;
             }
             else if (lower.startsWith("cooldown:")) {
-                Element num = new Element(determination.substring("cooldown:".length()));
+                ElementTag num = new ElementTag(determination.substring("cooldown:".length()));
                 if (!num.isFloat()) {
                     Debug.echoError("Determination for 'cooldown' must be a valid decimal number.");
                     return false;
@@ -130,25 +130,25 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     reagents = new SpellReagents();
                 }
                 if (typeLower.startsWith("mana:")) {
-                    reagents.setMana(new Element(type.substring("mana:".length())).asInt());
+                    reagents.setMana(new ElementTag(type.substring("mana:".length())).asInt());
                 }
                 else if (typeLower.startsWith("health:")) {
-                    reagents.setHealth(new Element(type.substring("health:".length())).asInt());
+                    reagents.setHealth(new ElementTag(type.substring("health:".length())).asInt());
                 }
                 else if (typeLower.startsWith("hunger:")) {
-                    reagents.setHunger(new Element(type.substring("hunger:".length())).asInt());
+                    reagents.setHunger(new ElementTag(type.substring("hunger:".length())).asInt());
                 }
                 else if (typeLower.startsWith("experience:")) {
-                    reagents.setExperience(new Element(type.substring("experience:".length())).asInt());
+                    reagents.setExperience(new ElementTag(type.substring("experience:".length())).asInt());
                 }
                 else if (typeLower.startsWith("levels:")) {
-                    reagents.setLevels(new Element(type.substring("levels:".length())).asInt());
+                    reagents.setLevels(new ElementTag(type.substring("levels:".length())).asInt());
                 }
                 else if (typeLower.startsWith("durability:")) {
-                    reagents.setDurability(new Element(type.substring("durability:".length())).asInt());
+                    reagents.setDurability(new ElementTag(type.substring("durability:".length())).asInt());
                 }
                 else if (typeLower.startsWith("money:")) {
-                    reagents.setMoney(new Element(type.substring("money:".length())).asFloat());
+                    reagents.setMoney(new ElementTag(type.substring("money:".length())).asFloat());
                 }
                 else if (typeLower.startsWith("variable:")) {
                     String variable = type.substring("variable:".length());
@@ -156,11 +156,11 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     if (reagents.getVariables() == null) {
                         reagents.setVariables(new HashMap<>());
                     }
-                    reagents.getVariables().put(variable.substring(0, ind), new Element(variable.substring(ind + 1)).asDouble());
+                    reagents.getVariables().put(variable.substring(0, ind), new ElementTag(variable.substring(ind + 1)).asDouble());
                 }
                 else if (typeLower.startsWith("items:")) {
                     List<ItemStack> itemsToSet = new ArrayList<>();
-                    for (dItem item : new dList(type.substring("items:".length())).filter(dItem.class)) {
+                    for (dItem item : new ListTag(type.substring("items:".length())).filter(dItem.class)) {
                         itemsToSet.add(item.getItemStack());
                     }
                     reagents.setItems(itemsToSet);
@@ -178,15 +178,15 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("power")) {
-            return new Element(event.getPower());
+            return new ElementTag(event.getPower());
         }
         else if (name.equals("cast_time")) {
-            return new Element(event.getCastTime());
+            return new ElementTag(event.getCastTime());
         }
         else if (name.equals("cooldown")) {
-            return new Element(event.getCooldown());
+            return new ElementTag(event.getCooldown());
         }
         else if (name.equals("spell_name")) {
             return spell;
@@ -195,28 +195,28 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
             SpellReagents reagents = event.getReagents();
             if (reagents != null) {
                 if (name.equals("spell_reagant_mana")) {
-                    return new Element(reagents.getMana());
+                    return new ElementTag(reagents.getMana());
                 }
                 else if (name.equals("spell_reagant_health")) {
-                    return new Element(reagents.getHealth());
+                    return new ElementTag(reagents.getHealth());
                 }
                 else if (name.equals("spell_reagant_hunger")) {
-                    return new Element(reagents.getHunger());
+                    return new ElementTag(reagents.getHunger());
                 }
                 else if (name.equals("spell_reagant_experience")) {
-                    return new Element(reagents.getExperience());
+                    return new ElementTag(reagents.getExperience());
                 }
                 else if (name.equals("spell_reagant_levels")) {
-                    return new Element(reagents.getLevels());
+                    return new ElementTag(reagents.getLevels());
                 }
                 else if (name.equals("spell_reagant_durability")) {
-                    return new Element(reagents.getDurability());
+                    return new ElementTag(reagents.getDurability());
                 }
                 else if (name.equals("spell_reagant_money")) {
-                    return new Element(reagents.getMoney());
+                    return new ElementTag(reagents.getMoney());
                 }
                 else if (name.equals("spell_reagant_variables")) {
-                    dList list = new dList();
+                    ListTag list = new ListTag();
                     if (reagents.getVariables() != null) {
                         for (Map.Entry<String, Double> entry : reagents.getVariables().entrySet()) {
                             list.add(entry.getKey() + "/" + entry.getValue());
@@ -225,7 +225,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                     return list;
                 }
                 else if (name.equals("spell_reagant_items")) {
-                    dList list = new dList();
+                    ListTag list = new ListTag();
                     if (reagents.getItems() != null) {
                         for (ItemStack item : reagents.getItems()) {
                             list.addObject(new dItem(item));
@@ -241,7 +241,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     @EventHandler
     public void onPlayerCastsSpell(SpellCastEvent event) {
         player = dPlayer.mirrorBukkitPlayer(event.getCaster());
-        spell = new Element(event.getSpell().getName());
+        spell = new ElementTag(event.getSpell().getName());
         this.event = event;
         fire(event);
     }

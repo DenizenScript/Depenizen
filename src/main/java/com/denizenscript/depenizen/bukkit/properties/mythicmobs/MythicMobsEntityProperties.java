@@ -2,8 +2,8 @@ package com.denizenscript.depenizen.bukkit.properties.mythicmobs;
 
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
@@ -26,11 +26,11 @@ public class MythicMobsEntityProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dEntity;
     }
 
-    public static MythicMobsEntityProperties getFrom(dObject object) {
+    public static MythicMobsEntityProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -60,13 +60,13 @@ public class MythicMobsEntityProperties implements Property {
 
         // <--[tag]
         // @attribute <e@entity.is_mythicmob>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the entity is a MythicMob.
         // @Plugin Depenizen, MythicMobs
         // -->
         if (attribute.startsWith("is_mythic_mob") || attribute.startsWith("is_mythicmob")) {
-            return new Element(MythicMobsBridge.isMythicMob(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(MythicMobsBridge.isMythicMob(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

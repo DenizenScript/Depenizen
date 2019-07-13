@@ -5,9 +5,9 @@ import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -48,10 +48,10 @@ public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implement
     public static mcMMOPlayerLevelDownScriptEvent instance;
     public McMMOPlayerLevelDownEvent event;
     public dPlayer player;
-    public Element skill;
+    public ElementTag skill;
     public int new_level;
     public int levels_lost;
-    public Element cause;
+    public ElementTag cause;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -94,18 +94,18 @@ public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implement
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("skill")) {
             return skill;
         }
         else if (name.equals("new_level")) {
-            return new Element(new_level);
+            return new ElementTag(new_level);
         }
         else if (name.equals("old_level")) {
-            return new Element(new_level + levels_lost);
+            return new ElementTag(new_level + levels_lost);
         }
         else if (name.equals("levels_lost")) {
-            return new Element(levels_lost);
+            return new ElementTag(levels_lost);
         }
         else if (name.equals("cause")) {
             return cause;
@@ -121,8 +121,8 @@ public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implement
         player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
         levels_lost = event.getLevelsLost();
         new_level = event.getSkillLevel();
-        cause = new Element(event.getXpGainReason().toString());
-        skill = new Element(event.getSkill().getName());
+        cause = new ElementTag(event.getXpGainReason().toString());
+        skill = new ElementTag(event.getSkill().getName());
         this.event = event;
         fire(event);
         event.setLevelsLost(levels_lost);

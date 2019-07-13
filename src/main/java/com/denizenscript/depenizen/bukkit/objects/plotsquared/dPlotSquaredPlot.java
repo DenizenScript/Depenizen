@@ -1,9 +1,9 @@
 package com.denizenscript.depenizen.bukkit.objects.plotsquared;
 
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.github.intellectualsites.plotsquared.plot.object.Plot;
 import com.github.intellectualsites.plotsquared.plot.object.RegionWrapper;
 import com.github.intellectualsites.plotsquared.plot.util.MainUtil;
@@ -20,7 +20,7 @@ import org.bukkit.*;
 import java.util.List;
 import java.util.UUID;
 
-public class dPlotSquaredPlot implements dObject {
+public class dPlotSquaredPlot implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
@@ -69,7 +69,7 @@ public class dPlotSquaredPlot implements dObject {
     }
 
     /////////////////////
-    //   dObject Methods
+    //   ObjectTag Methods
     /////////////////
 
     private String prefix = "PlotSquaredPlot";
@@ -133,24 +133,24 @@ public class dPlotSquaredPlot implements dObject {
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.id_x>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the plot's X coordinate portion of its ID.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("x")) {
-            return new Element(plot.getId().x).getAttribute(attribute.fulfill(1));
+            return new ElementTag(plot.getId().x).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.id_Z>
-        // @returns Element(Number)
+        // @returns ElementTag(Number)
         // @description
         // Returns the plot's Z coordinate portion of its ID.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("z")) {
-            return new Element(plot.getId().y).getAttribute(attribute.fulfill(1));
+            return new ElementTag(plot.getId().y).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -190,13 +190,13 @@ public class dPlotSquaredPlot implements dObject {
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.owners>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of all owners of the plot.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("owners")) {
-            dList players = new dList();
+            ListTag players = new ListTag();
             for (UUID uuid : plot.getOwners()) {
                 players.add(dPlayer.valueOf(uuid.toString()).identify());
             }
@@ -205,13 +205,13 @@ public class dPlotSquaredPlot implements dObject {
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.trusted>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of all trusted of the plot.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("trusted")) {
-            dList players = new dList();
+            ListTag players = new ListTag();
             for (UUID uuid : plot.getTrusted()) {
                 players.add(dPlayer.valueOf(uuid.toString()).identify());
             }
@@ -220,13 +220,13 @@ public class dPlotSquaredPlot implements dObject {
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.members>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of all members of the plot.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("members")) {
-            dList players = new dList();
+            ListTag players = new ListTag();
             for (UUID uuid : plot.getMembers()) {
                 players.add(dPlayer.valueOf(uuid.toString()).identify());
             }
@@ -249,13 +249,13 @@ public class dPlotSquaredPlot implements dObject {
 
         // <--[tag]
         // @attribute <plotsquaredplot@plotsquaredplot.all_cuboids>
-        // @returns dList(dCuboid)
+        // @returns ListTag(dCuboid)
         // @description
         // Returns all the plot's cuboids in a list. Useful for merged plots.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("all_cuboids")) {
-            dList cuboids = new dList();
+            ListTag cuboids = new ListTag();
             dWorld world = dWorld.valueOf(plot.getArea().worldname);
             for (RegionWrapper region : plot.getRegions()) {
                 Location l1 = new Location(world.getWorld(), region.minX, region.minY, region.minZ);
@@ -265,7 +265,7 @@ public class dPlotSquaredPlot implements dObject {
             return cuboids.getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
 
     }
 }

@@ -10,7 +10,7 @@ import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Duration;
+import com.denizenscript.denizencore.objects.DurationTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
@@ -64,7 +64,7 @@ public class EffectLibCommand extends AbstractCommand {
 
             else if (!scriptEntry.hasObject("duration")
                     && arg.matchesPrefix("duration")) {
-                scriptEntry.addObject("duration", arg.asType(Duration.class));
+                scriptEntry.addObject("duration", arg.asType(DurationTag.class));
             }
 
             else if (!scriptEntry.hasObject("location")
@@ -104,7 +104,7 @@ public class EffectLibCommand extends AbstractCommand {
 
         dEntity target = (dEntity) scriptEntry.getObject("target");
         Action action = (Action) scriptEntry.getObject("action");
-        Duration duration = (Duration) scriptEntry.getObject("duration");
+        DurationTag duration = (DurationTag) scriptEntry.getObject("duration");
         dLocation location = (dLocation) scriptEntry.getObject("location");
 
         // Report to dB

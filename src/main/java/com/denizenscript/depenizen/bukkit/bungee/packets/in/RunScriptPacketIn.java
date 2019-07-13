@@ -7,8 +7,8 @@ import io.netty.buffer.ByteBuf;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dScript;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ScriptTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.queues.ScriptQueue;
 import com.denizenscript.denizencore.scripts.queues.core.InstantQueue;
@@ -61,14 +61,14 @@ public class RunScriptPacketIn extends PacketIn {
                         // Ignore
                     }
                 }
-                dScript script = dScript.valueOf(scriptName);
+                ScriptTag script = ScriptTag.valueOf(scriptName);
                 List<ScriptEntry> entries = script.getContainer().getBaseEntries(new BukkitScriptEntryData(linkedPlayer, null));
                 if (entries.size() == 0) {
                     return;
                 }
                 ScriptQueue queue = new InstantQueue("BUNGEERUN_" + scriptName).addEntries(entries);
                 int x = 1;
-                dList definitions = dList.valueOf(defs);
+                ListTag definitions = ListTag.valueOf(defs);
                 String[] definition_names = null;
                 try {
                     if (script != null && script.getContainer() != null) {

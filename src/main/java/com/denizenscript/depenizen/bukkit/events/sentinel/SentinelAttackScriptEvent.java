@@ -5,7 +5,7 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dNPC;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -39,7 +39,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
 
     public static SentinelAttackScriptEvent instance;
     public SentinelAttackEvent event;
-    public dObject entity;
+    public ObjectTag entity;
     public dNPC npc;
 
     @Override
@@ -68,7 +68,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.startsWith("entity")) {
             return entity;
         }

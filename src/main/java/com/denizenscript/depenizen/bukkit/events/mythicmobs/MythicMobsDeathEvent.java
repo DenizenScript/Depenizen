@@ -47,7 +47,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     // @Determine
     // "XP:" + Element(Number) to specify the new amount of XP to be dropped.
     // "CURRENCY:" + Element(Decimal) to specify the new amount of currency to be dropped.
-    // dList(dItem) to specify new items to be dropped.
+    // ListTag(dItem) to specify new items to be dropped.
     //
     // @Plugin Depenizen, MythicMobs
     //
@@ -62,9 +62,9 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     public MythicMobsMob mob;
     public dEntity entity;
     public dEntity killer;
-    public Element level;
-    public Element experience;
-    public Element currency;
+    public ElementTag level;
+    public ElementTag experience;
+    public ElementTag currency;
     public List<ItemStack> newDrops;
 
     @Override
@@ -109,18 +109,18 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         if (isDefaultDetermination(determination)) {
             Argument arg = new Argument(determination);
             if (arg.matchesPrefix("currency") && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Double)) {
-                currency = new Element(determination);
+                currency = new ElementTag(determination);
                 return true;
             }
             else if (ArgumentHelper.matchesInteger(determination)) { // "xp" prefix, but not required for back support reasons.
-                experience = new Element(determination);
+                experience = new ElementTag(determination);
                 return true;
             }
             else if (Argument.valueOf(determination).matchesArgumentList(dItem.class)) {
                 if (newDrops == null) {
                     newDrops = new ArrayList<>();
                 }
-                List<dItem> items = dList.valueOf(determination).filter(dItem.class, container);
+                List<dItem> items = ListTag.valueOf(determination).filter(dItem.class, container);
                 for (dItem i : items) {
                     newDrops.add(i.getItemStack());
                 }
@@ -136,7 +136,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("mob")) {
             return mob;
         }
@@ -153,7 +153,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
             return currency;
         }
         else if (name.equals("drops")) {
-            dList oldDrops = new dList();
+            ListTag oldDrops = new ListTag();
             for (ItemStack i : event.getDrops()) {
                 oldDrops.add(new dItem(i).identify());
             }
@@ -170,9 +170,9 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         mob = new MythicMobsMob(event.getMob());
         entity = new dEntity(event.getEntity());
         killer = new dEntity(event.getKiller());
-        level = new Element(event.getMobLevel());
-        experience = new Element(event.getExp());
-        currency = new Element(event.getCurrency());
+        level = new ElementTag(event.getMobLevel());
+        experience = new ElementTag(event.getExp());
+        currency = new ElementTag(event.getCurrency());
         newDrops = null;
         this.event = event;
         fire(event);

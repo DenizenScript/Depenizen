@@ -3,8 +3,8 @@ package com.denizenscript.depenizen.bukkit.events.essentials;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -35,7 +35,7 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
 
     public static PlayerAFKStatusScriptEvent instance;
     public AfkStatusChangeEvent event;
-    public Element afk;
+    public ElementTag afk;
 
     public PlayerAFKStatusScriptEvent() {
         instance = this;
@@ -78,7 +78,7 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("status")) {
             return afk;
         }
@@ -87,7 +87,7 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
 
     @EventHandler
     public void onPlayerAFKStatus(AfkStatusChangeEvent event) {
-        afk = new Element(event.getValue());
+        afk = new ElementTag(event.getValue());
         this.event = event;
         fire(event);
     }

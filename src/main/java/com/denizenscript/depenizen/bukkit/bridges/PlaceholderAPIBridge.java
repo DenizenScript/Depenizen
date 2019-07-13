@@ -5,7 +5,7 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.tags.BukkitTagContext;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
@@ -35,7 +35,7 @@ public class PlaceholderAPIBridge extends Bridge {
         Attribute attribute = event.getAttributes();
         // <--[tag]
         // @attribute <placeholder[<name>]>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the value of the placeholder.
         // @Plugin Depenizen, PlaceholderAPI
@@ -47,7 +47,7 @@ public class PlaceholderAPIBridge extends Bridge {
         }
         Player player = ((BukkitTagContext) event.getContext()).player != null ?
                 ((BukkitTagContext) event.getContext()).player.getPlayerEntity() : null;
-        event.setReplacedObject(new Element(PlaceholderAPI.setPlaceholders(player, "%" + placeholder + "%"))
+        event.setReplacedObject(new ElementTag(PlaceholderAPI.setPlaceholders(player, "%" + placeholder + "%"))
                 .getObjectAttribute(attribute.fulfill(1)));
     }
 

@@ -6,8 +6,8 @@ import com.wasteofplastic.askyblock.ASkyBlockAPI;
 import com.wasteofplastic.askyblock.Island;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class ASkyBlockLocationProperties implements Property {
@@ -27,11 +27,11 @@ public class ASkyBlockLocationProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject pl) {
+    public static boolean describes(ObjectTag pl) {
         return pl instanceof dLocation;
     }
 
-    public static ASkyBlockLocationProperties getFrom(dObject object) {
+    public static ASkyBlockLocationProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -63,13 +63,13 @@ public class ASkyBlockLocationProperties implements Property {
 
             // <--[tag]
             // @attribute <l@location.skyblock.has_skyblock>
-            // @returns Element(Boolean)
+            // @returns ElementTag(Boolean)
             // @description
             // Returns whether the location has a skyblock.
             // @Plugin Depenizen, A SkyBlock
             // -->
             if (attribute.startsWith("has_skyblock")) {
-                return new Element(api.getIslandAt(location) != null).getAttribute(attribute.fulfill(1));
+                return new ElementTag(api.getIslandAt(location) != null).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]

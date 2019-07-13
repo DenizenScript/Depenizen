@@ -4,8 +4,8 @@ import com.nisovin.shopkeepers.api.events.ShopkeeperTradeEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -41,7 +41,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     public ShopkeeperTradeEvent event;
     public ShopKeeper keeper;
     public dPlayer player;
-    public dList recipe;
+    public ListTag recipe;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -69,7 +69,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.startsWith("recipe")) {
             return recipe;
         }

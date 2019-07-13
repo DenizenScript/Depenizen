@@ -8,7 +8,7 @@ import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobsPlayer;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class JobsPlayerProperties implements Property {
@@ -28,11 +28,11 @@ public class JobsPlayerProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dPlayer;
     }
 
-    public static JobsPlayerProperties getFrom(dObject object) {
+    public static JobsPlayerProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }

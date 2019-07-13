@@ -4,14 +4,14 @@ import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
-public class LuckPermsTrack implements dObject {
+public class LuckPermsTrack implements ObjectTag {
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
@@ -59,7 +59,7 @@ public class LuckPermsTrack implements dObject {
     }
 
     /////////////////////
-    //   dObject Methods
+    //   ObjectTag Methods
     /////////////////
 
     private String prefix = "LuckPermsTrack";
@@ -123,30 +123,30 @@ public class LuckPermsTrack implements dObject {
 
         // <--[tag]
         // @attribute <luckpermstrack@luckpermstrack.name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the name of the track.
         // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("name")) {
-            return new Element(track.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(track.getName()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <luckpermstrack@luckpermstrack.groups>
-        // @returns dList(Element)
+        // @returns ListTag(Element)
         // @description
         // Returns the list of groups in the track.
         // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("groups")) {
-            dList groups = new dList();
+            ListTag groups = new ListTag();
             LuckPermsApi api = LuckPerms.getApi();
             groups.addAll(track.getGroups());
             return groups.getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
 
     }
 }

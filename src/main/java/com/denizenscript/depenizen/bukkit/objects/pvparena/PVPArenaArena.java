@@ -1,9 +1,9 @@
 package com.denizenscript.depenizen.bukkit.objects.pvparena;
 
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
@@ -11,7 +11,7 @@ import net.slipcor.pvparena.arena.Arena;
 import net.slipcor.pvparena.arena.ArenaPlayer;
 import net.slipcor.pvparena.managers.ArenaManager;
 
-public class PVPArenaArena implements dObject {
+public class PVPArenaArena implements ObjectTag {
 
     String prefix = "PVPArena";
     Arena arena = null;
@@ -52,7 +52,7 @@ public class PVPArenaArena implements dObject {
     }
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -95,24 +95,24 @@ public class PVPArenaArena implements dObject {
 
         // <--[tag]
         // @attribute <pvparena@pvparena.name>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the name of the arena.
         // @Plugin Depenizen, PVPArena
         // -->
         if (attribute.startsWith("name")) {
-            return new Element(arena.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.getName()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <pvparena@pvparena.fighters>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Returns a list of all fighters in the arena.
         // @Plugin Depenizen, PvPArena
         // -->
         else if (attribute.startsWith("fighters")) {
-            dList fighters = new dList();
+            ListTag fighters = new ListTag();
             for (ArenaPlayer p : arena.getFighters()) {
                 fighters.add(new dPlayer(p.get()).identify());
             }
@@ -121,21 +121,21 @@ public class PVPArenaArena implements dObject {
 
         // NOTE: Deprecated.
         if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
-            return new Element(arena.getFighters().size()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.getFighters().size()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <pvparena@pvparena.type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Always returns 'PVPArena' for PVPArena objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
         // @Plugin Depenizen, PVPArena
         // -->
         else if (attribute.startsWith("type")) {
-            return new Element("PVPArena").getAttribute(attribute.fulfill(1));
+            return new ElementTag("PVPArena").getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
     }
 }

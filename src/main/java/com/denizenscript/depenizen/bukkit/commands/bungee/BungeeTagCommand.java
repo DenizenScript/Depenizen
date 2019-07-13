@@ -6,8 +6,8 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.ReadTagPacketOut;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.scripts.commands.Holdable;
@@ -56,11 +56,11 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
         for (String arg : scriptEntry.getArguments()) {
             if (!scriptEntry.hasObject("server")
                     && arg.startsWith("server:")) {
-                scriptEntry.addObject("server", new Element(TagManager.tag(arg.substring("server:".length()),
+                scriptEntry.addObject("server", new ElementTag(TagManager.tag(arg.substring("server:".length()),
                         scriptEntry.entryData.getTagContext())));
             }
             else if (!scriptEntry.hasObject("tag")) {
-                scriptEntry.addObject("tag", new Element(arg));
+                scriptEntry.addObject("tag", new ElementTag(arg));
             }
             else {
                 Debug.echoError('\'' + arg + "' is an unknown argument!");
@@ -86,14 +86,14 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
         if (entry == null) {
             return;
         }
-        entry.addObject("result", new Element(result));
+        entry.addObject("result", new ElementTag(result));
         entry.setFinished(true);
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-        Element tag = scriptEntry.getElement("tag");
-        Element server = scriptEntry.getElement("server");
+        ElementTag tag = scriptEntry.getElement("tag");
+        ElementTag server = scriptEntry.getElement("server");
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), tag.debug() + server.debug());
         }
@@ -105,7 +105,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
         int newId = currentId++;
         StringBuilder defNames = new StringBuilder();
         StringBuilder defValues = new StringBuilder();
-        for (Map.Entry<String, dObject> def : scriptEntry.getResidingQueue().getAllDefinitions().entrySet()) {
+        for (Map.Entry<String, ObjectTag> def : scriptEntry.getResidingQueue().getAllDefinitions().entrySet()) {
             defNames.append(BungeeCommand.escape(def.getKey())).append("\n");
             defValues.append(BungeeCommand.escape(def.getValue().toString())).append("\n");
         }

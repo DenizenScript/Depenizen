@@ -10,7 +10,7 @@ import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizen.utilities.debugging.Debug;
@@ -53,12 +53,12 @@ public class JobsBridge extends Bridge {
         else {
             // <--[tag]
             // @attribute <jobs[(<name>)]>
-            // @returns dList(dJob)/dJob
+            // @returns ListTag(dJob)/dJob
             // @description
             // Returns a list of all known dJobs, or the job by the given input name if one is given.
             // @Plugin Depenizen, Jobs
             // -->
-            dList jobList = new dList();
+            ListTag jobList = new ListTag();
             for (Job jb : Jobs.getJobs()) {
                 jobList.add(new JobsJob(jb).identify());
             }

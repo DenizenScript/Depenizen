@@ -13,9 +13,9 @@ import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.denizenscript.denizen.objects.dCuboid;
 import com.denizenscript.denizen.objects.dLocation;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import org.bukkit.World;
 
@@ -39,11 +39,11 @@ public class WorldGuardCuboidProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject cuboid) {
+    public static boolean describes(ObjectTag cuboid) {
         return cuboid instanceof dCuboid;
     }
 
-    public static WorldGuardCuboidProperties getFrom(dObject cuboid) {
+    public static WorldGuardCuboidProperties getFrom(ObjectTag cuboid) {
         if (!describes(cuboid)) {
             return null;
         }
@@ -79,12 +79,12 @@ public class WorldGuardCuboidProperties implements Property {
         return getApplicableRegions().size() > 0;
     }
 
-    private dList getRegions(World world) {
+    private ListTag getRegions(World world) {
         List<String> regionList = new ArrayList<>();
         for (ProtectedRegion protectedRegion : getApplicableRegions()) {
             regionList.add(new WorldGuardRegion(protectedRegion, world).identify());
         }
-        return new dList(regionList);
+        return new ListTag(regionList);
     }
 
     @Override
@@ -92,18 +92,18 @@ public class WorldGuardCuboidProperties implements Property {
 
         // <--[tag]
         // @attribute <cu@cuboid.has_region>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the cuboid contains any region.
         // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("has_region")) {
-            return new Element(hasRegion()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(hasRegion()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <cu@cuboid.regions>
-        // @returns dList(Region)
+        // @returns ListTag(Region)
         // @description
         // Returns a list of regions that are in this cuboid.
         // @Plugin Depenizen, WorldGuard

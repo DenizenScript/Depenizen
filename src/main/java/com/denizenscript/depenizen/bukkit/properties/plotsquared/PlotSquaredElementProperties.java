@@ -4,8 +4,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class PlotSquaredElementProperties implements Property {
@@ -20,16 +20,16 @@ public class PlotSquaredElementProperties implements Property {
         return "PlotSquaredElement";
     }
 
-    public static boolean describes(dObject object) {
-        return object instanceof Element;
+    public static boolean describes(ObjectTag object) {
+        return object instanceof ElementTag;
     }
 
-    public static PlotSquaredElementProperties getFrom(dObject object) {
+    public static PlotSquaredElementProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
         else {
-            return new PlotSquaredElementProperties((Element) object);
+            return new PlotSquaredElementProperties((ElementTag) object);
         }
     }
 
@@ -44,16 +44,16 @@ public class PlotSquaredElementProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private PlotSquaredElementProperties(Element element) {
+    private PlotSquaredElementProperties(ElementTag element) {
         this.element = element;
     }
 
-    Element element;
+    ElementTag element;
 
     @Override
     public String getAttribute(Attribute attribute) {
         // <--[tag]
-        // @attribute <el@element.as_plotsquared_plot>
+        // @attribute <ElementTag.as_plotsquared_plot>
         // @returns dPlotSquaredPlot
         // @description
         // Returns the element as a dPlotSquaredPlot.

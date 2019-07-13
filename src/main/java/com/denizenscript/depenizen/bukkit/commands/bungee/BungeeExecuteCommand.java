@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.out.ExecuteCommandPacke
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
@@ -50,7 +50,7 @@ public class BungeeExecuteCommand extends AbstractCommand {
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-        Element command = scriptEntry.getElement("command");
+        ElementTag command = scriptEntry.getElement("command");
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), command.debug());
         }

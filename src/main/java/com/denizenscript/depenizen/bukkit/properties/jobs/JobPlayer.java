@@ -2,18 +2,18 @@ package com.denizenscript.depenizen.bukkit.properties.jobs;
 
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
 
 public class JobPlayer implements Property {
 
-    public static boolean describes(dObject job) {
+    public static boolean describes(ObjectTag job) {
         return job instanceof JobsJob;
     }
 
-    public static JobPlayer getFrom(dObject job) {
+    public static JobPlayer getFrom(ObjectTag job) {
         if (!describes(job)) {
             return null;
         }

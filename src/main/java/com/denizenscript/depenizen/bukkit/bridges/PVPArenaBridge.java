@@ -14,7 +14,7 @@ import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.TagRunnable;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
-import com.denizenscript.denizencore.objects.dList;
+import com.denizenscript.denizencore.objects.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagManager;
 import net.slipcor.pvparena.arena.Arena;
@@ -61,14 +61,14 @@ public class PVPArenaBridge extends Bridge {
 
         // <--[tag]
         // @attribute <pvparena.list_arenas>
-        // @returns dList(PVPArena)
+        // @returns ListTag(PVPArena)
         // @description
         // Returns a list of all PVPArenas.
         // @Plugin Depenizen, PVPArena
         // -->
         attribute = attribute.fulfill(1);
         if (attribute.startsWith("list_arenas")) {
-            dList arenas = new dList();
+            ListTag arenas = new ListTag();
             for (Arena a : ArenaManager.getArenas()) {
                 arenas.add(new PVPArenaArena(a).identify());
             }

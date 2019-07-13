@@ -5,17 +5,17 @@ import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobProgression;
 import com.gamingmesh.jobs.container.JobsPlayer;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
 import java.util.regex.Matcher;
 
-public class JobsJob implements dObject {
+public class JobsJob implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
@@ -96,7 +96,7 @@ public class JobsJob implements dObject {
     }
 
     /////////////////////
-    //   dObject Methods
+    //   ObjectTag Methods
     /////////////////
 
     private String prefix = "Job";
@@ -107,7 +107,7 @@ public class JobsJob implements dObject {
     }
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -152,60 +152,60 @@ public class JobsJob implements dObject {
 
                 // <--[tag]
                 // @attribute <job@job[<player>].xp.max>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the maximum experience a player can get in a specified job.
                 // @Plugin Depenizen, Jobs
                 // -->
                 if (attribute.startsWith("max")) {
-                    return new Element(jobProgression.getMaxExperience())
+                    return new ElementTag(jobProgression.getMaxExperience())
                             .getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
                 // @attribute <job@job[<player>].xp.level>
-                // @returns Element(Number)
+                // @returns ElementTag(Number)
                 // @description
                 // Returns the current experience level a player has in a specified job.
                 // @Plugin Depenizen, Jobs
                 // -->
                 if (attribute.startsWith("level")) {
-                    return new Element(jobProgression.getLevel())
+                    return new ElementTag(jobProgression.getLevel())
                             .getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
                 // @attribute <job@job[<player>].xp>
-                // @returns Element(Decimal)
+                // @returns ElementTag(Decimal)
                 // @description
                 // Returns the current experience a player has in a specified job.
                 // @Plugin Depenizen, Jobs
                 // -->
-                return new Element(jobProgression.getExperience()).getAttribute(attribute);
+                return new ElementTag(jobProgression.getExperience()).getAttribute(attribute);
             }
         }
 
         // <--[tag]
         // @attribute <job@job.color>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the ChatColor of the job.
         // @Plugin Depenizen, Jobs
         // -->
         if (attribute.startsWith("color")) {
-            return new Element(job.getChatColor().toString())
+            return new ElementTag(job.getChatColor().toString())
                     .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <job@job.description>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Returns the description of the job.
         // @Plugin Depenizen, Jobs
         // -->
         else if (attribute.startsWith("description")) {
-            return new Element(job.getDescription()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(job.getDescription()).getAttribute(attribute.fulfill(1));
         }
 
         else if (attribute.startsWith("name")) {
@@ -213,39 +213,39 @@ public class JobsJob implements dObject {
 
             // <--[tag]
             // @attribute <job@job.name.short>
-            // @returns Element
+            // @returns ElementTag
             // @description
             // Returns the shortened name of the job.
             // @Plugin Depenizen, Jobs
             // -->
             if (attribute.startsWith("short")) {
-                return new Element(job.getShortName())
+                return new ElementTag(job.getShortName())
                         .getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
             // @attribute <job@job.name>
-            // @returns Element
+            // @returns ElementTag
             // @description
             // Returns the name of the job.
             // @Plugin Depenizen, Jobs
             // -->
-            return new Element(job.getName()).getAttribute(attribute);
+            return new ElementTag(job.getName()).getAttribute(attribute);
         }
 
         // <--[tag]
         // @attribute <jobs@job.type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Always returns 'Job' for JobsJob objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
         // @Plugin Depenizen, Jobs
         // -->
         if (attribute.startsWith("type")) {
-            return new Element("Job").getAttribute(attribute.fulfill(1));
+            return new ElementTag("Job").getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
 
     }
 }

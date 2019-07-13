@@ -4,8 +4,8 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.bridges.BossShopBridge;
 import com.denizenscript.denizen.objects.dInventory;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import org.black_ixx.bossshop.BossShop;
 
@@ -25,11 +25,11 @@ public class BossShopInventoryProperties implements Property {
     public void adjust(Mechanism mechanism) {
         // None
     }
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dInventory;
     }
 
-    public static BossShopInventoryProperties getFrom(dObject object) {
+    public static BossShopInventoryProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -59,7 +59,7 @@ public class BossShopInventoryProperties implements Property {
 
         // <--[tag]
         // @attribute <in@inventory.is_bossshop>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the inventory is a BossShop.
         // @Plugin Depenizen, BossShop
@@ -67,7 +67,7 @@ public class BossShopInventoryProperties implements Property {
         if (attribute.startsWith("is_bossshop")) {
             BossShop bs = (BossShop) BossShopBridge.instance.plugin;
 
-            return new Element(bs.getAPI().isValidShop(inv.getInventory())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(bs.getAPI().isValidShop(inv.getInventory())).getAttribute(attribute.fulfill(1));
         }
 
         return null;

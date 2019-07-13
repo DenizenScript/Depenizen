@@ -3,10 +3,10 @@ package com.denizenscript.depenizen.bukkit.properties.essentials;
 import com.earth2me.essentials.Essentials;
 import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.depenizen.bukkit.bridges.EssentialsBridge;
@@ -25,11 +25,11 @@ public class EssentialsItemProperties implements Property {
         return "EssentialsItem";
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dItem;
     }
 
-    public static EssentialsItemProperties getFrom(dObject object) {
+    public static EssentialsItemProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -60,7 +60,7 @@ public class EssentialsItemProperties implements Property {
 
         // <--[tag]
         // @attribute <i@item.worth>
-        // @returns Element(Decimal)
+        // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of money one of this item is worth in Essentials.
         // @Plugin Depenizen, Essentials
@@ -77,16 +77,16 @@ public class EssentialsItemProperties implements Property {
             double price = priceBD.doubleValue();
             // <--[tag]
             // @attribute <i@item.worth.quantity[<#>]>
-            // @returns Element(Decimal)
+            // @returns ElementTag(Decimal)
             // @description
             // Returns the amount of money the quantity specified of this item is worth in Essentials.
             // @Plugin Depenizen, Essentials
             // -->
             if (attribute.getAttribute(2).startsWith("quantity") &&
                     attribute.hasContext(2) && ArgumentHelper.matchesInteger(attribute.getContext(2))) {
-                return new Element(price * attribute.getIntContext(2)).getAttribute(attribute.fulfill(2));
+                return new ElementTag(price * attribute.getIntContext(2)).getAttribute(attribute.fulfill(2));
             }
-            return new Element(price).getAttribute(attribute.fulfill(1));
+            return new ElementTag(price).getAttribute(attribute.fulfill(1));
         }
 
         return null;

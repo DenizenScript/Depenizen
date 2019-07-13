@@ -6,9 +6,9 @@ import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.dCuboid;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import org.bukkit.Location;
 
@@ -32,11 +32,11 @@ public class TownyCuboidProperties implements Property {
         // None
     }
 
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dCuboid;
     }
 
-    public static TownyCuboidProperties getFrom(dObject object) {
+    public static TownyCuboidProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -63,7 +63,7 @@ public class TownyCuboidProperties implements Property {
 
         // <--[tag]
         // @attribute <cu@cuboid.has_town>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the cuboid contains any town at all.
         // @Plugin Depenizen, Towny
@@ -71,21 +71,21 @@ public class TownyCuboidProperties implements Property {
         if (attribute.startsWith("has_town")) {
             for (Location location : cuboid.getBlockLocations()) {
                 if (TownyUniverse.getTownName(location) != null) {
-                    return new Element(true).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(true).getAttribute(attribute.fulfill(1));
                 }
             }
-            return new Element(false).getAttribute(attribute.fulfill(1));
+            return new ElementTag(false).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <cu@cuboid.list_towns>
-        // @returns dList(dTown)
+        // @returns ListTag(dTown)
         // @description
         // Returns all the towns within the cuboid.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("list_towns")) {
-            dList list = new dList();
+            ListTag list = new ListTag();
             List<String> towns = new ArrayList<>();
             try {
                 for (Location location : cuboid.getBlockLocations()) {

@@ -5,8 +5,8 @@ import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dPlayer;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -45,9 +45,9 @@ public class mcMMOPlayerAbilityActivateScriptEvent extends BukkitScriptEvent imp
     public static mcMMOPlayerAbilityActivateScriptEvent instance;
     public McMMOPlayerAbilityActivateEvent event;
     public dPlayer player;
-    public Element skill;
-    public Element skill_level;
-    public Element ability;
+    public ElementTag skill;
+    public ElementTag skill_level;
+    public ElementTag ability;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -89,7 +89,7 @@ public class mcMMOPlayerAbilityActivateScriptEvent extends BukkitScriptEvent imp
     }
 
     @Override
-    public dObject getContext(String name) {
+    public ObjectTag getContext(String name) {
         if (name.equals("skill")) {
             return skill;
         }
@@ -108,9 +108,9 @@ public class mcMMOPlayerAbilityActivateScriptEvent extends BukkitScriptEvent imp
             return;
         }
         player = dPlayer.mirrorBukkitPlayer(event.getPlayer());
-        ability = new Element(event.getAbility().getName());
-        skill = new Element(event.getSkill().getName());
-        skill_level = new Element(event.getSkillLevel());
+        ability = new ElementTag(event.getAbility().getName());
+        skill = new ElementTag(event.getSkill().getName());
+        skill_level = new ElementTag(event.getSkillLevel());
         this.event = event;
         fire(event);
     }

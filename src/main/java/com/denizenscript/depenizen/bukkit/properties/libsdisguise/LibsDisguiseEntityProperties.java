@@ -5,8 +5,8 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguise;
 import me.libraryaddict.disguise.DisguiseAPI;
 import com.denizenscript.denizen.objects.dEntity;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ElementTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 
 public class LibsDisguiseEntityProperties implements Property {
@@ -25,11 +25,11 @@ public class LibsDisguiseEntityProperties implements Property {
     public void adjust(Mechanism mechanism) {
         // None
     }
-    public static boolean describes(dObject object) {
+    public static boolean describes(ObjectTag object) {
         return object instanceof dEntity;
     }
 
-    public static LibsDisguiseEntityProperties getFrom(dObject object) {
+    public static LibsDisguiseEntityProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
         }
@@ -59,13 +59,13 @@ public class LibsDisguiseEntityProperties implements Property {
 
         // <--[tag]
         // @attribute <e@entity.is_disguised>
-        // @returns Element(Boolean)
+        // @returns ElementTag(Boolean)
         // @description
         // Returns whether the entity is in a disguise.
         // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("is_disguised") || attribute.startsWith("is_disguise")) {
-            return new Element(DisguiseAPI.isDisguised(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(DisguiseAPI.isDisguised(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

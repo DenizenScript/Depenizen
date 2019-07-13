@@ -9,10 +9,10 @@ import com.denizenscript.denizen.objects.dCuboid;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.objects.dWorld;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Element;
+import com.denizenscript.denizencore.objects.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
+import com.denizenscript.denizencore.objects.ListTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import org.bukkit.Bukkit;
@@ -22,7 +22,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class WorldGuardRegion implements dObject {
+public class WorldGuardRegion implements ObjectTag {
 
     /////////////////////
     //   PATTERNS
@@ -90,7 +90,7 @@ public class WorldGuardRegion implements dObject {
     }
 
     /////////////////////
-    //   dObject Methods
+    //   ObjectTag Methods
     /////////////////
 
     private String prefix = "Region";
@@ -101,7 +101,7 @@ public class WorldGuardRegion implements dObject {
     }
 
     @Override
-    public dObject setPrefix(String prefix) {
+    public ObjectTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -160,24 +160,24 @@ public class WorldGuardRegion implements dObject {
 
         // <--[tag]
         // @attribute <region@region.id>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Gets the ID name of the region.
         // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("id")) {
-            return new Element(region.getId()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(region.getId()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
         // @attribute <region@region.members>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Gets a list of all members of a region. (Members are permitted to build, etc.)
         // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("members")) {
-            dList list = new dList();
+            ListTag list = new ListTag();
             for (UUID uuid : region.getMembers().getUniqueIds()) {
                 list.add(dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)).identify());
             }
@@ -186,13 +186,13 @@ public class WorldGuardRegion implements dObject {
 
         // <--[tag]
         // @attribute <region@region.owners>
-        // @returns dList(dPlayer)
+        // @returns ListTag(dPlayer)
         // @description
         // Gets a list of all owners of a region. (Owners are permitted to build, edit settings, etc.)
         // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("owners")) {
-            dList list = new dList();
+            ListTag list = new ListTag();
             for (UUID uuid : region.getOwners().getUniqueIds()) {
                 list.add(dPlayer.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)).identify());
             }
@@ -201,14 +201,14 @@ public class WorldGuardRegion implements dObject {
 
         // <--[tag]
         // @attribute <region@region.type>
-        // @returns Element
+        // @returns ElementTag
         // @description
         // Always returns 'Region' for WorldGuardRegion objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
         // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("type")) {
-            return new Element("Region").getAttribute(attribute.fulfill(1));
+            return new ElementTag("Region").getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -222,7 +222,7 @@ public class WorldGuardRegion implements dObject {
             return new dWorld(world).getAttribute(attribute.fulfill(1));
         }
 
-        return new Element(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getAttribute(attribute);
 
     }
 }
