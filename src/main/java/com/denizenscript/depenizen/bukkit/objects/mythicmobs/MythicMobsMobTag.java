@@ -18,14 +18,14 @@ import org.bukkit.entity.LivingEntity;
 
 import java.util.UUID;
 
-public class MythicMobsMob implements ObjectTag, Adjustable {
+public class MythicMobsMobTag implements ObjectTag, Adjustable {
 
-    public static MythicMobsMob valueOf(String uuid) {
+    public static MythicMobsMobTag valueOf(String uuid) {
         return valueOf(uuid, null);
     }
 
     @Fetchable("mythicmob")
-    public static MythicMobsMob valueOf(String string, TagContext context) {
+    public static MythicMobsMobTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -35,7 +35,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
             if (!MythicMobsBridge.isMythicMob(uuid)) {
                 return null;
             }
-            return new MythicMobsMob(MythicMobsBridge.getActiveMob(EntityTag.getEntityForID(uuid)));
+            return new MythicMobsMobTag(MythicMobsBridge.getActiveMob(EntityTag.getEntityForID(uuid)));
         }
         catch (Exception e) {
             return null;
@@ -46,7 +46,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         return valueOf(string) != null;
     }
 
-    public MythicMobsMob(ActiveMob mob) {
+    public MythicMobsMobTag(ActiveMob mob) {
         if (mob != null) {
             this.mob = mob;
             this.mobType = mob.getType();
@@ -125,7 +125,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.internal_name>
+        // @attribute <MythicMobsMobTag.internal_name>
         // @returns ElementTag
         // @description
         // Returns the name MythicMobs identifies the MythicMob with.
@@ -136,7 +136,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.display_name>
+        // @attribute <MythicMobsMobTag.display_name>
         // @returns ElementTag
         // @description
         // Returns the display name of the MythicMob.
@@ -147,7 +147,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.spawner_name>
+        // @attribute <MythicMobsMobTag.spawner_name>
         // @returns ElementTag
         // @description
         // Returns the name of the spawner (as set on creation in-game) that spawned this mob.
@@ -162,7 +162,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.level>
+        // @attribute <MythicMobsMobTag.level>
         // @returns ElementTag(Number)
         // @description
         // Returns the level of the MythicMob.
@@ -173,7 +173,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.players_killed>
+        // @attribute <MythicMobsMobTag.players_killed>
         // @returns ElementTag(Number)
         // @description
         // Returns the number of players the MythicMob has killed.
@@ -184,7 +184,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.damage>
+        // @attribute <MythicMobsMobTag.damage>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the damage the MythicMob deals.
@@ -195,7 +195,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.armor>
+        // @attribute <MythicMobsMobTag.armor>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the armor the MythicMob has.
@@ -206,7 +206,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.has_target>
+        // @attribute <MythicMobsMobTag.has_target>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the MythicMob has a target.
@@ -217,7 +217,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.target>
+        // @attribute <MythicMobsMobTag.target>
         // @returns EntityTag
         // @description
         // Returns the MythicMob's target.
@@ -232,7 +232,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.is_damaging>
+        // @attribute <MythicMobsMobTag.is_damaging>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the MythicMob is using its damaging skill.
@@ -243,7 +243,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.entity>
+        // @attribute <MythicMobsMobTag.entity>
         // @returns EntityTag
         // @description
         // Returns the EntityTag for the MythicMob.
@@ -254,7 +254,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.global_cooldown>
+        // @attribute <MythicMobsMobTag.global_cooldown>
         // @returns ElementTag(Number)
         // @description
         // Returns the MythicMob's global cooldown.
@@ -265,7 +265,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <mythicmob@mythicmob.type>
+        // @attribute <MythicMobsMobTag.type>
         // @returns ElementTag
         // @description
         // Always returns 'Mythic Mob' for MythicMob objects. All objects fetchable by the Object Fetcher will return the
@@ -294,7 +294,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         // @description
         // Sets global cooldown of the MythicMob.
         // @tags
-        // <mythicmob@mythicmob.global_cooldown>
+        // <MythicMobsMobTag.global_cooldown>
         // -->
         if (mechanism.matches("global_cooldown") && mechanism.requireInteger()) {
             mob.setGlobalCooldown(mechanism.getValue().asInt());
@@ -307,7 +307,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         // @description
         // Reset the MythicMob's target.
         // @tags
-        // <mythicmob@mythicmob.target>
+        // <MythicMobsMobTag.target>
         // -->
         else if (mechanism.matches("reset_target")) {
             mob.resetTarget();
@@ -320,7 +320,7 @@ public class MythicMobsMob implements ObjectTag, Adjustable {
         // @description
         // Sets MythicMob's target.
         // @tags
-        // <mythicmob@mythicmob.target>
+        // <MythicMobsMobTag.target>
         // -->
         else if (mechanism.matches("target") && mechanism.requireObject(EntityTag.class)) {
             EntityTag mTarget = EntityTag.valueOf(mechanism.getValue().asString());

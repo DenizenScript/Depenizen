@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.libsdisguises;
 
-import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguise;
+import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguiseTag;
 import me.libraryaddict.disguise.events.UndisguiseEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
@@ -43,7 +43,7 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
 
     public UndisguiseEvent event;
     public EntityTag entity;
-    public LibsDisguise disguise;
+    public LibsDisguiseTag disguise;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -59,7 +59,7 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
             return true;
         }
 
-        LibsDisguise dDisguise = LibsDisguise.valueOf(disguiseName);
+        LibsDisguiseTag dDisguise = LibsDisguiseTag.valueOf(disguiseName);
         return dDisguise != null && dDisguise.equals(disguise);
     }
 
@@ -91,7 +91,7 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
 
     @EventHandler
     public void onUndisguise(UndisguiseEvent event) {
-        disguise = new LibsDisguise(event.getDisguise());
+        disguise = new LibsDisguiseTag(event.getDisguise());
         entity = new EntityTag(event.getEntity());
         this.event = event;
         fire(event);

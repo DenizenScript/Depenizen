@@ -6,7 +6,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeper;
+import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeperTag;
 
 public class ShopKeepersEntityProperties implements Property {
 
@@ -47,7 +47,7 @@ public class ShopKeepersEntityProperties implements Property {
 
     public ShopKeepersEntityProperties(EntityTag entity) {
         this.entity = entity;
-        this.isShopKeeper = ShopKeeper.isShopKeeper(entity);
+        this.isShopKeeper = ShopKeeperTag.isShopKeeper(entity);
     }
 
     EntityTag entity;
@@ -79,7 +79,7 @@ public class ShopKeepersEntityProperties implements Property {
         // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("shopkeeper") && isShopKeeper) {
-            return ShopKeeper.fromEntity(entity).getAttribute(attribute.fulfill(1));
+            return ShopKeeperTag.fromEntity(entity).getAttribute(attribute.fulfill(1));
         }
 
         return null;

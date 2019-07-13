@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.pvparena;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
+import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArenaTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -73,7 +73,7 @@ public class PVPArenaPlayerProperties implements Property {
                     return new ElementTag(false).getAttribute(attribute.fulfill(1));
                 }
                 if (attribute.hasContext(1)) {
-                    PVPArenaArena a = PVPArenaArena.valueOf(attribute.getContext(1));
+                    PVPArenaArenaTag a = PVPArenaArenaTag.valueOf(attribute.getContext(1));
                     if (a == null) {
                         return null;
                     }

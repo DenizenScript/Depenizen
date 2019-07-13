@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.events.mythicmobs;
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
+import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
@@ -61,7 +61,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
 
     public static MythicMobsDeathEvent instance;
     public MythicMobDeathEvent event;
-    public MythicMobsMob mob;
+    public MythicMobsMobTag mob;
     public EntityTag entity;
     public EntityTag killer;
     public ElementTag level;
@@ -169,7 +169,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
 
     @EventHandler
     public void onMythicMobDeath(MythicMobDeathEvent event) {
-        mob = new MythicMobsMob(event.getMob());
+        mob = new MythicMobsMobTag(event.getMob());
         entity = new EntityTag(event.getEntity());
         killer = new EntityTag(event.getKiller());
         level = new ElementTag(event.getMobLevel());

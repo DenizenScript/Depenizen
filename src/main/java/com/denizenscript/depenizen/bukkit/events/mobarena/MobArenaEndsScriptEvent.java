@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.mobarena;
 
 import com.garbagemule.MobArena.events.ArenaEndEvent;
-import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
+import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArenaTag;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -39,7 +39,7 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
 
     public static MobArenaEndsScriptEvent instance;
     public ArenaEndEvent event;
-    public MobArenaArena arena;
+    public MobArenaArenaTag arena;
     public ElementTag wave;
 
     @Override
@@ -51,7 +51,7 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     @Override
     public boolean matches(ScriptPath path) {
         String arenaname = path.eventArgLowerAt(2);
-        MobArenaArena a = MobArenaArena.valueOf(arenaname);
+        MobArenaArenaTag a = MobArenaArenaTag.valueOf(arenaname);
         return arenaname.equals("arena") || (a != null && a.getArena() == event.getArena());
     }
 
@@ -83,7 +83,7 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
 
     @EventHandler
     public void onMobArenaEnds(ArenaEndEvent event) {
-        arena = new MobArenaArena(event.getArena());
+        arena = new MobArenaArenaTag(event.getArena());
         wave = new ElementTag(event.getArena().getWaveManager().getWaveNumber());
         this.event = event;
         fire(event);

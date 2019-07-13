@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.towny;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
+import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.LocationTag;
@@ -75,7 +75,7 @@ public class TownyLocationProperties implements Property {
 
         // <--[tag]
         // @attribute <LocationTag.town>
-        // @returns dTown
+        // @returns TownTag
         // @description
         // Returns the town at the specified location.
         // @Plugin Depenizen, Towny
@@ -86,7 +86,7 @@ public class TownyLocationProperties implements Property {
                 if (town == null) {
                     return null;
                 }
-                return new dTown(TownyUniverse.getDataSource().getTown(town))
+                return new TownTag(TownyUniverse.getDataSource().getTown(town))
                         .getAttribute(attribute.fulfill(1));
             }
             catch (NotRegisteredException ex) {

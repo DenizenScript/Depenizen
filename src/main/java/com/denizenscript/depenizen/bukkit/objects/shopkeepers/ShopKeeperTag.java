@@ -22,14 +22,14 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
-public class ShopKeeper implements ObjectTag {
+public class ShopKeeperTag implements ObjectTag {
 
-    public static ShopKeeper valueOf(String string) {
+    public static ShopKeeperTag valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("shopkeeper")
-    public static ShopKeeper valueOf(String string, TagContext context) {
+    public static ShopKeeperTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -39,7 +39,7 @@ public class ShopKeeper implements ObjectTag {
             if (keeper == null) {
                 return null;
             }
-            return new ShopKeeper(keeper);
+            return new ShopKeeperTag(keeper);
         }
         catch (Exception e) {
             return null;
@@ -57,14 +57,14 @@ public class ShopKeeper implements ObjectTag {
         return ((ShopkeepersPlugin) ShopkeepersBridge.instance.plugin).getShopkeeperRegistry().isShopkeeper(entity.getBukkitEntity());
     }
 
-    public static ShopKeeper fromEntity(EntityTag entity) {
+    public static ShopKeeperTag fromEntity(EntityTag entity) {
         if (!isShopKeeper(entity)) {
             return null;
         }
-        return new ShopKeeper(ShopkeepersAPI.getShopkeeperRegistry().getShopkeeperByEntity(entity.getBukkitEntity()));
+        return new ShopKeeperTag(ShopkeepersAPI.getShopkeeperRegistry().getShopkeeperByEntity(entity.getBukkitEntity()));
     }
 
-    public ShopKeeper(Shopkeeper shopkeeper) {
+    public ShopKeeperTag(Shopkeeper shopkeeper) {
         if (shopkeeper != null) {
             this.shopkeeper = shopkeeper;
         }
@@ -139,7 +139,7 @@ public class ShopKeeper implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <shopkeeper@shopkeeper.is_active>
+        // @attribute <ShopKeeperTag.is_active>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the Shopkeeper is active.
@@ -150,7 +150,7 @@ public class ShopKeeper implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <shopkeeper@shopkeeper.is_ui_active>
+        // @attribute <ShopKeeperTag.is_ui_active>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the Shopkeeper is currently in a trade.
@@ -161,7 +161,7 @@ public class ShopKeeper implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <shopkeeper@shopkeeper.trades>
+        // @attribute <ShopKeeperTag.trades>
         // @returns ListTag(dList)
         // @description
         // Returns an escaped ListTag of the Shopkeeper's trades.
@@ -178,7 +178,7 @@ public class ShopKeeper implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <shopkeeper@shopkeeper.entity>
+        // @attribute <ShopKeeperTag.entity>
         // @returns EntityTag
         // @description
         // Returns the EntityTag for this ShopKeeper.
@@ -189,7 +189,7 @@ public class ShopKeeper implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <shopkeeper@shopkeeper.type>
+        // @attribute <ShopKeeperTag.type>
         // @returns ElementTag
         // @description
         // Always returns 'ShopKeeper' for ShopKeeper objects. All objects fetchable by the Object Fetcher will return the

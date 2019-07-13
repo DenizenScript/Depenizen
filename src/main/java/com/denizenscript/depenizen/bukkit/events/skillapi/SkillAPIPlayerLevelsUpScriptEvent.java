@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.skillapi;
 
-import com.denizenscript.depenizen.bukkit.objects.skillapi.SkillAPIClass;
+import com.denizenscript.depenizen.bukkit.objects.skillapi.SkillAPIClassTag;
 import com.sucy.skill.api.event.PlayerLevelUpEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
@@ -46,7 +46,7 @@ public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent impleme
     public PlayerTag player;
     public int level;
     public int gained;
-    public SkillAPIClass skillAPIClass;
+    public SkillAPIClassTag skillAPIClass;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -101,7 +101,7 @@ public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent impleme
         player = PlayerTag.mirrorBukkitPlayer(event.getPlayerData().getPlayer());
         level = event.getLevel();
         gained = event.getAmount();
-        skillAPIClass = new SkillAPIClass(event.getPlayerClass().getData());
+        skillAPIClass = new SkillAPIClassTag(event.getPlayerClass().getData());
         this.event = event;
         fire(event);
     }

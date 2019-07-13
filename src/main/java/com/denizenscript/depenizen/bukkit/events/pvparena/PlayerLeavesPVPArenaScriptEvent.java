@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.pvparena;
 
-import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
+import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArenaTag;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -33,7 +33,7 @@ public class PlayerLeavesPVPArenaScriptEvent extends BukkitScriptEvent implement
 
     public static PlayerLeavesPVPArenaScriptEvent instance;
     public PALeaveEvent event;
-    public PVPArenaArena arena;
+    public PVPArenaArenaTag arena;
 
     public PlayerLeavesPVPArenaScriptEvent() {
         instance = this;
@@ -74,7 +74,7 @@ public class PlayerLeavesPVPArenaScriptEvent extends BukkitScriptEvent implement
 
     @EventHandler
     public void onPlayerLeavesPVPArena(PALeaveEvent event) {
-        arena = new PVPArenaArena(event.getArena());
+        arena = new PVPArenaArenaTag(event.getArena());
         cancelled = false;
         this.event = event;
         fire(event);

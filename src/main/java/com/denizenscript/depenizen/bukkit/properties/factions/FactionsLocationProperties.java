@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.factions;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.factions.dFaction;
+import com.denizenscript.depenizen.bukkit.objects.factions.FactionTag;
 import com.massivecraft.factions.entity.BoardColl;
 import com.massivecraft.massivecore.ps.PS;
 import com.denizenscript.denizen.objects.LocationTag;
@@ -57,13 +57,13 @@ public class FactionsLocationProperties implements Property {
 
         // <--[tag]
         // @attribute <LocationTag.faction>
-        // @returns dFaction
+        // @returns FactionTag
         // @description
         // Returns the faction at the location. (Can also be SafeZone, WarZone, or Wilderness)
         // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("faction")) {
-            return new dFaction(BoardColl.get().getFactionAt(PS.valueOf(location)))
+            return new FactionTag(BoardColl.get().getFactionAt(PS.valueOf(location)))
                     .getAttribute(attribute.fulfill(1));
         }
 

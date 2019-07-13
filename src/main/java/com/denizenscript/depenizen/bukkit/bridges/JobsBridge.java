@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 import com.denizenscript.depenizen.bukkit.properties.jobs.JobPlayer;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.jobs.JobsCommand;
-import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
+import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -22,8 +22,8 @@ public class JobsBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(JobsJob.class);
-        PropertyParser.registerProperty(JobPlayer.class, JobsJob.class);
+        ObjectFetcher.registerWithObjectFetcher(JobsJobTag.class);
+        PropertyParser.registerProperty(JobPlayer.class, JobsJobTag.class);
         PropertyParser.registerProperty(JobsPlayerProperties.class, PlayerTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
@@ -38,12 +38,12 @@ public class JobsBridge extends Bridge {
     public void tagEvent(ReplaceableTagEvent event) {
         Attribute attribute = event.getAttributes();
 
-        JobsJob j = null;
+        JobsJobTag j = null;
 
         if (attribute.hasContext(1)) {
             // Documented below.
-            if (JobsJob.matches(attribute.getContext(1))) {
-                j = JobsJob.valueOf(attribute.getContext(1));
+            if (JobsJobTag.matches(attribute.getContext(1))) {
+                j = JobsJobTag.valueOf(attribute.getContext(1));
             }
             else {
                 Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid job!");
@@ -60,7 +60,7 @@ public class JobsBridge extends Bridge {
             // -->
             ListTag jobList = new ListTag();
             for (Job jb : Jobs.getJobs()) {
-                jobList.add(new JobsJob(jb).identify());
+                jobList.add(new JobsJobTag(jb).identify());
             }
             event.setReplacedObject(jobList.getObjectAttribute(attribute.fulfill(1)));
         }

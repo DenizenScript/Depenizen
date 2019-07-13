@@ -20,18 +20,18 @@ import org.bukkit.*;
 import java.util.List;
 import java.util.UUID;
 
-public class dPlotSquaredPlot implements ObjectTag {
+public class PlotSquaredPlotTag implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
 
-    public static dPlotSquaredPlot valueOf(String string) {
+    public static PlotSquaredPlotTag valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("plotsquaredplot")
-    public static dPlotSquaredPlot valueOf(String string, TagContext context) {
+    public static PlotSquaredPlotTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -46,7 +46,7 @@ public class dPlotSquaredPlot implements ObjectTag {
             if (p == null) {
                 return null;
             }
-            return new dPlotSquaredPlot(p);
+            return new PlotSquaredPlotTag(p);
         }
         catch (Throwable e) {
             Debug.echoError(e);
@@ -64,7 +64,7 @@ public class dPlotSquaredPlot implements ObjectTag {
 
     Plot plot = null;
 
-    public dPlotSquaredPlot(Plot pl) {
+    public PlotSquaredPlotTag(Plot pl) {
         plot = pl;
     }
 
@@ -80,7 +80,7 @@ public class dPlotSquaredPlot implements ObjectTag {
     }
 
     @Override
-    public dPlotSquaredPlot setPrefix(String prefix) {
+    public PlotSquaredPlotTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -92,8 +92,8 @@ public class dPlotSquaredPlot implements ObjectTag {
 
     @Override
     public boolean equals(Object a) {
-        if (a instanceof dPlotSquaredPlot) {
-            return ((dPlotSquaredPlot) a).plot.getId().equals(plot.getId());
+        if (a instanceof PlotSquaredPlotTag) {
+            return ((PlotSquaredPlotTag) a).plot.getId().equals(plot.getId());
         }
         return false;
     }
@@ -132,7 +132,7 @@ public class dPlotSquaredPlot implements ObjectTag {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plotsquaredplot.id_x>
+        // @attribute <PlotSquaredPlotTag.id_x>
         // @returns ElementTag(Number)
         // @description
         // Returns the plot's X coordinate portion of its ID.
@@ -143,7 +143,7 @@ public class dPlotSquaredPlot implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plotsquaredplot.id_Z>
+        // @attribute <PlotSquaredPlotTag.id_Z>
         // @returns ElementTag(Number)
         // @description
         // Returns the plot's Z coordinate portion of its ID.
@@ -154,7 +154,7 @@ public class dPlotSquaredPlot implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plotsquaredplot.home>
+        // @attribute <PlotSquaredPlotTag.home>
         // @returns LocationTag
         // @description
         // Returns the plot's current home location.
@@ -166,7 +166,7 @@ public class dPlotSquaredPlot implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plotsquaredplot.default_home>
+        // @attribute <PlotSquaredPlotTag.default_home>
         // @returns LocationTag
         // @description
         // Returns the plot's default home location.
@@ -178,7 +178,7 @@ public class dPlotSquaredPlot implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plotsquaredplot.world>
+        // @attribute <PlotSquaredPlotTag.world>
         // @returns WorldTag
         // @description
         // Returns the plot's world.
@@ -189,7 +189,7 @@ public class dPlotSquaredPlot implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plotsquaredplot.owners>
+        // @attribute <PlotSquaredPlotTag.owners>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all owners of the plot.
@@ -204,7 +204,7 @@ public class dPlotSquaredPlot implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plotsquaredplot.trusted>
+        // @attribute <PlotSquaredPlotTag.trusted>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all trusted of the plot.
@@ -219,7 +219,7 @@ public class dPlotSquaredPlot implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plotsquaredplot.members>
+        // @attribute <PlotSquaredPlotTag.members>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all members of the plot.
@@ -234,7 +234,7 @@ public class dPlotSquaredPlot implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plotsquaredplot.cuboid>
+        // @attribute <PlotSquaredPlotTag.cuboid>
         // @returns CuboidTag
         // @description
         // Returns the plot's cuboid.
@@ -248,7 +248,7 @@ public class dPlotSquaredPlot implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <plotsquaredplot@plotsquaredplot.all_cuboids>
+        // @attribute <PlotSquaredPlotTag.all_cuboids>
         // @returns ListTag(CuboidTag)
         // @description
         // Returns all the plot's cuboids in a list. Useful for merged plots.

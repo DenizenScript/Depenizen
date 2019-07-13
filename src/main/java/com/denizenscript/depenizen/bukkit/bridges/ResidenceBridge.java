@@ -5,7 +5,7 @@ import com.denizenscript.depenizen.bukkit.properties.residence.ResidenceLocation
 import com.denizenscript.depenizen.bukkit.properties.residence.ResidencePlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.events.residence.PlayerEntersResidenceScriptEvent;
-import com.denizenscript.depenizen.bukkit.objects.residence.dResidence;
+import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.events.ScriptEvent;
@@ -16,7 +16,7 @@ public class ResidenceBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(dResidence.class);
+        ObjectFetcher.registerWithObjectFetcher(ResidenceTag.class);
         PropertyParser.registerProperty(ResidencePlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(ResidenceLocationProperties.class, LocationTag.class);
         ScriptEvent.registerScriptEvent(new PlayerEntersResidenceScriptEvent());

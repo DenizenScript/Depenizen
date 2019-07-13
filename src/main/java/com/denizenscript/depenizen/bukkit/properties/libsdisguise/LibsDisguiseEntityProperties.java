@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.libsdisguise;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguise;
+import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguiseTag;
 import me.libraryaddict.disguise.DisguiseAPI;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -70,14 +70,14 @@ public class LibsDisguiseEntityProperties implements Property {
 
         // <--[tag]
         // @attribute <EntityTag.disguise>
-        // @returns dlibsdisguise
+        // @returns LibsDisguiseTag
         // @description
         // Returns the disguise of the entity.
         // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("disguise")
                 && DisguiseAPI.isDisguised(entity.getBukkitEntity())) {
-            return new LibsDisguise(DisguiseAPI.getDisguise(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
+            return new LibsDisguiseTag(DisguiseAPI.getDisguise(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
         }
 
         return null;

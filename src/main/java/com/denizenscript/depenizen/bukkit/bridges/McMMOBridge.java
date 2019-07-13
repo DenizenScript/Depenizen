@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.commands.mcmmo.McMMOCommand;
 import com.denizenscript.depenizen.bukkit.events.mcmmo.*;
 import com.denizenscript.depenizen.bukkit.properties.mcmmo.McMMOEntityProperties;
 import com.denizenscript.depenizen.bukkit.properties.mcmmo.McMMOPlayerProperties;
-import com.denizenscript.depenizen.bukkit.objects.mcmmo.dParty;
+import com.denizenscript.depenizen.bukkit.objects.mcmmo.PartyTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -22,7 +22,7 @@ public class McMMOBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(dParty.class);
+        ObjectFetcher.registerWithObjectFetcher(PartyTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {
@@ -45,7 +45,7 @@ public class McMMOBridge extends Bridge {
         Attribute attribute = event.getAttributes();
 
         if (attribute.startsWith("party") && attribute.hasContext(1)) {
-            dParty party = dParty.valueOf(attribute.getContext(1));
+            PartyTag party = PartyTag.valueOf(attribute.getContext(1));
             if (party != null) {
                 event.setReplacedObject(party.getObjectAttribute(attribute.fulfill(1)));
             }

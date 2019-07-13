@@ -12,14 +12,14 @@ import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
-public class dResidence implements ObjectTag {
+public class ResidenceTag implements ObjectTag {
 
-    public static dResidence valueOf(String string) {
-        return dResidence.valueOf(string, null);
+    public static ResidenceTag valueOf(String string) {
+        return ResidenceTag.valueOf(string, null);
     }
 
     @Fetchable("residence")
-    public static dResidence valueOf(String string, TagContext context) {
+    public static ResidenceTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -32,7 +32,7 @@ public class dResidence implements ObjectTag {
         if (residence == null) {
             return null;
         }
-        return new dResidence(residence);
+        return new ResidenceTag(residence);
     }
 
     public static boolean matches(String arg) {
@@ -42,7 +42,7 @@ public class dResidence implements ObjectTag {
 
     ClaimedResidence residence = null;
 
-    public dResidence(ClaimedResidence residence) {
+    public ResidenceTag(ClaimedResidence residence) {
         if (residence != null) {
             this.residence = residence;
         }
@@ -93,7 +93,7 @@ public class dResidence implements ObjectTag {
         return residence;
     }
 
-    public boolean equals(dResidence residence) {
+    public boolean equals(ResidenceTag residence) {
         return CoreUtilities.toLowerCase(residence.getResidence().getName()).equals(CoreUtilities.toLowerCase(this.getResidence().getName()));
     }
 
@@ -109,7 +109,7 @@ public class dResidence implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <residence@residence.name>
+        // @attribute <ResidenceTag.name>
         // @returns ElementTag
         // @description
         // Returns the name of the residence.
@@ -120,7 +120,7 @@ public class dResidence implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <residence@residence.owner>
+        // @attribute <ResidenceTag.owner>
         // @returns PlayerTag
         // @description
         // Returns the owner of the residence.
@@ -131,7 +131,7 @@ public class dResidence implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <residence@residence.is_within[<location>]>
+        // @attribute <ResidenceTag.is_within[<location>]>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the specified location is within this Residence.

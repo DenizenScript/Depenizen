@@ -15,18 +15,18 @@ import com.denizenscript.denizencore.tags.TagContext;
 
 import java.util.regex.Matcher;
 
-public class JobsJob implements ObjectTag {
+public class JobsJobTag implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
 
-    public static JobsJob valueOf(String string) {
+    public static JobsJobTag valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("job")
-    public static JobsJob valueOf(String string, TagContext context) {
+    public static JobsJobTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -34,13 +34,13 @@ public class JobsJob implements ObjectTag {
         ////////
         // Match job name
 
-        JobsJob job = null;
+        JobsJobTag job = null;
 
         Matcher m = ObjectFetcher.DESCRIBED_PATTERN.matcher(string);
         if (m.matches()) {
-            return ObjectFetcher.getObjectFrom(JobsJob.class, string, context);
+            return ObjectFetcher.getObjectFrom(JobsJobTag.class, string, context);
         }
-        return new JobsJob(Jobs.getJob(string.replace("job@", "")));
+        return new JobsJobTag(Jobs.getJob(string.replace("job@", "")));
     }
 
     public static boolean matches(String arg) {
@@ -59,11 +59,11 @@ public class JobsJob implements ObjectTag {
     JobProgression jobProgression = null;
     JobsPlayer jobOwner = null;
 
-    public JobsJob(Job job) {
+    public JobsJobTag(Job job) {
         this.job = job;
     }
 
-    public JobsJob(Job job, JobsPlayer jobOwner) {
+    public JobsJobTag(Job job, JobsPlayer jobOwner) {
         this.job = job;
         this.jobProgression = jobOwner.getJobProgression(job);
         this.jobOwner = jobOwner;
@@ -77,7 +77,7 @@ public class JobsJob implements ObjectTag {
         return job;
     }
 
-    public JobsJob setJobProgression(JobProgression jobProgression) {
+    public JobsJobTag setJobProgression(JobProgression jobProgression) {
         this.jobProgression = jobProgression;
         return this;
     }
@@ -151,7 +151,7 @@ public class JobsJob implements ObjectTag {
                 attribute = attribute.fulfill(1);
 
                 // <--[tag]
-                // @attribute <job@job[<player>].xp.max>
+                // @attribute <JobsJobTag.xp.max>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the maximum experience a player can get in a specified job.
@@ -163,7 +163,7 @@ public class JobsJob implements ObjectTag {
                 }
 
                 // <--[tag]
-                // @attribute <job@job[<player>].xp.level>
+                // @attribute <JobsJobTag.xp.level>
                 // @returns ElementTag(Number)
                 // @description
                 // Returns the current experience level a player has in a specified job.
@@ -175,7 +175,7 @@ public class JobsJob implements ObjectTag {
                 }
 
                 // <--[tag]
-                // @attribute <job@job[<player>].xp>
+                // @attribute <JobsJobTag.xp>
                 // @returns ElementTag(Decimal)
                 // @description
                 // Returns the current experience a player has in a specified job.
@@ -186,7 +186,7 @@ public class JobsJob implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <job@job.color>
+        // @attribute <JobsJobTag.color>
         // @returns ElementTag
         // @description
         // Returns the ChatColor of the job.
@@ -198,7 +198,7 @@ public class JobsJob implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <job@job.description>
+        // @attribute <JobsJobTag.description>
         // @returns ElementTag
         // @description
         // Returns the description of the job.
@@ -212,7 +212,7 @@ public class JobsJob implements ObjectTag {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <job@job.name.short>
+            // @attribute <JobsJobTag.name.short>
             // @returns ElementTag
             // @description
             // Returns the shortened name of the job.
@@ -224,7 +224,7 @@ public class JobsJob implements ObjectTag {
             }
 
             // <--[tag]
-            // @attribute <job@job.name>
+            // @attribute <JobsJobTag.name>
             // @returns ElementTag
             // @description
             // Returns the name of the job.

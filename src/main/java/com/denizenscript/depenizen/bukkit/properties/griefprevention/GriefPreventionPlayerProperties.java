@@ -11,7 +11,7 @@ import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
-import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventionClaim;
+import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventionClaimTag;
 
 public class GriefPreventionPlayerProperties implements Property {
 
@@ -81,7 +81,7 @@ public class GriefPreventionPlayerProperties implements Property {
             if (attribute.startsWith("list_claims")) {
                 ListTag claims = new ListTag();
                 for (Claim claim : data.getClaims()) {
-                    claims.add(new GriefPreventionClaim(claim).identify());
+                    claims.add(new GriefPreventionClaimTag(claim).identify());
                 }
                 return claims.getAttribute(attribute.fulfill(1));
             }

@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.properties.luckperms.LuckPermsPlayerProperties;
-import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrack;
+import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrackTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
@@ -25,7 +25,7 @@ public class LuckPermsBridge extends Bridge {
                 tagEvent(event);
             }
         }, "luckperms");
-        ObjectFetcher.registerWithObjectFetcher(LuckPermsTrack.class);
+        ObjectFetcher.registerWithObjectFetcher(LuckPermsTrackTag.class);
         PropertyParser.registerProperty(LuckPermsPlayerProperties.class, PlayerTag.class);
     }
 
@@ -43,7 +43,7 @@ public class LuckPermsBridge extends Bridge {
             ListTag tracks = new ListTag();
             LuckPermsApi api = LuckPerms.getApi();
             for (Track track : api.getTracks()) {
-                tracks.add(new LuckPermsTrack(track).identify());
+                tracks.add(new LuckPermsTrackTag(track).identify());
             }
             event.setReplacedObject(tracks.getObjectAttribute(attribute.fulfill(1)));
         }
@@ -58,7 +58,7 @@ public class LuckPermsBridge extends Bridge {
         if (attribute.startsWith("track")) {
             if (attribute.hasContext(1)) {
                 LuckPermsApi api = LuckPerms.getApi();
-                event.setReplacedObject(new LuckPermsTrack(api.getTrack(attribute.getContext(1))).getObjectAttribute(attribute.fulfill(1)));
+                event.setReplacedObject(new LuckPermsTrackTag(api.getTrack(attribute.getContext(1))).getObjectAttribute(attribute.fulfill(1)));
             }
         }
     }

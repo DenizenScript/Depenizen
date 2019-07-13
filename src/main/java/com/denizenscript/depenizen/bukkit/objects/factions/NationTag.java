@@ -1,6 +1,6 @@
-package com.denizenscript.depenizen.bukkit.factions;
+package com.denizenscript.depenizen.bukkit.objects.factions;
 
-import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
+import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
@@ -15,18 +15,18 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
-public class dNation implements ObjectTag {
+public class NationTag implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
 
-    public static dNation valueOf(String string) {
+    public static NationTag valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("nation")
-    public static dNation valueOf(String string, TagContext context) {
+    public static NationTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -36,7 +36,7 @@ public class dNation implements ObjectTag {
 
         string = string.replace("nation@", "");
         try {
-            return new dNation(TownyUniverse.getDataSource().getNation(string));
+            return new NationTag(TownyUniverse.getDataSource().getNation(string));
         }
         catch (NotRegisteredException e) {
             return null;
@@ -54,7 +54,7 @@ public class dNation implements ObjectTag {
 
     Nation nation = null;
 
-    public dNation(Nation nation) {
+    public NationTag(Nation nation) {
         if (nation != null) {
             this.nation = nation;
         }
@@ -75,7 +75,7 @@ public class dNation implements ObjectTag {
     }
 
     @Override
-    public dNation setPrefix(String prefix) {
+    public NationTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -115,7 +115,7 @@ public class dNation implements ObjectTag {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <nation@nation.allies>
+        // @attribute <NationTag.allies>
         // @returns ListTag(dNation)
         // @description
         // Returns a list of the nation's allies.
@@ -124,13 +124,13 @@ public class dNation implements ObjectTag {
         if (attribute.startsWith("allies")) {
             ListTag list = new ListTag();
             for (Nation ally : nation.getAllies()) {
-                list.add(new dNation(ally).identify());
+                list.add(new NationTag(ally).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
-        // @attribute <nation@nation.assistants>
+        // @attribute <NationTag.assistants>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of the nation's assistants.
@@ -145,7 +145,7 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.balance>
+        // @attribute <NationTag.balance>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the current money balance of the nation.
@@ -163,21 +163,21 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.capital>
-        // @returns dTown
+        // @attribute <NationTag.capital>
+        // @returns TownTag
         // @description
         // Returns the capital city of the nation as a dTown.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("capital")) {
             if (nation.hasCapital()) {
-                return new dTown(nation.getCapital())
+                return new TownTag(nation.getCapital())
                         .getAttribute(attribute.fulfill(1));
             }
         }
 
         // <--[tag]
-        // @attribute <nation@nation.enemies>
+        // @attribute <NationTag.enemies>
         // @returns ListTag(dNation)
         // @description
         // Returns a list of the nation's enemies.
@@ -186,13 +186,13 @@ public class dNation implements ObjectTag {
         if (attribute.startsWith("enemies")) {
             ListTag list = new ListTag();
             for (Nation enemy : nation.getEnemies()) {
-                list.add(new dNation(enemy).identify());
+                list.add(new NationTag(enemy).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
-        // @attribute <nation@nation.is_neutral>
+        // @attribute <NationTag.is_neutral>
         // @returns ElementTag(Boolean)
         // @description
         // Returns true if the nation is neutral.
@@ -204,7 +204,7 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.king>
+        // @attribute <NationTag.king>
         // @returns PlayerTag
         // @description
         // Returns the king of the nation.
@@ -216,7 +216,7 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.name>
+        // @attribute <NationTag.name>
         // @returns ElementTag
         // @description
         // Returns the nation's name.
@@ -228,7 +228,7 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.player_count>
+        // @attribute <NationTag.player_count>
         // @returns ElementTag(Number)
         // @description
         // Returns the amount of players in the nation.
@@ -240,7 +240,7 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.relation[<nation>]>
+        // @attribute <NationTag.relation[<nation>]>
         // @returns ElementTag
         // @description
         // Returns the nation's current relation with another nation.
@@ -249,7 +249,7 @@ public class dNation implements ObjectTag {
         else if (attribute.startsWith("relation")) {
 
             try {
-                dNation to = valueOf(attribute.getContext(1));
+                NationTag to = valueOf(attribute.getContext(1));
 
                 if (nation.hasAlly(to.nation)) {
                     return new ElementTag("allies").getAttribute(attribute.fulfill(1));
@@ -268,7 +268,7 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.residents>
+        // @attribute <NationTag.residents>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of the nation's residents.
@@ -283,7 +283,7 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.tag>
+        // @attribute <NationTag.tag>
         // @returns ElementTag
         // @description
         // Returns the nation's tag.
@@ -297,7 +297,7 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.taxes>
+        // @attribute <NationTag.taxes>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the nation's current taxes.
@@ -309,7 +309,7 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.town_count>
+        // @attribute <NationTag.town_count>
         // @returns ElementTag(Number)
         // @description
         // Returns the number of towns in the nation.
@@ -321,7 +321,7 @@ public class dNation implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <nation@nation.type>
+        // @attribute <NationTag.type>
         // @returns ElementTag
         // @description
         // Always returns 'Nation' for dNation objects. All objects fetchable by the Object Fetcher will return the

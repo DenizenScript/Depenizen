@@ -11,17 +11,17 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
-public class LuckPermsTrack implements ObjectTag {
+public class LuckPermsTrackTag implements ObjectTag {
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
 
-    public static LuckPermsTrack valueOf(String string) {
+    public static LuckPermsTrackTag valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("luckpermstrack")
-    public static LuckPermsTrack valueOf(String string, TagContext context) {
+    public static LuckPermsTrackTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -36,7 +36,7 @@ public class LuckPermsTrack implements ObjectTag {
             if (track == null) {
                 return null;
             }
-            return new LuckPermsTrack(track);
+            return new LuckPermsTrackTag(track);
         }
         catch (Throwable e) {
             Debug.echoError(e);
@@ -54,7 +54,7 @@ public class LuckPermsTrack implements ObjectTag {
 
     Track track = null;
 
-    public LuckPermsTrack(Track t) {
+    public LuckPermsTrackTag(Track t) {
         track = t;
     }
 
@@ -70,7 +70,7 @@ public class LuckPermsTrack implements ObjectTag {
     }
 
     @Override
-    public LuckPermsTrack setPrefix(String prefix) {
+    public LuckPermsTrackTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -82,8 +82,8 @@ public class LuckPermsTrack implements ObjectTag {
 
     @Override
     public boolean equals(Object a) {
-        if (a instanceof LuckPermsTrack) {
-            return ((LuckPermsTrack) a).track.getName().equals(track.getName());
+        if (a instanceof LuckPermsTrackTag) {
+            return ((LuckPermsTrackTag) a).track.getName().equals(track.getName());
         }
         return false;
     }
@@ -122,7 +122,7 @@ public class LuckPermsTrack implements ObjectTag {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <luckpermstrack@luckpermstrack.name>
+        // @attribute <LuckPermsTrackTag.name>
         // @returns ElementTag
         // @description
         // Returns the name of the track.
@@ -133,7 +133,7 @@ public class LuckPermsTrack implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <luckpermstrack@luckpermstrack.groups>
+        // @attribute <LuckPermsTrackTag.groups>
         // @returns ListTag(Element)
         // @description
         // Returns the list of groups in the track.

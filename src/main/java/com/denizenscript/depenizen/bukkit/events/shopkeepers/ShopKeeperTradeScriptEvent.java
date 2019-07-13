@@ -9,7 +9,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeper;
+import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeperTag;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -39,7 +39,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
 
     public static ShopKeeperTradeScriptEvent instance;
     public ShopkeeperTradeEvent event;
-    public ShopKeeper keeper;
+    public ShopKeeperTag keeper;
     public PlayerTag player;
     public ListTag recipe;
 
@@ -82,8 +82,8 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     @EventHandler
     public void onShopKeeperTrade(ShopkeeperTradeEvent event) {
         player = PlayerTag.mirrorBukkitPlayer(event.getPlayer());
-        keeper = new ShopKeeper(event.getShopkeeper());
-        recipe = ShopKeeper.wrapTradingRecipe(event.getTradingRecipe());
+        keeper = new ShopKeeperTag(event.getShopkeeper());
+        recipe = ShopKeeperTag.wrapTradingRecipe(event.getTradingRecipe());
         this.event = event;
         fire(event);
     }

@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.towny;
 
-import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
+import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.event.PlayerLeaveTownEvent;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.denizenscript.denizen.BukkitScriptEntryData;
@@ -39,7 +39,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
 
     public static PlayerExitsTownScriptEvent instance;
     public PlayerLeaveTownEvent event;
-    public dTown town;
+    public TownTag town;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -49,11 +49,11 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public boolean matches(ScriptPath path) {
         String name = path.eventArgLowerAt(3);
-        dTown eventTown = dTown.fromWorldCoord(event.getFrom());
+        TownTag eventTown = TownTag.fromWorldCoord(event.getFrom());
         if (name.equals("town") && eventTown != null) {
             return true;
         }
-        dTown givenTown = dTown.valueOf(name);
+        TownTag givenTown = TownTag.valueOf(name);
         return eventTown != null && givenTown != null && eventTown.equals(givenTown);
     }
 
@@ -90,7 +90,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
         catch (NotRegisteredException e) {
             return;
         }
-        town = dTown.fromWorldCoord(event.getFrom());
+        town = TownTag.fromWorldCoord(event.getFrom());
         this.event = event;
         fire(event);
     }

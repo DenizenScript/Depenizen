@@ -13,17 +13,17 @@ import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.entity.Player;
 
-public class MobArenaArena implements ObjectTag {
+public class MobArenaArenaTag implements ObjectTag {
 
     String prefix = "MobArena";
     Arena arena = null;
 
-    public static MobArenaArena valueOf(String name) {
+    public static MobArenaArenaTag valueOf(String name) {
         return valueOf(name, null);
     }
 
     @Fetchable("mobarena")
-    public static MobArenaArena valueOf(String name, TagContext context) {
+    public static MobArenaArenaTag valueOf(String name, TagContext context) {
         if (name == null) {
             return null;
         }
@@ -35,14 +35,14 @@ public class MobArenaArena implements ObjectTag {
         if (arena == null) {
             return null;
         }
-        return new MobArenaArena(arena);
+        return new MobArenaArenaTag(arena);
     }
 
     public static boolean matches(String name) {
         return valueOf(name) != null;
     }
 
-    public MobArenaArena(Arena arena) {
+    public MobArenaArenaTag(Arena arena) {
         if (arena != null) {
             this.arena = arena;
         }
@@ -103,7 +103,7 @@ public class MobArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <mobarena@mobarena.name>
+        // @attribute <MobArenaArenaTag.name>
         // @returns ElementTag
         // @description
         // Returns the name of the arena.
@@ -114,7 +114,7 @@ public class MobArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <mobarena@mobarena.config_name>
+        // @attribute <MobArenaArenaTag.config_name>
         // @returns ElementTag
         // @description
         // Returns the configuration name of the arena.
@@ -125,7 +125,7 @@ public class MobArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <mobarena@mobarena.is_running>
+        // @attribute <MobArenaArenaTag.is_running>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the arena is running.
@@ -136,7 +136,7 @@ public class MobArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <mobarena@mobarena.wave_count>
+        // @attribute <MobArenaArenaTag.wave_count>
         // @returns ElementTag(Number)
         // @description
         // Returns the number of waves this arena has in total.
@@ -148,7 +148,7 @@ public class MobArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <mobarena@mobarena.current_wave>
+        // @attribute <MobArenaArenaTag.current_wave>
         // @returns ElementTag(Number)
         // @description
         // Returns the current wave number.
@@ -161,7 +161,7 @@ public class MobArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <mobarena@mobarena.wave_type>
+        // @attribute <MobArenaArenaTag.wave_type>
         // @returns ElementTag
         // @description
         // Returns the type of the current wave.
@@ -174,7 +174,7 @@ public class MobArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <mobarena@mobarena.is_enabled>
+        // @attribute <MobArenaArenaTag.is_enabled>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the arena is enabled.
@@ -185,7 +185,7 @@ public class MobArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <mobarena@mobarena.status>
+        // @attribute <MobArenaArenaTag.status>
         // @returns ElementTag
         // @description
         // Returns the status of the arena.
@@ -207,7 +207,7 @@ public class MobArenaArena implements ObjectTag {
         else if (attribute.startsWith("players")) {
 
             // <--[tag]
-            // @attribute <mobarena@mobarena.players.in_arena>
+            // @attribute <MobArenaArenaTag.players.in_arena>
             // @returns ListTag(PlayerTag)
             // @description
             // Returns a list of players in the arena.
@@ -222,7 +222,7 @@ public class MobArenaArena implements ObjectTag {
             }
 
             // <--[tag]
-            // @attribute <mobarena@mobarena.players.in_lobby>
+            // @attribute <MobArenaArenaTag.players.in_lobby>
             // @returns ListTag(PlayerTag)
             // @description
             // Returns a list of players in the lobby.
@@ -237,7 +237,7 @@ public class MobArenaArena implements ObjectTag {
             }
 
             // <--[tag]
-            // @attribute <mobarena@mobarena.players>
+            // @attribute <MobArenaArenaTag.players>
             // @returns ListTag(PlayerTag)
             // @description
             // Returns a list of all players in the arena (including the lobby).
@@ -253,7 +253,7 @@ public class MobArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <mobarena@mobarena.type>
+        // @attribute <MobArenaArenaTag.type>
         // @returns ElementTag
         // @description
         // Always returns 'MobArena' for MobArena objects. All objects fetchable by the Object Fetcher will return the

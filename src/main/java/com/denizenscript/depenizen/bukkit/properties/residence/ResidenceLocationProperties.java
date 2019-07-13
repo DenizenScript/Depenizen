@@ -4,7 +4,7 @@ import com.bekvon.bukkit.residence.Residence;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.residence.dResidence;
+import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -68,7 +68,7 @@ public class ResidenceLocationProperties implements Property {
 
         // <--[tag]
         // @attribute <LocationTag.residence>
-        // @returns dResidence
+        // @returns ResidenceTag
         // @description
         // Returns the residence contained by this location.
         // @Plugin Depenizen, Residence
@@ -76,7 +76,7 @@ public class ResidenceLocationProperties implements Property {
         if (attribute.startsWith("residence")) {
             ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);
             if (res != null) {
-                return new dResidence(res).getAttribute(attribute.fulfill(1));
+                return new ResidenceTag(res).getAttribute(attribute.fulfill(1));
             }
             return null;
         }

@@ -10,16 +10,16 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
+import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
 
-public class dAreaShop implements ObjectTag {
+public class AreaShopTag implements ObjectTag {
 
-    public static dAreaShop valueOf(String string) {
-        return dAreaShop.valueOf(string, null);
+    public static AreaShopTag valueOf(String string) {
+        return AreaShopTag.valueOf(string, null);
     }
 
     @Fetchable("areashop")
-    public static dAreaShop valueOf(String string, TagContext context) {
+    public static AreaShopTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -32,7 +32,7 @@ public class dAreaShop implements ObjectTag {
         if (areaShop == null) {
             return null;
         }
-        return new dAreaShop(areaShop);
+        return new AreaShopTag(areaShop);
     }
 
     public static boolean matches(String arg) {
@@ -42,7 +42,7 @@ public class dAreaShop implements ObjectTag {
 
     GeneralRegion areaShop = null;
 
-    public dAreaShop(GeneralRegion areaShop) {
+    public AreaShopTag(GeneralRegion areaShop) {
         if (areaShop != null) {
             this.areaShop = areaShop;
         }
@@ -98,7 +98,7 @@ public class dAreaShop implements ObjectTag {
         return areaShop;
     }
 
-    public boolean equals(dAreaShop areaShop) {
+    public boolean equals(AreaShopTag areaShop) {
         return areaShop.getAreaShop().equals(this.getAreaShop());
     }
 
@@ -109,7 +109,7 @@ public class dAreaShop implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <areashop@areashop.is_bought>
+        // @attribute <AreaShopTag.is_bought>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether this AreaShop has been bought.
@@ -120,7 +120,7 @@ public class dAreaShop implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <areashop@areashop.is_rented>
+        // @attribute <AreaShopTag.is_rented>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether this AreaShop is being rented.
@@ -131,7 +131,7 @@ public class dAreaShop implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <areashop@areashop.groups>
+        // @attribute <AreaShopTag.groups>
         // @returns ListTag
         // @description
         // Returns a list of groups that control this AreaShop.
@@ -142,7 +142,7 @@ public class dAreaShop implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <areashop@areashop.landlord>
+        // @attribute <AreaShopTag.landlord>
         // @returns PlayerTag
         // @description
         // Returns the landlord of the AreaShop.
@@ -153,7 +153,7 @@ public class dAreaShop implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <areashop@areashop.name>
+        // @attribute <AreaShopTag.name>
         // @returns ElementTag
         // @description
         // Returns the name of the AreaShop.
@@ -164,7 +164,7 @@ public class dAreaShop implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <areashop@areashop.owner>
+        // @attribute <AreaShopTag.owner>
         // @returns PlayerTag
         // @description
         // Returns the owner of the AreaShop.
@@ -175,14 +175,14 @@ public class dAreaShop implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <areashop@areashop.worldguard_region>
+        // @attribute <AreaShopTag.worldguard_region>
         // @returns WorldGuardRegion
         // @description
         // Returns the WorldGuardRegion that holds the AreaShop.
         // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("worldguard_region")) {
-            return new WorldGuardRegion(areaShop.getRegion(), areaShop.getWorld()).getAttribute(attribute.fulfill(1));
+            return new WorldGuardRegionTag(areaShop.getRegion(), areaShop.getWorld()).getAttribute(attribute.fulfill(1));
         }
 
         return new ElementTag(identify()).getAttribute(attribute);

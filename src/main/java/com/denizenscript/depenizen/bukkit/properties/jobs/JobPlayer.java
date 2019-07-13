@@ -5,12 +5,12 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
+import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
 
 public class JobPlayer implements Property {
 
     public static boolean describes(ObjectTag job) {
-        return job instanceof JobsJob;
+        return job instanceof JobsJobTag;
     }
 
     public static JobPlayer getFrom(ObjectTag job) {
@@ -18,7 +18,7 @@ public class JobPlayer implements Property {
             return null;
         }
         else {
-            return new JobPlayer((JobsJob) job);
+            return new JobPlayer((JobsJobTag) job);
         }
     }
 
@@ -26,9 +26,9 @@ public class JobPlayer implements Property {
     // Instance Fields and Methods
     /////////////
 
-    JobsJob job = null;
+    JobsJobTag job = null;
 
-    private JobPlayer(JobsJob job) {
+    private JobPlayer(JobsJobTag job) {
         this.job = job;
     }
 

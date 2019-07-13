@@ -22,7 +22,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class WorldGuardRegion implements ObjectTag {
+public class WorldGuardRegionTag implements ObjectTag {
 
     /////////////////////
     //   PATTERNS
@@ -34,12 +34,12 @@ public class WorldGuardRegion implements ObjectTag {
     //   OBJECT FETCHER
     /////////////////
 
-    public static WorldGuardRegion valueOf(String string) {
+    public static WorldGuardRegionTag valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("region")
-    public static WorldGuardRegion valueOf(String string, TagContext context) {
+    public static WorldGuardRegionTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -59,7 +59,7 @@ public class WorldGuardRegion implements ObjectTag {
                         + "' for world '" + worldName + "'");
                 return null;
             }
-            return new WorldGuardRegion(manager.getRegion(regionName), world);
+            return new WorldGuardRegionTag(manager.getRegion(regionName), world);
         }
 
         return null;
@@ -76,7 +76,7 @@ public class WorldGuardRegion implements ObjectTag {
     ProtectedRegion region = null;
     World world = null;
 
-    public WorldGuardRegion(ProtectedRegion region, World world) {
+    public WorldGuardRegionTag(ProtectedRegion region, World world) {
         this.region = region;
         this.world = world;
     }
@@ -140,7 +140,7 @@ public class WorldGuardRegion implements ObjectTag {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <region@region.cuboid>
+        // @attribute <WorldGuardRegionTag.cuboid>
         // @returns CuboidTag
         // @group conversion
         // @description
@@ -150,7 +150,7 @@ public class WorldGuardRegion implements ObjectTag {
         if (attribute.startsWith("cuboid") || attribute.startsWith("as_cuboid")) { // TODO: Scrap as_cuboid
             if (!(region instanceof ProtectedCuboidRegion)) {
                 if (!attribute.hasAlternative()) {
-                    Debug.echoError("<region@region.as_cuboid> requires a Cuboid-shaped region!");
+                    Debug.echoError("<WorldGuardRegionTag.as_cuboid> requires a Cuboid-shaped region!");
                 }
                 return null;
             }
@@ -159,7 +159,7 @@ public class WorldGuardRegion implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <region@region.id>
+        // @attribute <WorldGuardRegionTag.id>
         // @returns ElementTag
         // @description
         // Gets the ID name of the region.
@@ -170,7 +170,7 @@ public class WorldGuardRegion implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <region@region.members>
+        // @attribute <WorldGuardRegionTag.members>
         // @returns ListTag(PlayerTag)
         // @description
         // Gets a list of all members of a region. (Members are permitted to build, etc.)
@@ -185,7 +185,7 @@ public class WorldGuardRegion implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <region@region.owners>
+        // @attribute <WorldGuardRegionTag.owners>
         // @returns ListTag(PlayerTag)
         // @description
         // Gets a list of all owners of a region. (Owners are permitted to build, edit settings, etc.)
@@ -200,7 +200,7 @@ public class WorldGuardRegion implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <region@region.type>
+        // @attribute <WorldGuardRegionTag.type>
         // @returns ElementTag
         // @description
         // Always returns 'Region' for WorldGuardRegion objects. All objects fetchable by the Object Fetcher will return the
@@ -212,7 +212,7 @@ public class WorldGuardRegion implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <region@region.world>
+        // @attribute <WorldGuardRegionTag.world>
         // @returns WorldTag
         // @description
         // Gets the WorldTag this region is in.

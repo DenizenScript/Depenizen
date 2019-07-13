@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.pvparena;
 
-import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
+import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArenaTag;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -36,7 +36,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
     public static PVPArenaStartsScriptEvent instance;
     public PAStartEvent event;
     public ListTag fighters;
-    public PVPArenaArena arena;
+    public PVPArenaArenaTag arena;
 
     public PVPArenaStartsScriptEvent() {
         instance = this;
@@ -84,7 +84,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
         for (ArenaPlayer p : event.getArena().getFighters()) {
             fighters.add(new PlayerTag(p.get()).identify());
         }
-        arena = new PVPArenaArena(event.getArena());
+        arena = new PVPArenaArenaTag(event.getArena());
         this.event = event;
         fire(event);
     }

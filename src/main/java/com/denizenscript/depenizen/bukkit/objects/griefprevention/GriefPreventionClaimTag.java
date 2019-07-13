@@ -21,7 +21,7 @@ import org.bukkit.Chunk;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class GriefPreventionClaim implements ObjectTag, Adjustable {
+public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
 
     static DataStore dataStore = GriefPrevention.instance.dataStore;
 
@@ -29,12 +29,12 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         return valueOf(id) != null;
     }
 
-    public static GriefPreventionClaim valueOf(String id) {
+    public static GriefPreventionClaimTag valueOf(String id) {
         return valueOf(id, null);
     }
 
     @Fetchable("gpclaim")
-    public static GriefPreventionClaim valueOf(String id, TagContext context) {
+    public static GriefPreventionClaimTag valueOf(String id, TagContext context) {
         long claimID;
         id = id.replace("gpclaim@", "");
         try {
@@ -47,10 +47,10 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         if (claim == null) {
             return null;
         }
-        return new GriefPreventionClaim(claim);
+        return new GriefPreventionClaimTag(claim);
     }
 
-    public GriefPreventionClaim(Claim claim) {
+    public GriefPreventionClaimTag(Claim claim) {
         this.claim = claim;
     }
 
@@ -109,7 +109,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.id>
+        // @attribute <GriefPreventionClaimTag.id>
         // @returns ElementTag(Number)
         // @description
         // Returns the GriefPreventionClaim's ID.
@@ -120,7 +120,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.managers>
+        // @attribute <GriefPreventionClaimTag.managers>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns the GriefPreventionClaim's managers.
@@ -135,7 +135,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.trusted>
+        // @attribute <GriefPreventionClaimTag.trusted>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns the GriefPreventionClaim's trusted.
@@ -152,7 +152,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.builders>
+        // @attribute <GriefPreventionClaimTag.builders>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns the GriefPreventionClaim's builders.
@@ -169,7 +169,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.containers>
+        // @attribute <GriefPreventionClaimTag.containers>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns the GriefPreventionClaim's containers.
@@ -186,7 +186,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.accessors>
+        // @attribute <GriefPreventionClaimTag.accessors>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns the GriefPreventionClaim's accessors.
@@ -203,7 +203,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.owner>
+        // @attribute <GriefPreventionClaimTag.owner>
         // @returns PlayerTag/Element
         // @description
         // Returns the GriefPreventionClaim's owner.
@@ -220,7 +220,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.cuboid>
+        // @attribute <GriefPreventionClaimTag.cuboid>
         // @returns CuboidTag
         // @description
         // Returns the GriefPreventionClaim's cuboid area.
@@ -235,7 +235,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.is_adminclaim>
+        // @attribute <GriefPreventionClaimTag.is_adminclaim>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether GriefPreventionClaim is an Admin Claim.
@@ -246,7 +246,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.chunks>
+        // @attribute <GriefPreventionClaimTag.chunks>
         // @returns ListTag(ChunkTag)
         // @description
         // Returns a list of all chunks in the GriefPreventionClaim.
@@ -261,7 +261,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <gpclaim@gpclaim.can_siege[<player>]>
+        // @attribute <GriefPreventionClaimTag.can_siege[<player>]>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether the GriefPreventionClaim can siege the player.
@@ -288,7 +288,7 @@ public class GriefPreventionClaim implements ObjectTag, Adjustable {
         // Sets the owner of the GriefPreventionClaim.
         // Accepts PlayerTag or "admin" to set as admin claim.
         // @tags
-        // <gpclaim@gpclaim.owner>
+        // <GriefPreventionClaimTag.owner>
         // -->
         if (mechanism.matches("owner")) {
             try {

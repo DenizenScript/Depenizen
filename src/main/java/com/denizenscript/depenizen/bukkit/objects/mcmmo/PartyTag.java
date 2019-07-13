@@ -15,14 +15,14 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 import java.util.UUID;
 
-public class dParty implements ObjectTag {
+public class PartyTag implements ObjectTag {
 
-    public static dParty valueOf(String string) {
-        return dParty.valueOf(string, null);
+    public static PartyTag valueOf(String string) {
+        return PartyTag.valueOf(string, null);
     }
 
     @Fetchable("party")
-    public static dParty valueOf(String string, TagContext context) {
+    public static PartyTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -35,7 +35,7 @@ public class dParty implements ObjectTag {
         if (party == null) {
             return null;
         }
-        return new dParty(party);
+        return new PartyTag(party);
     }
 
     public static boolean matches(String arg) {
@@ -43,7 +43,7 @@ public class dParty implements ObjectTag {
         return PartyManager.getParty(arg) != null;
     }
 
-    public static dParty forPlayer(PlayerTag player) {
+    public static PartyTag forPlayer(PlayerTag player) {
         McMMOPlayer pl = UserManager.getOfflinePlayer(player.getOfflinePlayer());
         if (pl == null) {
             return null;
@@ -52,12 +52,12 @@ public class dParty implements ObjectTag {
         if (party == null) {
             return null;
         }
-        return new dParty(party);
+        return new PartyTag(party);
     }
 
     Party party = null;
 
-    public dParty(Party party) {
+    public PartyTag(Party party) {
         if (party != null) {
             this.party = party;
         }
@@ -116,7 +116,7 @@ public class dParty implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <party@party.name>
+        // @attribute <PartyTag.name>
         // @returns ElementTag
         // @description
         // Returns the name of the party.
@@ -127,7 +127,7 @@ public class dParty implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <party@party.leader>
+        // @attribute <PartyTag.leader>
         // @returns PlayerTag
         // @description
         // Returns the leader of the party.
@@ -138,7 +138,7 @@ public class dParty implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <party@party.members>
+        // @attribute <PartyTag.members>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all party members.

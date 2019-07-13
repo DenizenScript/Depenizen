@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.mobarena;
 
 import com.garbagemule.MobArena.events.ArenaStartEvent;
-import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
+import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArenaTag;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -37,7 +37,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     public static MobArenaStartsScriptEvent instance;
     public ArenaStartEvent event;
-    public MobArenaArena arena;
+    public MobArenaArenaTag arena;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -48,7 +48,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
     @Override
     public boolean matches(ScriptPath path) {
         String arenaname = path.eventArgLowerAt(2).replace("mobarena@", "");
-        MobArenaArena a = MobArenaArena.valueOf(arenaname);
+        MobArenaArenaTag a = MobArenaArenaTag.valueOf(arenaname);
         return arenaname.equals("arena") || (a != null && a.getArena() == event.getArena());
     }
 
@@ -77,7 +77,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     @EventHandler
     public void onMobArenaStarts(ArenaStartEvent event) {
-        arena = new MobArenaArena(event.getArena());
+        arena = new MobArenaArenaTag(event.getArena());
         this.event = event;
         fire(event);
     }

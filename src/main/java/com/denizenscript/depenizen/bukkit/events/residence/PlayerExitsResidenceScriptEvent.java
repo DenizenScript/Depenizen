@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.residence;
 
 import com.bekvon.bukkit.residence.event.ResidenceChangedEvent;
-import com.denizenscript.depenizen.bukkit.objects.residence.dResidence;
+import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -38,7 +38,7 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
 
     public static PlayerExitsResidenceScriptEvent instance;
     public ResidenceChangedEvent event;
-    public dResidence residence;
+    public ResidenceTag residence;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -48,11 +48,11 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
     @Override
     public boolean matches(ScriptPath path) {
         String name = path.eventArgLowerAt(3);
-        dResidence eventResidence = event.getFrom() != null ? new dResidence(event.getFrom()) : null;
+        ResidenceTag eventResidence = event.getFrom() != null ? new ResidenceTag(event.getFrom()) : null;
         if (name.equals("residence") && eventResidence != null) {
             return true;
         }
-        dResidence givenResidence = dResidence.valueOf(name);
+        ResidenceTag givenResidence = ResidenceTag.valueOf(name);
         if (eventResidence != null && givenResidence != null && eventResidence.equals(givenResidence)) {
             return true;
         }
@@ -87,7 +87,7 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
         if (event.getFrom() == null) {
             return;
         }
-        residence = new dResidence(event.getFrom());
+        residence = new ResidenceTag(event.getFrom());
         this.event = event;
         fire(event);
     }

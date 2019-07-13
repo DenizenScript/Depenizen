@@ -7,7 +7,7 @@ import com.garbagemule.MobArena.framework.Arena;
 import com.denizenscript.depenizen.bukkit.commands.mobarena.MobArenaCommand;
 import com.denizenscript.depenizen.bukkit.events.mobarena.MobArenaEndsScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.mobarena.MobArenaPlayerProperties;
-import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
+import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArenaTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizen.utilities.debugging.Debug;
@@ -28,7 +28,7 @@ public class MobArenaBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        ObjectFetcher.registerWithObjectFetcher(MobArenaArena.class);
+        ObjectFetcher.registerWithObjectFetcher(MobArenaArenaTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {
@@ -54,7 +54,7 @@ public class MobArenaBridge extends Bridge {
         // @Plugin Depenizen, MobArena
         // -->
         if (attribute.hasContext(1)) {
-            MobArenaArena arena = MobArenaArena.valueOf(attribute.getContext(1));
+            MobArenaArenaTag arena = MobArenaArenaTag.valueOf(attribute.getContext(1));
             if (arena != null) {
                 event.setReplacedObject(arena.getObjectAttribute(attribute.fulfill(1)));
             }
@@ -79,7 +79,7 @@ public class MobArenaBridge extends Bridge {
                 if (((MobArena) plugin).getArenaMaster().getArenaWithName(a.configName()) == null) {
                     continue;
                 }
-                arenas.add(new MobArenaArena(a).identify());
+                arenas.add(new MobArenaArenaTag(a).identify());
             }
             event.setReplacedObject(arenas.getObjectAttribute(attribute.fulfill(1)));
         }

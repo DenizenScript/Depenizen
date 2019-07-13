@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.plotsquared;
 
-import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
+import com.denizenscript.depenizen.bukkit.objects.plotsquared.PlotSquaredPlotTag;
 import com.github.intellectualsites.plotsquared.bukkit.events.PlayerLeavePlotEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
@@ -42,7 +42,7 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
     public static PlayerLeavePlotScriptEvent instance;
     public PlayerLeavePlotEvent event;
     public PlayerTag player;
-    public dPlotSquaredPlot plot;
+    public PlotSquaredPlotTag plot;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -56,7 +56,7 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
         if (plotName.equals("plotsquaredplot")) {
             return true;
         }
-        dPlotSquaredPlot dplot = dPlotSquaredPlot.valueOf(plotName);
+        PlotSquaredPlotTag dplot = PlotSquaredPlotTag.valueOf(plotName);
         return dplot != null && dplot.equals(plot);
     }
 
@@ -89,7 +89,7 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
             return;
         }
         player = PlayerTag.mirrorBukkitPlayer(event.getPlayer());
-        plot = new dPlotSquaredPlot(event.getPlot());
+        plot = new PlotSquaredPlotTag(event.getPlot());
         this.event = event;
         fire(event);
     }

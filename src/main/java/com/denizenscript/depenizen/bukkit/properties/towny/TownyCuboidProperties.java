@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.towny;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
+import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.CuboidTag;
@@ -91,7 +91,7 @@ public class TownyCuboidProperties implements Property {
                 for (Location location : cuboid.getBlockLocations()) {
                     String townName = TownyUniverse.getTownName(location);
                     if (townName != null && !towns.contains(townName)) {
-                        list.add(new dTown(TownyUniverse.getTownBlock(location).getTown()).identify());
+                        list.add(new TownTag(TownyUniverse.getTownBlock(location).getTown()).identify());
                         towns.add(townName);
                     }
                 }

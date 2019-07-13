@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.skillapi;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.skillapi.SkillAPIClass;
+import com.denizenscript.depenizen.bukkit.objects.skillapi.SkillAPIClassTag;
 import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.player.PlayerClass;
 import com.sucy.skill.api.player.PlayerData;
@@ -76,7 +76,7 @@ public class SkillAPIPlayerProperties implements Property {
                 if (data == null || data.getMainClass() == null) {
                     return null;
                 }
-                return new SkillAPIClass(data.getMainClass().getData()).getAttribute(attribute.fulfill(1));
+                return new SkillAPIClassTag(data.getMainClass().getData()).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -89,7 +89,7 @@ public class SkillAPIPlayerProperties implements Property {
             // -->
             if (attribute.startsWith("in_class")) {
                 if (attribute.hasContext(1)) {
-                    SkillAPIClass testClass = SkillAPIClass.valueOf(attribute.getContext(1));
+                    SkillAPIClassTag testClass = SkillAPIClassTag.valueOf(attribute.getContext(1));
                     if (testClass == null) {
                         return null;
                     }
@@ -134,7 +134,7 @@ public class SkillAPIPlayerProperties implements Property {
             if (attribute.startsWith("class_") && attribute.hasContext(1)) {
 
                 PlayerClass playerClass = null;
-                SkillAPIClass skillAPIClass = SkillAPIClass.valueOf(attribute.getContext(1));
+                SkillAPIClassTag skillAPIClass = SkillAPIClassTag.valueOf(attribute.getContext(1));
                 if (skillAPIClass != null) {
                     String name = skillAPIClass.getRPGClass().getName();
                     for (PlayerClass plClass : data.getClasses()) {

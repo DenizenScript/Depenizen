@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.worldguard;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
+import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
@@ -70,7 +70,7 @@ public class WorldGuardWorldProperties implements Property {
         if (attribute.startsWith("list_regions")) {
             ListTag regions = new ListTag();
             for (ProtectedRegion r : manager.getRegions().values()) {
-                regions.add(new WorldGuardRegion(r, world).identify());
+                regions.add(new WorldGuardRegionTag(r, world).identify());
             }
             return regions.getAttribute(attribute.fulfill(1));
         }

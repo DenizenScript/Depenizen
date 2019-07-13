@@ -9,7 +9,7 @@ import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.depenizen.bukkit.objects.mcmmo.dParty;
+import com.denizenscript.depenizen.bukkit.objects.mcmmo.PartyTag;
 
 public class McMMOPlayerProperties implements Property {
 
@@ -100,7 +100,7 @@ public class McMMOPlayerProperties implements Property {
             // @Plugin Depenizen, mcMMO
             // -->
             else if (attribute.startsWith("party")) {
-                dParty party = dParty.forPlayer(player);
+                PartyTag party = PartyTag.forPlayer(player);
                 if (party != null) {
                     return party.getAttribute(attribute.fulfill(1));
                 }

@@ -10,7 +10,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.residence.dResidence;
+import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 
 public class ResidencePlayerProperties implements Property {
 
@@ -72,7 +72,7 @@ public class ResidencePlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <PlayerTag.main_residence>
-        // @returns dResidence
+        // @returns ResidenceTag
         // @description
         // Returns the player's current main Residence if they have one.
         // @Plugin Depenizen, Residence
@@ -80,7 +80,7 @@ public class ResidencePlayerProperties implements Property {
         else if (attribute.startsWith("main_residence")) {
             ClaimedResidence residence = player.getMainResidence();
             if (residence != null) {
-                return new dResidence(player.getMainResidence()).getAttribute(attribute.fulfill(1));
+                return new ResidenceTag(player.getMainResidence()).getAttribute(attribute.fulfill(1));
             }
         }
 
@@ -94,7 +94,7 @@ public class ResidencePlayerProperties implements Property {
         else if (attribute.startsWith("residences")) {
             ListTag list = new ListTag();
             for (ClaimedResidence residence : player.getResList()) {
-                list.add(new dResidence(residence).identify());
+                list.add(new ResidenceTag(residence).identify());
             }
             return list.getAttribute(attribute.fulfill(1));
         }

@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.plotsquared;
 import com.github.intellectualsites.plotsquared.plot.object.Location;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
+import com.denizenscript.depenizen.bukkit.objects.plotsquared.PlotSquaredPlotTag;
 import com.github.intellectualsites.plotsquared.api.PlotAPI;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
@@ -60,14 +60,14 @@ public class PlotSquaredLocationProperties implements Property {
     public String getAttribute(Attribute attribute) {
         // <--[tag]
         // @attribute <LocationTag.plotsquared_plot>
-        // @returns dPlotSquaredPlot
+        // @returns PlotSquaredPlotTag
         // @description
         // Returns the plot contained by this location.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("plotsquared_plot")) {
             try {
-                return new dPlotSquaredPlot(new PlotAPI().getPlotSquared().getPlotAreaAbs(getPlotSquaredLocation())
+                return new PlotSquaredPlotTag(new PlotAPI().getPlotSquared().getPlotAreaAbs(getPlotSquaredLocation())
                         .getPlot(getPlotSquaredLocation())).getAttribute(attribute.fulfill(1));
             }
             catch (Exception e) {

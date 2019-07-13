@@ -4,8 +4,8 @@ import com.denizenscript.depenizen.bukkit.events.towny.PlayerEntersTownScriptEve
 import com.denizenscript.depenizen.bukkit.events.towny.PlayerExitsTownScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyCuboidProperties;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyLocationProperties;
-import com.denizenscript.depenizen.bukkit.factions.dNation;
-import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
+import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
+import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyPlayerProperties;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
@@ -28,8 +28,8 @@ public class TownyBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(dTown.class);
-        ObjectFetcher.registerWithObjectFetcher(dNation.class);
+        ObjectFetcher.registerWithObjectFetcher(TownTag.class);
+        ObjectFetcher.registerWithObjectFetcher(NationTag.class);
         PropertyParser.registerProperty(TownyPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(TownyLocationProperties.class, LocationTag.class);
         PropertyParser.registerProperty(TownyCuboidProperties.class, CuboidTag.class);
@@ -70,7 +70,7 @@ public class TownyBridge extends Bridge {
             if (attribute.hasContext(1)) {
                 try {
                     for (Town town : TownyUniverse.getDataSource().getWorld(attribute.getContext(1)).getTowns()) {
-                        towns.add(new dTown(town).identify());
+                        towns.add(new TownTag(town).identify());
                     }
                 }
                 catch (NotRegisteredException e) {
@@ -80,7 +80,7 @@ public class TownyBridge extends Bridge {
             }
             else {
                 for (Town town : TownyUniverse.getDataSource().getTowns()) {
-                    towns.add(new dTown(town).identify());
+                    towns.add(new TownTag(town).identify());
                 }
             }
             event.setReplacedObject(towns.getObjectAttribute(attribute.fulfill(1)));
@@ -92,15 +92,15 @@ public class TownyBridge extends Bridge {
 
         // <--[tag]
         // @attribute <town[<name>]>
-        // @returns dTown
+        // @returns TownTag
         // @description
         // Returns the town by the input name.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.hasContext(1)) {
-            dTown town;
-            if (dTown.matches(attribute.getContext(1))) {
-                town = dTown.valueOf(attribute.getContext(1));
+            TownTag town;
+            if (TownTag.matches(attribute.getContext(1))) {
+                town = TownTag.valueOf(attribute.getContext(1));
             }
             else {
                 Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid town!");
@@ -120,15 +120,15 @@ public class TownyBridge extends Bridge {
 
         // <--[tag]
         // @attribute <nation[<name>]>
-        // @returns dNation
+        // @returns NationTag
         // @description
         // Returns the nation by the input name.
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.hasContext(1)) {
-            dNation nation;
-            if (dNation.matches(attribute.getContext(1))) {
-                nation = dNation.valueOf(attribute.getContext(1));
+            NationTag nation;
+            if (NationTag.matches(attribute.getContext(1))) {
+                nation = NationTag.valueOf(attribute.getContext(1));
             }
             else {
                 Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid nation!");

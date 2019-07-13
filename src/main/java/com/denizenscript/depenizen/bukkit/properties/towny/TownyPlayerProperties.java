@@ -2,8 +2,8 @@ package com.denizenscript.depenizen.bukkit.properties.towny;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.factions.dNation;
-import com.denizenscript.depenizen.bukkit.objects.towny.dTown;
+import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
+import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
@@ -119,7 +119,7 @@ public class TownyPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.nation>
-            // @returns dNation
+            // @returns NationTag
             // @description
             // Returns the player's nation.
             // @Plugin Depenizen, Towny
@@ -127,7 +127,7 @@ public class TownyPlayerProperties implements Property {
             if (attribute.startsWith("nation")) {
                 try {
                     if (getResident().hasNation()) {
-                        return new dNation(getResident().getTown().getNation()).getAttribute(attribute.fulfill(1));
+                        return new NationTag(getResident().getTown().getNation()).getAttribute(attribute.fulfill(1));
                     }
                     else {
                         return null;
@@ -157,7 +157,7 @@ public class TownyPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.town>
-            // @returns dTown
+            // @returns TownTag
             // @description
             // Returns the player's town.
             // @Plugin Depenizen, Towny
@@ -165,7 +165,7 @@ public class TownyPlayerProperties implements Property {
             if (attribute.startsWith("town")) {
                 try {
                     if (getResident().hasTown()) {
-                        return new dTown(getResident().getTown()).getAttribute(attribute.fulfill(1));
+                        return new TownTag(getResident().getTown()).getAttribute(attribute.fulfill(1));
                     }
                     else {
                         return null;

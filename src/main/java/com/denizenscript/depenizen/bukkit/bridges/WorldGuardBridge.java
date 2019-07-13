@@ -17,7 +17,7 @@ import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardLocationProperties;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardPlayerProperties;
-import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
+import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
 import com.denizenscript.denizencore.tags.TagManager;
 
 public class WorldGuardBridge extends Bridge {
@@ -27,7 +27,7 @@ public class WorldGuardBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        ObjectFetcher.registerWithObjectFetcher(WorldGuardRegion.class);
+        ObjectFetcher.registerWithObjectFetcher(WorldGuardRegionTag.class);
         PropertyParser.registerProperty(WorldGuardLocationProperties.class, LocationTag.class);
         PropertyParser.registerProperty(WorldGuardPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(WorldGuardCuboidProperties.class, CuboidTag.class);
@@ -45,7 +45,7 @@ public class WorldGuardBridge extends Bridge {
     public void tagEvent(ReplaceableTagEvent event) {
         Attribute attribute = event.getAttributes();
         if (attribute.startsWith("region") && attribute.hasContext(1)) {
-            WorldGuardRegion region = WorldGuardRegion.valueOf(attribute.getContext(1));
+            WorldGuardRegionTag region = WorldGuardRegionTag.valueOf(attribute.getContext(1));
             if (region != null) {
                 event.setReplacedObject(region.getObjectAttribute(attribute.fulfill(1)));
             }

@@ -11,7 +11,7 @@ import net.slipcor.pvparena.arena.Arena;
 import net.slipcor.pvparena.arena.ArenaPlayer;
 import net.slipcor.pvparena.managers.ArenaManager;
 
-public class PVPArenaArena implements ObjectTag {
+public class PVPArenaArenaTag implements ObjectTag {
 
     String prefix = "PVPArena";
     Arena arena = null;
@@ -20,20 +20,20 @@ public class PVPArenaArena implements ObjectTag {
         return valueOf(name) != null;
     }
 
-    public static PVPArenaArena valueOf(String name) {
+    public static PVPArenaArenaTag valueOf(String name) {
         return valueOf(name, null);
     }
 
-    public static PVPArenaArena valueOf(String name, TagContext context) {
+    public static PVPArenaArenaTag valueOf(String name, TagContext context) {
         name = name.replace("pvparena@", "");
         Arena a = ArenaManager.getArenaByName(name);
         if (a == null) {
             return null;
         }
-        return new PVPArenaArena(a);
+        return new PVPArenaArenaTag(a);
     }
 
-    public PVPArenaArena(Arena a) {
+    public PVPArenaArenaTag(Arena a) {
         if (a != null) {
             this.arena = a;
         }
@@ -94,7 +94,7 @@ public class PVPArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <pvparena@pvparena.name>
+        // @attribute <PVPArenaArenaTag.name>
         // @returns ElementTag
         // @description
         // Returns the name of the arena.
@@ -105,7 +105,7 @@ public class PVPArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <pvparena@pvparena.fighters>
+        // @attribute <PVPArenaArenaTag.fighters>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all fighters in the arena.
@@ -125,7 +125,7 @@ public class PVPArenaArena implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <pvparena@pvparena.type>
+        // @attribute <PVPArenaArenaTag.type>
         // @returns ElementTag
         // @description
         // Always returns 'PVPArena' for PVPArena objects. All objects fetchable by the Object Fetcher will return the

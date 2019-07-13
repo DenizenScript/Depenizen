@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.griefprevention;
 
-import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventionClaim;
+import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventionClaimTag;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import com.denizenscript.denizen.BukkitScriptEntryData;
@@ -50,8 +50,8 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
 
     public LocationTag from;
     public LocationTag to;
-    public GriefPreventionClaim new_claim;
-    public GriefPreventionClaim old_claim;
+    public GriefPreventionClaimTag new_claim;
+    public GriefPreventionClaimTag old_claim;
     public PlayerMoveEvent event;
 
     @Override
@@ -120,8 +120,8 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
         if (tclaim == fclaim) {
             return;
         }
-        new_claim = tclaim == null ? null : new GriefPreventionClaim(tclaim);
-        old_claim = fclaim == null ? null : new GriefPreventionClaim(fclaim);
+        new_claim = tclaim == null ? null : new GriefPreventionClaimTag(tclaim);
+        old_claim = fclaim == null ? null : new GriefPreventionClaimTag(fclaim);
         this.event = event;
         fire(event);
     }

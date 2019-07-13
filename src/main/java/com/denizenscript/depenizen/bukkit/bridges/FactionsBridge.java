@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.properties.factions.FactionsPlayerNPCProperties;
-import com.denizenscript.depenizen.bukkit.factions.dFaction;
+import com.denizenscript.depenizen.bukkit.objects.factions.FactionTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.utilities.BridgeLoadException;
 import com.massivecraft.factions.entity.Faction;
@@ -25,7 +25,7 @@ public class FactionsBridge extends Bridge {
         if (plugin.getDescription().getVersion().startsWith("1.")) {
             throw new BridgeLoadException("Only Factions 1.x.x is supported.");
         }
-        ObjectFetcher.registerWithObjectFetcher(dFaction.class);
+        ObjectFetcher.registerWithObjectFetcher(FactionTag.class);
         PropertyParser.registerProperty(FactionsPlayerNPCProperties.class, NPCTag.class);
         PropertyParser.registerProperty(FactionsPlayerNPCProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(FactionsLocationProperties.class, LocationTag.class);
@@ -47,7 +47,7 @@ public class FactionsBridge extends Bridge {
         Attribute attribute = event.getAttributes().fulfill(1);
         // <--[tag]
         // @attribute <faction[<name>]>
-        // @returns dFaction
+        // @returns FactionTag
         // @description
         // Returns the faction for the input name.
         // @Plugin Depenizen, Factions
@@ -58,7 +58,7 @@ public class FactionsBridge extends Bridge {
             f = FactionColl.get().get(nameOrId);
         }
         if (f != null) {
-            event.setReplacedObject(new dFaction(f).getObjectAttribute(attribute.fulfill(1)));
+            event.setReplacedObject(new FactionTag(f).getObjectAttribute(attribute.fulfill(1)));
         }
 
     }
@@ -76,7 +76,7 @@ public class FactionsBridge extends Bridge {
         if (attribute.startsWith("list_factions")) {
             ListTag factions = new ListTag();
             for (Faction f : FactionColl.get().getAll()) {
-                factions.addObject(new dFaction(f));
+                factions.addObject(new FactionTag(f));
             }
             event.setReplacedObject(factions.getObjectAttribute(attribute.fulfill(1)));
         }

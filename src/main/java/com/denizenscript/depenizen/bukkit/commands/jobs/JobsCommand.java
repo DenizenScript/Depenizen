@@ -10,7 +10,7 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
-import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
+import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
 
 public class JobsCommand extends AbstractCommand {
 
@@ -61,8 +61,8 @@ public class JobsCommand extends AbstractCommand {
             }
 
             else if (!scriptEntry.hasObject("job")
-                    && arg.matchesArgumentType(JobsJob.class)) {
-                scriptEntry.addObject("job", JobsJob.valueOf(arg.getValue()));
+                    && arg.matchesArgumentType(JobsJobTag.class)) {
+                scriptEntry.addObject("job", JobsJobTag.valueOf(arg.getValue()));
             }
 
             else if (!scriptEntry.hasObject("number")
@@ -90,7 +90,7 @@ public class JobsCommand extends AbstractCommand {
         BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.entryData;
 
         Action action = (Action) scriptEntry.getObject("action");
-        JobsJob job = (JobsJob) scriptEntry.getObject("job");
+        JobsJobTag job = (JobsJobTag) scriptEntry.getObject("job");
         int number = (scriptEntry.hasObject("number") ? scriptEntry.getElement("number").asInt() : 0);
         JobsPlayer player = Jobs.getPlayerManager().getJobsPlayer(scriptEntryData.getPlayer().getName());
 

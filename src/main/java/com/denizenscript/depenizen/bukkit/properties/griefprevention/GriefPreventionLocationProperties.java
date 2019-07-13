@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.griefprevention;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventionClaim;
+import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventionClaimTag;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
@@ -97,7 +97,7 @@ public class GriefPreventionLocationProperties implements Property {
                 if (claim == null) {
                     return null;
                 }
-                return new GriefPreventionClaim(claim).getAttribute(attribute.fulfill(1));
+                return new GriefPreventionClaimTag(claim).getAttribute(attribute.fulfill(1));
             }
 
         }

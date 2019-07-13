@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.areashop;
 
-import com.denizenscript.depenizen.bukkit.objects.areashop.dAreaShop;
+import com.denizenscript.depenizen.bukkit.objects.areashop.AreaShopTag;
 import me.wiefferink.areashop.AreaShop;
 import me.wiefferink.areashop.regions.GeneralRegion;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -76,7 +76,7 @@ public class AreaShopPlayerProperties implements Property {
                 UUID uuid = player.getOfflinePlayer().getUniqueId();
                 for (GeneralRegion region : AreaShop.getInstance().getFileManager().getRegions()) {
                     if (uuid.equals(region.getOwner())) {
-                        list.add(new dAreaShop(region).identify());
+                        list.add(new AreaShopTag(region).identify());
                     }
                 }
                 return list.getAttribute(attribute.fulfill(1));

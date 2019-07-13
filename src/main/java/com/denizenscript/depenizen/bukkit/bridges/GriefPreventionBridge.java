@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.properties.griefprevention.GriefPreventionPlayerProperties;
-import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventionClaim;
+import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventionClaimTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.depenizen.bukkit.events.griefprevention.GPClaimEnterEvent;
@@ -15,7 +15,7 @@ public class GriefPreventionBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(GriefPreventionClaim.class);
+        ObjectFetcher.registerWithObjectFetcher(GriefPreventionClaimTag.class);
         PropertyParser.registerProperty(GriefPreventionPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(GriefPreventionLocationProperties.class, LocationTag.class);
         ScriptEvent.registerScriptEvent(new GPClaimEnterEvent());

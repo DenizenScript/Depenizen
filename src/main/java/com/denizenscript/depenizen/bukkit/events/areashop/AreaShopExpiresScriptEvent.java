@@ -8,7 +8,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import com.denizenscript.depenizen.bukkit.objects.areashop.dAreaShop;
+import com.denizenscript.depenizen.bukkit.objects.areashop.AreaShopTag;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -38,7 +38,7 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
 
     public static AreaShopExpiresScriptEvent instance;
     public UnrentedRegionEvent event;
-    public dAreaShop areaShop;
+    public AreaShopTag areaShop;
 
     @Override
     public boolean couldMatch(ScriptContainer scriptContainer, String s) {
@@ -52,7 +52,7 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
         if (shopName.equals("shop")) {
             return true;
         }
-        dAreaShop shop = dAreaShop.valueOf(shopName);
+        AreaShopTag shop = AreaShopTag.valueOf(shopName);
         return shop != null && shop.equals(areaShop);
     }
 
@@ -84,7 +84,7 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
         if (event.getRefundedMoney() > 0) {
             return;
         }
-        areaShop = new dAreaShop(event.getRegion());
+        areaShop = new AreaShopTag(event.getRegion());
         this.event = event;
         fire(event);
     }

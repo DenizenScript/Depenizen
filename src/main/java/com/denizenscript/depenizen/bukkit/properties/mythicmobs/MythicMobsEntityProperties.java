@@ -7,7 +7,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
+import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 
 public class MythicMobsEntityProperties implements Property {
 
@@ -78,7 +78,7 @@ public class MythicMobsEntityProperties implements Property {
         // -->
         else if ((attribute.startsWith("mythicmob") || attribute.startsWith("mythic_mob"))
                 && MythicMobsBridge.isMythicMob(entity.getBukkitEntity())) {
-            return new MythicMobsMob(MythicMobsBridge.getActiveMob(entity.getBukkitEntity()))
+            return new MythicMobsMobTag(MythicMobsBridge.getActiveMob(entity.getBukkitEntity()))
                     .getAttribute(attribute.fulfill(1));
         }
 

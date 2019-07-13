@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.factions;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.factions.dFaction;
+import com.denizenscript.depenizen.bukkit.objects.factions.FactionTag;
 import com.massivecraft.factions.entity.MPlayer;
 import com.massivecraft.factions.entity.MPlayerColl;
 import com.massivecraft.massivecore.util.IdUtil;
@@ -141,20 +141,20 @@ public class FactionsPlayerNPCProperties implements Property {
 
         // <--[tag]
         // @attribute <PlayerTag.faction>
-        // @returns dFaction
+        // @returns FactionTag
         // @description
         // Returns the player's faction.
         // @Plugin Depenizen, Factions
         // -->
         // <--[tag]
         // @attribute <NPCTag.faction>
-        // @returns dFaction
+        // @returns FactionTag
         // @description
         // Returns the NPC's faction.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("faction")) {
-            return new dFaction(player.getFaction()).getAttribute(attribute.fulfill(1));
+            return new FactionTag(player.getFaction()).getAttribute(attribute.fulfill(1));
         }
 
         return null;

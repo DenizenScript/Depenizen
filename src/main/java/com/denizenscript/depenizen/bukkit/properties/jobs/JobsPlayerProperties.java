@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.jobs;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJob;
+import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobsPlayer;
@@ -59,7 +59,7 @@ public class JobsPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <PlayerTag.jobs[<job>]>
-        // @returns dJob
+        // @returns JobsJobTag
         // @description
         // Returns the job specified with the player's information attached.
         // @Plugin Depenizen, Jobs
@@ -75,7 +75,7 @@ public class JobsPlayerProperties implements Property {
                 }
                 return null;
             }
-            return new JobsJob(job, player).getAttribute(attribute.fulfill(1));
+            return new JobsJobTag(job, player).getAttribute(attribute.fulfill(1));
         }
 
         return null;

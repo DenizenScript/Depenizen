@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.worldguard;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
+import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
 import com.denizenscript.depenizen.bukkit.bridges.WorldGuardBridge;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
@@ -82,7 +82,7 @@ public class WorldGuardCuboidProperties implements Property {
     private ListTag getRegions(World world) {
         List<String> regionList = new ArrayList<>();
         for (ProtectedRegion protectedRegion : getApplicableRegions()) {
-            regionList.add(new WorldGuardRegion(protectedRegion, world).identify());
+            regionList.add(new WorldGuardRegionTag(protectedRegion, world).identify());
         }
         return new ListTag(regionList);
     }

@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.towny;
 
-import com.denizenscript.depenizen.bukkit.factions.dNation;
+import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
@@ -20,18 +20,18 @@ import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Location;
 
-public class dTown implements ObjectTag {
+public class TownTag implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
 
-    public static dTown valueOf(String string) {
+    public static TownTag valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("town")
-    public static dTown valueOf(String string, TagContext context) {
+    public static TownTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -41,7 +41,7 @@ public class dTown implements ObjectTag {
 
         string = string.replace("town@", "");
         try {
-            return new dTown(TownyUniverse.getDataSource().getTown(string));
+            return new TownTag(TownyUniverse.getDataSource().getTown(string));
         }
         catch (NotRegisteredException e) {
             return null;
@@ -59,16 +59,16 @@ public class dTown implements ObjectTag {
 
     Town town = null;
 
-    public dTown(Town town) {
+    public TownTag(Town town) {
         this.town = town;
     }
 
-    public static dTown fromWorldCoord(WorldCoord coord) {
+    public static TownTag fromWorldCoord(WorldCoord coord) {
         if (coord == null) {
             return null;
         }
         try {
-            return new dTown(coord.getTownBlock().getTown());
+            return new TownTag(coord.getTownBlock().getTown());
         }
         catch (NotRegisteredException e) {
             return null;
@@ -87,7 +87,7 @@ public class dTown implements ObjectTag {
     }
 
     @Override
-    public dTown setPrefix(String prefix) {
+    public TownTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -122,7 +122,7 @@ public class dTown implements ObjectTag {
         return town;
     }
 
-    public Boolean equals(dTown town) {
+    public Boolean equals(TownTag town) {
         return CoreUtilities.toLowerCase(town.getTown().getName()).equals(CoreUtilities.toLowerCase(this.getTown().getName()));
     }
 
@@ -135,7 +135,7 @@ public class dTown implements ObjectTag {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <town@town.assistants>
+        // @attribute <TownTag.assistants>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of the town's assistants.
@@ -150,7 +150,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.balance>
+        // @attribute <TownTag.balance>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the current money balance of the town.
@@ -168,7 +168,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.board>
+        // @attribute <TownTag.board>
         // @returns ElementTag
         // @description
         // Returns the town's current board.
@@ -180,7 +180,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.is_open>
+        // @attribute <TownTag.is_open>
         // @returns ElementTag(Boolean)
         // @description
         // Returns true if the town is currently open.
@@ -192,7 +192,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.is_public>
+        // @attribute <TownTag.is_public>
         // @returns ElementTag(Boolean)
         // @description
         // Returns true if the town is currently public.
@@ -204,7 +204,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.mayor>
+        // @attribute <TownTag.mayor>
         // @returns PlayerTag
         // @description
         // Returns the mayor of the town.
@@ -216,7 +216,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.name>
+        // @attribute <TownTag.name>
         // @returns ElementTag
         // @description
         // Returns the town's names.
@@ -228,15 +228,15 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.nation>
-        // @returns dNation
+        // @attribute <TownTag.nation>
+        // @returns NationTag
         // @description
         // Returns the nation that the town belongs to.
         // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("nation")) {
             try {
-                return new dNation(town.getNation())
+                return new NationTag(town.getNation())
                         .getAttribute(attribute.fulfill(1));
             }
             catch (NotRegisteredException e) {
@@ -244,7 +244,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.player_count>
+        // @attribute <TownTag.player_count>
         // @returns ElementTag(Number)
         // @description
         // Returns the number of players in the town.
@@ -256,7 +256,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.residents>
+        // @attribute <TownTag.residents>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of the town's residents.
@@ -271,7 +271,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.size>
+        // @attribute <TownTag.size>
         // @returns ElementTag(Number)
         // @description
         // Returns the number of blocks the town owns.
@@ -283,7 +283,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.spawn>
+        // @attribute <TownTag.spawn>
         // @returns LocationTag
         // @description
         // Returns the spawn point of the town.
@@ -299,7 +299,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.tag>
+        // @attribute <TownTag.tag>
         // @returns ElementTag
         // @description
         // Returns the town's tag.
@@ -311,7 +311,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.taxes>
+        // @attribute <TownTag.taxes>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the town's current taxes.
@@ -323,7 +323,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.outposts>
+        // @attribute <TownTag.outposts>
         // @returns ListTag(LocationTag)
         // @description
         // Returns a list of the town's outpost locations.
@@ -338,7 +338,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.type>
+        // @attribute <TownTag.type>
         // @returns ElementTag
         // @description
         // Always returns 'Town' for dTown objects. All objects fetchable by the Object Fetcher will return the
@@ -350,7 +350,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.has_explosions>
+        // @attribute <TownTag.has_explosions>
         // @returns ElementTag(Boolean)
         // @description
         // Returns if the town has explosions turned on.
@@ -361,7 +361,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.has_mobs>
+        // @attribute <TownTag.has_mobs>
         // @returns ElementTag(Boolean)
         // @description
         // Returns if the town has mobs turned on.
@@ -372,7 +372,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.has_pvp>
+        // @attribute <TownTag.has_pvp>
         // @returns ElementTag(Boolean)
         // @description
         // Returns if the town has PvP turned on.
@@ -383,7 +383,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.has_firespread>
+        // @attribute <TownTag.has_firespread>
         // @returns ElementTag(Boolean)
         // @description
         // Returns if the town has firespread turned on.
@@ -394,7 +394,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.has_taxpercent>
+        // @attribute <TownTag.has_taxpercent>
         // @returns ElementTag(Boolean)
         // @description
         // Returns if the town has taxes in percentage.
@@ -405,7 +405,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.has_taxpercent>
+        // @attribute <TownTag.has_taxpercent>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of taxes collected from plots.
@@ -416,7 +416,7 @@ public class dTown implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <town@town.plotprice>
+        // @attribute <TownTag.plotprice>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the price of a plot.

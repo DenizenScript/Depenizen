@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.plotsquared;
 import com.github.intellectualsites.plotsquared.plot.object.PlotPlayer;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
+import com.denizenscript.depenizen.bukkit.objects.plotsquared.PlotSquaredPlotTag;
 import com.github.intellectualsites.plotsquared.plot.object.Plot;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.objects.WorldTag;
@@ -71,14 +71,14 @@ public class PlotSquaredPlayerProperties implements Property {
                 }
                 ListTag plots = new ListTag();
                 for (Plot plays : PlotPlayer.wrap(player.getPlayerEntity()).getPlots(world.getName())) {
-                    plots.add(new dPlotSquaredPlot(plays).identify());
+                    plots.add(new PlotSquaredPlotTag(plays).identify());
                 }
                 return plots.getAttribute(attribute.fulfill(1));
             }
             else {
                 ListTag plots = new ListTag();
                 for (Plot plays : PlotPlayer.wrap(player.getPlayerEntity()).getPlots()) {
-                    plots.add(new dPlotSquaredPlot(plays).identify());
+                    plots.add(new PlotSquaredPlotTag(plays).identify());
                 }
                 return plots.getAttribute(attribute.fulfill(1));
             }

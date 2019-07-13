@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.commands.mobarena;
 
 import com.denizenscript.denizencore.objects.Argument;
-import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
+import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArenaTag;
 import com.garbagemule.MobArena.framework.Arena;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
@@ -53,8 +53,8 @@ public class MobArenaCommand extends AbstractCommand {
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
         for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
             if (!scriptEntry.hasObject("arena") &&
-                    (arg.matchesPrefix("arena") || MobArenaArena.matches(arg.getValue()))) {
-                scriptEntry.addObject("arena", MobArenaArena.valueOf(arg.getValue()));
+                    (arg.matchesPrefix("arena") || MobArenaArenaTag.matches(arg.getValue()))) {
+                scriptEntry.addObject("arena", MobArenaArenaTag.valueOf(arg.getValue()));
             }
             else if (!scriptEntry.hasObject("add")
                     && arg.matchesPrefix("add", "join")
@@ -87,7 +87,7 @@ public class MobArenaCommand extends AbstractCommand {
     @SuppressWarnings("unchecked")
     @Override
     public void execute(ScriptEntry scriptEntry) {
-        MobArenaArena arena = scriptEntry.getdObject("arena");
+        MobArenaArenaTag arena = scriptEntry.getdObject("arena");
         List<PlayerTag> add = (List<PlayerTag>) scriptEntry.getObject("add");
         List<PlayerTag> remove = (List<PlayerTag>) scriptEntry.getObject("remove");
         List<PlayerTag> spectate = (List<PlayerTag>) scriptEntry.getObject("spectate");

@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.luckperms;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrack;
+import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrackTag;
 import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.Track;
@@ -69,8 +69,8 @@ public class LuckPermsPlayerProperties implements Property {
             for (Track track : api.getTracks()) {
                 for (String group : track.getGroups()) {
                     if (api.getUser(player.getOfflinePlayer().getUniqueId()).inheritsGroup(api.getGroup(group))) {
-                        if (!tracks.contains(new LuckPermsTrack(track).identify())) {
-                            tracks.add(new LuckPermsTrack(track).identify());
+                        if (!tracks.contains(new LuckPermsTrackTag(track).identify())) {
+                            tracks.add(new LuckPermsTrackTag(track).identify());
                         }
                     }
                 }

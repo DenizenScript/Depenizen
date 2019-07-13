@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.plotsquared;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.plotsquared.dPlotSquaredPlot;
+import com.denizenscript.depenizen.bukkit.objects.plotsquared.PlotSquaredPlotTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -54,14 +54,14 @@ public class PlotSquaredElementProperties implements Property {
     public String getAttribute(Attribute attribute) {
         // <--[tag]
         // @attribute <ElementTag.as_plotsquared_plot>
-        // @returns dPlotSquaredPlot
+        // @returns PlotSquaredPlotTag
         // @description
         // Returns the element as a dPlotSquaredPlot.
         // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("as_plotsquared_plot")) {
             try {
-                return dPlotSquaredPlot.valueOf(element.toString()).getAttribute(attribute.fulfill(1));
+                return PlotSquaredPlotTag.valueOf(element.toString()).getAttribute(attribute.fulfill(1));
             }
             catch (Exception e) {
                 if (!attribute.hasAlternative()) {

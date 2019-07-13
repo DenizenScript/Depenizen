@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.factions;
+package com.denizenscript.depenizen.bukkit.objects.factions;
 
 import com.massivecraft.factions.entity.*;
 import com.massivecraft.massivecore.money.Money;
@@ -16,18 +16,18 @@ import com.denizenscript.denizencore.tags.TagContext;
 
 import java.util.Set;
 
-public class dFaction implements ObjectTag {
+public class FactionTag implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
 
-    public static dFaction valueOf(String string) {
+    public static FactionTag valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("faction")
-    public static dFaction valueOf(String string, TagContext context) {
+    public static FactionTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -38,7 +38,7 @@ public class dFaction implements ObjectTag {
         string = string.replace("faction@", "");
         Faction faction = FactionColl.get().getByName(string);
         if (faction != null) {
-            return new dFaction(faction);
+            return new FactionTag(faction);
         }
 
         return null;
@@ -58,7 +58,7 @@ public class dFaction implements ObjectTag {
 
     Faction faction = null;
 
-    public dFaction(Faction faction) {
+    public FactionTag(Faction faction) {
         if (faction != null) {
             this.faction = faction;
         }
@@ -123,7 +123,7 @@ public class dFaction implements ObjectTag {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <faction@faction.balance>
+        // @attribute <FactionTag.balance>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of money the faction currently has.
@@ -135,7 +135,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.home>
+        // @attribute <FactionTag.home>
         // @returns LocationTag
         // @description
         // Returns the location of the faction's home, if any.
@@ -149,7 +149,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.id>
+        // @attribute <FactionTag.id>
         // @returns ElementTag
         // @description
         // Returns the unique ID for this faction.
@@ -160,7 +160,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.is_open>
+        // @attribute <FactionTag.is_open>
         // @returns ElementTag(Boolean)
         // @description
         // Returns true if the faction is open.
@@ -172,7 +172,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.is_peaceful>
+        // @attribute <FactionTag.is_peaceful>
         // @returns ElementTag(Boolean)
         // @description
         // Returns true if the faction is peaceful.
@@ -184,7 +184,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.is_permanent>
+        // @attribute <FactionTag.is_permanent>
         // @returns ElementTag(Boolean)
         // @description
         // Returns true if the faction is permanent.
@@ -196,7 +196,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.leader>
+        // @attribute <FactionTag.leader>
         // @returns PlayerTag
         // @description
         // Returns the faction's leader as a PlayerTag.
@@ -210,7 +210,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.name>
+        // @attribute <FactionTag.name>
         // @returns ElementTag
         // @description
         // Returns the name of the faction.
@@ -222,7 +222,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.player_count>
+        // @attribute <FactionTag.player_count>
         // @returns ElementTag(Number)
         // @description
         // Returns the number of players in the faction.
@@ -234,7 +234,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.power>
+        // @attribute <FactionTag.power>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of power the faction currently has.
@@ -246,14 +246,14 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.relation[<faction>]>
+        // @attribute <FactionTag.relation[<faction>]>
         // @returns ElementTag
         // @description
         // Returns the current relation between the faction and another faction.
         // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("relation")) {
-            dFaction to = valueOf(attribute.getContext(1));
+            FactionTag to = valueOf(attribute.getContext(1));
 
             if (to != null) {
                 return new ElementTag(faction.getRelationTo(to.getFaction()).toString())
@@ -262,7 +262,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.size>
+        // @attribute <FactionTag.size>
         // @returns ElementTag(Number)
         // @description
         // Returns the amount of land the faction has.
@@ -274,7 +274,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.type>
+        // @attribute <FactionTag.type>
         // @returns ElementTag
         // @description
         // Always returns 'Faction' for dFaction objects. All objects fetchable by the Object Fetcher will return the
@@ -286,7 +286,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.claimed_chunks>
+        // @attribute <FactionTag.claimed_chunks>
         // @returns ListTag(ChunkTag)
         // @description
         // Returns a list of all chunks claimed in the faction.
@@ -302,7 +302,7 @@ public class dFaction implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <faction@faction.list_players>
+        // @attribute <FactionTag.list_players>
         // @returns ListTag(PlayerTag)
         // @description
         // Returns a list of all players in the faction.

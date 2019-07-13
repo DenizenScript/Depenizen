@@ -12,17 +12,17 @@ import com.denizenscript.denizencore.utilities.CoreUtilities;
 
 import java.util.List;
 
-public class LibsDisguise implements ObjectTag {
+public class LibsDisguiseTag implements ObjectTag {
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
 
-    public static LibsDisguise valueOf(String string) {
+    public static LibsDisguiseTag valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("libsdisguise")
-    public static LibsDisguise valueOf(String string, TagContext context) {
+    public static LibsDisguiseTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -33,7 +33,7 @@ public class LibsDisguise implements ObjectTag {
         string = string.replace("libsdisguise@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');
-            return new LibsDisguise(DisguiseAPI.getCustomDisguise(split.get(0)));
+            return new LibsDisguiseTag(DisguiseAPI.getCustomDisguise(split.get(0)));
         }
         catch (Throwable e) {
         }
@@ -50,7 +50,7 @@ public class LibsDisguise implements ObjectTag {
 
     Disguise disguise = null;
 
-    public LibsDisguise(Disguise pl) {
+    public LibsDisguiseTag(Disguise pl) {
         disguise = pl;
     }
 
@@ -66,7 +66,7 @@ public class LibsDisguise implements ObjectTag {
     }
 
     @Override
-    public LibsDisguise setPrefix(String prefix) {
+    public LibsDisguiseTag setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
     }
@@ -78,8 +78,8 @@ public class LibsDisguise implements ObjectTag {
 
     @Override
     public boolean equals(Object a) {
-        if (a instanceof LibsDisguise) {
-            return ((LibsDisguise) a).disguise.equals(disguise);
+        if (a instanceof LibsDisguiseTag) {
+            return ((LibsDisguiseTag) a).disguise.equals(disguise);
         }
         return false;
     }
@@ -118,7 +118,7 @@ public class LibsDisguise implements ObjectTag {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <libsdisguise@libsdisguise.type>
+        // @attribute <LibsDisguiseTag.type>
         // @returns ElementTag
         // @description
         // Returns the type of the disguise.
@@ -129,7 +129,7 @@ public class LibsDisguise implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <libsdisguise@libsdisguise.type>
+        // @attribute <LibsDisguiseTag.type>
         // @returns EntityTag
         // @description
         // Returns the entity of the disguise.
@@ -140,7 +140,7 @@ public class LibsDisguise implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <libsdisguise@libsdisguise.display_name>
+        // @attribute <LibsDisguiseTag.display_name>
         // @returns ElementTag
         // @description
         // Returns the display name of the disguise.

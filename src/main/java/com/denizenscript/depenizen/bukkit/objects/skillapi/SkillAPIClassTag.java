@@ -9,18 +9,18 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
-public class SkillAPIClass implements ObjectTag {
+public class SkillAPIClassTag implements ObjectTag {
 
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
 
-    public static SkillAPIClass valueOf(String string) {
+    public static SkillAPIClassTag valueOf(String string) {
         return valueOf(string, null);
     }
 
     @Fetchable("skillapiclass")
-    public static SkillAPIClass valueOf(String string, TagContext context) {
+    public static SkillAPIClassTag valueOf(String string, TagContext context) {
         if (string == null) {
             return null;
         }
@@ -29,7 +29,7 @@ public class SkillAPIClass implements ObjectTag {
 
         RPGClass rpgClass = SkillAPI.getClass(string);
         if (rpgClass != null) {
-            return new SkillAPIClass(rpgClass);
+            return new SkillAPIClassTag(rpgClass);
         }
 
         return null;
@@ -49,7 +49,7 @@ public class SkillAPIClass implements ObjectTag {
 
     RPGClass rpgClass;
 
-    public SkillAPIClass(RPGClass rpgClass) {
+    public SkillAPIClassTag(RPGClass rpgClass) {
         this.rpgClass = rpgClass;
     }
 
@@ -108,7 +108,7 @@ public class SkillAPIClass implements ObjectTag {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.name>
+        // @attribute <SkillAPIClassTag.name>
         // @returns ElementTag
         // @description
         // Returns the name of this SkillAPI class.
@@ -119,7 +119,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.prefix_color>
+        // @attribute <SkillAPIClassTag.prefix_color>
         // @returns ElementTag
         // @description
         // Returns the color of the prefix of this SkillAPI class.
@@ -130,7 +130,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.prefix>
+        // @attribute <SkillAPIClassTag.prefix>
         // @returns ElementTag
         // @description
         // Returns the prefix of this SkillAPI class.
@@ -141,7 +141,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.needs_permission>
+        // @attribute <SkillAPIClassTag.needs_permission>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether this SkillAPI class requires permission to profess as it.
@@ -152,7 +152,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.group.name>
+        // @attribute <SkillAPIClassTag.group.name>
         // @returns ElementTag
         // @description
         // Returns the name of the group that this SkillAPI class falls into.
@@ -163,7 +163,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.has_parent>
+        // @attribute <SkillAPIClassTag.has_parent>
         // @returns ElementTag(Boolean)
         // @description
         // Returns the whether this SkillAPI class has a parent class.
@@ -174,18 +174,18 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.parent>
+        // @attribute <SkillAPIClassTag.parent>
         // @returns SkillAPIClass
         // @description
         // Returns the parent class of this SkillAPI class.
         // @Plugin Depenizen, SkillAPI
         // -->
         if (attribute.startsWith("parent")) {
-            return new SkillAPIClass(rpgClass.getParent()).getAttribute(attribute.fulfill(1));
+            return new SkillAPIClassTag(rpgClass.getParent()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.icon>
+        // @attribute <SkillAPIClassTag.icon>
         // @returns ItemTag
         // @description
         // Returns the item icon representing this SkillAPI class in menus.
@@ -196,7 +196,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.max_level>
+        // @attribute <SkillAPIClassTag.max_level>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the maximum level that this SkillAPI class can reach.
@@ -207,7 +207,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.base_health>
+        // @attribute <SkillAPIClassTag.base_health>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the base amount of health for this SkillAPI class.
@@ -218,7 +218,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.health_scale>
+        // @attribute <SkillAPIClassTag.health_scale>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of health gained per level for this SkillAPI class.
@@ -229,7 +229,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.base_mana>
+        // @attribute <SkillAPIClassTag.base_mana>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the base amount of mana for this SkillAPI class.
@@ -240,7 +240,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.mana_scale>
+        // @attribute <SkillAPIClassTag.mana_scale>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of mana gained per level for this SkillAPI class.
@@ -251,7 +251,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.mana_name>
+        // @attribute <SkillAPIClassTag.mana_name>
         // @returns ElementTag
         // @description
         // Returns the alias for mana that this SkillAPI class uses.
@@ -262,7 +262,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.has_mana_regen>
+        // @attribute <SkillAPIClassTag.has_mana_regen>
         // @returns ElementTag(Boolean)
         // @description
         // Returns whether this SkillAPI class has mana regeneration.
@@ -273,7 +273,7 @@ public class SkillAPIClass implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <skillapiclass@skill_class.mana_regen>
+        // @attribute <SkillAPIClassTag.mana_regen>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of mana regeneration that this SkillAPI class has.

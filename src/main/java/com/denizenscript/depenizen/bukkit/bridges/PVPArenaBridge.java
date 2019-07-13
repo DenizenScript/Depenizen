@@ -5,7 +5,7 @@ import com.denizenscript.depenizen.bukkit.events.pvparena.PlayerJoinsPVPArenaScr
 import com.denizenscript.depenizen.bukkit.events.pvparena.PlayerLeavesPVPArenaScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.pvparena.PVPArenaStartsScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.pvparena.PVPArenaPlayerProperties;
-import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArena;
+import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArenaTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
@@ -29,7 +29,7 @@ public class PVPArenaBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new PlayerLeavesPVPArenaScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerExitsPVPArenaScriptEvent());
         PropertyParser.registerProperty(PVPArenaPlayerProperties.class, PlayerTag.class);
-        ObjectFetcher.registerWithObjectFetcher(PVPArenaArena.class);
+        ObjectFetcher.registerWithObjectFetcher(PVPArenaArenaTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {
@@ -49,7 +49,7 @@ public class PVPArenaBridge extends Bridge {
         // @Plugin Depenizen, PVPArena
         // -->
         if (attribute.hasContext(1)) {
-            PVPArenaArena arena = PVPArenaArena.valueOf(attribute.getContext(1));
+            PVPArenaArenaTag arena = PVPArenaArenaTag.valueOf(attribute.getContext(1));
             if (arena != null) {
                 event.setReplacedObject(arena.getObjectAttribute(attribute.fulfill(1)));
             }
@@ -70,7 +70,7 @@ public class PVPArenaBridge extends Bridge {
         if (attribute.startsWith("list_arenas")) {
             ListTag arenas = new ListTag();
             for (Arena a : ArenaManager.getArenas()) {
-                arenas.add(new PVPArenaArena(a).identify());
+                arenas.add(new PVPArenaArenaTag(a).identify());
             }
             event.setReplacedObject(arenas.getObjectAttribute(attribute.fulfill(1)));
         }

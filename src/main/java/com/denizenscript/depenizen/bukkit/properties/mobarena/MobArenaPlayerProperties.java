@@ -7,7 +7,7 @@ import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
+import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArenaTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -91,7 +91,7 @@ public class MobArenaPlayerProperties implements Property {
                 // @Plugin Depenizen, MobArena
                 // -->
                 if (attribute.startsWith("current_arena")) {
-                    return new MobArenaArena(arena).getAttribute(attribute.fulfill(1));
+                    return new MobArenaArenaTag(arena).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -112,7 +112,7 @@ public class MobArenaPlayerProperties implements Property {
             }
 
             else if (attribute.startsWith("stats") && attribute.hasContext(1)) {
-                MobArenaArena a = MobArenaArena.valueOf(attribute.getContext(1));
+                MobArenaArenaTag a = MobArenaArenaTag.valueOf(attribute.getContext(1));
                 if (a == null) {
                     return null;
                 }
