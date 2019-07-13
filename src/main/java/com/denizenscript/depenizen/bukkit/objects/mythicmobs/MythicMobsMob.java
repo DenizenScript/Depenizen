@@ -6,7 +6,7 @@ import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitEntity;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
@@ -50,7 +50,7 @@ public class MythicMobsMob implements dObject, Adjustable {
             this.mobType = mob.getType();
         }
         else {
-            dB.echoError("ActiveMob referenced is null!");
+            Debug.echoError("ActiveMob referenced is null!");
         }
     }
 
@@ -339,6 +339,6 @@ public class MythicMobsMob implements dObject, Adjustable {
 
     @Override
     public void applyProperty(Mechanism mechanism) {
-        dB.echoError("Cannot apply properties to a MythicMob!");
+        Debug.echoError("Cannot apply properties to a MythicMob!");
     }
 }

@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.worldguard;
 
+import com.denizenscript.denizencore.objects.Argument;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.WorldGuard;
@@ -10,7 +11,7 @@ import com.denizenscript.denizen.objects.dWorld;
 import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import org.bukkit.Location;
@@ -48,7 +49,7 @@ public class RegionCommand extends AbstractCommand {
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
-        for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
+        for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("region_id")
                     && arg.matchesPrefix("id")) {
@@ -111,7 +112,7 @@ public class RegionCommand extends AbstractCommand {
         }
 
         dB.report(scriptEntry, getName(), region_id.debug() + (cuboid != null ? cuboid.debug() : "")
-                + aH.debugObj("world", world.getName()) + action.debug());
+                + ArgumentHelper.debugObj("world", world.getName()) + action.debug());
 
         RegionManager regionManager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
 

@@ -6,7 +6,7 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -82,8 +82,8 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
     public boolean applyDetermination(ScriptContainer container, String determination) {
         String lower = CoreUtilities.toLowerCase(determination);
 
-        if (aH.matchesInteger(lower)) {
-            levels_gained = aH.getIntegerFrom(lower);
+        if (ArgumentHelper.matchesInteger(lower)) {
+            levels_gained = ArgumentHelper.getIntegerFrom(lower);
             return true;
         }
         return super.applyDetermination(container, determination);

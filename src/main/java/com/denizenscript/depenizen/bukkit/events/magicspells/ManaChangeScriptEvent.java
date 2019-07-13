@@ -9,7 +9,7 @@ import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -73,7 +73,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
         if (determination.length() > 0 && !isDefaultDetermination(determination)) {
             Element mana = new Element(determination);
             if (!mana.isInt()) {
-                dB.echoError("Determination for 'mana' must be a valid number.");
+                Debug.echoError("Determination for 'mana' must be a valid number.");
                 return false;
             }
             new_mana = mana.asInt();

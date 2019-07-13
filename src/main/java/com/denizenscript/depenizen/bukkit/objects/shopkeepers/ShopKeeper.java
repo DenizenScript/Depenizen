@@ -15,7 +15,7 @@ import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.core.EscapeTags;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
@@ -69,7 +69,7 @@ public class ShopKeeper implements dObject {
             this.shopkeeper = shopkeeper;
         }
         else {
-            dB.echoError("Shopkeeper referenced is null!");
+            Debug.echoError("Shopkeeper referenced is null!");
         }
     }
 

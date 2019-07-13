@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -88,7 +88,7 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     public boolean applyDetermination(ScriptContainer container, String determination) {
         String determinationLow = CoreUtilities.toLowerCase(determination);
         if (determinationLow.startsWith("max_players:")) {
-            maxPlayers = aH.getIntegerFrom(determination.substring("max_players:".length()));
+            maxPlayers = ArgumentHelper.getIntegerFrom(determination.substring("max_players:".length()));
         }
         else if (determinationLow.startsWith("version:")) {
             version = determination.substring("version:".length());

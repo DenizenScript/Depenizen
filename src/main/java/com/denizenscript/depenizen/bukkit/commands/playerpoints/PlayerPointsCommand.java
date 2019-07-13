@@ -1,15 +1,16 @@
 package com.denizenscript.depenizen.bukkit.commands.playerpoints;
 
+import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.bridges.PlayerPointsBridge;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import org.black_ixx.playerpoints.PlayerPoints;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class PlayerPointsCommand extends AbstractCommand {
     // <--[command]
@@ -48,7 +49,7 @@ public class PlayerPointsCommand extends AbstractCommand {
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
-        for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
+        for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
@@ -96,17 +97,17 @@ public class PlayerPointsCommand extends AbstractCommand {
         Element amount = scriptEntry.getdObject("amount");
 
         // Report to dB
-        dB.report(scriptEntry, getName(), action.debug()
+        Debug.report(scriptEntry, getName(), action.debug()
                 + (target != null ? target.debug() : "")
                 + (amount != null ? amount.debug() : ""));
 
         if (target == null) {
-            dB.echoError(scriptEntry.getResidingQueue(), "Target not found!");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
             return;
         }
 
         if (amount == null) {
-            dB.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
             return;
         }
 

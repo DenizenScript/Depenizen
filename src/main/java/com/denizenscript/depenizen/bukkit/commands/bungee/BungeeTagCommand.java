@@ -12,7 +12,7 @@ import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.scripts.commands.Holdable;
 import com.denizenscript.denizencore.tags.TagManager;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +63,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
                 scriptEntry.addObject("tag", new Element(arg));
             }
             else {
-                dB.echoError('\'' + arg + "' is an unknown argument!");
+                Debug.echoError('\'' + arg + "' is an unknown argument!");
             }
         }
         if (!scriptEntry.hasObject("tag")) {
@@ -95,10 +95,10 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
         Element tag = scriptEntry.getElement("tag");
         Element server = scriptEntry.getElement("server");
         if (scriptEntry.dbCallShouldDebug()) {
-            dB.report(scriptEntry, getName(), tag.debug() + server.debug());
+            Debug.report(scriptEntry, getName(), tag.debug() + server.debug());
         }
         if (!BungeeBridge.instance.connected) {
-            dB.echoError("Cannot BungeeTag: bungee is not connected!");
+            Debug.echoError("Cannot BungeeTag: bungee is not connected!");
             scriptEntry.setFinished(true);
             return;
         }

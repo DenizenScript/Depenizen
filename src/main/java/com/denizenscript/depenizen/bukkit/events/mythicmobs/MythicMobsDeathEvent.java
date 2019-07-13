@@ -1,14 +1,11 @@
 package com.denizenscript.depenizen.bukkit.events.mythicmobs;
 
+import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dItem;
-import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.aH;
-import com.denizenscript.denizencore.objects.dList;
-import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -110,16 +107,16 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     @Override
     public boolean applyDetermination(ScriptContainer container, String determination) {
         if (isDefaultDetermination(determination)) {
-            aH.Argument arg = new aH.Argument(determination);
-            if (arg.matchesPrefix("currency") && arg.matchesPrimitive(aH.PrimitiveType.Double)) {
+            Argument arg = new Argument(determination);
+            if (arg.matchesPrefix("currency") && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Double)) {
                 currency = new Element(determination);
                 return true;
             }
-            else if (aH.matchesInteger(determination)) { // "xp" prefix, but not required for back support reasons.
+            else if (ArgumentHelper.matchesInteger(determination)) { // "xp" prefix, but not required for back support reasons.
                 experience = new Element(determination);
                 return true;
             }
-            else if (aH.Argument.valueOf(determination).matchesArgumentList(dItem.class)) {
+            else if (Argument.valueOf(determination).matchesArgumentList(dItem.class)) {
                 if (newDrops == null) {
                     newDrops = new ArrayList<>();
                 }

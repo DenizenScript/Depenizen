@@ -5,7 +5,7 @@ import com.denizenscript.denizen.objects.dItem;
 import com.denizenscript.denizen.utilities.debugging.dB;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
@@ -83,7 +83,7 @@ public class EssentialsItemProperties implements Property {
             // @Plugin Depenizen, Essentials
             // -->
             if (attribute.getAttribute(2).startsWith("quantity") &&
-                    attribute.hasContext(2) && aH.matchesInteger(attribute.getContext(2))) {
+                    attribute.hasContext(2) && ArgumentHelper.matchesInteger(attribute.getContext(2))) {
                 return new Element(price * attribute.getIntContext(2)).getAttribute(attribute.fulfill(2));
             }
             return new Element(price).getAttribute(attribute.fulfill(1));

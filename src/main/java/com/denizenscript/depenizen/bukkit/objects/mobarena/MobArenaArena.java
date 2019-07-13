@@ -10,7 +10,7 @@ import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.entity.Player;
 
 public class MobArenaArena implements dObject {
@@ -47,7 +47,7 @@ public class MobArenaArena implements dObject {
             this.arena = arena;
         }
         else {
-            dB.echoError("Arena referenced is null");
+            Debug.echoError("Arena referenced is null");
         }
     }
 

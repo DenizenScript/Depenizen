@@ -11,7 +11,7 @@ import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 import java.util.UUID;
 
@@ -62,7 +62,7 @@ public class dParty implements dObject {
             this.party = party;
         }
         else {
-            dB.echoError("Party referenced is null!");
+            Debug.echoError("Party referenced is null!");
         }
     }
 

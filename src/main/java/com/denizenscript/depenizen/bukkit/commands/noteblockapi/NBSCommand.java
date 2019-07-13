@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.noteblockapi;
 
+import com.denizenscript.denizencore.objects.Argument;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 import com.xxmicloxx.NoteBlockAPI.model.Song;
 import com.xxmicloxx.NoteBlockAPI.songplayer.RadioSongPlayer;
@@ -9,11 +10,11 @@ import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 import java.io.File;
 import java.net.URLDecoder;
@@ -61,7 +62,7 @@ public class NBSCommand extends AbstractCommand {
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
-        for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
+        for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("targets")
                     && arg.matchesPrefix("targets", "targets")
@@ -106,18 +107,18 @@ public class NBSCommand extends AbstractCommand {
         List<dPlayer> targets = (List<dPlayer>) scriptEntry.getObject("targets");
 
         // Report to dB
-        dB.report(scriptEntry, getName(), action.debug()
-                + aH.debugList("targets", targets)
+        Debug.report(scriptEntry, getName(), action.debug()
+                + ArgumentHelper.debugList("targets", targets)
                 + (file != null ? file.debug() : ""));
 
         if (targets == null || targets.isEmpty()) {
-            dB.echoError(scriptEntry.getResidingQueue(), "Targets not found!");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Targets not found!");
             return;
         }
 
         if (action.asString().equalsIgnoreCase("play")) {
             if (file == null) {
-                dB.echoError(scriptEntry.getResidingQueue(), "File not specified!");
+                Debug.echoError(scriptEntry.getResidingQueue(), "File not specified!");
                 return;
             }
             String directory = URLDecoder.decode(System.getProperty("user.dir"));

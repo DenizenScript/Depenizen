@@ -1,13 +1,14 @@
 package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
+import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMob;
 import org.bukkit.entity.Entity;
@@ -37,7 +38,7 @@ public class MythicSpawnCommand extends AbstractCommand {
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
-        for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
+        for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("location")
                     && arg.matchesArgumentType(dLocation.class)) {
@@ -46,7 +47,7 @@ public class MythicSpawnCommand extends AbstractCommand {
 
             else if (!scriptEntry.hasObject("level")
                     && arg.matchesPrefix("level", "l")
-                    && arg.matchesPrimitive(aH.PrimitiveType.Integer)) {
+                    && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Integer)) {
                 scriptEntry.addObject("level", arg.asElement());
             }
 
@@ -74,19 +75,19 @@ public class MythicSpawnCommand extends AbstractCommand {
         dLocation location = scriptEntry.getdObject("location");
         Element level = scriptEntry.getElement("level");
 
-        dB.report(scriptEntry, getName(), name.debug() + location.debug() + level.debug());
+        Debug.report(scriptEntry, getName(), name.debug() + location.debug() + level.debug());
 
         try {
             MythicMob mob = MythicMobsBridge.getMythicMob(name.asString());
             if (mob == null) {
-                dB.echoError("MythicMob does not exist: " + name.asString());
+                Debug.echoError("MythicMob does not exist: " + name.asString());
                 return;
             }
             Entity entity = MythicMobsBridge.spawnMythicMob(mob, location, level.asInt());
             scriptEntry.addObject("spawned_mythicmob", new MythicMobsMob(MythicMobsBridge.getActiveMob(entity)));
         }
         catch (Exception e) {
-            dB.echoError(e);
+            Debug.echoError(e);
         }
 
     }

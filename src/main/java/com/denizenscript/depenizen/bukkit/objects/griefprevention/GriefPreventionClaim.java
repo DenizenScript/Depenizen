@@ -13,7 +13,7 @@ import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.Chunk;
 
 import java.util.ArrayList;
@@ -299,7 +299,7 @@ public class GriefPreventionClaim implements dObject, Adjustable {
                 }
             }
             catch (Exception e) {
-                dB.echoError("Unable to transfer ownership of claim: " + this.identify() + ".");
+                Debug.echoError("Unable to transfer ownership of claim: " + this.identify() + ".");
             }
         }
 
@@ -331,6 +331,6 @@ public class GriefPreventionClaim implements dObject, Adjustable {
 
     @Override
     public void applyProperty(Mechanism mechanism) {
-        dB.echoError("Cannot apply Properties to a GriefPreventionClaim!");
+        Debug.echoError("Cannot apply Properties to a GriefPreventionClaim!");
     }
 }

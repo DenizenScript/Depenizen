@@ -12,7 +12,7 @@ import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -94,7 +94,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
             if (lower.startsWith("power:")) {
                 Element num = new Element(determination.substring("power:".length()));
                 if (!num.isFloat()) {
-                    dB.echoError("Determination for 'power' must be a valid decimal number.");
+                    Debug.echoError("Determination for 'power' must be a valid decimal number.");
                     return false;
                 }
                 event.setPower(num.asFloat());
@@ -103,7 +103,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
             else if (lower.startsWith("cast_time:")) {
                 Element max = new Element(determination.substring("cast_time:".length()));
                 if (!max.isInt()) {
-                    dB.echoError("Determination for 'cast_time' must be a valid number.");
+                    Debug.echoError("Determination for 'cast_time' must be a valid number.");
                     return false;
                 }
                 event.setCastTime(max.asInt());
@@ -112,7 +112,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
             else if (lower.startsWith("cooldown:")) {
                 Element num = new Element(determination.substring("cooldown:".length()));
                 if (!num.isFloat()) {
-                    dB.echoError("Determination for 'cooldown' must be a valid decimal number.");
+                    Debug.echoError("Determination for 'cooldown' must be a valid decimal number.");
                     return false;
                 }
                 event.setCooldown(num.asFloat());

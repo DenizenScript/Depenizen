@@ -15,7 +15,7 @@ import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -101,12 +101,12 @@ public class WorldGuardPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("test_flag")) {
             if (!attribute.hasContext(1)) {
-                dB.echoError("The tag p@player.worlduard.test_flag[...] must have a value.");
+                Debug.echoError("The tag p@player.worlduard.test_flag[...] must have a value.");
                 return null;
             }
             StateFlag flag = getStateFlag(attribute.getContext(1));
             if (flag == null) {
-                dB.echoError("The tag p@player.worlduard.test_flag[...] has an invalid value: " + attribute.getContext(1));
+                Debug.echoError("The tag p@player.worlduard.test_flag[...] has an invalid value: " + attribute.getContext(1));
                 return null;
             }
 

@@ -11,7 +11,7 @@ import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Element;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class FactionsPlayerNPCProperties implements Property {
 
@@ -57,7 +57,7 @@ public class FactionsPlayerNPCProperties implements Property {
                 : object instanceof dNPC ? ((dNPC) object).getName()
                 : null;
         if (name == null) {
-            dB.echoError("Invalid dObject! Must be a dPlayer or dNPC!");
+            Debug.echoError("Invalid dObject! Must be a dPlayer or dNPC!");
             return;
         }
         player = MPlayer.get(IdUtil.getId(name));

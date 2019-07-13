@@ -9,7 +9,7 @@ import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegion;
 
 public class dAreaShop implements dObject {
@@ -47,7 +47,7 @@ public class dAreaShop implements dObject {
             this.areaShop = areaShop;
         }
         else {
-            dB.echoError("AreaShop referenced is null!");
+            Debug.echoError("AreaShop referenced is null!");
         }
     }
 

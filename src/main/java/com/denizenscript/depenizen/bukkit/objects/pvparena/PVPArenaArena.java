@@ -6,7 +6,7 @@ import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import net.slipcor.pvparena.arena.Arena;
 import net.slipcor.pvparena.arena.ArenaPlayer;
 import net.slipcor.pvparena.managers.ArenaManager;
@@ -38,7 +38,7 @@ public class PVPArenaArena implements dObject {
             this.arena = a;
         }
         else {
-            dB.echoError("Arena referenced is null");
+            Debug.echoError("Arena referenced is null");
         }
     }
 

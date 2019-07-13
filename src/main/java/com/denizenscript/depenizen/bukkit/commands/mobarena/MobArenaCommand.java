@@ -1,14 +1,15 @@
 package com.denizenscript.depenizen.bukkit.commands.mobarena;
 
+import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArena;
 import com.garbagemule.MobArena.framework.Arena;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.dList;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class MobArenaCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
+        for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
             if (!scriptEntry.hasObject("arena") &&
                     (arg.matchesPrefix("arena") || MobArenaArena.matches(arg.getValue()))) {
                 scriptEntry.addObject("arena", MobArenaArena.valueOf(arg.getValue()));
@@ -91,10 +92,10 @@ public class MobArenaCommand extends AbstractCommand {
         List<dPlayer> remove = (List<dPlayer>) scriptEntry.getObject("remove");
         List<dPlayer> spectate = (List<dPlayer>) scriptEntry.getObject("spectate");
 
-        dB.report(scriptEntry, getName(), arena.debug()
-                + aH.debugList("Add Players", add)
-                + aH.debugList("Remove Players", remove)
-                + aH.debugList("Spectate Players", spectate));
+        Debug.report(scriptEntry, getName(), arena.debug()
+                + ArgumentHelper.debugList("Add Players", add)
+                + ArgumentHelper.debugList("Remove Players", remove)
+                + ArgumentHelper.debugList("Spectate Players", spectate));
 
         Arena mobArena = arena.getArena();
 

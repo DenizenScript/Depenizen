@@ -11,7 +11,7 @@ import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -20,7 +20,7 @@ public class PlaceholderAPIBridge extends Bridge {
     @Override
     public void init() {
         if (!new PlaceholderHook().register()) {
-            dB.echoError("Failed to register placeholder for identifier 'denizen'!" +
+            Debug.echoError("Failed to register placeholder for identifier 'denizen'!" +
                     " Denizen PlaceholderAPI placeholders will not function.");
         }
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
@@ -42,7 +42,7 @@ public class PlaceholderAPIBridge extends Bridge {
         // -->
         String placeholder = CoreUtilities.toLowerCase(attribute.getContext(1));
         if (placeholder.startsWith("denizen_")) {
-            dB.echoError("Cannot use <placeholder[]> tags with 'denizen' prefix!");
+            Debug.echoError("Cannot use <placeholder[]> tags with 'denizen' prefix!");
             return;
         }
         Player player = ((BukkitTagContext) event.getContext()).player != null ?

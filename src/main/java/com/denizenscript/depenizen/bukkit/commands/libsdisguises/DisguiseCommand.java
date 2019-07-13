@@ -1,15 +1,16 @@
 package com.denizenscript.depenizen.bukkit.commands.libsdisguises;
 
+import com.denizenscript.denizencore.objects.Argument;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.*;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class DisguiseCommand extends AbstractCommand {
     // <--[command]
@@ -76,7 +77,7 @@ public class DisguiseCommand extends AbstractCommand {
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
-        for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
+        for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
@@ -167,7 +168,7 @@ public class DisguiseCommand extends AbstractCommand {
         Element self = scriptEntry.getdObject("self");
 
         // Report to dB
-        dB.report(scriptEntry, getName(), action.debug()
+        Debug.report(scriptEntry, getName(), action.debug()
                 + (target != null ? target.debug() : "")
                 + (type != null ? type.debug() : "")
                 + (name != null ? name.debug() : "")
@@ -176,12 +177,12 @@ public class DisguiseCommand extends AbstractCommand {
                 + (baby != null ? baby.debug() : ""));
 
         if (target == null) {
-            dB.echoError(scriptEntry.getResidingQueue(), "Target not found!");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
             return;
         }
 
         if (baby == null) {
-            dB.echoError(scriptEntry.getResidingQueue(), "Baby not specified!");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Baby not specified!");
             return;
         }
 
@@ -191,7 +192,7 @@ public class DisguiseCommand extends AbstractCommand {
 
         else if (action.asString().equalsIgnoreCase("mob")) {
             if (type == null) {
-                dB.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
+                Debug.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
                 return;
             }
             MobDisguise mobDisguise = new MobDisguise(DisguiseType.valueOf(type.toString().toUpperCase()), !baby.asBoolean());
@@ -210,7 +211,7 @@ public class DisguiseCommand extends AbstractCommand {
 
         else if (action.asString().equalsIgnoreCase("player")) {
             if (name == null) {
-                dB.echoError(scriptEntry.getResidingQueue(), "Name not specified!");
+                Debug.echoError(scriptEntry.getResidingQueue(), "Name not specified!");
                 return;
             }
             PlayerDisguise playerDisguise = new PlayerDisguise(name.toString());
@@ -224,15 +225,15 @@ public class DisguiseCommand extends AbstractCommand {
 
         else if (action.asString().equalsIgnoreCase("misc")) {
             if (type == null) {
-                dB.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
+                Debug.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
                 return;
             }
             if (id == null) {
-                dB.echoError(scriptEntry.getResidingQueue(), "ID not specified!");
+                Debug.echoError(scriptEntry.getResidingQueue(), "ID not specified!");
                 return;
             }
             if (data == null) {
-                dB.echoError(scriptEntry.getResidingQueue(), "Data not specified!");
+                Debug.echoError(scriptEntry.getResidingQueue(), "Data not specified!");
                 return;
             }
             MiscDisguise miscDisguise = new MiscDisguise(DisguiseType.valueOf(type.toString().toUpperCase()), id.asInt(), data.asInt());

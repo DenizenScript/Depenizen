@@ -1,12 +1,13 @@
 package com.denizenscript.depenizen.bukkit.events.mcmmo;
 
+import com.denizenscript.denizencore.objects.Argument;
 import com.gmail.nossr50.events.experience.McMMOPlayerXpGainEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.dEntity;
 import com.denizenscript.denizen.objects.dPlayer;
 import com.denizenscript.denizencore.objects.Element;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.dObject;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -78,7 +79,7 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     public boolean applyDetermination(ScriptContainer container, String determination) {
         String lower = CoreUtilities.toLowerCase(determination);
 
-        if (aH.Argument.valueOf(lower).matchesPrimitive(aH.PrimitiveType.Float)) {
+        if (Argument.valueOf(lower).matchesPrimitive(ArgumentHelper.PrimitiveType.Float)) {
             xp = new Element(lower);
             return true;
         }

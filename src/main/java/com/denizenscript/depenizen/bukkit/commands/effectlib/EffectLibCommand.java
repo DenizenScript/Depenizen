@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.effectlib;
 
+import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.bridges.EffectLibBridge;
 import de.slikey.effectlib.EffectManager;
 import de.slikey.effectlib.effect.ArcEffect;
@@ -10,10 +11,10 @@ import com.denizenscript.denizen.objects.dLocation;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Duration;
-import com.denizenscript.denizencore.objects.aH;
+import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
-import com.denizenscript.denizencore.utilities.debugging.dB;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.Location;
 
 public class EffectLibCommand extends AbstractCommand {
@@ -54,7 +55,7 @@ public class EffectLibCommand extends AbstractCommand {
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
-        for (aH.Argument arg : aH.interpret(scriptEntry.getArguments())) {
+        for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
 
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
@@ -107,21 +108,21 @@ public class EffectLibCommand extends AbstractCommand {
         dLocation location = (dLocation) scriptEntry.getObject("location");
 
         // Report to dB
-        dB.report(scriptEntry, getName(), (target != null ? target.debug() : "")
+        Debug.report(scriptEntry, getName(), (target != null ? target.debug() : "")
                 + (action != null ? action.toString() : "")
                 + (duration != null ? duration.debug() : "")
                 + (location != null ? location.debug() : ""));
 
         if (target == null && location == null) {
-            dB.echoError(scriptEntry.getResidingQueue(), "Target not found!");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
             return;
         }
         if (action == null) {
-            dB.echoError(scriptEntry.getResidingQueue(), "Effect type not specified!");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Effect type not specified!");
             return;
         }
         if (duration == null) {
-            dB.echoError(scriptEntry.getResidingQueue(), "Duration not specified!");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Duration not specified!");
             return;
         }
 
@@ -201,7 +202,7 @@ public class EffectLibCommand extends AbstractCommand {
             }
 
             default: {
-                dB.echoError(scriptEntry.getResidingQueue(), "Effect type not found!");
+                Debug.echoError(scriptEntry.getResidingQueue(), "Effect type not found!");
             }
 
         }
