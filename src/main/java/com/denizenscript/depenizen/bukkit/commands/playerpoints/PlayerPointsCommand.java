@@ -92,9 +92,9 @@ public class PlayerPointsCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        PlayerTag target = scriptEntry.getdObject("target");
-        ElementTag action = scriptEntry.getdObject("action");
-        ElementTag amount = scriptEntry.getdObject("amount");
+        PlayerTag target = scriptEntry.getObjectTag("target");
+        ElementTag action = scriptEntry.getObjectTag("action");
+        ElementTag amount = scriptEntry.getObjectTag("amount");
 
         // Report to dB
         Debug.report(scriptEntry, getName(), action.debug()

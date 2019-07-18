@@ -72,7 +72,7 @@ public class MythicSpawnCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) {
 
         ElementTag name = scriptEntry.getElement("name");
-        LocationTag location = scriptEntry.getdObject("location");
+        LocationTag location = scriptEntry.getObjectTag("location");
         ElementTag level = scriptEntry.getElement("level");
 
         Debug.report(scriptEntry, getName(), name.debug() + location.debug() + level.debug());

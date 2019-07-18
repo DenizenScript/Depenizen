@@ -79,8 +79,8 @@ public class BossShopCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        PlayerTag target = scriptEntry.getdObject("target");
-        ElementTag dshop = scriptEntry.getdObject("shop");
+        PlayerTag target = scriptEntry.getObjectTag("target");
+        ElementTag dshop = scriptEntry.getObjectTag("shop");
 
         // Report to dB
         Debug.report(scriptEntry, getName(),

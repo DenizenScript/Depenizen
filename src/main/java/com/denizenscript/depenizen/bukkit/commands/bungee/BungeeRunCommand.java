@@ -67,7 +67,7 @@ public class BungeeRunCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
         ElementTag def = scriptEntry.getElement("def");
-        ListTag servers = scriptEntry.getdObject("servers");
+        ListTag servers = scriptEntry.getObjectTag("servers");
         ElementTag scriptName = scriptEntry.getElement("script_name");
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), def.debug() + servers.debug() + scriptName.debug());

@@ -87,7 +87,7 @@ public class MobArenaCommand extends AbstractCommand {
     @SuppressWarnings("unchecked")
     @Override
     public void execute(ScriptEntry scriptEntry) {
-        MobArenaArenaTag arena = scriptEntry.getdObject("arena");
+        MobArenaArenaTag arena = scriptEntry.getObjectTag("arena");
         List<PlayerTag> add = (List<PlayerTag>) scriptEntry.getObject("add");
         List<PlayerTag> remove = (List<PlayerTag>) scriptEntry.getObject("remove");
         List<PlayerTag> spectate = (List<PlayerTag>) scriptEntry.getObject("spectate");

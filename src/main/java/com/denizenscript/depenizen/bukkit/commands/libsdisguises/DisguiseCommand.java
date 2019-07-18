@@ -158,14 +158,14 @@ public class DisguiseCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        EntityTag target = scriptEntry.getdObject("target");
-        ElementTag type = scriptEntry.getdObject("type");
-        ElementTag name = scriptEntry.getdObject("name");
-        ElementTag action = scriptEntry.getdObject("action");
-        ElementTag id = scriptEntry.getdObject("id");
-        ElementTag data = scriptEntry.getdObject("data");
-        ElementTag baby = scriptEntry.getdObject("baby");
-        ElementTag self = scriptEntry.getdObject("self");
+        EntityTag target = scriptEntry.getObjectTag("target");
+        ElementTag type = scriptEntry.getObjectTag("type");
+        ElementTag name = scriptEntry.getObjectTag("name");
+        ElementTag action = scriptEntry.getObjectTag("action");
+        ElementTag id = scriptEntry.getObjectTag("id");
+        ElementTag data = scriptEntry.getObjectTag("data");
+        ElementTag baby = scriptEntry.getObjectTag("baby");
+        ElementTag self = scriptEntry.getObjectTag("self");
 
         // Report to dB
         Debug.report(scriptEntry, getName(), action.debug()

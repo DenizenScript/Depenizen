@@ -102,8 +102,8 @@ public class NBSCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        ElementTag file = scriptEntry.getdObject("file");
-        ElementTag action = scriptEntry.getdObject("action");
+        ElementTag file = scriptEntry.getObjectTag("file");
+        ElementTag action = scriptEntry.getObjectTag("action");
         List<PlayerTag> targets = (List<PlayerTag>) scriptEntry.getObject("targets");
 
         // Report to dB

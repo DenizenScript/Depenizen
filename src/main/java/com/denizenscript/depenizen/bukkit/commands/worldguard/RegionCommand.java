@@ -101,8 +101,8 @@ public class RegionCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) {
 
         ElementTag region_id = scriptEntry.getElement("region_id");
-        CuboidTag cuboid = scriptEntry.getdObject("cuboid");
-        WorldTag w = scriptEntry.getdObject("world");
+        CuboidTag cuboid = scriptEntry.getObjectTag("cuboid");
+        WorldTag w = scriptEntry.getObjectTag("world");
         World world = w != null ? w.getWorld() : cuboid != null ? cuboid.getWorld() : null;
         ElementTag action = scriptEntry.getElement("action");
 

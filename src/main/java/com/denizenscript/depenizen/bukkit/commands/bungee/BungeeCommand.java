@@ -70,7 +70,7 @@ public class BungeeCommand extends BracedCommand {
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-        ListTag servers = scriptEntry.getdObject("servers");
+        ListTag servers = scriptEntry.getObjectTag("servers");
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), servers.debug());
         }
