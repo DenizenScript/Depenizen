@@ -53,7 +53,7 @@ public class JobsCommand extends AbstractCommand {
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
         // Iterate through arguments
-        for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
+        for (Argument arg : scriptEntry.getProcessedArgs()) {
 
             if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {

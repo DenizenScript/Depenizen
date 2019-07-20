@@ -8,7 +8,6 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.RunCom
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
@@ -51,7 +50,7 @@ public class BungeeCommand extends BracedCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (Argument arg : ArgumentHelper.interpretArguments(scriptEntry.aHArgs)) {
+        for (Argument arg : scriptEntry.getProcessedArgs()) {
             if (!scriptEntry.hasObject("servers")) {
                 scriptEntry.addObject("servers", arg.asType(ListTag.class));
             }

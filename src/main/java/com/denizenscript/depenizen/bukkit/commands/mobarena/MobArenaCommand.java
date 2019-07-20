@@ -51,7 +51,7 @@ public class MobArenaCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (Argument arg : ArgumentHelper.interpret(scriptEntry.getArguments())) {
+        for (Argument arg : scriptEntry.getProcessedArgs()) {
             if (!scriptEntry.hasObject("arena") &&
                     (arg.matchesPrefix("arena") || MobArenaArenaTag.matches(arg.getValue()))) {
                 scriptEntry.addObject("arena", MobArenaArenaTag.valueOf(arg.getValue()));

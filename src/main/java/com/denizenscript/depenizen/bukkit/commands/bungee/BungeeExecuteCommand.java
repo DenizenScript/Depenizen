@@ -7,7 +7,6 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 
@@ -35,7 +34,7 @@ public class BungeeExecuteCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (Argument arg : ArgumentHelper.interpretArguments(scriptEntry.aHArgs)) {
+        for (Argument arg : scriptEntry.getProcessedArgs()) {
             if (!scriptEntry.hasObject("command")) {
                 scriptEntry.addObject("command", arg.asElement());
             }
