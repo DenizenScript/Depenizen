@@ -62,11 +62,6 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
-        return super.applyDetermination(container, determination);
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(new PlayerTag(event.getOldRenter()), null);
     }

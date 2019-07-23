@@ -81,11 +81,6 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
-        return super.applyDetermination(container, determination);
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         // TODO: Store the player?
         return new BukkitScriptEntryData(event != null ? new PlayerTag(event.getPlayer()) : null, null);

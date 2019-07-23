@@ -76,14 +76,15 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
+    public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
+        String determination = determinationObj.toString();
         String lower = CoreUtilities.toLowerCase(determination);
 
         if (Argument.valueOf(lower).matchesPrimitive(ArgumentHelper.PrimitiveType.Float)) {
             xp = new ElementTag(lower);
             return true;
         }
-        return super.applyDetermination(container, determination);
+        return super.applyDetermination(path, determinationObj);
     }
 
     @Override

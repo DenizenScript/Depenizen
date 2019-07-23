@@ -57,11 +57,6 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
-        return super.applyDetermination(container, determination);
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(null, null);
     }

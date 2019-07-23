@@ -69,8 +69,9 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
-        if (determination.length() > 0 && !isDefaultDetermination(determination)) {
+    public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
+        String determination = determinationObj.toString();
+        if (determination.length() > 0 && !isDefaultDetermination(determinationObj)) {
             ElementTag mana = new ElementTag(determination);
             if (!mana.isInt()) {
                 Debug.echoError("Determination for 'mana' must be a valid number.");
@@ -78,7 +79,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
             }
             new_mana = mana.asInt();
         }
-        return super.applyDetermination(container, determination);
+        return super.applyDetermination(path, determinationObj);
     }
 
     @Override

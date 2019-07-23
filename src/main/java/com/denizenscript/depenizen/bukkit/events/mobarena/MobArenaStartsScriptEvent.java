@@ -58,11 +58,6 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
-        return super.applyDetermination(container, determination);
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(null, null);
     }

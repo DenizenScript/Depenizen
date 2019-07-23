@@ -60,11 +60,6 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
-        return super.applyDetermination(container, determination);
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(null, null);
     }

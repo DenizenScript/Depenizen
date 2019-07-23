@@ -69,11 +69,6 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
-        return super.applyDetermination(container, determination);
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(null, null);
     }

@@ -107,8 +107,9 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
-        if (isDefaultDetermination(determination)) {
+    public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
+        String determination = determinationObj.toString();
+        if (isDefaultDetermination(determinationObj)) {
             Argument arg = new Argument(determination);
             if (arg.matchesPrefix("currency") && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Double)) {
                 currency = new ElementTag(determination);
@@ -122,14 +123,14 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
                 if (newDrops == null) {
                     newDrops = new ArrayList<>();
                 }
-                List<ItemTag> items = ListTag.valueOf(determination).filter(ItemTag.class, container);
+                List<ItemTag> items = ListTag.valueOf(determination).filter(ItemTag.class, path.container);
                 for (ItemTag i : items) {
                     newDrops.add(i.getItemStack());
                 }
                 return true;
             }
         }
-        return super.applyDetermination(container, determination);
+        return super.applyDetermination(path, determinationObj);
     }
 
     @Override

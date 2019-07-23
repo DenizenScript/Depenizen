@@ -74,14 +74,15 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
+    public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
+        String determination = determinationObj.toString();
         String lower = CoreUtilities.toLowerCase(determination);
 
         if (ArgumentHelper.matchesInteger(lower)) {
             level = ArgumentHelper.getIntegerFrom(lower);
             return true;
         }
-        return super.applyDetermination(container, determination);
+        return super.applyDetermination(path, determinationObj);
     }
 
     @Override

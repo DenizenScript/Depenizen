@@ -85,7 +85,8 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public boolean applyDetermination(ScriptContainer container, String determination) {
+    public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
+        String determination = determinationObj.toString();
         String determinationLow = CoreUtilities.toLowerCase(determination);
         if (determinationLow.startsWith("max_players:")) {
             maxPlayers = ArgumentHelper.getIntegerFrom(determination.substring("max_players:".length()));
@@ -96,7 +97,7 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
         else if (determinationLow.startsWith("motd:")) {
             motd = determination.substring("motd:".length());
         }
-        return super.applyDetermination(container, determination);
+        return super.applyDetermination(path, determinationObj);
     }
 
 
