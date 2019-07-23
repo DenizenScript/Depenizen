@@ -95,7 +95,7 @@ public class Depenizen extends JavaPlugin {
         registerBridge("LibsDisguises", () -> new LibsDisguisesBridge());
         registerBridge("LuckPerms", () -> new LuckPermsBridge());
         registerBridge("MagicSpells", () -> new MagicSpellsBridge());
-        registerBridge("McMMO", () -> new McMMOBridge());
+        registerBridge("mcMMO", () -> new McMMOBridge());
         registerBridge("MobArena", () -> new MobArenaBridge());
         registerBridge("MythicMobs", () -> new MythicMobsBridge());
         registerBridge("NoCheatPlus", () -> new NoCheatPlusBridge());
