@@ -1,13 +1,11 @@
 package com.denizenscript.depenizen.bukkit.events.mcmmo;
 
-import com.denizenscript.denizencore.objects.Argument;
 import com.gmail.nossr50.events.experience.McMMOPlayerXpGainEvent;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -77,11 +75,8 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
 
     @Override
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
-        String determination = determinationObj.toString();
-        String lower = CoreUtilities.toLowerCase(determination);
-
-        if (Argument.valueOf(lower).matchesPrimitive(ArgumentHelper.PrimitiveType.Float)) {
-            xp = new ElementTag(lower);
+        if (determinationObj instanceof ElementTag && ((ElementTag) determinationObj).isFloat()) {
+            xp = (ElementTag) determinationObj;
             return true;
         }
         return super.applyDetermination(path, determinationObj);

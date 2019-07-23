@@ -6,7 +6,6 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
@@ -79,11 +78,8 @@ public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
-        String determination = determinationObj.toString();
-        String lower = CoreUtilities.toLowerCase(determination);
-
-        if (ArgumentHelper.matchesInteger(lower)) {
-            levels_lost = ArgumentHelper.getIntegerFrom(lower);
+        if (determinationObj instanceof ElementTag && ((ElementTag) determinationObj).isInt()) {
+            levels_lost = ((ElementTag) determinationObj).asInt();
             return true;
         }
         return super.applyDetermination(path, determinationObj);
