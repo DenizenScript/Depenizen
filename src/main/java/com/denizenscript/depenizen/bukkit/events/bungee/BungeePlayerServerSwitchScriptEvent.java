@@ -6,7 +6,6 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
@@ -42,8 +41,8 @@ public class BungeePlayerServerSwitchScriptEvent extends BukkitScriptEvent {
     public String newServer;
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return s.startsWith("bungee player switches to");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("bungee player switches to");
     }
 
     @Override

@@ -5,7 +5,6 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 
 public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
 
@@ -31,8 +30,8 @@ public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
     public String serverName;
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return s.startsWith("bungee server disconnects");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("bungee server disconnects");
     }
 
     @Override

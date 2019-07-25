@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
 import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyCommandPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyPingPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.MyInfoPacketOut;
 import io.netty.buffer.ByteBuf;
@@ -73,6 +74,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
                 BungeeBridge.instance.connected = true;
                 BungeeBridge.instance.sendPacket(new MyInfoPacketOut(Bukkit.getPort()));
                 BungeeBridge.instance.sendPacket(new ControlsProxyPingPacketOut(BungeeBridge.instance.controlsProxyPing));
+                BungeeBridge.instance.sendPacket(new ControlsProxyCommandPacketOut(BungeeBridge.instance.controlsProxyCommand));
             }
         }, 30);
     }

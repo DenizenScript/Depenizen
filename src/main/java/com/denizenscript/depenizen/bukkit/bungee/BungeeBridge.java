@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.bungee;
 
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
+import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyCommandPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyPingPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeCommand;
@@ -59,6 +60,8 @@ public class BungeeBridge {
 
     public boolean controlsProxyPing = false;
 
+    public boolean controlsProxyCommand = false;
+
     public int keepAliveTickRate = 10;
 
     public int ticksTilKeepalive = 0;
@@ -68,6 +71,12 @@ public class BungeeBridge {
     public void checkBroadcastProxyPing() {
         if (connected) {
             sendPacket(new ControlsProxyPingPacketOut(controlsProxyPing));
+        }
+    }
+
+    public void checkBroadcastProxyCommand() {
+        if (connected) {
+            sendPacket(new ControlsProxyCommandPacketOut(controlsProxyCommand));
         }
     }
 
@@ -84,6 +93,7 @@ public class BungeeBridge {
         packets.put(58, new RunCommandsPacketIn());
         packets.put(59, new ReadTagPacketIn());
         packets.put(60, new TagResponsePacketIn());
+        packets.put(61, new ProxyCommandPacketIn());
     }
 
     public void sendPacket(PacketOut packet) {
@@ -176,6 +186,7 @@ public class BungeeBridge {
         ScriptEvent.registerScriptEvent(new BungeePlayerJoinsScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeePlayerQuitsScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeePlayerServerSwitchScriptEvent());
+        ScriptEvent.registerScriptEvent(new BungeeProxyServerCommandScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeeProxyServerListPingScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeeServerConnectScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeeServerDisconnectScriptEvent());

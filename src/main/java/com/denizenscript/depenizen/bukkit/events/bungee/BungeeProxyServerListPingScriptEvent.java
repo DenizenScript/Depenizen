@@ -7,7 +7,6 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 
 public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
@@ -54,8 +53,11 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     public String version;
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return s.startsWith("proxy server list ping");
+    public boolean couldMatch(ScriptPath path) {
+        if (!path.eventLower.startsWith("proxy server list ping")) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -91,12 +93,15 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
             String determinationLow = CoreUtilities.toLowerCase(determination);
             if (determinationLow.startsWith("max_players:")) {
                 maxPlayers = ArgumentHelper.getIntegerFrom(determination.substring("max_players:".length()));
+                return true;
             }
             else if (determinationLow.startsWith("version:")) {
                 version = determination.substring("version:".length());
+                return true;
             }
             else if (determinationLow.startsWith("motd:")) {
                 motd = determination.substring("motd:".length());
+                return true;
             }
         }
         return super.applyDetermination(path, determinationObj);
