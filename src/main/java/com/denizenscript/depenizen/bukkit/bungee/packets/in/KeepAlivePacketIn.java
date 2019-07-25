@@ -13,11 +13,11 @@ public class KeepAlivePacketIn extends PacketIn {
 
     @Override
     public void process(ByteBuf data) {
-        if (data.readableBytes() < 512) {
+        if (data.readableBytes() < 1024) {
             BungeeBridge.instance.handler.fail("Invalid KeepAlivePacket (bytes available: " + data.readableBytes() + ")");
             return;
         }
         // Read and ignore empty buffer
-        data.readBytes(512);
+        data.readBytes(1024);
     }
 }

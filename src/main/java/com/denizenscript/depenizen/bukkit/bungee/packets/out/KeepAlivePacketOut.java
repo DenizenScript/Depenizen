@@ -10,7 +10,7 @@ public class KeepAlivePacketOut extends PacketOut {
         return 0;
     }
 
-    public static byte[] KEEP_ALIVE_BUFFER = new byte[512];
+    public static byte[] KEEP_ALIVE_BUFFER = new byte[1024];
 
     @Override
     public void writeTo(ByteBuf buf) {
