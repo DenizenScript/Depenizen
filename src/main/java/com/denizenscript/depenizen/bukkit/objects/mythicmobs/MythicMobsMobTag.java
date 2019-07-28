@@ -20,6 +20,30 @@ import java.util.UUID;
 
 public class MythicMobsMobTag implements ObjectTag, Adjustable {
 
+    // <--[language]
+    // @name MythicMobsMobTag
+    // @group Depenizen Object Types
+    // @plugin Depenizen, MythicMobs
+    // @description
+    // A MythicMobsMobTag represents a Mythic mob entity in the world.
+    //
+    // For format info, see <@link language mythicmob@>
+    //
+    // -->
+
+    // <--[language]
+    // @name mythicmob@
+    // @group Depenizen Object Fetcher Types
+    // @plugin Depenizen, MythicMobs
+    // @description
+    // mythicmob@ refers to the 'object identifier' of a MythicMobsMobTag. The 'mythicmob@' is notation for Denizen's Object
+    // Fetcher. The constructor for a MythicMobsMobTag is <uuid>
+    // For example, 'mythicmob@1234-1234-1234'.
+    //
+    // For general info, see <@link language MythicMobsMobTag>
+    //
+    // -->
+
     public static MythicMobsMobTag valueOf(String uuid) {
         return valueOf(uuid, null);
     }

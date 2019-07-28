@@ -13,6 +13,30 @@ import net.slipcor.pvparena.managers.ArenaManager;
 
 public class PVPArenaArenaTag implements ObjectTag {
 
+    // <--[language]
+    // @name PVPArenaArenaTag
+    // @group Depenizen Object Types
+    // @plugin Depenizen, PvPArena
+    // @description
+    // A PVPArenaArenaTag represents a PvP Arena in the world.
+    //
+    // For format info, see <@link language pvparena@>
+    //
+    // -->
+
+    // <--[language]
+    // @name pvparena@
+    // @group Depenizen Object Fetcher Types
+    // @plugin Depenizen, PvPArena
+    // @description
+    // pvparena@ refers to the 'object identifier' of a PVPArenaArenaTag. The 'pvparena@' is notation for Denizen's Object
+    // Fetcher. The constructor for a PVPArenaArenaTag is <arena_name>
+    // For example, 'pvparena@myarena'.
+    //
+    // For general info, see <@link language PVPArenaArenaTag>
+    //
+    // -->
+
     String prefix = "PVPArena";
     Arena arena = null;
 

@@ -18,6 +18,30 @@ import java.util.Set;
 
 public class FactionTag implements ObjectTag {
 
+    // <--[language]
+    // @name FactionTag
+    // @group Depenizen Object Types
+    // @plugin Depenizen, Factions
+    // @description
+    // A FactionTag represents a Factions faction.
+    //
+    // For format info, see <@link language faction@>
+    //
+    // -->
+
+    // <--[language]
+    // @name faction@
+    // @group Depenizen Object Fetcher Types
+    // @plugin Depenizen, Factions
+    // @description
+    // faction@ refers to the 'object identifier' of a FactionTag. The 'faction@' is notation for Denizen's Object
+    // Fetcher. The constructor for a FactionTag is <faction_name>
+    // For example, 'faction@my_faction'.
+    //
+    // For general info, see <@link language FactionTag>
+    //
+    // -->
+
     /////////////////////
     //   OBJECT FETCHER
     /////////////////

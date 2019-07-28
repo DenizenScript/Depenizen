@@ -13,6 +13,31 @@ import com.denizenscript.denizencore.utilities.CoreUtilities;
 import java.util.List;
 
 public class LibsDisguiseTag implements ObjectTag {
+
+    // <--[language]
+    // @name LibsDisguiseTag
+    // @group Depenizen Object Types
+    // @plugin Depenizen, LibsDisguises
+    // @description
+    // A LibsDisguiseTag represents a LibsDisguises disguise type.
+    //
+    // For format info, see <@link language libsdisguise@>
+    //
+    // -->
+
+    // <--[language]
+    // @name libsdisguise@
+    // @group Depenizen Object Fetcher Types
+    // @plugin Depenizen, LibsDisguises
+    // @description
+    // libsdisguise@ refers to the 'object identifier' of a LibsDisguiseTag. The 'libsdisguise@' is notation for Denizen's Object
+    // Fetcher. The constructor for a LibsDisguiseTag is <disguise_name>
+    // For example, 'libsdisguise@zombie'.
+    //
+    // For general info, see <@link language LibsDisguiseTag>
+    //
+    // -->
+
     /////////////////////
     //   OBJECT FETCHER
     /////////////////

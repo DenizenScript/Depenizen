@@ -14,6 +14,30 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class ResidenceTag implements ObjectTag {
 
+    // <--[language]
+    // @name ResidenceTag
+    // @group Depenizen Object Types
+    // @plugin Depenizen, Residence
+    // @description
+    // A ResidenceTag represents a Residence in the world.
+    //
+    // For format info, see <@link language residence@>
+    //
+    // -->
+
+    // <--[language]
+    // @name residence@
+    // @group Depenizen Object Fetcher Types
+    // @plugin Depenizen, Residence
+    // @description
+    // residence@ refers to the 'object identifier' of a ResidenceTag. The 'residence@' is notation for Denizen's Object
+    // Fetcher. The constructor for a ResidenceTag is <residence_name>
+    // For example, 'residence@myresidence'.
+    //
+    // For general info, see <@link language ResidenceTag>
+    //
+    // -->
+
     public static ResidenceTag valueOf(String string) {
         return ResidenceTag.valueOf(string, null);
     }

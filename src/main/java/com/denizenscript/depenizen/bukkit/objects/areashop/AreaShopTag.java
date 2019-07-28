@@ -14,6 +14,30 @@ import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag
 
 public class AreaShopTag implements ObjectTag {
 
+    // <--[language]
+    // @name AreaShopTag
+    // @group Depenizen Object Types
+    // @plugin Depenizen, AreaShop
+    // @description
+    // A AreaShopTag represents an AreaShop shop.
+    //
+    // For format info, see <@link language areashop@>
+    //
+    // -->
+
+    // <--[language]
+    // @name areashop@
+    // @group Depenizen Object Fetcher Types
+    // @plugin Depenizen, AreaShop
+    // @description
+    // areashop@ refers to the 'object identifier' of a AreaShopTag. The 'areashop@' is notation for Denizen's Object
+    // Fetcher. The constructor for a AreaShopTag is <shop_name>
+    // For example, 'areashop@my_shot'.
+    //
+    // For general info, see <@link language AreaShopTag>
+    //
+    // -->
+
     public static AreaShopTag valueOf(String string) {
         return AreaShopTag.valueOf(string, null);
     }

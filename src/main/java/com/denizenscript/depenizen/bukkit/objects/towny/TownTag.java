@@ -22,6 +22,30 @@ import org.bukkit.Location;
 
 public class TownTag implements ObjectTag {
 
+    // <--[language]
+    // @name TownTag
+    // @group Depenizen Object Types
+    // @plugin Depenizen, Towny
+    // @description
+    // A TownTag represents a Towny town in the world.
+    //
+    // For format info, see <@link language town@>
+    //
+    // -->
+
+    // <--[language]
+    // @name town@
+    // @group Depenizen Object Fetcher Types
+    // @plugin Depenizen, Towny
+    // @description
+    // town@ refers to the 'object identifier' of a TownTag. The 'town@' is notation for Denizen's Object
+    // Fetcher. The constructor for a TownTag is <town_name>
+    // For example, 'town@mytown'.
+    //
+    // For general info, see <@link language TownTag>
+    //
+    // -->
+
     /////////////////////
     //   OBJECT FETCHER
     /////////////////

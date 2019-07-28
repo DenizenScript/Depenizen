@@ -24,6 +24,30 @@ import java.util.UUID;
 
 public class ShopKeeperTag implements ObjectTag {
 
+    // <--[language]
+    // @name ShopKeeperTag
+    // @group Depenizen Object Types
+    // @plugin Depenizen, Shopkeepers
+    // @description
+    // A ShopKeeperTag represents a ShopKeeper entity in the world.
+    //
+    // For format info, see <@link language shopkeeper@>
+    //
+    // -->
+
+    // <--[language]
+    // @name shopkeeper@
+    // @group Depenizen Object Fetcher Types
+    // @plugin Depenizen, Shopkeepers
+    // @description
+    // shopkeeper@ refers to the 'object identifier' of a ShopKeeperTag. The 'shopkeeper@' is notation for Denizen's Object
+    // Fetcher. The constructor for a ShopKeeperTag is <uuid>
+    // For example, 'shopkeeper@1234-1234-1234'.
+    //
+    // For general info, see <@link language ShopKeeperTag>
+    //
+    // -->
+
     public static ShopKeeperTag valueOf(String string) {
         return valueOf(string, null);
     }
