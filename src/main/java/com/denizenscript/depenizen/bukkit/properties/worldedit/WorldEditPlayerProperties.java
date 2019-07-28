@@ -59,7 +59,7 @@ public class WorldEditPlayerProperties implements Property {
     }
 
     public static final String[] handledTags = new String[] {
-            "we_brush_info", "selected_region"
+            "we_brush_info", "selected_region", "we_selection"
     };
 
     public static final String[] handledMechs = new String[] {
@@ -128,13 +128,13 @@ public class WorldEditPlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <PlayerTag.selected_region>
+        // @attribute <PlayerTag.we_selection>
         // @returns CuboidTag
         // @description
-        // Returns the player's current region selection, as a CuboidTag.
+        // Returns the player's current block area selection, as a CuboidTag.
         // @Plugin Depenizen, WorldEdit
         // -->
-        if (attribute.startsWith("selected_region")) {
+        if (attribute.startsWith("we_selection") || attribute.startsWith("selected_region")) {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             RegionSelector selection = worldEdit.getSession(player).getRegionSelector(BukkitAdapter.adapt(player.getWorld()));
             if (selection != null) {
