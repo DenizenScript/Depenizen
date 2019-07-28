@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit;
 
+import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.depenizen.bukkit.bridges.*;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.utilities.BridgeLoadException;
@@ -35,6 +36,12 @@ public class Depenizen extends JavaPlugin {
         }
         catch (Throwable ex) {
             Debug.echoError("Cannot load Depenizen-Bungee bridge: Internal exception was thrown!");
+            Debug.echoError(ex);
+        }
+        try {
+            ObjectFetcher._initialize();
+        }
+        catch (Throwable ex) {
             Debug.echoError(ex);
         }
         Debug.log("Depenizen loaded! " + loadedBridges.size() + " plugin bridge(s) loaded (of " + allBridges.size() + " available)");
