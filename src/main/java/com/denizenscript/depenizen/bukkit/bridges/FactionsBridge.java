@@ -23,7 +23,7 @@ public class FactionsBridge extends Bridge {
     @Override
     public void init() {
         if (plugin.getDescription().getVersion().startsWith("1.")) {
-            throw new BridgeLoadException("Only Factions 1.x.x is supported.");
+            throw new BridgeLoadException("Only official modern Factions versions are supported.");
         }
         ObjectFetcher.registerWithObjectFetcher(FactionTag.class);
         PropertyParser.registerProperty(FactionsPlayerNPCProperties.class, NPCTag.class);
