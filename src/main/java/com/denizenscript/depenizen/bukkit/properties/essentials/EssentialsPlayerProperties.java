@@ -13,8 +13,6 @@ import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.depenizen.bukkit.bridges.EssentialsBridge;
 
-import java.util.GregorianCalendar;
-
 public class EssentialsPlayerProperties implements Property {
 
     @Override
@@ -46,7 +44,8 @@ public class EssentialsPlayerProperties implements Property {
 
     public static final String[] handledTags = new String[] {
             "god_mode", "has_home", "is_afk", "is_muted", "is_vanished", "home_list", "home_location_list",
-            "ignored_players", "home_name_list", "mail_list", "mute_timout", "socialspy"
+            "ignored_players", "home_name_list", "mail_list", "mute_timout", "socialspy",
+            "list_home_locations", "list_home_names", "list_homes", "list_mails"
     };
 
     public static final String[] handledMechs = new String[] {
@@ -126,13 +125,13 @@ public class EssentialsPlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <PlayerTag.home_list>
-        // @returns ListTag(Element/dLocation)
+        // @attribute <PlayerTag.list_homes>
+        // @returns ListTag
         // @description
         // Returns a list of the homes of the player, in the format "HomeName/l@x,y,z,world".
         // @Plugin Depenizen, Essentials
         // -->
-        if (attribute.startsWith("home_list")) {
+        if (attribute.startsWith("list_homes") || attribute.startsWith("home_list")) {
             ListTag homes = new ListTag();
             for (String home : getUser().getHomes()) {
                 try {
@@ -148,17 +147,17 @@ public class EssentialsPlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <PlayerTag.home_location_list>
+        // @attribute <PlayerTag.list_home_locations>
         // @returns ListTag(LocationTag)
         // @description
         // Returns a list of the locations of homes of the player.
         // @Plugin Depenizen, Essentials
         // -->
-        if (attribute.startsWith("home_location_list")) {
+        if (attribute.startsWith("list_home_locations") || attribute.startsWith("home_location_list")) {
             ListTag homes = new ListTag();
             for (String home : getUser().getHomes()) {
                 try {
-                    homes.add(new LocationTag(getUser().getHome(home)).identifySimple());
+                    homes.addObject(new LocationTag(getUser().getHome(home)));
                 }
                 catch (Exception e) {
                     if (!attribute.hasAlternative()) {
@@ -167,6 +166,17 @@ public class EssentialsPlayerProperties implements Property {
                 }
             }
             return homes.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <PlayerTag.list_home_names>
+        // @returns ListTag
+        // @description
+        // Returns a list of the names of homes of the player.
+        // @Plugin Depenizen, Essentials
+        // -->
+        if (attribute.startsWith("list_home_names") || attribute.startsWith("home_name_list")) {
+            return new ListTag(getUser().getHomes()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -193,24 +203,13 @@ public class EssentialsPlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <PlayerTag.home_name_list>
-        // @returns ListTag(Element)
-        // @description
-        // Returns a list of the names of homes of the player.
-        // @Plugin Depenizen, Essentials
-        // -->
-        if (attribute.startsWith("home_name_list")) {
-            return new ListTag(getUser().getHomes()).getAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <PlayerTag.mail_list>
-        // @returns ListTag(Element)
+        // @attribute <PlayerTag.list_mails>
+        // @returns ListTag
         // @description
         // Returns a list of mail the player currently has.
         // @Plugin Depenizen, Essentials
         // -->
-        if (attribute.startsWith("mail_list")) {
+        if (attribute.startsWith("list_mails") || attribute.startsWith("mail_list")) {
             return new ListTag(getUser().getMails()).getAttribute(attribute.fulfill(1));
         }
 
@@ -222,7 +221,7 @@ public class EssentialsPlayerProperties implements Property {
         // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("mute_timeout")) {
-            return new DurationTag((int) (getUser().getMuteTimeout() - new GregorianCalendar().getTimeInMillis()) / 1000)
+            return new DurationTag((getUser().getMuteTimeout() - System.currentTimeMillis()))
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -254,7 +253,7 @@ public class EssentialsPlayerProperties implements Property {
         // <PlayerTag.is_afk>
         // @Plugin Depenizen, Essentials
         // -->
-        if ((mechanism.matches("afk") || mechanism.matches("is_afk")) && mechanism.requireBoolean()) {
+        if ((mechanism.matches("is_afk") || mechanism.matches("afk")) && mechanism.requireBoolean()) {
             getUser().setAfk(mechanism.getValue().asBoolean());
         }
 
@@ -284,19 +283,11 @@ public class EssentialsPlayerProperties implements Property {
         // <PlayerTag.mute_timeout>
         // @Plugin Depenizen, Essentials
         // -->
-        if ((mechanism.matches("muted") || mechanism.matches("is_muted")) && mechanism.requireBoolean()) {
-            if (mechanism.getValue().asString().length() > 0) {
-                ListTag split = mechanism.valueAsType(ListTag.class);
-                if (split.size() > 0 && new ElementTag(split.get(0)).isBoolean()) {
-                    getUser().setMuted(new ElementTag(split.get(0)).asBoolean());
-                    if (split.size() > 1 && DurationTag.matches(split.get(1))) {
-                        getUser().setMuteTimeout(new GregorianCalendar().getTimeInMillis()
-                                + DurationTag.valueOf(split.get(1)).getMillis());
-                    }
-                }
-                else {
-                    Debug.echoError("'" + split.get(0) + "' is not a valid boolean!");
-                }
+        if ((mechanism.matches("is_muted") || mechanism.matches("muted")) && mechanism.requireBoolean()) {
+            ListTag split = mechanism.valueAsType(ListTag.class);
+            getUser().setMuted(new ElementTag(split.get(0)).asBoolean());
+            if (split.size() > 1) {
+                getUser().setMuteTimeout(System.currentTimeMillis() + DurationTag.valueOf(split.get(1), mechanism.context).getMillis());
             }
         }
 
@@ -331,25 +322,20 @@ public class EssentialsPlayerProperties implements Property {
         // <--[mechanism]
         // @object PlayerTag
         // @name essentials_ignore
-        // @input Element(dPlayer)(|Boolean)
+        // @input PlayerTag(|Element(Boolean))
         // @description
-        // Sets whether the player should ignore anther player. If no boolean is provided, it is by default true.
+        // Sets whether the player should ignore another player.
+        // Optionally, specify a boolean indicate whether to ignore (defaults to true).
         // @tags
         // <PlayerTag.ignored_players>
         // @Plugin Depenizen, Essentials
         // -->
         if (mechanism.matches("essentials_ignore")) {
             Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
-            if (mechanism.getValue().asString().contains("|")) {
-                int split = mechanism.getValue().asString().indexOf("|");
-                int len = mechanism.getValue().asString().length();
-                String after = mechanism.getValue().asString().substring(split + 1, len);
-                String before = mechanism.getValue().asString().substring(0, split - 1);
-                getUser().setIgnoredPlayer(ess.getUser(new ElementTag(before).asType(PlayerTag.class, mechanism.context).getOfflinePlayer().getUniqueId()), new ElementTag(after).asBoolean());
-            }
-            else {
-                getUser().setIgnoredPlayer(ess.getUser(mechanism.valueAsType(PlayerTag.class).getOfflinePlayer().getUniqueId()), true);
-            }
+            ListTag split = mechanism.valueAsType(ListTag.class);
+            PlayerTag otherPlayer = PlayerTag.valueOf(split.get(0), mechanism.context);
+            boolean shouldIgnore = split.size() < 2 || new ElementTag(split.get(1)).asBoolean();
+            getUser().setIgnoredPlayer(ess.getUser(otherPlayer.getOfflinePlayer().getUniqueId()), shouldIgnore);
         }
 
     }

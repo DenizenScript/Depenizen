@@ -5,7 +5,6 @@ import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
@@ -74,7 +73,8 @@ public class EssentialsItemProperties implements Property {
                 }
                 return null;
             }
-            double price = priceBD.doubleValue();
+            attribute = attribute.fulfill(1);
+
             // <--[tag]
             // @attribute <ItemTag.worth.quantity[<#>]>
             // @returns ElementTag(Decimal)
@@ -82,11 +82,11 @@ public class EssentialsItemProperties implements Property {
             // Returns the amount of money the quantity specified of this item is worth in Essentials.
             // @Plugin Depenizen, Essentials
             // -->
-            if (attribute.getAttribute(2).startsWith("quantity") &&
-                    attribute.hasContext(2) && ArgumentHelper.matchesInteger(attribute.getContext(2))) {
-                return new ElementTag(price * attribute.getIntContext(2)).getAttribute(attribute.fulfill(2));
+            if (attribute.startsWith("quantity") && attribute.hasContext(1)) {
+                return new ElementTag(priceBD.multiply(BigDecimal.valueOf(attribute.getIntContext(1))))
+                        .getAttribute(attribute.fulfill(1));
             }
-            return new ElementTag(price).getAttribute(attribute.fulfill(1));
+            return new ElementTag(priceBD).getAttribute(attribute);
         }
 
         return null;
@@ -94,6 +94,7 @@ public class EssentialsItemProperties implements Property {
 
     @Override
     public void adjust(Mechanism mechanism) {
+
         // <--[mechanism]
         // @object ItemTag
         // @name worth
@@ -102,10 +103,10 @@ public class EssentialsItemProperties implements Property {
         // Sets the worth of this item in Essentials.
         // @tags
         // <ItemTag.worth>
-        // <ItemTag.worth.quantity[<Element>]>
+        // <ItemTag.worth.quantity[<#>]>
         // @Plugin Depenizen, Essentials
         // -->
-        if (mechanism.matches("worth") && mechanism.getValue().isDouble()) {
+        if (mechanism.matches("worth") && mechanism.requireDouble()) {
             Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
             ess.getWorth().setPrice(ess, item.getItemStack(), mechanism.getValue().asDouble());
         }
