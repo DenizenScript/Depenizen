@@ -15,22 +15,19 @@ import org.bukkit.event.Listener;
 
 public class EssentialsPlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements Listener {
 
-
     // <--[event]
     // @Events
-    // player balance change
+    // player balance changes
     //
     // @Regex ^on essentials player balance changes$
     //
-    // @Cancellable false
-    //
-    // @Triggers when a player's balance changes, when using essentials economy.
+    // @Triggers when a player's balance changes, when using Essentials economy.
     //
     // @Switch in <area>
     //
     // @Context
-    // <context.oldbalance> Returns the balance before changes are made
-    // <context.newbalance> Returns the balance after changes are made
+    // <context.old_balance> Returns the balance before changes are made
+    // <context.new_balance> Returns the balance after changes are made
     //
     // @Plugin Depenizen, Essentials
     //
@@ -73,10 +70,10 @@ public class EssentialsPlayerBalanceChangeScriptEvent extends BukkitScriptEvent 
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("newbalance")) {
+        if (name.equals("new_balance")) {
             return newBalance;
         }
-        if (name.equals("oldbalance")) {
+        if (name.equals("old_balance")) {
             return oldBalance;
         }
         return super.getContext(name);
