@@ -49,15 +49,16 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
     @Override
     public boolean matches(ScriptPath path) {
         String status = path.eventArgLowerAt(1);
-        if (status.equals("muted") && event.getValue()) {
-            return true;
+        if (status.equals("muted") && !event.getValue()) {
+            return false;
         }
-        else if ((status.equals("unmuted") || status.equals("un-muted")) && !event.getValue()) {
-            return true;
+        if ((status.equals("unmuted") || status.equals("un-muted")) && event.getValue()) {
+            return false;
         }
-        else {
-            return status.equals("status");
+        if (!status.equals("status")) {
+            return false;
         }
+        return true;
     }
 
     @Override

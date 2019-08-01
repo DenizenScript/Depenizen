@@ -49,15 +49,16 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
     @Override
     public boolean matches(ScriptPath path) {
         String status = path.eventArgLowerAt(1);
-        if (status.equals("jailed") && event.getValue()) {
-            return true;
+        if (status.equals("jailed") && !event.getValue()) {
+            return false;
         }
-        else if ((status.equals("unjailed") || status.equals("un-jailed")) && !event.getValue()) {
-            return true;
+        if ((status.equals("unjailed") || status.equals("un-jailed")) && event.getValue()) {
+            return false;
         }
-        else {
-            return status.equals("status");
+        if (!status.equals("status")) {
+            return false;
         }
+        return true;
     }
 
     @Override
