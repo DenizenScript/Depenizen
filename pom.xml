@@ -28,13 +28,6 @@
             <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
         <repository>
-            <id>shopkeepers-releases</id>
-            <url>http://nexus3.cube-nation.de/repository/releases/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>md_5-public</id>
             <url>http://repo.md-5.net/content/groups/public/</url>
         </repository>
@@ -265,8 +258,9 @@
         <dependency>
             <groupId>com.nisovin.shopkeepers</groupId>
             <artifactId>Shopkeepers</artifactId>
-            <version>2.2.0</version>
-            <scope>provided</scope>
+            <version>2.7.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/Shopkeepers.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.sucy</groupId>
