@@ -17,7 +17,7 @@ public class EssentialsPlayerBalanceChangeScriptEvent extends BukkitScriptEvent 
 
     // <--[event]
     // @Events
-    // player balance changes
+    // essentials player balance changes
     //
     // @Regex ^on essentials player balance changes$
     //
@@ -26,8 +26,8 @@ public class EssentialsPlayerBalanceChangeScriptEvent extends BukkitScriptEvent 
     // @Switch in <area>
     //
     // @Context
-    // <context.old_balance> Returns the balance before changes are made
-    // <context.new_balance> Returns the balance after changes are made
+    // <context.old_balance> Returns the balance before changes are made.
+    // <context.new_balance> Returns the balance after changes are made.
     //
     // @Plugin Depenizen, Essentials
     //
