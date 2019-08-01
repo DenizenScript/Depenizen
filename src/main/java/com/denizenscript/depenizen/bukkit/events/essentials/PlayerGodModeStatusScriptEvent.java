@@ -6,8 +6,6 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import net.ess3.api.events.GodStatusChangeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,24 +33,23 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
 
     public static PlayerGodModeStatusScriptEvent instance;
     public GodStatusChangeEvent event;
-    public ElementTag god;
 
     public PlayerGodModeStatusScriptEvent() {
         instance = this;
     }
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("player god mode");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("player god mode");
     }
 
     @Override
     public boolean matches(ScriptPath path) {
         String status = path.eventArgLowerAt(3);
-        if (status.equals("enabled") && god.asBoolean()) {
+        if (status.equals("enabled") && event.getValue()) {
             return true;
         }
-        else if (status.equals("disabled") && !god.asBoolean()) {
+        else if (status.equals("disabled") && !event.getValue()) {
             return true;
         }
         else {
@@ -73,14 +70,13 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
     @Override
     public ObjectTag getContext(String name) {
         if (name.equals("status")) {
-            return god;
+            return new ElementTag(event.getValue());
         }
         return super.getContext(name);
     }
 
     @EventHandler
     public void onPlayerAFKStatus(GodStatusChangeEvent event) {
-        god = new ElementTag(event.getValue());
         this.event = event;
         fire(event);
     }

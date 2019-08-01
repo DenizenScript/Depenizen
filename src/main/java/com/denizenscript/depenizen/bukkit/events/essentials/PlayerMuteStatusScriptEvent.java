@@ -6,8 +6,6 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import net.ess3.api.events.MuteStatusChangeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -36,27 +34,25 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
 
     public static PlayerMuteStatusScriptEvent instance;
     public MuteStatusChangeEvent event;
-    public ElementTag muted;
 
     public PlayerMuteStatusScriptEvent() {
         instance = this;
     }
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("player mute")
-                || lower.startsWith("player unmuted")
-                || lower.startsWith("player un-muted");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("player mute")
+                || path.eventLower.startsWith("player unmuted")
+                || path.eventLower.startsWith("player un-muted");
     }
 
     @Override
     public boolean matches(ScriptPath path) {
         String status = path.eventArgLowerAt(1);
-        if (status.equals("muted") && muted.asBoolean()) {
+        if (status.equals("muted") && event.getValue()) {
             return true;
         }
-        else if ((status.equals("unmuted") || status.equals("un-muted")) && !muted.asBoolean()) {
+        else if ((status.equals("unmuted") || status.equals("un-muted")) && !event.getValue()) {
             return true;
         }
         else {
@@ -77,14 +73,13 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
     @Override
     public ObjectTag getContext(String name) {
         if (name.equals("status")) {
-            return muted;
+            return new ElementTag(event.getValue());
         }
         return super.getContext(name);
     }
 
     @EventHandler
     public void onPlayerAFKStatus(MuteStatusChangeEvent event) {
-        muted = new ElementTag(event.getValue());
         this.event = event;
         fire(event);
     }

@@ -37,7 +37,7 @@ public class EssentialsBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new PlayerGodModeStatusScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerJailStatusScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerMuteStatusScriptEvent());
-        ScriptEvent.registerScriptEvent(new EssentialsPlayerBalanceChangeScriptEvent());
+        ScriptEvent.registerScriptEvent(new PlayerBalanceChangeScriptEvent());
         PropertyParser.registerProperty(EssentialsPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(EssentialsItemProperties.class, ItemTag.class);
     }

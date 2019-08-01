@@ -6,8 +6,6 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import net.ess3.api.events.AfkStatusChangeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,26 +33,24 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
 
     public static PlayerAFKStatusScriptEvent instance;
     public AfkStatusChangeEvent event;
-    public ElementTag afk;
 
     public PlayerAFKStatusScriptEvent() {
         instance = this;
     }
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("player goes afk")
-                || lower.startsWith("player returns from afk")
-                || lower.startsWith("player afk status changes");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("player goes afk")
+                || path.eventLower.startsWith("player returns from afk")
+                || path.eventLower.startsWith("player afk status changes");
     }
 
     @Override
     public boolean matches(ScriptPath path) {
-        if (path.eventArgLowerAt(1).equals("goes") && afk.asBoolean()) {
+        if (path.eventArgLowerAt(1).equals("goes") && event.getValue()) {
             return true;
         }
-        else if (path.eventArgLowerAt(1).equals("returns") && !afk.asBoolean()) {
+        else if (path.eventArgLowerAt(1).equals("returns") && !event.getValue()) {
             return true;
         }
         else {
@@ -75,14 +71,13 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public ObjectTag getContext(String name) {
         if (name.equals("status")) {
-            return afk;
+            return new ElementTag(event.getValue());
         }
         return super.getContext(name);
     }
 
     @EventHandler
     public void onPlayerAFKStatus(AfkStatusChangeEvent event) {
-        afk = new ElementTag(event.getValue());
         this.event = event;
         fire(event);
     }

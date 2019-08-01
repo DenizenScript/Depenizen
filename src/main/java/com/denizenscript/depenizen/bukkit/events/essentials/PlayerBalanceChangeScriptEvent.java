@@ -3,17 +3,14 @@ package com.denizenscript.depenizen.bukkit.events.essentials;
 import com.denizenscript.denizen.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import net.ess3.api.events.UserBalanceUpdateEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class EssentialsPlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements Listener {
+public class PlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]
     // @Events
@@ -33,26 +30,22 @@ public class EssentialsPlayerBalanceChangeScriptEvent extends BukkitScriptEvent 
     //
     // -->
 
-    public static EssentialsPlayerBalanceChangeScriptEvent instance;
+    public static PlayerBalanceChangeScriptEvent instance;
     public UserBalanceUpdateEvent event;
-    public ElementTag newBalance;
-    public ElementTag oldBalance;
-    public LocationTag location;
 
 
-    public EssentialsPlayerBalanceChangeScriptEvent() {
+    public PlayerBalanceChangeScriptEvent() {
         instance = this;
     }
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("essentials player balance changes");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("essentials player balance changes");
     }
 
     @Override
     public boolean matches(ScriptPath path) {
-        if (!runInCheck(path, location)) {
+        if (!runInCheck(path, event.getPlayer().getLocation())) {
             return false;
         }
         return true;
@@ -71,10 +64,10 @@ public class EssentialsPlayerBalanceChangeScriptEvent extends BukkitScriptEvent 
     @Override
     public ObjectTag getContext(String name) {
         if (name.equals("new_balance")) {
-            return newBalance;
+            return new ElementTag(event.getNewBalance());
         }
         if (name.equals("old_balance")) {
-            return oldBalance;
+            return new ElementTag(event.getOldBalance());
         }
         return super.getContext(name);
     }
@@ -82,9 +75,6 @@ public class EssentialsPlayerBalanceChangeScriptEvent extends BukkitScriptEvent 
     @EventHandler
     public void onPlayerBalanceChange(UserBalanceUpdateEvent event) {
         this.event = event;
-        location = new LocationTag(event.getPlayer().getLocation());
-        newBalance = new ElementTag(event.getNewBalance());
-        oldBalance = new ElementTag(event.getOldBalance());
         fire(event);
     }
 }
