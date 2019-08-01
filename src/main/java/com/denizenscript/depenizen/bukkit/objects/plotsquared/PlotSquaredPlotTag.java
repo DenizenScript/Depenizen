@@ -243,6 +243,21 @@ public class PlotSquaredPlotTag implements ObjectTag {
         }
 
         // <--[tag]
+        // @attribute <PlotSquaredPlotTag.denied>
+        // @returns ListTag(PlayerTag)
+        // @description
+        // Returns a list of all players denied from the plot.
+        // @Plugin Depenizen, PlotSquared
+        // -->
+        if (attribute.startsWith("denied")) {
+            ListTag players = new ListTag();
+            for (UUID uuid : plot.getDenied()) {
+                players.add(PlayerTag.valueOf(uuid.toString()).identify());
+            }
+            return players.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <PlotSquaredPlotTag.members>
         // @returns ListTag(PlayerTag)
         // @description
