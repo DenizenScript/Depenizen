@@ -53,7 +53,6 @@ public class ViaVersionPlayerProperties implements Property {
             return null;
         }
 
-        //Getting the ViaVersion API object
 
 
         // <--[tag]
