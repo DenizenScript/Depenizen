@@ -52,15 +52,13 @@ public class ViaVersionPlayerProperties implements Property {
         if (attribute == null) {
             return null;
         }
-
-
-
+        
         // <--[tag]
         // @attribute <PlayerTag.viaversion>
         // @returns ElementTag(Number)
         // @description
         // Returns the protocol version number of the player's client.
-        // See <@link url https://wiki.vg/Protocol_version_numbers as a reference list.>
+        // See <@link url https://wiki.vg/Protocol_version_numbers> as a reference list.
         // @Plugin Depenizen, ViaVersion
         // -->
         if (attribute.startsWith("viaversion")) {
