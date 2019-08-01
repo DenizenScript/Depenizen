@@ -54,7 +54,6 @@ public class ViaVersionPlayerProperties implements Property {
         }
 
         //Getting the ViaVersion API object
-        ViaAPI api = Via.getAPI();
 
 
         // <--[tag]
@@ -62,10 +61,11 @@ public class ViaVersionPlayerProperties implements Property {
         // @returns ElementTag(Number)
         // @description
         // Returns the protocol version number of the player's client.
-        // See https://wiki.vg/Protocol_version_numbers as a reference list.
-        // @Plugin Depenizen, ViaVersion.
+        // See <@link url https://wiki.vg/Protocol_version_numbers as a reference list.>
+        // @Plugin Depenizen, ViaVersion
         // -->
         if (attribute.startsWith("viaversion")) {
+            ViaAPI api = Via.getAPI();
             return new ElementTag(api.getPlayerVersion(player.getOfflinePlayer().getUniqueId()))
                     .getAttribute(attribute.fulfill(1));
         }
