@@ -4,6 +4,7 @@ import com.denizenscript.depenizen.bukkit.events.essentials.PlayerAFKStatusScrip
 import com.denizenscript.depenizen.bukkit.events.essentials.PlayerGodModeStatusScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.essentials.PlayerJailStatusScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.essentials.PlayerMuteStatusScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.essentials.EssentialsPlayerBalanceChangeScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsItemProperties;
 import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
@@ -40,6 +41,7 @@ public class EssentialsBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new PlayerGodModeStatusScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerJailStatusScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerMuteStatusScriptEvent());
+        ScriptEvent.registerScriptEvent(new EssentialsPlayerBalanceChangeScriptEvent());
         PropertyParser.registerProperty(EssentialsPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(EssentialsItemProperties.class, ItemTag.class);
     }
