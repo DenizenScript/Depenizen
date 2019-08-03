@@ -154,7 +154,7 @@ public class LibsDisguiseTag implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <LibsDisguiseTag.type>
+        // @attribute <LibsDisguiseTag.entity>
         // @returns EntityTag
         // @description
         // Returns the entity of the disguise.
