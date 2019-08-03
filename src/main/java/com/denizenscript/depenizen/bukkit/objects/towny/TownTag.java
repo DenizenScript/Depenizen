@@ -429,7 +429,7 @@ public class TownTag implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <TownTag.has_taxpercent>
+        // @attribute <TownTag.plottax>
         // @returns ElementTag(Decimal)
         // @description
         // Returns the amount of taxes collected from plots.
