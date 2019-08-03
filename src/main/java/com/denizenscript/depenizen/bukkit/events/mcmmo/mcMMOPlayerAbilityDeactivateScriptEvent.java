@@ -24,8 +24,6 @@ public class mcMMOPlayerAbilityDeactivateScriptEvent extends BukkitScriptEvent i
     //
     // @Regex ^on mcmmo player deactivates [^\s]+ for [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player deactivates mcmmo ability.
     //
     // @Context

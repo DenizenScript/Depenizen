@@ -22,8 +22,6 @@ public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent im
     //
     // @Regex ^on skillapi player upgrades [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player upgrades a skill in SkillAPI.
     //
     // @Context

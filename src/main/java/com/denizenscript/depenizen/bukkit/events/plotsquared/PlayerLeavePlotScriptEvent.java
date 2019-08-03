@@ -24,8 +24,6 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player leaves a plot.
     //
     // @Context

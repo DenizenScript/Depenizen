@@ -21,8 +21,6 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
     //
     // @Regex ^on residence player enters [^\s]+$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player enters a Residence.
     //
     // @Context

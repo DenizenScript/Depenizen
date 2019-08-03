@@ -23,8 +23,6 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     //
     // @Triggers when a player's mana value changes.
     //
-    // @Cancellable false
-    //
     // @Context
     // <context.old_mana> returns the old amount of mana.
     // <context.new_mana> returns the new amount of mana.

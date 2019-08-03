@@ -33,8 +33,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     //
     // @Regex ^on mythicmob [^\s]+ (dies|death|killed)( by [^\s]+)?( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
     //
-    // @Cancellable false
-    //
     // @Triggers when a MythicMob dies.
     //
     // @Context

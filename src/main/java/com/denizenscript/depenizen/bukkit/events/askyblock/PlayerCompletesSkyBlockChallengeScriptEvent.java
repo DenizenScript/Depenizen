@@ -22,8 +22,6 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
     //
     // @Regex ^on player completes skyblock challenge$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player completes a skyblock challenge.
     //
     // @Context

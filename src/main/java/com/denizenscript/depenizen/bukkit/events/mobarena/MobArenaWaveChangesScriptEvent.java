@@ -21,8 +21,6 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
     //
     // @Regex ^on mobarena [^\s]+ wave changes$
     //
-    // @Cancellable false
-    //
     // @Triggers when a wave changes in a MobArena.
     //
     // @Context

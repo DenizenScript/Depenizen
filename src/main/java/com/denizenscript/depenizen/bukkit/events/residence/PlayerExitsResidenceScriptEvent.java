@@ -21,8 +21,6 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
     //
     // @Regex ^on residence player exits [^\s]+$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player exits a Residence.
     //
     // @Context

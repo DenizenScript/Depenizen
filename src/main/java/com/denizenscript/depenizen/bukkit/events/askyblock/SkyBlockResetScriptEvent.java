@@ -20,8 +20,6 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
     //
     // @Regex ^on skyblock island reset$
     //
-    // @Cancellable false
-    //
     // @Triggers when a new skyblock is reset.
     //
     // @Context

@@ -21,8 +21,6 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Regex ^on skyblock island created$
     //
-    // @Cancellable false
-    //
     // @Triggers when a new skyblock is created.
     //
     // @Context

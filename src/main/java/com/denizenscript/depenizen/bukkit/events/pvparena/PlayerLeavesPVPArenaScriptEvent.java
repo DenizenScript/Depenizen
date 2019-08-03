@@ -20,8 +20,6 @@ public class PlayerLeavesPVPArenaScriptEvent extends BukkitScriptEvent implement
     //
     // @Regex ^on pvparena player leaves$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player leaves a pvparena.
     //
     // @Context

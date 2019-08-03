@@ -22,8 +22,6 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
     //
     // @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player enters a plot.
     //
     // @Context

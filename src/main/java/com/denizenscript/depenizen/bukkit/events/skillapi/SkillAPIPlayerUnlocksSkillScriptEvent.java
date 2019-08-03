@@ -22,8 +22,6 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
     //
     // @Regex ^on skillapi player unlocks [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player unlocks a skill in SkillAPI.
     //
     // @Context

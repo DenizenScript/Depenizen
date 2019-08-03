@@ -20,8 +20,6 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
     //
     // @Regex ^on player exits skyblock$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player leaves a skyblock island.
     //
     // @Context

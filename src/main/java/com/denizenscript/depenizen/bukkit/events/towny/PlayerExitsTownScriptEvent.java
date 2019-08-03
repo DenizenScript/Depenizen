@@ -22,8 +22,6 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Regex ^on towny player exits [^\s]+$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player exits a Towny Town.
     //
     // @Context

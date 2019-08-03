@@ -21,8 +21,6 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Regex ^on areashop [^\s]+ expires$
     //
-    // @Cancellable false
-    //
     // @Triggers when an AreaShop's rent expires.
     //
     // @Context

@@ -22,8 +22,6 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
     //
     // @Regex ^on skillapi player downgrades [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player downgrades a skill in SkillAPI.
     //
     // @Context

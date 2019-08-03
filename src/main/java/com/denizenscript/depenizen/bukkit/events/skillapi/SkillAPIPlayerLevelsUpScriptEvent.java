@@ -22,8 +22,6 @@ public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent impleme
     //
     // @Regex ^on skillapi player levels up( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player levels up in SkillAPI.
     //
     // @Context

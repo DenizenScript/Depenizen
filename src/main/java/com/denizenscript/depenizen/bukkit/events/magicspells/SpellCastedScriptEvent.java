@@ -22,8 +22,6 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     //
     // @Triggers when the spell is done and everything has been handled.
     //
-    // @Cancellable false
-    //
     // @Context
     // <context.spell_name> returns the name of the spell.
     // <context.power> returns an Element(Decimal) of the power of the spell.

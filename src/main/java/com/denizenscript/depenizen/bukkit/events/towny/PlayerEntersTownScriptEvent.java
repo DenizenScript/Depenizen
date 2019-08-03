@@ -22,8 +22,6 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
     //
     // @Regex ^on towny player enters [^\s]+$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player enters a Towny Town.
     //
     // @Context

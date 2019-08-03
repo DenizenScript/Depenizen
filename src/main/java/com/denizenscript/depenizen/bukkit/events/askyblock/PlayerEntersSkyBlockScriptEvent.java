@@ -20,8 +20,6 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
     //
     // @Regex ^on player enters skyblock$
     //
-    // @Cancellable false
-    //
     // @Triggers when a player goes to a skyblock island.
     //
     // @Context

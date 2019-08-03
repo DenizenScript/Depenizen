@@ -21,8 +21,6 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     //
     // @Regex ^on mobarena [^\s]+ ends$
     //
-    // @Cancellable false
-    //
     // @Triggers when a mobarena ends.
     //
     // @Context
