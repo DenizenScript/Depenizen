@@ -77,7 +77,7 @@ public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listen
 
     @EventHandler
     public void onVotifierEvent(VotifierEvent event) {
-        Vote vote = event.getVote();
+        vote = event.getVote();
         fire(event);
     }
 }
