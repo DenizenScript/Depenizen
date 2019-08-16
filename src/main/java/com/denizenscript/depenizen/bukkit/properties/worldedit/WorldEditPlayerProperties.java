@@ -72,7 +72,7 @@ public class WorldEditPlayerProperties implements Property {
     Player player = null;
 
     public static Material deLegacy(Material mat) {
-        if (NMSHandler.getVersion().isAtLeast(NMSVersion.v1_13_R2) && mat.isLegacy()) {
+        if (NMSHandler.getVersion().isAtLeast(NMSVersion.v1_13) && mat.isLegacy()) {
             return Bukkit.getUnsafe().fromLegacy(mat);
         }
         return mat;
