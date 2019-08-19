@@ -159,15 +159,24 @@ public class FactionTag implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <FactionTag.home>
+        // @attribute <FactionTag.warp[<name>]>
         // @returns LocationTag
         // @description
-        // Returns the location of the faction's home, if any.
+        // Returns the location of the faction's warp by name, if any.
+        // Note that this was previously named "home" instead of "warp".
         // @Plugin Depenizen, Factions
         // -->
-        else if (attribute.startsWith("home")) {
-            if (faction.hasHome()) {
-                return new LocationTag(faction.getHome().asBukkitLocation())
+        else if (attribute.startsWith("warp") && attribute.hasContext(1)) {
+            Warp warp = faction.getWarp(attribute.getContext(1));
+            if (warp != null) {
+                return new LocationTag(warp.getLocation().asBukkitLocation())
+                        .getAttribute(attribute.fulfill(1));
+            }
+        }
+        else if (attribute.startsWith("home")) { // Legacy sorta-compat
+            Warp warp = faction.getWarp("home");
+            if (warp != null) {
+                return new LocationTag(warp.getLocation().asBukkitLocation())
                         .getAttribute(attribute.fulfill(1));
             }
         }

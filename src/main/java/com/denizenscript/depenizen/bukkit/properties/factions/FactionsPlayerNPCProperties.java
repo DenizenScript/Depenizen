@@ -101,6 +101,7 @@ public class FactionsPlayerNPCProperties implements Property {
                 // @returns ElementTag
                 // @description
                 // Returns the player's role in their faction.
+                // Note: In modern Factions these are called ranks instead of roles.
                 // @Plugin Depenizen, Factions
                 // -->
                 // <--[tag]
@@ -108,11 +109,12 @@ public class FactionsPlayerNPCProperties implements Property {
                 // @returns ElementTag
                 // @description
                 // Returns the NPC's role in their faction.
+                // Note: In modern Factions these are called ranks instead of roles.
                 // @Plugin Depenizen, Factions
                 // -->
                 if (attribute.startsWith("role")) {
-                    if (player.getRole() != null) {
-                        return new ElementTag(player.getRole().toString()).getAttribute(attribute.fulfill(1));
+                    if (player.getRank() != null) {
+                        return new ElementTag(player.getRank().toString()).getAttribute(attribute.fulfill(1));
                     }
                 }
 

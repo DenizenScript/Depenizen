@@ -118,14 +118,14 @@
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>MassiveCore</artifactId>
-            <version>2.9.0</version>
+            <version>3.2.3</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/MassiveCore.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>Factions</artifactId>
-            <version>2.9.0</version>
+            <version>3.2.3</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Factions.jar</systemPath>
         </dependency>
