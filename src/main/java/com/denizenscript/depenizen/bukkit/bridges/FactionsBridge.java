@@ -1,8 +1,9 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.depenizen.bukkit.properties.factions.FactionsPlayerNPCProperties;
+import com.denizenscript.depenizen.bukkit.properties.factions.FactionsNPCProperties;
 import com.denizenscript.depenizen.bukkit.objects.factions.FactionTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
+import com.denizenscript.depenizen.bukkit.properties.factions.FactionsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.utilities.BridgeLoadException;
 import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.FactionColl;
@@ -26,8 +27,8 @@ public class FactionsBridge extends Bridge {
             throw new BridgeLoadException("Only official modern Factions versions are supported.");
         }
         ObjectFetcher.registerWithObjectFetcher(FactionTag.class);
-        PropertyParser.registerProperty(FactionsPlayerNPCProperties.class, NPCTag.class);
-        PropertyParser.registerProperty(FactionsPlayerNPCProperties.class, PlayerTag.class);
+        PropertyParser.registerProperty(FactionsNPCProperties.class, NPCTag.class);
+        PropertyParser.registerProperty(FactionsPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(FactionsLocationProperties.class, LocationTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
