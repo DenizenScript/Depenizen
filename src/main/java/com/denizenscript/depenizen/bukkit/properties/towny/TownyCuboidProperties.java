@@ -69,7 +69,7 @@ public class TownyCuboidProperties implements Property {
         // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("has_town")) {
-            for (Location location : cuboid.getBlockLocations()) {
+            for (Location location : cuboid.getBlockLocationsUnfiltered()) {
                 if (TownyUniverse.getTownName(location) != null) {
                     return new ElementTag(true).getAttribute(attribute.fulfill(1));
                 }
@@ -88,7 +88,7 @@ public class TownyCuboidProperties implements Property {
             ListTag list = new ListTag();
             List<String> towns = new ArrayList<>();
             try {
-                for (Location location : cuboid.getBlockLocations()) {
+                for (Location location : cuboid.getBlockLocationsUnfiltered()) {
                     String townName = TownyUniverse.getTownName(location);
                     if (townName != null && !towns.contains(townName)) {
                         list.add(new TownTag(TownyUniverse.getTownBlock(location).getTown()).identify());
