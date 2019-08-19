@@ -123,7 +123,7 @@ public class BungeeBridge {
     public boolean reconnectPending = false;
 
     public void reconnect() {
-        if (reconnectPending) {
+        if (reconnectPending || shuttingDown) {
             return;
         }
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
@@ -133,6 +133,21 @@ public class BungeeBridge {
                 connect();
             }
         }, 20 * 5);
+    }
+
+    public boolean shuttingDown = false;
+
+    public void onShutdown() {
+        shuttingDown = true;
+        if (connected) {
+            try {
+                handler.channel.close().await();
+                connected = false;
+            }
+            catch (Throwable ex) {
+                Debug.echoError(ex);
+            }
+        }
     }
 
     private boolean showedLastError = false;

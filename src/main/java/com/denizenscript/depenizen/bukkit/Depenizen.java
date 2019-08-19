@@ -47,6 +47,13 @@ public class Depenizen extends JavaPlugin {
         Debug.log("Depenizen loaded! " + loadedBridges.size() + " plugin bridge(s) loaded (of " + allBridges.size() + " available)");
     }
 
+    @Override
+    public void onDisable() {
+        if (BungeeBridge.instance.connected) {
+            BungeeBridge.instance.onShutdown();
+        }
+    }
+
     public void checkLoadBungeeBridge() {
         String bungeeServer = getConfig().getString("Bungee server address", "none");
         if (CoreUtilities.toLowerCase(bungeeServer).equals("none")) {
