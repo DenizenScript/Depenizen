@@ -21,7 +21,7 @@
     <repositories>
         <repository>
             <id>everything</id>
-            <url>http://repo.citizensnpcs.co/</url>
+            <url>https://repo.citizensnpcs.co/</url>
         </repository>
         <repository>
             <id>placeholderapi</id>
