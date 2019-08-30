@@ -49,7 +49,7 @@ public class Depenizen extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (BungeeBridge.instance.connected) {
+        if (BungeeBridge.instance != null && BungeeBridge.instance.connected) {
             BungeeBridge.instance.onShutdown();
         }
     }
