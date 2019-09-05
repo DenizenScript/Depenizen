@@ -137,7 +137,7 @@ public class WorldEditPlayerProperties implements Property {
         if (attribute.startsWith("we_selection") || attribute.startsWith("selected_region")) {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             RegionSelector selection = worldEdit.getSession(player).getRegionSelector(BukkitAdapter.adapt(player.getWorld()));
-            if (selection != null) {
+            if (selection != null && selection.isDefined()) {
                 return new CuboidTag(BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
                         BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMaximumPoint()))
                         .getAttribute(attribute.fulfill(1));
