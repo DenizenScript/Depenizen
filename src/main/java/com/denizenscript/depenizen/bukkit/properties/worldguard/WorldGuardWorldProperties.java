@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.worldguard;
 
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
@@ -62,7 +63,7 @@ public class WorldGuardWorldProperties implements Property {
 
         // <--[tag]
         // @attribute <WorldTag.list_regions>
-        // @returns ListTag(Region)
+        // @returns ListTag(WorldGuardRegionTag)
         // @description
         // Returns a list of WorldGuard regions in this world.
         // @Plugin Depenizen, WorldGuard
@@ -70,9 +71,20 @@ public class WorldGuardWorldProperties implements Property {
         if (attribute.startsWith("list_regions")) {
             ListTag regions = new ListTag();
             for (ProtectedRegion r : manager.getRegions().values()) {
-                regions.add(new WorldGuardRegionTag(r, world).identify());
+                regions.addObject(new WorldGuardRegionTag(r, world));
             }
             return regions.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <WorldTag.has_region[<name>]>
+        // @returns BooleanTag
+        // @description
+        // Returns whether a region exists in this world for the given name.
+        // @Plugin Depenizen, WorldGuard
+        // -->
+        if (attribute.startsWith("has_region") && attribute.hasContext(1)) {
+            return new ElementTag(manager.hasRegion(attribute.getContext(1))).getAttribute(attribute.fulfill(1));
         }
 
         return null;
