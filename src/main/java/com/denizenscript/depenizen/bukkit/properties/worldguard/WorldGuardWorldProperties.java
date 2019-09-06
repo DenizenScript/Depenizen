@@ -44,7 +44,7 @@ public class WorldGuardWorldProperties implements Property {
     /////////////
 
     public static final String[] handledTags = new String[] {
-            "list_regions"
+            "list_regions", "has_region"
     };
 
     public static final String[] handledMechs = new String[] {
