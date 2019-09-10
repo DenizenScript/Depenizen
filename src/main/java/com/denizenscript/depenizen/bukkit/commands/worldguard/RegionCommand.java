@@ -32,7 +32,8 @@ public class RegionCommand extends AbstractCommand {
     // or removes a protected region from a region manager based on the specified
     // world. Currently, this command only supports cuboid-shaped regions.
     //
-    // @Tags None
+    // @Tags
+    // None
     //
     // @Usage
     // Use to add a region based on a cuboid.

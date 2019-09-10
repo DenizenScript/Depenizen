@@ -33,7 +33,7 @@ public class McMMOCommand extends AbstractCommand {
     // skill, or set the leader of a party.
     //
     // @Tags
-    // <player.mcmmo. * >
+    // <PlayerTag.mcmmo.party>
     //
     // @Usage
     // Use to add 5 levels to a player's skill.

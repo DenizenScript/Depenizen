@@ -29,7 +29,7 @@ public class MobArenaCommand extends AbstractCommand {
     // NOTE: You can use all 3: ("add", "remove", and "spectate") as once, however avoid conflicts.
     //
     // @Tags
-    // <player.mobarena.*>
+    // <player.mobarena.in_arena>
     //
     // @Usage
     // Use to force the player to join an arena.
