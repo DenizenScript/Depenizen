@@ -27,47 +27,49 @@ public class DisguiseCommand extends AbstractCommand {
     // The entity mimics the same actions and movement as the entity in a disguise.
     //
     // The required argument depends on the first argument:
-    // If the disguise is a mob, a type is required.
-    // If the disguise is a misc, a type is required.
-    // If the disguise is a player, a name is required instead of a type.
+    // For 'mob':
+    //     Specify an entity type.
+    //     Optionally, specify if the mob is a baby or not (defaults to false).
+    // For 'player':
+    //     Specify the player name.
+    // For 'misc':
+    //     Specify a misc disguise type.
+    //     Optionally, specify id and/or data. (Defaults to id:1 data:0).
     //
-    // Specify if mob is a baby or not, otherwise its default adult.
-    // Specify id and/or data for misc disguises. Default is 1 and 0 respectively.
     // Removing a disguise shows the true entity again for all players.
-    // Only one disguise can be allowed, if another one is set, the preious disguise is removed.
-    // Specify self argument, if it is set to true, the disguise will be hidden from the player who is disguised.
-    // Otherwise it is default set to false, showing the disguised character the player is disguising as.
+    // Only one disguise can be set per target, if another one is set, the previous disguise is removed.
+    // Optionally specify 'self:true' to hide the disguise from the target player, so they still see their normal player (defaults to false).
     //
     // @Tags
     // <EntityTag.is_disguised>
     // <EntityTag.disguise>
     //
     // @Usage
-    // Use to disguise the attached player in the queue as a Player.
+    // Use to disguise the linked player as a different player named Bob.
     // - disguise player name:Bob
     //
     // @Usage
-    // Use to disguise the attached player in the queue as a Zombie.
+    // Use to disguise the linked player as a baby Zombie, which can only be seen by other players.
     // - disguise mob type:ZOMBIE baby:true self:true
     //
     // @Usage
-    // Use to disguise the attached player in the queue as a Boat.
+    // Use to disguise the linked player as a Boat.
     // - disguise misc type:Boat
     //
     // @Usage
-    // Use to disguise the attached player in the queue as a Sponge Block.
+    // Use to disguise the linked player as a Sponge Block.
     // - disguise misc type:Falling_Block id:19 data:0
     //
     // @Usage
-    // Use to remove the disguise from the attached player in the queue.
+    // Use to remove the disguise from the linked player.
     // - disguise remove
     //
     // @Usage
-    // Use to diguise a entity.
+    // Use to disguise an entity as a player named Bob.
     // - disguise player target:<player.target> name:Bob
     //
     // @Usage
-    // Use to remove a diguise from a entity.
+    // Use to remove a disguise from an entity.
     // - disguise remove target:<player.target>
     //
     // -->

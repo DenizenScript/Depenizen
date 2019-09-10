@@ -12,6 +12,6 @@ public class EffectLibBridge extends Bridge {
     public void init() {
         instance = this;
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(EffectLibCommand.class,
-                "EFFECTLIB", "effectlib (type:<effect name>) (duration:<duration>) (target:<entity>)", 1);
+                "EFFECTLIB", "effectlib (type:<effect name>) (duration:<duration>) (target:<entity>/location:<location>)", 1);
     }
 }

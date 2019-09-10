@@ -20,7 +20,7 @@ public class EffectLibCommand extends AbstractCommand {
 
     // <--[command]
     // @Name effectlib
-    // @Syntax effectlib (type:<effect name>) (duration:<duration>) (target:<entity>)
+    // @Syntax effectlib (type:<effect name>) (duration:<duration>) (target:<entity>/location:<location>)
     // @Group Depenizen
     // @Plugin Depenizen, EffectLib
     // @Required 1
