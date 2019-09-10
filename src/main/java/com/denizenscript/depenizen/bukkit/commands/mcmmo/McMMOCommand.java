@@ -26,27 +26,27 @@ public class McMMOCommand extends AbstractCommand {
     // @Plugin Depenizen, mcMMO
     // @Required 1
     // @Short Edits mcMMO information.
-
+    //
     // @Description
     // This command allows you to add or remove skill levels and experience for players, add or remove
     // players to/from parties, set the level, xp, xprate, vampirism state, hardcore state of a player's
     // skill, or set the leader of a party.
-
+    //
     // @Tags
     // <player.mcmmo. * >
-
+    //
     // @Usage
     // Use to add 5 levels to a player's skill.
     // - mcmmo add levels skill:acrobatics qty:5
-
+    //
     // @Usage
     // Use to remove a player from a party.
     // - mcmmo remove player:SerpentX party:SerpentPeople
-
+    //
     // @Usage
     // Use to set vampirism mode for a player's skill.
     // - mcmmo set vampirism skill:woodcutting state:true
-
+    //
     // -->
 
     private enum Action {ADD, REMOVE, SET}

@@ -26,22 +26,22 @@ public class RegionCommand extends AbstractCommand {
     // @Plugin Depenizen, WorldGuard
     // @Required 2
     // @Short Adds or removes a protected region.
-
+    //
     // @Description
     // Adds a protected region to a region manager based on the specified cuboid,
     // or removes a protected region from a region manager based on the specified
     // world. Currently, this command only supports cuboid-shaped regions.
-
+    //
     // @Tags None
-
+    //
     // @Usage
     // Use to add a region based on a cuboid.
     // - region add cu@l@123,0,321,world|l@321,256,123,world id:MyRegion
-
+    //
     // @Usage
     // Use to remove a region from a world.
     // - region remove WorldTag id:MyRegion
-
+    //
     // -->
 
     private enum Action {ADD, REMOVE}

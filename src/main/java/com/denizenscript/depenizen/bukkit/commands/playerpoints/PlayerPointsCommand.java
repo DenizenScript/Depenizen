@@ -12,6 +12,7 @@ import org.black_ixx.playerpoints.PlayerPoints;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class PlayerPointsCommand extends AbstractCommand {
+
     // <--[command]
     // @Name playerpoints
     // @Syntax playerpoints [set/give/take] (amount:<amount>) (target:<player>)
@@ -19,28 +20,28 @@ public class PlayerPointsCommand extends AbstractCommand {
     // @Plugin Depenizen, PlayerPoints
     // @Required 2
     // @Short Adjusts the amount of points the player has.
-
+    //
     // @Description
     // Take, give or set the amount of points a player has.
     // This is useful for plugins supporting this kind of economy
     // which uses the points instead of money as an alternative system.
     // This works for offline players.
-
+    //
     // @Tags
     // <PlayerTag.playerpoints_points>
-
+    //
     // @Usage
     // Use to give 5 points to the player
     // - playerpoints give 5
-
+    //
     // @Usage
     // Use take 2 points from a target player
     // - playerpoints take 2 target:p@Mwthorn
-
+    //
     // @Usage
     // Use to set 10 points to the player
     // - playerpoints set 10
-
+    //
     // -->
 
     private enum Action {SET, GIVE, TAKE}

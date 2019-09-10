@@ -12,6 +12,7 @@ import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class DisguiseCommand extends AbstractCommand {
+
     // <--[command]
     // @Name disguise
     // @Syntax disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<number>) (data:<number>) (self:true/false)
@@ -19,7 +20,7 @@ public class DisguiseCommand extends AbstractCommand {
     // @Plugin Depenizen, LibsDisguises
     // @Required 2
     // @Short Disguises an entity as a different entity.
-
+    //
     // @Description
     // Disguises an entity using Lib's Disguises.
     // This hides the true entity and replaces it with a fake entity as a disguise.
@@ -36,39 +37,39 @@ public class DisguiseCommand extends AbstractCommand {
     // Only one disguise can be allowed, if another one is set, the preious disguise is removed.
     // Specify self arguement, if it is set to true, the disguise will be hidden from the player who is disguised.
     // Otherwise it is default set to false, showing the disguised character the player is disguising as.
-
+    //
     // @Tags
     // <EntityTag.is_disguised>
     // <EntityTag.disguise>
-
+    //
     // @Usage
     // Use to disguise the attached player in the queue as a Player.
     // - disguise player name:Bob
-
+    //
     // @Usage
     // Use to disguise the attached player in the queue as a Zombie.
     // - disguise mob type:ZOMBIE baby:true self:true
-
+    //
     // @Usage
     // Use to disguise the attached player in the queue as a Boat.
     // - disguise misc type:Boat
-
+    //
     // @Usage
     // Use to disguise the attached player in the queue as a Sponge Block.
     // - disguise misc type:Falling_Block id:19 data:0
-
+    //
     // @Usage
     // Use to remove the disguise from the attached player in the queue.
     // - disguise remove
-
+    //
     // @Usage
     // Use to diguise a entity.
     // - disguise player target:<player.target> name:Bob
-
+    //
     // @Usage
     // Use to remove a diguise from a entity.
     // - disguise remove target:<player.target>
-
+    //
     // -->
 
     private enum Action {REMOVE, MOB, PLAYER, MISC}

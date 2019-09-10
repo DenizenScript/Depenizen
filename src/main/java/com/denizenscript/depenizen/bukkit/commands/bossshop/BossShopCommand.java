@@ -13,6 +13,7 @@ import org.black_ixx.bossshop.core.BSShop;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class BossShopCommand extends AbstractCommand {
+
     // <--[command]
     // @Name bossshop
     // @Syntax bossshop [<shop name>] (target:<player>)
@@ -20,7 +21,7 @@ public class BossShopCommand extends AbstractCommand {
     // @Plugin Depenizen, BossShop
     // @Required 1
     // @Short Opens a BossShop inventory for a player.
-
+    //
     // @Description
     // Use to open up a BossShop inventory for either
     // the player attached to the queue or specified target.
@@ -29,15 +30,15 @@ public class BossShopCommand extends AbstractCommand {
     //
     // @Tags
     // <InventoryTag.is_bossshop>
-
+    //
     // @Usage
     // Use to open a bossshop inventory for the player in the queue as a Player.
     // - bossshop "MyShop"
-
+    //
     // @Usage
     // Use to open a bossshop inventory for the target.
     // - bossshop "MyShop" target:<player>
-
+    //
     // -->
 
     @Override

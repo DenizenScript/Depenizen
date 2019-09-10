@@ -21,26 +21,26 @@ public class JobsCommand extends AbstractCommand {
     // @Plugin Depenizen, Jobs
     // @Required 2
     // @Short Modifies the specified job of a player.
-
+    //
     // @Description
     // This allows you to promote or demote a player's job level. This also allows you
     // to force a player to join or quit a job.
-
+    //
     // @Tags
     // <PlayerTag.jobs[<job>]>
-
+    //
     // @Usage
     // Use to promote a player.
     // - jobs promote Woodcutter
-
+    //
     // @Usage
     // Use to demote a player multiple times.
     // - jobs demote Builder 3
-
+    //
     // @Usage
     // Use to make a player join a job.
     // - jobs join Worker player:Jeebiss
-
+    //
     // -->
 
     private enum Action {PROMOTE, DEMOTE, JOIN, QUIT}

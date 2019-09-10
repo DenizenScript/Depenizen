@@ -22,31 +22,31 @@ public class MobArenaCommand extends AbstractCommand {
     // @Plugin Depenizen, MobArena
     // @Required 1
     // @Short Make a player join, remove a player from or make a player spectate a MobArena.
-
+    //
     // @Description
     // This command allows you to make a player join an arena, make them leave an arena or make them spectate an arena.
     // Follows normal MobArena functionality, so acts as if the player has typed '/mobarena join'.
     // NOTE: You can use all 3: ("add", "remove", and "spectate") as once, however avoid conflicts.
-
+    //
     // @Tags
     // <player.mobarena.*>
-
+    //
     // @Usage
     // Use to force the player to join an arena.
     // - mobarena mobarena@Default add:<player>
-
+    //
     // @Usage
     // Use to force the player to leave an arena.
     // - mobarena mobarena@Default remove:<player>
-
+    //
     // @Usage
     // Use to force a player to join an arena and another to leave..
     // - mobarena mobarena@Default add:<player> remove:p@mcmonkey4eva
-
+    //
     // @Usage
     // Use to cause all players who aren't in an arena to spectate.
     // - mobarena mobarena@Default spectate:<server.list_online_players.filter[mobarena.in_arena.not]>
-
+    //
     // -->
 
     @Override

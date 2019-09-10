@@ -17,6 +17,7 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.Location;
 
 public class EffectLibCommand extends AbstractCommand {
+
     // <--[command]
     // @Name effectlib
     // @Syntax effectlib (type:<effect name>) (duration:<duration>) (target:<entity>)
@@ -24,27 +25,27 @@ public class EffectLibCommand extends AbstractCommand {
     // @Plugin Depenizen, EffectLib
     // @Required 1
     // @Short Show custom effects using EffectLib
-
+    //
     // @Description
     // Use to show custom effects in a easier way using the config file in EffectLib.
     // The effect names comes from the config file.
     // Specify a location instead of a target to show the effect at a location instead.
-
+    //
     // @Tags
     // None
-
+    //
     // @Usage
     // Use to show a effect on the attached player in queue.
     // - effeclib bleed duration:10s
-
+    //
     // @Usage
     // Use to show a effect on a target entity.
     // - effeclib atom target:<player.target> duration:10s
-
+    //
     // @Usage
     // Use to show effect at a position of the player.
     // - effeclib type:atom duration:10s location:<player.location>
-
+    //
     // -->
 
     private enum Action {

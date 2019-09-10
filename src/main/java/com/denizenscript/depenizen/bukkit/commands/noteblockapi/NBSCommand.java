@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class NBSCommand extends AbstractCommand {
+
     // <--[command]
     // @Name nbs
     // @Syntax nbs [play/stop] (file:<file path>) [targets:<entity>|...]
@@ -29,32 +30,32 @@ public class NBSCommand extends AbstractCommand {
     // @Plugin Depenizen, NoteBlockAPI
     // @Required 2
     // @Short Plays or stops a noteblock song.
-
+    //
     // @Description
     // Plays a .nbs file for the targets, being players specified.
     // If no targets are specified, the target will be the player in the queue.
     // Note block song files are created using NoteBlockStudio or other programs.
     // The file path starts in the denizen folder: /plugins/Denizen/
-
+    //
     // @Tags
     // <PlayerTag.nbs_is_playing>
-
+    //
     // @Usage
     // Use to play a song to the linked player in a queue.
     // - nbs play file:MySong
-
+    //
     // @Usage
     // Use to play a song to everyone online.
     // - nbs play file:MySong targets:<player.list_online_players>
-
+    //
     // @Usage
     // Use to stop the current song playing for the linked player in a queue.
     // - nbs stop
-
+    //
     // @Usage
     // Use to stop the current song playing for all online players.
     // - nbs stop targets:<player.list_online_players>
-
+    //
     // -->
 
     private enum Action {PLAY, STOP}
