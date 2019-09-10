@@ -16,15 +16,14 @@ public class BossShopCommand extends AbstractCommand {
 
     // <--[command]
     // @Name bossshop
-    // @Syntax bossshop [<shop name>] (target:<player>)
+    // @Syntax bossshop [<shop name>]
     // @Group Depenizen
     // @Plugin Depenizen, BossShop
     // @Required 1
     // @Short Opens a BossShop inventory for a player.
     //
     // @Description
-    // Use to open up a BossShop inventory for either
-    // the player attached to the queue or specified target.
+    // Use to open up a BossShop inventory for the linked player.
     // Useful for rewarding players using the BossShop plugin.
     // Shops are made with the BossShop system.
     //
@@ -32,12 +31,8 @@ public class BossShopCommand extends AbstractCommand {
     // <InventoryTag.is_bossshop>
     //
     // @Usage
-    // Use to open a bossshop inventory for the player in the queue as a Player.
+    // Use to open a bossshop inventory for the linked player.
     // - bossshop "MyShop"
-    //
-    // @Usage
-    // Use to open a bossshop inventory for the target.
-    // - bossshop "MyShop" target:<player>
     //
     // -->
 
@@ -49,6 +44,7 @@ public class BossShopCommand extends AbstractCommand {
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
                 scriptEntry.addObject("target", arg.asType(PlayerTag.class));
+                Debug.echoError("Don't use 'target:' for 'bossshop' command. Just use 'player:'.");
             }
 
             else if (!scriptEntry.hasObject("shop")) {

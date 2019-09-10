@@ -32,7 +32,7 @@ public class McMMOBridge extends Bridge {
         PropertyParser.registerProperty(McMMOPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(McMMOEntityProperties.class, EntityTag.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(McMMOCommand.class,
-                "MCMMO", "mcmmo [add/remove/set] [levels/xp/xprate/vampirism/hardcore/leader] (skill:<skill>) (state:{toggle}/true/false) (qty:<#>) (party:<party>)", 1);
+                "MCMMO", "mcmmo [add/remove/set] [levels/xp/xprate/vampirism/hardcore/leader] (skill:<skill>) (state:{toggle}/true/false) (quantity:<#>) (party:<party>)", 1);
         ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelChangeScriptEvent());
         ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelUpScriptEvent());
         ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelDownScriptEvent());

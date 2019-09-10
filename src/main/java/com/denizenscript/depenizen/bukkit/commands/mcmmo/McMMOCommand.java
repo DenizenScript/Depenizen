@@ -21,7 +21,7 @@ public class McMMOCommand extends AbstractCommand {
 
     // <--[command]
     // @Name mcMMO
-    // @Syntax mcmmo [add/remove/set] [levels/xp/xprate/vampirism/hardcore/leader] (skill:<skill>) (state:{toggle}/true/false) (qty:<#>) (party:<party>)
+    // @Syntax mcmmo [add/remove/set] [levels/xp/xprate/vampirism/hardcore/leader] (skill:<skill>) (state:{toggle}/true/false) (quantity:<#>) (party:<party>)
     // @Group Depenizen
     // @Plugin Depenizen, mcMMO
     // @Required 1
@@ -86,10 +86,10 @@ public class McMMOCommand extends AbstractCommand {
                 scriptEntry.addObject("skill", arg.asElement());
             }
 
-            else if (!scriptEntry.hasObject("qty")
+            else if (!scriptEntry.hasObject("quantity")
                     && arg.matchesPrefix("q", "qty", "quantity")
                     && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Double)) {
-                scriptEntry.addObject("qty", arg.asElement());
+                scriptEntry.addObject("quantity", arg.asElement());
             }
 
             else if (!scriptEntry.hasObject("type")
@@ -124,37 +124,37 @@ public class McMMOCommand extends AbstractCommand {
         ElementTag action = scriptEntry.getElement("action");
         ElementTag state = scriptEntry.getElement("state");
         ElementTag type = scriptEntry.getElement("type");
-        ElementTag qty = scriptEntry.getElement("qty");
+        ElementTag quantity = scriptEntry.getElement("quantity");
         ElementTag party = scriptEntry.getElement("party");
         ElementTag skill = scriptEntry.getElement("skill");
 
         PlayerTag player = scriptEntryData.getPlayer();
 
         // Report to dB
-        Debug.report(scriptEntry, getName(), action.debug() + type.debug() + (state != null ? state.debug() : "") + qty.debug()
+        Debug.report(scriptEntry, getName(), action.debug() + type.debug() + (state != null ? state.debug() : "") + quantity.debug()
                 + (party != null ? party.debug() : "") + (skill != null ? skill.debug() : ""));
 
         switch (Action.valueOf(action.asString().toUpperCase())) {
 
             case ADD: {
 
-                if (qty.asDouble() >= 0 && skill != null && player != null) {
+                if (quantity.asDouble() >= 0 && skill != null && player != null) {
                     switch (Type.valueOf(type.asString().toUpperCase())) {
                         case LEVELS: {
                             if (player.isOnline()) {
-                                ExperienceAPI.addLevel(player.getPlayerEntity(), skill.asString(), qty.asInt());
+                                ExperienceAPI.addLevel(player.getPlayerEntity(), skill.asString(), quantity.asInt());
                             }
                             else {
-                                ExperienceAPI.addLevelOffline(player.getName(), skill.asString(), qty.asInt());
+                                ExperienceAPI.addLevelOffline(player.getName(), skill.asString(), quantity.asInt());
                             }
                             break;
                         }
                         case XP: {
                             if (player.isOnline()) {
-                                ExperienceAPI.addRawXP(player.getPlayerEntity(), skill.asString(), qty.asFloat());
+                                ExperienceAPI.addRawXP(player.getPlayerEntity(), skill.asString(), quantity.asFloat());
                             }
                             else {
-                                ExperienceAPI.addRawXPOffline(player.getName(), skill.asString(), qty.asFloat());
+                                ExperienceAPI.addRawXPOffline(player.getName(), skill.asString(), quantity.asFloat());
                             }
                         }
                     }
@@ -167,23 +167,23 @@ public class McMMOCommand extends AbstractCommand {
             }
             case REMOVE: {
 
-                if (qty.asDouble() >= 0 && skill != null && player != null) {
+                if (quantity.asDouble() >= 0 && skill != null && player != null) {
                     switch (Type.valueOf(type.asString().toUpperCase())) {
                         case LEVELS: {
                             if (player.isOnline()) {
-                                ExperienceAPI.setLevel(player.getPlayerEntity(), skill.asString(), ExperienceAPI.getLevel(player.getPlayerEntity(), skill.asString()) - qty.asInt());
+                                ExperienceAPI.setLevel(player.getPlayerEntity(), skill.asString(), ExperienceAPI.getLevel(player.getPlayerEntity(), skill.asString()) - quantity.asInt());
                             }
                             else {
-                                ExperienceAPI.setLevelOffline(player.getName(), skill.asString(), ExperienceAPI.getLevelOffline(player.getName(), skill.asString()) - qty.asInt());
+                                ExperienceAPI.setLevelOffline(player.getName(), skill.asString(), ExperienceAPI.getLevelOffline(player.getName(), skill.asString()) - quantity.asInt());
                             }
                             break;
                         }
                         case XP: {
                             if (player.isOnline()) {
-                                ExperienceAPI.removeXP(player.getPlayerEntity(), skill.asString(), qty.asInt());
+                                ExperienceAPI.removeXP(player.getPlayerEntity(), skill.asString(), quantity.asInt());
                             }
                             else {
-                                ExperienceAPI.removeXPOffline(player.getName(), skill.asString(), qty.asInt());
+                                ExperienceAPI.removeXPOffline(player.getName(), skill.asString(), quantity.asInt());
                             }
                             break;
                         }
@@ -206,23 +206,23 @@ public class McMMOCommand extends AbstractCommand {
             }
             case SET: {
 
-                if (qty.asDouble() >= 0 && skill != null && player != null) {
+                if (quantity.asDouble() >= 0 && skill != null && player != null) {
                     switch (Type.valueOf(type.asString().toUpperCase())) {
                         case LEVELS: {
                             if (player.isOnline()) {
-                                ExperienceAPI.setLevel(player.getPlayerEntity(), skill.asString(), qty.asInt());
+                                ExperienceAPI.setLevel(player.getPlayerEntity(), skill.asString(), quantity.asInt());
                             }
                             else {
-                                ExperienceAPI.setLevelOffline(player.getName(), skill.asString(), qty.asInt());
+                                ExperienceAPI.setLevelOffline(player.getName(), skill.asString(), quantity.asInt());
                             }
                             break;
                         }
                         case XP: {
                             if (player.isOnline()) {
-                                ExperienceAPI.setXP(player.getPlayerEntity(), skill.asString(), qty.asInt());
+                                ExperienceAPI.setXP(player.getPlayerEntity(), skill.asString(), quantity.asInt());
                             }
                             else {
-                                ExperienceAPI.setXPOffline(player.getName(), skill.asString(), qty.asInt());
+                                ExperienceAPI.setXPOffline(player.getName(), skill.asString(), quantity.asInt());
                             }
                             break;
                         }
@@ -237,8 +237,8 @@ public class McMMOCommand extends AbstractCommand {
                             break;
                         }
                         case XPRATE: {
-                            if (qty.asInt() > 0) {
-                                ExperienceConfig.getInstance().setExperienceGainsGlobalMultiplier(qty.asInt());
+                            if (quantity.asInt() > 0) {
+                                ExperienceConfig.getInstance().setExperienceGainsGlobalMultiplier(quantity.asInt());
                             }
                             break;
                         }

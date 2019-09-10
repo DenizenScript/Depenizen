@@ -40,7 +40,7 @@ public class MobArenaCommand extends AbstractCommand {
     // - mobarena mobarena@Default remove:<player>
     //
     // @Usage
-    // Use to force a player to join an arena and another to leave..
+    // Use to force a player to join an arena and another to leave.
     // - mobarena mobarena@Default add:<player> remove:p@mcmonkey4eva
     //
     // @Usage

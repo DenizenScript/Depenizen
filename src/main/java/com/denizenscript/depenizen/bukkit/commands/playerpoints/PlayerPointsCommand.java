@@ -15,7 +15,7 @@ public class PlayerPointsCommand extends AbstractCommand {
 
     // <--[command]
     // @Name playerpoints
-    // @Syntax playerpoints [set/give/take] (amount:<amount>) (target:<player>)
+    // @Syntax playerpoints [set/give/take] [<#>]
     // @Group Depenizen
     // @Plugin Depenizen, PlayerPoints
     // @Required 2
@@ -31,15 +31,11 @@ public class PlayerPointsCommand extends AbstractCommand {
     // <PlayerTag.playerpoints_points>
     //
     // @Usage
-    // Use to give 5 points to the player
+    // Use to give 5 points to the player.
     // - playerpoints give 5
     //
     // @Usage
-    // Use take 2 points from a target player
-    // - playerpoints take 2 target:p@Mwthorn
-    //
-    // @Usage
-    // Use to set 10 points to the player
+    // Use to set 10 points to the player.
     // - playerpoints set 10
     //
     // -->
@@ -54,6 +50,7 @@ public class PlayerPointsCommand extends AbstractCommand {
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
                 scriptEntry.addObject("target", arg.asType(PlayerTag.class));
+                Debug.echoError("Don't use 'target:' for 'playerpoints' command. Just use 'player:'.");
             }
 
             else if (!scriptEntry.hasObject("action")

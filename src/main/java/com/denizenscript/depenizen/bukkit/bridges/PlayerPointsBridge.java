@@ -15,7 +15,7 @@ public class PlayerPointsBridge extends Bridge {
     public void init() {
         instance = this;
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(PlayerPointsCommand.class,
-                "PLAYERPOINTS", "playerpoints [set/give/take] (amount:<amount>) (target:<player>)", 2);
+                "PLAYERPOINTS", "playerpoints [set/give/take] [<#>]", 2);
         PropertyParser.registerProperty(PlayerPointsPlayerProperties.class, PlayerTag.class);
     }
 }
