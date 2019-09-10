@@ -26,16 +26,16 @@ public class DisguiseCommand extends AbstractCommand {
     // This hides the true entity and replaces it with a fake entity as a disguise.
     // The entity mimics the same actions and movement as the entity in a disguise.
     //
-    // The required arguement depends on the first arguement:
+    // The required argument depends on the first argument:
     // If the disguise is a mob, a type is required.
     // If the disguise is a misc, a type is required.
     // If the disguise is a player, a name is required instead of a type.
     //
     // Specify if mob is a baby or not, otherwise its default adult.
     // Specify id and/or data for misc disguises. Default is 1 and 0 respectively.
-    // Removing a disgsuise shows the true entity again for all players.
+    // Removing a disguise shows the true entity again for all players.
     // Only one disguise can be allowed, if another one is set, the preious disguise is removed.
-    // Specify self arguement, if it is set to true, the disguise will be hidden from the player who is disguised.
+    // Specify self argument, if it is set to true, the disguise will be hidden from the player who is disguised.
     // Otherwise it is default set to false, showing the disguised character the player is disguising as.
     //
     // @Tags

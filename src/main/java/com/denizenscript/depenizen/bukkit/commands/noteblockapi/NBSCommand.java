@@ -46,7 +46,7 @@ public class NBSCommand extends AbstractCommand {
     //
     // @Usage
     // Use to play a song to everyone online.
-    // - nbs play file:MySong targets:<player.list_online_players>
+    // - nbs play file:MySong targets:<server.list_online_players>
     //
     // @Usage
     // Use to stop the current song playing for the linked player in a queue.
@@ -54,7 +54,7 @@ public class NBSCommand extends AbstractCommand {
     //
     // @Usage
     // Use to stop the current song playing for all online players.
-    // - nbs stop targets:<player.list_online_players>
+    // - nbs stop targets:<server.list_online_players>
     //
     // -->
 

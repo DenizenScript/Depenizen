@@ -37,7 +37,7 @@ public class McMMOCommand extends AbstractCommand {
     //
     // @Usage
     // Use to add 5 levels to a player's skill.
-    // - mcmmo add levels skill:acrobatics qty:5
+    // - mcmmo add levels skill:acrobatics quantity:5
     //
     // @Usage
     // Use to remove a player from a party.

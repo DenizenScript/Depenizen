@@ -37,11 +37,11 @@ public class RegionCommand extends AbstractCommand {
     //
     // @Usage
     // Use to add a region based on a cuboid.
-    // - region add cu@l@123,0,321,world|l@321,256,123,world id:MyRegion
+    // - region add cu@123,0,321,world|321,256,123,world id:MyRegion
     //
     // @Usage
     // Use to remove a region from a world.
-    // - region remove WorldTag id:MyRegion
+    // - region remove world id:MyRegion
     //
     // -->
 
