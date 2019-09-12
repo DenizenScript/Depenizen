@@ -50,10 +50,10 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
         if (path.eventArgLowerAt(1).equals("goes") && !event.getValue()) {
             return false;
         }
-        if (path.eventArgLowerAt(1).equals("returns") && event.getValue()) {
+        else if (path.eventArgLowerAt(1).equals("returns") && event.getValue()) {
             return false;
         }
-        if (!path.eventArgLowerAt(1).equals("afk")) {
+        else if (!path.eventArgLowerAt(1).equals("afk")) {
             return false;
         }
         return true;
