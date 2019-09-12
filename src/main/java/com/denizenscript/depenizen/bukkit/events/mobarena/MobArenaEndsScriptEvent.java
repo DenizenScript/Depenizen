@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.mobarena;
 
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.garbagemule.MobArena.events.ArenaEndEvent;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArenaTag;
 import com.denizenscript.denizen.BukkitScriptEntryData;
@@ -7,8 +8,6 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -41,16 +40,18 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     public ElementTag wave;
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        return s.startsWith("mobarena") && CoreUtilities.xthArgEquals(2, lower, "ends");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventArgLowerAt(0).equals("mobarena") && path.eventArgLowerAt(2).equals("ends");
     }
 
     @Override
     public boolean matches(ScriptPath path) {
         String arenaname = path.eventArgLowerAt(2);
         MobArenaArenaTag a = MobArenaArenaTag.valueOf(arenaname);
-        return arenaname.equals("arena") || (a != null && a.getArena() == event.getArena());
+        if (!arenaname.equals("arena") && (a == null || !CoreUtilities.toLowerCase(a.getArena().arenaName()).equals(arenaname))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
