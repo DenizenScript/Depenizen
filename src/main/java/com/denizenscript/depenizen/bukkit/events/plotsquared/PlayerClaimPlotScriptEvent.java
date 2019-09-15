@@ -19,7 +19,7 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
     // <--[event]
     // @Events
     // plotsquared player claims plotsquaredplot
-    // plotsquared player claims <dplotsquaredplot>
+    // plotsquared player claims <plotsquaredplot>
     //
     // @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
     //
@@ -58,7 +58,10 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
             return true;
         }
         PlotSquaredPlotTag dplot = PlotSquaredPlotTag.valueOf(plotName);
-        return dplot != null && dplot.equals(plot);
+        if (dplot == null || !dplot.equals(plot)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

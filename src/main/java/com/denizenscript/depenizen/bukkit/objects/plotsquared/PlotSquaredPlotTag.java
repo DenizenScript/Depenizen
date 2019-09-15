@@ -66,6 +66,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         string = string.replace("plotsquaredplot@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');
+            if (split.size() < 3) {
+                return null;
+            }
             Plot p = MainUtil.getPlotFromString(null, split.get(2) + ";" + split.get(0) + ";" + split.get(1), false);
             if (p == null) {
                 return null;
@@ -86,7 +89,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
     //   STATIC CONSTRUCTORS
     /////////////////
 
-    Plot plot = null;
+    public Plot plot = null;
 
     public PlotSquaredPlotTag(Plot pl) {
         plot = pl;
