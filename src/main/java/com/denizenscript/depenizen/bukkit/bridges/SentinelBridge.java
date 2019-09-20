@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.depenizen.bukkit.events.sentinel.SentinelAttackScriptEvent;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.EntityTag;
@@ -48,7 +49,13 @@ public class SentinelBridge extends Bridge {
                         return true;
                     }
                 }
-                if (prefix.equals("denizen_proc") && ent.getEquipment() != null) {
+                if (prefix.equals("denizen_proc")) {
+                    String context = null;
+                    int colon = value.indexOf(':');
+                    if (colon > 0) {
+                        context = value.substring(colon + 1);
+                        value = value.substring(0, colon);
+                    }
                     ScriptTag script = ScriptTag.valueOf(value);
                     if (script == null) {
                         Debug.echoError("Invalid procedure script name '" + value + "' (non-existent) in a Sentinel NPC target.");
@@ -65,13 +72,20 @@ public class SentinelBridge extends Bridge {
                     InstantQueue queue = InstantQueue.getQueue(ScriptQueue.getNextId(script.getContainer().getName()));
                     queue.addEntries(entries);
                     String def_name = "entity";
+                    String context_name = "context";
                     if (script.getContainer().getContents().contains("definitions")) {
                         List<String> definition_names = CoreUtilities.split(script.getContainer().getString("definitions"), '|');
                         if (definition_names.size() >= 1) {
                             def_name = definition_names.get(0);
                         }
+                        if (definition_names.size() >= 2) {
+                            context_name = definition_names.get(1);
+                        }
                     }
                     queue.addDefinition(def_name, new EntityTag(ent).getDenizenObject());
+                    if (context != null) {
+                        queue.addDefinition(context_name, new ElementTag(context));
+                    }
                     queue.start();
                     if (queue.determinations != null && queue.determinations.size() > 0) {
                         return CoreUtilities.toLowerCase(queue.determinations.get(0)).equals("true");

@@ -143,11 +143,6 @@ public class PVPArenaArenaTag implements ObjectTag {
             return fighters.getAttribute(attribute.fulfill(1));
         }
 
-        // NOTE: Deprecated.
-        if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
-            return new ElementTag(arena.getFighters().size()).getAttribute(attribute.fulfill(1));
-        }
-
         // <--[tag]
         // @attribute <PVPArenaArenaTag.type>
         // @returns ElementTag

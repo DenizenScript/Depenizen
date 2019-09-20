@@ -251,7 +251,7 @@
         <dependency>
             <groupId>org.mcmonkey</groupId>
             <artifactId>sentinel</artifactId>
-            <version>1.8.5</version>
+            <version>1.9.5</version>
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
