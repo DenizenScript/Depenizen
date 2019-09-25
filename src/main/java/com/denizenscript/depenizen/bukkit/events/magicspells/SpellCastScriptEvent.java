@@ -161,7 +161,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
                 }
                 else if (typeLower.startsWith("items:")) {
                     List<ItemStack> itemsToSet = new ArrayList<>();
-                    for (ItemTag item : new ListTag(type.substring("items:".length())).filter(ItemTag.class)) {
+                    for (ItemTag item : new ListTag(type.substring("items:".length())).filter(ItemTag.class, path.container, true)) {
                         itemsToSet.add(item.getItemStack());
                     }
                     reagents.setItems(itemsToSet);

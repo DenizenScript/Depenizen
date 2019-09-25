@@ -68,7 +68,7 @@ public class NBSCommand extends AbstractCommand {
             if (!scriptEntry.hasObject("targets")
                     && arg.matchesPrefix("targets", "targets")
                     && arg.matchesArgumentList(PlayerTag.class)) {
-                scriptEntry.addObject("targets", arg.asType(ListTag.class).filter(PlayerTag.class));
+                scriptEntry.addObject("targets", arg.asType(ListTag.class).filter(PlayerTag.class, scriptEntry));
             }
 
             else if (!scriptEntry.hasObject("file")
