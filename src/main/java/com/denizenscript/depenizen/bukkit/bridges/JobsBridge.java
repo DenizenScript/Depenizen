@@ -9,7 +9,7 @@ import com.gamingmesh.jobs.container.Job;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.TagRunnable;
+import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
