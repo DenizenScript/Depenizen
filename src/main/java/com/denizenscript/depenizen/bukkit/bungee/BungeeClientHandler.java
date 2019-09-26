@@ -33,7 +33,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         BungeeBridge.instance.connected = false;
     }
 
-    public static enum Stage {
+    public enum Stage {
         AWAIT_HEADER,
         AWAIT_DATA
     }
