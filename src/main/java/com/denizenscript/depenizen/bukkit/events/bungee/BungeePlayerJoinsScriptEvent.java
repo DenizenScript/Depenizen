@@ -25,6 +25,8 @@ public class BungeePlayerJoinsScriptEvent extends BukkitScriptEvent {
     // <context.name> returns the connecting player's name.
     // <context.uuid> returns the connection player's UUID.
     //
+    // @Plugin Depenizen, BungeeCord
+    //
     // -->
 
     public BungeePlayerJoinsScriptEvent() {

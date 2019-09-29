@@ -32,6 +32,8 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     // "VERSION:" + ElementTag to change the listed server version.
     // "MOTD:" + ElementTag to change the server MOTD that will be displayed.
     //
+    // @Plugin Depenizen, BungeeCord
+    //
     // -->
 
     public BungeeProxyServerListPingScriptEvent() {

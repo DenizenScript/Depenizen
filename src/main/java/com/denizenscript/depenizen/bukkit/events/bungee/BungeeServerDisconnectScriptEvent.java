@@ -19,6 +19,8 @@ public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
     // @Context
     // <context.server> returns the name of the previously connected server.
     //
+    // @Plugin Depenizen, BungeeCord
+    //
     // -->
 
     public BungeeServerDisconnectScriptEvent() {

@@ -25,6 +25,8 @@ public class BungeePlayerQuitsScriptEvent extends BukkitScriptEvent {
     // <context.name> returns the leaving player's name.
     // <context.uuid> returns the leaving player's UUID.
     //
+    // @Plugin Depenizen, BungeeCord
+    //
     // -->
 
     public BungeePlayerQuitsScriptEvent() {

@@ -26,6 +26,8 @@ public class BungeePlayerServerSwitchScriptEvent extends BukkitScriptEvent {
     // <context.uuid> returns the switching player's UUID.
     // <context.server> returns the name of the server being switched to.
     //
+    // @Plugin Depenizen, BungeeCord
+    //
     // -->
 
     public BungeePlayerServerSwitchScriptEvent() {
