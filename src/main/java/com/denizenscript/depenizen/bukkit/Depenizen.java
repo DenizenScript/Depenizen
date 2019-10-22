@@ -78,7 +78,8 @@ public class Depenizen extends JavaPlugin {
             newBridge = bridgeSupplier.get();
         }
         catch (Throwable ex) {
-            Debug.echoError("Cannot load Depenizen bridge for '" + name + "': fundamental loading error: " + ex.getMessage());
+            Debug.echoError("Cannot load Depenizen bridge for '" + name + "': fundamental loading error:");
+            Debug.echoError(ex);
             return;
         }
         newBridge.name = name;
