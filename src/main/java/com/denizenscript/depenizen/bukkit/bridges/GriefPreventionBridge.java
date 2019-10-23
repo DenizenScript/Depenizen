@@ -1,5 +1,10 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
+import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.properties.griefprevention.GriefPreventionPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventionClaimTag;
@@ -10,6 +15,8 @@ import com.denizenscript.depenizen.bukkit.properties.griefprevention.GriefPreven
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import me.ryanhamshire.GriefPrevention.Claim;
+import me.ryanhamshire.GriefPrevention.GriefPrevention;
 
 public class GriefPreventionBridge extends Bridge {
 
@@ -19,5 +26,30 @@ public class GriefPreventionBridge extends Bridge {
         PropertyParser.registerProperty(GriefPreventionPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(GriefPreventionLocationProperties.class, LocationTag.class);
         ScriptEvent.registerScriptEvent(new GPClaimEnterEvent());
+        TagManager.registerTagHandler(new TagRunnable.RootForm() {
+            @Override
+            public void run(ReplaceableTagEvent event) {
+                tagEvent(event);
+            }
+        }, "griefprevention");
+    }
+
+    public void tagEvent(ReplaceableTagEvent event) {
+        Attribute attribute = event.getAttributes().fulfill(1);
+
+        // <--[tag]
+        // @attribute <griefprevention.list_claims>
+        // @returns ListTag(GriefPreventionClaimTag)
+        // @description
+        // Returns a list of all GriefPrevention claims.
+        // @Plugin Depenizen, GriefPrevention
+        // -->
+        if (attribute.startsWith("list_claims")) {
+            ListTag result = new ListTag();
+            for (Claim claim : GriefPrevention.instance.dataStore.getClaims()) {
+                result.addObject(new GriefPreventionClaimTag(claim));
+            }
+            event.setReplacedObject(result.getObjectAttribute(attribute.fulfill(1)));
+        }
     }
 }

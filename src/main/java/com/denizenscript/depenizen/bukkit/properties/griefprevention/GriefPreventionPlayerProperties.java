@@ -73,7 +73,7 @@ public class GriefPreventionPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.griefprevention.list_claims>
-            // @returns ListTag(GriefPreventionClaim)
+            // @returns ListTag(GriefPreventionClaimTag)
             // @description
             // Returns a list of all claims the player has.
             // @Plugin Depenizen, GriefPrevention

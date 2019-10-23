@@ -87,7 +87,7 @@ public class GriefPreventionLocationProperties implements Property {
 
             // <--[tag]
             // @attribute <LocationTag.griefprevention.claim>
-            // @returns GriefPreventionClaim
+            // @returns GriefPreventionClaimTag
             // @description
             // Returns the GriefPreventionClaim at this location.
             // @Plugin Depenizen, GriefPrevention
