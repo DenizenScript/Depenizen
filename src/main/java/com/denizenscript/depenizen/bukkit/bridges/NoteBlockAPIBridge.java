@@ -1,6 +1,8 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.depenizen.bukkit.commands.noteblockapi.NBSCommand;
+import com.denizenscript.depenizen.bukkit.events.noteblockapi.NoteBlockAPISongEndsScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.noteblockapi.NoteBlockAPIPlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -15,5 +17,6 @@ public class NoteBlockAPIBridge extends Bridge {
         PropertyParser.registerProperty(NoteBlockAPIPlayerProperties.class, PlayerTag.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(NBSCommand.class,
                 "NBS", "nbs [play/stop] (file:<file path>) [targets:<entity>|...]", 1);
+        ScriptEvent.registerScriptEvent(new NoteBlockAPISongEndsScriptEvent());
     }
 }
