@@ -39,12 +39,6 @@ public class Depenizen extends JavaPlugin {
             Debug.echoError("Cannot load Depenizen-Bungee bridge: Internal exception was thrown!");
             Debug.echoError(ex);
         }
-        try {
-            ObjectFetcher._initialize();
-        }
-        catch (Throwable ex) {
-            Debug.echoError(ex);
-        }
         Debug.log("Depenizen loaded! " + loadedBridges.size() + " plugin bridge(s) loaded (of " + allBridges.size() + " available)");
     }
 
