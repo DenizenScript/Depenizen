@@ -15,7 +15,7 @@ public class WorldEditBridge extends Bridge {
     public void init() {
         instance = this;
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(WorldEditCommand.class,
-                "WORLDEDIT", "worldedit [cuboidschematic/cuboidclipboard/schematicpaste/schematicclipboard] (file:<file path>) (undoable) (noair) (cuboid:<cuboid>) (rotate:<#>)", 2);
+                "WORLDEDIT", "worldedit [create_schematic/copy_to_clipboard/paste] (file:<file path>) (cuboid:<cuboid>) (position:<location>) (rotate:<#>) (undoable) (noair)", 2);
         PropertyParser.registerProperty(WorldEditPlayerProperties.class, PlayerTag.class);
     }
 }
