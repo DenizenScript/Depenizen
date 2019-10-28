@@ -1,8 +1,10 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.depenizen.bukkit.commands.mcmmo.McMMOCommand;
 import com.denizenscript.depenizen.bukkit.events.mcmmo.*;
 import com.denizenscript.depenizen.bukkit.properties.mcmmo.McMMOEntityProperties;
+import com.denizenscript.depenizen.bukkit.properties.mcmmo.McMMOLocationProperties;
 import com.denizenscript.depenizen.bukkit.properties.mcmmo.McMMOPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.mcmmo.PartyTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
@@ -31,6 +33,7 @@ public class McMMOBridge extends Bridge {
         }, "party");
         PropertyParser.registerProperty(McMMOPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(McMMOEntityProperties.class, EntityTag.class);
+        PropertyParser.registerProperty(McMMOLocationProperties.class, LocationTag.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(McMMOCommand.class,
                 "MCMMO", "mcmmo [add/remove/set] [levels/xp/xprate/vampirism/hardcore/leader] (skill:<skill>) (state:{toggle}/true/false) (quantity:<#>) (party:<party>)", 1);
         ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelChangeScriptEvent());
