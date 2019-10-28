@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.events.skillapi;
 
 import com.denizenscript.depenizen.bukkit.objects.skillapi.SkillAPIClassTag;
 import com.sucy.skill.api.event.PlayerLevelUpEvent;
-import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.PlayerTag;

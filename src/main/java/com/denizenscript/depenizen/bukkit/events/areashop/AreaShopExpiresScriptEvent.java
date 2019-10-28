@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.areashop;
 
 import me.wiefferink.areashop.events.notify.UnrentedRegionEvent;
-import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;

@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.bungee;
 
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
-import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ArgumentHelper;

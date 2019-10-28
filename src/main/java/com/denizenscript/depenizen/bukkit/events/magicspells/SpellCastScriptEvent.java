@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.events.magicspells;
 
 import com.nisovin.magicspells.events.SpellCastEvent;
 import com.nisovin.magicspells.util.SpellReagents;
-import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.objects.PlayerTag;

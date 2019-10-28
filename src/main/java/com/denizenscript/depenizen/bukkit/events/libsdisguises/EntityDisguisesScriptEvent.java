@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.events.libsdisguises;
 
 import com.denizenscript.depenizen.bukkit.objects.libsdisguises.LibsDisguiseTag;
 import me.libraryaddict.disguise.events.DisguiseEvent;
-import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.ObjectTag;

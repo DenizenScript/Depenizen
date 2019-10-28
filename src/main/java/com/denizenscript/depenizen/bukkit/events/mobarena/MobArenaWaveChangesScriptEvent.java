@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.events.mobarena;
 
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArenaTag;
 import com.garbagemule.MobArena.events.NewWaveEvent;
-import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;

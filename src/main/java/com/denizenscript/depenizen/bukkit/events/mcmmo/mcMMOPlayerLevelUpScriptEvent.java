@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.mcmmo;
 
 import com.gmail.nossr50.events.experience.McMMOPlayerLevelUpEvent;
-import com.denizenscript.denizen.BukkitScriptEntryData;
+import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.PlayerTag;
