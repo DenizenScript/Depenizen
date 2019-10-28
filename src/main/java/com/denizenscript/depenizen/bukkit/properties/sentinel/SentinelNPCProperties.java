@@ -19,7 +19,6 @@ import org.mcmonkey.sentinel.SentinelTrait;
 import org.mcmonkey.sentinel.commands.SentinelCommand;
 import org.mcmonkey.sentinel.targeting.SentinelTargetList;
 
-import java.util.List;
 import java.util.Map;
 
 public class SentinelNPCProperties implements Property {
