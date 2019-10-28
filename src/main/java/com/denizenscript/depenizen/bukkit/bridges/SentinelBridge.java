@@ -1,6 +1,8 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.objects.NPCTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.depenizen.bukkit.events.sentinel.SentinelAttackScriptEvent;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.EntityTag;
@@ -14,6 +16,7 @@ import com.denizenscript.denizencore.scripts.containers.core.ProcedureScriptCont
 import com.denizenscript.denizencore.scripts.queues.ScriptQueue;
 import com.denizenscript.denizencore.scripts.queues.core.InstantQueue;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.depenizen.bukkit.properties.sentinel.SentinelNPCProperties;
 import org.bukkit.entity.LivingEntity;
 import org.mcmonkey.sentinel.SentinelIntegration;
 import org.mcmonkey.sentinel.SentinelPlugin;
@@ -27,6 +30,7 @@ public class SentinelBridge extends Bridge {
     public void init() {
         ScriptEvent.registerScriptEvent(new SentinelAttackScriptEvent());
         SentinelPlugin.instance.registerIntegration(new DenizenSentinelTargets());
+        PropertyParser.registerProperty(SentinelNPCProperties.class, NPCTag.class);
     }
 
     public class DenizenSentinelTargets extends SentinelIntegration {
