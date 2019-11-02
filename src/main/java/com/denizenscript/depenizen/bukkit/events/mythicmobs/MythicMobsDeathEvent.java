@@ -170,6 +170,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     public void onMythicMobDeath(MythicMobDeathEvent event) {
         mob = new MythicMobsMobTag(event.getMob());
         entity = new EntityTag(event.getEntity());
+        EntityTag.rememberEntity(entity.getBukkitEntity());
         killer = new EntityTag(event.getKiller());
         level = new ElementTag(event.getMobLevel());
         experience = new ElementTag(event.getExp());
@@ -182,5 +183,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         }
         event.setExp(experience.asInt());
         event.setCurrency(currency.asDouble());
+        EntityTag.forgetEntity(entity.getBukkitEntity());
     }
 }
