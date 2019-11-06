@@ -299,6 +299,17 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             return new ElementTag(claim.canSiege(defender.getPlayerEntity())).getAttribute(attribute.fulfill(1));
         }
 
+        // <--[tag]
+        // @attribute <GriefPreventionClaimTag.is_sieged>
+        // @returns ElementTag(Boolean)
+        // @description
+        // Returns whether the GriefPreventionClaim is currently under siege.
+        // @Plugin Depenizen, GriefPrevention
+        // -->
+        else if (attribute.startsWith("is_sieged")) {
+            return new ElementTag(claim.siegeData != null).getAttribute(attribute.fulfill(1));
+        }
+
         return new ElementTag(identify()).getAttribute(attribute);
     }
 
