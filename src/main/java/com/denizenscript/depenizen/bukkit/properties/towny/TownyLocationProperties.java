@@ -1,15 +1,19 @@
 package com.denizenscript.depenizen.bukkit.properties.towny;
 
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.TownBlock;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
+
+import java.util.UUID;
 
 public class TownyLocationProperties implements Property {
 
@@ -42,7 +46,7 @@ public class TownyLocationProperties implements Property {
     }
 
     public static final String[] handledTags = new String[] {
-            "has_town", "town", "is_wilderness"
+            "has_town", "town", "is_wilderness", "towny"
     };
 
     public static final String[] handledMechs = new String[] {
@@ -52,10 +56,40 @@ public class TownyLocationProperties implements Property {
         this.location = location;
     }
 
-    LocationTag location = null;
+    public LocationTag location;
 
     @Override
     public String getAttribute(Attribute attribute) {
+
+        if (attribute.startsWith("towny")) {
+            attribute = attribute.fulfill(1);
+            TownBlock block = TownyUniverse.getTownBlock(location);
+            if (block == null) {
+                return null;
+            }
+            try {
+
+                // <--[tag]
+                // @attribute <LocationTag.towny.resident>
+                // @returns ElementTag(Boolean)
+                // @description
+                // Returns the resident of a Towny plot at the location, if any.
+                // @Plugin Depenizen, Towny
+                // -->
+                if (attribute.startsWith("resident")) {
+                    if (!block.hasResident()) {
+                        return null;
+                    }
+                    UUID player = PlayerTag.getAllPlayers().get(block.getResident().getName());
+                    return new PlayerTag(player).getAttribute(attribute.fulfill(1));
+                }
+            }
+            catch (NotRegisteredException ex) {
+                if (!attribute.hasAlternative()) {
+                    Debug.echoError("Towny tag NotRegisteredException: " + ex.getMessage());
+                }
+            }
+        }
 
         // <--[tag]
         // @attribute <LocationTag.has_town>
