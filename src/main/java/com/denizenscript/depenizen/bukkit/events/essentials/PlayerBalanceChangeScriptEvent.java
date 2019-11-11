@@ -20,7 +20,7 @@ public class PlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements
     //
     // @Triggers when a player's balance changes, when using Essentials economy.
     //
-    // @Switch in <area>
+    // @Switch in:<area> to only process the event if it occurred within a specified area.
     //
     // @Context
     // <context.old_balance> Returns the balance before changes are made.
