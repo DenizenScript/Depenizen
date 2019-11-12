@@ -24,7 +24,7 @@ import java.util.UUID;
 public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
 
     // <--[language]
-    // @name GriefPreventionClaimTag
+    // @name GriefPreventionClaimTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, GriefPrevention
     // @description
@@ -43,7 +43,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
     // Fetcher. The constructor for a GriefPreventionClaimTag is <claim_id>
     // For example, 'gpclaim@1234'.
     //
-    // For general info, see <@link language GriefPreventionClaimTag>
+    // For general info, see <@link language GriefPreventionClaimTag Objects>
     //
     // -->
 

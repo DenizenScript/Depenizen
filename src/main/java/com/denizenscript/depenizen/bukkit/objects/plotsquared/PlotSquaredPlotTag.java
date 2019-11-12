@@ -23,7 +23,7 @@ import java.util.UUID;
 public class PlotSquaredPlotTag implements ObjectTag {
 
     // <--[language]
-    // @name PlotSquaredPlotTag
+    // @name PlotSquaredPlotTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, PlotSquared
     // @description
@@ -42,7 +42,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
     // Fetcher. The constructor for a PlotSquaredPlotTag is <x>,<z>,<world>
     // For example, 'plotsquaredplot@5,10,Hub'.
     //
-    // For general info, see <@link language PlotSquaredPlotTag>
+    // For general info, see <@link language PlotSquaredPlotTag Objects>
     //
     // -->
 

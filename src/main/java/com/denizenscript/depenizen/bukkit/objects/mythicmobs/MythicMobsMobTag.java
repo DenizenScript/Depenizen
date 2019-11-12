@@ -21,7 +21,7 @@ import java.util.UUID;
 public class MythicMobsMobTag implements ObjectTag, Adjustable {
 
     // <--[language]
-    // @name MythicMobsMobTag
+    // @name MythicMobsMobTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, MythicMobs
     // @description
@@ -40,7 +40,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
     // Fetcher. The constructor for a MythicMobsMobTag is <uuid>
     // For example, 'mythicmob@1234-1234-1234'.
     //
-    // For general info, see <@link language MythicMobsMobTag>
+    // For general info, see <@link language MythicMobsMobTag Objects>
     //
     // -->
 

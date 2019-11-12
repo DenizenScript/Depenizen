@@ -18,7 +18,7 @@ import java.util.UUID;
 public class PartyTag implements ObjectTag {
 
     // <--[language]
-    // @name PartyTag
+    // @name PartyTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, McMMO
     // @description
@@ -37,7 +37,7 @@ public class PartyTag implements ObjectTag {
     // Fetcher. The constructor for a PartyTag is <party_name>
     // For example, 'party@my_party'.
     //
-    // For general info, see <@link language PartyTag>
+    // For general info, see <@link language PartyTag Objects>
     //
     // -->
 

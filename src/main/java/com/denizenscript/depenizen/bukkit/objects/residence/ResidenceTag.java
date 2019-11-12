@@ -15,7 +15,7 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 public class ResidenceTag implements ObjectTag {
 
     // <--[language]
-    // @name ResidenceTag
+    // @name ResidenceTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, Residence
     // @description
@@ -34,7 +34,7 @@ public class ResidenceTag implements ObjectTag {
     // Fetcher. The constructor for a ResidenceTag is <residence_name>
     // For example, 'residence@myresidence'.
     //
-    // For general info, see <@link language ResidenceTag>
+    // For general info, see <@link language ResidenceTag Objects>
     //
     // -->
 

@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 public class MobArenaArenaTag implements ObjectTag {
 
     // <--[language]
-    // @name MobArenaArenaTag
+    // @name MobArenaArenaTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, MobArena
     // @description
@@ -35,7 +35,7 @@ public class MobArenaArenaTag implements ObjectTag {
     // Fetcher. The constructor for a MobArenaArenaTag is <arena_name>
     // For example, 'mobarena@my_arena'.
     //
-    // For general info, see <@link language MobArenaArenaTag>
+    // For general info, see <@link language MobArenaArenaTag Objects>
     //
     // -->
 

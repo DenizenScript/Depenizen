@@ -14,7 +14,7 @@ import net.slipcor.pvparena.managers.ArenaManager;
 public class PVPArenaArenaTag implements ObjectTag {
 
     // <--[language]
-    // @name PVPArenaArenaTag
+    // @name PVPArenaArenaTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, PvPArena
     // @description
@@ -33,7 +33,7 @@ public class PVPArenaArenaTag implements ObjectTag {
     // Fetcher. The constructor for a PVPArenaArenaTag is <arena_name>
     // For example, 'pvparena@myarena'.
     //
-    // For general info, see <@link language PVPArenaArenaTag>
+    // For general info, see <@link language PVPArenaArenaTag Objects>
     //
     // -->
 

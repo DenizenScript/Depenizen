@@ -15,7 +15,7 @@ import java.util.List;
 public class LibsDisguiseTag implements ObjectTag {
 
     // <--[language]
-    // @name LibsDisguiseTag
+    // @name LibsDisguiseTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, LibsDisguises
     // @description
@@ -34,7 +34,7 @@ public class LibsDisguiseTag implements ObjectTag {
     // Fetcher. The constructor for a LibsDisguiseTag is <disguise_name>
     // For example, 'libsdisguise@zombie'.
     //
-    // For general info, see <@link language LibsDisguiseTag>
+    // For general info, see <@link language LibsDisguiseTag Objects>
     //
     // -->
 

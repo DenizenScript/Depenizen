@@ -18,7 +18,7 @@ import java.util.regex.Matcher;
 public class JobsJobTag implements ObjectTag {
 
     // <--[language]
-    // @name JobsJobTag
+    // @name JobsJobTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, Jobs
     // @description
@@ -37,7 +37,7 @@ public class JobsJobTag implements ObjectTag {
     // Fetcher. The constructor for a JobsJobTag is <job_name>
     // For example, 'job@job_name'.
     //
-    // For general info, see <@link language JobsJobTag>
+    // For general info, see <@link language JobsJobTag Objects>
     //
     // -->
 

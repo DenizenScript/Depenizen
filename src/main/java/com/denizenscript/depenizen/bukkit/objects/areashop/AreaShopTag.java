@@ -15,7 +15,7 @@ import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag
 public class AreaShopTag implements ObjectTag {
 
     // <--[language]
-    // @name AreaShopTag
+    // @name AreaShopTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, AreaShop
     // @description
@@ -34,7 +34,7 @@ public class AreaShopTag implements ObjectTag {
     // Fetcher. The constructor for a AreaShopTag is <shop_name>
     // For example, 'areashop@my_shot'.
     //
-    // For general info, see <@link language AreaShopTag>
+    // For general info, see <@link language AreaShopTag Objects>
     //
     // -->
 

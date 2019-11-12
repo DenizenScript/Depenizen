@@ -12,7 +12,7 @@ import com.denizenscript.denizencore.tags.TagContext;
 public class SkillAPIClassTag implements ObjectTag {
 
     // <--[language]
-    // @name SkillAPIClassTag
+    // @name SkillAPIClassTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, SkillAPI
     // @description
@@ -31,7 +31,7 @@ public class SkillAPIClassTag implements ObjectTag {
     // Fetcher. The constructor for a SkillAPIClassTag is <class_name>
     // For example, 'skillapiclass@myclass'.
     //
-    // For general info, see <@link language SkillAPIClassTag>
+    // For general info, see <@link language SkillAPIClassTag Objects>
     //
     // -->
 

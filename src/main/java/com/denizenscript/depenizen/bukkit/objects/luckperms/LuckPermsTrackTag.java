@@ -14,7 +14,7 @@ import com.denizenscript.denizencore.tags.TagContext;
 public class LuckPermsTrackTag implements ObjectTag {
 
     // <--[language]
-    // @name LuckPermsTrackTag
+    // @name LuckPermsTrackTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, LuckPerms
     // @description
@@ -33,7 +33,7 @@ public class LuckPermsTrackTag implements ObjectTag {
     // Fetcher. The constructor for a LuckPermsTrackTag is <track_name>
     // For example, 'luckpermstrack@my_track'.
     //
-    // For general info, see <@link language LuckPermsTrackTag>
+    // For general info, see <@link language LuckPermsTrackTag Objects>
     //
     // -->
 

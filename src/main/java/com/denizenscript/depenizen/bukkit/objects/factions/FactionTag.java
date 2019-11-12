@@ -19,7 +19,7 @@ import java.util.Set;
 public class FactionTag implements ObjectTag {
 
     // <--[language]
-    // @name FactionTag
+    // @name FactionTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, Factions
     // @description
@@ -38,7 +38,7 @@ public class FactionTag implements ObjectTag {
     // Fetcher. The constructor for a FactionTag is <faction_name>
     // For example, 'faction@my_faction'.
     //
-    // For general info, see <@link language FactionTag>
+    // For general info, see <@link language FactionTag Objects>
     //
     // -->
 

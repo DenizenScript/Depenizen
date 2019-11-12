@@ -23,7 +23,7 @@ import org.bukkit.Location;
 public class TownTag implements ObjectTag {
 
     // <--[language]
-    // @name TownTag
+    // @name TownTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, Towny
     // @description
@@ -42,7 +42,7 @@ public class TownTag implements ObjectTag {
     // Fetcher. The constructor for a TownTag is <town_name>
     // For example, 'town@mytown'.
     //
-    // For general info, see <@link language TownTag>
+    // For general info, see <@link language TownTag Objects>
     //
     // -->
 

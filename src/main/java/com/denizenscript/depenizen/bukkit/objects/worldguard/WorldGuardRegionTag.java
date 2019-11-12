@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 public class WorldGuardRegionTag implements ObjectTag {
 
     // <--[language]
-    // @name WorldGuardRegionTag
+    // @name WorldGuardRegionTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, WorldGuard
     // @description
@@ -44,7 +44,7 @@ public class WorldGuardRegionTag implements ObjectTag {
     // Fetcher. The constructor for a WorldGuardRegionTag is <region_name>,<world_name>
     // For example, 'region@spawnland,Hub'.
     //
-    // For general info, see <@link language WorldGuardRegionTag>
+    // For general info, see <@link language WorldGuardRegionTag Objects>
     //
     // -->
 
