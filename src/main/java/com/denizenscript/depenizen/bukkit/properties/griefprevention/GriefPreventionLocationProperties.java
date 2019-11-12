@@ -71,7 +71,7 @@ public class GriefPreventionLocationProperties implements Property {
             // @returns ElementTag(Boolean)
             // @description
             // Returns whether there is a GriefPreventionClaim at this location.
-            // Optionally specify an Element(Boolean) for whether to ignore Y axis.
+            // Optionally specify an ElementTag(Boolean) for whether to ignore Y axis.
             // @Plugin Depenizen, GriefPrevention
             // -->
             if (attribute.startsWith("has_claim")) {

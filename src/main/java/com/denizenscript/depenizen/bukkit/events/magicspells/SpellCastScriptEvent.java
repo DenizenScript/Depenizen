@@ -37,19 +37,19 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     //
     // @Context
     // <context.spell_name> returns the name of the spell.
-    // <context.power> returns an Element(Decimal) of the power of the spell.
-    // <context.cast_time> returns an Element(Number) of the cast time of the spell.
-    // <context.cooldown> returns an Element(Decimal) of the cooldown of the spell.
-    // <context.spell_reagent_TYPE> returns an Element(Number) of the reagent cost for the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
+    // <context.power> returns an ElementTag(Decimal) of the power of the spell.
+    // <context.cast_time> returns an ElementTag(Number) of the cast time of the spell.
+    // <context.cooldown> returns an ElementTag(Decimal) of the cooldown of the spell.
+    // <context.spell_reagent_TYPE> returns an ElementTag(Number) of the reagent cost for the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
     // <context.spell_reagent_variables> returns a ListTag in the form variable/cost|...
     // <context.spell_reagent_items> returns a ListTag of ItemTags of reagent cost.
     //
     // @Determine
-    // "POWER:" + Element(Number) to change the power of the spell.
-    // "CAST_TIME:" + Element(Decimal) to change the cast time.
-    // "COOLDOWN:" + Element(Number) to change the cooldown.
-    // "REAGENT:<TYPE>:" + Element(Number) to change the reagent cost of the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
-    // "REAGANT:VARIABLE:<NAME>:" + Element(Decimal) to change the reagant cost for the given variable name.
+    // "POWER:" + ElementTag(Number) to change the power of the spell.
+    // "CAST_TIME:" + ElementTag(Decimal) to change the cast time.
+    // "COOLDOWN:" + ElementTag(Number) to change the cooldown.
+    // "REAGENT:<TYPE>:" + ElementTag(Number) to change the reagent cost of the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
+    // "REAGANT:VARIABLE:<NAME>:" + ElementTag(Decimal) to change the reagant cost for the given variable name.
     // "REAGENT:ITEMS:" + ListTag(ItemTag) to change the reagent item cost.
     // "CLEAR_REAGENTS" to clear away all reagent costs.
     //

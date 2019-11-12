@@ -98,7 +98,7 @@ public class EssentialsItemProperties implements Property {
         // <--[mechanism]
         // @object ItemTag
         // @name worth
-        // @input Element(Decimal)
+        // @input ElementTag(Decimal)
         // @description
         // Sets the worth of this item in Essentials.
         // @tags

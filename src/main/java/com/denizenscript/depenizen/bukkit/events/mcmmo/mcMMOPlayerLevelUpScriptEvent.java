@@ -35,7 +35,7 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
     // Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
     //
     // @Determine
-    // Element(Number) to set the number of levels to gain.
+    // ElementTag(Number) to set the number of levels to gain.
     //
     // @Plugin Depenizen, mcMMO
     //

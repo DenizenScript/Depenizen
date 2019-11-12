@@ -24,8 +24,8 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     //
     // @Context
     // <context.spell_name> returns the name of the spell.
-    // <context.power> returns an Element(Decimal) of the power of the spell.
-    // <context.cooldown> returns an Element(Decimal) of the cooldown of the spell.
+    // <context.power> returns an ElementTag(Decimal) of the power of the spell.
+    // <context.cooldown> returns an ElementTag(Decimal) of the cooldown of the spell.
     //
     // @Plugin Depenizen, MagicSpells
     //

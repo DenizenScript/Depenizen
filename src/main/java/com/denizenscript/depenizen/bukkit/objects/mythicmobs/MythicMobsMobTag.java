@@ -314,7 +314,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object MythicMob
         // @name global_cooldown
-        // @input Element(Number)
+        // @input ElementTag(Number)
         // @description
         // Sets global cooldown of the MythicMob.
         // @tags

@@ -343,7 +343,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object GriefPreventionClaim
         // @name depth
-        // @input Element(Number)
+        // @input ElementTag(Number)
         // @description
         // Sets the protection depth of the GriefPreventionClaim.
         // @tags

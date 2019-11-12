@@ -246,7 +246,7 @@ public class EssentialsPlayerProperties implements Property {
         // <--[mechanism]
         // @object PlayerTag
         // @name is_afk
-        // @input Element(Boolean)
+        // @input ElementTag(Boolean)
         // @description
         // Sets whether the player is marked as AFK.
         // @tags
@@ -260,7 +260,7 @@ public class EssentialsPlayerProperties implements Property {
         // <--[mechanism]
         // @object PlayerTag
         // @name god_mode
-        // @input Element(Boolean)
+        // @input ElementTag(Boolean)
         // @description
         // Sets whether the player has god mode enabled.
         // @tags
@@ -274,7 +274,7 @@ public class EssentialsPlayerProperties implements Property {
         // <--[mechanism]
         // @object PlayerTag
         // @name is_muted
-        // @input Element(Boolean)(|Duration)
+        // @input ElementTag(Boolean)(|Duration)
         // @description
         // Sets whether the player is muted. Optionally, you may also
         // specify a duration to set how long they are muted for.
@@ -294,7 +294,7 @@ public class EssentialsPlayerProperties implements Property {
         // <--[mechanism]
         // @object PlayerTag
         // @name socialspy
-        // @input Element(Boolean)
+        // @input ElementTag(Boolean)
         // @description
         // Sets whether the player has SocialSpy enabled.
         // @tags
@@ -308,7 +308,7 @@ public class EssentialsPlayerProperties implements Property {
         // <--[mechanism]
         // @object PlayerTag
         // @name vanish
-        // @input Element(Boolean)
+        // @input ElementTag(Boolean)
         // @description
         // Sets whether the player has vanish enabled.
         // @tags
@@ -322,7 +322,7 @@ public class EssentialsPlayerProperties implements Property {
         // <--[mechanism]
         // @object PlayerTag
         // @name essentials_ignore
-        // @input PlayerTag(|Element(Boolean))
+        // @input PlayerTag(|ElementTag(Boolean))
         // @description
         // Sets whether the player should ignore another player.
         // Optionally, specify a boolean indicate whether to ignore (defaults to true).

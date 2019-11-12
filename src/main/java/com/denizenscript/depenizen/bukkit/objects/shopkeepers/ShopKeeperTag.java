@@ -186,9 +186,9 @@ public class ShopKeeperTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <ShopKeeperTag.trades>
-        // @returns ListTag(dList)
+        // @returns ListTag)
         // @description
-        // Returns an escaped ListTag of the Shopkeeper's trades.
+        // Returns a ListTag of the Shopkeeper's trades (as escaped sub-lists).
         // NOTE: see '!language Property Escaping'.
         // @Plugin Depenizen, ShopKeepers
         // -->

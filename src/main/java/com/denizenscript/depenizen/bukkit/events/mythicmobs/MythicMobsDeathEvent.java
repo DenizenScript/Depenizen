@@ -45,8 +45,8 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     // <context.currency> returns the currency dropped.
     //
     // @Determine
-    // "XP:" + Element(Number) to specify the new amount of XP to be dropped.
-    // "CURRENCY:" + Element(Decimal) to specify the new amount of currency to be dropped.
+    // "XP:" + ElementTag(Number) to specify the new amount of XP to be dropped.
+    // "CURRENCY:" + ElementTag(Decimal) to specify the new amount of currency to be dropped.
     // ListTag(ItemTag) to specify new items to be dropped.
     //
     // @Plugin Depenizen, MythicMobs

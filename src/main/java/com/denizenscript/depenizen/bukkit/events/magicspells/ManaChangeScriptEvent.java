@@ -30,7 +30,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     // <context.reason> returns the reason of the change. Can either be POTION, REGEN, SPELL_COST or OTHER
     //
     // @Determine
-    // Element(Number) to set a new mana value.
+    // ElementTag(Number) to set a new mana value.
     //
     // @Plugin Depenizen, MagicSpells
     //
