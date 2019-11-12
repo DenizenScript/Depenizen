@@ -55,12 +55,11 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     public boolean matches(ScriptPath path) {
         String disguiseName = path.eventArgLowerAt(2);
 
-        if (disguiseName.equals("disguise")) {
-            return true;
+        if (!disguiseName.equals("disguise") && !disguise.equals(LibsDisguiseTag.valueOf(disguiseName))) {
+            return false;
         }
 
-        LibsDisguiseTag dDisguise = LibsDisguiseTag.valueOf(disguiseName);
-        return dDisguise != null && dDisguise.equals(disguise);
+        return super.matches(path);
     }
 
     @Override

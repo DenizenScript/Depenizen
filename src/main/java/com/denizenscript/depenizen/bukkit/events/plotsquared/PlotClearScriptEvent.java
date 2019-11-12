@@ -50,11 +50,10 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
     @Override
     public boolean matches(ScriptPath path) {
         String plotName = path.eventArgLowerAt(3);
-        if (plotName.equals("plotsquaredplot")) {
-            return true;
+        if (!plotName.equals("plotsquaredplot") && !plot.equals(PlotSquaredPlotTag.valueOf(plotName))) {
+            return false;
         }
-        PlotSquaredPlotTag dplot = PlotSquaredPlotTag.valueOf(plotName);
-        return dplot != null && dplot.equals(plot);
+        return super.matches(path);
     }
 
     @Override

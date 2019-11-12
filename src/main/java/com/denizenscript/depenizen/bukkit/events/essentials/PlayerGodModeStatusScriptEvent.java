@@ -55,7 +55,7 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
         if (!status.equals("status")) {
             return false;
         }
-        return true;
+        return super.matches(path);
     }
 
     @Override

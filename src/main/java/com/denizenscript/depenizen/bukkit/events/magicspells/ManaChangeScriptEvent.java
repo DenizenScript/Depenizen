@@ -57,8 +57,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
 
     @Override
     public boolean matches(ScriptPath path) {
-        String lower = path.eventArgLowerAt(3);
-        return lower.startsWith("magicspells player mana change");
+        return super.matches(path);
     }
 
     @Override

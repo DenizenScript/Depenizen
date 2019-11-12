@@ -65,7 +65,7 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
             return false;
         }
 
-        return true;
+        return super.matches(path);
     }
 
     @Override

@@ -52,8 +52,10 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
     public boolean matches(ScriptPath path) {
         String arenaname = path.eventArgLowerAt(2).replace("mobarena@", "");
         MobArenaArenaTag a = MobArenaArenaTag.valueOf(arenaname);
-        return (arenaname.equals("arena") || (a != null && a.getArena() == event.getArena()))
-                && event.getWave() != null;
+        if (!((arenaname.equals("arena") || (a != null && a.getArena() == event.getArena())) && event.getWave() != null)) {
+            return false;
+        }
+        return super.matches(path);
     }
 
     @Override

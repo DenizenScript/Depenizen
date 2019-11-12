@@ -60,7 +60,7 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
             return false;
         }
 
-        return true;
+        return super.matches(path);
     }
 
     @Override

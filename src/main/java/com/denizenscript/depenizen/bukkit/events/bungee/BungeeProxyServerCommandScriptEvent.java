@@ -62,7 +62,7 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
         if (!path.eventArgLowerAt(2).equals("command") && !path.eventArgLowerAt(2).equals(commandName())) {
             return false;
         }
-        return true;
+        return super.matches(path);
     }
 
     @Override

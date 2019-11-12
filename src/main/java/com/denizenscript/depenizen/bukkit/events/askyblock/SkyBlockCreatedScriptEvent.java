@@ -49,7 +49,7 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public boolean matches(ScriptPath path) {
-        return true;
+        return super.matches(path);
     }
 
     @Override

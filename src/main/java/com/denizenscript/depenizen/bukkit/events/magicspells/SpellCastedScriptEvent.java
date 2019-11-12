@@ -51,8 +51,7 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
 
     @Override
     public boolean matches(ScriptPath path) {
-        String lower = path.eventArgLowerAt(3);
-        return lower.startsWith("magicspells player completes spell");
+        return super.matches(path);
     }
 
     @Override

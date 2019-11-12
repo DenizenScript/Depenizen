@@ -68,7 +68,7 @@ public class mcMMOPlayerAbilityDeactivateScriptEvent extends BukkitScriptEvent i
             return false;
         }
 
-        return true;
+        return super.matches(path);
     }
 
     @Override

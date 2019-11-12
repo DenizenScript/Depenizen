@@ -53,7 +53,7 @@ public class BungeePlayerServerSwitchScriptEvent extends BukkitScriptEvent {
         if (!serverName.equals("server") && !serverName.equalsIgnoreCase(newServer)) {
             return false;
         }
-        return true;
+        return super.matches(path);
     }
 
     @Override

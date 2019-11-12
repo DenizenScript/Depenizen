@@ -50,7 +50,7 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
         if (!path.eventArgLowerAt(2).equals("ends") && !path.eventArgLowerAt(3).equals("ends")) {
             return false;
         }
-        return true;
+        return super.matches(path);
     }
 
     @Override

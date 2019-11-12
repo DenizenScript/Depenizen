@@ -79,7 +79,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
         if (spellName.equals("spell") || spellName.equalsIgnoreCase(spell.asString())) {
             return true;
         }
-        return false;
+        return super.matches(path);
     }
 
     @Override

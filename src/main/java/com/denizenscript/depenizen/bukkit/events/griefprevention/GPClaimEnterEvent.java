@@ -66,11 +66,18 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
         String direction = path.eventArgAt(2);
         String claim_test = path.eventArgLowerAt(3);
 
+        // TODO: Wtf
         if (direction.equals("enters") && new_claim != null) {
-            return claim_test.equals("gpclaim") || claim_test.equals(CoreUtilities.toLowerCase(new_claim.simple()));
+            if (!(claim_test.equals("gpclaim") || claim_test.equals(CoreUtilities.toLowerCase(new_claim.simple())))) {
+                return false;
+            }
+            return super.matches(path);
         }
         else if (direction.equals("exits") && old_claim != null) {
-            return claim_test.equals("gpclaim") || claim_test.equals(CoreUtilities.toLowerCase(old_claim.simple()));
+            if (!(claim_test.equals("gpclaim") || claim_test.equals(CoreUtilities.toLowerCase(old_claim.simple())))) {
+                return false;
+            }
+            return super.matches(path);
         }
         return false;
     }

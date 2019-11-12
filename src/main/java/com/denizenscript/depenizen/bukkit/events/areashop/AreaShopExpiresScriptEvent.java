@@ -47,11 +47,10 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public boolean matches(ScriptPath path) {
         String shopName = path.eventArgLowerAt(2).replace("areashop@", "");
-        if (shopName.equals("shop")) {
-            return true;
+        if (!shopName.equals("shop") && !areaShop.equals(AreaShopTag.valueOf(shopName))) {
+            return false;
         }
-        AreaShopTag shop = AreaShopTag.valueOf(shopName);
-        return shop != null && shop.equals(areaShop);
+        return super.matches(path);
     }
 
     @Override

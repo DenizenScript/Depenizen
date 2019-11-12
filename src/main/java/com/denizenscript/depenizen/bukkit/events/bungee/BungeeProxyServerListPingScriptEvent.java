@@ -64,7 +64,7 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
 
     @Override
     public boolean matches(ScriptPath path) {
-        return true;
+        return super.matches(path);
     }
 
     @Override

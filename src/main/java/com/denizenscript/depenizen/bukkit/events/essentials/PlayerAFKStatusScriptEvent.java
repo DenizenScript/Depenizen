@@ -56,7 +56,7 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
         else if (!path.eventArgLowerAt(1).equals("afk")) {
             return false;
         }
-        return true;
+        return super.matches(path);
     }
 
     @Override

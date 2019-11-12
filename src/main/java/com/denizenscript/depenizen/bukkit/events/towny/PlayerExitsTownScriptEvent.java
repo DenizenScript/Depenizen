@@ -47,12 +47,10 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public boolean matches(ScriptPath path) {
         String name = path.eventArgLowerAt(3);
-        TownTag eventTown = TownTag.fromWorldCoord(event.getFrom());
-        if (name.equals("town") && eventTown != null) {
-            return true;
+        if (!name.equals("town") && !town.equals(TownTag.valueOf(name))) {
+            return false;
         }
-        TownTag givenTown = TownTag.valueOf(name);
-        return eventTown != null && givenTown != null && eventTown.equals(givenTown);
+        return super.matches(path);
     }
 
     @Override
@@ -84,6 +82,9 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
             return;
         }
         town = TownTag.fromWorldCoord(event.getFrom());
+        if (town == null) {
+            return;
+        }
         this.event = event;
         fire(event);
     }

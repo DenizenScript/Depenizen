@@ -64,7 +64,7 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
             return false;
         }
 
-        return true;
+        return super.matches(path);
     }
 
     @Override

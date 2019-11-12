@@ -58,7 +58,7 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
         if (!status.equals("status")) {
             return false;
         }
-        return true;
+        return super.matches(path);
     }
 
     @Override

@@ -63,8 +63,7 @@ public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent im
         if (!runInCheck(path, player.getLocation())) {
             return false;
         }
-
-        return true;
+        return super.matches(path);
     }
 
     @Override

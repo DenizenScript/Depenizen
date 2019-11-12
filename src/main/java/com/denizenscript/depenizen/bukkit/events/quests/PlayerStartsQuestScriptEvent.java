@@ -49,8 +49,7 @@ public class PlayerStartsQuestScriptEvent extends BukkitScriptEvent implements L
         if (!questName.equals("quest") && !questName.equals(CoreUtilities.toLowerCase(event.getQuest().getId()))) {
             return false;
         }
-
-        return true;
+        return super.matches(path);
     }
 
     @Override

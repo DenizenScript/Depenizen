@@ -44,7 +44,7 @@ public class PlayerExitsPVPArenaScriptEvent extends BukkitScriptEvent implements
 
     @Override
     public boolean matches(ScriptPath path) {
-        return true;
+        return super.matches(path);
     }
 
     @Override

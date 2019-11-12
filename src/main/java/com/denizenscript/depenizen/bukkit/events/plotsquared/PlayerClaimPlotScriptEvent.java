@@ -54,14 +54,10 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public boolean matches(ScriptPath path) {
         String plotName = path.eventArgLowerAt(3);
-        if (plotName.equals("plotsquaredplot")) {
-            return true;
-        }
-        PlotSquaredPlotTag dplot = PlotSquaredPlotTag.valueOf(plotName);
-        if (dplot == null || !dplot.equals(plot)) {
+        if (!plotName.equals("plotsquaredplot") && !plot.equals(PlotSquaredPlotTag.valueOf(plotName))) {
             return false;
         }
-        return true;
+        return super.matches(path);
     }
 
     @Override

@@ -59,7 +59,7 @@ public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent impleme
             return false;
         }
 
-        return true;
+        return super.matches(path);
     }
 
     @Override

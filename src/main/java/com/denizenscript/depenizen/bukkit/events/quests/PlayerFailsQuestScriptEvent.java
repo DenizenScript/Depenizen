@@ -50,7 +50,7 @@ public class PlayerFailsQuestScriptEvent extends BukkitScriptEvent implements Li
             return false;
         }
 
-        return true;
+        return super.matches(path);
     }
 
     @Override

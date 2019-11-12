@@ -50,7 +50,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
         if (!arenaname.equals("arena") && (a == null || !CoreUtilities.toLowerCase(a.getArena().arenaName()).equals(arenaname))) {
             return false;
         }
-        return true;
+        return super.matches(path);
     }
 
     @Override

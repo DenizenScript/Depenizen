@@ -64,7 +64,7 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
             return false;
         }
 
-        return true;
+        return super.matches(path);
     }
 
     @Override
