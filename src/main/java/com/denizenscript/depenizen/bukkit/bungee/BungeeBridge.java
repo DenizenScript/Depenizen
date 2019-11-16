@@ -5,6 +5,7 @@ import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyCommandPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyPingPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.packets.out.MyInfoPacketOut;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeCommand;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeExecuteCommand;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeRunCommand;
@@ -97,7 +98,7 @@ public class BungeeBridge {
     }
 
     public void sendPacket(PacketOut packet) {
-        if (!connected) {
+        if (!connected && !(packet instanceof MyInfoPacketOut)) {
             Debug.echoError("BungeeBridge tried to send packet while not connected.");
             return;
         }
