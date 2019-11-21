@@ -1,10 +1,12 @@
 package com.denizenscript.depenizen.bukkit.objects.shopkeepers;
 
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.depenizen.bukkit.bridges.ShopkeepersBridge;
 import com.nisovin.shopkeepers.api.shopkeeper.Shopkeeper;
 import com.nisovin.shopkeepers.api.shopkeeper.TradingRecipe;
 import com.nisovin.shopkeepers.api.ShopkeepersAPI;
 import com.nisovin.shopkeepers.api.ShopkeepersPlugin;
+import com.nisovin.shopkeepers.api.shopkeeper.player.PlayerShopkeeper;
 import com.nisovin.shopkeepers.api.shopobjects.entity.EntityShopObject;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
@@ -210,6 +212,20 @@ public class ShopKeeperTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("entity")) {
             return getDenizenEntity().getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <ShopKeeperTag.owner>
+        // @returns PlayerTag
+        // @description
+        // Returns the player that owns this ShopKeeper, if any.
+        // @Plugin Depenizen, ShopKeepers
+        // -->
+        else if (attribute.startsWith("owner")) {
+            if (shopkeeper instanceof PlayerShopkeeper) {
+                return new PlayerTag(((PlayerShopkeeper) shopkeeper).getOwnerUUID()).getAttribute(attribute.fulfill(1));
+            }
+            return null;
         }
 
         // <--[tag]
