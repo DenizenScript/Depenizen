@@ -167,7 +167,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @Plugin Depenizen, MythicMobs
         // -->
         else if (attribute.startsWith("display_name")) {
-            return new ElementTag(mobType.getDisplayName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(mobType.getDisplayName().get()).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
