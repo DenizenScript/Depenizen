@@ -94,7 +94,7 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
             String determination = determinationObj.toString();
             String determinationLow = CoreUtilities.toLowerCase(determination);
             if (determinationLow.startsWith("max_players:")) {
-                maxPlayers = ArgumentHelper.getIntegerFrom(determination.substring("max_players:".length()));
+                maxPlayers = Integer.parseInt(determination.substring("max_players:".length()));
                 return true;
             }
             else if (determinationLow.startsWith("version:")) {
