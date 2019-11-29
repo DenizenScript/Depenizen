@@ -72,9 +72,14 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
                 Debug.log("Depenizen now connected to Bungee server.");
                 BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
                 BungeeBridge.instance.sendPacket(new MyInfoPacketOut(Bukkit.getPort()));
-                BungeeBridge.instance.connected = true;
                 BungeeBridge.instance.sendPacket(new ControlsProxyPingPacketOut(BungeeBridge.instance.controlsProxyPing));
                 BungeeBridge.instance.sendPacket(new ControlsProxyCommandPacketOut(BungeeBridge.instance.controlsProxyCommand));
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
+                    @Override
+                    public void run() {
+                        BungeeBridge.instance.connected = true;
+                    }
+                }, 10);
             }
         }, 30);
     }

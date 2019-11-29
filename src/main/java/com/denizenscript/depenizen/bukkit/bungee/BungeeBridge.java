@@ -65,7 +65,7 @@ public class BungeeBridge {
 
     public int keepAliveTickRate = 10;
 
-    public int ticksTilKeepalive = 0;
+    public int ticksTilKeepalive = 10;
 
     public long lastPacketReceived = 0;
 
@@ -127,6 +127,7 @@ public class BungeeBridge {
         if (reconnectPending || shuttingDown) {
             return;
         }
+        connected = false;
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
             @Override
             public void run() {
@@ -157,6 +158,7 @@ public class BungeeBridge {
 
     public void connect() {
         try {
+            ticksTilKeepalive = keepAliveTickRate;
             hasConnectionLoading = false;
             knownServers.clear();
             Bootstrap b = new Bootstrap();
