@@ -60,6 +60,7 @@ public class EssentialsItemProperties implements Property {
         // <--[tag]
         // @attribute <ItemTag.worth>
         // @returns ElementTag(Decimal)
+        // @mechanism ItemTag.worth
         // @description
         // Returns the amount of money one of this item is worth in Essentials.
         // @Plugin Depenizen, Essentials
