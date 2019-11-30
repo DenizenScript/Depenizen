@@ -44,9 +44,9 @@ public class PVPArenaBridge extends Bridge {
         // <--[tag]
         // @attribute <pvparena[<name>]>
         // @returns PVPArena
+        // @plugin Depenizen, PVPArena
         // @description
         // Returns the PVPArena by the input name.
-        // @Plugin Depenizen, PVPArena
         // -->
         if (attribute.hasContext(1)) {
             PVPArenaArenaTag arena = PVPArenaArenaTag.valueOf(attribute.getContext(1));
@@ -62,9 +62,9 @@ public class PVPArenaBridge extends Bridge {
         // <--[tag]
         // @attribute <pvparena.list_arenas>
         // @returns ListTag(PVPArena)
+        // @plugin Depenizen, PVPArena
         // @description
         // Returns a list of all PVPArenas.
-        // @Plugin Depenizen, PVPArena
         // -->
         attribute = attribute.fulfill(1);
         if (attribute.startsWith("list_arenas")) {

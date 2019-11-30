@@ -161,9 +161,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.id_x>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns the plot's X coordinate portion of its ID.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("x")) {
             return new ElementTag(plot.getId().x).getAttribute(attribute.fulfill(1));
@@ -172,9 +172,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.id_Z>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns the plot's Z coordinate portion of its ID.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("z")) {
             return new ElementTag(plot.getId().y).getAttribute(attribute.fulfill(1));
@@ -183,9 +183,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.home>
         // @returns LocationTag
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns the plot's current home location.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("home")) {
             com.github.intellectualsites.plotsquared.plot.object.Location loca = plot.getHome();
@@ -195,9 +195,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.default_home>
         // @returns LocationTag
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns the plot's default home location.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("default_home")) {
             com.github.intellectualsites.plotsquared.plot.object.Location loca = plot.getDefaultHome();
@@ -207,9 +207,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.world>
         // @returns WorldTag
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns the plot's world.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("world")) {
             return WorldTag.valueOf(plot.getArea().worldname).getAttribute(attribute.fulfill(1));
@@ -218,9 +218,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.owners>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns a list of all owners of the plot.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("owners")) {
             ListTag players = new ListTag();
@@ -233,9 +233,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.trusted>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns a list of all trusted of the plot.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("trusted")) {
             ListTag players = new ListTag();
@@ -248,9 +248,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.denied>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns a list of all players denied from the plot.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("denied")) {
             ListTag players = new ListTag();
@@ -263,9 +263,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.members>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns a list of all members of the plot.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("members")) {
             ListTag players = new ListTag();
@@ -278,9 +278,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.cuboid>
         // @returns CuboidTag
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns the plot's cuboid.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("cuboid")) {
             WorldTag world = WorldTag.valueOf(plot.getArea().worldname);
@@ -292,9 +292,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.all_cuboids>
         // @returns ListTag(CuboidTag)
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns all the plot's cuboids in a list. Useful for merged plots.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("all_cuboids")) {
             ListTag cuboids = new ListTag();

@@ -177,9 +177,9 @@ public class JobsJobTag implements ObjectTag {
                 // <--[tag]
                 // @attribute <JobsJobTag.xp.max>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, Jobs
                 // @description
                 // Returns the maximum experience a player can get in a specified job.
-                // @Plugin Depenizen, Jobs
                 // -->
                 if (attribute.startsWith("max")) {
                     return new ElementTag(jobProgression.getMaxExperience())
@@ -189,9 +189,9 @@ public class JobsJobTag implements ObjectTag {
                 // <--[tag]
                 // @attribute <JobsJobTag.xp.level>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, Jobs
                 // @description
                 // Returns the current experience level a player has in a specified job.
-                // @Plugin Depenizen, Jobs
                 // -->
                 if (attribute.startsWith("level")) {
                     return new ElementTag(jobProgression.getLevel())
@@ -201,9 +201,9 @@ public class JobsJobTag implements ObjectTag {
                 // <--[tag]
                 // @attribute <JobsJobTag.xp>
                 // @returns ElementTag(Decimal)
+                // @plugin Depenizen, Jobs
                 // @description
                 // Returns the current experience a player has in a specified job.
-                // @Plugin Depenizen, Jobs
                 // -->
                 return new ElementTag(jobProgression.getExperience()).getAttribute(attribute);
             }
@@ -212,9 +212,9 @@ public class JobsJobTag implements ObjectTag {
         // <--[tag]
         // @attribute <JobsJobTag.color>
         // @returns ElementTag
+        // @plugin Depenizen, Jobs
         // @description
         // Returns the ChatColor of the job.
-        // @Plugin Depenizen, Jobs
         // -->
         if (attribute.startsWith("color")) {
             return new ElementTag(job.getChatColor().toString())
@@ -224,9 +224,9 @@ public class JobsJobTag implements ObjectTag {
         // <--[tag]
         // @attribute <JobsJobTag.description>
         // @returns ElementTag
+        // @plugin Depenizen, Jobs
         // @description
         // Returns the description of the job.
-        // @Plugin Depenizen, Jobs
         // -->
         else if (attribute.startsWith("description")) {
             return new ElementTag(job.getDescription()).getAttribute(attribute.fulfill(1));
@@ -238,9 +238,9 @@ public class JobsJobTag implements ObjectTag {
             // <--[tag]
             // @attribute <JobsJobTag.name.short>
             // @returns ElementTag
+            // @plugin Depenizen, Jobs
             // @description
             // Returns the shortened name of the job.
-            // @Plugin Depenizen, Jobs
             // -->
             if (attribute.startsWith("short")) {
                 return new ElementTag(job.getShortName())
@@ -250,9 +250,9 @@ public class JobsJobTag implements ObjectTag {
             // <--[tag]
             // @attribute <JobsJobTag.name>
             // @returns ElementTag
+            // @plugin Depenizen, Jobs
             // @description
             // Returns the name of the job.
-            // @Plugin Depenizen, Jobs
             // -->
             return new ElementTag(job.getName()).getAttribute(attribute);
         }
@@ -260,10 +260,10 @@ public class JobsJobTag implements ObjectTag {
         // <--[tag]
         // @attribute <jobs@job.type>
         // @returns ElementTag
+        // @plugin Depenizen, Jobs
         // @description
         // Always returns 'Job' for JobsJob objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin Depenizen, Jobs
         // -->
         if (attribute.startsWith("type")) {
             return new ElementTag("Job").getAttribute(attribute.fulfill(1));

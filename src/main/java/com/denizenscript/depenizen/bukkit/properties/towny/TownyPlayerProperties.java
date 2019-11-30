@@ -68,9 +68,9 @@ public class TownyPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.has_nation>
             // @returns ElementTag(Boolean)
+            // @plugin Depenizen, Towny
             // @description
             // Returns whether the player is part of a nation.
-            // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("has_nation")) {
                 return new ElementTag(getResident().hasNation()).getAttribute(attribute.fulfill(1));
@@ -79,9 +79,9 @@ public class TownyPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.has_town>
             // @returns ElementTag(Boolean)
+            // @plugin Depenizen, Towny
             // @description
             // Returns whether the player is part of a town.
-            // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("has_town")) {
                 return new ElementTag(getResident().hasTown()).getAttribute(attribute.fulfill(1));
@@ -90,9 +90,9 @@ public class TownyPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.mode_list>
             // @returns ListTag(Element)
+            // @plugin Depenizen, Towny
             // @description
             // Returns the player's towny modes as a list.
-            // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("mode_list")) {
                 ListTag modes = new ListTag();
@@ -105,9 +105,9 @@ public class TownyPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.nation_ranks>
             // @returns ListTag(Element)
+            // @plugin Depenizen, Towny
             // @description
             // Returns the player's nation ranks.
-            // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("nation_ranks")) {
                 ListTag ranks = new ListTag();
@@ -120,9 +120,9 @@ public class TownyPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.nation>
             // @returns NationTag
+            // @plugin Depenizen, Towny
             // @description
             // Returns the player's nation.
-            // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("nation")) {
                 try {
@@ -143,9 +143,9 @@ public class TownyPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.town_ranks>
             // @returns ListTag(Element)
+            // @plugin Depenizen, Towny
             // @description
             // Returns the player's town ranks.
-            // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("town_ranks")) {
                 ListTag ranks = new ListTag();
@@ -158,9 +158,9 @@ public class TownyPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.town>
             // @returns TownTag
+            // @plugin Depenizen, Towny
             // @description
             // Returns the player's town.
-            // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("town")) {
                 try {

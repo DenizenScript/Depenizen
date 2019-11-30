@@ -60,10 +60,10 @@ public class PlayerPointsBridge extends Bridge {
         // <--[tag]
         // @attribute <playerpoints.leaders>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, PlayerPoints
         // @description
         // Returns a list of all players known to PlayerPoints, sorted in order of point value.
         // Use like, for example, '<playerpoints.leaders.get[1].to[10]>' to get the top 10.
-        // @Plugin Depenizen, PlayerPoints
         // -->
         if (attribute.startsWith("leaders")) {
             event.setReplacedObject(getLeaders().getObjectAttribute(attribute.fulfill(1)));

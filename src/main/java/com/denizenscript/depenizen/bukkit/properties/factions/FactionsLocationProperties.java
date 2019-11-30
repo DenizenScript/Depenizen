@@ -58,9 +58,9 @@ public class FactionsLocationProperties implements Property {
         // <--[tag]
         // @attribute <LocationTag.faction>
         // @returns FactionTag
+        // @plugin Depenizen, Factions
         // @description
         // Returns the faction at the location. (Can also be SafeZone, WarZone, or Wilderness)
-        // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("faction")) {
             return new FactionTag(BoardColl.get().getFactionAt(PS.valueOf(location)))

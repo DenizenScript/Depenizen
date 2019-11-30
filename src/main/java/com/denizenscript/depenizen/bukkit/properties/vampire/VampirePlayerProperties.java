@@ -60,9 +60,9 @@ public class VampirePlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.is_vampire>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Vampire
         // @description
         // Returns true if the player is a vampire.
-        // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("is_vampire")) {
             return new ElementTag(uPlayer.isVampire()).getAttribute(attribute.fulfill(1));
@@ -71,9 +71,9 @@ public class VampirePlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.is_ínfected>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Vampire
         // @description
         // Returns true if the player is infected.
-        // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("is_ínfected")) {
             return new ElementTag(uPlayer.isInfected()).getAttribute(attribute.fulfill(1));
@@ -82,9 +82,9 @@ public class VampirePlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.combat_infect>
         // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Vampire
         // @description
         // Returns the value of the combat infection risk.
-        // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("combat_infect")) {
             return new ElementTag(uPlayer.combatInfectRisk()).getAttribute(attribute.fulfill(1));
@@ -93,9 +93,9 @@ public class VampirePlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.combat_damage>
         // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Vampire
         // @description
         // Returns the value of the combat damage factor.
-        // @Plugin Depenizen, Vampire
         // -->
         if (attribute.startsWith("combat_damage")) {
             return new ElementTag(uPlayer.combatDamageFactor()).getAttribute(attribute.fulfill(1));

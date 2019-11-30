@@ -40,9 +40,9 @@ public class MythicMobsBridge extends Bridge {
         // <--[tag]
         // @attribute <mythic_item[<name>]>
         // @returns ItemTag
+        // @plugin Depenizen, MythicMobs
         // @description
         // Returns an ItemTag of the named mythic item.
-        // @Plugin Depenizen, MythicMobs
         // -->
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override

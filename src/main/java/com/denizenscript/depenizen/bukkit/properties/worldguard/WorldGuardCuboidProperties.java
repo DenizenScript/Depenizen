@@ -93,9 +93,9 @@ public class WorldGuardCuboidProperties implements Property {
         // <--[tag]
         // @attribute <CuboidTag.has_region>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, WorldGuard
         // @description
         // Returns whether the cuboid contains any region.
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("has_region")) {
             return new ElementTag(hasRegion()).getAttribute(attribute.fulfill(1));
@@ -104,9 +104,9 @@ public class WorldGuardCuboidProperties implements Property {
         // <--[tag]
         // @attribute <CuboidTag.regions>
         // @returns ListTag(Region)
+        // @plugin Depenizen, WorldGuard
         // @description
         // Returns a list of regions that are in this cuboid.
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("regions")) {
             return getRegions(cuboid.getWorld()).getAttribute(attribute.fulfill(1));

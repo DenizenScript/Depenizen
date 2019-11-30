@@ -55,9 +55,9 @@ public class PlotSquaredElementProperties implements Property {
         // <--[tag]
         // @attribute <ElementTag.as_plotsquared_plot>
         // @returns PlotSquaredPlotTag
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns the element as a dPlotSquaredPlot.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("as_plotsquared_plot")) {
             try {

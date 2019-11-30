@@ -161,9 +161,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.assistants>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, Towny
         // @description
         // Returns a list of the town's assistants.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("assistants")) {
             ListTag list = new ListTag();
@@ -176,9 +176,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.balance>
         // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Towny
         // @description
         // Returns the current money balance of the town.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("balance")) {
             try {
@@ -194,9 +194,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.board>
         // @returns ElementTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the town's current board.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("board")) {
             return new ElementTag(town.getTownBoard())
@@ -206,9 +206,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.is_open>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns true if the town is currently open.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open")) {
             return new ElementTag(town.isOpen())
@@ -218,9 +218,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.is_public>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns true if the town is currently public.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("ispublic") || attribute.startsWith("is_public")) {
             return new ElementTag(town.isPublic())
@@ -230,9 +230,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.mayor>
         // @returns PlayerTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the mayor of the town.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("mayor")) {
             return PlayerTag.valueOf(town.getMayor().getName())
@@ -242,9 +242,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.name>
         // @returns ElementTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the town's names.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("name")) {
             return new ElementTag(town.getName())
@@ -254,9 +254,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.nation>
         // @returns NationTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the nation that the town belongs to.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("nation")) {
             try {
@@ -270,9 +270,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.player_count>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, Towny
         // @description
         // Returns the number of players in the town.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
             return new ElementTag(town.getNumResidents())
@@ -282,9 +282,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.residents>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, Towny
         // @description
         // Returns a list of the town's residents.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("residents")) {
             ListTag list = new ListTag();
@@ -297,9 +297,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.size>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, Towny
         // @description
         // Returns the number of blocks the town owns.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("size")) {
             return new ElementTag(town.getPurchasedBlocks())
@@ -309,9 +309,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.spawn>
         // @returns LocationTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the spawn point of the town.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("spawn")) {
             try {
@@ -325,9 +325,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.tag>
         // @returns ElementTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the town's tag.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("tag")) {
             return new ElementTag(town.getTag())
@@ -337,9 +337,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.taxes>
         // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Towny
         // @description
         // Returns the town's current taxes.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("taxes")) {
             return new ElementTag(town.getTaxes())
@@ -349,9 +349,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.outposts>
         // @returns ListTag(LocationTag)
+        // @plugin Depenizen, Towny
         // @description
         // Returns a list of the town's outpost locations.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("outposts")) {
             ListTag posts = new ListTag();
@@ -364,10 +364,10 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.type>
         // @returns ElementTag
+        // @plugin Depenizen, Towny
         // @description
         // Always returns 'Town' for dTown objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("type")) {
             return new ElementTag("Town").getAttribute(attribute.fulfill(1));
@@ -376,9 +376,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.has_explosions>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns if the town has explosions turned on.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("has_explosions")) {
             return new ElementTag(town.isBANG()).getAttribute(attribute.fulfill(1));
@@ -387,9 +387,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.has_mobs>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns if the town has mobs turned on.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("has_mobs")) {
             return new ElementTag(town.hasMobs()).getAttribute(attribute.fulfill(1));
@@ -398,9 +398,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.has_pvp>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns if the town has PvP turned on.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("has_pvp")) {
             return new ElementTag(town.isPVP()).getAttribute(attribute.fulfill(1));
@@ -409,9 +409,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.has_firespread>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns if the town has firespread turned on.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("has_firespread")) {
             return new ElementTag(town.isFire()).getAttribute(attribute.fulfill(1));
@@ -420,9 +420,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.has_taxpercent>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns if the town has taxes in percentage.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("has_taxpercent")) {
             return new ElementTag(town.isTaxPercentage()).getAttribute(attribute.fulfill(1));
@@ -431,9 +431,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.plottax>
         // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Towny
         // @description
         // Returns the amount of taxes collected from plots.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("plottax")) {
             return new ElementTag(town.getPlotTax()).getAttribute(attribute.fulfill(1));
@@ -442,9 +442,9 @@ public class TownTag implements ObjectTag {
         // <--[tag]
         // @attribute <TownTag.plotprice>
         // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Towny
         // @description
         // Returns the price of a plot.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("plotprice")) {
             return new ElementTag(town.getPlotPrice()).getAttribute(attribute.fulfill(1));

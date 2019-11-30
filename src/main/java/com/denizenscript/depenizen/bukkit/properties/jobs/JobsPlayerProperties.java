@@ -60,9 +60,9 @@ public class JobsPlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.jobs[<job>]>
         // @returns JobsJobTag
+        // @plugin Depenizen, Jobs
         // @description
         // Returns the job specified with the player's information attached.
-        // @Plugin Depenizen, Jobs
         // -->
         if (attribute.startsWith("jobs")) {
             Job job = null;

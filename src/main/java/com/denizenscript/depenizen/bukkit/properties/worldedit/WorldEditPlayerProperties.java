@@ -84,13 +84,13 @@ public class WorldEditPlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.we_brush_info[(<item>)]>
         // @returns ListTag
+        // @plugin Depenizen, WorldEdit
         // @description
         // Returns information about a player's current brush for an item.
         // If no item is specified, will be based on their held item.
         // Output is in format: type|size|range|material
         //
         // Note that some values may be listed as "unknown" or strange values due to WorldEdit having a messy API (no way to automatically stringify brush data).
-        // @Plugin Depenizen, WorldEdit
         // -->
         if (attribute.startsWith("we_brush_info")) {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
@@ -130,9 +130,9 @@ public class WorldEditPlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.we_selection>
         // @returns CuboidTag
+        // @plugin Depenizen, WorldEdit
         // @description
         // Returns the player's current block area selection, as a CuboidTag.
-        // @Plugin Depenizen, WorldEdit
         // -->
         if (attribute.startsWith("we_selection") || attribute.startsWith("selected_region")) {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;

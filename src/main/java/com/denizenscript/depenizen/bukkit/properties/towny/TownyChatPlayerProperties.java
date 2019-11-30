@@ -68,9 +68,9 @@ public class TownyChatPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.townychat.channels>
             // @returns ListTag(Element)
+            // @plugin Depenizen, Towny
             // @description
             // Returns a list of all channels the player is in.
-            // @Plugin Depenizen, Towny
             // -->
             if (attribute.startsWith("channel")) {
                 ListTag chans = new ListTag();
@@ -83,9 +83,9 @@ public class TownyChatPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.townychat.muted_in[<channel name>]>
             // @returns ElementTag(Boolean)
+            // @plugin Depenizen, Towny
             // @description
             // Returns whether the player is muted in the specified channel.
-            // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("muted_in") && attribute.hasContext(1)) {
                 Channel c = holder.getChannel(attribute.getAttribute(1));
@@ -98,9 +98,9 @@ public class TownyChatPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.townychat.has_permission[<channel name>]>
             // @returns ElementTag(Boolean)
+            // @plugin Depenizen, Towny
             // @description
             // Returns whether the player has permissions to join the specified channel.
-            // @Plugin Depenizen, Towny
             // -->
             else if (attribute.startsWith("has_permission") && attribute.hasContext(1)) {
                 Channel c = holder.getChannel(attribute.getContext(1));

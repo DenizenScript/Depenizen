@@ -64,9 +64,9 @@ public class TownyCuboidProperties implements Property {
         // <--[tag]
         // @attribute <CuboidTag.has_town>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns whether the cuboid contains any town at all.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("has_town")) {
             for (Location location : cuboid.getBlockLocationsUnfiltered()) {
@@ -80,9 +80,9 @@ public class TownyCuboidProperties implements Property {
         // <--[tag]
         // @attribute <CuboidTag.list_towns>
         // @returns ListTag(dTown)
+        // @plugin Depenizen, Towny
         // @description
         // Returns all the towns within the cuboid.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("list_towns")) {
             ListTag list = new ListTag();

@@ -61,9 +61,9 @@ public class PlotSquaredLocationProperties implements Property {
         // <--[tag]
         // @attribute <LocationTag.plotsquared_plot>
         // @returns PlotSquaredPlotTag
+        // @plugin Depenizen, PlotSquared
         // @description
         // Returns the plot contained by this location.
-        // @Plugin Depenizen, PlotSquared
         // -->
         if (attribute.startsWith("plotsquared_plot")) {
             try {

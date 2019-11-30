@@ -71,9 +71,9 @@ public class ASkyBlockPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.skyblock.has_skyblock>
             // @returns ElementTag(Boolean)
+            // @plugin Depenizen, A SkyBlock
             // @description
             // Returns whether the player has a skyblock.
-            // @Plugin Depenizen, A SkyBlock
             // -->
             if (attribute.startsWith("has_skyblock")) {
                 return new ElementTag(api.hasIsland(player.getOfflinePlayer().getUniqueId()))
@@ -84,9 +84,9 @@ public class ASkyBlockPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.skyblock.center>
                 // @returns LocationTag
+                // @plugin Depenizen, A SkyBlock
                 // @description
                 // Returns the centre of the player's skyblock.
-                // @Plugin Depenizen, A SkyBlock
                 // -->
                 if (attribute.startsWith("center") || attribute.startsWith("centre")) {
                     return new LocationTag(skyblock.getCenter()).getAttribute(attribute.fulfill(1));
@@ -95,9 +95,9 @@ public class ASkyBlockPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.skyblock.spawn_point>
                 // @returns LocationTag
+                // @plugin Depenizen, A SkyBlock
                 // @description
                 // Returns the spawnpoint of the player's skyblock.
-                // @Plugin Depenizen, A SkyBlock
                 // -->
                 else if (attribute.startsWith("spawn_point")) {
                     return new LocationTag(skyblock.getSpawnPoint()).getAttribute(attribute.fulfill(1));
@@ -106,9 +106,9 @@ public class ASkyBlockPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.skyblock.members>
                 // @returns ListTag(PlayerTag)
+                // @plugin Depenizen, A SkyBlock
                 // @description
                 // Returns a list of members of the player's skyblock.
-                // @Plugin Depenizen, A SkyBlock
                 // -->
                 else if (attribute.startsWith("members")) {
                     ListTag m = new ListTag();
@@ -121,9 +121,9 @@ public class ASkyBlockPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.skyblock.level>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, A SkyBlock
                 // @description
                 // Returns the level of the player's skyblock.
-                // @Plugin Depenizen, A SkyBlock
                 // -->
                 else if (attribute.startsWith("level")) {
                     return new ElementTag(api.getIslandLevel(player.getOfflinePlayer().getUniqueId()))

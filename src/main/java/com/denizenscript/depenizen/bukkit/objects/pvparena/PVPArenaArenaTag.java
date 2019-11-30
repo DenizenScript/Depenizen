@@ -120,9 +120,9 @@ public class PVPArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <PVPArenaArenaTag.name>
         // @returns ElementTag
+        // @plugin Depenizen, PVPArena
         // @description
         // Returns the name of the arena.
-        // @Plugin Depenizen, PVPArena
         // -->
         if (attribute.startsWith("name")) {
             return new ElementTag(arena.getName()).getAttribute(attribute.fulfill(1));
@@ -131,9 +131,9 @@ public class PVPArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <PVPArenaArenaTag.fighters>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, PvPArena
         // @description
         // Returns a list of all fighters in the arena.
-        // @Plugin Depenizen, PvPArena
         // -->
         else if (attribute.startsWith("fighters")) {
             ListTag fighters = new ListTag();
@@ -146,10 +146,10 @@ public class PVPArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <PVPArenaArenaTag.type>
         // @returns ElementTag
+        // @plugin Depenizen, PVPArena
         // @description
         // Always returns 'PVPArena' for PVPArena objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin Depenizen, PVPArena
         // -->
         else if (attribute.startsWith("type")) {
             return new ElementTag("PVPArena").getAttribute(attribute.fulfill(1));

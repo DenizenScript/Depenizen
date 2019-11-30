@@ -149,9 +149,9 @@ public class LuckPermsTrackTag implements ObjectTag {
         // <--[tag]
         // @attribute <LuckPermsTrackTag.name>
         // @returns ElementTag
+        // @plugin Depenizen, LuckPerms
         // @description
         // Returns the name of the track.
-        // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("name")) {
             return new ElementTag(track.getName()).getAttribute(attribute.fulfill(1));
@@ -160,9 +160,9 @@ public class LuckPermsTrackTag implements ObjectTag {
         // <--[tag]
         // @attribute <LuckPermsTrackTag.groups>
         // @returns ListTag(Element)
+        // @plugin Depenizen, LuckPerms
         // @description
         // Returns the list of groups in the track.
-        // @Plugin Depenizen, LuckPerms
         // -->
         if (attribute.startsWith("groups")) {
             ListTag groups = new ListTag();

@@ -249,9 +249,9 @@ public class BungeeBridge {
         // <--[tag]
         // @attribute <bungee.server>
         // @returns ElementTag
+        // @plugin Depenizen, BungeeCord
         // @description
         // Returns the name of the current server (according to the Bungee proxy config).
-        // @Plugin Depenizen, BungeeCord
         // -->
         if (attribute.startsWith("server")) {
             event.setReplacedObject(new ElementTag(serverName)
@@ -261,9 +261,9 @@ public class BungeeBridge {
         // <--[tag]
         // @attribute <bungee.list_servers>
         // @returns ListTag
+        // @plugin Depenizen, BungeeCord
         // @description
         // Returns a list of known bungee server names.
-        // @Plugin Depenizen, BungeeCord
         // -->
         if (attribute.startsWith("list_servers")) {
             event.setReplacedObject(new ListTag(knownServers)
@@ -273,9 +273,9 @@ public class BungeeBridge {
         // <--[tag]
         // @attribute <bungee.connected>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, BungeeCord
         // @description
         // Returns this server is currently connected to the BungeeCord proxy server.
-        // @Plugin Depenizen, BungeeCord
         // -->
         if (attribute.startsWith("connected")) {
             event.setReplacedObject(new ElementTag(connected)

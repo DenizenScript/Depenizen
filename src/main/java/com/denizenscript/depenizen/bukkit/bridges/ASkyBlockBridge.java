@@ -51,9 +51,9 @@ public class ASkyBlockBridge extends Bridge {
         // <--[tag]
         // @attribute <skyblock.island_world>
         // @returns WorldTag
+        // @plugin Depenizen, A SkyBlock
         // @description
         // Returns the world that A Skyblock uses for islands.
-        // @Plugin Depenizen, A SkyBlock
         // -->
         if (attribute.startsWith("island_world")) {
             event.setReplacedObject(new WorldTag(api.getIslandWorld()).getObjectAttribute(attribute.fulfill(1)));
@@ -62,9 +62,9 @@ public class ASkyBlockBridge extends Bridge {
         // <--[tag]
         // @attribute <skyblock.nether_world>
         // @returns WorldTag
+        // @plugin Depenizen, A SkyBlock
         // @description
         // Returns the world that A Skyblock uses for the nether.
-        // @Plugin Depenizen, A SkyBlock
         // -->
         else if (attribute.startsWith("nether_world")) {
             event.setReplacedObject(new WorldTag(api.getNetherWorld()).getObjectAttribute(attribute.fulfill(1)));
@@ -73,9 +73,9 @@ public class ASkyBlockBridge extends Bridge {
         // <--[tag]
         // @attribute <skyblock.island_count>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, A SkyBlock
         // @description
         // Returns the number of Skyblock Islands that exist.
-        // @Plugin Depenizen, A SkyBlock
         // -->
         else if (attribute.startsWith("island_count")) {
             event.setReplacedObject(new ElementTag(api.getIslandCount()).getObjectAttribute(attribute.fulfill(1)));

@@ -61,9 +61,9 @@ public class ASkyBlockWorldProperties implements Property {
         // <--[tag]
         // @attribute <WorldTag.is_skyblock_world>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, A SkyBlock
         // @description
         // Returns whether the world is used by A SkyBlock.
-        // @Plugin Depenizen, A SkyBlock
         // -->
         if (attribute.startsWith("is_skyblock_world")) {
             return new ElementTag(api.getIslandWorld() == world.getWorld() ||

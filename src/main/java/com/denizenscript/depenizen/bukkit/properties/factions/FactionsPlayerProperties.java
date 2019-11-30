@@ -68,9 +68,9 @@ public class FactionsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.factions.power>
             // @returns ElementTag(Decimal)
+            // @plugin Depenizen, Factions
             // @description
             // Returns the player's power level.
-            // @Plugin Depenizen, Factions
             // -->
             if (attribute.startsWith("power")) {
                 return new ElementTag(getMPlayer().getPower()).getAttribute(attribute.fulfill(1));
@@ -81,10 +81,10 @@ public class FactionsPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.factions.role>
                 // @returns ElementTag
+                // @plugin Depenizen, Factions
                 // @description
                 // Returns the player's role in their faction.
                 // Note: In modern Factions these are called ranks instead of roles.
-                // @Plugin Depenizen, Factions
                 // -->
                 if (attribute.startsWith("role")) {
                     if (getMPlayer().getRank() != null) {
@@ -95,9 +95,9 @@ public class FactionsPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.factions.title>
                 // @returns ElementTag
+                // @plugin Depenizen, Factions
                 // @description
                 // Returns the player's title.
-                // @Plugin Depenizen, Factions
                 // -->
                 else if (attribute.startsWith("title")) {
                     if (getMPlayer().hasTitle()) {
@@ -111,9 +111,9 @@ public class FactionsPlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.faction>
         // @returns FactionTag
+        // @plugin Depenizen, Factions
         // @description
         // Returns the player's faction.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("faction")) {
             return new FactionTag(getMPlayer().getFaction()).getAttribute(attribute.fulfill(1));

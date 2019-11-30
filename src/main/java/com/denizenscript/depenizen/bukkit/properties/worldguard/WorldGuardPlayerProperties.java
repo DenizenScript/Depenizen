@@ -77,9 +77,9 @@ public class WorldGuardPlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.worldguard.can_build[<location>]>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, WorldGuard
         // @description
         // Whether WorldGuard allows to build at a location.
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("can_build") && attribute.hasContext(1)) {
             LocationTag location = LocationTag.valueOf(attribute.getContext(1));
@@ -94,10 +94,10 @@ public class WorldGuardPlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.worldguard.test_flag[<name>]>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, WorldGuard
         // @description
         // Returns the state of a flag for that player at their location.
         // For example: .test_flag[pvp] returns 'true' when the player can be attacked.
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("test_flag")) {
             if (!attribute.hasContext(1)) {
@@ -117,9 +117,9 @@ public class WorldGuardPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.worldguard.test_flag[<name>].at[<location>]>
             // @returns ElementTag(Boolean)
+            // @plugin Depenizen, WorldGuard
             // @description
             // Returns the state of a flag for that player at the specified location.
-            // @Plugin Depenizen, WorldGuard
             // -->
             if (attribute.getAttribute(2).startsWith("at") && attribute.hasContext(2)) {
                 loc = LocationTag.valueOf(attribute.getContext(2));

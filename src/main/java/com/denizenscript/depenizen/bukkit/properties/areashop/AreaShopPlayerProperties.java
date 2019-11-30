@@ -67,9 +67,9 @@ public class AreaShopPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.areashop.owned>
             // @returns ListTag(AreaShop)
+            // @plugin Depenizen, AreaShop
             // @description
             // Returns a list of AreaShops the player owns.
-            // @Plugin Depenizen, AreaShop
             // -->
             if (attribute.startsWith("owned")) {
                 ListTag list = new ListTag();

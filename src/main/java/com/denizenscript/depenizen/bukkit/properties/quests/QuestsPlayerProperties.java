@@ -66,9 +66,9 @@ public class QuestsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.quests.points>
             // @returns ElementTag(Number)
+            // @plugin Depenizen, Quests
             // @description
             // Returns the number of quest points the player has.
-            // @Plugin Depenizen, Quests
             // -->
             if (attribute.startsWith("points")) {
                 if (quester.getBaseData().contains("quest-points")) {
@@ -80,9 +80,9 @@ public class QuestsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.quests.completed_names>
             // @returns ListTag
+            // @plugin Depenizen, Quests
             // @description
             // Returns the names of quests the player has completed.
-            // @Plugin Depenizen, Quests
             // -->
             if (attribute.startsWith("completed_names")) {
                 ListTag list = new ListTag();
@@ -95,9 +95,9 @@ public class QuestsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.quests.active_names>
             // @returns ListTag
+            // @plugin Depenizen, Quests
             // @description
             // Returns the names of quests the player has active.
-            // @Plugin Depenizen, Quests
             // -->
             if (attribute.startsWith("active_names")) {
                 ListTag list = new ListTag();
@@ -110,9 +110,9 @@ public class QuestsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.quests.completed>
             // @returns ElementTag(Number)
+            // @plugin Depenizen, Quests
             // @description
             // Returns the number of quests the player has completed.
-            // @Plugin Depenizen, Quests
             // -->
             else if (attribute.startsWith("completed")) {
                 return new ElementTag(quester.getCompletedQuests().size()).getAttribute(attribute.fulfill(1));
@@ -121,9 +121,9 @@ public class QuestsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.quests.active>
             // @returns ElementTag(Number)
+            // @plugin Depenizen, Quests
             // @description
             // Returns the number of quests the player has active.
-            // @Plugin Depenizen, Quests
             // -->
             else if (attribute.startsWith("active")) {
                 return new ElementTag(quester.getCurrentQuests().size()).getAttribute(attribute.fulfill(1));

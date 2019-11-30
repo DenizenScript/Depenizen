@@ -145,9 +145,9 @@ public class LibsDisguiseTag implements ObjectTag {
         // <--[tag]
         // @attribute <LibsDisguiseTag.type>
         // @returns ElementTag
+        // @plugin Depenizen, LibsDisguises
         // @description
         // Returns the type of the disguise.
-        // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("type")) {
             return new ElementTag(disguise.getType().toString()).getAttribute(attribute.fulfill(1));
@@ -156,9 +156,9 @@ public class LibsDisguiseTag implements ObjectTag {
         // <--[tag]
         // @attribute <LibsDisguiseTag.entity>
         // @returns EntityTag
+        // @plugin Depenizen, LibsDisguises
         // @description
         // Returns the entity of the disguise.
-        // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("entity")) {
             return new EntityTag(disguise.getEntity()).getAttribute(attribute.fulfill(1));
@@ -167,9 +167,9 @@ public class LibsDisguiseTag implements ObjectTag {
         // <--[tag]
         // @attribute <LibsDisguiseTag.display_name>
         // @returns ElementTag
+        // @plugin Depenizen, LibsDisguises
         // @description
         // Returns the display name of the disguise.
-        // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("display_name")) {
             return new ElementTag(disguise.getWatcher().getCustomName()).getAttribute(attribute.fulfill(1));

@@ -74,9 +74,9 @@ public class GriefPreventionPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.griefprevention.list_claims>
             // @returns ListTag(GriefPreventionClaimTag)
+            // @plugin Depenizen, GriefPrevention
             // @description
             // Returns a list of all claims the player has.
-            // @Plugin Depenizen, GriefPrevention
             // -->
             if (attribute.startsWith("list_claims")) {
                 ListTag claims = new ListTag();
@@ -89,9 +89,9 @@ public class GriefPreventionPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.griefprevention.claims>
             // @returns ElementTag(Number)
+            // @plugin Depenizen, GriefPrevention
             // @description
             // Returns the number of claims the player has in GriefPrevention.
-            // @Plugin Depenizen, GriefPrevention
             // -->
             else if (attribute.startsWith("claims")) {
                 return new ElementTag(data.getClaims().size()).getAttribute(attribute.fulfill(1));
@@ -103,9 +103,9 @@ public class GriefPreventionPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.griefprevention.blocks.remaining>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, GriefPrevention
                 // @description
                 // Returns the number of claim blocks the player has left.
-                // @Plugin Depenizen, GriefPrevention
                 // -->
                 if (attribute.startsWith("remaining")) {
                     return new ElementTag(data.getRemainingClaimBlocks()).getAttribute(attribute.fulfill(1));
@@ -114,9 +114,9 @@ public class GriefPreventionPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.griefprevention.blocks.bonus>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, GriefPrevention
                 // @description
                 // Returns the number of bonus claim blocks the player has.
-                // @Plugin Depenizen, GriefPrevention
                 // -->
                 else if (attribute.startsWith("bonus")) {
                     return new ElementTag(data.getBonusClaimBlocks()).getAttribute(attribute.fulfill(1));
@@ -125,9 +125,9 @@ public class GriefPreventionPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.griefprevention.blocks.total>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, GriefPrevention
                 // @description
                 // Returns the total number of claim blocks the player has.
-                // @Plugin Depenizen, GriefPrevention
                 // -->
                 else if (attribute.startsWith("total")) {
                     return new ElementTag(data.getAccruedClaimBlocks() + data.getBonusClaimBlocks())
@@ -137,9 +137,9 @@ public class GriefPreventionPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.griefprevention.blocks>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, GriefPrevention
                 // @description
                 // Returns the number of normal claim blocks the payer has.
-                // @Plugin Depenizen, GriefPrevention
                 // -->
                 else {
                     return new ElementTag(data.getAccruedClaimBlocks()).getAttribute(attribute);

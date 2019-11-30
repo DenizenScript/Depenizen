@@ -61,9 +61,9 @@ public class MythicMobsEntityProperties implements Property {
         // <--[tag]
         // @attribute <EntityTag.is_mythicmob>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, MythicMobs
         // @description
         // Returns whether the entity is a MythicMob.
-        // @Plugin Depenizen, MythicMobs
         // -->
         if (attribute.startsWith("is_mythic_mob") || attribute.startsWith("is_mythicmob")) {
             return new ElementTag(MythicMobsBridge.isMythicMob(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
@@ -72,9 +72,9 @@ public class MythicMobsEntityProperties implements Property {
         // <--[tag]
         // @attribute <EntityTag.mythicmob>
         // @returns MythicMobsMob
+        // @plugin Depenizen, MythicMobs
         // @description
         // Returns the MythicMob for this entity.
-        // @Plugin Depenizen, MythicMobs
         // -->
         else if ((attribute.startsWith("mythicmob") || attribute.startsWith("mythic_mob"))
                 && MythicMobsBridge.isMythicMob(entity.getBukkitEntity())) {

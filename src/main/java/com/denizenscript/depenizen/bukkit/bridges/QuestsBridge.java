@@ -41,9 +41,9 @@ public class QuestsBridge extends Bridge {
         // <--[tag]
         // @attribute <quests.list_quests>
         // @returns ListTag
+        // @plugin Depenizen, Quests
         // @description
         // Returns a list of all quest IDs from the Quests plugin.
-        // @Plugin Depenizen, Quests
         // -->
         if (attribute.startsWith("list_quests")) {
             ListTag list = new ListTag();

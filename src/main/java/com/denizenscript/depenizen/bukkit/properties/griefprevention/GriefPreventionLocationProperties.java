@@ -69,10 +69,10 @@ public class GriefPreventionLocationProperties implements Property {
             // <--[tag]
             // @attribute <LocationTag.griefprevention.has_claim[(<ignore_height>)]>
             // @returns ElementTag(Boolean)
+            // @plugin Depenizen, GriefPrevention
             // @description
             // Returns whether there is a GriefPreventionClaim at this location.
             // Optionally specify an ElementTag(Boolean) for whether to ignore Y axis.
-            // @Plugin Depenizen, GriefPrevention
             // -->
             if (attribute.startsWith("has_claim")) {
                 ElementTag ignoreHeight = new ElementTag(false);
@@ -88,9 +88,9 @@ public class GriefPreventionLocationProperties implements Property {
             // <--[tag]
             // @attribute <LocationTag.griefprevention.claim>
             // @returns GriefPreventionClaimTag
+            // @plugin Depenizen, GriefPrevention
             // @description
             // Returns the GriefPreventionClaim at this location.
-            // @Plugin Depenizen, GriefPrevention
             // -->
             else if (attribute.startsWith("claim")) {
                 Claim claim = dataStore.getClaimAt(location, false, null);

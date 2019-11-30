@@ -117,9 +117,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.allies>
         // @returns ListTag(dNation)
+        // @plugin Depenizen, Towny
         // @description
         // Returns a list of the nation's allies.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("allies")) {
             ListTag list = new ListTag();
@@ -132,9 +132,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.assistants>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, Towny
         // @description
         // Returns a list of the nation's assistants.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("assistants")) {
             ListTag list = new ListTag();
@@ -147,9 +147,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.balance>
         // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Towny
         // @description
         // Returns the current money balance of the nation.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("balance")) {
             try {
@@ -165,9 +165,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.capital>
         // @returns TownTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the capital city of the nation as a dTown.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("capital")) {
             if (nation.hasCapital()) {
@@ -179,9 +179,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.enemies>
         // @returns ListTag(dNation)
+        // @plugin Depenizen, Towny
         // @description
         // Returns a list of the nation's enemies.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("enemies")) {
             ListTag list = new ListTag();
@@ -194,9 +194,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.is_neutral>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns true if the nation is neutral.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("isneutral") || attribute.startsWith("is_neutral")) {
             return new ElementTag(nation.isNeutral())
@@ -206,9 +206,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.king>
         // @returns PlayerTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the king of the nation.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("king")) {
             return PlayerTag.valueOf(nation.getCapital().getMayor().getName())
@@ -218,9 +218,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.name>
         // @returns ElementTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the nation's name.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("name")) {
             return new ElementTag(nation.getName())
@@ -230,9 +230,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.player_count>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, Towny
         // @description
         // Returns the amount of players in the nation.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
             return new ElementTag(nation.getNumResidents())
@@ -242,9 +242,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.relation[<nation>]>
         // @returns ElementTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the nation's current relation with another nation.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("relation")) {
 
@@ -270,9 +270,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.residents>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, Towny
         // @description
         // Returns a list of the nation's residents.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("residents")) {
             ListTag list = new ListTag();
@@ -285,9 +285,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.tag>
         // @returns ElementTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the nation's tag.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("tag")) {
             if (nation.hasTag()) {
@@ -299,9 +299,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.taxes>
         // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Towny
         // @description
         // Returns the nation's current taxes.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("taxes")) {
             return new ElementTag(nation.getTaxes())
@@ -311,9 +311,9 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.town_count>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, Towny
         // @description
         // Returns the number of towns in the nation.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("towncount") || attribute.startsWith("town_count")) {
             return new ElementTag(nation.getNumTowns())
@@ -323,10 +323,10 @@ public class NationTag implements ObjectTag {
         // <--[tag]
         // @attribute <NationTag.type>
         // @returns ElementTag
+        // @plugin Depenizen, Towny
         // @description
         // Always returns 'Nation' for dNation objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("type")) {
             return new ElementTag("Nation").getAttribute(attribute.fulfill(1));

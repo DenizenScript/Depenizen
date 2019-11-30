@@ -135,9 +135,9 @@ public class ResidenceTag implements ObjectTag {
         // <--[tag]
         // @attribute <ResidenceTag.name>
         // @returns ElementTag
+        // @plugin Depenizen, Residence
         // @description
         // Returns the name of the residence.
-        // @Plugin Depenizen, Residence
         // -->
         if (attribute.startsWith("name")) {
             return new ElementTag(residence.getName()).getAttribute(attribute.fulfill(1));
@@ -146,9 +146,9 @@ public class ResidenceTag implements ObjectTag {
         // <--[tag]
         // @attribute <ResidenceTag.owner>
         // @returns PlayerTag
+        // @plugin Depenizen, Residence
         // @description
         // Returns the owner of the residence.
-        // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("owner")) {
             return new PlayerTag(residence.getOwnerUUID()).getAttribute(attribute.fulfill(1));
@@ -157,9 +157,9 @@ public class ResidenceTag implements ObjectTag {
         // <--[tag]
         // @attribute <ResidenceTag.is_within[<location>]>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Residence
         // @description
         // Returns whether the specified location is within this Residence.
-        // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("is_within") && attribute.hasContext(1)) {
             LocationTag location = LocationTag.valueOf(attribute.getContext(1));

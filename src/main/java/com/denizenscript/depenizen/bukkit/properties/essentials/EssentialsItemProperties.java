@@ -61,9 +61,9 @@ public class EssentialsItemProperties implements Property {
         // @attribute <ItemTag.worth>
         // @returns ElementTag(Decimal)
         // @mechanism ItemTag.worth
+        // @plugin Depenizen, Essentials
         // @description
         // Returns the amount of money one of this item is worth in Essentials.
-        // @Plugin Depenizen, Essentials
         // -->
         if (attribute.startsWith("worth")) {
             Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
@@ -79,9 +79,9 @@ public class EssentialsItemProperties implements Property {
             // <--[tag]
             // @attribute <ItemTag.worth.quantity[<#>]>
             // @returns ElementTag(Decimal)
+            // @plugin Depenizen, Essentials
             // @description
             // Returns the amount of money the quantity specified of this item is worth in Essentials.
-            // @Plugin Depenizen, Essentials
             // -->
             if (attribute.startsWith("quantity") && attribute.hasContext(1)) {
                 return new ElementTag(priceBD.multiply(BigDecimal.valueOf(attribute.getIntContext(1))))
@@ -100,12 +100,12 @@ public class EssentialsItemProperties implements Property {
         // @object ItemTag
         // @name worth
         // @input ElementTag(Decimal)
+        // @plugin Depenizen, Essentials
         // @description
         // Sets the worth of this item in Essentials.
         // @tags
         // <ItemTag.worth>
         // <ItemTag.worth.quantity[<#>]>
-        // @Plugin Depenizen, Essentials
         // -->
         if (mechanism.matches("worth") && mechanism.requireDouble()) {
             Essentials ess = (Essentials) EssentialsBridge.instance.plugin;

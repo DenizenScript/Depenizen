@@ -54,9 +54,9 @@ public class JobsBridge extends Bridge {
             // <--[tag]
             // @attribute <jobs[(<name>)]>
             // @returns ListTag(dJob)/dJob
+            // @plugin Depenizen, Jobs
             // @description
             // Returns a list of all known dJobs, or the job by the given input name if one is given.
-            // @Plugin Depenizen, Jobs
             // -->
             ListTag jobList = new ListTag();
             for (Job jb : Jobs.getJobs()) {

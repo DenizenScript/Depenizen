@@ -73,9 +73,9 @@ public class FactionsNPCProperties implements Property {
             // <--[tag]
             // @attribute <NPCTag.factions.power>
             // @returns ElementTag(Decimal)
+            // @plugin Depenizen, Factions
             // @description
             // Returns the NPC's power level.
-            // @Plugin Depenizen, Factions
             // -->
             if (attribute.startsWith("power")) {
                 return new ElementTag(getMPlayer().getPower()).getAttribute(attribute.fulfill(1));
@@ -86,10 +86,10 @@ public class FactionsNPCProperties implements Property {
                 // <--[tag]
                 // @attribute <NPCTag.factions.role>
                 // @returns ElementTag
+                // @plugin Depenizen, Factions
                 // @description
                 // Returns the NPC's role in their faction.
                 // Note: In modern Factions these are called ranks instead of roles.
-                // @Plugin Depenizen, Factions
                 // -->
                 if (attribute.startsWith("role")) {
                     if (getMPlayer().getRank() != null) {
@@ -100,9 +100,9 @@ public class FactionsNPCProperties implements Property {
                 // <--[tag]
                 // @attribute <NPCTag.factions.title>
                 // @returns ElementTag
+                // @plugin Depenizen, Factions
                 // @description
                 // Returns the NPC's title.
-                // @Plugin Depenizen, Factions
                 // -->
                 else if (attribute.startsWith("title")) {
                     if (getMPlayer().hasTitle()) {
@@ -116,9 +116,9 @@ public class FactionsNPCProperties implements Property {
         // <--[tag]
         // @attribute <NPCTag.faction>
         // @returns FactionTag
+        // @plugin Depenizen, Factions
         // @description
         // Returns the NPC's faction.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("faction")) {
             return new FactionTag(getMPlayer().getFaction()).getAttribute(attribute.fulfill(1));

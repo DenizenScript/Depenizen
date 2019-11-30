@@ -62,9 +62,9 @@ public class ShopKeepersEntityProperties implements Property {
         // <--[tag]
         // @attribute <EntityTag.is_shopkeeper>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, ShopKeepers
         // @description
         // Returns whether the entity is a Shopkeeper.
-        // @Plugin Depenizen, ShopKeepers
         // -->
         if (attribute.startsWith("is_shopkeeper")) {
             return new ElementTag(isShopKeeper)
@@ -74,9 +74,9 @@ public class ShopKeepersEntityProperties implements Property {
         // <--[tag]
         // @attribute <EntityTag.shopkeeper>
         // @returns ShopKeeper
+        // @plugin Depenizen, ShopKeepers
         // @description
         // Returns the ShopKeeper for this entity.
-        // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("shopkeeper") && isShopKeeper) {
             return ShopKeeperTag.fromEntity(entity).getAttribute(attribute.fulfill(1));

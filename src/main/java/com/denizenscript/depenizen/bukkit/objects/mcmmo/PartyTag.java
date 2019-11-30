@@ -142,9 +142,9 @@ public class PartyTag implements ObjectTag {
         // <--[tag]
         // @attribute <PartyTag.name>
         // @returns ElementTag
+        // @plugin Depenizen, mcMMO
         // @description
         // Returns the name of the party.
-        // @Plugin Depenizen, mcMMO
         // -->
         if (attribute.startsWith("name")) {
             return new ElementTag(party.getName()).getAttribute(attribute.fulfill(1));
@@ -153,9 +153,9 @@ public class PartyTag implements ObjectTag {
         // <--[tag]
         // @attribute <PartyTag.leader>
         // @returns PlayerTag
+        // @plugin Depenizen, mcMMO
         // @description
         // Returns the leader of the party.
-        // @Plugin Depenizen, mcMMO
         // -->
         else if (attribute.startsWith("leader")) {
             return new PlayerTag(party.getLeader().getUniqueId()).getAttribute(attribute.fulfill(1));
@@ -164,9 +164,9 @@ public class PartyTag implements ObjectTag {
         // <--[tag]
         // @attribute <PartyTag.members>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, mcMMO
         // @description
         // Returns a list of all party members.
-        // @Plugin Depenizen, mcMMO
         // -->
         else if (attribute.startsWith("members")) {
             ListTag players = new ListTag();

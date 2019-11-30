@@ -135,9 +135,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.id>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns the GriefPreventionClaim's ID.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("id")) {
             return new ElementTag(claim.getID()).getAttribute(attribute.fulfill(1));
@@ -146,9 +146,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.managers>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns the GriefPreventionClaim's managers.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("managers")) {
             ListTag managers = new ListTag();
@@ -161,9 +161,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.trusted>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns the GriefPreventionClaim's trusted.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("trusted")) {
             ListTag trusted = new ListTag();
@@ -178,9 +178,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.builders>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns the GriefPreventionClaim's builders.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("builders")) {
             ListTag trusted = new ListTag();
@@ -195,9 +195,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.containers>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns the GriefPreventionClaim's containers.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("containers")) {
             ListTag trusted = new ListTag();
@@ -212,9 +212,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.accessors>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns the GriefPreventionClaim's accessors.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("accessors")) {
             ListTag trusted = new ListTag();
@@ -229,11 +229,11 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.owner>
         // @returns PlayerTag/Element
+        // @mechanism GriefPreventionClaim.owner
+        // @Plugin Depenizen, GriefPrevention
         // @description
         // Returns the GriefPreventionClaim's owner.
         // Can be "Admin" or a PlayerTag.
-        // @mechanism GriefPreventionClaim.owner
-        // @Plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("owner")) {
             if (claim.isAdminClaim()) {
@@ -246,9 +246,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.cuboid>
         // @returns CuboidTag
+        // @Plugin Depenizen, GriefPrevention
         // @description
         // Returns the GriefPreventionClaim's cuboid area.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("cuboid")) {
             LocationTag lower = new LocationTag(claim.getLesserBoundaryCorner());
@@ -261,9 +261,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.is_adminclaim>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns whether GriefPreventionClaim is an Admin Claim.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("is_adminclaim") || attribute.startsWith("is_admin_claim")) {
             return new ElementTag(claim.isAdminClaim()).getAttribute(attribute.fulfill(1));
@@ -272,9 +272,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.chunks>
         // @returns ListTag(ChunkTag)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns a list of all chunks in the GriefPreventionClaim.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("chunks")) {
             ListTag chunks = new ListTag();
@@ -287,9 +287,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.can_siege[<player>]>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns whether the GriefPreventionClaim can siege the player.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("can_siege") && attribute.hasContext(1)) {
             PlayerTag defender = PlayerTag.valueOf(attribute.getContext(1));
@@ -302,9 +302,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.is_sieged>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns whether the GriefPreventionClaim is currently under siege.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         else if (attribute.startsWith("is_sieged")) {
             return new ElementTag(claim.siegeData != null).getAttribute(attribute.fulfill(1));

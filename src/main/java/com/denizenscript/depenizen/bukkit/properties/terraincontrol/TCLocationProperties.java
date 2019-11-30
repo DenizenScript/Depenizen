@@ -63,9 +63,9 @@ public class TCLocationProperties implements Property {
             // <--[tag]
             // @attribute <LocationTag.tc_biome.name>
             // @returns ElementTag
+            // @plugin Depenizen, TerrainControl
             // @description
             // Returns the TerrainControl biome name at this location, if any.
-            // @Plugin Depenizen, TerrainControl
             // -->
             if (attribute.startsWith("name")) {
                 return new ElementTag(biome.getName()).getAttribute(attribute.fulfill(1));
@@ -75,9 +75,9 @@ public class TCLocationProperties implements Property {
                 // <--[tag]
                 // @attribute <LocationTag.tc_biome.temperature>
                 // @returns ElementTag
+                // @plugin Depenizen, TerrainControl
                 // @description
                 // Returns the TerrainControl biome temperature at this location, if any.
-                // @Plugin Depenizen, TerrainControl
                 // -->
                 return new ElementTag(biome.getTemperatureAt(location.getBlockX(), location.getBlockY(), location.getBlockZ()))
                         .getAttribute(attribute.fulfill(1));

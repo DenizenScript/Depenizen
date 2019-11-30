@@ -72,9 +72,9 @@ public class TownyLocationProperties implements Property {
                 // <--[tag]
                 // @attribute <LocationTag.towny.resident>
                 // @returns ElementTag(Boolean)
+                // @plugin Depenizen, Towny
                 // @description
                 // Returns the resident of a Towny plot at the location, if any.
-                // @Plugin Depenizen, Towny
                 // -->
                 if (attribute.startsWith("resident")) {
                     if (!block.hasResident()) {
@@ -94,9 +94,9 @@ public class TownyLocationProperties implements Property {
         // <--[tag]
         // @attribute <LocationTag.has_town>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns whether the location is within a town.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("has_town")) {
             if (TownyUniverse.getTownName(location) != null) {
@@ -110,9 +110,9 @@ public class TownyLocationProperties implements Property {
         // <--[tag]
         // @attribute <LocationTag.town>
         // @returns TownTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the town at the specified location.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("town")) {
             try {
@@ -133,9 +133,9 @@ public class TownyLocationProperties implements Property {
         // <--[tag]
         // @attribute <LocationTag.is_wilderness>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
         // @description
         // Returns whether the location is wilderness.
-        // @Plugin Depenizen, Towny
         // -->
         else if (attribute.startsWith("is_wilderness")) {
             return new ElementTag(TownyUniverse.isWilderness(location.getBlock())).getAttribute(attribute.fulfill(1));

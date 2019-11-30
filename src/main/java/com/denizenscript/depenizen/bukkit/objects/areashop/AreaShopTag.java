@@ -135,9 +135,9 @@ public class AreaShopTag implements ObjectTag {
         // <--[tag]
         // @attribute <AreaShopTag.is_bought>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, AreaShop
         // @description
         // Returns whether this AreaShop has been bought.
-        // @Plugin Depenizen, AreaShop
         // -->
         if (attribute.startsWith("is_bought")) {
             return new ElementTag(areaShop.isBuyRegion()).getAttribute(attribute.fulfill(1));
@@ -146,9 +146,9 @@ public class AreaShopTag implements ObjectTag {
         // <--[tag]
         // @attribute <AreaShopTag.is_rented>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, AreaShop
         // @description
         // Returns whether this AreaShop is being rented.
-        // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("is_rented")) {
             return new ElementTag(areaShop.isRentRegion()).getAttribute(attribute.fulfill(1));
@@ -157,9 +157,9 @@ public class AreaShopTag implements ObjectTag {
         // <--[tag]
         // @attribute <AreaShopTag.groups>
         // @returns ListTag
+        // @plugin Depenizen, AreaShop
         // @description
         // Returns a list of groups that control this AreaShop.
-        // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("groups")) {
             return new ListTag(areaShop.getGroupNames()).getAttribute(attribute.fulfill(1));
@@ -168,9 +168,9 @@ public class AreaShopTag implements ObjectTag {
         // <--[tag]
         // @attribute <AreaShopTag.landlord>
         // @returns PlayerTag
+        // @plugin Depenizen, AreaShop
         // @description
         // Returns the landlord of the AreaShop.
-        // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("landlord")) {
             return new PlayerTag(areaShop.getLandlord()).getAttribute(attribute.fulfill(1));
@@ -179,9 +179,9 @@ public class AreaShopTag implements ObjectTag {
         // <--[tag]
         // @attribute <AreaShopTag.name>
         // @returns ElementTag
+        // @plugin Depenizen, AreaShop
         // @description
         // Returns the name of the AreaShop.
-        // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("name")) {
             return new ElementTag(areaShop.getName()).getAttribute(attribute.fulfill(1));
@@ -190,9 +190,9 @@ public class AreaShopTag implements ObjectTag {
         // <--[tag]
         // @attribute <AreaShopTag.owner>
         // @returns PlayerTag
+        // @plugin Depenizen, AreaShop
         // @description
         // Returns the owner of the AreaShop.
-        // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("owner")) {
             return new PlayerTag(areaShop.getOwner()).getAttribute(attribute.fulfill(1));
@@ -201,9 +201,9 @@ public class AreaShopTag implements ObjectTag {
         // <--[tag]
         // @attribute <AreaShopTag.worldguard_region>
         // @returns WorldGuardRegion
+        // @plugin Depenizen, AreaShop
         // @description
         // Returns the WorldGuardRegion that holds the AreaShop.
-        // @Plugin Depenizen, AreaShop
         // -->
         else if (attribute.startsWith("worldguard_region")) {
             return new WorldGuardRegionTag(areaShop.getRegion(), areaShop.getWorld()).getAttribute(attribute.fulfill(1));

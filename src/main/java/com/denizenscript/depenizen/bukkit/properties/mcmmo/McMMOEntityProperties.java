@@ -61,9 +61,9 @@ public class McMMOEntityProperties implements Property {
             // <--[tag]
             // @attribute <EntityTag.mcmmo.is_spawned_mob>
             // @returns ElementTag(Boolean)
+            // @plugin Depenizen, mcMMO
             // @description
             // Returns whether the entity is tracked by McMMO as a 'spawned' mob (one from a spawner block or spawn egg).
-            // @Plugin Depenizen, mcMMO
             // -->
             if (attribute.startsWith("is_spawned_mob")) {
                 return new ElementTag(entity.getBukkitEntity().hasMetadata(mcMMO.entityMetadataKey))

@@ -71,9 +71,9 @@ public class BungeePlayerProperties implements Property {
             // @object PlayerTag
             // @name send_to
             // @input Element
+            // @plugin Depenizen, BungeeCord
             // @description
             // Sends the player to the specified Bungee server.
-            // @Plugin Depenizen, BungeeCord
             // -->
             if ((mechanism.matches("send_to") && mechanism.hasValue())) {
                 BungeeHelpers.sendPlayer(player.getOfflinePlayer().getUniqueId(), mechanism.getValue().asString());

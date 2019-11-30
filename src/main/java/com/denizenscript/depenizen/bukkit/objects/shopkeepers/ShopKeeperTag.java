@@ -167,9 +167,9 @@ public class ShopKeeperTag implements ObjectTag {
         // <--[tag]
         // @attribute <ShopKeeperTag.is_active>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, ShopKeepers
         // @description
         // Returns whether the Shopkeeper is active.
-        // @Plugin Depenizen, ShopKeepers
         // -->
         if (attribute.startsWith("is_active")) {
             return new ElementTag(shopkeeper.isActive()).getAttribute(attribute.fulfill(1));
@@ -178,9 +178,9 @@ public class ShopKeeperTag implements ObjectTag {
         // <--[tag]
         // @attribute <ShopKeeperTag.is_ui_active>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, ShopKeepers
         // @description
         // Returns whether the Shopkeeper is currently in a trade.
-        // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("is_ui_active")) {
             return new ElementTag(shopkeeper.isUIActive()).getAttribute(attribute.fulfill(1));
@@ -189,10 +189,10 @@ public class ShopKeeperTag implements ObjectTag {
         // <--[tag]
         // @attribute <ShopKeeperTag.trades>
         // @returns ListTag)
+        // @plugin Depenizen, ShopKeepers
         // @description
         // Returns a ListTag of the Shopkeeper's trades (as escaped sub-lists).
         // NOTE: see '!language Property Escaping'.
-        // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("trades") || attribute.startsWith("recipes")) {
             ListTag trades = new ListTag();
@@ -206,9 +206,9 @@ public class ShopKeeperTag implements ObjectTag {
         // <--[tag]
         // @attribute <ShopKeeperTag.entity>
         // @returns EntityTag
+        // @plugin Depenizen, ShopKeepers
         // @description
         // Returns the EntityTag for this ShopKeeper.
-        // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("entity")) {
             return getDenizenEntity().getAttribute(attribute.fulfill(1));
@@ -217,9 +217,9 @@ public class ShopKeeperTag implements ObjectTag {
         // <--[tag]
         // @attribute <ShopKeeperTag.owner>
         // @returns PlayerTag
+        // @plugin Depenizen, ShopKeepers
         // @description
         // Returns the player that owns this ShopKeeper, if any.
-        // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("owner")) {
             if (shopkeeper instanceof PlayerShopkeeper) {
@@ -231,10 +231,10 @@ public class ShopKeeperTag implements ObjectTag {
         // <--[tag]
         // @attribute <ShopKeeperTag.type>
         // @returns ElementTag
+        // @plugin Depenizen, ShopKeepers
         // @description
         // Always returns 'ShopKeeper' for ShopKeeper objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin Depenizen, ShopKeepers
         // -->
         else if (attribute.startsWith("type")) {
             return new ElementTag("ShopKeeper").getAttribute(attribute.fulfill(1));

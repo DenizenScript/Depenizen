@@ -61,9 +61,9 @@ public class TownyBridge extends Bridge {
         // <--[tag]
         // @attribute <towny.list_towns[<world name>]>
         // @returns ListTag(Element)
+        // @plugin Depenizen, Towny
         // @description
         // Returns a list of all towns. Optionally specify a world name.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.startsWith("list_towns")) {
             ListTag towns = new ListTag();
@@ -93,9 +93,9 @@ public class TownyBridge extends Bridge {
         // <--[tag]
         // @attribute <town[<name>]>
         // @returns TownTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the town by the input name.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.hasContext(1)) {
             TownTag town;
@@ -121,9 +121,9 @@ public class TownyBridge extends Bridge {
         // <--[tag]
         // @attribute <nation[<name>]>
         // @returns NationTag
+        // @plugin Depenizen, Towny
         // @description
         // Returns the nation by the input name.
-        // @Plugin Depenizen, Towny
         // -->
         if (attribute.hasContext(1)) {
             NationTag nation;

@@ -36,9 +36,9 @@ public class PlaceholderAPIBridge extends Bridge {
         // <--[tag]
         // @attribute <placeholder[<name>]>
         // @returns ElementTag
+        // @plugin Depenizen, PlaceholderAPI
         // @description
         // Returns the value of the placeholder.
-        // @Plugin Depenizen, PlaceholderAPI
         // -->
         String placeholder = CoreUtilities.toLowerCase(attribute.getContext(1));
         if (placeholder.startsWith("denizen_")) {

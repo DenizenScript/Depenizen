@@ -62,9 +62,9 @@ public class MagicSpellsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.magicspells.mana>
             // @returns ElementTag(Number)
+            // @plugin Depenizen, MagicSpells
             // @description
             // Returns the mana of the player.
-            // @Plugin Depenizen, MagicSpells
             // -->
             if (attribute.startsWith("mana")) {
                 ManaHandler mH = MagicSpells.getManaHandler();

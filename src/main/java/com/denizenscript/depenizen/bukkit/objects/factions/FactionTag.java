@@ -149,9 +149,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.balance>
         // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Factions
         // @description
         // Returns the amount of money the faction currently has.
-        // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("balance")) {
             return new ElementTag(Money.get(faction))
@@ -161,10 +161,10 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.warp[<name>]>
         // @returns LocationTag
+        // @plugin Depenizen, Factions
         // @description
         // Returns the location of the faction's warp by name, if any.
         // Note that this was previously named "home" instead of "warp".
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("warp") && attribute.hasContext(1)) {
             Warp warp = faction.getWarp(attribute.getContext(1));
@@ -184,9 +184,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.id>
         // @returns ElementTag
+        // @plugin Depenizen, Factions
         // @description
         // Returns the unique ID for this faction.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("id")) {
             return new ElementTag(faction.getId()).getAttribute(attribute.fulfill(1));
@@ -195,9 +195,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.is_open>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Factions
         // @description
         // Returns true if the faction is open.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open")) {
             return new ElementTag(faction.isOpen())
@@ -207,9 +207,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.is_peaceful>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Factions
         // @description
         // Returns true if the faction is peaceful.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("ispeaceful") || attribute.startsWith("is_peaceful")) {
             return new ElementTag(faction.getFlag(MFlag.getFlagPeaceful()))
@@ -219,9 +219,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.is_permanent>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Factions
         // @description
         // Returns true if the faction is permanent.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("ispermanent") || attribute.startsWith("is_permanent")) {
             return new ElementTag(faction.getFlag(MFlag.getFlagPermanent()))
@@ -231,9 +231,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.leader>
         // @returns PlayerTag
+        // @plugin Depenizen, Factions
         // @description
         // Returns the faction's leader as a PlayerTag.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("leader")) {
             if (faction.getLeader() != null) {
@@ -245,9 +245,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.name>
         // @returns ElementTag
+        // @plugin Depenizen, Factions
         // @description
         // Returns the name of the faction.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("name")) {
             return new ElementTag(faction.getName())
@@ -257,9 +257,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.player_count>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, Factions
         // @description
         // Returns the number of players in the faction.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
             return new ElementTag(faction.getMPlayers().size())
@@ -269,9 +269,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.power>
         // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Factions
         // @description
         // Returns the amount of power the faction currently has.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("power")) {
             return new ElementTag(faction.getPower())
@@ -281,9 +281,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.relation[<faction>]>
         // @returns ElementTag
+        // @plugin Depenizen, Factions
         // @description
         // Returns the current relation between the faction and another faction.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("relation")) {
             FactionTag to = valueOf(attribute.getContext(1));
@@ -297,9 +297,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.size>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, Factions
         // @description
         // Returns the amount of land the faction has.
-        // @Plugin Depenizen, Factions
         // -->
         else if (attribute.startsWith("size")) {
             return new ElementTag(faction.getLandCount())
@@ -309,10 +309,10 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.type>
         // @returns ElementTag
+        // @plugin Depenizen, Factions
         // @description
         // Always returns 'Faction' for dFaction objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("type")) {
             return new ElementTag("Faction").getAttribute(attribute.fulfill(1));
@@ -321,9 +321,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.claimed_chunks>
         // @returns ListTag(ChunkTag)
+        // @plugin Depenizen, Factions
         // @description
         // Returns a list of all chunks claimed in the faction.
-        // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("claimed_chunks")) {
             Set<PS> chunks = BoardColl.get().getChunks(faction);
@@ -337,9 +337,9 @@ public class FactionTag implements ObjectTag {
         // <--[tag]
         // @attribute <FactionTag.list_players>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, Factions
         // @description
         // Returns a list of all players in the faction.
-        // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("list_players")) {
             Set<PS> chunks = BoardColl.get().getChunks(faction);

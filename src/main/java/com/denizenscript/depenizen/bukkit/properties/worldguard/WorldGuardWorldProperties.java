@@ -64,9 +64,9 @@ public class WorldGuardWorldProperties implements Property {
         // <--[tag]
         // @attribute <WorldTag.list_regions>
         // @returns ListTag(WorldGuardRegionTag)
+        // @plugin Depenizen, WorldGuard
         // @description
         // Returns a list of WorldGuard regions in this world.
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("list_regions")) {
             ListTag regions = new ListTag();
@@ -79,9 +79,9 @@ public class WorldGuardWorldProperties implements Property {
         // <--[tag]
         // @attribute <WorldTag.has_region[<name>]>
         // @returns BooleanTag
+        // @plugin Depenizen, WorldGuard
         // @description
         // Returns whether a region exists in this world for the given name.
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("has_region") && attribute.hasContext(1)) {
             return new ElementTag(manager.hasRegion(attribute.getContext(1))).getAttribute(attribute.fulfill(1));

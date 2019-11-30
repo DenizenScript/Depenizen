@@ -40,9 +40,9 @@ public class GriefPreventionBridge extends Bridge {
         // <--[tag]
         // @attribute <griefprevention.list_claims>
         // @returns ListTag(GriefPreventionClaimTag)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Returns a list of all GriefPrevention claims.
-        // @Plugin Depenizen, GriefPrevention
         // -->
         if (attribute.startsWith("list_claims")) {
             ListTag result = new ListTag();

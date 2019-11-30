@@ -56,9 +56,9 @@ public class NoteBlockAPIPlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.nbs_is_playing>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, NoteBlockAPI
         // @description
         // Returns true if the player is currently listening to a note block song.
-        // @Plugin Depenizen, NoteBlockAPI
         // -->
         if (attribute.startsWith("nbs_is_playing")) {
             return new ElementTag(NoteBlockAPI.isReceivingSong(player.getPlayerEntity())).getAttribute(attribute.fulfill(1));

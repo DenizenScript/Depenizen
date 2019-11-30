@@ -167,9 +167,9 @@ public class WorldGuardRegionTag implements ObjectTag {
         // @attribute <WorldGuardRegionTag.cuboid>
         // @returns CuboidTag
         // @group conversion
+        // @plugin Depenizen, WorldGuard
         // @description
         // Converts a cuboid-shaped region to a CuboidTag.
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("cuboid") || attribute.startsWith("as_cuboid")) { // TODO: Scrap as_cuboid
             if (!(region instanceof ProtectedCuboidRegion)) {
@@ -185,9 +185,9 @@ public class WorldGuardRegionTag implements ObjectTag {
         // <--[tag]
         // @attribute <WorldGuardRegionTag.id>
         // @returns ElementTag
+        // @plugin Depenizen, WorldGuard
         // @description
         // Gets the ID name of the region.
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("id")) {
             return new ElementTag(region.getId()).getAttribute(attribute.fulfill(1));
@@ -196,9 +196,9 @@ public class WorldGuardRegionTag implements ObjectTag {
         // <--[tag]
         // @attribute <WorldGuardRegionTag.members>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, WorldGuard
         // @description
         // Gets a list of all members of a region. (Members are permitted to build, etc.)
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("members")) {
             ListTag list = new ListTag();
@@ -211,9 +211,9 @@ public class WorldGuardRegionTag implements ObjectTag {
         // <--[tag]
         // @attribute <WorldGuardRegionTag.owners>
         // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, WorldGuard
         // @description
         // Gets a list of all owners of a region. (Owners are permitted to build, edit settings, etc.)
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("owners")) {
             ListTag list = new ListTag();
@@ -226,10 +226,10 @@ public class WorldGuardRegionTag implements ObjectTag {
         // <--[tag]
         // @attribute <WorldGuardRegionTag.type>
         // @returns ElementTag
+        // @plugin Depenizen, WorldGuard
         // @description
         // Always returns 'Region' for WorldGuardRegion objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("type")) {
             return new ElementTag("Region").getAttribute(attribute.fulfill(1));
@@ -238,9 +238,9 @@ public class WorldGuardRegionTag implements ObjectTag {
         // <--[tag]
         // @attribute <WorldGuardRegionTag.world>
         // @returns WorldTag
+        // @plugin Depenizen, WorldGuard
         // @description
         // Gets the WorldTag this region is in.
-        // @Plugin Depenizen, WorldGuard
         // -->
         if (attribute.startsWith("world")) {
             return new WorldTag(world).getAttribute(attribute.fulfill(1));

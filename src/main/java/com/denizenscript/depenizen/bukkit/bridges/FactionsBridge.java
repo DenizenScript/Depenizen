@@ -49,9 +49,9 @@ public class FactionsBridge extends Bridge {
         // <--[tag]
         // @attribute <faction[<name>]>
         // @returns FactionTag
+        // @plugin Depenizen, Factions
         // @description
         // Returns the faction for the input name.
-        // @Plugin Depenizen, Factions
         // -->
         String nameOrId = attribute.getContext(1);
         Faction f = FactionColl.get().getByName(nameOrId);
@@ -70,9 +70,9 @@ public class FactionsBridge extends Bridge {
         // <--[tag]
         // @attribute <factions.list_factions>
         // @returns ListTag(dFaction)
+        // @plugin Depenizen, Factions
         // @description
         // Returns a list of all current factions.
-        // @Plugin Depenizen, Factions
         // -->
         if (attribute.startsWith("list_factions")) {
             ListTag factions = new ListTag();

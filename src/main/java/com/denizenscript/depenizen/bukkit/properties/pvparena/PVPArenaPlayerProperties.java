@@ -63,10 +63,10 @@ public class PVPArenaPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.pvparena.in_arena[<pvparena>]>
             // @returns ElementTag(Boolean)
+            // @plugin Depenizen, PvP Arena
             // @description
             // Returns true if the player is in the specified arena. If no arena is specified,
             // this returns true if the player is in any arena.
-            // @Plugin Depenizen, PvP Arena
             // -->
             if (attribute.startsWith("inarena") || attribute.startsWith("in_arena")) {
                 if (player.getArena() == null) {
@@ -90,9 +90,9 @@ public class PVPArenaPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.pvparena.class>
             // @returns ElementTag
+            // @plugin Depenizen, PvP Arena
             // @description
             // Returns the player's class if they're in an arena. Otherwise, returns null.
-            // @Plugin Depenizen, PvP Arena
             // -->
             else if (attribute.startsWith("class")) {
                 return new ElementTag(player.getArenaClass().getName()).getAttribute(attribute.fulfill(1));
@@ -101,9 +101,9 @@ public class PVPArenaPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.pvparena.is_ready>
             // @returns ElementTag(Boolean)
+            // @plugin Depenizen, PvP Arena
             // @description
             // Returns true if the player is ready.
-            // @Plugin Depenizen, PvP Arena
             // -->
             else if (attribute.startsWith("isready") || attribute.startsWith("is_ready")) {
                 return new ElementTag(player.getStatus().equals(ArenaPlayer.Status.READY))
@@ -117,9 +117,9 @@ public class PVPArenaPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.pvparena.team.player_count>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, PvP Arena
                 // @description
                 // Returns the number of players in the team.
-                // @Plugin Depenizen, PvP Arena
                 // -->
                 if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
                     return new ElementTag(player.getArenaTeam().getTeamMembers().size())
@@ -129,9 +129,9 @@ public class PVPArenaPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.pvparena.team.name>
                 // @returns ElementTag
+                // @plugin Depenizen, PvP Arena
                 // @description
                 // Returns the player's team name if they're in an arena. Otherwise, returns null.
-                // @Plugin Depenizen, PvP Arena
                 // -->
                 if (attribute.startsWith("name")) {
                     return new ElementTag(player.getArenaTeam().getName())

@@ -61,9 +61,9 @@ public class ResidencePlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.has_main_residence>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Residence
         // @description
         // Returns whether the player has a main Residence.
-        // @Plugin Depenizen, Residence
         // -->
         if (attribute.startsWith("has_main_residence")) {
             ClaimedResidence residence = player.getMainResidence();
@@ -73,9 +73,9 @@ public class ResidencePlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.main_residence>
         // @returns ResidenceTag
+        // @plugin Depenizen, Residence
         // @description
         // Returns the player's current main Residence if they have one.
-        // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("main_residence")) {
             ClaimedResidence residence = player.getMainResidence();
@@ -87,9 +87,9 @@ public class ResidencePlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.residences>
         // @returns ListTag(dResidence)
+        // @plugin Depenizen, Residence
         // @description
         // Returns the player's current list of Residences.
-        // @Plugin Depenizen, Residence
         // -->
         else if (attribute.startsWith("residences")) {
             ListTag list = new ListTag();

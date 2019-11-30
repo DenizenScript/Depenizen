@@ -60,9 +60,9 @@ public class BossShopInventoryProperties implements Property {
         // <--[tag]
         // @attribute <InventoryTag.is_bossshop>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, BossShop
         // @description
         // Returns whether the inventory is a BossShop.
-        // @Plugin Depenizen, BossShop
         // -->
         if (attribute.startsWith("is_bossshop")) {
             BossShop bs = (BossShop) BossShopBridge.instance.plugin;

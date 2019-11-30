@@ -57,9 +57,9 @@ public class PlayerPointsPlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.playerpoints_points>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, PlayerPoints
         // @description
         // Returns the amount of points the player has. Only works on online players.
-        // @Plugin Depenizen, PlayerPoints
         // -->
         if (attribute.startsWith("playerpoints_points")) {
             return new ElementTag(((PlayerPoints) PlayerPointsBridge.instance.plugin).getAPI()

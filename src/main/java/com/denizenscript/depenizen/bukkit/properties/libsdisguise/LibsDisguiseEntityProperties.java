@@ -60,9 +60,9 @@ public class LibsDisguiseEntityProperties implements Property {
         // <--[tag]
         // @attribute <EntityTag.is_disguised>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, LibsDisguises
         // @description
         // Returns whether the entity is in a disguise.
-        // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("is_disguised") || attribute.startsWith("is_disguise")) {
             return new ElementTag(DisguiseAPI.isDisguised(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
@@ -71,9 +71,9 @@ public class LibsDisguiseEntityProperties implements Property {
         // <--[tag]
         // @attribute <EntityTag.disguise>
         // @returns LibsDisguiseTag
+        // @plugin Depenizen, LibsDisguises
         // @description
         // Returns the disguise of the entity.
-        // @Plugin Depenizen, LibsDisguises
         // -->
         if (attribute.startsWith("disguise")
                 && DisguiseAPI.isDisguised(entity.getBukkitEntity())) {

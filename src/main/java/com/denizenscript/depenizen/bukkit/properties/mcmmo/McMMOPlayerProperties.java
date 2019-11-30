@@ -64,10 +64,10 @@ public class McMMOPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.mcmmo.level[<skill>]>
             // @returns ElementTag(Number)
+            // @plugin Depenizen, mcMMO
             // @description
             // Returns the player's level in a skill. If no skill is specified,
             // this returns the player's overall level.
-            // @Plugin Depenizen, mcMMO
             // -->
             if (attribute.startsWith("level")) {
                 if (!attribute.hasContext(1)) {
@@ -95,9 +95,9 @@ public class McMMOPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.mcmmo.party>
             // @returns ElementTag
+            // @plugin Depenizen, mcMMO
             // @description
             // Returns the name of the player's party.
-            // @Plugin Depenizen, mcMMO
             // -->
             else if (attribute.startsWith("party")) {
                 PartyTag party = PartyTag.forPlayer(player);
@@ -114,10 +114,10 @@ public class McMMOPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.mcmmo.xp[<skill>].to_next_level>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, mcMMO
                 // @description
                 // Returns the amount of experience a player needs to level up
                 // in a skill.
-                // @Plugin Depenizen, mcMMO
                 // -->
                 if (attribute.startsWith("tonextlevel") || attribute.startsWith("to_next_level")) {
                     if (player.isOnline()) {
@@ -133,9 +133,9 @@ public class McMMOPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.mcmmo.xp[<skill>].level>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, mcMMO
                 // @description
                 // Returns the player's experience level in a skill.
-                // @Plugin Depenizen, mcMMO
                 // -->
                 else if (attribute.startsWith("level")) {
                     if (player.isOnline()) {
@@ -151,9 +151,9 @@ public class McMMOPlayerProperties implements Property {
                 // <--[tag]
                 // @attribute <PlayerTag.mcmmo.xp[<skill>]>
                 // @returns ElementTag(Number)
+                // @plugin Depenizen, mcMMO
                 // @description
                 // Returns the player's amount of experience in a skill.
-                // @Plugin Depenizen, mcMMO
                 // -->
                 else if (player.isOnline()) {
                     return new ElementTag(ExperienceAPI.getXP(player.getPlayerEntity(), skill))
@@ -169,10 +169,10 @@ public class McMMOPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.mcmmo.rank[<skill>]>
             // @returns ElementTag(Number)
+            // @plugin Depenizen, mcMMO
             // @description
             // Returns the player's current rank in a skill. If no skill is specified,
             // this returns the player's overall rank.
-            // @Plugin Depenizen, mcMMO
             // -->
             else if (attribute.startsWith("rank")) {
                 if (!attribute.hasContext(1)) {

@@ -129,9 +129,9 @@ public class MobArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <MobArenaArenaTag.name>
         // @returns ElementTag
+        // @plugin Depenizen, MobArena
         // @description
         // Returns the name of the arena.
-        // @Plugin Depenizen, MobArena
         // -->
         if (attribute.startsWith("name")) {
             return new ElementTag(arena.arenaName()).getAttribute(attribute.fulfill(1));
@@ -140,9 +140,9 @@ public class MobArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <MobArenaArenaTag.config_name>
         // @returns ElementTag
+        // @plugin Depenizen, MobArena
         // @description
         // Returns the configuration name of the arena.
-        // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("config_name")) {
             return new ElementTag(arena.configName()).getAttribute(attribute.fulfill(1));
@@ -151,9 +151,9 @@ public class MobArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <MobArenaArenaTag.is_running>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, MobArena
         // @description
         // Returns whether the arena is running.
-        // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("is_running")) {
             return new ElementTag(arena.isRunning()).getAttribute(attribute.fulfill(1));
@@ -162,9 +162,9 @@ public class MobArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <MobArenaArenaTag.wave_count>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, MobArena
         // @description
         // Returns the number of waves this arena has in total.
-        // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("wave_count")) {
             return new ElementTag(arena.getWaveManager().getFinalWave())
@@ -174,10 +174,10 @@ public class MobArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <MobArenaArenaTag.current_wave>
         // @returns ElementTag(Number)
+        // @plugin Depenizen, MobArena
         // @description
         // Returns the current wave number.
         // NOTE: Requires the arena to be running.
-        // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("current_wave") && arena.isRunning()) {
             return new ElementTag(arena.getWaveManager().getWaveNumber())
@@ -187,10 +187,10 @@ public class MobArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <MobArenaArenaTag.wave_type>
         // @returns ElementTag
+        // @plugin Depenizen, MobArena
         // @description
         // Returns the type of the current wave.
         // NOTE: Requires the arena to be running.
-        // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("wave_type") && arena.isRunning()) {
             return new ElementTag(arena.getWaveManager().getCurrent().getType().toString())
@@ -200,9 +200,9 @@ public class MobArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <MobArenaArenaTag.is_enabled>
         // @returns ElementTag(Boolean)
+        // @plugin Depenizen, MobArena
         // @description
         // Returns whether the arena is enabled.
-        // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("is_enabled")) {
             return new ElementTag(arena.isEnabled()).getAttribute(attribute.fulfill(1));
@@ -211,10 +211,10 @@ public class MobArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <MobArenaArenaTag.status>
         // @returns ElementTag
+        // @plugin Depenizen, MobArena
         // @description
         // Returns the status of the arena.
         // Will return 'closed', 'open', or 'running'.
-        // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("status")) {
             if (!arena.isEnabled()) {
@@ -233,9 +233,9 @@ public class MobArenaArenaTag implements ObjectTag {
             // <--[tag]
             // @attribute <MobArenaArenaTag.players.in_arena>
             // @returns ListTag(PlayerTag)
+            // @plugin Depenizen, MobArena
             // @description
             // Returns a list of players in the arena.
-            // @Plugin Depenizen, MobArena
             // -->
             if (attribute.getAttribute(2).startsWith("in_arena")) {
                 ListTag players = new ListTag();
@@ -248,9 +248,9 @@ public class MobArenaArenaTag implements ObjectTag {
             // <--[tag]
             // @attribute <MobArenaArenaTag.players.in_lobby>
             // @returns ListTag(PlayerTag)
+            // @plugin Depenizen, MobArena
             // @description
             // Returns a list of players in the lobby.
-            // @Plugin Depenizen, MobArena
             // -->
             else if (attribute.getAttribute(2).startsWith("in_lobby")) {
                 ListTag players = new ListTag();
@@ -263,9 +263,9 @@ public class MobArenaArenaTag implements ObjectTag {
             // <--[tag]
             // @attribute <MobArenaArenaTag.players>
             // @returns ListTag(PlayerTag)
+            // @plugin Depenizen, MobArena
             // @description
             // Returns a list of all players in the arena (including the lobby).
-            // @Plugin Depenizen, MobArena
             // -->
             else {
                 ListTag players = new ListTag();
@@ -279,10 +279,10 @@ public class MobArenaArenaTag implements ObjectTag {
         // <--[tag]
         // @attribute <MobArenaArenaTag.type>
         // @returns ElementTag
+        // @plugin Depenizen, MobArena
         // @description
         // Always returns 'MobArena' for MobArena objects. All objects fetchable by the Object Fetcher will return the
         // type of object that is fulfilling this attribute.
-        // @Plugin Depenizen, MobArena
         // -->
         else if (attribute.startsWith("type")) {
             return new ElementTag("MobArena").getAttribute(attribute.fulfill(1));

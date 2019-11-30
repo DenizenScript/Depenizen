@@ -49,9 +49,9 @@ public class MobArenaBridge extends Bridge {
         // <--[tag]
         // @attribute <mobarena[<name>]>
         // @returns MobArena
+        // @plugin Depenizen, MobArena
         // @description
         // Returns the mob arena for the input name.
-        // @Plugin Depenizen, MobArena
         // -->
         if (attribute.hasContext(1)) {
             MobArenaArenaTag arena = MobArenaArenaTag.valueOf(attribute.getContext(1));
@@ -69,9 +69,9 @@ public class MobArenaBridge extends Bridge {
         // <--[tag]
         // @attribute <mobarena.list_arenas>
         // @returns ListTag(MobArena)
+        // @plugin Depenizen, MobArena
         // @description
         // Returns a list of all MobArenas.
-        // @Plugin Depenizen, MobArena
         // -->
         if (attribute.startsWith("list_arenas")) {
             ListTag arenas = new ListTag();

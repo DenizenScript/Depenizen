@@ -61,9 +61,9 @@ public class PVPStatsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.pvpstats.deaths>
             // @returns ElementTag
+            // @plugin Depenizen, PvP Stats
             // @description
             // Returns the number of times the player has died.
-            // @Plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("deaths")) {
                 return new ElementTag(PVPData.getDeaths(playerName)).getAttribute(attribute.fulfill(1));
@@ -72,9 +72,9 @@ public class PVPStatsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.pvpstats.elo>
             // @returns ElementTag
+            // @plugin Depenizen, PvP Stats
             // @description
             // Returns the Elo rating of the player.
-            // @Plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("elo")) {
                 return new ElementTag(PVPData.getEloScore(playerName)).getAttribute(attribute.fulfill(1));
@@ -83,9 +83,9 @@ public class PVPStatsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.pvpstats.kills>
             // @returns ElementTag
+            // @plugin Depenizen, PvP Stats
             // @description
             // Returns the number of players the player has killed.
-            // @Plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("kills")) {
                 return new ElementTag(PVPData.getKills(playerName)).getAttribute(attribute.fulfill(1));
@@ -94,9 +94,9 @@ public class PVPStatsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.pvpstats.streak>
             // @returns ElementTag
+            // @plugin Depenizen, PvP Stats
             // @description
             // Returns the current kill streak of the player.
-            // @Plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("streak")) {
                 return new ElementTag(PVPData.getStreak(playerName)).getAttribute(attribute.fulfill(1));
@@ -105,9 +105,9 @@ public class PVPStatsPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.pvpstats.max_streak>
             // @returns ElementTag
+            // @plugin Depenizen, PvP Stats
             // @description
             // Returns the highest kill streak of the player.
-            // @Plugin Depenizen, PvP Stats
             // -->
             if (attribute.startsWith("max_streak")) {
                 return new ElementTag(PVPData.getMaxStreak(playerName)).getAttribute(attribute.fulfill(1));
