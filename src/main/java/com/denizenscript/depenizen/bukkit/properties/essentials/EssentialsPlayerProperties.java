@@ -115,7 +115,7 @@ public class EssentialsPlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.is_vanished>
         // @returns ElementTag(Boolean)
-        // @mechanism PlayerTag.is_vanished
+        // @mechanism PlayerTag.vanish
         // @description
         // Returns whether the player is vanished.
         // @Plugin Depenizen, Essentials
