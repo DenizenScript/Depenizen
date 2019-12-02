@@ -5,6 +5,8 @@ import io.netty.buffer.ByteBuf;
 
 public abstract class PacketOut {
 
+    public boolean canBeFirstPacket = false;
+
     public abstract int getPacketId();
 
     public abstract void writeTo(ByteBuf buf);

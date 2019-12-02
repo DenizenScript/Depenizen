@@ -7,6 +7,7 @@ public class ControlsProxyCommandPacketOut extends PacketOut {
 
     public ControlsProxyCommandPacketOut(boolean control) {
         this.control = control;
+        canBeFirstPacket = true;
     }
 
     public boolean control;

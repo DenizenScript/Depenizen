@@ -7,6 +7,7 @@ public class MyInfoPacketOut extends PacketOut {
 
     public MyInfoPacketOut(int port) {
         this.port = port;
+        canBeFirstPacket = true;
     }
 
     public int port;

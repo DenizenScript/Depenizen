@@ -98,7 +98,7 @@ public class BungeeBridge {
     }
 
     public void sendPacket(PacketOut packet) {
-        if (!connected && !(packet instanceof MyInfoPacketOut)) {
+        if (!connected && !packet.canBeFirstPacket) {
             Debug.echoError("BungeeBridge tried to send packet while not connected.");
             return;
         }
