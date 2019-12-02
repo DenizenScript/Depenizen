@@ -109,7 +109,9 @@ public class BungeeBridge {
         header.writeInt(packet.getPacketId());
         channel.writeAndFlush(header);
         channel.writeAndFlush(buf);
-        ticksTilKeepalive = 0;
+        if (connected) {
+            ticksTilKeepalive = 0;
+        }
     }
 
     public void init(String address, int port) {
