@@ -7,7 +7,7 @@ public class KeepAlivePacketOut extends PacketOut {
 
     @Override
     public int getPacketId() {
-        return 0;
+        return 1;
     }
 
     public static byte[] KEEP_ALIVE_BUFFER = new byte[1024];

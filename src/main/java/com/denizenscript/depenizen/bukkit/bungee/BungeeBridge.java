@@ -82,7 +82,7 @@ public class BungeeBridge {
     }
 
     public void registerPackets() {
-        packets.put(0, new KeepAlivePacketIn());
+        packets.put(1, new KeepAlivePacketIn());
         packets.put(50, new YourInfoPacketIn());
         packets.put(51, new AddServerPacketIn());
         packets.put(52, new RemoveServerPacketIn());
