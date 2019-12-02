@@ -158,7 +158,7 @@ public class BungeeBridge {
 
     public void connect() {
         try {
-            ticksTilKeepalive = keepAliveTickRate;
+            ticksTilKeepalive = 100;
             hasConnectionLoading = false;
             knownServers.clear();
             Bootstrap b = new Bootstrap();
