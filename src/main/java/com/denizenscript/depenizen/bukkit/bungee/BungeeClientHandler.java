@@ -101,19 +101,23 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         ByteBuf m = (ByteBuf) msg;
         packetBuffer.writeBytes(m);
         m.release();
-        if (currentStage == Stage.AWAIT_HEADER) {
-            if (packetBuffer.readableBytes() >= 8) {
+        while (true) {
+            if (currentStage == Stage.AWAIT_HEADER) {
+                if (packetBuffer.readableBytes() < 8) {
+                    return;
+                }
                 waitingLength = packetBuffer.readInt();
                 packetId = packetBuffer.readInt();
                 currentStage = Stage.AWAIT_DATA;
-                    if (!BungeeBridge.instance.packets.containsKey(packetId)) {
-                        fail("Invalid packet id: " + packetId);
-                        return;
-                    }
+                if (!BungeeBridge.instance.packets.containsKey(packetId)) {
+                    fail("Invalid packet id: " + packetId);
+                    return;
+                }
             }
-        }
-        if (currentStage == Stage.AWAIT_DATA) {
-            if (packetBuffer.readableBytes() >= waitingLength) {
+            else if (currentStage == Stage.AWAIT_DATA) {
+                if (packetBuffer.readableBytes() < waitingLength) {
+                    return;
+                }
                 try {
                     BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
                     PacketIn packet = BungeeBridge.instance.packets.get(packetId);
@@ -126,6 +130,9 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
                     fail("Internal exception.");
                     return;
                 }
+            }
+            else {
+                return;
             }
         }
     }
