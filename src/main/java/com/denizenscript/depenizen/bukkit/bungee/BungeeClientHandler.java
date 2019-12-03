@@ -25,7 +25,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
             1 // We request protocol 1: ping status (to avoid uneeded proxy functionality)
     };
 
-    public ByteBuf tmp;
+    public ByteBuf packetBuffer;
 
     public void fail(String reason) {
         Debug.echoError("Depenizen-Bungee connection failed: " + reason);
@@ -46,16 +46,28 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
 
     public Stage currentStage = Stage.AWAIT_HEADER;
 
+    public void reallocateBuf(ChannelHandlerContext ctx) {
+        ByteBuf newBuf = ctx.alloc().buffer(32);
+        if (packetBuffer != null) {
+            newBuf.writeBytes(packetBuffer);
+            packetBuffer.release();
+        }
+        packetBuffer = newBuf;
+    }
+
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) {
-        tmp = ctx.alloc().buffer(4);
+        if (packetBuffer != null) {
+            packetBuffer.release();
+        }
+        packetBuffer = ctx.alloc().buffer(32);
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
         Debug.log("Depenizen-Bungee connection ended.");
-        tmp.release();
-        tmp = null;
+        packetBuffer.release();
+        packetBuffer = null;
         BungeeBridge.instance.connected = false;
         BungeeBridge.instance.reconnect();
     }
@@ -87,12 +99,12 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf m = (ByteBuf) msg;
-        tmp.writeBytes(m);
+        packetBuffer.writeBytes(m);
         m.release();
         if (currentStage == Stage.AWAIT_HEADER) {
-            if (tmp.readableBytes() >= 8) {
-                waitingLength = tmp.readInt();
-                packetId = tmp.readInt();
+            if (packetBuffer.readableBytes() >= 8) {
+                waitingLength = packetBuffer.readInt();
+                packetId = packetBuffer.readInt();
                 currentStage = Stage.AWAIT_DATA;
                     if (!BungeeBridge.instance.packets.containsKey(packetId)) {
                         fail("Invalid packet id: " + packetId);
@@ -101,12 +113,13 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
             }
         }
         if (currentStage == Stage.AWAIT_DATA) {
-            if (tmp.readableBytes() >= waitingLength) {
+            if (packetBuffer.readableBytes() >= waitingLength) {
                 try {
                     BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
                     PacketIn packet = BungeeBridge.instance.packets.get(packetId);
-                    packet.process(tmp);
+                    packet.process(packetBuffer);
                     currentStage = Stage.AWAIT_HEADER;
+                    reallocateBuf(ctx);
                 }
                 catch (Throwable ex) {
                     ex.printStackTrace();
