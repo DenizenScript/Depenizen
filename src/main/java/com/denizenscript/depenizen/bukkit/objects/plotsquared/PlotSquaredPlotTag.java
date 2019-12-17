@@ -225,7 +225,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         if (attribute.startsWith("owners")) {
             ListTag players = new ListTag();
             for (UUID uuid : plot.getOwners()) {
-                players.add(PlayerTag.valueOf(uuid.toString()).identify());
+                players.addObject(new PlayerTag(uuid));
             }
             return players.getAttribute(attribute.fulfill(1));
         }
@@ -240,7 +240,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         if (attribute.startsWith("trusted")) {
             ListTag players = new ListTag();
             for (UUID uuid : plot.getTrusted()) {
-                players.add(PlayerTag.valueOf(uuid.toString()).identify());
+                players.addObject(new PlayerTag(uuid));
             }
             return players.getAttribute(attribute.fulfill(1));
         }
@@ -255,7 +255,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         if (attribute.startsWith("denied")) {
             ListTag players = new ListTag();
             for (UUID uuid : plot.getDenied()) {
-                players.add(PlayerTag.valueOf(uuid.toString()).identify());
+                players.addObject(new PlayerTag(uuid));
             }
             return players.getAttribute(attribute.fulfill(1));
         }
@@ -270,7 +270,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         if (attribute.startsWith("members")) {
             ListTag players = new ListTag();
             for (UUID uuid : plot.getMembers()) {
-                players.add(PlayerTag.valueOf(uuid.toString()).identify());
+                players.addObject(new PlayerTag(uuid));
             }
             return players.getAttribute(attribute.fulfill(1));
         }
