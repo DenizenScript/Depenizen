@@ -12,9 +12,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <craftbukkit.version>1.14.4-R0.1-SNAPSHOT</craftbukkit.version>
-        <citizens.version>2.0.25-SNAPSHOT</citizens.version>
-        <denizen.version>1.1.1-SNAPSHOT</denizen.version>
+        <craftbukkit.version>1.15-R0.1-SNAPSHOT</craftbukkit.version>
+        <citizens.version>2.0.26-SNAPSHOT</citizens.version>
+        <denizen.version>1.1.2-SNAPSHOT</denizen.version>
         <BUILD_NUMBER>Unknown</BUILD_NUMBER>
     </properties>
 
@@ -162,7 +162,7 @@
             <artifactId>luckperms-api</artifactId>
             <version>4.2.17</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/LuckPerms-Bukkit-4.2.17.jar</systemPath>
+            <systemPath>${project.basedir}/lib/LuckPerms.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.github.TheComputerGeek2</groupId>
@@ -188,7 +188,7 @@
         <dependency>
             <groupId>io.lumine.xikage</groupId>
             <artifactId>mythicmobs</artifactId>
-            <version>4.6.5</version>
+            <version>4.7.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/MythicMobs.jar</systemPath>
         </dependency>
