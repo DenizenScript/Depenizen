@@ -94,7 +94,7 @@ public class ResidencePlayerProperties implements Property {
         else if (attribute.startsWith("residences")) {
             ListTag list = new ListTag();
             for (ClaimedResidence residence : player.getResList()) {
-                list.add(new ResidenceTag(residence).identify());
+                list.addObject(new ResidenceTag(residence));
             }
             return list.getAttribute(attribute.fulfill(1));
         }

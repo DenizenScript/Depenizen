@@ -43,7 +43,7 @@ public class LuckPermsBridge extends Bridge {
             ListTag tracks = new ListTag();
             LuckPermsApi api = LuckPerms.getApi();
             for (Track track : api.getTracks()) {
-                tracks.add(new LuckPermsTrackTag(track).identify());
+                tracks.addObject(new LuckPermsTrackTag(track));
             }
             event.setReplacedObject(tracks.getObjectAttribute(attribute.fulfill(1)));
         }

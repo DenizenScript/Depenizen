@@ -71,14 +71,14 @@ public class PlotSquaredPlayerProperties implements Property {
                 }
                 ListTag plots = new ListTag();
                 for (Plot plays : PlotPlayer.wrap(player.getPlayerEntity()).getPlots(world.getName())) {
-                    plots.add(new PlotSquaredPlotTag(plays).identify());
+                    plots.addObject(new PlotSquaredPlotTag(plays));
                 }
                 return plots.getAttribute(attribute.fulfill(1));
             }
             else {
                 ListTag plots = new ListTag();
                 for (Plot plays : PlotPlayer.wrap(player.getPlayerEntity()).getPlots()) {
-                    plots.add(new PlotSquaredPlotTag(plays).identify());
+                    plots.addObject(new PlotSquaredPlotTag(plays));
                 }
                 return plots.getAttribute(attribute.fulfill(1));
             }

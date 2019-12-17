@@ -156,7 +156,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         else if (name.equals("drops")) {
             ListTag oldDrops = new ListTag();
             for (ItemStack i : event.getDrops()) {
-                oldDrops.add(new ItemTag(i).identify());
+                oldDrops.addObject(new ItemTag(i));
             }
             return oldDrops;
         }

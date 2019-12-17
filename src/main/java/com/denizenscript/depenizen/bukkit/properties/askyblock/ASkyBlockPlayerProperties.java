@@ -113,7 +113,7 @@ public class ASkyBlockPlayerProperties implements Property {
                 else if (attribute.startsWith("members")) {
                     ListTag m = new ListTag();
                     for (UUID u : skyblock.getMembers()) {
-                        m.add(new PlayerTag(u).identify());
+                        m.addObject(new PlayerTag(u));
                     }
                     return m.getAttribute(attribute.fulfill(1));
                 }

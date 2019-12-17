@@ -171,7 +171,7 @@ public class PartyTag implements ObjectTag {
         else if (attribute.startsWith("members")) {
             ListTag players = new ListTag();
             for (UUID uuid : party.getMembers().keySet()) {
-                players.add(PlayerTag.valueOf(uuid.toString()).identify());
+                players.addObject(PlayerTag.valueOf(uuid.toString()));
             }
             return players.getAttribute(attribute.fulfill(1));
         }

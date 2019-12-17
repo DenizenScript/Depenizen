@@ -191,7 +191,7 @@ public class EssentialsPlayerProperties implements Property {
             Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
             for (String player : getUser()._getIgnoredPlayers()) {
                 try {
-                    players.add(new PlayerTag(ess.getOfflineUser(player).getBase()).identifySimple());
+                    players.addObject(new PlayerTag(ess.getOfflineUser(player).getBase()));
                 }
                 catch (Exception e) {
                     if (!attribute.hasAlternative()) {

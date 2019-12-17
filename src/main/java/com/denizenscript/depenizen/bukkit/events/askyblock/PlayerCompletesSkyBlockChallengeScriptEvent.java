@@ -92,7 +92,7 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
         for (String i : event.getItemRewards()) {
             ItemTag item = ItemTag.valueOf(i);
             if (item != null) {
-                item_rewards.add(item.identify());
+                item_rewards.addObject(item);
             }
         }
         this.event = event;

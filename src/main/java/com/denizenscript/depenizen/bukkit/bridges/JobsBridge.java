@@ -60,7 +60,7 @@ public class JobsBridge extends Bridge {
             // -->
             ListTag jobList = new ListTag();
             for (Job jb : Jobs.getJobs()) {
-                jobList.add(new JobsJobTag(jb).identify());
+                jobList.addObject(new JobsJobTag(jb));
             }
             event.setReplacedObject(jobList.getObjectAttribute(attribute.fulfill(1)));
         }

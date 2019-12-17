@@ -153,7 +153,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         if (attribute.startsWith("managers")) {
             ListTag managers = new ListTag();
             for (String manager : claim.managers) {
-                managers.add(new PlayerTag(UUID.fromString(manager)).identify());
+                managers.addObject(new PlayerTag(UUID.fromString(manager)));
             }
             return managers.getAttribute(attribute.fulfill(1));
         }
@@ -170,7 +170,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             ArrayList<String> b = new ArrayList<>();
             claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             for (String trust : b) {
-                trusted.add(new PlayerTag(UUID.fromString(trust)).identify());
+                trusted.addObject(new PlayerTag(UUID.fromString(trust)));
             }
             return trusted.getAttribute(attribute.fulfill(1));
         }
@@ -187,7 +187,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             ArrayList<String> b = new ArrayList<>();
             claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             for (String trust : b) {
-                trusted.add(new PlayerTag(UUID.fromString(trust)).identify());
+                trusted.addObject(new PlayerTag(UUID.fromString(trust)));
             }
             return trusted.getAttribute(attribute.fulfill(1));
         }
@@ -204,7 +204,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             ArrayList<String> c = new ArrayList<>();
             claim.getPermissions(new ArrayList<>(), c, new ArrayList<>(), new ArrayList<>());
             for (String container : c) {
-                trusted.add(new PlayerTag(UUID.fromString(container)).identify());
+                trusted.addObject(new PlayerTag(UUID.fromString(container)));
             }
             return trusted.getAttribute(attribute.fulfill(1));
         }
@@ -221,7 +221,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             ArrayList<String> a = new ArrayList<>();
             claim.getPermissions(new ArrayList<>(), new ArrayList<>(), a, new ArrayList<>());
             for (String access : a) {
-                trusted.add(new PlayerTag(UUID.fromString(access)).identify());
+                trusted.addObject(new PlayerTag(UUID.fromString(access)));
             }
             return trusted.getAttribute(attribute.fulfill(1));
         }
@@ -279,7 +279,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         else if (attribute.startsWith("chunks")) {
             ListTag chunks = new ListTag();
             for (Chunk chunk : claim.getChunks()) {
-                chunks.add(new ChunkTag(chunk).identify());
+                chunks.addObject(new ChunkTag(chunk));
             }
             return chunks.getAttribute(attribute.fulfill(1));
         }

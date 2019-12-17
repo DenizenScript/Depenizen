@@ -14,9 +14,6 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import org.bukkit.World;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class WorldGuardLocationProperties implements Property {
 
     @Override
@@ -58,7 +55,7 @@ public class WorldGuardLocationProperties implements Property {
         location = loc;
     }
 
-    LocationTag location = null;
+    LocationTag location;
 
     private ApplicableRegionSet getApplicableRegions() {
         return WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(location.getWorld()))
@@ -79,11 +76,11 @@ public class WorldGuardLocationProperties implements Property {
     }
 
     private ListTag getRegions(World world) {
-        List<String> regionList = new ArrayList<>();
+        ListTag regionList = new ListTag();
         for (ProtectedRegion protectedRegion : getApplicableRegions()) {
-            regionList.add(new WorldGuardRegionTag(protectedRegion, world).identify());
+            regionList.addObject(new WorldGuardRegionTag(protectedRegion, world));
         }
-        return new ListTag(regionList);
+        return regionList;
     }
 
     @Override

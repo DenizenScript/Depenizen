@@ -77,7 +77,7 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
     public void onPVPArenaStart(PAStartEvent event) {
         fighters = new ListTag();
         for (ArenaPlayer p : event.getArena().getFighters()) {
-            fighters.add(new PlayerTag(p.get()).identify());
+            fighters.addObject(new PlayerTag(p.get()));
         }
         arena = new PVPArenaArenaTag(event.getArena());
         this.event = event;

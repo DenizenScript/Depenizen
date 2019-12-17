@@ -75,7 +75,7 @@ public class TownyChatPlayerProperties implements Property {
             if (attribute.startsWith("channel")) {
                 ListTag chans = new ListTag();
                 for (Channel c : holder.getAllChannels().values()) {
-                    chans.add(new ElementTag(c.getName()).identify());
+                    chans.addObject(new ElementTag(c.getName()));
                 }
                 return chans.getAttribute(attribute.fulfill(1));
             }

@@ -79,7 +79,7 @@ public class MobArenaBridge extends Bridge {
                 if (((MobArena) plugin).getArenaMaster().getArenaWithName(a.configName()) == null) {
                     continue;
                 }
-                arenas.add(new MobArenaArenaTag(a).identify());
+                arenas.addObject(new MobArenaArenaTag(a));
             }
             event.setReplacedObject(arenas.getObjectAttribute(attribute.fulfill(1)));
         }

@@ -124,7 +124,7 @@ public class NationTag implements ObjectTag {
         if (attribute.startsWith("allies")) {
             ListTag list = new ListTag();
             for (Nation ally : nation.getAllies()) {
-                list.add(new NationTag(ally).identify());
+                list.addObject(new NationTag(ally));
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -139,7 +139,7 @@ public class NationTag implements ObjectTag {
         if (attribute.startsWith("assistants")) {
             ListTag list = new ListTag();
             for (Resident resident : nation.getAssistants()) {
-                list.add(PlayerTag.valueOf(resident.getName()).identify());
+                list.addObject(PlayerTag.valueOf(resident.getName()));
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -186,7 +186,7 @@ public class NationTag implements ObjectTag {
         if (attribute.startsWith("enemies")) {
             ListTag list = new ListTag();
             for (Nation enemy : nation.getEnemies()) {
-                list.add(new NationTag(enemy).identify());
+                list.addObject(new NationTag(enemy));
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -277,7 +277,7 @@ public class NationTag implements ObjectTag {
         if (attribute.startsWith("residents")) {
             ListTag list = new ListTag();
             for (Resident resident : nation.getResidents()) {
-                list.add(PlayerTag.valueOf(resident.getName()).identify());
+                list.addObject(PlayerTag.valueOf(resident.getName()));
             }
             return list.getAttribute(attribute.fulfill(1));
         }

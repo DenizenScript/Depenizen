@@ -302,7 +302,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
             for (RegionWrapper region : plot.getRegions()) {
                 Location l1 = new Location(world.getWorld(), region.minX, region.minY, region.minZ);
                 Location l2 = new Location(world.getWorld(), region.maxX, region.maxY, region.maxZ);
-                cuboids.add(new CuboidTag(l1, l2).identify());
+                cuboids.addObject(new CuboidTag(l1, l2));
             }
             return cuboids.getAttribute(attribute.fulfill(1));
         }

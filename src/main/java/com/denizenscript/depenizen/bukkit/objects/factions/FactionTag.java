@@ -329,7 +329,7 @@ public class FactionTag implements ObjectTag {
             Set<PS> chunks = BoardColl.get().getChunks(faction);
             ListTag dchunks = new ListTag();
             for (PS ps : chunks) {
-                dchunks.add(new ChunkTag(ps.asBukkitChunk()).identify());
+                dchunks.addObject(new ChunkTag(ps.asBukkitChunk()));
             }
             return dchunks.getAttribute(attribute.fulfill(1));
         }
@@ -345,7 +345,7 @@ public class FactionTag implements ObjectTag {
             Set<PS> chunks = BoardColl.get().getChunks(faction);
             ListTag players = new ListTag();
             for (MPlayer ps : faction.getMPlayers()) {
-                players.add(PlayerTag.valueOf(faction.getLeader().getUuid().toString()).identify());
+                players.addObject(PlayerTag.valueOf(faction.getLeader().getUuid().toString()));
             }
             return players.getAttribute(attribute.fulfill(1));
         }

@@ -240,7 +240,7 @@ public class MobArenaArenaTag implements ObjectTag {
             if (attribute.getAttribute(2).startsWith("in_arena")) {
                 ListTag players = new ListTag();
                 for (Player p : arena.getPlayersInArena()) {
-                    players.add(new PlayerTag(p).identify());
+                    players.addObject(new PlayerTag(p));
                 }
                 return players.getAttribute(attribute.fulfill(2));
             }
@@ -255,7 +255,7 @@ public class MobArenaArenaTag implements ObjectTag {
             else if (attribute.getAttribute(2).startsWith("in_lobby")) {
                 ListTag players = new ListTag();
                 for (Player p : arena.getPlayersInLobby()) {
-                    players.add(new PlayerTag(p).identify());
+                    players.addObject(new PlayerTag(p));
                 }
                 return players.getAttribute(attribute.fulfill(2));
             }
@@ -270,7 +270,7 @@ public class MobArenaArenaTag implements ObjectTag {
             else {
                 ListTag players = new ListTag();
                 for (Player p : arena.getAllPlayers()) {
-                    players.add(new PlayerTag(p).identify());
+                    players.addObject(new PlayerTag(p));
                 }
                 return players.getAttribute(attribute.fulfill(1));
             }

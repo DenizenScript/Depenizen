@@ -81,7 +81,7 @@ public class GriefPreventionPlayerProperties implements Property {
             if (attribute.startsWith("list_claims")) {
                 ListTag claims = new ListTag();
                 for (Claim claim : data.getClaims()) {
-                    claims.add(new GriefPreventionClaimTag(claim).identify());
+                    claims.addObject(new GriefPreventionClaimTag(claim));
                 }
                 return claims.getAttribute(attribute.fulfill(1));
             }

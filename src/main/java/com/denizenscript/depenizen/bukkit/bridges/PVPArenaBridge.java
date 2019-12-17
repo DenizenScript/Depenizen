@@ -70,7 +70,7 @@ public class PVPArenaBridge extends Bridge {
         if (attribute.startsWith("list_arenas")) {
             ListTag arenas = new ListTag();
             for (Arena a : ArenaManager.getArenas()) {
-                arenas.add(new PVPArenaArenaTag(a).identify());
+                arenas.addObject(new PVPArenaArenaTag(a));
             }
             event.setReplacedObject(arenas.getObjectAttribute(attribute.fulfill(1)));
         }

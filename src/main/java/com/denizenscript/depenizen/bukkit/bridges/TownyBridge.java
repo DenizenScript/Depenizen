@@ -70,7 +70,7 @@ public class TownyBridge extends Bridge {
             if (attribute.hasContext(1)) {
                 try {
                     for (Town town : TownyUniverse.getDataSource().getWorld(attribute.getContext(1)).getTowns()) {
-                        towns.add(new TownTag(town).identify());
+                        towns.addObject(new TownTag(town));
                     }
                 }
                 catch (NotRegisteredException e) {
@@ -80,7 +80,7 @@ public class TownyBridge extends Bridge {
             }
             else {
                 for (Town town : TownyUniverse.getDataSource().getTowns()) {
-                    towns.add(new TownTag(town).identify());
+                    towns.addObject(new TownTag(town));
                 }
             }
             event.setReplacedObject(towns.getObjectAttribute(attribute.fulfill(1)));

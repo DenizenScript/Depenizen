@@ -168,7 +168,7 @@ public class TownTag implements ObjectTag {
         if (attribute.startsWith("assistants")) {
             ListTag list = new ListTag();
             for (Resident resident : town.getAssistants()) {
-                list.add(PlayerTag.valueOf(resident.getName()).identify());
+                list.addObject(PlayerTag.valueOf(resident.getName()));
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -289,7 +289,7 @@ public class TownTag implements ObjectTag {
         else if (attribute.startsWith("residents")) {
             ListTag list = new ListTag();
             for (Resident resident : town.getResidents()) {
-                list.add(PlayerTag.valueOf(resident.getName()).identify());
+                list.addObject(PlayerTag.valueOf(resident.getName()));
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -356,7 +356,7 @@ public class TownTag implements ObjectTag {
         else if (attribute.startsWith("outposts")) {
             ListTag posts = new ListTag();
             for (Location p : town.getAllOutpostSpawns()) {
-                posts.add(new LocationTag(p).identify());
+                posts.addObject(new LocationTag(p));
             }
             return posts.getAttribute(attribute.fulfill(1));
         }

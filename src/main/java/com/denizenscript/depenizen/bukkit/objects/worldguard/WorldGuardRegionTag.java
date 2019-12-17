@@ -203,7 +203,7 @@ public class WorldGuardRegionTag implements ObjectTag {
         if (attribute.startsWith("members")) {
             ListTag list = new ListTag();
             for (UUID uuid : region.getMembers().getUniqueIds()) {
-                list.add(PlayerTag.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)).identify());
+                list.addObject(PlayerTag.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)));
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -218,7 +218,7 @@ public class WorldGuardRegionTag implements ObjectTag {
         if (attribute.startsWith("owners")) {
             ListTag list = new ListTag();
             for (UUID uuid : region.getOwners().getUniqueIds()) {
-                list.add(PlayerTag.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)).identify());
+                list.addObject(PlayerTag.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)));
             }
             return list.getAttribute(attribute.fulfill(1));
         }

@@ -138,7 +138,7 @@ public class PVPArenaArenaTag implements ObjectTag {
         else if (attribute.startsWith("fighters")) {
             ListTag fighters = new ListTag();
             for (ArenaPlayer p : arena.getFighters()) {
-                fighters.add(new PlayerTag(p.get()).identify());
+                fighters.addObject(new PlayerTag(p.get()));
             }
             return fighters.getAttribute(attribute.fulfill(1));
         }

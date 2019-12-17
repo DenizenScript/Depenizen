@@ -91,7 +91,7 @@ public class TownyCuboidProperties implements Property {
                 for (Location location : cuboid.getBlockLocationsUnfiltered()) {
                     String townName = TownyUniverse.getTownName(location);
                     if (townName != null && !towns.contains(townName)) {
-                        list.add(new TownTag(TownyUniverse.getTownBlock(location).getTown()).identify());
+                        list.addObject(new TownTag(TownyUniverse.getTownBlock(location).getTown()));
                         towns.add(townName);
                     }
                 }

@@ -76,7 +76,7 @@ public class AreaShopPlayerProperties implements Property {
                 UUID uuid = player.getOfflinePlayer().getUniqueId();
                 for (GeneralRegion region : AreaShop.getInstance().getFileManager().getRegions()) {
                     if (uuid.equals(region.getOwner())) {
-                        list.add(new AreaShopTag(region).identify());
+                        list.addObject(new AreaShopTag(region));
                     }
                 }
                 return list.getAttribute(attribute.fulfill(1));

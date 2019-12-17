@@ -19,9 +19,6 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import org.bukkit.World;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class WorldGuardCuboidProperties implements Property {
 
     @Override
@@ -63,7 +60,7 @@ public class WorldGuardCuboidProperties implements Property {
         this.cuboid = cuboid;
     }
 
-    CuboidTag cuboid = null;
+    CuboidTag cuboid;
 
     private ApplicableRegionSet getApplicableRegions() {
         WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
@@ -80,11 +77,11 @@ public class WorldGuardCuboidProperties implements Property {
     }
 
     private ListTag getRegions(World world) {
-        List<String> regionList = new ArrayList<>();
+        ListTag regionList = new ListTag();
         for (ProtectedRegion protectedRegion : getApplicableRegions()) {
-            regionList.add(new WorldGuardRegionTag(protectedRegion, world).identify());
+            regionList.addObject(new WorldGuardRegionTag(protectedRegion, world));
         }
-        return new ListTag(regionList);
+        return regionList;
     }
 
     @Override

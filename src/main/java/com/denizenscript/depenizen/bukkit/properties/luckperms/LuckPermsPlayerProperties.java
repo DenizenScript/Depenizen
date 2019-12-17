@@ -70,7 +70,7 @@ public class LuckPermsPlayerProperties implements Property {
                 for (String group : track.getGroups()) {
                     if (api.getUser(player.getOfflinePlayer().getUniqueId()).inheritsGroup(api.getGroup(group))) {
                         if (!tracks.contains(new LuckPermsTrackTag(track).identify())) {
-                            tracks.add(new LuckPermsTrackTag(track).identify());
+                            tracks.addObject(new LuckPermsTrackTag(track));
                         }
                     }
                 }

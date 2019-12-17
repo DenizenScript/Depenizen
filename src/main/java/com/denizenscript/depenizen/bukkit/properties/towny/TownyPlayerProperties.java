@@ -97,7 +97,7 @@ public class TownyPlayerProperties implements Property {
             else if (attribute.startsWith("mode_list")) {
                 ListTag modes = new ListTag();
                 for (String mode : getResident().getModes()) {
-                    modes.add(new ElementTag(mode).identify());
+                    modes.addObject(new ElementTag(mode));
                 }
                 return modes.getAttribute(attribute.fulfill(1));
             }
@@ -112,7 +112,7 @@ public class TownyPlayerProperties implements Property {
             else if (attribute.startsWith("nation_ranks")) {
                 ListTag ranks = new ListTag();
                 for (String rank : getResident().getNationRanks()) {
-                    ranks.add(new ElementTag(rank).identify());
+                    ranks.addObject(new ElementTag(rank));
                 }
                 return ranks.getAttribute(attribute.fulfill(1));
             }
@@ -150,7 +150,7 @@ public class TownyPlayerProperties implements Property {
             else if (attribute.startsWith("town_ranks")) {
                 ListTag ranks = new ListTag();
                 for (String rank : getResident().getTownRanks()) {
-                    ranks.add(new ElementTag(rank).identify());
+                    ranks.addObject(new ElementTag(rank));
                 }
                 return ranks.getAttribute(attribute.fulfill(1));
             }

@@ -18,7 +18,6 @@ import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.core.EscapeTagBase;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
-import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
@@ -249,18 +248,9 @@ public class ShopKeeperTag implements ObjectTag {
         ItemStack resultItem = tradingRecipe.getResultItem();
 
         ListTag recipe = new ListTag();
-        recipe.add(wrapTradeItem(item1).identify());
-        recipe.add(wrapTradeItem(item2).identify());
-        recipe.add(wrapTradeItem(resultItem).identify());
+        recipe.addObject(new ItemTag(item1));
+        recipe.addObject(new ItemTag(item2));
+        recipe.addObject(new ItemTag(resultItem));
         return recipe;
-    }
-
-    private static ItemTag wrapTradeItem(ItemStack itemStack) {
-        if (itemStack != null) {
-            return new ItemTag(itemStack);
-        }
-        else {
-            return new ItemTag(Material.AIR);
-        }
     }
 }
