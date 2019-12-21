@@ -335,6 +335,7 @@ public class WorldEditCommand extends AbstractCommand {
                 }
                 ClipboardHolder holder = new ClipboardHolder(clipboard);
                 WorldEdit.getInstance().getSessionManager().get(p).setClipboard(holder);
+                return;
             }
             if (file == null) {
                 Debug.echoError("Cuboid or file must be specified.");
