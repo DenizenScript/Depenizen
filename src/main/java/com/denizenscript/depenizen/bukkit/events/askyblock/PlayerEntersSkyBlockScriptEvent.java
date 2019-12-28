@@ -47,11 +47,6 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
     }
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public String getName() {
         return "PlayerEntersSkyBlock";
     }

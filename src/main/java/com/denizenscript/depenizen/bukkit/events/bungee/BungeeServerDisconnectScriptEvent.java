@@ -37,11 +37,6 @@ public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public String getName() {
         return "BungeeServerDisconnects";
     }

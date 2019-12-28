@@ -45,11 +45,6 @@ public class PlayerJoinsPVPArenaScriptEvent extends BukkitScriptEvent implements
     }
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public String getName() {
         return "PlayerJoinsPVPArena";
     }

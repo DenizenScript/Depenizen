@@ -49,11 +49,6 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public String getName() {
         return "ShopKeeperTrade";
     }

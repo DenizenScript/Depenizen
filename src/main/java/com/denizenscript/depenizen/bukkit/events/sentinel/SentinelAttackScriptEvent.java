@@ -48,11 +48,6 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     }
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public String getName() {
         return "SentinelAttack";
     }

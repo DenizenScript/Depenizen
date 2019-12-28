@@ -29,20 +29,11 @@ public class BungeePlayerProperties implements Property {
                 "send_to"
         };
 
-
-        ///////////////////
-        // Instance Fields and Methods
-        /////////////
-
         private BungeePlayerProperties(PlayerTag plr) {
             player = plr;
         }
 
         PlayerTag player;
-
-        /////////
-        // Property Methods
-        ///////
 
         @Override
         public String getPropertyString() {
@@ -53,11 +44,6 @@ public class BungeePlayerProperties implements Property {
         public String getPropertyId() {
             return "BungeePlayer";
         }
-
-
-        ///////////
-        // ObjectTag Attributes
-        ////////
 
         @Override
         public String getAttribute(Attribute attribute) {

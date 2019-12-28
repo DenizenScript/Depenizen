@@ -39,10 +39,6 @@ public class WorldGuardWorldProperties implements Property {
         }
     }
 
-    ///////////////////
-    // Instance Fields and Methods
-    /////////////
-
     public static final String[] handledTags = new String[] {
             "list_regions", "has_region"
     };

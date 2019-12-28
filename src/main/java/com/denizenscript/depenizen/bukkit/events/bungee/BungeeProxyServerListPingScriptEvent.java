@@ -62,11 +62,6 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public void init() {
         BungeeBridge.instance.controlsProxyPing = true;
         BungeeBridge.instance.checkBroadcastProxyPing();

@@ -22,19 +22,11 @@ public class JobPlayer implements Property {
         }
     }
 
-    ///////////////////
-    // Instance Fields and Methods
-    /////////////
-
     JobsJobTag job = null;
 
     private JobPlayer(JobsJobTag job) {
         this.job = job;
     }
-
-    /////////
-    // Property Methods
-    ///////
 
     @Override
     public String getPropertyString() {

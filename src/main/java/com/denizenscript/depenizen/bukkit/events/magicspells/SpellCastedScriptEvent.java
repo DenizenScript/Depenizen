@@ -50,11 +50,6 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     }
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public String getName() {
         return "SpellCastedEvent";
     }

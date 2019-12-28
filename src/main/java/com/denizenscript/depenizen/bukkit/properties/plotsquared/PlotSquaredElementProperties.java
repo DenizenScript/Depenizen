@@ -33,10 +33,6 @@ public class PlotSquaredElementProperties implements Property {
         }
     }
 
-    ///////////////////
-    // Instance Fields and Methods
-    /////////////
-
     public static final String[] handledTags = new String[] {
             "as_plotsquared_plot"
     };

@@ -45,11 +45,6 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
     }
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public String getName() {
         return "SkyBlockReset";
     }

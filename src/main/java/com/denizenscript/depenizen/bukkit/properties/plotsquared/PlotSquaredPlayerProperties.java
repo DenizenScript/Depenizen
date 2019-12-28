@@ -36,10 +36,6 @@ public class PlotSquaredPlayerProperties implements Property {
         }
     }
 
-    ///////////////////
-    // Instance Fields and Methods
-    /////////////
-
     public static final String[] handledTags = new String[] {
             "plotsquared_plots"
     };
