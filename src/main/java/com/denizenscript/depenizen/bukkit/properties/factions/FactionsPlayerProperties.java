@@ -52,8 +52,7 @@ public class FactionsPlayerProperties implements Property {
     }
 
     public MPlayer getMPlayer() {
-        MPlayer mplayer = MPlayer.get(IdUtil.getId(player.getOfflinePlayer().getUniqueId()));
-        return mplayer;
+        return MPlayer.get(IdUtil.getId(player.getOfflinePlayer().getUniqueId()));
     }
 
     PlayerTag player;

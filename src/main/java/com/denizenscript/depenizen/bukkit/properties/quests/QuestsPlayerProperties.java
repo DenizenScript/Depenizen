@@ -85,10 +85,7 @@ public class QuestsPlayerProperties implements Property {
             // Returns the names of quests the player has completed.
             // -->
             if (attribute.startsWith("completed_names")) {
-                ListTag list = new ListTag();
-                for (String quest : quester.getCompletedQuests()) {
-                    list.add(quest);
-                }
+                ListTag list = new ListTag(quester.getCompletedQuests());
                 return list.getAttribute(attribute.fulfill(1));
             }
 
