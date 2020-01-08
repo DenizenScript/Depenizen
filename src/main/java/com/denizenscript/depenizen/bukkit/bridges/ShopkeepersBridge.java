@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.depenizen.bukkit.events.shopkeepers.ShopKeeperCreatedScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.shopkeepers.ShopKeeperTradeScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.shopkeepers.ShopKeepersEntityProperties;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeperTag;
@@ -18,6 +19,7 @@ public class ShopkeepersBridge extends Bridge {
         instance = this;
         ObjectFetcher.registerWithObjectFetcher(ShopKeeperTag.class);
         ScriptEvent.registerScriptEvent(new ShopKeeperTradeScriptEvent());
+        ScriptEvent.registerScriptEvent(new ShopKeeperCreatedScriptEvent());
         PropertyParser.registerProperty(ShopKeepersEntityProperties.class, EntityTag.class);
     }
 }

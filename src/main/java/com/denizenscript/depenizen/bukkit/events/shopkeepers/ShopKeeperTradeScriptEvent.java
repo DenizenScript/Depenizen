@@ -4,11 +4,8 @@ import com.nisovin.shopkeepers.api.events.ShopkeeperTradeEvent;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeperTag;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,7 +24,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Context
     // <context.recipe> Returns the recipe for this trade.
-    // <context.shopkeeper> Returns the ShopKeeper that the trade occured with.
+    // <context.shopkeeper> Returns the ShopKeeper that the trade occurred with.
     //
     // @Plugin Depenizen, ShopKeepers
     //
@@ -39,13 +36,11 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
 
     public static ShopKeeperTradeScriptEvent instance;
     public ShopkeeperTradeEvent event;
-    public ShopKeeperTag keeper;
     public PlayerTag player;
-    public ListTag recipe;
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("shopkeeper trade");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("shopkeeper trade");
     }
 
     @Override
@@ -61,19 +56,17 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public ObjectTag getContext(String name) {
         if (name.startsWith("recipe")) {
-            return recipe;
+            return ShopKeeperTag.wrapTradingRecipe(event.getTradingRecipe());
         }
         else if (name.equals("shopkeeper")) {
-            return keeper;
+            return new ShopKeeperTag(event.getShopkeeper());
         }
         return super.getContext(name);
     }
 
     @EventHandler
     public void onShopKeeperTrade(ShopkeeperTradeEvent event) {
-        player = PlayerTag.mirrorBukkitPlayer(event.getPlayer());
-        keeper = new ShopKeeperTag(event.getShopkeeper());
-        recipe = ShopKeeperTag.wrapTradingRecipe(event.getTradingRecipe());
+        player = new PlayerTag(event.getPlayer());
         this.event = event;
         fire(event);
     }

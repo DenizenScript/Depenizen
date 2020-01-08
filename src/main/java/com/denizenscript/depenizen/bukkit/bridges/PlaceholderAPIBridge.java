@@ -33,6 +33,7 @@ public class PlaceholderAPIBridge extends Bridge {
 
     public void tagEvent(ReplaceableTagEvent event) {
         Attribute attribute = event.getAttributes();
+
         // <--[tag]
         // @attribute <placeholder[<name>]>
         // @returns ElementTag
