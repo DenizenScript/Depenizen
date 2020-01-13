@@ -33,7 +33,6 @@ public class PlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements
     public static PlayerBalanceChangeScriptEvent instance;
     public UserBalanceUpdateEvent event;
 
-
     public PlayerBalanceChangeScriptEvent() {
         instance = this;
     }

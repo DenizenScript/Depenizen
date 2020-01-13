@@ -99,7 +99,6 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
         return super.applyDetermination(path, determinationObj);
     }
 
-
     @Override
     public ObjectTag getContext(String name) {
         if (name.equals("sender")) {

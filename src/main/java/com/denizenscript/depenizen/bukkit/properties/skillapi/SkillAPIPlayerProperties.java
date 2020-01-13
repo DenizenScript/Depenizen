@@ -131,7 +131,7 @@ public class SkillAPIPlayerProperties implements Property {
                 return new ElementTag(data.getMaxMana()).getAttribute(attribute.fulfill(1));
             }
 
-            if (attribute.startsWith("class_") && attribute.hasContext(1)) {
+            if (attribute.getAttribute(1).startsWith("class_") && attribute.hasContext(1)) {
 
                 PlayerClass playerClass = null;
                 SkillAPIClassTag skillAPIClass = SkillAPIClassTag.valueOf(attribute.getContext(1));
@@ -238,7 +238,7 @@ public class SkillAPIPlayerProperties implements Property {
                 }
             }
 
-            if (attribute.startsWith("skill_") && attribute.hasContext(1)) {
+            if (attribute.getAttribute(1).startsWith("skill_") && attribute.hasContext(1)) {
 
                 PlayerSkill playerSkill = data.getSkill(attribute.getContext(1)); // TODO: SkillAPISkill object?
                 if (playerSkill == null) {
