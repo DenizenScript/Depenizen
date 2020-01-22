@@ -1,5 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.in;
 
+import com.denizenscript.denizen.tags.BukkitTagContext;
+import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
@@ -68,7 +70,8 @@ public class RunScriptPacketIn extends PacketIn {
                 }
                 ScriptQueue queue = new InstantQueue("BUNGEERUN_" + scriptName).addEntries(entries);
                 int x = 1;
-                ListTag definitions = ListTag.valueOf(defs);
+                TagContext context = new BukkitTagContext(linkedPlayer, null, script);
+                ListTag definitions = ListTag.valueOf(defs, context);
                 String[] definition_names = null;
                 try {
                     if (script != null && script.getContainer() != null) {

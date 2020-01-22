@@ -98,7 +98,7 @@ public class WorldGuardLocationProperties implements Property {
         if (attribute.startsWith("in_region")) {
             // Check if the location is in the specified region
             if (attribute.hasContext(1)) {
-                ListTag region_list = ListTag.valueOf(attribute.getContext(1));
+                ListTag region_list = ListTag.valueOf(attribute.getContext(1), attribute.context);
                 for (String region : region_list) {
                     if (inRegion(region)) {
                         return new ElementTag(true).getAttribute(attribute.fulfill(1));

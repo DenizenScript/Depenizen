@@ -121,7 +121,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
                 if (newDrops == null) {
                     newDrops = new ArrayList<>();
                 }
-                List<ItemTag> items = ListTag.valueOf(determination).filter(ItemTag.class, path.container, true);
+                List<ItemTag> items = ListTag.valueOf(determination, getTagContext(path)).filter(ItemTag.class, path.container, true);
                 for (ItemTag i : items) {
                     newDrops.add(i.getItemStack());
                 }
