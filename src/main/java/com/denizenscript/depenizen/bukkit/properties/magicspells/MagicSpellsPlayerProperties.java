@@ -75,6 +75,21 @@ public class MagicSpellsPlayerProperties implements Property {
                         .getAttribute(attribute.fulfill(1));
             }
 
+            // <--[tag]
+            // @attribute <PlayerTag.magicspells.max_mana>
+            // @returns ElementTag(Number)
+            // @plugin Depenizen, MagicSpells
+            // @description
+            // Returns the maximum mana of the player.
+            // -->
+            if (attribute.startsWith("max_mana")) {
+                ManaHandler mH = MagicSpells.getManaHandler();
+                if (mH == null) {
+                    return null;
+                }
+                return new ElementTag(mH.getMaxMana(player.getPlayerEntity()))
+                        .getAttribute(attribute.fulfill(1));
+            }
         }
 
         return null;
