@@ -18,7 +18,7 @@ public class DisguiseCommand extends AbstractCommand {
     // @Syntax disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<#>) (data:<#>) (self:true/false)
     // @Group Depenizen
     // @Plugin Depenizen, LibsDisguises
-    // @Required 2
+    // @Required 1
     // @Short Disguises an entity as a different entity.
     //
     // @Description
