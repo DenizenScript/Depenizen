@@ -162,7 +162,7 @@ public class QuestsCommand extends AbstractCommand {
                             Player p = player.getPlayerEntity();
                             Quester quester = quests.getQuester(p.getUniqueId());
                             quester.hardQuit(quest);
-                            if (state.asBoolean() == true && p.isOnline()) {
+                            if (state.asBoolean() && p.isOnline()) {
                                 p.sendMessage(Lang.get(p, "questQuit").replace("<quest>", quest.getName()));
                             }
                             reloadData(quester);
