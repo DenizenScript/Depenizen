@@ -152,9 +152,7 @@ public class QuestsCommand extends AbstractCommand {
                 else {
                     Debug.echoError("Must specify either a quest_id and state value, or a points value.");
                 }
-                
                 break;
-
             }
             case REMOVE: {
                 
@@ -182,9 +180,7 @@ public class QuestsCommand extends AbstractCommand {
                 else {
                     Debug.echoError("Must specify either a quest_id and state value, or a points value.");
                 }
-                
                 break;
-                
             }
             case SET: {
 
@@ -209,9 +205,7 @@ public class QuestsCommand extends AbstractCommand {
                 else {
                     Debug.echoError("Must specify either a quest_id and stage_no value, or a points value.");
                 }
-                
                 break;
-
             }
         }
 
