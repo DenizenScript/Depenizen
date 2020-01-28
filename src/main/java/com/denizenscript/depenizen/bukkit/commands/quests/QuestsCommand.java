@@ -118,7 +118,6 @@ public class QuestsCommand extends AbstractCommand {
         
         BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.entryData;
 
-        // Get objects
         ElementTag action = scriptEntry.getElement("action");
         ElementTag questId = scriptEntry.getElement("quest_id");
         ElementTag stageNum = scriptEntry.getElement("stage_no");
@@ -127,7 +126,6 @@ public class QuestsCommand extends AbstractCommand {
 
         PlayerTag player = scriptEntryData.getPlayer();
 
-        // Report to dB
         Debug.report(scriptEntry, getName(), action.debug() 
                 + (questId != null ? questId.debug() : "") 
                 + (stageNum != null ? stageNum.debug() : "") 
