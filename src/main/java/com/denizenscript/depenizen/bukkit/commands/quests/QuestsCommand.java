@@ -194,8 +194,8 @@ public class QuestsCommand extends AbstractCommand {
                             try {
                                 quest.setStage(quests.getQuester(player.getPlayerEntity().getUniqueId()), stageNum.asInt());
                             } 
-                            catch (InvalidStageException e) {
-                                e.printStackTrace();
+                            catch (InvalidStageException ex) {
+                                Debug.echoError(ex);
                             }
                             break;
                         }
