@@ -41,19 +41,19 @@ public class QuestsCommand extends AbstractCommand {
     // None
     //
     // @Usage
-    // Use to force player to take quest with ID custom1, ignoring requirements.
+    // Use to force the player to take quest with ID custom1, ignoring requirements.
     // - quests add quest_id:custom1 state:true
     //
     // @Usage
-    // Use to force player to quit quest with ID custom2, notifying player.
+    // Use to force the player to quit quest with ID custom2, notifying said player.
     // - quests remove quest_id:custom2 state:true
     //
     // @Usage
-    // Use to force player into specified stage 2 of quest with ID custom3.
+    // Use to force the player into specified stage 2 of quest with ID custom3.
     // - quests set quest_id:custom3 stage_no:2
     //
     // @Usage
-    // Use to give player 100 Quest Points.
+    // Use to give the player 100 Quest Points.
     // - quests add points:100
     //
     // -->
