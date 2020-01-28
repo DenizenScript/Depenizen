@@ -21,11 +21,6 @@ import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.depenizen.bukkit.bridges.QuestsBridge;
 
-/**
- * Command integration for Quests
- * @author PikaMug
- * @since 2.0.0-b595
- */
 public class QuestsCommand extends AbstractCommand {
 
     // <--[command]
