@@ -107,7 +107,6 @@ public class NBSCommand extends AbstractCommand {
         ElementTag action = scriptEntry.getObjectTag("action");
         List<PlayerTag> targets = (List<PlayerTag>) scriptEntry.getObject("targets");
 
-        // Report to dB
         Debug.report(scriptEntry, getName(), action.debug()
                 + ArgumentHelper.debugList("targets", targets)
                 + (file != null ? file.debug() : ""));

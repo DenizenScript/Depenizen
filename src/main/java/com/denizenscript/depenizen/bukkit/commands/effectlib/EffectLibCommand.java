@@ -107,7 +107,6 @@ public class EffectLibCommand extends AbstractCommand {
         DurationTag duration = (DurationTag) scriptEntry.getObject("duration");
         LocationTag location = (LocationTag) scriptEntry.getObject("location");
 
-        // Report to dB
         Debug.report(scriptEntry, getName(), (target != null ? target.debug() : "")
                 + (action != null ? action.toString() : "")
                 + (duration != null ? duration.debug() : "")

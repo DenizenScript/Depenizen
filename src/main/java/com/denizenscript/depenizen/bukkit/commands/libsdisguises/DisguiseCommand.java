@@ -169,7 +169,6 @@ public class DisguiseCommand extends AbstractCommand {
         ElementTag baby = scriptEntry.getObjectTag("baby");
         ElementTag self = scriptEntry.getObjectTag("self");
 
-        // Report to dB
         Debug.report(scriptEntry, getName(), action.debug()
                 + (target != null ? target.debug() : "")
                 + (type != null ? type.debug() : "")

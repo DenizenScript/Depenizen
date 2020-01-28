@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.commands.jobs;
 import com.denizenscript.denizencore.objects.Argument;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.JobsPlayer;
-import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -38,8 +37,8 @@ public class JobsCommand extends AbstractCommand {
     // - jobs demote Builder 3
     //
     // @Usage
-    // Use to make a player join a job.
-    // - jobs join Worker player:Jeebiss
+    // Use to make a different player join a job.
+    // - jobs join Worker player:<[player]>
     //
     // -->
 
@@ -87,12 +86,10 @@ public class JobsCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.entryData;
-
         Action action = (Action) scriptEntry.getObject("action");
         JobsJobTag job = (JobsJobTag) scriptEntry.getObject("job");
         int number = (scriptEntry.hasObject("number") ? scriptEntry.getElement("number").asInt() : 0);
-        JobsPlayer player = Jobs.getPlayerManager().getJobsPlayer(scriptEntryData.getPlayer().getName());
+        JobsPlayer player = Jobs.getPlayerManager().getJobsPlayer(Utilities.getEntryPlayer(scriptEntry).getName());
 
         switch (action) {
 

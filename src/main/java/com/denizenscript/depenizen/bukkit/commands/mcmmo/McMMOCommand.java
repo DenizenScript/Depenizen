@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.mcmmo;
 
+import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.objects.Argument;
 import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.api.PartyAPI;
@@ -8,7 +9,6 @@ import com.gmail.nossr50.config.experience.ExperienceConfig;
 import com.gmail.nossr50.database.DatabaseManagerFactory;
 import com.gmail.nossr50.datatypes.skills.SkillType;
 import com.gmail.nossr50.party.PartyManager;
-import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
@@ -40,8 +40,8 @@ public class McMMOCommand extends AbstractCommand {
     // - mcmmo add levels skill:acrobatics quantity:5
     //
     // @Usage
-    // Use to remove a player from a party.
-    // - mcmmo remove player:SerpentX party:SerpentPeople
+    // Use to remove a different player from a party.
+    // - mcmmo remove player:<[player]> party:SerpentPeople
     //
     // @Usage
     // Use to set vampirism mode for a player's skill.
@@ -118,9 +118,6 @@ public class McMMOCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
 
-        BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.entryData;
-
-        // Get objects
         ElementTag action = scriptEntry.getElement("action");
         ElementTag state = scriptEntry.getElement("state");
         ElementTag type = scriptEntry.getElement("type");
@@ -128,9 +125,8 @@ public class McMMOCommand extends AbstractCommand {
         ElementTag party = scriptEntry.getElement("party");
         ElementTag skill = scriptEntry.getElement("skill");
 
-        PlayerTag player = scriptEntryData.getPlayer();
+        PlayerTag player = Utilities.getEntryPlayer(scriptEntry);
 
-        // Report to dB
         Debug.report(scriptEntry, getName(), action.debug() + type.debug() + (state != null ? state.debug() : "") + quantity.debug()
                 + (party != null ? party.debug() : "") + (skill != null ? skill.debug() : ""));
 

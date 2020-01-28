@@ -93,7 +93,6 @@ public class PlayerPointsCommand extends AbstractCommand {
         ElementTag action = scriptEntry.getObjectTag("action");
         ElementTag amount = scriptEntry.getObjectTag("amount");
 
-        // Report to dB
         Debug.report(scriptEntry, getName(), action.debug()
                 + (target != null ? target.debug() : "")
                 + (amount != null ? amount.debug() : ""));

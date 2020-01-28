@@ -78,7 +78,6 @@ public class BossShopCommand extends AbstractCommand {
         PlayerTag target = scriptEntry.getObjectTag("target");
         ElementTag dshop = scriptEntry.getObjectTag("shop");
 
-        // Report to dB
         Debug.report(scriptEntry, getName(),
                 (target != null ? target.debug() : "")
                         + (dshop != null ? dshop.debug() : ""));
