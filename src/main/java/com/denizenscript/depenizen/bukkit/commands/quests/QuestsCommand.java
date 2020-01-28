@@ -33,7 +33,9 @@ public class QuestsCommand extends AbstractCommand {
     //
     // @Description
     // This command allows you to give, quit, or set the stage of a quest for a player, or to add, subtract, or set
-    // the amount of Quest Points that a player holds.
+    // the amount of Quest Points that a player holds. When modifying quests, the ID (read: NOT the name) must be
+    // specified. Numerical stage number must be present when setting progress. State indicates whether to perform
+    // associated checks (see Usage). If not modifying a quest, points must be included as a numerical value.
     //
     // @Tags
     // None
