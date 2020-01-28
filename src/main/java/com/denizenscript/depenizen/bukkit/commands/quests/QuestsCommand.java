@@ -214,7 +214,9 @@ public class QuestsCommand extends AbstractCommand {
     }
     
     private void reloadData(Quester quester) {
-        if (quester == null) return;
+        if (quester == null) {
+            return;
+        }
         quester.saveData();
         quester.loadData();
     }
