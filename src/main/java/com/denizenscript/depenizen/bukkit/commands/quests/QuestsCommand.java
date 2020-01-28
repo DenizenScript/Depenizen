@@ -150,6 +150,8 @@ public class QuestsCommand extends AbstractCommand {
                     Quester quester = quests.getQuester(player.getPlayerEntity().getUniqueId());
                     quester.setQuestPoints(quester.getQuestPoints() + points.asInt());
                     reloadData(quester);
+                } else {
+                    Debug.echoError("Must specify either a quest_id and state value, or a points value.");
                 }
                 
                 break;
@@ -177,6 +179,8 @@ public class QuestsCommand extends AbstractCommand {
                     int n = quester.getQuestPoints() - points.asInt();
                     quester.setQuestPoints(n <= 0 ? 0 : n);
                     reloadData(quester);
+                } else {
+                    Debug.echoError("Must specify either a quest_id and state value, or a points value.");
                 }
                 
                 break;
@@ -200,6 +204,8 @@ public class QuestsCommand extends AbstractCommand {
                     Quester quester = quests.getQuester(player.getPlayerEntity().getUniqueId());
                     quester.setQuestPoints(points.asInt());
                     reloadData(quester);
+                } else {
+                    Debug.echoError("Must specify either a quest_id and stage_no value, or a points value.");
                 }
                 
                 break;
