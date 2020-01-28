@@ -25,7 +25,7 @@ public class QuestsCommand extends AbstractCommand {
 
     // <--[command]
     // @Name Quests
-    // @Syntax quests [add/remove/set] (questId:<quest-id>) (stage-no:<#>) (points:<#>) (state:true/false)
+    // @Syntax quests [add/remove/set] (quest_id:<quest_id>) (stage_no:<#>) (points:<#>) (state:true/false)
     // @Group Depenizen
     // @Plugin Depenizen, Quests
     // @Required 1
@@ -40,15 +40,15 @@ public class QuestsCommand extends AbstractCommand {
     //
     // @Usage
     // Use to force player to take MyFirstQuest quest, ignoring requirements.
-    // - quests add quest-id:custom1 state:true
+    // - quests add quest_id:custom1 state:true
     //
     // @Usage
     // Use to force player to quit MyFirstQuest quest, notifying player.
-    // - quests remove quest-id:custom2 state:true
+    // - quests remove quest_id:custom2 state:true
     //
     // @Usage
     // Use to force player into specified stage 2 of MyFirstQuest quest.
-    // - quests set quest-id:custom3 stage-no:2
+    // - quests set quest_id:custom3 stage_no:2
     //
     // @Usage
     // Use to give player 100 Quest Points.
@@ -75,15 +75,15 @@ public class QuestsCommand extends AbstractCommand {
                 scriptEntry.addObject("action", arg.asElement());
             }
 
-            else if (!scriptEntry.hasObject("quest-id")
-                    && arg.matchesPrefix("quest", "quest-id")) {
-                scriptEntry.addObject("quest-id", arg.asElement());
+            else if (!scriptEntry.hasObject("quest_id")
+                    && arg.matchesPrefix("quest", "quest_id")) {
+                scriptEntry.addObject("quest_id", arg.asElement());
             }
             
-            else if (!scriptEntry.hasObject("stage-no")
-                    && arg.matchesPrefix("stage", "stage-no")
+            else if (!scriptEntry.hasObject("stage_no")
+                    && arg.matchesPrefix("stage", "stage_no")
                     && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Integer)) {
-                scriptEntry.addObject("stage-no", arg.asElement());
+                scriptEntry.addObject("stage_no", arg.asElement());
             }
             
             else if (!scriptEntry.hasObject("points")
@@ -118,8 +118,8 @@ public class QuestsCommand extends AbstractCommand {
 
         // Get objects
         ElementTag action = scriptEntry.getElement("action");
-        ElementTag questId = scriptEntry.getElement("quest-id");
-        ElementTag stageNum = scriptEntry.getElement("stage-no");
+        ElementTag questId = scriptEntry.getElement("quest_id");
+        ElementTag stageNum = scriptEntry.getElement("stage_no");
         ElementTag points = scriptEntry.getElement("points");
         ElementTag state = scriptEntry.getElement("state");
 
