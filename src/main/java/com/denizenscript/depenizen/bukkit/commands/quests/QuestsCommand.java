@@ -126,11 +126,13 @@ public class QuestsCommand extends AbstractCommand {
 
         PlayerTag player = scriptEntryData.getPlayer();
 
-        Debug.report(scriptEntry, getName(), action.debug() 
-                + (questId != null ? questId.debug() : "") 
-                + (stageNum != null ? stageNum.debug() : "") 
-                + (points != null ? points.debug() : "") 
-                + (state != null ? state.debug() : ""));
+        if (scriptEntry.dbCallShouldDebug()) {
+            Debug.report(scriptEntry, getName(), action.debug() 
+                    + (questId != null ? questId.debug() : "") 
+                    + (stageNum != null ? stageNum.debug() : "") 
+                    + (points != null ? points.debug() : "") 
+                    + (state != null ? state.debug() : ""));
+        }
 
         switch (Action.valueOf(action.asString().toUpperCase())) {
 
