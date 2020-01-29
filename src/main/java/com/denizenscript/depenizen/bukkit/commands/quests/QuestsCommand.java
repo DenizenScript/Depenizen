@@ -115,8 +115,6 @@ public class QuestsCommand extends AbstractCommand {
     @Override
     public void execute(ScriptEntry scriptEntry) {
         Quests quests = (Quests) QuestsBridge.instance.plugin;
-        
-        BukkitScriptEntryData scriptEntryData = (BukkitScriptEntryData) scriptEntry.entryData;
 
         ElementTag action = scriptEntry.getElement("action");
         ElementTag questId = scriptEntry.getElement("quest_id");
@@ -124,7 +122,7 @@ public class QuestsCommand extends AbstractCommand {
         ElementTag points = scriptEntry.getElement("points");
         ElementTag state = scriptEntry.getElement("state");
 
-        PlayerTag player = scriptEntryData.getPlayer();
+        PlayerTag player = ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer();
 
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), action.debug() 
