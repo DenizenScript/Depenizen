@@ -9,8 +9,6 @@ import me.blackvein.quests.Quests;
 import me.blackvein.quests.exceptions.InvalidStageException;
 import me.blackvein.quests.util.Lang;
 
-import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
-
 import org.bukkit.entity.Player;
 
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -105,6 +103,10 @@ public class QuestsCommand extends AbstractCommand {
             }
 
         }
+        
+        if (!Utilities.entryHasPlayer(scriptEntry)) {
+            throw new InvalidArgumentsException("Must have a linked player!");
+        }
 
         if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Must specify a valid action!");
@@ -139,7 +141,7 @@ public class QuestsCommand extends AbstractCommand {
 
                 if (questId != null && state != null) {
                     for (Quest quest : quests.getQuests()) {
-                        if (quest.getId().equals(questId.asString()) && player != null) {
+                        if (quest.getId().equals(questId.asString())) {
                             
                             quests.getQuester(player.getPlayerEntity().getUniqueId()).takeQuest(quest, state.asBoolean());
                             break;
@@ -160,7 +162,7 @@ public class QuestsCommand extends AbstractCommand {
                 
                 if (questId != null && state != null) {
                     for (Quest quest : quests.getQuests()) {
-                        if (quest.getId().equals(questId.asString()) && player != null) {
+                        if (quest.getId().equals(questId.asString())) {
                             Player thePlayer = player.getPlayerEntity();
                             Quester quester = quests.getQuester(thePlayer.getUniqueId());
                             quester.hardQuit(quest);
@@ -188,7 +190,7 @@ public class QuestsCommand extends AbstractCommand {
 
                 if (questId != null && stageNum != null && stageNum.asInt() > 0) {
                     for (Quest quest : quests.getQuests()) {
-                        if (quest.getId().equals(questId.asString()) && player != null) {
+                        if (quest.getId().equals(questId.asString())) {
                             try {
                                 quest.setStage(quests.getQuester(player.getPlayerEntity().getUniqueId()), stageNum.asInt());
                             } 
