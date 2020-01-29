@@ -14,6 +14,7 @@ import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import org.bukkit.entity.Player;
 
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -122,7 +123,7 @@ public class QuestsCommand extends AbstractCommand {
         ElementTag points = scriptEntry.getElement("points");
         ElementTag state = scriptEntry.getElement("state");
 
-        PlayerTag player = ((BukkitScriptEntryData) scriptEntry.entryData).getPlayer();
+        PlayerTag player = Utilities.getEntryPlayer(scriptEntry);
 
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), action.debug() 
@@ -139,6 +140,7 @@ public class QuestsCommand extends AbstractCommand {
                 if (questId != null && state != null) {
                     for (Quest quest : quests.getQuests()) {
                         if (quest.getId().equals(questId.asString()) && player != null) {
+                            
                             quests.getQuester(player.getPlayerEntity().getUniqueId()).takeQuest(quest, state.asBoolean());
                             break;
                         }
