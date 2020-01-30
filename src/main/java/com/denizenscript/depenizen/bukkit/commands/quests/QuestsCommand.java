@@ -24,7 +24,7 @@ public class QuestsCommand extends AbstractCommand {
 
     // <--[command]
     // @Name Quests
-    // @Syntax quests [add/remove/set] (quest_id:<quest_id>) (stage_no:<#>) (points:<#>) (state:true/false)
+    // @Syntax quests [add/remove/set] (quest_id:<quest_id>) (stage:<#>) (points:<#>) (state:true/false)
     // @Group Depenizen
     // @Plugin Depenizen, Quests
     // @Required 1
@@ -49,7 +49,7 @@ public class QuestsCommand extends AbstractCommand {
     //
     // @Usage
     // Use to force the player into specified stage 2 of quest with ID custom3.
-    // - quests set quest_id:custom3 stage_no:2
+    // - quests set quest_id:custom3 stage:2
     //
     // @Usage
     // Use to give the player 100 Quest Points.
@@ -81,10 +81,10 @@ public class QuestsCommand extends AbstractCommand {
                 scriptEntry.addObject("quest_id", arg.asElement());
             }
             
-            else if (!scriptEntry.hasObject("stage_no")
-                    && arg.matchesPrefix("stage", "stage_no")
+            else if (!scriptEntry.hasObject("stage")
+                    && arg.matchesPrefix("stage", "stage")
                     && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Integer)) {
-                scriptEntry.addObject("stage_no", arg.asElement());
+                scriptEntry.addObject("stage", arg.asElement());
             }
             
             else if (!scriptEntry.hasObject("points")
@@ -121,7 +121,7 @@ public class QuestsCommand extends AbstractCommand {
 
         ElementTag action = scriptEntry.getElement("action");
         ElementTag questId = scriptEntry.getElement("quest_id");
-        ElementTag stageNum = scriptEntry.getElement("stage_no");
+        ElementTag stageNum = scriptEntry.getElement("stage");
         ElementTag points = scriptEntry.getElement("points");
         ElementTag state = scriptEntry.getElement("state");
 
@@ -207,7 +207,7 @@ public class QuestsCommand extends AbstractCommand {
                     reloadData(quester);
                 }
                 else {
-                    Debug.echoError("Must specify either a quest_id and stage_no value, or a points value.");
+                    Debug.echoError("Must specify either a quest_id and stage value, or a points value.");
                 }
                 break;
             }
