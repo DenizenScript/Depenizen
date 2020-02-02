@@ -1,8 +1,11 @@
 package com.denizenscript.depenizen.bukkit.properties.magicspells;
 
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.nisovin.magicspells.MagicSpells;
+import com.nisovin.magicspells.Spell;
+import com.nisovin.magicspells.Spellbook;
 import com.nisovin.magicspells.mana.ManaHandler;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -89,6 +92,25 @@ public class MagicSpellsPlayerProperties implements Property {
                 }
                 return new ElementTag(mH.getMaxMana(player.getPlayerEntity()))
                         .getAttribute(attribute.fulfill(1));
+            }
+
+            // <--[tag]
+            // @attribute <PlayerTag.magicspells.known_spells>
+            // @returns ListTag
+            // @plugin Depenizen, MagicSpells
+            // @description
+            // Returns a list of spells the player knows, by internal name.
+            // -->
+            if (attribute.startsWith("known_spells")) {
+                Spellbook book = MagicSpells.getSpellbook(player.getPlayerEntity());
+                if (book == null) {
+                    return null;
+                }
+                ListTag result = new ListTag();
+                for (Spell spell : book.getSpells()) {
+                    result.add(spell.getInternalName());
+                }
+                return result.getAttribute(attribute.fulfill(1));
             }
         }
 
