@@ -9,8 +9,6 @@ import me.blackvein.quests.Quests;
 import me.blackvein.quests.exceptions.InvalidStageException;
 import me.blackvein.quests.util.Lang;
 
-import org.bukkit.entity.Player;
-
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizen.utilities.debugging.Debug;
@@ -162,11 +160,10 @@ public class QuestsCommand extends AbstractCommand {
                 if (questId != null && state != null) {
                     for (Quest quest : quests.getQuests()) {
                         if (quest.getId().equals(questId.asString())) {
-                            Player thePlayer = player.getPlayerEntity();
-                            Quester quester = quests.getQuester(thePlayer.getUniqueId());
+                            Quester quester = quests.getQuester(player.getPlayerEntity().getUniqueId());
                             quester.hardQuit(quest);
-                            if (state.asBoolean() && thePlayer.isOnline()) {
-                                thePlayer.sendMessage(Lang.get(thePlayer, "questQuit").replace("<quest>", quest.getName()));
+                            if (state.asBoolean() && player.isOnline()) {
+                                player.getPlayerEntity().sendMessage(Lang.get(player.getPlayerEntity(), "questQuit").replace("<quest>", quest.getName()));
                             }
                             reloadData(quester);
                             quester.updateJournal();
