@@ -56,7 +56,7 @@ public class TownyCuboidProperties implements Property {
         this.cuboid = cuboid;
     }
 
-    CuboidTag cuboid = null;
+    CuboidTag cuboid;
 
     @Override
     public String getAttribute(Attribute attribute) {

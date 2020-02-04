@@ -49,7 +49,7 @@ public class VampirePlayerProperties implements Property {
         this.uPlayer = UPlayer.get(player.getPlayerEntity());
     }
 
-    UPlayer uPlayer = null;
+    UPlayer uPlayer;
 
     @Override
     public String getAttribute(Attribute attribute) {

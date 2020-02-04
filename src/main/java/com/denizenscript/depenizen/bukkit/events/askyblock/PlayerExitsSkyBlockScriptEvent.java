@@ -7,8 +7,6 @@ import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -42,8 +40,8 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
     }
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("player exits skyblock");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("player exits skyblock");
     }
 
     @Override

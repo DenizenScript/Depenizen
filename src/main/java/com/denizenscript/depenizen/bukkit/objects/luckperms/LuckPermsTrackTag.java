@@ -77,7 +77,7 @@ public class LuckPermsTrackTag implements ObjectTag {
     //   STATIC CONSTRUCTORS
     /////////////////
 
-    Track track = null;
+    Track track;
 
     public LuckPermsTrackTag(Track t) {
         track = t;

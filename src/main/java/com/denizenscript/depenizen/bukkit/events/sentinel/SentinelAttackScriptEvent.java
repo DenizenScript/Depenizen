@@ -7,8 +7,6 @@ import com.denizenscript.denizen.objects.NPCTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.mcmonkey.sentinel.SentinelTrait;
@@ -43,8 +41,8 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     public NPCTag npc;
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("sentinel npc attacks");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("sentinel npc attacks");
     }
 
     @Override

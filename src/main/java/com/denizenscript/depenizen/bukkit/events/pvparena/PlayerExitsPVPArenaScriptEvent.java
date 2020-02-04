@@ -6,8 +6,6 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import net.slipcor.pvparena.events.PAExitEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -38,8 +36,8 @@ public class PlayerExitsPVPArenaScriptEvent extends BukkitScriptEvent implements
     }
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("pvparena player exits");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("pvparena player exits");
     }
 
     @Override

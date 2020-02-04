@@ -73,7 +73,7 @@ public class LibsDisguiseTag implements ObjectTag {
     //   STATIC CONSTRUCTORS
     /////////////////
 
-    Disguise disguise = null;
+    Disguise disguise;
 
     public LibsDisguiseTag(Disguise pl) {
         disguise = pl;

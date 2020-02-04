@@ -22,7 +22,7 @@ public class JobPlayer implements Property {
         }
     }
 
-    JobsJobTag job = null;
+    JobsJobTag job;
 
     private JobPlayer(JobsJobTag job) {
         this.job = job;

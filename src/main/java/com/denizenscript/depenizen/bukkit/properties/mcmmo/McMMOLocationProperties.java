@@ -49,7 +49,7 @@ public class McMMOLocationProperties implements Property {
         this.location = location;
     }
 
-    LocationTag location = null;
+    LocationTag location;
 
     @Override
     public String getAttribute(Attribute attribute) {

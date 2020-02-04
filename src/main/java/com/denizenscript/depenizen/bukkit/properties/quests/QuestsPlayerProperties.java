@@ -51,7 +51,7 @@ public class QuestsPlayerProperties implements Property {
         this.quester = quests.getQuester(player.getOfflinePlayer().getUniqueId());
     }
 
-    PlayerTag player = null;
+    PlayerTag player;
     Quester quester;
 
     @Override

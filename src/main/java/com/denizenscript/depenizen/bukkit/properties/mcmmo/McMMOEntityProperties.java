@@ -49,7 +49,7 @@ public class McMMOEntityProperties implements Property {
         this.entity = entity;
     }
 
-    EntityTag entity = null;
+    EntityTag entity;
 
     @Override
     public String getAttribute(Attribute attribute) {

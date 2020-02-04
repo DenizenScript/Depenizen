@@ -59,7 +59,7 @@ public class WorldGuardPlayerProperties implements Property {
         this.player = player.getPlayerEntity();
     }
 
-    Player player = null;
+    Player player;
 
     private StateFlag getStateFlag(String s) {
         Flag flag = Flags.fuzzyMatchFlag(WorldGuard.getInstance().getFlagRegistry(), s);

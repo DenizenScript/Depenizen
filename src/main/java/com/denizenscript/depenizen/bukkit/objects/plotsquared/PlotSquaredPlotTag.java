@@ -89,7 +89,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
     //   STATIC CONSTRUCTORS
     /////////////////
 
-    public Plot plot = null;
+    public Plot plot;
 
     public PlotSquaredPlotTag(Plot pl) {
         plot = pl;

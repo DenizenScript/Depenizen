@@ -50,7 +50,7 @@ public class FactionsLocationProperties implements Property {
         this.location = location;
     }
 
-    LocationTag location = null;
+    LocationTag location;
 
     @Override
     public String getAttribute(Attribute attribute) {

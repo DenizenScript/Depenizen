@@ -97,8 +97,8 @@ public class WorldGuardRegionTag implements ObjectTag {
     //   STATIC CONSTRUCTORS
     /////////////////
 
-    ProtectedRegion region = null;
-    World world = null;
+    ProtectedRegion region;
+    World world;
 
     public WorldGuardRegionTag(ProtectedRegion region, World world) {
         this.region = region;

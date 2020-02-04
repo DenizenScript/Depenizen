@@ -52,7 +52,7 @@ public class JobsPlayerProperties implements Property {
         this.player = Jobs.getPlayerManager().getJobsPlayer(player.getName());
     }
 
-    JobsPlayer player = null;
+    JobsPlayer player;
 
     @Override
     public String getAttribute(Attribute attribute) {

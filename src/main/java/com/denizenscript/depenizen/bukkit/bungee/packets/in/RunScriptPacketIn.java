@@ -65,7 +65,7 @@ public class RunScriptPacketIn extends PacketIn {
                 }
                 ScriptTag script = ScriptTag.valueOf(scriptName);
                 List<ScriptEntry> entries = script.getContainer().getBaseEntries(new BukkitScriptEntryData(linkedPlayer, null));
-                if (entries.size() == 0) {
+                if (entries.isEmpty()) {
                     return;
                 }
                 ScriptQueue queue = new InstantQueue("BUNGEERUN_" + scriptName).addEntries(entries);

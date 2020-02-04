@@ -9,8 +9,6 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -47,8 +45,8 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
     }
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("player completes skyblock challenge");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("player completes skyblock challenge");
     }
 
     @Override

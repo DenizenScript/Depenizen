@@ -51,7 +51,7 @@ public class PVPArenaPlayerProperties implements Property {
         this.player = ArenaPlayer.parsePlayer(player.getName());
     }
 
-    ArenaPlayer player = null;
+    ArenaPlayer player;
 
     @Override
     public String getAttribute(Attribute attribute) {

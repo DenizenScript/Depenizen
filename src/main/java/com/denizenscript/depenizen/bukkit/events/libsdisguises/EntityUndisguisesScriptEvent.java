@@ -7,8 +7,6 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -46,9 +44,8 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
     public LibsDisguiseTag disguise;
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        return lower.startsWith("libsdisguises undisguise");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("libsdisguises undisguise");
     }
 
     @Override

@@ -55,7 +55,7 @@ public class TownyPlayerProperties implements Property {
         this.player = player;
     }
 
-    PlayerTag player = null;
+    PlayerTag player;
 
     public Resident getResident() throws NotRegisteredException {
         return TownyUniverse.getDataSource().getResident(player.getName());

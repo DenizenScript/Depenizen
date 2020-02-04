@@ -50,7 +50,7 @@ public class TCLocationProperties implements Property {
         location = object;
     }
 
-    LocationTag location = null;
+    LocationTag location;
 
     @Override
     public String getAttribute(Attribute attribute) {

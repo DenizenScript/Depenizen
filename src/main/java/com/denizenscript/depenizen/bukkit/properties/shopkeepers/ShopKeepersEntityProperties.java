@@ -51,7 +51,7 @@ public class ShopKeepersEntityProperties implements Property {
     }
 
     EntityTag entity;
-    boolean isShopKeeper = false;
+    boolean isShopKeeper;
 
     @Override
     public String getAttribute(Attribute attribute) {

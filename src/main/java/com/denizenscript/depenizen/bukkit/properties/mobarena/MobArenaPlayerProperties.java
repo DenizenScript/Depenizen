@@ -55,8 +55,8 @@ public class MobArenaPlayerProperties implements Property {
         this.arena = ((MobArena) MobArenaBridge.instance.plugin).getArenaMaster().getArenaWithPlayer(player.getPlayerEntity());
     }
 
-    PlayerTag player = null;
-    Arena arena = null;
+    PlayerTag player;
+    Arena arena;
 
     @Override
     public String getAttribute(Attribute attribute) {

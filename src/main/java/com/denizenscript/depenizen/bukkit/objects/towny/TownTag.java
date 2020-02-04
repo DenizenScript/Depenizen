@@ -81,7 +81,7 @@ public class TownTag implements ObjectTag {
     //   STATIC CONSTRUCTORS
     /////////////////
 
-    Town town = null;
+    Town town;
 
     public TownTag(Town town) {
         this.town = town;

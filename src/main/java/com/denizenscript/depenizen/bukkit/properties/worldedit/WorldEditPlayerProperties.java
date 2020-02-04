@@ -69,7 +69,7 @@ public class WorldEditPlayerProperties implements Property {
         this.player = player.getPlayerEntity();
     }
 
-    Player player = null;
+    Player player;
 
     public static Material deLegacy(Material mat) {
         if (NMSHandler.getVersion().isAtLeast(NMSVersion.v1_13) && mat.isLegacy()) {

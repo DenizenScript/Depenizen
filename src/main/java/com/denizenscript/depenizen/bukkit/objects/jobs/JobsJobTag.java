@@ -79,7 +79,7 @@ public class JobsJobTag implements ObjectTag {
     //   STATIC CONSTRUCTORS
     /////////////////
 
-    Job job = null;
+    Job job;
     JobProgression jobProgression = null;
     JobsPlayer jobOwner = null;
 

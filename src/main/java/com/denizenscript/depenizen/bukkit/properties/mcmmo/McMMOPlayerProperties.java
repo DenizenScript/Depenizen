@@ -52,7 +52,7 @@ public class McMMOPlayerProperties implements Property {
         this.player = player;
     }
 
-    PlayerTag player = null;
+    PlayerTag player;
 
     @Override
     public String getAttribute(Attribute attribute) {

@@ -69,7 +69,7 @@ public class RunCommandsPacketIn extends PacketIn {
                     }
                 }
                 List<ScriptEntry> entries = ScriptBuilder.buildScriptEntries(rawEntries, null, new BukkitScriptEntryData(linkedPlayer, null));
-                if (entries.size() == 0) {
+                if (entries.isEmpty()) {
                     return;
                 }
                 if (!shouldDebug) {

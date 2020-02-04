@@ -9,7 +9,6 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
 import org.bukkit.event.EventHandler;
@@ -68,10 +67,9 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     public List<ItemStack> newDrops;
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        String lower = CoreUtilities.toLowerCase(s);
-        String cmd = CoreUtilities.getXthArg(2, lower);
-        return lower.startsWith("mythicmob")
+    public boolean couldMatch(ScriptPath path) {
+        String cmd = path.eventArgLowerAt(2);
+        return path.eventLower.startsWith("mythicmob")
                 && (cmd.equals("death") || cmd.equals("dies") || cmd.equals("killed"));
     }
 

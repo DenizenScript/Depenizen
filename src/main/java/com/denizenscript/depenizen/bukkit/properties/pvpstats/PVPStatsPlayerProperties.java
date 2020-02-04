@@ -49,7 +49,7 @@ public class PVPStatsPlayerProperties implements Property {
         this.playerName = player.getName();
     }
 
-    String playerName = null;
+    String playerName;
 
     @Override
     public String getAttribute(Attribute attribute) {

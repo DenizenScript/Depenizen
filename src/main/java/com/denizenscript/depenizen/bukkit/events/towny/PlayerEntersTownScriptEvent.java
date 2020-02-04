@@ -8,8 +8,6 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.scripts.containers.ScriptContainer;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -40,8 +38,8 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
     public TownTag town;
 
     @Override
-    public boolean couldMatch(ScriptContainer scriptContainer, String s) {
-        return CoreUtilities.toLowerCase(s).startsWith("towny player enters");
+    public boolean couldMatch(ScriptPath path) {
+        return path.eventLower.startsWith("towny player enters");
     }
 
     @Override
