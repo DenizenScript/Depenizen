@@ -76,7 +76,7 @@ public class PlaceholderAPIBridge extends Bridge {
 
         @Override
         public String onRequest(OfflinePlayer player, String identifier) {
-            return TagManager.tag(identifier, new BukkitTagContext(PlayerTag.mirrorBukkitPlayer(player), null, false, null, false, null));
+            return TagManager.tag(identifier, new BukkitTagContext(PlayerTag.mirrorBukkitPlayer(player), null, null, false, null));
         }
     }
 }

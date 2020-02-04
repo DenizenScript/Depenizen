@@ -54,7 +54,7 @@ public class BungeeCommand extends BracedCommand {
             if (!scriptEntry.hasObject("servers")) {
                 scriptEntry.addObject("servers", arg.asType(ListTag.class));
             }
-            else if (arg.matchesOne("{")) {
+            else if (arg.matches("{")) {
                 break;
             }
             else {
