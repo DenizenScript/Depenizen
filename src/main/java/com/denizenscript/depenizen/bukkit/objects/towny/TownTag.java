@@ -163,12 +163,18 @@ public class TownTag implements ObjectTag {
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, Towny
         // @description
-        // Returns a list of the town's assistants.
+        // Returns a list of the town's assistants. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
         // -->
         if (attribute.startsWith("assistants")) {
             ListTag list = new ListTag();
             for (Resident resident : town.getAssistants()) {
-                list.addObject(PlayerTag.valueOf(resident.getName()));
+                PlayerTag player = PlayerTag.valueOf(resident.getName());
+                if (player != null) {
+                    list.addObject(player);
+                }
+                else {
+                    list.add(resident.getName());
+                }
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -284,12 +290,18 @@ public class TownTag implements ObjectTag {
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, Towny
         // @description
-        // Returns a list of the town's residents.
+        // Returns a list of the town's residents. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
         // -->
         else if (attribute.startsWith("residents")) {
             ListTag list = new ListTag();
             for (Resident resident : town.getResidents()) {
-                list.addObject(PlayerTag.valueOf(resident.getName()));
+                PlayerTag player = PlayerTag.valueOf(resident.getName());
+                if (player != null) {
+                    list.addObject(player);
+                }
+                else {
+                    list.add(resident.getName());
+                }
             }
             return list.getAttribute(attribute.fulfill(1));
         }
