@@ -11,7 +11,9 @@ import com.denizenscript.depenizen.bukkit.events.quests.PlayerFailsQuestScriptEv
 import com.denizenscript.depenizen.bukkit.events.quests.PlayerStartsQuestScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.quests.QuestsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
+import com.denizenscript.depenizen.bukkit.commands.quests.QuestsCommand;
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quests;
@@ -24,6 +26,8 @@ public class QuestsBridge extends Bridge {
     public void init() {
         instance = this;
         PropertyParser.registerProperty(QuestsPlayerProperties.class, PlayerTag.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(QuestsCommand.class, "QUESTS",
+                "quests [add/remove/set] (quest_id:<quest-id>) (stage:<#>) (points:<#>) (state:true/false)", 1);
         ScriptEvent.registerScriptEvent(new PlayerCompletesQuestScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerFailsQuestScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerStartsQuestScriptEvent());
