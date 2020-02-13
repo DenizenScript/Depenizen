@@ -153,7 +153,7 @@ public class NationTag implements ObjectTag {
         // -->
         if (attribute.startsWith("balance")) {
             try {
-                return new ElementTag(nation.getHoldingBalance()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(nation.getAccount().getHoldingBalance()).getAttribute(attribute.fulfill(1));
             }
             catch (EconomyException e) {
                 if (!attribute.hasAlternative()) {

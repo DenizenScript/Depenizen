@@ -81,7 +81,7 @@ public class TownyChatPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <PlayerTag.townychat.muted_in[<channel name>]>
+            // @attribute <PlayerTag.townychat.muted_in[<channel_name>]>
             // @returns ElementTag(Boolean)
             // @plugin Depenizen, Towny
             // @description
@@ -96,7 +96,7 @@ public class TownyChatPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <PlayerTag.townychat.has_permission[<channel name>]>
+            // @attribute <PlayerTag.townychat.has_permission[<channel_name>]>
             // @returns ElementTag(Boolean)
             // @plugin Depenizen, Towny
             // @description
@@ -108,7 +108,7 @@ public class TownyChatPlayerProperties implements Property {
                     return null;
                 }
                 String perm = c.getPermission();
-                if (perm == null || !plugin.getTowny().isPermissions()) {
+                if (perm == null) {
                     return new ElementTag(true).getAttribute(attribute.fulfill(1));
                 }
                 return new ElementTag(TownyUniverse.getPermissionSource().has(player.getPlayerEntity(), perm))
