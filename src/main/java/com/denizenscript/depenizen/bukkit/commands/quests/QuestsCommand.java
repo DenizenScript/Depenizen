@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.quests;
 
 import com.denizenscript.denizencore.objects.Argument;
-import com.denizenscript.denizencore.objects.ArgumentHelper;
 
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
@@ -72,17 +71,17 @@ public class QuestsCommand extends AbstractCommand {
             }
             else if (!scriptEntry.hasObject("stage")
                     && arg.matchesPrefix("stage")
-                    && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Integer)) {
+                    && arg.matchesInteger()) {
                 scriptEntry.addObject("stage", arg.asElement());
             }
             else if (!scriptEntry.hasObject("points")
                     && arg.matchesPrefix("points")
-                    && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Integer)) {
+                    && arg.matchesInteger()) {
                 scriptEntry.addObject("points", arg.asElement());
             }
             else if (!scriptEntry.hasObject("override_checks")
                     && arg.matchesPrefix("override_checks")
-                    && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Boolean)) {
+                    && arg.matchesBoolean()) {
                 scriptEntry.addObject("override_checks", arg.asElement());
             }
             else {

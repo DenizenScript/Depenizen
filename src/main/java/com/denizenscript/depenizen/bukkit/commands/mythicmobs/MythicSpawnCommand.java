@@ -5,7 +5,6 @@ import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.ArgumentHelper;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
@@ -47,7 +46,7 @@ public class MythicSpawnCommand extends AbstractCommand {
 
             else if (!scriptEntry.hasObject("level")
                     && arg.matchesPrefix("level", "l")
-                    && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Integer)) {
+                    && arg.matchesInteger()) {
                 scriptEntry.addObject("level", arg.asElement());
             }
 

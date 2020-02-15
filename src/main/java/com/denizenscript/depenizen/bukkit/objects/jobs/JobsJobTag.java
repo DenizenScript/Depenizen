@@ -13,8 +13,6 @@ import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
-import java.util.regex.Matcher;
-
 public class JobsJobTag implements ObjectTag {
 
     // <--[language]
@@ -60,8 +58,7 @@ public class JobsJobTag implements ObjectTag {
 
         JobsJobTag job = null;
 
-        Matcher m = ObjectFetcher.DESCRIBED_PATTERN.matcher(string);
-        if (m.matches()) {
+        if (ObjectFetcher.isObjectWithProperties(string)) {
             return ObjectFetcher.getObjectFrom(JobsJobTag.class, string, context);
         }
         return new JobsJobTag(Jobs.getJob(string.replace("job@", "")));

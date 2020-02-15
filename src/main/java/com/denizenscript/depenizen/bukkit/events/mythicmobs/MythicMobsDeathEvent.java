@@ -107,7 +107,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         if (isDefaultDetermination(determinationObj)) {
             String determination = determinationObj.toString();
             Argument arg = new Argument(determination);
-            if (arg.matchesPrefix("currency") && arg.matchesPrimitive(ArgumentHelper.PrimitiveType.Double)) {
+            if (arg.matchesPrefix("currency") && arg.matchesFloat()) {
                 currency = new ElementTag(determination);
                 return true;
             }
