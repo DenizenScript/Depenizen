@@ -19,22 +19,11 @@ public class AreaShopTag implements ObjectTag {
     // @group Depenizen Object Types
     // @plugin Depenizen, AreaShop
     // @description
-    // A AreaShopTag represents an AreaShop shop.
+    // An AreaShopTag represents an AreaShop shop.
     //
-    // For format info, see <@link language areashop@>
-    //
-    // -->
-
-    // <--[language]
-    // @name areashop@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, AreaShop
-    // @description
-    // areashop@ refers to the 'object identifier' of a AreaShopTag. The 'areashop@' is notation for Denizen's Object
-    // Fetcher. The constructor for a AreaShopTag is <shop_name>
+    // These use the object notation "areashop@".
+    // The identity format for shops is <shop_name>
     // For example, 'areashop@my_shot'.
-    //
-    // For general info, see <@link language AreaShopTag Objects>
     //
     // -->
 

@@ -30,20 +30,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
     // @description
     // A GriefPreventionClaimTag represents a GriefPrevention claim.
     //
-    // For format info, see <@link language gpclaim@>
-    //
-    // -->
-
-    // <--[language]
-    // @name gpclaim@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, GriefPrevention
-    // @description
-    // gpclaim@ refers to the 'object identifier' of a GriefPreventionClaimTag. The 'gpclaim@' is notation for Denizen's Object
-    // Fetcher. The constructor for a GriefPreventionClaimTag is <claim_id>
+    // These use the object notation "gpclaim@".
+    // The identity format for claims is <claim_id>
     // For example, 'gpclaim@1234'.
-    //
-    // For general info, see <@link language GriefPreventionClaimTag Objects>
     //
     // -->
 

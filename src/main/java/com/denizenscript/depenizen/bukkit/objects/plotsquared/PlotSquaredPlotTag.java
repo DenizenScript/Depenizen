@@ -29,20 +29,9 @@ public class PlotSquaredPlotTag implements ObjectTag {
     // @description
     // A PlotSquaredPlotTag represents a PlotSquared plot in the world.
     //
-    // For format info, see <@link language plotsquaredplot@>
-    //
-    // -->
-
-    // <--[language]
-    // @name plotsquaredplot@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, PlotSquared
-    // @description
-    // plotsquaredplot@ refers to the 'object identifier' of a PlotSquaredPlotTag. The 'plotsquaredplot@' is notation for Denizen's Object
-    // Fetcher. The constructor for a PlotSquaredPlotTag is <x>,<z>,<world>
+    // These use the object notation "plotsquaredplot@".
+    // The identity format for plots is <x>,<z>,<world>
     // For example, 'plotsquaredplot@5,10,Hub'.
-    //
-    // For general info, see <@link language PlotSquaredPlotTag Objects>
     //
     // -->
 

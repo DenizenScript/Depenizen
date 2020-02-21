@@ -18,20 +18,9 @@ public class SkillAPIClassTag implements ObjectTag {
     // @description
     // A SkillAPIClassTag represents a SkillAPI class.
     //
-    // For format info, see <@link language skillapiclass@>
-    //
-    // -->
-
-    // <--[language]
-    // @name skillapiclass@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, SkillAPI
-    // @description
-    // skillapiclass@ refers to the 'object identifier' of a SkillAPIClassTag. The 'skillapiclass@' is notation for Denizen's Object
-    // Fetcher. The constructor for a SkillAPIClassTag is <class_name>
+    // These use the object notation "skillapiclass@".
+    // The identity format for regions is <class_name>
     // For example, 'skillapiclass@myclass'.
-    //
-    // For general info, see <@link language SkillAPIClassTag Objects>
     //
     // -->
 

@@ -22,20 +22,9 @@ public class JobsJobTag implements ObjectTag {
     // @description
     // A JobsJobTag represents a Jobs job.
     //
-    // For format info, see <@link language job@>
-    //
-    // -->
-
-    // <--[language]
-    // @name job@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, Jobs
-    // @description
-    // job@ refers to the 'object identifier' of a JobsJobTag. The 'job@' is notation for Denizen's Object
-    // Fetcher. The constructor for a JobsJobTag is <job_name>
+    // These use the object notation "job@".
+    // The identity format for jobs is <job_name>
     // For example, 'job@job_name'.
-    //
-    // For general info, see <@link language JobsJobTag Objects>
     //
     // -->
 

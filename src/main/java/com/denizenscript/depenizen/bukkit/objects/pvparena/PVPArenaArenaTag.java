@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.objects.pvparena;
 
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -20,20 +21,9 @@ public class PVPArenaArenaTag implements ObjectTag {
     // @description
     // A PVPArenaArenaTag represents a PvP Arena in the world.
     //
-    // For format info, see <@link language pvparena@>
-    //
-    // -->
-
-    // <--[language]
-    // @name pvparena@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, PvPArena
-    // @description
-    // pvparena@ refers to the 'object identifier' of a PVPArenaArenaTag. The 'pvparena@' is notation for Denizen's Object
-    // Fetcher. The constructor for a PVPArenaArenaTag is <arena_name>
+    // These use the object notation "pvparena@".
+    // The identity format for arenas is <arena_name>
     // For example, 'pvparena@myarena'.
-    //
-    // For general info, see <@link language PVPArenaArenaTag Objects>
     //
     // -->
 
@@ -48,6 +38,7 @@ public class PVPArenaArenaTag implements ObjectTag {
         return valueOf(name, null);
     }
 
+    @Fetchable("pvparena")
     public static PVPArenaArenaTag valueOf(String name, TagContext context) {
         name = name.replace("pvparena@", "");
         Arena a = ArenaManager.getArenaByName(name);

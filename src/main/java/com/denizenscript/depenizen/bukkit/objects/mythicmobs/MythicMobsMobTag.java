@@ -27,20 +27,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
     // @description
     // A MythicMobsMobTag represents a Mythic mob entity in the world.
     //
-    // For format info, see <@link language mythicmob@>
-    //
-    // -->
-
-    // <--[language]
-    // @name mythicmob@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, MythicMobs
-    // @description
-    // mythicmob@ refers to the 'object identifier' of a MythicMobsMobTag. The 'mythicmob@' is notation for Denizen's Object
-    // Fetcher. The constructor for a MythicMobsMobTag is <uuid>
+    // These use the object notation "mythicmob@".
+    // The identity format for mythicmobs is <uuid>
     // For example, 'mythicmob@1234-1234-1234'.
-    //
-    // For general info, see <@link language MythicMobsMobTag Objects>
     //
     // -->
 

@@ -32,20 +32,9 @@ public class ShopKeeperTag implements ObjectTag {
     // @description
     // A ShopKeeperTag represents a ShopKeeper entity in the world.
     //
-    // For format info, see <@link language shopkeeper@>
-    //
-    // -->
-
-    // <--[language]
-    // @name shopkeeper@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, Shopkeepers
-    // @description
-    // shopkeeper@ refers to the 'object identifier' of a ShopKeeperTag. The 'shopkeeper@' is notation for Denizen's Object
-    // Fetcher. The constructor for a ShopKeeperTag is <uuid>
+    // These use the object notation "shopkeeper@".
+    // The identity format for shopkeepers is <uuid>
     // For example, 'shopkeeper@1234-1234-1234'.
-    //
-    // For general info, see <@link language ShopKeeperTag Objects>
     //
     // -->
 

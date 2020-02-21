@@ -21,20 +21,9 @@ public class ResidenceTag implements ObjectTag {
     // @description
     // A ResidenceTag represents a Residence in the world.
     //
-    // For format info, see <@link language residence@>
-    //
-    // -->
-
-    // <--[language]
-    // @name residence@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, Residence
-    // @description
-    // residence@ refers to the 'object identifier' of a ResidenceTag. The 'residence@' is notation for Denizen's Object
-    // Fetcher. The constructor for a ResidenceTag is <residence_name>
+    // These use the object notation "residence@".
+    // The identity format for residences is <residence_name>
     // For example, 'residence@myresidence'.
-    //
-    // For general info, see <@link language ResidenceTag Objects>
     //
     // -->
 

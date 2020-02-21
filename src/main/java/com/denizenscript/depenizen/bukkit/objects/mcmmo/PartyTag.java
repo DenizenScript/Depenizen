@@ -24,20 +24,9 @@ public class PartyTag implements ObjectTag {
     // @description
     // A PartyTag represents an McMMO party.
     //
-    // For format info, see <@link language party@>
-    //
-    // -->
-
-    // <--[language]
-    // @name party@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, McMMO
-    // @description
-    // party@ refers to the 'object identifier' of a PartyTag. The 'party@' is notation for Denizen's Object
-    // Fetcher. The constructor for a PartyTag is <party_name>
+    // These use the object notation "party@".
+    // The identity format for parties is <party_name>
     // For example, 'party@my_party'.
-    //
-    // For general info, see <@link language PartyTag Objects>
     //
     // -->
 

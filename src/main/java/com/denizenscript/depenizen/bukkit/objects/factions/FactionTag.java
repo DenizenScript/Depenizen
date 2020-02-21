@@ -25,20 +25,9 @@ public class FactionTag implements ObjectTag {
     // @description
     // A FactionTag represents a Factions faction.
     //
-    // For format info, see <@link language faction@>
-    //
-    // -->
-
-    // <--[language]
-    // @name faction@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, Factions
-    // @description
-    // faction@ refers to the 'object identifier' of a FactionTag. The 'faction@' is notation for Denizen's Object
-    // Fetcher. The constructor for a FactionTag is <faction_name>
+    // These use the object notation "faction@".
+    // The identity format for factions is <faction_name>
     // For example, 'faction@my_faction'.
-    //
-    // For general info, see <@link language FactionTag Objects>
     //
     // -->
 

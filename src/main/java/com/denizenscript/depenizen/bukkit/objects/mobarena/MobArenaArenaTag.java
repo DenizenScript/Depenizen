@@ -22,20 +22,9 @@ public class MobArenaArenaTag implements ObjectTag {
     // @description
     // A MobArenaArenaTag represents a mob arena in the world.
     //
-    // For format info, see <@link language mobarena@>
-    //
-    // -->
-
-    // <--[language]
-    // @name mobarena@
-    // @group Depenizen Object Fetcher Types
-    // @plugin Depenizen, MobArena
-    // @description
-    // mobarena@ refers to the 'object identifier' of a MobArenaArenaTag. The 'mobarena@' is notation for Denizen's Object
-    // Fetcher. The constructor for a MobArenaArenaTag is <arena_name>
+    // These use the object notation "mobarena@".
+    // The identity format for arenas is <arena_name>
     // For example, 'mobarena@my_arena'.
-    //
-    // For general info, see <@link language MobArenaArenaTag Objects>
     //
     // -->
 
