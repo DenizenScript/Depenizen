@@ -46,7 +46,6 @@ public class ProxyPingPacketIn extends PacketIn {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {
-                        BungeeProxyServerListPingScriptEvent.instance.reset();
                         BungeeProxyServerListPingScriptEvent.instance.address = address;
                         BungeeProxyServerListPingScriptEvent.instance.currentPlayers = currentPlayers;
                         BungeeProxyServerListPingScriptEvent.instance.maxPlayers = maxPlayers;

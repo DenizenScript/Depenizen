@@ -37,7 +37,6 @@ public class ProxyCommandPacketIn extends PacketIn {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {
-                        BungeeProxyServerCommandScriptEvent.instance.reset();
                         BungeeProxyServerCommandScriptEvent.instance.sender = sender;
                         BungeeProxyServerCommandScriptEvent.instance.command = command;
                         BungeeProxyServerCommandScriptEvent.instance.fire();

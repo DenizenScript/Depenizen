@@ -40,7 +40,6 @@ public class PlayerSwitchServerPacketIn extends PacketIn {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {
-                        BungeePlayerServerSwitchScriptEvent.instance.reset();
                         BungeePlayerServerSwitchScriptEvent.instance.name = name;
                         BungeePlayerServerSwitchScriptEvent.instance.uuid = uuid;
                         BungeePlayerServerSwitchScriptEvent.instance.newServer = serverName;

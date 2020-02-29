@@ -75,6 +75,7 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
         if (determinationObj instanceof ElementTag && ((ElementTag) determinationObj).isFloat()) {
             xp = (ElementTag) determinationObj;
+            event.setRawXpGained(xp.asFloat());
             return true;
         }
         return super.applyDetermination(path, determinationObj);
@@ -110,6 +111,5 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
         xp = new ElementTag(event.getRawXpGained());
         this.event = event;
         fire(event);
-        event.setRawXpGained(xp.asFloat());
     }
 }

@@ -80,6 +80,7 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
         if (determinationObj instanceof ElementTag && ((ElementTag) determinationObj).isInt()) {
             levels_gained = ((ElementTag) determinationObj).asInt();
+            event.setLevelsGained(levels_gained);
             return true;
         }
         return super.applyDetermination(path, determinationObj);
@@ -122,6 +123,5 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
         skill = new ElementTag(event.getSkill().getName());
         this.event = event;
         fire(event);
-        event.setLevelsGained(levels_gained);
     }
 }

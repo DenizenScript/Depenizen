@@ -34,7 +34,6 @@ public class PlayerJoinPacketIn extends PacketIn {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {
-                        BungeePlayerJoinsScriptEvent.instance.reset();
                         BungeePlayerJoinsScriptEvent.instance.name = name;
                         BungeePlayerJoinsScriptEvent.instance.uuid = uuid;
                         BungeePlayerJoinsScriptEvent.instance.fire();

@@ -34,7 +34,6 @@ public class PlayerQuitPacketIn extends PacketIn {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {
-                        BungeePlayerQuitsScriptEvent.instance.reset();
                         BungeePlayerQuitsScriptEvent.instance.name = name;
                         BungeePlayerQuitsScriptEvent.instance.uuid = uuid;
                         BungeePlayerQuitsScriptEvent.instance.fire();

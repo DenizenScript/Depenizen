@@ -30,7 +30,6 @@ public class AddServerPacketIn extends PacketIn {
                     @Override
                     public void run() {
                         BungeeBridge.instance.knownServers.add(serverName);
-                        BungeeServerConnectScriptEvent.instance.reset();
                         BungeeServerConnectScriptEvent.instance.serverName = serverName;
                         BungeeServerConnectScriptEvent.instance.fire();
                     }

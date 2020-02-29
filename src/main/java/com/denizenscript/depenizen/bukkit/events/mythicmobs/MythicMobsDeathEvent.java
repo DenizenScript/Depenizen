@@ -109,10 +109,12 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
             Argument arg = new Argument(determination);
             if (arg.matchesPrefix("currency") && arg.matchesFloat()) {
                 currency = new ElementTag(determination);
+                event.setCurrency(currency.asDouble());
                 return true;
             }
             else if (ArgumentHelper.matchesInteger(determination)) { // "xp" prefix, but not required for back support reasons.
                 experience = new ElementTag(determination);
+                event.setExp(experience.asInt());
                 return true;
             }
             else if (Argument.valueOf(determination).matchesArgumentList(ItemTag.class)) {
@@ -122,6 +124,9 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
                 List<ItemTag> items = ListTag.valueOf(determination, getTagContext(path)).filter(ItemTag.class, path.container, true);
                 for (ItemTag i : items) {
                     newDrops.add(i.getItemStack());
+                }
+                if (newDrops != null && !newDrops.isEmpty()) {
+                    event.setDrops(newDrops);
                 }
                 return true;
             }
@@ -176,11 +181,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         newDrops = null;
         this.event = event;
         fire(event);
-        if (newDrops != null && !newDrops.isEmpty()) {
-            event.setDrops(newDrops);
-        }
-        event.setExp(experience.asInt());
-        event.setCurrency(currency.asDouble());
         EntityTag.forgetEntity(entity.getBukkitEntity());
     }
 }

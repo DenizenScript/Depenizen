@@ -30,7 +30,6 @@ public class RemoveServerPacketIn extends PacketIn {
                     @Override
                     public void run() {
                         BungeeBridge.instance.knownServers.remove(serverName);
-                        BungeeServerDisconnectScriptEvent.instance.reset();
                         BungeeServerDisconnectScriptEvent.instance.serverName = serverName;
                         BungeeServerDisconnectScriptEvent.instance.fire();
                     }
