@@ -8,11 +8,11 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
-import me.lucko.luckperms.common.model.Group;
-import me.lucko.luckperms.common.model.Track;
-import me.lucko.luckperms.common.model.User;
+import net.luckperms.api.model.group.Group;
+import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.NodeType;
 import net.luckperms.api.query.QueryOptions;
+import net.luckperms.api.track.Track;
 
 public class LuckPermsPlayerProperties implements Property {
 
@@ -64,10 +64,10 @@ public class LuckPermsPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("luckperms_tracks")) {
             ListTag tracks = new ListTag();
-            User user = LuckPermsBridge.luckPermsInstance.getUserManager().getOrMake(player.getOfflinePlayer().getUniqueId());
-            for (Track track : LuckPermsBridge.luckPermsInstance.getTrackManager().getAll().values()) {
+            User user = LuckPermsBridge.luckPermsInstance.getUserManager().getUser(player.getOfflinePlayer().getUniqueId());
+            for (Track track : LuckPermsBridge.luckPermsInstance.getTrackManager().getLoadedTracks()) {
                 for (String groupName : track.getGroups()) {
-                    Group group = LuckPermsBridge.luckPermsInstance.getGroupManager().getOrMake(groupName);
+                    Group group = LuckPermsBridge.luckPermsInstance.getGroupManager().getGroup(groupName);
                     // Copied from https://github.com/LuckPerms/extension-legacy-api/blob/97f30ce63b32663a0481557f3a081a9554a5bca0/src/main/java/me/lucko/luckperms/extension/legacyapi/impl/permissionholders/PermissionHolderProxy.java#L205-L212
                     boolean inGroup = user.resolveInheritedNodes(QueryOptions.nonContextual()).stream()
                             .filter(NodeType.INHERITANCE::matches)

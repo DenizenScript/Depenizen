@@ -8,7 +8,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.depenizen.bukkit.bridges.LuckPermsBridge;
-import me.lucko.luckperms.common.model.Track;
+import net.luckperms.api.track.Track;
 
 public class LuckPermsTrackTag implements ObjectTag {
 
@@ -44,7 +44,7 @@ public class LuckPermsTrackTag implements ObjectTag {
 
         string = string.replace("luckpermstrack@", "");
         try {
-            Track track = LuckPermsBridge.luckPermsInstance.getTrackManager().getIfLoaded(string);
+            Track track = LuckPermsBridge.luckPermsInstance.getTrackManager().getTrack(string);
             if (track == null) {
                 return null;
             }

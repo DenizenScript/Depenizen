@@ -11,16 +11,17 @@ import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
-import me.lucko.luckperms.bukkit.LPBukkitPlugin;
-import me.lucko.luckperms.common.model.Track;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.track.Track;
 
 public class LuckPermsBridge extends Bridge {
 
-    public static LPBukkitPlugin luckPermsInstance;
+    public static LuckPerms luckPermsInstance;
 
     @Override
     public void init() {
-        luckPermsInstance = (LPBukkitPlugin) plugin;
+        luckPermsInstance = LuckPermsProvider.get();
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {
@@ -43,7 +44,7 @@ public class LuckPermsBridge extends Bridge {
         // -->
         if (attribute.startsWith("list_tracks")) {
             ListTag tracks = new ListTag();
-            for (Track track : luckPermsInstance.getTrackManager().getAll().values()) {
+            for (Track track : luckPermsInstance.getTrackManager().getLoadedTracks()) {
                 tracks.addObject(new LuckPermsTrackTag(track));
             }
             event.setReplacedObject(tracks.getObjectAttribute(attribute.fulfill(1)));
