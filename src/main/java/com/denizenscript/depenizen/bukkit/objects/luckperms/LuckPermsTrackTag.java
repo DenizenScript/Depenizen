@@ -1,8 +1,5 @@
 package com.denizenscript.depenizen.bukkit.objects.luckperms;
 
-import me.lucko.luckperms.LuckPerms;
-import me.lucko.luckperms.api.LuckPermsApi;
-import me.lucko.luckperms.api.Track;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
@@ -10,6 +7,8 @@ import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
+import com.denizenscript.depenizen.bukkit.bridges.LuckPermsBridge;
+import me.lucko.luckperms.common.model.Track;
 
 public class LuckPermsTrackTag implements ObjectTag {
 
@@ -45,8 +44,7 @@ public class LuckPermsTrackTag implements ObjectTag {
 
         string = string.replace("luckpermstrack@", "");
         try {
-            LuckPermsApi api = LuckPerms.getApi();
-            Track track = api.getTrack(string);
+            Track track = LuckPermsBridge.luckPermsInstance.getTrackManager().getIfLoaded(string);
             if (track == null) {
                 return null;
             }
@@ -155,7 +153,6 @@ public class LuckPermsTrackTag implements ObjectTag {
         // -->
         if (attribute.startsWith("groups")) {
             ListTag groups = new ListTag();
-            LuckPermsApi api = LuckPerms.getApi();
             groups.addAll(track.getGroups());
             return groups.getAttribute(attribute.fulfill(1));
         }

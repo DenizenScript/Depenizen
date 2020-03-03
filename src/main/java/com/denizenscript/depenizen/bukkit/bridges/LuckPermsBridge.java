@@ -3,9 +3,6 @@ package com.denizenscript.depenizen.bukkit.bridges;
 import com.denizenscript.depenizen.bukkit.properties.luckperms.LuckPermsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrackTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import me.lucko.luckperms.LuckPerms;
-import me.lucko.luckperms.api.LuckPermsApi;
-import me.lucko.luckperms.api.Track;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.tags.TagRunnable;
@@ -14,11 +11,16 @@ import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
+import me.lucko.luckperms.bukkit.LPBukkitPlugin;
+import me.lucko.luckperms.common.model.Track;
 
 public class LuckPermsBridge extends Bridge {
 
+    public static LPBukkitPlugin luckPermsInstance;
+
     @Override
     public void init() {
+        luckPermsInstance = (LPBukkitPlugin) plugin;
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {
@@ -41,8 +43,7 @@ public class LuckPermsBridge extends Bridge {
         // -->
         if (attribute.startsWith("list_tracks")) {
             ListTag tracks = new ListTag();
-            LuckPermsApi api = LuckPerms.getApi();
-            for (Track track : api.getTracks()) {
+            for (Track track : luckPermsInstance.getTrackManager().getAll().values()) {
                 tracks.addObject(new LuckPermsTrackTag(track));
             }
             event.setReplacedObject(tracks.getObjectAttribute(attribute.fulfill(1)));
@@ -57,8 +58,7 @@ public class LuckPermsBridge extends Bridge {
         // -->
         if (attribute.startsWith("track")) {
             if (attribute.hasContext(1)) {
-                LuckPermsApi api = LuckPerms.getApi();
-                event.setReplacedObject(new LuckPermsTrackTag(api.getTrack(attribute.getContext(1))).getObjectAttribute(attribute.fulfill(1)));
+                event.setReplacedObject(LuckPermsTrackTag.valueOf(attribute.getContext(1)).getObjectAttribute(attribute.fulfill(1)));
             }
         }
     }
