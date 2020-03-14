@@ -31,8 +31,7 @@ public class JobsBridge extends Bridge {
                 tagEvent(event);
             }
         }, "jobs");
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(JobsCommand.class,
-                "JOBS", "jobs [promote/demote/join/quit] [<job>] (<#>)", 2);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(JobsCommand.class);
     }
 
     public void tagEvent(ReplaceableTagEvent event) {

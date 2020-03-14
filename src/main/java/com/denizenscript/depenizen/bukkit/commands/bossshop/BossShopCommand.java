@@ -14,12 +14,19 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class BossShopCommand extends AbstractCommand {
 
+    public BossShopCommand() {
+        setName("bossshop");
+        setSyntax("bossshop [<shop name>]");
+        setRequiredArguments(1, 1);
+    }
+
     // <--[command]
     // @Name bossshop
     // @Syntax bossshop [<shop name>]
     // @Group Depenizen
     // @Plugin Depenizen, BossShop
     // @Required 1
+    // @Maximum 1
     // @Short Opens a BossShop inventory for a player.
     //
     // @Description

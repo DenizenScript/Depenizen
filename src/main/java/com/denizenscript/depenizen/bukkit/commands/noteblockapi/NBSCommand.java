@@ -23,12 +23,19 @@ import java.util.List;
 
 public class NBSCommand extends AbstractCommand {
 
+    public NBSCommand() {
+        setName("nbs");
+        setSyntax("nbs [play/stop] (file:<file path>) [targets:<entity>|...]");
+        setRequiredArguments(2, 3);
+    }
+
     // <--[command]
     // @Name nbs
     // @Syntax nbs [play/stop] (file:<file path>) [targets:<entity>|...]
     // @Group Depenizen
     // @Plugin Depenizen, NoteBlockAPI
     // @Required 2
+    // @Maximum 3
     // @Short Plays or stops a noteblock song.
     //
     // @Description

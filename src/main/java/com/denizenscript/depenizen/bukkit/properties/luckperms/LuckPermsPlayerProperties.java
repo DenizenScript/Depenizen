@@ -57,7 +57,7 @@ public class LuckPermsPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <PlayerTag.luckperms_tracks>
-        // @returns ListTag(luckpermstrack)
+        // @returns ListTag(luckpermstracktag)
         // @plugin Depenizen, LuckPerms
         // @description
         // Returns a list of tracks the player is in.

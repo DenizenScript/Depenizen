@@ -15,8 +15,7 @@ public class NoteBlockAPIBridge extends Bridge {
     public void init() {
 
         PropertyParser.registerProperty(NoteBlockAPIPlayerProperties.class, PlayerTag.class);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(NBSCommand.class,
-                "NBS", "nbs [play/stop] (file:<file path>) [targets:<entity>|...]", 1);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(NBSCommand.class);
         ScriptEvent.registerScriptEvent(new NoteBlockAPISongEndsScriptEvent());
     }
 }

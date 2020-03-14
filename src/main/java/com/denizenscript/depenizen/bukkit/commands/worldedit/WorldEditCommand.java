@@ -35,12 +35,19 @@ import java.net.URLDecoder;
 
 public class WorldEditCommand extends AbstractCommand {
 
+    public WorldEditCommand() {
+        setName("worldedit");
+        setSyntax("worldedit [create_schematic/copy_to_clipboard/paste] (file:<file path>) (cuboid:<cuboid>) (position:<location>) (rotate:<#>) (undoable) (noair)");
+        setRequiredArguments(2, 7);
+    }
+
     // <--[command]
     // @Name worldedit
     // @Syntax worldedit [create_schematic/copy_to_clipboard/paste] (file:<file path>) (cuboid:<cuboid>) (position:<location>) (rotate:<#>) (undoable) (noair)
     // @Group Depenizen
     // @Plugin Depenizen, WorldEdit
     // @Required 2
+    // @Maximum 7
     // @Short Controls schematics and clipboards in WorldEdit.
     //
     // @Description

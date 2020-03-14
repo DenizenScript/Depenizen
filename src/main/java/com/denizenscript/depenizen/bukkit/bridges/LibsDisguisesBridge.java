@@ -20,7 +20,6 @@ public class LibsDisguisesBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new EntityUndisguisesScriptEvent());
         ObjectFetcher.registerWithObjectFetcher(LibsDisguiseTag.class);
         PropertyParser.registerProperty(LibsDisguiseEntityProperties.class, EntityTag.class);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(DisguiseCommand.class, "DISGUISE",
-                "disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<#>) (data:<#>) (self:true/false)", 1);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(DisguiseCommand.class);
     }
 }

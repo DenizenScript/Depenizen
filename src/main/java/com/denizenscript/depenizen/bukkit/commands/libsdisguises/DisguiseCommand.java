@@ -13,12 +13,19 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class DisguiseCommand extends AbstractCommand {
 
+    public DisguiseCommand() {
+        setName("disguise");
+        setSyntax("disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<#>) (data:<#>) (self:true/false)");
+        setRequiredArguments(1, 6);
+    }
+
     // <--[command]
     // @Name disguise
     // @Syntax disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<#>) (data:<#>) (self:true/false)
     // @Group Depenizen
     // @Plugin Depenizen, LibsDisguises
     // @Required 1
+    // @Maximum 8
     // @Short Disguises an entity as a different entity.
     //
     // @Description

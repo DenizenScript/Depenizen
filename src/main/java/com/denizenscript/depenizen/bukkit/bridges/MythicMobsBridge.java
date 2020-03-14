@@ -34,8 +34,7 @@ public class MythicMobsBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(MythicMobsMobTag.class);
         PropertyParser.registerProperty(MythicMobsEntityProperties.class, EntityTag.class);
         ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(MythicSpawnCommand.class,
-                "MYTHICSPAWN", "mythicspawn [<name>] [<location>] (level:<#>)", 2);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSpawnCommand.class);
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>

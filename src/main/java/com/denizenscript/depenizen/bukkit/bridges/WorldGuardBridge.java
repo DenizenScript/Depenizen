@@ -32,8 +32,7 @@ public class WorldGuardBridge extends Bridge {
         PropertyParser.registerProperty(WorldGuardPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(WorldGuardCuboidProperties.class, CuboidTag.class);
         PropertyParser.registerProperty(WorldGuardWorldProperties.class, WorldTag.class);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(RegionCommand.class,
-                "REGION", "region [{add} <cuboid>/remove <world>] [id:<name>]", 2);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(RegionCommand.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

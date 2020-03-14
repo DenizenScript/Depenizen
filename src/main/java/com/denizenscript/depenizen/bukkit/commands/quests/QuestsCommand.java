@@ -19,12 +19,19 @@ import com.denizenscript.depenizen.bukkit.bridges.QuestsBridge;
 
 public class QuestsCommand extends AbstractCommand {
 
+    public QuestsCommand() {
+        setName("quests");
+        setSyntax("quests [add/remove/set] (quest:<quest_id>) (stage:<#>) (points:<#>) (override_checks:{true}/false)");
+        setRequiredArguments(2, 5);
+    }
+
     // <--[command]
     // @Name Quests
     // @Syntax quests [add/remove/set] (quest:<quest_id>) (stage:<#>) (points:<#>) (override_checks:{true}/false)
     // @Group Depenizen
     // @Plugin Depenizen, Quests
     // @Required 2
+    // @Maximum 5
     // @Short Edits quest player information.
     //
     // @Description

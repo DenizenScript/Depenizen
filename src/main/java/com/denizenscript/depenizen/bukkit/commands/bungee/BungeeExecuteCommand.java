@@ -12,12 +12,19 @@ import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 
 public class BungeeExecuteCommand extends AbstractCommand {
 
+    public BungeeExecuteCommand() {
+        setName("bungeeexecute");
+        setSyntax("bungeeexecute [<command>]");
+        setRequiredArguments(1, 1);
+    }
+
     // <--[command]
     // @Name BungeeExecute
     // @Syntax bungeeexecute [<command>]
     // @Group Depenizen
     // @Plugin Depenizen, BungeeCord
     // @Required 1
+    // @Maximum 1
     // @Short Runs a command on the Bungee proxy server.
     //
     // @Description

@@ -17,12 +17,19 @@ import java.util.UUID;
 
 public class BungeeRunCommand extends AbstractCommand {
 
+    public BungeeRunCommand() {
+        setName("bungeerun");
+        setSyntax("bungeerun [<server>|...] [<script name>] (def:<definition>|...)");
+        setRequiredArguments(2, 3);
+    }
+
     // <--[command]
     // @Name BungeeRun
     // @Syntax bungeerun [<server>|...] [<script name>] (def:<definition>|...)
     // @Group Depenizen
     // @Plugin Depenizen, BungeeCord
     // @Required 2
+    // @Maximum 3
     // @Short Runs a task script on another server.
     //
     // @Description

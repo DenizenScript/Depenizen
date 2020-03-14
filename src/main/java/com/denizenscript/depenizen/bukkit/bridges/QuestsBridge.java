@@ -26,8 +26,7 @@ public class QuestsBridge extends Bridge {
     public void init() {
         instance = this;
         PropertyParser.registerProperty(QuestsPlayerProperties.class, PlayerTag.class);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(QuestsCommand.class, "QUESTS",
-                "quests [add/remove/set] (quest:<quest-id>) (stage:<#>) (points:<#>) (override_checks:{true}/false)", 2);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(QuestsCommand.class);
         ScriptEvent.registerScriptEvent(new PlayerCompletesQuestScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerFailsQuestScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerStartsQuestScriptEvent());

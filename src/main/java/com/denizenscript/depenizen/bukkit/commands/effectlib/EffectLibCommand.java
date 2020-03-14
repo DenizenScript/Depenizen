@@ -18,12 +18,19 @@ import org.bukkit.Location;
 
 public class EffectLibCommand extends AbstractCommand {
 
+    public EffectLibCommand() {
+        setName("effectlib");
+        setSyntax("effectlib (type:<effect name>) (duration:<duration>) (target:<entity>/location:<location>)");
+        setRequiredArguments(1, 3);
+    }
+
     // <--[command]
     // @Name effectlib
     // @Syntax effectlib (type:<effect name>) (duration:<duration>) (target:<entity>/location:<location>)
     // @Group Depenizen
     // @Plugin Depenizen, EffectLib
     // @Required 1
+    // @Maximum 3
     // @Short Show custom effects using EffectLib
     //
     // @Description

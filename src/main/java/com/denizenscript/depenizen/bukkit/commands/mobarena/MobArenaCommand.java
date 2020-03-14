@@ -15,12 +15,19 @@ import java.util.List;
 
 public class MobArenaCommand extends AbstractCommand {
 
+    public MobArenaCommand() {
+        setName("mobarena");
+        setSyntax("mobarena [<mobarena>] (add:<player>|...) (remove:<player>|...) (spectate:<player>|...)");
+        setRequiredArguments(1, 4);
+    }
+
     // <--[command]
     // @Name MobArena
     // @Syntax mobarena [<mobarena>] (add:<player>|...) (remove:<player>|...) (spectate:<player>|...)
     // @Group Depenizen
     // @Plugin Depenizen, MobArena
     // @Required 1
+    // @Maximum 4
     // @Short Make a player join, remove a player from or make a player spectate a MobArena.
     //
     // @Description

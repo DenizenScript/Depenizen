@@ -14,12 +14,19 @@ import org.bukkit.entity.Entity;
 
 public class MythicSpawnCommand extends AbstractCommand {
 
+    public MythicSpawnCommand() {
+        setName("mythicspawn");
+        setSyntax("mythicspawn [<name>] [<location>] (level:<#>)");
+        setRequiredArguments(2, 3);
+    }
+
     // <--[command]
     // @Name MythicSpawn
     // @Syntax mythicspawn [<name>] [<location>] (level:<#>)
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
     // @Required 2
+    // @Maximum 3
     // @Short Spawns a MythicMob at a location.
     //
     // @Description

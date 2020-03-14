@@ -19,12 +19,19 @@ import org.bukkit.World;
 
 public class RegionCommand extends AbstractCommand {
 
+    public RegionCommand() {
+        setName("region");
+        setSyntax("region [{add} <cuboid>/remove <world>] [id:<name>]");
+        setRequiredArguments(2, 3);
+    }
+
     // <--[command]
     // @Name region
     // @Syntax region [{add} <cuboid>/remove <world>] [id:<name>]
     // @Group Depenizen
     // @Plugin Depenizen, WorldGuard
     // @Required 2
+    // @Maximum 3
     // @Short Adds or removes a protected region.
     //
     // @Description

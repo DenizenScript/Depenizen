@@ -62,12 +62,12 @@ public class McMMOPlayerProperties implements Property {
             attribute = attribute.fulfill(1);
 
             // <--[tag]
-            // @attribute <PlayerTag.mcmmo.level[<skill>]>
+            // @attribute <PlayerTag.mcmmo.level[(<skill>)]>
             // @returns ElementTag(Number)
             // @plugin Depenizen, mcMMO
             // @description
-            // Returns the player's level in a skill. If no skill is specified,
-            // this returns the player's overall level.
+            // Returns the player's level in a skill.
+            // If no skill is specified, this returns the player's overall level.
             // -->
             if (attribute.startsWith("level")) {
                 if (!attribute.hasContext(1)) {
@@ -116,8 +116,7 @@ public class McMMOPlayerProperties implements Property {
                 // @returns ElementTag(Number)
                 // @plugin Depenizen, mcMMO
                 // @description
-                // Returns the amount of experience a player needs to level up
-                // in a skill.
+                // Returns the amount of experience a player needs to level up in a skill.
                 // -->
                 if (attribute.startsWith("tonextlevel") || attribute.startsWith("to_next_level")) {
                     if (player.isOnline()) {
@@ -167,12 +166,12 @@ public class McMMOPlayerProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <PlayerTag.mcmmo.rank[<skill>]>
+            // @attribute <PlayerTag.mcmmo.rank[(<skill>)]>
             // @returns ElementTag(Number)
             // @plugin Depenizen, mcMMO
             // @description
-            // Returns the player's current rank in a skill. If no skill is specified,
-            // this returns the player's overall rank.
+            // Returns the player's current rank in a skill.
+            // If no skill is specified, this returns the player's overall rank.
             // -->
             else if (attribute.startsWith("rank")) {
                 if (!attribute.hasContext(1)) {

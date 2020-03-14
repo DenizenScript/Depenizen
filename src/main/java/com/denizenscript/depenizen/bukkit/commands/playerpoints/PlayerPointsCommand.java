@@ -13,12 +13,19 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class PlayerPointsCommand extends AbstractCommand {
 
+    public PlayerPointsCommand() {
+        setName("playerpoints");
+        setSyntax("playerpoints [set/give/take] [<#>]");
+        setRequiredArguments(2, 2);
+    }
+
     // <--[command]
     // @Name playerpoints
     // @Syntax playerpoints [set/give/take] [<#>]
     // @Group Depenizen
     // @Plugin Depenizen, PlayerPoints
     // @Required 2
+    // @Maximum 2
     // @Short Adjusts the amount of points the player has.
     //
     // @Description

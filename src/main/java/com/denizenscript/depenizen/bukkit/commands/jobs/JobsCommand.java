@@ -12,12 +12,19 @@ import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
 
 public class JobsCommand extends AbstractCommand {
 
+    public JobsCommand() {
+        setName("jobs");
+        setSyntax("jobs [promote/demote/join/quit] [<job>] (<#>)");
+        setRequiredArguments(2, 3);
+    }
+
     // <--[command]
     // @Name Jobs
     // @Syntax jobs [promote/demote/join/quit] [<job>] (<#>)
     // @Group Depenizen
     // @Plugin Depenizen, Jobs
     // @Required 2
+    // @Maximum 3
     // @Short Modifies the specified job of a player.
     //
     // @Description
@@ -43,14 +50,9 @@ public class JobsCommand extends AbstractCommand {
 
     private enum Action {PROMOTE, DEMOTE, JOIN, QUIT}
 
-    public JobsCommand() {
-
-    }
-
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
-        // Iterate through arguments
         for (Argument arg : scriptEntry.getProcessedArgs()) {
 
             if (!scriptEntry.hasObject("action")

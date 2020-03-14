@@ -18,12 +18,19 @@ import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 
 public class McMMOCommand extends AbstractCommand {
 
+    public McMMOCommand() {
+        setName("mcmmo");
+        setSyntax("mcmmo [add/remove/set] [levels/xp/xprate/vampirism/hardcore/leader] (skill:<skill>) (state:{toggle}/true/false) (quantity:<#>) (party:<party>)");
+        setRequiredArguments(1, 6);
+    }
+
     // <--[command]
     // @Name mcMMO
     // @Syntax mcmmo [add/remove/set] [levels/xp/xprate/vampirism/hardcore/leader] (skill:<skill>) (state:{toggle}/true/false) (quantity:<#>) (party:<party>)
     // @Group Depenizen
     // @Plugin Depenizen, mcMMO
     // @Required 1
+    // @Maximum 6
     // @Short Edits mcMMO information.
     //
     // @Description
@@ -54,14 +61,9 @@ public class McMMOCommand extends AbstractCommand {
 
     private enum Type {XP, LEVELS, TOGGLE, XPRATE, LEADER, VAMPIRISM, HARDCORE}
 
-    public McMMOCommand() {
-
-    }
-
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
-        // Iterate through arguments
         for (Argument arg : scriptEntry.getProcessedArgs()) {
 
             if (!scriptEntry.hasObject("action")

@@ -20,12 +20,20 @@ import java.util.UUID;
 
 public class BungeeTagCommand extends AbstractCommand implements Holdable {
 
+    public BungeeTagCommand() {
+        setName("bungeetag");
+        setSyntax("bungeetag [server:<server>] [<tag>]");
+        setRequiredArguments(2, 2);
+        setParseArgs(false);
+    }
+
     // <--[command]
     // @Name BungeeTag
     // @Syntax bungeetag [server:<server>] [<tag>]
     // @Group Depenizen
     // @Plugin Depenizen, BungeeCord
     // @Required 2
+    // @Maximum 2
     // @Short Gets the result of a tag from another server on the Bungee network.
     //
     // @Description
@@ -44,11 +52,6 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
     // - narrate "The lobby's MOTD is <entry[motd].result>"
     //
     // -->
-
-    @Override
-    public void onEnable() {
-        setParseArgs(false);
-    }
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {

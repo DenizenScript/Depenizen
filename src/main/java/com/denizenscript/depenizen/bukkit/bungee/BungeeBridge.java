@@ -210,14 +210,10 @@ public class BungeeBridge {
         ScriptEvent.registerScriptEvent(new BungeeServerConnectScriptEvent());
         ScriptEvent.registerScriptEvent(new BungeeServerDisconnectScriptEvent());
         PropertyParser.registerProperty(BungeePlayerProperties.class, PlayerTag.class);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeRunCommand.class, "BUNGEERUN",
-                "bungeerun [<server>|...] [<script name>] (def:<definition>|...)", 2);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeExecuteCommand.class, "BUNGEEEXECUTE",
-                "bungeeexecute [<command>]", 1);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeCommand.class, "BUNGEE",
-                "bungee [<server>|...] [<commands>]", 1);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCoreMember(BungeeTagCommand.class, "BUNGEETAG",
-                "bungeetag [server:<server>] [<tag>]", 2);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(BungeeRunCommand.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(BungeeExecuteCommand.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(BungeeCommand.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(BungeeTagCommand.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

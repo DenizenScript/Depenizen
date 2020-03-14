@@ -19,12 +19,19 @@ import java.util.UUID;
 
 public class BungeeCommand extends BracedCommand {
 
+    public BungeeCommand() {
+        setName("bungee");
+        setSyntax("bungee [<server>|...] [<commands>]");
+        setRequiredArguments(1, 1);
+    }
+
     // <--[command]
     // @Name Bungee
     // @Syntax bungee [<server>|...] [<commands>]
     // @Group Depenizen
     // @Plugin Depenizen, BungeeCord
     // @Required 1
+    // @Maximum 1
     // @Short Runs a set of commands on another server.
     //
     // @Description
