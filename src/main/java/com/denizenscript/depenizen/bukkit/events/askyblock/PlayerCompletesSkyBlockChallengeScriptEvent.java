@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.askyblock;
 
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.wasteofplastic.askyblock.events.ChallengeCompleteEvent;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
@@ -38,7 +39,6 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
     public ElementTag challenge;
     public ElementTag xp_reward;
     public ElementTag money_reward;
-    public ListTag item_rewards;
 
     public PlayerCompletesSkyBlockChallengeScriptEvent() {
         instance = this;
@@ -71,6 +71,13 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
             return money_reward;
         }
         else if (name.equals("item_rewards")) {
+            ListTag item_rewards = new ListTag();
+            for (String i : event.getItemRewards()) {
+                ItemTag item = ItemTag.valueOf(i, CoreUtilities.basicContext);
+                if (item != null) {
+                    item_rewards.addObject(item);
+                }
+            }
             return item_rewards;
         }
         return super.getContext(name);
@@ -81,13 +88,6 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
         challenge = new ElementTag(event.getChallengeName());
         xp_reward = new ElementTag(event.getExpReward());
         money_reward = new ElementTag(event.getMoneyReward());
-        item_rewards = new ListTag();
-        for (String i : event.getItemRewards()) {
-            ItemTag item = ItemTag.valueOf(i);
-            if (item != null) {
-                item_rewards.addObject(item);
-            }
-        }
         this.event = event;
         fire(event);
     }
