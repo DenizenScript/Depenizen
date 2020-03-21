@@ -80,6 +80,6 @@ public class MythicMobsBridge extends Bridge {
     }
 
     public static Entity spawnMythicMob(MythicMob mythicMob, Location location, int level) {
-        return mythicMob.spawn(BukkitAdapter.adapt(location), level).getLivingEntity();
+        return mythicMob.spawn(BukkitAdapter.adapt(location), level).getEntity().getBukkitEntity();
     }
 }

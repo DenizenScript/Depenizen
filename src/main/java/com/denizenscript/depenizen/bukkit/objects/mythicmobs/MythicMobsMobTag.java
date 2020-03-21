@@ -78,7 +78,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
     }
 
     public LivingEntity getLivingEntity() {
-        return mob.getLivingEntity();
+        return (LivingEntity) mob.getEntity().getBukkitEntity();
     }
 
     public Entity getEntity() {

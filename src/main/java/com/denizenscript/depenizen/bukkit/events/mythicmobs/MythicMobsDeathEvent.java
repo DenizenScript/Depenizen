@@ -40,12 +40,8 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     // <context.killer> returns the EntityTag that killed the MythicMob (if available).
     // <context.level> Returns the level of the MythicMob.
     // <context.drops> Returns a list of items dropped.
-    // <context.xp> Returns the xp dropped.
-    // <context.currency> returns the currency dropped.
     //
     // @Determine
-    // "XP:" + ElementTag(Number) to specify the new amount of XP to be dropped.
-    // "CURRENCY:" + ElementTag(Decimal) to specify the new amount of currency to be dropped.
     // ListTag(ItemTag) to specify new items to be dropped.
     //
     // @Plugin Depenizen, MythicMobs
@@ -107,17 +103,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         if (isDefaultDetermination(determinationObj)) {
             String determination = determinationObj.toString();
             Argument arg = new Argument(determination);
-            if (arg.matchesPrefix("currency") && arg.matchesFloat()) {
-                currency = new ElementTag(determination);
-                event.setCurrency(currency.asDouble());
-                return true;
-            }
-            else if (ArgumentHelper.matchesInteger(determination)) { // "xp" prefix, but not required for back support reasons.
-                experience = new ElementTag(determination);
-                event.setExp(experience.asInt());
-                return true;
-            }
-            else if (Argument.valueOf(determination).matchesArgumentList(ItemTag.class)) {
+            if (Argument.valueOf(determination).matchesArgumentList(ItemTag.class)) {
                 if (newDrops == null) {
                     newDrops = new ArrayList<>();
                 }
@@ -176,8 +162,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         EntityTag.rememberEntity(entity.getBukkitEntity());
         killer = new EntityTag(event.getKiller());
         level = new ElementTag(event.getMobLevel());
-        experience = new ElementTag(event.getExp());
-        currency = new ElementTag(event.getCurrency());
         newDrops = null;
         this.event = event;
         fire(event);
