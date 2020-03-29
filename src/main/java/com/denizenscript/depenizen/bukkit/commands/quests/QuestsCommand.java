@@ -5,7 +5,6 @@ import com.denizenscript.denizencore.objects.Argument;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
 import me.blackvein.quests.Quests;
-import me.blackvein.quests.exceptions.InvalidStageException;
 import me.blackvein.quests.util.Lang;
 
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -176,7 +175,7 @@ public class QuestsCommand extends AbstractCommand {
                             try {
                                 quest.setStage(quests.getQuester(player.getPlayerEntity().getUniqueId()), stageNum.asInt());
                             }
-                            catch (InvalidStageException ex) {
+                            catch (IndexOutOfBoundsException ex) {
                                 Debug.echoError(ex);
                             }
                             break;
