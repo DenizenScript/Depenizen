@@ -60,7 +60,7 @@ public class BossShopInventoryProperties implements Property {
         // <--[tag]
         // @attribute <InventoryTag.is_bossshop>
         // @returns ElementTag(Boolean)
-        // @plugin Depenizen, BossShop
+        // @plugin Depenizen, BossShopPro
         // @description
         // Returns whether the inventory is a BossShop.
         // -->

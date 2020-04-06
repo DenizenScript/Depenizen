@@ -3,7 +3,7 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 
 - AreaShop (https://www.spigotmc.org/resources/areashop.2991/)
 - ASkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
-- BossShop (https://www.spigotmc.org/resources/bossshop-powerful-and-playerfriendly-chest-gui-shop-menu-plugin.222/)
+- BossShopPro (https://www.spigotmc.org/resources/bossshop-powerful-and-playerfriendly-chest-gui-shop-menu-plugin.222/)
 - EffectLib (https://dev.bukkit.org/projects/effectlib)
 - EssentialsX (https://www.spigotmc.org/resources/essentialsx.9089/)
 - Factions (https://www.spigotmc.org/resources/factions3-for-1-13.63602/)

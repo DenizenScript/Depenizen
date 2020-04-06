@@ -97,7 +97,7 @@ public class Depenizen extends JavaPlugin {
         // Yes it needs to be `new MyBridge()` not `MyBridge::new` - this is due to an error in the Java runtime.
         registerBridge("AreaShop", () -> new AreaShopBridge());
         registerBridge("ASkyBlock", () -> new ASkyBlockBridge());
-        registerBridge("BossShop", () -> new BossShopBridge());
+        registerBridge("BossShopPro", () -> new BossShopBridge());
         registerBridge("EffectLib", () -> new EffectLibBridge());
         registerBridge("Essentials", () -> new EssentialsBridge());
         registerBridge("Factions", () -> new FactionsBridge());

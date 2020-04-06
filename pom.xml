@@ -96,10 +96,10 @@
         </dependency>
         <dependency>
             <groupId>org.black_ixx</groupId>
-            <artifactId>BossShop</artifactId>
-            <version>2.7.5</version>
+            <artifactId>BossShopPro</artifactId>
+            <version>2.0.8</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/BossShop.jar</systemPath>
+            <systemPath>${project.basedir}/lib/BossShopPro.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>de.slikey</groupId>
