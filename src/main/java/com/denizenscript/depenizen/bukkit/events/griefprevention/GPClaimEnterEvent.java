@@ -110,7 +110,7 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
 
     @EventHandler
     public void onPlayerEntersExitsGPClaim(PlayerMoveEvent event) {
-        if (event.getTo().getBlock().getLocation().equals(event.getFrom().getBlock().getLocation())) {
+        if (LocationTag.isSameBlock(event.getFrom(), event.getTo())) {
             return;
         }
         from = new LocationTag(event.getFrom());

@@ -316,7 +316,7 @@ public class TownTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("spawn")) {
             try {
-                return new LocationTag(town.getSpawn().getBlock().getLocation())
+                return new LocationTag(town.getSpawn()).getBlockLocation()
                         .getAttribute(attribute.fulfill(1));
             }
             catch (TownyException e) {
