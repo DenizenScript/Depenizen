@@ -306,7 +306,7 @@ public class SentinelNPCProperties implements Property {
                 if (entity == null) {
                     return null;
                 }
-                return new EntityTag(entity).getAttribute(attribute.fulfill(1));
+                return new EntityTag(entity).getDenizenObject().getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
