@@ -14,9 +14,9 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
 
     // <--[event]
     // @Events
-    // player enters skyblock
+    // skyblock player enters skyblock
     //
-    // @Regex ^on player enters skyblock$
+    // @Regex ^on skyblock player enters skyblock$
     //
     // @Triggers when a player goes to a skyblock island.
     //
@@ -41,7 +41,7 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("player enters skyblock");
+        return path.eventLower.startsWith("skyblock player enters skyblock");
     }
 
     @Override
