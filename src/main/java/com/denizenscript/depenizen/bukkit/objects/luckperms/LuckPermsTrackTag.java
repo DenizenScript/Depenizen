@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.luckperms;
 
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
@@ -8,7 +9,14 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.depenizen.bukkit.bridges.LuckPermsBridge;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.node.NodeType;
+import net.luckperms.api.node.types.InheritanceNode;
+import net.luckperms.api.query.QueryOptions;
 import net.luckperms.api.track.Track;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LuckPermsTrackTag implements ObjectTag {
 
@@ -145,15 +153,34 @@ public class LuckPermsTrackTag implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <LuckPermsTrackTag.groups>
-        // @returns ListTag(Element)
+        // @attribute <LuckPermsTrackTag.groups[(<player>)]>
+        // @returns ListTag
         // @plugin Depenizen, LuckPerms
         // @description
         // Returns the list of groups in the track.
+        // If a player input is specified, limits to only the groups that the player is in.
         // -->
         if (attribute.startsWith("groups")) {
             ListTag groups = new ListTag();
-            groups.addAll(track.getGroups());
+            if (attribute.hasContext(1)) {
+                PlayerTag player = PlayerTag.valueOf(attribute.getContext(1));
+                if (player == null) {
+                    attribute.echoError("Invalid player input for 'group' tag.");
+                    return null;
+                }
+                User user = LuckPermsBridge.luckPermsInstance.getUserManager().getUser(player.getOfflinePlayer().getUniqueId());
+                List<String> trackGroups = track.getGroups();
+                List<String> memberGroups = user.resolveInheritedNodes(QueryOptions.nonContextual()).stream()
+                        .filter(NodeType.INHERITANCE::matches)
+                        .map(NodeType.INHERITANCE::cast)
+                        .filter(net.luckperms.api.node.Node::getValue)
+                        .filter(n -> trackGroups.contains(n.getGroupName()))
+                        .map(InheritanceNode::getGroupName).collect(Collectors.toList());
+                groups.addAll(memberGroups);
+            }
+            else {
+                groups.addAll(track.getGroups());
+            }
             return groups.getAttribute(attribute.fulfill(1));
         }
 

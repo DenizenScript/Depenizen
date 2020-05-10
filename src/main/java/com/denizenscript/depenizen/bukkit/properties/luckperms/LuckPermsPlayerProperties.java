@@ -77,6 +77,7 @@ public class LuckPermsPlayerProperties implements Property {
                     if (inGroup) {
                         if (!tracks.contains(new LuckPermsTrackTag(track).identify())) {
                             tracks.addObject(new LuckPermsTrackTag(track));
+                            break;
                         }
                     }
                 }
