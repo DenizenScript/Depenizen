@@ -335,8 +335,6 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @input ElementTag(Number)
         // @description
         // Sets the protection depth of the GriefPreventionClaim.
-        // @tags
-        // None
         // -->
         if (mechanism.matches("depth") && mechanism.requireInteger()) {
             dataStore.extendClaim(claim, mechanism.getValue().asInt());

@@ -58,8 +58,6 @@ public class JobPlayer implements Property {
         // @plugin Depenizen, Jobs
         // @description
         // Sets the owner of the job, to enable player-required tags.
-        // @tags
-        // None
         // -->
         if (mechanism.matches("player") && mechanism.requireObject(PlayerTag.class)) {
             job.setOwner(mechanism.valueAsType(PlayerTag.class));
