@@ -109,10 +109,10 @@ public class EffectLibCommand extends AbstractCommand {
     @Override
     public void execute(final ScriptEntry scriptEntry) {
 
-        EntityTag target = (EntityTag) scriptEntry.getObject("target");
+        EntityTag target = scriptEntry.getObjectTag("target");
         Action action = (Action) scriptEntry.getObject("action");
-        DurationTag duration = (DurationTag) scriptEntry.getObject("duration");
-        LocationTag location = (LocationTag) scriptEntry.getObject("location");
+        DurationTag duration = scriptEntry.getObjectTag("duration");
+        LocationTag location = scriptEntry.getObjectTag("location");
 
         Debug.report(scriptEntry, getName(), (target != null ? target.debug() : "")
                 + (action != null ? action.toString() : "")
