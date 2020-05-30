@@ -46,8 +46,19 @@ public class PlaceholderAPIBridge extends Bridge {
             Debug.echoError("Cannot use <placeholder[]> tags with 'denizen' prefix!");
             return;
         }
-        Player player = ((BukkitTagContext) event.getContext()).player != null ?
-                ((BukkitTagContext) event.getContext()).player.getPlayerEntity() : null;
+        attribute = attribute.fulfill(1);
+        Player player = ((BukkitTagContext) event.getContext()).player != null ? ((BukkitTagContext) event.getContext()).player.getPlayerEntity() : null;
+
+        // <--[tag]
+        // @attribute <placeholder[<name>].player[<player>]>
+        // @returns ElementTag
+        // @plugin Depenizen, PlaceholderAPI
+        // @description
+        // Returns the value of the placeholder for the specified player.
+        // -->
+        if (attribute.matches("player") && attribute.hasContext(1) && PlayerTag.matches(attribute.getContext(1))) {
+            player = PlayerTag.valueOf(attribute.getContext(1)).getPlayerEntity();
+        }
         event.setReplacedObject(new ElementTag(PlaceholderAPI.setPlaceholders(player, "%" + placeholder + "%"))
                 .getObjectAttribute(attribute.fulfill(1)));
     }
