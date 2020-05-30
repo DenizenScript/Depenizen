@@ -8,20 +8,6 @@ Depenizen
 - **Supported Plugin List**: [Docs/BukkitPlugins.md](Docs/BukkitPlugins.md)
 - **Setp Guide For The Bungee Bridge**: [Docs/Bungee.md](Docs/Bungee.md)
 
-### Version 2.x notice:
-
-Depenizen version 2.x is a rewrite of many of the core functions of Depenizen.
-
-2.x version does not include support for the following previously supported plugins
-due to the plugins being unmaintained or unavailable for modern servers: PlotMe, SimpleClans, Heroes, HyperConomy, Prism, dtlTraders, BattleNight.
-
-2.x version has a completely redesigned Bungee system. Most (but not all!) script tags/events/commands have been kept available to be called in the same way
-(though you should review the new bungee meta docs to be sure, as there are some changes - of particular note, 'server@' is no longer used, and 'bungeerun' is now more standardized).
-The configuration / setup of Bungee is significantly different, and you will have to redo the setup. Refer to [the new Bungee setup doc](Docs/Bungee.md).
-This change is due to the unnecessary complexity of the old system being not worthy of any replication. The new system is much cleaner and easier to work with.
-
-If you need the 1.x (legacy) version, you can find the last official build of that here: https://ci.citizensnpcs.co/job/Depenizen/476/
-
 ### Licensing pre-note:
 
 This is an open source project, provided entirely freely, for everyone to use and contribute to.
