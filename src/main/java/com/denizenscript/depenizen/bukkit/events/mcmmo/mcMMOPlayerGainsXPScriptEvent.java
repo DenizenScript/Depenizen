@@ -32,6 +32,9 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     // <context.cause> returns the cause of the xp gain.
     // Will be one of: 'PVP', 'PVE', 'VAMPIRISM', 'SHARED_PVP', 'SHARED_PVE', 'COMMAND', 'UNKNOWN'.
     //
+    // @Determine
+    // ElementTag(Decimal) to set the XP gained.
+    //
     // @Plugin Depenizen, mcMMO
     //
     // -->
