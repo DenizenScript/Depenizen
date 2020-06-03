@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.jobs;
 
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
@@ -42,7 +43,7 @@ public class JobsPlayerProperties implements Property {
     }
 
     public static final String[] handledTags = new String[] {
-            "jobs"
+            "job", "jobs", "current_jobs"
     };
 
     public static final String[] handledMechs = new String[] {
@@ -58,13 +59,30 @@ public class JobsPlayerProperties implements Property {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <PlayerTag.jobs[<job>]>
+        // @attribute <PlayerTag.current_jobs>
+        // @returns ListTag(JobsJobTag)
+        // @plugin Depenizen, Jobs
+        // @description
+        // Returns a list of all jobs that the player is in.
+        // -->
+        if (attribute.startsWith("current_jobs")) {
+            ListTag jobList = new ListTag();
+            for (Job jb : Jobs.getJobs()) {
+                if (player.isInJob(jb)) {
+                    jobList.addObject(new JobsJobTag(jb, player));
+                }
+            }
+            return jobList.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <PlayerTag.job[<job>]>
         // @returns JobsJobTag
         // @plugin Depenizen, Jobs
         // @description
         // Returns the job specified with the player's information attached.
         // -->
-        if (attribute.startsWith("jobs")) {
+        if (attribute.startsWith("job") || attribute.startsWith("jobs")) {
             Job job = null;
             if (attribute.hasContext(1)) {
                 job = Jobs.getJob(attribute.getContext(1));
