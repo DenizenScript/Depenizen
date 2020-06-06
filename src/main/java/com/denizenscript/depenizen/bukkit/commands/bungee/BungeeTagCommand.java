@@ -22,22 +22,27 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
 
     public BungeeTagCommand() {
         setName("bungeetag");
-        setSyntax("bungeetag [server:<server>] [<tag>]");
+        setSyntax("bungeetag [server:<server>] [<tags>]");
         setRequiredArguments(2, 2);
         setParseArgs(false);
     }
 
     // <--[command]
     // @Name BungeeTag
-    // @Syntax bungeetag [server:<server>] [<tag>]
+    // @Syntax bungeetag [server:<server>] [<tags>]
     // @Group Depenizen
     // @Plugin Depenizen, BungeeCord
     // @Required 2
     // @Maximum 2
-    // @Short Gets the result of a tag from another server on the Bungee network.
+    // @Short Parses tags on another server on a Bungee network and returns the results for this server to process.
     //
     // @Description
-    // This command gets the result of a tag from another server on the Bungee network.
+    // This command parses tags on another server on a Bungee network and returns the results for this server to process.
+    //
+    // As a more technical explanation: All commands in Denizen parse tags in any input arguments prior to processing them further.
+    // This command skips that step, and sends the raw tags out to the specified server to then have that server perform the actual tag processing,
+    // when then gets sent back and allows the command to complete.
+    //
     // Tags will be parsed on the remote server, but definitions from the originating queue will be used.
     // The linked player will be available on the remote server if that server has ever seen the player.
     //

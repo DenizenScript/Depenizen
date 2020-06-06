@@ -32,7 +32,8 @@ public class JobsCommand extends AbstractCommand {
     // to force a player to join or quit a job.
     //
     // @Tags
-    // <PlayerTag.jobs[<job>]>
+    // <PlayerTag.job[<job>]>
+    // <PlayerTag.current_jobs>
     //
     // @Usage
     // Use to promote a player.
@@ -54,22 +55,18 @@ public class JobsCommand extends AbstractCommand {
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
         for (Argument arg : scriptEntry.getProcessedArgs()) {
-
             if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", Action.valueOf(arg.getValue().toUpperCase()));
             }
-
             else if (!scriptEntry.hasObject("job")
                     && arg.matchesArgumentType(JobsJobTag.class)) {
                 scriptEntry.addObject("job", JobsJobTag.valueOf(arg.getValue()));
             }
-
             else if (!scriptEntry.hasObject("number")
                     && arg.matchesInteger()) {
                 scriptEntry.addObject("number", new ElementTag(arg.getValue()));
             }
-
         }
 
         if (!scriptEntry.hasObject("action")) {
