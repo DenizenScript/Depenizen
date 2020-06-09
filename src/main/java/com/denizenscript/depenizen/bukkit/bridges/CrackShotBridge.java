@@ -12,6 +12,7 @@ import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.events.crackshot.crackshotWeaponAttachmentToggleEvent;
 import com.denizenscript.depenizen.bukkit.events.crackshot.crackshotWeaponDamageEntityEvent;
+import com.denizenscript.depenizen.bukkit.events.crackshot.crackshotWeaponExplodeEvent;
 import com.denizenscript.depenizen.bukkit.properties.crackshot.CrackShotEntityProperties;
 import com.denizenscript.depenizen.bukkit.properties.crackshot.CrackShotItemProperties;
 import com.shampaggon.crackshot.CSUtility;
@@ -35,6 +36,7 @@ public class CrackShotBridge extends Bridge {
         PropertyParser.registerProperty(CrackShotEntityProperties.class, EntityTag.class);
         ScriptEvent.registerScriptEvent(new crackshotWeaponAttachmentToggleEvent());
         ScriptEvent.registerScriptEvent(new crackshotWeaponDamageEntityEvent());
+        ScriptEvent.registerScriptEvent(new crackshotWeaponExplodeEvent());
         utility = new CSUtility();
     }
 

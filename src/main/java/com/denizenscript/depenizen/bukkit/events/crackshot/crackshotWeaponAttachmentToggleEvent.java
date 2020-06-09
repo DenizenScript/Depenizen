@@ -48,8 +48,8 @@ public class crackshotWeaponAttachmentToggleEvent extends BukkitScriptEvent impl
 
     @Override
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
-        String determination = determinationObj.toString();
         if (!isDefaultDetermination(determinationObj)) {
+            String determination = determinationObj.toString();
             ElementTag newDelay = new ElementTag(determination);
             if (!newDelay.isInt()) {
                 Debug.echoError("Determination for 'delay' must be a valid integer.");
