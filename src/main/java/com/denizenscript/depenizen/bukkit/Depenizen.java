@@ -98,6 +98,7 @@ public class Depenizen extends JavaPlugin {
         registerBridge("AreaShop", () -> new AreaShopBridge());
         registerBridge("ASkyBlock", () -> new ASkyBlockBridge());
         registerBridge("BossShopPro", () -> new BossShopBridge());
+        registerBridge("CrackShot", () -> new CrackShotBridge());
         registerBridge("EffectLib", () -> new EffectLibBridge());
         registerBridge("Essentials", () -> new EssentialsBridge());
         registerBridge("Factions", () -> new FactionsBridge());
