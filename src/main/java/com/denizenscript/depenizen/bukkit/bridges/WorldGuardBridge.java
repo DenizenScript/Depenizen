@@ -44,7 +44,7 @@ public class WorldGuardBridge extends Bridge {
     public void tagEvent(ReplaceableTagEvent event) {
         Attribute attribute = event.getAttributes();
         if (attribute.startsWith("region") && attribute.hasContext(1)) {
-            WorldGuardRegionTag region = WorldGuardRegionTag.valueOf(attribute.getContext(1));
+            WorldGuardRegionTag region =  attribute.contextAsType(1, WorldGuardRegionTag.class);
             if (region != null) {
                 event.setReplacedObject(region.getObjectAttribute(attribute.fulfill(1)));
             }

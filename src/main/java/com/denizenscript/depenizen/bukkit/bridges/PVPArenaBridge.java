@@ -49,7 +49,7 @@ public class PVPArenaBridge extends Bridge {
         // Returns the PVPArena by the input name.
         // -->
         if (attribute.hasContext(1)) {
-            PVPArenaArenaTag arena = PVPArenaArenaTag.valueOf(attribute.getContext(1));
+            PVPArenaArenaTag arena = attribute.contextAsType(1, PVPArenaArenaTag.class);
             if (arena != null) {
                 event.setReplacedObject(arena.getObjectAttribute(attribute.fulfill(1)));
             }

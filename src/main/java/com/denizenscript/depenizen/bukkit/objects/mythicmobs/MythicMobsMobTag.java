@@ -336,7 +336,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <MythicMobsMobTag.target>
         // -->
         else if (mechanism.matches("target") && mechanism.requireObject(EntityTag.class)) {
-            EntityTag mTarget = EntityTag.valueOf(mechanism.getValue().asString());
+            EntityTag mTarget = mechanism.valueAsType(EntityTag.class);
             if (mTarget == null || !mTarget.isValid() || mTarget.getLivingEntity() == null) {
                 return;
             }

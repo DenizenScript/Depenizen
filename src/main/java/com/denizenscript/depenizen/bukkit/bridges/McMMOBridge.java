@@ -47,7 +47,7 @@ public class McMMOBridge extends Bridge {
         Attribute attribute = event.getAttributes();
 
         if (attribute.startsWith("party") && attribute.hasContext(1)) {
-            PartyTag party = PartyTag.valueOf(attribute.getContext(1));
+            PartyTag party = attribute.contextAsType(1, PartyTag.class);
             if (party != null) {
                 event.setReplacedObject(party.getObjectAttribute(attribute.fulfill(1)));
             }

@@ -100,7 +100,7 @@ public class TownyBridge extends Bridge {
         if (attribute.hasContext(1)) {
             TownTag town;
             if (TownTag.matches(attribute.getContext(1))) {
-                town = TownTag.valueOf(attribute.getContext(1));
+                town = attribute.contextAsType(1, TownTag.class);
             }
             else {
                 Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid town!");
@@ -128,7 +128,7 @@ public class TownyBridge extends Bridge {
         if (attribute.hasContext(1)) {
             NationTag nation;
             if (NationTag.matches(attribute.getContext(1))) {
-                nation = NationTag.valueOf(attribute.getContext(1));
+                nation = attribute.contextAsType(1, NationTag.class);
             }
             else {
                 Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid nation!");

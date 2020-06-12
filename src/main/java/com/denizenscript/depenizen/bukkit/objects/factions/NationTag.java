@@ -152,7 +152,7 @@ public class NationTag implements ObjectTag {
         if (attribute.startsWith("assistants")) {
             ListTag list = new ListTag();
             for (Resident resident : nation.getAssistants()) {
-                list.addObject(PlayerTag.valueOf(resident.getName()));
+                list.addObject(PlayerTag.valueOf(resident.getName(), attribute.context));
             }
             return list.getAttribute(attribute.fulfill(1));
         }
@@ -224,7 +224,7 @@ public class NationTag implements ObjectTag {
         // Returns the king of the nation.
         // -->
         else if (attribute.startsWith("king")) {
-            return PlayerTag.valueOf(nation.getCapital().getMayor().getName())
+            return PlayerTag.valueOf(nation.getCapital().getMayor().getName(), attribute.context)
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -290,7 +290,7 @@ public class NationTag implements ObjectTag {
         if (attribute.startsWith("residents")) {
             ListTag list = new ListTag();
             for (Resident resident : nation.getResidents()) {
-                list.addObject(PlayerTag.valueOf(resident.getName()));
+                list.addObject(PlayerTag.valueOf(resident.getName(), attribute.context));
             }
             return list.getAttribute(attribute.fulfill(1));
         }

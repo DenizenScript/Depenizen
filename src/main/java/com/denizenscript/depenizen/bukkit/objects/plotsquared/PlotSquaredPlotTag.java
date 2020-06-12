@@ -201,7 +201,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // Returns the plot's world.
         // -->
         if (attribute.startsWith("world")) {
-            return WorldTag.valueOf(plot.getArea().worldname).getAttribute(attribute.fulfill(1));
+            return WorldTag.valueOf(plot.getArea().worldname, attribute.context).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -272,7 +272,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // Returns the plot's cuboid.
         // -->
         if (attribute.startsWith("cuboid")) {
-            WorldTag world = WorldTag.valueOf(plot.getArea().worldname);
+            WorldTag world = WorldTag.valueOf(plot.getArea().worldname, attribute.context);
             Location l1 = new Location(world.getWorld(), plot.getBottomAbs().getX(), 0, plot.getBottomAbs().getZ());
             Location l2 = new Location(world.getWorld(), plot.getTopAbs().getX(), 255, plot.getTopAbs().getZ());
             return new CuboidTag(l1, l2).getAttribute(attribute.fulfill(1));
@@ -287,7 +287,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // -->
         if (attribute.startsWith("all_cuboids")) {
             ListTag cuboids = new ListTag();
-            WorldTag world = WorldTag.valueOf(plot.getArea().worldname);
+            WorldTag world = WorldTag.valueOf(plot.getArea().worldname, attribute.context);
             for (RegionWrapper region : plot.getRegions()) {
                 Location l1 = new Location(world.getWorld(), region.minX, region.minY, region.minZ);
                 Location l2 = new Location(world.getWorld(), region.maxX, region.maxY, region.maxZ);

@@ -42,7 +42,7 @@ public class JobsBridge extends Bridge {
         if (attribute.hasContext(1)) {
             // Documented below.
             if (JobsJobTag.matches(attribute.getContext(1))) {
-                j = JobsJobTag.valueOf(attribute.getContext(1));
+                j = attribute.contextAsType(1, JobsJobTag.class);
             }
             else {
                 Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid job!");

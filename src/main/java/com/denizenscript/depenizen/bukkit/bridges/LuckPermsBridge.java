@@ -59,7 +59,7 @@ public class LuckPermsBridge extends Bridge {
         // -->
         if (attribute.startsWith("track")) {
             if (attribute.hasContext(1)) {
-                event.setReplacedObject(LuckPermsTrackTag.valueOf(attribute.getContext(1)).getObjectAttribute(attribute.fulfill(1)));
+                event.setReplacedObject(attribute.contextAsType(1, LuckPermsTrackTag.class).getObjectAttribute(attribute.fulfill(1)));
             }
         }
     }

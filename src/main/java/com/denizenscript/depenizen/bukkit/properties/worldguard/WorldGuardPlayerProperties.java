@@ -82,7 +82,7 @@ public class WorldGuardPlayerProperties implements Property {
         // Whether WorldGuard allows to build at a location.
         // -->
         if (attribute.startsWith("can_build") && attribute.hasContext(1)) {
-            LocationTag location = LocationTag.valueOf(attribute.getContext(1));
+            LocationTag location = attribute.contextAsType(1, LocationTag.class);
             if (location == null) {
                 return null;
             }
@@ -122,7 +122,7 @@ public class WorldGuardPlayerProperties implements Property {
             // Returns the state of a flag for that player at the specified location.
             // -->
             if (attribute.getAttribute(2).startsWith("at") && attribute.hasContext(2)) {
-                loc = LocationTag.valueOf(attribute.getContext(2));
+                loc = attribute.contextAsType(2, LocationTag.class);
                 args = 2;
                 if (loc == null) {
                     return null;

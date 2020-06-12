@@ -62,7 +62,7 @@ public class SentinelBridge extends Bridge {
                         context = value.substring(colon + 1);
                         value = value.substring(0, colon);
                     }
-                    ScriptTag script = ScriptTag.valueOf(value);
+                    ScriptTag script = ScriptTag.valueOf(value, CoreUtilities.basicContext);
                     if (script == null) {
                         Debug.echoError("Invalid procedure script name '" + value + "' (non-existent) in a Sentinel NPC target.");
                         return false;

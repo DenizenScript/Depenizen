@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.bungee.packets.in;
 
 import com.denizenscript.denizen.tags.BukkitTagContext;
 import com.denizenscript.denizencore.tags.TagContext;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
@@ -63,7 +64,7 @@ public class RunScriptPacketIn extends PacketIn {
                         // Ignore
                     }
                 }
-                ScriptTag script = ScriptTag.valueOf(scriptName);
+                ScriptTag script = ScriptTag.valueOf(scriptName, CoreUtilities.basicContext);
                 List<ScriptEntry> entries = script.getContainer().getBaseEntries(new BukkitScriptEntryData(linkedPlayer, null));
                 if (entries.isEmpty()) {
                     return;

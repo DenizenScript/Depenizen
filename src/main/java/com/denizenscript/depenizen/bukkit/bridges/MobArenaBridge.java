@@ -53,7 +53,7 @@ public class MobArenaBridge extends Bridge {
         // Returns the mob arena for the input name.
         // -->
         if (attribute.hasContext(1)) {
-            MobArenaArenaTag arena = MobArenaArenaTag.valueOf(attribute.getContext(1));
+            MobArenaArenaTag arena = attribute.contextAsType(1, MobArenaArenaTag.class);
             if (arena != null) {
                 event.setReplacedObject(arena.getObjectAttribute(attribute.fulfill(1)));
             }

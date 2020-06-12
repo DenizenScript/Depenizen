@@ -281,7 +281,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // Returns whether the GriefPreventionClaim can siege the player.
         // -->
         else if (attribute.startsWith("can_siege") && attribute.hasContext(1)) {
-            PlayerTag defender = PlayerTag.valueOf(attribute.getContext(1));
+            PlayerTag defender = attribute.contextAsType(1, PlayerTag.class);
             if (defender == null || defender.getPlayerEntity() == null) {
                 return null;
             }
@@ -317,7 +317,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         if (mechanism.matches("owner")) {
             try {
                 if (PlayerTag.matches(mechanism.getValue().asString())) {
-                    PlayerTag player = PlayerTag.valueOf(mechanism.getValue().asString());
+                    PlayerTag player = mechanism.valueAsType(PlayerTag.class);
                     dataStore.changeClaimOwner(claim, player.getOfflinePlayer().getUniqueId());
                 }
                 else if (CoreUtilities.toLowerCase(mechanism.getValue().asString()).equals("admin")) {

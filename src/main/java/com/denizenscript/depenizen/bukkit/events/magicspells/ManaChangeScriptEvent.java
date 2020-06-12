@@ -68,6 +68,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
             }
             new_mana = mana.asInt();
             event.setNewAmount(new_mana);
+            return true;
         }
         return super.applyDetermination(path, determinationObj);
     }

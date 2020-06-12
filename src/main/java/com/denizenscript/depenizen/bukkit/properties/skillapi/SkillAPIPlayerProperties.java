@@ -89,7 +89,7 @@ public class SkillAPIPlayerProperties implements Property {
             // -->
             if (attribute.startsWith("in_class")) {
                 if (attribute.hasContext(1)) {
-                    SkillAPIClassTag testClass = SkillAPIClassTag.valueOf(attribute.getContext(1));
+                    SkillAPIClassTag testClass = attribute.contextAsType(1, SkillAPIClassTag.class);
                     if (testClass == null) {
                         return null;
                     }
@@ -134,7 +134,7 @@ public class SkillAPIPlayerProperties implements Property {
             if (attribute.getAttribute(1).startsWith("class_") && attribute.hasContext(1)) {
 
                 PlayerClass playerClass = null;
-                SkillAPIClassTag skillAPIClass = SkillAPIClassTag.valueOf(attribute.getContext(1));
+                SkillAPIClassTag skillAPIClass = attribute.contextAsType(1, SkillAPIClassTag.class);
                 if (skillAPIClass != null) {
                     String name = skillAPIClass.getRPGClass().getName();
                     for (PlayerClass plClass : data.getClasses()) {

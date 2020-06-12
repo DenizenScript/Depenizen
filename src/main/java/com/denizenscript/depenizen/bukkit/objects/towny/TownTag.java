@@ -157,7 +157,7 @@ public class TownTag implements ObjectTag {
         if (attribute.startsWith("assistants")) {
             ListTag list = new ListTag();
             for (Resident resident : town.getAssistants()) {
-                PlayerTag player = PlayerTag.valueOf(resident.getName());
+                PlayerTag player = PlayerTag.valueOf(resident.getName(), attribute.context);
                 if (player != null) {
                     list.addObject(player);
                 }
@@ -230,7 +230,7 @@ public class TownTag implements ObjectTag {
         // Returns the mayor of the town.
         // -->
         else if (attribute.startsWith("mayor")) {
-            return PlayerTag.valueOf(town.getMayor().getName())
+            return PlayerTag.valueOf(town.getMayor().getName(), attribute.context)
                     .getAttribute(attribute.fulfill(1));
         }
 
@@ -284,7 +284,7 @@ public class TownTag implements ObjectTag {
         else if (attribute.startsWith("residents")) {
             ListTag list = new ListTag();
             for (Resident resident : town.getResidents()) {
-                PlayerTag player = PlayerTag.valueOf(resident.getName());
+                PlayerTag player = PlayerTag.valueOf(resident.getName(), attribute.context);
                 if (player != null) {
                     list.addObject(player);
                 }

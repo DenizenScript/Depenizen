@@ -61,7 +61,7 @@ public class PlotSquaredPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("plotsquared_plots")) {
             if (attribute.hasContext(1)) {
-                WorldTag world = WorldTag.valueOf(attribute.getContext(1));
+                WorldTag world = attribute.contextAsType(1, WorldTag.class);
                 if (world == null) {
                     return null;
                 }

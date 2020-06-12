@@ -96,7 +96,7 @@ public class WorldEditPlayerProperties implements Property {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             ItemType itemType;
             if (attribute.hasContext(1)) {
-                itemType = BukkitAdapter.asItemType(deLegacy(ItemTag.valueOf(attribute.getContext(1), attribute.context).getMaterial().getMaterial()));
+                itemType = BukkitAdapter.asItemType(deLegacy(attribute.contextAsType(1, ItemTag.class).getMaterial().getMaterial()));
             }
             else {
                 ItemStack itm = player.getEquipment().getItemInMainHand();

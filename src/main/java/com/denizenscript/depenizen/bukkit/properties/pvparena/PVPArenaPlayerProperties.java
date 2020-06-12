@@ -73,7 +73,7 @@ public class PVPArenaPlayerProperties implements Property {
                     return new ElementTag(false).getAttribute(attribute.fulfill(1));
                 }
                 if (attribute.hasContext(1)) {
-                    PVPArenaArenaTag a = PVPArenaArenaTag.valueOf(attribute.getContext(1));
+                    PVPArenaArenaTag a = attribute.contextAsType(1, PVPArenaArenaTag.class);
                     if (a == null) {
                         return null;
                     }

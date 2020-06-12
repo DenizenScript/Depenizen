@@ -57,7 +57,7 @@ public class PlaceholderAPIBridge extends Bridge {
         // Returns the value of the placeholder for the specified player.
         // -->
         if (attribute.matches("player") && attribute.hasContext(1) && PlayerTag.matches(attribute.getContext(1))) {
-            player = PlayerTag.valueOf(attribute.getContext(1)).getPlayerEntity();
+            player = attribute.contextAsType(1, PlayerTag.class).getPlayerEntity();
         }
         event.setReplacedObject(new ElementTag(PlaceholderAPI.setPlaceholders(player, "%" + placeholder + "%"))
                 .getObjectAttribute(attribute.fulfill(1)));
