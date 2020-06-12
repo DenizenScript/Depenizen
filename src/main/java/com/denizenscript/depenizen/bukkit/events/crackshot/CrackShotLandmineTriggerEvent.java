@@ -52,7 +52,7 @@ public class CrackShotLandmineTriggerEvent extends BukkitScriptEvent implements 
 
     @Override
     public String getName() {
-        return "CrackShotLandmineTriggeredEvent";
+        return "CrackShotLandmineTriggered";
     }
 
     @Override

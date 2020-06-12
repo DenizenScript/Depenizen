@@ -35,7 +35,7 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
     //
     // @Determine
     // "BULLET_SPREAD:" + ElementTag(Number) to set the bullet spread.
-    // "RELOAD_SOUNDS:" + ElementTag to set the shot sounds. Use "NONE" to have no sound. <@link https://github.com/Shampaggon/CrackShot/wiki/The-Complete-Guide-to-CrackShot#sounds>
+    // "SHOT_SOUNDS:" + ElementTag to set the shot sounds. Use "NONE" to have no sound. <@link https://github.com/Shampaggon/CrackShot/wiki/The-Complete-Guide-to-CrackShot#sounds>
     //
     // @Plugin Depenizen, CrackShot
     //
@@ -88,7 +88,7 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
 
     @Override
     public String getName() {
-        return "CrackShotPlayerFiresProjectileEvent";
+        return "CrackShotPlayerFiresProjectile";
     }
 
     @Override

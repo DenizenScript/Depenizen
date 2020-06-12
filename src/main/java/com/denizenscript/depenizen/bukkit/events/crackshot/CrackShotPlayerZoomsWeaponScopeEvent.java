@@ -51,7 +51,7 @@ public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent impl
 
     @Override
     public String getName() {
-        return "CrackShotPlayerZoomsWeaponScopeEvent";
+        return "CrackShotPlayerZoomsWeaponScope";
     }
 
     @Override

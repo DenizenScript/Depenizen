@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -56,15 +55,13 @@ public class CrackShotBridge extends Bridge {
         // @description
         // Returns the ItemTag for the CrackShot weapon title specified, if it exists. <@link https://github.com/Shampaggon/CrackShot/wiki/The-Complete-Guide-to-CrackShot#title>
         // -->
-        if (attribute.startsWith("weapon")) {
-            if (attribute.hasContext(1)) {
-                ItemStack weapon = utility.generateWeapon(attribute.getContext(1));
-                if (weapon != null) {
-                    event.setReplacedObject(new ItemTag(weapon).getObjectAttribute(attribute.fulfill(1)));
-                }
-                else {
-                    attribute.echoError("Invalid weapon name specified.");
-                }
+        if (attribute.startsWith("weapon") && attribute.hasContext(1)) {
+            ItemStack weapon = utility.generateWeapon(attribute.getContext(1));
+            if (weapon != null) {
+                event.setReplacedObject(new ItemTag(weapon).getObjectAttribute(attribute.fulfill(1)));
+            }
+            else {
+                attribute.echoError("Invalid weapon name specified.");
             }
         }
     }

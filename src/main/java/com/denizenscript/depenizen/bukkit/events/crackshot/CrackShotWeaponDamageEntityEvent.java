@@ -25,8 +25,7 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
     // @Cancellable true
     //
     // @Context
-    // <context.damager> returns the entity that did the damage.
-    // This can be a projectile, or TNT.
+    // <context.damager> returns the entity that did the damage. This can be a projectile, or TNT.
     // <context.weapon> returns the name of the weapon that did the damage.
     // <context.victim> returns the entity that was damaged.
     // <context.damage> returns the amount of damage dealt.
@@ -35,7 +34,7 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
     // <context.headshot> returns if the attack was a head-shot.
     //
     // @Determine
-    // ElementTag(Number) to set damage dealt.
+    // ElementTag(Decimal) to set damage dealt.
     //
     // @Plugin Depenizen, CrackShot
     //

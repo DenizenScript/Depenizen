@@ -33,7 +33,6 @@ public class CrackShotPlayerFinishesReloadingWeaponEvent extends BukkitScriptEve
 
     public static CrackShotPlayerFinishesReloadingWeaponEvent instance;
     public WeaponReloadCompleteEvent event;
-    public ElementTag weaponName;
 
     public CrackShotPlayerFinishesReloadingWeaponEvent() {
         instance = this;
@@ -51,7 +50,7 @@ public class CrackShotPlayerFinishesReloadingWeaponEvent extends BukkitScriptEve
 
     @Override
     public String getName() {
-        return "CrackShotPlayerFinishesReloadingWeaponEvent";
+        return "CrackShotPlayerFinishesReloadingWeapon";
     }
 
     @Override

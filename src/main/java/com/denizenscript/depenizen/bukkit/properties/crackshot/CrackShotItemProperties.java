@@ -11,10 +11,11 @@ import com.denizenscript.depenizen.bukkit.bridges.CrackShotBridge;
 public class CrackShotItemProperties implements Property {
 
     public static final String[] handledTags = new String[] {
-            "crackshot_name"
+            "crackshot_weapon"
     };
 
-    public static final String[] handlesMechs = new String[] {};
+    public static final String[] handledMechs = new String[] {
+    }; // None
 
     ItemTag item;
 
@@ -52,14 +53,13 @@ public class CrackShotItemProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <ItemTag.crackshot_name>
+        // @attribute <ItemTag.crackshot_weapon>
         // @returns ElementTag
-        // @mechanism ItemTag.crackshot_name
         // @plugin Depenizen, CrackShot
         // @description
         // Returns the CrackShot weapon name for the item.
         // -->
-        if (attribute.startsWith("crackshot_name")) {
+        if (attribute.startsWith("crackshot_weapon")) {
             String name = CrackShotBridge.utility.getWeaponTitle(item.getItemStack());
             if (name != null) {
                 return new ElementTag(name).getAttribute(attribute.fulfill(1));

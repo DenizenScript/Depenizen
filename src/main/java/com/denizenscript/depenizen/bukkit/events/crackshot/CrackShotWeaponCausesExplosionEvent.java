@@ -28,7 +28,6 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
     // <context.weapon> returns the weapon name that caused the explosion.
     // <context.split> returns whether the explosion was a cluster bomb splitting.
     // <context.airstrike> returns whether the explosion was an airstrike call.
-    // <player> returns the player that caused the explosion
     //
     // @Plugin Depenizen, CrackShot
     //
@@ -55,7 +54,7 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
 
     @Override
     public String getName() {
-        return "CrackShotWeaponCausesExplosionEvent";
+        return "CrackShotWeaponCausesExplosion";
     }
 
     @Override

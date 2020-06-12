@@ -50,7 +50,7 @@ public class CrackShotPlayerPlacesLandmineEvent extends BukkitScriptEvent implem
 
     @Override
     public String getName() {
-        return "CrackShotWeaponPlaceLandmineEvent";
+        return "CrackShotWeaponPlaceLandmine";
     }
 
     @Override

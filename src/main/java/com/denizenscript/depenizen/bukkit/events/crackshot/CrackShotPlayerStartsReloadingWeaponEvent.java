@@ -4,6 +4,7 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -37,7 +38,7 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
     // "RELOAD_SPEED: " + ElementTag(Number) to set the reload speed.
     // The reload speed can be scaled with a decimal ranging from zero to infinity.
     // For example, 0 is instantaneous, 1 is normal and 2 will double the reload time.
-    // "RELOAD_DURATION:" + ElementTag(Number) to set the time taken to reload in ticks.
+    // "RELOAD_TIME:" + DurationTag to set the time taken to reload in ticks.
     // "RELOAD_SOUNDS:" + ElementTag to set the reload sounds. Use "NONE" to have no sound. <@link https://github.com/Shampaggon/CrackShot/wiki/The-Complete-Guide-to-CrackShot#sounds>
     //
     // @Plugin Depenizen, CrackShot
@@ -59,21 +60,22 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
             String determination = determinationObj.toString();
             String lower = CoreUtilities.toLowerCase(determination);
             if (lower.startsWith("reload_speed:")) {
-                ElementTag newBulletSpread = new ElementTag(lower.substring("reload_speed:".length()));
-                if (!newBulletSpread.isDouble()) {
+                ElementTag newReloadSpeed = new ElementTag(lower.substring("reload_speed:".length()));
+                if (!newReloadSpeed.isDouble()) {
                     Debug.echoError("Determination for 'reload_speed' must be a valid number.");
                     return false;
                 }
-                event.setReloadSpeed(newBulletSpread.asDouble());
+                event.setReloadSpeed(newReloadSpeed.asDouble());
                 return true;
             }
             else if (lower.startsWith("reload_time:")) {
-                ElementTag newBulletSpread = new ElementTag(lower.substring("reload_time:".length()));
-                if (!newBulletSpread.isInt()) {
-                    Debug.echoError("Determination for 'reload_time' must be a valid number.");
+                String time = lower.substring("reload_time:".length());
+                if (!DurationTag.matches(time)) {
+                    Debug.echoError("Determination for 'reload_time' must be a valid DurationTag.");
                     return false;
                 }
-                event.setReloadDuration(newBulletSpread.asInt());
+                DurationTag newReloadtime = DurationTag.valueOf(lower.substring("reload_time:".length()));
+                event.setReloadDuration(newReloadtime.getTicksAsInt());
                 return true;
             }
             else if (lower.startsWith("reload_sounds:")) {
@@ -100,7 +102,7 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
 
     @Override
     public String getName() {
-        return "CrackShotPlayerStartsReloadingWeaponEvent";
+        return "CrackShotPlayerStartsReloadingWeapon";
     }
 
     @Override

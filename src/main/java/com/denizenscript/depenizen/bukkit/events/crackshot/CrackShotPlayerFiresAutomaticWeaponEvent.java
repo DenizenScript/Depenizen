@@ -72,7 +72,7 @@ public class CrackShotPlayerFiresAutomaticWeaponEvent extends BukkitScriptEvent 
 
     @Override
     public String getName() {
-        return "CrackShotPlayerFiresAutomaticWeaponEvent";
+        return "CrackShotPlayerFiresAutomaticWeapon";
     }
 
     @Override

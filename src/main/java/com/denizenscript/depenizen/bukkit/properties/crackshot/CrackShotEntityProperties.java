@@ -13,10 +13,11 @@ import org.bukkit.entity.TNTPrimed;
 public class CrackShotEntityProperties implements Property {
 
     public static final String[] handledTags = new String[] {
-            "crackshot_weapon_name"
+            "crackshot_weapon"
     };
 
-    public static final String[] handlesMechs = new String[] {};
+    public static final String[] handledMechs = new String[] {
+    }; // None
 
 
     EntityTag entity;
@@ -55,13 +56,13 @@ public class CrackShotEntityProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <EntityTag.crackshot_weapon_name>
+        // @attribute <EntityTag.crackshot_weapon>
         // @returns ElementTag
         // @plugin Depenizen, CrackShot
         // @description
         // Returns the CrackShot weapon name that the projectile was shot from.
         // -->
-        if (attribute.startsWith("crackshot_weapon_name")) {
+        if (attribute.startsWith("crackshot_weapon")) {
             String name = null;
             if (entity instanceof TNTPrimed) {
                 name = CrackShotBridge.utility.getWeaponTitle((TNTPrimed) entity);
