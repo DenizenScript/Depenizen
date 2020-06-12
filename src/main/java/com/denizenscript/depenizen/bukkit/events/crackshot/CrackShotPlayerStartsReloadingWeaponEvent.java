@@ -48,7 +48,6 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
 
     public static CrackShotPlayerStartsReloadingWeaponEvent instance;
     public WeaponReloadEvent event;
-    public PlayerTag player;
 
     public CrackShotPlayerStartsReloadingWeaponEvent() {
         instance = this;

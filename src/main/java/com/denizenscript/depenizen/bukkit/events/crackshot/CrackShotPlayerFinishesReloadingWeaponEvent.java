@@ -33,7 +33,6 @@ public class CrackShotPlayerFinishesReloadingWeaponEvent extends BukkitScriptEve
 
     public static CrackShotPlayerFinishesReloadingWeaponEvent instance;
     public WeaponReloadCompleteEvent event;
-    public PlayerTag player;
     public ElementTag weaponName;
 
     public CrackShotPlayerFinishesReloadingWeaponEvent() {

@@ -45,7 +45,6 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
 
     public static CrackShotPlayerFiresProjectileEvent instance;
     public WeaponPreShootEvent event;
-    public PlayerTag player;
 
     public CrackShotPlayerFiresProjectileEvent() {
         instance = this;

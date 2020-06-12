@@ -38,7 +38,6 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
 
     public static CrackShotWeaponCausesExplosionEvent instance;
     public WeaponExplodeEvent event;
-    public PlayerTag player;
 
     public CrackShotWeaponCausesExplosionEvent() {
         instance = this;

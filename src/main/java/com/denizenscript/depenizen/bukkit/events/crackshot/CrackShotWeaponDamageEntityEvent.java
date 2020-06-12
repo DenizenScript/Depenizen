@@ -45,7 +45,6 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
 
     public static CrackShotWeaponDamageEntityEvent instance;
     public WeaponDamageEntityEvent event;
-    public PlayerTag player;
 
     public CrackShotWeaponDamageEntityEvent() {
         instance = this;

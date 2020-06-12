@@ -39,7 +39,6 @@ public class CrackShotPlayerFiresAutomaticWeaponEvent extends BukkitScriptEvent 
 
     public static CrackShotPlayerFiresAutomaticWeaponEvent instance;
     public WeaponFireRateEvent event;
-    public PlayerTag player;
 
     public CrackShotPlayerFiresAutomaticWeaponEvent() {
         instance = this;

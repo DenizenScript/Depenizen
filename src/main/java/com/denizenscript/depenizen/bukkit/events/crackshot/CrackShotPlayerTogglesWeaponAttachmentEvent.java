@@ -39,7 +39,6 @@ public class CrackShotPlayerTogglesWeaponAttachmentEvent extends BukkitScriptEve
 
     public static CrackShotPlayerTogglesWeaponAttachmentEvent instance;
     public WeaponAttachmentToggleEvent event;
-    public PlayerTag player;
 
     public CrackShotPlayerTogglesWeaponAttachmentEvent() {
         instance = this;

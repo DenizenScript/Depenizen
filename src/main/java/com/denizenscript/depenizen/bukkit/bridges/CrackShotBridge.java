@@ -63,7 +63,7 @@ public class CrackShotBridge extends Bridge {
                     event.setReplacedObject(new ItemTag(weapon).getObjectAttribute(attribute.fulfill(1)));
                 }
                 else {
-                    Debug.echoError("Invalid weapon name specified.");
+                    attribute.echoError("Invalid weapon name specified.");
                 }
             }
         }

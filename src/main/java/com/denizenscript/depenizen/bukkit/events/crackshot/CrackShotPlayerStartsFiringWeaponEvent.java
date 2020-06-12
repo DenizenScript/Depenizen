@@ -33,7 +33,6 @@ public class CrackShotPlayerStartsFiringWeaponEvent extends BukkitScriptEvent im
 
     public static CrackShotPlayerStartsFiringWeaponEvent instance;
     public WeaponPrepareShootEvent event;
-    public PlayerTag player;
 
     public CrackShotPlayerStartsFiringWeaponEvent() {
         instance = this;

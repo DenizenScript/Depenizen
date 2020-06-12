@@ -33,7 +33,6 @@ public class CrackShotPlayerPlacesLandmineEvent extends BukkitScriptEvent implem
 
     public static CrackShotPlayerPlacesLandmineEvent instance;
     public WeaponPlaceMineEvent event;
-    public PlayerTag player;
 
     public CrackShotPlayerPlacesLandmineEvent() {
         instance = this;

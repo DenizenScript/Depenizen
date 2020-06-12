@@ -35,7 +35,6 @@ public class CrackShotLandmineTriggerEvent extends BukkitScriptEvent implements 
 
     public static CrackShotLandmineTriggerEvent instance;
     public WeaponTriggerEvent event;
-    public PlayerTag player;
 
     public CrackShotLandmineTriggerEvent() {
         instance = this;

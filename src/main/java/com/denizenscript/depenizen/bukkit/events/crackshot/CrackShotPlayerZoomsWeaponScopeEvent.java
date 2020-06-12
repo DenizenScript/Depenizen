@@ -34,7 +34,6 @@ public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent impl
 
     public static CrackShotPlayerZoomsWeaponScopeEvent instance;
     public WeaponScopeEvent event;
-    public PlayerTag player;
 
     public CrackShotPlayerZoomsWeaponScopeEvent() {
         instance = this;
