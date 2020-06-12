@@ -54,8 +54,7 @@ public class CrackShotBridge extends Bridge {
         // @returns ItemTag
         // @plugin Depenizen, CrackShot
         // @description
-        // Returns the ItemTag for the CrackShot weapon title specified, if it exists.
-        // https://github.com/Shampaggon/CrackShot/wiki/The-Complete-Guide-to-CrackShot#title
+        // Returns the ItemTag for the CrackShot weapon title specified, if it exists. <@link https://github.com/Shampaggon/CrackShot/wiki/The-Complete-Guide-to-CrackShot#title>
         // -->
         if (attribute.startsWith("weapon")) {
             if (attribute.hasContext(1)) {
