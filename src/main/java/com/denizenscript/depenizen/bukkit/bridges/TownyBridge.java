@@ -8,6 +8,7 @@ import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyPlayerProperties;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
@@ -69,7 +70,7 @@ public class TownyBridge extends Bridge {
             ListTag towns = new ListTag();
             if (attribute.hasContext(1)) {
                 try {
-                    for (Town town : TownyUniverse.getDataSource().getWorld(attribute.getContext(1)).getTowns()) {
+                    for (Town town : TownyAPI.getInstance().getDataSource().getWorld(attribute.getContext(1)).getTowns().values()) {
                         towns.addObject(new TownTag(town));
                     }
                 }
