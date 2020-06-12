@@ -25,7 +25,7 @@ public class CrackShotPlayerFiresAutomaticWeaponEvent extends BukkitScriptEvent 
     // @Cancellable false
     //
     // @Context
-    // <context.weapon_name> returns the name of the weapon.
+    // <context.weapon> returns the name of the weapon.
     // <context.fire_rate> returns the weapon fire rate.
     //
     // @Determine
@@ -78,7 +78,7 @@ public class CrackShotPlayerFiresAutomaticWeaponEvent extends BukkitScriptEvent 
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("weapon_name")) {
+        if (name.equals("weapon")) {
             return new ElementTag(event.getWeaponTitle());
         }
         else if (name.equals("fire_rate")) {

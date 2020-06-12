@@ -27,7 +27,7 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
     // @Context
     // <context.damager> returns the entity that did the damage.
     // This can be a projectile, or TNT.
-    // <context.weapon_name> returns the name of the weapon that did the damage.
+    // <context.weapon> returns the name of the weapon that did the damage.
     // <context.victim> returns the entity that was damaged.
     // <context.damage> returns the amount of damage dealt.
     // <context.backstab> returns if the attack was a back-stab.
@@ -103,7 +103,7 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
         else if (name.equals("victim")) {
             return new EntityTag(event.getVictim());
         }
-        else if (name.equals("weapon_name")) {
+        else if (name.equals("weapon")) {
             return new ElementTag(event.getWeaponTitle());
         }
         return super.getContext(name);

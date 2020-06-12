@@ -25,7 +25,7 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
     //
     // @Context
     // <context.location> returns the LocationTag for where the explosion occurred.
-    // <context.weapon_name> returns the weapon name that caused the explosion.
+    // <context.weapon> returns the weapon name that caused the explosion.
     // <context.split> returns whether the explosion was a cluster bomb splitting.
     // <context.airstrike> returns whether the explosion was an airstrike call.
     // <player> returns the player that caused the explosion
@@ -64,7 +64,7 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
         if (name.equals("location")) {
             return new LocationTag(event.getLocation());
         }
-        else if (name.equals("weapon_name")) {
+        else if (name.equals("weapon")) {
             return new ElementTag(event.getWeaponTitle());
         }
         else if (name.equals("split")) {

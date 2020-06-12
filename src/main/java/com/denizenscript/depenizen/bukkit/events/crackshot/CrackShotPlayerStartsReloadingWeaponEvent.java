@@ -28,7 +28,7 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
     // @Cancellable false
     //
     // @Context
-    // <context.weapon_name> returns the name of the weapon.
+    // <context.weapon> returns the name of the weapon.
     // <context.reload_speed> returns the rate at which the weapon is reloaded.
     // <context.reload_time> returns the time taken to reload in ticks.
     // <context.reload_sounds> returns a ListTag(ElementTag) of the reload sounds.
@@ -106,7 +106,7 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("weapon_name")) {
+        if (name.equals("weapon")) {
             return new ElementTag(event.getWeaponTitle());
         }
         else if (name.equals("reload_speed")) {

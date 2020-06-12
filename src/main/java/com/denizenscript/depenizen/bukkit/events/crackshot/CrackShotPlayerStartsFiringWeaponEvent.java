@@ -23,7 +23,7 @@ public class CrackShotPlayerStartsFiringWeaponEvent extends BukkitScriptEvent im
     // @Cancellable true
     //
     // @Context
-    // <context.weapon_name> returns the name of the weapon.
+    // <context.weapon> returns the name of the weapon.
     //
     // @Plugin Depenizen, CrackShot
     //
@@ -56,7 +56,7 @@ public class CrackShotPlayerStartsFiringWeaponEvent extends BukkitScriptEvent im
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("weapon_name")) {
+        if (name.equals("weapon")) {
             return new ElementTag(event.getWeaponTitle());
         }
         return super.getContext(name);

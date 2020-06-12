@@ -28,7 +28,7 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
     // @Cancellable true
     //
     // @Context
-    // <context.weapon_name> returns the name of the weapon about to fire.
+    // <context.weapon> returns the name of the weapon about to fire.
     // <context.bullet_spread> returns the spread of the projectiles being fired.
     // <context.left_click> returns whether the fire was a left click.
     // <context.shot_sounds> returns a list of the shot sounds.
@@ -94,7 +94,7 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("weapon_name")) {
+        if (name.equals("weapon")) {
             return new ElementTag(event.getWeaponTitle());
         }
         else if (name.equals("bullet_spread")) {

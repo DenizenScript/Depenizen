@@ -24,7 +24,7 @@ public class CrackShotLandmineTriggerEvent extends BukkitScriptEvent implements 
     // @Cancellable true
     //
     // @Context
-    // <context.weapon_name> returns the weapon name of the landmine.
+    // <context.weapon> returns the weapon name of the landmine.
     // <context.victim> returns the entity that triggered the landmine.
     //
     // @Plugin Depenizen, CrackShot
@@ -61,7 +61,7 @@ public class CrackShotLandmineTriggerEvent extends BukkitScriptEvent implements 
         if (name.equals("victim")) {
             return new EntityTag(event.getVictim());
         }
-        else if (name.equals("weapon_name")) {
+        else if (name.equals("weapon")) {
             return new ElementTag(event.getWeaponTitle());
         }
         return super.getContext(name);

@@ -25,7 +25,7 @@ public class CrackShotPlayerTogglesWeaponAttachmentEvent extends BukkitScriptEve
     // @Cancellable true
     //
     // @Context
-    // <context.weapon_name> returns the name of the weapon.
+    // <context.weapon> returns the name of the weapon.
     // <context.delay> returns the delay between toggles.
     //
     // @Determine
@@ -81,7 +81,7 @@ public class CrackShotPlayerTogglesWeaponAttachmentEvent extends BukkitScriptEve
         if (name.equals("delay")) {
             return new ElementTag(event.getToggleDelay());
         }
-        else if (name.equals("weapon_name")) {
+        else if (name.equals("weapon")) {
             return new ElementTag(event.getWeaponTitle());
         }
         return super.getContext(name);

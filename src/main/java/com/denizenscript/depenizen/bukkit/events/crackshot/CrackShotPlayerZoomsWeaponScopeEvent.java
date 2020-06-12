@@ -23,7 +23,7 @@ public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent impl
     // @Cancellable true
     //
     // @Context
-    // <context.weapon_name> returns the name of the weapon.
+    // <context.weapon> returns the name of the weapon.
     // <context.zoomed> returns whether the player zoomed in.
     //
     // @Plugin Depenizen, CrackShot
@@ -57,7 +57,7 @@ public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent impl
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("weapon_name")) {
+        if (name.equals("weapon")) {
             return new ElementTag(event.getWeaponTitle());
         }
         else if (name.equals("zoomed")) {
