@@ -326,6 +326,14 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/WorldGuard.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.shampaggon.crackshot</groupId>
+            <artifactId>CrackShot</artifactId>
+            <version>0.98.9</version>
+            <type>jar</type>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/CrackShot.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
