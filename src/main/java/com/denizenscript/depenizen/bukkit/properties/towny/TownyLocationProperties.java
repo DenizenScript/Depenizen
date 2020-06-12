@@ -92,6 +92,22 @@ public class TownyLocationProperties implements Property {
         }
 
         // <--[tag]
+        // @attribute <LocationTag.towny_type>
+        // @returns ElementTag
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns the type of the Towny area this location is in.
+        // Can be RESIDENTIAL, COMMERCIAL, ARENA, EMBASSY, WILDS, SPLEEF, INN, JAIL, FARM, or BANK.
+        // -->
+        if (attribute.startsWith("towny_type")) {
+            TownBlock block = TownyUniverse.getTownBlock(location);
+            if (block != null) {
+                return new ElementTag(block.getType().name()).getAttribute(attribute.fulfill(1));
+            }
+            return null;
+        }
+
+        // <--[tag]
         // @attribute <LocationTag.has_town>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Towny
