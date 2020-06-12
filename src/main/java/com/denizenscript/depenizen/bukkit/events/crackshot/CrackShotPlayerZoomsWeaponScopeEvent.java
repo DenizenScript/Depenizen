@@ -66,7 +66,7 @@ public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent impl
     }
 
     @EventHandler
-    public void onCrackShotPlayerZoomsWeaponScopeEvent(WeaponScopeEvent event) {
+    public void onZoomsWeapon(WeaponScopeEvent event) {
         this.event = event;
         fire(event);
     }

@@ -87,7 +87,7 @@ public class CrackShotPlayerFiresAutomaticWeaponEvent extends BukkitScriptEvent 
     }
 
     @EventHandler
-    public void onCrackShotPlayerFiresAutomaticWeaponEvent(WeaponFireRateEvent event) {
+    public void onFiresAutomaticWeapon(WeaponFireRateEvent event) {
         this.event = event;
         fire(event);
     }

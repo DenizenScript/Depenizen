@@ -62,7 +62,7 @@ public class CrackShotPlayerStartsFiringWeaponEvent extends BukkitScriptEvent im
     }
 
     @EventHandler
-    public void onCrackShotPlayerStartsFiringWeaponEvent(WeaponPrepareShootEvent event) {
+    public void onStartsFiringWeapon(WeaponPrepareShootEvent event) {
         this.event = event;
         fire(event);
     }

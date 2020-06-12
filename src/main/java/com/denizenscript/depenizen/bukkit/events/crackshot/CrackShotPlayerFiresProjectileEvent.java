@@ -109,7 +109,7 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
     }
 
     @EventHandler
-    public void onCrackShotPlayerFiresProjectileEvent(WeaponPreShootEvent event) {
+    public void onFiresProjectile(WeaponPreShootEvent event) {
         this.event = event;
         fire(event);
     }

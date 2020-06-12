@@ -63,7 +63,7 @@ public class CrackShotPlayerFinishesReloadingWeaponEvent extends BukkitScriptEve
     }
 
     @EventHandler
-    public void onCrackShotPlayerFinishesReloadingWeaponEvent(WeaponReloadCompleteEvent event) {
+    public void onFinishesReloading(WeaponReloadCompleteEvent event) {
         this.event = event;
         fire(event);
     }

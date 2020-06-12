@@ -62,7 +62,7 @@ public class CrackShotPlayerPlacesLandmineEvent extends BukkitScriptEvent implem
     }
 
     @EventHandler
-    public void onCrackShotPlayerPlacesLandmineEvent(WeaponPlaceMineEvent event) {
+    public void onPlacesLandmine(WeaponPlaceMineEvent event) {
         this.event = event;
         fire(event);
     }

@@ -87,7 +87,7 @@ public class CrackShotPlayerTogglesWeaponAttachmentEvent extends BukkitScriptEve
     }
 
     @EventHandler
-    public void onCrackShotPlayerTogglesWeaponAttachment(WeaponAttachmentToggleEvent event) {
+    public void onTogglesAttachment(WeaponAttachmentToggleEvent event) {
         this.event = event;
         fire(event);
     }

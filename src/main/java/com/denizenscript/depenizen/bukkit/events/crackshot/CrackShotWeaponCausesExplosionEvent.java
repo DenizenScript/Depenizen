@@ -76,7 +76,7 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
     }
 
     @EventHandler
-    public void onCrackShotWeaponCausesExplosionEvent(WeaponExplodeEvent event) {
+    public void onExplosion(WeaponExplodeEvent event) {
         this.event = event;
         fire(event);
     }

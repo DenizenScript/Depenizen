@@ -109,11 +109,11 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
     }
 
     public ObjectTag getDamager() {
-        return event.getDamager() != null ? new EntityTag(event.getDamager()) : player;
+        return event.getDamager() != null ? new EntityTag(event.getDamager()) : new PlayerTag(event.getPlayer());
     }
 
     @EventHandler
-    public void onCrackShotWeaponDamageEntityEvent(WeaponDamageEntityEvent event) {
+    public void onEntityDamaged(WeaponDamageEntityEvent event) {
         this.event = event;
         fire(event);
     }

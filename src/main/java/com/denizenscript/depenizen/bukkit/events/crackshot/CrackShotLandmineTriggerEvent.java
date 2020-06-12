@@ -67,7 +67,7 @@ public class CrackShotLandmineTriggerEvent extends BukkitScriptEvent implements 
     }
 
     @EventHandler
-    public void onCrackShotLandmineTriggerEvent(WeaponTriggerEvent event) {
+    public void onLandMineTrigger(WeaponTriggerEvent event) {
         this.event = event;
         fire(event);
     }
