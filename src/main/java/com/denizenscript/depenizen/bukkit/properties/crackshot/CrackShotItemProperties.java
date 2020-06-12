@@ -10,11 +10,11 @@ import com.denizenscript.depenizen.bukkit.bridges.CrackShotBridge;
 
 public class CrackShotItemProperties implements Property {
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "crackshot_name"
     };
 
-    public static final String[] handlesMechs = new String[]{};
+    public static final String[] handlesMechs = new String[] {};
 
     ItemTag item;
 

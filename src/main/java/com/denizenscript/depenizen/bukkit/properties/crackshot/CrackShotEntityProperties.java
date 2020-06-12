@@ -12,11 +12,11 @@ import org.bukkit.entity.TNTPrimed;
 
 public class CrackShotEntityProperties implements Property {
 
-    public static final String[] handledTags = new String[]{
+    public static final String[] handledTags = new String[] {
             "crackshot_weapon_name"
     };
 
-    public static final String[] handlesMechs = new String[]{};
+    public static final String[] handlesMechs = new String[] {};
 
 
     EntityTag entity;
