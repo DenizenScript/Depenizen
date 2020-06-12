@@ -74,7 +74,7 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
                     Debug.echoError("Determination for 'reload_time' must be a valid DurationTag.");
                     return false;
                 }
-                DurationTag newReloadtime = DurationTag.valueOf(lower.substring("reload_time:".length()));
+                DurationTag newReloadtime = DurationTag.valueOf(lower.substring("reload_time:".length()), getTagContext(path));
                 event.setReloadDuration(newReloadtime.getTicksAsInt());
                 return true;
             }
