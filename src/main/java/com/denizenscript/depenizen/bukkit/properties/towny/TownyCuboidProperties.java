@@ -79,7 +79,7 @@ public class TownyCuboidProperties implements Property {
 
         // <--[tag]
         // @attribute <CuboidTag.list_towns>
-        // @returns ListTag(dTown)
+        // @returns ListTag(TownTag)
         // @plugin Depenizen, Towny
         // @description
         // Returns all the towns within the cuboid.

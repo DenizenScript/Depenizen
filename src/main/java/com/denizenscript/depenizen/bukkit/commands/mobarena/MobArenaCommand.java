@@ -52,7 +52,7 @@ public class MobArenaCommand extends AbstractCommand {
     //
     // @Usage
     // Use to cause all players who aren't in an arena to spectate.
-    // - mobarena mobarena@Default spectate:<server.list_online_players.filter[mobarena.in_arena.not]>
+    // - mobarena mobarena@Default spectate:<server.online_players.filter[mobarena.in_arena.not]>
     //
     // -->
 
