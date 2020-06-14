@@ -39,7 +39,7 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
     // The reload speed can be scaled with a decimal ranging from zero to infinity.
     // For example, 0 is instantaneous, 1 is normal and 2 will double the reload time.
     // "RELOAD_TIME:" + DurationTag to set the time taken to reload in ticks.
-    // "RELOAD_SOUNDS:" + ElementTag to set the reload sounds. Use "NONE" to have no sound. <@link https://github.com/Shampaggon/CrackShot/wiki/The-Complete-Guide-to-CrackShot#sounds>
+    // "RELOAD_SOUNDS:" + ElementTag to set the reload sounds. Use "NONE" to have no sound. <@link url https://github.com/Shampaggon/CrackShot/wiki/The-Complete-Guide-to-CrackShot#sounds>
     //
     // @Plugin Depenizen, CrackShot
     //
