@@ -132,13 +132,13 @@ public class LibsDisguiseTag implements ObjectTag {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <LibsDisguiseTag.type>
+        // @attribute <LibsDisguiseTag.disguise_type>
         // @returns ElementTag
         // @plugin Depenizen, LibsDisguises
         // @description
         // Returns the type of the disguise.
         // -->
-        if (attribute.startsWith("type")) {
+        if (attribute.startsWith("disguise_type")) {
             return new ElementTag(disguise.getType().toString()).getAttribute(attribute.fulfill(1));
         }
 

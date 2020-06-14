@@ -216,18 +216,6 @@ public class ShopKeeperTag implements ObjectTag {
             return null;
         }
 
-        // <--[tag]
-        // @attribute <ShopKeeperTag.type>
-        // @returns ElementTag
-        // @plugin Depenizen, ShopKeepers
-        // @description
-        // Always returns 'ShopKeeper' for ShopKeeper objects. All objects fetchable by the Object Fetcher will return the
-        // type of object that is fulfilling this attribute.
-        // -->
-        else if (attribute.startsWith("type")) {
-            return new ElementTag("ShopKeeper").getAttribute(attribute.fulfill(1));
-        }
-
         return null;
     }
 

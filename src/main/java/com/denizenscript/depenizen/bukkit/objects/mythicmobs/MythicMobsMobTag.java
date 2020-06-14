@@ -277,18 +277,6 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
             return new DurationTag(mob.getGlobalCooldown()).getAttribute(attribute.fulfill(1));
         }
 
-        // <--[tag]
-        // @attribute <MythicMobsMobTag.type>
-        // @returns ElementTag
-        // @plugin Depenizen, MythicMobs
-        // @description
-        // Always returns 'Mythic Mob' for MythicMob objects. All objects fetchable by the Object Fetcher will return the
-        // type of object that is fulfilling this attribute.
-        // -->
-        else if (attribute.startsWith("type")) {
-            return new ElementTag("Mythic Mob").getAttribute(attribute.fulfill(1));
-        }
-
         String returned = CoreUtilities.autoPropertyTag(this, attribute);
         if (returned != null) {
             return returned;

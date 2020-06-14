@@ -243,18 +243,6 @@ public class JobsJobTag implements ObjectTag {
             return new ElementTag(job.getName()).getAttribute(attribute);
         }
 
-        // <--[tag]
-        // @attribute <jobs@job.type>
-        // @returns ElementTag
-        // @plugin Depenizen, Jobs
-        // @description
-        // Always returns 'Job' for JobsJob objects. All objects fetchable by the Object Fetcher will return the
-        // type of object that is fulfilling this attribute.
-        // -->
-        if (attribute.startsWith("type")) {
-            return new ElementTag("Job").getAttribute(attribute.fulfill(1));
-        }
-
         return new ElementTag(identify()).getAttribute(attribute);
 
     }

@@ -265,18 +265,6 @@ public class MobArenaArenaTag implements ObjectTag {
             }
         }
 
-        // <--[tag]
-        // @attribute <MobArenaArenaTag.type>
-        // @returns ElementTag
-        // @plugin Depenizen, MobArena
-        // @description
-        // Always returns 'MobArena' for MobArena objects. All objects fetchable by the Object Fetcher will return the
-        // type of object that is fulfilling this attribute.
-        // -->
-        else if (attribute.startsWith("type")) {
-            return new ElementTag("MobArena").getAttribute(attribute.fulfill(1));
-        }
-
         return new ElementTag(identify()).getAttribute(attribute);
     }
 }

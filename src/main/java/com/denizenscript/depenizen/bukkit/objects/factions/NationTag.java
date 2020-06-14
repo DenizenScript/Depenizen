@@ -333,18 +333,6 @@ public class NationTag implements ObjectTag {
                     .getAttribute(attribute.fulfill(1));
         }
 
-        // <--[tag]
-        // @attribute <NationTag.type>
-        // @returns ElementTag
-        // @plugin Depenizen, Towny
-        // @description
-        // Always returns 'Nation' for dNation objects. All objects fetchable by the Object Fetcher will return the
-        // type of object that is fulfilling this attribute.
-        // -->
-        if (attribute.startsWith("type")) {
-            return new ElementTag("Nation").getAttribute(attribute.fulfill(1));
-        }
-
         return new ElementTag(identify()).getAttribute(attribute);
 
     }

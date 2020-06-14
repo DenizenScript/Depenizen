@@ -143,13 +143,13 @@ public class SkillAPIClassTag implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <SkillAPIClassTag.prefix>
+        // @attribute <SkillAPIClassTag.class_prefix>
         // @returns ElementTag
         // @plugin Depenizen, SkillAPI
         // @description
         // Returns the prefix of this SkillAPI class.
         // -->
-        else if (attribute.startsWith("prefix")) {
+        else if (attribute.startsWith("class_prefix")) {
             return new ElementTag(rpgClass.getPrefix()).getAttribute(attribute.fulfill(1));
         }
 

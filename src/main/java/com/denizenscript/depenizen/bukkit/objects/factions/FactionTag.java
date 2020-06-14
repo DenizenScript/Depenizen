@@ -296,18 +296,6 @@ public class FactionTag implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <FactionTag.type>
-        // @returns ElementTag
-        // @plugin Depenizen, Factions
-        // @description
-        // Always returns 'Faction' for dFaction objects. All objects fetchable by the Object Fetcher will return the
-        // type of object that is fulfilling this attribute.
-        // -->
-        if (attribute.startsWith("type")) {
-            return new ElementTag("Faction").getAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
         // @attribute <FactionTag.claimed_chunks>
         // @returns ListTag(ChunkTag)
         // @plugin Depenizen, Factions

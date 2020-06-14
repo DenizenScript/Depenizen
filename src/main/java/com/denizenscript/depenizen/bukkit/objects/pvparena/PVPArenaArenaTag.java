@@ -134,18 +134,6 @@ public class PVPArenaArenaTag implements ObjectTag {
             return fighters.getAttribute(attribute.fulfill(1));
         }
 
-        // <--[tag]
-        // @attribute <PVPArenaArenaTag.type>
-        // @returns ElementTag
-        // @plugin Depenizen, PVPArena
-        // @description
-        // Always returns 'PVPArena' for PVPArena objects. All objects fetchable by the Object Fetcher will return the
-        // type of object that is fulfilling this attribute.
-        // -->
-        else if (attribute.startsWith("type")) {
-            return new ElementTag("PVPArena").getAttribute(attribute.fulfill(1));
-        }
-
         return new ElementTag(identify()).getAttribute(attribute);
     }
 }

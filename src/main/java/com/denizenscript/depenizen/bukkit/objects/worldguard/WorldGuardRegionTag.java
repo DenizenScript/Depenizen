@@ -213,18 +213,6 @@ public class WorldGuardRegionTag implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <WorldGuardRegionTag.type>
-        // @returns ElementTag
-        // @plugin Depenizen, WorldGuard
-        // @description
-        // Always returns 'Region' for WorldGuardRegion objects. All objects fetchable by the Object Fetcher will return the
-        // type of object that is fulfilling this attribute.
-        // -->
-        if (attribute.startsWith("type")) {
-            return new ElementTag("Region").getAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
         // @attribute <WorldGuardRegionTag.world>
         // @returns WorldTag
         // @plugin Depenizen, WorldGuard

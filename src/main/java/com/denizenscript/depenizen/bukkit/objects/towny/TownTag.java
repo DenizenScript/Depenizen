@@ -363,18 +363,6 @@ public class TownTag implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <TownTag.type>
-        // @returns ElementTag
-        // @plugin Depenizen, Towny
-        // @description
-        // Always returns 'Town' for dTown objects. All objects fetchable by the Object Fetcher will return the
-        // type of object that is fulfilling this attribute.
-        // -->
-        if (attribute.startsWith("type")) {
-            return new ElementTag("Town").getAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
         // @attribute <TownTag.has_explosions>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Towny
