@@ -47,7 +47,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
     public boolean matches(ScriptPath path) {
         String arenaname = path.eventArgLowerAt(1);
         MobArenaArenaTag a = MobArenaArenaTag.valueOf(arenaname);
-        if (!arenaname.equals("arena") && (a == null || !CoreUtilities.toLowerCase(a.getArena().arenaName()).equals(arenaname))) {
+        if (!arenaname.equals("arena") && (a == null || !CoreUtilities.equalsIgnoreCase(a.getArena().arenaName(), arenaname))) {
             return false;
         }
         return super.matches(path);

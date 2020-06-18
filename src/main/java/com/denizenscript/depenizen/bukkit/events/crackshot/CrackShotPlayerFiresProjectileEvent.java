@@ -66,7 +66,7 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
             }
             else if (lower.startsWith("shot_sounds:")) {
                 String newReloadSounds = determination.substring("shot_sounds:".length());
-                if (CoreUtilities.toLowerCase(newReloadSounds).equals("none")) {
+                if (CoreUtilities.equalsIgnoreCase(newReloadSounds, "none")) {
                     newReloadSounds = "";
                 }
                 event.setSounds(newReloadSounds);

@@ -107,7 +107,7 @@ public class ResidenceTag implements ObjectTag {
     }
 
     public boolean equals(ResidenceTag residence) {
-        return CoreUtilities.toLowerCase(residence.getResidence().getName()).equals(CoreUtilities.toLowerCase(this.getResidence().getName()));
+        return CoreUtilities.equalsIgnoreCase(residence.getResidence().getName(), this.getResidence().getName());
     }
 
     @Override

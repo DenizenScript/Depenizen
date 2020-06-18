@@ -52,7 +52,7 @@ public class Depenizen extends JavaPlugin {
 
     public void checkLoadBungeeBridge() {
         String bungeeServer = getConfig().getString("Bungee server address", "none");
-        if (CoreUtilities.toLowerCase(bungeeServer).equals("none")) {
+        if (CoreUtilities.equalsIgnoreCase(bungeeServer, "none")) {
             Debug.log("<G>Depenizen will not load bungee bridge.");
             return;
         }

@@ -80,7 +80,7 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
             }
             else if (lower.startsWith("reload_sounds:")) {
                 String newReloadSounds = determination.substring("reload_sounds:".length());
-                if (CoreUtilities.toLowerCase(newReloadSounds).equals("none")) {
+                if (CoreUtilities.equalsIgnoreCase(newReloadSounds, "none")) {
                     newReloadSounds = "";
                 }
                 event.setSounds(newReloadSounds);

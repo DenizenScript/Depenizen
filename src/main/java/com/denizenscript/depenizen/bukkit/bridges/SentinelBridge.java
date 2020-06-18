@@ -94,7 +94,7 @@ public class SentinelBridge extends Bridge {
                     }
                     queue.start();
                     if (queue.determinations != null && queue.determinations.size() > 0) {
-                        return CoreUtilities.toLowerCase(queue.determinations.get(0)).equals("true");
+                        return CoreUtilities.equalsIgnoreCase(queue.determinations.get(0), "true");
                     }
                 }
             }

@@ -136,7 +136,7 @@ public class TownTag implements ObjectTag {
     }
 
     public boolean equals(TownTag town) {
-        return CoreUtilities.toLowerCase(town.getTown().getName()).equals(CoreUtilities.toLowerCase(this.getTown().getName()));
+        return CoreUtilities.equalsIgnoreCase(town.getTown().getName(), this.getTown().getName());
     }
 
     @Override

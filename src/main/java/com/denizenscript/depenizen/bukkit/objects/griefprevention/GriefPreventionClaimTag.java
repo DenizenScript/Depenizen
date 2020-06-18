@@ -320,7 +320,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
                     PlayerTag player = mechanism.valueAsType(PlayerTag.class);
                     dataStore.changeClaimOwner(claim, player.getOfflinePlayer().getUniqueId());
                 }
-                else if (CoreUtilities.toLowerCase(mechanism.getValue().asString()).equals("admin")) {
+                else if (CoreUtilities.equalsIgnoreCase(mechanism.getValue().asString(), "admin")) {
                     dataStore.changeClaimOwner(claim, null);
                 }
             }
