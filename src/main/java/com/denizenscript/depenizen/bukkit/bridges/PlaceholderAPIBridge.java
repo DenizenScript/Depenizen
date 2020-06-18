@@ -71,6 +71,11 @@ public class PlaceholderAPIBridge extends Bridge {
         }
 
         @Override
+        public boolean persist() {
+            return true;
+        }
+
+        @Override
         public String getAuthor() {
             return "The DenizenScript Team";
         }
