@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.skillapi;
 
+import com.denizenscript.denizen.objects.MaterialTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.skillapi.SkillAPIClassTag;
@@ -12,7 +13,6 @@ import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.denizen.utilities.blocks.OldMaterialsHelper;
 
 public class SkillAPIPlayerProperties implements Property {
 
@@ -253,7 +253,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the material this skill is currently bound to.
                 // -->
                 if (attribute.startsWith("skill_bind")) {
-                    return OldMaterialsHelper.getMaterialFrom(playerSkill.getBind()).getAttribute(attribute.fulfill(1));
+                    return new MaterialTag(playerSkill.getBind()).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
