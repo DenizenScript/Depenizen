@@ -11,17 +11,17 @@ import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
-public class DisguiseCommand extends AbstractCommand {
+public class LibsDisguiseCommand extends AbstractCommand {
 
-    public DisguiseCommand() {
-        setName("disguise");
-        setSyntax("disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<#>) (data:<#>) (self:true/false)");
+    public LibsDisguiseCommand() {
+        setName("libsdisguise");
+        setSyntax("libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<#>) (data:<#>) (self:true/false)");
         setRequiredArguments(1, 6);
     }
 
     // <--[command]
-    // @Name disguise
-    // @Syntax disguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<#>) (data:<#>) (self:true/false)
+    // @Name libsdisguise
+    // @Syntax libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<#>) (data:<#>) (self:true/false)
     // @Group Depenizen
     // @Plugin Depenizen, LibsDisguises
     // @Required 1

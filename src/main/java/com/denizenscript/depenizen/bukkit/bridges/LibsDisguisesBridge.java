@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.depenizen.bukkit.commands.libsdisguises.DisguiseCommand;
+import com.denizenscript.depenizen.bukkit.commands.libsdisguises.LibsDisguiseCommand;
 import com.denizenscript.depenizen.bukkit.events.libsdisguises.EntityDisguisesScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.libsdisguises.EntityUndisguisesScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.libsdisguise.LibsDisguiseEntityProperties;
@@ -20,6 +20,6 @@ public class LibsDisguisesBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new EntityUndisguisesScriptEvent());
         ObjectFetcher.registerWithObjectFetcher(LibsDisguiseTag.class);
         PropertyParser.registerProperty(LibsDisguiseEntityProperties.class, EntityTag.class);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(DisguiseCommand.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(LibsDisguiseCommand.class);
     }
 }
