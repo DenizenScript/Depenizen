@@ -65,6 +65,10 @@ public class RunScriptPacketIn extends PacketIn {
                     }
                 }
                 ScriptTag script = ScriptTag.valueOf(scriptName, CoreUtilities.basicContext);
+                if (script == null) {
+                    Debug.echoError("Invalid Depenizen bungeerun script '" + scriptName + "': script does not exist.");
+                    return;
+                }
                 List<ScriptEntry> entries = script.getContainer().getBaseEntries(new BukkitScriptEntryData(linkedPlayer, null));
                 if (entries.isEmpty()) {
                     return;
@@ -75,11 +79,9 @@ public class RunScriptPacketIn extends PacketIn {
                 ListTag definitions = ListTag.valueOf(defs, context);
                 String[] definition_names = null;
                 try {
-                    if (script != null && script.getContainer() != null) {
-                        String str = script.getContainer().getString("definitions");
-                        if (str != null) {
-                            definition_names = str.split("\\|");
-                        }
+                    String str = script.getContainer().getString("definitions");
+                    if (str != null) {
+                        definition_names = str.split("\\|");
                     }
                 }
                 catch (Exception e) {
