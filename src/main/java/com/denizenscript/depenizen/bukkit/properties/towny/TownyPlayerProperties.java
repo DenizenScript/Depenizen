@@ -89,7 +89,7 @@ public class TownyPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.mode_list>
-            // @returns ListTag(Element)
+            // @returns ListTag
             // @plugin Depenizen, Towny
             // @description
             // Returns the player's towny modes as a list.
@@ -104,7 +104,7 @@ public class TownyPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.nation_ranks>
-            // @returns ListTag(Element)
+            // @returns ListTag
             // @plugin Depenizen, Towny
             // @description
             // Returns the player's nation ranks.
@@ -142,7 +142,7 @@ public class TownyPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.town_ranks>
-            // @returns ListTag(Element)
+            // @returns ListTag
             // @plugin Depenizen, Towny
             // @description
             // Returns the player's town ranks.

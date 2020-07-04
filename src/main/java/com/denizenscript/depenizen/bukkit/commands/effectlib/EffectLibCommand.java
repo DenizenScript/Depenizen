@@ -43,15 +43,15 @@ public class EffectLibCommand extends AbstractCommand {
     //
     // @Usage
     // Use to show a effect on the attached player in queue.
-    // - effeclib bleed duration:10s
+    // - effectlib bleed duration:10s
     //
     // @Usage
     // Use to show a effect on a target entity.
-    // - effeclib atom target:<player.target> duration:10s
+    // - effectlib atom target:<player.target> duration:10s
     //
     // @Usage
     // Use to show effect at a position of the player.
-    // - effeclib type:atom duration:10s location:<player.location>
+    // - effectlib type:atom duration:10s location:<player.location>
     //
     // -->
 

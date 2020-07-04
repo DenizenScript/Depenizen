@@ -61,7 +61,7 @@ public class TownyBridge extends Bridge {
 
         // <--[tag]
         // @attribute <towny.list_towns[<world name>]>
-        // @returns ListTag(Element)
+        // @returns ListTag
         // @plugin Depenizen, Towny
         // @description
         // Returns a list of all towns. Optionally specify a world name.

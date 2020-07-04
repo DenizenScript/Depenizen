@@ -217,7 +217,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.owner>
-        // @returns PlayerTag/Element
+        // @returns PlayerTag/ElementTag
         // @mechanism GriefPreventionClaim.owner
         // @Plugin Depenizen, GriefPrevention
         // @description
@@ -307,7 +307,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object GriefPreventionClaim
         // @name owner
-        // @input PlayerTag/Element
+        // @input PlayerTag/ElementTag
         // @description
         // Sets the owner of the GriefPreventionClaim.
         // Accepts PlayerTag or "admin" to set as admin claim.

@@ -67,7 +67,7 @@ public class TownyChatPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.townychat.channels>
-            // @returns ListTag(Element)
+            // @returns ListTag
             // @plugin Depenizen, Towny
             // @description
             // Returns a list of all channels the player is in.

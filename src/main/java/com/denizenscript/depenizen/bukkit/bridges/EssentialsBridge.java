@@ -70,7 +70,7 @@ public class EssentialsBridge extends Bridge {
 
         // <--[tag]
         // @attribute <essentials.list_warps>
-        // @returns ListTag(Element)
+        // @returns ListTag
         // @plugin Depenizen, Essentials
         // @description
         // Returns a list of all Warp names.

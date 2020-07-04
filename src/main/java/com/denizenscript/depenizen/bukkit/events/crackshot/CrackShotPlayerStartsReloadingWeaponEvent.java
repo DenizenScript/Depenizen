@@ -32,7 +32,7 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
     // <context.weapon> returns the name of the weapon.
     // <context.reload_speed> returns the rate at which the weapon is reloaded.
     // <context.reload_time> returns the time taken to reload in ticks.
-    // <context.reload_sounds> returns a ListTag(ElementTag) of the reload sounds.
+    // <context.reload_sounds> returns a ListTag of the reload sounds.
     //
     // @Determine
     // "RELOAD_SPEED: " + ElementTag(Number) to set the reload speed.
