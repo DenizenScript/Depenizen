@@ -115,7 +115,7 @@ public class WorldGuardLocationProperties implements Property {
 
         // <--[tag]
         // @attribute <LocationTag.regions>
-        // @returns ListTag(Region)
+        // @returns ListTag(WorldGuardRegionTag)
         // @plugin Depenizen, WorldGuard
         // @description
         // Returns a list of regions that the location is in.

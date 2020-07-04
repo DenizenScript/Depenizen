@@ -54,7 +54,7 @@ public class PlotSquaredPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <PlayerTag.plotsquared_plots[<WorldTag>]>
-        // @returns ListTag(dPlotSquaredPlot)
+        // @returns ListTag(PlotSquaredPlotTag)
         // @plugin Depenizen, PlotSquared
         // @description
         // Returns a list of plots a player has in a world. Exclude the context to get plots in all worlds.

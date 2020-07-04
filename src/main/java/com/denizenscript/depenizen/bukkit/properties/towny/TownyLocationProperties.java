@@ -71,7 +71,7 @@ public class TownyLocationProperties implements Property {
 
                 // <--[tag]
                 // @attribute <LocationTag.towny.resident>
-                // @returns ElementTag(Boolean)
+                // @returns PlayerTag
                 // @plugin Depenizen, Towny
                 // @description
                 // Returns the resident of a Towny plot at the location, if any.

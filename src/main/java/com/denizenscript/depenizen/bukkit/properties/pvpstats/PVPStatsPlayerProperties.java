@@ -60,7 +60,7 @@ public class PVPStatsPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.pvpstats.deaths>
-            // @returns ElementTag
+            // @returns ElementTag(Number)
             // @plugin Depenizen, PvP Stats
             // @description
             // Returns the number of times the player has died.
@@ -71,7 +71,7 @@ public class PVPStatsPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.pvpstats.elo>
-            // @returns ElementTag
+            // @returns ElementTag(Number)
             // @plugin Depenizen, PvP Stats
             // @description
             // Returns the Elo rating of the player.
@@ -82,7 +82,7 @@ public class PVPStatsPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.pvpstats.kills>
-            // @returns ElementTag
+            // @returns ElementTag(Number)
             // @plugin Depenizen, PvP Stats
             // @description
             // Returns the number of players the player has killed.
@@ -93,7 +93,7 @@ public class PVPStatsPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.pvpstats.streak>
-            // @returns ElementTag
+            // @returns ElementTag(Number)
             // @plugin Depenizen, PvP Stats
             // @description
             // Returns the current kill streak of the player.
@@ -104,7 +104,7 @@ public class PVPStatsPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.pvpstats.max_streak>
-            // @returns ElementTag
+            // @returns ElementTag(Number)
             // @plugin Depenizen, PvP Stats
             // @description
             // Returns the highest kill streak of the player.

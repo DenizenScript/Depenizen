@@ -86,7 +86,7 @@ public class ResidencePlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <PlayerTag.residences>
-        // @returns ListTag(dResidence)
+        // @returns ListTag(ResidenceTag)
         // @plugin Depenizen, Residence
         // @description
         // Returns the player's current list of Residences.

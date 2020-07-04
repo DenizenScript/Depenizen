@@ -74,7 +74,7 @@ public class WorldGuardWorldProperties implements Property {
 
         // <--[tag]
         // @attribute <WorldTag.has_region[<name>]>
-        // @returns BooleanTag
+        // @returns ElementTag(Boolean)
         // @plugin Depenizen, WorldGuard
         // @description
         // Returns whether a region exists in this world for the given name.

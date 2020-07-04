@@ -73,7 +73,7 @@ public class ShopKeepersEntityProperties implements Property {
 
         // <--[tag]
         // @attribute <EntityTag.shopkeeper>
-        // @returns ShopKeeper
+        // @returns ShopKeeperTag
         // @plugin Depenizen, ShopKeepers
         // @description
         // Returns the ShopKeeper for this entity.

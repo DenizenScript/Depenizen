@@ -37,7 +37,7 @@ public class LuckPermsBridge extends Bridge {
 
         // <--[tag]
         // @attribute <luckperms.list_tracks>
-        // @returns ListTag(luckpermstrack)
+        // @returns ListTag(LuckPermsTrackTag)
         // @plugin Depenizen, LuckPerms
         // @description
         // Returns a list of all tracks.
@@ -51,8 +51,8 @@ public class LuckPermsBridge extends Bridge {
         }
 
         // <--[tag]
-        // @attribute <luckperms.track[<track name>]>
-        // @returns luckpermstrack
+        // @attribute <luckperms.track[<track_name>]>
+        // @returns LuckPermsTrackTag
         // @plugin Depenizen, LuckPerms
         // @description
         // Returns the track from the name given.

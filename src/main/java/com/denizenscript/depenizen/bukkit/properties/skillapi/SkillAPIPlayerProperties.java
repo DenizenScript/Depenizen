@@ -67,7 +67,7 @@ public class SkillAPIPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.skillapi.main_class>
-            // @returns SkillAPIClass
+            // @returns SkillAPIClassTag
             // @plugin Depenizen, SkillAPI
             // @description
             // Returns the player's main SkillAPI class.

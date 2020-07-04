@@ -100,7 +100,7 @@ public class WorldGuardCuboidProperties implements Property {
 
         // <--[tag]
         // @attribute <CuboidTag.regions>
-        // @returns ListTag(Region)
+        // @returns ListTag(WorldGuardRegionTag)
         // @plugin Depenizen, WorldGuard
         // @description
         // Returns a list of regions that are in this cuboid.

@@ -71,7 +71,7 @@ public class MythicMobsEntityProperties implements Property {
 
         // <--[tag]
         // @attribute <EntityTag.mythicmob>
-        // @returns MythicMobsMob
+        // @returns MythicMobsMobTag
         // @plugin Depenizen, MythicMobs
         // @description
         // Returns the MythicMob for this entity.

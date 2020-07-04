@@ -69,7 +69,7 @@ public class FactionsBridge extends Bridge {
 
         // <--[tag]
         // @attribute <factions.list_factions>
-        // @returns ListTag(dFaction)
+        // @returns ListTag(FactionTag)
         // @plugin Depenizen, Factions
         // @description
         // Returns a list of all current factions.

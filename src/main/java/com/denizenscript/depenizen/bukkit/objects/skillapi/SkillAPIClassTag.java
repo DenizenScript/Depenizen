@@ -210,7 +210,7 @@ public class SkillAPIClassTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <SkillAPIClassTag.max_level>
-        // @returns ElementTag(Decimal)
+        // @returns ElementTag(Number)
         // @plugin Depenizen, SkillAPI
         // @description
         // Returns the maximum level that this SkillAPI class can reach.

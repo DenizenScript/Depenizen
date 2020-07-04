@@ -129,7 +129,7 @@ public class NationTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <NationTag.allies>
-        // @returns ListTag(dNation)
+        // @returns ListTag(NationTag)
         // @plugin Depenizen, Towny
         // @description
         // Returns a list of the nation's allies.
@@ -191,7 +191,7 @@ public class NationTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <NationTag.enemies>
-        // @returns ListTag(dNation)
+        // @returns ListTag(NationTag)
         // @plugin Depenizen, Towny
         // @description
         // Returns a list of the nation's enemies.
