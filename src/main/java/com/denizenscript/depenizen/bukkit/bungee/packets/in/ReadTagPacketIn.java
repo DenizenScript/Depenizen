@@ -1,12 +1,12 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.in;
 
+import com.denizenscript.denizen.tags.BukkitTagContext;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.TagResponsePacketOut;
 import io.netty.buffer.ByteBuf;
-import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagManager;
@@ -67,7 +67,7 @@ public class ReadTagPacketIn extends PacketIn {
                         // Ignore
                     }
                 }
-                TagContext context = new BukkitScriptEntryData(linkedPlayer, null).getTagContext();
+                TagContext context = new BukkitTagContext(linkedPlayer, null, null, false, null);
                 List<String> defSets = CoreUtilities.split(defs, '\r');
                 List<String> defNames = CoreUtilities.split(defSets.get(0), '\n');
                 List<String> defValues = CoreUtilities.split(defSets.get(1), '\n');
