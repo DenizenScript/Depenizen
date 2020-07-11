@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.skillapi;
 
+import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.objects.MaterialTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
@@ -243,6 +244,17 @@ public class SkillAPIPlayerProperties implements Property {
                 PlayerSkill playerSkill = data.getSkill(attribute.getContext(1)); // TODO: SkillAPISkill object?
                 if (playerSkill == null) {
                     return null;
+                }
+
+                // <--[tag]
+                // @attribute <PlayerTag.skillapi.skill_indicator[<skill>]>
+                // @returns ItemTag
+                // @plugin Depenizen, SkillAPI
+                // @description
+                // Returns the indicator item for the skill.
+                // -->
+                if (attribute.startsWith("skill_indicator")) {
+                    return new ItemTag(playerSkill.getData().getIndicator(playerSkill)).getAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
