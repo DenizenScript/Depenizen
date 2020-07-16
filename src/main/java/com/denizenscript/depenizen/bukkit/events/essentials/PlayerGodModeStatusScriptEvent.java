@@ -46,13 +46,17 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
     @Override
     public boolean matches(ScriptPath path) {
         String status = path.eventArgLowerAt(3);
-        if (status.equals("enabled") && !event.getValue()) {
-            return false;
+        if (status.equals("enabled")) {
+            if (!event.getValue()) {
+                return false;
+            }
         }
-        if (status.equals("disabled") && event.getValue()) {
-            return false;
+        else if (status.equals("disabled")) {
+            if (event.getValue()) {
+                return false;
+            }
         }
-        if (!status.equals("status")) {
+        else if (!status.equals("status")) {
             return false;
         }
         return super.matches(path);
