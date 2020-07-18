@@ -111,6 +111,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 // @attribute <PlayerTag.griefprevention.blocks.bonus>
                 // @returns ElementTag(Number)
                 // @plugin Depenizen, GriefPrevention
+                // @mechanism PlayerTag.bonus_blocks
                 // @description
                 // Returns the number of bonus claim blocks the player has.
                 // -->
@@ -134,6 +135,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 // @attribute <PlayerTag.griefprevention.blocks>
                 // @returns ElementTag(Number)
                 // @plugin Depenizen, GriefPrevention
+                // @mechanism PlayerTag.normal_blocks
                 // @description
                 // Returns the number of normal claim blocks the payer has.
                 // -->
@@ -147,10 +149,31 @@ public class GriefPreventionPlayerProperties implements Property {
 
     @Override
     public void adjust(Mechanism mechanism) {
+
+        // <--[mechanism]
+        // @object PlayerTag
+        // @name bonus_blocks
+        // @input ElementTag(Number)
+        // @plugin Depenizen, GriefPrevention
+        // @description
+        // Sets the player's bonus claim blocks.
+        // @tags
+        // <PlayerTag.griefprevention.blocks.bonus>
+        // -->
         if (mechanism.matches("bonus_blocks") && mechanism.requireInteger()) {
             data.setBonusClaimBlocks(mechanism.getValue().asInt());
         }
 
+        // <--[mechanism]
+        // @object PlayerTag
+        // @name normal_blocks
+        // @input ElementTag(Number)
+        // @plugin Depenizen, GriefPrevention
+        // @description
+        // Sets the player's accrued claim blocks.
+        // @tags
+        // <PlayerTag.griefprevention.blocks>
+        // -->
         if (mechanism.matches("normal_blocks") && mechanism.requireInteger()) {
             data.setAccruedClaimBlocks(mechanism.getValue().asInt());
         }
