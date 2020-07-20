@@ -27,6 +27,8 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
     //
     // @Plugin Depenizen, MobArena
     //
+    // @Group Depenizen
+    //
     // -->
 
     public MobArenaWaveChangesScriptEvent() {

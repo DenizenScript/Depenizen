@@ -20,6 +20,10 @@ public class SentinelNoMoreTargetsScriptEvent extends BukkitScriptEvent implemen
     //
     // @Plugin Depenizen, Sentinel
     //
+    // @NPC Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public SentinelNoMoreTargetsScriptEvent() {

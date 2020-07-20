@@ -29,6 +29,10 @@ public class PlayerQuestStageChangeScriptEvent extends BukkitScriptEvent impleme
     //
     // @Plugin Depenizen, Quests
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerQuestStageChangeScriptEvent() {

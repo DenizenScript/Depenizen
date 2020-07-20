@@ -27,6 +27,10 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
     //
     // @Plugin Depenizen, A SkyBlock
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public static PlayerExitsSkyBlockScriptEvent instance;

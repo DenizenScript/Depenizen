@@ -37,6 +37,10 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     //
     // @Plugin Depenizen, mcMMO
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public mcMMOPlayerGainsXPScriptEvent() {

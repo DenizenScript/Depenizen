@@ -41,6 +41,8 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
     //
     // @Player Always
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static CrackShotPlayerFiresProjectileEvent instance;

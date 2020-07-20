@@ -30,6 +30,10 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
     //
     // @Plugin Depenizen, Essentials
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public static PlayerJailStatusScriptEvent instance;

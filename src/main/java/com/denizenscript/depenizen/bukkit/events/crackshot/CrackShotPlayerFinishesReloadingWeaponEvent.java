@@ -29,6 +29,8 @@ public class CrackShotPlayerFinishesReloadingWeaponEvent extends BukkitScriptEve
     //
     // @Player Always
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static CrackShotPlayerFinishesReloadingWeaponEvent instance;

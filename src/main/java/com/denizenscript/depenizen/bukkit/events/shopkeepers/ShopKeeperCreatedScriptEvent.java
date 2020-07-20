@@ -28,6 +28,10 @@ public class ShopKeeperCreatedScriptEvent extends BukkitScriptEvent implements L
     //
     // @Plugin Depenizen, ShopKeepers
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public ShopKeeperCreatedScriptEvent() {

@@ -46,6 +46,8 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     //
     // @Plugin Depenizen, MythicMobs
     //
+    // @Group Depenizen
+    //
     // -->
 
     public MythicMobsDeathEvent() {

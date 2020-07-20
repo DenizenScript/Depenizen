@@ -29,6 +29,10 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Plugin Depenizen, Essentials
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public static PlayerAFKStatusScriptEvent instance;

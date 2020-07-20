@@ -33,6 +33,8 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     //
     // @Plugin Depenizen, BungeeCord
     //
+    // @Group Depenizen
+    //
     // -->
 
     public BungeeProxyServerListPingScriptEvent() {

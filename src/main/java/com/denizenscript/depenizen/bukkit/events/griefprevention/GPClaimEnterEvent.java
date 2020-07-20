@@ -39,6 +39,11 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
     // <context.old_claim> returns the gpclaim being exited.
     //
     // @Plugin Depenizen, GriefPrevention
+    //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public GPClaimEnterEvent() {

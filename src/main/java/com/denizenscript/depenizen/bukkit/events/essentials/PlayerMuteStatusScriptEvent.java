@@ -30,6 +30,10 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
     //
     // @Plugin Depenizen, Essentials
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public static PlayerMuteStatusScriptEvent instance;

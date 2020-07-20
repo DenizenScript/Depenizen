@@ -21,10 +21,13 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
     // @Triggers when a new skyblock is reset.
     //
     // @Context
-    // <context.owner> Returns the owner of the island.
     // <context.location> Returns the location of the island.
     //
     // @Plugin Depenizen, A SkyBlock
+    //
+    // @Player Always.
+    //
+    // @Group Depenizen
     //
     // -->
 
@@ -49,15 +52,12 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(null, null);
+        return new BukkitScriptEntryData(owner, null);
     }
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("owner")) {
-            return owner;
-        }
-        else if (name.equals("location")) {
+        if (name.equals("location")) {
             return location;
         }
         return super.getContext(name);

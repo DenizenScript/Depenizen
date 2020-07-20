@@ -33,6 +33,8 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
     //
     // @Player Always
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static CrackShotWeaponCausesExplosionEvent instance;

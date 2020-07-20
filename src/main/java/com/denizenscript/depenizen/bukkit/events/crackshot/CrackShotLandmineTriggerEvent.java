@@ -31,6 +31,8 @@ public class CrackShotLandmineTriggerEvent extends BukkitScriptEvent implements 
     //
     // @Player Always
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static CrackShotLandmineTriggerEvent instance;

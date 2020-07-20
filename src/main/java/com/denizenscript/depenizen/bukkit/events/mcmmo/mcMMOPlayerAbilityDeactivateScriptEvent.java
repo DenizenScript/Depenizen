@@ -33,6 +33,10 @@ public class mcMMOPlayerAbilityDeactivateScriptEvent extends BukkitScriptEvent i
     //
     // @Plugin Depenizen, mcMMO
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public mcMMOPlayerAbilityDeactivateScriptEvent() {

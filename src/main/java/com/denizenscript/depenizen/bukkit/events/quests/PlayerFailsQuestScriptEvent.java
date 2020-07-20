@@ -29,6 +29,10 @@ public class PlayerFailsQuestScriptEvent extends BukkitScriptEvent implements Li
     //
     // @Plugin Depenizen, Quests
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerFailsQuestScriptEvent() {

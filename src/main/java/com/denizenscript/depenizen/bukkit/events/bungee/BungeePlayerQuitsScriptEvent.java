@@ -27,6 +27,10 @@ public class BungeePlayerQuitsScriptEvent extends BukkitScriptEvent {
     //
     // @Plugin Depenizen, BungeeCord
     //
+    // @Player when the player has been on this specific server before.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public BungeePlayerQuitsScriptEvent() {

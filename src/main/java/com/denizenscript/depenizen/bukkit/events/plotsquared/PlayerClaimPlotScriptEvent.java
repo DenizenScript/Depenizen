@@ -31,6 +31,10 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Plugin Depenizen, PlotSquared
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerClaimPlotScriptEvent() {

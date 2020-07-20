@@ -32,6 +32,11 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
     // None
     //
     // @Plugin Depenizen, SkillAPI
+    //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public SkillAPIPlayerDowngradesSkillScriptEvent() {

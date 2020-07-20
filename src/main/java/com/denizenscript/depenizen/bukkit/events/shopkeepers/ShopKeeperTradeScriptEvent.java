@@ -28,6 +28,10 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Plugin Depenizen, ShopKeepers
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public ShopKeeperTradeScriptEvent() {

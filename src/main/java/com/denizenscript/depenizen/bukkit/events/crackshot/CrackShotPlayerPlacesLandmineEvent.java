@@ -29,6 +29,8 @@ public class CrackShotPlayerPlacesLandmineEvent extends BukkitScriptEvent implem
     //
     // @Player Always
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static CrackShotPlayerPlacesLandmineEvent instance;

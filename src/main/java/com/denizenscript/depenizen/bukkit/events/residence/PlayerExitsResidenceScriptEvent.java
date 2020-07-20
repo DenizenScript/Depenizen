@@ -26,6 +26,10 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
     //
     // @Plugin Depenizen, Residence
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerExitsResidenceScriptEvent() {

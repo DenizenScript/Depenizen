@@ -26,6 +26,10 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
     //
     // @Plugin Depenizen, Residence
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerEntersResidenceScriptEvent() {

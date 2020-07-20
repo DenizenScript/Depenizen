@@ -29,6 +29,8 @@ public class CrackShotPlayerStartsFiringWeaponEvent extends BukkitScriptEvent im
     //
     // @Player Always
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static CrackShotPlayerStartsFiringWeaponEvent instance;

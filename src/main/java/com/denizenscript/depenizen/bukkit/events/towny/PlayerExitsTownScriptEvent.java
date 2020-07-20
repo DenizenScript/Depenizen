@@ -27,6 +27,10 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Plugin Depenizen, Towny
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerExitsTownScriptEvent() {

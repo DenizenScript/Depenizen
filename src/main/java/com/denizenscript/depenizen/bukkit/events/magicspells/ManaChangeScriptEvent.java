@@ -32,6 +32,10 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     //
     // @Plugin Depenizen, MagicSpells
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public ManaChangeScriptEvent() {

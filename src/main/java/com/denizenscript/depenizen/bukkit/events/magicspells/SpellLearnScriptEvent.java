@@ -28,6 +28,10 @@ public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener
     //
     // @Plugin Depenizen, MagicSpells
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public SpellLearnScriptEvent() {

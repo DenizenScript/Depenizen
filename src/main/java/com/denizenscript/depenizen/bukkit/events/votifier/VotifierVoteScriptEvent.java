@@ -35,6 +35,11 @@ public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listen
     // <context.username> returns the username input with the vote.
     //
     // @Plugin Depenizen, Votifier
+    //
+    // @Player When the vote is made using a recognized username.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public Vote vote;

@@ -31,6 +31,8 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Plugin Depenizen, LibsDisguises
     //
+    // @Group Depenizen
+    //
     // -->
 
     public EntityDisguisesScriptEvent() {

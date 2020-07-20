@@ -28,6 +28,8 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     //
     // @Plugin Depenizen, MobArena
     //
+    // @Group Depenizen
+    //
     // -->
 
     public MobArenaEndsScriptEvent() {

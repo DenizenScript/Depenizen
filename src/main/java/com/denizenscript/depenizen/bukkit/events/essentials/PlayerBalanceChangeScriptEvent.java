@@ -28,6 +28,10 @@ public class PlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements
     //
     // @Plugin Depenizen, Essentials
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public static PlayerBalanceChangeScriptEvent instance;

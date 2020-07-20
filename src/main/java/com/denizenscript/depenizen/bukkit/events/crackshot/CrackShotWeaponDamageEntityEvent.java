@@ -40,6 +40,8 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
     //
     // @Player Always
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static CrackShotWeaponDamageEntityEvent instance;

@@ -26,6 +26,10 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Plugin Depenizen, AreaShop
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public AreaShopExpiresScriptEvent() {

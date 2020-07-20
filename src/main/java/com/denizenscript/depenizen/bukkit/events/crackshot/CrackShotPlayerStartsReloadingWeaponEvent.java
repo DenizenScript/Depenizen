@@ -45,6 +45,8 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
     //
     // @Player Always
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static CrackShotPlayerStartsReloadingWeaponEvent instance;

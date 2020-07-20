@@ -32,6 +32,10 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
     //
     // @Plugin Depenizen, A SkyBlock
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public static PlayerCompletesSkyBlockChallengeScriptEvent instance;

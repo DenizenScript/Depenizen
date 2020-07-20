@@ -25,6 +25,10 @@ public class PlayerLeavesPVPArenaScriptEvent extends BukkitScriptEvent implement
     //
     // @Plugin Depenizen, PVPArena
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public static PlayerLeavesPVPArenaScriptEvent instance;

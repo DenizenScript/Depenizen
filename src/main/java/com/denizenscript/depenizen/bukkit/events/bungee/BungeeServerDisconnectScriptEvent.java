@@ -21,6 +21,8 @@ public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
     //
     // @Plugin Depenizen, BungeeCord
     //
+    // @Group Depenizen
+    //
     // -->
 
     public BungeeServerDisconnectScriptEvent() {

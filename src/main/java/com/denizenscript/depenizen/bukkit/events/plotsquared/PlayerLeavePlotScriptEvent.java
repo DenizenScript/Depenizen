@@ -29,6 +29,10 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Plugin Depenizen, PlotSquared
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerLeavePlotScriptEvent() {

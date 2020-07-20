@@ -30,6 +30,8 @@ public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent impl
     //
     // @Player Always
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static CrackShotPlayerZoomsWeaponScopeEvent instance;

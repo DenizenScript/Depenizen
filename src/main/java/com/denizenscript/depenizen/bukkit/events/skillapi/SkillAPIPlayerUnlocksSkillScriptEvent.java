@@ -30,6 +30,11 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
     // None
     //
     // @Plugin Depenizen, SkillAPI
+    //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public SkillAPIPlayerUnlocksSkillScriptEvent() {

@@ -27,6 +27,10 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
     //
     // @Plugin Depenizen, Towny
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerEntersTownScriptEvent() {

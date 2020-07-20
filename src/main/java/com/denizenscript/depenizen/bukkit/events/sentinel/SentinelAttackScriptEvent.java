@@ -29,6 +29,12 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     //
     // @Plugin Depenizen, Sentinel
     //
+    // @NPC Always.
+    //
+    // @Player When the attacked entity is a player.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public SentinelAttackScriptEvent() {

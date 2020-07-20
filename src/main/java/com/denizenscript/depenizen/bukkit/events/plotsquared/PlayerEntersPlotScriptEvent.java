@@ -27,6 +27,10 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
     //
     // @Plugin Depenizen, PlotSquared
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerEntersPlotScriptEvent() {

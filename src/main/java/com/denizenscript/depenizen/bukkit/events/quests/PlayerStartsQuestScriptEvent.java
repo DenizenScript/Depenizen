@@ -29,6 +29,10 @@ public class PlayerStartsQuestScriptEvent extends BukkitScriptEvent implements L
     //
     // @Plugin Depenizen, Quests
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerStartsQuestScriptEvent() {

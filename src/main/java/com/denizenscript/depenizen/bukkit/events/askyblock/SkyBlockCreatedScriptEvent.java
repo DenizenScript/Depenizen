@@ -22,11 +22,14 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
     // @Triggers when a new skyblock is created.
     //
     // @Context
-    // <context.owner> Returns the owner of the island.
     // <context.location> Returns the location of the island.
     // <context.schematic> Returns the name of the schematic used for the island.
     //
     // @Plugin Depenizen, A SkyBlock
+    //
+    // @Player Always.
+    //
+    // @Group Depenizen
     //
     // -->
 
@@ -52,15 +55,12 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(null, null);
+        return new BukkitScriptEntryData(owner, null);
     }
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("owner")) {
-            return owner;
-        }
-        else if (name.equals("location")) {
+        if (name.equals("location")) {
             return location;
         }
         else if (name.equals("schematic")) {

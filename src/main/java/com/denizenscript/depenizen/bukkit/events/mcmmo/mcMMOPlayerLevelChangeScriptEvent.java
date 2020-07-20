@@ -33,6 +33,10 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
     //
     // @Plugin Depenizen, mcMMO
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public mcMMOPlayerLevelChangeScriptEvent() {

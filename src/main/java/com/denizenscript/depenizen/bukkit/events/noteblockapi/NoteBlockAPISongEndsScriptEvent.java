@@ -33,6 +33,8 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
     //
     // @Plugin Depenizen, NoteBlockAPI
     //
+    // @Group Depenizen
+    //
     // -->
 
     public NoteBlockAPISongEndsScriptEvent() {

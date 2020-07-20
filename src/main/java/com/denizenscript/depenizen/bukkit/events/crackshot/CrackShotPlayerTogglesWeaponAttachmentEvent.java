@@ -36,6 +36,8 @@ public class CrackShotPlayerTogglesWeaponAttachmentEvent extends BukkitScriptEve
     //
     // @Player Always
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static CrackShotPlayerTogglesWeaponAttachmentEvent instance;

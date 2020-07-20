@@ -27,6 +27,10 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     //
     // @Plugin Depenizen, MagicSpells
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public SpellCastedScriptEvent() {

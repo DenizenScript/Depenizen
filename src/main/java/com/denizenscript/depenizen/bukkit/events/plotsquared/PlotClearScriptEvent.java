@@ -29,6 +29,8 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
     //
     // @Plugin Depenizen, PlotSquared
     //
+    // @Group Depenizen
+    //
     // -->
 
     public PlotClearScriptEvent() {

@@ -29,6 +29,10 @@ public class PlayerCompletesQuestScriptEvent extends BukkitScriptEvent implement
     //
     // @Plugin Depenizen, Quests
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerCompletesQuestScriptEvent() {

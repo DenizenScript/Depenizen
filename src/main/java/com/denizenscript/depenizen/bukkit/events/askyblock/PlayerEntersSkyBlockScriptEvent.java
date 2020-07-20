@@ -27,6 +27,10 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
     //
     // @Plugin Depenizen, A SkyBlock
     //
+    // @Player Always.
+    //
+    // @Group Depenizen
+    //
     // -->
 
     public PlayerEntersSkyBlockScriptEvent instance;

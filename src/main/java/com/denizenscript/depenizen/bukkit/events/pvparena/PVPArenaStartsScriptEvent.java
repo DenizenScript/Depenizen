@@ -29,6 +29,8 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
     //
     // @Plugin Depenizen, PVPArena
     //
+    // @Group Depenizen
+    //
     // -->
 
     public static PVPArenaStartsScriptEvent instance;
