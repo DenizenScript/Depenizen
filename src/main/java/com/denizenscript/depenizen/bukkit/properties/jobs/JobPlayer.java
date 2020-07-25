@@ -52,7 +52,7 @@ public class JobPlayer implements Property {
     public void adjust(Mechanism mechanism) {
 
         // <--[mechanism]
-        // @object dJob
+        // @object JobsJobTag
         // @name player
         // @input PlayerTag
         // @plugin Depenizen, Jobs

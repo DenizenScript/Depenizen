@@ -305,7 +305,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
     @Override
     public void adjust(Mechanism mechanism) {
         // <--[mechanism]
-        // @object GriefPreventionClaim
+        // @object GriefPreventionClaimTag
         // @name owner
         // @input PlayerTag/ElementTag
         // @description
@@ -330,7 +330,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         }
 
         // <--[mechanism]
-        // @object GriefPreventionClaim
+        // @object GriefPreventionClaimTag
         // @name depth
         // @input ElementTag(Number)
         // @description

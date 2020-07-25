@@ -270,7 +270,7 @@ public class EssentialsPlayerProperties implements Property {
         // <--[mechanism]
         // @object PlayerTag
         // @name is_muted
-        // @input ElementTag(Boolean)(|Duration)
+        // @input ElementTag(Boolean)(|DurationTag)
         // @plugin Depenizen, Essentials
         // @description
         // Sets whether the player is muted. Optionally, you may also
