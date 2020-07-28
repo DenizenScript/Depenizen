@@ -232,6 +232,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.target>
         // @returns EntityTag
+        // @mechanism MythicMobsMobTag.target
         // @plugin Depenizen, MythicMobs
         // @description
         // Returns the MythicMob's target.
@@ -269,6 +270,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.global_cooldown>
         // @returns ElementTag(Number)
+        // @mechanism MythicMobsMobTag.global_cooldown
         // @plugin Depenizen, MythicMobs
         // @description
         // Returns the MythicMob's global cooldown.

@@ -218,7 +218,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.owner>
         // @returns PlayerTag/ElementTag
-        // @mechanism GriefPreventionClaim.owner
+        // @mechanism GriefPreventionClaimTag.owner
         // @Plugin Depenizen, GriefPrevention
         // @description
         // Returns the GriefPreventionClaim's owner.

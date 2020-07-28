@@ -36,7 +36,7 @@ public class BungeeRunCommand extends AbstractCommand {
     // This command runs a task on another server on the Bungee network. Works similarly to the 'run' command.
     //
     // @Tags
-    // None
+    // <bungee.list_servers>
     //
     // @Usage
     // Use to run a simple task on another server.

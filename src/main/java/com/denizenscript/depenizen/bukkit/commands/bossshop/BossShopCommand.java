@@ -39,7 +39,7 @@ public class BossShopCommand extends AbstractCommand {
     //
     // @Usage
     // Use to open a bossshop inventory for the linked player.
-    // - bossshop "MyShop"
+    // - bossshop MyShop
     //
     // -->
 

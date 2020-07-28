@@ -41,7 +41,7 @@ public class BungeeCommand extends BracedCommand {
     // Generally, prefer <@link command BungeeRun>.
     //
     // @Tags
-    // None
+    // <bungee.list_servers>
     //
     // @Usage
     // Use to run a simple announce command on another server;
