@@ -1,7 +1,9 @@
 package com.denizenscript.depenizen.bukkit.events.mythicmobs;
 
+import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
@@ -12,6 +14,9 @@ import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobSpawnEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]
@@ -21,11 +26,14 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
     //
     // @Regex ^on mythicmob [^\s]+ spawns$
     //
+    // @Switch in:<area> to only process the event if it occurred within a specified area.
+    //
     // @Triggers when a MythicMob spawns.
     //
     // @Context
-    // <context.mob> Returns the MythicMob that is spawning.
+    // <context.mob> Returns the MythicMobTag that is spawning.
     // <context.entity> Returns the EntityTag for the MythicMob.
+    // <context.location> Returns a LocationTag of where the MythicMob will spawn.
     // <context.from_spawner> Returns true if the mob was from a spawner.
     // <context.spawner_location> Returns a LocationTag of the spawner that spawned the mob.
     //
@@ -47,9 +55,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public boolean couldMatch(ScriptPath path) {
-        String cmd = path.eventArgLowerAt(2);
-        return path.eventLower.startsWith("mythicmob")
-                && (cmd.equals("death") || cmd.equals("dies") || cmd.equals("killed"));
+        return (path.eventLower.startsWith("mythicmob") && (path.eventArgLowerAt(2).equals("spawns")));
     }
 
     @Override
@@ -61,7 +67,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
             return false;
         }
 
-        if (!runInCheck(path, entity.getLocation())) {
+        if (!runInCheck(path, location)) {
             return false;
         }
 
@@ -70,7 +76,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public String getName() {
-        return "MythicMobsDeath";
+        return "MythicMobsSpawn";
     }
 
     @Override
@@ -80,6 +86,9 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
         }
         else if (name.equals("entity")) {
             return entity;
+        }
+        else if (name.equals("location")) {
+            return location;
         }
         else if (name.equals("from_spawner")) {
             return new ElementTag(event.isFromMythicSpawner());
@@ -95,6 +104,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
     public void onMythicMobSpawns(MythicMobSpawnEvent event) {
         mob = new MythicMobsMobTag(event.getMob());
         entity = new EntityTag(event.getEntity());
+        location = new LocationTag(event.getLocation());
         EntityTag.rememberEntity(entity.getBukkitEntity());
         this.event = event;
         fire(event);
