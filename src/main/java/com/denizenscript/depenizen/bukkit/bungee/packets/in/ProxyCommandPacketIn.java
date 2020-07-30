@@ -8,6 +8,8 @@ import com.denizenscript.depenizen.bukkit.events.bungee.BungeeProxyServerCommand
 import io.netty.buffer.ByteBuf;
 import org.bukkit.Bukkit;
 
+import java.util.UUID;
+
 public class ProxyCommandPacketIn extends PacketIn {
 
     @Override
@@ -17,7 +19,7 @@ public class ProxyCommandPacketIn extends PacketIn {
 
     @Override
     public void process(ByteBuf data) {
-        if (data.readableBytes() < 8 + 4 + 4) {
+        if (data.readableBytes() < 8 + 4 + 4 + 4) {
             BungeeBridge.instance.handler.fail("Invalid ProxyCommandPacket (bytes available: " + data.readableBytes() + ")");
             return;
         }
@@ -34,10 +36,18 @@ public class ProxyCommandPacketIn extends PacketIn {
             return;
         }
         String command = readString(data, commandLength);
+        int senderIdLength = data.readInt();
+        if (data.readableBytes() < senderIdLength || senderIdLength < 0) {
+            BungeeBridge.instance.handler.fail("Invalid ProxyCommandPacket (senderId bytes requested: " + senderIdLength + ")");
+            return;
+        }
+        String senderIdText = readString(data, senderIdLength);
+        UUID senderId = senderIdText.isEmpty() ? null : UUID.fromString(senderIdText);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
                     @Override
                     public void run() {
                         BungeeProxyServerCommandScriptEvent.instance.sender = sender;
+                        BungeeProxyServerCommandScriptEvent.instance.senderId = senderId;
                         BungeeProxyServerCommandScriptEvent.instance.command = command;
                         BungeeProxyServerCommandScriptEvent.instance.fire();
                         ProxyCommandResultPacketOut packetOut = new ProxyCommandResultPacketOut();

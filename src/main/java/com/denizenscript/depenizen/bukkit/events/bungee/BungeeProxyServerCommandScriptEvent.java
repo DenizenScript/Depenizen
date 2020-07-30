@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.bungee;
 
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -7,6 +8,10 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+
+import java.util.UUID;
 
 public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
 
@@ -23,6 +28,7 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
     //
     // @Context
     // <context.sender> returns the name of the command sender.
+    // <context.sender_id> returns the UUID of the command sender, if available.
     // <context.command> returns the command executed.
     //
     // @Determine
@@ -31,6 +37,8 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
     // @Plugin Depenizen, BungeeCord
     //
     // @Group Depenizen
+    //
+    // @Player when the player has been on this specific server before.
     //
     // -->
 
@@ -43,6 +51,8 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
     public String sender;
 
     public String command;
+
+    public UUID senderId;
 
     @Override
     public boolean couldMatch(ScriptPath path) {
@@ -85,7 +95,19 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(null, null);
+        OfflinePlayer player = null;
+        if (senderId != null) {
+            try {
+                player = Bukkit.getOfflinePlayer(senderId);
+                if (!player.hasPlayedBefore()) {
+                    player = null;
+                }
+            }
+            catch (IllegalArgumentException ex) {
+                // Ignore.
+            }
+        }
+        return new BukkitScriptEntryData(player == null ? null : new PlayerTag(player), null);
     }
 
     @Override
@@ -105,6 +127,9 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
     public ObjectTag getContext(String name) {
         if (name.equals("sender")) {
             return new ElementTag(sender);
+        }
+        else if (name.equals("sender_id") && senderId != null) {
+            return new ElementTag(senderId.toString());
         }
         else if (name.equals("command")) {
             return new ElementTag(command);
