@@ -63,25 +63,26 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public boolean couldMatch(ScriptPath path) {
+        if (!path.eventLower.startsWith("mythicmob")) {
+            return false;
+        }
         String cmd = path.eventArgLowerAt(2);
-        return path.eventLower.startsWith("mythicmob")
-                && (cmd.equals("death") || cmd.equals("dies") || cmd.equals("killed"));
+        if (!cmd.equals("death") && !cmd.equals("die") && !cmd.equals("killed")) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean matches(ScriptPath path) {
         String mob = path.eventArgLowerAt(1);
-
-        if (!mob.equals("mob")
-                && runGenericCheck(mob, mythicmob.getMobType().getInternalName())) {
+        if (!mob.equals("mob") && runGenericCheck(mob, mythicmob.getMobType().getInternalName())) {
             return false;
         }
-        if ((path.eventArgLowerAt(3).equals("by"))
-                && !tryEntity(killer, path.eventArgLowerAt(4))) {
+        if ((path.eventArgLowerAt(3).equals("by")) && !tryEntity(killer, path.eventArgLowerAt(4))) {
             return false;
         }
-        if (!runInCheck(path, entity.getLocation())
-                && !runInCheck(path, killer.getLocation())) {
+        if (!runInCheck(path, entity.getLocation()) && !runInCheck(path, killer.getLocation())) {
             return false;
         }
         return super.matches(path);

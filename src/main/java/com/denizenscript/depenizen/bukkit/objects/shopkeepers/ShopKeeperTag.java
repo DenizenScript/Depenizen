@@ -168,7 +168,7 @@ public class ShopKeeperTag implements ObjectTag {
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, ShopKeepers
         // @description
-        // Returns whether the Shopkeeper is currently in a trade.
+        // Returns whether the Shopkeeper UI is currently active (may be false when the UI is about to be closed).
         // -->
         else if (attribute.startsWith("is_ui_active")) {
             return new ElementTag(shopkeeper.isUIActive()).getAttribute(attribute.fulfill(1));
@@ -179,14 +179,14 @@ public class ShopKeeperTag implements ObjectTag {
         // @returns ListTag
         // @plugin Depenizen, ShopKeepers
         // @description
-        // Returns a ListTag of the Shopkeeper's trades (as escaped sub-lists).
+        // Returns a ListTag of the Shopkeeper's trades (as sub-lists).
         // NOTE: see '!language Property Escaping'.
         // -->
         else if (attribute.startsWith("trades") || attribute.startsWith("recipes")) {
             ListTag trades = new ListTag();
             for (TradingRecipe trade : shopkeeper.getTradingRecipes(null)) {
                 ListTag recipe = wrapTradingRecipe(trade);
-                trades.add(EscapeTagBase.escape(recipe.identify()));
+                trades.addObject(recipe);
             }
             return trades.getAttribute(attribute.fulfill(1));
         }
