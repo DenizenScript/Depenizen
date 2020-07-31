@@ -49,20 +49,19 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public boolean couldMatch(ScriptPath path) {
-        String cmd = path.eventArgLowerAt(2);
         if (!path.eventLower.startsWith("mythicmob")) {
             return false;
         }
-        if (cmd.equals("spawns")) {
+        if (!path.eventArgLowerAt(2).equals("spawns")) {
             return false;
-        };
+        }
         return true;
-    };
+    }
 
     @Override
     public boolean matches(ScriptPath path) {
         String mob = path.eventArgLowerAt(1);
-        if (!mob.equals("mob") && runGenericCheck(mob, mythicmob.getMobType().getInternalName())) {
+        if (!mob.equals("mob") && !runGenericCheck(mob, mythicmob.getMobType().getInternalName())) {
             return false;
         }
         if (!runInCheck(path, location)) {
