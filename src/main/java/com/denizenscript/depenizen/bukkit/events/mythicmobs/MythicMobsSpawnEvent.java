@@ -49,10 +49,15 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public boolean couldMatch(ScriptPath path) {
-        String cmd = path.eventArgLowerAt(1);
-        return (path.eventLower.startsWith("mythicmob")
-                && (cmd.equals("spawns")));
-    }
+        String cmd = path.eventArgLowerAt(2);
+        if (!path.eventLower.startsWith("mythicmob")) {
+            return false;
+        }
+        if (cmd.equals("spawns")) {
+            return false;
+        };
+        return true;
+    };
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -85,7 +90,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
         else if (name.equals("from_spawner")) {
             return new ElementTag(event.isFromMythicSpawner());
         }
-        else if ((name.equals("spawner_location")) && (event.isFromMythicSpawner())) {
+        else if (name.equals("spawner_location") && event.isFromMythicSpawner()) {
                 AbstractLocation loc = event.getMythicSpawner().getLocation();
                 return new LocationTag(loc.getX(), loc.getY(), loc.getZ(), loc.getWorld().getName());
         }
