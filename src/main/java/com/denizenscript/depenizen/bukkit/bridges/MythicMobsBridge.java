@@ -15,6 +15,7 @@ import io.lumine.xikage.mythicmobs.items.MythicItem;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
+import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsSpawnEvent;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizencore.events.ScriptEvent;
@@ -34,6 +35,7 @@ public class MythicMobsBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(MythicMobsMobTag.class);
         PropertyParser.registerProperty(MythicMobsEntityProperties.class, EntityTag.class);
         ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
+        ScriptEvent.registerScriptEvent(new MythicMobsSpawnEvent());
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSpawnCommand.class);
 
         // <--[tag]
