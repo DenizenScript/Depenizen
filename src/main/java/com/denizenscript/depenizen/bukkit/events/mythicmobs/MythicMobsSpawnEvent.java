@@ -26,11 +26,11 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
     // @Triggers when a MythicMob spawns.
     //
     // @Context
-    // <context.mob> Returns the MythicMobTag that is spawning.
+    // <context.mob> Returns the MythicMob that is spawning.
     // <context.entity> Returns the EntityTag for the MythicMob.
-    // <context.location> Returns a LocationTag of where the MythicMob will spawn.
+    // <context.location> Returns the LocationTag of where the MythicMob will spawn.
     // <context.from_spawner> Returns true if the mob was from a spawner.
-    // <context.spawner_location> Returns a LocationTag of the spawner that spawned the mob.
+    // <context.spawner_location> Returns the LocationTag of the spawner that spawned the mob, if any.
     //
     // @Plugin Depenizen, MythicMobs
     //
@@ -49,15 +49,15 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public boolean couldMatch(ScriptPath path) {
+        String cmd = path.eventArgLowerAt(1);
         return (path.eventLower.startsWith("mythicmob")
-                && (path.eventArgLowerAt(2).equals("spawns")));
+                && (cmd.equals("spawns")));
     }
 
     @Override
     public boolean matches(ScriptPath path) {
         String mob = path.eventArgLowerAt(1);
-        if (!mob.equals("mob")
-                && runGenericCheck(mob, mythicmob.getMobType().getInternalName())) {
+        if (!mob.equals("mob") && runGenericCheck(mob, mythicmob.getMobType().getInternalName())) {
             return false;
         }
         if (!runInCheck(path, location)) {
@@ -85,11 +85,9 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
         else if (name.equals("from_spawner")) {
             return new ElementTag(event.isFromMythicSpawner());
         }
-        else if (name.equals("spawner_location")) {
-            if (event.isFromMythicSpawner()) {
+        else if (event.isFromMythicSpawner() && (name.equals("spawner_location"))) {
                 AbstractLocation loc = event.getMythicSpawner().getLocation();
                 return new LocationTag(loc.getX(), loc.getY(), loc.getZ(), loc.getWorld().getName());
-            }
         }
         return super.getContext(name);
     }
