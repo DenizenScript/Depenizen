@@ -85,7 +85,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
         else if (name.equals("from_spawner")) {
             return new ElementTag(event.isFromMythicSpawner());
         }
-        else if (event.isFromMythicSpawner() && (name.equals("spawner_location"))) {
+        else if ((name.equals("spawner_location")) && (event.isFromMythicSpawner())) {
                 AbstractLocation loc = event.getMythicSpawner().getLocation();
                 return new LocationTag(loc.getX(), loc.getY(), loc.getZ(), loc.getWorld().getName());
         }
