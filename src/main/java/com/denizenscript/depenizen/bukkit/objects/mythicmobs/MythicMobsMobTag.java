@@ -3,19 +3,25 @@ package com.denizenscript.depenizen.bukkit.objects.mythicmobs;
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.MapTag;
+import com.denizenscript.denizencore.tags.ObjectTagProcessor;
+import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
+import com.google.common.collect.ImmutableMap;
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitEntity;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class MythicMobsMobTag implements ObjectTag, Adjustable {
@@ -96,6 +102,11 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
     }
 
     @Override
+    public ObjectTag getObjectAttribute(Attribute attribute) {
+        return tagProcessor.getObjectAttribute(this, attribute);
+    }
+
+    @Override
     public String getPrefix() {
         return prefix;
     }
@@ -130,12 +141,12 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         return identify();
     }
 
-    @Override
-    public String getAttribute(Attribute attribute) {
+    public static void registerTag(String name, TagRunnable.ObjectInterface<MythicMobsMobTag> runnable, String... variants) {
+        tagProcessor.registerTag(name, runnable, variants);
+    }
+    public static ObjectTagProcessor<MythicMobsMobTag> tagProcessor = new ObjectTagProcessor<>();
 
-        if (attribute == null) {
-            return null;
-        }
+    public static void registerTags() {
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.internal_name>
@@ -144,9 +155,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the name MythicMobs identifies the MythicMob with.
         // -->
-        if (attribute.startsWith("internal_name")) {
-            return new ElementTag(mobType.getInternalName()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("internal_name", (attribute, object) -> {
+            return new ElementTag(object.getMobType().getInternalName());
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.display_name>
@@ -155,9 +166,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the display name of the MythicMob.
         // -->
-        else if (attribute.startsWith("display_name")) {
-            return new ElementTag(mobType.getDisplayName().get()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("display_name", (attribute, object) -> {
+            return new ElementTag(object.getMob().getDisplayName());
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.spawner_name>
@@ -167,12 +178,12 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // Returns the name of the spawner (as set on creation in-game) that spawned this mob.
         // Returns null, if the mob was spawned by something other than a spawner.
         // -->
-        if (attribute.startsWith("spawner_name")) {
-            if (mob.getSpawner() == null) {
+        registerTag("spawner_name", (attribute, object) -> {
+            if (object.getMob().getSpawner() == null) {
                 return null;
             }
-            return new ElementTag(mob.getSpawner().getName()).getAttribute(attribute.fulfill(1));
-        }
+            return new ElementTag(object.getMob().getSpawner().getName());
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.level>
@@ -181,9 +192,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the level of the MythicMob.
         // -->
-        if (attribute.startsWith("level")) {
-            return new ElementTag(mob.getLevel()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("level", (attribute, object) -> {
+            return new ElementTag(object.getMob().getLevel());
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.players_killed>
@@ -192,9 +203,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the number of players the MythicMob has killed.
         // -->
-        else if (attribute.startsWith("players_killed")) {
-            return new ElementTag(mob.getPlayerKills()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("players_killed", (attribute, object) -> {
+            return new ElementTag(object.getMob().getPlayerKills());
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.damage>
@@ -203,9 +214,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the damage the MythicMob deals.
         // -->
-        else if (attribute.startsWith("damage")) {
-            return new ElementTag(mob.getDamage()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("damage", (attribute, object) -> {
+            return new ElementTag(object.getMob().getDamage());
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.armor>
@@ -214,9 +225,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the armor the MythicMob has.
         // -->
-        else if (attribute.startsWith("armor") || attribute.startsWith("armour")) {
-            return new ElementTag(mob.getArmor()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("armor", (attribute, object) -> {
+            return new ElementTag(object.getMob().getArmor());
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.has_target>
@@ -225,9 +236,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the MythicMob has a target.
         // -->
-        else if (attribute.startsWith("has_target")) {
-            return new ElementTag(mob.hasTarget()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("has_target", (attribute, object) -> {
+            return new ElementTag(object.getMob().hasTarget());
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.target>
@@ -236,13 +247,64 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the MythicMob's target.
         // -->
-        else if (attribute.startsWith("target") && mob.hasThreatTable()) {
-            AbstractEntity target = mob.getThreatTable().getTopThreatHolder();
+        registerTag("target", (attribute, object) -> {
+            AbstractEntity target = object.getMob().getThreatTable().getTopThreatHolder();
             if (target == null) {
                 return null;
             }
-            return new EntityTag(target.getBukkitEntity()).getAttribute(attribute.fulfill(1));
-        }
+            return new EntityTag(target.getBukkitEntity());
+        });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.has_threat_table>
+        // @returns EntityTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Returns wether the MythicMob has a threat table.
+        // -->
+        registerTag("has_threat_table", (attribute, object) -> {
+            return new ElementTag(object.getMob().hasThreatTable());
+        });
+
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.threat_table>
+        // @returns EntityTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Returns the MythicMob's threat table, can contain multiple types of entities.
+        // -->
+        registerTag("threat_table", (attribute, object) -> {
+            if (!object.getMob().hasThreatTable()) {
+                return null;
+            }
+            ImmutableMap<AbstractEntity, Double> table = object.getMob().getThreatTable().asMap();
+
+            // <--[tag]
+            // @attribute <MythicMobsMobTag.threat_table.players>
+            // @returns EntityTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns the MythicMob's threat table, only containing players.
+            // -->
+            if (attribute.startsWith("players", 2)) {
+                attribute.fulfill(1);
+                MapTag map = new MapTag();
+                for (AbstractEntity entity : table.keySet()) {
+                    if (entity.isPlayer()) {
+                        map.putObject(entity.getUniqueId().toString(), new ElementTag(table.get(entity)));
+                    }
+                }
+                return map;
+            }
+            else {
+                MapTag map = new MapTag();
+                for (AbstractEntity entity : table.keySet()) {
+                    map.putObject(entity.getUniqueId().toString(), new ElementTag(table.get(entity)));
+                }
+                return map;
+            }
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.is_damaging>
@@ -251,9 +313,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the MythicMob is using its damaging skill.
         // -->
-        else if (attribute.startsWith("is_damaging")) {
-            return new ElementTag(mob.isUsingDamageSkill()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("is_damaging", (attribute, object) -> {
+            return new ElementTag(object.getMob().isUsingDamageSkill());
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.entity>
@@ -262,9 +324,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the EntityTag for the MythicMob.
         // -->
-        else if (attribute.startsWith("entity")) {
-            return new EntityTag(getLivingEntity()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("entity", (attribute, object) -> {
+            return new EntityTag(object.getMob().getEntity().getBukkitEntity());
+        });
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.global_cooldown>
@@ -273,16 +335,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the MythicMob's global cooldown.
         // -->
-        else if (attribute.startsWith("global_cooldown")) {
-            return new DurationTag(mob.getGlobalCooldown()).getAttribute(attribute.fulfill(1));
-        }
-
-        String returned = CoreUtilities.autoPropertyTag(this, attribute);
-        if (returned != null) {
-            return returned;
-        }
-
-        return new ElementTag(identify()).getAttribute(attribute);
+        registerTag("global_cooldown", (attribute, object) -> {
+            return new DurationTag(object.getMob().getGlobalCooldown());
+        });
     }
 
     @Override

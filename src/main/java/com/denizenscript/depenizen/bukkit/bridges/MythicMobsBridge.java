@@ -6,7 +6,7 @@ import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand;
+import com.denizenscript.depenizen.bukkit.commands.mythicmobs.*;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import com.denizenscript.denizen.objects.EntityTag;
@@ -14,8 +14,7 @@ import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
 import io.lumine.xikage.mythicmobs.items.MythicItem;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
-import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsSpawnEvent;
+import com.denizenscript.depenizen.bukkit.events.mythicmobs.*;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizencore.events.ScriptEvent;
@@ -32,11 +31,12 @@ public class MythicMobsBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(MythicMobsMobTag.class);
+        ObjectFetcher.registerWithObjectFetcher(MythicMobsMobTag.class, MythicMobsMobTag.tagProcessor);
         PropertyParser.registerProperty(MythicMobsEntityProperties.class, EntityTag.class);
         ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
         ScriptEvent.registerScriptEvent(new MythicMobsSpawnEvent());
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSpawnCommand.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicThreatCommand.class);
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>
