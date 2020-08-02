@@ -60,7 +60,7 @@ public class TownyBridge extends Bridge {
         Attribute attribute = event.getAttributes().fulfill(1);
 
         // <--[tag]
-        // @attribute <towny.list_towns[<world name>]>
+        // @attribute <towny.list_towns[<world>]>
         // @returns ListTag
         // @plugin Depenizen, Towny
         // @description
@@ -70,7 +70,7 @@ public class TownyBridge extends Bridge {
             ListTag towns = new ListTag();
             if (attribute.hasContext(1)) {
                 try {
-                    for (Town town : TownyAPI.getInstance().getDataSource().getWorld(attribute.getContext(1)).getTowns().values()) {
+                    for (Town town : TownyAPI.getInstance().getDataSource().getWorld(attribute.getContext(1).replace("w@", "")).getTowns().values()) {
                         towns.addObject(new TownTag(town));
                     }
                 }

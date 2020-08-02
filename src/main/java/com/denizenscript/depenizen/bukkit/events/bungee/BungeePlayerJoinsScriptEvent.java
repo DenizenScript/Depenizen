@@ -58,6 +58,9 @@ public class BungeePlayerJoinsScriptEvent extends BukkitScriptEvent {
         OfflinePlayer player = null;
         try {
             player = Bukkit.getOfflinePlayer(uuid);
+            if (!player.hasPlayedBefore()) {
+                player = null;
+            }
         }
         catch (IllegalArgumentException ex) {
             // Ignore.

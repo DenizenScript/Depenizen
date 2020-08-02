@@ -42,7 +42,7 @@ public class MythicThreatCommand  extends AbstractCommand {
     //
     // @Usage
     // Used to add 50 threat to the attached player on the target mob's threat table.
-    // - mythicthreat <player.target.mythicmob> add threat:50
+    // - mythicthreat <player.target.mythicmob> add 50
     //
     // -->
 

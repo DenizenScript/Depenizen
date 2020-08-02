@@ -50,6 +50,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
     //
     // @Tags
     // <entry[saveName].result> returns the result of the parsed tag.
+    // <bungee.list_servers>
     //
     // @Usage
     // Use to read a simple tag from another server.
