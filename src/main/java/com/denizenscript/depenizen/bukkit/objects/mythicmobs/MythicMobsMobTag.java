@@ -19,9 +19,7 @@ import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 
-import java.util.Map;
 import java.util.UUID;
 
 public class MythicMobsMobTag implements ObjectTag, Adjustable {
@@ -266,8 +264,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         registerTag("has_threat_table", (attribute, object) -> {
             return new ElementTag(object.getMob().hasThreatTable());
         });
-
-
+        
         // <--[tag]
         // @attribute <MythicMobsMobTag.threat_table>
         // @returns EntityTag

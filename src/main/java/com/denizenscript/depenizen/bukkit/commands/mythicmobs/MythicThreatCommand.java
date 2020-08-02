@@ -54,7 +54,7 @@ public class MythicThreatCommand  extends AbstractCommand {
         for (Argument arg : scriptEntry.getProcessedArgs()) {
             if (!scriptEntry.hasObject("mythicmob")
                     && arg.matchesArgumentType(MythicMobsMobTag.class)) {
-                scriptEntry.addObject("mythicmob", MythicMobsMobTag.valueOf(arg.getValue()));
+                scriptEntry.addObject("mythicmob", arg.asType(MythicMobsMobTag.class));
             }
             else if (!scriptEntry.hasObject("operation")
                     && arg.matchesEnum(Operation.values())) {
