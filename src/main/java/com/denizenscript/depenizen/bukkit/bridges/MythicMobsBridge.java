@@ -1,25 +1,28 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
+import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.depenizen.bukkit.commands.mythicmobs.*;
-import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
+import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand;
+import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicThreatCommand;
+import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
+import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsSpawnEvent;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
-import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
+import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
+import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
 import io.lumine.xikage.mythicmobs.items.MythicItem;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import com.denizenscript.depenizen.bukkit.events.mythicmobs.*;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import com.denizenscript.denizen.utilities.DenizenAPI;
-import com.denizenscript.denizencore.events.ScriptEvent;
-import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
@@ -37,6 +40,7 @@ public class MythicMobsBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new MythicMobsSpawnEvent());
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSpawnCommand.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicThreatCommand.class);
+        new MythicMobsLoaders().RegisterEvents();
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>

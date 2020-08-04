@@ -264,7 +264,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         registerTag("has_threat_table", (attribute, object) -> {
             return new ElementTag(object.getMob().hasThreatTable());
         });
-        
+
         // <--[tag]
         // @attribute <MythicMobsMobTag.threat_table>
         // @returns EntityTag
