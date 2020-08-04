@@ -27,13 +27,11 @@ public class MythicMobsLoaders implements Listener {
     // In both cases, <context.entity> is available as an EntityTag of the caster.
     //
     // Usage:
-    // <code>
     // @DenizenEntity{tag=<context.entity.location.find.players.within[30].filter[has_flag[marked]]>}
     //
     // @DenizenLocation{tag=<context.entity.location.find.surface_blocks.within[30].random[5]>}
     //
     // @DenizenEntity{tag=<proc[SomeProcScript]>}
-    // </code>
     //
     // -->
 
