@@ -18,25 +18,30 @@ import java.util.List;
 
 public class DenizenEntityTargeter extends IEntitySelector {
     final String tag;
+    OldEventManager.OldEventContextSource source;
+    HashMap<String, ObjectTag> context;
+    BukkitTagContext tagContext;
 
     public DenizenEntityTargeter(MythicLineConfig mlc) {
         super(mlc);
         tag = mlc.getString("tag");
+        context = new HashMap<>();
+        source = new OldEventManager.OldEventContextSource();
+        source.contexts = new HashMap<>();
+        BukkitTagContext tagContext = new BukkitTagContext(null, null, null, false, null);
+        tagContext.contextSource = source;
     }
 
     @Override
     public HashSet<AbstractEntity> getEntities(SkillMetadata skillMetadata) {
-        BukkitTagContext context = new BukkitTagContext(null, null, null, false, null);
-        OldEventManager.OldEventContextSource source = new OldEventManager.OldEventContextSource();
-        source.contexts = new HashMap<>();
         source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
-        context.contextSource = source;
-        ObjectTag object = TagManager.tagObject( tag , context);
-        List<EntityTag> list = (object.asType(ListTag.class, context)).filter(EntityTag.class, context);
+        ObjectTag object = TagManager.tagObject( tag , tagContext);
+        List<EntityTag> list = (object.asType(ListTag.class, tagContext)).filter(EntityTag.class, tagContext);
         HashSet<AbstractEntity> entities = new HashSet<AbstractEntity>();
         for (EntityTag entity : list) {
             entities.add(BukkitAdapter.adapt(entity.getBukkitEntity()));
         }
         return entities;
+
     }
 }

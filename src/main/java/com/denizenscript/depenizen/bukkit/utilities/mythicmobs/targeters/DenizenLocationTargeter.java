@@ -19,21 +19,25 @@ import java.util.List;
 
 public class DenizenLocationTargeter extends ILocationSelector {
     final String tag;
+    OldEventManager.OldEventContextSource source;
+    HashMap<String, ObjectTag> context;
+    BukkitTagContext tagContext;
 
     public DenizenLocationTargeter(MythicLineConfig mlc) {
         super(mlc);
         tag = mlc.getString("tag");
+        context = new HashMap<>();
+        source = new OldEventManager.OldEventContextSource();
+        source.contexts = new HashMap<>();
+        BukkitTagContext tagContext = new BukkitTagContext(null, null, null, false, null);
+        tagContext.contextSource = source;
     }
 
     @Override
     public HashSet<AbstractLocation> getLocations(SkillMetadata skillMetadata) {
-        BukkitTagContext context = new BukkitTagContext(null, null, null, false, null);
-        OldEventManager.OldEventContextSource source = new OldEventManager.OldEventContextSource();
-        source.contexts = new HashMap<>();
         source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
-        context.contextSource = source;
-        ObjectTag object = TagManager.tagObject( tag , context);
-        List<LocationTag> list = (object.asType(ListTag.class, context)).filter(LocationTag.class, context);
+        ObjectTag object = TagManager.tagObject( tag , tagContext);
+        List<LocationTag> list = (object.asType(ListTag.class, tagContext)).filter(LocationTag.class, tagContext);
         HashSet<AbstractLocation> locations = new HashSet<AbstractLocation>();
         for (LocationTag location : list) {
             locations.add(BukkitAdapter.adapt(location));
