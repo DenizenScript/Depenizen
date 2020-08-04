@@ -12,6 +12,7 @@ import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
 import io.lumine.xikage.mythicmobs.skills.SkillMetadata;
 import io.lumine.xikage.mythicmobs.skills.targeters.IEntitySelector;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -27,10 +28,11 @@ public class DenizenEntityTargeter extends IEntitySelector {
     public HashSet<AbstractEntity> getEntities(SkillMetadata skillMetadata) {
         BukkitTagContext context = new BukkitTagContext(null, null, null, false, null);
         OldEventManager.OldEventContextSource source = new OldEventManager.OldEventContextSource();
-        source.contexts.put("context.entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
+        source.contexts = new HashMap<>();
+        source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
         context.contextSource = source;
         ObjectTag object = TagManager.tagObject( tag , context);
-        List<EntityTag> list = ((ListTag) object).filter(EntityTag.class, context);
+        List<EntityTag> list = (object.asType(ListTag.class, context)).filter(EntityTag.class, context);
         HashSet<AbstractEntity> entities = new HashSet<AbstractEntity>();
         for (EntityTag entity : list) {
             entities.add(BukkitAdapter.adapt(entity.getBukkitEntity()));

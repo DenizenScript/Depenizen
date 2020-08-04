@@ -13,6 +13,7 @@ import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
 import io.lumine.xikage.mythicmobs.skills.SkillMetadata;
 import io.lumine.xikage.mythicmobs.skills.targeters.ILocationSelector;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -28,10 +29,11 @@ public class DenizenLocationTargeter extends ILocationSelector {
     public HashSet<AbstractLocation> getLocations(SkillMetadata skillMetadata) {
         BukkitTagContext context = new BukkitTagContext(null, null, null, false, null);
         OldEventManager.OldEventContextSource source = new OldEventManager.OldEventContextSource();
-        source.contexts.put("context.entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
+        source.contexts = new HashMap<>();
+        source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
         context.contextSource = source;
         ObjectTag object = TagManager.tagObject( tag , context);
-        List<LocationTag> list = ((ListTag) object).filter(LocationTag.class, context);
+        List<LocationTag> list = (object.asType(ListTag.class, context)).filter(LocationTag.class, context);
         HashSet<AbstractLocation> locations = new HashSet<AbstractLocation>();
         for (LocationTag location : list) {
             locations.add(BukkitAdapter.adapt(location));
