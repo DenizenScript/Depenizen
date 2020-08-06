@@ -19,10 +19,10 @@ public class MythicMobsLoaders implements Listener {
     }
 
     // <--[language]
-    // @name MythicMobs Additions
+    // @name MythicMobs Targeters
     // @group Depenizen External Additions
     // @description
-    // Depenizen adds additional features to Mythic Mobs, such as Targeters, and Conditions.
+    // Depenizen adds additional features to Mythic Mobs, such as Targeters, a Condition, and Mechanic.
     //
     // There are two Targeters added by Depenizen that you can use in MM skills
     // The first is @DenizenEntity, and the second is @DenizenLocation
@@ -38,11 +38,11 @@ public class MythicMobsLoaders implements Listener {
     //
     // Usage Examples
     //
-    // @DenizenEntity{tag=<context.entity.location.find.players.within[30].filter[has_flag[marked]]>}
+    // Exmaple 1: @DenizenEntity{tag=<context.entity.location.find.players.within[30].filter[has_flag[marked]]>}
     //
-    // @DenizenLocation{tag=<context.entity.location.find.surface_blocks.within[30].random[5]>}
+    // Example 2: @DenizenLocation{tag=<context.entity.location.find.surface_blocks.within[30].random[5]>}
     //
-    // @DenizenEntity{tag=<proc[SomeProcScript]>}
+    // Example 3: @DenizenEntity{tag=<proc[SomeProcScript]>}
     //
     // Condition:
     //   - denizencondition{tag=<context.entity.location.find.players.within[30].is_empty.not>}

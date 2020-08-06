@@ -23,7 +23,7 @@ public class MythicSkillCommand extends AbstractCommand {
     }
 
     // <--[command]
-    // @Name MythicSignal
+    // @Name MythicSkill
     // @Syntax mythicskill [<entity>|..] [<skill>] (<location>|...) (<entity>|...) (power:<#.#>)
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
