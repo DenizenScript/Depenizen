@@ -316,6 +316,17 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         });
 
         // <--[tag]
+        // @attribute <MythicMobsMobTag.stance>
+        // @returns ElementTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Returns the current stance of the MythicMob.
+        // -->
+        registerTag("stance", (attribute, object) -> {
+            return new ElementTag(object.getMob().getStance());
+        });
+
+        // <--[tag]
         // @attribute <MythicMobsMobTag.entity>
         // @returns EntityTag
         // @plugin Depenizen, MythicMobs
@@ -353,6 +364,19 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // -->
         if (mechanism.matches("global_cooldown") && mechanism.requireInteger()) {
             mob.setGlobalCooldown(mechanism.getValue().asInt());
+        }
+
+        // <--[mechanism]
+        // @object MythicMobsMobTag
+        // @name stance
+        // @input ElementTag
+        // @description
+        // Set the stance of the MythicMob
+        // @tags
+        // <MythicMobsMobTag.stance>
+        // -->
+        if (mechanism.matches("stance") && mechanism.requireObject(ElementTag.class)) {
+            mob.setStance(mechanism.getValue().asString());
         }
 
         // <--[mechanism]

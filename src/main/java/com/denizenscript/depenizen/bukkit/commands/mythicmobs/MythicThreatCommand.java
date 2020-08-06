@@ -63,7 +63,7 @@ public class MythicThreatCommand  extends AbstractCommand {
             }
             else if (!scriptEntry.hasObject("targets")
                     && arg.matchesPrefix("for")
-                    && arg.matchesArgumentType(EntityTag.class)) {
+                    && arg.matchesArgumentList(EntityTag.class)) {
                 scriptEntry.addObject("targets", arg.asType(ListTag.class).filter(EntityTag.class, scriptEntry));
             }
             else {

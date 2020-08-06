@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
@@ -11,6 +12,8 @@ import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.Bridge;
+import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSignalCommand;
+import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSkillCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicThreatCommand;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
@@ -20,6 +23,7 @@ import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntity
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
+import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
 import io.lumine.xikage.mythicmobs.items.MythicItem;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
@@ -27,6 +31,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -40,6 +46,8 @@ public class MythicMobsBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new MythicMobsSpawnEvent());
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSpawnCommand.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicThreatCommand.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSignalCommand.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
 
         // <--[tag]
@@ -87,5 +95,30 @@ public class MythicMobsBridge extends Bridge {
 
     public static Entity spawnMythicMob(MythicMob mythicMob, Location location, int level) {
         return mythicMob.spawn(BukkitAdapter.adapt(location), level).getEntity().getBukkitEntity();
+    }
+
+    public static BukkitAPIHelper getAPI() {
+        return MythicMobs.inst().getAPIHelper();
+    }
+
+    public static boolean skillExists(String name) {
+        return MythicMobs.inst().getSkillManager().getSkillNames().contains(name);
+    }
+
+    public static void castSkill(EntityTag caster, String skill, List<EntityTag> entities, List<LocationTag> locations, float power) {
+        HashSet<Entity> entityTargets = null;
+        HashSet<Location> locationTargets = null;
+        if (entities == null && locations == null && power == 0) {
+            MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill);
+        }
+        if (entities != null) {
+            for (EntityTag entity : entities) {
+                entityTargets.add(entity.getBukkitEntity());
+            }
+        }
+        if (locations != null) {
+            locationTargets.addAll(locations);
+        }
+        MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill, caster.getBukkitEntity().getLocation(), entityTargets, locationTargets, power);
     }
 }

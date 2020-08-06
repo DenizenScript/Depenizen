@@ -28,12 +28,12 @@ public class DenizenEntityTargeter extends IEntitySelector {
         context = new HashMap<>();
         source = new OldEventManager.OldEventContextSource();
         source.contexts = new HashMap<>();
-        BukkitTagContext tagContext = new BukkitTagContext(null, null, null, false, null);
-        tagContext.contextSource = source;
     }
 
     @Override
     public HashSet<AbstractEntity> getEntities(SkillMetadata skillMetadata) {
+        BukkitTagContext tagContext = new BukkitTagContext(null, null, null, false, null);
+        tagContext.contextSource = source;
         source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
         ObjectTag object = TagManager.tagObject( tag , tagContext);
         List<EntityTag> list = (object.asType(ListTag.class, tagContext)).filter(EntityTag.class, tagContext);
