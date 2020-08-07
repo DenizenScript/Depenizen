@@ -27,6 +27,7 @@ import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
 import io.lumine.xikage.mythicmobs.items.MythicItem;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import io.lumine.xikage.mythicmobs.spawning.spawners.MythicSpawner;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
@@ -95,6 +96,14 @@ public class MythicMobsBridge extends Bridge {
 
     public static Entity spawnMythicMob(MythicMob mythicMob, Location location, int level) {
         return mythicMob.spawn(BukkitAdapter.adapt(location), level).getEntity().getBukkitEntity();
+    }
+
+    public static boolean isMythicSpawner(String name) {
+        return (!(MythicMobs.inst().getSpawnerManager().getSpawnerByName(name) == null));
+    }
+
+    public static MythicSpawner getMythicSpawner(String name) {
+        return MythicMobs.inst().getSpawnerManager().getSpawnerByName(name);
     }
 
     public static BukkitAPIHelper getAPI() {

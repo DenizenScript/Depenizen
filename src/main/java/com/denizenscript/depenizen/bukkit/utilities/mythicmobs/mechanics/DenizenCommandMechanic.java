@@ -30,13 +30,13 @@ public class DenizenCommandMechanic extends SkillMechanic implements INoTargetSk
         this.ASYNC_SAFE = false;
         command = config.getString("cmd");
         entries.add(command);
-        context = new HashMap<>();
         source = new OldEventManager.OldEventContextSource();
-        scriptEntries = ScriptBuilder.buildScriptEntries(entries, null, new BukkitScriptEntryData(null, null));
     }
 
     @Override
     public boolean castAtEntity(SkillMetadata skillMetadata, AbstractEntity entity) {
+        context = new HashMap<>();
+        scriptEntries = ScriptBuilder.buildScriptEntries(entries, null, new BukkitScriptEntryData(null, null));
         context.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
         context.put("target", new EntityTag(entity.getBukkitEntity()));
         return RunCommand();
@@ -44,13 +44,17 @@ public class DenizenCommandMechanic extends SkillMechanic implements INoTargetSk
 
     @Override
     public boolean castAtLocation(SkillMetadata skillMetadata, AbstractLocation location) {
+        context = new HashMap<>();
+        scriptEntries = ScriptBuilder.buildScriptEntries(entries, null, new BukkitScriptEntryData(null, null));
         context.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
-        context.put("target", new LocationTag((World) location.getWorld(), location.getX(), location.getY(), location.getZ()));
+        context.put("location", new LocationTag((World) location.getWorld(), location.getX(), location.getY(), location.getZ()));
         return RunCommand();
     }
 
     @Override
     public boolean cast(SkillMetadata skillMetadata) {
+        context = new HashMap<>();
+        scriptEntries = ScriptBuilder.buildScriptEntries(entries, null, new BukkitScriptEntryData(null, null));
         context.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
         return RunCommand();
     }

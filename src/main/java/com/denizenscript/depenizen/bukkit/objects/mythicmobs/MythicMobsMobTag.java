@@ -277,31 +277,32 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
                 return null;
             }
             ImmutableMap<AbstractEntity, Double> table = object.getMob().getThreatTable().asMap();
+            MapTag map = new MapTag();
+            for (AbstractEntity entity : table.keySet()) {
+                map.putObject(entity.getUniqueId().toString(), new ElementTag(table.get(entity)));
+            }
+            return map;
+        });
 
             // <--[tag]
-            // @attribute <MythicMobsMobTag.threat_table.players>
+            // @attribute <MythicMobsMobTag.threat_table_players>
             // @returns EntityTag
             // @plugin Depenizen, MythicMobs
             // @description
             // Returns the MythicMob's threat table, only containing players.
             // -->
-            if (attribute.startsWith("players", 2)) {
-                attribute.fulfill(1);
-                MapTag map = new MapTag();
-                for (AbstractEntity entity : table.keySet()) {
-                    if (entity.isPlayer()) {
-                        map.putObject(entity.getUniqueId().toString(), new ElementTag(table.get(entity)));
-                    }
-                }
-                return map;
+        registerTag("threat_table_players", (attribute, object) -> {
+            if (!object.getMob().hasThreatTable()) {
+                return null;
             }
-            else {
-                MapTag map = new MapTag();
-                for (AbstractEntity entity : table.keySet()) {
+            ImmutableMap<AbstractEntity, Double> table = object.getMob().getThreatTable().asMap();
+            MapTag map = new MapTag();
+            for (AbstractEntity entity : table.keySet()) {
+                if (entity.isPlayer()) {
                     map.putObject(entity.getUniqueId().toString(), new ElementTag(table.get(entity)));
                 }
-                return map;
             }
+            return map;
         });
 
         // <--[tag]
@@ -375,7 +376,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.stance>
         // -->
-        if (mechanism.matches("stance") && mechanism.requireObject(ElementTag.class)) {
+        if (mechanism.matches("stance")) {
             mob.setStance(mechanism.getValue().asString());
         }
 
@@ -390,6 +391,19 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // -->
         else if (mechanism.matches("reset_target")) {
             mob.resetTarget();
+        }
+
+        // <--[mechanism]
+        // @object MythicMobsMobTag
+        // @name level
+        // @input None
+        // @description
+        // Set the MythicMob's level.
+        // @tags
+        // <MythicMobsMobTag.target>
+        // -->
+        else if (mechanism.matches("level")) {
+            mob.setLevel(mechanism.getValue().asInt());
         }
 
         // <--[mechanism]
