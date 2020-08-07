@@ -234,7 +234,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Sets group of the MythicSpawner.
         // @tags
-        // <MythicMobsMobTag.group>
+        // <MythicSpawnerTag.group>
         // -->
         if (mechanism.matches("global_cooldown")) {
             spawner.setGroup(mechanism.getValue().asString());
@@ -247,7 +247,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Sets the location of the MythicSpawner.
         // @tags
-        // <MythicMobsMobTag.location>
+        // <MythicSpawnerTag.location>
         // -->
         else if (mechanism.matches("location") && mechanism.requireObject(LocationTag.class)) {
             spawner.setLocation(BukkitAdapter.adapt(mechanism.valueAsType(LocationTag.class)));
@@ -260,7 +260,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Sets the MythicSpawner's cooldown timer.
         // @tags
-        // <MythicMobsMobTag.cooldown>
+        // <MythicSpawnerTag.cooldown>
         // -->
         else if (mechanism.matches("cooldown") && mechanism.requireInteger()) {
             spawner.setCooldownSeconds(mechanism.getValue().asInt());
@@ -273,7 +273,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Starts the MythicSpawner's cooldown timer.
         // @tags
-        // <MythicMobsMobTag.cooldown>
+        // <MythicSpawnerTag.cooldown>
         // -->
         else if (mechanism.matches("start_cooldown")) {
             spawner.setOnCooldown();
@@ -286,7 +286,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Sets the MythicSpawner's MythicMob Mob type.
         // @tags
-        // <MythicMobsMobTag.mob_type>
+        // <MythicSpawnerTag.mob_type>
         // -->
         else if (mechanism.matches("set_mob_type")) {
             spawner.setOnCooldown();
@@ -298,8 +298,6 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @input None
         // @description
         // Forces the MythicSpawner to spawn.
-        // @tags
-        // <MythicMobsMobTag.mob_type>
         // -->
         else if (mechanism.matches("spawn")) {
             spawner.Spawn();

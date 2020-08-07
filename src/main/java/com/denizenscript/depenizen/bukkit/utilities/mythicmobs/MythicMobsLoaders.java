@@ -19,22 +19,31 @@ public class MythicMobsLoaders implements Listener {
     }
 
     // <--[language]
-    // @name MythicMobs Targeters
+    // @name MythicMobs Additions
     // @group Depenizen External Additions
     // @description
     // Depenizen adds additional features to Mythic Mobs, such as Targeters, a Condition, and Mechanic.
     //
-    // There are two Targeters added by Depenizen that you can use in MM skills
-    // The first is @DenizenEntity, and the second is @DenizenLocation
+    // There are two Targeters added by Depenizen that you can use in MM skills.
+    // The first is @DenizenEntity, and the second is @DenizenLocation.
     // Both of these can parse tags that return either an EntityTag, or LocationTag respectively.
     // They both also support returning ListTags, containing their respective tag types.
     // In both cases, <context.entity> is available as an EntityTag of the caster.
     //
     // Conditions are a bit more complex and depending on the type of system they're used in provide different context.
     // The syntax for calling a Denizen tag as a condition is DenizenCondition.
-    // The tag should return and ElementTag of a boolean value (true or false).
-    // Location based systems will have <context.location>.
-    // Entity and Caster conditions provide <context.entity>.
+    // The tag should return an ElementTag of a boolean value (true or false).
+    // Location based checks will have <context.location>
+    // Entity and Caster checks provide <context.entity>
+    // Target checks will provide <context.target>
+    //
+    // Denizen provides the DenizenCommand mechanic.
+    // This allows you to run raw Denizen commands as if you were using them in a script.
+    // The context available will depend on the Targeter used.
+    // If multiple things are targeted, MM wil parse the command for each target.
+    // <context.entity> will be available in all cases, as the casting entity.
+    // <context.target> will be available when targeting one or more entities.
+    // <context.location> will be available when targeting one or more locations.
     //
     // Usage Examples
     //
