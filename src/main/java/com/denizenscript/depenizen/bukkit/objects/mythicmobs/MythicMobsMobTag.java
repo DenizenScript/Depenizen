@@ -202,8 +202,8 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @attribute <MythicMobsMobTag.level>
         // @returns ElementTag(Number)
         // @plugin Depenizen, MythicMobs
-        // @description
         // @mechanism MythicMobsMobTag.level
+        // @description
         // Returns the level of the MythicMob.
         // -->
         registerTag("level", (attribute, object) -> {
@@ -336,8 +336,8 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @attribute <MythicMobsMobTag.stance>
         // @returns ElementTag
         // @plugin Depenizen, MythicMobs
-        // @description
         // @mechanism MythicMobsMobTag.stance
+        // @description
         // Returns the current stance of the MythicMob.
         // -->
         registerTag("stance", (attribute, object) -> {
