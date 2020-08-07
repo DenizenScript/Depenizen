@@ -148,6 +148,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @returns ElementTag
         // @plugin Depenizen, MythicMobs
         // @description
+        // @mechanism MythicSpawnerTag.cooldown
         // Returns an ElementTag(Number) of the MythicSpawner's cooldown.
         // -->
         registerTag("mythic_mobs", (attribute, object) -> {
@@ -174,6 +175,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @returns ElementTag
         // @plugin Depenizen, MythicMobs
         // @description
+        // @mechanism MythicSpawnerTag.set_mob_type
         // Returns an ElementTag for internal name the MythicMob mob type spawned.
         // -->
         registerTag("mob_type", (attribute, object) -> {
@@ -204,6 +206,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @returns ElementTag
         // @plugin Depenizen, MythicMobs
         // @description
+        // @mechanism MythicSpawnerTag.location
         // Returns a LocationTag of the MythicSpawner.
         // -->
         registerTag("location", (attribute, object) -> {
@@ -216,6 +219,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @returns ElementTag
         // @plugin Depenizen, MythicMobs
         // @description
+        // @mechanism MythicSpawnerTag.group
         // Returns an ElementTag of a MythicSpawn's group, if applicable.
         // -->
         registerTag("group", (attribute, object) -> {

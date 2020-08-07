@@ -184,10 +184,26 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         });
 
         // <--[tag]
+        // @attribute <MythicMobsMobTag.spawner>
+        // @returns MythicSpawnerTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Returns the MythicSpawnerTag that spawned this mob.
+        // Returns null, if the mob was spawned by something other than a spawner.
+        // -->
+        registerTag("spawner_name", (attribute, object) -> {
+            if (object.getMob().getSpawner() == null) {
+                return null;
+            }
+            return new MythicSpawnerTag(object.getMob().getSpawner());
+        });
+
+        // <--[tag]
         // @attribute <MythicMobsMobTag.level>
         // @returns ElementTag(Number)
         // @plugin Depenizen, MythicMobs
         // @description
+        // @mechanism MythicMobsMobTag.level
         // Returns the level of the MythicMob.
         // -->
         registerTag("level", (attribute, object) -> {
@@ -321,6 +337,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @returns ElementTag
         // @plugin Depenizen, MythicMobs
         // @description
+        // @mechanism MythicMobsMobTag.stance
         // Returns the current stance of the MythicMob.
         // -->
         registerTag("stance", (attribute, object) -> {
@@ -400,7 +417,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Set the MythicMob's level.
         // @tags
-        // <MythicMobsMobTag.target>
+        // <MythicMobsMobTag.level>
         // -->
         else if (mechanism.matches("level")) {
             mob.setLevel(mechanism.getValue().asInt());
