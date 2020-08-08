@@ -167,7 +167,7 @@
         <dependency>
             <groupId>com.github.TheComputerGeek2</groupId>
             <artifactId>MagicSpells</artifactId>
-            <version>3.5-Release</version>
+            <version>4.0-Release</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/MagicSpells.jar</systemPath>
         </dependency>

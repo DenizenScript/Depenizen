@@ -1,9 +1,9 @@
 package com.denizenscript.depenizen.bukkit.events.magicspells;
 
+import com.denizenscript.denizen.objects.EntityTag;
 import com.nisovin.magicspells.events.SpellCastedEvent;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -14,7 +14,8 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
 
     // <--[event]
     // @Events
-    // magicspells player completes spell
+    // magicspells entity completes spell
+    // magicspells <entity> completes spell
     //
     // @Regex ^on magicspells [^\s]+ spell$
     //
@@ -22,12 +23,13 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     //
     // @Context
     // <context.spell_name> returns the name of the spell.
+    // <context.caster> returns the entity that casted the spell.
     // <context.power> returns an ElementTag(Decimal) of the power of the spell.
     // <context.cooldown> returns an ElementTag(Decimal) of the cooldown of the spell.
     //
     // @Plugin Depenizen, MagicSpells
     //
-    // @Player Always.
+    // @Player When the caster is a player.
     //
     // @Group Depenizen
     //
@@ -40,14 +42,34 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     public static SpellCastedScriptEvent instance;
 
     public SpellCastedEvent event;
-    public PlayerTag player;
+    public EntityTag caster;
     private float power;
     private float cooldown;
     private ElementTag spell;
 
     @Override
     public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("magicspells player completes spell");
+        if (!path.eventArgLowerAt(0).equals("magicspells")) {
+            return false;
+        }
+        if (!path.eventArgLowerAt(2).equals("completes")) {
+            return false;
+        }
+        if (!path.eventArgLowerAt(3).equals("spell")) {
+            return false;
+        }
+        if (!couldMatchEntity(path.eventArgLowerAt(1))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean matches(ScriptPath path) {
+        if (!tryEntity(caster, path.eventArgLowerAt(1))) {
+            return false;
+        }
+        return super.matches(path);
     }
 
     @Override
@@ -57,13 +79,16 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(player, null);
+        return new BukkitScriptEntryData(caster);
     }
 
     @Override
     public ObjectTag getContext(String name) {
         if (name.equals("power")) {
             return new ElementTag(power);
+        }
+        else if (name.equals("caster")) {
+            return caster.getDenizenObject();
         }
         else if (name.equals("cooldown")) {
             return new ElementTag(cooldown);
@@ -76,7 +101,7 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
 
     @EventHandler
     public void onPlayerCastsSpell(SpellCastedEvent event) {
-        player = PlayerTag.mirrorBukkitPlayer(event.getCaster());
+        caster = new EntityTag(event.getCaster());
         power = event.getPower();
         cooldown = event.getCooldown();
         spell = new ElementTag(event.getSpell().getName());

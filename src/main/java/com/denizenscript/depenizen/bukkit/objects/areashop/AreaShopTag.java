@@ -25,7 +25,7 @@ public class AreaShopTag implements ObjectTag {
     //
     // These use the object notation "areashop@".
     // The identity format for shops is <shop_name>
-    // For example, 'areashop@my_shot'.
+    // For example, 'areashop@my_shop'.
     //
     // -->
 
