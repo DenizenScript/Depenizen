@@ -35,36 +35,33 @@ public class MythicSignalCommand extends AbstractCommand {
     // This allows you to send a signal trigger to multiple MythicMobs.
     // If those mobs have any triggers configured for that signal, they will fire.
     // Optionally, specify an entity that acts as the sender.
-    // NOTE: signals are caps sensitive.
+    // NOTE: signals are case sensitive.
     //
     // @Usage
-    // Used to trigger the player's target signal "attack"
-    // - mythicsignal <player.location.find.entities.within[10].filter[is_mythicmob]> attack
+    // Used to trigger the player's target signal "attack".
+    // - mythicsignal <player.target.mythicmob> attack
     //
     // -->
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry.getProcessedArgs()) {
             if (!scriptEntry.hasObject("targets")
                     && arg.matchesArgumentList(MythicMobsMobTag.class)) {
                 scriptEntry.addObject("targets", arg.asType(ListTag.class).filter(MythicMobsMobTag.class, scriptEntry));
             }
-            else if (!scriptEntry.hasObject("signal")
-                    && arg.matchesArgumentType(ElementTag.class)) {
-                scriptEntry.addObject("signal", arg.asType(ElementTag.class));
-            }
-            else if (!scriptEntry.hasObject("soruce")
+            else if (!scriptEntry.hasObject("source")
                     && arg.matchesPrefix("source")
                     && arg.matchesArgumentType(EntityTag.class)) {
                 scriptEntry.addObject("source", arg.asType(EntityTag.class));
+            }
+            else if (!scriptEntry.hasObject("signal")) {
+                scriptEntry.addObject("signal", arg.asType(ElementTag.class));
             }
             else {
                 arg.reportUnhandled();
             }
         }
-
         if (!scriptEntry.hasObject("targets")) {
             throw new InvalidArgumentsException("Must specify MythicMobs to send the signal to.");
         }
@@ -80,9 +77,11 @@ public class MythicSignalCommand extends AbstractCommand {
         List<MythicMobsMobTag> targets = (List<MythicMobsMobTag>) scriptEntry.getObject("targets");
         ElementTag signal = scriptEntry.getElement("signal");
 
-        Debug.report(scriptEntry, getName(),ArgumentHelper.debugList("mythicmobs", targets)
-                + signal.debug()
-                + (source == null ? "" : source.debug()));
+        if (scriptEntry.dbCallShouldDebug()) {
+            Debug.report(scriptEntry, getName(), ArgumentHelper.debugList("mythicmobs", targets)
+                    + signal.debug()
+                    + (source == null ? "" : source.debug()));
+        }
 
         for (MythicMobsMobTag mob : targets) {
             mob.getMob().signalMob((source == null ? null : BukkitAdapter.adapt(source.getBukkitEntity())), signal.asString());

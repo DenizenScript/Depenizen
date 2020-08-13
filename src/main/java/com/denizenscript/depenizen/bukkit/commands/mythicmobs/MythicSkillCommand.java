@@ -20,16 +20,16 @@ public class MythicSkillCommand extends AbstractCommand {
 
     public MythicSkillCommand() {
         setName("mythicskill");
-        setSyntax("mythicskill [<skillname>] (<location>|...) (<entity>|...) (power:<#.#>) (casters:<entity>|..)");
-        setRequiredArguments(1, 5);
+        setSyntax("mythicskill [<skillname>] [<location>|.../<entity>|...] (power:<#.#>) (casters:<entity>|...)");
+        setRequiredArguments(2, 5);
     }
 
     // <--[command]
     // @Name MythicSkill
-    // @Syntax mythicskill [<skillname>] (<location>|...) (<entity>|...) (power:<#.#>) (casters:<entity>|..)
+    // @Syntax mythicskill [<skillname>] (<location>|.../<entity>|...) (power:<#.#>) (casters:<entity>|...)
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
-    // @Required 1
+    // @Required 2
     // @Maximum 5
     // @Short Cast a MythicMob skill from an entity.
     //
@@ -98,11 +98,13 @@ public class MythicSkillCommand extends AbstractCommand {
         List<LocationTag> location_targets = (List<LocationTag>) scriptEntry.getObject("location_targets");
         ElementTag power = scriptEntry.getObjectTag("power");
 
-        Debug.report(scriptEntry, getName(), ArgumentHelper.debugList("casters", casters)
-                + skill.debug()
-                + (location_targets == null ? "": ArgumentHelper.debugList("location_Targets", location_targets))
-                + (entity_targets == null ? "": ArgumentHelper.debugList("entity_targets", entity_targets))
-                + (power == null ? "": power.debug()));
+        if (scriptEntry.dbCallShouldDebug()) {
+            Debug.report(scriptEntry, getName(), ArgumentHelper.debugList("casters", casters)
+                    + skill.debug()
+                    + (location_targets == null ? "" : ArgumentHelper.debugList("location_Targets", location_targets))
+                    + (entity_targets == null ? "" : ArgumentHelper.debugList("entity_targets", entity_targets))
+                    + (power == null ? "" : power.debug()));
+        }
 
         for (EntityTag entity : casters) {
             MythicMobsBridge.castSkill(entity, skill.asString(), entity_targets, location_targets, power.asFloat());

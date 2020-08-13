@@ -14,7 +14,7 @@ public class MythicMobsEntityProperties implements Property {
 
     @Override
     public String getPropertyString() {
-        return getMythicMob().getMob().getUniqueId().toString();
+        return null;
     }
 
     @Override
@@ -79,6 +79,7 @@ public class MythicMobsEntityProperties implements Property {
     public boolean isMythicMob() {
         return MythicMobsBridge.isMythicMob(entity.getBukkitEntity());
     }
+
     public MythicMobsMobTag getMythicMob() {
         return new MythicMobsMobTag(MythicMobsBridge.getActiveMob(entity.getBukkitEntity()));
     }

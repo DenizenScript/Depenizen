@@ -72,13 +72,13 @@ public class MythicThreatCommand  extends AbstractCommand {
         }
 
         if (!scriptEntry.hasObject("mythicmob")) {
-            throw new InvalidArgumentsException("Must specify a MythicMob");
+            throw new InvalidArgumentsException("Must specify a MythicMob!");
         }
         if (!scriptEntry.hasObject("operation")) {
-            throw new InvalidArgumentsException("Must specify an Operation");
+            throw new InvalidArgumentsException("Must specify an Operation!");
         }
         if (!scriptEntry.hasObject("threat")) {
-            throw new InvalidArgumentsException("Must specify a threat value");
+            throw new InvalidArgumentsException("Must specify a threat value!");
         }
         if (!scriptEntry.hasObject("targets")) {
             scriptEntry.defaultObject("targets", (Utilities.entryHasPlayer(scriptEntry) ? Arrays.asList(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity()) : null));
@@ -93,7 +93,9 @@ public class MythicThreatCommand  extends AbstractCommand {
         ElementTag threat = scriptEntry.getElement("threat");
         List<EntityTag> targets = (List<EntityTag>) scriptEntry.getObject("targets");
 
-        Debug.report(scriptEntry, getName(), mythicmob.debug() + operation.debug() + threat.debug() + ArgumentHelper.debugList("targets", targets));
+        if (scriptEntry.dbCallShouldDebug()) {
+            Debug.report(scriptEntry, getName(), mythicmob.debug() + operation.debug() + threat.debug() + ArgumentHelper.debugList("targets", targets));
+        }
 
         if (!mythicmob.getMob().hasThreatTable()) {
             Debug.echoError("MythicMob does not have a threat table: " + mythicmob);

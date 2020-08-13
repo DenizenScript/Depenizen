@@ -65,12 +65,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
     }
 
     public MythicSpawnerTag(MythicSpawner spawner) {
-        if (spawner != null) {
             this.spawner = spawner;
-        }
-        else {
-            Debug.echoError("Mythic Spawner referenced is null!");
-        }
     }
 
     public MythicSpawner getSpawner() {
@@ -150,7 +145,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @plugin Depenizen, MythicMobs
         // @mechanism MythicSpawnerTag.cooldown
         // @description
-        // Returns an ElementTag(Number) of the MythicSpawner's cooldown.
+        // Returns the MythicSpawner's configured cooldown.
         // -->
         registerTag("cooldown", (attribute, object) -> {
             return new DurationTag(object.getSpawner().getCooldownSeconds());
@@ -164,20 +159,20 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // Returns a ListTag of all active MythicMobs from this spawner.
         // -->
         registerTag("mythic_mobs", (attribute, object) -> {
-            ArrayList<MythicMobsMobTag> list = new ArrayList<>();
-            for (UUID uuid : object.getSpawner().getAssociatedMobs()){
-                list.add(MythicMobsMobTag.valueOf(uuid.toString()));
+            ListTag list = new ListTag();
+            for (UUID uuid : object.getSpawner().getAssociatedMobs()) {
+                list.addObject(MythicMobsMobTag.valueOf(uuid.toString()));
             }
-            return new ListTag(list);
+            return list;
         });
 
         // <--[tag]
         // @attribute <MythicSpawnerTag.mob_type>
         // @returns ElementTag
         // @plugin Depenizen, MythicMobs
-        // @mechanism MythicSpawnerTag.set_mob_type
+        // @mechanism MythicSpawnerTag.mob_type
         // @description
-        // Returns an ElementTag for internal name the MythicMob mob type spawned.
+        // Returns the internal name the MythicMob mob type spawned.
         // -->
         registerTag("mob_type", (attribute, object) -> {
             return new ElementTag(object.getSpawner().getTypeName());
@@ -192,7 +187,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // -->
         registerTag("mobs", (attribute, object) -> {
             ArrayList<EntityTag> list = new ArrayList<>();
-            for (UUID uuid : object.getSpawner().getAssociatedMobs()){
+            for (UUID uuid : object.getSpawner().getAssociatedMobs()) {
                 list.add(new EntityTag(MythicMobsMobTag.valueOf(uuid.toString()).getEntity()));
             }
             return new ListTag(list);
@@ -217,7 +212,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @plugin Depenizen, MythicMobs
         // @mechanism MythicSpawnerTag.group
         // @description
-        // Returns an ElementTag of a MythicSpawn's group, if applicable.
+        // Returns the MythicSpawner's group, if applicable.
         // -->
         registerTag("group", (attribute, object) -> {
             return new ElementTag(object.getSpawner().getGroup());
@@ -233,7 +228,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @name group
         // @input ElementTag
         // @description
-        // Sets group of the MythicSpawner.
+        // Sets the group of the MythicSpawner.
         // @tags
         // <MythicSpawnerTag.group>
         // -->
@@ -282,7 +277,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
 
         // <--[mechanism]
         // @object MythicSpawnerTag
-        // @name set_mob_type
+        // @name mob_type
         // @input ElementTag
         // @description
         // Sets the MythicSpawner's MythicMob Mob type.
@@ -304,7 +299,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @input None
         // @description
         // Forces the MythicSpawner to spawn.
-        // This spawn method still checks conditions
+        // This spawn method still checks conditions.
         // -->
         else if (mechanism.matches("spawn")) {
             spawner.Spawn();

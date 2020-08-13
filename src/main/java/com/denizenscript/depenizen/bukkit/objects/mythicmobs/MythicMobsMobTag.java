@@ -12,7 +12,6 @@ import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.google.common.collect.ImmutableMap;
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitEntity;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
@@ -20,6 +19,7 @@ import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class MythicMobsMobTag implements ObjectTag, Adjustable {
@@ -283,16 +283,17 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.threat_table>
-        // @returns EntityTag
+        // @returns MapTag
         // @plugin Depenizen, MythicMobs
         // @description
         // Returns the MythicMob's threat table, can contain multiple types of entities.
+        // Map is in the formatting of "UUID/Threat|UUID/Threat"
         // -->
         registerTag("threat_table", (attribute, object) -> {
             if (!object.getMob().hasThreatTable()) {
                 return null;
             }
-            ImmutableMap<AbstractEntity, Double> table = object.getMob().getThreatTable().asMap();
+            Map<AbstractEntity, Double> table = object.getMob().getThreatTable().asMap();
             MapTag map = new MapTag();
             for (AbstractEntity entity : table.keySet()) {
                 map.putObject(entity.getUniqueId().toString(), new ElementTag(table.get(entity)));
@@ -300,18 +301,19 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
             return map;
         });
 
-            // <--[tag]
-            // @attribute <MythicMobsMobTag.threat_table_players>
-            // @returns EntityTag
-            // @plugin Depenizen, MythicMobs
-            // @description
-            // Returns the MythicMob's threat table, only containing players.
-            // -->
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.threat_table_players>
+        // @returns MapTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Returns the MythicMob's threat table, only containing players.
+        // Map is in the formatting of "UUID/Threat|UUID/Threat"
+        // -->
         registerTag("threat_table_players", (attribute, object) -> {
             if (!object.getMob().hasThreatTable()) {
                 return null;
             }
-            ImmutableMap<AbstractEntity, Double> table = object.getMob().getThreatTable().asMap();
+            Map<AbstractEntity, Double> table = object.getMob().getThreatTable().asMap();
             MapTag map = new MapTag();
             for (AbstractEntity entity : table.keySet()) {
                 if (entity.isPlayer()) {

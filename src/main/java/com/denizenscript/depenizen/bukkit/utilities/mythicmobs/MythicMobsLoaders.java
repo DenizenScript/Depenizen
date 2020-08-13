@@ -2,11 +2,9 @@ package com.denizenscript.depenizen.bukkit.utilities.mythicmobs;
 
 import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.conditions.DenizenCondition;
-import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.mechanics.DenizenCommandMechanic;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.targeters.DenizenEntityTargeter;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.targeters.DenizenLocationTargeter;
 import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicConditionLoadEvent;
-import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMechanicLoadEvent;
 import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicTargeterLoadEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -22,7 +20,7 @@ public class MythicMobsLoaders implements Listener {
     // @name MythicMobs Additions
     // @group Depenizen External Additions
     // @description
-    // Depenizen adds additional features to Mythic Mobs, such as Targeters, a Condition, and Mechanic.
+    // Depenizen adds additional features to Mythic Mobs, 2 Targeters, and a Condition.
     //
     // There are two Targeters added by Depenizen that you can use in MM skills.
     // The first is @DenizenEntity, and the second is @DenizenLocation.
@@ -38,14 +36,6 @@ public class MythicMobsLoaders implements Listener {
     // Target checks will provide <context.target>
     // NOTE: TriggerConditions are NOT currently supported.
     //
-    // Denizen provides the DenizenCommand mechanic.
-    // This allows you to run raw Denizen commands as if you were using them in a script.
-    // The context available will depend on the Targeter used.
-    // If multiple things are targeted, MM wil parse the command for each target.
-    // <context.entity> will be available in all cases, as the casting entity.
-    // <context.target> will be available when targeting one or more entities.
-    // <context.location> will be available when targeting one or more locations.
-    //
     // Usage Examples
     //
     // Exmaple 1: @DenizenEntity{tag=<context.entity.location.find.players.within[30].filter[has_flag[marked]]>}
@@ -56,11 +46,6 @@ public class MythicMobsLoaders implements Listener {
     //
     // Condition:
     //   - denizencondition{tag=<context.entity.location.find.players.within[30].is_empty.not>}
-    //
-    // Mechanic:
-    //   - DenizenCommand{cmd=run MyTaskScript}
-    //
-    //   - DenizenCommand{cmd=announce "Hello World!"}
     // -->
 
     @EventHandler
@@ -77,13 +62,6 @@ public class MythicMobsLoaders implements Listener {
     public void onMythicConditionsLoad(MythicConditionLoadEvent event) {
         if (event.getConditionName().toLowerCase().equals("denizencondition")) {
             event.register(new DenizenCondition(event.getConfig().getLine(), event.getConfig()));
-        }
-    }
-
-    @EventHandler
-    public void onMythicMechanicsLoad(MythicMechanicLoadEvent event) {
-        if (event.getMechanicName().toLowerCase().equals("denizencommand")) {
-            event.register(new DenizenCommandMechanic(event.getConfig().getLine(), event.getConfig()));
         }
     }
 }

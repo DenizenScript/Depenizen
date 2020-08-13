@@ -8,10 +8,10 @@ public class MythicSpawnerTagBase {
     public MythicSpawnerTagBase() {
 
         // <--[tag]
-        // @attribute <MythicSpawner[<name>]>
+        // @attribute <mythicspawner[<name>]>
         // @returns MythicSpawnerTag
         // @description
-        // Returns a MythicSpawnerTag based on the name inpuit
+        // Returns a MythicSpawnerTag based on the name input.
         // Refer to <@link language MythicSpawnerTag Objects>.
         // -->
         TagManager.registerTagHandler("mythicspawner", (attribute) -> {

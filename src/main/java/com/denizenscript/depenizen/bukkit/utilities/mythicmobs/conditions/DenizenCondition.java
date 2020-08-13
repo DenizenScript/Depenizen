@@ -2,12 +2,12 @@ package com.denizenscript.depenizen.bukkit.utilities.mythicmobs.conditions;
 
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizen.tags.BukkitTagContext;
-import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.OldEventManager;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
 import io.lumine.xikage.mythicmobs.adapters.AbstractLocation;
 import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
@@ -20,14 +20,13 @@ import org.bukkit.World;
 import java.util.HashMap;
 
 public class DenizenCondition extends SkillCondition implements IEntityCondition, ILocationCondition, ICasterCondition, ISkillMetaCondition, IEntityComparisonCondition {
+
     final String tag;
     OldEventManager.OldEventContextSource source;
-    HashMap<String, ObjectTag> context;
 
     public DenizenCondition(String line, MythicLineConfig mlc) {
         super(line);
         tag = mlc.getString("tag");
-        context = new HashMap<>();
         source = new OldEventManager.OldEventContextSource();
         source.contexts = new HashMap<>();
     }
@@ -47,7 +46,7 @@ public class DenizenCondition extends SkillCondition implements IEntityCondition
     @Override
     public boolean check(SkillCaster caster) {
         source.contexts.put("entity", new EntityTag(caster.getEntity().getBukkitEntity()));
-        if (caster.getEntity().getTarget() == null){
+        if (caster.getEntity().getTarget() == null) {
             source.contexts.put("target", new EntityTag(caster.getEntity().getTarget().getBukkitEntity()));
         }
         return runCheck();
@@ -57,7 +56,7 @@ public class DenizenCondition extends SkillCondition implements IEntityCondition
     public boolean check(SkillMetadata skillMetadata) {
         source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
         source.contexts.put("target", new EntityTag(skillMetadata.getCaster().getEntity().getTarget().getBukkitEntity()));
-        if (skillMetadata.getTrigger() == null){
+        if (skillMetadata.getTrigger() == null) {
             source.contexts.put("trigger", new EntityTag(skillMetadata.getTrigger().getBukkitEntity()));
         }
         return runCheck();
@@ -71,9 +70,9 @@ public class DenizenCondition extends SkillCondition implements IEntityCondition
     }
 
     public boolean runCheck() {
-        BukkitTagContext tagContext = new BukkitTagContext(null, null, null, false, null);
+        TagContext tagContext = CoreUtilities.noDebugContext;
         tagContext.contextSource = source;
-        ObjectTag object = TagManager.tagObject(tag , tagContext);
+        ObjectTag object = TagManager.tagObject(tag, tagContext);
         return object.asType(ElementTag.class, tagContext).asBoolean();
     }
 }

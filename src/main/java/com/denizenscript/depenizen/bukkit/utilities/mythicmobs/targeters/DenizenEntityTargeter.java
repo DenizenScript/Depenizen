@@ -17,10 +17,10 @@ import java.util.HashSet;
 import java.util.List;
 
 public class DenizenEntityTargeter extends IEntitySelector {
+
     final String tag;
     OldEventManager.OldEventContextSource source;
     HashMap<String, ObjectTag> context;
-    BukkitTagContext tagContext;
 
     public DenizenEntityTargeter(MythicLineConfig mlc) {
         super(mlc);
@@ -35,13 +35,12 @@ public class DenizenEntityTargeter extends IEntitySelector {
         BukkitTagContext tagContext = new BukkitTagContext(null, null, null, false, null);
         tagContext.contextSource = source;
         source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
-        ObjectTag object = TagManager.tagObject( tag , tagContext);
-        List<EntityTag> list = (object.asType(ListTag.class, tagContext)).filter(EntityTag.class, tagContext);
+        ObjectTag object = TagManager.tagObject(tag, tagContext);
+        List<EntityTag> list = object.asType(ListTag.class, tagContext).filter(EntityTag.class, tagContext);
         HashSet<AbstractEntity> entities = new HashSet<AbstractEntity>();
         for (EntityTag entity : list) {
             entities.add(BukkitAdapter.adapt(entity.getBukkitEntity()));
         }
         return entities;
-
     }
 }
