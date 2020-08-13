@@ -36,6 +36,7 @@ public class MythicMobsLoaders implements Listener {
     // Location based checks will have <context.location>
     // Entity and Caster checks provide <context.entity>
     // Target checks will provide <context.target>
+    // NOTE: TriggerConditions are NOT currently supported.
     //
     // Denizen provides the DenizenCommand mechanic.
     // This allows you to run raw Denizen commands as if you were using them in a script.
@@ -55,6 +56,11 @@ public class MythicMobsLoaders implements Listener {
     //
     // Condition:
     //   - denizencondition{tag=<context.entity.location.find.players.within[30].is_empty.not>}
+    //
+    // Mechanic:
+    //   - DenizenCommand{cmd=run MyTaskScript}
+    //
+    //   - DenizenCommand{cmd=announce "Hello World!"}
     // -->
 
     @EventHandler

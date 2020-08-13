@@ -3,10 +3,10 @@ package com.denizenscript.depenizen.bukkit.utilities.mythicmobs.conditions;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.tags.BukkitTagContext;
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.OldEventManager;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.TagManager;
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
 import io.lumine.xikage.mythicmobs.adapters.AbstractLocation;
@@ -14,15 +14,12 @@ import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
 import io.lumine.xikage.mythicmobs.skills.SkillCaster;
 import io.lumine.xikage.mythicmobs.skills.SkillCondition;
 import io.lumine.xikage.mythicmobs.skills.SkillMetadata;
-import io.lumine.xikage.mythicmobs.skills.conditions.ICasterCondition;
-import io.lumine.xikage.mythicmobs.skills.conditions.IEntityCondition;
-import io.lumine.xikage.mythicmobs.skills.conditions.ILocationCondition;
-import io.lumine.xikage.mythicmobs.skills.conditions.ISkillMetaCondition;
+import io.lumine.xikage.mythicmobs.skills.conditions.*;
 import org.bukkit.World;
 
 import java.util.HashMap;
 
-public class DenizenCondition extends SkillCondition implements IEntityCondition, ILocationCondition, ICasterCondition, ISkillMetaCondition {
+public class DenizenCondition extends SkillCondition implements IEntityCondition, ILocationCondition, ICasterCondition, ISkillMetaCondition, IEntityComparisonCondition {
     final String tag;
     OldEventManager.OldEventContextSource source;
     HashMap<String, ObjectTag> context;
@@ -50,26 +47,26 @@ public class DenizenCondition extends SkillCondition implements IEntityCondition
     @Override
     public boolean check(SkillCaster caster) {
         source.contexts.put("entity", new EntityTag(caster.getEntity().getBukkitEntity()));
+        if (caster.getEntity().getTarget() == null){
+            source.contexts.put("target", new EntityTag(caster.getEntity().getTarget().getBukkitEntity()));
+        }
         return runCheck();
     }
 
     @Override
     public boolean check(SkillMetadata skillMetadata) {
         source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
-        if (!(skillMetadata.getEntityTargets() == null)) {
-            ListTag entity_targets = new ListTag();
-            for (AbstractEntity entity : skillMetadata.getEntityTargets()) {
-                entity_targets.addObject(new EntityTag(entity.getBukkitEntity()));
-            }
-            source.contexts.put("entity_targets", entity_targets);
+        source.contexts.put("target", new EntityTag(skillMetadata.getCaster().getEntity().getTarget().getBukkitEntity()));
+        if (skillMetadata.getTrigger() == null){
+            source.contexts.put("trigger", new EntityTag(skillMetadata.getTrigger().getBukkitEntity()));
         }
-        if (!(skillMetadata.getLocationTargets() == null)) {
-            ListTag location_targets = new ListTag();
-            for (AbstractLocation location : skillMetadata.getLocationTargets()) {
-                location_targets.addObject(new LocationTag((World) location.getWorld(), location.getX(),location.getY(), location.getZ()));
-            }
-            source.contexts.put("location_targets", location_targets);
-        }
+        return runCheck();
+    }
+
+    @Override
+    public boolean check(AbstractEntity entity1, AbstractEntity entity2) {
+        source.contexts.put("entity", new EntityTag(entity1.getBukkitEntity()));
+        source.contexts.put("target", new EntityTag(entity2.getBukkitEntity()));
         return runCheck();
     }
 
@@ -78,6 +75,5 @@ public class DenizenCondition extends SkillCondition implements IEntityCondition
         tagContext.contextSource = source;
         ObjectTag object = TagManager.tagObject(tag , tagContext);
         return object.asType(ElementTag.class, tagContext).asBoolean();
-
     }
 }

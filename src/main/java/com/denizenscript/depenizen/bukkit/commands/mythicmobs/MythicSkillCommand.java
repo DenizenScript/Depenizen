@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.denizencore.objects.ArgumentHelper;
@@ -12,29 +13,31 @@ import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MythicSkillCommand extends AbstractCommand {
 
     public MythicSkillCommand() {
         setName("mythicskill");
-        setSyntax("mythicskill [<entity>|..] [<skill>] (<location>|...) (<entity>|...) (power:<#.#>)");
-        setRequiredArguments(2, 5);
+        setSyntax("mythicskill [<skillname>] (<location>|...) (<entity>|...) (power:<#.#>) (casters:<entity>|..)");
+        setRequiredArguments(1, 5);
     }
 
     // <--[command]
     // @Name MythicSkill
-    // @Syntax mythicskill [<entity>|..] [<skill>] (<location>|...) (<entity>|...) (power:<#.#>)
+    // @Syntax mythicskill [<skillname>] (<location>|...) (<entity>|...) (power:<#.#>) (casters:<entity>|..)
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
-    // @Required 2
+    // @Required 1
     // @Maximum 5
     // @Short Cast a MythicMob skill from an entity.
     //
     // @Description
     // This will cast a MythicMob skill from any specified entity.
     // Optionally, you can have multiple entities cast the skill.
-    // You may also specify multiple EntityTag(s) and/or LocationTag(s) for targets.
+    // You may also specify multiple EntityTag(s) or LocationTag(s) for targets.
+    // You may not have both the Entity and Location targets, one or the other.
     // The MythicMob configuration must be configured to account for this.
     //
     // @Usage
@@ -48,28 +51,24 @@ public class MythicSkillCommand extends AbstractCommand {
 
         for (Argument arg : scriptEntry.getProcessedArgs()) {
             if (!scriptEntry.hasObject("casters")
+                    && arg.matchesPrefix("casters")
                     && arg.matchesArgumentList(EntityTag.class)) {
-                Debug.report(scriptEntry, getName(), "Matched Casters.");
                 scriptEntry.addObject("casters", arg.asType(ListTag.class).filter(EntityTag.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("skill")
                     && MythicMobsBridge.skillExists(arg.asElement().asString())) {
-                Debug.report(scriptEntry, getName(), "Matched Skill.");
                 scriptEntry.addObject("skill", arg.asType(ElementTag.class));
             }
             else if (!scriptEntry.hasObject("entity_targets")
                     && arg.matchesArgumentList(EntityTag.class)) {
-                Debug.report(scriptEntry, getName(), "Matched Entitiy Targets.");
                 scriptEntry.addObject("entity_targets", arg.asType(ListTag.class).filter(EntityTag.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("location_targets")
                     && arg.matchesArgumentList(LocationTag.class)) {
-                Debug.report(scriptEntry, getName(), "Matched Location Targets.");
-                scriptEntry.addObject("location_targets", arg.asType(LocationTag.class));
+                scriptEntry.addObject("location_targets", arg.asType(ListTag.class).filter(LocationTag.class, scriptEntry));
             }
             else if (!scriptEntry.hasObject("power")
                     && arg.matchesFloat()) {
-                Debug.report(scriptEntry, getName(), "Matched Power.");
                 scriptEntry.addObject("power", arg.asType(ElementTag.class));
             }
             else {
@@ -77,11 +76,15 @@ public class MythicSkillCommand extends AbstractCommand {
             }
         }
 
-        if (!scriptEntry.hasObject("casters")) {
-            throw new InvalidArgumentsException("Must specify an Entity to cast the spell.");
-        }
-        else if (!scriptEntry.hasObject("skill")) {
+        if (!scriptEntry.hasObject("skill")) {
             throw new InvalidArgumentsException("Must specify a valid skill.");
+        }
+        if (scriptEntry.hasObject("entity_targets") && scriptEntry.hasObject("location_targets")) {
+            throw new InvalidArgumentsException("Cannot have both entity and location targets.");
+        }
+        if (!scriptEntry.hasObject("casters")) {
+            scriptEntry.defaultObject("casters", (Utilities.entryHasPlayer(scriptEntry) ? Arrays.asList(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity()) : null),
+                    (Utilities.entryHasNPC(scriptEntry) ? Arrays.asList(Utilities.getEntryNPC(scriptEntry).getDenizenEntity()) : null));
         }
         scriptEntry.defaultObject("power", new ElementTag(0));
     }

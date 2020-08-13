@@ -80,7 +80,6 @@ public class MythicThreatCommand  extends AbstractCommand {
         if (!scriptEntry.hasObject("threat")) {
             throw new InvalidArgumentsException("Must specify a threat value");
         }
-
         if (!scriptEntry.hasObject("targets")) {
             scriptEntry.defaultObject("targets", (Utilities.entryHasPlayer(scriptEntry) ? Arrays.asList(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity()) : null));
         }
@@ -96,30 +95,27 @@ public class MythicThreatCommand  extends AbstractCommand {
 
         Debug.report(scriptEntry, getName(), mythicmob.debug() + operation.debug() + threat.debug() + ArgumentHelper.debugList("targets", targets));
 
-        try {
-            if (!mythicmob.getMob().hasThreatTable()) {
-                Debug.echoError("MythicMob does not have a threat table: " + mythicmob);
-                return;
-            }
-            Operation op = Operation.valueOf(operation.toString().toUpperCase());
-            switch (op) {
-                case ADD:
-                    for (EntityTag target : targets){
-                        mythicmob.getMob().getThreatTable().threatGain(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
-                    }
-                case SUBTRACT:
-                    for (EntityTag target : targets){
-                        mythicmob.getMob().getThreatTable().threatLoss(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
-                    }
-                case SET:
-                    for (EntityTag target : targets){
-                        mythicmob.getMob().getThreatTable().threatSet(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
-                    }
-            }
+        if (!mythicmob.getMob().hasThreatTable()) {
+            Debug.echoError("MythicMob does not have a threat table: " + mythicmob);
+            return;
         }
-        catch (Exception e) {
-            Debug.echoError(e);
+        Operation op = Operation.valueOf(operation.toString().toUpperCase());
+        switch (op) {
+            case ADD:
+                for (EntityTag target : targets) {
+                    mythicmob.getMob().getThreatTable().threatGain(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
+                }
+                break;
+            case SUBTRACT:
+                for (EntityTag target : targets) {
+                    mythicmob.getMob().getThreatTable().threatLoss(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
+                }
+                break;
+            case SET:
+                for (EntityTag target : targets) {
+                    mythicmob.getMob().getThreatTable().threatSet(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
+                }
+                break;
         }
-
     }
 }

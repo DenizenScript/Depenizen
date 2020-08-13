@@ -32,7 +32,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
     // A MythicMobsMobTag represents a Mythic mob entity in the world.
     //
     // These use the object notation "mythicmob@".
-    // The identity format for mythicmobs is <uuid>
+    // The identity format for MythicMobsMobTag is <uuid>
     // For example, 'mythicmob@1234-1234-1234'.
     //
     // -->
@@ -413,13 +413,13 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object MythicMobsMobTag
         // @name level
-        // @input None
+        // @input ElementTag(Number)
         // @description
         // Set the MythicMob's level.
         // @tags
         // <MythicMobsMobTag.level>
         // -->
-        else if (mechanism.matches("level")) {
+        else if (mechanism.matches("level") && mechanism.requireInteger()) {
             mob.setLevel(mechanism.getValue().asInt());
         }
 

@@ -33,7 +33,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
     // A MythicSpawnerTag represents a MythicMobs spanwer in the world.
     //
     // These use the object notation "mythicspawner@".
-    // The identity format for a mythicspawner is it's name.
+    // The identity format for a MythicSpawner is its name.
     // For example, 'mythicspawner@AngrySludgeSpawner1'.
     //
     // -->

@@ -26,8 +26,10 @@ import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
 import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
 import io.lumine.xikage.mythicmobs.items.MythicItem;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.xikage.mythicmobs.mobs.MobManager;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import io.lumine.xikage.mythicmobs.spawning.spawners.MythicSpawner;
+import io.lumine.xikage.mythicmobs.spawning.spawners.SpawnerManager;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
@@ -98,6 +100,14 @@ public class MythicMobsBridge extends Bridge {
         return mythicMob.spawn(BukkitAdapter.adapt(location), level).getEntity().getBukkitEntity();
     }
 
+    public static MobManager getMobManager() {
+        return MythicMobs.inst().getMobManager();
+    }
+
+    public static SpawnerManager getSpawnerManager() {
+        return MythicMobs.inst().getSpawnerManager();
+    }
+
     public static boolean isMythicSpawner(String name) {
         return (!(MythicMobs.inst().getSpawnerManager().getSpawnerByName(name) == null));
     }
@@ -121,12 +131,13 @@ public class MythicMobsBridge extends Bridge {
             MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill);
         }
         if (entities != null) {
+            entityTargets = new HashSet<>();
             for (EntityTag entity : entities) {
                 entityTargets.add(entity.getBukkitEntity());
             }
         }
         if (locations != null) {
-            locationTargets.addAll(locations);
+            locationTargets = new HashSet<>(locations);
         }
         MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill, caster.getBukkitEntity().getLocation(), entityTargets, locationTargets, power);
     }
