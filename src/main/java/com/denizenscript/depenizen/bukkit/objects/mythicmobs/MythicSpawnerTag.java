@@ -284,7 +284,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicSpawnerTag.mob_type>
         // -->
-        else if (mechanism.matches("set_mob_type")) {
+        else if (mechanism.matches("mob_type")) {
             MythicMob mob = MythicMobsBridge.getMythicMob(mechanism.getValue().asString());
             if (mob == null) {
                 Debug.echoError("MythicMob type does not exist: " + mechanism.getValue().asString());
@@ -326,11 +326,10 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         else if (mechanism.matches("disable")) {
             spawner.Disable();
         }
-
     }
+
     @Override
     public void applyProperty(Mechanism mechanism) {
         Debug.echoError("Cannot apply properties to a MythicSpawner!");
     }
-
 }

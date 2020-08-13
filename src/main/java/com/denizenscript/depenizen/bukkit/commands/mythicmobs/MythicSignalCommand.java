@@ -72,7 +72,6 @@ public class MythicSignalCommand extends AbstractCommand {
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         EntityTag source = scriptEntry.getObjectTag("source");
         List<MythicMobsMobTag> targets = (List<MythicMobsMobTag>) scriptEntry.getObject("targets");
         ElementTag signal = scriptEntry.getElement("signal");
@@ -82,9 +81,8 @@ public class MythicSignalCommand extends AbstractCommand {
                     + signal.debug()
                     + (source == null ? "" : source.debug()));
         }
-
         for (MythicMobsMobTag mob : targets) {
-            mob.getMob().signalMob((source == null ? null : BukkitAdapter.adapt(source.getBukkitEntity())), signal.asString());
+            mob.getMob().signalMob(source == null ? null : BukkitAdapter.adapt(source.getBukkitEntity()), signal.asString());
         }
     }
 }

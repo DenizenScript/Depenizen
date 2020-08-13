@@ -12,8 +12,11 @@ import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class MythicSkillCommand extends AbstractCommand {
@@ -26,7 +29,7 @@ public class MythicSkillCommand extends AbstractCommand {
 
     // <--[command]
     // @Name MythicSkill
-    // @Syntax mythicskill [<skillname>] (<location>|.../<entity>|...) (power:<#.#>) (casters:<entity>|...)
+    // @Syntax mythicskill [<skillname>] [<location>|.../<entity>|...] (power:<#.#>) (casters:<entity>|...)
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
     // @Required 2
@@ -41,7 +44,7 @@ public class MythicSkillCommand extends AbstractCommand {
     // The MythicMob configuration must be configured to account for this.
     //
     // @Usage
-    // Used to make the player use the MythicMob skill frostbolt on their target
+    // Used to make the player use the MythicMob skill frostbolt on their target.
     // - mythicskill <player> frostbolt <player.target>
     //
     // -->
@@ -75,7 +78,6 @@ public class MythicSkillCommand extends AbstractCommand {
                 arg.reportUnhandled();
             }
         }
-
         if (!scriptEntry.hasObject("skill")) {
             throw new InvalidArgumentsException("Must specify a valid skill.");
         }
@@ -91,7 +93,6 @@ public class MythicSkillCommand extends AbstractCommand {
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         List<EntityTag> casters = (List<EntityTag>) scriptEntry.getObject("casters");
         ElementTag skill = scriptEntry.getObjectTag("skill");
         List<EntityTag> entity_targets = (List<EntityTag>) scriptEntry.getObject("entity_targets");
@@ -106,8 +107,19 @@ public class MythicSkillCommand extends AbstractCommand {
                     + (power == null ? "" : power.debug()));
         }
 
-        for (EntityTag entity : casters) {
-            MythicMobsBridge.castSkill(entity, skill.asString(), entity_targets, location_targets, power.asFloat());
+        HashSet<Entity> entityTargets = null;
+        HashSet<Location> locationTargets = null;
+        if (entity_targets != null) {
+            entityTargets = new HashSet<>();
+            for (EntityTag entity : entity_targets) {
+                entityTargets.add(entity.getBukkitEntity());
+            }
+        }
+        else {
+            locationTargets = new HashSet<>(location_targets);
+        }
+        for (EntityTag caster : casters) {
+            MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill.asString(), caster.getBukkitEntity().getLocation(), entityTargets, locationTargets, power.asFloat());
         }
     }
 }

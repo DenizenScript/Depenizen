@@ -70,7 +70,7 @@ public class DenizenCondition extends SkillCondition implements IEntityCondition
     }
 
     public boolean runCheck() {
-        TagContext tagContext = CoreUtilities.noDebugContext;
+        TagContext tagContext = CoreUtilities.noDebugContext.clone();
         tagContext.contextSource = source;
         ObjectTag object = TagManager.tagObject(tag, tagContext);
         return object.asType(ElementTag.class, tagContext).asBoolean();

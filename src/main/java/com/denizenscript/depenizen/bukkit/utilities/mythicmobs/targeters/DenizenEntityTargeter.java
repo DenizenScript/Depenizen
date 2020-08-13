@@ -1,11 +1,12 @@
 package com.denizenscript.depenizen.bukkit.utilities.mythicmobs.targeters;
 
 import com.denizenscript.denizen.objects.EntityTag;
-import com.denizenscript.denizen.tags.BukkitTagContext;
 import com.denizenscript.denizencore.events.OldEventManager;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
 import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
@@ -32,7 +33,7 @@ public class DenizenEntityTargeter extends IEntitySelector {
 
     @Override
     public HashSet<AbstractEntity> getEntities(SkillMetadata skillMetadata) {
-        BukkitTagContext tagContext = new BukkitTagContext(null, null, null, false, null);
+        TagContext tagContext = CoreUtilities.noDebugContext.clone();
         tagContext.contextSource = source;
         source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
         ObjectTag object = TagManager.tagObject(tag, tagContext);

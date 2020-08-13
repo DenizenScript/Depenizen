@@ -104,10 +104,6 @@ public class MythicMobsBridge extends Bridge {
         return MythicMobs.inst().getMobManager().getMythicMob(name);
     }
 
-    public static Entity spawnMythicMob(MythicMob mythicMob, Location location, int level) {
-        return mythicMob.spawn(BukkitAdapter.adapt(location), level).getEntity().getBukkitEntity();
-    }
-
     public static MobManager getMobManager() {
         return MythicMobs.inst().getMobManager();
     }
@@ -130,23 +126,5 @@ public class MythicMobsBridge extends Bridge {
 
     public static boolean skillExists(String name) {
         return MythicMobs.inst().getSkillManager().getSkillNames().contains(name);
-    }
-
-    public static void castSkill(EntityTag caster, String skill, List<EntityTag> entities, List<LocationTag> locations, float power) {
-        HashSet<Entity> entityTargets = null;
-        HashSet<Location> locationTargets = null;
-        if (entities == null && locations == null && power == 0) {
-            MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill);
-        }
-        if (entities != null) {
-            entityTargets = new HashSet<>();
-            for (EntityTag entity : entities) {
-                entityTargets.add(entity.getBukkitEntity());
-            }
-        }
-        if (locations != null) {
-            locationTargets = new HashSet<>(locations);
-        }
-        MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill, caster.getBukkitEntity().getLocation(), entityTargets, locationTargets, power);
     }
 }

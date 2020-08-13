@@ -8,6 +8,7 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
+import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
 import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import org.bukkit.entity.Entity;
@@ -89,7 +90,7 @@ public class MythicSpawnCommand extends AbstractCommand {
                 Debug.echoError("MythicMob does not exist: " + name.asString());
                 return;
             }
-            Entity entity = MythicMobsBridge.spawnMythicMob(mob, location, level.asInt());
+            Entity entity = mob.spawn(BukkitAdapter.adapt(location), level.asDouble()).getEntity().getBukkitEntity();
             scriptEntry.addObject("spawned_mythicmob", new MythicMobsMobTag(MythicMobsBridge.getActiveMob(entity)));
         }
         catch (Exception e) {
