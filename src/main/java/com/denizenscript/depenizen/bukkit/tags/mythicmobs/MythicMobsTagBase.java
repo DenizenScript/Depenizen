@@ -10,14 +10,15 @@ import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import io.lumine.xikage.mythicmobs.spawning.spawners.MythicSpawner;
 
-import java.util.List;
-
 public class MythicMobsTagBase {
 
     public MythicMobsTagBase() {
-    };
+        TagManager.registerTagHandler("mythicmobs", (attribute) -> {
+            return MythicMobsTag(attribute);
+        });
+    }
 
-    public ObjectTag MythicMobsTagProcess(Attribute attribute) {
+    public ObjectTag MythicMobsTag(Attribute attribute) {
         attribute.fulfill(1);
 
         // <--[tag]

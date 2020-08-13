@@ -19,7 +19,11 @@ import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicThreatComman
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsSpawnEvent;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
+import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
+import com.denizenscript.depenizen.bukkit.tags.mythicmobs.MythicMobTagBase;
+import com.denizenscript.depenizen.bukkit.tags.mythicmobs.MythicMobsTagBase;
+import com.denizenscript.depenizen.bukkit.tags.mythicmobs.MythicSpawnerTagBase;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
@@ -44,6 +48,7 @@ public class MythicMobsBridge extends Bridge {
     @Override
     public void init() {
         ObjectFetcher.registerWithObjectFetcher(MythicMobsMobTag.class, MythicMobsMobTag.tagProcessor);
+        ObjectFetcher.registerWithObjectFetcher(MythicSpawnerTag.class, MythicSpawnerTag.tagProcessor);
         PropertyParser.registerProperty(MythicMobsEntityProperties.class, EntityTag.class);
         ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
         ScriptEvent.registerScriptEvent(new MythicMobsSpawnEvent());
@@ -52,6 +57,9 @@ public class MythicMobsBridge extends Bridge {
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSignalCommand.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
+        new MythicMobsTagBase();
+        new MythicSpawnerTagBase();
+        new MythicMobTagBase();
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>

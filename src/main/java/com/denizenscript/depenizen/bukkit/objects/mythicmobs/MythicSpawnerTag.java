@@ -17,6 +17,7 @@ import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizencore.objects.core.DurationTag;
 import io.lumine.xikage.mythicmobs.adapters.AbstractLocation;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
 import io.lumine.xikage.mythicmobs.spawning.spawners.MythicSpawner;
 import org.bukkit.World;
 
@@ -145,22 +146,22 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <MythicSpawnerTag.cooldown>
-        // @returns ElementTag
+        // @returns DurationTag
         // @plugin Depenizen, MythicMobs
         // @mechanism MythicSpawnerTag.cooldown
         // @description
         // Returns an ElementTag(Number) of the MythicSpawner's cooldown.
         // -->
-        registerTag("mythic_mobs", (attribute, object) -> {
+        registerTag("cooldown", (attribute, object) -> {
             return new DurationTag(object.getSpawner().getCooldownSeconds());
         });
 
         // <--[tag]
         // @attribute <MythicSpawnerTag.mythic_mobs>
-        // @returns ElementTag
+        // @returns ListTag(MythicMobsMobTag)
         // @plugin Depenizen, MythicMobs
         // @description
-        // Returns a ListTag(MythicMobsMobTag) of all active MythicMobs from this spawner.
+        // Returns a ListTag of all active MythicMobs from this spawner.
         // -->
         registerTag("mythic_mobs", (attribute, object) -> {
             ArrayList<MythicMobsMobTag> list = new ArrayList<>();
@@ -179,19 +180,15 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // Returns an ElementTag for internal name the MythicMob mob type spawned.
         // -->
         registerTag("mob_type", (attribute, object) -> {
-            ArrayList<MythicMobsMobTag> list = new ArrayList<>();
-            for (UUID uuid : object.getSpawner().getAssociatedMobs()){
-                list.add(MythicMobsMobTag.valueOf(uuid.toString()));
-            }
-            return new ListTag(list);
+            return new ElementTag(object.getSpawner().getTypeName());
         });
 
         // <--[tag]
         // @attribute <MythicSpawnerTag.mobs>
-        // @returns ElementTag
+        // @returns ListTag(EntityTag)
         // @plugin Depenizen, MythicMobs
         // @description
-        // Returns a ListTag(EntityTag) of all active MythicMobs from this spawner.
+        // Returns a ListTag of all active MythicMobs from this spawner.
         // -->
         registerTag("mobs", (attribute, object) -> {
             ArrayList<EntityTag> list = new ArrayList<>();
@@ -203,11 +200,11 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <MythicSpawnerTag.location>
-        // @returns ElementTag
+        // @returns LocationTag
         // @plugin Depenizen, MythicMobs
         // @mechanism MythicSpawnerTag.location
         // @description
-        // Returns a LocationTag of the MythicSpawner.
+        // Returns a LocationTag of the MythicSpawner's location.
         // -->
         registerTag("location", (attribute, object) -> {
             AbstractLocation loc = object.getSpawner().getLocation();
@@ -240,7 +237,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicSpawnerTag.group>
         // -->
-        if (mechanism.matches("global_cooldown")) {
+        if (mechanism.matches("group")) {
             spawner.setGroup(mechanism.getValue().asString());
         }
 
@@ -262,7 +259,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @name cooldown
         // @input ElementTag(Number)
         // @description
-        // Sets the MythicSpawner's cooldown timer.
+        // Sets the MythicSpawner's cooldown timer, in seconds.
         // @tags
         // <MythicSpawnerTag.cooldown>
         // -->
@@ -293,7 +290,12 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // <MythicSpawnerTag.mob_type>
         // -->
         else if (mechanism.matches("set_mob_type")) {
-            spawner.setOnCooldown();
+            MythicMob mob = MythicMobsBridge.getMythicMob(mechanism.getValue().asString());
+            if (mob == null) {
+                Debug.echoError("MythicMob type does not exist: " + mechanism.getValue().asString());
+                return;
+            }
+            spawner.setType(mechanism.getValue().asString());
         }
 
         // <--[mechanism]
@@ -302,6 +304,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @input None
         // @description
         // Forces the MythicSpawner to spawn.
+        // This spawn method still checks conditions
         // -->
         else if (mechanism.matches("spawn")) {
             spawner.Spawn();
