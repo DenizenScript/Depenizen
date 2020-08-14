@@ -74,8 +74,9 @@ public class MythicMobsBridge extends Bridge {
         // <--[tag]
         // @attribute <mythicmob[<name>]>
         // @returns MythicMobsMobTag
+        // @plugin Depenizen, MythicMobs
         // @description
-        // Returns a MythicMobsMobTg based on the name input.
+        // Returns a MythicMobsMobTag based on the name input.
         // Refer to <@link language MythicMobsMobTag Objects>.
         // -->
         TagManager.registerTagHandler("mythicmob", (attribute) -> {
@@ -89,6 +90,7 @@ public class MythicMobsBridge extends Bridge {
         // <--[tag]
         // @attribute <mythicspawner[<name>]>
         // @returns MythicSpawnerTag
+        // @plugin Depenizen, MythicMobs
         // @description
         // Returns a MythicSpawnerTag based on the name input.
         // Refer to <@link language MythicSpawnerTag Objects>.
@@ -107,6 +109,7 @@ public class MythicMobsBridge extends Bridge {
             // <--[tag]
             // @attribute <mythicmobs.active_mobs>
             // @returns ListTag(MythicMobsMobTag)
+            // @plugin Depenizen, MythicMobs
             // @description
             // Returns a ListTag of all active MythicMobs on the server.
             // -->
@@ -121,6 +124,7 @@ public class MythicMobsBridge extends Bridge {
             // <--[tag]
             // @attribute <mythicmobs.spawners>
             // @returns ListTag(MythicSpawnerTag)
+            // @plugin Depenizen, MythicMobs
             // @description
             // Returns a ListTag of all MythicSpawners.
             // -->

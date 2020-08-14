@@ -69,13 +69,13 @@ public class VampirePlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <PlayerTag.is_ínfected>
+        // @attribute <PlayerTag.is_infected>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Vampire
         // @description
         // Returns true if the player is infected.
         // -->
-        if (attribute.startsWith("is_ínfected")) {
+        if (attribute.startsWith("is_infected")) {
             return new ElementTag(uPlayer.isInfected()).getAttribute(attribute.fulfill(1));
         }
 
