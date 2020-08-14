@@ -179,7 +179,6 @@ public class ShopKeeperTag implements ObjectTag {
         // @plugin Depenizen, ShopKeepers
         // @description
         // Returns a ListTag of the Shopkeeper's trades (as sub-lists).
-        // NOTE: see '!language Property Escaping'.
         // -->
         else if (attribute.startsWith("trades") || attribute.startsWith("recipes")) {
             ListTag trades = new ListTag();

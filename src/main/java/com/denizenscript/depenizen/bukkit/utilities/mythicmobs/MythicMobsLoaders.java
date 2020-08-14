@@ -22,8 +22,7 @@ public class MythicMobsLoaders implements Listener {
     // @description
     // Depenizen adds additional features to Mythic Mobs, 2 Targeters, and a Condition.
     //
-    // Depenizen provides two additional targeters via the MythicMobs API.
-    // @DenizenEntity is an entity-based targeter, @DenizenLocation is a location-based targeter.
+    // Depenizen provides two additional targeters via the MythicMobs API: @DenizenEntity is an entity-based targeter, @DenizenLocation is a location-based targeter.
     // Both targeters can parse tags; they accept input of either an EntityTag or LocationTag respectively.
     // Both targeters also support returning ListTags containing their respective tag types.
     // Both targeters provide <context.entity> as an EntityTag of the caster.
