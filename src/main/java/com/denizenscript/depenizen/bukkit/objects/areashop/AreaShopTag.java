@@ -212,10 +212,10 @@ public class AreaShopTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <AreaShopTag.worldguard_region>
-        // @returns WorldGuardRegion
+        // @returns WorldGuardRegionTag
         // @plugin Depenizen, AreaShop
         // @description
-        // Returns the WorldGuardRegion that holds the AreaShop.
+        // Returns the WorldGuardRegionTag that holds the AreaShop.
         // -->
         else if (attribute.startsWith("worldguard_region")) {
             return new WorldGuardRegionTag(areaShop.getRegion(), areaShop.getWorld()).getAttribute(attribute.fulfill(1));

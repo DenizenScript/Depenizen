@@ -149,7 +149,7 @@ public class TownTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <TownTag.assistants>
-        // @returns ListTag(PlayerTag)
+        // @returns ListTag
         // @plugin Depenizen, Towny
         // @description
         // Returns a list of the town's assistants. Players will be valid PlayerTag instances, non-players will be plaintext of the name.

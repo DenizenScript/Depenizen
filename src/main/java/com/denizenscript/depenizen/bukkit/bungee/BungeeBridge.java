@@ -268,7 +268,7 @@ public class BungeeBridge {
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, BungeeCord
         // @description
-        // Returns this server is currently connected to the BungeeCord proxy server.
+        // Returns whether this server is currently connected to the BungeeCord proxy server.
         // -->
         if (attribute.startsWith("connected")) {
             event.setReplacedObject(new ElementTag(connected)

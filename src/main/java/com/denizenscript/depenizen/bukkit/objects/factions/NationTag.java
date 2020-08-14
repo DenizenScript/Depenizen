@@ -180,7 +180,7 @@ public class NationTag implements ObjectTag {
         // @returns TownTag
         // @plugin Depenizen, Towny
         // @description
-        // Returns the capital city of the nation as a dTown.
+        // Returns the capital city of the nation as a TownTag.
         // -->
         else if (attribute.startsWith("capital")) {
             if (nation.hasCapital()) {
