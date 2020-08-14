@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class DenizenLocationTargeter extends ILocationSelector {
+
     final String tag;
     OldEventManager.OldEventContextSource source;
     HashMap<String, ObjectTag> context;

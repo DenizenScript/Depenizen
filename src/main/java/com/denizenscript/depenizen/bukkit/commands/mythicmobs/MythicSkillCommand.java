@@ -51,7 +51,6 @@ public class MythicSkillCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry.getProcessedArgs()) {
             if (!scriptEntry.hasObject("casters")
                     && arg.matchesPrefix("casters")
