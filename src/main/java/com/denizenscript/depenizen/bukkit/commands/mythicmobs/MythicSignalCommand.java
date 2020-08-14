@@ -75,7 +75,6 @@ public class MythicSignalCommand extends AbstractCommand {
         EntityTag source = scriptEntry.getObjectTag("source");
         List<MythicMobsMobTag> targets = (List<MythicMobsMobTag>) scriptEntry.getObject("targets");
         ElementTag signal = scriptEntry.getElement("signal");
-
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), ArgumentHelper.debugList("mythicmobs", targets)
                     + signal.debug()

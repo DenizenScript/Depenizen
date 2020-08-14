@@ -44,46 +44,37 @@ public class MythicSpawnCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry.getProcessedArgs()) {
-
             if (!scriptEntry.hasObject("location")
                     && arg.matchesArgumentType(LocationTag.class)) {
                 scriptEntry.addObject("location", arg.asType(LocationTag.class));
             }
-
             else if (!scriptEntry.hasObject("level")
                     && arg.matchesPrefix("level", "l")
                     && arg.matchesInteger()) {
                 scriptEntry.addObject("level", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("name")) {
                 scriptEntry.addObject("name", arg.asElement());
             }
-
             else {
                 arg.reportUnhandled();
             }
-
         }
-
         if (!scriptEntry.hasObject("location") || !scriptEntry.hasObject("name")) {
             throw new InvalidArgumentsException("Must specify a name and location.");
         }
-
         scriptEntry.defaultObject("level", new ElementTag(1));
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         ElementTag name = scriptEntry.getElement("name");
         LocationTag location = scriptEntry.getObjectTag("location");
         ElementTag level = scriptEntry.getElement("level");
-
-        Debug.report(scriptEntry, getName(), name.debug() + location.debug() + level.debug());
-
+        if (scriptEntry.dbCallShouldDebug()) {
+            Debug.report(scriptEntry, getName(), name.debug() + location.debug() + level.debug());
+        }
         try {
             MythicMob mob = MythicMobsBridge.getMythicMob(name.asString());
             if (mob == null) {
@@ -96,6 +87,5 @@ public class MythicSpawnCommand extends AbstractCommand {
         catch (Exception e) {
             Debug.echoError(e);
         }
-
     }
 }

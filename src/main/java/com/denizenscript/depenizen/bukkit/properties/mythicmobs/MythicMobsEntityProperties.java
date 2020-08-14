@@ -8,7 +8,6 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
-import org.bukkit.entity.Entity;
 
 public class MythicMobsEntityProperties implements Property {
 
@@ -76,6 +75,7 @@ public class MythicMobsEntityProperties implements Property {
             return null;
         }, "mythic_mob");
     }
+
     public boolean isMythicMob() {
         return MythicMobsBridge.isMythicMob(entity.getBukkitEntity());
     }

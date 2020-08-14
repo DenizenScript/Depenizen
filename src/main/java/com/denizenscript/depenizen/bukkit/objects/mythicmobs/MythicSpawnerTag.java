@@ -219,7 +219,6 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         });
     }
 
-
     @Override
     public void adjust(Mechanism mechanism) {
 

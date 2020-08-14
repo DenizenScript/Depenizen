@@ -20,13 +20,13 @@ public class MythicThreatCommand  extends AbstractCommand {
 
     public MythicThreatCommand() {
         setName("mythicthreat");
-        setSyntax("mythicthreat [<mythicmob>] [add/subtract/set] [<#>] (for:<entity>|...)");
+        setSyntax("mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] (for:<entity>|...)");
         setRequiredArguments(3, 4);
     }
 
     // <--[command]
     // @Name MythicThreat
-    // @Syntax mythicthreat [<mythicmob>] [add/subtract/set] [<#>] (for:<entity>|...)
+    // @Syntax mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] (for:<entity>|...)
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
     // @Required 3
@@ -47,7 +47,6 @@ public class MythicThreatCommand  extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry.getProcessedArgs()) {
             if (!scriptEntry.hasObject("mythicmob")
                     && arg.matchesArgumentType(MythicMobsMobTag.class)) {
@@ -70,7 +69,6 @@ public class MythicThreatCommand  extends AbstractCommand {
                 arg.reportUnhandled();
             }
         }
-
         if (!scriptEntry.hasObject("mythicmob")) {
             throw new InvalidArgumentsException("Must specify a MythicMob!");
         }
@@ -87,16 +85,13 @@ public class MythicThreatCommand  extends AbstractCommand {
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         MythicMobsMobTag mythicmob = scriptEntry.getObjectTag("mythicmob");
         ElementTag operation = scriptEntry.getObjectTag("operation");
         ElementTag threat = scriptEntry.getElement("threat");
         List<EntityTag> targets = (List<EntityTag>) scriptEntry.getObject("targets");
-
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), mythicmob.debug() + operation.debug() + threat.debug() + ArgumentHelper.debugList("targets", targets));
         }
-
         if (!mythicmob.getMob().hasThreatTable()) {
             Debug.echoError("MythicMob does not have a threat table: " + mythicmob);
             return;

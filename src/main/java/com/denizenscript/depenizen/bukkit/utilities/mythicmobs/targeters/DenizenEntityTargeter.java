@@ -18,7 +18,6 @@ import java.util.HashSet;
 import java.util.List;
 
 public class DenizenEntityTargeter extends IEntitySelector {
-
     final String tag;
     OldEventManager.OldEventContextSource source;
     HashMap<String, ObjectTag> context;

@@ -98,7 +98,6 @@ public class MythicSkillCommand extends AbstractCommand {
         List<EntityTag> entity_targets = (List<EntityTag>) scriptEntry.getObject("entity_targets");
         List<LocationTag> location_targets = (List<LocationTag>) scriptEntry.getObject("location_targets");
         ElementTag power = scriptEntry.getObjectTag("power");
-
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), ArgumentHelper.debugList("casters", casters)
                     + skill.debug()
@@ -106,7 +105,6 @@ public class MythicSkillCommand extends AbstractCommand {
                     + (entity_targets == null ? "" : ArgumentHelper.debugList("entity_targets", entity_targets))
                     + (power == null ? "" : power.debug()));
         }
-
         HashSet<Entity> entityTargets = null;
         HashSet<Location> locationTargets = null;
         if (entity_targets != null) {

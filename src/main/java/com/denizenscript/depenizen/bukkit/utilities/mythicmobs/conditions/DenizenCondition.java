@@ -20,7 +20,6 @@ import org.bukkit.World;
 import java.util.HashMap;
 
 public class DenizenCondition extends SkillCondition implements IEntityCondition, ILocationCondition, ICasterCondition, ISkillMetaCondition, IEntityComparisonCondition {
-
     final String tag;
     OldEventManager.OldEventContextSource source;
 
