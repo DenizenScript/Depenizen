@@ -22,18 +22,18 @@ public class MythicMobsLoaders implements Listener {
     // @description
     // Depenizen adds additional features to Mythic Mobs, 2 Targeters, and a Condition.
     //
-    // There are two Targeters added by Depenizen that you can use in MM skills.
-    // The first is @DenizenEntity, and the second is @DenizenLocation.
-    // Both of these can parse tags that return either an EntityTag, or LocationTag respectively.
-    // They both also support returning ListTags, containing their respective tag types.
-    // In both cases, <context.entity> is available as an EntityTag of the caster.
+    // Depenizen provides two additional targeters via the MythicMobs API.
+    // @DenizenEntity is an entity-based targeter, @DenizenLocation is a location-based targeter.
+    // Both targeters can parse tags; they accept input of either an EntityTag or LocationTag respectively.
+    // Both targeters also support returning ListTags containing their respective tag types.
+    // Both targeters provide <context.entity> as an EntityTag of the caster.
     //
-    // Conditions are a bit more complex and depending on the type of system they're used in provide different context.
+    // Conditions provide different contexts depending on their usage.
     // The syntax for calling a Denizen tag as a condition is DenizenCondition.
     // The tag should return an ElementTag of a boolean value (true or false).
-    // Location based checks will have <context.location>
-    // Entity and Caster checks provide <context.entity>
-    // Target checks will provide <context.target>
+    // <context.location> is available for location-based checks,
+    // <context.entity> is available for for entity- and caster-based checks,
+    // and <context.target> is available for target-based checks.
     // NOTE: TriggerConditions are NOT currently supported.
     //
     // Usage Examples
@@ -44,8 +44,8 @@ public class MythicMobsLoaders implements Listener {
     //
     // Example 3: @DenizenEntity{tag=<proc[SomeProcScript]>}
     //
-    // Condition:
-    //   - denizencondition{tag=<context.entity.location.find.players.within[30].is_empty.not>}
+    // Conditions:
+    // - denizencondition{tag=<context.entity.location.find.players.within[30].is_empty.not>}
     // -->
 
     @EventHandler
