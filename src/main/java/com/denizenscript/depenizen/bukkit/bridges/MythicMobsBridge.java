@@ -3,13 +3,11 @@ package com.denizenscript.depenizen.bukkit.bridges;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.utilities.DenizenAPI;
-import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
-import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
-import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSignalCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSkillCommand;
@@ -20,9 +18,6 @@ import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsSpawnEvent
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
-import com.denizenscript.depenizen.bukkit.tags.mythicmobs.MythicMobTagBase;
-import com.denizenscript.depenizen.bukkit.tags.mythicmobs.MythicMobsTagBase;
-import com.denizenscript.depenizen.bukkit.tags.mythicmobs.MythicSpawnerTagBase;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
 import io.lumine.xikage.mythicmobs.MythicMobs;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
@@ -53,9 +48,6 @@ public class MythicMobsBridge extends Bridge {
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSignalCommand.class);
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
-        new MythicMobsTagBase();
-        new MythicSpawnerTagBase();
-        new MythicMobTagBase();
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>
@@ -64,24 +56,83 @@ public class MythicMobsBridge extends Bridge {
         // @description
         // Returns an ItemTag of the named mythic item.
         // -->
-        TagManager.registerTagHandler(new TagRunnable.RootForm() {
-            @Override
-            public void run(ReplaceableTagEvent event) {
-                if (!event.hasNameContext()) {
-                    return;
-                }
-                String name = event.getNameContext();
-                Optional<MythicItem> itemOpt = MythicMobs.inst().getItemManager().getItem(name);
-                if (!itemOpt.isPresent()) {
-                    if (!event.hasAlternative()) {
-                        Debug.echoError("'" + name + "' is not a valid Mythic item.");
-                    }
-                    return;
-                }
-                ItemStack item = BukkitAdapter.adapt(itemOpt.get().generateItemStack(1));
-                event.setReplacedObject(new ItemTag(item).getObjectAttribute(event.getAttributes().fulfill(1)));
+        TagManager.registerTagHandler("mythic_item", (attribute) -> {
+            if (!attribute.hasContext(1)) {
+                attribute.echoError("The mythic_item tag must have input.");
+                return null;
             }
-        }, "mythic_item");
+            String name = attribute.getContext(1);
+            Optional<MythicItem> itemOpt = MythicMobs.inst().getItemManager().getItem(name);
+            if (!itemOpt.isPresent()) {
+                attribute.echoError("'" + name + "' is not a valid Mythic item.");
+                return null;
+            }
+            ItemStack item = BukkitAdapter.adapt(itemOpt.get().generateItemStack(1));
+            return new ItemTag(item);
+        });
+
+        // <--[tag]
+        // @attribute <mythicmob[<name>]>
+        // @returns MythicMobsMobTag
+        // @description
+        // Returns a MythicMobsMobTg based on the name input.
+        // Refer to <@link language MythicMobsMobTag Objects>.
+        // -->
+        TagManager.registerTagHandler("mythicmob", (attribute) -> {
+            if (!attribute.hasContext(1)) {
+                attribute.echoError("MythicMob tag base must have input.");
+                return null;
+            }
+            return MythicMobsMobTag.valueOf(attribute.getContext(1), attribute.context);
+        });
+
+        // <--[tag]
+        // @attribute <mythicspawner[<name>]>
+        // @returns MythicSpawnerTag
+        // @description
+        // Returns a MythicSpawnerTag based on the name input.
+        // Refer to <@link language MythicSpawnerTag Objects>.
+        // -->
+        TagManager.registerTagHandler("mythicspawner", (attribute) -> {
+            if (!attribute.hasContext(1)) {
+                attribute.echoError("MythicSpawner tag base must have input.");
+                return null;
+            }
+            return MythicSpawnerTag.valueOf(attribute.getContext(1), attribute.context);
+        });
+
+        TagManager.registerTagHandler("mythicmobs", (attribute) -> {
+            attribute.fulfill(1);
+
+            // <--[tag]
+            // @attribute <mythicmobs.active_mobs>
+            // @returns ListTag(MythicMobsMobTag)
+            // @description
+            // Returns a ListTag of all active MythicMobs on the server.
+            // -->
+            if (attribute.startsWith("active_mobs")) {
+                ListTag list = new ListTag();
+                for (ActiveMob entity : MythicMobsBridge.getMobManager().getActiveMobs()) {
+                    list.addObject(new MythicMobsMobTag(entity));
+                }
+                return list;
+            }
+
+            // <--[tag]
+            // @attribute <mythicmobs.spawners>
+            // @returns ListTag(MythicSpawnerTag)
+            // @description
+            // Returns a ListTag of all MythicSpawners.
+            // -->
+            else if (attribute.startsWith("spawners")) {
+                ListTag list = new ListTag();
+                for (MythicSpawner spawner : MythicMobsBridge.getSpawnerManager().getSpawners()) {
+                    list.addObject(new MythicSpawnerTag(spawner));
+                }
+                return list;
+            }
+            return null;
+        });
     }
 
     public static boolean isMythicMob(Entity entity) {

@@ -84,7 +84,7 @@ public class MobArenaPlayerProperties implements Property {
 
                 // <--[tag]
                 // @attribute <PlayerTag.mobarena.current_arena>
-                // @returns mobarena
+                // @returns MobArenaArenaTag
                 // @plugin Depenizen, MobArena
                 // @description
                 // Returns the arena the player is in.

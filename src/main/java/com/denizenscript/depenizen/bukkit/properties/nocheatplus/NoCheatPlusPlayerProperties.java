@@ -58,7 +58,7 @@ public class NoCheatPlusPlayerProperties implements Property {
             // <--[tag]
             // @attribute <PlayerTag.ncp.infractions>
             // @returns ElementTag(Number)
-            // @plugin Depenizen, NoCheatPlus.
+            // @plugin Depenizen, NoCheatPlus
             // @description
             // Returns the number of infractions this player has with NoCheatPlus
             // NOTE: Cannot guarantee the accuracy of this tag, due to lack of API in NoCheatPlus.

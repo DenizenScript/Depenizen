@@ -214,7 +214,7 @@ public class EssentialsPlayerProperties implements Property {
         // @returns DurationTag
         // @plugin Depenizen, Essentials
         // @description
-        // Returns how much time is left until the player is muted.
+        // Returns how much time is left until the player is unmuted.
         // -->
         if (attribute.startsWith("mute_timeout")) {
             return new DurationTag((getUser().getMuteTimeout() - System.currentTimeMillis()))
