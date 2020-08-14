@@ -1,27 +1,38 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
+import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.Bridge;
+import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSignalCommand;
+import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSkillCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand;
-import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
-import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
-import com.denizenscript.denizen.objects.EntityTag;
-import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
-import io.lumine.xikage.mythicmobs.items.MythicItem;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
-import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicThreatCommand;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsSpawnEvent;
+import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
+import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
+import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
+import com.denizenscript.depenizen.bukkit.tags.mythicmobs.MythicMobTagBase;
+import com.denizenscript.depenizen.bukkit.tags.mythicmobs.MythicMobsTagBase;
+import com.denizenscript.depenizen.bukkit.tags.mythicmobs.MythicSpawnerTagBase;
+import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
 import io.lumine.xikage.mythicmobs.MythicMobs;
-import com.denizenscript.denizen.utilities.DenizenAPI;
-import com.denizenscript.denizencore.events.ScriptEvent;
-import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
-import org.bukkit.Location;
+import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
+import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
+import io.lumine.xikage.mythicmobs.items.MythicItem;
+import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
+import io.lumine.xikage.mythicmobs.mobs.MobManager;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import io.lumine.xikage.mythicmobs.spawning.spawners.MythicSpawner;
+import io.lumine.xikage.mythicmobs.spawning.spawners.SpawnerManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
@@ -32,11 +43,19 @@ public class MythicMobsBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(MythicMobsMobTag.class);
+        ObjectFetcher.registerWithObjectFetcher(MythicMobsMobTag.class, MythicMobsMobTag.tagProcessor);
+        ObjectFetcher.registerWithObjectFetcher(MythicSpawnerTag.class, MythicSpawnerTag.tagProcessor);
         PropertyParser.registerProperty(MythicMobsEntityProperties.class, EntityTag.class);
         ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
         ScriptEvent.registerScriptEvent(new MythicMobsSpawnEvent());
         DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSpawnCommand.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicThreatCommand.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSignalCommand.class);
+        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MythicSkillCommand.class);
+        new MythicMobsLoaders().RegisterEvents();
+        new MythicMobsTagBase();
+        new MythicSpawnerTagBase();
+        new MythicMobTagBase();
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>
@@ -81,7 +100,27 @@ public class MythicMobsBridge extends Bridge {
         return MythicMobs.inst().getMobManager().getMythicMob(name);
     }
 
-    public static Entity spawnMythicMob(MythicMob mythicMob, Location location, int level) {
-        return mythicMob.spawn(BukkitAdapter.adapt(location), level).getEntity().getBukkitEntity();
+    public static MobManager getMobManager() {
+        return MythicMobs.inst().getMobManager();
+    }
+
+    public static SpawnerManager getSpawnerManager() {
+        return MythicMobs.inst().getSpawnerManager();
+    }
+
+    public static boolean isMythicSpawner(String name) {
+        return MythicMobs.inst().getSpawnerManager().getSpawnerByName(name) != null;
+    }
+
+    public static MythicSpawner getMythicSpawner(String name) {
+        return MythicMobs.inst().getSpawnerManager().getSpawnerByName(name);
+    }
+
+    public static BukkitAPIHelper getAPI() {
+        return MythicMobs.inst().getAPIHelper();
+    }
+
+    public static boolean skillExists(String name) {
+        return MythicMobs.inst().getSkillManager().getSkillNames().contains(name);
     }
 }
