@@ -191,7 +191,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // Returns the MythicSpawnerTag that spawned this mob.
         // Returns null, if the mob was spawned by something other than a spawner.
         // -->
-        registerTag("spawner_name", (attribute, object) -> {
+        registerTag("spawner", (attribute, object) -> {
             if (object.getMob().getSpawner() == null) {
                 return null;
             }
@@ -272,10 +272,10 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.has_threat_table>
-        // @returns EntityTag
+        // @returns ElementTag(Boolean)
         // @plugin Depenizen, MythicMobs
         // @description
-        // Returns wether the MythicMob has a threat table.
+        // Returns whether the MythicMob has a threat table.
         // -->
         registerTag("has_threat_table", (attribute, object) -> {
             return new ElementTag(object.getMob().hasThreatTable());
@@ -391,7 +391,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @name stance
         // @input ElementTag
         // @description
-        // Set the stance of the MythicMob
+        // Set the stance of the MythicMob.
         // @tags
         // <MythicMobsMobTag.stance>
         // -->

@@ -251,14 +251,14 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object MythicSpawnerTag
         // @name cooldown
-        // @input ElementTag(Number)
+        // @input DurationTag
         // @description
-        // Sets the MythicSpawner's cooldown timer, in seconds.
+        // Sets the MythicSpawner's configured cooldown timer, in seconds.
         // @tags
         // <MythicSpawnerTag.cooldown>
         // -->
-        else if (mechanism.matches("cooldown") && mechanism.requireInteger()) {
-            spawner.setCooldownSeconds(mechanism.getValue().asInt());
+        else if (mechanism.matches("cooldown") && mechanism.requireObject(DurationTag.class)) {
+            spawner.setCooldownSeconds(mechanism.valueAsType(DurationTag.class).getSecondsAsInt());
         }
 
         // <--[mechanism]

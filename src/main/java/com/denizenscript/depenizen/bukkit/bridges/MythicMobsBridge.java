@@ -109,7 +109,7 @@ public class MythicMobsBridge extends Bridge {
     }
 
     public static boolean isMythicSpawner(String name) {
-        return (!(MythicMobs.inst().getSpawnerManager().getSpawnerByName(name) == null));
+        return (MythicMobs.inst().getSpawnerManager().getSpawnerByName(name) != null);
     }
 
     public static MythicSpawner getMythicSpawner(String name) {
