@@ -19,7 +19,7 @@ public class BungeeServerConnectScriptEvent extends BukkitScriptEvent {
     // @Context
     // <context.server> returns the name of the newly connected server.
     //
-    // @Plugin Depenizen, BungeeCord
+    // @Plugin Depenizen, DepenizenBungee, BungeeCord
     //
     // @Group Depenizen
     //

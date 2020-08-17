@@ -27,7 +27,7 @@ public class BungeeRunCommand extends AbstractCommand {
     // @Name BungeeRun
     // @Syntax bungeerun [<server>|...] [<script name>] (def:<definition>|...)
     // @Group Depenizen
-    // @Plugin Depenizen, BungeeCord
+    // @Plugin Depenizen, DepenizenBungee, BungeeCord
     // @Required 2
     // @Maximum 3
     // @Short Runs a task script on another server.

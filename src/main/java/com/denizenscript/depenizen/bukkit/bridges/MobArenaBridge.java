@@ -67,7 +67,7 @@ public class MobArenaBridge extends Bridge {
 
         // <--[tag]
         // @attribute <mobarena.list_arenas>
-        // @returns ListTag(MobArena)
+        // @returns ListTag(MobArenaArenaTag)
         // @plugin Depenizen, MobArena
         // @description
         // Returns a list of all MobArenas.

@@ -31,7 +31,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
     // @Name BungeeTag
     // @Syntax bungeetag [server:<server>] [<tags>]
     // @Group Depenizen
-    // @Plugin Depenizen, BungeeCord
+    // @Plugin Depenizen, DepenizenBungee, BungeeCord
     // @Required 2
     // @Maximum 2
     // @Short Parses tags on another server on a Bungee network and returns the results for this server to process.

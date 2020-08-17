@@ -29,7 +29,7 @@ public class BungeeCommand extends BracedCommand {
     // @Name Bungee
     // @Syntax bungee [<server>|...] [<commands>]
     // @Group Depenizen
-    // @Plugin Depenizen, BungeeCord
+    // @Plugin Depenizen, DepenizenBungee, BungeeCord
     // @Required 1
     // @Maximum 1
     // @Short Runs a set of commands on another server.

@@ -22,7 +22,7 @@ public class BungeeExecuteCommand extends AbstractCommand {
     // @Name BungeeExecute
     // @Syntax bungeeexecute [<command>]
     // @Group Depenizen
-    // @Plugin Depenizen, BungeeCord
+    // @Plugin Depenizen, DepenizenBungee, BungeeCord
     // @Required 1
     // @Maximum 1
     // @Short Runs a command on the Bungee proxy server.
