@@ -239,7 +239,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <BigDoorsDoorTag.power_block>
+        // @attribute <BigDoorsDoorTag.owners>
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, Big Doors
         // @description
