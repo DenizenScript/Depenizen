@@ -3,6 +3,7 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 
 - AreaShop (https://www.spigotmc.org/resources/areashop.2991/)
 - ASkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
+- BigDoors (https://www.spigotmc.org/resources/big-doors.58669)
 - BossShopPro (https://www.spigotmc.org/resources/bossshop-powerful-and-playerfriendly-chest-gui-shop-menu-plugin.222/)
 - CrackShot (https://www.spigotmc.org/resources/crackshot-guns.48301/)
 - EffectLib (https://dev.bukkit.org/projects/effectlib)

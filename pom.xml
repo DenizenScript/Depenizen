@@ -334,6 +334,14 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/CrackShot.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>nl.pim16aap2</groupId>
+            <artifactId>bigDoors</artifactId>
+            <version>Alpha 0.1.8.25</version>
+            <type>jar</type>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/BigDoors.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
