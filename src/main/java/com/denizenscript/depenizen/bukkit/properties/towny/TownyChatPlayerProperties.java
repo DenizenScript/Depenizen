@@ -1,17 +1,16 @@
 package com.denizenscript.depenizen.bukkit.properties.towny;
 
-import com.denizenscript.denizencore.objects.properties.Property;
-import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.bridges.TownyChatBridge;
-import com.palmergames.bukkit.TownyChat.Chat;
-import com.palmergames.bukkit.TownyChat.channels.Channel;
-import com.palmergames.bukkit.TownyChat.channels.ChannelsHolder;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.properties.Property;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.depenizen.bukkit.bridges.TownyChatBridge;
+import com.palmergames.bukkit.TownyChat.channels.Channel;
+import com.palmergames.bukkit.towny.TownyUniverse;
 
 public class TownyChatPlayerProperties implements Property {
 
@@ -54,16 +53,8 @@ public class TownyChatPlayerProperties implements Property {
 
     PlayerTag player;
 
-    @Override
-    public String getAttribute(Attribute attribute) {
-        if (attribute == null) {
-            return null;
-        }
-
-        if (attribute.startsWith("townychat")) {
-            Chat plugin = (Chat) TownyChatBridge.instance.plugin;
-            ChannelsHolder holder = plugin.getChannelsHandler();
-            attribute = attribute.fulfill(1);
+    public static void registerTags() {
+        PropertyParser.<TownyChatPlayerProperties>registerTag("townychat", (attribute, object) -> {
 
             // <--[tag]
             // @attribute <PlayerTag.townychat.channels>
@@ -72,51 +63,48 @@ public class TownyChatPlayerProperties implements Property {
             // @description
             // Returns a list of all channels the player is in.
             // -->
-            if (attribute.startsWith("channels") || attribute.startsWith("channel")) {
-                ListTag chans = new ListTag();
-                for (Channel c : holder.getAllChannels().values()) {
-                    chans.addObject(new ElementTag(c.getName()));
+            if (attribute.startsWith("channel")) {
+                ListTag channels = new ListTag();
+                for (Channel channel : TownyChatBridge.channelsHolder.getAllChannels().values()) {
+                    channels.addObject(new ElementTag(channel.getName()));
                 }
-                return chans.getAttribute(attribute.fulfill(1));
+                return channels;
             }
 
-            // <--[tag]
-            // @attribute <PlayerTag.townychat.muted_in[<channel_name>]>
-            // @returns ElementTag(Boolean)
-            // @plugin Depenizen, Towny
-            // @description
-            // Returns whether the player is muted in the specified channel.
-            // -->
-            else if (attribute.startsWith("muted_in") && attribute.hasContext(1)) {
-                Channel c = holder.getChannel(attribute.getAttribute(1));
-                if (c == null) {
+            else if (attribute.startsWith("muted_in")) {
+                if (attribute.hasContext(1)) {
+                    Channel channel = TownyChatBridge.channelsHolder.getChannel(attribute.getContext(1));
+                    if (channel != null) {
+                        return new ElementTag(channel.isMuted(object.player.getName()));
+                    }
+                    Debug.echoError("Unable to match '" + attribute.getContext(1) + "' to a valid chat channel!");
                     return null;
                 }
-                return new ElementTag(c.isMuted(player.getName())).getAttribute(attribute.fulfill(1));
+                Debug.echoError("A channel must be specified for <PlayerTag.townychat.muted_in[<channel>]>!");
+                return null;
             }
 
             // <--[tag]
-            // @attribute <PlayerTag.townychat.has_permission[<channel_name>]>
+            // @attribute <PlayerTag.townychat.has_permission[<channel>]>
             // @returns ElementTag(Boolean)
             // @plugin Depenizen, Towny
             // @description
             // Returns whether the player has permissions to join the specified channel.
             // -->
-            else if (attribute.startsWith("has_permission") && attribute.hasContext(1)) {
-                Channel c = holder.getChannel(attribute.getContext(1));
-                if (c == null) {
+            else if (attribute.startsWith("has_permission")) {
+                if (attribute.hasContext(1)) {
+                    Channel channel = TownyChatBridge.channelsHolder.getChannel(attribute.getContext(1));
+                    if (channel != null) {
+                        return new ElementTag(channel.getPermission() != null &&
+                                TownyUniverse.getInstance().getPermissionSource().has(object.player.getPlayerEntity(), channel.getPermission()));
+                    }
+                }
+                else {
+                    Debug.echoError("You must specify a channel for tag <PlayerTag.townychat.has_permission[<channel>]>!");
                     return null;
                 }
-                String perm = c.getPermission();
-                if (perm == null) {
-                    return new ElementTag(true).getAttribute(attribute.fulfill(1));
-                }
-                return new ElementTag(TownyUniverse.getPermissionSource().has(player.getPlayerEntity(), perm))
-                        .getAttribute(attribute.fulfill(1));
             }
-
             return null;
-        }
-        return null;
+        });
     }
 }

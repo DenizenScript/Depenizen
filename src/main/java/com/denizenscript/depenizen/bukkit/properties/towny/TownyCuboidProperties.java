@@ -1,19 +1,16 @@
 package com.denizenscript.depenizen.bukkit.properties.towny;
 
-import com.denizenscript.denizencore.objects.properties.Property;
-import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.denizenscript.denizen.objects.CuboidTag;
+import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.properties.Property;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.object.TownyUniverse;
 import org.bukkit.Location;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TownyCuboidProperties implements Property {
 
@@ -45,10 +42,6 @@ public class TownyCuboidProperties implements Property {
         }
     }
 
-    public static final String[] handledTags = new String[] {
-            "has_town", "list_towns"
-    };
-
     public static final String[] handledMechs = new String[] {
     }; // None
 
@@ -58,8 +51,7 @@ public class TownyCuboidProperties implements Property {
 
     CuboidTag cuboid;
 
-    @Override
-    public String getAttribute(Attribute attribute) {
+    public static void registerTags() {
 
         // <--[tag]
         // @attribute <CuboidTag.has_town>
@@ -68,39 +60,34 @@ public class TownyCuboidProperties implements Property {
         // @description
         // Returns whether the cuboid contains any town at all.
         // -->
-        if (attribute.startsWith("has_town")) {
-            for (Location location : cuboid.getBlockLocationsUnfiltered()) {
+        PropertyParser.<TownyCuboidProperties>registerTag("has_town", (attribute, object) -> {
+            for (Location location : object.cuboid.getBlockLocationsUnfiltered()) {
                 if (TownyUniverse.getTownName(location) != null) {
-                    return new ElementTag(true).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(true);
                 }
             }
-            return new ElementTag(false).getAttribute(attribute.fulfill(1));
-        }
+            return new ElementTag(false);
+        });
 
         // <--[tag]
-        // @attribute <CuboidTag.list_towns>
+        // @attribute <CuboidTag.towns>
         // @returns ListTag(TownTag)
         // @plugin Depenizen, Towny
         // @description
         // Returns all the towns within the cuboid.
         // -->
-        if (attribute.startsWith("list_towns")) {
-            ListTag list = new ListTag();
-            List<String> towns = new ArrayList<>();
-            try {
-                for (Location location : cuboid.getBlockLocationsUnfiltered()) {
-                    String townName = TownyUniverse.getTownName(location);
-                    if (townName != null && !towns.contains(townName)) {
-                        list.addObject(new TownTag(TownyUniverse.getTownBlock(location).getTown()));
-                        towns.add(townName);
+        PropertyParser.<TownyCuboidProperties>registerTag("towns", (attribute, object) -> {
+            ListTag towns = new ListTag();
+            for (Location location : object.cuboid.getBlockLocationsUnfiltered()) {
+                String townName = TownyAPI.getInstance().getTownName(location);
+                if (townName != null) {
+                    TownTag town = TownTag.valueOf(townName);
+                    if (!towns.contains(town)) {
+                        towns.addObject(town);
                     }
                 }
             }
-            catch (NotRegisteredException e) {
-            }
-            return list.getAttribute(attribute.fulfill(1));
-        }
-
-        return null;
+            return towns;
+        }, "list_towns");
     }
 }
