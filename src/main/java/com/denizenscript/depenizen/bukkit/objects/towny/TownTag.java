@@ -1,6 +1,16 @@
 package com.denizenscript.depenizen.bukkit.objects.towny;
 
-import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.objects.Fetchable;
+import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.tags.ObjectTagProcessor;
+import com.denizenscript.denizencore.tags.TagContext;
+import com.denizenscript.denizencore.tags.TagRunnable;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
@@ -8,16 +18,6 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.palmergames.bukkit.towny.object.WorldCoord;
-import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.denizencore.tags.TagContext;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Location;
 
 public class TownTag implements ObjectTag {
@@ -144,8 +144,13 @@ public class TownTag implements ObjectTag {
         return identify();
     }
 
-    @Override
-    public String getAttribute(Attribute attribute) {
+    public static void registerTag(String name, TagRunnable.ObjectInterface<TownTag> runnable, String... variants) {
+        tagProcessor.registerTag(name, runnable, variants);
+    }
+
+    public static ObjectTagProcessor<TownTag> tagProcessor = new ObjectTagProcessor<>();
+
+    public static void registerTags() {
 
         // <--[tag]
         // @attribute <TownTag.assistants>
@@ -154,9 +159,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns a list of the town's assistants. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
         // -->
-        if (attribute.startsWith("assistants")) {
+        registerTag("assistants", (attribute, object) -> {
             ListTag list = new ListTag();
-            for (Resident resident : town.getAssistants()) {
+            for (Resident resident : object.town.getAssistants()) {
                 PlayerTag player = PlayerTag.valueOf(resident.getName(), attribute.context);
                 if (player != null) {
                     list.addObject(player);
@@ -165,8 +170,8 @@ public class TownTag implements ObjectTag {
                     list.add(resident.getName());
                 }
             }
-            return list.getAttribute(attribute.fulfill(1));
-        }
+            return list;
+        });
 
         // <--[tag]
         // @attribute <TownTag.balance>
@@ -175,16 +180,15 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the current money balance of the town.
         // -->
-        else if (attribute.startsWith("balance")) {
+        registerTag("balance", (attribute, object) -> {
             try {
-                return new ElementTag(town.getAccount().getHoldingBalance()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(object.town.getAccount().getHoldingBalance());
             }
             catch (EconomyException e) {
-                if (!attribute.hasAlternative()) {
-                    Debug.echoError("Invalid economy response!");
-                }
+                Debug.echoError("Invalid economy response!");
+                return null;
             }
-        }
+        });
 
         // <--[tag]
         // @attribute <TownTag.board>
@@ -193,22 +197,20 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the town's current board.
         // -->
-        else if (attribute.startsWith("board")) {
-            return new ElementTag(town.getTownBoard())
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("board", (attribute, object) -> {
+            return new ElementTag(object.town.getTownBoard());
+        });
 
         // <--[tag]
-        // @attribute <TownTag.is_open>
-        // @returns ElementTag(Boolean)
+        // @attribute <TownTag.board>
+        // @returns ElementTag
         // @plugin Depenizen, Towny
         // @description
-        // Returns true if the town is currently open.
+        // Returns the town's current board.
         // -->
-        else if (attribute.startsWith("isopen") || attribute.startsWith("is_open")) {
-            return new ElementTag(town.isOpen())
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("is_open", (attribute, object) -> {
+            return new ElementTag(object.town.isOpen());
+        });
 
         // <--[tag]
         // @attribute <TownTag.is_public>
@@ -217,10 +219,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns true if the town is currently public.
         // -->
-        else if (attribute.startsWith("ispublic") || attribute.startsWith("is_public")) {
-            return new ElementTag(town.isPublic())
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("is_public", (attribute, object) -> {
+            return new ElementTag(object.town.isPublic());
+        });
 
         // <--[tag]
         // @attribute <TownTag.mayor>
@@ -229,10 +230,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the mayor of the town.
         // -->
-        else if (attribute.startsWith("mayor")) {
-            return PlayerTag.valueOf(town.getMayor().getName(), attribute.context)
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("mayor", (attribute, object) -> {
+            return PlayerTag.valueOf(object.town.getMayor().getUUID().toString(), attribute.context);
+        });
 
         // <--[tag]
         // @attribute <TownTag.name>
@@ -241,10 +241,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the town's name.
         // -->
-        else if (attribute.startsWith("name")) {
-            return new ElementTag(town.getName())
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("name", (attribute, object) -> {
+            return new ElementTag(object.town.getName());
+        });
 
         // <--[tag]
         // @attribute <TownTag.nation>
@@ -253,14 +252,25 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the nation that the town belongs to.
         // -->
-        else if (attribute.startsWith("nation")) {
+        registerTag("nation", (attribute, object) -> {
             try {
-                return new NationTag(town.getNation())
-                        .getAttribute(attribute.fulfill(1));
+                return new NationTag(object.town.getNation());
             }
             catch (NotRegisteredException e) {
+                return null;
             }
-        }
+        });
+
+        // <--[tag]
+        // @attribute <TownTag.has_nation>
+        // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns whether the town belongs to a nation.
+        // -->
+        registerTag("has_nation", (attribute, object) -> {
+            return new ElementTag(object.town.hasNation());
+        });
 
         // <--[tag]
         // @attribute <TownTag.player_count>
@@ -269,10 +279,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the number of players in the town.
         // -->
-        else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
-            return new ElementTag(town.getNumResidents())
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("player_count", (attribute, object) -> {
+            return new ElementTag(object.town.getNumResidents());
+        }, "playercount");
 
         // <--[tag]
         // @attribute <TownTag.residents>
@@ -281,19 +290,13 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns a list of the town's residents. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
         // -->
-        else if (attribute.startsWith("residents")) {
-            ListTag list = new ListTag();
-            for (Resident resident : town.getResidents()) {
-                PlayerTag player = PlayerTag.valueOf(resident.getName(), attribute.context);
-                if (player != null) {
-                    list.addObject(player);
-                }
-                else {
-                    list.add(resident.getName());
-                }
+        registerTag("residents", (attribute, object) -> {
+            ListTag residents = new ListTag();
+            for (Resident resident : object.town.getResidents()) {
+                residents.addObject(PlayerTag.valueOf(resident.getUUID().toString(), attribute.context));
             }
-            return list.getAttribute(attribute.fulfill(1));
-        }
+            return residents;
+        });
 
         // <--[tag]
         // @attribute <TownTag.size>
@@ -302,10 +305,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the number of blocks the town owns.
         // -->
-        else if (attribute.startsWith("size")) {
-            return new ElementTag(town.getPurchasedBlocks())
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("size", (attribute, object) -> {
+            return new ElementTag(object.town.getPurchasedBlocks());
+        });
 
         // <--[tag]
         // @attribute <TownTag.spawn>
@@ -314,14 +316,25 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the spawn point of the town.
         // -->
-        else if (attribute.startsWith("spawn")) {
+        registerTag("spawn", (attribute, object) -> {
             try {
-                return new LocationTag(town.getSpawn()).getBlockLocation()
-                        .getAttribute(attribute.fulfill(1));
+                return new LocationTag(object.town.getSpawn());
             }
             catch (TownyException e) {
+                return null;
             }
-        }
+        });
+
+        // <--[tag]
+        // @attribute <TownTag.has_spawn>
+        // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns whether the town has a spawn point set.
+        // -->
+        registerTag("has_spawn", (attribute, object) -> {
+            return new ElementTag(object.town.hasSpawn());
+        });
 
         // <--[tag]
         // @attribute <TownTag.tag>
@@ -330,10 +343,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the town's tag.
         // -->
-        else if (attribute.startsWith("tag")) {
-            return new ElementTag(town.getTag())
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("", (attribute, object) -> {
+            return new ElementTag(object.town.getTag());
+        });
 
         // <--[tag]
         // @attribute <TownTag.taxes>
@@ -342,11 +354,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the town's current taxes.
         // -->
-        else if (attribute.startsWith("taxes")) {
-            return new ElementTag(town.getTaxes())
-                    .getAttribute(attribute.fulfill(1));
-        }
-
+        registerTag("taxes", (attribute, object) -> {
+            return new ElementTag(object.town.getTaxes());
+        });
         // <--[tag]
         // @attribute <TownTag.outposts>
         // @returns ListTag(LocationTag)
@@ -354,13 +364,13 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns a list of the town's outpost locations.
         // -->
-        else if (attribute.startsWith("outposts")) {
+        registerTag("", (attribute, object) -> {
             ListTag posts = new ListTag();
-            for (Location p : town.getAllOutpostSpawns()) {
+            for (Location p : object.town.getAllOutpostSpawns()) {
                 posts.addObject(new LocationTag(p));
             }
-            return posts.getAttribute(attribute.fulfill(1));
-        }
+            return posts;
+        });
 
         // <--[tag]
         // @attribute <TownTag.has_explosions>
@@ -369,9 +379,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns if the town has explosions turned on.
         // -->
-        else if (attribute.startsWith("has_explosions")) {
-            return new ElementTag(town.isBANG()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("has_explosions", (attribute, object) -> {
+            return new ElementTag(object.town.isBANG());
+        });
 
         // <--[tag]
         // @attribute <TownTag.has_mobs>
@@ -380,9 +390,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns if the town has mobs turned on.
         // -->
-        else if (attribute.startsWith("has_mobs")) {
-            return new ElementTag(town.hasMobs()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("has_mobs", (attribute, object) -> {
+            return new ElementTag(object.town.hasMobs());
+        });
 
         // <--[tag]
         // @attribute <TownTag.has_pvp>
@@ -391,9 +401,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns if the town has PvP turned on.
         // -->
-        else if (attribute.startsWith("has_pvp")) {
-            return new ElementTag(town.isPVP()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("has_pvp", (attribute, object) -> {
+            return new ElementTag(object.town.isPVP());
+        });
 
         // <--[tag]
         // @attribute <TownTag.has_firespread>
@@ -402,9 +412,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns if the town has firespread turned on.
         // -->
-        else if (attribute.startsWith("has_firespread")) {
-            return new ElementTag(town.isFire()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("has_firespread", (attribute, object) -> {
+            return new ElementTag(object.town.isFire());
+        });
 
         // <--[tag]
         // @attribute <TownTag.has_taxpercent>
@@ -413,9 +423,9 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns if the town has taxes in percentage.
         // -->
-        else if (attribute.startsWith("has_taxpercent")) {
-            return new ElementTag(town.isTaxPercentage()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("has_taxpercent", (attribute, object) -> {
+            return new ElementTag(object.town.isTaxPercentage());
+        });
 
         // <--[tag]
         // @attribute <TownTag.plottax>
@@ -424,9 +434,10 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the amount of taxes collected from plots.
         // -->
-        else if (attribute.startsWith("plottax")) {
-            return new ElementTag(town.getPlotTax()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("plottax", (attribute, object) -> {
+            return new ElementTag(object.town.getPlotTax());
+        }, "plot_tax");
+
 
         // <--[tag]
         // @attribute <TownTag.plotprice>
@@ -435,11 +446,8 @@ public class TownTag implements ObjectTag {
         // @description
         // Returns the price of a plot.
         // -->
-        else if (attribute.startsWith("plotprice")) {
-            return new ElementTag(town.getPlotPrice()).getAttribute(attribute.fulfill(1));
-        }
-
-        return new ElementTag(identify()).getAttribute(attribute);
-
+        registerTag("", (attribute, object) -> {
+            return new ElementTag(object.town.getPlotPrice());
+        }, "plot_price");
     }
 }

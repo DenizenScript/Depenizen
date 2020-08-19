@@ -1,19 +1,19 @@
-package com.denizenscript.depenizen.bukkit.objects.factions;
+package com.denizenscript.depenizen.bukkit.objects.towny;
 
-import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
+import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.objects.Fetchable;
+import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.tags.ObjectTagProcessor;
+import com.denizenscript.denizencore.tags.TagContext;
+import com.denizenscript.denizencore.tags.TagRunnable;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
-import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.denizencore.tags.TagContext;
 
 public class NationTag implements ObjectTag {
 
@@ -49,7 +49,7 @@ public class NationTag implements ObjectTag {
 
         string = string.replace("nation@", "");
         try {
-            return new NationTag(TownyUniverse.getDataSource().getNation(string));
+            return new NationTag(TownyAPI.getInstance().getDataSource().getNation(string));
         }
         catch (NotRegisteredException e) {
             return null;
@@ -58,7 +58,7 @@ public class NationTag implements ObjectTag {
 
     public static boolean matches(String arg) {
         arg = arg.replace("nation@", "");
-        return TownyUniverse.getDataSource().hasNation(arg);
+        return TownyAPI.getInstance().getDataSource().hasNation(arg);
     }
 
     /////////////////////
@@ -124,8 +124,13 @@ public class NationTag implements ObjectTag {
         return identify();
     }
 
-    @Override
-    public String getAttribute(Attribute attribute) {
+    public static void registerTag(String name, TagRunnable.ObjectInterface<NationTag> runnable, String... variants) {
+        tagProcessor.registerTag(name, runnable, variants);
+    }
+
+    public static ObjectTagProcessor<NationTag> tagProcessor = new ObjectTagProcessor<>();
+
+    public static void registerTags() {
 
         // <--[tag]
         // @attribute <NationTag.allies>
@@ -134,60 +139,13 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns a list of the nation's allies.
         // -->
-        if (attribute.startsWith("allies")) {
+        registerTag("allies", (attribute, object) -> {
             ListTag list = new ListTag();
-            for (Nation ally : nation.getAllies()) {
+            for (Nation ally : object.nation.getAllies()) {
                 list.addObject(new NationTag(ally));
             }
-            return list.getAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <NationTag.assistants>
-        // @returns ListTag(PlayerTag)
-        // @plugin Depenizen, Towny
-        // @description
-        // Returns a list of the nation's assistants.
-        // -->
-        if (attribute.startsWith("assistants")) {
-            ListTag list = new ListTag();
-            for (Resident resident : nation.getAssistants()) {
-                list.addObject(PlayerTag.valueOf(resident.getName(), attribute.context));
-            }
-            return list.getAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <NationTag.balance>
-        // @returns ElementTag(Decimal)
-        // @plugin Depenizen, Towny
-        // @description
-        // Returns the current money balance of the nation.
-        // -->
-        if (attribute.startsWith("balance")) {
-            try {
-                return new ElementTag(nation.getAccount().getHoldingBalance()).getAttribute(attribute.fulfill(1));
-            }
-            catch (EconomyException e) {
-                if (!attribute.hasAlternative()) {
-                    Debug.echoError("Invalid economy response!");
-                }
-            }
-        }
-
-        // <--[tag]
-        // @attribute <NationTag.capital>
-        // @returns TownTag
-        // @plugin Depenizen, Towny
-        // @description
-        // Returns the capital city of the nation as a TownTag.
-        // -->
-        else if (attribute.startsWith("capital")) {
-            if (nation.hasCapital()) {
-                return new TownTag(nation.getCapital())
-                        .getAttribute(attribute.fulfill(1));
-            }
-        }
+            return list;
+        });
 
         // <--[tag]
         // @attribute <NationTag.enemies>
@@ -196,13 +154,70 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns a list of the nation's enemies.
         // -->
-        if (attribute.startsWith("enemies")) {
+        registerTag("enemies", (attribute, object) -> {
             ListTag list = new ListTag();
-            for (Nation enemy : nation.getEnemies()) {
+            for (Nation enemy : object.nation.getEnemies()) {
                 list.addObject(new NationTag(enemy));
             }
-            return list.getAttribute(attribute.fulfill(1));
-        }
+            return list;
+        });
+
+        // <--[tag]
+        // @attribute <NationTag.assistants>
+        // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns a list of the nation's assistants.
+        // -->
+        registerTag("assistants", (attribute, object) -> {
+            ListTag list = new ListTag();
+            for (Resident resident : object.nation.getAssistants()) {
+                list.addObject(PlayerTag.valueOf(resident.getName(), attribute.context));
+            }
+            return list;
+        });
+
+        // <--[tag]
+        // @attribute <NationTag.balance>
+        // @returns ElementTag(Decimal)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns the current money balance of the nation.
+        // -->
+        registerTag("balance", (attribute, object) -> {
+            try {
+                return new ElementTag(object.nation.getAccount().getHoldingBalance());
+            }
+            catch (EconomyException e) {
+                Debug.echoError("Invalid economy response!");
+                return null;
+            }
+        });
+
+        // <--[tag]
+        // @attribute <NationTag.has_capital>
+        // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns whether the nation has a capital Town.
+        // -->
+        registerTag("has_capital", (attribute, object) -> {
+            return new ElementTag(object.nation.hasCapital());
+        });
+
+        // <--[tag]
+        // @attribute <NationTag.capital>
+        // @returns TownTag
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns the capital city of the nation as a TownTag.
+        // -->
+        registerTag("capital", (attribute, object) -> {
+            if (object.nation.hasCapital()) {
+                return new TownTag(object.nation.getCapital());
+            }
+            return null;
+        });
 
         // <--[tag]
         // @attribute <NationTag.is_neutral>
@@ -211,10 +226,9 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns true if the nation is neutral.
         // -->
-        else if (attribute.startsWith("isneutral") || attribute.startsWith("is_neutral")) {
-            return new ElementTag(nation.isNeutral())
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("is_neutral", (attribute, object) -> {
+            return new ElementTag(object.nation.isNeutral());
+        }, "isneutral", "neutral");
 
         // <--[tag]
         // @attribute <NationTag.king>
@@ -223,10 +237,9 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns the king of the nation.
         // -->
-        else if (attribute.startsWith("king")) {
-            return PlayerTag.valueOf(nation.getCapital().getMayor().getName(), attribute.context)
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("king", (attribute, object) -> {
+            return PlayerTag.valueOf(object.nation.getKing().getUUID().toString(), attribute.context);
+        });
 
         // <--[tag]
         // @attribute <NationTag.name>
@@ -235,10 +248,9 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns the nation's name.
         // -->
-        else if (attribute.startsWith("name")) {
-            return new ElementTag(nation.getName())
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("name", (attribute, object) -> {
+            return new ElementTag(object.nation.getName());
+        });
 
         // <--[tag]
         // @attribute <NationTag.player_count>
@@ -247,10 +259,9 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns the amount of players in the nation.
         // -->
-        else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
-            return new ElementTag(nation.getNumResidents())
-                    .getAttribute(attribute.fulfill(1));
-        }
+        registerTag("player_count", (attribute, object) -> {
+            return new ElementTag(object.nation.getNumResidents());
+        }, "playercount");
 
         // <--[tag]
         // @attribute <NationTag.relation[<nation>]>
@@ -259,26 +270,30 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns the nation's current relation with another nation.
         // -->
-        else if (attribute.startsWith("relation")) {
-
-            try {
-                NationTag to = valueOf(attribute.getContext(1));
-
-                if (nation.hasAlly(to.nation)) {
-                    return new ElementTag("allies").getAttribute(attribute.fulfill(1));
-                }
-                else if (nation.hasEnemy(to.nation)) {
-                    return new ElementTag("enemies").getAttribute(attribute.fulfill(1));
+        registerTag("relation", (attribute, object) -> {
+            if (attribute.hasContext(1)) {
+                if (matches(attribute.getContext(1))) {
+                    NationTag to = valueOf(attribute.getContext(1));
+                    if (object.nation.hasAlly(to.nation)) {
+                        return new ElementTag("allies");
+                    }
+                    else if (object.nation.hasEnemy(to.nation)) {
+                        return new ElementTag("enemies");
+                    }
+                    else {
+                        return new ElementTag("neutral");
+                    }
                 }
                 else {
-                    return new ElementTag("neutral").getAttribute(attribute.fulfill(1));
+                    Debug.echoError("Unable to match nation: '" + attribute.getContext(1) + "' to a nation!");
+                    return null;
                 }
-
             }
-            catch (Exception e) {
+            else {
+                Debug.echoError("Must specify a nation for tag <NationTag.relation[<nation>]>!");
+                return null;
             }
-
-        }
+        });
 
         // <--[tag]
         // @attribute <NationTag.residents>
@@ -287,13 +302,13 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns a list of the nation's residents.
         // -->
-        if (attribute.startsWith("residents")) {
-            ListTag list = new ListTag();
-            for (Resident resident : nation.getResidents()) {
-                list.addObject(PlayerTag.valueOf(resident.getName(), attribute.context));
+        registerTag("residents", (attribute, object) -> {
+            ListTag residents = new ListTag();
+            for (Resident resident : object.nation.getResidents()) {
+                residents.addObject(PlayerTag.valueOf(resident.getUUID().toString(), attribute.context));
             }
-            return list.getAttribute(attribute.fulfill(1));
-        }
+            return residents;
+        });
 
         // <--[tag]
         // @attribute <NationTag.tag>
@@ -302,12 +317,9 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns the nation's tag.
         // -->
-        else if (attribute.startsWith("tag")) {
-            if (nation.hasTag()) {
-                return new ElementTag(nation.getTag())
-                        .getAttribute(attribute.fulfill(1));
-            }
-        }
+        registerTag("tag", (attribute, object) -> {
+            return new ElementTag(object.nation.getTag());
+        });
 
         // <--[tag]
         // @attribute <NationTag.taxes>
@@ -316,11 +328,9 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns the nation's current taxes.
         // -->
-        else if (attribute.startsWith("taxes")) {
-            return new ElementTag(nation.getTaxes())
-                    .getAttribute(attribute.fulfill(1));
-        }
-
+        registerTag("taxes", (attribute, object) -> {
+            return new ElementTag(object.nation.getTaxes());
+        });
         // <--[tag]
         // @attribute <NationTag.town_count>
         // @returns ElementTag(Number)
@@ -328,12 +338,8 @@ public class NationTag implements ObjectTag {
         // @description
         // Returns the number of towns in the nation.
         // -->
-        else if (attribute.startsWith("towncount") || attribute.startsWith("town_count")) {
-            return new ElementTag(nation.getNumTowns())
-                    .getAttribute(attribute.fulfill(1));
-        }
-
-        return new ElementTag(identify()).getAttribute(attribute);
-
+        registerTag("town_count", (attribute, object) -> {
+            return new ElementTag(object.nation.getNumTowns());
+        }, "towncount");
     }
 }

@@ -15,7 +15,7 @@ import com.denizenscript.depenizen.bukkit.events.towny.PlayerEntersTownScriptEve
 import com.denizenscript.depenizen.bukkit.events.towny.PlayerExitsTownScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.towny.PlayerCreatesTownyTownScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.towny.TownyTownCreatedScriptEvent;
-import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
+import com.denizenscript.depenizen.bukkit.objects.towny.NationTag;
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyCuboidProperties;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyLocationProperties;
@@ -28,8 +28,8 @@ public class TownyBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(TownTag.class);
-        ObjectFetcher.registerWithObjectFetcher(NationTag.class);
+        ObjectFetcher.registerWithObjectFetcher(TownTag.class, TownTag.tagProcessor);
+        ObjectFetcher.registerWithObjectFetcher(NationTag.class, NationTag.tagProcessor);
         PropertyParser.registerProperty(TownyPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(TownyLocationProperties.class, LocationTag.class);
         PropertyParser.registerProperty(TownyCuboidProperties.class, CuboidTag.class);
