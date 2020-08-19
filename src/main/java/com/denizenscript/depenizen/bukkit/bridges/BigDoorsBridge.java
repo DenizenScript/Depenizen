@@ -29,6 +29,13 @@ public class BigDoorsBridge extends Bridge {
         PropertyParser.registerProperty(BigDoorsPlayerProperties.class, PlayerTag.class);
         ScriptEvent.registerScriptEvent(new BigDoorsDoorTogglesScriptEvent());
 
+        // <--[tag]
+        // @attribute <bigdoor[<door>]>
+        // @returns BigDoorsDoorTag
+        // @plugin Depenizen, Big Doors
+        // @description
+        // Returns the door for the value
+        // -->
         TagManager.registerTagHandler("bigdoor", (attribute) -> {
             if (attribute.hasContext(1)) {
                 return BigDoorsDoorTag.valueOf(attribute.getContext(1), attribute.context);
