@@ -5,18 +5,14 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.Property;
-import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.depenizen.bukkit.bridges.BigDoorsBridge;
 import com.denizenscript.depenizen.bukkit.objects.bigdoors.BigDoorsDoorTag;
-import nl.pim16aap2.bigDoors.BigDoors;
-import nl.pim16aap2.bigDoors.Commander;
 import nl.pim16aap2.bigDoors.Door;
 import nl.pim16aap2.bigDoors.GUI.GUI;
 
 public class BigDoorsPlayerProperties implements Property {
 
-    Commander commander = BigDoorsBridge.getCommander();
-    BigDoors bigDoors = BigDoorsBridge.getBigDoors();
     PlayerTag player;
 
     @Override
@@ -42,10 +38,6 @@ public class BigDoorsPlayerProperties implements Property {
         }
     }
 
-    public static final String[] handledTags = new String[] {
-            "bigdoors"
-    };
-
     public static final String[] handledMechs = new String[] {
             "display_bigdoors_manager"
     };
@@ -54,13 +46,7 @@ public class BigDoorsPlayerProperties implements Property {
         this.player = player;
     }
 
-
-    @Override
-    public String getAttribute(Attribute attribute) {
-        if (attribute == null) {
-            return null;
-        }
-
+    public static void registerTags() {
         // <--[tag]
         // @attribute <PlayerTag.bigdoors>
         // @returns ListTag(BigDoorsDoorTag)
@@ -68,15 +54,13 @@ public class BigDoorsPlayerProperties implements Property {
         // @description
         // Returns a list of Big Doors the player is an owner of.
         // -->
-        if (attribute.startsWith("bigdoors")) {
+        PropertyParser.<BigDoorsPlayerProperties>registerTag("bigdoors", (attribute, property) -> {
             ListTag doors = new ListTag();
-            for (Door door : commander.getDoors(player.getOfflinePlayer().getUniqueId().toString(), null)) {
+            for (Door door : BigDoorsBridge.commander.getDoors(property.player.getOfflinePlayer().getUniqueId().toString(), null)) {
                 doors.addObject(new BigDoorsDoorTag(door));
             }
-            return doors.getAttribute(attribute.fulfill(1));
-        }
-
-        return null;
+            return doors;
+        });
     }
 
     @Override
@@ -90,7 +74,7 @@ public class BigDoorsPlayerProperties implements Property {
         // Opens the Big Doors manager (bdm).
         // -->
         if (mechanism.matches("display_bigdoors_manager")) {
-            bigDoors.addGUIUser(new GUI(bigDoors, player.getPlayerEntity()));
+            BigDoorsBridge.bigDoors.addGUIUser(new GUI(BigDoorsBridge.bigDoors, player.getPlayerEntity()));
         }
     }
 }

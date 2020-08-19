@@ -1,10 +1,8 @@
 package com.denizenscript.depenizen.bukkit.events.bigdoors;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.depenizen.bukkit.objects.bigdoors.BigDoorsDoorTag;
 import nl.pim16aap2.bigDoors.Door;
 import nl.pim16aap2.bigDoors.events.DoorEventToggle;
@@ -16,16 +14,16 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
 
     // <--[event]
     // @Events
-    // bigdoors door [toggles|opens|closes|toggled|opened|closed]
+    // bigdoors door [toggles|opens|closes]
     //
-    // @Regex ^on bigdoors door (toggles|opens|closes|toggled|opened|closed)$
+    // @Regex ^on bigdoors door (toggles|opens|closes)$
     //
     // @Cancellable true
     //
     // @Triggers when a Big Doors door toggles, opens, or closes.
     //
     // @Context
-    // <context.door> returns the Big Doors door being toggled.
+    // <context.door> returns the Big Doors door being toggles.
     // <context.state> returns the Big Doors open state.
     //
     // @Plugin Depenizen, Big Doors
@@ -53,17 +51,17 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
     @Override
     public boolean matches(ScriptPath path) {
         String cmd = path.eventArgLowerAt(2);
-        if (cmd.equals("opens") || cmd.equals("opened")) {
+        if (cmd.equals("opens")) {
             if (toggleType != DoorEventToggle.ToggleType.OPEN) {
                 return false;
             }
         }
-        else if (cmd.equals("closes") || cmd.equals("closed")) {
+        else if (cmd.equals("closes")) {
             if (toggleType != DoorEventToggle.ToggleType.CLOSE) {
                 return false;
             }
         }
-        else if (!cmd.equals("toggles") && !cmd.equals("toggled")) {
+        else if (!cmd.equals("toggles")) {
             return false;
         }
         if (!runGenericSwitchCheck(path, "door", String.valueOf(door.getDoorUID()))) {
@@ -75,11 +73,6 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
     @Override
     public String getName() {
         return "BigDoorsDoorToggles";
-    }
-
-    @Override
-    public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(null, null);
     }
 
     @Override

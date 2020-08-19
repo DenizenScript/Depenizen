@@ -1,28 +1,20 @@
 package com.denizenscript.depenizen.bukkit.objects.bigdoors;
 
-import com.comphenix.protocol.PacketType;
 import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.Adjustable;
-import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
-import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
+import com.denizenscript.denizencore.tags.TagRunnable;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.bridges.BigDoorsBridge;
-import nl.pim16aap2.bigDoors.BigDoors;
-import nl.pim16aap2.bigDoors.Commander;
 import nl.pim16aap2.bigDoors.Door;
 import nl.pim16aap2.bigDoors.util.DoorOwner;
-import org.bukkit.entity.Player;
-
-import javax.xml.bind.Element;
 
 public class BigDoorsDoorTag implements ObjectTag, Adjustable {
 
@@ -34,51 +26,38 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
     // A BigDoorsDoorTag represents a Big Doors door.
     //
     // These use the object notation "bigdoor@".
-    // The identity format for a door is <door_id>
-    // For example, 'bigdoor@door_id'.
+    // The identity format for a door is it's Door ID as a number. NOT the name of the door you have set.
+    // For example, 'bigdoor@1'.
     //
     // -->
 
     /////////////////////
     //   OBJECT FETCHER
     /////////////////
-
-    static Commander commander = BigDoorsBridge.getCommander();
-    static BigDoors bigDoors = BigDoorsBridge.getBigDoors();
-
-    public static BigDoorsDoorTag valueOf(String string) {
-        return valueOf(string, null);
-    }
-
     @Fetchable("bigdoor")
     public static BigDoorsDoorTag valueOf(String string, TagContext context) {
         if (string == null || string.length() == 0) {
             return null;
         }
 
-        string = string.replace("bigdoor@", "");
+        string = string.substring("bigdoor@".length());
 
-        try {
-            long id = Long.parseLong(string);
-            return new BigDoorsDoorTag(commander.getDoor(null, id));
+        if (!ArgumentHelper.matchesInteger(string)) {
+            return null;
         }
-        catch (NumberFormatException e) {
-            Debug.echoError("Invalid door id specified.");
-        }
-        return null;
+        return new BigDoorsDoorTag(BigDoorsBridge.commander.getDoor(null, Integer.parseInt(string)));
     }
 
     public static boolean matches(String arg) {
         if (arg.startsWith("bigdoor@")) {
             return true;
         }
-        return valueOf(arg) != null;
+        return valueOf(arg, CoreUtilities.noDebugContext) != null;
     }
 
     /////////////////////
     //   STATIC CONSTRUCTORS
     /////////////////
-
     Door door;
 
     public BigDoorsDoorTag(Door door) {
@@ -86,33 +65,8 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
     }
 
     /////////////////////
-    //   INSTANCE FIELDS/METHODS
-    /////////////////
-
-    public Door getDoor() {
-        return door;
-    }
-
-    public boolean isBusy() {
-        return commander.isDoorBusy(door.getDoorUID());
-    }
-
-    public boolean isOpen() {
-        return door.isOpen();
-    }
-
-    public boolean isLocked() {
-        return door.isLocked();
-    }
-
-    public boolean isLoaded() {
-        return bigDoors.areChunksLoadedForDoor(door);
-    }
-
-    /////////////////////
     //   ObjectTag Methods
     /////////////////
-
     private String prefix = "BigDoorsDoor";
 
     @Override
@@ -143,12 +97,12 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
 
     @Override
     public String identify() {
-        return "bigdoor@" + door.getDoorUID() + PropertyParser.getPropertiesString(this);
+        return "bigdoor@" + door.getDoorUID();
     }
 
     @Override
     public String identifySimple() {
-        return "bigdoor@" + door.getDoorUID();
+        return identify();
     }
 
     @Override
@@ -156,9 +110,13 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         return identify();
     }
 
-    @Override
-    public String getAttribute(Attribute attribute) {
+    public static void registerTag(String name, TagRunnable.ObjectInterface<BigDoorsDoorTag> runnable, String... variants) {
+        tagProcessor.registerTag(name, runnable, variants);
+    }
 
+    public static ObjectTagProcessor<BigDoorsDoorTag> tagProcessor = new ObjectTagProcessor<>();
+
+    public static void registerTags() {
         // <--[tag]
         // @attribute <BigDoorsDoorTag.is_open>
         // @returns ElementTag(Boolean)
@@ -166,9 +124,9 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the door is open.
         // -->
-        if (attribute.startsWith("is_open")) {
-            return new ElementTag(door.isOpen()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("is_open", (attribute, object) -> {
+            return new ElementTag(object.door.isOpen());
+        });
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.is_locked>
@@ -177,9 +135,9 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the door is locked.
         // -->
-        if (attribute.startsWith("is_locked")) {
-            return new ElementTag(door.isLocked()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("is_locked", (attribute, object) -> {
+            return new ElementTag(object.door.isLocked());
+        });
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.is_busy>
@@ -188,9 +146,9 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the door is busy (currently animated/opening/closing).
         // -->
-        else if (attribute.startsWith("is_busy")) {
-            return new ElementTag(isBusy()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("is_busy", (attribute, object) -> {
+            return new ElementTag(BigDoorsBridge.commander.isDoorBusy(object.door.getDoorUID()));
+        });
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.is_loaded>
@@ -200,9 +158,9 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // Returns whether the door is currently loaded (the chunks it sits in are loaded).
         // If this returns false, the door cannot open or close.
         // -->
-        else if (attribute.startsWith("is_loaded")) {
-            return new ElementTag(isLoaded()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("is_loaded", (attribute, object) -> {
+            return new ElementTag(BigDoorsBridge.bigDoors.areChunksLoadedForDoor(object.door));
+        });
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.cuboid>
@@ -211,9 +169,9 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns the cuboid of the door.
         // -->
-        else if (attribute.startsWith("cuboid")) {
-            return new CuboidTag(door.getMinimum(), door.getMaximum()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("cuboid", (attribute, object) -> {
+            return new CuboidTag(object.door.getMinimum(), object.door.getMaximum());
+        });
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.auto_close>
@@ -223,9 +181,9 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // Returns the auto close time for the door.
         // Returns 0 if the door does not auto close.
         // -->
-        else if (attribute.startsWith("auto_close")) {
-            return new ElementTag(door.getAutoClose()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("auto_close", (attribute, object) -> {
+            return new ElementTag(object.door.getAutoClose());
+        }, "autoclose");
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.power_block>
@@ -234,9 +192,9 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns the location of the power block for the door.
         // -->
-        else if (attribute.startsWith("power_block")) {
-            return new LocationTag(door.getPowerBlockLoc()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("power_block", (attribute, object) -> {
+            return new LocationTag(object.door.getPowerBlockLoc());
+        });
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.owners>
@@ -245,13 +203,13 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns the list of owners of the door.
         // -->
-        else if (attribute.startsWith("owners")) {
+        registerTag("owners", (attribute, object) -> {
             ListTag owners = new ListTag();
-            for (DoorOwner owner : commander.getDoorOwners(door.getDoorUID(), null)) {
-                owners.addObject(PlayerTag.valueOf(owner.getPlayerUUID().toString(), attribute.context));
+            for (DoorOwner owner : BigDoorsBridge.commander.getDoorOwners(object.door.getDoorUID(), null)) {
+                owners.addObject(PlayerTag.valueOf(owner.getPlayerUUID().toString(), CoreUtilities.noDebugContext));
             }
-            return owners.getAttribute(attribute.fulfill(1));
-        }
+            return owners;
+        });
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.door_type>
@@ -260,12 +218,20 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns the type of door.
         // -->
-        else if (attribute.startsWith("door_type")) {
-            return new ElementTag(door.getType().toString()).getAttribute(attribute.fulfill(1));
-        }
+        registerTag("door_type", (attribute, object) -> {
+            return new ElementTag(object.door.getType().toString());
+        });
 
-        return new ElementTag(identify()).getAttribute(attribute);
-
+        // <--[tag]
+        // @attribute <BigDoorsDoorTag.name>
+        // @returns ElementTag
+        // @plugin Depenizen, Big Doors
+        // @description
+        // Returns the name of the door (this is not always unique).
+        // -->
+        registerTag("", (attribute, object) -> {
+            return new ElementTag(object.door.getName());
+        });
     }
 
     @Override
@@ -284,14 +250,14 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // <BigDoorsDoorTag.is_busy>
         // -->
         if (mechanism.matches("is_open") && mechanism.requireBoolean("Doors can only be open or closed.")) {
-            if (isOpen() == mechanism.getValue().asBoolean() || isBusy()) {
+            if (door.isOpen() == mechanism.getValue().asBoolean() || BigDoorsBridge.commander.isDoorBusy(door.getDoorUID())) {
                 return;
             }
-            if (!isLoaded()) {
+            if (!BigDoorsBridge.bigDoors.areChunksLoadedForDoor(door)) {
                 Debug.echoError("Door chunks are not loaded. cannot open door.");
                 return;
             }
-            bigDoors.toggleDoor(door.getDoorUID());
+            BigDoorsBridge.bigDoors.toggleDoor(door.getDoorUID());
             return;
         }
 
@@ -305,7 +271,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // <BigDoorsDoorTag.is_locked>
         // -->
         if (mechanism.matches("is_locked") && mechanism.requireBoolean("Doors can only be locked or unlocked.")) {
-            commander.setLock(door.getDoorUID(), mechanism.getValue().asBoolean());
+            BigDoorsBridge.commander.setLock(door.getDoorUID(), mechanism.getValue().asBoolean());
             return;
         }
 
@@ -320,7 +286,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // <BigDoorsDoorTag.auto_close>
         // -->
         if (mechanism.matches("auto_close") && mechanism.requireObject(DurationTag.class)) {
-            commander.updateDoorAutoClose(door.getDoorUID(), mechanism.valueAsType(DurationTag.class).getSecondsAsInt());
+            BigDoorsBridge.commander.updateDoorAutoClose(door.getDoorUID(), mechanism.valueAsType(DurationTag.class).getSecondsAsInt());
         }
 
         if (!mechanism.fulfilled()) {
