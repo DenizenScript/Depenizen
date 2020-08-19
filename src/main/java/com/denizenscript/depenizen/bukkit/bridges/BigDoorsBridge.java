@@ -34,7 +34,7 @@ public class BigDoorsBridge extends Bridge {
         // @returns BigDoorsDoorTag
         // @plugin Depenizen, Big Doors
         // @description
-        // Returns the door for the value
+        // Returns the door for the value.
         // -->
         TagManager.registerTagHandler("bigdoor", (attribute) -> {
             if (attribute.hasContext(1)) {
