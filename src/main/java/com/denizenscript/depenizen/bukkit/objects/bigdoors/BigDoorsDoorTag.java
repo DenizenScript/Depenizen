@@ -229,7 +229,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns the name of the door (this is not always unique).
         // -->
-        registerTag("", (attribute, object) -> {
+        registerTag("name", (attribute, object) -> {
             return new ElementTag(object.door.getName());
         });
     }

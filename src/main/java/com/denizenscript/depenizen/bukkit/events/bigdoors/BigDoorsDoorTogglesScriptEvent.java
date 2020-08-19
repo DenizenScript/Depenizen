@@ -23,7 +23,7 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
     // @Triggers when a Big Doors door toggles, opens, or closes.
     //
     // @Context
-    // <context.door> returns the Big Doors door being toggles.
+    // <context.door> returns the Big Doors door being toggled.
     // <context.state> returns the Big Doors open state.
     //
     // @Plugin Depenizen, Big Doors
