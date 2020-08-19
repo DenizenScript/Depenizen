@@ -39,9 +39,9 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         if (string == null || string.length() == 0) {
             return null;
         }
-
-        string = string.substring("bigdoor@".length());
-
+        if (string.startsWith("bigdoors@")) {
+            string = string.substring("bigdoor@".length());
+        }
         if (!ArgumentHelper.matchesInteger(string)) {
             return null;
         }
