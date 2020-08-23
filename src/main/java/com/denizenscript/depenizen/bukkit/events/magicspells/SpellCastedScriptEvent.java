@@ -17,7 +17,7 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     // magicspells entity completes spell
     // magicspells <entity> completes spell
     //
-    // @Regex ^on magicspells [^\s]+ spell$
+    // @Regex ^on magicspells [^\s]+ completes spell$
     //
     // @Triggers when the spell is done and everything has been handled.
     //
