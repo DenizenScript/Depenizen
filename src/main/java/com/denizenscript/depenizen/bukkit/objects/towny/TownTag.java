@@ -162,13 +162,7 @@ public class TownTag implements ObjectTag {
         registerTag("assistants", (attribute, object) -> {
             ListTag list = new ListTag();
             for (Resident resident : object.town.getAssistants()) {
-                PlayerTag player = PlayerTag.valueOf(resident.getName(), attribute.context);
-                if (player != null) {
-                    list.addObject(player);
-                }
-                else {
-                    list.add(resident.getName());
-                }
+                list.addObject(new PlayerTag(resident.getUUID()));
             }
             return list;
         });
@@ -231,7 +225,7 @@ public class TownTag implements ObjectTag {
         // Returns the mayor of the town.
         // -->
         registerTag("mayor", (attribute, object) -> {
-            return PlayerTag.valueOf(object.town.getMayor().getUUID().toString(), attribute.context);
+            return new PlayerTag(object.town.getMayor().getUUID());
         });
 
         // <--[tag]
@@ -293,7 +287,7 @@ public class TownTag implements ObjectTag {
         registerTag("residents", (attribute, object) -> {
             ListTag residents = new ListTag();
             for (Resident resident : object.town.getResidents()) {
-                residents.addObject(PlayerTag.valueOf(resident.getUUID().toString(), attribute.context));
+                residents.addObject(new PlayerTag(resident.getUUID()));
             }
             return residents;
         });

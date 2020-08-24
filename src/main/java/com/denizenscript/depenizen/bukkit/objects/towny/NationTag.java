@@ -172,7 +172,7 @@ public class NationTag implements ObjectTag {
         registerTag("assistants", (attribute, object) -> {
             ListTag list = new ListTag();
             for (Resident resident : object.nation.getAssistants()) {
-                list.addObject(PlayerTag.valueOf(resident.getName(), attribute.context));
+                list.addObject(new PlayerTag(resident.getUUID()));
             }
             return list;
         });
@@ -238,7 +238,7 @@ public class NationTag implements ObjectTag {
         // Returns the king of the nation.
         // -->
         registerTag("king", (attribute, object) -> {
-            return PlayerTag.valueOf(object.nation.getKing().getUUID().toString(), attribute.context);
+            return new PlayerTag(object.nation.getKing().getUUID());
         });
 
         // <--[tag]
@@ -305,7 +305,7 @@ public class NationTag implements ObjectTag {
         registerTag("residents", (attribute, object) -> {
             ListTag residents = new ListTag();
             for (Resident resident : object.nation.getResidents()) {
-                residents.addObject(PlayerTag.valueOf(resident.getUUID().toString(), attribute.context));
+                residents.addObject(new PlayerTag(resident.getUUID()));
             }
             return residents;
         });

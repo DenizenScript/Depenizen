@@ -226,8 +226,7 @@ public class FactionTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("leader")) {
             if (faction.getLeader() != null) {
-                return PlayerTag.valueOf(faction.getLeader().getName(), attribute.context)
-                        .getAttribute(attribute.fulfill(1));
+                return new PlayerTag(faction.getLeader().getUuid()).getAttribute(attribute.fulfill(1));
             }
         }
 
@@ -321,7 +320,7 @@ public class FactionTag implements ObjectTag {
             Set<PS> chunks = BoardColl.get().getChunks(faction);
             ListTag players = new ListTag();
             for (MPlayer ps : faction.getMPlayers()) {
-                players.addObject(PlayerTag.valueOf(faction.getLeader().getUuid().toString(), attribute.context));
+                players.addObject(new PlayerTag(faction.getLeader().getUuid()));
             }
             return players.getAttribute(attribute.fulfill(1));
         }
