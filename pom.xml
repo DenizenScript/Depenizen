@@ -288,7 +288,7 @@
             <artifactId>TownyChat</artifactId>
             <version>0.72</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/TownyChat-0.72.jar</systemPath>
+            <systemPath>${basedir}/lib/TownyChat.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
