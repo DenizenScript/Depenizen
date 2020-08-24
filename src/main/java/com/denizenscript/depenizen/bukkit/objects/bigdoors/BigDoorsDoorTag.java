@@ -175,14 +175,14 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.auto_close>
-        // @returns ElementTag(Number)
+        // @returns DurationTag
         // @plugin Depenizen, Big Doors
         // @description
         // Returns the auto close time for the door.
         // Returns 0 if the door does not auto close.
         // -->
         registerTag("auto_close", (attribute, object) -> {
-            return new ElementTag(object.door.getAutoClose());
+            return new DurationTag(object.door.getAutoClose());
         });
 
         // <--[tag]
@@ -278,9 +278,9 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object BigDoorsDoorTag
         // @name auto_close
-        // @input ElementTag(Number)
+        // @input DurationTag
         // @description
-        // Sets the auto_close time of the door.
+        // Sets the auto_close time of the door, in seconds.
         // Set this to 0 to disable auto close.
         // @tags
         // <BigDoorsDoorTag.auto_close>
