@@ -249,7 +249,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // <BigDoorsDoorTag.is_open>
         // <BigDoorsDoorTag.is_busy>
         // -->
-        if (mechanism.matches("is_open") && mechanism.requireBoolean("Doors can only be open or closed.")) {
+        if (mechanism.matches("is_open") && mechanism.requireBoolean()) {
             if (door.isOpen() == mechanism.getValue().asBoolean() || BigDoorsBridge.commander.isDoorBusy(door.getDoorUID())) {
                 return;
             }
@@ -270,7 +270,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @tags
         // <BigDoorsDoorTag.is_locked>
         // -->
-        if (mechanism.matches("is_locked") && mechanism.requireBoolean("Doors can only be locked or unlocked.")) {
+        if (mechanism.matches("is_locked") && mechanism.requireBoolean()) {
             BigDoorsBridge.commander.setLock(door.getDoorUID(), mechanism.getValue().asBoolean());
             return;
         }
