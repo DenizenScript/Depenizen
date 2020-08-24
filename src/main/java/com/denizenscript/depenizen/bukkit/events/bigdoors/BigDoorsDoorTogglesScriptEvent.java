@@ -45,7 +45,10 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
 
     @Override
     public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("bigdoors door");
+       if (!path.eventLower.startsWith("bigdoors door")) {
+           return false;
+       }
+       return true;
     }
 
     @Override

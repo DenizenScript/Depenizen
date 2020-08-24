@@ -183,7 +183,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // -->
         registerTag("auto_close", (attribute, object) -> {
             return new ElementTag(object.door.getAutoClose());
-        }, "autoclose");
+        });
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.power_block>
@@ -206,7 +206,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         registerTag("owners", (attribute, object) -> {
             ListTag owners = new ListTag();
             for (DoorOwner owner : BigDoorsBridge.commander.getDoorOwners(object.door.getDoorUID(), null)) {
-                owners.addObject(PlayerTag.valueOf(owner.getPlayerUUID().toString(), CoreUtilities.noDebugContext));
+                owners.addObject(new PlayerTag(owner.getPlayerUUID()));
             }
             return owners;
         });
