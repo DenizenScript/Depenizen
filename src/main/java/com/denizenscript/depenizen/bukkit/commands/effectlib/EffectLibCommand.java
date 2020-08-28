@@ -38,6 +38,8 @@ public class EffectLibCommand extends AbstractCommand {
     // The effect names comes from the config file.
     // Specify a location instead of a target to show the effect at a location instead.
     //
+    // Note that most users should instead use <@link command playeffect>.
+    //
     // @Tags
     // None
     //
@@ -61,43 +63,33 @@ public class EffectLibCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry.getProcessedArgs()) {
-
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
                 scriptEntry.addObject("target", arg.asType(EntityTag.class));
             }
-
             else if (!scriptEntry.hasObject("duration")
                     && arg.matchesPrefix("duration")) {
                 scriptEntry.addObject("duration", arg.asType(DurationTag.class));
             }
-
             else if (!scriptEntry.hasObject("location")
                     && arg.matchesPrefix("location")) {
-                scriptEntry.addObject("location", arg.asElement());
+                scriptEntry.addObject("location", arg.asType(LocationTag.class));
             }
-
             else if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", Action.valueOf(arg.getValue().toUpperCase()));
             }
-
             else {
                 arg.reportUnhandled();
             }
-
         }
-
         if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Effect not specified!");
         }
-
         if (!scriptEntry.hasObject("duration")) {
             throw new InvalidArgumentsException("Duration not specified!");
         }
-
         if (!scriptEntry.hasObject("target")) {
             if (Utilities.entryHasPlayer(scriptEntry)) {
                 scriptEntry.addObject("target", Utilities.getEntryPlayer(scriptEntry).getDenizenEntity());
@@ -108,17 +100,16 @@ public class EffectLibCommand extends AbstractCommand {
 
     @Override
     public void execute(final ScriptEntry scriptEntry) {
-
         EntityTag target = scriptEntry.getObjectTag("target");
         Action action = (Action) scriptEntry.getObject("action");
         DurationTag duration = scriptEntry.getObjectTag("duration");
         LocationTag location = scriptEntry.getObjectTag("location");
-
-        Debug.report(scriptEntry, getName(), (target != null ? target.debug() : "")
-                + (action != null ? action.toString() : "")
-                + (duration != null ? duration.debug() : "")
-                + (location != null ? location.debug() : ""));
-
+        if (scriptEntry.dbCallShouldDebug()) {
+            Debug.report(scriptEntry, getName(), (target != null ? target.debug() : "")
+                    + (action != null ? action.toString() : "")
+                    + (duration != null ? duration.debug() : "")
+                    + (location != null ? location.debug() : ""));
+        }
         if (target == null && location == null) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
             return;
@@ -131,13 +122,10 @@ public class EffectLibCommand extends AbstractCommand {
             Debug.echoError(scriptEntry.getResidingQueue(), "Duration not specified!");
             return;
         }
-
         int ticks = duration.getTicksAsInt();
         EffectManager effectManager = new EffectManager(EffectLibBridge.instance.plugin);
-
         // TODO: Find a better way to handle all effects and add custom ones as well
         switch (action) {
-
             case BLEED: {
                 BleedEffect effect = new BleedEffect(effectManager);
                 if (location == null) {
@@ -146,21 +134,16 @@ public class EffectLibCommand extends AbstractCommand {
                 else {
                     effect.setLocation(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()));
                 }
-                // Add a callback to the effect
                 effect.callback = new Runnable() {
-
                     @Override
                     public void run() {
                         scriptEntry.setFinished(true);
                     }
-
                 };
-
                 effect.iterations = ticks;
                 effect.start();
                 return;
             }
-
             case ARC: {
                 ArcEffect effect = new ArcEffect(effectManager);
                 if (location == null) {
@@ -169,21 +152,16 @@ public class EffectLibCommand extends AbstractCommand {
                 else {
                     effect.setLocation(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()));
                 }
-                // Add a callback to the effect
                 effect.callback = new Runnable() {
-
                     @Override
                     public void run() {
                         scriptEntry.setFinished(true);
                     }
-
                 };
-
                 effect.iterations = ticks;
                 effect.start();
                 return;
             }
-
             case ATOM: {
                 AtomEffect effect = new AtomEffect(effectManager);
                 if (location == null) {
@@ -192,26 +170,19 @@ public class EffectLibCommand extends AbstractCommand {
                 else {
                     effect.setLocation(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()));
                 }
-                // Add a callback to the effect
                 effect.callback = new Runnable() {
-
                     @Override
                     public void run() {
                         scriptEntry.setFinished(true);
                     }
-
                 };
-
                 effect.iterations = ticks;
                 effect.start();
                 return;
             }
-
             default: {
                 Debug.echoError(scriptEntry.getResidingQueue(), "Effect type not found!");
             }
-
         }
-
     }
 }
