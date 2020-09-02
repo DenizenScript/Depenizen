@@ -12,22 +12,6 @@ import nl.pim16aap2.bigDoors.Door;
 
 public class BigDoorsWorldProperties implements Property {
 
-    WorldTag world;
-
-    @Override
-    public String getPropertyString() {
-        return null;
-    }
-
-    @Override
-    public String getPropertyId() {
-        return "BigDoorsWorld";
-    }
-
-    @Override
-    public void adjust(Mechanism mechanism) {
-    } // None
-
     public static boolean describes(ObjectTag object) {
         return object instanceof WorldTag;
     }
@@ -48,6 +32,18 @@ public class BigDoorsWorldProperties implements Property {
         this.world = world;
     }
 
+    WorldTag world;
+
+    @Override
+    public String getPropertyString() {
+        return null;
+    }
+
+    @Override
+    public String getPropertyId() {
+        return "BigDoorsWorld";
+    }
+
     public static void registerTags() {
         // <--[tag]
         // @attribute <WorldTag.bigdoors>
@@ -63,5 +59,10 @@ public class BigDoorsWorldProperties implements Property {
             }
             return doors;
         });
+    }
+
+    @Override
+    public void adjust(Mechanism mechanism) {
+        // None
     }
 }

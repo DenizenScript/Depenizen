@@ -8,6 +8,7 @@ import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagRunnable;
@@ -19,7 +20,7 @@ import nl.pim16aap2.bigDoors.util.DoorOwner;
 public class BigDoorsDoorTag implements ObjectTag, Adjustable {
 
     // <--[language]
-    // @name BigDoorsDoor Objects
+    // @name BigDoorsDoorTag Objects
     // @group Depenizen Object Types
     // @plugin Depenizen, Big Doors
     // @description
@@ -31,9 +32,6 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
     //
     // -->
 
-    /////////////////////
-    //   OBJECT FETCHER
-    /////////////////
     @Fetchable("bigdoor")
     public static BigDoorsDoorTag valueOf(String string, TagContext context) {
         if (string == null || string.length() == 0) {
@@ -55,18 +53,12 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         return valueOf(arg, CoreUtilities.noDebugContext) != null;
     }
 
-    /////////////////////
-    //   STATIC CONSTRUCTORS
-    /////////////////
     Door door;
 
     public BigDoorsDoorTag(Door door) {
         this.door = door;
     }
 
-    /////////////////////
-    //   ObjectTag Methods
-    /////////////////
     private String prefix = "BigDoorsDoor";
 
     @Override
@@ -110,13 +102,8 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         return identify();
     }
 
-    public static void registerTag(String name, TagRunnable.ObjectInterface<BigDoorsDoorTag> runnable, String... variants) {
-        tagProcessor.registerTag(name, runnable, variants);
-    }
-
-    public static ObjectTagProcessor<BigDoorsDoorTag> tagProcessor = new ObjectTagProcessor<>();
-
     public static void registerTags() {
+
         // <--[tag]
         // @attribute <BigDoorsDoorTag.is_open>
         // @returns ElementTag(Boolean)
@@ -234,6 +221,22 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         });
     }
 
+    public static ObjectTagProcessor<BigDoorsDoorTag> tagProcessor = new ObjectTagProcessor<>();
+
+    public static void registerTag(String name, TagRunnable.ObjectInterface<BigDoorsDoorTag> runnable, String... variants) {
+        tagProcessor.registerTag(name, runnable, variants);
+    }
+
+    @Override
+    public ObjectTag getObjectAttribute(Attribute attribute) {
+        return tagProcessor.getObjectAttribute(this, attribute);
+    }
+
+    @Override
+    public void applyProperty(Mechanism mechanism) {
+        Debug.echoError("Cannot apply Properties to a BigDoors Door!");
+    }
+
     @Override
     public void adjust(Mechanism mechanism) {
 
@@ -292,10 +295,5 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         if (!mechanism.fulfilled()) {
             mechanism.reportInvalid();
         }
-    }
-
-    @Override
-    public void applyProperty(Mechanism mechanism) {
-        Debug.echoError("Cannot apply Properties to a BigDoors Door!");
     }
 }

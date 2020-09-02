@@ -13,18 +13,6 @@ import nl.pim16aap2.bigDoors.GUI.GUI;
 
 public class BigDoorsPlayerProperties implements Property {
 
-    PlayerTag player;
-
-    @Override
-    public String getPropertyString() {
-        return null;
-    }
-
-    @Override
-    public String getPropertyId() {
-        return "BigDoorsPlayer";
-    }
-
     public static boolean describes(ObjectTag object) {
         return object instanceof PlayerTag;
     }
@@ -46,7 +34,20 @@ public class BigDoorsPlayerProperties implements Property {
         this.player = player;
     }
 
+    PlayerTag player;
+
+    @Override
+    public String getPropertyString() {
+        return null;
+    }
+
+    @Override
+    public String getPropertyId() {
+        return "BigDoorsPlayer";
+    }
+
     public static void registerTags() {
+
         // <--[tag]
         // @attribute <PlayerTag.bigdoors>
         // @returns ListTag(BigDoorsDoorTag)
@@ -69,7 +70,7 @@ public class BigDoorsPlayerProperties implements Property {
         // <--[mechanism]
         // @object PlayerTag
         // @name display_bigdoors_manager
-        // @input none
+        // @input None
         // @description
         // Opens the Big Doors manager (bdm).
         // -->

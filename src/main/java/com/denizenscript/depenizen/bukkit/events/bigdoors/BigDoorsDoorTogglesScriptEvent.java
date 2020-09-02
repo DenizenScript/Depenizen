@@ -20,11 +20,11 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
     //
     // @Cancellable true
     //
-    // @Triggers when a Big Doors door toggles, opens, or closes.
+    // @Triggers when a Big Doors door opens or closes.
     //
     // @Context
     // <context.door> returns the Big Doors door being toggled.
-    // <context.state> returns the Big Doors open state.
+    // <context.state> returns the Big Doors open state ('open' or 'close').
     //
     // @Plugin Depenizen, Big Doors
     //
@@ -48,23 +48,20 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
        if (!path.eventLower.startsWith("bigdoors door")) {
            return false;
        }
+       String type = path.eventArgLowerAt(2);
+       if (!type.equals("toggles") && !type.equals("opens") && !type.equals("closes")) {
+           return false;
+       }
        return true;
     }
 
     @Override
     public boolean matches(ScriptPath path) {
         String cmd = path.eventArgLowerAt(2);
-        if (cmd.equals("opens")) {
-            if (toggleType != DoorEventToggle.ToggleType.OPEN) {
-                return false;
-            }
+        if (cmd.equals("opens") && toggleType != DoorEventToggle.ToggleType.OPEN) {
+            return false;
         }
-        else if (cmd.equals("closes")) {
-            if (toggleType != DoorEventToggle.ToggleType.CLOSE) {
-                return false;
-            }
-        }
-        else if (!cmd.equals("toggles")) {
+        if (cmd.equals("closes") && toggleType != DoorEventToggle.ToggleType.CLOSE) {
             return false;
         }
         if (!runGenericSwitchCheck(path, "door", String.valueOf(door.getDoorUID()))) {
