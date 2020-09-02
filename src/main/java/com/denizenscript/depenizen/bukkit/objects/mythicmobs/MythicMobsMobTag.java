@@ -403,7 +403,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @name faction
         // @input ElementTag
         // @description
-        // Sets faction of the MythicMob.
+        // Sets the faction of the MythicMob.
         // @tags
         // <MythicMobsMobTag.faction>
         // -->
