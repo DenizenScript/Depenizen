@@ -377,7 +377,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the faction for the MythicMob.
         // -->
-        registerTag("entity", (attribute, object) -> {
+        registerTag("faction", (attribute, object) -> {
             return new ElementTag(object.getMob().getFaction());
         });
     }
