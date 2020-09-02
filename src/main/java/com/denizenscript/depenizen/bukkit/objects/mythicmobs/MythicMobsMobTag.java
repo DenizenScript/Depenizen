@@ -368,6 +368,18 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         registerTag("global_cooldown", (attribute, object) -> {
             return new DurationTag(object.getMob().getGlobalCooldown());
         });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.faction>
+        // @returns ElementTag
+        // @mechanism MythicMobsMobTag.faction
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Returns the faction for the MythicMob.
+        // -->
+        registerTag("entity", (attribute, object) -> {
+            return new ElementTag(object.getMob().getFaction());
+        });
     }
 
     @Override
@@ -384,6 +396,19 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // -->
         if (mechanism.matches("global_cooldown") && mechanism.requireInteger()) {
             mob.setGlobalCooldown(mechanism.getValue().asInt());
+        }
+
+        // <--[mechanism]
+        // @object MythicMobsMobTag
+        // @name faction
+        // @input ElementTag
+        // @description
+        // Sets faction of the MythicMob.
+        // @tags
+        // <MythicMobsMobTag.faction>
+        // -->
+        if (mechanism.matches("faction")) {
+            mob.setFaction(mechanism.getValue().asString());
         }
 
         // <--[mechanism]

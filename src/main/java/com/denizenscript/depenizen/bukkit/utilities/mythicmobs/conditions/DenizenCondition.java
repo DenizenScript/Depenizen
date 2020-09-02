@@ -54,9 +54,12 @@ public class DenizenCondition extends SkillCondition implements IEntityCondition
 
     @Override
     public boolean check(SkillMetadata skillMetadata) {
-        source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
-        source.contexts.put("target", new EntityTag(skillMetadata.getCaster().getEntity().getTarget().getBukkitEntity()));
-        if (skillMetadata.getTrigger() == null) {
+        SkillCaster caster = skillMetadata.getCaster();
+        source.contexts.put("entity", new EntityTag(caster.getEntity().getBukkitEntity()));
+        if (caster.getEntity().getTarget().getBukkitEntity() != null) {
+            source.contexts.put("target", new EntityTag(caster.getEntity().getTarget().getBukkitEntity()));
+        }
+        if (skillMetadata.getTrigger() != null) {
             source.contexts.put("trigger", new EntityTag(skillMetadata.getTrigger().getBukkitEntity()));
         }
         return runCheck();
