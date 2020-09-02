@@ -72,7 +72,7 @@ public class TownyChatPlayerProperties implements Property {
             // @description
             // Returns a list of all channels the player is in.
             // -->
-            if (attribute.startsWith("channel")) {
+            if (attribute.startsWith("channels") || attribute.startsWith("channel")) {
                 ListTag chans = new ListTag();
                 for (Channel c : holder.getAllChannels().values()) {
                     chans.addObject(new ElementTag(c.getName()));

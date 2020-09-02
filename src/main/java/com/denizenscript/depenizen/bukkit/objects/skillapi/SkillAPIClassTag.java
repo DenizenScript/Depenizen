@@ -188,7 +188,7 @@ public class SkillAPIClassTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <SkillAPIClassTag.parent>
-        // @returns SkillAPIClass
+        // @returns SkillAPIClassTag
         // @plugin Depenizen, SkillAPI
         // @description
         // Returns the parent class of this SkillAPI class.

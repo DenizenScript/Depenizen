@@ -137,7 +137,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 // @plugin Depenizen, GriefPrevention
                 // @mechanism PlayerTag.normal_blocks
                 // @description
-                // Returns the number of normal claim blocks the payer has.
+                // Returns the number of normal claim blocks the player has.
                 // -->
                 else {
                     return new ElementTag(data.getAccruedClaimBlocks()).getAttribute(attribute);

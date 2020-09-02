@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.objects.areashop;
 
 import me.wiefferink.areashop.AreaShop;
+import me.wiefferink.areashop.regions.BuyRegion;
 import me.wiefferink.areashop.regions.GeneralRegion;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -11,6 +12,7 @@ import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
+import me.wiefferink.areashop.regions.RentRegion;
 
 public class AreaShopTag implements ObjectTag {
 
@@ -23,7 +25,7 @@ public class AreaShopTag implements ObjectTag {
     //
     // These use the object notation "areashop@".
     // The identity format for shops is <shop_name>
-    // For example, 'areashop@my_shot'.
+    // For example, 'areashop@my_shop'.
     //
     // -->
 
@@ -177,6 +179,27 @@ public class AreaShopTag implements ObjectTag {
         }
 
         // <--[tag]
+        // @attribute <AreaShopTag.price>
+        // @returns ElementTag(Decimal)
+        // @plugin Depenizen, AreaShop
+        // @description
+        // Returns the price of the AreaShop.
+        // -->
+        else if (attribute.startsWith("name")) {
+            double price;
+            if (areaShop instanceof BuyRegion) {
+                price = ((BuyRegion) areaShop).getPrice();
+            }
+            else if (areaShop instanceof RentRegion) {
+                price = ((RentRegion) areaShop).getPrice();
+            }
+            else {
+                return null;
+            }
+            return new ElementTag(price).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <AreaShopTag.owner>
         // @returns PlayerTag
         // @plugin Depenizen, AreaShop
@@ -189,10 +212,10 @@ public class AreaShopTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <AreaShopTag.worldguard_region>
-        // @returns WorldGuardRegion
+        // @returns WorldGuardRegionTag
         // @plugin Depenizen, AreaShop
         // @description
-        // Returns the WorldGuardRegion that holds the AreaShop.
+        // Returns the WorldGuardRegionTag that holds the AreaShop.
         // -->
         else if (attribute.startsWith("worldguard_region")) {
             return new WorldGuardRegionTag(areaShop.getRegion(), areaShop.getWorld()).getAttribute(attribute.fulfill(1));

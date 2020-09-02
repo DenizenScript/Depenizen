@@ -31,7 +31,7 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     // "VERSION:" + ElementTag to change the listed server version.
     // "MOTD:" + ElementTag to change the server MOTD that will be displayed.
     //
-    // @Plugin Depenizen, BungeeCord
+    // @Plugin Depenizen, DepenizenBungee, BungeeCord
     //
     // @Group Depenizen
     //
@@ -43,17 +43,22 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
 
     public static BungeeProxyServerListPingScriptEvent instance;
 
-    public String address;
+    public static class PingData {
 
-    public int currentPlayers;
+        public String address;
 
-    public int maxPlayers;
+        public int currentPlayers;
 
-    public String motd;
+        public int maxPlayers;
 
-    public int protocol;
+        public String motd;
 
-    public String version;
+        public int protocol;
+
+        public String version;
+    }
+
+    public PingData data;
 
     @Override
     public boolean couldMatch(ScriptPath path) {
@@ -90,15 +95,15 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
             String determination = determinationObj.toString();
             String determinationLow = CoreUtilities.toLowerCase(determination);
             if (determinationLow.startsWith("max_players:")) {
-                maxPlayers = Integer.parseInt(determination.substring("max_players:".length()));
+                data.maxPlayers = Integer.parseInt(determination.substring("max_players:".length()));
                 return true;
             }
             else if (determinationLow.startsWith("version:")) {
-                version = determination.substring("version:".length());
+                data.version = determination.substring("version:".length());
                 return true;
             }
             else if (determinationLow.startsWith("motd:")) {
-                motd = determination.substring("motd:".length());
+                data.motd = determination.substring("motd:".length());
                 return true;
             }
         }
@@ -108,22 +113,22 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     @Override
     public ObjectTag getContext(String name) {
         if (name.equals("address")) {
-            return new ElementTag(address);
+            return new ElementTag(data.address);
         }
         else if (name.equals("num_players") || name.equals("current_players")) {
-            return new ElementTag(currentPlayers);
+            return new ElementTag(data.currentPlayers);
         }
         else if (name.equals("max_players")) {
-            return new ElementTag(maxPlayers);
+            return new ElementTag(data.maxPlayers);
         }
         else if (name.equals("motd")) {
-            return new ElementTag(motd);
+            return new ElementTag(data.motd);
         }
         else if (name.equals("protocol")) {
-            return new ElementTag(protocol);
+            return new ElementTag(data.protocol);
         }
         else if (name.equals("version")) {
-            return new ElementTag(version);
+            return new ElementTag(data.version);
         }
         return super.getContext(name);
     }

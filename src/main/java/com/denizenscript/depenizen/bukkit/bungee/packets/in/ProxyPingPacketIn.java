@@ -44,22 +44,24 @@ public class ProxyPingPacketIn extends PacketIn {
         }
         String version = readString(data, versionLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-                    @Override
-                    public void run() {
-                        BungeeProxyServerListPingScriptEvent.instance.address = address;
-                        BungeeProxyServerListPingScriptEvent.instance.currentPlayers = currentPlayers;
-                        BungeeProxyServerListPingScriptEvent.instance.maxPlayers = maxPlayers;
-                        BungeeProxyServerListPingScriptEvent.instance.motd = motd;
-                        BungeeProxyServerListPingScriptEvent.instance.protocol = protocol;
-                        BungeeProxyServerListPingScriptEvent.instance.version = version;
-                        BungeeProxyServerListPingScriptEvent.instance.fire();
-                        ProxyPingResultPacketOut packetOut = new ProxyPingResultPacketOut();
-                        packetOut.id = id;
-                        packetOut.maxPlayers = BungeeProxyServerListPingScriptEvent.instance.maxPlayers;
-                        packetOut.version = BungeeProxyServerListPingScriptEvent.instance.version;
-                        packetOut.motd = BungeeProxyServerListPingScriptEvent.instance.motd;
-                        BungeeBridge.instance.sendPacket(packetOut);
-                    }
-                });
+            @Override
+            public void run() {
+                BungeeProxyServerListPingScriptEvent.PingData ping = new BungeeProxyServerListPingScriptEvent.PingData();
+                ping.address = address;
+                ping.currentPlayers = currentPlayers;
+                ping.maxPlayers = maxPlayers;
+                ping.motd = motd;
+                ping.protocol = protocol;
+                ping.version = version;
+                BungeeProxyServerListPingScriptEvent.instance.data = ping;
+                BungeeProxyServerListPingScriptEvent.instance.fire();
+                ProxyPingResultPacketOut packetOut = new ProxyPingResultPacketOut();
+                packetOut.id = id;
+                packetOut.maxPlayers = ping.maxPlayers;
+                packetOut.version = ping.version;
+                packetOut.motd = ping.motd;
+                BungeeBridge.instance.sendPacket(packetOut);
+            }
+        });
     }
 }

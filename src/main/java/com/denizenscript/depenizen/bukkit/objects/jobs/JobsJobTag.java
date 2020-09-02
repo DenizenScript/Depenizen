@@ -48,7 +48,7 @@ public class JobsJobTag implements ObjectTag {
         JobsJobTag job = null;
 
         if (ObjectFetcher.isObjectWithProperties(string)) {
-            return ObjectFetcher.getObjectFrom(JobsJobTag.class, string, context);
+            return ObjectFetcher.getObjectFromWithProperties(JobsJobTag.class, string, context);
         }
         return new JobsJobTag(Jobs.getJob(string.replace("job@", "")));
     }

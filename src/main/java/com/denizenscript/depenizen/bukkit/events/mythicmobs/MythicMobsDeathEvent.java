@@ -21,17 +21,18 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
 
     // <--[event]
     // @Events
-    // mythicmob mob dies (by <entity>)
-    // mythicmob mob death (by <entity>)
-    // mythicmob mob killed (by <entity>)
-    // mythicmob <mob> dies (by <entity>)
-    // mythicmob <mob> death (by <entity>)
-    // mythicmob <mob> killed (by <entity>)
+    // mythicmob mob dies
+    // mythicmob mob death
+    // mythicmob mob killed
+    // mythicmob <mob> dies
+    // mythicmob <mob> death
+    // mythicmob <mob> killed
 
     //
-    // @Regex ^on mythicmob [^\s]+ (dies|death|killed)( by [^\s]+)?$
+    // @Regex ^on mythicmob [^\s]+ (dies|death|killed)$
     //
     // @Switch in:<area> to only process the event if it occurred within a specified area.
+    // @Switch by:<entity> to only process the event if the killer matches a specified entity type.
     //
     // @Triggers when a MythicMob dies.
     //
@@ -76,10 +77,13 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     @Override
     public boolean matches(ScriptPath path) {
         String mob = path.eventArgLowerAt(1);
-        if (!mob.equals("mob") && runGenericCheck(mob, mythicmob.getMobType().getInternalName())) {
+        if (!mob.equals("mob") && !runGenericCheck(mob, mythicmob.getMobType().getInternalName())) {
             return false;
         }
         if ((path.eventArgLowerAt(3).equals("by")) && !tryEntity(killer, path.eventArgLowerAt(4))) {
+            return false;
+        }
+        if (path.switches.containsKey("by") && !tryEntity(killer, path.switches.get("by"))) {
             return false;
         }
         if (!runInCheck(path, entity.getLocation()) && !runInCheck(path, killer.getLocation())) {

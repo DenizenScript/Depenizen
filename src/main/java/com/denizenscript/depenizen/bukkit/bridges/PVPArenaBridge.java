@@ -61,7 +61,7 @@ public class PVPArenaBridge extends Bridge {
 
         // <--[tag]
         // @attribute <pvparena.list_arenas>
-        // @returns ListTag(PVPArena)
+        // @returns ListTag(PVPArenaArenaTag)
         // @plugin Depenizen, PVPArena
         // @description
         // Returns a list of all PVPArenas.

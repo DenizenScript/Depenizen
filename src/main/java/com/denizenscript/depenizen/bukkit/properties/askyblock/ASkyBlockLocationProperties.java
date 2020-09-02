@@ -73,13 +73,13 @@ public class ASkyBlockLocationProperties implements Property {
             }
 
             // <--[tag]
-            // @attribute <LocationTag.skyblock.get_owner>
+            // @attribute <LocationTag.skyblock.owner>
             // @returns PlayerTag
             // @plugin Depenizen, A SkyBlock
             // @description
-            // Returns whether the owner of the skyblock at the location.
+            // Returns the owner of the skyblock at the location.
             // -->
-            else if (attribute.startsWith("get_owner")) {
+            else if (attribute.startsWith("owner") || attribute.startsWith("get_owner")) {
                 Island i = api.getIslandAt(location);
                 if (i == null) {
                     return null;

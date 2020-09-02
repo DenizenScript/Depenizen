@@ -1,11 +1,11 @@
 package com.denizenscript.depenizen.bukkit.events.magicspells;
 
+import com.denizenscript.denizen.objects.EntityTag;
 import com.nisovin.magicspells.events.SpellCastEvent;
 import com.nisovin.magicspells.util.SpellReagents;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.ItemTag;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -25,17 +25,18 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
 
     // <--[event]
     // @Events
-    // magicspells player casts spell
-    // magicspells player casts <spell>
+    // magicspells entity casts spell
+    // magicspells <entity> casts <spell>
     //
-    // @Regex ^on magicspells casts [^\s]+$
+    // @Regex ^on magicspells [^\s]+ casts [^\s]+$
     //
-    // @Triggers when a player starts to casts a spell.
+    // @Triggers when an entity starts to casts a spell.
     //
     // @Cancellable true
     //
     // @Context
     // <context.spell_name> returns the name of the spell.
+    // <context.caster> returns the entity that casted the spell.
     // <context.power> returns an ElementTag(Decimal) of the power of the spell.
     // <context.cast_time> returns an ElementTag(Number) of the cast time of the spell.
     // <context.cooldown> returns an ElementTag(Decimal) of the cooldown of the spell.
@@ -54,7 +55,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     //
     // @Plugin Depenizen, MagicSpells
     //
-    // @Player Always.
+    // @Player When the caster is a player.
     //
     // @Group Depenizen
     //
@@ -67,19 +68,31 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     public static SpellCastScriptEvent instance;
 
     public SpellCastEvent event;
-    public PlayerTag player;
+    public EntityTag caster;
     private ElementTag spell;
 
     @Override
     public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("magicspells player casts");
+        if (!path.eventArgLowerAt(0).equals("magicspells")) {
+            return false;
+        }
+        if (!path.eventArgLowerAt(2).equals("casts")) {
+            return false;
+        }
+        if (!couldMatchEntity(path.eventArgLowerAt(1))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean matches(ScriptPath path) {
         String spellName = path.eventArgLowerAt(3);
-        if (spellName.equals("spell") || spellName.equalsIgnoreCase(spell.asString())) {
-            return true;
+        if (!spellName.equals("spell") && !spellName.equalsIgnoreCase(spell.asString())) {
+            return false;
+        }
+        if (!tryEntity(caster, path.eventArgLowerAt(1))) {
+            return false;
         }
         return super.matches(path);
     }
@@ -177,13 +190,16 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(player, null);
+        return new BukkitScriptEntryData(caster);
     }
 
     @Override
     public ObjectTag getContext(String name) {
         if (name.equals("power")) {
             return new ElementTag(event.getPower());
+        }
+        else if (name.equals("caster")) {
+            return caster.getDenizenObject();
         }
         else if (name.equals("cast_time")) {
             return new ElementTag(event.getCastTime());
@@ -243,7 +259,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
 
     @EventHandler
     public void onPlayerCastsSpell(SpellCastEvent event) {
-        player = PlayerTag.mirrorBukkitPlayer(event.getCaster());
+        caster = new EntityTag(event.getCaster());
         spell = new ElementTag(event.getSpell().getName());
         this.event = event;
         fire(event);

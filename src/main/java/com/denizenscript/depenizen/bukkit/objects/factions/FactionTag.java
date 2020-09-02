@@ -276,7 +276,6 @@ public class FactionTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("relation")) {
             FactionTag to = valueOf(attribute.getContext(1));
-
             if (to != null) {
                 return new ElementTag(faction.getRelationTo(to.getFaction()).toString())
                         .getAttribute(attribute.fulfill(1));

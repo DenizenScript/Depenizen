@@ -34,7 +34,7 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
     // @Determine
     // "COMMAND:" + Element to change the command that will be ran.
     //
-    // @Plugin Depenizen, BungeeCord
+    // @Plugin Depenizen, DepenizenBungee, BungeeCord
     //
     // @Group Depenizen
     //
@@ -50,7 +50,14 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
 
     public String sender;
 
-    public String command;
+    public static class CommandData {
+
+        public String command;
+
+        public boolean cancelled;
+    }
+
+    public CommandData command;
 
     public UUID senderId;
 
@@ -66,7 +73,7 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
     }
 
     public String commandName() {
-        return CoreUtilities.toLowerCase(command.substring(1, command.contains(" ") ? command.indexOf(' ') : command.length()));
+        return CoreUtilities.toLowerCase(command.command.substring(1, command.command.contains(" ") ? command.command.indexOf(' ') : command.command.length()));
     }
 
     @Override
@@ -111,12 +118,18 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
+    public void cancellationChanged() {
+        command.cancelled = cancelled;
+        super.cancellationChanged();
+    }
+
+    @Override
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
         if (determinationObj instanceof ElementTag) {
             String determination = determinationObj.toString();
             String determinationLow = CoreUtilities.toLowerCase(determination);
             if (determinationLow.startsWith("command:")) {
-                command = determination.substring("command:".length());
+                command.command = determination.substring("command:".length());
                 return true;
             }
         }
@@ -132,7 +145,7 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
             return new ElementTag(senderId.toString());
         }
         else if (name.equals("command")) {
-            return new ElementTag(command);
+            return new ElementTag(command.command);
         }
         return super.getContext(name);
     }

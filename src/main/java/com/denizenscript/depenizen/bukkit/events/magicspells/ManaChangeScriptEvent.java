@@ -17,7 +17,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     // @Events
     // magicspells player mana change
     //
-    // @Regex ^on magicspells [^\s]+ mana change$
+    // @Regex ^on magicspells player mana change$
     //
     // @Triggers when a player's mana value changes.
     //
