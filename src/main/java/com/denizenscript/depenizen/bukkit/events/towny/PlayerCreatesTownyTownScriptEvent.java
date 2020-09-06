@@ -20,6 +20,10 @@ public class PlayerCreatesTownyTownScriptEvent extends BukkitScriptEvent impleme
     //
     // @Context
     // <context.town_name> Returns the name of the town.
+    // <context.cancel_message> Returns the cancel message if the town creation was cancelled.
+    //
+    // @Determine
+    // cancel_message:ElementTag to determine a new cancel message.
     //
     // @Player Always
     //
@@ -41,11 +45,6 @@ public class PlayerCreatesTownyTownScriptEvent extends BukkitScriptEvent impleme
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("towny player creates town");
-    }
-
-    @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
     }
 
     @Override

@@ -55,6 +55,7 @@ public class TownyChatPlayerProperties implements Property {
 
     public static void registerTags() {
         PropertyParser.<TownyChatPlayerProperties>registerTag("townychat", (attribute, object) -> {
+            attribute = attribute.fulfill(1);
 
             // <--[tag]
             // @attribute <PlayerTag.townychat.channels>
@@ -63,7 +64,7 @@ public class TownyChatPlayerProperties implements Property {
             // @description
             // Returns a list of all channels the player is in.
             // -->
-            if (attribute.startsWith("channel")) {
+            if (attribute.startsWith("channels")) {
                 ListTag channels = new ListTag();
                 for (Channel channel : TownyChatBridge.channelsHolder.getAllChannels().values()) {
                     channels.addObject(new ElementTag(channel.getName()));

@@ -189,7 +189,7 @@ public class NationTag implements ObjectTag {
                 return new ElementTag(object.nation.getAccount().getHoldingBalance());
             }
             catch (EconomyException e) {
-                Debug.echoError("Invalid economy response!");
+                attribute.echoError("Invalid economy response!");
                 return null;
             }
         });
@@ -285,12 +285,12 @@ public class NationTag implements ObjectTag {
                     }
                 }
                 else {
-                    Debug.echoError("Unable to match nation: '" + attribute.getContext(1) + "' to a nation!");
+                    attribute.echoError("Unable to match nation: '" + attribute.getContext(1) + "' to a nation!");
                     return null;
                 }
             }
             else {
-                Debug.echoError("Must specify a nation for tag <NationTag.relation[<nation>]>!");
+                attribute.echoError("Must specify a nation for tag <NationTag.relation[<nation>]>!");
                 return null;
             }
         });

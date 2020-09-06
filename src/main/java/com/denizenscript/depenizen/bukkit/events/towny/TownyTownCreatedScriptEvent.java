@@ -11,9 +11,9 @@ public class TownyTownCreatedScriptEvent extends BukkitScriptEvent implements Li
 
     // <--[event]
     // @Events
-    // towny player creates town
+    // towny town created
     //
-    // @Regex ^on towny player creates town$
+    // @Regex ^on towny town created$
     //
     // @Triggers when a new town is created.
     //
@@ -36,11 +36,6 @@ public class TownyTownCreatedScriptEvent extends BukkitScriptEvent implements Li
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("towny town created");
-    }
-
-    @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
     }
 
     @Override

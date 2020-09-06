@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.objects.towny;
 
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -179,7 +178,7 @@ public class TownTag implements ObjectTag {
                 return new ElementTag(object.town.getAccount().getHoldingBalance());
             }
             catch (EconomyException e) {
-                Debug.echoError("Invalid economy response!");
+                attribute.echoError("Invalid economy response!");
                 return null;
             }
         });
