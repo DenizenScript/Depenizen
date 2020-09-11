@@ -41,8 +41,8 @@ public class PlaceholderAPIBridge extends Bridge {
         // @description
         // Returns the value of the placeholder.
         // -->
-        String placeholder = CoreUtilities.toLowerCase(attribute.getContext(1));
-        if (placeholder.startsWith("denizen_")) {
+        String placeholder = attribute.getContext(1);
+        if (CoreUtilities.toLowerCase(placeholder).startsWith("denizen_")) {
             Debug.echoError("Cannot use <placeholder[]> tags with 'denizen' prefix!");
             return;
         }

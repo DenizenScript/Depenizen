@@ -25,16 +25,16 @@ public class NBSCommand extends AbstractCommand {
 
     public NBSCommand() {
         setName("nbs");
-        setSyntax("nbs [play/stop] (file:<file path>) [targets:<entity>|...]");
-        setRequiredArguments(2, 3);
+        setSyntax("nbs [play/stop] (file:<file path>) (targets:<entity>|...)");
+        setRequiredArguments(1, 3);
     }
 
     // <--[command]
     // @Name nbs
-    // @Syntax nbs [play/stop] (file:<file path>) [targets:<entity>|...]
+    // @Syntax nbs [play/stop] (file:<file path>) (targets:<entity>|...)
     // @Group Depenizen
     // @Plugin Depenizen, NoteBlockAPI
-    // @Required 2
+    // @Required 1
     // @Maximum 3
     // @Short Plays or stops a noteblock song.
     //
@@ -69,29 +69,23 @@ public class NBSCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry.getProcessedArgs()) {
-
             if (!scriptEntry.hasObject("targets")
                     && arg.matchesPrefix("targets", "targets")
                     && arg.matchesArgumentList(PlayerTag.class)) {
                 scriptEntry.addObject("targets", arg.asType(ListTag.class).filter(PlayerTag.class, scriptEntry));
             }
-
             else if (!scriptEntry.hasObject("file")
                     && arg.matchesPrefix("file")) {
                 scriptEntry.addObject("file", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
             }
-
             else {
                 arg.reportUnhandled();
             }
-
         }
         if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Action not specified! (play/stop)");
@@ -109,20 +103,18 @@ public class NBSCommand extends AbstractCommand {
     @SuppressWarnings("unchecked")
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         ElementTag file = scriptEntry.getObjectTag("file");
         ElementTag action = scriptEntry.getObjectTag("action");
         List<PlayerTag> targets = (List<PlayerTag>) scriptEntry.getObject("targets");
-
-        Debug.report(scriptEntry, getName(), action.debug()
-                + ArgumentHelper.debugList("targets", targets)
-                + (file != null ? file.debug() : ""));
-
+        if (scriptEntry.dbCallShouldDebug()) {
+            Debug.report(scriptEntry, getName(), action.debug()
+                    + ArgumentHelper.debugList("targets", targets)
+                    + (file != null ? file.debug() : ""));
+        }
         if (targets == null || targets.isEmpty()) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Targets not found!");
             return;
         }
-
         if (action.asString().equalsIgnoreCase("play")) {
             if (file == null) {
                 Debug.echoError(scriptEntry.getResidingQueue(), "File not specified!");
@@ -137,12 +129,10 @@ public class NBSCommand extends AbstractCommand {
             }
             sp.setPlaying(true);
         }
-
         else if (action.asString().equalsIgnoreCase("stop")) {
             for (PlayerTag p : targets) {
                 NoteBlockAPI.stopPlaying(p.getPlayerEntity());
             }
         }
-
     }
 }

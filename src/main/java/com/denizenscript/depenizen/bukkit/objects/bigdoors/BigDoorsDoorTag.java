@@ -245,7 +245,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @name is_open
         // @input ElementTag(Boolean)
         // @description
-        // Sets opened state of a door. (This activates the animations).
+        // Sets opened state of a door (this activates the animations).
         // Doors cannot be opened or closed if they are busy (currently opening or closing).
         // This ignores whether a door is locked.
         // @tags
