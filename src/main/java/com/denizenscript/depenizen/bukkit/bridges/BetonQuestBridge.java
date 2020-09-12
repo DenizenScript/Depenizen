@@ -18,9 +18,9 @@ public class BetonQuestBridge extends Bridge {
         // Returns a variable from a BetonQuest package, for the player.
         // -->
         PlayerTag.registerTag("beton_quest", (attribute, object) -> {
-            String quest_package = attribute.getRawContext(1);
+            String quest_package = attribute.getContext(1);
             if (attribute.startsWith("variable", 2)) {
-                String variable = attribute.getRawContext(2);
+                String variable = attribute.getContext(2);
                 attribute.fulfill(1);
                 return new ElementTag(BetonQuest.getInstance().getVariableValue(quest_package, "%" + variable + "%", PlayerConverter.getID(object.getPlayerEntity())));
             }

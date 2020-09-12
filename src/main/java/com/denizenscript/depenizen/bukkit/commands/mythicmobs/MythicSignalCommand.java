@@ -34,7 +34,7 @@ public class MythicSignalCommand extends AbstractCommand {
     // @Description
     // This allows you to send a signal trigger to multiple MythicMobs.
     // If those mobs have any triggers configured for that signal, they will fire.
-    // Optionally, specify an entity that acts as the sender.
+    // You must specify an entity that acts as the sender.
     // NOTE: signals are case sensitive.
     //
     // @Usage
