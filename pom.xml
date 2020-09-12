@@ -12,7 +12,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <craftbukkit.version>1.16.3-R0.1-SNAPSHOT</craftbukkit.version>
+        <craftbukkit.version>1.16.2-R0.1-SNAPSHOT</craftbukkit.version>
         <citizens.version>2.0.27-SNAPSHOT</citizens.version>
         <denizen.version>1.1.7-SNAPSHOT</denizen.version>
         <BUILD_NUMBER>Unknown</BUILD_NUMBER>
@@ -100,6 +100,13 @@
             <version>2.0.8</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/BossShopPro.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>pl.betoncraft.betonquest</groupId>
+            <artifactId>BetonQuest</artifactId>
+            <version>1.12.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/BetonQuest.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>de.slikey</groupId>

@@ -18,16 +18,16 @@ public class MythicSignalCommand extends AbstractCommand {
 
     public MythicSignalCommand() {
         setName("mythicsignal");
-        setSyntax("mythicsignal [<mythicmob>|...] [<signal>] (source:<entity>)");
-        setRequiredArguments(2, 3);
+        setSyntax("mythicsignal [<mythicmob>|...] [<signal>] [source:<entity>]");
+        setRequiredArguments(3, 3);
     }
 
     // <--[command]
     // @Name MythicSignal
-    // @Syntax mythicsignal [<mythicmob>|...] [<signal>] (source:<entity>)
+    // @Syntax mythicsignal [<mythicmob>|...] [<signal>] [source:<entity>]
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
-    // @Required 2
+    // @Required 3
     // @Maximum 3
     // @Short Sends a signal trigger to the target MythicMobs.
     //
@@ -68,6 +68,9 @@ public class MythicSignalCommand extends AbstractCommand {
         if (!scriptEntry.hasObject("signal")) {
             throw new InvalidArgumentsException("Must specify a signal to send.");
         }
+        if (!scriptEntry.hasObject("source")) {
+            throw new InvalidArgumentsException("Must specify a source entity.");
+        }
     }
 
     @Override
@@ -78,10 +81,10 @@ public class MythicSignalCommand extends AbstractCommand {
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), ArgumentHelper.debugList("mythicmobs", targets)
                     + signal.debug()
-                    + (source == null ? "" : source.debug()));
+                    + source.debug());
         }
         for (MythicMobsMobTag mob : targets) {
-            mob.getMob().signalMob(source == null ? null : BukkitAdapter.adapt(source.getBukkitEntity()), signal.asString());
+            mob.getMob().signalMob(BukkitAdapter.adapt(source.getBukkitEntity()), signal.asString());
         }
     }
 }
