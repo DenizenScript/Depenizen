@@ -6,7 +6,7 @@ Depenizen
 - **Support Discord**: https://discord.gg/Q6pZGSR
 - **Builds (Download)**: https://ci.citizensnpcs.co/job/Depenizen/
 - **Supported Plugin List**: [Docs/BukkitPlugins.md](Docs/BukkitPlugins.md)
-- **Setp Guide For The Bungee Bridge**: [Docs/Bungee.md](Docs/Bungee.md)
+- **Setup Guide For The Bungee Bridge**: [Docs/Bungee.md](Docs/Bungee.md)
 
 ### Licensing pre-note:
 
