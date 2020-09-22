@@ -108,6 +108,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @attribute <BigDoorsDoorTag.is_open>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Big Doors
+        // @mechanism BigDoorsDoorTag.is_open
         // @description
         // Returns whether the door is open.
         // -->
@@ -119,6 +120,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @attribute <BigDoorsDoorTag.is_locked>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Big Doors
+        // @mechanism BigDoorsDoorTag.is_locked
         // @description
         // Returns whether the door is locked.
         // -->
@@ -164,6 +166,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @attribute <BigDoorsDoorTag.auto_close>
         // @returns DurationTag
         // @plugin Depenizen, Big Doors
+        // @mechanism BigDoorsDoorTag.auto_close
         // @description
         // Returns the auto close time for the door.
         // Returns 0 if the door does not auto close.
