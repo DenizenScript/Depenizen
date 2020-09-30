@@ -60,7 +60,7 @@ public class SentinelNPCProperties implements Property {
     NPCTag npc;
 
     public static ListTag listTargets(SentinelTargetList list) {
-        String comboStr = list.toComboString().replace(SentinelCommand.colorBasic, "").replace(ChatColor.AQUA.toString(), "");
+        String comboStr = list.toComboString().replace(SentinelCommand.colorBasic, "").replace(ChatColor.AQUA.toString(), "").trim();
         ListTag result = new ListTag();
         if (comboStr.isEmpty()) {
             return result;

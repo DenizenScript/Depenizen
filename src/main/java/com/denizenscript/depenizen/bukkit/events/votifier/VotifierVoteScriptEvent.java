@@ -1,5 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.votifier;
 
+import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.objects.core.TimeTag;
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
@@ -30,7 +32,7 @@ public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listen
     // @Triggers when a Votifier vote is made.
     //
     // @Context
-    // <context.time> returns the time the vote was sent.
+    // <context.time_sent> returns the time the vote was sent.
     // <context.service> returns what service was used to send the vote.
     // <context.username> returns the username input with the vote.
     //
@@ -63,7 +65,11 @@ public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listen
     @Override
     public ObjectTag getContext(String name) {
         if (name.equals("time")) {
+            Debug.echoError("Deprecation notice: Use 'context.time_sent' (TimeTag) instead of 'context.time' (ElementTag) for votifier vote event.");
             return new ElementTag(vote.getTimeStamp());
+        }
+        else if (name.equals("time_sent")) {
+            return new TimeTag(Long.parseLong(vote.getTimeStamp()) * 1000);
         }
         else if (name.equals("service")) {
             return new ElementTag(vote.getServiceName());
