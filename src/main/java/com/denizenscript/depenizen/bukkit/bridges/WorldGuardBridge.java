@@ -48,8 +48,8 @@ public class WorldGuardBridge extends Bridge {
             if (region != null) {
                 event.setReplacedObject(region.getObjectAttribute(attribute.fulfill(1)));
             }
-            else if (!event.hasAlternative()) {
-                Debug.echoError("Unknown WorldGuard region '" + attribute.getContext(1) + "' for region[] tag.");
+            else {
+                attribute.echoError("Unknown WorldGuard region '" + attribute.getContext(1) + "' for region[] tag.");
             }
         }
     }

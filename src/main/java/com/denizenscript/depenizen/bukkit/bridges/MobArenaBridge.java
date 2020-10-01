@@ -57,8 +57,8 @@ public class MobArenaBridge extends Bridge {
             if (arena != null) {
                 event.setReplacedObject(arena.getObjectAttribute(attribute.fulfill(1)));
             }
-            else if (!event.hasAlternative()) {
-                Debug.echoError("Unknown mob arena '" + attribute.getContext(1) + "' for mobarena[] tag.");
+            else {
+                attribute.echoError("Unknown mob arena '" + attribute.getContext(1) + "' for mobarena[] tag.");
             }
             return;
         }

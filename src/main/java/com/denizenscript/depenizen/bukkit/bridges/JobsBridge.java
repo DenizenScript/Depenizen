@@ -36,16 +36,14 @@ public class JobsBridge extends Bridge {
 
     public void tagEvent(ReplaceableTagEvent event) {
         Attribute attribute = event.getAttributes();
-
         JobsJobTag j = null;
-
         if (attribute.hasContext(1)) {
             // Documented below.
             if (JobsJobTag.matches(attribute.getContext(1))) {
                 j = attribute.contextAsType(1, JobsJobTag.class);
             }
             else {
-                Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid job!");
+                attribute.echoError("Could not match '" + attribute.getContext(1) + "' to a valid job!");
                 return;
             }
         }
@@ -63,12 +61,10 @@ public class JobsBridge extends Bridge {
             }
             event.setReplacedObject(jobList.getObjectAttribute(attribute.fulfill(1)));
         }
-
         if (j == null) {
-            Debug.echoError("Invalid or missing job!");
+            attribute.echoError("Invalid or missing job!");
             return;
         }
-
         event.setReplacedObject(j.getObjectAttribute(attribute.fulfill(1)));
 
     }

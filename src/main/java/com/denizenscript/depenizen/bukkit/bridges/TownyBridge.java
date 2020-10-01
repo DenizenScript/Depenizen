@@ -75,7 +75,7 @@ public class TownyBridge extends Bridge {
                     }
                 }
                 catch (NotRegisteredException e) {
-                    Debug.echoError("World specified is not a registered towny world!");
+                    attribute.echoError("World specified is not a registered towny world!");
                     return;
                 }
             }
@@ -104,14 +104,14 @@ public class TownyBridge extends Bridge {
                 town = attribute.contextAsType(1, TownTag.class);
             }
             else {
-                Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid town!");
+                attribute.echoError("Could not match '" + attribute.getContext(1) + "' to a valid town!");
                 return;
             }
             if (town != null) {
                 event.setReplacedObject(town.getObjectAttribute(attribute.fulfill(1)));
             }
-            else if (!event.hasAlternative()) {
-                Debug.echoError("Unknown town '" + attribute.getContext(1) + "' for town[] tag.");
+            else {
+                attribute.echoError("Unknown town '" + attribute.getContext(1) + "' for town[] tag.");
             }
         }
     }
@@ -132,15 +132,14 @@ public class TownyBridge extends Bridge {
                 nation = attribute.contextAsType(1, NationTag.class);
             }
             else {
-                Debug.echoError("Could not match '" + attribute.getContext(1) + "' to a valid nation!");
+                attribute.echoError("Could not match '" + attribute.getContext(1) + "' to a valid nation!");
                 return;
             }
-
             if (nation != null) {
                 event.setReplacedObject(nation.getObjectAttribute(attribute.fulfill(1)));
             }
-            else if (!event.hasAlternative()) {
-                Debug.echoError("Unknown nation '" + attribute.getContext(1) + "' for nation[] tag.");
+            else {
+                attribute.echoError("Unknown nation '" + attribute.getContext(1) + "' for nation[] tag.");
             }
         }
 

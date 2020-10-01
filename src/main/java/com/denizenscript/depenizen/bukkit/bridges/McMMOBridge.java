@@ -51,8 +51,8 @@ public class McMMOBridge extends Bridge {
             if (party != null) {
                 event.setReplacedObject(party.getObjectAttribute(attribute.fulfill(1)));
             }
-            else if (!event.hasAlternative()) {
-                Debug.echoError("Unknown party '" + attribute.getContext(1) + "' for party[] tag.");
+            else {
+                attribute.echoError("Unknown party '" + attribute.getContext(1) + "' for party[] tag.");
             }
         }
     }

@@ -53,8 +53,8 @@ public class PVPArenaBridge extends Bridge {
             if (arena != null) {
                 event.setReplacedObject(arena.getObjectAttribute(attribute.fulfill(1)));
             }
-            else if (!event.hasAlternative()) {
-                Debug.echoError("Unknown arena '" + attribute.getContext(1) + "' for pvparena[] tag.");
+            else {
+                attribute.echoError("Unknown arena '" + attribute.getContext(1) + "' for pvparena[] tag.");
             }
             return;
         }

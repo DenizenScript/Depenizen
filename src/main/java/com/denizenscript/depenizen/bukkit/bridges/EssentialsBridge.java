@@ -60,10 +60,10 @@ public class EssentialsBridge extends Bridge {
                     event.setReplacedObject(new LocationTag(loc).getObjectAttribute(attribute.fulfill(1)));
                 }
                 catch (WarpNotFoundException e) {
-                    Debug.echoError("Warp not found");
+                    attribute.echoError("Warp not found");
                 }
                 catch (InvalidWorldException e) {
-                    Debug.echoError("Invalid world for getting warp");
+                    attribute.echoError("Invalid world for getting warp");
                 }
             }
         }
