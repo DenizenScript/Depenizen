@@ -3,7 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.mcmmo;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.gmail.nossr50.api.ExperienceAPI;
-import com.gmail.nossr50.datatypes.skills.SkillType;
+import com.gmail.nossr50.datatypes.skills.PrimarySkillType;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -179,7 +179,7 @@ public class McMMOPlayerProperties implements Property {
                             .getAttribute(attribute.fulfill(1));
                 }
                 else {
-                    if (SkillType.getSkill(attribute.getContext(1)) != null) {
+                    if (PrimarySkillType.getSkill(attribute.getContext(1)) != null) {
                         return new ElementTag(ExperienceAPI.getPlayerRankSkill(player.getOfflinePlayer().getUniqueId(), attribute.getContext(1)))
                                 .getAttribute(attribute.fulfill(1));
                     }

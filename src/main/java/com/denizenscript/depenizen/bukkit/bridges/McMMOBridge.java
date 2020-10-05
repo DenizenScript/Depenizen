@@ -11,7 +11,6 @@ import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.DenizenAPI;
-import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.tags.TagRunnable;
@@ -46,6 +45,14 @@ public class McMMOBridge extends Bridge {
     public void tagEvent(ReplaceableTagEvent event) {
         Attribute attribute = event.getAttributes();
 
+        // <--[tag]
+        // @attribute <party[<party>]>
+        // @returns PartyTag
+        // @plugin Depenizen, mcMMO
+        // @description
+        // Returns a party object constructed from the input value.
+        // Refer to <@link language PartyTag objects>.
+        // -->
         if (attribute.startsWith("party") && attribute.hasContext(1)) {
             PartyTag party = attribute.contextAsType(1, PartyTag.class);
             if (party != null) {

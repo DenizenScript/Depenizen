@@ -7,7 +7,7 @@ import com.gmail.nossr50.api.PartyAPI;
 import com.gmail.nossr50.config.Config;
 import com.gmail.nossr50.config.experience.ExperienceConfig;
 import com.gmail.nossr50.database.DatabaseManagerFactory;
-import com.gmail.nossr50.datatypes.skills.SkillType;
+import com.gmail.nossr50.datatypes.skills.PrimarySkillType;
 import com.gmail.nossr50.party.PartyManager;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
@@ -63,36 +63,29 @@ public class McMMOCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry.getProcessedArgs()) {
-
             if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("state")
                     && arg.matchesPrefix("state")
                     && arg.matchesEnum(State.values())) {
                 scriptEntry.addObject("state", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("party")
                     && arg.matchesPrefix("party")) {
                 scriptEntry.addObject("party", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("skill")
                     && arg.matchesPrefix("skill")) {
                 scriptEntry.addObject("skill", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("quantity")
                     && arg.matchesPrefix("q", "qty", "quantity")
                     && arg.matchesFloat()) {
                 scriptEntry.addObject("quantity", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("type")
                     && arg.matchesEnum(Type.values())) {
                 scriptEntry.addObject("type", arg.asElement());
@@ -100,41 +93,32 @@ public class McMMOCommand extends AbstractCommand {
             else {
                 arg.reportUnhandled();
             }
-
         }
-
         if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Must specify a valid action!");
         }
-
         if (!scriptEntry.hasObject("type")) {
             throw new InvalidArgumentsException("Must specify a valid type!");
         }
-
         scriptEntry.defaultObject("state", new ElementTag("TOGGLE"))
                 .defaultObject("qty", new ElementTag(-1));
-
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         ElementTag action = scriptEntry.getElement("action");
         ElementTag state = scriptEntry.getElement("state");
         ElementTag type = scriptEntry.getElement("type");
         ElementTag quantity = scriptEntry.getElement("quantity");
         ElementTag party = scriptEntry.getElement("party");
         ElementTag skill = scriptEntry.getElement("skill");
-
         PlayerTag player = Utilities.getEntryPlayer(scriptEntry);
-
-        Debug.report(scriptEntry, getName(), action.debug() + type.debug() + (state != null ? state.debug() : "") + quantity.debug()
-                + (party != null ? party.debug() : "") + (skill != null ? skill.debug() : ""));
-
+        if (scriptEntry.dbCallShouldDebug()) {
+            Debug.report(scriptEntry, getName(), action.debug() + type.debug() + (state != null ? state.debug() : "") + quantity.debug()
+                    + (party != null ? party.debug() : "") + (skill != null ? skill.debug() : ""));
+        }
         switch (Action.valueOf(action.asString().toUpperCase())) {
-
             case ADD: {
-
                 if (quantity.asDouble() >= 0 && skill != null && player != null) {
                     switch (Type.valueOf(type.asString().toUpperCase())) {
                         case LEVELS: {
@@ -160,10 +144,8 @@ public class McMMOCommand extends AbstractCommand {
                     PartyAPI.addToParty(player.getPlayerEntity(), party.asString());
                 }
                 break;
-
             }
             case REMOVE: {
-
                 if (quantity.asDouble() >= 0 && skill != null && player != null) {
                     switch (Type.valueOf(type.asString().toUpperCase())) {
                         case LEVELS: {
@@ -196,13 +178,11 @@ public class McMMOCommand extends AbstractCommand {
                     }
                 }
                 else if (player != null) {
-                    DatabaseManagerFactory.getDatabaseManager().removeUser(player.getName());
+                    DatabaseManagerFactory.getDatabaseManager().removeUser(player.getName(), player.getOfflinePlayer().getUniqueId());
                 }
                 break;
-
             }
             case SET: {
-
                 if (quantity.asDouble() >= 0 && skill != null && player != null) {
                     switch (Type.valueOf(type.asString().toUpperCase())) {
                         case LEVELS: {
@@ -243,9 +223,8 @@ public class McMMOCommand extends AbstractCommand {
                             if (skill == null) {
                                 return;
                             }
-                            SkillType skillType = SkillType.getSkill(skill.asString());
+                            PrimarySkillType skillType = PrimarySkillType.getSkill(skill.asString());
                             boolean isEnabled = Config.getInstance().getHardcoreStatLossEnabled(skillType);
-
                             switch (State.valueOf(state.asString().toUpperCase())) {
                                 case TOGGLE: {
                                     Config.getInstance().setHardcoreStatLossEnabled(skillType, !isEnabled);
@@ -266,9 +245,8 @@ public class McMMOCommand extends AbstractCommand {
                             if (skill == null) {
                                 return;
                             }
-                            SkillType skillType = SkillType.getSkill(skill.asString());
+                            PrimarySkillType skillType = PrimarySkillType.getSkill(skill.asString());
                             boolean isEnabled = Config.getInstance().getHardcoreVampirismEnabled(skillType);
-
                             switch (State.valueOf(state.asString().toUpperCase())) {
                                 case TOGGLE: {
                                     Config.getInstance().setHardcoreVampirismEnabled(skillType, !isEnabled);
@@ -288,7 +266,6 @@ public class McMMOCommand extends AbstractCommand {
                     }
                 }
                 break;
-
             }
         }
 
