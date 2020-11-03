@@ -72,7 +72,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     @EventHandler
     public void onSentinelAttack(SentinelAttackEvent event) {
         npc = new NPCTag(event.getNPC());
-        entity = new EntityTag(event.getNPC().getTrait(SentinelTrait.class).chasing).getDenizenObject();
+        entity = new EntityTag(event.getNPC().getOrAddTrait(SentinelTrait.class).chasing).getDenizenObject();
         this.event = event;
         fire(event);
     }

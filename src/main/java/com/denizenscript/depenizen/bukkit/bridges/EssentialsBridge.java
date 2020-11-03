@@ -9,7 +9,6 @@ import com.earth2me.essentials.commands.WarpNotFoundException;
 import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.denizencore.objects.core.ListTag;

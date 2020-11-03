@@ -83,7 +83,7 @@ public class SentinelNPCProperties implements Property {
             if (!npc.getCitizen().hasTrait(SentinelTrait.class)) {
                 return null;
             }
-            SentinelTrait sentinel = npc.getCitizen().getTrait(SentinelTrait.class);
+            SentinelTrait sentinel = npc.getCitizen().getOrAddTrait(SentinelTrait.class);
 
             // <--[tag]
             // @attribute <NPCTag.sentinel.chasing>

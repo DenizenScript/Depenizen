@@ -53,31 +53,31 @@ public class LibsDisguiseCommand extends AbstractCommand {
     //
     // @Usage
     // Use to disguise the linked player as a different player named Bob.
-    // - disguise player name:Bob
+    // - libsdisguise player name:Bob
     //
     // @Usage
     // Use to disguise the linked player as a baby Zombie, which can only be seen by other players.
-    // - disguise mob type:ZOMBIE baby:true self:true
+    // - libsdisguise mob type:ZOMBIE baby:true self:true
     //
     // @Usage
     // Use to disguise the linked player as a Boat.
-    // - disguise misc type:Boat
+    // - libsdisguise misc type:Boat
     //
     // @Usage
     // Use to disguise the linked player as a Sponge Block.
-    // - disguise misc type:Falling_Block id:19 data:0
+    // - libsdisguise misc type:Falling_Block id:19 data:0
     //
     // @Usage
     // Use to remove the disguise from the linked player.
-    // - disguise remove
+    // - libsdisguise remove
     //
     // @Usage
     // Use to disguise an entity as a player named Bob.
-    // - disguise player target:<player.target> name:Bob
+    // - libsdisguise player target:<player.target> name:Bob
     //
     // @Usage
     // Use to remove a disguise from an entity.
-    // - disguise remove target:<player.target>
+    // - libsdisguise remove target:<player.target>
     //
     // -->
 

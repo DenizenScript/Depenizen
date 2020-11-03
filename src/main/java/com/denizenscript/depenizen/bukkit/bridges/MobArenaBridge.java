@@ -10,7 +10,6 @@ import com.denizenscript.depenizen.bukkit.properties.mobarena.MobArenaPlayerProp
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArenaTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.DenizenAPI;
-import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.tags.TagRunnable;

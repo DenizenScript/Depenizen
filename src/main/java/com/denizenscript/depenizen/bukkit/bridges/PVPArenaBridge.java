@@ -8,7 +8,6 @@ import com.denizenscript.depenizen.bukkit.properties.pvparena.PVPArenaPlayerProp
 import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArenaTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.tags.TagRunnable;
