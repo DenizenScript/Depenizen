@@ -101,7 +101,7 @@ public class McMMOCommand extends AbstractCommand {
             throw new InvalidArgumentsException("Must specify a valid type!");
         }
         scriptEntry.defaultObject("state", new ElementTag("TOGGLE"))
-                .defaultObject("qty", new ElementTag(-1));
+                .defaultObject("quantity", new ElementTag(-1));
     }
 
     @Override

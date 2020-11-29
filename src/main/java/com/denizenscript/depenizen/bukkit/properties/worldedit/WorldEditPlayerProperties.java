@@ -12,8 +12,6 @@ import com.sk89q.worldedit.function.pattern.BlockPattern;
 import com.sk89q.worldedit.function.pattern.Pattern;
 import com.sk89q.worldedit.regions.RegionSelector;
 import com.sk89q.worldedit.world.item.ItemType;
-import com.denizenscript.denizen.nms.NMSHandler;
-import com.denizenscript.denizen.nms.NMSVersion;
 import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -72,7 +70,7 @@ public class WorldEditPlayerProperties implements Property {
     Player player;
 
     public static Material deLegacy(Material mat) {
-        if (NMSHandler.getVersion().isAtLeast(NMSVersion.v1_13) && mat.isLegacy()) {
+        if (mat.isLegacy()) {
             return Bukkit.getUnsafe().fromLegacy(mat);
         }
         return mat;
