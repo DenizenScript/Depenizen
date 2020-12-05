@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
+import com.denizenscript.denizen.Denizen;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyCommandPacketOut;
@@ -18,9 +19,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
-import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -32,6 +31,8 @@ import org.bukkit.Bukkit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.denizenscript.denizencore.events.ScriptEvent.*;
 
 public class BungeeBridge {
 
@@ -199,17 +200,17 @@ public class BungeeBridge {
 
     public void successInit() {
         instance = this;
-        ScriptEvent.registerScriptEvent(new BungeePlayerJoinsScriptEvent());
-        ScriptEvent.registerScriptEvent(new BungeePlayerQuitsScriptEvent());
-        ScriptEvent.registerScriptEvent(new BungeePlayerServerSwitchScriptEvent());
-        ScriptEvent.registerScriptEvent(new BungeeProxyServerCommandScriptEvent());
-        ScriptEvent.registerScriptEvent(new BungeeProxyServerListPingScriptEvent());
-        ScriptEvent.registerScriptEvent(new BungeeServerConnectScriptEvent());
-        ScriptEvent.registerScriptEvent(new BungeeServerDisconnectScriptEvent());
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(BungeeRunCommand.class);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(BungeeExecuteCommand.class);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(BungeeCommand.class);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(BungeeTagCommand.class);
+        registerScriptEvent(new BungeePlayerJoinsScriptEvent());
+        registerScriptEvent(new BungeePlayerQuitsScriptEvent());
+        registerScriptEvent(new BungeePlayerServerSwitchScriptEvent());
+        registerScriptEvent(new BungeeProxyServerCommandScriptEvent());
+        registerScriptEvent(new BungeeProxyServerListPingScriptEvent());
+        registerScriptEvent(new BungeeServerConnectScriptEvent());
+        registerScriptEvent(new BungeeServerDisconnectScriptEvent());
+        Denizen.getInstance().getCommandRegistry().registerCommand(BungeeRunCommand.class);
+        Denizen.getInstance().getCommandRegistry().registerCommand(BungeeExecuteCommand.class);
+        Denizen.getInstance().getCommandRegistry().registerCommand(BungeeCommand.class);
+        Denizen.getInstance().getCommandRegistry().registerCommand(BungeeTagCommand.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

@@ -1,6 +1,5 @@
 package com.denizenscript.depenizen.bukkit.utilities.mythicmobs;
-
-import com.denizenscript.denizen.utilities.DenizenAPI;
+import com.denizenscript.denizen.Denizen;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.conditions.DenizenCondition;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.targeters.DenizenEntityTargeter;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.targeters.DenizenLocationTargeter;
@@ -13,7 +12,7 @@ import org.bukkit.event.Listener;
 public class MythicMobsLoaders implements Listener {
 
     public void RegisterEvents() {
-        Bukkit.getServer().getPluginManager().registerEvents(this, DenizenAPI.getCurrentInstance());
+        Bukkit.getServer().getPluginManager().registerEvents(this, Denizen.getInstance());
     }
 
     // <--[language]

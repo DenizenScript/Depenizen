@@ -1,6 +1,5 @@
 package com.denizenscript.depenizen.bukkit;
-
-import com.denizenscript.denizen.utilities.DenizenAPI;
+import com.denizenscript.denizen.Denizen;
 import com.denizenscript.depenizen.bukkit.bridges.*;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.utilities.BridgeLoadException;
@@ -47,7 +46,7 @@ public class Depenizen extends JavaPlugin {
             BungeeBridge.instance.onShutdown();
         }
         // To prevent issue with onDisable order, tell Denizen to shutdown NOW (it won't repeat itself).
-        DenizenAPI.getCurrentInstance().onDisable();
+        Denizen.getInstance().onDisable();
     }
 
     public void checkLoadBungeeBridge() {

@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
@@ -9,7 +10,6 @@ import com.denizenscript.depenizen.bukkit.commands.playerpoints.PlayerPointsComm
 import com.denizenscript.depenizen.bukkit.properties.playerpoints.PlayerPointsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import org.black_ixx.playerpoints.PlayerPoints;
 import org.black_ixx.playerpoints.models.SortedPlayer;
@@ -26,7 +26,7 @@ public class PlayerPointsBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(PlayerPointsCommand.class);
+        Denizen.getInstance().getCommandRegistry().registerCommand(PlayerPointsCommand.class);
         PropertyParser.registerProperty(PlayerPointsPlayerProperties.class, PlayerTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override

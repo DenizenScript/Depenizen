@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.Denizen;
 import com.denizenscript.depenizen.bukkit.events.mobarena.MobArenaStartsScriptEvent;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.garbagemule.MobArena.MobArena;
@@ -9,7 +10,6 @@ import com.denizenscript.depenizen.bukkit.events.mobarena.MobArenaEndsScriptEven
 import com.denizenscript.depenizen.bukkit.properties.mobarena.MobArenaPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArenaTag;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.tags.TagRunnable;
@@ -34,7 +34,7 @@ public class MobArenaBridge extends Bridge {
                 tagEvent(event);
             }
         }, "mobarena");
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(MobArenaCommand.class);
+        Denizen.getInstance().getCommandRegistry().registerCommand(MobArenaCommand.class);
         ScriptEvent.registerScriptEvent(new MobArenaStartsScriptEvent());
         ScriptEvent.registerScriptEvent(new MobArenaEndsScriptEvent());
         ScriptEvent.registerScriptEvent(new MobArenaWaveChangesScriptEvent());

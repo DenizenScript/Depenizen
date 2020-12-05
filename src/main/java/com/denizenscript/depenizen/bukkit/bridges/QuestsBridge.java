@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -13,7 +14,6 @@ import com.denizenscript.depenizen.bukkit.properties.quests.QuestsPlayerProperti
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.quests.QuestsCommand;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.DenizenAPI;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quests;
@@ -26,7 +26,7 @@ public class QuestsBridge extends Bridge {
     public void init() {
         instance = this;
         PropertyParser.registerProperty(QuestsPlayerProperties.class, PlayerTag.class);
-        DenizenAPI.getCurrentInstance().getCommandRegistry().registerCommand(QuestsCommand.class);
+        Denizen.getInstance().getCommandRegistry().registerCommand(QuestsCommand.class);
         ScriptEvent.registerScriptEvent(new PlayerCompletesQuestScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerFailsQuestScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerStartsQuestScriptEvent());
