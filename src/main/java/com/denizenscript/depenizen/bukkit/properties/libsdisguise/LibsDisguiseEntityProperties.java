@@ -39,7 +39,7 @@ public class LibsDisguiseEntityProperties implements Property {
     }
 
     public static final String[] handledTags = new String[] {
-            "is_disguised", "disguise"
+            "libsdisguise_is_disguised", "libsdisguise_disguise"
     };
 
     public static final String[] handledMechs = new String[] {
@@ -58,24 +58,24 @@ public class LibsDisguiseEntityProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <EntityTag.is_disguised>
+        // @attribute <EntityTag.libsdisguise_is_disguised>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, LibsDisguises
         // @description
         // Returns whether the entity is in a disguise.
         // -->
-        if (attribute.startsWith("is_disguised") || attribute.startsWith("is_disguise")) {
+        if (attribute.startsWith("libsdisguise_is_disguised")) {
             return new ElementTag(DisguiseAPI.isDisguised(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
-        // @attribute <EntityTag.disguise>
+        // @attribute <EntityTag.libsdisguise_disguise>
         // @returns LibsDisguiseTag
         // @plugin Depenizen, LibsDisguises
         // @description
         // Returns the disguise of the entity.
         // -->
-        if (attribute.startsWith("disguise")
+        if (attribute.startsWith("libsdisguise_disguise")
                 && DisguiseAPI.isDisguised(entity.getBukkitEntity())) {
             return new LibsDisguiseTag(DisguiseAPI.getDisguise(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
         }
