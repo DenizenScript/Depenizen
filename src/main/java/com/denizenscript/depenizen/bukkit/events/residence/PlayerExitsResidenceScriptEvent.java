@@ -4,7 +4,6 @@ import com.bekvon.bukkit.residence.event.ResidenceChangedEvent;
 import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import org.bukkit.event.EventHandler;
@@ -61,7 +60,7 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()), null);
+        return new BukkitScriptEntryData(event.getPlayer());
     }
 
     @Override

@@ -70,7 +70,7 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()), null);
+        return new BukkitScriptEntryData(event.getPlayer());
     }
 
     @Override

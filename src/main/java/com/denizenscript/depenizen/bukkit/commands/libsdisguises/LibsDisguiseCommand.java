@@ -48,8 +48,8 @@ public class LibsDisguiseCommand extends AbstractCommand {
     // Optionally specify 'self:true' to hide the disguise from the target player, so they still see their normal player (defaults to false).
     //
     // @Tags
-    // <EntityTag.is_disguised>
-    // <EntityTag.disguise>
+    // <EntityTag.libsdisguise_is_disguised>
+    // <EntityTag.libsdisguise_disguise>
     //
     // @Usage
     // Use to disguise the linked player as a different player named Bob.

@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.events.pvparena;
 import com.denizenscript.depenizen.bukkit.objects.pvparena.PVPArenaArenaTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import net.slipcor.pvparena.events.PAExitEvent;
@@ -51,7 +50,7 @@ public class PlayerExitsPVPArenaScriptEvent extends BukkitScriptEvent implements
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()), null);
+        return new BukkitScriptEntryData(event.getPlayer());
     }
 
     @Override
