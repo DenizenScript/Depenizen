@@ -55,7 +55,7 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(event.getPlayer());
+        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()), null);
     }
 
     @Override
