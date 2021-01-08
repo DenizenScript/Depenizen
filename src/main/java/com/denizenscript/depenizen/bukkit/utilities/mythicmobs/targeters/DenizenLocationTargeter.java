@@ -2,9 +2,9 @@ package com.denizenscript.depenizen.bukkit.utilities.mythicmobs.targeters;
 
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizencore.events.OldEventManager;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.scripts.queues.ContextSource;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -21,14 +21,14 @@ import java.util.List;
 public class DenizenLocationTargeter extends ILocationSelector {
 
     final String tag;
-    OldEventManager.OldEventContextSource source;
+    ContextSource.SimpleMap source;
     HashMap<String, ObjectTag> context;
 
     public DenizenLocationTargeter(MythicLineConfig mlc) {
         super(mlc);
         tag = mlc.getString("tag");
         context = new HashMap<>();
-        source = new OldEventManager.OldEventContextSource();
+        source = new ContextSource.SimpleMap();
         source.contexts = new HashMap<>();
     }
 
@@ -39,7 +39,7 @@ public class DenizenLocationTargeter extends ILocationSelector {
         source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
         ObjectTag object = TagManager.tagObject( tag , tagContext);
         List<LocationTag> list = (object.asType(ListTag.class, tagContext)).filter(LocationTag.class, tagContext);
-        HashSet<AbstractLocation> locations = new HashSet<AbstractLocation>();
+        HashSet<AbstractLocation> locations = new HashSet<>();
         for (LocationTag location : list) {
             locations.add(BukkitAdapter.adapt(location));
         }

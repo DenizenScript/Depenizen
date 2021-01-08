@@ -1,9 +1,9 @@
 package com.denizenscript.depenizen.bukkit.utilities.mythicmobs.targeters;
 
 import com.denizenscript.denizen.objects.EntityTag;
-import com.denizenscript.denizencore.events.OldEventManager;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.scripts.queues.ContextSource;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -20,14 +20,14 @@ import java.util.List;
 public class DenizenEntityTargeter extends IEntitySelector {
 
     final String tag;
-    OldEventManager.OldEventContextSource source;
+    ContextSource.SimpleMap source;
     HashMap<String, ObjectTag> context;
 
     public DenizenEntityTargeter(MythicLineConfig mlc) {
         super(mlc);
         tag = mlc.getString("tag");
         context = new HashMap<>();
-        source = new OldEventManager.OldEventContextSource();
+        source = new ContextSource.SimpleMap();
         source.contexts = new HashMap<>();
     }
 
@@ -38,7 +38,7 @@ public class DenizenEntityTargeter extends IEntitySelector {
         source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
         ObjectTag object = TagManager.tagObject(tag, tagContext);
         List<EntityTag> list = object.asType(ListTag.class, tagContext).filter(EntityTag.class, tagContext);
-        HashSet<AbstractEntity> entities = new HashSet<AbstractEntity>();
+        HashSet<AbstractEntity> entities = new HashSet<>();
         for (EntityTag entity : list) {
             entities.add(BukkitAdapter.adapt(entity.getBukkitEntity()));
         }

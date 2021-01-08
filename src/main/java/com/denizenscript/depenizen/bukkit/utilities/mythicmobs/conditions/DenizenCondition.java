@@ -2,9 +2,9 @@ package com.denizenscript.depenizen.bukkit.utilities.mythicmobs.conditions;
 
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizencore.events.OldEventManager;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.scripts.queues.ContextSource;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -22,12 +22,12 @@ import java.util.HashMap;
 public class DenizenCondition extends SkillCondition implements IEntityCondition, ILocationCondition, ICasterCondition, ISkillMetaCondition, IEntityComparisonCondition {
 
     final String tag;
-    OldEventManager.OldEventContextSource source;
+    ContextSource.SimpleMap source;
 
     public DenizenCondition(String line, MythicLineConfig mlc) {
         super(line);
         tag = mlc.getString("tag");
-        source = new OldEventManager.OldEventContextSource();
+        source = new ContextSource.SimpleMap();
         source.contexts = new HashMap<>();
     }
 
