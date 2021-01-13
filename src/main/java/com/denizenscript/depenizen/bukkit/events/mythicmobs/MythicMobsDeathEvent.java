@@ -31,7 +31,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     //
     // @Regex ^on mythicmob [^\s]+ (dies|death|killed)$
     //
-    // @Switch in:<area> to only process the event if it occurred within a specified area.
+    // @Location true
     // @Switch by:<entity> to only process the event if the killer matches a specified entity type.
     //
     // @Triggers when a MythicMob dies.

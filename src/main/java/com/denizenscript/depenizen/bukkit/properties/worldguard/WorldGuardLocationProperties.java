@@ -87,7 +87,7 @@ public class WorldGuardLocationProperties implements Property {
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <LocationTag.in_region[<name>|...]>
+        // @attribute <LocationTag.in_region[(<name>|...)]>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, WorldGuard
         // @description

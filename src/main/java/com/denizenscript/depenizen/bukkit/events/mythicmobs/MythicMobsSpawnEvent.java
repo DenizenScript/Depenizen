@@ -21,7 +21,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
     //
     // @Regex ^on mythicmob [^\s]+ spawns$
     //
-    // @Switch in:<area> to only process the event if it occurred within a specified area.
+    // @Location true
     //
     // @Triggers when a MythicMob spawns.
     //
