@@ -286,14 +286,14 @@
         <dependency>
             <groupId>com.palmergames</groupId>
             <artifactId>Towny</artifactId>
-            <version>0.96</version>
+            <version>0.96.7</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Towny.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.palmergames</groupId>
             <artifactId>TownyChat</artifactId>
-            <version>0.45</version>
+            <version>0.86</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/TownyChat.jar</systemPath>
         </dependency>
