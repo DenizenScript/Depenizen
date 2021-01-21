@@ -1,26 +1,22 @@
 package com.denizenscript.depenizen.bukkit.objects.towny;
 
+import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
-import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.Town;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
-import com.palmergames.bukkit.towny.object.WorldCoord;
+import com.palmergames.bukkit.towny.object.*;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Location;
 
-public class TownTag implements ObjectTag {
+public class TownTag implements ObjectTag, Adjustable {
 
     // <--[language]
     // @name TownTag Objects
@@ -172,6 +168,7 @@ public class TownTag implements ObjectTag {
         // @attribute <TownTag.balance>
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, Towny
+        // @mechanism TownTag.balance
         // @description
         // Returns the current money balance of the town.
         // -->
@@ -418,6 +415,21 @@ public class TownTag implements ObjectTag {
         }
 
         // <--[tag]
+        // @attribute <TownTag.plot_names>
+        // @returns ListTag
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns a list of the names of town plots.
+        // -->
+        else if (attribute.startsWith("plot_names")) {
+            ListTag output = new ListTag();
+            for (PlotGroup group : town.getPlotObjectGroups()) {
+                output.add(group.getName());
+            }
+            return output.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <TownTag.plottax>
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, Towny
@@ -441,5 +453,37 @@ public class TownTag implements ObjectTag {
 
         return new ElementTag(identify()).getAttribute(attribute);
 
+    }
+
+    @Override
+    public void adjust(Mechanism mechanism) {
+
+        // <--[mechanism]
+        // @object TownTag
+        // @name balance
+        // @input ElementTag(Decimal)|ElementTag
+        // @description
+        // Sets the money balance of a town, with a reason for the change.
+        // @tags
+        // <TownTag.balance>
+        // -->
+        if (mechanism.matches("balance")) {
+            ListTag input = mechanism.valueAsType(ListTag.class);
+            if (input.size() != 2 || !ArgumentHelper.matchesDouble(input.get(0))) {
+                mechanism.echoError("Invalid balance mech input.");
+                return;
+            }
+            try {
+                town.getAccount().setBalance(new ElementTag(input.get(0)).asDouble(), input.get(1));
+            }
+            catch (EconomyException ex) {
+                Debug.echoError(ex);
+            }
+        }
+    }
+
+    @Override
+    public void applyProperty(Mechanism mechanism) {
+        Debug.echoError("Cannot apply properties to a Towny town!");
     }
 }
