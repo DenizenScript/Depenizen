@@ -316,7 +316,7 @@
             <artifactId>Votifier</artifactId>
             <version>1.9</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/Votifier.jar</systemPath>
+            <systemPath>${basedir}/lib/nuvotifier.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
