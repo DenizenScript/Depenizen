@@ -237,7 +237,7 @@
         <dependency>
             <groupId>praxis.slipcor</groupId>
             <artifactId>pvpstats</artifactId>
-            <version>0.8.18</version>
+            <version>1.7.40</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/pvpstats.jar</systemPath>
         </dependency>

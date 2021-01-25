@@ -6,7 +6,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import net.slipcor.pvpstats.PVPData;
+import net.slipcor.pvpstats.api.PlayerStatisticsBuffer;
 
 public class PVPStatsPlayerProperties implements Property {
 
@@ -46,16 +46,14 @@ public class PVPStatsPlayerProperties implements Property {
     }; // None
 
     public PVPStatsPlayerProperties(PlayerTag player) {
-        this.playerName = player.getName();
+        this.player = player;
     }
 
-    String playerName;
+    PlayerTag player;
 
     @Override
     public String getAttribute(Attribute attribute) {
-
         if (attribute.startsWith("pvpstats")) {
-
             attribute = attribute.fulfill(1);
 
             // <--[tag]
@@ -66,7 +64,7 @@ public class PVPStatsPlayerProperties implements Property {
             // Returns the number of times the player has died.
             // -->
             if (attribute.startsWith("deaths")) {
-                return new ElementTag(PVPData.getDeaths(playerName)).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PlayerStatisticsBuffer.getDeaths(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -77,7 +75,7 @@ public class PVPStatsPlayerProperties implements Property {
             // Returns the Elo rating of the player.
             // -->
             if (attribute.startsWith("elo")) {
-                return new ElementTag(PVPData.getEloScore(playerName)).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PlayerStatisticsBuffer.getEloScore(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -88,7 +86,7 @@ public class PVPStatsPlayerProperties implements Property {
             // Returns the number of players the player has killed.
             // -->
             if (attribute.startsWith("kills")) {
-                return new ElementTag(PVPData.getKills(playerName)).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PlayerStatisticsBuffer.getKills(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -99,7 +97,7 @@ public class PVPStatsPlayerProperties implements Property {
             // Returns the current kill streak of the player.
             // -->
             if (attribute.startsWith("streak")) {
-                return new ElementTag(PVPData.getStreak(playerName)).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PlayerStatisticsBuffer.getStreak(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -110,12 +108,9 @@ public class PVPStatsPlayerProperties implements Property {
             // Returns the highest kill streak of the player.
             // -->
             if (attribute.startsWith("max_streak")) {
-                return new ElementTag(PVPData.getMaxStreak(playerName)).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PlayerStatisticsBuffer.getMaxStreak(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
             }
-
         }
-
         return null;
-
     }
 }

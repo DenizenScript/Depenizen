@@ -423,6 +423,9 @@ public class TownTag implements ObjectTag, Adjustable {
         // -->
         else if (attribute.startsWith("plot_names")) {
             ListTag output = new ListTag();
+            if (!town.hasPlotGroups()) {
+                return null;
+            }
             for (PlotGroup group : town.getPlotObjectGroups()) {
                 output.add(group.getName());
             }
