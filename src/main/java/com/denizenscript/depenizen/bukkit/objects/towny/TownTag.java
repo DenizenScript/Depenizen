@@ -415,19 +415,34 @@ public class TownTag implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <TownTag.plot_names>
+        // @attribute <TownTag.plot_object_group_names>
         // @returns ListTag
         // @plugin Depenizen, Towny
         // @description
-        // Returns a list of the names of town plots.
+        // Returns a list of the names of town plot object groups.
         // -->
-        else if (attribute.startsWith("plot_names")) {
+        else if (attribute.startsWith("plot_object_group_names")) {
             ListTag output = new ListTag();
             if (!town.hasPlotGroups()) {
                 return null;
             }
             for (PlotGroup group : town.getPlotObjectGroups()) {
                 output.add(group.getName());
+            }
+            return output.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <TownTag.plots>
+        // @returns ListTag(LocationTag)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns a list of the names of town plots.
+        // -->
+        else if (attribute.startsWith("plots")) {
+            ListTag output = new ListTag();
+            for (TownBlock block : town.getTownBlocks()) {
+                output.addObject(new LocationTag(block.getX(), 0, block.getZ(), block.getWorld().getName()));
             }
             return output.getAttribute(attribute.fulfill(1));
         }
