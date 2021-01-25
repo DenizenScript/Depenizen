@@ -1,5 +1,7 @@
 package com.denizenscript.depenizen.bukkit.objects.towny;
 
+import com.denizenscript.denizen.objects.ChunkTag;
+import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
@@ -442,7 +444,7 @@ public class TownTag implements ObjectTag, Adjustable {
         else if (attribute.startsWith("plots")) {
             ListTag output = new ListTag();
             for (TownBlock block : town.getTownBlocks()) {
-                output.addObject(new LocationTag(block.getX(), 0, block.getZ(), block.getWorld().getName()));
+                output.addObject(new ChunkTag(new WorldTag(block.getWorld().getName()), block.getX(), block.getZ()));
             }
             return output.getAttribute(attribute.fulfill(1));
         }
