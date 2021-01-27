@@ -178,7 +178,7 @@ public class McMMOCommand extends AbstractCommand {
                     }
                 }
                 else if (player != null) {
-                    DatabaseManagerFactory.getDatabaseManager().removeUser(player.getName(), player.getOfflinePlayer().getUniqueId());
+                    DatabaseManagerFactory.getDatabaseManager().removeUser(player.getName(), player.getUUID());
                 }
                 break;
             }

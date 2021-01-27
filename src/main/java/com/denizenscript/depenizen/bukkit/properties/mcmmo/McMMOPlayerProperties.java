@@ -76,7 +76,7 @@ public class McMMOPlayerProperties implements Property {
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else {
-                        return new ElementTag(ExperienceAPI.getPowerLevelOffline(player.getOfflinePlayer().getUniqueId()))
+                        return new ElementTag(ExperienceAPI.getPowerLevelOffline(player.getUUID()))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
@@ -86,7 +86,7 @@ public class McMMOPlayerProperties implements Property {
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else {
-                        return new ElementTag(ExperienceAPI.getLevelOffline(player.getOfflinePlayer().getUniqueId(), attribute.getContext(1)))
+                        return new ElementTag(ExperienceAPI.getLevelOffline(player.getUUID(), attribute.getContext(1)))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
@@ -124,7 +124,7 @@ public class McMMOPlayerProperties implements Property {
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else {
-                        return new ElementTag(ExperienceAPI.getOfflineXPToNextLevel(player.getOfflinePlayer().getUniqueId(), skill))
+                        return new ElementTag(ExperienceAPI.getOfflineXPToNextLevel(player.getUUID(), skill))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
@@ -142,7 +142,7 @@ public class McMMOPlayerProperties implements Property {
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else {
-                        return new ElementTag(ExperienceAPI.getLevelOffline(player.getOfflinePlayer().getUniqueId(), skill))
+                        return new ElementTag(ExperienceAPI.getLevelOffline(player.getUUID(), skill))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
@@ -159,7 +159,7 @@ public class McMMOPlayerProperties implements Property {
                             .getAttribute(attribute.fulfill(0));
                 }
                 else {
-                    return new ElementTag(ExperienceAPI.getOfflineXP(player.getOfflinePlayer().getUniqueId(), skill))
+                    return new ElementTag(ExperienceAPI.getOfflineXP(player.getUUID(), skill))
                             .getAttribute(attribute.fulfill(0));
                 }
 
@@ -180,7 +180,7 @@ public class McMMOPlayerProperties implements Property {
                 }
                 else {
                     if (PrimarySkillType.getSkill(attribute.getContext(1)) != null) {
-                        return new ElementTag(ExperienceAPI.getPlayerRankSkill(player.getOfflinePlayer().getUniqueId(), attribute.getContext(1)))
+                        return new ElementTag(ExperienceAPI.getPlayerRankSkill(player.getUUID(), attribute.getContext(1)))
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else if (!attribute.hasAlternative()) {

@@ -52,7 +52,7 @@ public class ASkyBlockPlayerProperties implements Property {
 
     public ASkyBlockPlayerProperties(PlayerTag player) {
         this.player = player;
-        skyblock = api.getIslandOwnedBy(player.getOfflinePlayer().getUniqueId());
+        skyblock = api.getIslandOwnedBy(player.getUUID());
     }
 
     ASkyBlockAPI api = ASkyBlockAPI.getInstance();
@@ -76,7 +76,7 @@ public class ASkyBlockPlayerProperties implements Property {
             // Returns whether the player has a skyblock.
             // -->
             if (attribute.startsWith("has_skyblock")) {
-                return new ElementTag(api.hasIsland(player.getOfflinePlayer().getUniqueId()))
+                return new ElementTag(api.hasIsland(player.getUUID()))
                         .getAttribute(attribute.fulfill(1));
             }
 
@@ -126,7 +126,7 @@ public class ASkyBlockPlayerProperties implements Property {
                 // Returns the level of the player's skyblock.
                 // -->
                 else if (attribute.startsWith("level")) {
-                    return new ElementTag(api.getIslandLevel(player.getOfflinePlayer().getUniqueId()))
+                    return new ElementTag(api.getIslandLevel(player.getUUID()))
                             .getAttribute(attribute.fulfill(1));
                 }
             }

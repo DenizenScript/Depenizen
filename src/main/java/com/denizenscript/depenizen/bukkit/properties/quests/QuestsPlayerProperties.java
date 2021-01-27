@@ -48,7 +48,7 @@ public class QuestsPlayerProperties implements Property {
         this.player = player;
         Quests quests = (Quests) QuestsBridge.instance.plugin;
         // This would be Quests.getInstance() but the developers of Quests did a stupid and broke that method.
-        this.quester = quests.getQuester(player.getOfflinePlayer().getUniqueId());
+        this.quester = quests.getQuester(player.getUUID());
     }
 
     PlayerTag player;

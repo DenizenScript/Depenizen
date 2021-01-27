@@ -53,7 +53,7 @@ public class EssentialsPlayerProperties implements Property {
     }
 
     public User getUser() {
-        return ((Essentials) EssentialsBridge.instance.plugin).getUser(player.getOfflinePlayer().getUniqueId());
+        return ((Essentials) EssentialsBridge.instance.plugin).getUser(player.getUUID());
     }
 
     PlayerTag player;
@@ -331,7 +331,7 @@ public class EssentialsPlayerProperties implements Property {
             ListTag split = mechanism.valueAsType(ListTag.class);
             PlayerTag otherPlayer = PlayerTag.valueOf(split.get(0), mechanism.context);
             boolean shouldIgnore = split.size() < 2 || new ElementTag(split.get(1)).asBoolean();
-            getUser().setIgnoredPlayer(ess.getUser(otherPlayer.getOfflinePlayer().getUniqueId()), shouldIgnore);
+            getUser().setIgnoredPlayer(ess.getUser(otherPlayer.getUUID()), shouldIgnore);
         }
 
     }

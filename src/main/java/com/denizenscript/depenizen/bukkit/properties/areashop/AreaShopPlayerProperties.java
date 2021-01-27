@@ -73,7 +73,7 @@ public class AreaShopPlayerProperties implements Property {
             // -->
             if (attribute.startsWith("owned")) {
                 ListTag list = new ListTag();
-                UUID uuid = player.getOfflinePlayer().getUniqueId();
+                UUID uuid = player.getUUID();
                 for (GeneralRegion region : AreaShop.getInstance().getFileManager().getRegions()) {
                     if (uuid.equals(region.getOwner())) {
                         list.addObject(new AreaShopTag(region));

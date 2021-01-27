@@ -84,7 +84,7 @@ public class BungeeRunCommand extends AbstractCommand {
         }
         RunScriptPacketOut packetScript = new RunScriptPacketOut();
         packetScript.playerUUID = Utilities.entryHasPlayer(scriptEntry) ?
-                Utilities.getEntryPlayer(scriptEntry).getOfflinePlayer().getUniqueId()
+                Utilities.getEntryPlayer(scriptEntry).getUUID()
                 : new UUID(0, 0);
         packetScript.scriptName = scriptName.asString();
         packetScript.defs = def.asString();

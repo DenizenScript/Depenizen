@@ -168,7 +168,7 @@ public class LuckPermsTrackTag implements ObjectTag {
                     attribute.echoError("Invalid player input for 'group' tag.");
                     return null;
                 }
-                User user = LuckPermsBridge.luckPermsInstance.getUserManager().getUser(player.getOfflinePlayer().getUniqueId());
+                User user = LuckPermsBridge.luckPermsInstance.getUserManager().getUser(player.getUUID());
                 List<String> trackGroups = track.getGroups();
                 List<String> memberGroups = user.resolveInheritedNodes(QueryOptions.nonContextual()).stream()
                         .filter(NodeType.INHERITANCE::matches)

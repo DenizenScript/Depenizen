@@ -120,7 +120,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
         }
         ReadTagPacketOut packetTag = new ReadTagPacketOut();
         packetTag.playerUUID = Utilities.entryHasPlayer(scriptEntry) ?
-                Utilities.getEntryPlayer(scriptEntry).getOfflinePlayer().getUniqueId()
+                Utilities.getEntryPlayer(scriptEntry).getUUID()
                 : new UUID(0, 0);
         packetTag.tag = tag.asString();
         packetTag.id = newId;

@@ -64,7 +64,7 @@ public class LuckPermsPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("luckperms_tracks")) {
             ListTag tracks = new ListTag();
-            User user = LuckPermsBridge.luckPermsInstance.getUserManager().getUser(player.getOfflinePlayer().getUniqueId());
+            User user = LuckPermsBridge.luckPermsInstance.getUserManager().getUser(player.getUUID());
             for (Track track : LuckPermsBridge.luckPermsInstance.getTrackManager().getLoadedTracks()) {
                 for (String groupName : track.getGroups()) {
                     Group group = LuckPermsBridge.luckPermsInstance.getGroupManager().getGroup(groupName);

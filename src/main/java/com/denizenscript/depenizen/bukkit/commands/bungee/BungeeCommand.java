@@ -102,7 +102,7 @@ public class BungeeCommand extends BracedCommand {
         RunCommandsPacketOut packetScript = new RunCommandsPacketOut(toSend.toString(),
                 defNames.toString() + "\r" + defValues.toString(), scriptEntry.shouldDebug(),
                 Utilities.entryHasPlayer(scriptEntry) ?
-                Utilities.getEntryPlayer(scriptEntry).getOfflinePlayer().getUniqueId()
+                Utilities.getEntryPlayer(scriptEntry).getUUID()
                 : new UUID(0, 0));
         for (String server : servers) {
             RedirectPacketOut packet = new RedirectPacketOut(server, packetScript);

@@ -116,15 +116,15 @@ public class PlayerPointsCommand extends AbstractCommand {
 
         PlayerPoints plugin = (PlayerPoints) PlayerPointsBridge.instance.plugin;
         if (action.asString().equalsIgnoreCase("give")) {
-            plugin.getAPI().give(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            plugin.getAPI().give(target.getUUID(), amount.asInt());
         }
 
         else if (action.asString().equalsIgnoreCase("take")) {
-            plugin.getAPI().take(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            plugin.getAPI().take(target.getUUID(), amount.asInt());
         }
 
         else if (action.asString().equalsIgnoreCase("set")) {
-            plugin.getAPI().set(target.getOfflinePlayer().getUniqueId(), amount.asInt());
+            plugin.getAPI().set(target.getUUID(), amount.asInt());
         }
 
     }

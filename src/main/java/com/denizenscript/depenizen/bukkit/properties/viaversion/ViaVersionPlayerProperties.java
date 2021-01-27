@@ -63,7 +63,7 @@ public class ViaVersionPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("viaversion")) {
             ViaAPI api = Via.getAPI();
-            return new ElementTag(api.getPlayerVersion(player.getOfflinePlayer().getUniqueId()))
+            return new ElementTag(api.getPlayerVersion(player.getUUID()))
                     .getAttribute(attribute.fulfill(1));
         }
 

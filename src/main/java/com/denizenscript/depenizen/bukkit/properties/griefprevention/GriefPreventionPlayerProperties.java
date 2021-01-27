@@ -50,7 +50,7 @@ public class GriefPreventionPlayerProperties implements Property {
 
     private GriefPreventionPlayerProperties(PlayerTag player) {
         this.player = player;
-        data = dataStore.getPlayerData(player.getOfflinePlayer().getUniqueId());
+        data = dataStore.getPlayerData(player.getUUID());
     }
 
     PlayerData data;

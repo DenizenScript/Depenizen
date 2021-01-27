@@ -57,7 +57,7 @@ public class BigDoorsPlayerProperties implements Property {
         // -->
         PropertyParser.<BigDoorsPlayerProperties>registerTag("bigdoors", (attribute, property) -> {
             ListTag doors = new ListTag();
-            for (Door door : BigDoorsBridge.commander.getDoors(property.player.getOfflinePlayer().getUniqueId().toString(), null)) {
+            for (Door door : BigDoorsBridge.commander.getDoors(property.player.getUUID().toString(), null)) {
                 doors.addObject(new BigDoorsDoorTag(door));
             }
             return doors;

@@ -59,7 +59,7 @@ public class PlayerPointsPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("playerpoints_points")) {
             return new ElementTag(((PlayerPoints) PlayerPointsBridge.instance.plugin).getAPI()
-                    .look(player.getOfflinePlayer().getUniqueId())).getAttribute(attribute.fulfill(1));
+                    .look(player.getUUID())).getAttribute(attribute.fulfill(1));
         }
 
         return null;
