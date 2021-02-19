@@ -175,29 +175,26 @@ public class LibsDisguiseCommand extends AbstractCommand {
         ElementTag data = scriptEntry.getObjectTag("data");
         ElementTag baby = scriptEntry.getObjectTag("baby");
         ElementTag self = scriptEntry.getObjectTag("self");
-
-        Debug.report(scriptEntry, getName(), action.debug()
-                + (target != null ? target.debug() : "")
-                + (type != null ? type.debug() : "")
-                + (name != null ? name.debug() : "")
-                + (id != null ? id.debug() : "")
-                + (data != null ? data.debug() : "")
-                + (baby != null ? baby.debug() : ""));
-
+        if (scriptEntry.dbCallShouldDebug()) {
+            Debug.report(scriptEntry, getName(), action.debug()
+                    + (target != null ? target.debug() : "")
+                    + (type != null ? type.debug() : "")
+                    + (name != null ? name.debug() : "")
+                    + (id != null ? id.debug() : "")
+                    + (data != null ? data.debug() : "")
+                    + (baby != null ? baby.debug() : ""));
+        }
         if (target == null) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
             return;
         }
-
         if (baby == null) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Baby not specified!");
             return;
         }
-
         if (action.asString().equalsIgnoreCase("remove")) {
             DisguiseAPI.undisguiseToAll(target.getBukkitEntity());
         }
-
         else if (action.asString().equalsIgnoreCase("mob")) {
             if (type == null) {
                 Debug.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
@@ -216,7 +213,6 @@ public class LibsDisguiseCommand extends AbstractCommand {
                 DisguiseAPI.disguiseToAll(target.getBukkitEntity(), mobDisguise);
             }
         }
-
         else if (action.asString().equalsIgnoreCase("player")) {
             if (name == null) {
                 Debug.echoError(scriptEntry.getResidingQueue(), "Name not specified!");
@@ -230,7 +226,6 @@ public class LibsDisguiseCommand extends AbstractCommand {
                 DisguiseAPI.disguiseToAll(target.getBukkitEntity(), playerDisguise);
             }
         }
-
         else if (action.asString().equalsIgnoreCase("misc")) {
             if (type == null) {
                 Debug.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");

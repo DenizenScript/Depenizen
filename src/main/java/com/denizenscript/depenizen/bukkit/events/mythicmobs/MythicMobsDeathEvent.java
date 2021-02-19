@@ -68,7 +68,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
             return false;
         }
         String cmd = path.eventArgLowerAt(2);
-        if (!cmd.equals("death") && !cmd.equals("die") && !cmd.equals("killed")) {
+        if (!cmd.equals("death") && !cmd.equals("dies") && !cmd.equals("killed")) {
             return false;
         }
         return true;

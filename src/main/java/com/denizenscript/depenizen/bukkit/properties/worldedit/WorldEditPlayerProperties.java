@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.worldedit;
 
+import com.denizenscript.denizen.objects.*;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.bridges.WorldEditBridge;
@@ -10,11 +11,13 @@ import com.sk89q.worldedit.command.tool.InvalidToolBindException;
 import com.sk89q.worldedit.command.tool.brush.Brush;
 import com.sk89q.worldedit.function.pattern.BlockPattern;
 import com.sk89q.worldedit.function.pattern.Pattern;
+import com.sk89q.worldedit.math.BlockVector2;
+import com.sk89q.worldedit.regions.EllipsoidRegion;
+import com.sk89q.worldedit.regions.Polygonal2DRegion;
 import com.sk89q.worldedit.regions.RegionSelector;
+import com.sk89q.worldedit.regions.selector.EllipsoidRegionSelector;
+import com.sk89q.worldedit.regions.selector.Polygonal2DRegionSelector;
 import com.sk89q.worldedit.world.item.ItemType;
-import com.denizenscript.denizen.objects.CuboidTag;
-import com.denizenscript.denizen.objects.ItemTag;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -127,18 +130,37 @@ public class WorldEditPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <PlayerTag.we_selection>
-        // @returns CuboidTag
+        // @returns ObjectTag
         // @plugin Depenizen, WorldEdit
         // @description
-        // Returns the player's current block area selection, as a CuboidTag.
+        // Returns the player's current block area selection, as a CuboidTag, EllipsoidTag, or PolygonTag.
         // -->
         if (attribute.startsWith("we_selection") || attribute.startsWith("selected_region")) {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             RegionSelector selection = worldEdit.getSession(player).getRegionSelector(BukkitAdapter.adapt(player.getWorld()));
-            if (selection != null && selection.isDefined()) {
-                return new CuboidTag(BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
-                        BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMaximumPoint()))
-                        .getAttribute(attribute.fulfill(1));
+            try {
+                if (selection != null && selection.isDefined()) {
+                    if (selection instanceof EllipsoidRegionSelector) {
+                        EllipsoidRegion region = ((EllipsoidRegionSelector) selection).getRegion();
+                        return new EllipsoidTag(new LocationTag(BukkitAdapter.adapt(BukkitAdapter.adapt(region.getWorld()), region.getCenter())), new LocationTag(BukkitAdapter.adapt(BukkitAdapter.adapt(region.getWorld()), region.getRadius())))
+                                .getAttribute(attribute.fulfill(1));
+                    }
+                    else if (selection instanceof Polygonal2DRegionSelector) {
+                        Polygonal2DRegion region = ((Polygonal2DRegionSelector) selection).getRegion();
+                        PolygonTag poly = new PolygonTag(new WorldTag(region.getWorld().getName()));
+                        for (BlockVector2 vec2 : region.getPoints()) {
+                            poly.corners.add(new PolygonTag.Corner(vec2.getX(), vec2.getZ()));
+                        }
+                        poly.recalculateBox();
+                        return poly.getAttribute(attribute.fulfill(1));
+                    }
+                    return new CuboidTag(BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
+                            BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMaximumPoint()))
+                            .getAttribute(attribute.fulfill(1));
+                }
+            }
+            catch (Throwable ex) {
+                Debug.echoError(ex);
             }
         }
 

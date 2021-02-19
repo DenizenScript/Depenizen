@@ -51,7 +51,8 @@ public class WorldEditCommand extends AbstractCommand {
     // @Short Controls schematics and clipboards in WorldEdit.
     //
     // @Description
-    // Controls schematics and clipboards in WorldEdit.
+    // Controls schematics and clipboards in WorldEdit. You should almost always use <@link command schematic> instead of this.
+    //
     // The action can be create_schematic, copy_to_clipboard, or paste.
     //
     // For 'paste':
