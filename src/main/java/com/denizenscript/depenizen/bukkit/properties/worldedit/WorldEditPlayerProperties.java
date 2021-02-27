@@ -151,6 +151,8 @@ public class WorldEditPlayerProperties implements Property {
                         for (BlockVector2 vec2 : region.getPoints()) {
                             poly.corners.add(new PolygonTag.Corner(vec2.getX(), vec2.getZ()));
                         }
+                        poly.yMin = region.getMinimumY();
+                        poly.yMax = region.getMaximumY();
                         poly.recalculateBox();
                         return poly.getAttribute(attribute.fulfill(1));
                     }

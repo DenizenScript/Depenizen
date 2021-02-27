@@ -3,8 +3,9 @@ package com.denizenscript.depenizen.bukkit.properties.towny;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -70,7 +71,7 @@ public class TownyCuboidProperties implements Property {
         // -->
         if (attribute.startsWith("has_town")) {
             for (Location location : cuboid.getBlockLocationsUnfiltered(true)) { // TODO: This is an awful way to do this.
-                if (TownyUniverse.getTownName(location) != null) {
+                if (TownyAPI.getInstance().getTownName(location) != null) {
                     return new ElementTag(true).getAttribute(attribute.fulfill(1));
                 }
             }
@@ -89,9 +90,9 @@ public class TownyCuboidProperties implements Property {
             List<String> towns = new ArrayList<>();
             try {
                 for (Location location : cuboid.getBlockLocationsUnfiltered(true)) { // TODO: This is an awful way to do this.
-                    String townName = TownyUniverse.getTownName(location);
+                    String townName = TownyAPI.getInstance().getTownName(location);
                     if (townName != null && !towns.contains(townName)) {
-                        list.addObject(new TownTag(TownyUniverse.getTownBlock(location).getTown()));
+                        list.addObject(new TownTag(TownyAPI.getInstance().getTownBlock(location).getTown()));
                         towns.add(townName);
                     }
                 }

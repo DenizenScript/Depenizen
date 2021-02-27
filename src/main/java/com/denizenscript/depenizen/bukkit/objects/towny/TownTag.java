@@ -8,6 +8,7 @@ import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.*;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
@@ -46,22 +47,17 @@ public class TownTag implements ObjectTag, Adjustable {
         if (string == null) {
             return null;
         }
-
-        ////////
-        // Match town name
-
         string = string.replace("town@", "");
-        try {
-            return new TownTag(TownyUniverse.getDataSource().getTown(string));
-        }
-        catch (NotRegisteredException e) {
+        Town town = TownyUniverse.getInstance().getTown(string);
+        if (town == null) {
             return null;
         }
+        return new TownTag(town);
     }
 
     public static boolean matches(String arg) {
         arg = arg.replace("town@", "");
-        return TownyUniverse.getDataSource().hasTown(arg);
+        return TownyUniverse.getInstance().hasTown(arg);
     }
 
     /////////////////////

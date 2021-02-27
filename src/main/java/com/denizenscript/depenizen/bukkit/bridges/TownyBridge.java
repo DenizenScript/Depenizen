@@ -11,7 +11,7 @@ import com.denizenscript.depenizen.bukkit.properties.towny.TownyPlayerProperties
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Town;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -79,7 +79,7 @@ public class TownyBridge extends Bridge {
                 }
             }
             else {
-                for (Town town : TownyUniverse.getDataSource().getTowns()) {
+                for (Town town : TownyUniverse.getInstance().getTowns()) {
                     towns.addObject(new TownTag(town));
                 }
             }

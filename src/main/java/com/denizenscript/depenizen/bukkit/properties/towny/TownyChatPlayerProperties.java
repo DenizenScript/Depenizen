@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.bridges.TownyChatBridge;
 import com.palmergames.bukkit.TownyChat.Chat;
 import com.palmergames.bukkit.TownyChat.channels.Channel;
 import com.palmergames.bukkit.TownyChat.channels.ChannelsHolder;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -111,7 +111,7 @@ public class TownyChatPlayerProperties implements Property {
                 if (perm == null) {
                     return new ElementTag(true).getAttribute(attribute.fulfill(1));
                 }
-                return new ElementTag(TownyUniverse.getPermissionSource().has(player.getPlayerEntity(), perm))
+                return new ElementTag(TownyUniverse.getInstance().getPermissionSource().has(player.getPlayerEntity(), perm))
                         .getAttribute(attribute.fulfill(1));
             }
 

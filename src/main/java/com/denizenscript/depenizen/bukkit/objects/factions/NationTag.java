@@ -5,7 +5,7 @@ import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -43,22 +43,17 @@ public class NationTag implements ObjectTag {
         if (string == null) {
             return null;
         }
-
-        ////////
-        // Match nation name
-
         string = string.replace("nation@", "");
-        try {
-            return new NationTag(TownyUniverse.getDataSource().getNation(string));
-        }
-        catch (NotRegisteredException e) {
+        Nation nation = TownyUniverse.getInstance().getNation(string);
+        if (nation == null) {
             return null;
         }
+        return new NationTag(nation);
     }
 
     public static boolean matches(String arg) {
         arg = arg.replace("nation@", "");
-        return TownyUniverse.getDataSource().hasNation(arg);
+        return TownyUniverse.getInstance().hasNation(arg);
     }
 
     /////////////////////

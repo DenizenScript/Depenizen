@@ -4,9 +4,10 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownBlock;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -63,11 +64,11 @@ public class TownyLocationProperties implements Property {
 
         if (attribute.startsWith("towny")) {
             attribute = attribute.fulfill(1);
-            TownBlock block = TownyUniverse.getTownBlock(location);
-            if (block == null) {
-                return null;
-            }
             try {
+                TownBlock block = TownyAPI.getInstance().getTownBlock(location);
+                if (block == null) {
+                    return null;
+                }
 
                 // <--[tag]
                 // @attribute <LocationTag.towny.resident>
@@ -100,7 +101,7 @@ public class TownyLocationProperties implements Property {
         // Can be RESIDENTIAL, COMMERCIAL, ARENA, EMBASSY, WILDS, SPLEEF, INN, JAIL, FARM, or BANK.
         // -->
         if (attribute.startsWith("towny_type")) {
-            TownBlock block = TownyUniverse.getTownBlock(location);
+            TownBlock block = TownyAPI.getInstance().getTownBlock(location);
             if (block != null) {
                 return new ElementTag(block.getType().name()).getAttribute(attribute.fulfill(1));
             }
@@ -115,7 +116,7 @@ public class TownyLocationProperties implements Property {
         // Returns whether the location is within a town.
         // -->
         if (attribute.startsWith("has_town")) {
-            if (TownyUniverse.getTownName(location) != null) {
+            if (TownyAPI.getInstance().getTownName(location) != null) {
                 return new ElementTag(true).getAttribute(attribute.fulfill(1));
             }
             else {
@@ -131,19 +132,12 @@ public class TownyLocationProperties implements Property {
         // Returns the town at the specified location.
         // -->
         if (attribute.startsWith("town")) {
-            try {
-                String town = TownyUniverse.getTownName(location);
-                if (town == null) {
-                    return null;
-                }
-                return new TownTag(TownyUniverse.getDataSource().getTown(town))
-                        .getAttribute(attribute.fulfill(1));
+            String town = TownyAPI.getInstance().getTownName(location);
+            if (town == null) {
+                return null;
             }
-            catch (NotRegisteredException ex) {
-                if (!attribute.hasAlternative()) {
-                    Debug.echoError(location.identifySimple() + " is not registered to a town!");
-                }
-            }
+            return new TownTag(TownyUniverse.getInstance().getTown(town))
+                    .getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -154,7 +148,7 @@ public class TownyLocationProperties implements Property {
         // Returns whether the location is wilderness.
         // -->
         else if (attribute.startsWith("is_wilderness")) {
-            return new ElementTag(TownyUniverse.isWilderness(location.getBlock())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(TownyAPI.getInstance().isWilderness(location.getBlock())).getAttribute(attribute.fulfill(1));
         }
 
         return null;
