@@ -7,7 +7,7 @@ import com.denizenscript.depenizen.bukkit.bridges.WorldEditBridge;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.command.tool.BrushTool;
-import com.sk89q.worldedit.command.tool.InvalidToolBindException;
+import com.sk89q.worldedit.command.tool.Tool;
 import com.sk89q.worldedit.command.tool.brush.Brush;
 import com.sk89q.worldedit.function.pattern.BlockPattern;
 import com.sk89q.worldedit.function.pattern.Pattern;
@@ -103,29 +103,26 @@ public class WorldEditPlayerProperties implements Property {
                 ItemStack itm = player.getEquipment().getItemInMainHand();
                 itemType = BukkitAdapter.asItemType(deLegacy(itm == null ? Material.AIR : itm.getType()));
             }
-            try {
-                BrushTool brush = worldEdit.getSession(player).getBrushTool(itemType);
-                Brush btype = brush.getBrush();
-                String brushType = CoreUtilities.toLowerCase(btype.getClass().getSimpleName());
-                String materialInfo = "unknown";
-                Pattern materialPattern = brush.getMaterial();
-                if (materialPattern instanceof BlockPattern) {
-                    materialInfo = ((BlockPattern) materialPattern).getBlock().getAsString();
-                }
-                // TODO: other patterns?
-                // TODO: mask?
-                ListTag info = new ListTag();
-                info.add(brushType);
-                info.add(String.valueOf(brush.getSize()));
-                info.add(String.valueOf(brush.getRange()));
-                info.add(materialInfo);
-                return info.getAttribute(attribute.fulfill(1));
+            Tool tool = worldEdit.getSession(player).getTool(itemType);
+            if (!(tool instanceof BrushTool)) {
+                return null;
             }
-            catch (InvalidToolBindException ex) {
-                if (!attribute.hasAlternative()) {
-                    Debug.echoError("Player " + player.getName() + " does not have a WE brush for " + itemType.getName());
-                }
+            BrushTool brush = (BrushTool) tool;
+            Brush btype = brush.getBrush();
+            String brushType = CoreUtilities.toLowerCase(btype.getClass().getSimpleName());
+            String materialInfo = "unknown";
+            Pattern materialPattern = brush.getMaterial();
+            if (materialPattern instanceof BlockPattern) {
+                materialInfo = ((BlockPattern) materialPattern).getBlock().getAsString();
             }
+            // TODO: other patterns?
+            // TODO: mask?
+            ListTag info = new ListTag();
+            info.add(brushType);
+            info.add(String.valueOf(brush.getSize()));
+            info.add(String.valueOf(brush.getRange()));
+            info.add(materialInfo);
+            return info.getAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
