@@ -90,14 +90,13 @@ public class mcMMOPlayerLevelChangeScriptEvent extends BukkitScriptEvent impleme
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("skill")) {
-            return skill;
-        }
-        else if (name.equals("level")) {
-            return new ElementTag(level);
-        }
-        else if (name.equals("cause")) {
-            return new ElementTag(cause);
+        switch (name) {
+            case "skill":
+                return skill;
+            case "level":
+                return new ElementTag(level);
+            case "cause":
+                return new ElementTag(cause);
         }
         return super.getContext(name);
     }

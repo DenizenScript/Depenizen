@@ -43,21 +43,18 @@ public class ProxyCommandPacketIn extends PacketIn {
         }
         String senderIdText = readString(data, senderIdLength);
         UUID senderId = senderIdText.isEmpty() ? null : UUID.fromString(senderIdText);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-                    @Override
-                    public void run() {
-                        BungeeProxyServerCommandScriptEvent.instance.sender = sender;
-                        BungeeProxyServerCommandScriptEvent.instance.senderId = senderId;
-                        BungeeProxyServerCommandScriptEvent.instance.command = new BungeeProxyServerCommandScriptEvent.CommandData();
-                        BungeeProxyServerCommandScriptEvent.instance.command.command = command;
-                        BungeeProxyServerCommandScriptEvent.instance.fire();
-                        ProxyCommandResultPacketOut packetOut = new ProxyCommandResultPacketOut();
-                        packetOut.id = id;
-                        packetOut.result = BungeeProxyServerCommandScriptEvent.instance.command.cancelled ? "cancelled" :
-                                (!BungeeProxyServerCommandScriptEvent.instance.command.command.equals(command) ?
-                                        BungeeProxyServerCommandScriptEvent.instance.command.command : "");
-                        BungeeBridge.instance.sendPacket(packetOut);
-                    }
-                });
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            BungeeProxyServerCommandScriptEvent.instance.sender = sender;
+            BungeeProxyServerCommandScriptEvent.instance.senderId = senderId;
+            BungeeProxyServerCommandScriptEvent.instance.command = new BungeeProxyServerCommandScriptEvent.CommandData();
+            BungeeProxyServerCommandScriptEvent.instance.command.command = command;
+            BungeeProxyServerCommandScriptEvent.instance.fire();
+            ProxyCommandResultPacketOut packetOut = new ProxyCommandResultPacketOut();
+            packetOut.id = id;
+            packetOut.result = BungeeProxyServerCommandScriptEvent.instance.command.cancelled ? "cancelled" :
+                    (!BungeeProxyServerCommandScriptEvent.instance.command.command.equals(command) ?
+                            BungeeProxyServerCommandScriptEvent.instance.command.command : "");
+            BungeeBridge.instance.sendPacket(packetOut);
+        });
     }
 }

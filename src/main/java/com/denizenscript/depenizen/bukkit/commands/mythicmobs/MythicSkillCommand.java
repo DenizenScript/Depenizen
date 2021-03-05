@@ -15,7 +15,7 @@ import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -84,8 +84,8 @@ public class MythicSkillCommand extends AbstractCommand {
             throw new InvalidArgumentsException("Cannot have both entity and location targets.");
         }
         if (!scriptEntry.hasObject("casters")) {
-            scriptEntry.defaultObject("casters", (Utilities.entryHasPlayer(scriptEntry) ? Arrays.asList(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity()) : null),
-                    (Utilities.entryHasNPC(scriptEntry) ? Arrays.asList(Utilities.getEntryNPC(scriptEntry).getDenizenEntity()) : null));
+            scriptEntry.defaultObject("casters", (Utilities.entryHasPlayer(scriptEntry) ? Collections.singletonList(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity()) : null),
+                    (Utilities.entryHasNPC(scriptEntry) ? Collections.singletonList(Utilities.getEntryNPC(scriptEntry).getDenizenEntity()) : null));
         }
         scriptEntry.defaultObject("power", new ElementTag(0));
     }

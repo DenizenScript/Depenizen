@@ -97,20 +97,17 @@ public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("skill")) {
-            return skill;
-        }
-        else if (name.equals("new_level")) {
-            return new ElementTag(new_level);
-        }
-        else if (name.equals("old_level")) {
-            return new ElementTag(new_level + levels_lost);
-        }
-        else if (name.equals("levels_lost")) {
-            return new ElementTag(levels_lost);
-        }
-        else if (name.equals("cause")) {
-            return cause;
+        switch (name) {
+            case "skill":
+                return skill;
+            case "new_level":
+                return new ElementTag(new_level);
+            case "old_level":
+                return new ElementTag(new_level + levels_lost);
+            case "levels_lost":
+                return new ElementTag(levels_lost);
+            case "cause":
+                return cause;
         }
         return super.getContext(name);
     }

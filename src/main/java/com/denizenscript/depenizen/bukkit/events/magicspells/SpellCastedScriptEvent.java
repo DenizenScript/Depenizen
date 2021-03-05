@@ -84,17 +84,15 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("power")) {
-            return new ElementTag(power);
-        }
-        else if (name.equals("caster")) {
-            return caster.getDenizenObject();
-        }
-        else if (name.equals("cooldown")) {
-            return new ElementTag(cooldown);
-        }
-        else if (name.equals("spell_name")) {
-            return spell;
+        switch (name) {
+            case "power":
+                return new ElementTag(power);
+            case "caster":
+                return caster.getDenizenObject();
+            case "cooldown":
+                return new ElementTag(cooldown);
+            case "spell_name":
+                return spell;
         }
         return super.getContext(name);
     }

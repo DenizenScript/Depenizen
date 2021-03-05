@@ -108,17 +108,15 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("weapon")) {
-            return new ElementTag(event.getWeaponTitle());
-        }
-        else if (name.equals("reload_speed")) {
-            return new ElementTag(event.getReloadSpeed());
-        }
-        else if (name.equals("reload_time")) {
-            return new ElementTag(event.getReloadDuration());
-        }
-        else if (name.equals("reload_sounds")) {
-            return new ListTag(Arrays.asList(event.getSounds().split(",")));
+        switch (name) {
+            case "weapon":
+                return new ElementTag(event.getWeaponTitle());
+            case "reload_speed":
+                return new ElementTag(event.getReloadSpeed());
+            case "reload_time":
+                return new ElementTag(event.getReloadDuration());
+            case "reload_sounds":
+                return new ListTag(Arrays.asList(event.getSounds().split(",")));
         }
         return super.getContext(name);
     }

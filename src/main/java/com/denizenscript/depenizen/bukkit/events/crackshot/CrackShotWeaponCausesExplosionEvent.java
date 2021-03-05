@@ -60,17 +60,15 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("location")) {
-            return new LocationTag(event.getLocation());
-        }
-        else if (name.equals("weapon")) {
-            return new ElementTag(event.getWeaponTitle());
-        }
-        else if (name.equals("split")) {
-            return new ElementTag(event.isSplit());
-        }
-        else if (name.equals("airstrike")) {
-            return new ElementTag(event.isAirstrike());
+        switch (name) {
+            case "location":
+                return new LocationTag(event.getLocation());
+            case "weapon":
+                return new ElementTag(event.getWeaponTitle());
+            case "split":
+                return new ElementTag(event.isSplit());
+            case "airstrike":
+                return new ElementTag(event.isAirstrike());
         }
         return super.getContext(name);
     }

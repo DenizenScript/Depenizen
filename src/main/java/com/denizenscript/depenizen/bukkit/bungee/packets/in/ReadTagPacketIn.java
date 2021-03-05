@@ -51,40 +51,37 @@ public class ReadTagPacketIn extends PacketIn {
         long uuidMost = data.readLong();
         long uuidLeast = data.readLong();
         int responseId = data.readInt();
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-            @Override
-            public void run() {
-                PlayerTag linkedPlayer = null;
-                if (uuidMost != 0 || uuidLeast != 0) {
-                    UUID uuid = new UUID(uuidMost, uuidLeast);
-                    try {
-                        OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
-                        if (player != null) {
-                            linkedPlayer = new PlayerTag(player);
-                        }
-                    }
-                    catch (Exception ex) {
-                        // Ignore
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            PlayerTag linkedPlayer = null;
+            if (uuidMost != 0 || uuidLeast != 0) {
+                UUID uuid = new UUID(uuidMost, uuidLeast);
+                try {
+                    OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
+                    if (player != null) {
+                        linkedPlayer = new PlayerTag(player);
                     }
                 }
-                TagContext context = new BukkitTagContext(linkedPlayer, null, null, false, null);
-                List<String> defSets = CoreUtilities.split(defs, '\r');
-                List<String> defNames = CoreUtilities.split(defSets.get(0), '\n');
-                List<String> defValues = CoreUtilities.split(defSets.get(1), '\n');
-                for (int i = 0; i < defNames.size(); i++) {
-                    String name = RunCommandsPacketIn.unescape(defNames.get(i));
-                    if (name.length() > 0) {
-                        String value = RunCommandsPacketIn.unescape(defValues.get(i));
-                        context.definitionProvider.addDefinition(name, value);
-                    }
+                catch (Exception ex) {
+                    // Ignore
                 }
-                String result = TagManager.tag(tag, context);
-                TagResponsePacketOut packet = new TagResponsePacketOut();
-                packet.id = responseId;
-                packet.result = result;
-                RedirectPacketOut redirectPacket = new RedirectPacketOut(responseServer, packet);
-                BungeeBridge.instance.sendPacket(redirectPacket);
             }
+            TagContext context = new BukkitTagContext(linkedPlayer, null, null, false, null);
+            List<String> defSets = CoreUtilities.split(defs, '\r');
+            List<String> defNames = CoreUtilities.split(defSets.get(0), '\n');
+            List<String> defValues = CoreUtilities.split(defSets.get(1), '\n');
+            for (int i = 0; i < defNames.size(); i++) {
+                String name = RunCommandsPacketIn.unescape(defNames.get(i));
+                if (name.length() > 0) {
+                    String value = RunCommandsPacketIn.unescape(defValues.get(i));
+                    context.definitionProvider.addDefinition(name, value);
+                }
+            }
+            String result = TagManager.tag(tag, context);
+            TagResponsePacketOut packet = new TagResponsePacketOut();
+            packet.id = responseId;
+            packet.result = result;
+            RedirectPacketOut redirectPacket = new RedirectPacketOut(responseServer, packet);
+            BungeeBridge.instance.sendPacket(redirectPacket);
         });
     }
 }

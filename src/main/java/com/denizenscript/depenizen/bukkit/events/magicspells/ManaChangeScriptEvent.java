@@ -84,17 +84,15 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("new_mana")) {
-            return new ElementTag(new_mana);
-        }
-        else if (name.equals("old_mana")) {
-            return new ElementTag(old_mana);
-        }
-        else if (name.equals("max_mana")) {
-            return new ElementTag(max_mana);
-        }
-        else if (name.equals("reason")) {
-            return reason;
+        switch (name) {
+            case "new_mana":
+                return new ElementTag(new_mana);
+            case "old_mana":
+                return new ElementTag(old_mana);
+            case "max_mana":
+                return new ElementTag(max_mana);
+            case "reason":
+                return reason;
         }
         return super.getContext(name);
     }

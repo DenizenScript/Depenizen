@@ -5,7 +5,6 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;

@@ -120,24 +120,21 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("mob")) {
-            return mythicmob;
-        }
-        else if (name.equals("killer")) {
-            return killer;
-        }
-        else if (name.equals("entity")) {
-            return entity;
-        }
-        else if (name.equals("drops")) {
-            ListTag drops = new ListTag();
-            for (ItemStack i : event.getDrops()) {
-                drops.addObject(new ItemTag(i));
-            }
-            return drops;
-        }
-        else if (name.equals("level")) {
-            return new ElementTag(event.getMobLevel());
+        switch (name) {
+            case "mob":
+                return mythicmob;
+            case "killer":
+                return killer;
+            case "entity":
+                return entity;
+            case "drops":
+                ListTag drops = new ListTag();
+                for (ItemStack i : event.getDrops()) {
+                    drops.addObject(new ItemTag(i));
+                }
+                return drops;
+            case "level":
+                return new ElementTag(event.getMobLevel());
         }
         return super.getContext(name);
     }

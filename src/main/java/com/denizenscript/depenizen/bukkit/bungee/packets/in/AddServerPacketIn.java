@@ -26,13 +26,10 @@ public class AddServerPacketIn extends PacketIn {
             return;
         }
         String serverName = readString(data, yourNameLength);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-                    @Override
-                    public void run() {
-                        BungeeBridge.instance.knownServers.add(serverName);
-                        BungeeServerConnectScriptEvent.instance.serverName = serverName;
-                        BungeeServerConnectScriptEvent.instance.fire();
-                    }
-                });
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            BungeeBridge.instance.knownServers.add(serverName);
+            BungeeServerConnectScriptEvent.instance.serverName = serverName;
+            BungeeServerConnectScriptEvent.instance.fire();
+        });
     }
 }

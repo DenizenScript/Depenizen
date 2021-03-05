@@ -95,14 +95,13 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("skill")) {
-            return skill;
-        }
-        else if (name.equals("xp")) {
-            return xp;
-        }
-        else if (name.equals("cause")) {
-            return cause;
+        switch (name) {
+            case "skill":
+                return skill;
+            case "xp":
+                return xp;
+            case "cause":
+                return cause;
         }
         return super.getContext(name);
     }

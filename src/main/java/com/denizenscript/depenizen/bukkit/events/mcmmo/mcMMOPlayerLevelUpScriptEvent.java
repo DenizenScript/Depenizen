@@ -97,20 +97,17 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("skill")) {
-            return skill;
-        }
-        else if (name.equals("new_level")) {
-            return new ElementTag(new_level);
-        }
-        else if (name.equals("old_level")) {
-            return new ElementTag(new_level - levels_gained);
-        }
-        else if (name.equals("levels_gained")) {
-            return new ElementTag(levels_gained);
-        }
-        else if (name.equals("cause")) {
-            return new ElementTag(cause);
+        switch (name) {
+            case "skill":
+                return skill;
+            case "new_level":
+                return new ElementTag(new_level);
+            case "old_level":
+                return new ElementTag(new_level - levels_gained);
+            case "levels_gained":
+                return new ElementTag(levels_gained);
+            case "cause":
+                return new ElementTag(cause);
         }
         return super.getContext(name);
     }

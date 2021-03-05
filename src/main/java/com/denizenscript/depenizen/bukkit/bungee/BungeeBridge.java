@@ -17,8 +17,6 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.tags.TagRunnable;
@@ -127,12 +125,9 @@ public class BungeeBridge {
             return;
         }
         connected = false;
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-            @Override
-            public void run() {
-                reconnectPending = false;
-                connect();
-            }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            reconnectPending = false;
+            connect();
         }, 20 * 5);
     }
 
@@ -174,19 +169,11 @@ public class BungeeBridge {
                     channel = ch;
                 }
             });
-            b.connect(address, port).addListener(new GenericFutureListener<Future<? super Void>>() {
-                @Override
-                public void operationComplete(Future<? super Void> future) {
-                    Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!connected && !hasConnectionLoading) {
-                                reconnect();
-                            }
-                        }
-                    }, 10);
+            b.connect(address, port).addListener(future -> Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+                if (!connected && !hasConnectionLoading) {
+                    reconnect();
                 }
-            });
+            }, 10));
             showedLastError = false;
         }
         catch (Throwable ex) {
@@ -217,22 +204,19 @@ public class BungeeBridge {
                 tagEvent(event);
             }
         }, "bungee");
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Depenizen.instance, new Runnable() {
-            @Override
-            public void run() {
-                if (!connected) {
-                    return;
-                }
-                if (System.currentTimeMillis() > lastPacketReceived + 20 * 1000) {
-                    // 20 seconds without a packet = connection lost!
-                    handler.fail("Connection time out.");
-                    return;
-                }
-                ticksTilKeepalive--;
-                if (ticksTilKeepalive <= 0) {
-                    sendPacket(new KeepAlivePacketOut());
-                    ticksTilKeepalive = keepAliveTickRate;
-                }
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Depenizen.instance, () -> {
+            if (!connected) {
+                return;
+            }
+            if (System.currentTimeMillis() > lastPacketReceived + 20 * 1000) {
+                // 20 seconds without a packet = connection lost!
+                handler.fail("Connection time out.");
+                return;
+            }
+            ticksTilKeepalive--;
+            if (ticksTilKeepalive <= 0) {
+                sendPacket(new KeepAlivePacketOut());
+                ticksTilKeepalive = keepAliveTickRate;
             }
         }, 1, 1);
     }

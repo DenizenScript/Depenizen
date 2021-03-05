@@ -94,17 +94,15 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("weapon")) {
-            return new ElementTag(event.getWeaponTitle());
-        }
-        else if (name.equals("bullet_spread")) {
-            return new ElementTag(event.getBulletSpread());
-        }
-        else if (name.equals("shot_sounds")) {
-            return new ListTag(Arrays.asList(event.getSounds().split(",")));
-        }
-        else if (name.equals("left_click")) {
-            return new ElementTag(event.isLeftClick());
+        switch (name) {
+            case "weapon":
+                return new ElementTag(event.getWeaponTitle());
+            case "bullet_spread":
+                return new ElementTag(event.getBulletSpread());
+            case "shot_sounds":
+                return new ListTag(Arrays.asList(event.getSounds().split(",")));
+            case "left_click":
+                return new ElementTag(event.isLeftClick());
         }
         return super.getContext(name);
     }

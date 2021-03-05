@@ -43,25 +43,22 @@ public class ProxyPingPacketIn extends PacketIn {
             return;
         }
         String version = readString(data, versionLength);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-            @Override
-            public void run() {
-                BungeeProxyServerListPingScriptEvent.PingData ping = new BungeeProxyServerListPingScriptEvent.PingData();
-                ping.address = address;
-                ping.currentPlayers = currentPlayers;
-                ping.maxPlayers = maxPlayers;
-                ping.motd = motd;
-                ping.protocol = protocol;
-                ping.version = version;
-                BungeeProxyServerListPingScriptEvent.instance.data = ping;
-                BungeeProxyServerListPingScriptEvent.instance.fire();
-                ProxyPingResultPacketOut packetOut = new ProxyPingResultPacketOut();
-                packetOut.id = id;
-                packetOut.maxPlayers = ping.maxPlayers;
-                packetOut.version = ping.version;
-                packetOut.motd = ping.motd;
-                BungeeBridge.instance.sendPacket(packetOut);
-            }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            BungeeProxyServerListPingScriptEvent.PingData ping = new BungeeProxyServerListPingScriptEvent.PingData();
+            ping.address = address;
+            ping.currentPlayers = currentPlayers;
+            ping.maxPlayers = maxPlayers;
+            ping.motd = motd;
+            ping.protocol = protocol;
+            ping.version = version;
+            BungeeProxyServerListPingScriptEvent.instance.data = ping;
+            BungeeProxyServerListPingScriptEvent.instance.fire();
+            ProxyPingResultPacketOut packetOut = new ProxyPingResultPacketOut();
+            packetOut.id = id;
+            packetOut.maxPlayers = ping.maxPlayers;
+            packetOut.version = ping.version;
+            packetOut.motd = ping.motd;
+            BungeeBridge.instance.sendPacket(packetOut);
         });
     }
 }

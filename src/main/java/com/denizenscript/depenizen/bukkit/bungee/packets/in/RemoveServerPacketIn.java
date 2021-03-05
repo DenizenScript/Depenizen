@@ -26,13 +26,10 @@ public class RemoveServerPacketIn extends PacketIn {
             return;
         }
         String serverName = readString(data, serverNameLength);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-                    @Override
-                    public void run() {
-                        BungeeBridge.instance.knownServers.remove(serverName);
-                        BungeeServerDisconnectScriptEvent.instance.serverName = serverName;
-                        BungeeServerDisconnectScriptEvent.instance.fire();
-                    }
-                });
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            BungeeBridge.instance.knownServers.remove(serverName);
+            BungeeServerDisconnectScriptEvent.instance.serverName = serverName;
+            BungeeServerDisconnectScriptEvent.instance.fire();
+        });
     }
 }

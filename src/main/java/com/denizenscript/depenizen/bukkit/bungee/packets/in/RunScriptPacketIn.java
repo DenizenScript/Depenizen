@@ -48,55 +48,52 @@ public class RunScriptPacketIn extends PacketIn {
         String defs = readString(data, defsLength);
         long uuidMost = data.readLong();
         long uuidLeast = data.readLong();
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-            @Override
-            public void run() {
-                PlayerTag linkedPlayer = null;
-                if (uuidMost != 0 || uuidLeast != 0) {
-                    UUID uuid = new UUID(uuidMost, uuidLeast);
-                    try {
-                        OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
-                        if (player != null) {
-                            linkedPlayer = new PlayerTag(player);
-                        }
-                    }
-                    catch (Exception ex) {
-                        // Ignore
-                    }
-                }
-                ScriptTag script = ScriptTag.valueOf(scriptName, CoreUtilities.basicContext);
-                if (script == null) {
-                    Debug.echoError("Invalid Depenizen bungeerun script '" + scriptName + "': script does not exist.");
-                    return;
-                }
-                List<ScriptEntry> entries = script.getContainer().getBaseEntries(new BukkitScriptEntryData(linkedPlayer, null));
-                if (entries.isEmpty()) {
-                    return;
-                }
-                ScriptQueue queue = new InstantQueue("BUNGEERUN_" + scriptName).addEntries(entries);
-                int x = 1;
-                TagContext context = new BukkitTagContext(linkedPlayer, null, script);
-                ListTag definitions = ListTag.valueOf(defs, context);
-                String[] definition_names = null;
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            PlayerTag linkedPlayer = null;
+            if (uuidMost != 0 || uuidLeast != 0) {
+                UUID uuid = new UUID(uuidMost, uuidLeast);
                 try {
-                    String str = script.getContainer().getString("definitions");
-                    if (str != null) {
-                        definition_names = str.split("\\|");
+                    OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
+                    if (player != null) {
+                        linkedPlayer = new PlayerTag(player);
                     }
                 }
-                catch (Exception e) {
-                    // Ignored
+                catch (Exception ex) {
+                    // Ignore
                 }
-                for (String definition : definitions) {
-                    String name = definition_names != null && definition_names.length >= x ?
-                            definition_names[x - 1].trim() : String.valueOf(x);
-                    queue.addDefinition(name, definition);
-                    Debug.echoDebug(entries.get(0), "Adding definition '" + name + "' as " + definition);
-                    x++;
-                }
-                queue.addDefinition("raw_context", defs);
-                queue.start();
             }
+            ScriptTag script = ScriptTag.valueOf(scriptName, CoreUtilities.basicContext);
+            if (script == null) {
+                Debug.echoError("Invalid Depenizen bungeerun script '" + scriptName + "': script does not exist.");
+                return;
+            }
+            List<ScriptEntry> entries = script.getContainer().getBaseEntries(new BukkitScriptEntryData(linkedPlayer, null));
+            if (entries.isEmpty()) {
+                return;
+            }
+            ScriptQueue queue = new InstantQueue("BUNGEERUN_" + scriptName).addEntries(entries);
+            int x = 1;
+            TagContext context = new BukkitTagContext(linkedPlayer, null, script);
+            ListTag definitions = ListTag.valueOf(defs, context);
+            String[] definition_names = null;
+            try {
+                String str = script.getContainer().getString("definitions");
+                if (str != null) {
+                    definition_names = str.split("\\|");
+                }
+            }
+            catch (Exception e) {
+                // Ignored
+            }
+            for (String definition : definitions) {
+                String name = definition_names != null && definition_names.length >= x ?
+                        definition_names[x - 1].trim() : String.valueOf(x);
+                queue.addDefinition(name, definition);
+                Debug.echoDebug(entries.get(0), "Adding definition '" + name + "' as " + definition);
+                x++;
+            }
+            queue.addDefinition("raw_context", defs);
+            queue.start();
         });
     }
 }

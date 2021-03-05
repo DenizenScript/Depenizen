@@ -64,18 +64,16 @@ public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listen
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("time")) {
-            Debug.echoError("Deprecation notice: Use 'context.time_sent' (TimeTag) instead of 'context.time' (ElementTag) for votifier vote event.");
-            return new ElementTag(vote.getTimeStamp());
-        }
-        else if (name.equals("time_sent")) {
-            return new TimeTag(Long.parseLong(vote.getTimeStamp()) * 1000);
-        }
-        else if (name.equals("service")) {
-            return new ElementTag(vote.getServiceName());
-        }
-        else if (name.equals("username")) {
-            return new ElementTag(vote.getUsername());
+        switch (name) {
+            case "time":
+                Debug.echoError("Deprecation notice: Use 'context.time_sent' (TimeTag) instead of 'context.time' (ElementTag) for votifier vote event.");
+                return new ElementTag(vote.getTimeStamp());
+            case "time_sent":
+                return new TimeTag(Long.parseLong(vote.getTimeStamp()) * 1000);
+            case "service":
+                return new ElementTag(vote.getServiceName());
+            case "username":
+                return new ElementTag(vote.getUsername());
         }
         return super.getContext(name);
     }

@@ -26,5 +26,5 @@ public class BetonQuestBridge extends Bridge {
             }
             return null;
         });
-    };
+    }
 }

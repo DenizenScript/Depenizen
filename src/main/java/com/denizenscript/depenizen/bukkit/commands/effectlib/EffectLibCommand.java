@@ -134,12 +134,7 @@ public class EffectLibCommand extends AbstractCommand {
                 else {
                     effect.setLocation(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()));
                 }
-                effect.callback = new Runnable() {
-                    @Override
-                    public void run() {
-                        scriptEntry.setFinished(true);
-                    }
-                };
+                effect.callback = () -> scriptEntry.setFinished(true);
                 effect.iterations = ticks;
                 effect.start();
                 return;
@@ -152,12 +147,7 @@ public class EffectLibCommand extends AbstractCommand {
                 else {
                     effect.setLocation(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()));
                 }
-                effect.callback = new Runnable() {
-                    @Override
-                    public void run() {
-                        scriptEntry.setFinished(true);
-                    }
-                };
+                effect.callback = () -> scriptEntry.setFinished(true);
                 effect.iterations = ticks;
                 effect.start();
                 return;
@@ -170,12 +160,7 @@ public class EffectLibCommand extends AbstractCommand {
                 else {
                     effect.setLocation(new Location(location.getWorld(), location.getX(), location.getY(), location.getZ()));
                 }
-                effect.callback = new Runnable() {
-                    @Override
-                    public void run() {
-                        scriptEntry.setFinished(true);
-                    }
-                };
+                effect.callback = () -> scriptEntry.setFinished(true);
                 effect.iterations = ticks;
                 effect.start();
                 return;

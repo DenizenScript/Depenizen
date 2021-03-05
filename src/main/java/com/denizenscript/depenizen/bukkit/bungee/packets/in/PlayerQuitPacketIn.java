@@ -31,13 +31,10 @@ public class PlayerQuitPacketIn extends PacketIn {
             return;
         }
         String name = readString(data, nameLength);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-                    @Override
-                    public void run() {
-                        BungeePlayerQuitsScriptEvent.instance.name = name;
-                        BungeePlayerQuitsScriptEvent.instance.uuid = uuid;
-                        BungeePlayerQuitsScriptEvent.instance.fire();
-                    }
-                });
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            BungeePlayerQuitsScriptEvent.instance.name = name;
+            BungeePlayerQuitsScriptEvent.instance.uuid = uuid;
+            BungeePlayerQuitsScriptEvent.instance.fire();
+        });
     }
 }

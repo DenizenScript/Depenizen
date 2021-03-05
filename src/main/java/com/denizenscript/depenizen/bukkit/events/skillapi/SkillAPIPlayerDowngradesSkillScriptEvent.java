@@ -82,14 +82,13 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("level")) {
-            return level;
-        }
-        else if (name.equals("refund")) {
-            return refund;
-        }
-        else if (name.equals("skill_name")) {
-            return skill;
+        switch (name) {
+            case "level":
+                return level;
+            case "refund":
+                return refund;
+            case "skill_name":
+                return skill;
         }
         return super.getContext(name);
     }

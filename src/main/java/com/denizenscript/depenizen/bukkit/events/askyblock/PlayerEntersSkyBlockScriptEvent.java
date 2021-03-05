@@ -60,14 +60,13 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("owner")) {
-            return owner;
-        }
-        else if (name.equals("island_location")) {
-            return island_location;
-        }
-        else if (name.equals("location")) {
-            return location;
+        switch (name) {
+            case "owner":
+                return owner;
+            case "island_location":
+                return island_location;
+            case "location":
+                return location;
         }
         return super.getContext(name);
     }

@@ -85,14 +85,13 @@ public class mcMMOPlayerAbilityDeactivateScriptEvent extends BukkitScriptEvent i
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("skill")) {
-            return skill;
-        }
-        else if (name.equals("skill_level")) {
-            return skill_level;
-        }
-        else if (name.equals("ability")) {
-            return ability;
+        switch (name) {
+            case "skill":
+                return skill;
+            case "skill_level":
+                return skill_level;
+            case "ability":
+                return ability;
         }
         return super.getContext(name);
     }

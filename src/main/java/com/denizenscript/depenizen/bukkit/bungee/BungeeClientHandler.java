@@ -78,21 +78,13 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         ByteBuf handshake = ctx.alloc().buffer(FAKE_HANDSHAKE.length);
         handshake.writeBytes(FAKE_HANDSHAKE);
         ctx.writeAndFlush(handshake); // Will release handshake
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-            @Override
-            public void run() {
-                Debug.log("Depenizen now connected to Bungee server.");
-                BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
-                BungeeBridge.instance.sendPacket(new MyInfoPacketOut(Bukkit.getPort()));
-                BungeeBridge.instance.sendPacket(new ControlsProxyPingPacketOut(BungeeBridge.instance.controlsProxyPing));
-                BungeeBridge.instance.sendPacket(new ControlsProxyCommandPacketOut(BungeeBridge.instance.controlsProxyCommand));
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-                    @Override
-                    public void run() {
-                        BungeeBridge.instance.connected = true;
-                    }
-                }, 10);
-            }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            Debug.log("Depenizen now connected to Bungee server.");
+            BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
+            BungeeBridge.instance.sendPacket(new MyInfoPacketOut(Bukkit.getPort()));
+            BungeeBridge.instance.sendPacket(new ControlsProxyPingPacketOut(BungeeBridge.instance.controlsProxyPing));
+            BungeeBridge.instance.sendPacket(new ControlsProxyCommandPacketOut(BungeeBridge.instance.controlsProxyCommand));
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> BungeeBridge.instance.connected = true, 10);
         }, 30);
     }
 

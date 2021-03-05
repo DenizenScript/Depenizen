@@ -37,14 +37,11 @@ public class PlayerSwitchServerPacketIn extends PacketIn {
             return;
         }
         String serverName = readString(data, serverNameLength);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-                    @Override
-                    public void run() {
-                        BungeePlayerServerSwitchScriptEvent.instance.name = name;
-                        BungeePlayerServerSwitchScriptEvent.instance.uuid = uuid;
-                        BungeePlayerServerSwitchScriptEvent.instance.newServer = serverName;
-                        BungeePlayerServerSwitchScriptEvent.instance.fire();
-                    }
-                });
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            BungeePlayerServerSwitchScriptEvent.instance.name = name;
+            BungeePlayerServerSwitchScriptEvent.instance.uuid = uuid;
+            BungeePlayerServerSwitchScriptEvent.instance.newServer = serverName;
+            BungeePlayerServerSwitchScriptEvent.instance.fire();
+        });
     }
 }

@@ -213,44 +213,39 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
         else if (name.startsWith("spell_reagent_")) {
             SpellReagents reagents = event.getReagents();
             if (reagents != null) {
-                if (name.equals("spell_reagant_mana")) {
-                    return new ElementTag(reagents.getMana());
-                }
-                else if (name.equals("spell_reagant_health")) {
-                    return new ElementTag(reagents.getHealth());
-                }
-                else if (name.equals("spell_reagant_hunger")) {
-                    return new ElementTag(reagents.getHunger());
-                }
-                else if (name.equals("spell_reagant_experience")) {
-                    return new ElementTag(reagents.getExperience());
-                }
-                else if (name.equals("spell_reagant_levels")) {
-                    return new ElementTag(reagents.getLevels());
-                }
-                else if (name.equals("spell_reagant_durability")) {
-                    return new ElementTag(reagents.getDurability());
-                }
-                else if (name.equals("spell_reagant_money")) {
-                    return new ElementTag(reagents.getMoney());
-                }
-                else if (name.equals("spell_reagant_variables")) {
-                    ListTag list = new ListTag();
-                    if (reagents.getVariables() != null) {
-                        for (Map.Entry<String, Double> entry : reagents.getVariables().entrySet()) {
-                            list.add(entry.getKey() + "/" + entry.getValue());
+                switch (name) {
+                    case "spell_reagant_mana":
+                        return new ElementTag(reagents.getMana());
+                    case "spell_reagant_health":
+                        return new ElementTag(reagents.getHealth());
+                    case "spell_reagant_hunger":
+                        return new ElementTag(reagents.getHunger());
+                    case "spell_reagant_experience":
+                        return new ElementTag(reagents.getExperience());
+                    case "spell_reagant_levels":
+                        return new ElementTag(reagents.getLevels());
+                    case "spell_reagant_durability":
+                        return new ElementTag(reagents.getDurability());
+                    case "spell_reagant_money":
+                        return new ElementTag(reagents.getMoney());
+                    case "spell_reagant_variables": {
+                        ListTag list = new ListTag();
+                        if (reagents.getVariables() != null) {
+                            for (Map.Entry<String, Double> entry : reagents.getVariables().entrySet()) {
+                                list.add(entry.getKey() + "/" + entry.getValue());
+                            }
                         }
+                        return list;
                     }
-                    return list;
-                }
-                else if (name.equals("spell_reagant_items")) {
-                    ListTag list = new ListTag();
-                    if (reagents.getItems() != null) {
-                        for (ItemStack item : reagents.getItems()) {
-                            list.addObject(new ItemTag(item));
+                    case "spell_reagant_items": {
+                        ListTag list = new ListTag();
+                        if (reagents.getItems() != null) {
+                            for (ItemStack item : reagents.getItems()) {
+                                list.addObject(new ItemTag(item));
+                            }
                         }
+                        return list;
                     }
-                    return list;
                 }
             }
         }

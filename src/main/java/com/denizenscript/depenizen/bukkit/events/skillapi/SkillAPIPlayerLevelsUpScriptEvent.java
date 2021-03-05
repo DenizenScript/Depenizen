@@ -76,14 +76,13 @@ public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent impleme
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("level")) {
-            return new ElementTag(level);
-        }
-        else if (name.equals("gained")) {
-            return new ElementTag(gained);
-        }
-        else if (name.equals("class")) {
-            return skillAPIClass;
+        switch (name) {
+            case "level":
+                return new ElementTag(level);
+            case "gained":
+                return new ElementTag(gained);
+            case "class":
+                return skillAPIClass;
         }
         return super.getContext(name);
     }

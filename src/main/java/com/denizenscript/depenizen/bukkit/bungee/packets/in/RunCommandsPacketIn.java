@@ -45,52 +45,49 @@ public class RunCommandsPacketIn extends PacketIn {
         boolean shouldDebug = data.readByte() != 0;
         long uuidMost = data.readLong();
         long uuidLeast = data.readLong();
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, new Runnable() {
-            @Override
-            public void run() {
-                PlayerTag linkedPlayer = null;
-                if (uuidMost != 0 || uuidLeast != 0) {
-                    UUID uuid = new UUID(uuidMost, uuidLeast);
-                    try {
-                        OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
-                        if (player != null) {
-                            linkedPlayer = new PlayerTag(player);
-                        }
-                    }
-                    catch (Exception ex) {
-                        // Ignore
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
+            PlayerTag linkedPlayer = null;
+            if (uuidMost != 0 || uuidLeast != 0) {
+                UUID uuid = new UUID(uuidMost, uuidLeast);
+                try {
+                    OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
+                    if (player != null) {
+                        linkedPlayer = new PlayerTag(player);
                     }
                 }
-                List<String> commandsSeparated = CoreUtilities.split(commands, '\n');
-                List<Object> rawEntries = new ArrayList<>();
-                for (String cmd : commandsSeparated) {
-                    if (cmd.length() > 0) {
-                        rawEntries.add(parseCommandsBack(unescape(cmd)));
-                    }
+                catch (Exception ex) {
+                    // Ignore
                 }
-                List<ScriptEntry> entries = ScriptBuilder.buildScriptEntries(rawEntries, null, new BukkitScriptEntryData(linkedPlayer, null));
-                if (entries.isEmpty()) {
-                    return;
-                }
-                if (!shouldDebug) {
-                    for (ScriptEntry entry : entries) {
-                        entry.shouldDebugBool = false;
-                    }
-                }
-                ScriptQueue queue = new InstantQueue("BUNGEE_").addEntries(entries);
-                List<String> defSets = CoreUtilities.split(defs, '\r');
-                List<String> defNames = CoreUtilities.split(defSets.get(0), '\n');
-                List<String> defValues = CoreUtilities.split(defSets.get(1), '\n');
-                for (int i = 0; i < defNames.size(); i++) {
-                    String name = unescape(defNames.get(i));
-                    if (name.length() > 0) {
-                        String value = unescape(defValues.get(i));
-                        queue.addDefinition(name, value);
-                        Debug.echoDebug(entries.get(0), "Adding definition '" + name + "' as " + value);
-                    }
-                }
-                queue.start();
             }
+            List<String> commandsSeparated = CoreUtilities.split(commands, '\n');
+            List<Object> rawEntries = new ArrayList<>();
+            for (String cmd : commandsSeparated) {
+                if (cmd.length() > 0) {
+                    rawEntries.add(parseCommandsBack(unescape(cmd)));
+                }
+            }
+            List<ScriptEntry> entries = ScriptBuilder.buildScriptEntries(rawEntries, null, new BukkitScriptEntryData(linkedPlayer, null));
+            if (entries.isEmpty()) {
+                return;
+            }
+            if (!shouldDebug) {
+                for (ScriptEntry entry : entries) {
+                    entry.shouldDebugBool = false;
+                }
+            }
+            ScriptQueue queue = new InstantQueue("BUNGEE_").addEntries(entries);
+            List<String> defSets = CoreUtilities.split(defs, '\r');
+            List<String> defNames = CoreUtilities.split(defSets.get(0), '\n');
+            List<String> defValues = CoreUtilities.split(defSets.get(1), '\n');
+            for (int i = 0; i < defNames.size(); i++) {
+                String name = unescape(defNames.get(i));
+                if (name.length() > 0) {
+                    String value = unescape(defValues.get(i));
+                    queue.addDefinition(name, value);
+                    Debug.echoDebug(entries.get(0), "Adding definition '" + name + "' as " + value);
+                }
+            }
+            queue.start();
         });
     }
 

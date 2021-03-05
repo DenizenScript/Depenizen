@@ -13,7 +13,7 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MythicThreatCommand  extends AbstractCommand {
@@ -79,7 +79,7 @@ public class MythicThreatCommand  extends AbstractCommand {
             throw new InvalidArgumentsException("Must specify a threat value!");
         }
         if (!scriptEntry.hasObject("targets")) {
-            scriptEntry.defaultObject("targets", (Utilities.entryHasPlayer(scriptEntry) ? Arrays.asList(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity()) : null));
+            scriptEntry.defaultObject("targets", (Utilities.entryHasPlayer(scriptEntry) ? Collections.singletonList(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity()) : null));
         }
     }
 

@@ -64,24 +64,22 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("challenge")) {
-            return challenge;
-        }
-        else if (name.equals("xp_reward")) {
-            return xp_reward;
-        }
-        else if (name.equals("money_reward")) {
-            return money_reward;
-        }
-        else if (name.equals("item_rewards")) {
-            ListTag item_rewards = new ListTag();
-            for (String i : event.getItemRewards()) {
-                ItemTag item = ItemTag.valueOf(i, CoreUtilities.basicContext);
-                if (item != null) {
-                    item_rewards.addObject(item);
+        switch (name) {
+            case "challenge":
+                return challenge;
+            case "xp_reward":
+                return xp_reward;
+            case "money_reward":
+                return money_reward;
+            case "item_rewards":
+                ListTag item_rewards = new ListTag();
+                for (String i : event.getItemRewards()) {
+                    ItemTag item = ItemTag.valueOf(i, CoreUtilities.basicContext);
+                    if (item != null) {
+                        item_rewards.addObject(item);
+                    }
                 }
-            }
-            return item_rewards;
+                return item_rewards;
         }
         return super.getContext(name);
     }
