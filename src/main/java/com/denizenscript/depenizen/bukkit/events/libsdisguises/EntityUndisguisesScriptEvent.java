@@ -56,7 +56,6 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
         if (!disguiseName.equals("disguise") && !disguise.equals(LibsDisguiseTag.valueOf(disguiseName))) {
             return false;
         }
-
         return super.matches(path);
     }
 

@@ -160,7 +160,7 @@
         <dependency>
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
-            <version>9.5.0</version>
+            <version>10.0.24-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/LibsDisguises.jar</systemPath>
         </dependency>

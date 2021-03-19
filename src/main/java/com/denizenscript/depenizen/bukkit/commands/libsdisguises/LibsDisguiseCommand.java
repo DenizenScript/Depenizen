@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.libsdisguises;
 
+import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizencore.objects.Argument;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.*;
@@ -15,13 +16,13 @@ public class LibsDisguiseCommand extends AbstractCommand {
 
     public LibsDisguiseCommand() {
         setName("libsdisguise");
-        setSyntax("libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<#>) (data:<#>) (self:true/false)");
+        setSyntax("libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/{false}) (id:<item>) (self:true/{false})");
         setRequiredArguments(1, 6);
     }
 
     // <--[command]
     // @Name libsdisguise
-    // @Syntax libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/false) (id:<#>) (data:<#>) (self:true/false)
+    // @Syntax libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/{false}) (id:<item>) (self:true/{false})
     // @Group Depenizen
     // @Plugin Depenizen, LibsDisguises
     // @Required 1
@@ -41,7 +42,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
     //     Specify the player name.
     // For 'misc':
     //     Specify a misc disguise type.
-    //     Optionally, specify id and/or data. (Defaults to id:1 data:0).
+    //     Optionally, specify id as an ItemTag.
     //
     // Removing a disguise shows the true entity again for all players.
     // Only one disguise can be set per target, if another one is set, the previous disguise is removed.
@@ -65,7 +66,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
     //
     // @Usage
     // Use to disguise the linked player as a Sponge Block.
-    // - libsdisguise misc type:Falling_Block id:19 data:0
+    // - libsdisguise misc type:Falling_Block id:sponge
     //
     // @Usage
     // Use to remove the disguise from the linked player.
@@ -85,74 +86,48 @@ public class LibsDisguiseCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry.getProcessedArgs()) {
-
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
                 scriptEntry.addObject("target", arg.asType(EntityTag.class));
             }
-
             else if (!scriptEntry.hasObject("name")
                     && arg.matchesPrefix("name")) {
                 scriptEntry.addObject("name", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("type")
                     && arg.matchesPrefix("type")) {
                 scriptEntry.addObject("type", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("id")
                     && arg.matchesPrefix("id")) {
                 scriptEntry.addObject("id", arg.asElement());
             }
-
-            else if (!scriptEntry.hasObject("data")
-                    && arg.matchesPrefix("data")) {
-                scriptEntry.addObject("data", arg.asElement());
-            }
-
             else if (!scriptEntry.hasObject("baby")
                     && arg.matchesPrefix("baby")) {
                 scriptEntry.addObject("baby", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("self")
                     && arg.matchesPrefix("self")) {
                 scriptEntry.addObject("self", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
             }
-
             else {
                 arg.reportUnhandled();
             }
-
         }
         if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Action not specified! (remove/mob/player/misc)");
         }
-
         if (!scriptEntry.hasObject("baby")) {
             scriptEntry.addObject("baby", new ElementTag(false));
         }
-
-        if (!scriptEntry.hasObject("id")) {
-            scriptEntry.addObject("id", new ElementTag(1));
-        }
-
-        if (!scriptEntry.hasObject("data")) {
-            scriptEntry.addObject("data", new ElementTag(0));
-        }
-
         if (!scriptEntry.hasObject("self")) {
             scriptEntry.addObject("self", new ElementTag(false));
         }
-
         if (!scriptEntry.hasObject("target")) {
             if (Utilities.entryHasPlayer(scriptEntry)) {
                 scriptEntry.addObject("target", Utilities.getEntryPlayer(scriptEntry).getDenizenEntity());
@@ -161,18 +136,15 @@ public class LibsDisguiseCommand extends AbstractCommand {
                 throw new InvalidArgumentsException("This command does not have a player attached!");
             }
         }
-
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         EntityTag target = scriptEntry.getObjectTag("target");
         ElementTag type = scriptEntry.getObjectTag("type");
         ElementTag name = scriptEntry.getObjectTag("name");
         ElementTag action = scriptEntry.getObjectTag("action");
         ElementTag id = scriptEntry.getObjectTag("id");
-        ElementTag data = scriptEntry.getObjectTag("data");
         ElementTag baby = scriptEntry.getObjectTag("baby");
         ElementTag self = scriptEntry.getObjectTag("self");
         if (scriptEntry.dbCallShouldDebug()) {
@@ -181,7 +153,6 @@ public class LibsDisguiseCommand extends AbstractCommand {
                     + (type != null ? type.debug() : "")
                     + (name != null ? name.debug() : "")
                     + (id != null ? id.debug() : "")
-                    + (data != null ? data.debug() : "")
                     + (baby != null ? baby.debug() : ""));
         }
         if (target == null) {
@@ -231,15 +202,18 @@ public class LibsDisguiseCommand extends AbstractCommand {
                 Debug.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
                 return;
             }
-            if (id == null) {
-                Debug.echoError(scriptEntry.getResidingQueue(), "ID not specified!");
-                return;
+            DisguiseType disType = DisguiseType.valueOf(type.toString().toUpperCase());
+            MiscDisguise miscDisguise;
+            if (disType == DisguiseType.FALLING_BLOCK || disType == DisguiseType.DROPPED_ITEM) {
+                if (id == null) {
+                    Debug.echoError(scriptEntry.getResidingQueue(), "ID not specified!");
+                    return;
+                }
+                miscDisguise = new MiscDisguise(disType, ItemTag.valueOf(id.asString(), scriptEntry.context).getItemStack());
             }
-            if (data == null) {
-                Debug.echoError(scriptEntry.getResidingQueue(), "Data not specified!");
-                return;
+            else {
+                miscDisguise = new MiscDisguise(disType);
             }
-            MiscDisguise miscDisguise = new MiscDisguise(DisguiseType.valueOf(type.toString().toUpperCase()), id.asInt(), data.asInt());
             FlagWatcher watcher = miscDisguise.getWatcher();
             if (name != null) {
                 watcher.setCustomNameVisible(true);

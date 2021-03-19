@@ -42,6 +42,15 @@ public class WorldGuardBridge extends Bridge {
 
     public void tagEvent(ReplaceableTagEvent event) {
         Attribute attribute = event.getAttributes();
+
+        // <--[tag]
+        // @attribute <region[<region>]>
+        // @returns WorldGuardRegionTag
+        // @plugin Depenizen, WorldGuard
+        // @description
+        // Returns a WorldGuard region object constructed from the input value.
+        // Refer to <@link language WorldGuardRegionTag objects>.
+        // -->
         if (attribute.startsWith("region") && attribute.hasContext(1)) {
             WorldGuardRegionTag region =  attribute.contextAsType(1, WorldGuardRegionTag.class);
             if (region != null) {

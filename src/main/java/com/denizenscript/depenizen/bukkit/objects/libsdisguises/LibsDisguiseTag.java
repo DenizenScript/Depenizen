@@ -40,10 +40,6 @@ public class LibsDisguiseTag implements ObjectTag {
         if (string == null) {
             return null;
         }
-
-        ////////
-        // Match disguise name
-
         string = string.replace("libsdisguise@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');

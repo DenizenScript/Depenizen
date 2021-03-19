@@ -81,12 +81,12 @@ public class BungeeCommand extends BracedCommand {
         }
         List<BracedCommand.BracedData> bdlist = (List<BracedData>) scriptEntry.getObject("braces");
         if (bdlist == null || bdlist.isEmpty()) {
-            com.denizenscript.denizencore.utilities.debugging.Debug.echoError(scriptEntry.getResidingQueue(), "Empty braces (internal)!");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Empty subsection - did you forget a ':'?");
             return;
         }
         List<ScriptEntry> bracedCommandsList = bdlist.get(0).value;
         if (bracedCommandsList == null || bracedCommandsList.isEmpty()) {
-            com.denizenscript.denizencore.utilities.debugging.Debug.echoError(scriptEntry.getResidingQueue(), "Empty braces!");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Empty subsection - did you forget to add the sub-commands inside the command?");
             return;
         }
         StringBuilder toSend = new StringBuilder();

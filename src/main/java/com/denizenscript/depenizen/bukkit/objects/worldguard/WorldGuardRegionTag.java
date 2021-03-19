@@ -160,10 +160,10 @@ public class WorldGuardRegionTag implements ObjectTag {
         // @description
         // Converts a cuboid-shaped region to a CuboidTag.
         // -->
-        if (attribute.startsWith("cuboid") || attribute.startsWith("as_cuboid")) { // TODO: Scrap as_cuboid
+        if (attribute.startsWith("cuboid")) {
             if (!(region instanceof ProtectedCuboidRegion)) {
                 if (!attribute.hasAlternative()) {
-                    Debug.echoError("<WorldGuardRegionTag.as_cuboid> requires a Cuboid-shaped region!");
+                    Debug.echoError("<WorldGuardRegionTag.cuboid> requires a Cuboid-shaped region!");
                 }
                 return null;
             }
