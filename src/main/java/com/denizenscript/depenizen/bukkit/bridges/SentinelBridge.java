@@ -3,18 +3,16 @@ package com.denizenscript.depenizen.bukkit.bridges;
 import com.denizenscript.denizen.objects.NPCTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.utilities.ScriptUtilities;
 import com.denizenscript.depenizen.bukkit.events.sentinel.SentinelAttackScriptEvent;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
-import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.core.ScriptTag;
-import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.containers.core.ProcedureScriptContainer;
 import com.denizenscript.denizencore.scripts.queues.ScriptQueue;
-import com.denizenscript.denizencore.scripts.queues.core.InstantQueue;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.events.sentinel.SentinelNoMoreTargetsScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.sentinel.SentinelNPCProperties;
@@ -23,7 +21,7 @@ import org.mcmonkey.sentinel.SentinelIntegration;
 import org.mcmonkey.sentinel.SentinelPlugin;
 import org.mcmonkey.sentinel.SentinelUtilities;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class SentinelBridge extends Bridge {
 
@@ -71,28 +69,12 @@ public class SentinelBridge extends Bridge {
                         Debug.echoError("Invalid procedure script name '" + value + "' (not a procedure) in a Sentinel NPC target.");
                         return false;
                     }
-                    List<ScriptEntry> entries = script.getContainer().getBaseEntries(DenizenCore.getImplementation().getEmptyScriptEntryData());
-                    if (entries.isEmpty()) {
-                        return false;
-                    }
-                    InstantQueue queue = InstantQueue.getQueue(ScriptQueue.getNextId(script.getContainer().getName()));
-                    queue.addEntries(entries);
-                    String def_name = "entity";
-                    String context_name = "context";
-                    if (script.getContainer().getContents().contains("definitions")) {
-                        List<String> definition_names = CoreUtilities.split(script.getContainer().getString("definitions"), '|');
-                        if (definition_names.size() >= 1) {
-                            def_name = definition_names.get(0);
-                        }
-                        if (definition_names.size() >= 2) {
-                            context_name = definition_names.get(1);
-                        }
-                    }
-                    queue.addDefinition(def_name, new EntityTag(ent).getDenizenObject());
-                    if (context != null) {
-                        queue.addDefinition(context_name, new ElementTag(context));
-                    }
-                    queue.start();
+                    final String contextFinal = context;
+                    Consumer<ScriptQueue> configure = (queue) -> {
+                        queue.addDefinition("entity", new EntityTag(ent).getDenizenObject());
+                        queue.addDefinition("context", new ElementTag(contextFinal));
+                    };
+                    ScriptQueue queue = ScriptUtilities.createAndStartQueue(script.getContainer(), null, null, null, configure, null, null, null, null);
                     if (queue.determinations != null && queue.determinations.size() > 0) {
                         return CoreUtilities.equalsIgnoreCase(queue.determinations.get(0), "true");
                     }
