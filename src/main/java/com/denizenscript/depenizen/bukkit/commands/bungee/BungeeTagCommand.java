@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.bungee;
 
+import com.denizenscript.denizencore.utilities.text.StringHolder;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
@@ -114,8 +115,8 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
         int newId = currentId++;
         StringBuilder defNames = new StringBuilder();
         StringBuilder defValues = new StringBuilder();
-        for (Map.Entry<String, ObjectTag> def : scriptEntry.getResidingQueue().getAllDefinitions().entrySet()) {
-            defNames.append(BungeeCommand.escape(def.getKey())).append("\n");
+        for (Map.Entry<StringHolder, ObjectTag> def : scriptEntry.getResidingQueue().getAllDefinitions().map.entrySet()) {
+            defNames.append(BungeeCommand.escape(def.getKey().low)).append("\n");
             defValues.append(BungeeCommand.escape(def.getValue().toString())).append("\n");
         }
         ReadTagPacketOut packetTag = new ReadTagPacketOut();
