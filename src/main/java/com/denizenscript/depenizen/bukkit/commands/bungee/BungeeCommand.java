@@ -119,12 +119,12 @@ public class BungeeCommand extends BracedCommand {
     public static String stringify(Object obj) {
         if (obj instanceof ScriptEntry) {
             ScriptEntry entry = (ScriptEntry) obj;
-            if (entry.internal.insideList == null) {
+            if (!(entry.internal.yamlSubcontent instanceof List)) {
                 return escape(entry.internal.originalLine);
             }
             StringBuilder result = new StringBuilder();
             result.append(escape(entry.internal.originalLine)).append("\r");
-            for (Object subCommand : entry.internal.insideList) {
+            for (Object subCommand : (List<Object>) entry.internal.yamlSubcontent) {
                 result.append(stringify(subCommand)).append("\r");
             }
             return result.toString();
