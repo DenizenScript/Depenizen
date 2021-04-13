@@ -220,7 +220,7 @@ public class WorldEditCommand extends AbstractCommand {
                     return;
                 }
                 Player wePlayer = BukkitAdapter.adapt(target.getPlayerEntity());
-                EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(weWorld, -1, null, wePlayer);
+                EditSession editSession = WorldEdit.getInstance().newEditSessionBuilder().world(weWorld).actor(wePlayer).build();
                 Operation operation = holder.createPaste(editSession)
                         .to(BlockVector3.at(position.getBlockX(), position.getBlockY(), position.getBlockZ()))
                         .ignoreAirBlocks(noAir != null).build();
@@ -232,11 +232,11 @@ public class WorldEditCommand extends AbstractCommand {
                     Debug.echoError(ex);
                     return;
                 }
-                editSession.flushSession();
+                Operations.completeBlindly(editSession.commit());
                 WorldEdit.getInstance().getSessionManager().get(wePlayer).remember(editSession);
             }
             else {
-                EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(weWorld, -1);
+                EditSession editSession = WorldEdit.getInstance().newEditSessionBuilder().world(weWorld).build();
                 Operation operation = holder.createPaste(editSession)
                         .to(BlockVector3.at(position.getBlockX(), position.getBlockY(), position.getBlockZ()))
                         .ignoreAirBlocks(noAir != null).build();
@@ -248,7 +248,7 @@ public class WorldEditCommand extends AbstractCommand {
                     Debug.echoError(ex);
                     return;
                 }
-                editSession.flushSession();
+                Operations.completeBlindly(editSession.commit());
             }
         }
         else if (action.asString().equalsIgnoreCase("create_schematic")) {

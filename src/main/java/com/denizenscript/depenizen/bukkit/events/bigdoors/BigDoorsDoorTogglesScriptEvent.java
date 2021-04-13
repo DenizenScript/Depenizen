@@ -14,7 +14,7 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
 
     // <--[event]
     // @Events
-    // bigdoors door [toggles|opens|closes]
+    // bigdoors door [toggles/opens/closes]
     //
     // @Regex ^on bigdoors door (toggles|opens|closes)$
     //
