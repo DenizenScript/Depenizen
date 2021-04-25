@@ -15,6 +15,7 @@ import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.regions.EllipsoidRegion;
 import com.sk89q.worldedit.regions.Polygonal2DRegion;
 import com.sk89q.worldedit.regions.RegionSelector;
+import com.sk89q.worldedit.regions.selector.CuboidRegionSelector;
 import com.sk89q.worldedit.regions.selector.EllipsoidRegionSelector;
 import com.sk89q.worldedit.regions.selector.Polygonal2DRegionSelector;
 import com.sk89q.worldedit.world.item.ItemType;
@@ -28,6 +29,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.stream.Collectors;
+
 public class WorldEditPlayerProperties implements Property {
 
     @Override
@@ -38,11 +41,6 @@ public class WorldEditPlayerProperties implements Property {
     @Override
     public String getPropertyId() {
         return "WorldEditPlayer";
-    }
-
-    @Override
-    public void adjust(Mechanism mechanism) {
-        // None
     }
 
     public static boolean describes(ObjectTag object) {
@@ -64,6 +62,7 @@ public class WorldEditPlayerProperties implements Property {
     };
 
     public static final String[] handledMechs = new String[] {
+            "we_selection"
     }; // None
 
     private WorldEditPlayerProperties(PlayerTag player) {
@@ -128,6 +127,7 @@ public class WorldEditPlayerProperties implements Property {
         // <--[tag]
         // @attribute <PlayerTag.we_selection>
         // @returns ObjectTag
+        // @mechanism PlayerTag.we_selection
         // @plugin Depenizen, WorldEdit
         // @description
         // Returns the player's current block area selection, as a CuboidTag, EllipsoidTag, or PolygonTag.
@@ -164,6 +164,41 @@ public class WorldEditPlayerProperties implements Property {
         }
 
         return null;
+    }
 
+    @Override
+    public void adjust(Mechanism mechanism) {
+
+        // <--[mechanism]
+        // @object PlayerTag
+        // @name we_selection
+        // @plugin Depenizen, WorldEdit
+        // @input ObjectTag
+        // @description
+        // Sets the player's current block area selection, as a CuboidTag, EllipsoidTag, or PolygonTag.
+        // @tags
+        // <PlayerTag.we_selection>
+        // -->
+        if (mechanism.matches("we_selection")) {
+            WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
+            RegionSelector selector;
+            if (mechanism.getValue().asString().startsWith("cu@")) {
+                CuboidTag input = mechanism.valueAsType(CuboidTag.class);
+                selector = new CuboidRegionSelector(BukkitAdapter.adapt(input.getWorld()), BukkitAdapter.asBlockVector(input.getLow(0)), BukkitAdapter.asBlockVector(input.getHigh(0)));
+            }
+            else if (mechanism.getValue().asString().startsWith("ellipsoid@")) {
+                EllipsoidTag input = mechanism.valueAsType(EllipsoidTag.class);
+                selector = new EllipsoidRegionSelector(BukkitAdapter.adapt(input.center.getWorld()), BukkitAdapter.asBlockVector(input.center), BukkitAdapter.asVector(input.size));
+            }
+            else if (mechanism.getValue().asString().startsWith("polygon@")) {
+                PolygonTag input = mechanism.valueAsType(PolygonTag.class);
+                selector = new Polygonal2DRegionSelector(BukkitAdapter.adapt(input.world.getWorld()), input.corners.stream().map(c -> BlockVector2.at(c.x, c.z)).collect(Collectors.toList()), (int)input.yMin, (int)input.yMax);
+            }
+            else {
+                Debug.echoError("Invalid we_selection input");
+                return;
+            }
+            worldEdit.getSession(player).setRegionSelector(BukkitAdapter.adapt(player.getWorld()), selector);
+        }
     }
 }

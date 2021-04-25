@@ -182,7 +182,7 @@ public class WorldEditCommand extends AbstractCommand {
             String directory = URLDecoder.decode(System.getProperty("user.dir"));
             File fileToLoad = new File(directory + "/plugins/Denizen/schematics/" + file + ".schem");
             if (!Utilities.canReadFile(fileToLoad)) {
-                Debug.echoError("Permission to read file '" + file + "' denied by config.");
+                Debug.echoError("Cannot read from that file path due to security settings in Denizen/config.yml.");
                 return;
             }
             if (!fileToLoad.exists()) {
@@ -259,7 +259,7 @@ public class WorldEditCommand extends AbstractCommand {
             String directory = URLDecoder.decode(System.getProperty("user.dir"));
             File fileToSave = new File(directory + "/plugins/Denizen/schematics/" + file + ".schem");
             if (!Utilities.canWriteToFile(fileToSave)) {
-                Debug.echoError("Permission to write file '" + file + "' denied by config.");
+                Debug.echoError("Cannot write to that file path due to security settings in Denizen/config.yml.");
                 return;
             }
             if (cuboid == null) {
@@ -352,7 +352,7 @@ public class WorldEditCommand extends AbstractCommand {
             String directory = URLDecoder.decode(System.getProperty("user.dir"));
             File fileToLoad = new File(directory + "/plugins/Denizen/schematics/" + file + ".schem");
             if (!Utilities.canReadFile(fileToLoad)) {
-                Debug.echoError("Permission to read file '" + file + "' denied by config.");
+                Debug.echoError("Cannot read from that file path due to security settings in Denizen/config.yml.");
                 return;
             }
             if (!fileToLoad.exists()) {

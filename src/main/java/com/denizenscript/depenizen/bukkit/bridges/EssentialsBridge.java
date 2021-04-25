@@ -45,7 +45,7 @@ public class EssentialsBridge extends Bridge {
         Attribute attribute = event.getAttributes().fulfill(1);
 
         // <--[tag]
-        // @attribute <essentials.warp[<warp name>]>
+        // @attribute <essentials.warp[<warp_name>]>
         // @returns LocationTag
         // @plugin Depenizen, Essentials
         // @description
