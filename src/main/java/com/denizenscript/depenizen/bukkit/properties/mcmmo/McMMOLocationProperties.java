@@ -66,7 +66,7 @@ public class McMMOLocationProperties implements Property {
             // Returns whether the location is tracked by McMMO as a player-placed block (might only apply to certain block types).
             // -->
             if (attribute.startsWith("is_placed")) {
-                return new ElementTag(mcMMO.getPlaceStore().isTrue(location.getBlockX(), location.getBlockY(), location.getBlockZ(), location.getWorld()))
+                return new ElementTag(mcMMO.getPlaceStore().isTrue(location.getBlock()))
                         .getAttribute(attribute.fulfill(1));
             }
         }

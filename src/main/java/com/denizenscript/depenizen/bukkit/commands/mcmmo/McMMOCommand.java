@@ -4,10 +4,9 @@ import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.objects.Argument;
 import com.gmail.nossr50.api.ExperienceAPI;
 import com.gmail.nossr50.api.PartyAPI;
-import com.gmail.nossr50.config.Config;
 import com.gmail.nossr50.config.experience.ExperienceConfig;
-import com.gmail.nossr50.database.DatabaseManagerFactory;
 import com.gmail.nossr50.datatypes.skills.PrimarySkillType;
+import com.gmail.nossr50.mcMMO;
 import com.gmail.nossr50.party.PartyManager;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
@@ -178,7 +177,7 @@ public class McMMOCommand extends AbstractCommand {
                     }
                 }
                 else if (player != null) {
-                    DatabaseManagerFactory.getDatabaseManager().removeUser(player.getName(), player.getUUID());
+                    mcMMO.getDatabaseManager().removeUser(player.getName(), player.getUUID());
                 }
                 break;
             }
@@ -224,18 +223,18 @@ public class McMMOCommand extends AbstractCommand {
                                 return;
                             }
                             PrimarySkillType skillType = PrimarySkillType.getSkill(skill.asString());
-                            boolean isEnabled = Config.getInstance().getHardcoreStatLossEnabled(skillType);
+                            boolean isEnabled = mcMMO.p.getGeneralConfig().getHardcoreStatLossEnabled(skillType);
                             switch (State.valueOf(state.asString().toUpperCase())) {
                                 case TOGGLE: {
-                                    Config.getInstance().setHardcoreStatLossEnabled(skillType, !isEnabled);
+                                    mcMMO.p.getGeneralConfig().setHardcoreStatLossEnabled(skillType, !isEnabled);
                                     break;
                                 }
                                 case TRUE: {
-                                    Config.getInstance().setHardcoreStatLossEnabled(skillType, true);
+                                    mcMMO.p.getGeneralConfig().setHardcoreStatLossEnabled(skillType, true);
                                     break;
                                 }
                                 case FALSE: {
-                                    Config.getInstance().setHardcoreStatLossEnabled(skillType, false);
+                                    mcMMO.p.getGeneralConfig().setHardcoreStatLossEnabled(skillType, false);
                                     break;
                                 }
                             }
@@ -246,18 +245,18 @@ public class McMMOCommand extends AbstractCommand {
                                 return;
                             }
                             PrimarySkillType skillType = PrimarySkillType.getSkill(skill.asString());
-                            boolean isEnabled = Config.getInstance().getHardcoreVampirismEnabled(skillType);
+                            boolean isEnabled = mcMMO.p.getGeneralConfig().getHardcoreVampirismEnabled(skillType);
                             switch (State.valueOf(state.asString().toUpperCase())) {
                                 case TOGGLE: {
-                                    Config.getInstance().setHardcoreVampirismEnabled(skillType, !isEnabled);
+                                    mcMMO.p.getGeneralConfig().setHardcoreVampirismEnabled(skillType, !isEnabled);
                                     break;
                                 }
                                 case TRUE: {
-                                    Config.getInstance().setHardcoreVampirismEnabled(skillType, true);
+                                    mcMMO.p.getGeneralConfig().setHardcoreVampirismEnabled(skillType, true);
                                     break;
                                 }
                                 case FALSE: {
-                                    Config.getInstance().setHardcoreVampirismEnabled(skillType, false);
+                                    mcMMO.p.getGeneralConfig().setHardcoreVampirismEnabled(skillType, false);
                                     break;
                                 }
                             }

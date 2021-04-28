@@ -7,6 +7,7 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.tags.Attribute;
+import com.gmail.nossr50.util.compat.layers.persistentdata.MobMetaFlagType;
 
 public class McMMOEntityProperties implements Property {
 
@@ -66,7 +67,7 @@ public class McMMOEntityProperties implements Property {
             // Returns whether the entity is tracked by McMMO as a 'spawned' mob (one from a spawner block or spawn egg).
             // -->
             if (attribute.startsWith("is_spawned_mob")) {
-                return new ElementTag(entity.getBukkitEntity().hasMetadata(mcMMO.entityMetadataKey))
+                return new ElementTag(mcMMO.getCompatibilityManager().getPersistentDataLayer().hasMobFlag(MobMetaFlagType.MOB_SPAWNER_MOB, entity.getLivingEntity()))
                         .getAttribute(attribute.fulfill(1));
             }
         }
