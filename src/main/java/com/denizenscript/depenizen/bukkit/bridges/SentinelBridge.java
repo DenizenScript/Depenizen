@@ -72,7 +72,9 @@ public class SentinelBridge extends Bridge {
                     final String contextFinal = context;
                     Consumer<ScriptQueue> configure = (queue) -> {
                         queue.addDefinition("entity", new EntityTag(ent).getDenizenObject());
-                        queue.addDefinition("context", new ElementTag(contextFinal));
+                        if (contextFinal != null) {
+                            queue.addDefinition("context", new ElementTag(contextFinal));
+                        }
                     };
                     ScriptQueue queue = ScriptUtilities.createAndStartQueue(script.getContainer(), null, null, null, configure, null, null, null, null);
                     if (queue.determinations != null && queue.determinations.size() > 0) {

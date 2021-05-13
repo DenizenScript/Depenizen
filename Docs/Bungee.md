@@ -3,7 +3,7 @@ Bungee Bridge
 
 ### Setup
 
-Spigot/Paper Side:
+- Spigot/Paper Side:
     - Install [Denizen](https://github.com/DenizenScript/Denizen) and Depenizen ([builds here](https://ci.citizensnpcs.co/job/Depenizen/)) to your Spigot/Paper server.
     - Set the `Bungee server address` and `Bungee server port` in your Depenizen config to your Bungee proxy server's details.
 - Bungee (Proxy) Side:
