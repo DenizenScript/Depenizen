@@ -11,6 +11,6 @@ public class EffectLibBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        Denizen.getInstance().getCommandRegistry().registerCommand(EffectLibCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(EffectLibCommand.class);
     }
 }

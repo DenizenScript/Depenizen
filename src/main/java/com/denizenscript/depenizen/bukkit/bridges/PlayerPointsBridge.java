@@ -26,7 +26,7 @@ public class PlayerPointsBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        Denizen.getInstance().getCommandRegistry().registerCommand(PlayerPointsCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(PlayerPointsCommand.class);
         PropertyParser.registerProperty(PlayerPointsPlayerProperties.class, PlayerTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override

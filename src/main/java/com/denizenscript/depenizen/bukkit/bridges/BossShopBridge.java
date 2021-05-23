@@ -14,7 +14,7 @@ public class BossShopBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        Denizen.getInstance().getCommandRegistry().registerCommand(BossShopCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(BossShopCommand.class);
         PropertyParser.registerProperty(BossShopInventoryProperties.class, InventoryTag.class);
     }
 }

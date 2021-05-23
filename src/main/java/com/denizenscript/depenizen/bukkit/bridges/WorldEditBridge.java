@@ -13,7 +13,7 @@ public class WorldEditBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        Denizen.getInstance().getCommandRegistry().registerCommand(WorldEditCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(WorldEditCommand.class);
         PropertyParser.registerProperty(WorldEditPlayerProperties.class, PlayerTag.class);
     }
 }

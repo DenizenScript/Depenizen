@@ -31,7 +31,7 @@ public class WorldGuardBridge extends Bridge {
         PropertyParser.registerProperty(WorldGuardPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(WorldGuardCuboidProperties.class, CuboidTag.class);
         PropertyParser.registerProperty(WorldGuardWorldProperties.class, WorldTag.class);
-        Denizen.getInstance().getCommandRegistry().registerCommand(RegionCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(RegionCommand.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

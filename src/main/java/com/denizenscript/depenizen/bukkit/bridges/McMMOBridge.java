@@ -33,7 +33,7 @@ public class McMMOBridge extends Bridge {
         PropertyParser.registerProperty(McMMOPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(McMMOEntityProperties.class, EntityTag.class);
         PropertyParser.registerProperty(McMMOLocationProperties.class, LocationTag.class);
-        Denizen.getInstance().getCommandRegistry().registerCommand(McMMOCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(McMMOCommand.class);
         ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelChangeScriptEvent());
         ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelUpScriptEvent());
         ScriptEvent.registerScriptEvent(new mcMMOPlayerLevelDownScriptEvent());

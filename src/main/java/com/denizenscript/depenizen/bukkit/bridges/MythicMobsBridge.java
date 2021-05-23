@@ -43,10 +43,10 @@ public class MythicMobsBridge extends Bridge {
         PropertyParser.registerProperty(MythicMobsEntityProperties.class, EntityTag.class);
         ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
         ScriptEvent.registerScriptEvent(new MythicMobsSpawnEvent());
-        Denizen.getInstance().getCommandRegistry().registerCommand(MythicSpawnCommand.class);
-        Denizen.getInstance().getCommandRegistry().registerCommand(MythicThreatCommand.class);
-        Denizen.getInstance().getCommandRegistry().registerCommand(MythicSignalCommand.class);
-        Denizen.getInstance().getCommandRegistry().registerCommand(MythicSkillCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(MythicSpawnCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(MythicThreatCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(MythicSignalCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
 
         // <--[tag]

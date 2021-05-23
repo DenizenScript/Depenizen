@@ -20,6 +20,6 @@ public class LibsDisguisesBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new EntityUndisguisesScriptEvent());
         ObjectFetcher.registerWithObjectFetcher(LibsDisguiseTag.class);
         PropertyParser.registerProperty(LibsDisguiseEntityProperties.class, EntityTag.class);
-        Denizen.getInstance().getCommandRegistry().registerCommand(LibsDisguiseCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(LibsDisguiseCommand.class);
     }
 }

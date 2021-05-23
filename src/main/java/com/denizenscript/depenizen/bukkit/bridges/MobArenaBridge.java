@@ -34,7 +34,7 @@ public class MobArenaBridge extends Bridge {
                 tagEvent(event);
             }
         }, "mobarena");
-        Denizen.getInstance().getCommandRegistry().registerCommand(MobArenaCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(MobArenaCommand.class);
         ScriptEvent.registerScriptEvent(new MobArenaStartsScriptEvent());
         ScriptEvent.registerScriptEvent(new MobArenaEndsScriptEvent());
         ScriptEvent.registerScriptEvent(new MobArenaWaveChangesScriptEvent());

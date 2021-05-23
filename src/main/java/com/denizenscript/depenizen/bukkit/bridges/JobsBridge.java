@@ -30,7 +30,7 @@ public class JobsBridge extends Bridge {
                 tagEvent(event);
             }
         }, "jobs");
-        Denizen.getInstance().getCommandRegistry().registerCommand(JobsCommand.class);
+        Denizen.getInstance().commandRegistry.registerCommand(JobsCommand.class);
     }
 
     public void tagEvent(ReplaceableTagEvent event) {
