@@ -1,13 +1,15 @@
 package com.denizenscript.depenizen.bukkit.objects.worldguard;
 
+import com.denizenscript.denizen.objects.*;
+import com.denizenscript.denizencore.utilities.debugging.SlowWarning;
+import com.denizenscript.denizencore.utilities.debugging.Warning;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
+import com.sk89q.worldguard.protection.regions.ProtectedPolygonalRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import com.denizenscript.denizen.objects.CuboidTag;
-import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
@@ -149,18 +151,42 @@ public class WorldGuardRegionTag implements ObjectTag {
         return identify();
     }
 
+    public static Warning oldCuboidTag = new SlowWarning("The tag 'WorldGuardRegionTag.cuboid' is deprecated in favor of the '.area' equivalent.");
+
     @Override
     public String getAttribute(Attribute attribute) {
 
         // <--[tag]
-        // @attribute <WorldGuardRegionTag.cuboid>
-        // @returns CuboidTag
+        // @attribute <WorldGuardRegionTag.area>
+        // @returns AreaObject
         // @group conversion
         // @plugin Depenizen, WorldGuard
         // @description
-        // Converts a cuboid-shaped region to a CuboidTag.
+        // Returns the region's block area as a CuboidTag or PolygonTag.
         // -->
+        if (attribute.startsWith("area")) {
+            try {
+                if (region instanceof ProtectedPolygonalRegion) {
+                    ProtectedPolygonalRegion polyRegion = ((ProtectedPolygonalRegion) region);
+                    PolygonTag poly = new PolygonTag(new WorldTag(world));
+                    for (BlockVector2 vec2 : polyRegion.getPoints()) {
+                        poly.corners.add(new PolygonTag.Corner(vec2.getX(), vec2.getZ()));
+                    }
+                    poly.yMin = polyRegion.getMinimumPoint().getY();
+                    poly.yMax = polyRegion.getMaximumPoint().getY();
+                    poly.recalculateBox();
+                    return poly.getAttribute(attribute.fulfill(1));
+                }
+                return new CuboidTag(BukkitAdapter.adapt(world, region.getMinimumPoint()),
+                        BukkitAdapter.adapt(world, region.getMaximumPoint())).getAttribute(attribute.fulfill(1));
+            }
+            catch (Throwable ex) {
+                Debug.echoError(ex);
+            }
+        }
+
         if (attribute.startsWith("cuboid")) {
+            oldCuboidTag.warn(attribute.context);
             if (!(region instanceof ProtectedCuboidRegion)) {
                 if (!attribute.hasAlternative()) {
                     Debug.echoError("<WorldGuardRegionTag.cuboid> requires a Cuboid-shaped region!");
