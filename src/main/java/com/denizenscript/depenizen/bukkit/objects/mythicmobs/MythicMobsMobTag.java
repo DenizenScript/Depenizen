@@ -24,16 +24,17 @@ import java.util.UUID;
 
 public class MythicMobsMobTag implements ObjectTag, Adjustable {
 
-    // <--[language]
-    // @name MythicMobsMobTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name MythicMobsMobTag
+    // @prefix mythicmob
+    // @base ElementTag
+    // @format
+    // The identity format for MythicMobsMobTag is <uuid>
+    // For example, 'mythicmob@1234-1234-1234'.
+    //
     // @plugin Depenizen, MythicMobs
     // @description
     // A MythicMobsMobTag represents a Mythic mob entity in the world.
-    //
-    // These use the object notation "mythicmob@".
-    // The identity format for MythicMobsMobTag is <uuid>
-    // For example, 'mythicmob@1234-1234-1234'.
     //
     // -->
 

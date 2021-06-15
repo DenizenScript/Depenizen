@@ -26,16 +26,17 @@ import java.util.UUID;
 
 public class MythicSpawnerTag implements ObjectTag, Adjustable {
 
-    // <--[language]
-    // @name MythicSpawnerTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name MythicSpawnerTag
+    // @prefix mythicspawner
+    // @base ElementTag
+    // @format
+    // The identity format for a MythicSpawner is its name.
+    // For example, 'mythicspawner@AngrySludgeSpawner1'.
+    //
     // @plugin Depenizen, MythicMobs
     // @description
     // A MythicSpawnerTag represents a MythicMobs spanwer in the world.
-    //
-    // These use the object notation "mythicspawner@".
-    // The identity format for a MythicSpawner is its name.
-    // For example, 'mythicspawner@AngrySludgeSpawner1'.
     //
     // -->
 

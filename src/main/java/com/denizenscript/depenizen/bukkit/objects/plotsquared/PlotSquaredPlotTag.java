@@ -22,16 +22,17 @@ import java.util.UUID;
 
 public class PlotSquaredPlotTag implements ObjectTag {
 
-    // <--[language]
-    // @name PlotSquaredPlotTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name PlotSquaredPlotTag
+    // @prefix plotsquaredplot
+    // @base ElementTag
+    // @format
+    // The identity format for plots is <x>,<z>,<world>
+    // For example, 'plotsquaredplot@5,10,Hub'.
+    //
     // @plugin Depenizen, PlotSquared
     // @description
     // A PlotSquaredPlotTag represents a PlotSquared plot in the world.
-    //
-    // These use the object notation "plotsquaredplot@".
-    // The identity format for plots is <x>,<z>,<world>
-    // For example, 'plotsquaredplot@5,10,Hub'.
     //
     // -->
 

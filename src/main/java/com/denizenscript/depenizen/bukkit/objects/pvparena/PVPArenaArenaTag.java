@@ -14,16 +14,17 @@ import net.slipcor.pvparena.managers.ArenaManager;
 
 public class PVPArenaArenaTag implements ObjectTag {
 
-    // <--[language]
-    // @name PVPArenaArenaTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name PVPArenaArenaTag
+    // @prefix pvparena
+    // @base ElementTag
+    // @format
+    // The identity format for arenas is <arena_name>
+    // For example, 'pvparena@myarena'.
+    //
     // @plugin Depenizen, PvPArena
     // @description
     // A PVPArenaArenaTag represents a PvP Arena in the world.
-    //
-    // These use the object notation "pvparena@".
-    // The identity format for arenas is <arena_name>
-    // For example, 'pvparena@myarena'.
     //
     // -->
 

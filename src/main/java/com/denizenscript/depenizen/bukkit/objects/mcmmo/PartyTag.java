@@ -17,16 +17,17 @@ import java.util.UUID;
 
 public class PartyTag implements ObjectTag {
 
-    // <--[language]
-    // @name PartyTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name PartyTag
+    // @prefix party
+    // @base ElementTag
+    // @format
+    // The identity format for parties is <party_name>
+    // For example, 'party@my_party'.
+    //
     // @plugin Depenizen, McMMO
     // @description
     // A PartyTag represents an McMMO party.
-    //
-    // These use the object notation "party@".
-    // The identity format for parties is <party_name>
-    // For example, 'party@my_party'.
     //
     // -->
 

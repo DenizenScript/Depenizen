@@ -15,16 +15,17 @@ import com.denizenscript.denizencore.tags.TagContext;
 
 public class JobsJobTag implements ObjectTag {
 
-    // <--[language]
-    // @name JobsJobTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name JobsJobTag
+    // @prefix job
+    // @base ElementTag
+    // @format
+    // The identity format for jobs is <job_name>
+    // For example, 'job@job_name'.
+    //
     // @plugin Depenizen, Jobs
     // @description
     // A JobsJobTag represents a Jobs job.
-    //
-    // These use the object notation "job@".
-    // The identity format for jobs is <job_name>
-    // For example, 'job@job_name'.
     //
     // -->
 

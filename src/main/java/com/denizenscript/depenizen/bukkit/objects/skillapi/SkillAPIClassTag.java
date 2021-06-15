@@ -11,16 +11,17 @@ import com.denizenscript.denizencore.tags.TagContext;
 
 public class SkillAPIClassTag implements ObjectTag {
 
-    // <--[language]
-    // @name SkillAPIClassTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name SkillAPIClassTag
+    // @prefix skillapiclass
+    // @base ElementTag
+    // @format
+    // The identity format for regions is <class_name>
+    // For example, 'skillapiclass@myclass'.
+    //
     // @plugin Depenizen, SkillAPI
     // @description
     // A SkillAPIClassTag represents a SkillAPI class.
-    //
-    // These use the object notation "skillapiclass@".
-    // The identity format for regions is <class_name>
-    // For example, 'skillapiclass@myclass'.
     //
     // -->
 

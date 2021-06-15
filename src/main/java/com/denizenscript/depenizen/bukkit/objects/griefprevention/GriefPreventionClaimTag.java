@@ -23,16 +23,17 @@ import java.util.UUID;
 
 public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
 
-    // <--[language]
-    // @name GriefPreventionClaimTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name GriefPreventionClaimTag
+    // @prefix gpclaim
+    // @base ElementTag
+    // @format
+    // The identity format for claims is <claim_id>
+    // For example, 'gpclaim@1234'.
+    //
     // @plugin Depenizen, GriefPrevention
     // @description
     // A GriefPreventionClaimTag represents a GriefPrevention claim.
-    //
-    // These use the object notation "gpclaim@".
-    // The identity format for claims is <claim_id>
-    // For example, 'gpclaim@1234'.
     //
     // -->
 

@@ -16,16 +16,17 @@ import com.denizenscript.denizencore.tags.TagContext;
 
 public class NationTag implements ObjectTag {
 
-    // <--[language]
-    // @name NationTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name NationTag
+    // @prefix nation
+    // @base ElementTag
+    // @format
+    // The identity format for nations is <nation_name>
+    // For example, 'nation@my_nation'.
+    //
     // @plugin Depenizen, Factions
     // @description
     // A NationTag represents a Factions nation.
-    //
-    // These use the object notation "nation@".
-    // The identity format for nations is <nation_name>
-    // For example, 'nation@my_nation'.
     //
     // -->
 

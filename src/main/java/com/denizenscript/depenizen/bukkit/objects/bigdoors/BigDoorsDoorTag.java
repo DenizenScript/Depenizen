@@ -19,16 +19,17 @@ import nl.pim16aap2.bigDoors.util.DoorOwner;
 
 public class BigDoorsDoorTag implements ObjectTag, Adjustable {
 
-    // <--[language]
-    // @name BigDoorsDoorTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name BigDoorsDoorTag
+    // @prefix bigdoor
+    // @base ElementTag
+    // @format
+    // The identity format for a door is it's Door ID as a number. NOT the name of the door you have set.
+    // For example, 'bigdoor@1'.
+    //
     // @plugin Depenizen, Big Doors
     // @description
     // A BigDoorsDoorTag represents a Big Doors door.
-    //
-    // These use the object notation "bigdoor@".
-    // The identity format for a door is it's Door ID as a number. NOT the name of the door you have set.
-    // For example, 'bigdoor@1'.
     //
     // -->
 

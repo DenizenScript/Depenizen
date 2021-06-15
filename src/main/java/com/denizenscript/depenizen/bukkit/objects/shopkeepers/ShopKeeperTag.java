@@ -24,16 +24,17 @@ import java.util.UUID;
 
 public class ShopKeeperTag implements ObjectTag {
 
-    // <--[language]
-    // @name ShopKeeperTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name ShopKeeperTag
+    // @prefix shopkeeper
+    // @base ElementTag
+    // @format
+    // The identity format for shopkeepers is <uuid>
+    // For example, 'shopkeeper@1234-1234-1234'.
+    //
     // @plugin Depenizen, Shopkeepers
     // @description
     // A ShopKeeperTag represents a ShopKeeper entity in the world.
-    //
-    // These use the object notation "shopkeeper@".
-    // The identity format for shopkeepers is <uuid>
-    // For example, 'shopkeeper@1234-1234-1234'.
     //
     // -->
 

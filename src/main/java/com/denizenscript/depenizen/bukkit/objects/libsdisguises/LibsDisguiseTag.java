@@ -14,16 +14,17 @@ import java.util.List;
 
 public class LibsDisguiseTag implements ObjectTag {
 
-    // <--[language]
-    // @name LibsDisguiseTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name LibsDisguiseTag
+    // @prefix libsdisguise
+    // @base ElementTag
+    // @format
+    // The identity format for disguises is <disguise_name>
+    // For example, 'libsdisguise@zombie'.
+    //
     // @plugin Depenizen, LibsDisguises
     // @description
     // A LibsDisguiseTag represents a LibsDisguises disguise type.
-    //
-    // These use the object notation "libsdisguise@".
-    // The identity format for disguises is <disguise_name>
-    // For example, 'libsdisguise@zombie'.
     //
     // -->
 

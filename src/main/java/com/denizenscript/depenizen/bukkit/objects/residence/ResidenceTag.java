@@ -14,16 +14,17 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class ResidenceTag implements ObjectTag {
 
-    // <--[language]
-    // @name ResidenceTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name ResidenceTag
+    // @prefix residence
+    // @base ElementTag
+    // @format
+    // The identity format for residences is <residence_name>
+    // For example, 'residence@myresidence'.
+    //
     // @plugin Depenizen, Residence
     // @description
     // A ResidenceTag represents a Residence in the world.
-    //
-    // These use the object notation "residence@".
-    // The identity format for residences is <residence_name>
-    // For example, 'residence@myresidence'.
     //
     // -->
 

@@ -16,16 +16,17 @@ import me.wiefferink.areashop.regions.RentRegion;
 
 public class AreaShopTag implements ObjectTag {
 
-    // <--[language]
-    // @name AreaShopTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name AreaShopTag
+    // @prefix areashop
+    // @base ElementTag
+    // @format
+    // The identity format for shops is <shop_name>
+    // For example, 'areashop@my_shop'.
+    //
     // @plugin Depenizen, AreaShop
     // @description
     // An AreaShopTag represents an AreaShop shop.
-    //
-    // These use the object notation "areashop@".
-    // The identity format for shops is <shop_name>
-    // For example, 'areashop@my_shop'.
     //
     // -->
 

@@ -18,16 +18,17 @@ import java.util.Set;
 
 public class FactionTag implements ObjectTag {
 
-    // <--[language]
-    // @name FactionTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name FactionTag
+    // @prefix faction
+    // @base ElementTag
+    // @format
+    // The identity format for factions is <faction_name>
+    // For example, 'faction@my_faction'.
+    //
     // @plugin Depenizen, Factions
     // @description
     // A FactionTag represents a Factions faction.
-    //
-    // These use the object notation "faction@".
-    // The identity format for factions is <faction_name>
-    // For example, 'faction@my_faction'.
     //
     // -->
 

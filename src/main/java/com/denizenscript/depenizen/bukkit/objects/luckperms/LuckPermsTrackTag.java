@@ -20,16 +20,17 @@ import java.util.stream.Collectors;
 
 public class LuckPermsTrackTag implements ObjectTag {
 
-    // <--[language]
-    // @name LuckPermsTrackTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name LuckPermsTrackTag
+    // @prefix luckpermstrack
+    // @base ElementTag
+    // @format
+    // The identity format for tracks is <track_name>
+    // For example, 'luckpermstrack@my_track'.
+    //
     // @plugin Depenizen, LuckPerms
     // @description
     // A LuckPermsTrackTag represents a LuckPerms track.
-    //
-    // These use the object notation "luckpermstrack@".
-    // The identity format for tracks is <track_name>
-    // For example, 'luckpermstrack@my_track'.
     //
     // -->
 

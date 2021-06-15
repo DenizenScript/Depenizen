@@ -15,16 +15,17 @@ import org.bukkit.entity.Player;
 
 public class MobArenaArenaTag implements ObjectTag {
 
-    // <--[language]
-    // @name MobArenaArenaTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name MobArenaArenaTag
+    // @prefix mobarena
+    // @base ElementTag
+    // @format
+    // The identity format for arenas is <arena_name>
+    // For example, 'mobarena@my_arena'.
+    //
     // @plugin Depenizen, MobArena
     // @description
     // A MobArenaArenaTag represents a mob arena in the world.
-    //
-    // These use the object notation "mobarena@".
-    // The identity format for arenas is <arena_name>
-    // For example, 'mobarena@my_arena'.
     //
     // -->
 

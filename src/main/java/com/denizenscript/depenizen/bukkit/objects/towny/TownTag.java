@@ -21,16 +21,17 @@ import org.bukkit.Location;
 
 public class TownTag implements ObjectTag, Adjustable {
 
-    // <--[language]
-    // @name TownTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name TownTag
+    // @prefix town
+    // @base ElementTag
+    // @format
+    // The identity format for towns is <town_name>
+    // For example, 'town@mytown'.
+    //
     // @plugin Depenizen, Towny
     // @description
     // A TownTag represents a Towny town in the world.
-    //
-    // These use the object notation "town@".
-    // The identity format for towns is <town_name>
-    // For example, 'town@mytown'.
     //
     // -->
 

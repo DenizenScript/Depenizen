@@ -26,16 +26,17 @@ import java.util.regex.Pattern;
 
 public class WorldGuardRegionTag implements ObjectTag {
 
-    // <--[language]
-    // @name WorldGuardRegionTag Objects
-    // @group Depenizen Object Types
+    // <--[ObjectType]
+    // @name WorldGuardRegionTag
+    // @prefix region
+    // @base ElementTag
+    // @format
+    // The identity format for regions is <region_name>,<world_name>
+    // For example, 'region@spawnland,Hub'.
+    //
     // @plugin Depenizen, WorldGuard
     // @description
     // A WorldGuardRegionTag represents a WorldGuard region in the world.
-    //
-    // These use the object notation "region@".
-    // The identity format for regions is <region_name>,<world_name>
-    // For example, 'region@spawnland,Hub'.
     //
     // -->
 
