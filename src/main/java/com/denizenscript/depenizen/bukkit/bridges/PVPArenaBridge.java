@@ -42,7 +42,7 @@ public class PVPArenaBridge extends Bridge {
 
         // <--[tag]
         // @attribute <pvparena[<name>]>
-        // @returns PVPArena
+        // @returns PVPArenaArenaTag
         // @plugin Depenizen, PVPArena
         // @description
         // Returns the PVPArena by the input name.

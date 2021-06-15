@@ -51,7 +51,7 @@ public class McMMOBridge extends Bridge {
         // @plugin Depenizen, mcMMO
         // @description
         // Returns a party object constructed from the input value.
-        // Refer to <@link language PartyTag objects>.
+        // Refer to <@link objecttype PartyTag>.
         // -->
         if (attribute.startsWith("party") && attribute.hasContext(1)) {
             PartyTag party = attribute.contextAsType(1, PartyTag.class);

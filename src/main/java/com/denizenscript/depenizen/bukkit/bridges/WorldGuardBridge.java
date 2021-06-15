@@ -49,7 +49,7 @@ public class WorldGuardBridge extends Bridge {
         // @plugin Depenizen, WorldGuard
         // @description
         // Returns a WorldGuard region object constructed from the input value.
-        // Refer to <@link language WorldGuardRegionTag objects>.
+        // Refer to <@link objecttype WorldGuardRegionTag>.
         // -->
         if (attribute.startsWith("region") && attribute.hasContext(1)) {
             WorldGuardRegionTag region =  attribute.contextAsType(1, WorldGuardRegionTag.class);

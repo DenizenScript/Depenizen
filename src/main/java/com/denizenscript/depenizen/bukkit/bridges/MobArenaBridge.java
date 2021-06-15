@@ -46,7 +46,7 @@ public class MobArenaBridge extends Bridge {
 
         // <--[tag]
         // @attribute <mobarena[<name>]>
-        // @returns MobArena
+        // @returns MobArenaArenaTag
         // @plugin Depenizen, MobArena
         // @description
         // Returns the mob arena for the input name.

@@ -77,7 +77,7 @@ public class MythicMobsBridge extends Bridge {
         // @plugin Depenizen, MythicMobs
         // @description
         // Returns a MythicMobsMobTag based on the name input.
-        // Refer to <@link language MythicMobsMobTag Objects>.
+        // Refer to <@link objecttype MythicMobsMobTag>.
         // -->
         TagManager.registerTagHandler("mythicmob", (attribute) -> {
             if (!attribute.hasContext(1)) {
@@ -93,7 +93,7 @@ public class MythicMobsBridge extends Bridge {
         // @plugin Depenizen, MythicMobs
         // @description
         // Returns a MythicSpawnerTag based on the name input.
-        // Refer to <@link language MythicSpawnerTag Objects>.
+        // Refer to <@link objecttype MythicSpawnerTag>.
         // -->
         TagManager.registerTagHandler("mythicspawner", (attribute) -> {
             if (!attribute.hasContext(1)) {
