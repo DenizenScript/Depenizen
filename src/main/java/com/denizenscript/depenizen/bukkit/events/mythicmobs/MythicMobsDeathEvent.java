@@ -142,11 +142,15 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     @EventHandler
     public void onMythicMobDeath(MythicMobDeathEvent event) {
         mythicmob = new MythicMobsMobTag(event.getMob());
-        entity = new EntityTag(event.getEntity());
-        EntityTag.rememberEntity(entity.getBukkitEntity());
-        killer = new EntityTag(event.getKiller());
+        entity = event.getEntity() == null ? null : new EntityTag(event.getEntity());
+        if (entity != null) {
+            EntityTag.rememberEntity(entity.getBukkitEntity());
+        }
+        killer = event.getKiller() == null ? null : new EntityTag(event.getKiller());
         this.event = event;
         fire(event);
-        EntityTag.forgetEntity(entity.getBukkitEntity());
+        if (entity != null) {
+            EntityTag.forgetEntity(entity.getBukkitEntity());
+        }
     }
 }
