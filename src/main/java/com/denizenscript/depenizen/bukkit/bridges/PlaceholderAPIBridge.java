@@ -58,9 +58,10 @@ public class PlaceholderAPIBridge extends Bridge {
         // -->
         if (attribute.matches("player") && attribute.hasContext(1) && PlayerTag.matches(attribute.getContext(1))) {
             player = attribute.contextAsType(1, PlayerTag.class).getPlayerEntity();
+            attribute.fulfill(1);
         }
         event.setReplacedObject(new ElementTag(PlaceholderAPI.setPlaceholders(player, "%" + placeholder + "%"))
-                .getObjectAttribute(attribute.fulfill(1)));
+                .getObjectAttribute(attribute));
     }
 
     private static class PlaceholderHook extends PlaceholderExpansion {
