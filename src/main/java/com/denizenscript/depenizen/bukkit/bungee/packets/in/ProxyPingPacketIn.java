@@ -58,6 +58,7 @@ public class ProxyPingPacketIn extends PacketIn {
             packetOut.maxPlayers = ping.maxPlayers;
             packetOut.version = ping.version;
             packetOut.motd = ping.motd;
+            packetOut.playerSample = ping.playerSample;
             BungeeBridge.instance.sendPacket(packetOut);
         });
     }

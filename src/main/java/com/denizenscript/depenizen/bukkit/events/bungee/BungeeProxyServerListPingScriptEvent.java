@@ -1,5 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.bungee;
 
+import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
@@ -7,6 +9,8 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
+
+import java.util.List;
 
 public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
 
@@ -30,6 +34,7 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     // "MAX_PLAYERS:" + ElementTag(Number) to change the listed maximum number of players.
     // "VERSION:" + ElementTag to change the listed server version.
     // "MOTD:" + ElementTag to change the server MOTD that will be displayed.
+    // "PLAYERS:" + List(PlayerTag) to set what players are displayed in the "online players sample" view of the list ping.
     //
     // @Plugin Depenizen, DepenizenBungee, BungeeCord
     //
@@ -56,6 +61,8 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
         public int protocol;
 
         public String version;
+
+        public List<PlayerTag> playerSample;
     }
 
     public PingData data;
@@ -104,6 +111,10 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
             }
             else if (determinationLow.startsWith("motd:")) {
                 data.motd = determination.substring("motd:".length());
+                return true;
+            }
+            else if (determinationLow.startsWith("players:")) {
+                data.playerSample = ListTag.valueOf(determination.substring("players:".length()), getTagContext(path)).filter(PlayerTag.class, getTagContext(path));
                 return true;
             }
         }
