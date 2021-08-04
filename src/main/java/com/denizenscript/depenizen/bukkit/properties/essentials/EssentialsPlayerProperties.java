@@ -4,6 +4,8 @@ import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.objects.core.MapTag;
+import com.denizenscript.denizencore.utilities.debugging.SlowWarning;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 import com.denizenscript.denizen.objects.LocationTag;
@@ -41,7 +43,7 @@ public class EssentialsPlayerProperties implements Property {
     public static final String[] handledTags = new String[] {
             "god_mode", "has_home", "is_afk", "is_muted", "is_vanished", "home_list", "home_location_list",
             "ignored_players", "home_name_list", "mail_list", "mute_timout", "socialspy",
-            "list_home_locations", "list_home_names", "list_homes", "list_mails"
+            "list_home_locations", "list_home_names", "list_homes", "list_mails", "essentials_homes"
     };
 
     public static final String[] handledMechs = new String[] {
@@ -55,6 +57,8 @@ public class EssentialsPlayerProperties implements Property {
     public User getUser() {
         return ((Essentials) EssentialsBridge.instance.plugin).getUser(player.getUUID());
     }
+
+    public static SlowWarning oldHomesTag = new SlowWarning("The tag 'list_homes' from Depenizen/Essentials is deprecated: use 'essentials_homes' (now a MapTag).");
 
     PlayerTag player;
 
@@ -121,13 +125,29 @@ public class EssentialsPlayerProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <PlayerTag.list_homes>
-        // @returns ListTag
+        // @attribute <PlayerTag.essentials_homes>
+        // @returns MapTag
         // @plugin Depenizen, Essentials
         // @description
-        // Returns a list of the homes of the player, in the format "HomeName/l@x,y,z,world".
+        // Returns a map of the homes of the player, with keys as the home name and values as the home location.
         // -->
+        if (attribute.startsWith("essentials_homes")) {
+            MapTag homes = new MapTag();
+            for (String home : getUser().getHomes()) {
+                try {
+                    homes.putObject(home, new LocationTag(getUser().getHome(home)));
+                }
+                catch (Exception e) {
+                    if (!attribute.hasAlternative()) {
+                        Debug.echoError(e);
+                    }
+                }
+            }
+            return homes.getAttribute(attribute.fulfill(1));
+        }
+
         if (attribute.startsWith("list_homes") || attribute.startsWith("home_list")) {
+            oldHomesTag.warn(attribute.context);
             ListTag homes = new ListTag();
             for (String home : getUser().getHomes()) {
                 try {
@@ -142,14 +162,8 @@ public class EssentialsPlayerProperties implements Property {
             return homes.getAttribute(attribute.fulfill(1));
         }
 
-        // <--[tag]
-        // @attribute <PlayerTag.list_home_locations>
-        // @returns ListTag(LocationTag)
-        // @plugin Depenizen, Essentials
-        // @description
-        // Returns a list of the locations of homes of the player.
-        // -->
         if (attribute.startsWith("list_home_locations") || attribute.startsWith("home_location_list")) {
+            oldHomesTag.warn(attribute.context);
             ListTag homes = new ListTag();
             for (String home : getUser().getHomes()) {
                 try {
@@ -164,14 +178,8 @@ public class EssentialsPlayerProperties implements Property {
             return homes.getAttribute(attribute.fulfill(1));
         }
 
-        // <--[tag]
-        // @attribute <PlayerTag.list_home_names>
-        // @returns ListTag
-        // @plugin Depenizen, Essentials
-        // @description
-        // Returns a list of the names of homes of the player.
-        // -->
         if (attribute.startsWith("list_home_names") || attribute.startsWith("home_name_list")) {
+            oldHomesTag.warn(attribute.context);
             return new ListTag(getUser().getHomes()).getAttribute(attribute.fulfill(1));
         }
 
