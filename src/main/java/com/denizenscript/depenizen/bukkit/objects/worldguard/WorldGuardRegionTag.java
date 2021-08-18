@@ -210,6 +210,39 @@ public class WorldGuardRegionTag implements ObjectTag {
         }
 
         // <--[tag]
+        // @attribute <WorldGuardRegionTag.parent>
+        // @returns WorldGuardRegionTag
+        // @plugin Depenizen, WorldGuard
+        // @description
+        // Gets the parent region of this region (if any).
+        // -->
+        if (attribute.startsWith("parent")) {
+            ProtectedRegion parent = region.getParent();
+            if (parent == null) {
+                return null;
+            }
+            return new WorldGuardRegionTag(parent, world).getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <WorldGuardRegionTag.children>
+        // @returns ListTag(WorldGuardRegionTag)
+        // @plugin Depenizen, WorldGuard
+        // @description
+        // Gets a list of all children of this region.
+        // -->
+        if (attribute.startsWith("children")) {
+            ListTag children = new ListTag();
+            RegionManager manager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
+            for (ProtectedRegion child : manager.getRegions().values()) {
+                if (child.getParent() == region) {
+                    children.addObject(new WorldGuardRegionTag(child, world));
+                }
+            }
+            return children.getAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <WorldGuardRegionTag.members>
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, WorldGuard
