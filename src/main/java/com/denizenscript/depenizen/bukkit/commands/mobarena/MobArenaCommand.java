@@ -91,7 +91,6 @@ public class MobArenaCommand extends AbstractCommand {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void execute(ScriptEntry scriptEntry) {
         MobArenaArenaTag arena = scriptEntry.getObjectTag("arena");
@@ -99,10 +98,7 @@ public class MobArenaCommand extends AbstractCommand {
         List<PlayerTag> remove = (List<PlayerTag>) scriptEntry.getObject("remove");
         List<PlayerTag> spectate = (List<PlayerTag>) scriptEntry.getObject("spectate");
 
-        Debug.report(scriptEntry, getName(), arena.debug()
-                + ArgumentHelper.debugList("Add Players", add)
-                + ArgumentHelper.debugList("Remove Players", remove)
-                + ArgumentHelper.debugList("Spectate Players", spectate));
+        Debug.report(scriptEntry, getName(), arena, ArgumentHelper.debugList("Add Players", add), ArgumentHelper.debugList("Remove Players", remove), ArgumentHelper.debugList("Spectate Players", spectate));
 
         Arena mobArena = arena.getArena();
 
