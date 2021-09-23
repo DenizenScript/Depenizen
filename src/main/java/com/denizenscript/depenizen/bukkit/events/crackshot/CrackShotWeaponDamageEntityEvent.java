@@ -7,7 +7,6 @@ import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.shampaggon.crackshot.events.WeaponDamageEntityEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -54,17 +53,11 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
     @Override
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
         String determination = determinationObj.toString();
-
-        if (!isDefaultDetermination(determinationObj)) {
-            ElementTag newDamage = new ElementTag(determination);
-            if (!newDamage.isDouble()) {
-                Debug.echoError("Determination for 'damage' must be a valid number.");
-                return false;
-            }
+        ElementTag newDamage = new ElementTag(determination);
+        if (newDamage.isDouble()) {
             event.setDamage(newDamage.asDouble());
             return true;
         }
-
         return super.applyDetermination(path, determinationObj);
     }
 

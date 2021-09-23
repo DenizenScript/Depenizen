@@ -105,7 +105,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     @Override
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
         String determination = determinationObj.toString();
-        if (determination.length() > 0 && !isDefaultDetermination(determinationObj)) {
+        if (determination.length() > 0) {
             String lower = CoreUtilities.toLowerCase(determination);
             if (lower.startsWith("power:")) {
                 ElementTag num = new ElementTag(determination.substring("power:".length()));

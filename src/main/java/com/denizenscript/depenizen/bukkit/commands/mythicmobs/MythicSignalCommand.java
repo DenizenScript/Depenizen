@@ -38,8 +38,8 @@ public class MythicSignalCommand extends AbstractCommand {
     // NOTE: signals are case sensitive.
     //
     // @Usage
-    // Used to trigger the player's target signal "attack".
-    // - mythicsignal <player.target.mythicmob> attack
+    // Used to trigger the player's target's signal "attack".
+    // - mythicsignal <player.target.mythicmob> attack source:<player>
     //
     // -->
 
@@ -79,9 +79,7 @@ public class MythicSignalCommand extends AbstractCommand {
         List<MythicMobsMobTag> targets = (List<MythicMobsMobTag>) scriptEntry.getObject("targets");
         ElementTag signal = scriptEntry.getElement("signal");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), ArgumentHelper.debugList("mythicmobs", targets)
-                    + signal.debug()
-                    + source.debug());
+            Debug.report(scriptEntry, getName(), ArgumentHelper.debugList("mythicmobs", targets), signal, source);
         }
         for (MythicMobsMobTag mob : targets) {
             mob.getMob().signalMob(BukkitAdapter.adapt(source.getBukkitEntity()), signal.asString());

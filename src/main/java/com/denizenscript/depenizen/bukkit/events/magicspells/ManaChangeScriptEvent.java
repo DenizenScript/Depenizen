@@ -7,7 +7,6 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -64,15 +63,13 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     @Override
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
         String determination = determinationObj.toString();
-        if (determination.length() > 0 && !isDefaultDetermination(determinationObj)) {
+        if (determination.length() > 0) {
             ElementTag mana = new ElementTag(determination);
-            if (!mana.isInt()) {
-                Debug.echoError("Determination for 'mana' must be a valid number.");
-                return false;
+            if (mana.isInt()) {
+                new_mana = mana.asInt();
+                event.setNewAmount(new_mana);
+                return true;
             }
-            new_mana = mana.asInt();
-            event.setNewAmount(new_mana);
-            return true;
         }
         return super.applyDetermination(path, determinationObj);
     }

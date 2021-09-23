@@ -57,36 +57,34 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
 
     @Override
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
-        if (!isDefaultDetermination(determinationObj)) {
-            String determination = determinationObj.toString();
-            String lower = CoreUtilities.toLowerCase(determination);
-            if (lower.startsWith("reload_speed:")) {
-                ElementTag newReloadSpeed = new ElementTag(lower.substring("reload_speed:".length()));
-                if (!newReloadSpeed.isDouble()) {
-                    Debug.echoError("Determination for 'reload_speed' must be a valid number.");
-                    return false;
-                }
-                event.setReloadSpeed(newReloadSpeed.asDouble());
-                return true;
+        String determination = determinationObj.toString();
+        String lower = CoreUtilities.toLowerCase(determination);
+        if (lower.startsWith("reload_speed:")) {
+            ElementTag newReloadSpeed = new ElementTag(lower.substring("reload_speed:".length()));
+            if (!newReloadSpeed.isDouble()) {
+                Debug.echoError("Determination for 'reload_speed' must be a valid number.");
+                return false;
             }
-            else if (lower.startsWith("reload_time:")) {
-                String time = lower.substring("reload_time:".length());
-                if (!DurationTag.matches(time)) {
-                    Debug.echoError("Determination for 'reload_time' must be a valid DurationTag.");
-                    return false;
-                }
-                DurationTag newReloadtime = DurationTag.valueOf(lower.substring("reload_time:".length()), getTagContext(path));
-                event.setReloadDuration(newReloadtime.getTicksAsInt());
-                return true;
+            event.setReloadSpeed(newReloadSpeed.asDouble());
+            return true;
+        }
+        else if (lower.startsWith("reload_time:")) {
+            String time = lower.substring("reload_time:".length());
+            if (!DurationTag.matches(time)) {
+                Debug.echoError("Determination for 'reload_time' must be a valid DurationTag.");
+                return false;
             }
-            else if (lower.startsWith("reload_sounds:")) {
-                String newReloadSounds = determination.substring("reload_sounds:".length());
-                if (CoreUtilities.equalsIgnoreCase(newReloadSounds, "none")) {
-                    newReloadSounds = "";
-                }
-                event.setSounds(newReloadSounds);
-                return true;
+            DurationTag newReloadtime = DurationTag.valueOf(lower.substring("reload_time:".length()), getTagContext(path));
+            event.setReloadDuration(newReloadtime.getTicksAsInt());
+            return true;
+        }
+        else if (lower.startsWith("reload_sounds:")) {
+            String newReloadSounds = determination.substring("reload_sounds:".length());
+            if (CoreUtilities.equalsIgnoreCase(newReloadSounds, "none")) {
+                newReloadSounds = "";
             }
+            event.setSounds(newReloadSounds);
+            return true;
         }
         return super.applyDetermination(path, determinationObj);
     }

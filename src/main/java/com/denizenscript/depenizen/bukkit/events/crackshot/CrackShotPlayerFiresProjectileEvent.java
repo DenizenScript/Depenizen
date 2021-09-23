@@ -53,26 +53,24 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
 
     @Override
     public boolean applyDetermination(ScriptPath path, ObjectTag determinationObj) {
-        if (!isDefaultDetermination(determinationObj)) {
-            String determination = determinationObj.toString();
-            String lower = CoreUtilities.toLowerCase(determination);
-            if (lower.startsWith("bullet_spread:")) {
-                ElementTag newBulletSpread = new ElementTag(lower.substring("bullet_spread:".length()));
-                if (!newBulletSpread.isDouble()) {
-                    Debug.echoError("Determination for 'bullet_spread' must be a valid number.");
-                    return false;
-                }
-                event.setBulletSpread(newBulletSpread.asDouble());
-                return true;
+        String determination = determinationObj.toString();
+        String lower = CoreUtilities.toLowerCase(determination);
+        if (lower.startsWith("bullet_spread:")) {
+            ElementTag newBulletSpread = new ElementTag(lower.substring("bullet_spread:".length()));
+            if (!newBulletSpread.isDouble()) {
+                Debug.echoError("Determination for 'bullet_spread' must be a valid number.");
+                return false;
             }
-            else if (lower.startsWith("shot_sounds:")) {
-                String newReloadSounds = determination.substring("shot_sounds:".length());
-                if (CoreUtilities.equalsIgnoreCase(newReloadSounds, "none")) {
-                    newReloadSounds = "";
-                }
-                event.setSounds(newReloadSounds);
-                return true;
+            event.setBulletSpread(newBulletSpread.asDouble());
+            return true;
+        }
+        else if (lower.startsWith("shot_sounds:")) {
+            String newReloadSounds = determination.substring("shot_sounds:".length());
+            if (CoreUtilities.equalsIgnoreCase(newReloadSounds, "none")) {
+                newReloadSounds = "";
             }
+            event.setSounds(newReloadSounds);
+            return true;
         }
         return super.applyDetermination(path, determinationObj);
     }
