@@ -17,6 +17,17 @@ import org.bukkit.entity.Player;
 
 public class PlaceholderAPIBridge extends Bridge {
 
+    // <--[language]
+    // @name PlaceholderAPI Bridge
+    // @group Depenizen Bridges
+    // @plugin Depenizen, PlaceholderAPI
+    // @description
+    // Using Depenizen with PlaceholderAPI allows you to use <@link tag placeholder> and <@link tag placeholder.player>,
+    // and also allows you to read Denizen tags from any PAPI placeholder location, written in the format: %denizen_<tag-here>%
+    // For example: %denizen_<player.flag[MyFlag]>%
+    //
+    // -->
+
     @Override
     public void init() {
         if (!new PlaceholderHook().register()) {

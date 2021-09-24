@@ -16,10 +16,12 @@ public class MythicMobsLoaders implements Listener {
     }
 
     // <--[language]
-    // @name MythicMobs Additions
-    // @group Depenizen External Additions
+    // @name MythicMobs Bridge
+    // @group Depenizen Bridges
+    // @plugin Depenizen, MythicMobs
     // @description
-    // Depenizen adds additional features to Mythic Mobs, 2 Targeters, and a Condition.
+    // In addition to the the tags, commands, and events found by searching for "mythicmobs" throughout the meta documentation,
+    // Depenizen adds additional features to Mythic Mobs: 2 Targeters, and a Condition.
     //
     // Depenizen provides two additional targeters via the MythicMobs API: @DenizenEntity is an entity-based targeter, @DenizenLocation is a location-based targeter.
     // Both targeters can parse tags; they accept input of either an EntityTag or LocationTag respectively.
@@ -33,6 +35,9 @@ public class MythicMobsLoaders implements Listener {
     // <context.entity> is available for for entity- and caster-based checks,
     // and <context.target> is available for target-based checks.
     // NOTE: TriggerConditions are NOT currently supported.
+    //
+    // Note as well that many parts of MythicMobs configurations allow usage of PlaceholderAPI, which means you can use the "denizen_" placeholder to read tags in any such parts,
+    // refer to <@link language PlaceholderAPI Bridge> for more information.
     //
     // Usage Examples
     //
