@@ -1,4 +1,5 @@
 package com.denizenscript.depenizen.bukkit.utilities.mythicmobs;
+
 import com.denizenscript.denizen.Denizen;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.conditions.DenizenCondition;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.targeters.DenizenEntityTargeter;
@@ -41,7 +42,7 @@ public class MythicMobsLoaders implements Listener {
     //
     // Usage Examples
     //
-    // Exmaple 1: @DenizenEntity{tag=<context.entity.location.find.players.within[30].filter[has_flag[marked]]>}
+    // Example 1: @DenizenEntity{tag=<context.entity.location.find.players.within[30].filter[has_flag[marked]]>}
     //
     // Example 2: @DenizenLocation{tag=<context.entity.location.find.surface_blocks.within[30].random[5]>}
     //

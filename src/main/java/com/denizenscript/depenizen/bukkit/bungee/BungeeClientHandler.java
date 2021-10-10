@@ -65,7 +65,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
-        Debug.log("Depenizen-Bungee connection ended.");
+        Debug.log("Depenizen-Bungee connection ended. If this is unexpected, check your Bungee proxy server logs.");
         packetBuffer.release();
         packetBuffer = null;
         BungeeBridge.instance.connected = false;
