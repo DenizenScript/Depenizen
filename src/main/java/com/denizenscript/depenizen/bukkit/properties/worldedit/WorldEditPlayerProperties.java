@@ -63,7 +63,7 @@ public class WorldEditPlayerProperties implements Property {
 
     public static final String[] handledMechs = new String[] {
             "we_selection"
-    }; // None
+    };
 
     private WorldEditPlayerProperties(PlayerTag player) {
         this.player = player.getPlayerEntity();
@@ -184,7 +184,7 @@ public class WorldEditPlayerProperties implements Property {
             RegionSelector selector;
             if (mechanism.getValue().asString().startsWith("cu@")) {
                 CuboidTag input = mechanism.valueAsType(CuboidTag.class);
-                selector = new CuboidRegionSelector(BukkitAdapter.adapt(input.getWorld()), BukkitAdapter.asBlockVector(input.getLow(0)), BukkitAdapter.asBlockVector(input.getHigh(0)));
+                selector = new CuboidRegionSelector(BukkitAdapter.adapt(input.getWorld().getWorld()), BukkitAdapter.asBlockVector(input.getLow(0)), BukkitAdapter.asBlockVector(input.getHigh(0)));
             }
             else if (mechanism.getValue().asString().startsWith("ellipsoid@")) {
                 EllipsoidTag input = mechanism.valueAsType(EllipsoidTag.class);

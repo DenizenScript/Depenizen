@@ -56,86 +56,65 @@ public class RegionCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry.getProcessedArgs()) {
-
             if (!scriptEntry.hasObject("region_id")
                     && arg.matchesPrefix("id")) {
                 scriptEntry.addObject("region_id", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("cuboid")
                     && arg.matchesArgumentType(CuboidTag.class)) {
                 scriptEntry.addObject("cuboid", arg.asType(CuboidTag.class));
             }
-
             else if (!scriptEntry.hasObject("world")
                     && arg.matchesArgumentType(WorldTag.class)) {
                 scriptEntry.addObject("world", arg.asType(WorldTag.class));
             }
-
             else if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
             }
-
             else {
                 arg.reportUnhandled();
             }
-
         }
-
         if (!scriptEntry.hasObject("region_id")) {
             throw new InvalidArgumentsException("Must specify a region id!");
         }
-
         if (!scriptEntry.hasObject("cuboid") && (!scriptEntry.hasObject("action")
                 || scriptEntry.getElement("action").asString().equalsIgnoreCase("ADD"))) {
             throw new InvalidArgumentsException("Must specify a valid cuboid!");
         }
-
         if (!scriptEntry.hasObject("world") && scriptEntry.hasObject("action")
                 && scriptEntry.getElement("action").asString().equalsIgnoreCase("REMOVE")) {
             throw new InvalidArgumentsException("Must specify a valid world!");
         }
-
         if (!scriptEntry.hasObject("action")) {
             scriptEntry.addObject("action", new ElementTag("ADD"));
         }
-
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         ElementTag region_id = scriptEntry.getElement("region_id");
         CuboidTag cuboid = scriptEntry.getObjectTag("cuboid");
         WorldTag w = scriptEntry.getObjectTag("world");
-        World world = w != null ? w.getWorld() : cuboid != null ? cuboid.getWorld() : null;
+        World world = w != null ? w.getWorld() : cuboid != null ? cuboid.getWorld().getWorld() : null;
         ElementTag action = scriptEntry.getElement("action");
-
         if (world == null) {
             Debug.echoError("No valid world found!");
             return;
         }
-
-        Debug.report(scriptEntry, getName(), region_id.debug() + (cuboid != null ? cuboid.debug() : "")
-                + ArgumentHelper.debugObj("world", world.getName()) + action.debug());
-
+        Debug.report(scriptEntry, getName(), region_id, cuboid, ArgumentHelper.debugObj("world", world.getName()), action);
         RegionManager regionManager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
-
         if (action.asString().equalsIgnoreCase("REMOVE")) {
             regionManager.removeRegion(region_id.asString());
             return;
         }
-
         Location low = cuboid.getLow(0);
         Location high = cuboid.getHigh(0);
         ProtectedCuboidRegion region = new ProtectedCuboidRegion(region_id.asString(),
                 BlockVector3.at(low.getX(), low.getY(), low.getZ()),
                 BlockVector3.at(high.getX(), high.getY(), high.getZ()));
-
         regionManager.addRegion(region);
-
     }
 }

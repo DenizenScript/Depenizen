@@ -67,7 +67,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
             if (!scriptEntry.hasObject("server")
                     && arg.startsWith("server:")) {
                 scriptEntry.addObject("server", new ElementTag(TagManager.tag(arg.substring("server:".length()),
-                        scriptEntry.entryData.getTagContext())));
+                        scriptEntry.getContext())));
             }
             else if (!scriptEntry.hasObject("tag")) {
                 scriptEntry.addObject("tag", new ElementTag(arg));

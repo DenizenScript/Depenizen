@@ -97,9 +97,7 @@ public class WorldEditCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry.getProcessedArgs()) {
-
             if (!scriptEntry.hasObject("position")
                     && arg.matchesPrefix("position")) {
                 scriptEntry.addObject("position", arg.asType(LocationTag.class));
@@ -132,7 +130,6 @@ public class WorldEditCommand extends AbstractCommand {
                 arg.reportUnhandled();
             }
         }
-
         if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Action not specified!");
         }
@@ -143,13 +140,12 @@ public class WorldEditCommand extends AbstractCommand {
         LocationTag bottom = cuboid.getLow(0);
         BlockVector3 topVector = BlockVector3.at(top.getBlockX(), top.getBlockY(), top.getBlockZ());
         BlockVector3 bottomVector = BlockVector3.at(bottom.getBlockX(), bottom.getBlockY(), bottom.getBlockZ());
-        World w = new BukkitWorld(cuboid.getWorld());
+        World w = new BukkitWorld(cuboid.getWorld().getWorld());
         return new CuboidRegion(w, bottomVector, topVector);
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         ElementTag action = scriptEntry.getObjectTag("action");
         ElementTag file = scriptEntry.getObjectTag("file");
         LocationTag position = scriptEntry.getObjectTag("position");
@@ -157,19 +153,10 @@ public class WorldEditCommand extends AbstractCommand {
         CuboidTag cuboid = scriptEntry.getObjectTag("cuboid");
         ElementTag undoable = scriptEntry.getObjectTag("undoable");
         ElementTag rotate = scriptEntry.getObjectTag("rotate");
-
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), action.debug()
-                    + (file != null ? file.debug() : "")
-                    + (position != null ? position.debug() : "")
-                    + (noAir != null ? noAir.debug() : "")
-                    + (cuboid != null ? cuboid.debug() : "")
-                    + (undoable != null ? undoable.debug() : "")
-                    + (rotate != null ? rotate.debug() : ""));
+            Debug.report(scriptEntry, getName(), action, file, position, noAir, cuboid, undoable, rotate);
         }
-
         PlayerTag target = Utilities.getEntryPlayer(scriptEntry);
-
         if (action.asString().equalsIgnoreCase("paste")) {
             if (file == null) {
                 Debug.echoError("File path not specified");

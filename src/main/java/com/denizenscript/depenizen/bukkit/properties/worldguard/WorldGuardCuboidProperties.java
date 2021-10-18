@@ -69,7 +69,7 @@ public class WorldGuardCuboidProperties implements Property {
         BlockVector3 vecLow = BlockVector3.at(low.getX(), low.getY(), low.getZ());
         BlockVector3 vecHigh = BlockVector3.at(high.getX(), high.getY(), high.getZ());
         ProtectedCuboidRegion region = new ProtectedCuboidRegion("FAKE_REGION", vecLow, vecHigh);
-        return WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(cuboid.getWorld())).getApplicableRegions(region);
+        return WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(cuboid.getWorld().getWorld())).getApplicableRegions(region);
     }
 
     private boolean hasRegion() {
@@ -106,7 +106,7 @@ public class WorldGuardCuboidProperties implements Property {
         // Returns a list of regions that are in this cuboid.
         // -->
         if (attribute.startsWith("regions")) {
-            return getRegions(cuboid.getWorld()).getAttribute(attribute.fulfill(1));
+            return getRegions(cuboid.getWorld().getWorld()).getAttribute(attribute.fulfill(1));
         }
 
         return null;
