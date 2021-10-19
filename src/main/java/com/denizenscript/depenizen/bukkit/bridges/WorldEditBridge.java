@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 import com.denizenscript.denizen.Denizen;
+import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.depenizen.bukkit.commands.worldedit.WorldEditCommand;
@@ -13,7 +14,7 @@ public class WorldEditBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        Denizen.getInstance().commandRegistry.registerCommand(WorldEditCommand.class);
+        DenizenCore.commandRegistry.registerCommand(WorldEditCommand.class);
         PropertyParser.registerProperty(WorldEditPlayerProperties.class, PlayerTag.class);
     }
 }

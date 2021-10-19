@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizen.Denizen;
+import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.depenizen.bukkit.commands.worldguard.RegionCommand;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardCuboidProperties;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardWorldProperties;
@@ -31,7 +32,7 @@ public class WorldGuardBridge extends Bridge {
         PropertyParser.registerProperty(WorldGuardPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(WorldGuardCuboidProperties.class, CuboidTag.class);
         PropertyParser.registerProperty(WorldGuardWorldProperties.class, WorldTag.class);
-        Denizen.getInstance().commandRegistry.registerCommand(RegionCommand.class);
+        DenizenCore.commandRegistry.registerCommand(RegionCommand.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

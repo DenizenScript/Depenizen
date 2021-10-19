@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizen.Denizen;
+import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.depenizen.bukkit.properties.jobs.JobPlayer;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.jobs.JobsCommand;
@@ -30,7 +31,7 @@ public class JobsBridge extends Bridge {
                 tagEvent(event);
             }
         }, "jobs");
-        Denizen.getInstance().commandRegistry.registerCommand(JobsCommand.class);
+        DenizenCore.commandRegistry.registerCommand(JobsCommand.class);
     }
 
     public void tagEvent(ReplaceableTagEvent event) {

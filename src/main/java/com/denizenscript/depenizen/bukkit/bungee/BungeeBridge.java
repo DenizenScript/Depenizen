@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
-import com.denizenscript.denizen.Denizen;
+import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyCommandPacketOut;
@@ -194,10 +194,10 @@ public class BungeeBridge {
         registerScriptEvent(new BungeeProxyServerListPingScriptEvent());
         registerScriptEvent(new BungeeServerConnectScriptEvent());
         registerScriptEvent(new BungeeServerDisconnectScriptEvent());
-        Denizen.getInstance().commandRegistry.registerCommand(BungeeRunCommand.class);
-        Denizen.getInstance().commandRegistry.registerCommand(BungeeExecuteCommand.class);
-        Denizen.getInstance().commandRegistry.registerCommand(BungeeCommand.class);
-        Denizen.getInstance().commandRegistry.registerCommand(BungeeTagCommand.class);
+        DenizenCore.commandRegistry.registerCommand(BungeeRunCommand.class);
+        DenizenCore.commandRegistry.registerCommand(BungeeExecuteCommand.class);
+        DenizenCore.commandRegistry.registerCommand(BungeeCommand.class);
+        DenizenCore.commandRegistry.registerCommand(BungeeTagCommand.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

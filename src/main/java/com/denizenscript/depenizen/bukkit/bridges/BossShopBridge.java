@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizen.Denizen;
+import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.depenizen.bukkit.commands.bossshop.BossShopCommand;
 import com.denizenscript.depenizen.bukkit.properties.bossshop.BossShopInventoryProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
@@ -14,7 +15,7 @@ public class BossShopBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        Denizen.getInstance().commandRegistry.registerCommand(BossShopCommand.class);
+        DenizenCore.commandRegistry.registerCommand(BossShopCommand.class);
         PropertyParser.registerProperty(BossShopInventoryProperties.class, InventoryTag.class);
     }
 }

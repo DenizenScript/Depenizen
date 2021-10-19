@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizen.Denizen;
+import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
@@ -26,7 +27,7 @@ public class PlayerPointsBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        Denizen.getInstance().commandRegistry.registerCommand(PlayerPointsCommand.class);
+        DenizenCore.commandRegistry.registerCommand(PlayerPointsCommand.class);
         PropertyParser.registerProperty(PlayerPointsPlayerProperties.class, PlayerTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override

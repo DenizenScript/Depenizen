@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
+import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -43,10 +44,10 @@ public class MythicMobsBridge extends Bridge {
         PropertyParser.registerProperty(MythicMobsEntityProperties.class, EntityTag.class);
         ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
         ScriptEvent.registerScriptEvent(new MythicMobsSpawnEvent());
-        Denizen.getInstance().commandRegistry.registerCommand(MythicSpawnCommand.class);
-        Denizen.getInstance().commandRegistry.registerCommand(MythicThreatCommand.class);
-        Denizen.getInstance().commandRegistry.registerCommand(MythicSignalCommand.class);
-        Denizen.getInstance().commandRegistry.registerCommand(MythicSkillCommand.class);
+        DenizenCore.commandRegistry.registerCommand(MythicSpawnCommand.class);
+        DenizenCore.commandRegistry.registerCommand(MythicThreatCommand.class);
+        DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);
+        DenizenCore.commandRegistry.registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
 
         // <--[tag]
