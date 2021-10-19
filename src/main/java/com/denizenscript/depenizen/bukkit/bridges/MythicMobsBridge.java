@@ -1,6 +1,5 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizencore.DenizenCore;

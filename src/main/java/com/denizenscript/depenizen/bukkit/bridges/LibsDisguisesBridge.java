@@ -1,6 +1,5 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.depenizen.bukkit.commands.libsdisguises.LibsDisguiseCommand;
 import com.denizenscript.depenizen.bukkit.events.libsdisguises.EntityDisguisesScriptEvent;

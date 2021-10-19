@@ -1,6 +1,5 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.depenizen.bukkit.commands.mcmmo.McMMOCommand;

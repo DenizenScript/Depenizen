@@ -1,4 +1,5 @@
 package com.denizenscript.depenizen.bukkit;
+
 import com.denizenscript.denizen.Denizen;
 import com.denizenscript.depenizen.bukkit.bridges.*;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
