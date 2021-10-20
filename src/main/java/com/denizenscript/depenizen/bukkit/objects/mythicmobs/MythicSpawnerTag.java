@@ -121,10 +121,6 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
     public String toString() {
         return identify();
     }
-
-    public static void registerTag(String name, TagRunnable.ObjectInterface<MythicSpawnerTag> runnable, String... variants) {
-        tagProcessor.registerTag(name, runnable, variants);
-    }
     public static ObjectTagProcessor<MythicSpawnerTag> tagProcessor = new ObjectTagProcessor<>();
 
     public static void registerTags() {
@@ -136,7 +132,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Returns the name of the MythicSpawner.
         // -->
-        registerTag("name", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
             return new ElementTag(object.getSpawner().getName());
         });
 
@@ -148,7 +144,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Returns the MythicSpawner's configured cooldown.
         // -->
-        registerTag("cooldown", (attribute, object) -> {
+        tagProcessor.registerTag(DurationTag.class, "cooldown", (attribute, object) -> {
             return new DurationTag(object.getSpawner().getCooldownSeconds());
         });
 
@@ -159,7 +155,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Returns a ListTag of all active MythicMobs from this spawner.
         // -->
-        registerTag("mythic_mobs", (attribute, object) -> {
+        tagProcessor.registerTag(ListTag.class, "mythic_mobs", (attribute, object) -> {
             ListTag list = new ListTag();
             for (UUID uuid : object.getSpawner().getAssociatedMobs()) {
                 list.addObject(MythicMobsMobTag.valueOf(uuid.toString()));
@@ -175,7 +171,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Returns the internal name the MythicMob mob type spawned.
         // -->
-        registerTag("mob_type", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "mob_type", (attribute, object) -> {
             return new ElementTag(object.getSpawner().getTypeName());
         });
 
@@ -186,7 +182,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Returns a ListTag of all active MythicMobs from this spawner.
         // -->
-        registerTag("mobs", (attribute, object) -> {
+        tagProcessor.registerTag(ListTag.class, "mobs", (attribute, object) -> {
             ArrayList<EntityTag> list = new ArrayList<>();
             for (UUID uuid : object.getSpawner().getAssociatedMobs()) {
                 list.add(new EntityTag(MythicMobsMobTag.valueOf(uuid.toString()).getEntity()));
@@ -202,7 +198,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Returns a LocationTag of the MythicSpawner's location.
         // -->
-        registerTag("location", (attribute, object) -> {
+        tagProcessor.registerTag(LocationTag.class, "location", (attribute, object) -> {
             AbstractLocation loc = object.getSpawner().getLocation();
             return new LocationTag((World) loc.getWorld(), loc.getX(), loc.getY(), loc.getZ());
         });
@@ -215,7 +211,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @description
         // Returns the MythicSpawner's group, if applicable.
         // -->
-        registerTag("group", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "group", (attribute, object) -> {
             return new ElementTag(object.getSpawner().getGroup());
         });
     }

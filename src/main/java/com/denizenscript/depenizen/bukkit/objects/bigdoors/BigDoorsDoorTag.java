@@ -113,7 +113,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the door is open.
         // -->
-        registerTag("is_open", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "is_open", (attribute, object) -> {
             return new ElementTag(object.door.isOpen());
         });
 
@@ -125,7 +125,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the door is locked.
         // -->
-        registerTag("is_locked", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "is_locked", (attribute, object) -> {
             return new ElementTag(object.door.isLocked());
         });
 
@@ -136,7 +136,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the door is busy (currently animated/opening/closing).
         // -->
-        registerTag("is_busy", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "is_busy", (attribute, object) -> {
             return new ElementTag(BigDoorsBridge.commander.isDoorBusy(object.door.getDoorUID()));
         });
 
@@ -148,7 +148,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // Returns whether the door is currently loaded (the chunks it sits in are loaded).
         // If this returns false, the door cannot open or close.
         // -->
-        registerTag("is_loaded", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "is_loaded", (attribute, object) -> {
             return new ElementTag(BigDoorsBridge.bigDoors.areChunksLoadedForDoor(object.door));
         });
 
@@ -159,7 +159,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns the cuboid of the door.
         // -->
-        registerTag("cuboid", (attribute, object) -> {
+        tagProcessor.registerTag(CuboidTag.class, "cuboid", (attribute, object) -> {
             return new CuboidTag(object.door.getMinimum(), object.door.getMaximum());
         });
 
@@ -172,7 +172,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // Returns the auto close time for the door.
         // Returns 0 if the door does not auto close.
         // -->
-        registerTag("auto_close", (attribute, object) -> {
+        tagProcessor.registerTag(DurationTag.class, "auto_close", (attribute, object) -> {
             return new DurationTag(object.door.getAutoClose());
         });
 
@@ -183,7 +183,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns the location of the power block for the door.
         // -->
-        registerTag("power_block", (attribute, object) -> {
+        tagProcessor.registerTag(LocationTag.class, "power_block", (attribute, object) -> {
             return new LocationTag(object.door.getPowerBlockLoc());
         });
 
@@ -194,7 +194,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns the list of owners of the door.
         // -->
-        registerTag("owners", (attribute, object) -> {
+        tagProcessor.registerTag(ListTag.class, "owners", (attribute, object) -> {
             ListTag owners = new ListTag();
             for (DoorOwner owner : BigDoorsBridge.commander.getDoorOwners(object.door.getDoorUID(), null)) {
                 owners.addObject(new PlayerTag(owner.getPlayerUUID()));
@@ -209,7 +209,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns the type of door.
         // -->
-        registerTag("door_type", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "door_type", (attribute, object) -> {
             return new ElementTag(object.door.getType().toString());
         });
 
@@ -220,16 +220,12 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // @description
         // Returns the name of the door (this is not always unique).
         // -->
-        registerTag("name", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
             return new ElementTag(object.door.getName());
         });
     }
 
     public static ObjectTagProcessor<BigDoorsDoorTag> tagProcessor = new ObjectTagProcessor<>();
-
-    public static void registerTag(String name, TagRunnable.ObjectInterface<BigDoorsDoorTag> runnable, String... variants) {
-        tagProcessor.registerTag(name, runnable, variants);
-    }
 
     @Override
     public ObjectTag getObjectAttribute(Attribute attribute) {

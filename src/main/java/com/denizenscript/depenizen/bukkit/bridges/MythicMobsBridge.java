@@ -5,6 +5,7 @@ import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.TagManager;
@@ -56,7 +57,7 @@ public class MythicMobsBridge extends Bridge {
         // @description
         // Returns an ItemTag of the named mythic item.
         // -->
-        TagManager.registerTagHandler("mythic_item", (attribute) -> {
+        TagManager.registerTagHandler(ItemTag.class, "mythic_item", (attribute) -> {
             if (!attribute.hasContext(1)) {
                 attribute.echoError("The mythic_item tag must have input.");
                 return null;
@@ -79,7 +80,7 @@ public class MythicMobsBridge extends Bridge {
         // Returns a MythicMobsMobTag based on the name input.
         // Refer to <@link objecttype MythicMobsMobTag>.
         // -->
-        TagManager.registerTagHandler("mythicmob", (attribute) -> {
+        TagManager.registerTagHandler(MythicMobsMobTag.class, "mythicmob", (attribute) -> {
             if (!attribute.hasContext(1)) {
                 attribute.echoError("MythicMob tag base must have input.");
                 return null;
@@ -95,7 +96,7 @@ public class MythicMobsBridge extends Bridge {
         // Returns a MythicSpawnerTag based on the name input.
         // Refer to <@link objecttype MythicSpawnerTag>.
         // -->
-        TagManager.registerTagHandler("mythicspawner", (attribute) -> {
+        TagManager.registerTagHandler(MythicSpawnerTag.class, "mythicspawner", (attribute) -> {
             if (!attribute.hasContext(1)) {
                 attribute.echoError("MythicSpawner tag base must have input.");
                 return null;
@@ -103,7 +104,7 @@ public class MythicMobsBridge extends Bridge {
             return MythicSpawnerTag.valueOf(attribute.getContext(1), attribute.context);
         });
 
-        TagManager.registerTagHandler("mythicmobs", (attribute) -> {
+        TagManager.registerTagHandler(ObjectTag.class, "mythicmobs", (attribute) -> {
             attribute.fulfill(1);
 
             // <--[tag]

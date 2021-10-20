@@ -52,7 +52,7 @@ public class BigDoorsWorldProperties implements Property {
         // @description
         // Returns a list of Big Doors doors in the world.
         // -->
-        PropertyParser.<BigDoorsWorldProperties>registerTag("bigdoors", (attribute, property) -> {
+        PropertyParser.<BigDoorsWorldProperties, ListTag>registerTag(ListTag.class, "bigdoors", (attribute, property) -> {
             ListTag doors = new ListTag();
             for (Door door : BigDoorsBridge.commander.getDoorsInWorld(property.world.getWorld())) {
                 doors.addObject(new BigDoorsDoorTag(door));
