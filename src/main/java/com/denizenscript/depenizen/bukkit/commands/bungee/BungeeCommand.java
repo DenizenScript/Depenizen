@@ -53,7 +53,7 @@ public class BungeeCommand extends BracedCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (Argument arg : scriptEntry.getProcessedArgs()) {
+        for (Argument arg : scriptEntry) {
             if (!scriptEntry.hasObject("servers")) {
                 scriptEntry.addObject("servers", arg.asType(ListTag.class));
             }

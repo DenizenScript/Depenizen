@@ -63,7 +63,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
 
-        for (String arg : scriptEntry.getArguments()) {
+        for (String arg : scriptEntry.getOriginalArguments()) {
             if (!scriptEntry.hasObject("server")
                     && arg.startsWith("server:")) {
                 scriptEntry.addObject("server", new ElementTag(TagManager.tag(arg.substring("server:".length()),

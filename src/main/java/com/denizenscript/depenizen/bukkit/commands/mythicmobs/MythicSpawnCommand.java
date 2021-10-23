@@ -44,7 +44,7 @@ public class MythicSpawnCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (Argument arg : scriptEntry.getProcessedArgs()) {
+        for (Argument arg : scriptEntry) {
             if (!scriptEntry.hasObject("location")
                     && arg.matchesArgumentType(LocationTag.class)) {
                 scriptEntry.addObject("location", arg.asType(LocationTag.class));

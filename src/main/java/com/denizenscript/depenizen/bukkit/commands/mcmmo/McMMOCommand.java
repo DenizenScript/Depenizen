@@ -62,7 +62,7 @@ public class McMMOCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (Argument arg : scriptEntry.getProcessedArgs()) {
+        for (Argument arg : scriptEntry) {
             if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
