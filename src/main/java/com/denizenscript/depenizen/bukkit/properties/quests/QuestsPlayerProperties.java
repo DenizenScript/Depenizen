@@ -46,13 +46,15 @@ public class QuestsPlayerProperties implements Property {
 
     private QuestsPlayerProperties(PlayerTag player) {
         this.player = player;
+    }
+
+    public Quester getQuester() {
         Quests quests = (Quests) QuestsBridge.instance.plugin;
         // This would be Quests.getInstance() but the developers of Quests did a stupid and broke that method.
-        this.quester = quests.getQuester(player.getUUID());
+        return quests.getQuester(player.getUUID());
     }
 
     PlayerTag player;
-    Quester quester;
 
     @Override
     public String getAttribute(Attribute attribute) {
@@ -71,8 +73,8 @@ public class QuestsPlayerProperties implements Property {
             // Returns the number of quest points the player has.
             // -->
             if (attribute.startsWith("points")) {
-                if (quester.getBaseData().contains("quest-points")) {
-                    return new ElementTag(quester.getBaseData().getInt("quest-points")).getAttribute(attribute.fulfill(1));
+                if (getQuester().getBaseData().contains("quest-points")) {
+                    return new ElementTag(getQuester().getBaseData().getInt("quest-points")).getAttribute(attribute.fulfill(1));
                 }
                 return new ElementTag("0").getAttribute(attribute.fulfill(1));
             }
@@ -85,7 +87,7 @@ public class QuestsPlayerProperties implements Property {
             // Returns the names of quests the player has completed.
             // -->
             if (attribute.startsWith("completed_names")) {
-                ListTag list = new ListTag(quester.getCompletedQuests());
+                ListTag list = new ListTag(getQuester().getCompletedQuests().stream().map(Quest::getName));
                 return list.getAttribute(attribute.fulfill(1));
             }
 
@@ -98,7 +100,7 @@ public class QuestsPlayerProperties implements Property {
             // -->
             if (attribute.startsWith("active_names")) {
                 ListTag list = new ListTag();
-                for (Quest quest : quester.getCurrentQuests().keySet()) {
+                for (Quest quest : getQuester().getCurrentQuests().keySet()) {
                     list.add(quest.getName());
                 }
                 return list.getAttribute(attribute.fulfill(1));
@@ -112,7 +114,7 @@ public class QuestsPlayerProperties implements Property {
             // Returns the number of quests the player has completed.
             // -->
             else if (attribute.startsWith("completed")) {
-                return new ElementTag(quester.getCompletedQuests().size()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(getQuester().getCompletedQuests().size()).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -123,7 +125,7 @@ public class QuestsPlayerProperties implements Property {
             // Returns the number of quests the player has active.
             // -->
             else if (attribute.startsWith("active")) {
-                return new ElementTag(quester.getCurrentQuests().size()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(getQuester().getCurrentQuests().size()).getAttribute(attribute.fulfill(1));
             }
             return null;
         }
