@@ -80,6 +80,18 @@ public class QuestsPlayerProperties implements Property {
             }
 
             // <--[tag]
+            // @attribute <PlayerTag.quests.completed_ids>
+            // @returns ListTag
+            // @plugin Depenizen, Quests
+            // @description
+            // Returns the IDs of quests the player has completed.
+            // -->
+            if (attribute.startsWith("completed_ids")) {
+                ListTag list = new ListTag(getQuester().getCompletedQuests().stream().map(Quest::getId));
+                return list.getAttribute(attribute.fulfill(1));
+            }
+
+            // <--[tag]
             // @attribute <PlayerTag.quests.completed_names>
             // @returns ListTag
             // @plugin Depenizen, Quests
@@ -92,6 +104,18 @@ public class QuestsPlayerProperties implements Property {
             }
 
             // <--[tag]
+            // @attribute <PlayerTag.quests.active_ids>
+            // @returns ListTag
+            // @plugin Depenizen, Quests
+            // @description
+            // Returns the IDs of quests the player has active.
+            // -->
+            if (attribute.startsWith("active_ids")) {
+                ListTag list = new ListTag(getQuester().getCurrentQuests().keySet().stream().map(Quest::getId));
+                return list.getAttribute(attribute.fulfill(1));
+            }
+
+            // <--[tag]
             // @attribute <PlayerTag.quests.active_names>
             // @returns ListTag
             // @plugin Depenizen, Quests
@@ -99,10 +123,7 @@ public class QuestsPlayerProperties implements Property {
             // Returns the names of quests the player has active.
             // -->
             if (attribute.startsWith("active_names")) {
-                ListTag list = new ListTag();
-                for (Quest quest : getQuester().getCurrentQuests().keySet()) {
-                    list.add(quest.getName());
-                }
+                ListTag list = new ListTag(getQuester().getCurrentQuests().keySet().stream().map(Quest::getName));
                 return list.getAttribute(attribute.fulfill(1));
             }
 
