@@ -72,8 +72,8 @@ public class PVPArenaPlayerProperties implements Property {
                 if (player.getArena() == null) {
                     return new ElementTag(false).getAttribute(attribute.fulfill(1));
                 }
-                if (attribute.hasContext(1)) {
-                    PVPArenaArenaTag a = attribute.contextAsType(1, PVPArenaArenaTag.class);
+                if (attribute.hasParam()) {
+                    PVPArenaArenaTag a = attribute.paramAsType(PVPArenaArenaTag.class);
                     if (a == null) {
                         return null;
                     }

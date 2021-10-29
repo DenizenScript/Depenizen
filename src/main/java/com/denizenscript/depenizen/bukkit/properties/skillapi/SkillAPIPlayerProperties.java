@@ -89,8 +89,8 @@ public class SkillAPIPlayerProperties implements Property {
             // whether the player professes in any class.
             // -->
             if (attribute.startsWith("in_class")) {
-                if (attribute.hasContext(1)) {
-                    SkillAPIClassTag testClass = attribute.contextAsType(1, SkillAPIClassTag.class);
+                if (attribute.hasParam()) {
+                    SkillAPIClassTag testClass = attribute.paramAsType(SkillAPIClassTag.class);
                     if (testClass == null) {
                         return null;
                     }
@@ -106,8 +106,8 @@ public class SkillAPIPlayerProperties implements Property {
             // @description
             // Returns whether the player has the specified skill.
             // -->
-            if (attribute.startsWith("has_skill") && attribute.hasContext(1)) {
-                return new ElementTag(data.hasSkill(attribute.getContext(1))).getAttribute(attribute.fulfill(1));
+            if (attribute.startsWith("has_skill") && attribute.hasParam()) {
+                return new ElementTag(data.hasSkill(attribute.getParam())).getAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -132,10 +132,10 @@ public class SkillAPIPlayerProperties implements Property {
                 return new ElementTag(data.getMaxMana()).getAttribute(attribute.fulfill(1));
             }
 
-            if (attribute.getAttribute(1).startsWith("class_") && attribute.hasContext(1)) {
+            if (attribute.getAttribute(1).startsWith("class_") && attribute.hasParam()) {
 
                 PlayerClass playerClass = null;
-                SkillAPIClassTag skillAPIClass = attribute.contextAsType(1, SkillAPIClassTag.class);
+                SkillAPIClassTag skillAPIClass = attribute.paramAsType(SkillAPIClassTag.class);
                 if (skillAPIClass != null) {
                     String name = skillAPIClass.getRPGClass().getName();
                     for (PlayerClass plClass : data.getClasses()) {
@@ -239,9 +239,9 @@ public class SkillAPIPlayerProperties implements Property {
                 }
             }
 
-            if (attribute.getAttribute(1).startsWith("skill_") && attribute.hasContext(1)) {
+            if (attribute.getAttribute(1).startsWith("skill_") && attribute.hasParam()) {
 
-                PlayerSkill playerSkill = data.getSkill(attribute.getContext(1)); // TODO: SkillAPISkill object?
+                PlayerSkill playerSkill = data.getSkill(attribute.getParam()); // TODO: SkillAPISkill object?
                 if (playerSkill == null) {
                     return null;
                 }

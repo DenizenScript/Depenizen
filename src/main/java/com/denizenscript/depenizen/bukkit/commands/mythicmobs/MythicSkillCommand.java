@@ -98,10 +98,10 @@ public class MythicSkillCommand extends AbstractCommand {
         List<LocationTag> location_targets = (List<LocationTag>) scriptEntry.getObject("location_targets");
         ElementTag power = scriptEntry.getObjectTag("power");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), ArgumentHelper.debugList("casters", casters)
+            Debug.report(scriptEntry, getName(), db("casters", casters)
                     + skill.debug()
-                    + (location_targets == null ? "" : ArgumentHelper.debugList("location_Targets", location_targets))
-                    + (entity_targets == null ? "" : ArgumentHelper.debugList("entity_targets", entity_targets))
+                    + (location_targets == null ? "" : db("location_Targets", location_targets))
+                    + (entity_targets == null ? "" : db("entity_targets", entity_targets))
                     + (power == null ? "" : power.debug()));
         }
         HashSet<Entity> entityTargets = null;

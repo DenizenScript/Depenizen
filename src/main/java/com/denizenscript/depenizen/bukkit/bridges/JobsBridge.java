@@ -36,13 +36,13 @@ public class JobsBridge extends Bridge {
     public void tagEvent(ReplaceableTagEvent event) {
         Attribute attribute = event.getAttributes();
         JobsJobTag j = null;
-        if (attribute.hasContext(1)) {
+        if (attribute.hasParam()) {
             // Documented below.
-            if (JobsJobTag.matches(attribute.getContext(1))) {
-                j = attribute.contextAsType(1, JobsJobTag.class);
+            if (JobsJobTag.matches(attribute.getParam())) {
+                j = attribute.paramAsType(JobsJobTag.class);
             }
             else {
-                attribute.echoError("Could not match '" + attribute.getContext(1) + "' to a valid job!");
+                attribute.echoError("Could not match '" + attribute.getParam() + "' to a valid job!");
                 return;
             }
         }

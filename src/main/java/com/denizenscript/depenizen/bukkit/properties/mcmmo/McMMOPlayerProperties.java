@@ -70,7 +70,7 @@ public class McMMOPlayerProperties implements Property {
             // If no skill is specified, this returns the player's overall level.
             // -->
             if (attribute.startsWith("level")) {
-                if (!attribute.hasContext(1)) {
+                if (!attribute.hasParam()) {
                     if (player.isOnline()) {
                         return new ElementTag(ExperienceAPI.getPowerLevel(player.getPlayerEntity()))
                                 .getAttribute(attribute.fulfill(1));
@@ -82,11 +82,11 @@ public class McMMOPlayerProperties implements Property {
                 }
                 else {
                     if (player.isOnline()) {
-                        return new ElementTag(ExperienceAPI.getLevel(player.getPlayerEntity(), attribute.getContext(1)))
+                        return new ElementTag(ExperienceAPI.getLevel(player.getPlayerEntity(), attribute.getParam()))
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else {
-                        return new ElementTag(ExperienceAPI.getLevelOffline(player.getUUID(), attribute.getContext(1)))
+                        return new ElementTag(ExperienceAPI.getLevelOffline(player.getUUID(), attribute.getParam()))
                                 .getAttribute(attribute.fulfill(1));
                     }
                 }
@@ -108,7 +108,7 @@ public class McMMOPlayerProperties implements Property {
 
             else if (attribute.startsWith("xp")) {
 
-                String skill = attribute.getContext(1);
+                String skill = attribute.getParam();
                 attribute = attribute.fulfill(1);
 
                 // <--[tag]
@@ -174,17 +174,17 @@ public class McMMOPlayerProperties implements Property {
             // If no skill is specified, this returns the player's overall rank.
             // -->
             else if (attribute.startsWith("rank")) {
-                if (!attribute.hasContext(1)) {
+                if (!attribute.hasParam()) {
                     return new ElementTag(ExperienceAPI.getPlayerRankOverall(player.getName()))
                             .getAttribute(attribute.fulfill(1));
                 }
                 else {
-                    if (PrimarySkillType.getSkill(attribute.getContext(1)) != null) {
-                        return new ElementTag(ExperienceAPI.getPlayerRankSkill(player.getUUID(), attribute.getContext(1)))
+                    if (PrimarySkillType.getSkill(attribute.getParam()) != null) {
+                        return new ElementTag(ExperienceAPI.getPlayerRankSkill(player.getUUID(), attribute.getParam()))
                                 .getAttribute(attribute.fulfill(1));
                     }
                     else if (!attribute.hasAlternative()) {
-                        Debug.echoError("Skill type '" + attribute.getContext(1) + "' does not exist!");
+                        Debug.echoError("Skill type '" + attribute.getParam() + "' does not exist!");
                     }
                 }
             }

@@ -87,7 +87,7 @@ public class TownyChatPlayerProperties implements Property {
             // @description
             // Returns whether the player is muted in the specified channel.
             // -->
-            else if (attribute.startsWith("muted_in") && attribute.hasContext(1)) {
+            else if (attribute.startsWith("muted_in") && attribute.hasParam()) {
                 Channel c = holder.getChannel(attribute.getAttribute(1));
                 if (c == null) {
                     return null;
@@ -102,8 +102,8 @@ public class TownyChatPlayerProperties implements Property {
             // @description
             // Returns whether the player has permissions to join the specified channel.
             // -->
-            else if (attribute.startsWith("has_permission") && attribute.hasContext(1)) {
-                Channel c = holder.getChannel(attribute.getContext(1));
+            else if (attribute.startsWith("has_permission") && attribute.hasParam()) {
+                Channel c = holder.getChannel(attribute.getParam());
                 if (c == null) {
                     return null;
                 }

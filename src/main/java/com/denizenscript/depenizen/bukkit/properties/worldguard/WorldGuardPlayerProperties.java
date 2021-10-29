@@ -81,8 +81,8 @@ public class WorldGuardPlayerProperties implements Property {
         // @description
         // Whether WorldGuard allows to build at a location.
         // -->
-        if (attribute.startsWith("can_build") && attribute.hasContext(1)) {
-            LocationTag location = attribute.contextAsType(1, LocationTag.class);
+        if (attribute.startsWith("can_build") && attribute.hasParam()) {
+            LocationTag location = attribute.paramAsType(LocationTag.class);
             if (location == null) {
                 return null;
             }
@@ -100,13 +100,13 @@ public class WorldGuardPlayerProperties implements Property {
         // For example: .test_flag[pvp] returns 'true' when the player can be attacked.
         // -->
         if (attribute.startsWith("test_flag")) {
-            if (!attribute.hasContext(1)) {
+            if (!attribute.hasParam()) {
                 Debug.echoError("The tag PlayerTag.worlduard.test_flag[...] must have a value.");
                 return null;
             }
-            StateFlag flag = getStateFlag(attribute.getContext(1));
+            StateFlag flag = getStateFlag(attribute.getParam());
             if (flag == null) {
-                Debug.echoError("The tag PlayerTag.worlduard.test_flag[...] has an invalid value: " + attribute.getContext(1));
+                Debug.echoError("The tag PlayerTag.worlduard.test_flag[...] has an invalid value: " + attribute.getParam());
                 return null;
             }
 

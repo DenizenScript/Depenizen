@@ -52,7 +52,7 @@ public class PlaceholderAPIBridge extends Bridge {
         // @description
         // Returns the value of the placeholder.
         // -->
-        String placeholder = attribute.getContext(1);
+        String placeholder = attribute.getParam();
         if (CoreUtilities.toLowerCase(placeholder).startsWith("denizen_")) {
             Debug.echoError("Cannot use <placeholder[]> tags with 'denizen' prefix!");
             return;
@@ -67,8 +67,8 @@ public class PlaceholderAPIBridge extends Bridge {
         // @description
         // Returns the value of the placeholder for the specified player.
         // -->
-        if (attribute.matches("player") && attribute.hasContext(1) && PlayerTag.matches(attribute.getContext(1))) {
-            player = attribute.contextAsType(1, PlayerTag.class).getPlayerEntity();
+        if (attribute.matches("player") && attribute.hasParam() && PlayerTag.matches(attribute.getParam())) {
+            player = attribute.paramAsType(PlayerTag.class).getPlayerEntity();
             attribute.fulfill(1);
         }
         event.setReplacedObject(new ElementTag(PlaceholderAPI.setPlaceholders(player, "%" + placeholder + "%"))

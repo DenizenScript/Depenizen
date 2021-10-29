@@ -83,8 +83,8 @@ public class EssentialsItemProperties implements Property {
             // @description
             // Returns the amount of money the quantity specified of this item is worth in Essentials.
             // -->
-            if (attribute.startsWith("quantity") && attribute.hasContext(1)) {
-                return new ElementTag(priceBD.multiply(BigDecimal.valueOf(attribute.getIntContext(1))))
+            if (attribute.startsWith("quantity") && attribute.hasParam()) {
+                return new ElementTag(priceBD.multiply(BigDecimal.valueOf(attribute.getIntParam())))
                         .getAttribute(attribute.fulfill(1));
             }
             return new ElementTag(priceBD).getAttribute(attribute);

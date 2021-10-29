@@ -43,7 +43,7 @@ public class BetonQuestPlayerProperties implements Property {
         // Returns a variable from a BetonQuest package, for the player.
         // -->
         PropertyParser.<BetonQuestPlayerProperties, ElementTag>registerTag(ElementTag.class, "beton_quest", (attribute, object) -> {
-            String quest_package = attribute.getContext(1);
+            String quest_package = attribute.getParam();
             if (attribute.startsWith("variable", 2)) {
                 String variable = attribute.getContext(2);
                 attribute.fulfill(1);

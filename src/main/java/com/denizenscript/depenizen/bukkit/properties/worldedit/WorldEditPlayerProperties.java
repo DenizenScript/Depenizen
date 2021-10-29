@@ -95,8 +95,8 @@ public class WorldEditPlayerProperties implements Property {
         if (attribute.startsWith("we_brush_info")) {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             ItemType itemType;
-            if (attribute.hasContext(1)) {
-                itemType = BukkitAdapter.asItemType(deLegacy(attribute.contextAsType(1, ItemTag.class).getMaterial().getMaterial()));
+            if (attribute.hasParam()) {
+                itemType = BukkitAdapter.asItemType(deLegacy(attribute.paramAsType(ItemTag.class).getMaterial().getMaterial()));
             }
             else {
                 ItemStack itm = player.getEquipment().getItemInMainHand();

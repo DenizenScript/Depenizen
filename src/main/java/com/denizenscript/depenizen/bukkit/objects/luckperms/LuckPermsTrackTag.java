@@ -163,8 +163,8 @@ public class LuckPermsTrackTag implements ObjectTag {
         // -->
         if (attribute.startsWith("groups")) {
             ListTag groups = new ListTag();
-            if (attribute.hasContext(1)) {
-                PlayerTag player = attribute.contextAsType(1, PlayerTag.class);
+            if (attribute.hasParam()) {
+                PlayerTag player = attribute.paramAsType(PlayerTag.class);
                 if (player == null) {
                     attribute.echoError("Invalid player input for 'group' tag.");
                     return null;

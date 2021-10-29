@@ -104,7 +104,7 @@ public class RegionCommand extends AbstractCommand {
             Debug.echoError("No valid world found!");
             return;
         }
-        Debug.report(scriptEntry, getName(), region_id, cuboid, ArgumentHelper.debugObj("world", world.getName()), action);
+        Debug.report(scriptEntry, getName(), region_id, cuboid, db("world", world.getName()), action);
         RegionManager regionManager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
         if (action.asString().equalsIgnoreCase("REMOVE")) {
             regionManager.removeRegion(region_id.asString());

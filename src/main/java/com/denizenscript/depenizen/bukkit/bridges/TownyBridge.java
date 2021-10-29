@@ -67,9 +67,9 @@ public class TownyBridge extends Bridge {
         // -->
         if (attribute.startsWith("list_towns")) {
             ListTag towns = new ListTag();
-            if (attribute.hasContext(1)) {
+            if (attribute.hasParam()) {
                 try {
-                    for (Town town : TownyAPI.getInstance().getDataSource().getWorld(attribute.getContext(1).replace("w@", "")).getTowns().values()) {
+                    for (Town town : TownyAPI.getInstance().getDataSource().getWorld(attribute.getParam().replace("w@", "")).getTowns().values()) {
                         towns.addObject(new TownTag(town));
                     }
                 }
@@ -97,20 +97,20 @@ public class TownyBridge extends Bridge {
         // @description
         // Returns the town by the input name.
         // -->
-        if (attribute.hasContext(1)) {
+        if (attribute.hasParam()) {
             TownTag town;
-            if (TownTag.matches(attribute.getContext(1))) {
-                town = attribute.contextAsType(1, TownTag.class);
+            if (TownTag.matches(attribute.getParam())) {
+                town = attribute.paramAsType(TownTag.class);
             }
             else {
-                attribute.echoError("Could not match '" + attribute.getContext(1) + "' to a valid town!");
+                attribute.echoError("Could not match '" + attribute.getParam() + "' to a valid town!");
                 return;
             }
             if (town != null) {
                 event.setReplacedObject(town.getObjectAttribute(attribute.fulfill(1)));
             }
             else {
-                attribute.echoError("Unknown town '" + attribute.getContext(1) + "' for town[] tag.");
+                attribute.echoError("Unknown town '" + attribute.getParam() + "' for town[] tag.");
             }
         }
     }
@@ -125,20 +125,20 @@ public class TownyBridge extends Bridge {
         // @description
         // Returns the nation by the input name.
         // -->
-        if (attribute.hasContext(1)) {
+        if (attribute.hasParam()) {
             NationTag nation;
-            if (NationTag.matches(attribute.getContext(1))) {
-                nation = attribute.contextAsType(1, NationTag.class);
+            if (NationTag.matches(attribute.getParam())) {
+                nation = attribute.paramAsType(NationTag.class);
             }
             else {
-                attribute.echoError("Could not match '" + attribute.getContext(1) + "' to a valid nation!");
+                attribute.echoError("Could not match '" + attribute.getParam() + "' to a valid nation!");
                 return;
             }
             if (nation != null) {
                 event.setReplacedObject(nation.getObjectAttribute(attribute.fulfill(1)));
             }
             else {
-                attribute.echoError("Unknown nation '" + attribute.getContext(1) + "' for nation[] tag.");
+                attribute.echoError("Unknown nation '" + attribute.getParam() + "' for nation[] tag.");
             }
         }
 

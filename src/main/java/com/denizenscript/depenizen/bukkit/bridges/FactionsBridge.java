@@ -53,7 +53,7 @@ public class FactionsBridge extends Bridge {
         // @description
         // Returns the faction for the input name.
         // -->
-        String nameOrId = attribute.getContext(1);
+        String nameOrId = attribute.getParam();
         Faction f = FactionColl.get().getByName(nameOrId);
         if (f == null && FactionColl.get().containsId(nameOrId)) {
             f = FactionColl.get().get(nameOrId);

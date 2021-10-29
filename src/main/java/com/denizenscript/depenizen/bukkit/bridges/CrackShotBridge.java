@@ -55,8 +55,8 @@ public class CrackShotBridge extends Bridge {
         // @description
         // Returns the ItemTag for the CrackShot weapon title specified, if it exists. <@link url https://github.com/Shampaggon/CrackShot/wiki/The-Complete-Guide-to-CrackShot#title>
         // -->
-        if (attribute.startsWith("weapon") && attribute.hasContext(1)) {
-            ItemStack weapon = utility.generateWeapon(attribute.getContext(1));
+        if (attribute.startsWith("weapon") && attribute.hasParam()) {
+            ItemStack weapon = utility.generateWeapon(attribute.getParam());
             if (weapon != null) {
                 event.setReplacedObject(new ItemTag(weapon).getObjectAttribute(attribute.fulfill(1)));
             }

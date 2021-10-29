@@ -98,7 +98,7 @@ public class MobArenaCommand extends AbstractCommand {
         List<PlayerTag> remove = (List<PlayerTag>) scriptEntry.getObject("remove");
         List<PlayerTag> spectate = (List<PlayerTag>) scriptEntry.getObject("spectate");
 
-        Debug.report(scriptEntry, getName(), arena, ArgumentHelper.debugList("Add Players", add), ArgumentHelper.debugList("Remove Players", remove), ArgumentHelper.debugList("Spectate Players", spectate));
+        Debug.report(scriptEntry, getName(), arena, db("Add Players", add), db("Remove Players", remove), db("Spectate Players", spectate));
 
         Arena mobArena = arena.getArena();
 

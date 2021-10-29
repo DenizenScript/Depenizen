@@ -60,8 +60,8 @@ public class PlotSquaredPlayerProperties implements Property {
         // Returns a list of plots a player has in a world. Exclude the context to get plots in all worlds.
         // -->
         if (attribute.startsWith("plotsquared_plots")) {
-            if (attribute.hasContext(1)) {
-                WorldTag world = attribute.contextAsType(1, WorldTag.class);
+            if (attribute.hasParam()) {
+                WorldTag world = attribute.paramAsType(WorldTag.class);
                 if (world == null) {
                     return null;
                 }

@@ -257,7 +257,7 @@ public class NationTag implements ObjectTag {
         else if (attribute.startsWith("relation")) {
 
             try {
-                NationTag to = valueOf(attribute.getContext(1));
+                NationTag to = valueOf(attribute.getParam());
 
                 if (nation.hasAlly(to.nation)) {
                     return new ElementTag("allies").getAttribute(attribute.fulfill(1));

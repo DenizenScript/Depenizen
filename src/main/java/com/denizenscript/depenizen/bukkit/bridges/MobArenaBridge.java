@@ -51,13 +51,13 @@ public class MobArenaBridge extends Bridge {
         // @description
         // Returns the mob arena for the input name.
         // -->
-        if (attribute.hasContext(1)) {
-            MobArenaArenaTag arena = attribute.contextAsType(1, MobArenaArenaTag.class);
+        if (attribute.hasParam()) {
+            MobArenaArenaTag arena = attribute.paramAsType(MobArenaArenaTag.class);
             if (arena != null) {
                 event.setReplacedObject(arena.getObjectAttribute(attribute.fulfill(1)));
             }
             else {
-                attribute.echoError("Unknown mob arena '" + attribute.getContext(1) + "' for mobarena[] tag.");
+                attribute.echoError("Unknown mob arena '" + attribute.getParam() + "' for mobarena[] tag.");
             }
             return;
         }

@@ -38,11 +38,11 @@ public class BigDoorsBridge extends Bridge {
         // Refer to <@link objecttype BigDoorsDoorTag>.
         // -->
         TagManager.registerTagHandler(BigDoorsDoorTag.class, "bigdoor", (attribute) -> {
-            if (!attribute.hasContext(1)) {
+            if (!attribute.hasParam()) {
                 attribute.echoError("Big Doors door tag base must have input.");
                 return null;
             }
-            return BigDoorsDoorTag.valueOf(attribute.getContext(1), attribute.context);
+            return BigDoorsDoorTag.valueOf(attribute.getParam(), attribute.context);
         });
     }
 }

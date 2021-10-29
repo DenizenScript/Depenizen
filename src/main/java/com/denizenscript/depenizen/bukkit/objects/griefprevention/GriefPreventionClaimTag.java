@@ -281,8 +281,8 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the GriefPreventionClaim can siege the player.
         // -->
-        else if (attribute.startsWith("can_siege") && attribute.hasContext(1)) {
-            PlayerTag defender = attribute.contextAsType(1, PlayerTag.class);
+        else if (attribute.startsWith("can_siege") && attribute.hasParam()) {
+            PlayerTag defender = attribute.paramAsType(PlayerTag.class);
             if (defender == null || defender.getPlayerEntity() == null) {
                 return null;
             }

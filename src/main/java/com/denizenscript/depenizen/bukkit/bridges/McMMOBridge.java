@@ -53,13 +53,13 @@ public class McMMOBridge extends Bridge {
         // Returns a party object constructed from the input value.
         // Refer to <@link objecttype PartyTag>.
         // -->
-        if (attribute.startsWith("party") && attribute.hasContext(1)) {
-            PartyTag party = attribute.contextAsType(1, PartyTag.class);
+        if (attribute.startsWith("party") && attribute.hasParam()) {
+            PartyTag party = attribute.paramAsType(PartyTag.class);
             if (party != null) {
                 event.setReplacedObject(party.getObjectAttribute(attribute.fulfill(1)));
             }
             else {
-                attribute.echoError("Unknown party '" + attribute.getContext(1) + "' for party[] tag.");
+                attribute.echoError("Unknown party '" + attribute.getParam() + "' for party[] tag.");
             }
         }
     }

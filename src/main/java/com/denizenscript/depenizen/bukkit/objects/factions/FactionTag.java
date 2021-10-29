@@ -156,8 +156,8 @@ public class FactionTag implements ObjectTag {
         // Returns the location of the faction's warp by name, if any.
         // Note that this was previously named "home" instead of "warp".
         // -->
-        else if (attribute.startsWith("warp") && attribute.hasContext(1)) {
-            Warp warp = faction.getWarp(attribute.getContext(1));
+        else if (attribute.startsWith("warp") && attribute.hasParam()) {
+            Warp warp = faction.getWarp(attribute.getParam());
             if (warp != null) {
                 return new LocationTag(warp.getLocation().asBukkitLocation())
                         .getAttribute(attribute.fulfill(1));
@@ -276,7 +276,7 @@ public class FactionTag implements ObjectTag {
         // Returns the current relation between the faction and another faction.
         // -->
         else if (attribute.startsWith("relation")) {
-            FactionTag to = valueOf(attribute.getContext(1));
+            FactionTag to = valueOf(attribute.getParam());
             if (to != null) {
                 return new ElementTag(faction.getRelationTo(to.getFaction()).toString())
                         .getAttribute(attribute.fulfill(1));

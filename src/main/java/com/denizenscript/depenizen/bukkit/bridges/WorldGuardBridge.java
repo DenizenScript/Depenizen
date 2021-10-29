@@ -51,13 +51,13 @@ public class WorldGuardBridge extends Bridge {
         // Returns a WorldGuard region object constructed from the input value.
         // Refer to <@link objecttype WorldGuardRegionTag>.
         // -->
-        if (attribute.startsWith("region") && attribute.hasContext(1)) {
-            WorldGuardRegionTag region =  attribute.contextAsType(1, WorldGuardRegionTag.class);
+        if (attribute.startsWith("region") && attribute.hasParam()) {
+            WorldGuardRegionTag region =  attribute.paramAsType(WorldGuardRegionTag.class);
             if (region != null) {
                 event.setReplacedObject(region.getObjectAttribute(attribute.fulfill(1)));
             }
             else {
-                attribute.echoError("Unknown WorldGuard region '" + attribute.getContext(1) + "' for region[] tag.");
+                attribute.echoError("Unknown WorldGuard region '" + attribute.getParam() + "' for region[] tag.");
             }
         }
     }

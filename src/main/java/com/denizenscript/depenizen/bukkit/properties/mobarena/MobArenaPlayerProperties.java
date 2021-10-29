@@ -111,8 +111,8 @@ public class MobArenaPlayerProperties implements Property {
                 return null;
             }
 
-            else if (attribute.startsWith("stats") && attribute.hasContext(1)) {
-                MobArenaArenaTag a = attribute.contextAsType(1, MobArenaArenaTag.class);
+            else if (attribute.startsWith("stats") && attribute.hasParam()) {
+                MobArenaArenaTag a = attribute.paramAsType(MobArenaArenaTag.class);
                 if (a == null) {
                     return null;
                 }

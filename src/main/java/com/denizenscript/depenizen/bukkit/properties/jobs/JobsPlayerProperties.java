@@ -84,8 +84,8 @@ public class JobsPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("job") || attribute.startsWith("jobs")) {
             Job job = null;
-            if (attribute.hasContext(1)) {
-                job = Jobs.getJob(attribute.getContext(1));
+            if (attribute.hasParam()) {
+                job = Jobs.getJob(attribute.getParam());
             }
             if (job == null) {
                 if (!attribute.hasAlternative()) {

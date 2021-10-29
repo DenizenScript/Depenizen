@@ -106,7 +106,7 @@ public class NBSCommand extends AbstractCommand {
         ElementTag action = scriptEntry.getObjectTag("action");
         List<PlayerTag> targets = (List<PlayerTag>) scriptEntry.getObject("targets");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), action, ArgumentHelper.debugList("targets", targets), file);
+            Debug.report(scriptEntry, getName(), action, db("targets", targets), file);
         }
         if (targets == null || targets.isEmpty()) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Targets not found!");

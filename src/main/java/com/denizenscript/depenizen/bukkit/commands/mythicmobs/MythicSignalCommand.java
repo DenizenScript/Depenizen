@@ -79,7 +79,7 @@ public class MythicSignalCommand extends AbstractCommand {
         List<MythicMobsMobTag> targets = (List<MythicMobsMobTag>) scriptEntry.getObject("targets");
         ElementTag signal = scriptEntry.getElement("signal");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), ArgumentHelper.debugList("mythicmobs", targets), signal, source);
+            Debug.report(scriptEntry, getName(), db("mythicmobs", targets), signal, source);
         }
         for (MythicMobsMobTag mob : targets) {
             mob.getMob().signalMob(BukkitAdapter.adapt(source.getBukkitEntity()), signal.asString());

@@ -72,8 +72,8 @@ public class GriefPreventionLocationProperties implements Property {
             // -->
             if (attribute.startsWith("has_claim")) {
                 ElementTag ignoreHeight = new ElementTag(false);
-                if (attribute.hasContext(1)) {
-                    ignoreHeight = new ElementTag(attribute.getContext(1));
+                if (attribute.hasParam()) {
+                    ignoreHeight = new ElementTag(attribute.getParam());
                     if (!ignoreHeight.asString().isEmpty() || !ignoreHeight.isBoolean()) {
                         ignoreHeight = new ElementTag(true);
                     }

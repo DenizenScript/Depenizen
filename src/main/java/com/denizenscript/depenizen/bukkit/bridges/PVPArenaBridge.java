@@ -47,13 +47,13 @@ public class PVPArenaBridge extends Bridge {
         // @description
         // Returns the PVPArena by the input name.
         // -->
-        if (attribute.hasContext(1)) {
-            PVPArenaArenaTag arena = attribute.contextAsType(1, PVPArenaArenaTag.class);
+        if (attribute.hasParam()) {
+            PVPArenaArenaTag arena = attribute.paramAsType(PVPArenaArenaTag.class);
             if (arena != null) {
                 event.setReplacedObject(arena.getObjectAttribute(attribute.fulfill(1)));
             }
             else {
-                attribute.echoError("Unknown arena '" + attribute.getContext(1) + "' for pvparena[] tag.");
+                attribute.echoError("Unknown arena '" + attribute.getParam() + "' for pvparena[] tag.");
             }
             return;
         }

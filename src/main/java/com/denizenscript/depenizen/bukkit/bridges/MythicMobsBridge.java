@@ -58,11 +58,11 @@ public class MythicMobsBridge extends Bridge {
         // Returns an ItemTag of the named mythic item.
         // -->
         TagManager.registerTagHandler(ItemTag.class, "mythic_item", (attribute) -> {
-            if (!attribute.hasContext(1)) {
+            if (!attribute.hasParam()) {
                 attribute.echoError("The mythic_item tag must have input.");
                 return null;
             }
-            String name = attribute.getContext(1);
+            String name = attribute.getParam();
             Optional<MythicItem> itemOpt = MythicMobs.inst().getItemManager().getItem(name);
             if (!itemOpt.isPresent()) {
                 attribute.echoError("'" + name + "' is not a valid Mythic item.");
@@ -81,11 +81,11 @@ public class MythicMobsBridge extends Bridge {
         // Refer to <@link objecttype MythicMobsMobTag>.
         // -->
         TagManager.registerTagHandler(MythicMobsMobTag.class, "mythicmob", (attribute) -> {
-            if (!attribute.hasContext(1)) {
+            if (!attribute.hasParam()) {
                 attribute.echoError("MythicMob tag base must have input.");
                 return null;
             }
-            return MythicMobsMobTag.valueOf(attribute.getContext(1), attribute.context);
+            return MythicMobsMobTag.valueOf(attribute.getParam(), attribute.context);
         });
 
         // <--[tag]
@@ -97,11 +97,11 @@ public class MythicMobsBridge extends Bridge {
         // Refer to <@link objecttype MythicSpawnerTag>.
         // -->
         TagManager.registerTagHandler(MythicSpawnerTag.class, "mythicspawner", (attribute) -> {
-            if (!attribute.hasContext(1)) {
+            if (!attribute.hasParam()) {
                 attribute.echoError("MythicSpawner tag base must have input.");
                 return null;
             }
-            return MythicSpawnerTag.valueOf(attribute.getContext(1), attribute.context);
+            return MythicSpawnerTag.valueOf(attribute.getParam(), attribute.context);
         });
 
         TagManager.registerTagHandler(ObjectTag.class, "mythicmobs", (attribute) -> {

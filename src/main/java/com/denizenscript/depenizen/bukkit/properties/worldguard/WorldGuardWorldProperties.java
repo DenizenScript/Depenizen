@@ -79,8 +79,8 @@ public class WorldGuardWorldProperties implements Property {
         // @description
         // Returns whether a region exists in this world for the given name.
         // -->
-        if (attribute.startsWith("has_region") && attribute.hasContext(1)) {
-            return new ElementTag(manager.hasRegion(attribute.getContext(1))).getAttribute(attribute.fulfill(1));
+        if (attribute.startsWith("has_region") && attribute.hasParam()) {
+            return new ElementTag(manager.hasRegion(attribute.getParam())).getAttribute(attribute.fulfill(1));
         }
 
         return null;

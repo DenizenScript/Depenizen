@@ -151,8 +151,8 @@ public class ResidenceTag implements ObjectTag {
         // @description
         // Returns whether the specified location is within this Residence.
         // -->
-        else if (attribute.startsWith("is_within") && attribute.hasContext(1)) {
-            LocationTag location = attribute.contextAsType(1, LocationTag.class);
+        else if (attribute.startsWith("is_within") && attribute.hasParam()) {
+            LocationTag location = attribute.paramAsType(LocationTag.class);
             return new ElementTag(residence.containsLoc(location)).getAttribute(attribute.fulfill(1));
         }
 

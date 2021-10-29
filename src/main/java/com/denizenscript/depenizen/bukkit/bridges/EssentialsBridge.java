@@ -52,10 +52,10 @@ public class EssentialsBridge extends Bridge {
         // Returns the location of the warp name.
         // -->
         if (attribute.startsWith("warp")) {
-            if (attribute.hasContext(1)) {
+            if (attribute.hasParam()) {
                 Essentials essentials = (Essentials) plugin;
                 try {
-                    Location loc = essentials.getWarps().getWarp(attribute.getContext(1));
+                    Location loc = essentials.getWarps().getWarp(attribute.getParam());
                     event.setReplacedObject(new LocationTag(loc).getObjectAttribute(attribute.fulfill(1)));
                 }
                 catch (WarpNotFoundException e) {
