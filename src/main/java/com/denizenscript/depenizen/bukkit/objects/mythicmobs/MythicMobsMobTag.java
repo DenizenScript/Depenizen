@@ -6,7 +6,6 @@ import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
-import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.tags.Attribute;
