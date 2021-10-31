@@ -71,7 +71,8 @@ public class RunScriptPacketIn extends PacketIn {
             if (entries.isEmpty()) {
                 return;
             }
-            ScriptQueue queue = new InstantQueue("BUNGEERUN_" + scriptName).addEntries(entries);
+            ScriptQueue queue = new InstantQueue("BUNGEERUN_" + scriptName);
+            queue.addEntries(entries);
             int x = 1;
             TagContext context = new BukkitTagContext(linkedPlayer, null, script);
             ListTag definitions = ListTag.valueOf(defs, context);

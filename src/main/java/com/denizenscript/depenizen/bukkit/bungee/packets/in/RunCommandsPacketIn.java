@@ -75,7 +75,8 @@ public class RunCommandsPacketIn extends PacketIn {
                     entry.shouldDebugBool = false;
                 }
             }
-            ScriptQueue queue = new InstantQueue("BUNGEE_").addEntries(entries);
+            ScriptQueue queue = new InstantQueue("BUNGEE_");
+            queue.addEntries(entries);
             List<String> defSets = CoreUtilities.split(defs, '\r');
             List<String> defNames = CoreUtilities.split(defSets.get(0), '\n');
             List<String> defValues = CoreUtilities.split(defSets.get(1), '\n');

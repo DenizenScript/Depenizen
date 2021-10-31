@@ -67,7 +67,6 @@ public class BungeeCommand extends BracedCommand {
         if (!scriptEntry.hasObject("servers")) {
             throw new InvalidArgumentsException("Must define servers to run the script on.");
         }
-        scriptEntry.addObject("braces", getBracedCommands(scriptEntry));
     }
 
     @Override
@@ -80,14 +79,9 @@ public class BungeeCommand extends BracedCommand {
             Debug.echoError("Cannot Bungee command: bungee is not connected!");
             return;
         }
-        List<BracedCommand.BracedData> bdlist = (List<BracedData>) scriptEntry.getObject("braces");
-        if (bdlist == null || bdlist.isEmpty()) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Empty subsection - did you forget a ':'?");
-            return;
-        }
-        List<ScriptEntry> bracedCommandsList = bdlist.get(0).value;
+        List<ScriptEntry> bracedCommandsList = BracedCommand.getBracedCommandsDirect(scriptEntry, scriptEntry);
         if (bracedCommandsList == null || bracedCommandsList.isEmpty()) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Empty subsection - did you forget to add the sub-commands inside the command?");
+            Debug.echoError(scriptEntry.getResidingQueue(), "Empty subsection - did you forget a ':'?");
             return;
         }
         StringBuilder toSend = new StringBuilder();
