@@ -45,29 +45,22 @@ public class BossShopCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry) {
-
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
                 scriptEntry.addObject("target", arg.asType(PlayerTag.class));
                 Debug.echoError("Don't use 'target:' for 'bossshop' command. Just use 'player:'.");
             }
-
             else if (!scriptEntry.hasObject("shop")) {
                 scriptEntry.addObject("shop", arg.asElement());
             }
-
             else {
                 arg.reportUnhandled();
             }
-
         }
-
         if (!scriptEntry.hasObject("shop")) {
             throw new InvalidArgumentsException("Shop not specified!");
         }
-
         if (!scriptEntry.hasObject("target")) {
             if (Utilities.entryHasPlayer(scriptEntry)) {
                 scriptEntry.addObject("target", Utilities.getEntryPlayer(scriptEntry));
@@ -76,37 +69,27 @@ public class BossShopCommand extends AbstractCommand {
                 throw new InvalidArgumentsException("This command does not have a player attached!");
             }
         }
-
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         PlayerTag target = scriptEntry.getObjectTag("target");
         ElementTag dshop = scriptEntry.getObjectTag("shop");
-
-        Debug.report(scriptEntry, getName(),
-                (target != null ? target.debug() : "")
-                        + (dshop != null ? dshop.debug() : ""));
-
+        Debug.report(scriptEntry, getName(), target, dshop);
         if (target == null) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
             return;
         }
-
         if (dshop == null) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Shop not Specified!");
             return;
         }
-
         BossShop bs = (BossShop) BossShopBridge.instance.plugin;
         BSShop shop = bs.getAPI().getShop(dshop.asString());
         if (shop == null) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Shop not found!");
             return;
         }
-
         bs.getAPI().openShop(target.getPlayerEntity(), shop);
-
     }
 }

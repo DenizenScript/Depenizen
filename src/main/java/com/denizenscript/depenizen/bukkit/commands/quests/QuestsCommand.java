@@ -112,15 +112,9 @@ public class QuestsCommand extends AbstractCommand {
         ElementTag points = scriptEntry.getElement("points");
         ElementTag override_checks = scriptEntry.getElement("override_checks");
         PlayerTag player = Utilities.getEntryPlayer(scriptEntry);
-
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), action.debug()
-                    + (questId != null ? questId.debug() : "")
-                    + (stageNum != null ? stageNum.debug() : "")
-                    + (points != null ? points.debug() : "")
-                    + override_checks.debug());
+            Debug.report(scriptEntry, getName(), action, questId, stageNum, points, override_checks);
         }
-
         switch (Action.valueOf(action.asString().toUpperCase())) {
             case ADD: {
                 if (questId != null) {

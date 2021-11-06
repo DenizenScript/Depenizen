@@ -73,7 +73,7 @@ public class MythicSpawnCommand extends AbstractCommand {
         LocationTag location = scriptEntry.getObjectTag("location");
         ElementTag level = scriptEntry.getElement("level");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), name.debug() + location.debug() + level.debug());
+            Debug.report(scriptEntry, getName(), name, location, level);
         }
         try {
             MythicMob mob = MythicMobsBridge.getMythicMob(name.asString());

@@ -73,7 +73,7 @@ public class BungeeCommand extends BracedCommand {
     public void execute(ScriptEntry scriptEntry) {
         ListTag servers = scriptEntry.getObjectTag("servers");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), servers.debug());
+            Debug.report(scriptEntry, getName(), servers);
         }
         if (!BungeeBridge.instance.connected) {
             Debug.echoError("Cannot Bungee command: bungee is not connected!");

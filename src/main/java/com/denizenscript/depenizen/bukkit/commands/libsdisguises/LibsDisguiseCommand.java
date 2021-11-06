@@ -148,12 +148,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
         ElementTag baby = scriptEntry.getObjectTag("baby");
         ElementTag self = scriptEntry.getObjectTag("self");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), action.debug()
-                    + (target != null ? target.debug() : "")
-                    + (type != null ? type.debug() : "")
-                    + (name != null ? name.debug() : "")
-                    + (id != null ? id.debug() : "")
-                    + (baby != null ? baby.debug() : ""));
+            Debug.report(scriptEntry, getName(), action, target, type, name, id, baby);
         }
         if (target == null) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");

@@ -51,37 +51,29 @@ public class PlayerPointsCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-
         for (Argument arg : scriptEntry) {
-
             if (!scriptEntry.hasObject("target")
                     && arg.matchesPrefix("target")) {
                 scriptEntry.addObject("target", arg.asType(PlayerTag.class));
                 Debug.echoError("Don't use 'target:' for 'playerpoints' command. Just use 'player:'.");
             }
-
             else if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.values())) {
                 scriptEntry.addObject("action", arg.asElement());
             }
-
             else if (!scriptEntry.hasObject("amount")) {
                 scriptEntry.addObject("amount", arg.asElement());
             }
-
             else {
                 arg.reportUnhandled();
             }
-
         }
         if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Action not specified! (remove/mob/player/misc)");
         }
-
         if (!scriptEntry.hasObject("amount")) {
             throw new InvalidArgumentsException("Amount not specified!");
         }
-
         if (!scriptEntry.hasObject("target")) {
             if (Utilities.entryHasPlayer(scriptEntry)) {
                 scriptEntry.addObject("target", Utilities.getEntryPlayer(scriptEntry));
@@ -90,42 +82,31 @@ public class PlayerPointsCommand extends AbstractCommand {
                 throw new InvalidArgumentsException("This command does not have a player attached!");
             }
         }
-
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-
         PlayerTag target = scriptEntry.getObjectTag("target");
         ElementTag action = scriptEntry.getObjectTag("action");
         ElementTag amount = scriptEntry.getObjectTag("amount");
-
-        Debug.report(scriptEntry, getName(), action.debug()
-                + (target != null ? target.debug() : "")
-                + (amount != null ? amount.debug() : ""));
-
+        Debug.report(scriptEntry, getName(), action, target, amount);
         if (target == null) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
             return;
         }
-
         if (amount == null) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
             return;
         }
-
         PlayerPoints plugin = (PlayerPoints) PlayerPointsBridge.instance.plugin;
         if (action.asString().equalsIgnoreCase("give")) {
             plugin.getAPI().give(target.getUUID(), amount.asInt());
         }
-
         else if (action.asString().equalsIgnoreCase("take")) {
             plugin.getAPI().take(target.getUUID(), amount.asInt());
         }
-
         else if (action.asString().equalsIgnoreCase("set")) {
             plugin.getAPI().set(target.getUUID(), amount.asInt());
         }
-
     }
 }

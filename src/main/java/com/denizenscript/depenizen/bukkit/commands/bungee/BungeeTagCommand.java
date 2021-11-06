@@ -105,7 +105,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
         ElementTag tag = scriptEntry.getElement("tag");
         ElementTag server = scriptEntry.getElement("server");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), tag.debug() + server.debug());
+            Debug.report(scriptEntry, getName(), tag, server);
         }
         if (!BungeeBridge.instance.connected) {
             Debug.echoError("Cannot BungeeTag: bungee is not connected!");

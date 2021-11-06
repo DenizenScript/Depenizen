@@ -58,7 +58,7 @@ public class BungeeExecuteCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) {
         ElementTag command = scriptEntry.getElement("command");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), command.debug());
+            Debug.report(scriptEntry, getName(), command);
         }
         if (!BungeeBridge.instance.connected) {
             Debug.echoError("Cannot BungeeExecute: bungee is not connected!");

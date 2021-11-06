@@ -89,7 +89,7 @@ public class MythicThreatCommand  extends AbstractCommand {
         ElementTag threat = scriptEntry.getElement("threat");
         List<EntityTag> targets = (List<EntityTag>) scriptEntry.getObject("targets");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), mythicmob.debug() + operation.debug() + threat.debug() + db("targets", targets));
+            Debug.report(scriptEntry, getName(), mythicmob, operation, threat, db("targets", targets));
         }
         if (!mythicmob.getMob().hasThreatTable()) {
             Debug.echoError("MythicMob does not have a threat table: " + mythicmob);

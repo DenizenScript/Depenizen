@@ -105,10 +105,7 @@ public class EffectLibCommand extends AbstractCommand {
         DurationTag duration = scriptEntry.getObjectTag("duration");
         LocationTag location = scriptEntry.getObjectTag("location");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), (target != null ? target.debug() : "")
-                    + (action != null ? action.toString() : "")
-                    + (duration != null ? duration.debug() : "")
-                    + (location != null ? location.debug() : ""));
+            Debug.report(scriptEntry, getName(), target, action, duration, location);
         }
         if (target == null && location == null) {
             Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");

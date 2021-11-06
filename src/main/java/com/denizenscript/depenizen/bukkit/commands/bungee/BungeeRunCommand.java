@@ -76,7 +76,7 @@ public class BungeeRunCommand extends AbstractCommand {
         ListTag servers = scriptEntry.getObjectTag("servers");
         ElementTag scriptName = scriptEntry.getElement("script_name");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), def.debug() + servers.debug() + scriptName.debug());
+            Debug.report(scriptEntry, getName(), def, servers, scriptName);
         }
         if (!BungeeBridge.instance.connected) {
             Debug.echoError("Cannot BungeeRun: bungee is not connected!");

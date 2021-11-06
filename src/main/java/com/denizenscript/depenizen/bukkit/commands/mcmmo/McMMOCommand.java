@@ -113,8 +113,7 @@ public class McMMOCommand extends AbstractCommand {
         ElementTag skill = scriptEntry.getElement("skill");
         PlayerTag player = Utilities.getEntryPlayer(scriptEntry);
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), action.debug() + type.debug() + (state != null ? state.debug() : "") + quantity.debug()
-                    + (party != null ? party.debug() : "") + (skill != null ? skill.debug() : ""));
+            Debug.report(scriptEntry, getName(), action, type, state, quantity, party, skill);
         }
         switch (Action.valueOf(action.asString().toUpperCase())) {
             case ADD: {

@@ -14,8 +14,7 @@ import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MythicSkillCommand extends AbstractCommand {
@@ -83,8 +82,7 @@ public class MythicSkillCommand extends AbstractCommand {
             throw new InvalidArgumentsException("Cannot have both entity and location targets.");
         }
         if (!scriptEntry.hasObject("casters")) {
-            scriptEntry.defaultObject("casters", (Utilities.entryHasPlayer(scriptEntry) ? Collections.singletonList(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity()) : null),
-                    (Utilities.entryHasNPC(scriptEntry) ? Collections.singletonList(Utilities.getEntryNPC(scriptEntry).getDenizenEntity()) : null));
+            scriptEntry.defaultObject("casters", Utilities.entryDefaultEntityList(scriptEntry, true));
         }
         scriptEntry.defaultObject("power", new ElementTag(0));
     }
@@ -97,22 +95,18 @@ public class MythicSkillCommand extends AbstractCommand {
         List<LocationTag> location_targets = (List<LocationTag>) scriptEntry.getObject("location_targets");
         ElementTag power = scriptEntry.getObjectTag("power");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), db("casters", casters)
-                    + skill.debug()
-                    + (location_targets == null ? "" : db("location_Targets", location_targets))
-                    + (entity_targets == null ? "" : db("entity_targets", entity_targets))
-                    + (power == null ? "" : power.debug()));
+            Debug.report(scriptEntry, getName(), db("casters", casters), skill, db("location_Targets", location_targets), db("entity_targets", entity_targets), power);
         }
-        HashSet<Entity> entityTargets = null;
-        HashSet<Location> locationTargets = null;
+        ArrayList<Entity> entityTargets = null;
+        ArrayList<Location> locationTargets = null;
         if (entity_targets != null) {
-            entityTargets = new HashSet<>();
+            entityTargets = new ArrayList<>();
             for (EntityTag entity : entity_targets) {
                 entityTargets.add(entity.getBukkitEntity());
             }
         }
         else {
-            locationTargets = new HashSet<>(location_targets);
+            locationTargets = new ArrayList<>(location_targets);
         }
         for (EntityTag caster : casters) {
             MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill.asString(), caster.getBukkitEntity().getLocation(), entityTargets, locationTargets, power.asFloat());
