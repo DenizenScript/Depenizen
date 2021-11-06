@@ -242,6 +242,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object BigDoorsDoorTag
         // @name is_open
+        // @plugin Depenizen, Big Doors
         // @input ElementTag(Boolean)
         // @description
         // Sets opened state of a door (this activates the animations).
@@ -266,6 +267,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object BigDoorsDoorTag
         // @name is_locked
+        // @plugin Depenizen, Big Doors
         // @input ElementTag(Boolean)
         // @description
         // Sets the locked state of the door.
@@ -280,6 +282,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object BigDoorsDoorTag
         // @name auto_close
+        // @plugin Depenizen, Big Doors
         // @input DurationTag
         // @description
         // Sets the auto_close time of the door, in seconds.

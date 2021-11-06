@@ -222,6 +222,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @object MythicSpawnerTag
         // @name group
         // @input ElementTag
+        // @plugin Depenizen, MythicMobs
         // @description
         // Sets the group of the MythicSpawner.
         // @tags
@@ -235,6 +236,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @object MythicSpawnerTag
         // @name location
         // @input LocationTag
+        // @plugin Depenizen, MythicMobs
         // @description
         // Sets the location of the MythicSpawner.
         // @tags
@@ -248,6 +250,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @object MythicSpawnerTag
         // @name cooldown
         // @input DurationTag
+        // @plugin Depenizen, MythicMobs
         // @description
         // Sets the MythicSpawner's configured cooldown timer, in seconds.
         // @tags
@@ -261,6 +264,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @object MythicSpawnerTag
         // @name start_cooldown
         // @input None
+        // @plugin Depenizen, MythicMobs
         // @description
         // Starts the MythicSpawner's cooldown timer.
         // @tags
@@ -274,6 +278,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @object MythicSpawnerTag
         // @name mob_type
         // @input ElementTag
+        // @plugin Depenizen, MythicMobs
         // @description
         // Sets the MythicSpawner's MythicMob Mob type.
         // @tags
@@ -292,6 +297,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @object MythicSpawnerTag
         // @name spawn
         // @input None
+        // @plugin Depenizen, MythicMobs
         // @description
         // Forces the MythicSpawner to spawn.
         // This spawn method still checks conditions.
@@ -304,6 +310,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @object MythicSpawnerTag
         // @name enable
         // @input None
+        // @plugin Depenizen, MythicMobs
         // @description
         // Enables the MythicSpawner.
         // -->
@@ -315,6 +322,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         // @object MythicSpawnerTag
         // @name disable
         // @input None
+        // @plugin Depenizen, MythicMobs
         // @description
         // Disables the MythicSpawner.
         // -->

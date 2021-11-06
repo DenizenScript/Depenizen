@@ -375,6 +375,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @object MythicMobsMobTag
         // @name global_cooldown
         // @input ElementTag(Number)
+        // @plugin Depenizen, MythicMobs
         // @description
         // Sets global cooldown of the MythicMob.
         // @tags
@@ -388,6 +389,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @object MythicMobsMobTag
         // @name stance
         // @input ElementTag
+        // @plugin Depenizen, MythicMobs
         // @description
         // Set the stance of the MythicMob.
         // @tags
@@ -401,6 +403,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @object MythicMobsMobTag
         // @name reset_target
         // @input None
+        // @plugin Depenizen, MythicMobs
         // @description
         // Reset the MythicMob's target.
         // @tags
@@ -414,6 +417,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @object MythicMobsMobTag
         // @name level
         // @input ElementTag(Number)
+        // @plugin Depenizen, MythicMobs
         // @description
         // Set the MythicMob's level.
         // @tags
@@ -427,6 +431,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @object MythicMobsMobTag
         // @name target
         // @input EntityTag
+        // @plugin Depenizen, MythicMobs
         // @description
         // Sets MythicMob's target.
         // @tags

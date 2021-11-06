@@ -479,6 +479,7 @@ public class TownTag implements ObjectTag, Adjustable {
         // @object TownTag
         // @name balance
         // @input ElementTag(Decimal)|ElementTag
+        // @plugin Depenizen, Towny
         // @description
         // Sets the money balance of a town, with a reason for the change.
         // @tags

@@ -71,6 +71,7 @@ public class BigDoorsPlayerProperties implements Property {
         // @object PlayerTag
         // @name display_bigdoors_manager
         // @input None
+        // @plugin Depenizen, Big Doors
         // @description
         // Opens the Big Doors manager (bdm).
         // -->

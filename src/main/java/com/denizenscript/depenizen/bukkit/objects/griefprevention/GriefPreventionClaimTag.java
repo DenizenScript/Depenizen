@@ -309,6 +309,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @object GriefPreventionClaimTag
         // @name owner
         // @input PlayerTag/ElementTag
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Sets the owner of the GriefPreventionClaim.
         // Accepts PlayerTag or "admin" to set as admin claim.
@@ -334,6 +335,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @object GriefPreventionClaimTag
         // @name depth
         // @input ElementTag(Number)
+        // @plugin Depenizen, GriefPrevention
         // @description
         // Sets the protection depth of the GriefPreventionClaim.
         // -->
