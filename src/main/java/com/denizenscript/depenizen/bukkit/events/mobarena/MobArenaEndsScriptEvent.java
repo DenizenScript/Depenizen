@@ -15,10 +15,7 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
 
     // <--[event]
     // @Events
-    // mobarena arena end
-    // mobarena <arena> ends
-    //
-    // @Regex ^on mobarena [^\s]+ ends$
+    // mobarena <'arena'> ends
     //
     // @Triggers when a mobarena ends.
     //
@@ -34,17 +31,13 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
 
     public MobArenaEndsScriptEvent() {
         instance = this;
+        registerCouldMatcher("mobarena <'arena'> ends");
     }
 
     public static MobArenaEndsScriptEvent instance;
     public ArenaEndEvent event;
     public MobArenaArenaTag arena;
     public ElementTag wave;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventArgLowerAt(0).equals("mobarena") && path.eventArgLowerAt(2).equals("ends");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

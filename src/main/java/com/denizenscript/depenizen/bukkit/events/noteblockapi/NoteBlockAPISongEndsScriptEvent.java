@@ -19,10 +19,7 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
 
     // <--[event]
     // @Events
-    // noteblockapi song ends
-    // noteblockapi song <song> ends
-    //
-    // @Regex ^on noteblockapi song( [^\s]+)? ends$
+    // noteblockapi song (<'song'>) ends
     //
     // @Cancellable true
     //
@@ -39,21 +36,11 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
 
     public NoteBlockAPISongEndsScriptEvent() {
         instance = this;
+        registerCouldMatcher("noteblockapi song (<'song'>) ends");
     }
 
     public static NoteBlockAPISongEndsScriptEvent instance;
     public SongEndEvent event;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        if (!path.eventLower.startsWith("noteblockapi song")) {
-            return false;
-        }
-        if (!path.eventArgLowerAt(2).equals("ends") && !path.eventArgLowerAt(3).equals("ends")) {
-            return false;
-        }
-        return super.matches(path);
-    }
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -61,7 +48,6 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
         if (!songName.equals("ends") && !songName.equals(CoreUtilities.toLowerCase(getSongFileName()))) {
             return false;
         }
-
         return true;
     }
 

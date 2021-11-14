@@ -14,10 +14,7 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
 
     // <--[event]
     // @Events
-    // towny player enters town
-    // towny player enters <town>
-    //
-    // @Regex ^on towny player enters [^\s]+$
+    // towny player enters <'town'>
     //
     // @Triggers when a player enters a Towny Town.
     //
@@ -34,16 +31,12 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
 
     public PlayerEntersTownScriptEvent() {
         instance = this;
+        registerCouldMatcher("towny player enters <'town'>");
     }
 
     public static PlayerEntersTownScriptEvent instance;
     public PlayerEnterTownEvent event;
     public TownTag town;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("towny player enters");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

@@ -16,10 +16,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
 
     // <--[event]
     // @Events
-    // mythicmob mob spawns
-    // mythicmob <mob> spawns
-    //
-    // @Regex ^on mythicmob [^\s]+ spawns$
+    // mythicmob <'mob'> spawns
     //
     // @Location true
     //
@@ -40,23 +37,13 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
 
     public MythicMobsSpawnEvent() {
         instance = this;
+        registerCouldMatcher("mythicmob <'mob'> spawns");
     }
 
     public static MythicMobsSpawnEvent instance;
     public MythicMobSpawnEvent event;
     public MythicMobsMobTag mythicmob;
     public LocationTag location;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        if (!path.eventLower.startsWith("mythicmob")) {
-            return false;
-        }
-        if (!path.eventArgLowerAt(2).equals("spawns")) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

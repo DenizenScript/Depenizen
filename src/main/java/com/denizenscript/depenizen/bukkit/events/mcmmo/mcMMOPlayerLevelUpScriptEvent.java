@@ -16,10 +16,9 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
 
     // <--[event]
     // @Events
-    // mcmmo player levels up skill (in <area>)
-    // mcmmo player levels up <skill> (in <area>)
+    // mcmmo player levels up <'skill'>
     //
-    // @Regex ^on mcmmo player levels up [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // @Location true
     //
     // @Cancellable true
     //
@@ -46,6 +45,7 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
 
     public mcMMOPlayerLevelUpScriptEvent() {
         instance = this;
+        registerCouldMatcher("mcmmo player levels up <'skill'>");
     }
 
     public static mcMMOPlayerLevelUpScriptEvent instance;
@@ -55,11 +55,6 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
     public int new_level;
     public int levels_gained;
     public String cause;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("mcmmo player levels up");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

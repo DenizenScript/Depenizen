@@ -13,10 +13,7 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
 
     // <--[event]
     // @Events
-    // residence player exits residence
-    // residence player exits <residence>
-    //
-    // @Regex ^on residence player exits [^\s]+$
+    // residence player exits <'residence'>
     //
     // @Triggers when a player exits a Residence.
     //
@@ -33,16 +30,12 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
 
     public PlayerExitsResidenceScriptEvent() {
         instance = this;
+        registerCouldMatcher("residence player exits <'residence'>");
     }
 
     public static PlayerExitsResidenceScriptEvent instance;
     public ResidenceChangedEvent event;
     public ResidenceTag residence;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("residence player exits");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

@@ -16,10 +16,9 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
 
     // <--[event]
     // @Events
-    // skillapi player downgrades skill (in <area>)
-    // skillapi player downgrades <skill> (in <area>)
+    // skillapi player downgrades <'skill'>
     //
-    // @Regex ^on skillapi player downgrades [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // @Location true
     //
     // @Triggers when a player downgrades a skill in SkillAPI.
     //
@@ -41,6 +40,7 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
 
     public SkillAPIPlayerDowngradesSkillScriptEvent() {
         instance = this;
+        registerCouldMatcher("skillapi player downgrades <'skill'>");
     }
 
     public static SkillAPIPlayerDowngradesSkillScriptEvent instance;
@@ -49,11 +49,6 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
     public ElementTag level;
     public ElementTag skill;
     public ElementTag refund;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("skillapi player downgrades");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

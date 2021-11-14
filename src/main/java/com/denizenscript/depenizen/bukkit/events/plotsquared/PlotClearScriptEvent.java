@@ -13,12 +13,7 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
 
     // <--[event]
     // @Events
-    // plotsquared plot clear plotsquaredplot
-    // plotsquared plot clears plotsquaredplot
-    // plotsquared plot clear <dplotsquaredplot>
-    // plotsquared plot clears <dplotsquaredplot>
-    //
-    // @Regex ^on plotsquared plot [^\s]+ clears( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // plotsquared plot clear|clears <'plotsquaredplot'>
     //
     // @Cancellable true
     //
@@ -35,16 +30,12 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
 
     public PlotClearScriptEvent() {
         instance = this;
+        registerCouldMatcher("plotsquared plot clear|clears <'plotsquaredplot'>");
     }
 
     public static PlotClearScriptEvent instance;
     public PlotClearEvent event;
     public PlotSquaredPlotTag plot;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("plotsquared plot clear") || path.eventLower.startsWith("plotsquared plot clears");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

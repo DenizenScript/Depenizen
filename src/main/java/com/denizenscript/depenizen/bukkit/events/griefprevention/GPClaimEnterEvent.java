@@ -19,12 +19,7 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
     // TODO: in area?
     // <--[event]
     // @Events
-    // gp player enters <gpclaim>
-    // gp player exits <gpclaim>
-    // gp player enters gpclaim
-    // gp player exits gpclaim
-    //
-    // @Regex ^on gp player (enters|exits) [^\s]+$
+    // gp player enters|exits <'gpclaim'>
     //
     // @Warning Cancelling this event will fire a similar event immediately after.
     //
@@ -48,6 +43,7 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
 
     public GPClaimEnterEvent() {
         instance = this;
+        registerCouldMatcher("gp player enters|exits <'gpclaim'>");
     }
 
     public static GPClaimEnterEvent instance;
@@ -57,12 +53,6 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
     public GriefPreventionClaimTag new_claim;
     public GriefPreventionClaimTag old_claim;
     public PlayerMoveEvent event;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("gp player enters")
-                || path.eventLower.startsWith("gp player exits");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

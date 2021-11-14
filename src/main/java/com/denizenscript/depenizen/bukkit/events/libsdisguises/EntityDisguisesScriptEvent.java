@@ -14,12 +14,7 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
 
     // <--[event]
     // @Events
-    // libsdisguises disguises disguise
-    // libsdisguises disguise disguise
-    // libsdisguises disguises <dLibsDisguises>
-    // libsdisguises disguise <dLibsDisguises>
-    //
-    // @Regex ^on libsdisguises [^\s]+ disguise$
+    // libsdisguises disguise|disguises <'disguise'>
     //
     // @Cancellable true
     //
@@ -37,6 +32,7 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
 
     public EntityDisguisesScriptEvent() {
         instance = this;
+        registerCouldMatcher("libsdisguises disguise|disguises <'disguise'>");
     }
 
     public static EntityDisguisesScriptEvent instance;
@@ -44,11 +40,6 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     public DisguiseEvent event;
     public EntityTag entity;
     public LibsDisguiseTag disguise;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("libsdisguises disguise");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

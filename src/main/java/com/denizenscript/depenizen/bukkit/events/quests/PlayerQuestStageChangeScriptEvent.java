@@ -15,10 +15,7 @@ public class PlayerQuestStageChangeScriptEvent extends BukkitScriptEvent impleme
 
     // <--[event]
     // @Events
-    // quests player changes quest stage
-    // quests player changes <quest> stage
-    //
-    // @Regex ^on quests player changes [^\s]+ stage$
+    // quests player changes <'quest'> stage
     //
     // @Cancellable true
     //
@@ -37,15 +34,11 @@ public class PlayerQuestStageChangeScriptEvent extends BukkitScriptEvent impleme
 
     public PlayerQuestStageChangeScriptEvent() {
         instance = this;
+        registerCouldMatcher("quests player changes <'quest'> stage");
     }
 
     public static PlayerQuestStageChangeScriptEvent instance;
     public QuesterPostChangeStageEvent event;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("quests player changes");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

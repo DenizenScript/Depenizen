@@ -14,10 +14,7 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
 
     // <--[event]
     // @Events
-    // areashop shop expires
-    // areashop <shop> expires
-    //
-    // @Regex ^on areashop [^\s]+ expires$
+    // areashop <'shop'> expires
     //
     // @Triggers when an AreaShop's rent expires.
     //
@@ -34,16 +31,12 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
 
     public AreaShopExpiresScriptEvent() {
         instance = this;
+        registerCouldMatcher("areashop <'shop'> expires");
     }
 
     public static AreaShopExpiresScriptEvent instance;
     public UnrentedRegionEvent event;
     public AreaShopTag areaShop;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("areashop") && path.eventArgLowerAt(2).equals("expires");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

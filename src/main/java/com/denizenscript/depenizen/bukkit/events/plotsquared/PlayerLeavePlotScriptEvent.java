@@ -15,12 +15,7 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
 
     // <--[event]
     // @Events
-    // plotsquared player leaves plotsquaredplot
-    // plotsquared player exits plotsquaredplot
-    // plotsquared player leaves <dplotsquaredplot>
-    // plotsquared player exits <dplotsquaredplot>
-    //
-    // @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // plotsquared player leaves|exits <'plotsquaredplot'>
     //
     // @Triggers when a player leaves a plot.
     //
@@ -37,17 +32,13 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
 
     public PlayerLeavePlotScriptEvent() {
         instance = this;
+        registerCouldMatcher("plotsquared player leaves|exits <'plotsquaredplot'>");
     }
 
     public static PlayerLeavePlotScriptEvent instance;
     public PlayerLeavePlotEvent event;
     public PlayerTag player;
     public PlotSquaredPlotTag plot;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("plotsquared player leaves") || path.eventLower.startsWith("plotsquared player exits");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

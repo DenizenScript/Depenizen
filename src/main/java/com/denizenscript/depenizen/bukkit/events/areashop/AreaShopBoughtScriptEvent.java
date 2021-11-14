@@ -14,10 +14,7 @@ public class AreaShopBoughtScriptEvent extends BukkitScriptEvent implements List
 
     // <--[event]
     // @Events
-    // areashop shop bought
-    // areashop <shop> bought
-    //
-    // @Regex ^on areashop [^\s]+ bought$
+    // areashop <'shop'> bought
     //
     // @Triggers when an AreaShop is bought.
     //
@@ -34,16 +31,12 @@ public class AreaShopBoughtScriptEvent extends BukkitScriptEvent implements List
 
     public AreaShopBoughtScriptEvent() {
         instance = this;
+        registerCouldMatcher("areashop <'shop'> bought");
     }
 
     public static AreaShopBoughtScriptEvent instance;
     public BoughtRegionEvent event;
     public AreaShopTag areaShop;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("areashop") && path.eventArgLowerAt(2).equals("bought");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

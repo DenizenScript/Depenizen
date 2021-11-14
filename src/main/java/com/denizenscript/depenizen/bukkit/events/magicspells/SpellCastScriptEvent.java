@@ -25,10 +25,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
 
     // <--[event]
     // @Events
-    // magicspells entity casts spell
-    // magicspells <entity> casts <spell>
-    //
-    // @Regex ^on magicspells [^\s]+ casts [^\s]+$
+    // magicspells <entity> casts <'spell'>
     //
     // @Triggers when an entity starts to casts a spell.
     //
@@ -63,6 +60,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
 
     public SpellCastScriptEvent() {
         instance = this;
+        registerCouldMatcher("magicspells <entity> casts <'spell'>");
     }
 
     public static SpellCastScriptEvent instance;
@@ -70,20 +68,6 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     public SpellCastEvent event;
     public EntityTag caster;
     private ElementTag spell;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        if (!path.eventArgLowerAt(0).equals("magicspells")) {
-            return false;
-        }
-        if (!path.eventArgLowerAt(2).equals("casts")) {
-            return false;
-        }
-        if (!couldMatchEntity(path.eventArgLowerAt(1))) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

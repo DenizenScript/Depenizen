@@ -9,6 +9,7 @@ import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.events.quests.PlayerCompletesQuestScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.quests.PlayerFailsQuestScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.quests.PlayerQuestStageChangeScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.quests.PlayerStartsQuestScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.quests.QuestsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.Bridge;
@@ -30,6 +31,7 @@ public class QuestsBridge extends Bridge {
         ScriptEvent.registerScriptEvent(new PlayerCompletesQuestScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerFailsQuestScriptEvent());
         ScriptEvent.registerScriptEvent(new PlayerStartsQuestScriptEvent());
+        ScriptEvent.registerScriptEvent(new PlayerQuestStageChangeScriptEvent());
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

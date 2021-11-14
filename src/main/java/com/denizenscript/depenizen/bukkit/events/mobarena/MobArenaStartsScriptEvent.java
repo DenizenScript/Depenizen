@@ -14,10 +14,7 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     // <--[event]
     // @Events
-    // mobarena arena starts
-    // mobarena <arena> starts
-    //
-    // @Regex ^on mobarena [^\s]+ starts$
+    // mobarena <'arena'> starts
     //
     // @Cancellable true
     //
@@ -34,16 +31,12 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     public MobArenaStartsScriptEvent() {
         instance = this;
+        registerCouldMatcher("mobarena <'arena'> starts");
     }
 
     public static MobArenaStartsScriptEvent instance;
     public ArenaStartEvent event;
     public MobArenaArenaTag arena;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventArgLowerAt(0).equals("mobarena") && path.eventArgLowerAt(2).equals("starts");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

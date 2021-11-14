@@ -16,10 +16,9 @@ public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent im
 
     // <--[event]
     // @Events
-    // skillapi player upgrades skill (in <area>)
-    // skillapi player upgrades <skill> (in <area>)
+    // skillapi player upgrades <'skill'>
     //
-    // @Regex ^on skillapi player upgrades [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // @Location true
     //
     // @Triggers when a player upgrades a skill in SkillAPI.
     //
@@ -41,6 +40,7 @@ public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent im
 
     public SkillAPIPlayerUpgradesSkillScriptEvent() {
         instance = this;
+        registerCouldMatcher("skillapi player upgrades <'skill'>");
     }
 
     public static SkillAPIPlayerUpgradesSkillScriptEvent instance;
@@ -49,11 +49,6 @@ public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent im
     public ElementTag level;
     public ElementTag skill;
     public ElementTag cost;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("skillapi player upgrades");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

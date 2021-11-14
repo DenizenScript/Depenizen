@@ -16,10 +16,7 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
 
     // <--[event]
     // @Events
-    // plotsquared player claims plotsquaredplot
-    // plotsquared player claims <plotsquaredplot>
-    //
-    // @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // plotsquared player claims <'plotsquaredplot'>
     //
     // @Cancellable true
     //
@@ -39,6 +36,7 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
 
     public PlayerClaimPlotScriptEvent() {
         instance = this;
+        registerCouldMatcher("plotsquared player claims <'plotsquaredplot'>");
     }
 
     public static PlayerClaimPlotScriptEvent instance;
@@ -46,11 +44,6 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
     public PlayerTag player;
     public PlotSquaredPlotTag plot;
     public ElementTag auto;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("plotsquared player claims");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

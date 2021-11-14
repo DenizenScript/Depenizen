@@ -16,10 +16,9 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
 
     // <--[event]
     // @Events
-    // mcmmo player gains xp for skill (in <area>)
-    // mcmmo player gains xp for <skill> (in <area>)
+    // mcmmo player gains xp for <'skill'>
     //
-    // @Regex ^on mcmmo player gains xp for [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // @Location true
     //
     // @Cancellable true
     //
@@ -45,6 +44,7 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
 
     public mcMMOPlayerGainsXPScriptEvent() {
         instance = this;
+        registerCouldMatcher("mcmmo player gains xp for <'skill'>");
     }
 
     public static mcMMOPlayerGainsXPScriptEvent instance;
@@ -53,11 +53,6 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     public ElementTag skill;
     public ElementTag xp;
     public ElementTag cause;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("mcmmo player gains xp for");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

@@ -17,10 +17,7 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
 
     // <--[event]
     // @Events
-    // proxy server command
-    // proxy server (<command>) command
-    //
-    // @Regex ^on proxy server( [^\s]+)? command$
+    // proxy server (<'command'>) command
     //
     // @Triggers when a player runs a command on the bungee proxy server.
     //
@@ -44,6 +41,7 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
 
     public BungeeProxyServerCommandScriptEvent() {
         instance = this;
+        registerCouldMatcher("proxy server (<'command'>) command");
     }
 
     public static BungeeProxyServerCommandScriptEvent instance;
@@ -60,17 +58,6 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
     public CommandData command;
 
     public UUID senderId;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        if (!path.eventLower.startsWith("proxy server ")) {
-            return false;
-        }
-        if (!path.eventArgLowerAt(2).equals("command") && !path.eventArgLowerAt(3).equals("command")) {
-            return false;
-        }
-        return true;
-    }
 
     public String commandName() {
         return CoreUtilities.toLowerCase(command.command.substring(1, command.command.contains(" ") ? command.command.indexOf(' ') : command.command.length()));

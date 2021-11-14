@@ -13,10 +13,7 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
 
     // <--[event]
     // @Events
-    // residence player enters residence
-    // residence player enters <residence>
-    //
-    // @Regex ^on residence player enters [^\s]+$
+    // residence player enters <'residence'>
     //
     // @Triggers when a player enters a Residence.
     //
@@ -33,16 +30,12 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
 
     public PlayerEntersResidenceScriptEvent() {
         instance = this;
+        registerCouldMatcher("residence player enters <'residence'>");
     }
 
     public static PlayerEntersResidenceScriptEvent instance;
     public ResidenceChangedEvent event;
     public ResidenceTag residence;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("residence player enters");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

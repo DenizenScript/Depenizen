@@ -16,10 +16,9 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
 
     // <--[event]
     // @Events
-    // skillapi player unlocks skill (in <area>)
-    // skillapi player unlocks <skill> (in <area>)
+    // skillapi player unlocks <'skill'>
     //
-    // @Regex ^on skillapi player unlocks [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // @Location true
     //
     // @Triggers when a player unlocks a skill in SkillAPI.
     //
@@ -39,17 +38,13 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
 
     public SkillAPIPlayerUnlocksSkillScriptEvent() {
         instance = this;
+        registerCouldMatcher("skillapi player unlocks <'skill'>");
     }
 
     public static SkillAPIPlayerUnlocksSkillScriptEvent instance;
     public PlayerSkillUnlockEvent event;
     public PlayerTag player;
     public ElementTag skill;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("skillapi player unlocks");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

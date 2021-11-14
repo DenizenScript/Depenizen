@@ -14,10 +14,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
 
     // <--[event]
     // @Events
-    // towny player exits town
-    // towny player exits <town>
-    //
-    // @Regex ^on towny player exits [^\s]+$
+    // towny player exits <'town'>
     //
     // @Triggers when a player exits a Towny Town.
     //
@@ -34,16 +31,12 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
 
     public PlayerExitsTownScriptEvent() {
         instance = this;
+        registerCouldMatcher("towny player exits <'town'>");
     }
 
     public static PlayerExitsTownScriptEvent instance;
     public PlayerLeaveTownEvent event;
     public TownTag town;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("towny player exits");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

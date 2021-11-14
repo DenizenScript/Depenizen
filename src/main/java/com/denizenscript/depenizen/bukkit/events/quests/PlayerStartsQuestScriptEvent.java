@@ -15,10 +15,7 @@ public class PlayerStartsQuestScriptEvent extends BukkitScriptEvent implements L
 
     // <--[event]
     // @Events
-    // quests player starts quest
-    // quests player starts <quest>
-    //
-    // @Regex ^on quests player starts [^\s]+$
+    // quests player starts <'quest'>
     //
     // @Cancellable true
     //
@@ -37,15 +34,11 @@ public class PlayerStartsQuestScriptEvent extends BukkitScriptEvent implements L
 
     public PlayerStartsQuestScriptEvent() {
         instance = this;
+        registerCouldMatcher("quests player starts <'quest'>");
     }
 
     public static PlayerStartsQuestScriptEvent instance;
     public QuesterPreStartQuestEvent event;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("quests player starts");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

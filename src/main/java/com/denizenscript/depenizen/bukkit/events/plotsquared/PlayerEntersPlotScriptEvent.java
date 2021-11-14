@@ -15,10 +15,7 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
 
     // <--[event]
     // @Events
-    // plotsquared player enters plotsquaredplot
-    // plotsquared player enters <dplotsquaredplot>
-    //
-    // @Regex ^on plotsquared player [^\s]+ level changes( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // plotsquared player enters <'plotsquaredplot'>
     //
     // @Triggers when a player enters a plot.
     //
@@ -35,17 +32,13 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
 
     public PlayerEntersPlotScriptEvent() {
         instance = this;
+        registerCouldMatcher("plotsquared player enters <'plotsquaredplot'>");
     }
 
     public static PlayerEntersPlotScriptEvent instance;
     public PlayerEnterPlotEvent event;
     public PlayerTag player;
     public PlotSquaredPlotTag plot;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("plotsquared player enters");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

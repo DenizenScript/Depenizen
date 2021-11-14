@@ -14,10 +14,7 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
 
     // <--[event]
     // @Events
-    // mobarena arena wave changes
-    // mobarena <arena> wave changes
-    //
-    // @Regex ^on mobarena [^\s]+ wave changes$
+    // mobarena <'arena'> wave changes
     //
     // @Triggers when a wave changes in a MobArena.
     //
@@ -33,19 +30,13 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
 
     public MobArenaWaveChangesScriptEvent() {
         instance = this;
+        registerCouldMatcher("mobarena <'arena'> wave changes");
     }
 
     public static MobArenaWaveChangesScriptEvent instance;
     public NewWaveEvent event;
     public MobArenaArenaTag arena;
     public ElementTag wave;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("mobarena")
-                && path.eventArgLowerAt(2).equals("wave")
-                && path.eventArgLowerAt(3).equals("changes");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

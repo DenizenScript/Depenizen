@@ -14,12 +14,7 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
 
     // <--[event]
     // @Events
-    // libsdisguises undisguises disguise
-    // libsdisguises undisguise disguise
-    // libsdisguises undisguises <dLibsDisguises>
-    // libsdisguises undisguise <dLibsDisguises>
-    //
-    // @Regex ^on libsdisguises [^\s]+ undisguise$
+    // libsdisguises undisguise|undisguises <'disguise'>
     //
     // @Cancellable true
     //
@@ -37,6 +32,7 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
 
     public EntityUndisguisesScriptEvent() {
         instance = this;
+        registerCouldMatcher("libsdisguises undisguise|undisguises <'disguise'>");
     }
 
     public static EntityUndisguisesScriptEvent instance;
@@ -44,11 +40,6 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
     public UndisguiseEvent event;
     public EntityTag entity;
     public LibsDisguiseTag disguise;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("libsdisguises undisguise");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

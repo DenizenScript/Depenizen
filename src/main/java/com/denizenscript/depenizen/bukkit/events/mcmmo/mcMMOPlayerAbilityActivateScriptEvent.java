@@ -16,12 +16,9 @@ public class mcMMOPlayerAbilityActivateScriptEvent extends BukkitScriptEvent imp
 
     // <--[event]
     // @Events
-    // mcmmo player activates ability for skill (in <area>)
-    // mcmmo player activates <ability> for skill (in <area>)
-    // mcmmo player activates ability for <skill> (in <area>)
-    // mcmmo player activates <ability> for <skill> (in <area>)
+    // mcmmo player activates <'ability'> for <'skill'>
     //
-    // @Regex ^on mcmmo player activates [^\s]+ for [^\s]+( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // @Location true
     //
     // @Cancellable true
     //
@@ -43,6 +40,7 @@ public class mcMMOPlayerAbilityActivateScriptEvent extends BukkitScriptEvent imp
 
     public mcMMOPlayerAbilityActivateScriptEvent() {
         instance = this;
+        registerCouldMatcher("mcmmo player activates <'ability'> for <'skill'>");
     }
 
     public static mcMMOPlayerAbilityActivateScriptEvent instance;
@@ -51,11 +49,6 @@ public class mcMMOPlayerAbilityActivateScriptEvent extends BukkitScriptEvent imp
     public ElementTag skill;
     public ElementTag skill_level;
     public ElementTag ability;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("mcmmo player activates");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

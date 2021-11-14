@@ -15,10 +15,7 @@ public class PlayerFailsQuestScriptEvent extends BukkitScriptEvent implements Li
 
     // <--[event]
     // @Events
-    // quests player fails quest
-    // quests player fails <quest>
-    //
-    // @Regex ^on quests player fails [^\s]+$
+    // quests player fails <'quest'>
     //
     // @Cancellable true
     //
@@ -37,15 +34,11 @@ public class PlayerFailsQuestScriptEvent extends BukkitScriptEvent implements Li
 
     public PlayerFailsQuestScriptEvent() {
         instance = this;
+        registerCouldMatcher("quests player fails <'quest'>");
     }
 
     public static PlayerFailsQuestScriptEvent instance;
     public QuesterPreFailQuestEvent event;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("quests player fails");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

@@ -16,9 +16,9 @@ public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent impleme
 
     // <--[event]
     // @Events
-    // skillapi player levels up (in <area>)
+    // skillapi player levels up
     //
-    // @Regex ^on skillapi player levels up( in ((notable (cuboid|ellipsoid))|([^\s]+)))?$
+    // @Location true
     //
     // @Triggers when a player levels up in SkillAPI.
     //
@@ -40,6 +40,7 @@ public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent impleme
 
     public SkillAPIPlayerLevelsUpScriptEvent() {
         instance = this;
+        registerCouldMatcher("skillapi player levels up");
     }
 
     public static SkillAPIPlayerLevelsUpScriptEvent instance;
@@ -48,11 +49,6 @@ public class SkillAPIPlayerLevelsUpScriptEvent extends BukkitScriptEvent impleme
     public int level;
     public int gained;
     public SkillAPIClassTag skillAPIClass;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("skillapi player levels up");
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

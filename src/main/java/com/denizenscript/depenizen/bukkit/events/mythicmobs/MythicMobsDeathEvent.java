@@ -21,17 +21,10 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
 
     // <--[event]
     // @Events
-    // mythicmob mob dies
-    // mythicmob mob death
-    // mythicmob mob killed
-    // mythicmob <mob> dies
-    // mythicmob <mob> death
-    // mythicmob <mob> killed
-
-    //
-    // @Regex ^on mythicmob [^\s]+ (dies|death|killed)$
+    // mythicmob <'mob'> dies|death|killed
     //
     // @Location true
+    //
     // @Switch by:<entity> to only process the event if the killer matches a specified entity type.
     //
     // @Triggers when a MythicMob dies.
@@ -54,6 +47,8 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
 
     public MythicMobsDeathEvent() {
         instance = this;
+        registerCouldMatcher("mythicmob <'mob'> dies|death|killed");
+        registerSwitches("by");
     }
 
     public static MythicMobsDeathEvent instance;
@@ -61,18 +56,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     public MythicMobsMobTag mythicmob;
     public EntityTag entity;
     public EntityTag killer;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        if (!path.eventLower.startsWith("mythicmob")) {
-            return false;
-        }
-        String cmd = path.eventArgLowerAt(2);
-        if (!cmd.equals("death") && !cmd.equals("dies") && !cmd.equals("killed")) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public boolean matches(ScriptPath path) {
