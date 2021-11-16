@@ -81,7 +81,10 @@ public class TownyLocationProperties implements Property {
                     if (!block.hasResident()) {
                         return null;
                     }
-                    UUID player = PlayerTag.getAllPlayers().get(block.getResident().getName());
+                    UUID player = block.getResident().getUUID();
+                    if (player == null) {
+                        return null;
+                    }
                     return new PlayerTag(player).getAttribute(attribute.fulfill(1));
                 }
             }

@@ -18,8 +18,6 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     // @Events
     // sentinel npc attacks
     //
-    // @Regex ^on sentinel npc attacks$
-    //
     // @Cancellable true
     //
     // @Triggers when a Sentinel-powered NPC attacks a target.
@@ -39,17 +37,13 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
 
     public SentinelAttackScriptEvent() {
         instance = this;
+        registerCouldMatcher("sentinel npc attacks");
     }
 
     public static SentinelAttackScriptEvent instance;
     public SentinelAttackEvent event;
     public ObjectTag entity;
     public NPCTag npc;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("sentinel npc attacks");
-    }
 
     @Override
     public String getName() {

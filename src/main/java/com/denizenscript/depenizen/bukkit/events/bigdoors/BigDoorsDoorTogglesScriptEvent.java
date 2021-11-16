@@ -14,9 +14,7 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
 
     // <--[event]
     // @Events
-    // bigdoors door [toggles/opens/closes]
-    //
-    // @Regex ^on bigdoors door (toggles|opens|closes)$
+    // bigdoors door toggles|opens|closes
     //
     // @Cancellable true
     //
@@ -36,24 +34,13 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
 
     public BigDoorsDoorTogglesScriptEvent() {
         instance = this;
+        registerCouldMatcher("bigdoors door toggles|opens|closes");
     }
 
     public static BigDoorsDoorTogglesScriptEvent instance;
     public DoorEventTogglePrepare event;
     public Door door;
     public DoorEventToggle.ToggleType toggleType;
-
-    @Override
-    public boolean couldMatch(ScriptPath path) {
-       if (!path.eventLower.startsWith("bigdoors door")) {
-           return false;
-       }
-       String type = path.eventArgLowerAt(2);
-       if (!type.equals("toggles") && !type.equals("opens") && !type.equals("closes")) {
-           return false;
-       }
-       return true;
-    }
 
     @Override
     public boolean matches(ScriptPath path) {
