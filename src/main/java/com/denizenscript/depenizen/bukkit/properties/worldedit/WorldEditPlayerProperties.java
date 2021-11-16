@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.worldedit;
 import com.denizenscript.denizen.objects.*;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.depenizen.bukkit.bridges.WorldEditBridge;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
@@ -22,7 +23,6 @@ import com.sk89q.worldedit.world.item.ItemType;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -57,10 +57,6 @@ public class WorldEditPlayerProperties implements Property {
         }
     }
 
-    public static final String[] handledTags = new String[] {
-            "we_brush_info", "selected_region", "we_selection"
-    };
-
     public static final String[] handledMechs = new String[] {
             "we_selection"
     };
@@ -78,8 +74,7 @@ public class WorldEditPlayerProperties implements Property {
         return mat;
     }
 
-    @Override
-    public String getAttribute(Attribute attribute) {
+    public static void registerTags() {
 
         // <--[tag]
         // @attribute <PlayerTag.we_brush_info[(<item>)]>
@@ -92,17 +87,17 @@ public class WorldEditPlayerProperties implements Property {
         //
         // Note that some values may be listed as "unknown" or strange values due to WorldEdit having a messy API (no way to automatically stringify brush data).
         // -->
-        if (attribute.startsWith("we_brush_info")) {
+        PropertyParser.<WorldEditPlayerProperties, ListTag>registerTag(ListTag.class, "we_brush_info", (attribute, object) -> {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             ItemType itemType;
             if (attribute.hasParam()) {
                 itemType = BukkitAdapter.asItemType(deLegacy(attribute.paramAsType(ItemTag.class).getMaterial().getMaterial()));
             }
             else {
-                ItemStack itm = player.getEquipment().getItemInMainHand();
+                ItemStack itm = object.player.getEquipment().getItemInMainHand();
                 itemType = BukkitAdapter.asItemType(deLegacy(itm == null ? Material.AIR : itm.getType()));
             }
-            Tool tool = worldEdit.getSession(player).getTool(itemType);
+            Tool tool = worldEdit.getSession(object.player).getTool(itemType);
             if (!(tool instanceof BrushTool)) {
                 return null;
             }
@@ -121,8 +116,8 @@ public class WorldEditPlayerProperties implements Property {
             info.add(String.valueOf(brush.getSize()));
             info.add(String.valueOf(brush.getRange()));
             info.add(materialInfo);
-            return info.getAttribute(attribute.fulfill(1));
-        }
+            return info;
+        });
 
         // <--[tag]
         // @attribute <PlayerTag.we_selection>
@@ -132,15 +127,14 @@ public class WorldEditPlayerProperties implements Property {
         // @description
         // Returns the player's current block area selection, as a CuboidTag, EllipsoidTag, or PolygonTag.
         // -->
-        if (attribute.startsWith("we_selection") || attribute.startsWith("selected_region")) {
+        PropertyParser.<WorldEditPlayerProperties, ObjectTag>registerTag(ObjectTag.class, "we_selection", (attribute, object) -> {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
-            RegionSelector selection = worldEdit.getSession(player).getRegionSelector(BukkitAdapter.adapt(player.getWorld()));
+            RegionSelector selection = worldEdit.getSession(object.player).getRegionSelector(BukkitAdapter.adapt(object.player.getWorld()));
             try {
                 if (selection != null && selection.isDefined()) {
                     if (selection instanceof EllipsoidRegionSelector) {
                         EllipsoidRegion region = ((EllipsoidRegionSelector) selection).getRegion();
-                        return new EllipsoidTag(new LocationTag(BukkitAdapter.adapt(BukkitAdapter.adapt(region.getWorld()), region.getCenter())), new LocationTag(BukkitAdapter.adapt(BukkitAdapter.adapt(region.getWorld()), region.getRadius())))
-                                .getAttribute(attribute.fulfill(1));
+                        return new EllipsoidTag(new LocationTag(BukkitAdapter.adapt(BukkitAdapter.adapt(region.getWorld()), region.getCenter())), new LocationTag(BukkitAdapter.adapt(BukkitAdapter.adapt(region.getWorld()), region.getRadius())));
                     }
                     else if (selection instanceof Polygonal2DRegionSelector) {
                         Polygonal2DRegion region = ((Polygonal2DRegionSelector) selection).getRegion();
@@ -151,19 +145,17 @@ public class WorldEditPlayerProperties implements Property {
                         poly.yMin = region.getMinimumY();
                         poly.yMax = region.getMaximumY();
                         poly.recalculateBox();
-                        return poly.getAttribute(attribute.fulfill(1));
+                        return poly;
                     }
-                    return new CuboidTag(BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
-                            BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMaximumPoint()))
-                            .getAttribute(attribute.fulfill(1));
+                    return new CuboidTag(BukkitAdapter.adapt(object.player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
+                            BukkitAdapter.adapt(object.player.getWorld(), selection.getIncompleteRegion().getMaximumPoint()));
                 }
             }
             catch (Throwable ex) {
                 Debug.echoError(ex);
             }
-        }
-
-        return null;
+            return null;
+        }, "selected_region");
     }
 
     @Override
