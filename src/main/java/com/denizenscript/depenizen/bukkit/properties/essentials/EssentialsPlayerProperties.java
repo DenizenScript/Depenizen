@@ -15,6 +15,8 @@ import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.depenizen.bukkit.bridges.EssentialsBridge;
 
+import java.util.UUID;
+
 public class EssentialsPlayerProperties implements Property {
 
     @Override
@@ -193,9 +195,9 @@ public class EssentialsPlayerProperties implements Property {
         if (attribute.startsWith("ignored_players")) {
             ListTag players = new ListTag();
             Essentials ess = (Essentials) EssentialsBridge.instance.plugin;
-            for (String player : getUser()._getIgnoredPlayers()) {
+            for (UUID player : getUser()._getIgnoredPlayers()) {
                 try {
-                    players.addObject(new PlayerTag(ess.getOfflineUser(player).getBase()));
+                    players.addObject(new PlayerTag(player));
                 }
                 catch (Exception e) {
                     if (!attribute.hasAlternative()) {

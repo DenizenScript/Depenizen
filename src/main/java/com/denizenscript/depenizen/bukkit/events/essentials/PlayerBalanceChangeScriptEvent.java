@@ -25,6 +25,7 @@ public class PlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements
     // @Context
     // <context.old_balance> Returns the balance before changes are made.
     // <context.new_balance> Returns the balance after changes are made.
+    // <context.cause> returns the reason for the balance change, refer to <@link url https://github.com/EssentialsX/Essentials/blob/2.x/Essentials/src/main/java/net/ess3/api/events/UserBalanceUpdateEvent.java#L73-L78>.
     //
     // @Plugin Depenizen, Essentials
     //
@@ -71,6 +72,9 @@ public class PlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements
         }
         if (name.equals("old_balance")) {
             return new ElementTag(event.getOldBalance());
+        }
+        if (name.equals("cause")) {
+            return new ElementTag(event.getCause().name());
         }
         return super.getContext(name);
     }
