@@ -22,6 +22,13 @@ public class JobPlayer implements Property {
         }
     }
 
+    public static final String[] handledTags = new String[] {
+    }; // None
+
+    public static final String[] handledMechs = new String[] {
+            "player"
+    };
+
     JobsJobTag job;
 
     private JobPlayer(JobsJobTag job) {
