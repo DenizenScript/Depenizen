@@ -96,11 +96,6 @@ public class LibsDisguiseTag implements ObjectTag {
     }
 
     @Override
-    public String debug() {
-        return (prefix + "='<A>" + identify() + "<G>' ");
-    }
-
-    @Override
     public boolean isUnique() {
         return true;
     }

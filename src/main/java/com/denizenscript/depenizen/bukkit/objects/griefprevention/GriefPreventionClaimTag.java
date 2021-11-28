@@ -83,11 +83,6 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
     }
 
     @Override
-    public String debug() {
-        return prefix + "='<A>" + identify() + "<G>' ";
-    }
-
-    @Override
     public boolean isUnique() {
         return true;
     }

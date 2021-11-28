@@ -117,11 +117,6 @@ public class ShopKeeperTag implements ObjectTag {
     }
 
     @Override
-    public String debug() {
-        return prefix + "='<A>" + identify() + "<G>' ";
-    }
-
-    @Override
     public boolean isUnique() {
         return true;
     }

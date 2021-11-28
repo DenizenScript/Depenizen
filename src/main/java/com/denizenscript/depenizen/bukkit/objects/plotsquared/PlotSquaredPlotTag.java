@@ -116,11 +116,6 @@ public class PlotSquaredPlotTag implements ObjectTag {
     }
 
     @Override
-    public String debug() {
-        return (prefix + "='<A>" + identify() + "<G>' ");
-    }
-
-    @Override
     public boolean isUnique() {
         return true;
     }
@@ -301,4 +296,3 @@ public class PlotSquaredPlotTag implements ObjectTag {
 
     }
 }
-

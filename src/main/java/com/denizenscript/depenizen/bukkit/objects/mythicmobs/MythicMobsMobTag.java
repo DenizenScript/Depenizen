@@ -111,11 +111,6 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
     }
 
     @Override
-    public String debug() {
-        return prefix + "='<A>" + identify() + "<G>' ";
-    }
-
-    @Override
     public boolean isUnique() {
         return true;
     }
