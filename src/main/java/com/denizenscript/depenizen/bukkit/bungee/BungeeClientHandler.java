@@ -27,7 +27,13 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
 
     public ByteBuf packetBuffer;
 
+    public boolean hasClosed = false;
+
     public void fail(String reason) {
+        if (hasClosed) {
+            return;
+        }
+        hasClosed = true;
         Debug.echoError("Depenizen-Bungee connection failed: " + reason);
         channel.close();
         BungeeBridge.instance.connected = false;

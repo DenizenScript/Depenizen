@@ -30,24 +30,12 @@ public class ReadTagPacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid ReadTagPacket (bytes available: " + data.readableBytes() + ")");
             return;
         }
-        int nameLength = data.readInt();
-        if (data.readableBytes() < nameLength || nameLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ReadTagPacket (name bytes requested: " + nameLength + ")");
+        String responseServer = readString(data, "serverName");
+        String tag = readString(data, "tag");
+        String defs = readString(data, "defs");
+        if (tag == null || defs == null) {
             return;
         }
-        String responseServer = readString(data, nameLength);
-        int tagLength = data.readInt();
-        if (data.readableBytes() < tagLength || tagLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ReadTagPacket (tag bytes requested: " + tagLength + ")");
-            return;
-        }
-        String tag = readString(data, tagLength);
-        int defLength = data.readInt();
-        if (data.readableBytes() < defLength || defLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ReadTagPacket (def bytes requested: " + defLength + ")");
-            return;
-        }
-        String defs = readString(data, defLength);
         long uuidMost = data.readLong();
         long uuidLeast = data.readLong();
         int responseId = data.readInt();

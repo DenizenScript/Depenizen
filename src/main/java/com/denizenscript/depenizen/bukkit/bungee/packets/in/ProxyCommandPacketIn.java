@@ -24,24 +24,12 @@ public class ProxyCommandPacketIn extends PacketIn {
             return;
         }
         long id = data.readLong();
-        int senderLength = data.readInt();
-        if (data.readableBytes() < senderLength || senderLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ProxyCommandPacket (sender bytes requested: " + senderLength + ")");
+        String sender = readString(data, "sender");
+        String command = readString(data, "command");
+        String senderIdText = readString(data, "senderID");
+        if (sender == null || command == null || senderIdText == null) {
             return;
         }
-        String sender = readString(data, senderLength);
-        int commandLength = data.readInt();
-        if (data.readableBytes() < commandLength || commandLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ProxyCommandPacket (command bytes requested: " + commandLength + ")");
-            return;
-        }
-        String command = readString(data, commandLength);
-        int senderIdLength = data.readInt();
-        if (data.readableBytes() < senderIdLength || senderIdLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ProxyCommandPacket (senderId bytes requested: " + senderIdLength + ")");
-            return;
-        }
-        String senderIdText = readString(data, senderIdLength);
         UUID senderId = senderIdText.isEmpty() ? null : UUID.fromString(senderIdText);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
             BungeeProxyServerCommandScriptEvent.instance.sender = sender;

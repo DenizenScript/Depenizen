@@ -34,18 +34,11 @@ public class RunScriptPacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid RunScriptPacket (bytes available: " + data.readableBytes() + ")");
             return;
         }
-        int nameLength = data.readInt();
-        if (data.readableBytes() < nameLength || nameLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid RunScriptPacket (name bytes requested: " + nameLength + ")");
+        String scriptName = readString(data, "scriptName");
+        String defs = readString(data, "defs");
+        if (scriptName == null || defs == null) {
             return;
         }
-        String scriptName = readString(data, nameLength);
-        int defsLength = data.readInt();
-        if (data.readableBytes() < defsLength || defsLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid RunScriptPacket (def bytes requested: " + defsLength + ")");
-            return;
-        }
-        String defs = readString(data, defsLength);
         long uuidMost = data.readLong();
         long uuidLeast = data.readLong();
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {

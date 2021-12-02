@@ -30,18 +30,11 @@ public class RunCommandsPacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid RunCommandsPacket (bytes available: " + data.readableBytes() + ")");
             return;
         }
-        int commamndsLength = data.readInt();
-        if (data.readableBytes() < commamndsLength || commamndsLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid RunCommandsPacket (command bytes requested: " + commamndsLength + ")");
+        String commands = readString(data, "commands");
+        String defs = readString(data, "defs");
+        if (commands == null || defs == null) {
             return;
         }
-        String commands = readString(data, commamndsLength);
-        int defsLength = data.readInt();
-        if (data.readableBytes() < defsLength || defsLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid RunCommandsPacket (def bytes requested: " + defsLength + ")");
-            return;
-        }
-        String defs = readString(data, defsLength);
         boolean shouldDebug = data.readByte() != 0;
         long uuidMost = data.readLong();
         long uuidLeast = data.readLong();

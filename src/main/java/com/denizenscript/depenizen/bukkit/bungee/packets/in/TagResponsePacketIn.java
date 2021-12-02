@@ -18,12 +18,10 @@ public class TagResponsePacketIn extends PacketIn {
             BungeeBridge.instance.handler.fail("Invalid TagResponsePacket (bytes available: " + data.readableBytes() + ")");
             return;
         }
-        int resLength = data.readInt();
-        if (data.readableBytes() < resLength || resLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid TagResponsePacket (result bytes requested: " + resLength + ")");
+        String result = readString(data, "result");
+        if (result == null) {
             return;
         }
-        String result = readString(data, resLength);
         int id = data.readInt();
         BungeeTagCommand.handleResult(id, result);
     }

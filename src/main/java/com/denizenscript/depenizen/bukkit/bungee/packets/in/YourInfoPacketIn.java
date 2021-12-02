@@ -13,16 +13,10 @@ public class YourInfoPacketIn extends PacketIn {
 
     @Override
     public void process(ByteBuf data) {
-        if (data.readableBytes() < 4) {
-            BungeeBridge.instance.handler.fail("Invalid YourInfoPacket (bytes available: " + data.readableBytes() + ")");
+        String serverName = readString(data, "serverName");
+        if (serverName == null) {
             return;
         }
-        int yourNameLength = data.readInt();
-        if (data.readableBytes() < yourNameLength || yourNameLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid YourInfoPacket (name bytes requested: " + yourNameLength + ")");
-            return;
-        }
-        String serverName = readString(data, yourNameLength);
         BungeeBridge.instance.serverName = serverName;
     }
 }

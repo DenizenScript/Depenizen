@@ -16,16 +16,10 @@ public class AddServerPacketIn extends PacketIn {
 
     @Override
     public void process(ByteBuf data) {
-        if (data.readableBytes() < 4) {
-            BungeeBridge.instance.handler.fail("Invalid AddServerPacket (bytes available: " + data.readableBytes() + ")");
+        String serverName = readString(data, "serverName");
+        if (serverName == null) {
             return;
         }
-        int yourNameLength = data.readInt();
-        if (data.readableBytes() < yourNameLength || yourNameLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid AddServerPacket (name bytes requested: " + yourNameLength + ")");
-            return;
-        }
-        String serverName = readString(data, yourNameLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
             BungeeBridge.instance.knownServers.add(serverName);
             BungeeServerConnectScriptEvent.instance.serverName = serverName;

@@ -22,27 +22,15 @@ public class ProxyPingPacketIn extends PacketIn {
             return;
         }
         long id = data.readLong();
-        int addressLength = data.readInt();
-        if (data.readableBytes() < addressLength || addressLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ProxyPingPacket (address bytes requested: " + addressLength + ")");
-            return;
-        }
-        String address = readString(data, addressLength);
+        String address = readString(data, "address");
         int currentPlayers = data.readInt();
         int maxPlayers = data.readInt();
-        int motdLength = data.readInt();
-        if (data.readableBytes() < motdLength || motdLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ProxyPingPacket (motd bytes requested: " + motdLength + ")");
-            return;
-        }
-        String motd = readString(data, motdLength);
+        String motd = readString(data, "motd");
         int protocol = data.readInt();
-        int versionLength = data.readInt();
-        if (data.readableBytes() < versionLength || versionLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid ProxyPingPacket (version bytes requested: " + versionLength + ")");
+        String version = readString(data, "version");
+        if (address == null || motd == null || version == null) {
             return;
         }
-        String version = readString(data, versionLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
             BungeeProxyServerListPingScriptEvent.PingData ping = new BungeeProxyServerListPingScriptEvent.PingData();
             ping.address = address;

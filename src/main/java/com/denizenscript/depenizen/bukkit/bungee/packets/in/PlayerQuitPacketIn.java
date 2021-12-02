@@ -25,12 +25,10 @@ public class PlayerQuitPacketIn extends PacketIn {
         long mostSigBits = data.readLong();
         long leastSigBits = data.readLong();
         UUID uuid = new UUID(mostSigBits, leastSigBits);
-        int nameLength = data.readInt();
-        if (data.readableBytes() < nameLength || nameLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid PlayerQuitPacket (name bytes requested: " + nameLength + ")");
+        String name = readString(data, "name");
+        if (name == null) {
             return;
         }
-        String name = readString(data, nameLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
             BungeePlayerQuitsScriptEvent.instance.name = name;
             BungeePlayerQuitsScriptEvent.instance.uuid = uuid;

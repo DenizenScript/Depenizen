@@ -25,18 +25,11 @@ public class PlayerSwitchServerPacketIn extends PacketIn {
         long mostSigBits = data.readLong();
         long leastSigBits = data.readLong();
         UUID uuid = new UUID(mostSigBits, leastSigBits);
-        int nameLength = data.readInt();
-        if (data.readableBytes() < nameLength || nameLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid PlayerSwitchServerPacket (name bytes requested: " + nameLength + ")");
+        String name = readString(data, "name");
+        String serverName = readString(data, "serverName");
+        if (name == null || serverName == null) {
             return;
         }
-        String name = readString(data, nameLength);
-        int serverNameLength = data.readInt();
-        if (data.readableBytes() < serverNameLength || serverNameLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid PlayerSwitchServerPacket (name bytes requested: " + serverNameLength + ")");
-            return;
-        }
-        String serverName = readString(data, serverNameLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
             BungeePlayerServerSwitchScriptEvent.instance.name = name;
             BungeePlayerServerSwitchScriptEvent.instance.uuid = uuid;
