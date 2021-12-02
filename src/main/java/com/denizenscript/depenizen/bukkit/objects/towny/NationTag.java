@@ -1,6 +1,5 @@
-package com.denizenscript.depenizen.bukkit.objects.factions;
+package com.denizenscript.depenizen.bukkit.objects.towny;
 
-import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -24,9 +23,9 @@ public class NationTag implements ObjectTag {
     // The identity format for nations is <nation_name>
     // For example, 'nation@my_nation'.
     //
-    // @plugin Depenizen, Factions
+    // @plugin Depenizen, Towny
     // @description
-    // A NationTag represents a Factions nation.
+    // A NationTag represents a Towny nation.
     //
     // -->
 

@@ -4,7 +4,7 @@ import com.denizenscript.depenizen.bukkit.events.towny.PlayerEntersTownScriptEve
 import com.denizenscript.depenizen.bukkit.events.towny.PlayerExitsTownScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyCuboidProperties;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyLocationProperties;
-import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
+import com.denizenscript.depenizen.bukkit.objects.towny.NationTag;
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyPlayerProperties;

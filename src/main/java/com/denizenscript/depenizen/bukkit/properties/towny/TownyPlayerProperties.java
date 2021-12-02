@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.towny;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
+import com.denizenscript.depenizen.bukkit.objects.towny.NationTag;
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;

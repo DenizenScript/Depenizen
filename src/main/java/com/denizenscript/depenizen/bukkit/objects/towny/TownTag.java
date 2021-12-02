@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.objects.towny;
 import com.denizenscript.denizen.objects.ChunkTag;
 import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizencore.objects.*;
-import com.denizenscript.depenizen.bukkit.objects.factions.NationTag;
 import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
