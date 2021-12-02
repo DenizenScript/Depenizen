@@ -75,7 +75,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         packetBuffer.release();
         packetBuffer = null;
         BungeeBridge.instance.connected = false;
-        BungeeBridge.instance.reconnect();
+        BungeeBridge.instance.reconnect(true);
     }
 
     @Override

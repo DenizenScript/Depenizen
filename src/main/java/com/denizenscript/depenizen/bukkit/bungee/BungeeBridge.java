@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
 import com.denizenscript.denizencore.DenizenCore;
+import com.denizenscript.denizencore.scripts.commands.core.AdjustCommand;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyCommandPacketOut;
@@ -120,7 +121,7 @@ public class BungeeBridge {
 
     public boolean reconnectPending = false;
 
-    public void reconnect() {
+    public void reconnect(boolean delay) {
         if (reconnectPending || shuttingDown) {
             return;
         }
@@ -128,7 +129,7 @@ public class BungeeBridge {
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
             reconnectPending = false;
             connect();
-        }, 20 * 5);
+        }, delay ? 20 * 5 : 0);
     }
 
     public boolean shuttingDown = false;
@@ -171,7 +172,7 @@ public class BungeeBridge {
             });
             b.connect(address, port).addListener(future -> Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
                 if (!connected && !hasConnectionLoading) {
-                    reconnect();
+                    reconnect(true);
                 }
             }, 10));
             showedLastError = false;
@@ -181,7 +182,7 @@ public class BungeeBridge {
                 showedLastError = true;
                 Debug.echoError(ex);
             }
-            reconnect();
+            reconnect(true);
         }
     }
 
@@ -219,6 +220,36 @@ public class BungeeBridge {
                 ticksTilKeepalive = keepAliveTickRate;
             }
         }, 1, 1);
+        // <--[ObjectType]
+        // @name bungee
+        // @prefix None
+        // @base None
+        // @plugin Depenizen, DepenizenBungee, BungeeCord
+        // @format
+        // N/A
+        //
+        // @description
+        // "bungee" is an internal pseudo-ObjectType that is used as a mechanism adjust target for some global mechanisms.
+        //
+        // -->
+        AdjustCommand.specialAdjustables.put("bungee", mechanism -> {
+
+            // <--[mechanism]
+            // @object bungee
+            // @name reconnect
+            // @input None
+            // @plugin Depenizen, DepenizenBungee, BungeeCord
+            // @description
+            // Immediately forces Bungee to do a full disconnect and reconnect.
+            // For example: - adjust bungee reconnect
+            // -->
+            if (mechanism.matches("reconnect")) {
+                if (BungeeBridge.instance.connected) {
+                    BungeeBridge.instance.handler.fail("Reconnect requested");
+                }
+                BungeeBridge.instance.reconnect(false);
+            }
+        });
     }
 
     public void tagEvent(ReplaceableTagEvent event) {
