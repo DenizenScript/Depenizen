@@ -24,6 +24,7 @@ public class BungeePlayerQuitsScriptEvent extends BukkitScriptEvent {
     // @Context
     // <context.name> returns the leaving player's name.
     // <context.uuid> returns the leaving player's UUID.
+    // <context.ip> returns the leaving player's IP address.
     //
     // @Plugin Depenizen, DepenizenBungee, BungeeCord
     //
@@ -42,6 +43,8 @@ public class BungeePlayerQuitsScriptEvent extends BukkitScriptEvent {
     public String name;
 
     public UUID uuid;
+
+    public String ip;
 
     @Override
     public boolean couldMatch(ScriptPath path) {
@@ -70,11 +73,10 @@ public class BungeePlayerQuitsScriptEvent extends BukkitScriptEvent {
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("name")) {
-            return new ElementTag(this.name);
-        }
-        else if (name.equals("uuid")) {
-            return new ElementTag(uuid.toString());
+        switch (name) {
+            case "name": return new ElementTag(this.name);
+            case "uuid": return new ElementTag(uuid.toString());
+            case "ip": return new ElementTag(ip);
         }
         return super.getContext(name);
     }

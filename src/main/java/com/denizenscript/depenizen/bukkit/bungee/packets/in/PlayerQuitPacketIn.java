@@ -26,12 +26,14 @@ public class PlayerQuitPacketIn extends PacketIn {
         long leastSigBits = data.readLong();
         UUID uuid = new UUID(mostSigBits, leastSigBits);
         String name = readString(data, "name");
-        if (name == null) {
+        String ip = readString(data, "ip");
+        if (name == null || ip == null) {
             return;
         }
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
             BungeePlayerQuitsScriptEvent.instance.name = name;
             BungeePlayerQuitsScriptEvent.instance.uuid = uuid;
+            BungeePlayerQuitsScriptEvent.instance.ip = ip;
             BungeePlayerQuitsScriptEvent.instance.fire();
         });
     }

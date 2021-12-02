@@ -25,15 +25,15 @@ public class PlayerJoinPacketIn extends PacketIn {
         long mostSigBits = data.readLong();
         long leastSigBits = data.readLong();
         UUID uuid = new UUID(mostSigBits, leastSigBits);
-        int nameLength = data.readInt();
-        if (data.readableBytes() < nameLength || nameLength < 0) {
-            BungeeBridge.instance.handler.fail("Invalid PlayerJoinPacket (name bytes requested: " + nameLength + ")");
+        String name = readString(data, "name");
+        String ip = readString(data, "ip");
+        if (name == null || ip == null) {
             return;
         }
-        String name = readString(data, nameLength);
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
             BungeePlayerJoinsScriptEvent.instance.name = name;
             BungeePlayerJoinsScriptEvent.instance.uuid = uuid;
+            BungeePlayerJoinsScriptEvent.instance.ip = ip;
             BungeePlayerJoinsScriptEvent.instance.fire();
         });
     }
