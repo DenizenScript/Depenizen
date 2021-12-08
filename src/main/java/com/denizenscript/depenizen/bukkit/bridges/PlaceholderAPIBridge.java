@@ -58,7 +58,7 @@ public class PlaceholderAPIBridge extends Bridge {
             return;
         }
         attribute = attribute.fulfill(1);
-        Player player = ((BukkitTagContext) event.getContext()).player != null ? ((BukkitTagContext) event.getContext()).player.getPlayerEntity() : null;
+        OfflinePlayer player = ((BukkitTagContext) event.getContext()).player != null ? ((BukkitTagContext) event.getContext()).player.getOfflinePlayer() : null;
 
         // <--[tag]
         // @attribute <placeholder[<name>].player[<player>]>
@@ -67,8 +67,8 @@ public class PlaceholderAPIBridge extends Bridge {
         // @description
         // Returns the value of the placeholder for the specified player.
         // -->
-        if (attribute.matches("player") && attribute.hasParam() && PlayerTag.matches(attribute.getParam())) {
-            player = attribute.paramAsType(PlayerTag.class).getPlayerEntity();
+        if (attribute.matches("player") && attribute.hasParam() && attribute.getParamObject().canBeType(PlayerTag.class)) {
+            player = attribute.paramAsType(PlayerTag.class).getOfflinePlayer();
             attribute.fulfill(1);
         }
         event.setReplacedObject(new ElementTag(PlaceholderAPI.setPlaceholders(player, "%" + placeholder + "%"))
