@@ -31,17 +31,17 @@ public class CrackShotBridge extends Bridge {
         }, "crackshot");
         PropertyParser.registerProperty(CrackShotItemProperties.class, ItemTag.class);
         PropertyParser.registerProperty(CrackShotEntityProperties.class, EntityTag.class);
-        ScriptEvent.registerScriptEvent(new CrackShotPlayerTogglesWeaponAttachmentEvent());
-        ScriptEvent.registerScriptEvent(new CrackShotWeaponDamageEntityEvent());
-        ScriptEvent.registerScriptEvent(new CrackShotWeaponCausesExplosionEvent());
-        ScriptEvent.registerScriptEvent(new CrackShotPlayerFiresAutomaticWeaponEvent());
-        ScriptEvent.registerScriptEvent(new CrackShotPlayerFiresProjectileEvent());
-        ScriptEvent.registerScriptEvent(new CrackShotPlayerStartsFiringWeaponEvent());
-        ScriptEvent.registerScriptEvent(new CrackShotPlayerPlacesLandmineEvent());
-        ScriptEvent.registerScriptEvent(new CrackShotLandmineTriggerEvent());
-        ScriptEvent.registerScriptEvent(new CrackShotPlayerStartsReloadingWeaponEvent());
-        ScriptEvent.registerScriptEvent(new CrackShotPlayerFinishesReloadingWeaponEvent());
-        ScriptEvent.registerScriptEvent(new CrackShotPlayerZoomsWeaponScopeEvent());
+        ScriptEvent.registerScriptEvent(CrackShotPlayerTogglesWeaponAttachmentEvent.class);
+        ScriptEvent.registerScriptEvent(CrackShotWeaponDamageEntityEvent.class);
+        ScriptEvent.registerScriptEvent(CrackShotWeaponCausesExplosionEvent.class);
+        ScriptEvent.registerScriptEvent(CrackShotPlayerFiresAutomaticWeaponEvent.class);
+        ScriptEvent.registerScriptEvent(CrackShotPlayerFiresProjectileEvent.class);
+        ScriptEvent.registerScriptEvent(CrackShotPlayerStartsFiringWeaponEvent.class);
+        ScriptEvent.registerScriptEvent(CrackShotPlayerPlacesLandmineEvent.class);
+        ScriptEvent.registerScriptEvent(CrackShotLandmineTriggerEvent.class);
+        ScriptEvent.registerScriptEvent(CrackShotPlayerStartsReloadingWeaponEvent.class);
+        ScriptEvent.registerScriptEvent(CrackShotPlayerFinishesReloadingWeaponEvent.class);
+        ScriptEvent.registerScriptEvent(CrackShotPlayerZoomsWeaponScopeEvent.class);
         utility = new CSUtility();
     }
 

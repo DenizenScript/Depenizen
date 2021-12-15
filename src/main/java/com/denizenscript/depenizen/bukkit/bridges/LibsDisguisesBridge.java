@@ -16,8 +16,8 @@ public class LibsDisguisesBridge extends Bridge {
 
     @Override
     public void init() {
-        ScriptEvent.registerScriptEvent(new EntityDisguisesScriptEvent());
-        ScriptEvent.registerScriptEvent(new EntityUndisguisesScriptEvent());
+        ScriptEvent.registerScriptEvent(EntityDisguisesScriptEvent.class);
+        ScriptEvent.registerScriptEvent(EntityUndisguisesScriptEvent.class);
         ObjectFetcher.registerWithObjectFetcher(LibsDisguiseTag.class);
         PropertyParser.registerProperty(LibsDisguiseEntityProperties.class, EntityTag.class);
         DenizenCore.commandRegistry.registerCommand(LibsDisguiseCommand.class);

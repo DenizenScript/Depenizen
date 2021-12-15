@@ -23,10 +23,10 @@ public class PVPArenaBridge extends Bridge {
 
     @Override
     public void init() {
-        ScriptEvent.registerScriptEvent(new PVPArenaStartsScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerJoinsPVPArenaScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerLeavesPVPArenaScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerExitsPVPArenaScriptEvent());
+        ScriptEvent.registerScriptEvent(PVPArenaStartsScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerJoinsPVPArenaScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerLeavesPVPArenaScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerExitsPVPArenaScriptEvent.class);
         PropertyParser.registerProperty(PVPArenaPlayerProperties.class, PlayerTag.class);
         ObjectFetcher.registerWithObjectFetcher(PVPArenaArenaTag.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {

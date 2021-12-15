@@ -27,8 +27,8 @@ public class SentinelBridge extends Bridge {
 
     @Override
     public void init() {
-        ScriptEvent.registerScriptEvent(new SentinelAttackScriptEvent());
-        ScriptEvent.registerScriptEvent(new SentinelNoMoreTargetsScriptEvent());
+        ScriptEvent.registerScriptEvent(SentinelAttackScriptEvent.class);
+        ScriptEvent.registerScriptEvent(SentinelNoMoreTargetsScriptEvent.class);
         SentinelPlugin.instance.registerIntegration(new DenizenSentinelTargets());
         PropertyParser.registerProperty(SentinelNPCProperties.class, NPCTag.class);
     }

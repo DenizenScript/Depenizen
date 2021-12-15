@@ -33,8 +33,8 @@ public class TownyBridge extends Bridge {
         PropertyParser.registerProperty(TownyPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(TownyLocationProperties.class, LocationTag.class);
         PropertyParser.registerProperty(TownyCuboidProperties.class, CuboidTag.class);
-        ScriptEvent.registerScriptEvent(new PlayerEntersTownScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerExitsTownScriptEvent());
+        ScriptEvent.registerScriptEvent(PlayerEntersTownScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerExitsTownScriptEvent.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

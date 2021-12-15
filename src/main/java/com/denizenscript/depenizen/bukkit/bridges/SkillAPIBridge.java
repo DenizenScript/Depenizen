@@ -18,9 +18,9 @@ public class SkillAPIBridge extends Bridge {
     public void init() {
         ObjectFetcher.registerWithObjectFetcher(SkillAPIClassTag.class);
         PropertyParser.registerProperty(SkillAPIPlayerProperties.class, PlayerTag.class);
-        ScriptEvent.registerScriptEvent(new SkillAPIPlayerUnlocksSkillScriptEvent());
-        ScriptEvent.registerScriptEvent(new SkillAPIPlayerUpgradesSkillScriptEvent());
-        ScriptEvent.registerScriptEvent(new SkillAPIPlayerDowngradesSkillScriptEvent());
-        ScriptEvent.registerScriptEvent(new SkillAPIPlayerLevelsUpScriptEvent());
+        ScriptEvent.registerScriptEvent(SkillAPIPlayerUnlocksSkillScriptEvent.class);
+        ScriptEvent.registerScriptEvent(SkillAPIPlayerUpgradesSkillScriptEvent.class);
+        ScriptEvent.registerScriptEvent(SkillAPIPlayerDowngradesSkillScriptEvent.class);
+        ScriptEvent.registerScriptEvent(SkillAPIPlayerLevelsUpScriptEvent.class);
     }
 }

@@ -12,9 +12,9 @@ public class MagicSpellsBridge extends Bridge {
     @Override
     public void init() {
         PropertyParser.registerProperty(MagicSpellsPlayerProperties.class, PlayerTag.class);
-        ScriptEvent.registerScriptEvent(new SpellCastScriptEvent());
-        ScriptEvent.registerScriptEvent(new SpellCastedScriptEvent());
-        ScriptEvent.registerScriptEvent(new ManaChangeScriptEvent());
-        ScriptEvent.registerScriptEvent(new SpellLearnScriptEvent());
+        ScriptEvent.registerScriptEvent(SpellCastScriptEvent.class);
+        ScriptEvent.registerScriptEvent(SpellCastedScriptEvent.class);
+        ScriptEvent.registerScriptEvent(ManaChangeScriptEvent.class);
+        ScriptEvent.registerScriptEvent(SpellLearnScriptEvent.class);
     }
 }

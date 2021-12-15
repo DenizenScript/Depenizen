@@ -18,10 +18,10 @@ public class PlotSquaredBridge extends Bridge {
 
     @Override
     public void init() {
-        ScriptEvent.registerScriptEvent(new PlayerEntersPlotScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerLeavePlotScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerClaimPlotScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlotClearScriptEvent());
+        ScriptEvent.registerScriptEvent(PlayerEntersPlotScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerLeavePlotScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerClaimPlotScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlotClearScriptEvent.class);
         ObjectFetcher.registerWithObjectFetcher(PlotSquaredPlotTag.class);
         PropertyParser.registerProperty(PlotSquaredPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(PlotSquaredLocationProperties.class, LocationTag.class);

@@ -19,7 +19,7 @@ public class ResidenceBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(ResidenceTag.class);
         PropertyParser.registerProperty(ResidencePlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(ResidenceLocationProperties.class, LocationTag.class);
-        ScriptEvent.registerScriptEvent(new PlayerEntersResidenceScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerExitsResidenceScriptEvent());
+        ScriptEvent.registerScriptEvent(PlayerEntersResidenceScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerExitsResidenceScriptEvent.class);
     }
 }

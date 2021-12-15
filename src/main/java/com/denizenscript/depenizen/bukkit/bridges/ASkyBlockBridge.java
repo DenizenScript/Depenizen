@@ -29,11 +29,11 @@ public class ASkyBlockBridge extends Bridge {
         PropertyParser.registerProperty(ASkyBlockPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(ASkyBlockLocationProperties.class, LocationTag.class);
         PropertyParser.registerProperty(ASkyBlockWorldProperties.class, WorldTag.class);
-        ScriptEvent.registerScriptEvent(new SkyBlockCreatedScriptEvent());
-        ScriptEvent.registerScriptEvent(new SkyBlockResetScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerEntersSkyBlockScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerExitsSkyBlockScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerCompletesSkyBlockChallengeScriptEvent());
+        ScriptEvent.registerScriptEvent(SkyBlockCreatedScriptEvent.class);
+        ScriptEvent.registerScriptEvent(SkyBlockResetScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerEntersSkyBlockScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerExitsSkyBlockScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerCompletesSkyBlockChallengeScriptEvent.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

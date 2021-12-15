@@ -32,11 +32,11 @@ public class EssentialsBridge extends Bridge {
                 tagEvent(event);
             }
         }, "essentials");
-        ScriptEvent.registerScriptEvent(new PlayerAFKStatusScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerGodModeStatusScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerJailStatusScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerMuteStatusScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerBalanceChangeScriptEvent());
+        ScriptEvent.registerScriptEvent(PlayerAFKStatusScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerGodModeStatusScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerJailStatusScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerMuteStatusScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerBalanceChangeScriptEvent.class);
         PropertyParser.registerProperty(EssentialsPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(EssentialsItemProperties.class, ItemTag.class);
     }

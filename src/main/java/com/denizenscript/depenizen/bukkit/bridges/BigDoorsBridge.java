@@ -27,7 +27,7 @@ public class BigDoorsBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(BigDoorsDoorTag.class, BigDoorsDoorTag.tagProcessor);
         PropertyParser.registerProperty(BigDoorsWorldProperties.class, WorldTag.class);
         PropertyParser.registerProperty(BigDoorsPlayerProperties.class, PlayerTag.class);
-        ScriptEvent.registerScriptEvent(new BigDoorsDoorTogglesScriptEvent());
+        ScriptEvent.registerScriptEvent(BigDoorsDoorTogglesScriptEvent.class);
 
         // <--[tag]
         // @attribute <bigdoor[<door>]>

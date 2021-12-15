@@ -8,6 +8,6 @@ public class VotifierBridge extends Bridge {
 
     @Override
     public void init() {
-        ScriptEvent.registerScriptEvent(new VotifierVoteScriptEvent());
+        ScriptEvent.registerScriptEvent(VotifierVoteScriptEvent.class);
     }
 }

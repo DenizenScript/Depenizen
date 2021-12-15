@@ -42,8 +42,8 @@ public class MythicMobsBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(MythicMobsMobTag.class, MythicMobsMobTag.tagProcessor);
         ObjectFetcher.registerWithObjectFetcher(MythicSpawnerTag.class, MythicSpawnerTag.tagProcessor);
         PropertyParser.registerProperty(MythicMobsEntityProperties.class, EntityTag.class);
-        ScriptEvent.registerScriptEvent(new MythicMobsDeathEvent());
-        ScriptEvent.registerScriptEvent(new MythicMobsSpawnEvent());
+        ScriptEvent.registerScriptEvent(MythicMobsDeathEvent.class);
+        ScriptEvent.registerScriptEvent(MythicMobsSpawnEvent.class);
         DenizenCore.commandRegistry.registerCommand(MythicSpawnCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicThreatCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);

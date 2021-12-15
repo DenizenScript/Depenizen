@@ -28,10 +28,10 @@ public class QuestsBridge extends Bridge {
         instance = this;
         PropertyParser.registerProperty(QuestsPlayerProperties.class, PlayerTag.class);
         DenizenCore.commandRegistry.registerCommand(QuestsCommand.class);
-        ScriptEvent.registerScriptEvent(new PlayerCompletesQuestScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerFailsQuestScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerStartsQuestScriptEvent());
-        ScriptEvent.registerScriptEvent(new PlayerQuestStageChangeScriptEvent());
+        ScriptEvent.registerScriptEvent(PlayerCompletesQuestScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerFailsQuestScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerStartsQuestScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerQuestStageChangeScriptEvent.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

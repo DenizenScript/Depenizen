@@ -25,7 +25,7 @@ public class GriefPreventionBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(GriefPreventionClaimTag.class);
         PropertyParser.registerProperty(GriefPreventionPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(GriefPreventionLocationProperties.class, LocationTag.class);
-        ScriptEvent.registerScriptEvent(new GPClaimEnterEvent());
+        ScriptEvent.registerScriptEvent(GPClaimEnterEvent.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

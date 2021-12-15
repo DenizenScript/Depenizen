@@ -188,13 +188,13 @@ public class BungeeBridge {
 
     public void successInit() {
         instance = this;
-        registerScriptEvent(new BungeePlayerJoinsScriptEvent());
-        registerScriptEvent(new BungeePlayerQuitsScriptEvent());
-        registerScriptEvent(new BungeePlayerServerSwitchScriptEvent());
-        registerScriptEvent(new BungeeProxyServerCommandScriptEvent());
-        registerScriptEvent(new BungeeProxyServerListPingScriptEvent());
-        registerScriptEvent(new BungeeServerConnectScriptEvent());
-        registerScriptEvent(new BungeeServerDisconnectScriptEvent());
+        registerScriptEvent(BungeePlayerJoinsScriptEvent.class);
+        registerScriptEvent(BungeePlayerQuitsScriptEvent.class);
+        registerScriptEvent(BungeePlayerServerSwitchScriptEvent.class);
+        registerScriptEvent(BungeeProxyServerCommandScriptEvent.class);
+        registerScriptEvent(BungeeProxyServerListPingScriptEvent.class);
+        registerScriptEvent(BungeeServerConnectScriptEvent.class);
+        registerScriptEvent(BungeeServerDisconnectScriptEvent.class);
         DenizenCore.commandRegistry.registerCommand(BungeeRunCommand.class);
         DenizenCore.commandRegistry.registerCommand(BungeeExecuteCommand.class);
         DenizenCore.commandRegistry.registerCommand(BungeeCommand.class);

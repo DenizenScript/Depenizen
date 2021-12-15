@@ -16,6 +16,6 @@ public class NoteBlockAPIBridge extends Bridge {
 
         PropertyParser.registerProperty(NoteBlockAPIPlayerProperties.class, PlayerTag.class);
         DenizenCore.commandRegistry.registerCommand(NBSCommand.class);
-        ScriptEvent.registerScriptEvent(new NoteBlockAPISongEndsScriptEvent());
+        ScriptEvent.registerScriptEvent(NoteBlockAPISongEndsScriptEvent.class);
     }
 }

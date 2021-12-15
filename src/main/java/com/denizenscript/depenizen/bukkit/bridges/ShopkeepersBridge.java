@@ -18,8 +18,8 @@ public class ShopkeepersBridge extends Bridge {
     public void init() {
         instance = this;
         ObjectFetcher.registerWithObjectFetcher(ShopKeeperTag.class);
-        ScriptEvent.registerScriptEvent(new ShopKeeperTradeScriptEvent());
-        ScriptEvent.registerScriptEvent(new ShopKeeperCreatedScriptEvent());
+        ScriptEvent.registerScriptEvent(ShopKeeperTradeScriptEvent.class);
+        ScriptEvent.registerScriptEvent(ShopKeeperCreatedScriptEvent.class);
         PropertyParser.registerProperty(ShopKeepersEntityProperties.class, EntityTag.class);
     }
 }
