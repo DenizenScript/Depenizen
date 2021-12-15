@@ -28,8 +28,8 @@ public class TownyBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(TownTag.class);
-        ObjectFetcher.registerWithObjectFetcher(NationTag.class);
+        ObjectFetcher.registerWithObjectFetcher(TownTag.class, TownTag.tagProcessor);
+        ObjectFetcher.registerWithObjectFetcher(NationTag.class, NationTag.tagProcessor);
         PropertyParser.registerProperty(TownyPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(TownyLocationProperties.class, LocationTag.class);
         PropertyParser.registerProperty(TownyCuboidProperties.class, CuboidTag.class);
