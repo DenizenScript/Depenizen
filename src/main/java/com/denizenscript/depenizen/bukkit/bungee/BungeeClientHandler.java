@@ -119,7 +119,6 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
                 try {
                     BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
                     PacketIn packet = BungeeBridge.instance.packets.get(packetId);
-                    BungeeBridge.instance.connected = true;
                     packet.process(packetBuffer);
                     currentStage = Stage.AWAIT_HEADER;
                     reallocateBuf(ctx);

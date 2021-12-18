@@ -18,5 +18,6 @@ public class YourInfoPacketIn extends PacketIn {
             return;
         }
         BungeeBridge.instance.serverName = serverName;
+        BungeeBridge.instance.connected = true;
     }
 }
