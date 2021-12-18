@@ -38,7 +38,7 @@ public class Depenizen extends JavaPlugin {
             Debug.echoError("Cannot load Depenizen-Bungee bridge: Internal exception was thrown!");
             Debug.echoError(ex);
         }
-        Debug.log("Depenizen loaded! " + loadedBridges.size() + " plugin bridge(s) loaded (of " + allBridges.size() + " available)");
+        Debug.log("Depenizen loaded! <A>" + loadedBridges.size() + "<W> plugin bridge(s) loaded (of <A>" + allBridges.size() + "<W> available)");
     }
 
     @Override
@@ -53,17 +53,15 @@ public class Depenizen extends JavaPlugin {
     public void checkLoadBungeeBridge() {
         String bungeeServer = getConfig().getString("Bungee server address", "none");
         if (CoreUtilities.equalsIgnoreCase(bungeeServer, "none")) {
-            Debug.log("<G>Depenizen will not load bungee bridge.");
             return;
         }
         new BungeeBridge().init(bungeeServer, getConfig().getInt("Bungee server port", 25565));
-        Debug.log("Depenizen loaded bungee bridge!");
+        Debug.log("Loaded bungee bridge!");
     }
 
     public void loadBridge(String name, Supplier<Bridge> bridgeSupplier) {
         Plugin plugin = Bukkit.getPluginManager().getPlugin(name);
         if (plugin == null) {
-            Debug.log("<G>Depenizen will not load bridge for '" + name + "'.");
             return;
         }
         Bridge newBridge;
@@ -90,7 +88,7 @@ public class Depenizen extends JavaPlugin {
             return;
         }
         loadedBridges.put(name, newBridge);
-        Debug.log("Depenizen loaded bridge for '" + name + "'!");
+        Debug.log("Loaded bridge for '" + name + "'!");
     }
 
     public void registerCoreBridges() {
