@@ -95,7 +95,7 @@ public class BungeeBridge {
 
     public void sendPacket(PacketOut packet) {
         if (!connected && !packet.canBeFirstPacket) {
-            Debug.echoError("BungeeBridge tried to send packet while not connected.");
+            Debug.echoError("BungeeBridge tried to send packet '" + packet.getClass().getName() + "' while not connected.");
             return;
         }
         ByteBuf buf = channel.alloc().buffer();
