@@ -30,7 +30,7 @@ public class EssentialsPlayerProperties implements Property {
     }
 
     public static boolean describes(ObjectTag object) {
-        return object instanceof PlayerTag && ((PlayerTag) object).isOnline();
+        return object instanceof PlayerTag;
     }
 
     public static EssentialsPlayerProperties getFrom(ObjectTag object) {

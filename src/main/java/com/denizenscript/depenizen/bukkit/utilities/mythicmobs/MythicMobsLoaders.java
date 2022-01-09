@@ -42,14 +42,14 @@ public class MythicMobsLoaders implements Listener {
     //
     // Usage Examples
     //
-    // Example 1: @DenizenEntity{tag=<context.entity.location.find.players.within[30].filter[has_flag[marked]]>}
+    // Example 1: @DenizenEntity{tag=<context.entity.location.find_players_within[30].filter[has_flag[marked]]>}
     //
     // Example 2: @DenizenLocation{tag=<context.entity.location.find.surface_blocks.within[30].random[5]>}
     //
     // Example 3: @DenizenEntity{tag=<proc[SomeProcScript]>}
     //
     // Conditions:
-    // - denizencondition{tag=<context.entity.location.find.players.within[30].is_empty.not>}
+    // - denizencondition{tag=<context.entity.location.find_players_within[30].is_empty.not>}
     // -->
 
     @EventHandler

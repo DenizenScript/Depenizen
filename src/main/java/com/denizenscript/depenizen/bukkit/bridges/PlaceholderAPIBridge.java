@@ -51,6 +51,11 @@ public class PlaceholderAPIBridge extends Bridge {
         // @plugin Depenizen, PlaceholderAPI
         // @description
         // Returns the value of the placeholder.
+        // For example, <placeholder[server_name]>
+        // Note that you do not need to include the "%" marks on the placeholder.
+        // The queue's linked player, if any, will be linked to the placeholder as well for any player-specific placeholder usage.
+        // Note: this should generally only be used for reading values from other plugins not already supported by Depenizen.
+        // This should not be used for cases where a Denizen tag already exists, or should exist.
         // -->
         String placeholder = attribute.getParam();
         if (CoreUtilities.toLowerCase(placeholder).startsWith("denizen_")) {
