@@ -20,8 +20,9 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Location;
+
+import java.util.UUID;
 
 public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
 
@@ -31,15 +32,15 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
     // @base ElementTag
     // @implements FlaggableObject
     // @format
-    // The identity format for towns is <town_name>
-    // For example, 'town@mytown'.
+    // The identity format for towns is <town_uuid>
+    // For example, 'town@123-abc'.
     //
     // @plugin Depenizen, Towny
     // @description
     // A TownTag represents a Towny town in the world.
     //
     // This object type is flaggable.
-    // Flags on this object type will be stored in the server saves file, under special sub-key "__depenizen_towny_towns"
+    // Flags on this object type will be stored in the server saves file, under special sub-key "__depenizen_towny_towns_uuid"
     //
     // -->
 
@@ -57,6 +58,20 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
             return null;
         }
         string = string.replace("town@", "");
+        if (string.length() == 36 && string.indexOf('-') >= 0) {
+            try {
+                UUID uuid = UUID.fromString(string);
+                if (uuid != null) {
+                    Town town = TownyUniverse.getInstance().getTown(uuid);
+                    if (town != null) {
+                        return new TownTag(town);
+                    }
+                }
+            }
+            catch (IllegalArgumentException e) {
+                // Nothing
+            }
+        }
         Town town = TownyUniverse.getInstance().getTown(string);
         if (town == null) {
             return null;
@@ -65,8 +80,10 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
     }
 
     public static boolean matches(String arg) {
-        arg = arg.replace("town@", "");
-        return TownyUniverse.getInstance().hasTown(arg);
+        if (arg.startsWith("town@")) {
+            return true;
+        }
+        return valueOf(arg) != null;
     }
 
     /////////////////////
@@ -120,7 +137,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
 
     @Override
     public String identify() {
-        return "town@" + town.getName();
+        return "town@" + town.getUUID();
     }
 
     @Override
@@ -134,7 +151,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
     }
 
     public boolean equals(TownTag town) {
-        return CoreUtilities.equalsIgnoreCase(town.getTown().getName(), this.getTown().getName());
+        return town.getTown().getUUID().equals(this.getTown().getUUID());
     }
 
     @Override
@@ -143,7 +160,13 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
     }
     @Override
     public AbstractFlagTracker getFlagTracker() {
-        return new RedirectionFlagTracker(DenizenCore.serverFlagMap, "__depenizen_towny_nations." + town.getName());
+        if (DenizenCore.serverFlagMap.hasFlag("__depenizen_towny_nations." + town.getName())
+                && !DenizenCore.serverFlagMap.hasFlag("__depenizen_towny_towns_uuid." + town.getUUID())) {
+            ObjectTag legacyValue = DenizenCore.serverFlagMap.getFlagValue("__depenizen_towny_nations." + town.getName());
+            DenizenCore.serverFlagMap.setFlag("__depenizen_towny_towns_uuid." + town.getUUID(), legacyValue, null);
+            DenizenCore.serverFlagMap.setFlag("__depenizen_towny_nations." + town.getName(), null, null);
+        }
+        return new RedirectionFlagTracker(DenizenCore.serverFlagMap, "__depenizen_towny_towns_uuid." + town.getUUID());
     }
 
     @Override

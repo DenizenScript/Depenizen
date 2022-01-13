@@ -18,6 +18,8 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
+import java.util.UUID;
+
 public class NationTag implements ObjectTag, FlaggableObject {
 
     // <--[ObjectType]
@@ -26,15 +28,15 @@ public class NationTag implements ObjectTag, FlaggableObject {
     // @base ElementTag
     // @implements FlaggableObject
     // @format
-    // The identity format for nations is <nation_name>
-    // For example, 'nation@my_nation'.
+    // The identity format for nations is <nation_uuid>
+    // For example, 'nation@123-abc'.
     //
     // @plugin Depenizen, Towny
     // @description
     // A NationTag represents a Towny nation.
     //
     // This object type is flaggable.
-    // Flags on this object type will be stored in the server saves file, under special sub-key "__depenizen_towny_nations"
+    // Flags on this object type will be stored in the server saves file, under special sub-key "__depenizen_towny_nations_uuid"
     //
     // -->
 
@@ -52,6 +54,20 @@ public class NationTag implements ObjectTag, FlaggableObject {
             return null;
         }
         string = string.replace("nation@", "");
+        if (string.length() == 36 && string.indexOf('-') >= 0) {
+            try {
+                UUID uuid = UUID.fromString(string);
+                if (uuid != null) {
+                    Nation nation = TownyUniverse.getInstance().getNation(uuid);
+                    if (nation != null) {
+                        return new NationTag(nation);
+                    }
+                }
+            }
+            catch (IllegalArgumentException e) {
+                // Nothing
+            }
+        }
         Nation nation = TownyUniverse.getInstance().getNation(string);
         if (nation == null) {
             return null;
@@ -60,8 +76,10 @@ public class NationTag implements ObjectTag, FlaggableObject {
     }
 
     public static boolean matches(String arg) {
-        arg = arg.replace("nation@", "");
-        return TownyUniverse.getInstance().hasNation(arg);
+        if (arg.startsWith("nation@")) {
+            return true;
+        }
+        return valueOf(arg) != null;
     }
 
     /////////////////////
@@ -108,7 +126,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
 
     @Override
     public String identify() {
-        return "nation@" + nation.getName();
+        return "nation@" + nation.getUUID();
     }
 
     @Override
@@ -124,7 +142,13 @@ public class NationTag implements ObjectTag, FlaggableObject {
 
     @Override
     public AbstractFlagTracker getFlagTracker() {
-        return new RedirectionFlagTracker(DenizenCore.serverFlagMap, "__depenizen_towny_nations." + nation.getName());
+        if (DenizenCore.serverFlagMap.hasFlag("__depenizen_towny_nations." + nation.getName())
+                && !DenizenCore.serverFlagMap.hasFlag("__depenizen_towny_nations_uuid." + nation.getUUID())) {
+            ObjectTag legacyValue = DenizenCore.serverFlagMap.getFlagValue("__depenizen_towny_nations." + nation.getName());
+            DenizenCore.serverFlagMap.setFlag("__depenizen_towny_nations_uuid." + nation.getUUID(), legacyValue, null);
+            DenizenCore.serverFlagMap.setFlag("__depenizen_towny_nations." + nation.getName(), null, null);
+        }
+        return new RedirectionFlagTracker(DenizenCore.serverFlagMap, "__depenizen_towny_nations_uuid." + nation.getUUID());
     }
 
     @Override
