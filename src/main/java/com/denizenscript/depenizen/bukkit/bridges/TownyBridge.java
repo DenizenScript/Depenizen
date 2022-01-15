@@ -10,6 +10,7 @@ import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyPlayerProperties;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.CuboidTag;
@@ -59,8 +60,8 @@ public class TownyBridge extends Bridge {
         Attribute attribute = event.getAttributes().fulfill(1);
 
         // <--[tag]
-        // @attribute <towny.list_towns[<world>]>
-        // @returns ListTag
+        // @attribute <towny.list_towns[(<world>)]>
+        // @returns ListTag(TownTag)
         // @plugin Depenizen, Towny
         // @description
         // Returns a list of all towns. Optionally specify a world name.
@@ -84,6 +85,21 @@ public class TownyBridge extends Bridge {
                 }
             }
             event.setReplacedObject(towns.getObjectAttribute(attribute.fulfill(1)));
+        }
+
+        // <--[tag]
+        // @attribute <towny.nations>
+        // @returns ListTag(NationTag)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns a list of all nations.
+        // -->
+        if (attribute.startsWith("nations")) {
+            ListTag nations = new ListTag();
+            for (Nation nation : TownyUniverse.getInstance().getNations()) {
+                nations.addObject(new NationTag(nation));
+            }
+            event.setReplacedObject(nations.getObjectAttribute(attribute.fulfill(1)));
         }
     }
 
