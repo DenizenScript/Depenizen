@@ -17,12 +17,14 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
     //
     // @Location true
     //
-    // @Switch id:<id> to only process the event if the specific key ID was pressed.
+    // @Switch id:<id> to only process the event if the key ID matches the given text matcher.
+    // @Switch held:<true/false> to only process the event for the given 'held' state. If 'false', only fires once per press. If 'true', fires continually after being pressed except the first tick. If left off, fires continually until released.
     //
-    // @Triggers when a key was pressed by a client running MythicKeys, if that key is in the MythicKeys config.
+    // @Triggers every tick in which a key is being held by a client running MythicKeys, if that key is in the MythicKeys config.
     //
     // @Context
-    // <context.id> Returns the ID of the key pressed.
+    // <context.id> Returns the ID of the key tha twas pressed according to the MythicKeys config, as a namespaced key.
+    // <context.held> returns true if the key is being held, false if this is the first tick the button has been pressed for.
     //
     // @Player Always.
     //
@@ -35,7 +37,7 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
     public MythicKeysKeyPressScriptEvent() {
         instance = this;
         registerCouldMatcher("mythickeys key pressed");
-        registerSwitches("id");
+        registerSwitches("id", "held");
     }
 
     public static MythicKeysKeyPressScriptEvent instance;
@@ -44,6 +46,9 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
     @Override
     public boolean matches(ScriptPath path) {
         if (!runGenericSwitchCheck(path, "id", String.valueOf(event.getId()))) {
+            return false;
+        }
+        if (!runGenericSwitchCheck(path, "held", String.valueOf(event.isHeld()))) {
             return false;
         }
         if (!runInCheck(path, event.getPlayer().getLocation())) {
@@ -64,8 +69,9 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("id")) {
-            return new ElementTag(event.getId());
+        switch (name) {
+            case "id": return new ElementTag(event.getId().toString());
+            case "held": return new ElementTag(event.isHeld());
         }
         return super.getContext(name);
     }
