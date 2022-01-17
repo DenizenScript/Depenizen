@@ -21,6 +21,7 @@ softdepend:
     - mcMMO
     - MobArena
     - MythicMobs
+    - MythicKeysPlugin
     - NoCheatPlus
     - NoteBlockAPI
     - OpenTerrainGenerator

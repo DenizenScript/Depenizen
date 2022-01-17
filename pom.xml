@@ -193,6 +193,13 @@
             <systemPath>${basedir}/lib/MobArena.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>eu.asangarin</groupId>
+            <artifactId>mythickeys</artifactId>
+            <version>1.1.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/mythickeysplugin.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>io.lumine.xikage</groupId>
             <artifactId>mythicmobs</artifactId>
             <version>4.9.1</version>
