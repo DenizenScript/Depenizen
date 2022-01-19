@@ -33,7 +33,7 @@ public class SentinelBridge extends Bridge {
         PropertyParser.registerProperty(SentinelNPCProperties.class, NPCTag.class);
     }
 
-    public class DenizenSentinelTargets extends SentinelIntegration {
+    public static class DenizenSentinelTargets extends SentinelIntegration {
 
         @Override
         public String getTargetHelp() {

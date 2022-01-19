@@ -5,24 +5,24 @@ import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import eu.asangarin.mythickeys.api.MythicKeyPressEvent;
+import eu.asangarin.mythickeys.api.MythicKeyReleaseEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements Listener {
+public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]
     // @Events
-    // mythickeys key pressed
+    // mythickeys key released
     //
     // @Location true
     //
     // @Switch id:<id> to only process the event if the key ID matches the given text matcher.
     //
-    // @Triggers When a key is pressed by a client running MythicKeys, if that key is in the MythicKeys config.
+    // @Triggers When a key stops being pressed by a client running MythicKeys, if that key is in the MythicKeys config.
     //
     // @Context
-    // <context.id> Returns the ID of the key that was pressed according to the MythicKeys config, as a namespaced key.
+    // <context.id> Returns the ID of the key that was released according to the MythicKeys config, as a namespaced key.
     //
     // @Player Always.
     //
@@ -32,14 +32,14 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
     //
     // -->
 
-    public MythicKeysKeyPressScriptEvent() {
+    public MythicKeysKeyReleaseScriptEvent() {
         instance = this;
-        registerCouldMatcher("mythickeys key pressed");
+        registerCouldMatcher("mythickeys key released");
         registerSwitches("id");
     }
 
-    public static MythicKeysKeyPressScriptEvent instance;
-    public MythicKeyPressEvent event;
+    public static MythicKeysKeyReleaseScriptEvent instance;
+    public MythicKeyReleaseEvent event;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -54,7 +54,7 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
 
     @Override
     public String getName() {
-        return "MythicKeysKeyPressed";
+        return "MythicKeysKeyReleased";
     }
 
     @Override
@@ -71,7 +71,7 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
     }
 
     @EventHandler
-    public void onKeyPress(MythicKeyPressEvent event) {
+    public void onKeyRelease(MythicKeyReleaseEvent event) {
         this.event = event;
         fire(event);
     }

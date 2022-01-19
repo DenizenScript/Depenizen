@@ -13,7 +13,6 @@ import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
 public class PlaceholderAPIBridge extends Bridge {
 
