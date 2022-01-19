@@ -39,6 +39,7 @@ softdepend:
     - Towny
     - TownyChat
     - Vampire
+    - ViaVersion
     - Votifier
     - WorldEdit
     - WorldGuard
