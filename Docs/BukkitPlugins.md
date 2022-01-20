@@ -36,6 +36,7 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 - Towny (https://github.com/TownyAdvanced/Towny)
 - TownyChat (https://github.com/TownyAdvanced/Towny)
 - Vampire (https://www.spigotmc.org/resources/vampire.1906/)
+- ViaVersion (https://www.spigotmc.org/resources/viaversion.19254/)
 - WorldEdit (https://dev.bukkit.org/bukkit-plugins/worldedit/)
 - WorldGuard (https://dev.bukkit.org/bukkit-plugins/worldguard/)
 - You may post an issue on the issues page to request support for a plugin!

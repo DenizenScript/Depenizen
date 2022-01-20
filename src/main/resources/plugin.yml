@@ -9,7 +9,10 @@ api-version: '1.13'
 softdepend:
     - AreaShop
     - ASkyBlock
+    - BetonQuest
+    - BigDoors
     - BossShopPro
+    - CrackShot
     - EffectLib
     - Essentials
     - Factions
@@ -20,16 +23,16 @@ softdepend:
     - MagicSpells
     - mcMMO
     - MobArena
-    - MythicMobs
     - MythicKeysPlugin
+    - MythicMobs
     - NoCheatPlus
     - NoteBlockAPI
     - OpenTerrainGenerator
     - PlaceholderAPI
     - PlayerPoints
     - PlotSquared
-    - pvparena
-    - pvpstats
+    - PVPArena
+    - PVPStats
     - Quests
     - Residence
     - Sentinel
@@ -39,6 +42,7 @@ softdepend:
     - Towny
     - TownyChat
     - Vampire
+    - ViaVersion
     - Votifier
     - WorldEdit
     - WorldGuard
