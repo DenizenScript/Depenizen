@@ -55,7 +55,7 @@ public class MythicSignalCommand extends AbstractCommand {
                 scriptEntry.addObject("source", arg.asType(EntityTag.class));
             }
             else if (!scriptEntry.hasObject("signal")) {
-                scriptEntry.addObject("signal", arg.asType(ElementTag.class));
+                scriptEntry.addObject("signal", arg.asElement());
             }
             else {
                 arg.reportUnhandled();

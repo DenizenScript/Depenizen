@@ -57,7 +57,7 @@ public class MythicSkillCommand extends AbstractCommand {
             }
             else if (!scriptEntry.hasObject("skill")
                     && MythicMobsBridge.skillExists(arg.asElement().asString())) {
-                scriptEntry.addObject("skill", arg.asType(ElementTag.class));
+                scriptEntry.addObject("skill", arg.asElement());
             }
             else if (!scriptEntry.hasObject("entity_targets")
                     && arg.matchesArgumentList(EntityTag.class)) {
@@ -69,7 +69,7 @@ public class MythicSkillCommand extends AbstractCommand {
             }
             else if (!scriptEntry.hasObject("power")
                     && arg.matchesFloat()) {
-                scriptEntry.addObject("power", arg.asType(ElementTag.class));
+                scriptEntry.addObject("power", arg.asElement());
             }
             else {
                 arg.reportUnhandled();
