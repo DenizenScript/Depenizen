@@ -93,7 +93,7 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
         if (senderId != null) {
             try {
                 player = Bukkit.getOfflinePlayer(senderId);
-                if (!player.hasPlayedBefore()) {
+                if (!player.isOnline() && !player.hasPlayedBefore()) {
                     player = null;
                 }
             }

@@ -91,11 +91,11 @@ public class PlayerPointsCommand extends AbstractCommand {
         ElementTag amount = scriptEntry.getObjectTag("amount");
         Debug.report(scriptEntry, getName(), action, target, amount);
         if (target == null) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
+            Debug.echoError(scriptEntry, "Target not found!");
             return;
         }
         if (amount == null) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
+            Debug.echoError(scriptEntry, "Entity not specified!");
             return;
         }
         PlayerPoints plugin = (PlayerPoints) PlayerPointsBridge.instance.plugin;

@@ -81,7 +81,7 @@ public class BungeeCommand extends BracedCommand {
         }
         List<ScriptEntry> bracedCommandsList = BracedCommand.getBracedCommandsDirect(scriptEntry, scriptEntry);
         if (bracedCommandsList == null || bracedCommandsList.isEmpty()) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Empty subsection - did you forget a ':'?");
+            Debug.echoError("Empty subsection - did you forget a ':'?");
             return;
         }
         StringBuilder toSend = new StringBuilder();

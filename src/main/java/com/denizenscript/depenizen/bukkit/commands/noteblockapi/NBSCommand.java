@@ -108,12 +108,12 @@ public class NBSCommand extends AbstractCommand {
             Debug.report(scriptEntry, getName(), action, db("targets", targets), file);
         }
         if (targets == null || targets.isEmpty()) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Targets not found!");
+            Debug.echoError(scriptEntry, "Targets not found!");
             return;
         }
         if (action.asString().equalsIgnoreCase("play")) {
             if (file == null) {
-                Debug.echoError(scriptEntry.getResidingQueue(), "File not specified!");
+                Debug.echoError(scriptEntry, "File not specified!");
                 return;
             }
             String directory = URLDecoder.decode(System.getProperty("user.dir"));

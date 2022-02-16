@@ -151,11 +151,11 @@ public class LibsDisguiseCommand extends AbstractCommand {
             Debug.report(scriptEntry, getName(), action, target, type, name, id, baby);
         }
         if (target == null) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
+            Debug.echoError(scriptEntry, "Target not found!");
             return;
         }
         if (baby == null) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Baby not specified!");
+            Debug.echoError(scriptEntry, "Baby not specified!");
             return;
         }
         if (action.asString().equalsIgnoreCase("remove")) {
@@ -163,7 +163,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
         }
         else if (action.asString().equalsIgnoreCase("mob")) {
             if (type == null) {
-                Debug.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
+                Debug.echoError(scriptEntry, "Entity not specified!");
                 return;
             }
             MobDisguise mobDisguise = new MobDisguise(DisguiseType.valueOf(type.toString().toUpperCase()), !baby.asBoolean());
@@ -181,7 +181,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
         }
         else if (action.asString().equalsIgnoreCase("player")) {
             if (name == null) {
-                Debug.echoError(scriptEntry.getResidingQueue(), "Name not specified!");
+                Debug.echoError(scriptEntry, "Name not specified!");
                 return;
             }
             PlayerDisguise playerDisguise = new PlayerDisguise(name.toString());
@@ -194,14 +194,14 @@ public class LibsDisguiseCommand extends AbstractCommand {
         }
         else if (action.asString().equalsIgnoreCase("misc")) {
             if (type == null) {
-                Debug.echoError(scriptEntry.getResidingQueue(), "Entity not specified!");
+                Debug.echoError(scriptEntry, "Entity not specified!");
                 return;
             }
             DisguiseType disType = DisguiseType.valueOf(type.toString().toUpperCase());
             MiscDisguise miscDisguise;
             if (disType == DisguiseType.FALLING_BLOCK || disType == DisguiseType.DROPPED_ITEM) {
                 if (id == null) {
-                    Debug.echoError(scriptEntry.getResidingQueue(), "ID not specified!");
+                    Debug.echoError(scriptEntry, "ID not specified!");
                     return;
                 }
                 miscDisguise = new MiscDisguise(disType, ItemTag.valueOf(id.asString(), scriptEntry.context).getItemStack());

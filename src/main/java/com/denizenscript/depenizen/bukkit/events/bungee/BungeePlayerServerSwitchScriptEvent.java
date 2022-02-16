@@ -70,7 +70,7 @@ public class BungeePlayerServerSwitchScriptEvent extends BukkitScriptEvent {
         OfflinePlayer player = null;
         try {
             player = Bukkit.getOfflinePlayer(uuid);
-            if (!player.hasPlayedBefore()) {
+            if (!player.isOnline() && !player.hasPlayedBefore()) {
                 player = null;
             }
         }

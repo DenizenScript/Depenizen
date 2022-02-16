@@ -77,17 +77,17 @@ public class BossShopCommand extends AbstractCommand {
         ElementTag dshop = scriptEntry.getObjectTag("shop");
         Debug.report(scriptEntry, getName(), target, dshop);
         if (target == null) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
+            Debug.echoError(scriptEntry, "Target not found!");
             return;
         }
         if (dshop == null) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Shop not Specified!");
+            Debug.echoError(scriptEntry, "Shop not Specified!");
             return;
         }
         BossShop bs = (BossShop) BossShopBridge.instance.plugin;
         BSShop shop = bs.getAPI().getShop(dshop.asString());
         if (shop == null) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Shop not found!");
+            Debug.echoError(scriptEntry, "Shop not found!");
             return;
         }
         bs.getAPI().openShop(target.getPlayerEntity(), shop);

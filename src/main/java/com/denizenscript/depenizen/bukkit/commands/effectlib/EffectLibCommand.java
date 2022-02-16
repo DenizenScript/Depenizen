@@ -108,15 +108,15 @@ public class EffectLibCommand extends AbstractCommand {
             Debug.report(scriptEntry, getName(), target, action, duration, location);
         }
         if (target == null && location == null) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Target not found!");
+            Debug.echoError(scriptEntry, "Target not found!");
             return;
         }
         if (action == null) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Effect type not specified!");
+            Debug.echoError(scriptEntry, "Effect type not specified!");
             return;
         }
         if (duration == null) {
-            Debug.echoError(scriptEntry.getResidingQueue(), "Duration not specified!");
+            Debug.echoError(scriptEntry, "Duration not specified!");
             return;
         }
         int ticks = duration.getTicksAsInt();
@@ -163,7 +163,7 @@ public class EffectLibCommand extends AbstractCommand {
                 return;
             }
             default: {
-                Debug.echoError(scriptEntry.getResidingQueue(), "Effect type not found!");
+                Debug.echoError(scriptEntry, "Effect type not found!");
             }
         }
     }
