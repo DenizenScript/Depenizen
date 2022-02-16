@@ -1,19 +1,18 @@
 package com.denizenscript.depenizen.bukkit.objects.jobs;
 
+import com.denizenscript.denizencore.objects.*;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobProgression;
 import com.gamingmesh.jobs.container.JobsPlayer;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
-public class JobsJobTag implements ObjectTag {
+public class JobsJobTag implements ObjectTag, Adjustable {
 
     // <--[ObjectType]
     // @name JobsJobTag
@@ -42,12 +41,6 @@ public class JobsJobTag implements ObjectTag {
         if (string == null) {
             return null;
         }
-
-        ////////
-        // Match job name
-
-        JobsJobTag job = null;
-
         if (ObjectFetcher.isObjectWithProperties(string)) {
             return ObjectFetcher.getObjectFromWithProperties(JobsJobTag.class, string, context);
         }
@@ -240,6 +233,15 @@ public class JobsJobTag implements ObjectTag {
         }
 
         return new ElementTag(identify()).getAttribute(attribute);
+    }
 
+    @Override
+    public void applyProperty(Mechanism mechanism) {
+        adjust(mechanism);
+    }
+
+    @Override
+    public void adjust(Mechanism mechanism) {
+        CoreUtilities.autoPropertyMechanism(this, mechanism);
     }
 }
