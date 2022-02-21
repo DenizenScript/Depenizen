@@ -507,6 +507,11 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
     }
 
     @Override
+    public void applyProperty(Mechanism mechanism) {
+        mechanism.echoError("Cannot apply properties to a Towny town!");
+    }
+
+    @Override
     public void adjust(Mechanism mechanism) {
 
         // <--[mechanism]
@@ -532,10 +537,5 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
                 Debug.echoError(ex);
             }
         }
-    }
-
-    @Override
-    public void applyProperty(Mechanism mechanism) {
-        Debug.echoError("Cannot apply properties to a Towny town!");
     }
 }

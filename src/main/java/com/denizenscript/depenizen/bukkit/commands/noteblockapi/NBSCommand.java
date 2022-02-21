@@ -79,7 +79,7 @@ public class NBSCommand extends AbstractCommand {
                 scriptEntry.addObject("file", arg.asElement());
             }
             else if (!scriptEntry.hasObject("action")
-                    && arg.matchesEnum(Action.values())) {
+                    && arg.matchesEnum(Action.class)) {
                 scriptEntry.addObject("action", arg.asElement());
             }
             else {

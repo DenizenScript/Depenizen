@@ -69,7 +69,7 @@ public class RegionCommand extends AbstractCommand {
                 scriptEntry.addObject("world", arg.asType(WorldTag.class));
             }
             else if (!scriptEntry.hasObject("action")
-                    && arg.matchesEnum(Action.values())) {
+                    && arg.matchesEnum(Action.class)) {
                 scriptEntry.addObject("action", arg.asElement());
             }
             else {

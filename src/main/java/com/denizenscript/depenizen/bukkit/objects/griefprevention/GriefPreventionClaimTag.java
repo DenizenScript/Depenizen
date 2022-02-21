@@ -299,6 +299,11 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
     }
 
     @Override
+    public void applyProperty(Mechanism mechanism) {
+        mechanism.echoError("Cannot apply Properties to a GriefPreventionClaim!");
+    }
+
+    @Override
     public void adjust(Mechanism mechanism) {
         // <--[mechanism]
         // @object GriefPreventionClaimTag
@@ -322,7 +327,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
                 }
             }
             catch (Exception e) {
-                Debug.echoError("Unable to transfer ownership of claim: " + this.identify() + ".");
+                mechanism.echoError("Unable to transfer ownership of claim: " + this.identify() + ".");
             }
         }
 
@@ -349,10 +354,5 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         if (!mechanism.fulfilled()) {
             mechanism.reportInvalid();
         }
-    }
-
-    @Override
-    public void applyProperty(Mechanism mechanism) {
-        Debug.echoError("Cannot apply Properties to a GriefPreventionClaim!");
     }
 }

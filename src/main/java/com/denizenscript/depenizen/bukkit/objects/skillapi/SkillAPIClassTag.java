@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.skillapi;
 
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.classes.RPGClass;
 import com.denizenscript.denizen.objects.ItemTag;
@@ -161,13 +162,17 @@ public class SkillAPIClassTag implements ObjectTag {
         }
 
         // <--[tag]
-        // @attribute <SkillAPIClassTag.group.name>
+        // @attribute <SkillAPIClassTag.group_name>
         // @returns ElementTag
         // @plugin Depenizen, SkillAPI
         // @description
         // Returns the name of the group that this SkillAPI class falls into.
         // -->
-        if (attribute.startsWith("group.name")) { // TODO: SkillAPIGroup object?
+        if (attribute.startsWith("group_name")) {
+            return new ElementTag(rpgClass.getGroup()).getAttribute(attribute.fulfill(1));
+        }
+        if (attribute.startsWith("group.name")) { // old
+            Debug.echoError("Deprecation notice - please change 'SkillAPIClassTag.group.name' to 'SkillAPIClassTag.group_name'");
             return new ElementTag(rpgClass.getGroup()).getAttribute(attribute.fulfill(2));
         }
 

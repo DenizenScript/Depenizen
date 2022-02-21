@@ -64,12 +64,12 @@ public class McMMOCommand extends AbstractCommand {
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
         for (Argument arg : scriptEntry) {
             if (!scriptEntry.hasObject("action")
-                    && arg.matchesEnum(Action.values())) {
+                    && arg.matchesEnum(Action.class)) {
                 scriptEntry.addObject("action", arg.asElement());
             }
             else if (!scriptEntry.hasObject("state")
                     && arg.matchesPrefix("state")
-                    && arg.matchesEnum(State.values())) {
+                    && arg.matchesEnum(State.class)) {
                 scriptEntry.addObject("state", arg.asElement());
             }
             else if (!scriptEntry.hasObject("party")
@@ -86,7 +86,7 @@ public class McMMOCommand extends AbstractCommand {
                 scriptEntry.addObject("quantity", arg.asElement());
             }
             else if (!scriptEntry.hasObject("type")
-                    && arg.matchesEnum(Type.values())) {
+                    && arg.matchesEnum(Type.class)) {
                 scriptEntry.addObject("type", arg.asElement());
             }
             else {

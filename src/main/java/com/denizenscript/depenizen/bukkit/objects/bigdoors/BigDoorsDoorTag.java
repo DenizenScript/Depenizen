@@ -228,7 +228,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
 
     @Override
     public void applyProperty(Mechanism mechanism) {
-        Debug.echoError("Cannot apply Properties to a BigDoors Door!");
+        mechanism.echoError("Cannot apply Properties to a BigDoors Door!");
     }
 
     @Override
@@ -252,7 +252,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
                 return;
             }
             if (!BigDoorsBridge.bigDoors.areChunksLoadedForDoor(door)) {
-                Debug.echoError("Door chunks are not loaded. cannot open door.");
+                mechanism.echoError("Door chunks are not loaded. cannot open door.");
                 return;
             }
             BigDoorsBridge.bigDoors.toggleDoor(door.getDoorUID());

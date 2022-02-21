@@ -364,6 +364,11 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
     }
 
     @Override
+    public void applyProperty(Mechanism mechanism) {
+        mechanism.echoError("Cannot apply properties to a MythicMob!");
+    }
+
+    @Override
     public void adjust(Mechanism mechanism) {
 
         // <--[mechanism]
@@ -444,10 +449,5 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         if (!mechanism.fulfilled()) {
             mechanism.reportInvalid();
         }
-    }
-
-    @Override
-    public void applyProperty(Mechanism mechanism) {
-        Debug.echoError("Cannot apply properties to a MythicMob!");
     }
 }

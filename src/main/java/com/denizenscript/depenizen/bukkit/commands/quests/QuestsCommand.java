@@ -68,7 +68,7 @@ public class QuestsCommand extends AbstractCommand {
 
         for (Argument arg : scriptEntry) {
             if (!scriptEntry.hasObject("action")
-                    && arg.matchesEnum(Action.values())) {
+                    && arg.matchesEnum(Action.class)) {
                 scriptEntry.addObject("action", arg.asElement());
             }
             else if (!scriptEntry.hasObject("quest")
@@ -198,4 +198,3 @@ public class QuestsCommand extends AbstractCommand {
         quester.loadData();
     }
 }
-

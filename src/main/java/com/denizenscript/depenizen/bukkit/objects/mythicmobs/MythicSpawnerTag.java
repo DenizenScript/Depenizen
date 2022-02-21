@@ -211,6 +211,11 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
     }
 
     @Override
+    public void applyProperty(Mechanism mechanism) {
+        mechanism.echoError("Cannot apply properties to a MythicSpawner!");
+    }
+
+    @Override
     public void adjust(Mechanism mechanism) {
 
         // <--[mechanism]
@@ -324,10 +329,5 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
         else if (mechanism.matches("disable")) {
             spawner.Disable();
         }
-    }
-
-    @Override
-    public void applyProperty(Mechanism mechanism) {
-        Debug.echoError("Cannot apply properties to a MythicSpawner!");
     }
 }
