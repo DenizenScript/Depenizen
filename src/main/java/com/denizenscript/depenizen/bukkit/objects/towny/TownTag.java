@@ -8,14 +8,12 @@ import com.denizenscript.denizencore.flags.FlaggableObject;
 import com.denizenscript.denizencore.flags.RedirectionFlagTracker;
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
-import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.*;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -187,7 +185,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // -->
         tagProcessor.registerTag(ListTag.class, "assistants", (attribute, object) -> {
             ListTag list = new ListTag();
-            for (Resident resident : object.town.getAssistants()) {
+            for (Resident resident : object.town.getRank("assistant")) {
                 PlayerTag player = PlayerTag.valueOf(resident.getName(), attribute.context);
                 if (player != null) {
                     list.addObject(player);
@@ -208,15 +206,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // Returns the current money balance of the object.town.
         // -->
         tagProcessor.registerTag(ElementTag.class, "balance", (attribute, object) -> {
-            try {
-                return new ElementTag(object.town.getAccount().getHoldingBalance());
-            }
-            catch (EconomyException e) {
-                if (!attribute.hasAlternative()) {
-                    Debug.echoError("Invalid economy response!");
-                }
-            }
-            return null;
+            return new ElementTag(object.town.getAccount().getHoldingBalance());
         });
 
         // <--[tag]
@@ -227,7 +217,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // Returns the town's current board.
         // -->
         tagProcessor.registerTag(ElementTag.class, "board", (attribute, object) -> {
-            return new ElementTag(object.town.getTownBoard());
+            return new ElementTag(object.town.getBoard());
         });
 
         // <--[tag]
@@ -454,7 +444,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
             if (!object.town.hasPlotGroups()) {
                 return null;
             }
-            for (PlotGroup group : object.town.getPlotObjectGroups()) {
+            for (PlotGroup group : object.town.getPlotGroups()) {
                 output.add(group.getName());
             }
             return output;
@@ -530,12 +520,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
                 mechanism.echoError("Invalid balance mech input.");
                 return;
             }
-            try {
-                town.getAccount().setBalance(new ElementTag(input.get(0)).asDouble(), input.get(1));
-            }
-            catch (EconomyException ex) {
-                Debug.echoError(ex);
-            }
+            town.getAccount().setBalance(new ElementTag(input.get(0)).asDouble(), input.get(1));
         }
     }
 }

@@ -5,7 +5,6 @@ import com.denizenscript.denizencore.flags.AbstractFlagTracker;
 import com.denizenscript.denizencore.flags.FlaggableObject;
 import com.denizenscript.denizencore.flags.RedirectionFlagTracker;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
-import com.palmergames.bukkit.towny.exceptions.EconomyException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.TownyUniverse;
@@ -198,15 +197,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
         // Returns the current money balance of the nation.
         // -->
         tagProcessor.registerTag(ElementTag.class, "balance", (attribute, object) -> {
-            try {
-                return new ElementTag(object.nation.getAccount().getHoldingBalance());
-            }
-            catch (EconomyException e) {
-                if (!attribute.hasAlternative()) {
-                    Debug.echoError("Invalid economy response!");
-                }
-            }
-            return null;
+            return new ElementTag(object.nation.getAccount().getHoldingBalance());
         });
 
         // <--[tag]

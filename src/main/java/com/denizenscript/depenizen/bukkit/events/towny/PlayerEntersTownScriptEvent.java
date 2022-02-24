@@ -2,11 +2,11 @@ package com.denizenscript.depenizen.bukkit.events.towny;
 
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.event.PlayerEnterTownEvent;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
+import com.palmergames.bukkit.towny.object.TownyWorld;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -67,12 +67,8 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
 
     @EventHandler
     public void onTownyPlayerEntersTown(PlayerEnterTownEvent event) {
-        try {
-            if (!event.getTo().getTownyWorld().isUsingTowny()) {
-                return;
-            }
-        }
-        catch (NotRegisteredException e) {
+        TownyWorld world = event.getTo().getTownyWorld();
+        if (world == null || !world.isUsingTowny()) {
             return;
         }
         town = TownTag.fromWorldCoord(event.getTo());

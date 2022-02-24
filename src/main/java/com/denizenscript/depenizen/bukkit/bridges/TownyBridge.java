@@ -9,7 +9,6 @@ import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.properties.towny.TownyPlayerProperties;
 import com.palmergames.bukkit.towny.TownyAPI;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.TownyUniverse;
@@ -24,6 +23,7 @@ import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagManager;
+import com.palmergames.bukkit.towny.object.TownyWorld;
 
 public class TownyBridge extends Bridge {
 
@@ -69,14 +69,13 @@ public class TownyBridge extends Bridge {
         if (attribute.startsWith("list_towns")) {
             ListTag towns = new ListTag();
             if (attribute.hasParam()) {
-                try {
-                    for (Town town : TownyAPI.getInstance().getDataSource().getWorld(attribute.getParam().replace("w@", "")).getTowns().values()) {
-                        towns.addObject(new TownTag(town));
-                    }
-                }
-                catch (NotRegisteredException e) {
+                TownyWorld world = TownyAPI.getInstance().getDataSource().getWorld(attribute.getParam().replace("w@", ""));
+                if (world == null) {
                     attribute.echoError("World specified is not a registered towny world!");
                     return;
+                }
+                for (Town town : world.getTowns().values()) {
+                    towns.addObject(new TownTag(town));
                 }
             }
             else {

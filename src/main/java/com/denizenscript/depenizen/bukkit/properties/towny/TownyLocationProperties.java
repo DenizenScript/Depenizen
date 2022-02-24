@@ -106,7 +106,7 @@ public class TownyLocationProperties implements Property {
         if (attribute.startsWith("towny_type")) {
             TownBlock block = TownyAPI.getInstance().getTownBlock(location);
             if (block != null) {
-                return new ElementTag(block.getType().name()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(block.getType().getName()).getAttribute(attribute.fulfill(1));
             }
             return null;
         }
