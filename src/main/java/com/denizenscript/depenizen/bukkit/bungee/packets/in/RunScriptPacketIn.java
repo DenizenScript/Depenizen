@@ -1,8 +1,10 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.in;
 
 import com.denizenscript.denizen.tags.BukkitTagContext;
+import com.denizenscript.denizencore.scripts.containers.core.TaskScriptContainer;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.ScriptUtilities;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
@@ -12,13 +14,8 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.core.ScriptTag;
-import com.denizenscript.denizencore.scripts.ScriptEntry;
-import com.denizenscript.denizencore.scripts.queues.ScriptQueue;
-import com.denizenscript.denizencore.scripts.queues.core.InstantQueue;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 
-import java.util.List;
 import java.util.UUID;
 
 public class RunScriptPacketIn extends PacketIn {
@@ -45,49 +42,27 @@ public class RunScriptPacketIn extends PacketIn {
             PlayerTag linkedPlayer = null;
             if (uuidMost != 0 || uuidLeast != 0) {
                 UUID uuid = new UUID(uuidMost, uuidLeast);
-                try {
-                    OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
-                    if (player != null) {
-                        linkedPlayer = new PlayerTag(player);
-                    }
-                }
-                catch (Exception ex) {
-                    // Ignore
-                }
+                linkedPlayer = new PlayerTag(Bukkit.getOfflinePlayer(uuid));
             }
-            ScriptTag script = ScriptTag.valueOf(scriptName, CoreUtilities.basicContext);
+            String scrName = scriptName;
+            String path = null;
+            int dotIndex = scrName.indexOf('.');
+            if (dotIndex != -1) {
+                path = scrName.substring(dotIndex + 1);
+                scrName = scrName.substring(0, dotIndex);
+            }
+            ScriptTag script = ScriptTag.valueOf(scrName, CoreUtilities.basicContext);
             if (script == null) {
-                Debug.echoError("Invalid Depenizen bungeerun script '" + scriptName + "': script does not exist.");
+                Debug.echoError("Invalid Depenizen bungeerun script '" + scrName + "': script does not exist.");
                 return;
             }
-            List<ScriptEntry> entries = script.getContainer().getBaseEntries(new BukkitScriptEntryData(linkedPlayer, null));
-            if (entries.isEmpty()) {
+            if (!(script.getContainer() instanceof TaskScriptContainer)) {
+                Debug.echoError("Invalid Depenizen bungeerun script '" + scrName + "': script is not a 'task' script.");
                 return;
             }
-            ScriptQueue queue = new InstantQueue("BUNGEERUN_" + scriptName);
-            queue.addEntries(entries);
-            int x = 1;
             TagContext context = new BukkitTagContext(linkedPlayer, null, script);
-            ListTag definitions = ListTag.valueOf(defs, context);
-            String[] definition_names = null;
-            try {
-                String str = script.getContainer().getString("definitions");
-                if (str != null) {
-                    definition_names = str.split("\\|");
-                }
-            }
-            catch (Exception e) {
-                // Ignored
-            }
-            for (String definition : definitions) {
-                String name = definition_names != null && definition_names.length >= x ?
-                        definition_names[x - 1].trim() : String.valueOf(x);
-                queue.addDefinition(name, definition);
-                Debug.echoDebug(entries.get(0), "Adding definition '" + name + "' as " + definition);
-                x++;
-            }
-            queue.addDefinition("raw_context", defs);
-            queue.start();
+            ScriptUtilities.createAndStartQueue(script.getContainer(), path, new BukkitScriptEntryData(linkedPlayer, null),
+                    null, null, null, "BUNGEERUN_" + scrName, ListTag.valueOf(defs, context), script.getContainer());
         });
     }
 }
