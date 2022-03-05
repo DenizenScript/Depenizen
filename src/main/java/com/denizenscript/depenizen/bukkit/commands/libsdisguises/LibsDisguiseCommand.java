@@ -16,13 +16,14 @@ public class LibsDisguiseCommand extends AbstractCommand {
 
     public LibsDisguiseCommand() {
         setName("libsdisguise");
-        setSyntax("libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/{false}) (id:<item>) (self:true/{false})");
-        setRequiredArguments(1, 6);
+        setSyntax("libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby) (id:<item>) (self) (hide_name)");
+        setRequiredArguments(1, 8);
+        setBooleansHandled("self", "baby", "hide_name");
     }
 
     // <--[command]
     // @Name libsdisguise
-    // @Syntax libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby:true/{false}) (id:<item>) (self:true/{false})
+    // @Syntax libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby) (id:<item>) (self) (hide_name)
     // @Group Depenizen
     // @Plugin Depenizen, LibsDisguises
     // @Required 1
@@ -46,7 +47,12 @@ public class LibsDisguiseCommand extends AbstractCommand {
     //
     // Removing a disguise shows the true entity again for all players.
     // Only one disguise can be set per target, if another one is set, the previous disguise is removed.
-    // Optionally specify 'self:true' to hide the disguise from the target player, so they still see their normal player (defaults to false).
+    //
+    // Optionally specify 'self' to hide the disguise from the target player, so they still see their normal player.
+    //
+    // Optionally specify 'baby' to make the disguised mob a baby (where applicable).
+    //
+    // Optionally specifiy 'hide_name' to hide the nameplate of a player disguise.
     //
     // @Tags
     // <EntityTag.libsdisguise_is_disguised>
@@ -103,14 +109,6 @@ public class LibsDisguiseCommand extends AbstractCommand {
                     && arg.matchesPrefix("id")) {
                 scriptEntry.addObject("id", arg.asElement());
             }
-            else if (!scriptEntry.hasObject("baby")
-                    && arg.matchesPrefix("baby")) {
-                scriptEntry.addObject("baby", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("self")
-                    && arg.matchesPrefix("self")) {
-                scriptEntry.addObject("self", arg.asElement());
-            }
             else if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.class)) {
                 scriptEntry.addObject("action", arg.asElement());
@@ -121,12 +119,6 @@ public class LibsDisguiseCommand extends AbstractCommand {
         }
         if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Action not specified! (remove/mob/player/misc)");
-        }
-        if (!scriptEntry.hasObject("baby")) {
-            scriptEntry.addObject("baby", new ElementTag(false));
-        }
-        if (!scriptEntry.hasObject("self")) {
-            scriptEntry.addObject("self", new ElementTag(false));
         }
         if (!scriptEntry.hasObject("target")) {
             if (Utilities.entryHasPlayer(scriptEntry)) {
@@ -143,82 +135,86 @@ public class LibsDisguiseCommand extends AbstractCommand {
         EntityTag target = scriptEntry.getObjectTag("target");
         ElementTag type = scriptEntry.getObjectTag("type");
         ElementTag name = scriptEntry.getObjectTag("name");
-        ElementTag action = scriptEntry.getObjectTag("action");
+        ElementTag actionElement = scriptEntry.getObjectTag("action");
         ElementTag id = scriptEntry.getObjectTag("id");
-        ElementTag baby = scriptEntry.getObjectTag("baby");
-        ElementTag self = scriptEntry.getObjectTag("self");
+        boolean baby = scriptEntry.argAsBoolean("baby");
+        boolean self = scriptEntry.argAsBoolean("self");
+        boolean hideName = scriptEntry.argAsBoolean("hide_name");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), action, target, type, name, id, baby);
+            Debug.report(scriptEntry, getName(), actionElement, target, type, name, id, db("baby", baby), db("self", self), db("hide_name", hideName));
         }
         if (target == null) {
             Debug.echoError(scriptEntry, "Target not found!");
             return;
         }
-        if (baby == null) {
-            Debug.echoError(scriptEntry, "Baby not specified!");
-            return;
-        }
-        if (action.asString().equalsIgnoreCase("remove")) {
-            DisguiseAPI.undisguiseToAll(target.getBukkitEntity());
-        }
-        else if (action.asString().equalsIgnoreCase("mob")) {
-            if (type == null) {
-                Debug.echoError(scriptEntry, "Entity not specified!");
-                return;
+        switch (actionElement.asEnum(Action.class)) {
+            case REMOVE: {
+                DisguiseAPI.undisguiseToAll(target.getBukkitEntity());
+                break;
             }
-            MobDisguise mobDisguise = new MobDisguise(DisguiseType.valueOf(type.toString().toUpperCase()), !baby.asBoolean());
-            FlagWatcher watcher = mobDisguise.getWatcher();
-            if (name != null) {
-                watcher.setCustomNameVisible(true);
-                watcher.setCustomName(name.toString());
-            }
-            if (target.isPlayer() && self.asBoolean()) {
-                DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), mobDisguise, target.getPlayer());
-            }
-            else {
-                DisguiseAPI.disguiseToAll(target.getBukkitEntity(), mobDisguise);
-            }
-        }
-        else if (action.asString().equalsIgnoreCase("player")) {
-            if (name == null) {
-                Debug.echoError(scriptEntry, "Name not specified!");
-                return;
-            }
-            PlayerDisguise playerDisguise = new PlayerDisguise(name.toString());
-            if (target.isPlayer() && self.asBoolean()) {
-                DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), playerDisguise, target.getPlayer());
-            }
-            else {
-                DisguiseAPI.disguiseToAll(target.getBukkitEntity(), playerDisguise);
-            }
-        }
-        else if (action.asString().equalsIgnoreCase("misc")) {
-            if (type == null) {
-                Debug.echoError(scriptEntry, "Entity not specified!");
-                return;
-            }
-            DisguiseType disType = DisguiseType.valueOf(type.toString().toUpperCase());
-            MiscDisguise miscDisguise;
-            if (disType == DisguiseType.FALLING_BLOCK || disType == DisguiseType.DROPPED_ITEM) {
-                if (id == null) {
-                    Debug.echoError(scriptEntry, "ID not specified!");
+            case MOB: {
+                if (type == null) {
+                    Debug.echoError(scriptEntry, "Entity not specified!");
                     return;
                 }
-                miscDisguise = new MiscDisguise(disType, ItemTag.valueOf(id.asString(), scriptEntry.context).getItemStack());
+                MobDisguise mobDisguise = new MobDisguise(DisguiseType.valueOf(type.toString().toUpperCase()), !baby);
+                FlagWatcher watcher = mobDisguise.getWatcher();
+                if (name != null) {
+                    watcher.setCustomNameVisible(true);
+                    watcher.setCustomName(name.toString());
+                }
+                if (target.isPlayer() && self) {
+                    DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), mobDisguise, target.getPlayer());
+                }
+                else {
+                    DisguiseAPI.disguiseToAll(target.getBukkitEntity(), mobDisguise);
+                }
+                break;
             }
-            else {
-                miscDisguise = new MiscDisguise(disType);
+            case PLAYER: {
+                if (name == null) {
+                    Debug.echoError(scriptEntry, "Name not specified!");
+                    return;
+                }
+                PlayerDisguise playerDisguise = new PlayerDisguise(name.toString());
+                playerDisguise.setNameVisible(!hideName);
+                if (target.isPlayer() && self) {
+                    DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), playerDisguise, target.getPlayer());
+                }
+                else {
+                    DisguiseAPI.disguiseToAll(target.getBukkitEntity(), playerDisguise);
+                }
+                break;
             }
-            FlagWatcher watcher = miscDisguise.getWatcher();
-            if (name != null) {
-                watcher.setCustomNameVisible(true);
-                watcher.setCustomName(name.toString());
-            }
-            if (target.isPlayer() && self.asBoolean()) {
-                DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), miscDisguise, target.getPlayer());
-            }
-            else {
-                DisguiseAPI.disguiseToAll(target.getBukkitEntity(), miscDisguise);
+            case MISC: {
+                if (type == null) {
+                    Debug.echoError(scriptEntry, "Entity not specified!");
+                    return;
+                }
+                DisguiseType disType = DisguiseType.valueOf(type.toString().toUpperCase());
+                MiscDisguise miscDisguise;
+                if (disType == DisguiseType.FALLING_BLOCK || disType == DisguiseType.DROPPED_ITEM) {
+                    if (id == null) {
+                        Debug.echoError(scriptEntry, "ID not specified!");
+                        return;
+                    }
+                    miscDisguise = new MiscDisguise(disType, ItemTag.valueOf(id.asString(), scriptEntry.context).getItemStack());
+                }
+                else {
+                    miscDisguise = new MiscDisguise(disType);
+                }
+                FlagWatcher watcher = miscDisguise.getWatcher();
+                if (name != null) {
+                    watcher.setCustomNameVisible(true);
+                    watcher.setCustomName(name.toString());
+                }
+                if (target.isPlayer() && self) {
+                    DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), miscDisguise, target.getPlayer());
+                }
+                else {
+                    DisguiseAPI.disguiseToAll(target.getBukkitEntity(), miscDisguise);
+                }
+                break;
             }
         }
     }
