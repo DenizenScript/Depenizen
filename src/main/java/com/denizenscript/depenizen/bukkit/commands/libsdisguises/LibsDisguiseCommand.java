@@ -111,7 +111,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-        EntityTag target = scriptEntry.argForPrefix("target", EntityTag.class, false);
+        EntityTag target = scriptEntry.argForPrefix("target", EntityTag.class, true);
         ElementTag type = scriptEntry.argForPrefixAsElement("type", null);
         ElementTag name = scriptEntry.argForPrefixAsElement("name", null);
         ElementTag displayName = scriptEntry.argForPrefixAsElement("display_name", null);
@@ -123,14 +123,12 @@ public class LibsDisguiseCommand extends AbstractCommand {
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), actionElement, target, type, name, displayName, id, db("baby", baby), db("self", self), db("hide_name", hideName));
         }
-        if (target == null) {
-            if (Utilities.entryHasPlayer(scriptEntry)) {
-                target = Utilities.getEntryPlayer(scriptEntry).getDenizenEntity();
-            }
-            else {
-                Debug.echoError(scriptEntry, "Target not found!");
-                return;
-            }
+        if (target == null && Utilities.entryHasPlayer(scriptEntry)) {
+            target = Utilities.getEntryPlayer(scriptEntry).getDenizenEntity();
+        }
+        else {
+            Debug.echoError(scriptEntry, "Target not found!");
+            return;
         }
         switch (actionElement.asEnum(Action.class)) {
             case REMOVE: {
@@ -142,7 +140,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
                     Debug.echoError(scriptEntry, "Entity not specified!");
                     return;
                 }
-                MobDisguise mobDisguise = new MobDisguise(DisguiseType.valueOf(type.asString().toUpperCase()), !baby);
+                MobDisguise mobDisguise = new MobDisguise(type.asEnum(DisguiseType.class), !baby);
                 FlagWatcher watcher = mobDisguise.getWatcher();
                 // The "name" argument used to set the display name
                 if (displayName == null && name != null) {
@@ -180,7 +178,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
                     Debug.echoError(scriptEntry, "Entity not specified!");
                     return;
                 }
-                DisguiseType disType = DisguiseType.valueOf(type.asString().toUpperCase());
+                DisguiseType disType = type.asEnum(DisguiseType.class);
                 MiscDisguise miscDisguise;
                 if (disType == DisguiseType.FALLING_BLOCK || disType == DisguiseType.DROPPED_ITEM) {
                     if (id == null) {
