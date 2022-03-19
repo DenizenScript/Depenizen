@@ -123,12 +123,14 @@ public class LibsDisguiseCommand extends AbstractCommand {
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), actionElement, target, type, name, displayName, id, db("baby", baby), db("self", self), db("hide_name", hideName));
         }
-        if (target == null && Utilities.entryHasPlayer(scriptEntry)) {
-            target = Utilities.getEntryPlayer(scriptEntry).getDenizenEntity();
-        }
-        else {
-            Debug.echoError(scriptEntry, "Target not found!");
-            return;
+        if (target == null) {
+            if (Utilities.entryHasPlayer(scriptEntry)) {
+                target = Utilities.getEntryPlayer(scriptEntry).getDenizenEntity();
+            }
+            else {
+                Debug.echoError(scriptEntry, "Target not found!");
+                return;
+            }
         }
         switch (actionElement.asEnum(Action.class)) {
             case REMOVE: {
