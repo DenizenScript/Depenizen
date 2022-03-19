@@ -16,18 +16,19 @@ public class LibsDisguiseCommand extends AbstractCommand {
 
     public LibsDisguiseCommand() {
         setName("libsdisguise");
-        setSyntax("libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby) (id:<item>) (self) (hide_name)");
-        setRequiredArguments(1, 8);
+        setSyntax("libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (display_name:<text>) (baby) (id:<item>) (self) (hide_name)");
+        setRequiredArguments(1, 9);
+        setPrefixesHandled("target", "name", "type", "id", "display_name");
         setBooleansHandled("self", "baby", "hide_name");
     }
 
     // <--[command]
     // @Name libsdisguise
-    // @Syntax libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (baby) (id:<item>) (self) (hide_name)
+    // @Syntax libsdisguise [remove/player/mob/misc] (type:<entity type>) (target:<entity>) (name:<text>) (display_name:<text>) (baby) (id:<item>) (self) (hide_name)
     // @Group Depenizen
     // @Plugin Depenizen, LibsDisguises
     // @Required 1
-    // @Maximum 8
+    // @Maximum 9
     // @Short Disguises an entity as a different entity.
     //
     // @Description
@@ -53,6 +54,8 @@ public class LibsDisguiseCommand extends AbstractCommand {
     // Optionally specify 'baby' to make the disguised mob a baby (where applicable).
     //
     // Optionally specifiy 'hide_name' to hide the nameplate of a player disguise.
+    //
+    // Optionally specify 'display_name' to set the display name of the disguise.
     //
     // @Tags
     // <EntityTag.libsdisguise_is_disguised>
@@ -93,23 +96,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
         for (Argument arg : scriptEntry) {
-            if (!scriptEntry.hasObject("target")
-                    && arg.matchesPrefix("target")) {
-                scriptEntry.addObject("target", arg.asType(EntityTag.class));
-            }
-            else if (!scriptEntry.hasObject("name")
-                    && arg.matchesPrefix("name")) {
-                scriptEntry.addObject("name", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("type")
-                    && arg.matchesPrefix("type")) {
-                scriptEntry.addObject("type", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("id")
-                    && arg.matchesPrefix("id")) {
-                scriptEntry.addObject("id", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("action")
+            if (!scriptEntry.hasObject("action")
                     && arg.matchesEnum(Action.class)) {
                 scriptEntry.addObject("action", arg.asElement());
             }
@@ -120,32 +107,30 @@ public class LibsDisguiseCommand extends AbstractCommand {
         if (!scriptEntry.hasObject("action")) {
             throw new InvalidArgumentsException("Action not specified! (remove/mob/player/misc)");
         }
-        if (!scriptEntry.hasObject("target")) {
-            if (Utilities.entryHasPlayer(scriptEntry)) {
-                scriptEntry.addObject("target", Utilities.getEntryPlayer(scriptEntry).getDenizenEntity());
-            }
-            else {
-                throw new InvalidArgumentsException("This command does not have a player attached!");
-            }
-        }
     }
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-        EntityTag target = scriptEntry.getObjectTag("target");
-        ElementTag type = scriptEntry.getObjectTag("type");
-        ElementTag name = scriptEntry.getObjectTag("name");
+        EntityTag target = scriptEntry.argForPrefix("target", EntityTag.class, true);
+        ElementTag type = scriptEntry.argForPrefixAsElement("type", null);
+        ElementTag name = scriptEntry.argForPrefixAsElement("name", null);
+        ElementTag displayName = scriptEntry.argForPrefixAsElement("display_name", null);
         ElementTag actionElement = scriptEntry.getObjectTag("action");
-        ElementTag id = scriptEntry.getObjectTag("id");
+        ElementTag id = scriptEntry.argForPrefixAsElement("id", null);
         boolean baby = scriptEntry.argAsBoolean("baby");
         boolean self = scriptEntry.argAsBoolean("self");
         boolean hideName = scriptEntry.argAsBoolean("hide_name");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), actionElement, target, type, name, id, db("baby", baby), db("self", self), db("hide_name", hideName));
+            Debug.report(scriptEntry, getName(), actionElement, target, type, name, displayName, id, db("baby", baby), db("self", self), db("hide_name", hideName));
         }
         if (target == null) {
-            Debug.echoError(scriptEntry, "Target not found!");
-            return;
+            if (Utilities.entryHasPlayer(scriptEntry)) {
+                target = Utilities.getEntryPlayer(scriptEntry).getDenizenEntity();
+            }
+            else {
+                Debug.echoError(scriptEntry, "Target not found!");
+                return;
+            }
         }
         switch (actionElement.asEnum(Action.class)) {
             case REMOVE: {
@@ -157,11 +142,15 @@ public class LibsDisguiseCommand extends AbstractCommand {
                     Debug.echoError(scriptEntry, "Entity not specified!");
                     return;
                 }
-                MobDisguise mobDisguise = new MobDisguise(DisguiseType.valueOf(type.toString().toUpperCase()), !baby);
+                MobDisguise mobDisguise = new MobDisguise(type.asEnum(DisguiseType.class), !baby);
                 FlagWatcher watcher = mobDisguise.getWatcher();
-                if (name != null) {
+                // The "name" argument used to set the display name
+                if (displayName == null && name != null) {
+                    displayName = name;
+                }
+                if (displayName != null) {
                     watcher.setCustomNameVisible(true);
-                    watcher.setCustomName(name.toString());
+                    watcher.setCustomName(displayName.asString());
                 }
                 if (target.isPlayer() && self) {
                     DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), mobDisguise, target.getPlayer());
@@ -176,7 +165,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
                     Debug.echoError(scriptEntry, "Name not specified!");
                     return;
                 }
-                PlayerDisguise playerDisguise = new PlayerDisguise(name.toString());
+                PlayerDisguise playerDisguise = new PlayerDisguise(displayName != null ? displayName.asString() : name.asString(), name.asString());
                 playerDisguise.setNameVisible(!hideName);
                 if (target.isPlayer() && self) {
                     DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), playerDisguise, target.getPlayer());
@@ -191,7 +180,7 @@ public class LibsDisguiseCommand extends AbstractCommand {
                     Debug.echoError(scriptEntry, "Entity not specified!");
                     return;
                 }
-                DisguiseType disType = DisguiseType.valueOf(type.toString().toUpperCase());
+                DisguiseType disType = type.asEnum(DisguiseType.class);
                 MiscDisguise miscDisguise;
                 if (disType == DisguiseType.FALLING_BLOCK || disType == DisguiseType.DROPPED_ITEM) {
                     if (id == null) {
@@ -204,9 +193,13 @@ public class LibsDisguiseCommand extends AbstractCommand {
                     miscDisguise = new MiscDisguise(disType);
                 }
                 FlagWatcher watcher = miscDisguise.getWatcher();
-                if (name != null) {
+                // The "name" argument used to set the display name
+                if (displayName == null && name != null) {
+                    displayName = name;
+                }
+                if (displayName != null) {
                     watcher.setCustomNameVisible(true);
-                    watcher.setCustomName(name.toString());
+                    watcher.setCustomName(displayName.asString());
                 }
                 if (target.isPlayer() && self) {
                     DisguiseAPI.disguiseIgnorePlayers(target.getBukkitEntity(), miscDisguise, target.getPlayer());
