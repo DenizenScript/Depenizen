@@ -7,24 +7,23 @@ import com.denizenscript.denizencore.scripts.queues.ContextSource;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import io.lumine.xikage.mythicmobs.adapters.AbstractEntity;
-import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
-import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
-import io.lumine.xikage.mythicmobs.skills.SkillMetadata;
-import io.lumine.xikage.mythicmobs.skills.targeters.IEntitySelector;
+import io.lumine.mythic.api.adapters.AbstractEntity;
+import io.lumine.mythic.api.config.MythicLineConfig;
+import io.lumine.mythic.api.skills.SkillMetadata;
+import io.lumine.mythic.api.skills.targeters.IEntityTargeter;
+import io.lumine.mythic.bukkit.BukkitAdapter;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-public class DenizenEntityTargeter extends IEntitySelector {
+public class DenizenEntityTargeter implements IEntityTargeter {
 
     final String tag;
     ContextSource.SimpleMap source;
     HashMap<String, ObjectTag> context;
 
     public DenizenEntityTargeter(MythicLineConfig mlc) {
-        super(mlc);
         tag = mlc.getString("tag");
         context = new HashMap<>();
         source = new ContextSource.SimpleMap();

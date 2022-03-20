@@ -1,11 +1,12 @@
 package com.denizenscript.depenizen.bukkit.utilities.mythicmobs;
 
 import com.denizenscript.denizen.Denizen;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.conditions.DenizenCondition;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.targeters.DenizenEntityTargeter;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.targeters.DenizenLocationTargeter;
-import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicConditionLoadEvent;
-import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicTargeterLoadEvent;
+import io.lumine.mythic.bukkit.events.MythicConditionLoadEvent;
+import io.lumine.mythic.bukkit.events.MythicTargeterLoadEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -54,17 +55,17 @@ public class MythicMobsLoaders implements Listener {
 
     @EventHandler
     public void onMythicTargetersLoad(MythicTargeterLoadEvent event) {
-        if (event.getTargeterName().toLowerCase().equals("denizenentity")) {
+        if (CoreUtilities.toLowerCase(event.getTargeterName()).equals("denizenentity")) {
             event.register(new DenizenEntityTargeter(event.getConfig()));
         }
-        else if (event.getTargeterName().toLowerCase().equals("denizenlocation")) {
+        else if (CoreUtilities.toLowerCase(event.getTargeterName()).equals("denizenlocation")) {
             event.register(new DenizenLocationTargeter(event.getConfig()));
         }
     }
 
     @EventHandler
     public void onMythicConditionsLoad(MythicConditionLoadEvent event) {
-        if (event.getConditionName().toLowerCase().equals("denizencondition")) {
+        if (CoreUtilities.toLowerCase(event.getConditionName()).equals("denizencondition")) {
             event.register(new DenizenCondition(event.getConfig().getLine(), event.getConfig()));
         }
     }

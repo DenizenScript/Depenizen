@@ -8,24 +8,23 @@ import com.denizenscript.denizencore.scripts.queues.ContextSource;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import io.lumine.xikage.mythicmobs.adapters.AbstractLocation;
-import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
-import io.lumine.xikage.mythicmobs.io.MythicLineConfig;
-import io.lumine.xikage.mythicmobs.skills.SkillMetadata;
-import io.lumine.xikage.mythicmobs.skills.targeters.ILocationSelector;
+import io.lumine.mythic.api.adapters.AbstractLocation;
+import io.lumine.mythic.api.config.MythicLineConfig;
+import io.lumine.mythic.api.skills.SkillMetadata;
+import io.lumine.mythic.api.skills.targeters.ILocationTargeter;
+import io.lumine.mythic.bukkit.BukkitAdapter;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-public class DenizenLocationTargeter extends ILocationSelector {
+public class DenizenLocationTargeter implements ILocationTargeter {
 
     final String tag;
     ContextSource.SimpleMap source;
     HashMap<String, ObjectTag> context;
 
     public DenizenLocationTargeter(MythicLineConfig mlc) {
-        super(mlc);
         tag = mlc.getString("tag");
         context = new HashMap<>();
         source = new ContextSource.SimpleMap();

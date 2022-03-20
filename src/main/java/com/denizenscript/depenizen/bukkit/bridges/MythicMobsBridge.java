@@ -20,15 +20,15 @@ import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
-import io.lumine.xikage.mythicmobs.api.bukkit.BukkitAPIHelper;
-import io.lumine.xikage.mythicmobs.items.MythicItem;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
-import io.lumine.xikage.mythicmobs.mobs.MobManager;
-import io.lumine.xikage.mythicmobs.mobs.MythicMob;
-import io.lumine.xikage.mythicmobs.spawning.spawners.MythicSpawner;
-import io.lumine.xikage.mythicmobs.spawning.spawners.SpawnerManager;
+import io.lumine.mythic.api.mobs.MobManager;
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.BukkitAPIHelper;
+import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.items.MythicItem;
+import io.lumine.mythic.core.mobs.ActiveMob;
+import io.lumine.mythic.core.spawning.spawners.MythicSpawner;
+import io.lumine.mythic.core.spawning.spawners.SpawnerManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
@@ -63,7 +63,7 @@ public class MythicMobsBridge extends Bridge {
                 return null;
             }
             String name = attribute.getParam();
-            Optional<MythicItem> itemOpt = MythicMobs.inst().getItemManager().getItem(name);
+            Optional<MythicItem> itemOpt = MythicBukkit.inst().getItemManager().getItem(name);
             if (!itemOpt.isPresent()) {
                 attribute.echoError("'" + name + "' is not a valid Mythic item.");
                 return null;
@@ -141,42 +141,42 @@ public class MythicMobsBridge extends Bridge {
     }
 
     public static boolean isMythicMob(Entity entity) {
-        return MythicMobs.inst().getMobManager().isActiveMob(BukkitAdapter.adapt(entity));
+        return MythicBukkit.inst().getMobManager().isActiveMob(BukkitAdapter.adapt(entity));
     }
 
     public static boolean isMythicMob(UUID uuid) {
-        return MythicMobs.inst().getMobManager().isActiveMob(uuid);
+        return MythicBukkit.inst().getMobManager().isActiveMob(uuid);
     }
 
     public static ActiveMob getActiveMob(Entity entity) {
-        return MythicMobs.inst().getMobManager().getMythicMobInstance(entity);
+        return MythicBukkit.inst().getMobManager().getMythicMobInstance(entity);
     }
 
     public static MythicMob getMythicMob(String name) {
-        return MythicMobs.inst().getMobManager().getMythicMob(name);
+        return MythicBukkit.inst().getMobManager().getMythicMob(name).orElse(null);
     }
 
     public static MobManager getMobManager() {
-        return MythicMobs.inst().getMobManager();
+        return MythicBukkit.inst().getMobManager();
     }
 
     public static SpawnerManager getSpawnerManager() {
-        return MythicMobs.inst().getSpawnerManager();
+        return MythicBukkit.inst().getSpawnerManager();
     }
 
     public static boolean isMythicSpawner(String name) {
-        return MythicMobs.inst().getSpawnerManager().getSpawnerByName(name) != null;
+        return MythicBukkit.inst().getSpawnerManager().getSpawnerByName(name) != null;
     }
 
     public static MythicSpawner getMythicSpawner(String name) {
-        return MythicMobs.inst().getSpawnerManager().getSpawnerByName(name);
+        return MythicBukkit.inst().getSpawnerManager().getSpawnerByName(name);
     }
 
     public static BukkitAPIHelper getAPI() {
-        return MythicMobs.inst().getAPIHelper();
+        return MythicBukkit.inst().getAPIHelper();
     }
 
     public static boolean skillExists(String name) {
-        return MythicMobs.inst().getSkillManager().getSkillNames().contains(name);
+        return MythicBukkit.inst().getSkillManager().getSkillNames().contains(name);
     }
 }
