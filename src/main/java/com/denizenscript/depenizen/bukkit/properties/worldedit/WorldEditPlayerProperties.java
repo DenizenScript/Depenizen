@@ -5,6 +5,7 @@ import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.depenizen.bukkit.bridges.WorldEditBridge;
+import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.command.tool.BrushTool;
@@ -190,7 +191,9 @@ public class WorldEditPlayerProperties implements Property {
                 Debug.echoError("Invalid we_selection input");
                 return;
             }
-            worldEdit.getSession(player).setRegionSelector(BukkitAdapter.adapt(player.getWorld()), selector);
+            LocalSession session = worldEdit.getSession(player);
+            session.setRegionSelector(BukkitAdapter.adapt(player.getWorld()), selector);
+            selector.explainRegionAdjust(BukkitAdapter.adapt(player), session);
         }
     }
 }
