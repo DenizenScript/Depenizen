@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.bungee;
 
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.scripts.commands.core.AdjustCommand;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyCommandPacketOut;
@@ -209,7 +210,7 @@ public class BungeeBridge {
             if (!connected) {
                 return;
             }
-            if (System.currentTimeMillis() > lastPacketReceived + 20 * 1000) {
+            if (CoreUtilities.monotonicMillis() > lastPacketReceived + 20 * 1000) {
                 // 20 seconds without a packet = connection lost!
                 handler.fail("Connection time out.");
                 return;

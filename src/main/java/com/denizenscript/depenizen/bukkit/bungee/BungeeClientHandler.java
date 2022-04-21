@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyCommandPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyPingPacketOut;
@@ -86,7 +87,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         ctx.writeAndFlush(handshake); // Will release handshake
         Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> {
             Debug.log("Depenizen now connected to Bungee server.");
-            BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
+            BungeeBridge.instance.lastPacketReceived = CoreUtilities.monotonicMillis();
             BungeeBridge.instance.sendPacket(new MyInfoPacketOut(Bukkit.getPort()));
             BungeeBridge.instance.sendPacket(new ControlsProxyPingPacketOut(BungeeBridge.instance.controlsProxyPing));
             BungeeBridge.instance.sendPacket(new ControlsProxyCommandPacketOut(BungeeBridge.instance.controlsProxyCommand));
@@ -117,7 +118,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
                     return;
                 }
                 try {
-                    BungeeBridge.instance.lastPacketReceived = System.currentTimeMillis();
+                    BungeeBridge.instance.lastPacketReceived = CoreUtilities.monotonicMillis();
                     PacketIn packet = BungeeBridge.instance.packets.get(packetId);
                     packet.process(packetBuffer);
                     currentStage = Stage.AWAIT_HEADER;
