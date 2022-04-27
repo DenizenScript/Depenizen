@@ -4,7 +4,6 @@ import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.NPCTag;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import org.bukkit.event.EventHandler;
@@ -22,6 +21,8 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     //
     // @Triggers when a Sentinel-powered NPC attacks a target.
     //
+    // @Switch entity:<entity> to only fire the event if the target entity matches the given entity matcher.
+    //
     // @Context
     // <context.entity> returns the entity that the NPC is attacking.
     //
@@ -38,11 +39,12 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     public SentinelAttackScriptEvent() {
         instance = this;
         registerCouldMatcher("sentinel npc attacks");
+        registerSwitches("entity");
     }
 
     public static SentinelAttackScriptEvent instance;
     public SentinelAttackEvent event;
-    public ObjectTag entity;
+    public EntityTag entity;
     public NPCTag npc;
 
     @Override
@@ -51,14 +53,22 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     }
 
     @Override
+    public boolean matches(ScriptPath path) {
+        if (path.switches.containsKey("entity") && !tryEntity(entity, path.switches.get("entity"))) {
+            return false;
+        }
+        return super.matches(path);
+    }
+
+    @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(entity instanceof PlayerTag ? (PlayerTag) entity : null, npc);
+        return new BukkitScriptEntryData(entity.isPlayer() ? entity.getDenizenPlayer() : null, npc);
     }
 
     @Override
     public ObjectTag getContext(String name) {
         if (name.startsWith("entity")) {
-            return entity;
+            return entity.getDenizenObject();
         }
         return super.getContext(name);
     }
@@ -66,7 +76,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     @EventHandler
     public void onSentinelAttack(SentinelAttackEvent event) {
         npc = new NPCTag(event.getNPC());
-        entity = new EntityTag(event.getNPC().getOrAddTrait(SentinelTrait.class).chasing).getDenizenObject();
+        entity = new EntityTag(event.getNPC().getOrAddTrait(SentinelTrait.class).chasing);
         this.event = event;
         fire(event);
     }
