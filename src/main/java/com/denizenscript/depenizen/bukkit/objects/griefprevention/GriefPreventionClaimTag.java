@@ -51,7 +51,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         long claimID;
         id = id.replace("gpclaim@", "");
         try {
-            claimID = Long.valueOf(id);
+            claimID = Long.parseLong(id);
         }
         catch (NumberFormatException e) {
             return null;

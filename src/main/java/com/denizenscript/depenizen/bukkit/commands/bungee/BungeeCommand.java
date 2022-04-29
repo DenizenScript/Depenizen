@@ -95,7 +95,7 @@ public class BungeeCommand extends BracedCommand {
             defValues.append(escape(def.getValue().toString())).append("\n");
         }
         RunCommandsPacketOut packetScript = new RunCommandsPacketOut(toSend.toString(),
-                defNames.toString() + "\r" + defValues.toString(), scriptEntry.shouldDebug(),
+                defNames + "\r" + defValues, scriptEntry.shouldDebug(),
                 Utilities.entryHasPlayer(scriptEntry) ?
                 Utilities.getEntryPlayer(scriptEntry).getUUID()
                 : new UUID(0, 0));

@@ -125,7 +125,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
                 : new UUID(0, 0);
         packetTag.tag = tag.asString();
         packetTag.id = newId;
-        packetTag.defs = defNames.toString() + "\r" + defValues.toString();
+        packetTag.defs = defNames + "\r" + defValues;
         RedirectPacketOut packet = new RedirectPacketOut(server.asString(), packetTag);
         BungeeBridge.instance.sendPacket(packet);
         BungeeBridge.instance.sendPacket(new KeepAlivePacketOut());

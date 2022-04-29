@@ -75,7 +75,7 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
         if (!spellName.equals("spell") && !spellName.equalsIgnoreCase(spell.asString())) {
             return false;
         }
-        if (!tryEntity(caster, path.eventArgLowerAt(1))) {
+        if (!caster.tryAdvancedMatcher(path.eventArgLowerAt(1))) {
             return false;
         }
         return super.matches(path);

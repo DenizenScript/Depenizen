@@ -54,7 +54,7 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
 
     @Override
     public boolean matches(ScriptPath path) {
-        if (path.switches.containsKey("entity") && !tryEntity(entity, path.switches.get("entity"))) {
+        if (path.switches.containsKey("entity") && !entity.tryAdvancedMatcher(path.switches.get("entity"))) {
             return false;
         }
         return super.matches(path);
