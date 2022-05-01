@@ -60,7 +60,7 @@ public class EssentialsPlayerProperties implements Property {
         return ((Essentials) EssentialsBridge.instance.plugin).getUser(player.getUUID());
     }
 
-    public static SlowWarning oldHomesTag = new SlowWarning("The tag 'list_homes' from Depenizen/Essentials is deprecated: use 'essentials_homes' (now a MapTag).");
+    public static SlowWarning oldHomesTag = new SlowWarning("essentialsListHomes", "The tag 'list_homes' from Depenizen/Essentials is deprecated: use 'essentials_homes' (now a MapTag).");
 
     PlayerTag player;
 

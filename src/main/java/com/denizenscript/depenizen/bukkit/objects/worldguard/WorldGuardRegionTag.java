@@ -147,7 +147,7 @@ public class WorldGuardRegionTag implements ObjectTag {
         return identify();
     }
 
-    public static Warning oldCuboidTag = new SlowWarning("The tag 'WorldGuardRegionTag.cuboid' is deprecated in favor of the '.area' equivalent.");
+    public static Warning oldCuboidTag = new SlowWarning("worldguardregionCuboid", "The tag 'WorldGuardRegionTag.cuboid' is deprecated in favor of the '.area' equivalent.");
 
     @Override
     public String getAttribute(Attribute attribute) {
