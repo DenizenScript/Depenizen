@@ -56,7 +56,7 @@ public class ResidencePlayerProperties implements Property {
     ResidencePlayer player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <PlayerTag.has_main_residence>
@@ -67,7 +67,7 @@ public class ResidencePlayerProperties implements Property {
         // -->
         if (attribute.startsWith("has_main_residence")) {
             ClaimedResidence residence = player.getMainResidence();
-            return new ElementTag(residence != null).getAttribute(attribute.fulfill(1));
+            return new ElementTag(residence != null).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -80,7 +80,7 @@ public class ResidencePlayerProperties implements Property {
         else if (attribute.startsWith("main_residence")) {
             ClaimedResidence residence = player.getMainResidence();
             if (residence != null) {
-                return new ResidenceTag(player.getMainResidence()).getAttribute(attribute.fulfill(1));
+                return new ResidenceTag(player.getMainResidence()).getObjectAttribute(attribute.fulfill(1));
             }
         }
 
@@ -96,7 +96,7 @@ public class ResidencePlayerProperties implements Property {
             for (ClaimedResidence residence : player.getResList()) {
                 list.addObject(new ResidenceTag(residence));
             }
-            return list.getAttribute(attribute.fulfill(1));
+            return list.getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

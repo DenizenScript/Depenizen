@@ -56,7 +56,7 @@ public class JobsPlayerProperties implements Property {
     JobsPlayer player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <PlayerTag.current_jobs>
@@ -72,7 +72,7 @@ public class JobsPlayerProperties implements Property {
                     jobList.addObject(new JobsJobTag(jb, player));
                 }
             }
-            return jobList.getAttribute(attribute.fulfill(1));
+            return jobList.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -93,7 +93,7 @@ public class JobsPlayerProperties implements Property {
                 }
                 return null;
             }
-            return new JobsJobTag(job, player).getAttribute(attribute.fulfill(1));
+            return new JobsJobTag(job, player).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

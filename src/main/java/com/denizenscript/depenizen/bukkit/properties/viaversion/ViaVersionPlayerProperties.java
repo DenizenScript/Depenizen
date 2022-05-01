@@ -48,7 +48,7 @@ public class ViaVersionPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -64,7 +64,7 @@ public class ViaVersionPlayerProperties implements Property {
         if (attribute.startsWith("viaversion")) {
             ViaAPI api = Via.getAPI();
             return new ElementTag(api.getPlayerVersion(player.getUUID()))
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

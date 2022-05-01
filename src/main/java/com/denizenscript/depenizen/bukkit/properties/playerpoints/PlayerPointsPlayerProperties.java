@@ -48,7 +48,7 @@ public class PlayerPointsPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <PlayerTag.playerpoints_points>
@@ -59,7 +59,7 @@ public class PlayerPointsPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("playerpoints_points")) {
             return new ElementTag(((PlayerPoints) PlayerPointsBridge.instance.plugin).getAPI()
-                    .look(player.getUUID())).getAttribute(attribute.fulfill(1));
+                    .look(player.getUUID())).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

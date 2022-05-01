@@ -55,7 +55,7 @@ public class TownyChatPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -77,7 +77,7 @@ public class TownyChatPlayerProperties implements Property {
                 for (Channel c : holder.getAllChannels().values()) {
                     chans.addObject(new ElementTag(c.getName()));
                 }
-                return chans.getAttribute(attribute.fulfill(1));
+                return chans.getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -92,7 +92,7 @@ public class TownyChatPlayerProperties implements Property {
                 if (c == null) {
                     return null;
                 }
-                return new ElementTag(c.isMuted(player.getName())).getAttribute(attribute.fulfill(1));
+                return new ElementTag(c.isMuted(player.getName())).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -109,10 +109,10 @@ public class TownyChatPlayerProperties implements Property {
                 }
                 String perm = c.getPermission();
                 if (perm == null) {
-                    return new ElementTag(true).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(true).getObjectAttribute(attribute.fulfill(1));
                 }
                 return new ElementTag(TownyUniverse.getInstance().getPermissionSource().has(player.getPlayerEntity(), perm))
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
 
             return null;

@@ -59,7 +59,7 @@ public class SkillAPIPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (attribute.startsWith("skillapi")) {
 
@@ -77,7 +77,7 @@ public class SkillAPIPlayerProperties implements Property {
                 if (data == null || data.getMainClass() == null) {
                     return null;
                 }
-                return new SkillAPIClassTag(data.getMainClass().getData()).getAttribute(attribute.fulfill(1));
+                return new SkillAPIClassTag(data.getMainClass().getData()).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -94,9 +94,9 @@ public class SkillAPIPlayerProperties implements Property {
                     if (testClass == null) {
                         return null;
                     }
-                    return new ElementTag(data.isExactClass(testClass.getRPGClass())).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(data.isExactClass(testClass.getRPGClass())).getObjectAttribute(attribute.fulfill(1));
                 }
-                return new ElementTag(data.hasClass()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(data.hasClass()).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -107,7 +107,7 @@ public class SkillAPIPlayerProperties implements Property {
             // Returns whether the player has the specified skill.
             // -->
             if (attribute.startsWith("has_skill") && attribute.hasParam()) {
-                return new ElementTag(data.hasSkill(attribute.getParam())).getAttribute(attribute.fulfill(1));
+                return new ElementTag(data.hasSkill(attribute.getParam())).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -118,7 +118,7 @@ public class SkillAPIPlayerProperties implements Property {
             // Returns the player's current amount of mana.
             // -->
             if (attribute.startsWith("mana")) {
-                return new ElementTag(data.getMana()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(data.getMana()).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -129,7 +129,7 @@ public class SkillAPIPlayerProperties implements Property {
             // Returns the player's maximum amount of mana.
             // -->
             if (attribute.startsWith("max_mana")) {
-                return new ElementTag(data.getMaxMana()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(data.getMaxMana()).getObjectAttribute(attribute.fulfill(1));
             }
 
             if (attribute.getAttribute(1).startsWith("class_") && attribute.hasParam()) {
@@ -157,7 +157,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the amount of experience the player has toward the next level in the specified class.
                 // -->
                 if (attribute.startsWith("class_exp")) {
-                    return new ElementTag(playerClass.getExp()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerClass.getExp()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -169,7 +169,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // in the specified class.
                 // -->
                 if (attribute.startsWith("class_required_exp")) {
-                    return new ElementTag(playerClass.getRequiredExp()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerClass.getRequiredExp()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -180,7 +180,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the total amount of experience the player has in the specified class.
                 // -->
                 if (attribute.startsWith("class_total_exp")) {
-                    return new ElementTag(playerClass.getTotalExp()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerClass.getTotalExp()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -191,7 +191,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the level the player is in the specified class.
                 // -->
                 if (attribute.startsWith("class_level")) {
-                    return new ElementTag(playerClass.getLevel()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerClass.getLevel()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -202,7 +202,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the number of skill points the player has in the specified class.
                 // -->
                 if (attribute.startsWith("class_points")) {
-                    return new ElementTag(playerClass.getPoints()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerClass.getPoints()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -213,7 +213,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns whether the player has hit maximum level in the specified class.
                 // -->
                 if (attribute.startsWith("class_maxed")) {
-                    return new ElementTag(playerClass.isLevelMaxed()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerClass.isLevelMaxed()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -224,7 +224,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the amount of health the player gets from the specified class.
                 // -->
                 if (attribute.startsWith("class_health")) {
-                    return new ElementTag(playerClass.getHealth()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerClass.getHealth()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -235,7 +235,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the amount of mana the player gets from the specified class.
                 // -->
                 if (attribute.startsWith("class_mana")) {
-                    return new ElementTag(playerClass.getMana()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerClass.getMana()).getObjectAttribute(attribute.fulfill(1));
                 }
             }
 
@@ -254,7 +254,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the indicator item for the skill.
                 // -->
                 if (attribute.startsWith("skill_indicator")) {
-                    return new ItemTag(playerSkill.getData().getIndicator(playerSkill)).getAttribute(attribute.fulfill(1));
+                    return new ItemTag(playerSkill.getData().getIndicator(playerSkill)).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -265,7 +265,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the material this skill is currently bound to.
                 // -->
                 if (attribute.startsWith("skill_bind")) {
-                    return new MaterialTag(playerSkill.getBind()).getAttribute(attribute.fulfill(1));
+                    return new MaterialTag(playerSkill.getBind()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -276,7 +276,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the level the player must be to level up the specified skill.
                 // -->
                 if (attribute.startsWith("skill_level_req")) {
-                    return new ElementTag(playerSkill.getLevelReq()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerSkill.getLevelReq()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -287,7 +287,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the level the player is in the specified skill.
                 // -->
                 if (attribute.startsWith("skill_level")) {
-                    return new ElementTag(playerSkill.getLevel()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerSkill.getLevel()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -298,7 +298,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns how many skill points the player has invested in the specified skill.
                 // -->
                 if (attribute.startsWith("skill_points")) {
-                    return new ElementTag(playerSkill.getPoints()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerSkill.getPoints()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -309,7 +309,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the cost the for the player to level up the specified skill.
                 // -->
                 if (attribute.startsWith("skill_cost")) {
-                    return new ElementTag(playerSkill.getCost()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerSkill.getCost()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -320,7 +320,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns whether the specified skill is currently on cooldown for the player.
                 // -->
                 if (attribute.startsWith("skill_on_cooldown")) {
-                    return new ElementTag(playerSkill.getLevel()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerSkill.getLevel()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -331,7 +331,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns the remaining cooldown the player has in the specified skill.
                 // -->
                 if (attribute.startsWith("skill_cooldown")) {
-                    return new DurationTag(playerSkill.getCooldown()).getAttribute(attribute.fulfill(1));
+                    return new DurationTag(playerSkill.getCooldown()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -342,7 +342,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Returns whether the player has reached max level in the specified skill.
                 // -->
                 if (attribute.startsWith("skill_maxed")) {
-                    return new ElementTag(playerSkill.isMaxed()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerSkill.isMaxed()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -354,7 +354,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Can be: ON_COOLDOWN, MISSING_MANA, or READY
                 // -->
                 if (attribute.startsWith("skill_status")) {
-                    return new ElementTag(playerSkill.getStatus().name()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerSkill.getStatus().name()).getObjectAttribute(attribute.fulfill(1));
                 }
             }
 

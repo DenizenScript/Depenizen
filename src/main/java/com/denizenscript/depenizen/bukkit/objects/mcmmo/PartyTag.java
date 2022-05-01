@@ -119,7 +119,7 @@ public class PartyTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -132,7 +132,7 @@ public class PartyTag implements ObjectTag {
         // Returns the name of the party.
         // -->
         if (attribute.startsWith("name")) {
-            return new ElementTag(party.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(party.getName()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -143,7 +143,7 @@ public class PartyTag implements ObjectTag {
         // Returns the leader of the party.
         // -->
         else if (attribute.startsWith("leader")) {
-            return new PlayerTag(party.getLeader().getUniqueId()).getAttribute(attribute.fulfill(1));
+            return new PlayerTag(party.getLeader().getUniqueId()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -158,9 +158,9 @@ public class PartyTag implements ObjectTag {
             for (UUID uuid : party.getMembers().keySet()) {
                 players.addObject(PlayerTag.valueOf(uuid.toString(), attribute.context));
             }
-            return players.getAttribute(attribute.fulfill(1));
+            return players.getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
     }
 }

@@ -54,7 +54,7 @@ public class ShopKeepersEntityProperties implements Property {
     boolean isShopKeeper;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -68,7 +68,7 @@ public class ShopKeepersEntityProperties implements Property {
         // -->
         if (attribute.startsWith("is_shopkeeper")) {
             return new ElementTag(isShopKeeper)
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -79,7 +79,7 @@ public class ShopKeepersEntityProperties implements Property {
         // Returns the ShopKeeper for this entity.
         // -->
         else if (attribute.startsWith("shopkeeper") && isShopKeeper) {
-            return ShopKeeperTag.fromEntity(entity).getAttribute(attribute.fulfill(1));
+            return ShopKeeperTag.fromEntity(entity).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

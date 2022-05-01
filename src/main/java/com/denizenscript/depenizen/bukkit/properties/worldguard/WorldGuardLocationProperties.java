@@ -84,7 +84,7 @@ public class WorldGuardLocationProperties implements Property {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <LocationTag.in_region[(<name>|...)]>
@@ -101,15 +101,15 @@ public class WorldGuardLocationProperties implements Property {
                 ListTag region_list = attribute.paramAsType(ListTag.class);
                 for (String region : region_list) {
                     if (inRegion(region)) {
-                        return new ElementTag(true).getAttribute(attribute.fulfill(1));
+                        return new ElementTag(true).getObjectAttribute(attribute.fulfill(1));
                     }
                 }
-                return new ElementTag(false).getAttribute(attribute.fulfill(1));
+                return new ElementTag(false).getObjectAttribute(attribute.fulfill(1));
             }
 
             // Check if the location is in any region
             else {
-                return new ElementTag(inRegion()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(inRegion()).getObjectAttribute(attribute.fulfill(1));
             }
         }
 
@@ -121,7 +121,7 @@ public class WorldGuardLocationProperties implements Property {
         // Returns a list of regions that the location is in.
         // -->
         if (attribute.startsWith("regions")) {
-            return getRegions(location.getWorld()).getAttribute(attribute.fulfill(1));
+            return getRegions(location.getWorld()).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

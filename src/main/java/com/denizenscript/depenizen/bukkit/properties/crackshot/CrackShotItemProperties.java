@@ -47,7 +47,7 @@ public class CrackShotItemProperties implements Property {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -62,7 +62,7 @@ public class CrackShotItemProperties implements Property {
         if (attribute.startsWith("crackshot_weapon")) {
             String name = CrackShotBridge.utility.getWeaponTitle(item.getItemStack());
             if (name != null) {
-                return new ElementTag(name).getAttribute(attribute.fulfill(1));
+                return new ElementTag(name).getObjectAttribute(attribute.fulfill(1));
             }
             else {
                 return null;

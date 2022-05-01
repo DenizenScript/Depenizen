@@ -142,7 +142,7 @@ public class ShopKeeperTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -155,7 +155,7 @@ public class ShopKeeperTag implements ObjectTag {
         // Returns whether the Shopkeeper is active.
         // -->
         if (attribute.startsWith("is_active")) {
-            return new ElementTag(shopkeeper.isActive()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(shopkeeper.isActive()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -166,7 +166,7 @@ public class ShopKeeperTag implements ObjectTag {
         // Returns whether the Shopkeeper UI is currently active (may be false when the UI is about to be closed).
         // -->
         else if (attribute.startsWith("is_ui_active")) {
-            return new ElementTag(shopkeeper.isUIActive()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(shopkeeper.isUIActive()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -182,7 +182,7 @@ public class ShopKeeperTag implements ObjectTag {
                 ListTag recipe = wrapTradingRecipe(trade);
                 trades.addObject(recipe);
             }
-            return trades.getAttribute(attribute.fulfill(1));
+            return trades.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -193,7 +193,7 @@ public class ShopKeeperTag implements ObjectTag {
         // Returns the EntityTag for this ShopKeeper.
         // -->
         else if (attribute.startsWith("entity")) {
-            return getDenizenEntity().getAttribute(attribute.fulfill(1));
+            return getDenizenEntity().getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -205,7 +205,7 @@ public class ShopKeeperTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("owner")) {
             if (shopkeeper instanceof PlayerShopkeeper) {
-                return new PlayerTag(((PlayerShopkeeper) shopkeeper).getOwnerUUID()).getAttribute(attribute.fulfill(1));
+                return new PlayerTag(((PlayerShopkeeper) shopkeeper).getOwnerUUID()).getObjectAttribute(attribute.fulfill(1));
             }
             return null;
         }

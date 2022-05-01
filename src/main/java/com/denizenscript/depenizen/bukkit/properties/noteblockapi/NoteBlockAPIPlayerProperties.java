@@ -47,7 +47,7 @@ public class NoteBlockAPIPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <PlayerTag.nbs_is_playing>
@@ -57,7 +57,7 @@ public class NoteBlockAPIPlayerProperties implements Property {
         // Returns true if the player is currently listening to a note block song.
         // -->
         if (attribute.startsWith("nbs_is_playing")) {
-            return new ElementTag(NoteBlockAPI.isReceivingSong(player.getPlayerEntity())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(NoteBlockAPI.isReceivingSong(player.getPlayerEntity())).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

@@ -129,7 +129,7 @@ public class FactionTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <FactionTag.balance>
@@ -140,7 +140,7 @@ public class FactionTag implements ObjectTag {
         // -->
         if (attribute.startsWith("balance")) {
             return new ElementTag(Money.get(faction))
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -155,14 +155,14 @@ public class FactionTag implements ObjectTag {
             Warp warp = faction.getWarp(attribute.getParam());
             if (warp != null) {
                 return new LocationTag(warp.getLocation().asBukkitLocation())
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
         }
         else if (attribute.startsWith("home")) { // Legacy sorta-compat
             Warp warp = faction.getWarp("home");
             if (warp != null) {
                 return new LocationTag(warp.getLocation().asBukkitLocation())
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
         }
 
@@ -174,7 +174,7 @@ public class FactionTag implements ObjectTag {
         // Returns the unique ID for this faction.
         // -->
         else if (attribute.startsWith("id")) {
-            return new ElementTag(faction.getId()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(faction.getId()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -186,7 +186,7 @@ public class FactionTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("isopen") || attribute.startsWith("is_open")) {
             return new ElementTag(faction.isOpen())
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -198,7 +198,7 @@ public class FactionTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("ispeaceful") || attribute.startsWith("is_peaceful")) {
             return new ElementTag(faction.getFlag(MFlag.getFlagPeaceful()))
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -210,7 +210,7 @@ public class FactionTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("ispermanent") || attribute.startsWith("is_permanent")) {
             return new ElementTag(faction.getFlag(MFlag.getFlagPermanent()))
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -223,7 +223,7 @@ public class FactionTag implements ObjectTag {
         else if (attribute.startsWith("leader")) {
             if (faction.getLeader() != null) {
                 return PlayerTag.valueOf(faction.getLeader().getName(), attribute.context)
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
         }
 
@@ -236,7 +236,7 @@ public class FactionTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("name")) {
             return new ElementTag(faction.getName())
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -248,7 +248,7 @@ public class FactionTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
             return new ElementTag(faction.getMPlayers().size())
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -260,7 +260,7 @@ public class FactionTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("power")) {
             return new ElementTag(faction.getPower())
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -274,7 +274,7 @@ public class FactionTag implements ObjectTag {
             FactionTag to = valueOf(attribute.getParam());
             if (to != null) {
                 return new ElementTag(faction.getRelationTo(to.getFaction()).toString())
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
         }
 
@@ -287,7 +287,7 @@ public class FactionTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("size")) {
             return new ElementTag(faction.getLandCount())
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -303,7 +303,7 @@ public class FactionTag implements ObjectTag {
             for (PS ps : chunks) {
                 dchunks.addObject(new ChunkTag(ps.asBukkitChunk()));
             }
-            return dchunks.getAttribute(attribute.fulfill(1));
+            return dchunks.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -319,10 +319,10 @@ public class FactionTag implements ObjectTag {
             for (MPlayer ps : faction.getMPlayers()) {
                 players.addObject(PlayerTag.valueOf(faction.getLeader().getUuid().toString(), attribute.context));
             }
-            return players.getAttribute(attribute.fulfill(1));
+            return players.getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
 
     }
 }

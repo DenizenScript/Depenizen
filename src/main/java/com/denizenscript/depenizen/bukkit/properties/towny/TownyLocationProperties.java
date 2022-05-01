@@ -60,7 +60,7 @@ public class TownyLocationProperties implements Property {
     public LocationTag location;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (attribute.startsWith("towny")) {
             attribute = attribute.fulfill(1);
@@ -85,7 +85,7 @@ public class TownyLocationProperties implements Property {
                     if (player == null) {
                         return null;
                     }
-                    return new PlayerTag(player).getAttribute(attribute.fulfill(1));
+                    return new PlayerTag(player).getObjectAttribute(attribute.fulfill(1));
                 }
             }
             catch (NotRegisteredException ex) {
@@ -106,7 +106,7 @@ public class TownyLocationProperties implements Property {
         if (attribute.startsWith("towny_type")) {
             TownBlock block = TownyAPI.getInstance().getTownBlock(location);
             if (block != null) {
-                return new ElementTag(block.getType().getName()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(block.getType().getName()).getObjectAttribute(attribute.fulfill(1));
             }
             return null;
         }
@@ -120,10 +120,10 @@ public class TownyLocationProperties implements Property {
         // -->
         if (attribute.startsWith("has_town")) {
             if (TownyAPI.getInstance().getTownName(location) != null) {
-                return new ElementTag(true).getAttribute(attribute.fulfill(1));
+                return new ElementTag(true).getObjectAttribute(attribute.fulfill(1));
             }
             else {
-                return new ElementTag(false).getAttribute(attribute.fulfill(1));
+                return new ElementTag(false).getObjectAttribute(attribute.fulfill(1));
             }
         }
 
@@ -140,7 +140,7 @@ public class TownyLocationProperties implements Property {
                 return null;
             }
             return new TownTag(TownyUniverse.getInstance().getTown(town))
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -151,7 +151,7 @@ public class TownyLocationProperties implements Property {
         // Returns whether the location is wilderness.
         // -->
         else if (attribute.startsWith("is_wilderness")) {
-            return new ElementTag(TownyAPI.getInstance().isWilderness(location.getBlock())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(TownyAPI.getInstance().isWilderness(location.getBlock())).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

@@ -54,7 +54,7 @@ public class PVPArenaPlayerProperties implements Property {
     ArenaPlayer player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (attribute.startsWith("pvparena")) {
 
@@ -70,7 +70,7 @@ public class PVPArenaPlayerProperties implements Property {
             // -->
             if (attribute.startsWith("inarena") || attribute.startsWith("in_arena")) {
                 if (player.getArena() == null) {
-                    return new ElementTag(false).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(false).getObjectAttribute(attribute.fulfill(1));
                 }
                 if (attribute.hasParam()) {
                     PVPArenaArenaTag a = attribute.paramAsType(PVPArenaArenaTag.class);
@@ -79,11 +79,11 @@ public class PVPArenaPlayerProperties implements Property {
                     }
                     return new ElementTag(CoreUtilities.toLowerCase(player.getArena().getName())
                             .equals(CoreUtilities.toLowerCase(a.getArena().getName())))
-                            .getAttribute(attribute.fulfill(1));
+                            .getObjectAttribute(attribute.fulfill(1));
                 }
                 else {
                     return new ElementTag(player.getArena() != null)
-                            .getAttribute(attribute.fulfill(1));
+                            .getObjectAttribute(attribute.fulfill(1));
                 }
             }
 
@@ -95,7 +95,7 @@ public class PVPArenaPlayerProperties implements Property {
             // Returns the player's class if they're in an arena. Otherwise, returns null.
             // -->
             else if (attribute.startsWith("class")) {
-                return new ElementTag(player.getArenaClass().getName()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(player.getArenaClass().getName()).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -107,7 +107,7 @@ public class PVPArenaPlayerProperties implements Property {
             // -->
             else if (attribute.startsWith("isready") || attribute.startsWith("is_ready")) {
                 return new ElementTag(player.getStatus().equals(ArenaPlayer.Status.READY))
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
 
             else if (attribute.startsWith("team")) {
@@ -123,7 +123,7 @@ public class PVPArenaPlayerProperties implements Property {
                 // -->
                 if (attribute.startsWith("playercount") || attribute.startsWith("player_count")) {
                     return new ElementTag(player.getArenaTeam().getTeamMembers().size())
-                            .getAttribute(attribute.fulfill(1));
+                            .getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -135,7 +135,7 @@ public class PVPArenaPlayerProperties implements Property {
                 // -->
                 if (attribute.startsWith("name")) {
                     return new ElementTag(player.getArenaTeam().getName())
-                            .getAttribute(attribute.fulfill(1));
+                            .getObjectAttribute(attribute.fulfill(1));
                 }
             }
         }

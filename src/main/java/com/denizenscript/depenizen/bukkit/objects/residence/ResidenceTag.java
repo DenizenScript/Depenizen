@@ -112,7 +112,7 @@ public class ResidenceTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -125,7 +125,7 @@ public class ResidenceTag implements ObjectTag {
         // Returns the name of the residence.
         // -->
         if (attribute.startsWith("name")) {
-            return new ElementTag(residence.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(residence.getName()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -136,7 +136,7 @@ public class ResidenceTag implements ObjectTag {
         // Returns the owner of the residence.
         // -->
         else if (attribute.startsWith("owner")) {
-            return new PlayerTag(residence.getOwnerUUID()).getAttribute(attribute.fulfill(1));
+            return new PlayerTag(residence.getOwnerUUID()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -148,9 +148,9 @@ public class ResidenceTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("is_within") && attribute.hasParam()) {
             LocationTag location = attribute.paramAsType(LocationTag.class);
-            return new ElementTag(residence.containsLoc(location)).getAttribute(attribute.fulfill(1));
+            return new ElementTag(residence.containsLoc(location)).getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
     }
 }

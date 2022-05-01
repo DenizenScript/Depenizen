@@ -57,7 +57,7 @@ public class GriefPreventionPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -79,7 +79,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 for (Claim claim : data.getClaims()) {
                     claims.addObject(new GriefPreventionClaimTag(claim));
                 }
-                return claims.getAttribute(attribute.fulfill(1));
+                return claims.getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -90,7 +90,7 @@ public class GriefPreventionPlayerProperties implements Property {
             // Returns the number of claims the player has in GriefPrevention.
             // -->
             else if (attribute.startsWith("claims")) {
-                return new ElementTag(data.getClaims().size()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(data.getClaims().size()).getObjectAttribute(attribute.fulfill(1));
             }
 
             else if (attribute.startsWith("blocks")) {
@@ -104,7 +104,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 // Returns the number of claim blocks the player has left.
                 // -->
                 if (attribute.startsWith("remaining")) {
-                    return new ElementTag(data.getRemainingClaimBlocks()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(data.getRemainingClaimBlocks()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -116,7 +116,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 // Returns the number of bonus claim blocks the player has.
                 // -->
                 else if (attribute.startsWith("bonus")) {
-                    return new ElementTag(data.getBonusClaimBlocks()).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(data.getBonusClaimBlocks()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -128,7 +128,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 // -->
                 else if (attribute.startsWith("total")) {
                     return new ElementTag(data.getAccruedClaimBlocks() + data.getBonusClaimBlocks())
-                            .getAttribute(attribute.fulfill(1));
+                            .getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -140,7 +140,7 @@ public class GriefPreventionPlayerProperties implements Property {
                 // Returns the number of normal claim blocks the player has.
                 // -->
                 else {
-                    return new ElementTag(data.getAccruedClaimBlocks()).getAttribute(attribute);
+                    return new ElementTag(data.getAccruedClaimBlocks()).getObjectAttribute(attribute);
                 }
             }
         }

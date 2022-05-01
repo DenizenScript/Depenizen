@@ -53,7 +53,7 @@ public class FactionsLocationProperties implements Property {
     LocationTag location;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <LocationTag.faction>
@@ -64,7 +64,7 @@ public class FactionsLocationProperties implements Property {
         // -->
         if (attribute.startsWith("faction")) {
             return new FactionTag(BoardColl.get().getFactionAt(PS.valueOf(location)))
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

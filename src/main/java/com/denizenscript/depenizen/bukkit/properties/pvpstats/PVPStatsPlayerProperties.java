@@ -52,7 +52,7 @@ public class PVPStatsPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute.startsWith("pvpstats")) {
             attribute = attribute.fulfill(1);
 
@@ -64,7 +64,7 @@ public class PVPStatsPlayerProperties implements Property {
             // Returns the number of times the player has died.
             // -->
             if (attribute.startsWith("deaths")) {
-                return new ElementTag(PlayerStatisticsBuffer.getDeaths(player.getUUID())).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PlayerStatisticsBuffer.getDeaths(player.getUUID())).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -75,7 +75,7 @@ public class PVPStatsPlayerProperties implements Property {
             // Returns the Elo rating of the player.
             // -->
             if (attribute.startsWith("elo")) {
-                return new ElementTag(PlayerStatisticsBuffer.getEloScore(player.getUUID())).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PlayerStatisticsBuffer.getEloScore(player.getUUID())).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -86,7 +86,7 @@ public class PVPStatsPlayerProperties implements Property {
             // Returns the number of players the player has killed.
             // -->
             if (attribute.startsWith("kills")) {
-                return new ElementTag(PlayerStatisticsBuffer.getKills(player.getUUID())).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PlayerStatisticsBuffer.getKills(player.getUUID())).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -97,7 +97,7 @@ public class PVPStatsPlayerProperties implements Property {
             // Returns the current kill streak of the player.
             // -->
             if (attribute.startsWith("streak")) {
-                return new ElementTag(PlayerStatisticsBuffer.getStreak(player.getUUID())).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PlayerStatisticsBuffer.getStreak(player.getUUID())).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -108,7 +108,7 @@ public class PVPStatsPlayerProperties implements Property {
             // Returns the highest kill streak of the player.
             // -->
             if (attribute.startsWith("max_streak")) {
-                return new ElementTag(PlayerStatisticsBuffer.getMaxStreak(player.getUUID())).getAttribute(attribute.fulfill(1));
+                return new ElementTag(PlayerStatisticsBuffer.getMaxStreak(player.getUUID())).getObjectAttribute(attribute.fulfill(1));
             }
         }
         return null;

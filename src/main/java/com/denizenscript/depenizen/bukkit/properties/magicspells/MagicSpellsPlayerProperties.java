@@ -56,7 +56,7 @@ public class MagicSpellsPlayerProperties implements Property {
     private PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (attribute.startsWith("magicspells")) {
 
@@ -75,7 +75,7 @@ public class MagicSpellsPlayerProperties implements Property {
                     return null;
                 }
                 return new ElementTag(mH.getMana(player.getPlayerEntity()))
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -91,7 +91,7 @@ public class MagicSpellsPlayerProperties implements Property {
                     return null;
                 }
                 return new ElementTag(mH.getMaxMana(player.getPlayerEntity()))
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -110,7 +110,7 @@ public class MagicSpellsPlayerProperties implements Property {
                 for (Spell spell : book.getSpells()) {
                     result.add(spell.getInternalName());
                 }
-                return result.getAttribute(attribute.fulfill(1));
+                return result.getObjectAttribute(attribute.fulfill(1));
             }
         }
 

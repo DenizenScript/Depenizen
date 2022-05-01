@@ -53,7 +53,7 @@ public class ASkyBlockLocationProperties implements Property {
     ASkyBlockAPI api = ASkyBlockAPI.getInstance();
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -69,7 +69,7 @@ public class ASkyBlockLocationProperties implements Property {
             // Returns whether the location has a skyblock.
             // -->
             if (attribute.startsWith("has_skyblock")) {
-                return new ElementTag(api.getIslandAt(location) != null).getAttribute(attribute.fulfill(1));
+                return new ElementTag(api.getIslandAt(location) != null).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -84,7 +84,7 @@ public class ASkyBlockLocationProperties implements Property {
                 if (i == null) {
                     return null;
                 }
-                return new PlayerTag(i.getOwner()).getAttribute(attribute.fulfill(1));
+                return new PlayerTag(i.getOwner()).getObjectAttribute(attribute.fulfill(1));
             }
         }
         return null;

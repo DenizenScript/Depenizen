@@ -47,7 +47,7 @@ public class NoCheatPlusPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -65,7 +65,7 @@ public class NoCheatPlusPlayerProperties implements Property {
             // -->
             if (attribute.startsWith("infractions")) {
                 ViolationHistory history = ViolationHistory.getHistory(player.getName(), false);
-                return new ElementTag(history != null ? history.getViolationLevels().length : 0).getAttribute(attribute.fulfill(1));
+                return new ElementTag(history != null ? history.getViolationLevels().length : 0).getObjectAttribute(attribute.fulfill(1));
             }
         }
 

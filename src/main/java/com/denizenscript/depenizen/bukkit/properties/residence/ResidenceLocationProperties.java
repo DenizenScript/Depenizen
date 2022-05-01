@@ -49,7 +49,7 @@ public class ResidenceLocationProperties implements Property {
     LocationTag location;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         // <--[tag]
         // @attribute <LocationTag.has_residence>
         // @returns ElementTag(Boolean)
@@ -59,7 +59,7 @@ public class ResidenceLocationProperties implements Property {
         // -->
         if (attribute.startsWith("has_residence")) {
             ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);
-            return new ElementTag(res != null).getAttribute(attribute.fulfill(1));
+            return new ElementTag(res != null).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -72,7 +72,7 @@ public class ResidenceLocationProperties implements Property {
         if (attribute.startsWith("residence")) {
             ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);
             if (res != null) {
-                return new ResidenceTag(res).getAttribute(attribute.fulfill(1));
+                return new ResidenceTag(res).getObjectAttribute(attribute.fulfill(1));
             }
             return null;
         }

@@ -62,7 +62,7 @@ public class TownyPlayerProperties implements Property {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <PlayerTag.has_nation>
@@ -72,7 +72,7 @@ public class TownyPlayerProperties implements Property {
         // Returns whether the player is part of a nation.
         // -->
         if (attribute.startsWith("has_nation")) {
-            return new ElementTag(getResident().hasNation()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getResident().hasNation()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -83,7 +83,7 @@ public class TownyPlayerProperties implements Property {
         // Returns whether the player is part of a town.
         // -->
         if (attribute.startsWith("has_town")) {
-            return new ElementTag(getResident().hasTown()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getResident().hasTown()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -98,7 +98,7 @@ public class TownyPlayerProperties implements Property {
             for (String mode : getResident().getModes()) {
                 modes.addObject(new ElementTag(mode));
             }
-            return modes.getAttribute(attribute.fulfill(1));
+            return modes.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -113,7 +113,7 @@ public class TownyPlayerProperties implements Property {
             for (String rank : getResident().getNationRanks()) {
                 ranks.addObject(new ElementTag(rank));
             }
-            return ranks.getAttribute(attribute.fulfill(1));
+            return ranks.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -126,7 +126,7 @@ public class TownyPlayerProperties implements Property {
         if (attribute.startsWith("nation")) {
             try {
                 if (getResident().hasNation()) {
-                    return new NationTag(getResident().getTown().getNation()).getAttribute(attribute.fulfill(1));
+                    return new NationTag(getResident().getTown().getNation()).getObjectAttribute(attribute.fulfill(1));
                 }
                 else {
                     return null;
@@ -151,7 +151,7 @@ public class TownyPlayerProperties implements Property {
             for (String rank : getResident().getTownRanks()) {
                 ranks.addObject(new ElementTag(rank));
             }
-            return ranks.getAttribute(attribute.fulfill(1));
+            return ranks.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -164,7 +164,7 @@ public class TownyPlayerProperties implements Property {
         if (attribute.startsWith("town")) {
             try {
                 if (getResident().hasTown()) {
-                    return new TownTag(getResident().getTown()).getAttribute(attribute.fulfill(1));
+                    return new TownTag(getResident().getTown()).getObjectAttribute(attribute.fulfill(1));
                 }
                 else {
                     return null;

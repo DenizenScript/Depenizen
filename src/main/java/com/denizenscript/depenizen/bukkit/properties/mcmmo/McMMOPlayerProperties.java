@@ -55,7 +55,7 @@ public class McMMOPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (attribute.startsWith("mcmmo")) {
 
@@ -73,21 +73,21 @@ public class McMMOPlayerProperties implements Property {
                 if (!attribute.hasParam()) {
                     if (player.isOnline()) {
                         return new ElementTag(ExperienceAPI.getPowerLevel(player.getPlayerEntity()))
-                                .getAttribute(attribute.fulfill(1));
+                                .getObjectAttribute(attribute.fulfill(1));
                     }
                     else {
                         return new ElementTag(ExperienceAPI.getPowerLevelOffline(player.getUUID()))
-                                .getAttribute(attribute.fulfill(1));
+                                .getObjectAttribute(attribute.fulfill(1));
                     }
                 }
                 else {
                     if (player.isOnline()) {
                         return new ElementTag(ExperienceAPI.getLevel(player.getPlayerEntity(), attribute.getParam()))
-                                .getAttribute(attribute.fulfill(1));
+                                .getObjectAttribute(attribute.fulfill(1));
                     }
                     else {
                         return new ElementTag(ExperienceAPI.getLevelOffline(player.getUUID(), attribute.getParam()))
-                                .getAttribute(attribute.fulfill(1));
+                                .getObjectAttribute(attribute.fulfill(1));
                     }
                 }
             }
@@ -102,7 +102,7 @@ public class McMMOPlayerProperties implements Property {
             else if (attribute.startsWith("party")) {
                 PartyTag party = PartyTag.forPlayer(player);
                 if (party != null) {
-                    return party.getAttribute(attribute.fulfill(1));
+                    return party.getObjectAttribute(attribute.fulfill(1));
                 }
             }
 
@@ -121,11 +121,11 @@ public class McMMOPlayerProperties implements Property {
                 if (attribute.startsWith("tonextlevel") || attribute.startsWith("to_next_level")) {
                     if (player.isOnline()) {
                         return new ElementTag(ExperienceAPI.getXPToNextLevel(player.getPlayerEntity(), skill))
-                                .getAttribute(attribute.fulfill(1));
+                                .getObjectAttribute(attribute.fulfill(1));
                     }
                     else {
                         return new ElementTag(ExperienceAPI.getOfflineXPToNextLevel(player.getUUID(), skill))
-                                .getAttribute(attribute.fulfill(1));
+                                .getObjectAttribute(attribute.fulfill(1));
                     }
                 }
 
@@ -139,11 +139,11 @@ public class McMMOPlayerProperties implements Property {
                 else if (attribute.startsWith("level")) {
                     if (player.isOnline()) {
                         return new ElementTag(ExperienceAPI.getLevel(player.getPlayerEntity(), skill))
-                                .getAttribute(attribute.fulfill(1));
+                                .getObjectAttribute(attribute.fulfill(1));
                     }
                     else {
                         return new ElementTag(ExperienceAPI.getLevelOffline(player.getUUID(), skill))
-                                .getAttribute(attribute.fulfill(1));
+                                .getObjectAttribute(attribute.fulfill(1));
                     }
                 }
 
@@ -156,11 +156,11 @@ public class McMMOPlayerProperties implements Property {
                 // -->
                 else if (player.isOnline()) {
                     return new ElementTag(ExperienceAPI.getXP(player.getPlayerEntity(), skill))
-                            .getAttribute(attribute.fulfill(0));
+                            .getObjectAttribute(attribute.fulfill(0));
                 }
                 else {
                     return new ElementTag(ExperienceAPI.getOfflineXP(player.getUUID(), skill))
-                            .getAttribute(attribute.fulfill(0));
+                            .getObjectAttribute(attribute.fulfill(0));
                 }
 
             }
@@ -176,12 +176,12 @@ public class McMMOPlayerProperties implements Property {
             else if (attribute.startsWith("rank")) {
                 if (!attribute.hasParam()) {
                     return new ElementTag(ExperienceAPI.getPlayerRankOverall(player.getName()))
-                            .getAttribute(attribute.fulfill(1));
+                            .getObjectAttribute(attribute.fulfill(1));
                 }
                 else {
                     if (PrimarySkillType.getSkill(attribute.getParam()) != null) {
                         return new ElementTag(ExperienceAPI.getPlayerRankSkill(player.getUUID(), attribute.getParam()))
-                                .getAttribute(attribute.fulfill(1));
+                                .getObjectAttribute(attribute.fulfill(1));
                     }
                     else if (!attribute.hasAlternative()) {
                         Debug.echoError("Skill type '" + attribute.getParam() + "' does not exist!");

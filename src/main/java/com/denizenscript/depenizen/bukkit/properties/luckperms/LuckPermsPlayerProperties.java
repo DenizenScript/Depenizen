@@ -53,7 +53,7 @@ public class LuckPermsPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <PlayerTag.luckperms_tracks>
@@ -85,7 +85,7 @@ public class LuckPermsPlayerProperties implements Property {
                     }
                 }
             }
-            return tracks.getAttribute(attribute.fulfill(1));
+            return tracks.getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;
@@ -95,4 +95,3 @@ public class LuckPermsPlayerProperties implements Property {
     public void adjust(Mechanism mechanism) {
     }
 }
-

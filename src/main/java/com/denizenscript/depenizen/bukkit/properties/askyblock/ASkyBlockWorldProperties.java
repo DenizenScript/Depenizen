@@ -53,7 +53,7 @@ public class ASkyBlockWorldProperties implements Property {
     ASkyBlockAPI api = ASkyBlockAPI.getInstance();
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -67,7 +67,7 @@ public class ASkyBlockWorldProperties implements Property {
         // -->
         if (attribute.startsWith("is_skyblock_world")) {
             return new ElementTag(api.getIslandWorld() == world.getWorld() ||
-                    api.getNetherWorld() == world.getWorld()).getAttribute(attribute.fulfill(1));
+                    api.getNetherWorld() == world.getWorld()).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

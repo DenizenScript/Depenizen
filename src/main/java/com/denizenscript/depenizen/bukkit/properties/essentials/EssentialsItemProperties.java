@@ -52,7 +52,7 @@ public class EssentialsItemProperties implements Property {
     ItemTag item;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -85,9 +85,9 @@ public class EssentialsItemProperties implements Property {
             // -->
             if (attribute.startsWith("quantity") && attribute.hasParam()) {
                 return new ElementTag(priceBD.multiply(BigDecimal.valueOf(attribute.getIntParam())))
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
-            return new ElementTag(priceBD).getAttribute(attribute);
+            return new ElementTag(priceBD).getObjectAttribute(attribute);
         }
 
         return null;

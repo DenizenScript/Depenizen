@@ -58,7 +58,7 @@ public class FactionsPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (attribute.startsWith("factions")) {
 
@@ -72,7 +72,7 @@ public class FactionsPlayerProperties implements Property {
             // Returns the player's power level.
             // -->
             if (attribute.startsWith("power")) {
-                return new ElementTag(getMPlayer().getPower()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(getMPlayer().getPower()).getObjectAttribute(attribute.fulfill(1));
             }
 
             else if (getMPlayer().hasFaction()) {
@@ -87,7 +87,7 @@ public class FactionsPlayerProperties implements Property {
                 // -->
                 if (attribute.startsWith("role")) {
                     if (getMPlayer().getRank() != null) {
-                        return new ElementTag(getMPlayer().getRank().toString()).getAttribute(attribute.fulfill(1));
+                        return new ElementTag(getMPlayer().getRank().toString()).getObjectAttribute(attribute.fulfill(1));
                     }
                 }
 
@@ -100,7 +100,7 @@ public class FactionsPlayerProperties implements Property {
                 // -->
                 else if (attribute.startsWith("title")) {
                     if (getMPlayer().hasTitle()) {
-                        return new ElementTag(getMPlayer().getTitle()).getAttribute(attribute.fulfill(1));
+                        return new ElementTag(getMPlayer().getTitle()).getObjectAttribute(attribute.fulfill(1));
                     }
                 }
             }
@@ -115,7 +115,7 @@ public class FactionsPlayerProperties implements Property {
         // Returns the player's faction.
         // -->
         else if (attribute.startsWith("faction")) {
-            return new FactionTag(getMPlayer().getFaction()).getAttribute(attribute.fulfill(1));
+            return new FactionTag(getMPlayer().getFaction()).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

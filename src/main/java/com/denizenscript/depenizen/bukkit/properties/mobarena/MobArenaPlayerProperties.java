@@ -59,7 +59,7 @@ public class MobArenaPlayerProperties implements Property {
     Arena arena;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -77,7 +77,7 @@ public class MobArenaPlayerProperties implements Property {
             // -->
             if (attribute.startsWith("in_arena")) {
                 return new ElementTag(arena != null)
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
 
             else if (arena != null) {
@@ -91,7 +91,7 @@ public class MobArenaPlayerProperties implements Property {
                 // NOTE: requires the player to be in an arena.
                 // -->
                 if (attribute.startsWith("current_arena")) {
-                    return new MobArenaArenaTag(arena).getAttribute(attribute.fulfill(1));
+                    return new MobArenaArenaTag(arena).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -105,7 +105,7 @@ public class MobArenaPlayerProperties implements Property {
                 else if (attribute.startsWith("class")) {
                     return new ElementTag(new ArenaPlayer(player.getPlayerEntity(), arena,
                             ((MobArena) MobArenaBridge.instance.plugin)).getStats().getClassName())
-                            .getAttribute(attribute.fulfill(1));
+                            .getObjectAttribute(attribute.fulfill(1));
                 }
 
                 return null;
@@ -132,7 +132,7 @@ public class MobArenaPlayerProperties implements Property {
                 // Returns the number of kills the player has in the arena.
                 // -->
                 if (attribute.startsWith("kills")) {
-                    return new ElementTag(stats.getInt("kills")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("kills")).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -143,7 +143,7 @@ public class MobArenaPlayerProperties implements Property {
                 // Returns the amount of damage the player has dealt in the arena.
                 // -->
                 else if (attribute.startsWith("damage_done")) {
-                    return new ElementTag(stats.getInt("dmgDone")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("dmgDone")).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -154,7 +154,7 @@ public class MobArenaPlayerProperties implements Property {
                 // Returns the amount of damage the player has taken in the arena.
                 // -->
                 else if (attribute.startsWith("damage_taken")) {
-                    return new ElementTag(stats.getInt("dmgTaken")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("dmgTaken")).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -165,7 +165,7 @@ public class MobArenaPlayerProperties implements Property {
                 // Returns the wave the player reached in their last match in the arena.
                 // -->
                 else if (attribute.startsWith("last_wave")) {
-                    return new ElementTag(stats.getInt("lastWave")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("lastWave")).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -176,7 +176,7 @@ public class MobArenaPlayerProperties implements Property {
                 // Returns the number of times the player has swung their weapon in the arena.
                 // -->
                 else if (attribute.startsWith("times_swung")) {
-                    return new ElementTag(stats.getInt("swings")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("swings")).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -187,7 +187,7 @@ public class MobArenaPlayerProperties implements Property {
                 // Returns the number of times the player has hit an enemy in the arena.
                 // -->
                 else if (attribute.startsWith("times_hit")) {
-                    return new ElementTag(stats.getInt("hits")).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(stats.getInt("hits")).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 return null;

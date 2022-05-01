@@ -50,7 +50,7 @@ public class CrackShotEntityProperties implements Property {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -71,7 +71,7 @@ public class CrackShotEntityProperties implements Property {
                 name = CrackShotBridge.utility.getWeaponTitle(entity.getProjectile());
             }
             if (name != null) {
-                return new ElementTag(name).getAttribute(attribute.fulfill(1));
+                return new ElementTag(name).getObjectAttribute(attribute.fulfill(1));
             }
             else {
                 return null;

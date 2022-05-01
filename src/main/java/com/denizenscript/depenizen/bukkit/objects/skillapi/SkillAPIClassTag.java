@@ -115,7 +115,7 @@ public class SkillAPIClassTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <SkillAPIClassTag.name>
@@ -125,7 +125,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the name of this SkillAPI class.
         // -->
         if (attribute.startsWith("name")) {
-            return new ElementTag(rpgClass.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getName()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -136,7 +136,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the color of the prefix of this SkillAPI class.
         // -->
         if (attribute.startsWith("prefix_color")) {
-            return new ElementTag(rpgClass.getPrefixColor().toString()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getPrefixColor().toString()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -147,7 +147,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the prefix of this SkillAPI class.
         // -->
         else if (attribute.startsWith("class_prefix")) {
-            return new ElementTag(rpgClass.getPrefix()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getPrefix()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -158,7 +158,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns whether this SkillAPI class requires permission to profess as it.
         // -->
         else if (attribute.startsWith("needs_permission")) {
-            return new ElementTag(rpgClass.isNeedsPermission()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.isNeedsPermission()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -169,11 +169,11 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the name of the group that this SkillAPI class falls into.
         // -->
         if (attribute.startsWith("group_name")) {
-            return new ElementTag(rpgClass.getGroup()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getGroup()).getObjectAttribute(attribute.fulfill(1));
         }
         if (attribute.startsWith("group.name")) { // old
             Debug.echoError("Deprecation notice - please change 'SkillAPIClassTag.group.name' to 'SkillAPIClassTag.group_name'");
-            return new ElementTag(rpgClass.getGroup()).getAttribute(attribute.fulfill(2));
+            return new ElementTag(rpgClass.getGroup()).getObjectAttribute(attribute.fulfill(2));
         }
 
         // <--[tag]
@@ -184,7 +184,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the whether this SkillAPI class has a parent class.
         // -->
         if (attribute.startsWith("has_parent")) {
-            return new ElementTag(rpgClass.hasParent()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.hasParent()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -195,7 +195,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the parent class of this SkillAPI class.
         // -->
         if (attribute.startsWith("parent")) {
-            return new SkillAPIClassTag(rpgClass.getParent()).getAttribute(attribute.fulfill(1));
+            return new SkillAPIClassTag(rpgClass.getParent()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -206,7 +206,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the item icon representing this SkillAPI class in menus.
         // -->
         if (attribute.startsWith("icon")) {
-            return new ItemTag(rpgClass.getIcon()).getAttribute(attribute.fulfill(1));
+            return new ItemTag(rpgClass.getIcon()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -217,7 +217,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the maximum level that this SkillAPI class can reach.
         // -->
         if (attribute.startsWith("max_level")) {
-            return new ElementTag(rpgClass.getMaxLevel()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getMaxLevel()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -228,7 +228,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the base amount of health for this SkillAPI class.
         // -->
         if (attribute.startsWith("base_health")) {
-            return new ElementTag(rpgClass.getBaseHealth()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getBaseHealth()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -239,7 +239,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the amount of health gained per level for this SkillAPI class.
         // -->
         if (attribute.startsWith("health_scale")) {
-            return new ElementTag(rpgClass.getHealthScale()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getHealthScale()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -250,7 +250,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the base amount of mana for this SkillAPI class.
         // -->
         if (attribute.startsWith("base_mana")) {
-            return new ElementTag(rpgClass.getBaseMana()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getBaseMana()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -261,7 +261,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the amount of mana gained per level for this SkillAPI class.
         // -->
         if (attribute.startsWith("mana_scale")) {
-            return new ElementTag(rpgClass.getManaScale()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getManaScale()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -272,7 +272,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the alias for mana that this SkillAPI class uses.
         // -->
         if (attribute.startsWith("mana_name")) {
-            return new ElementTag(rpgClass.getManaName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getManaName()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -283,7 +283,7 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns whether this SkillAPI class has mana regeneration.
         // -->
         if (attribute.startsWith("has_mana_regen")) {
-            return new ElementTag(rpgClass.hasManaRegen()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.hasManaRegen()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -294,10 +294,10 @@ public class SkillAPIClassTag implements ObjectTag {
         // Returns the amount of mana regeneration that this SkillAPI class has.
         // -->
         if (attribute.startsWith("mana_regen")) {
-            return new ElementTag(rpgClass.getManaRegen()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(rpgClass.getManaRegen()).getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
 
     }
 }

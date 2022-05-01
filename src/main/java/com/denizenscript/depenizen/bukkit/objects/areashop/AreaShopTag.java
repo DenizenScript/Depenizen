@@ -114,7 +114,7 @@ public class AreaShopTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -127,7 +127,7 @@ public class AreaShopTag implements ObjectTag {
         // Returns whether this AreaShop has been bought.
         // -->
         if (attribute.startsWith("is_bought")) {
-            return new ElementTag(areaShop.isBuyRegion()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(areaShop.isBuyRegion()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -138,7 +138,7 @@ public class AreaShopTag implements ObjectTag {
         // Returns whether this AreaShop is being rented.
         // -->
         else if (attribute.startsWith("is_rented")) {
-            return new ElementTag(areaShop.isRentRegion()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(areaShop.isRentRegion()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -149,7 +149,7 @@ public class AreaShopTag implements ObjectTag {
         // Returns a list of groups that control this AreaShop.
         // -->
         else if (attribute.startsWith("groups")) {
-            return new ListTag(areaShop.getGroupNames()).getAttribute(attribute.fulfill(1));
+            return new ListTag(areaShop.getGroupNames()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -160,7 +160,7 @@ public class AreaShopTag implements ObjectTag {
         // Returns the landlord of the AreaShop.
         // -->
         else if (attribute.startsWith("landlord")) {
-            return new PlayerTag(areaShop.getLandlord()).getAttribute(attribute.fulfill(1));
+            return new PlayerTag(areaShop.getLandlord()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -171,7 +171,7 @@ public class AreaShopTag implements ObjectTag {
         // Returns the name of the AreaShop.
         // -->
         else if (attribute.startsWith("name")) {
-            return new ElementTag(areaShop.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(areaShop.getName()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -192,7 +192,7 @@ public class AreaShopTag implements ObjectTag {
             else {
                 return null;
             }
-            return new ElementTag(price).getAttribute(attribute.fulfill(1));
+            return new ElementTag(price).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -203,7 +203,7 @@ public class AreaShopTag implements ObjectTag {
         // Returns the owner of the AreaShop.
         // -->
         else if (attribute.startsWith("owner")) {
-            return new PlayerTag(areaShop.getOwner()).getAttribute(attribute.fulfill(1));
+            return new PlayerTag(areaShop.getOwner()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -214,9 +214,9 @@ public class AreaShopTag implements ObjectTag {
         // Returns the WorldGuardRegionTag that holds the AreaShop.
         // -->
         else if (attribute.startsWith("worldguard_region")) {
-            return new WorldGuardRegionTag(areaShop.getRegion(), areaShop.getWorld()).getAttribute(attribute.fulfill(1));
+            return new WorldGuardRegionTag(areaShop.getRegion(), areaShop.getWorld()).getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
     }
 }

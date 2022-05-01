@@ -59,7 +59,7 @@ public class TownyCuboidProperties implements Property {
     CuboidTag cuboid;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <CuboidTag.has_town>
@@ -71,10 +71,10 @@ public class TownyCuboidProperties implements Property {
         if (attribute.startsWith("has_town")) {
             for (Location location : cuboid.getBlockLocationsUnfiltered(true)) { // TODO: This is an awful way to do this.
                 if (TownyAPI.getInstance().getTownName(location) != null) {
-                    return new ElementTag(true).getAttribute(attribute.fulfill(1));
+                    return new ElementTag(true).getObjectAttribute(attribute.fulfill(1));
                 }
             }
-            return new ElementTag(false).getAttribute(attribute.fulfill(1));
+            return new ElementTag(false).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -98,7 +98,7 @@ public class TownyCuboidProperties implements Property {
             }
             catch (NotRegisteredException e) {
             }
-            return list.getAttribute(attribute.fulfill(1));
+            return list.getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

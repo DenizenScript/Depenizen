@@ -52,7 +52,7 @@ public class BossShopInventoryProperties implements Property {
     InventoryTag inv;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -67,7 +67,7 @@ public class BossShopInventoryProperties implements Property {
         if (attribute.startsWith("is_bossshop")) {
             BossShop bs = (BossShop) BossShopBridge.instance.plugin;
 
-            return new ElementTag(bs.getAPI().isValidShop(inv.getInventory())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(bs.getAPI().isValidShop(inv.getInventory())).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

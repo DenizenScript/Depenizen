@@ -67,7 +67,7 @@ public class WorldGuardPlayerProperties implements Property {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (!attribute.startsWith("worldguard") && !attribute.startsWith("wg")) {
             return null;
@@ -88,7 +88,7 @@ public class WorldGuardPlayerProperties implements Property {
             }
             WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
             return new ElementTag(WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), worldGuard.wrapPlayer(player)))
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -130,7 +130,7 @@ public class WorldGuardPlayerProperties implements Property {
             }
             WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
             return new ElementTag(query.testState(BukkitAdapter.adapt(loc), worldGuard.wrapPlayer(player), flag))
-                    .getAttribute(attribute.fulfill(args));
+                    .getObjectAttribute(attribute.fulfill(args));
         }
 
         return null;

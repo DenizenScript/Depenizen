@@ -53,7 +53,7 @@ public class TCLocationProperties implements Property {
     LocationTag location;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (attribute.startsWith("tc_biome")) {
             attribute = attribute.fulfill(1);
@@ -68,7 +68,7 @@ public class TCLocationProperties implements Property {
             // Returns the TerrainControl biome name at this location, if any.
             // -->
             if (attribute.startsWith("name")) {
-                return new ElementTag(biome.getName()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(biome.getName()).getObjectAttribute(attribute.fulfill(1));
             }
 
             else if (attribute.startsWith("temperature")) {
@@ -80,7 +80,7 @@ public class TCLocationProperties implements Property {
                 // Returns the TerrainControl biome temperature at this location, if any.
                 // -->
                 return new ElementTag(biome.getTemperatureAt(location.getBlockX(), location.getBlockY(), location.getBlockZ()))
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
         }
 

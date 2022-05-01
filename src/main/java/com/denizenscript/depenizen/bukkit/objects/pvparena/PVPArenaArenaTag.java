@@ -99,7 +99,7 @@ public class PVPArenaArenaTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -112,7 +112,7 @@ public class PVPArenaArenaTag implements ObjectTag {
         // Returns the name of the arena.
         // -->
         if (attribute.startsWith("name")) {
-            return new ElementTag(arena.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.getName()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -127,9 +127,9 @@ public class PVPArenaArenaTag implements ObjectTag {
             for (ArenaPlayer p : arena.getFighters()) {
                 fighters.addObject(new PlayerTag(p.get()));
             }
-            return fighters.getAttribute(attribute.fulfill(1));
+            return fighters.getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
     }
 }

@@ -52,7 +52,7 @@ public class LibsDisguiseEntityProperties implements Property {
     EntityTag entity;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -65,7 +65,7 @@ public class LibsDisguiseEntityProperties implements Property {
         // Returns whether the entity is in a disguise.
         // -->
         if (attribute.startsWith("libsdisguise_is_disguised")) {
-            return new ElementTag(DisguiseAPI.isDisguised(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(DisguiseAPI.isDisguised(entity.getBukkitEntity())).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -77,7 +77,7 @@ public class LibsDisguiseEntityProperties implements Property {
         // -->
         if (attribute.startsWith("libsdisguise_disguise")
                 && DisguiseAPI.isDisguised(entity.getBukkitEntity())) {
-            return new LibsDisguiseTag(DisguiseAPI.getDisguise(entity.getBukkitEntity())).getAttribute(attribute.fulfill(1));
+            return new LibsDisguiseTag(DisguiseAPI.getDisguise(entity.getBukkitEntity())).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

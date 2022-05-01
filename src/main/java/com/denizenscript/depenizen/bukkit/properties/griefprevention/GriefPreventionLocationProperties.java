@@ -52,7 +52,7 @@ public class GriefPreventionLocationProperties implements Property {
     LocationTag location;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -78,7 +78,7 @@ public class GriefPreventionLocationProperties implements Property {
                         ignoreHeight = new ElementTag(true);
                     }
                 }
-                return new ElementTag(dataStore.getClaimAt(location, ignoreHeight.asBoolean(), null) != null).getAttribute(attribute.fulfill(1));
+                return new ElementTag(dataStore.getClaimAt(location, ignoreHeight.asBoolean(), null) != null).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -93,7 +93,7 @@ public class GriefPreventionLocationProperties implements Property {
                 if (claim == null) {
                     return null;
                 }
-                return new GriefPreventionClaimTag(claim).getAttribute(attribute.fulfill(1));
+                return new GriefPreventionClaimTag(claim).getObjectAttribute(attribute.fulfill(1));
             }
 
         }

@@ -141,7 +141,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <PlotSquaredPlotTag.id_x>
@@ -151,7 +151,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // Returns the plot's X coordinate portion of its ID.
         // -->
         if (attribute.startsWith("x")) {
-            return new ElementTag(plot.getId().x).getAttribute(attribute.fulfill(1));
+            return new ElementTag(plot.getId().x).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -162,7 +162,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // Returns the plot's Z coordinate portion of its ID.
         // -->
         if (attribute.startsWith("z")) {
-            return new ElementTag(plot.getId().y).getAttribute(attribute.fulfill(1));
+            return new ElementTag(plot.getId().y).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -174,7 +174,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // -->
         if (attribute.startsWith("home")) {
             com.github.intellectualsites.plotsquared.plot.object.Location loca = plot.getHome();
-            return new LocationTag(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getAttribute(attribute.fulfill(1));
+            return new LocationTag(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -186,7 +186,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // -->
         if (attribute.startsWith("default_home")) {
             com.github.intellectualsites.plotsquared.plot.object.Location loca = plot.getDefaultHome();
-            return new LocationTag(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getAttribute(attribute.fulfill(1));
+            return new LocationTag(new Location(Bukkit.getWorld(plot.getArea().worldname), loca.getX(), loca.getY(), loca.getZ())).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -197,7 +197,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
         // Returns the plot's world.
         // -->
         if (attribute.startsWith("world")) {
-            return WorldTag.valueOf(plot.getArea().worldname, attribute.context).getAttribute(attribute.fulfill(1));
+            return WorldTag.valueOf(plot.getArea().worldname, attribute.context).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -212,7 +212,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
             for (UUID uuid : plot.getOwners()) {
                 players.addObject(new PlayerTag(uuid));
             }
-            return players.getAttribute(attribute.fulfill(1));
+            return players.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -227,7 +227,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
             for (UUID uuid : plot.getTrusted()) {
                 players.addObject(new PlayerTag(uuid));
             }
-            return players.getAttribute(attribute.fulfill(1));
+            return players.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -242,7 +242,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
             for (UUID uuid : plot.getDenied()) {
                 players.addObject(new PlayerTag(uuid));
             }
-            return players.getAttribute(attribute.fulfill(1));
+            return players.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -257,7 +257,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
             for (UUID uuid : plot.getMembers()) {
                 players.addObject(new PlayerTag(uuid));
             }
-            return players.getAttribute(attribute.fulfill(1));
+            return players.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -271,7 +271,7 @@ public class PlotSquaredPlotTag implements ObjectTag {
             WorldTag world = WorldTag.valueOf(plot.getArea().worldname, attribute.context);
             Location l1 = new Location(world.getWorld(), plot.getBottomAbs().getX(), 0, plot.getBottomAbs().getZ());
             Location l2 = new Location(world.getWorld(), plot.getTopAbs().getX(), 255, plot.getTopAbs().getZ());
-            return new CuboidTag(l1, l2).getAttribute(attribute.fulfill(1));
+            return new CuboidTag(l1, l2).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -289,10 +289,10 @@ public class PlotSquaredPlotTag implements ObjectTag {
                 Location l2 = new Location(world.getWorld(), region.maxX, region.maxY, region.maxZ);
                 cuboids.addObject(new CuboidTag(l1, l2));
             }
-            return cuboids.getAttribute(attribute.fulfill(1));
+            return cuboids.getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
 
     }
 }

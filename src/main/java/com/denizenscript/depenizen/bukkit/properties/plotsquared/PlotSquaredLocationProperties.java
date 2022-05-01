@@ -53,7 +53,7 @@ public class PlotSquaredLocationProperties implements Property {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         // <--[tag]
         // @attribute <LocationTag.plotsquared_plot>
         // @returns PlotSquaredPlotTag
@@ -64,7 +64,7 @@ public class PlotSquaredLocationProperties implements Property {
         if (attribute.startsWith("plotsquared_plot")) {
             try {
                 return new PlotSquaredPlotTag(new PlotAPI().getPlotSquared().getPlotAreaAbs(getPlotSquaredLocation())
-                        .getPlot(getPlotSquaredLocation())).getAttribute(attribute.fulfill(1));
+                        .getPlot(getPlotSquaredLocation())).getObjectAttribute(attribute.fulfill(1));
             }
             catch (Exception e) {
                 if (!attribute.hasAlternative()) {

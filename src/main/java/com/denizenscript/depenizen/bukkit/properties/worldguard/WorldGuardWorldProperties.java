@@ -55,7 +55,7 @@ public class WorldGuardWorldProperties implements Property {
     RegionManager manager;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <WorldTag.list_regions>
@@ -69,7 +69,7 @@ public class WorldGuardWorldProperties implements Property {
             for (ProtectedRegion r : manager.getRegions().values()) {
                 regions.addObject(new WorldGuardRegionTag(r, world));
             }
-            return regions.getAttribute(attribute.fulfill(1));
+            return regions.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -80,7 +80,7 @@ public class WorldGuardWorldProperties implements Property {
         // Returns whether a region exists in this world for the given name.
         // -->
         if (attribute.startsWith("has_region") && attribute.hasParam()) {
-            return new ElementTag(manager.hasRegion(attribute.getParam())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(manager.hasRegion(attribute.getParam())).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

@@ -60,7 +60,7 @@ public class ASkyBlockPlayerProperties implements Property {
     Island skyblock;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -77,7 +77,7 @@ public class ASkyBlockPlayerProperties implements Property {
             // -->
             if (attribute.startsWith("has_skyblock")) {
                 return new ElementTag(api.hasIsland(player.getUUID()))
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
 
             if (skyblock != null) {
@@ -89,7 +89,7 @@ public class ASkyBlockPlayerProperties implements Property {
                 // Returns the centre of the player's skyblock.
                 // -->
                 if (attribute.startsWith("center") || attribute.startsWith("centre")) {
-                    return new LocationTag(skyblock.getCenter()).getAttribute(attribute.fulfill(1));
+                    return new LocationTag(skyblock.getCenter()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -100,7 +100,7 @@ public class ASkyBlockPlayerProperties implements Property {
                 // Returns the spawnpoint of the player's skyblock.
                 // -->
                 else if (attribute.startsWith("spawn_point")) {
-                    return new LocationTag(skyblock.getSpawnPoint()).getAttribute(attribute.fulfill(1));
+                    return new LocationTag(skyblock.getSpawnPoint()).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -115,7 +115,7 @@ public class ASkyBlockPlayerProperties implements Property {
                     for (UUID u : skyblock.getMembers()) {
                         m.addObject(new PlayerTag(u));
                     }
-                    return m.getAttribute(attribute.fulfill(1));
+                    return m.getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -127,7 +127,7 @@ public class ASkyBlockPlayerProperties implements Property {
                 // -->
                 else if (attribute.startsWith("level")) {
                     return new ElementTag(api.getIslandLevel(player.getUUID()))
-                            .getAttribute(attribute.fulfill(1));
+                            .getObjectAttribute(attribute.fulfill(1));
                 }
             }
         }

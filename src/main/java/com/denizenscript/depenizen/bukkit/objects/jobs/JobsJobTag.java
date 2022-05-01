@@ -142,7 +142,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (jobProgression != null) {
 
@@ -158,7 +158,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
                 // -->
                 if (attribute.startsWith("max")) {
                     return new ElementTag(jobProgression.getMaxExperience())
-                            .getAttribute(attribute.fulfill(1));
+                            .getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -170,7 +170,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
                 // -->
                 if (attribute.startsWith("level")) {
                     return new ElementTag(jobProgression.getLevel())
-                            .getAttribute(attribute.fulfill(1));
+                            .getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -180,7 +180,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
                 // @description
                 // Returns the current experience a player has in a specified job.
                 // -->
-                return new ElementTag(jobProgression.getExperience()).getAttribute(attribute);
+                return new ElementTag(jobProgression.getExperience()).getObjectAttribute(attribute);
             }
         }
 
@@ -193,7 +193,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // -->
         if (attribute.startsWith("color")) {
             return new ElementTag(job.getChatColor().toString())
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -204,7 +204,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // Returns the description of the job.
         // -->
         else if (attribute.startsWith("description")) {
-            return new ElementTag(job.getDescription()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(job.getDescription()).getObjectAttribute(attribute.fulfill(1));
         }
 
         else if (attribute.startsWith("name")) {
@@ -219,7 +219,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
             // -->
             if (attribute.startsWith("short")) {
                 return new ElementTag(job.getShortName())
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -229,10 +229,10 @@ public class JobsJobTag implements ObjectTag, Adjustable {
             // @description
             // Returns the name of the job.
             // -->
-            return new ElementTag(job.getName()).getAttribute(attribute);
+            return new ElementTag(job.getName()).getObjectAttribute(attribute);
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
     }
 
     @Override

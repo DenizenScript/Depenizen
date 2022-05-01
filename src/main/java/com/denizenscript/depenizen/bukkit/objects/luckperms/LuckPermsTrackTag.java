@@ -135,7 +135,7 @@ public class LuckPermsTrackTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <LuckPermsTrackTag.name>
@@ -145,7 +145,7 @@ public class LuckPermsTrackTag implements ObjectTag {
         // Returns the name of the track.
         // -->
         if (attribute.startsWith("name")) {
-            return new ElementTag(track.getName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(track.getName()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -177,10 +177,10 @@ public class LuckPermsTrackTag implements ObjectTag {
             else {
                 groups.addAll(track.getGroups());
             }
-            return groups.getAttribute(attribute.fulfill(1));
+            return groups.getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
 
     }
 }

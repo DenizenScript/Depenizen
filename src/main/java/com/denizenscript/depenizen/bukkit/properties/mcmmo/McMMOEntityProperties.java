@@ -53,7 +53,7 @@ public class McMMOEntityProperties implements Property {
     EntityTag entity;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (attribute.startsWith("mcmmo")) {
 
@@ -68,7 +68,7 @@ public class McMMOEntityProperties implements Property {
             // -->
             if (attribute.startsWith("is_spawned_mob")) {
                 return new ElementTag(mcMMO.getCompatibilityManager().getPersistentDataLayer().hasMobFlag(MobMetaFlagType.MOB_SPAWNER_MOB, entity.getLivingEntity()))
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
         }
 

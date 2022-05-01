@@ -72,7 +72,7 @@ public class SentinelNPCProperties implements Property {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -96,7 +96,7 @@ public class SentinelNPCProperties implements Property {
                 if (sentinel.chasing == null) {
                     return null;
                 }
-                return new EntityTag(sentinel.chasing).getAttribute(attribute.fulfill(1));
+                return new EntityTag(sentinel.chasing).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -107,7 +107,7 @@ public class SentinelNPCProperties implements Property {
             // Returns a list of all targets currently targeted by this Sentinel NPC.
             // -->
             if (attribute.startsWith("targets")) {
-                return listTargets(sentinel.allTargets).getAttribute(attribute.fulfill(1));
+                return listTargets(sentinel.allTargets).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -118,7 +118,7 @@ public class SentinelNPCProperties implements Property {
             // Returns a list of all targets currently ignored by this Sentinel NPC.
             // -->
             if (attribute.startsWith("ignores")) {
-                return listTargets(sentinel.allIgnores).getAttribute(attribute.fulfill(1));
+                return listTargets(sentinel.allIgnores).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -129,7 +129,7 @@ public class SentinelNPCProperties implements Property {
             // Returns a list of all targets currently avoided by this Sentinel NPC.
             // -->
             if (attribute.startsWith("avoids")) {
-                return listTargets(sentinel.allAvoids).getAttribute(attribute.fulfill(1));
+                return listTargets(sentinel.allAvoids).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -140,7 +140,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the avoid range of a Sentinel NPC.
             // -->
             if (attribute.startsWith("avoid_range")) {
-                return new ElementTag(sentinel.avoidRange).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.avoidRange).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -151,7 +151,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the range of a Sentinel NPC.
             // -->
             if (attribute.startsWith("range")) {
-                return new ElementTag(sentinel.range).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.range).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -162,7 +162,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the raw damage value (no calculating) of a Sentinel NPC.
             // -->
             if (attribute.startsWith("raw_damage")) {
-                return new ElementTag(sentinel.damage).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.damage).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -173,7 +173,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the current damage value (with calculations if needed) of a Sentinel NPC.
             // -->
             if (attribute.startsWith("damage")) {
-                return new ElementTag(sentinel.getDamage()).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.getDamage()).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -184,7 +184,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the raw armor value (no calculating) of a Sentinel NPC.
             // -->
             if (attribute.startsWith("raw_armor")) {
-                return new ElementTag(sentinel.armor).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.armor).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -195,7 +195,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the current armor value (with calculations if needed) of a Sentinel NPC.
             // -->
             if (attribute.startsWith("armor")) {
-                return new ElementTag(sentinel.getArmor(sentinel.getLivingEntity())).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.getArmor(sentinel.getLivingEntity())).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -206,7 +206,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the max health of a Sentinel NPC.
             // -->
             if (attribute.startsWith("health")) {
-                return new ElementTag(sentinel.health).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.health).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -217,7 +217,7 @@ public class SentinelNPCProperties implements Property {
             // Returns whether the Sentinel NPC will chase with ranged weapons.
             // -->
             if (attribute.startsWith("ranged_chase")) {
-                return new ElementTag(sentinel.rangedChase).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.rangedChase).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -228,7 +228,7 @@ public class SentinelNPCProperties implements Property {
             // Returns whether the Sentinel NPC will chase with close weapons.
             // -->
             if (attribute.startsWith("close_chase")) {
-                return new ElementTag(sentinel.closeChase).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.closeChase).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -239,7 +239,7 @@ public class SentinelNPCProperties implements Property {
             // Returns whether the Sentinel NPC is invincible.
             // -->
             if (attribute.startsWith("invincible")) {
-                return new ElementTag(sentinel.invincible).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.invincible).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -250,7 +250,7 @@ public class SentinelNPCProperties implements Property {
             // Returns whether the Sentinel NPC will fight back.
             // -->
             if (attribute.startsWith("fightback")) {
-                return new ElementTag(sentinel.fightback).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.fightback).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -261,7 +261,7 @@ public class SentinelNPCProperties implements Property {
             // Returns whether the Sentinel NPC will run away.
             // -->
             if (attribute.startsWith("runaway")) {
-                return new ElementTag(sentinel.runaway).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.runaway).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -272,7 +272,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the attack rate of a Sentinel NPC.
             // -->
             if (attribute.startsWith("attack_rate")) {
-                return new DurationTag((long) sentinel.attackRate).getAttribute(attribute.fulfill(1));
+                return new DurationTag((long) sentinel.attackRate).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -283,7 +283,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the attack rate (at range) of a Sentinel NPC.
             // -->
             if (attribute.startsWith("attack_rate")) {
-                return new DurationTag((long) sentinel.attackRateRanged).getAttribute(attribute.fulfill(1));
+                return new DurationTag((long) sentinel.attackRateRanged).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -294,7 +294,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the heal rate of a Sentinel NPC.
             // -->
             if (attribute.startsWith("heal_rate")) {
-                return new DurationTag((long) sentinel.healRate).getAttribute(attribute.fulfill(1));
+                return new DurationTag((long) sentinel.healRate).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -309,7 +309,7 @@ public class SentinelNPCProperties implements Property {
                 if (entity == null) {
                     return null;
                 }
-                return new EntityTag(entity).getDenizenObject().getAttribute(attribute.fulfill(1));
+                return new EntityTag(entity).getDenizenObject().getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -320,7 +320,7 @@ public class SentinelNPCProperties implements Property {
             // Returns whether the Sentinel NPC needs ammo.
             // -->
             if (attribute.startsWith("needs_ammo")) {
-                return new ElementTag(sentinel.needsAmmo).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.needsAmmo).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -331,7 +331,7 @@ public class SentinelNPCProperties implements Property {
             // Returns whether the Sentinel NPC has safe-shot enabled.
             // -->
             if (attribute.startsWith("safe_shot")) {
-                return new ElementTag(sentinel.safeShot).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.safeShot).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -342,7 +342,7 @@ public class SentinelNPCProperties implements Property {
             // Returns how long a Sentinel NPC will wait after death before respawning.
             // -->
             if (attribute.startsWith("respawn_time")) {
-                return new DurationTag(sentinel.respawnTime).getAttribute(attribute.fulfill(1));
+                return new DurationTag(sentinel.respawnTime).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -353,7 +353,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the chase range of a Sentinel NPC.
             // -->
             if (attribute.startsWith("chase_range")) {
-                return new ElementTag(sentinel.chaseRange).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.chaseRange).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -367,7 +367,7 @@ public class SentinelNPCProperties implements Property {
                 if (sentinel.spawnPoint == null) {
                     return null;
                 }
-                return new LocationTag(sentinel.spawnPoint).getAttribute(attribute.fulfill(1));
+                return new LocationTag(sentinel.spawnPoint).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -381,7 +381,7 @@ public class SentinelNPCProperties implements Property {
                 if (sentinel.avoidReturnPoint == null) {
                     return null;
                 }
-                return new LocationTag(sentinel.avoidReturnPoint).getAttribute(attribute.fulfill(1));
+                return new LocationTag(sentinel.avoidReturnPoint).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -396,7 +396,7 @@ public class SentinelNPCProperties implements Property {
                 for (ItemStack item : sentinel.drops) {
                     drops.addObject(new ItemTag(item.clone()));
                 }
-                return drops.getAttribute(attribute.fulfill(1));
+                return drops.getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -411,7 +411,7 @@ public class SentinelNPCProperties implements Property {
                 for (Double chance : sentinel.dropChances) {
                     drops.add(chance.toString());
                 }
-                return drops.getAttribute(attribute.fulfill(1));
+                return drops.getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -422,7 +422,7 @@ public class SentinelNPCProperties implements Property {
             // Returns whether the Sentinel NPC has enemy-drops enabled.
             // -->
             if (attribute.startsWith("enemy_drops")) {
-                return new ElementTag(sentinel.enemyDrops).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.enemyDrops).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -433,7 +433,7 @@ public class SentinelNPCProperties implements Property {
             // Returns how long a Sentinel NPC will wait before abandoning an unseen target.
             // -->
             if (attribute.startsWith("enemy_target_time")) {
-                return new DurationTag(sentinel.enemyTargetTime).getAttribute(attribute.fulfill(1));
+                return new DurationTag(sentinel.enemyTargetTime).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -444,7 +444,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the movement speed of a Sentinel NPC.
             // -->
             if (attribute.startsWith("speed")) {
-                return new ElementTag(sentinel.speed).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.speed).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -455,7 +455,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the warning message of a Sentinel NPC.
             // -->
             if (attribute.startsWith("warning")) {
-                return new ElementTag(sentinel.warningText).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.warningText).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -466,7 +466,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the greeting message of a Sentinel NPC.
             // -->
             if (attribute.startsWith("greeting")) {
-                return new ElementTag(sentinel.greetingText).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.greetingText).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -477,7 +477,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the greeting range of a Sentinel NPC.
             // -->
             if (attribute.startsWith("greet_range")) {
-                return new ElementTag(sentinel.greetRange).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.greetRange).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -488,7 +488,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the greeting rate of a Sentinel NPC.
             // -->
             if (attribute.startsWith("greet_rate")) {
-                return new DurationTag((long) sentinel.greetRate).getAttribute(attribute.fulfill(1));
+                return new DurationTag((long) sentinel.greetRate).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -499,7 +499,7 @@ public class SentinelNPCProperties implements Property {
             // Returns whether the Sentinel NPC will automatically switch weapons.
             // -->
             if (attribute.startsWith("autoswitch")) {
-                return new ElementTag(sentinel.autoswitch).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.autoswitch).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -513,7 +513,7 @@ public class SentinelNPCProperties implements Property {
                 if (sentinel.squad == null) {
                     return null;
                 }
-                return new ElementTag(sentinel.squad).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.squad).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -524,7 +524,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the accuracy value of a Sentinel NPC.
             // -->
             if (attribute.startsWith("accuracy")) {
-                return new ElementTag(sentinel.accuracy).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.accuracy).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -535,7 +535,7 @@ public class SentinelNPCProperties implements Property {
             // Returns whether the Sentinel NPC is set to realistic targeting mode.
             // -->
             if (attribute.startsWith("realistic")) {
-                return new ElementTag(sentinel.realistic).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.realistic).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -546,7 +546,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the hand reach value of a Sentinel NPC.
             // -->
             if (attribute.startsWith("reach")) {
-                return new ElementTag(sentinel.reach).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.reach).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -557,7 +557,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the minimum-guard-distance value of a Sentinel NPC.
             // -->
             if (attribute.startsWith("guard_distance_minimum")) {
-                return new ElementTag(sentinel.guardDistanceMinimum).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.guardDistanceMinimum).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -568,7 +568,7 @@ public class SentinelNPCProperties implements Property {
             // Returns the guard-selection-range value of a Sentinel NPC.
             // -->
             if (attribute.startsWith("guard_selection_range")) {
-                return new ElementTag(sentinel.guardSelectionRange).getAttribute(attribute.fulfill(1));
+                return new ElementTag(sentinel.guardSelectionRange).getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -584,7 +584,7 @@ public class SentinelNPCProperties implements Property {
                 for (Map.Entry<String, Double> damage : sentinel.weaponDamage.entrySet()) {
                     result.add(damage.getKey() + "/" + damage.getValue());
                 }
-                return result.getAttribute(attribute.fulfill(1));
+                return result.getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]
@@ -600,7 +600,7 @@ public class SentinelNPCProperties implements Property {
                 for (Map.Entry<String, String> redir : sentinel.weaponRedirects.entrySet()) {
                     result.add(redir.getKey() + "/" + redir.getValue());
                 }
-                return result.getAttribute(attribute.fulfill(1));
+                return result.getObjectAttribute(attribute.fulfill(1));
             }
         }
         return null;

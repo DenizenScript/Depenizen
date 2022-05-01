@@ -150,7 +150,7 @@ public class WorldGuardRegionTag implements ObjectTag {
     public static Warning oldCuboidTag = new SlowWarning("worldguardregionCuboid", "The tag 'WorldGuardRegionTag.cuboid' is deprecated in favor of the '.area' equivalent.");
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <WorldGuardRegionTag.area>
@@ -171,10 +171,10 @@ public class WorldGuardRegionTag implements ObjectTag {
                     poly.yMin = polyRegion.getMinimumPoint().getY();
                     poly.yMax = polyRegion.getMaximumPoint().getY();
                     poly.recalculateBox();
-                    return poly.getAttribute(attribute.fulfill(1));
+                    return poly.getObjectAttribute(attribute.fulfill(1));
                 }
                 return new CuboidTag(BukkitAdapter.adapt(world, region.getMinimumPoint()),
-                        BukkitAdapter.adapt(world, region.getMaximumPoint())).getAttribute(attribute.fulfill(1));
+                        BukkitAdapter.adapt(world, region.getMaximumPoint())).getObjectAttribute(attribute.fulfill(1));
             }
             catch (Throwable ex) {
                 Debug.echoError(ex);
@@ -190,7 +190,7 @@ public class WorldGuardRegionTag implements ObjectTag {
                 return null;
             }
             return new CuboidTag(BukkitAdapter.adapt(world, region.getMinimumPoint()),
-                    BukkitAdapter.adapt(world, region.getMaximumPoint())).getAttribute(attribute.fulfill(1));
+                    BukkitAdapter.adapt(world, region.getMaximumPoint())).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -201,7 +201,7 @@ public class WorldGuardRegionTag implements ObjectTag {
         // Gets the ID name of the region.
         // -->
         if (attribute.startsWith("id")) {
-            return new ElementTag(region.getId()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(region.getId()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -216,7 +216,7 @@ public class WorldGuardRegionTag implements ObjectTag {
             if (parent == null) {
                 return null;
             }
-            return new WorldGuardRegionTag(parent, world).getAttribute(attribute.fulfill(1));
+            return new WorldGuardRegionTag(parent, world).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -234,7 +234,7 @@ public class WorldGuardRegionTag implements ObjectTag {
                     children.addObject(new WorldGuardRegionTag(child, world));
                 }
             }
-            return children.getAttribute(attribute.fulfill(1));
+            return children.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -249,7 +249,7 @@ public class WorldGuardRegionTag implements ObjectTag {
             for (UUID uuid : region.getMembers().getUniqueIds()) {
                 list.addObject(PlayerTag.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)));
             }
-            return list.getAttribute(attribute.fulfill(1));
+            return list.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -264,7 +264,7 @@ public class WorldGuardRegionTag implements ObjectTag {
             for (UUID uuid : region.getOwners().getUniqueIds()) {
                 list.addObject(PlayerTag.mirrorBukkitPlayer(Bukkit.getOfflinePlayer(uuid)));
             }
-            return list.getAttribute(attribute.fulfill(1));
+            return list.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -275,10 +275,10 @@ public class WorldGuardRegionTag implements ObjectTag {
         // Gets the WorldTag this region is in.
         // -->
         if (attribute.startsWith("world")) {
-            return new WorldTag(world).getAttribute(attribute.fulfill(1));
+            return new WorldTag(world).getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
 
     }
 }

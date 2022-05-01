@@ -56,7 +56,7 @@ public class AreaShopPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -79,7 +79,7 @@ public class AreaShopPlayerProperties implements Property {
                         list.addObject(new AreaShopTag(region));
                     }
                 }
-                return list.getAttribute(attribute.fulfill(1));
+                return list.getObjectAttribute(attribute.fulfill(1));
             }
         }
 

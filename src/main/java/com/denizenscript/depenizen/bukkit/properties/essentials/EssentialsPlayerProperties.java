@@ -65,7 +65,7 @@ public class EssentialsPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <PlayerTag.god_mode>
@@ -76,7 +76,7 @@ public class EssentialsPlayerProperties implements Property {
         // Returns whether the player is currently in god mode.
         // -->
         if (attribute.startsWith("god_mode")) {
-            return new ElementTag(getUser().isGodModeEnabled()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().isGodModeEnabled()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -87,7 +87,7 @@ public class EssentialsPlayerProperties implements Property {
         // Returns whether the player has set at least one home.
         // -->
         if (attribute.startsWith("has_home")) {
-            return new ElementTag(getUser().hasHome()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().hasHome()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -99,7 +99,7 @@ public class EssentialsPlayerProperties implements Property {
         // Returns whether the player is AFK.
         // -->
         if (attribute.startsWith("is_afk")) {
-            return new ElementTag(getUser().isAfk()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().isAfk()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -111,7 +111,7 @@ public class EssentialsPlayerProperties implements Property {
         // Returns whether the player is muted.
         // -->
         if (attribute.startsWith("is_muted")) {
-            return new ElementTag(getUser().isMuted()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().isMuted()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -123,7 +123,7 @@ public class EssentialsPlayerProperties implements Property {
         // Returns whether the player is vanished.
         // -->
         if (attribute.startsWith("is_vanished")) {
-            return new ElementTag(getUser().isVanished()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().isVanished()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -145,7 +145,7 @@ public class EssentialsPlayerProperties implements Property {
                     }
                 }
             }
-            return homes.getAttribute(attribute.fulfill(1));
+            return homes.getObjectAttribute(attribute.fulfill(1));
         }
 
         if (attribute.startsWith("list_homes") || attribute.startsWith("home_list")) {
@@ -161,7 +161,7 @@ public class EssentialsPlayerProperties implements Property {
                     }
                 }
             }
-            return homes.getAttribute(attribute.fulfill(1));
+            return homes.getObjectAttribute(attribute.fulfill(1));
         }
 
         if (attribute.startsWith("list_home_locations") || attribute.startsWith("home_location_list")) {
@@ -177,12 +177,12 @@ public class EssentialsPlayerProperties implements Property {
                     }
                 }
             }
-            return homes.getAttribute(attribute.fulfill(1));
+            return homes.getObjectAttribute(attribute.fulfill(1));
         }
 
         if (attribute.startsWith("list_home_names") || attribute.startsWith("home_name_list")) {
             oldHomesTag.warn(attribute.context);
-            return new ListTag(getUser().getHomes()).getAttribute(attribute.fulfill(1));
+            return new ListTag(getUser().getHomes()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -205,7 +205,7 @@ public class EssentialsPlayerProperties implements Property {
                     }
                 }
             }
-            return players.getAttribute(attribute.fulfill(1));
+            return players.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -216,7 +216,7 @@ public class EssentialsPlayerProperties implements Property {
         // Returns a list of mail the player currently has.
         // -->
         if (attribute.startsWith("list_mails") || attribute.startsWith("mail_list")) {
-            return new ListTag(getUser().getMails()).getAttribute(attribute.fulfill(1));
+            return new ListTag(getUser().getMails()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -228,7 +228,7 @@ public class EssentialsPlayerProperties implements Property {
         // -->
         if (attribute.startsWith("mute_timeout")) {
             return new DurationTag((getUser().getMuteTimeout() - System.currentTimeMillis()))
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -240,7 +240,7 @@ public class EssentialsPlayerProperties implements Property {
         // Returns whether the player has SocialSpy enabled.
         // -->
         if (attribute.startsWith("socialspy")) {
-            return new ElementTag(getUser().isSocialSpyEnabled()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(getUser().isSocialSpyEnabled()).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

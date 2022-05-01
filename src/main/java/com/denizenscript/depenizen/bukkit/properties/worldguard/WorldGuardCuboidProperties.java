@@ -85,7 +85,7 @@ public class WorldGuardCuboidProperties implements Property {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <CuboidTag.has_region>
@@ -95,7 +95,7 @@ public class WorldGuardCuboidProperties implements Property {
         // Returns whether the cuboid contains any region.
         // -->
         if (attribute.startsWith("has_region")) {
-            return new ElementTag(hasRegion()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(hasRegion()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -106,7 +106,7 @@ public class WorldGuardCuboidProperties implements Property {
         // Returns a list of regions that are in this cuboid.
         // -->
         if (attribute.startsWith("regions")) {
-            return getRegions(cuboid.getWorld().getWorld()).getAttribute(attribute.fulfill(1));
+            return getRegions(cuboid.getWorld().getWorld()).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;

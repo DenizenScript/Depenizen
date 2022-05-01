@@ -111,7 +111,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -124,7 +124,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // Returns the GriefPreventionClaim's ID.
         // -->
         if (attribute.startsWith("id")) {
-            return new ElementTag(claim.getID()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(claim.getID()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -139,7 +139,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             for (String manager : claim.managers) {
                 managers.addObject(new PlayerTag(UUID.fromString(manager)));
             }
-            return managers.getAttribute(attribute.fulfill(1));
+            return managers.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -156,7 +156,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             for (String trust : b) {
                 trusted.addObject(new PlayerTag(UUID.fromString(trust)));
             }
-            return trusted.getAttribute(attribute.fulfill(1));
+            return trusted.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -173,7 +173,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             for (String trust : b) {
                 trusted.addObject(new PlayerTag(UUID.fromString(trust)));
             }
-            return trusted.getAttribute(attribute.fulfill(1));
+            return trusted.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -190,7 +190,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             for (String container : c) {
                 trusted.addObject(new PlayerTag(UUID.fromString(container)));
             }
-            return trusted.getAttribute(attribute.fulfill(1));
+            return trusted.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -207,7 +207,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             for (String access : a) {
                 trusted.addObject(new PlayerTag(UUID.fromString(access)));
             }
-            return trusted.getAttribute(attribute.fulfill(1));
+            return trusted.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -221,10 +221,10 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // -->
         else if (attribute.startsWith("owner")) {
             if (claim.isAdminClaim()) {
-                return new ElementTag("Admin").getAttribute(attribute.fulfill(1));
+                return new ElementTag("Admin").getObjectAttribute(attribute.fulfill(1));
             }
             return new PlayerTag(claim.ownerID)
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -239,7 +239,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             lower.setY(0);
             LocationTag upper = new LocationTag(claim.getGreaterBoundaryCorner());
             upper.setY(255);
-            return new CuboidTag(lower, upper).getAttribute(attribute.fulfill(1));
+            return new CuboidTag(lower, upper).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -250,7 +250,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // Returns whether GriefPreventionClaim is an Admin Claim.
         // -->
         else if (attribute.startsWith("is_adminclaim") || attribute.startsWith("is_admin_claim")) {
-            return new ElementTag(claim.isAdminClaim()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(claim.isAdminClaim()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -265,7 +265,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             for (Chunk chunk : claim.getChunks()) {
                 chunks.addObject(new ChunkTag(chunk));
             }
-            return chunks.getAttribute(attribute.fulfill(1));
+            return chunks.getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -280,7 +280,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
             if (defender == null || defender.getPlayerEntity() == null) {
                 return null;
             }
-            return new ElementTag(claim.canSiege(defender.getPlayerEntity())).getAttribute(attribute.fulfill(1));
+            return new ElementTag(claim.canSiege(defender.getPlayerEntity())).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -291,10 +291,10 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // Returns whether the GriefPreventionClaim is currently under siege.
         // -->
         else if (attribute.startsWith("is_sieged")) {
-            return new ElementTag(claim.siegeData != null).getAttribute(attribute.fulfill(1));
+            return new ElementTag(claim.siegeData != null).getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
     }
 
     @Override

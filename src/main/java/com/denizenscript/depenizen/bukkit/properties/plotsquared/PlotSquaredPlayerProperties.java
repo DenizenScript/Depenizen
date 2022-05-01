@@ -50,7 +50,7 @@ public class PlotSquaredPlayerProperties implements Property {
     PlayerTag player;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <PlayerTag.plotsquared_plots[<WorldTag>]>
@@ -69,14 +69,14 @@ public class PlotSquaredPlayerProperties implements Property {
                 for (Plot plays : PlotPlayer.wrap(player.getPlayerEntity()).getPlots(world.getName())) {
                     plots.addObject(new PlotSquaredPlotTag(plays));
                 }
-                return plots.getAttribute(attribute.fulfill(1));
+                return plots.getObjectAttribute(attribute.fulfill(1));
             }
             else {
                 ListTag plots = new ListTag();
                 for (Plot plays : PlotPlayer.wrap(player.getPlayerEntity()).getPlots()) {
                     plots.addObject(new PlotSquaredPlotTag(plays));
                 }
-                return plots.getAttribute(attribute.fulfill(1));
+                return plots.getObjectAttribute(attribute.fulfill(1));
             }
         }
 

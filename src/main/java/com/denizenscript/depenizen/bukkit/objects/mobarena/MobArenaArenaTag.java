@@ -106,7 +106,7 @@ public class MobArenaArenaTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -119,7 +119,7 @@ public class MobArenaArenaTag implements ObjectTag {
         // Returns the name of the arena.
         // -->
         if (attribute.startsWith("name")) {
-            return new ElementTag(arena.arenaName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.arenaName()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -130,7 +130,7 @@ public class MobArenaArenaTag implements ObjectTag {
         // Returns the configuration name of the arena.
         // -->
         else if (attribute.startsWith("config_name")) {
-            return new ElementTag(arena.configName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.configName()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -141,7 +141,7 @@ public class MobArenaArenaTag implements ObjectTag {
         // Returns whether the arena is running.
         // -->
         else if (attribute.startsWith("is_running")) {
-            return new ElementTag(arena.isRunning()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.isRunning()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -153,7 +153,7 @@ public class MobArenaArenaTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("wave_count")) {
             return new ElementTag(arena.getWaveManager().getFinalWave())
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -166,7 +166,7 @@ public class MobArenaArenaTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("current_wave") && arena.isRunning()) {
             return new ElementTag(arena.getWaveManager().getWaveNumber())
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -179,7 +179,7 @@ public class MobArenaArenaTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("wave_type") && arena.isRunning()) {
             return new ElementTag(arena.getWaveManager().getCurrent().getType().toString())
-                    .getAttribute(attribute.fulfill(1));
+                    .getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -190,7 +190,7 @@ public class MobArenaArenaTag implements ObjectTag {
         // Returns whether the arena is enabled.
         // -->
         else if (attribute.startsWith("is_enabled")) {
-            return new ElementTag(arena.isEnabled()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(arena.isEnabled()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -203,13 +203,13 @@ public class MobArenaArenaTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("status")) {
             if (!arena.isEnabled()) {
-                return new ElementTag("closed").getAttribute(attribute.fulfill(1));
+                return new ElementTag("closed").getObjectAttribute(attribute.fulfill(1));
             }
             else if (!arena.isRunning()) {
-                return new ElementTag("open").getAttribute(attribute.fulfill(1));
+                return new ElementTag("open").getObjectAttribute(attribute.fulfill(1));
             }
             else {
-                return new ElementTag("running").getAttribute(attribute.fulfill(1));
+                return new ElementTag("running").getObjectAttribute(attribute.fulfill(1));
             }
         }
 
@@ -227,7 +227,7 @@ public class MobArenaArenaTag implements ObjectTag {
                 for (Player p : arena.getPlayersInArena()) {
                     players.addObject(new PlayerTag(p));
                 }
-                return players.getAttribute(attribute.fulfill(2));
+                return players.getObjectAttribute(attribute.fulfill(2));
             }
 
             // <--[tag]
@@ -242,7 +242,7 @@ public class MobArenaArenaTag implements ObjectTag {
                 for (Player p : arena.getPlayersInLobby()) {
                     players.addObject(new PlayerTag(p));
                 }
-                return players.getAttribute(attribute.fulfill(2));
+                return players.getObjectAttribute(attribute.fulfill(2));
             }
 
             // <--[tag]
@@ -257,10 +257,10 @@ public class MobArenaArenaTag implements ObjectTag {
                 for (Player p : arena.getAllPlayers()) {
                     players.addObject(new PlayerTag(p));
                 }
-                return players.getAttribute(attribute.fulfill(1));
+                return players.getObjectAttribute(attribute.fulfill(1));
             }
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
     }
 }

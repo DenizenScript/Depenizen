@@ -52,7 +52,7 @@ public class McMMOLocationProperties implements Property {
     LocationTag location;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         if (attribute.startsWith("mcmmo")) {
 
@@ -67,7 +67,7 @@ public class McMMOLocationProperties implements Property {
             // -->
             if (attribute.startsWith("is_placed")) {
                 return new ElementTag(mcMMO.getPlaceStore().isTrue(location.getBlock()))
-                        .getAttribute(attribute.fulfill(1));
+                        .getObjectAttribute(attribute.fulfill(1));
             }
         }
 

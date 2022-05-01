@@ -51,7 +51,7 @@ public class JobPlayer implements Property {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         return null;
     }
 

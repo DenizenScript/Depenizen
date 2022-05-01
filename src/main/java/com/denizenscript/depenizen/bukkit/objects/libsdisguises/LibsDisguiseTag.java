@@ -121,7 +121,7 @@ public class LibsDisguiseTag implements ObjectTag {
     }
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
 
         // <--[tag]
         // @attribute <LibsDisguiseTag.disguise_type>
@@ -131,7 +131,7 @@ public class LibsDisguiseTag implements ObjectTag {
         // Returns the type of the disguise.
         // -->
         if (attribute.startsWith("disguise_type")) {
-            return new ElementTag(disguise.getType().toString()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(disguise.getType().toString()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -142,7 +142,7 @@ public class LibsDisguiseTag implements ObjectTag {
         // Returns the entity of the disguise.
         // -->
         if (attribute.startsWith("entity")) {
-            return new EntityTag(disguise.getEntity()).getAttribute(attribute.fulfill(1));
+            return new EntityTag(disguise.getEntity()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -153,10 +153,10 @@ public class LibsDisguiseTag implements ObjectTag {
         // Returns the display name of the disguise.
         // -->
         if (attribute.startsWith("display_name")) {
-            return new ElementTag(disguise.getWatcher().getCustomName()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(disguise.getWatcher().getCustomName()).getObjectAttribute(attribute.fulfill(1));
         }
 
-        return new ElementTag(identify()).getAttribute(attribute);
+        return new ElementTag(identify()).getObjectAttribute(attribute);
 
     }
 }

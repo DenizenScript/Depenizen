@@ -52,7 +52,7 @@ public class VampirePlayerProperties implements Property {
     UPlayer uPlayer;
 
     @Override
-    public String getAttribute(Attribute attribute) {
+    public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
         }
@@ -65,7 +65,7 @@ public class VampirePlayerProperties implements Property {
         // Returns true if the player is a vampire.
         // -->
         if (attribute.startsWith("is_vampire")) {
-            return new ElementTag(uPlayer.isVampire()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(uPlayer.isVampire()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -76,7 +76,7 @@ public class VampirePlayerProperties implements Property {
         // Returns true if the player is infected.
         // -->
         if (attribute.startsWith("is_infected")) {
-            return new ElementTag(uPlayer.isInfected()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(uPlayer.isInfected()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -87,7 +87,7 @@ public class VampirePlayerProperties implements Property {
         // Returns the value of the combat infection risk.
         // -->
         if (attribute.startsWith("combat_infect")) {
-            return new ElementTag(uPlayer.combatInfectRisk()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(uPlayer.combatInfectRisk()).getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]
@@ -98,7 +98,7 @@ public class VampirePlayerProperties implements Property {
         // Returns the value of the combat damage factor.
         // -->
         if (attribute.startsWith("combat_damage")) {
-            return new ElementTag(uPlayer.combatDamageFactor()).getAttribute(attribute.fulfill(1));
+            return new ElementTag(uPlayer.combatDamageFactor()).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;
