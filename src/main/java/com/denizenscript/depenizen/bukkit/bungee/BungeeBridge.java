@@ -94,9 +94,18 @@ public class BungeeBridge {
         packets.put(61, new ProxyCommandPacketIn());
     }
 
+    public static void runOnMainThread(Runnable run) {
+        if (Bukkit.isPrimaryThread()) {
+            run.run();
+        }
+        else {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, run);
+        }
+    }
+
     public void sendPacket(PacketOut packet) {
         if (!connected && !packet.canBeFirstPacket) {
-            Debug.echoError("BungeeBridge tried to send packet '" + packet.getClass().getName() + "' while not connected.");
+            runOnMainThread(() -> Debug.echoError("BungeeBridge tried to send packet '" + packet.getClass().getName() + "' while not connected."));
             return;
         }
         ByteBuf buf = channel.alloc().buffer();

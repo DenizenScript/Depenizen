@@ -35,9 +35,9 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
             return;
         }
         hasClosed = true;
-        Debug.echoError("Depenizen-Bungee connection failed: " + reason);
         channel.close();
         BungeeBridge.instance.connected = false;
+        BungeeBridge.runOnMainThread(() -> Debug.echoError("Depenizen-Bungee connection failed: " + reason));
     }
 
     public enum Stage {
@@ -72,7 +72,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) {
-        Debug.log("Depenizen-Bungee connection ended. If this is unexpected, check your Bungee proxy server logs.");
+        BungeeBridge.runOnMainThread(() -> Debug.log("Depenizen-Bungee connection ended. If this is unexpected, check your Bungee proxy server logs."));
         packetBuffer.release();
         packetBuffer = null;
         BungeeBridge.instance.connected = false;
