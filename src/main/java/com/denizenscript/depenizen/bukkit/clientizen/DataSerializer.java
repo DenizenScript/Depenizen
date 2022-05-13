@@ -57,4 +57,16 @@ public class DataSerializer {
             writeStringList(entry.getValue());
         }
     }
+
+    public void writeStringMap(Map<String, String> stringMap) {
+            writeInt(stringMap.size());
+            for (Map.Entry<String, String> entry : stringMap.entrySet()) {
+                writeString(entry.getKey());
+                writeString(entry.getValue());
+            }
+    }
+
+    public byte[] toByteArray() {
+        return outputStream.toByteArray();
+    }
 }
