@@ -28,7 +28,7 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
     public static final Set<UUID> clientizenPlayers = new HashSet<>();
 
     public static final File clientizenFolder;
-    public static final String CHANNEL_PREFIX = "clientizen";
+    public static final String CHANNEL_NAMESPACE = "clientizen";
 
     static {
         clientizenFolder = new File(Denizen.getInstance().getDataFolder(), "client-scripts");
@@ -40,7 +40,6 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
         registerInChannel(Channel.RECIVE_CONFIRM);
         registerOutChannel(Channel.REQUEST_CONFIRM);
         registerOutChannel(Channel.SET_SCRIPTS);
-        registerOutChannel(Channel.ADD_SCRIPTS);
     }
 
     public void registerInChannel(Channel channel) {
@@ -114,26 +113,26 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(@NotNull String channelString, @NotNull Player player, @NotNull byte[] bytes) {
-        Channel channel = new ElementTag(channelString.substring(CHANNEL_PREFIX.length() + 1)).asEnum(Channel.class);
+        Channel channel = new ElementTag(channelString.substring(CHANNEL_NAMESPACE.length() + 1)).asEnum(Channel.class);
         if (channel == null) {
             return;
         }
         switch (channel) {
             case RECIVE_CONFIRM:
                 clientizenPlayers.add(player.getUniqueId());
+                resendClientScriptsTo(player);
         }
     }
 
     enum Channel {
         SET_SCRIPTS("set_scripts"),
-        ADD_SCRIPTS("add_scripts"),
         REQUEST_CONFIRM("request_confirmation"),
         RECIVE_CONFIRM("receive_confirmation");
 
         private final String channel;
 
         Channel(String channel) {
-            this.channel = CHANNEL_PREFIX + channel;
+            this.channel = CHANNEL_NAMESPACE + channel;
         }
 
         public String getChannel() {
