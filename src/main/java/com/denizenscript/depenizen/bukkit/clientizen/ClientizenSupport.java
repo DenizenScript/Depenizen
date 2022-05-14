@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.clientizen;
 
 import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizen.events.bukkit.ScriptReloadEvent;
-import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptHelper;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
@@ -74,9 +73,14 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
     }
 
     public static void resendClientScripts() {
+        DataSerializer serializer = new DataSerializer();
+        serializer.writeStringMap(clientizenScripts);
         for (UUID uuid : clientizenPlayers) {
             Player player = Bukkit.getPlayer(uuid);
-            resendClientScriptsTo(player);
+            if (player == null) {
+                continue;
+            }
+            send(player, Channel.SET_SCRIPTS, serializer);
         }
     }
 
@@ -113,10 +117,7 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(@NotNull String channelString, @NotNull Player player, @NotNull byte[] bytes) {
-        Channel channel = new ElementTag(channelString.substring(CHANNEL_NAMESPACE.length() + 1)).asEnum(Channel.class);
-        if (channel == null) {
-            return;
-        }
+        Channel channel = Channel.valueOf(channelString.substring(CHANNEL_NAMESPACE.length() + 1));
         switch (channel) {
             case RECIVE_CONFIRM:
                 clientizenPlayers.add(player.getUniqueId());
