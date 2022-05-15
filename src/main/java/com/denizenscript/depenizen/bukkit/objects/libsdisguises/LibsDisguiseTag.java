@@ -142,7 +142,7 @@ public class LibsDisguiseTag implements ObjectTag {
         // Returns the entity of the disguise.
         // -->
         if (attribute.startsWith("entity")) {
-            return new EntityTag(disguise.getEntity()).getObjectAttribute(attribute.fulfill(1));
+            return new EntityTag(disguise.getEntity()).getDenizenObject().getObjectAttribute(attribute.fulfill(1));
         }
 
         // <--[tag]

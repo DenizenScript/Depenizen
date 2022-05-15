@@ -96,7 +96,7 @@ public class SentinelNPCProperties implements Property {
                 if (sentinel.chasing == null) {
                     return null;
                 }
-                return new EntityTag(sentinel.chasing).getObjectAttribute(attribute.fulfill(1));
+                return new EntityTag(sentinel.chasing).getDenizenObject().getObjectAttribute(attribute.fulfill(1));
             }
 
             // <--[tag]

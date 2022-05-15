@@ -90,7 +90,7 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
             case "damager":
                 return getDamager();
             case "victim":
-                return new EntityTag(event.getVictim());
+                return new EntityTag(event.getVictim()).getDenizenObject();
             case "weapon":
                 return new ElementTag(event.getWeaponTitle());
         }
