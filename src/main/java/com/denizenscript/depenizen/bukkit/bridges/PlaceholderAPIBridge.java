@@ -62,7 +62,7 @@ public class PlaceholderAPIBridge extends Bridge {
             return;
         }
         attribute = attribute.fulfill(1);
-        OfflinePlayer player = ((BukkitTagContext) event.getContext()).player != null ? ((BukkitTagContext) event.getContext()).player.getOfflinePlayer() : null;
+        OfflinePlayer player = ((BukkitTagContext) attribute.context).player != null ? ((BukkitTagContext) attribute.context).player.getOfflinePlayer() : null;
 
         // <--[tag]
         // @attribute <placeholder[<name>].player[<player>]>
