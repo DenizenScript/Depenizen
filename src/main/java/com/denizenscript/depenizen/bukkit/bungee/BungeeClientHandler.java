@@ -91,7 +91,6 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
             BungeeBridge.instance.sendPacket(new MyInfoPacketOut(Bukkit.getPort()));
             BungeeBridge.instance.sendPacket(new ControlsProxyPingPacketOut(BungeeBridge.instance.controlsProxyPing));
             BungeeBridge.instance.sendPacket(new ControlsProxyCommandPacketOut(BungeeBridge.instance.controlsProxyCommand));
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, () -> BungeeBridge.instance.connected = true, 10);
         }, 30);
     }
 

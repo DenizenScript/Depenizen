@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.events.plotsquared.PlayerClaimPlotScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.plotsquared.PlayerEntersPlotScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.plotsquared.PlayerLeavePlotScriptEvent;
@@ -18,6 +19,11 @@ public class PlotSquaredBridge extends Bridge {
 
     @Override
     public void init() {
+        // TODO: Remove PlotSquared? Newer versions are premium only, but licensing implies possibility of free updates?
+        if (!plugin.getDescription().getVersion().startsWith("4.")) {
+            Debug.log("Ignoring PlotSquared bridge, unsupported version.");
+            return;
+        }
         ScriptEvent.registerScriptEvent(PlayerEntersPlotScriptEvent.class);
         ScriptEvent.registerScriptEvent(PlayerLeavePlotScriptEvent.class);
         ScriptEvent.registerScriptEvent(PlayerClaimPlotScriptEvent.class);

@@ -99,7 +99,9 @@ public class BungeeBridge {
             run.run();
         }
         else {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, run);
+            if (Depenizen.instance.isEnabled()) {
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Depenizen.instance, run);
+            }
         }
     }
 
