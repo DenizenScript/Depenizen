@@ -2,6 +2,8 @@ package com.denizenscript.depenizen.bukkit.clientizen;
 
 import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizen.events.bukkit.ScriptReloadEvent;
+import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptHelper;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
@@ -36,17 +38,23 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
 
     public ClientizenSupport() {
         Bukkit.getPluginManager().registerEvents(this, Depenizen.instance);
+        PlayerTag.registerOnlineOnlyTag(ElementTag.class, "is_clientizen", (attribute, object) -> {
+            return new ElementTag(clientizenPlayers.contains(object.getUUID()));
+        });
         registerInChannel(Channel.RECIVE_CONFIRM);
         registerOutChannel(Channel.REQUEST_CONFIRM);
         registerOutChannel(Channel.SET_SCRIPTS);
+        Debug.log("ClientizenSupport", "Clientizen support enabled!");
     }
 
     public void registerInChannel(Channel channel) {
         Bukkit.getMessenger().registerIncomingPluginChannel(Depenizen.instance, channel.getChannel(), this);
+        Debug.log("ClientizenSupport", "Registered in channel " + channel);
     }
 
     public void registerOutChannel(Channel channel) {
         Bukkit.getMessenger().registerOutgoingPluginChannel(Depenizen.instance, channel.getChannel());
+        Debug.log("ClientizenSupport", "Registered out channel " + channel);
     }
 
     public static void refershClientScripts() {
@@ -95,12 +103,14 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
 
     public static void send(Player player, Channel channel, DataSerializer serializer) {
         player.sendPluginMessage(Depenizen.instance, channel.getChannel(), serializer == null ? new byte[0] : serializer.toByteArray());
+        Debug.log("ClientizenSupport", "Sent plugin message to " + player.getName() + " on channel " + channel);
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Bukkit.getScheduler().runTaskLater(Depenizen.instance, () -> {
             send(event.getPlayer(), Channel.REQUEST_CONFIRM, null);
+            Debug.log("ClientizenSupport", "Requested confirmation from " + event.getPlayer().getName());
         }, 20);
     }
 
@@ -122,6 +132,7 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
             case RECIVE_CONFIRM:
                 clientizenPlayers.add(player.getUniqueId());
                 resendClientScriptsTo(player);
+                Debug.log("ClientizenSupport", "Received confirmation from " + player.getName());
         }
     }
 
@@ -133,7 +144,7 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
         private final String channel;
 
         Channel(String channel) {
-            this.channel = CHANNEL_NAMESPACE + channel;
+            this.channel = CHANNEL_NAMESPACE + ":" + channel;
         }
 
         public String getChannel() {
