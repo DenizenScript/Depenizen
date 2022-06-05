@@ -120,9 +120,12 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
         Channel channel = Channel.fromPath(channelString.substring(CHANNEL_NAMESPACE.length() + 1));
         switch (channel) {
             case RECIVE_CONFIRM:
-                clientizenPlayers.add(player.getUniqueId());
-                resendClientScriptsTo(player);
                 Debug.log("ClientizenSupport", "Received confirmation from " + player.getName());
+                clientizenPlayers.add(player.getUniqueId());
+                // Wait a little to make sure the client is ready to receive packets
+                Bukkit.getScheduler().runTaskLater(Depenizen.instance, () -> {
+                    resendClientScriptsTo(player);
+                }, 20);
         }
     }
 
