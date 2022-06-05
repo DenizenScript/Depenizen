@@ -12,7 +12,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +41,6 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
             return new ElementTag(clientizenPlayers.contains(object.getUUID()));
         });
         registerInChannel(Channel.RECIVE_CONFIRM);
-        registerOutChannel(Channel.REQUEST_CONFIRM);
         registerOutChannel(Channel.SET_SCRIPTS);
         Debug.log("ClientizenSupport", "Clientizen support enabled!");
     }
@@ -107,14 +105,6 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Bukkit.getScheduler().runTaskLater(Depenizen.instance, () -> {
-            send(event.getPlayer(), Channel.REQUEST_CONFIRM, null);
-            Debug.log("ClientizenSupport", "Requested confirmation from " + event.getPlayer().getName());
-        }, 20);
-    }
-
-    @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         clientizenPlayers.remove(event.getPlayer().getUniqueId());
     }
@@ -138,7 +128,6 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
 
     enum Channel {
         SET_SCRIPTS("set_scripts"),
-        REQUEST_CONFIRM("request_confirmation"),
         RECIVE_CONFIRM("receive_confirmation");
 
         private final String path;
