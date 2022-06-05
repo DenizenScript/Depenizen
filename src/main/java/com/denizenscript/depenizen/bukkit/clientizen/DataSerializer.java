@@ -32,6 +32,7 @@ public class DataSerializer {
 
     public void writeByteArray(@NotNull byte[] bytes) {
         try {
+            writeInt(bytes.length);
             output.write(bytes);
         }
         catch (IOException e) {
