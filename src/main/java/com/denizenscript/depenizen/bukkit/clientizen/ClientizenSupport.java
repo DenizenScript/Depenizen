@@ -127,7 +127,7 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(@NotNull String channelString, @NotNull Player player, @NotNull byte[] bytes) {
-        Channel channel = Channel.valueOf(channelString.substring(CHANNEL_NAMESPACE.length() + 1));
+        Channel channel = Channel.fromPath(channelString.substring(CHANNEL_NAMESPACE.length() + 1));
         switch (channel) {
             case RECIVE_CONFIRM:
                 clientizenPlayers.add(player.getUniqueId());
@@ -141,14 +141,30 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
         REQUEST_CONFIRM("request_confirmation"),
         RECIVE_CONFIRM("receive_confirmation");
 
+        private final String path;
         private final String channel;
 
         Channel(String channel) {
+            this.path = channel;
             this.channel = CHANNEL_NAMESPACE + ":" + channel;
         }
 
         public String getChannel() {
             return channel;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        // TODO: A more efficient way of doing this?
+        public static Channel fromPath(String path) {
+            for (Channel channel : values()) {
+                if (channel.path.equals(path)) {
+                    return channel;
+                }
+            }
+            return null;
         }
 
         @Override
