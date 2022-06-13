@@ -99,18 +99,17 @@ public class CoreProtectLocationProperties implements Property {
         // -->
         if (mechanism.matches("coreprotect_log_placement") && mechanism.requireObject(MapTag.class)) {
             MapTag map = mechanism.valueAsType(MapTag.class);
-            ObjectTag user = map.getObject("user");
-            ObjectTag materialObj = map.getObject("material");
-            if (user == null || materialObj == null) {
+            ElementTag user = map.getElement("user");
+            MaterialTag material = map.getObjectAs("material", MaterialTag.class, mechanism.context);
+            if (user == null) {
                 mechanism.echoError("Missing required input, check meta docs.");
                 return;
             }
-            MaterialTag material = materialObj.asType(MaterialTag.class, mechanism.context);
             if (material == null || !material.getMaterial().isBlock()) {
                 mechanism.echoError("Invalid block material input.");
                 return;
             }
-            CoreProtectBridge.apiInstance.logPlacement(user.asElement().asString(), location.clone(), material.getMaterial(), material.getModernData());
+            CoreProtectBridge.apiInstance.logPlacement(user.asString(), location.clone(), material.getMaterial(), material.getModernData());
         }
 
         // <--[mechanism]
@@ -125,18 +124,17 @@ public class CoreProtectLocationProperties implements Property {
         // -->
         if (mechanism.matches("coreprotect_log_removal") && mechanism.requireObject(MapTag.class)) {
             MapTag map = mechanism.valueAsType(MapTag.class);
-            ObjectTag user = map.getObject("user");
-            ObjectTag materialObj = map.getObject("material");
-            if (user == null || materialObj == null) {
+            ElementTag user = map.getElement("user");
+            MaterialTag material = map.getObjectAs("material", MaterialTag.class, mechanism.context);
+            if (user == null) {
                 mechanism.echoError("Missing required input, check meta docs.");
                 return;
             }
-            MaterialTag material = materialObj.asType(MaterialTag.class, mechanism.context);
             if (material == null || !material.getMaterial().isBlock()) {
                 mechanism.echoError("Invalid block material input.");
                 return;
             }
-            CoreProtectBridge.apiInstance.logRemoval(user.asElement().asString(), location.clone(), material.getMaterial(), material.getModernData());
+            CoreProtectBridge.apiInstance.logRemoval(user.asString(), location.clone(), material.getMaterial(), material.getModernData());
         }
 
         // <--[mechanism]
