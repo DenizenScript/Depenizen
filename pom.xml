@@ -153,7 +153,7 @@
         <dependency>
             <groupId>com.gamingmesh</groupId>
             <artifactId>Jobs</artifactId>
-            <version>3.6.3</version>
+            <version>5.0.3.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Jobs.jar</systemPath>
         </dependency>
