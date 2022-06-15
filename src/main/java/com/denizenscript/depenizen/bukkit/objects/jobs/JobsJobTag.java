@@ -185,18 +185,6 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         }
 
         // <--[tag]
-        // @attribute <JobsJobTag.color>
-        // @returns ElementTag
-        // @plugin Depenizen, Jobs
-        // @description
-        // Returns the ChatColor of the job.
-        // -->
-        if (attribute.startsWith("color")) {
-            return new ElementTag(job.getChatColor().toString())
-                    .getObjectAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
         // @attribute <JobsJobTag.description>
         // @returns ElementTag
         // @plugin Depenizen, Jobs
