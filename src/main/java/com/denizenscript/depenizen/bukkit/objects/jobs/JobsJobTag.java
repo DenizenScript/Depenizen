@@ -224,7 +224,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // Returns the name of the job.
         // -->
         tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
-            if (attribute.startsWith("short", 1)) {
+            if (attribute.startsWith("short", 2)) {
                 attribute.fulfill(1);
                 return new ElementTag(object.getJob().getShortName());
             }
