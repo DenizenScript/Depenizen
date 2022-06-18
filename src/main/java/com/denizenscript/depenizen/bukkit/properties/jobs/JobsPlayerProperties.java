@@ -10,9 +10,7 @@ import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobProgression;
 import com.gamingmesh.jobs.container.JobsPlayer;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
 
 public class JobsPlayerProperties implements Property {
 

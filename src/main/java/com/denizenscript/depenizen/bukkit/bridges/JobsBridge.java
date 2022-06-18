@@ -51,7 +51,6 @@ public class JobsBridge extends Bridge {
             if (attribute.hasParam()) {
                 return JobsJobTag.valueOf(attribute.getParam(), attribute.context);
             }
-            attribute.fulfill(1);
             // <--[tag]
             // @attribute <jobs.server_jobs>
             // @returns ListTag(JobsJobTag)
@@ -59,7 +58,8 @@ public class JobsBridge extends Bridge {
             // @description
             // Returns the list of all jobs on the server
             // -->
-            if (attribute.startsWith("server_jobs")) {
+            if (attribute.startsWith("server_jobs", 2)) {
+                attribute.fulfill(1);
                 ListTag jobsList = new ListTag();
                 for (Job job : Jobs.getJobs()) {
                     jobsList.addObject(new JobsJobTag(job));
