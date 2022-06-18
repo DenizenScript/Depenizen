@@ -4,26 +4,26 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
-import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
 
-public class JobPlayer implements Property {
-
+public class JobsJobProperties implements Property {
     public static boolean describes(ObjectTag job) {
         return job instanceof JobsJobTag;
     }
 
-    public static JobPlayer getFrom(ObjectTag job) {
+    public static JobsJobProperties getFrom(ObjectTag job) {
         if (!describes(job)) {
             return null;
         }
         else {
-            return new JobPlayer((JobsJobTag) job);
+            return new JobsJobProperties((JobsJobTag) job);
         }
     }
 
     public static final String[] handledTags = new String[] {
-    }; // None
+            "player"
+    };
 
     public static final String[] handledMechs = new String[] {
             "player"
@@ -31,7 +31,7 @@ public class JobPlayer implements Property {
 
     JobsJobTag job;
 
-    private JobPlayer(JobsJobTag job) {
+    private JobsJobProperties(JobsJobTag job) {
         this.job = job;
     }
 
@@ -51,11 +51,6 @@ public class JobPlayer implements Property {
     }
 
     @Override
-    public ObjectTag getObjectAttribute(Attribute attribute) {
-        return null;
-    }
-
-    @Override
     public void adjust(Mechanism mechanism) {
 
         // <--[mechanism]
@@ -69,6 +64,18 @@ public class JobPlayer implements Property {
         if (mechanism.matches("player") && mechanism.requireObject(PlayerTag.class)) {
             job.setOwner(mechanism.valueAsType(PlayerTag.class));
         }
+    }
 
+    public static void registerTags() {
+        // <--[tag]
+        // @attribute <JobsJobTag.player>
+        // @returns PlayerTag
+        // @plugin Depenizen, Jobs
+        // @description
+        // Returns the player the job progression for this tag belongs to.
+        // -->
+        PropertyParser.<JobsJobProperties, PlayerTag>registerTag(PlayerTag.class, "player", (attribute, object) -> {
+            return object.job.getOwner();
+        });
     }
 }

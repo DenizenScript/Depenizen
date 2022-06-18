@@ -3,9 +3,11 @@ package com.denizenscript.depenizen.bukkit.properties.jobs;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
+import com.gamingmesh.jobs.container.JobProgression;
 import com.gamingmesh.jobs.container.JobsPlayer;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.debugging.Debug;
@@ -43,7 +45,7 @@ public class JobsPlayerProperties implements Property {
     }
 
     public static final String[] handledTags = new String[] {
-            "job", "jobs", "current_jobs"
+            "job", "current_jobs"
     };
 
     public static final String[] handledMechs = new String[] {
@@ -55,8 +57,22 @@ public class JobsPlayerProperties implements Property {
 
     JobsPlayer player;
 
-    @Override
-    public ObjectTag getObjectAttribute(Attribute attribute) {
+    public static void registerTags() {
+        // <--[tag]
+        // @attribute <PlayerTag.job[<job>]>
+        // @returns JobsJobTag
+        // @plugin Depenizen, Jobs
+        // @description
+        // Returns the job specified with the player's information attached.
+        // -->
+        PropertyParser.<JobsPlayerProperties, JobsJobTag>registerTag(JobsJobTag.class, "job", (attribute, object) -> {
+            if (attribute.hasParam()) {
+                Job job = Jobs.getJob(attribute.getParam());
+                return new JobsJobTag(job, object.player);
+            }
+            attribute.echoError("Invalid or missing job specified.");
+            return null;
+        });
 
         // <--[tag]
         // @attribute <PlayerTag.current_jobs>
@@ -65,38 +81,12 @@ public class JobsPlayerProperties implements Property {
         // @description
         // Returns a list of all jobs that the player is in.
         // -->
-        if (attribute.startsWith("current_jobs")) {
-            ListTag jobList = new ListTag();
-            for (Job jb : Jobs.getJobs()) {
-                if (player.isInJob(jb)) {
-                    jobList.addObject(new JobsJobTag(jb, player));
-                }
+        PropertyParser.<JobsPlayerProperties, ListTag>registerTag(ListTag.class, "current_jobs", (attribute, object) -> {
+            ListTag response = new ListTag();
+            for (JobProgression progress : object.player.getJobProgression()) {
+                response.addObject(new JobsJobTag(progress.getJob(), object.player));
             }
-            return jobList.getObjectAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <PlayerTag.job[<job>]>
-        // @returns JobsJobTag
-        // @plugin Depenizen, Jobs
-        // @description
-        // Returns the job specified with the player's information attached.
-        // -->
-        if (attribute.startsWith("job") || attribute.startsWith("jobs")) {
-            Job job = null;
-            if (attribute.hasParam()) {
-                job = Jobs.getJob(attribute.getParam());
-            }
-            if (job == null) {
-                if (!attribute.hasAlternative()) {
-                    Debug.echoError("Invalid or missing job specified!");
-                }
-                return null;
-            }
-            return new JobsJobTag(job, player).getObjectAttribute(attribute.fulfill(1));
-        }
-
-        return null;
-
+            return response;
+        });
     }
 }
