@@ -20,10 +20,10 @@ public class JobsJobsLeaveScriptEvent extends BukkitScriptEvent implements Liste
     //
     // @Cancellable true
     //
-    // @Triggers when a player joins the specified job
+    // @Triggers when a player joins the specified job.
     //
     // @Context
-    // <context.job> Returns the job that the player is joining
+    // <context.job> Returns the job that the player is joining.
     //
     // @Plugin Depenizen, Jobs
     //
@@ -43,21 +43,9 @@ public class JobsJobsLeaveScriptEvent extends BukkitScriptEvent implements Liste
     public JobsJobTag job;
 
     @Override
-    public boolean couldMatch(ScriptEvent.ScriptPath path) {
-        if (!super.couldMatch(path)) {
-            return false;
-        }
-        if (!path.eventArgLowerAt(3).equals("job")
-            && Jobs.getJob(path.eventArgAt(3)) == null) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public boolean matches(ScriptEvent.ScriptPath path) {
         if (!path.eventArgLowerAt(3).equals("job")
-            && !job.getJob().getName().equalsIgnoreCase(path.eventArgAt(3))) {
+                && !runGenericCheck(path.eventArgAt(3), job.getJob().getName())) {
             return false;
         }
         return super.matches(path);
@@ -78,8 +66,7 @@ public class JobsJobsLeaveScriptEvent extends BukkitScriptEvent implements Liste
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()
-            .getPlayer()), null);
+        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer().getPlayer()), null);
     }
 
     @EventHandler

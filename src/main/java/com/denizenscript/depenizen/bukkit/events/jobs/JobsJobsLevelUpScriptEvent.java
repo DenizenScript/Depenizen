@@ -20,10 +20,10 @@ public class JobsJobsLevelUpScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Cancellable true
     //
-    // @Triggers when a player levels up in the specified job
+    // @Triggers when a player levels up in the specified job.
     //
     // @Context
-    // <context.job> Returns the job that the player is levelling up in
+    // <context.job> Returns the job that the player is levelling up in.
     //
     // @Plugin Depenizen, Jobs
     //
@@ -43,21 +43,9 @@ public class JobsJobsLevelUpScriptEvent extends BukkitScriptEvent implements Lis
     public JobsJobTag job;
 
     @Override
-    public boolean couldMatch(ScriptEvent.ScriptPath path) {
-        if (!super.couldMatch(path)) {
-            return false;
-        }
-        if (!path.eventArgLowerAt(4).equals("job")
-            && Jobs.getJob(path.eventArgAt(4)) == null) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public boolean matches(ScriptEvent.ScriptPath path) {
         if (!path.eventArgLowerAt(4).equals("job")
-            && !job.getJob().getName().equalsIgnoreCase(path.eventArgAt(4))) {
+                && !runGenericCheck(path.eventArgAt(4), job.getJob().getName())) {
             return false;
         }
         return super.matches(path);
@@ -78,8 +66,7 @@ public class JobsJobsLevelUpScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()
-                .getPlayer()), null);
+        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer().getPlayer()), null);
     }
 
     @EventHandler

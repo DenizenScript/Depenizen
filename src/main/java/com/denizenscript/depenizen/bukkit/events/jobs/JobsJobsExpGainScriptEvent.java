@@ -11,7 +11,6 @@ import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.api.JobsExpGainEvent;
-import com.gamingmesh.jobs.container.ActionType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -19,19 +18,21 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
 
     // <--[event]
     // @Events
-    // jobs player earns exp for <'job'> (action <'action'>)
+    // jobs player earns exp for <'job'>
+    //
+    // @Switch action:<action> to only process the event if it came from a specified action.
     //
     // @Cancellable true
     //
-    // @Triggers when a player performs an action that would cause them to earn Jobs exp for a certain job
+    // @Triggers when a player performs an action that would cause them to earn Jobs exp for a certain job.
     //
     // @Context
-    // <context.job> Returns the job that the player is gaining exp for
-    // <context.experience> Returns the amount of exp the player will earn
-    // <context.action> Returns the name of the action being paid for, which can be: Break, StripLogs, TNTBreak, Place, Kill, MMKill, Fish, Craft, VTrade, Smelt, Brew, Enchant, Repair, Breed, Tame, Dye, Shear, Milk, Explore, Eat, custom-kill, Collect, Bake.
+    // <context.job> Returns the job that the player is gaining exp for.
+    // <context.experience> Returns the amount of exp the player will earn.
+    // <context.action> Returns the name of the action being paid for, which can be any of the strings from: <@link url https://github.com/Zrips/Jobs/blob/master/src/main/java/com/gamingmesh/jobs/container/ActionType.java>.
     //
     // @Determine
-    // "EXP:" + ElementTag(Decimal) to change the amount of Jobs exp this action should provide
+    // "EXP:" + ElementTag(Decimal) to change the amount of Jobs exp this action should provide.
     //
     // @Plugin Depenizen, Jobs
     //
@@ -43,7 +44,8 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
 
     public JobsJobsExpGainScriptEvent() {
         instance = this;
-        registerCouldMatcher("jobs player earns exp for <'job'> (action <'action'>)");
+        registerCouldMatcher("jobs player earns exp for <'job'>");
+        registerSwitches("action");
     }
 
     public static JobsJobsExpGainScriptEvent instance;
@@ -51,29 +53,12 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
     public JobsJobTag job;
 
     @Override
-    public boolean couldMatch(ScriptPath path) {
-        if (!super.couldMatch(path)) {
-            return false;
-        }
+    public boolean matches(ScriptPath path) {
         if (!path.eventArgLowerAt(5).equals("job")
-                && Jobs.getJob(path.eventArgAt(5)) == null) {
+            && !runGenericCheck(path.eventArgAt(5), job.getJob().getName())) {
             return false;
         }
-        if (!path.eventArgAt(7).isEmpty() && !path.eventArgLowerAt(7).equals("action")
-                && ActionType.getByName(path.eventArgAt(7)) == null) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean matches(ScriptEvent.ScriptPath path) {
-        if (!path.eventArgLowerAt(5).equals("job")
-                && !job.getJob().getName().equalsIgnoreCase(path.eventArgAt(5))) {
-            return false;
-        }
-        if (!path.eventArgAt(7).isEmpty() && !path.eventArgAt(7).equals("action")
-                && !event.getActionInfo().getType().name().equalsIgnoreCase(path.eventArgAt(7))) {
+        if (!runGenericSwitchCheck(path, "action", event.getActionInfo().getType().getName())) {
             return false;
         }
         return super.matches(path);
@@ -86,16 +71,16 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("job")) {
-            return job;
+        switch (name) {
+            case "job":
+                return job;
+            case "experience":
+                return new ElementTag(event.getExp());
+            case "action":
+                return new ElementTag(event.getActionInfo().getType().getName());
+            default:
+                return super.getContext(name);
         }
-        else if (name.equals("experience")) {
-            return new ElementTag(event.getExp());
-        }
-        else if (name.equals("action")) {
-            return new ElementTag(event.getActionInfo().getType().getName());
-        }
-        return super.getContext(name);
     }
 
     @Override

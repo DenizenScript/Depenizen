@@ -18,21 +18,23 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
 
     // <--[event]
     // @Events
-    // jobs player earns money for <'job'> (action <'action'>)
+    // jobs player earns money for <'job'>
+    //
+    // @Switch action:<action> to only process the event if it came from a specified action.
     //
     // @Cancellable true
     //
-    // @Triggers when a player performs an action that would cause them to be paid for a certain job
+    // @Triggers when a player performs an action that would cause them to be paid for a certain job.
     //
     // @Context
-    // <context.job> Returns the job that the player is being paid for
-    // <context.money> Returns the amount of money the player will be paid
-    // <context.points> Returns the amount of points the player will be paid
-    // <context.action> Returns the name of the action being paid for, which can be: Break, StripLogs, TNTBreak, Place, Kill, MMKill, Fish, Craft, VTrade, Smelt, Brew, Enchant, Repair, Breed, Tame, Dye, Shear, Milk, Explore, Eat, custom-kill, Collect, Bake.
+    // <context.job> Returns the job that the player is being paid for.
+    // <context.money> Returns the amount of money the player will be paid.
+    // <context.points> Returns the amount of points the player will be paid.
+    // <context.action> Returns the name of the action being paid for, which can be any of the strings from: <@link url https://github.com/Zrips/Jobs/blob/master/src/main/java/com/gamingmesh/jobs/container/ActionType.java>.
     //
     // @Determine
-    // "MONEY:" + ElementTag(Decimal) to change the amount of money this action should provide
-    // "POINTS:" + ElementTag(Decimal) to change the amount of Jobs points this action should provide
+    // "MONEY:" + ElementTag(Decimal) to change the amount of money this action should provide.
+    // "POINTS:" + ElementTag(Decimal) to change the amount of Jobs points this action should provide.
     //
     // @Plugin Depenizen, Jobs
     //
@@ -44,7 +46,8 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
 
     public JobsJobsPaymentScriptEvent() {
         instance = this;
-        registerCouldMatcher("jobs player earns money for <'job'> (action <'action'>)");
+        registerCouldMatcher("jobs player earns money for <'job'>");
+        registerSwitches("action");
     }
 
     public static JobsJobsPaymentScriptEvent instance;
@@ -52,29 +55,12 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
     public JobsJobTag job;
 
     @Override
-    public boolean couldMatch(ScriptPath path) {
-        if (!super.couldMatch(path)) {
-            return false;
-        }
-        if (!path.eventArgLowerAt(5).equals("job")
-            && Jobs.getJob(path.eventArgAt(5)) == null) {
-            return false;
-        }
-        if (!path.eventArgAt(7).isEmpty() && !path.eventArgLowerAt(7).equals("action")
-            && ActionType.getByName(path.eventArgAt(7)) == null) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public boolean matches(ScriptPath path) {
         if (!path.eventArgLowerAt(5).equals("job")
-            && !job.getJob().getName().equalsIgnoreCase(path.eventArgAt(5))) {
+                && !runGenericCheck(path.eventArgAt(4), job.getJob().getName())) {
             return false;
         }
-        if (!path.eventArgAt(7).isEmpty() && !path.eventArgAt(7).equals("action")
-            && !event.getActionInfo().getType().name().equalsIgnoreCase(path.eventArgAt(7))) {
+        if (!runGenericSwitchCheck(path, "action", event.getActionInfo().getType().getName())) {
             return false;
         }
         return super.matches(path);
@@ -87,19 +73,18 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("job")) {
-            return job;
+        switch (name) {
+            case "job":
+                return job;
+            case "money":
+                return new ElementTag(event.getAmount());
+            case "points":
+                return new ElementTag(event.getPoints());
+            case "action":
+                return new ElementTag(event.getActionInfo().getType().getName());
+            default:
+                return super.getContext(name);
         }
-        else if (name.equals("money")) {
-            return new ElementTag(event.getAmount());
-        }
-        else if (name.equals("points")) {
-            return new ElementTag(event.getPoints());
-        }
-        else if (name.equals("action")) {
-            return new ElementTag(event.getActionInfo().getType().getName());
-        }
-        return super.getContext(name);
     }
 
     @Override

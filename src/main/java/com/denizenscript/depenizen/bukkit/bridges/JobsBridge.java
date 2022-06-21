@@ -3,11 +3,11 @@ package com.denizenscript.depenizen.bukkit.bridges;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.utilities.debugging.SlowWarning;
 import com.denizenscript.depenizen.bukkit.events.jobs.*;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.jobs.JobsCommand;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
-import com.denizenscript.depenizen.bukkit.properties.jobs.JobsJobProperties;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -19,44 +19,36 @@ import com.denizenscript.denizencore.tags.TagManager;
 
 public class JobsBridge extends Bridge {
 
+    public static SlowWarning blankJobsConstructor = new SlowWarning("jobsEmptyConstructor", "The tag 'jobs' from Depenizen/Jobs is deprecated: use 'jobs.server_jobs'");
+
     @Override
     public void init() {
-        /////////////////
-        // Register Events
-        /////////////////
         ScriptEvent.registerScriptEvent(JobsJobsPaymentScriptEvent.class);
         ScriptEvent.registerScriptEvent(JobsJobsExpGainScriptEvent.class);
         ScriptEvent.registerScriptEvent(JobsJobsJoinScriptEvent.class);
         ScriptEvent.registerScriptEvent(JobsJobsLeaveScriptEvent.class);
         ScriptEvent.registerScriptEvent(JobsJobsLevelUpScriptEvent.class);
-        /////////////////
-        // Register Tag and Properties
-        /////////////////
         ObjectFetcher.registerWithObjectFetcher(JobsJobTag.class, JobsJobTag.tagProcessor);
         PropertyParser.registerProperty(JobsPlayerProperties.class, PlayerTag.class);
-        PropertyParser.registerProperty(JobsJobProperties.class, JobsJobTag.class);
-
-        /////////////////
-        // Register root tag handler
-        /////////////////
 
         // <--[tag]
         // @attribute <jobs[<name>]>
         // @returns JobsJobTag
         // @plugin Depenizen, Jobs
         // @description
-        // Returns the job tag with the given name
+        // Returns the job tag with the given name.
         // -->
         TagManager.registerTagHandler(ObjectTag.class, "jobs", (attribute) -> {
             if (attribute.hasParam()) {
                 return JobsJobTag.valueOf(attribute.getParam(), attribute.context);
             }
+
             // <--[tag]
             // @attribute <jobs.server_jobs>
             // @returns ListTag(JobsJobTag)
             // @plugin Depenizen, Jobs
             // @description
-            // Returns the list of all jobs on the server
+            // Returns the list of all jobs on the server.
             // -->
             if (attribute.startsWith("server_jobs", 2)) {
                 attribute.fulfill(1);
@@ -66,15 +58,8 @@ public class JobsBridge extends Bridge {
                 }
                 return jobsList;
             }
-            // <--[tag]
-            // @attribute <jobs>
-            // @returns ListTag(JobsJobTag)
-            // @plugin Depenizen, Jobs
-            // @deprecated Use <jobs.server_jobs> instead
-            // @description
-            // Returns the list of all jobs on the server
-            // -->
-            attribute.echoError("<jobs> for retrieving the list of jobs is deprecated, please use <jobs.server_jobs> instead.");
+
+            blankJobsConstructor.warn(attribute.context);
             ListTag jobsList = new ListTag();
             for (Job job : Jobs.getJobs()) {
                 jobsList.addObject(new JobsJobTag(job));
