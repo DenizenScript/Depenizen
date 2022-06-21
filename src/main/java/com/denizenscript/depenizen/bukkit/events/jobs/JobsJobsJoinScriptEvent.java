@@ -43,7 +43,7 @@ public class JobsJobsJoinScriptEvent extends BukkitScriptEvent implements Listen
     public JobsJobTag job;
 
     @Override
-    public boolean matches(ScriptEvent.ScriptPath path) {
+    public boolean matches(ScriptPath path) {
         if (!path.eventArgLowerAt(3).equals("job")
                 && !runGenericCheck(path.eventArgAt(3), job.getJob().getName())) {
             return false;

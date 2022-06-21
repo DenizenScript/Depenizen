@@ -43,7 +43,7 @@ public class JobsJobsLevelUpScriptEvent extends BukkitScriptEvent implements Lis
     public JobsJobTag job;
 
     @Override
-    public boolean matches(ScriptEvent.ScriptPath path) {
+    public boolean matches(ScriptPath path) {
         if (!path.eventArgLowerAt(4).equals("job")
                 && !runGenericCheck(path.eventArgAt(4), job.getJob().getName())) {
             return false;
