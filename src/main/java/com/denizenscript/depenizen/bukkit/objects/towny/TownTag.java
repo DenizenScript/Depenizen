@@ -18,7 +18,9 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 
 import java.util.UUID;
 
@@ -186,13 +188,14 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         tagProcessor.registerTag(ListTag.class, "assistants", (attribute, object) -> {
             ListTag list = new ListTag();
             for (Resident resident : object.town.getRank("assistant")) {
-                PlayerTag player = PlayerTag.valueOf(resident.getName(), attribute.context);
-                if (player != null) {
-                    list.addObject(player);
+                if (resident.getUUID() != null) {
+                    OfflinePlayer pl = Bukkit.getOfflinePlayer(resident.getUUID());
+                    if (pl.hasPlayedBefore()) {
+                        list.addObject(new PlayerTag(pl));
+                        continue;
+                    }
                 }
-                else {
-                    list.add(resident.getName());
-                }
+                list.add(resident.getName());
             }
             return list;
         });
@@ -302,13 +305,14 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         tagProcessor.registerTag(ListTag.class, "residents", (attribute, object) -> {
             ListTag list = new ListTag();
             for (Resident resident : object.town.getResidents()) {
-                PlayerTag player = PlayerTag.valueOf(resident.getName(), attribute.context);
-                if (player != null) {
-                    list.addObject(player);
+                if (resident.getUUID() != null) {
+                    OfflinePlayer pl = Bukkit.getOfflinePlayer(resident.getUUID());
+                    if (pl.hasPlayedBefore()) {
+                        list.addObject(new PlayerTag(pl));
+                        continue;
+                    }
                 }
-                else {
-                    list.add(resident.getName());
-                }
+                list.add(resident.getName());
             }
             return list;
         });
