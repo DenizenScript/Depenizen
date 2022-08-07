@@ -254,7 +254,14 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // Returns the mayor of the object.town.
         // -->
         tagProcessor.registerTag(PlayerTag.class, "mayor", (attribute, object) -> {
-            return PlayerTag.valueOf(object.town.getMayor().getName(), attribute.context);
+            Resident mayor = object.town.getMayor();
+            if (mayor.getUUID() != null) {
+                OfflinePlayer pl = Bukkit.getOfflinePlayer(mayor.getUUID());
+                if (pl.hasPlayedBefore()) {
+                    return new PlayerTag(pl);
+                }
+            }
+            return null;
         });
 
         // <--[tag]
