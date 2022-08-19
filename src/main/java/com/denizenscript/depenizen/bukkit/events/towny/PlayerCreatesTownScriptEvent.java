@@ -73,9 +73,7 @@ public class PlayerCreatesTownScriptEvent extends BukkitScriptEvent implements L
             case "town_name":
                 return new ElementTag(event.getTownName());
             case "cuboid":
-                return new CuboidTag(
-                        TownTag.getCornerMin(event.getTownLocation().getWorld(), event.getTownWorldCoord().getX(), event.getTownWorldCoord().getZ()),
-                        TownTag.getCornerMax(event.getTownLocation().getWorld(), event.getTownWorldCoord().getX(), event.getTownWorldCoord().getZ()));
+                return TownTag.getCuboid(event.getTownLocation().getWorld(), event.getTownWorldCoord().getX(), event.getTownWorldCoord().getZ());
         }
         return super.getContext(name);
     }

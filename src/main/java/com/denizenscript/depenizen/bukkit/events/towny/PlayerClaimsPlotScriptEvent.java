@@ -79,9 +79,7 @@ public class PlayerClaimsPlotScriptEvent extends BukkitScriptEvent implements Li
             case "town":
                 return new TownTag(event.getTown());
             case "cuboid":
-                return new CuboidTag(
-                        TownTag.getCornerMin(event.getPlayer().getWorld(), event.getTownBlock().getX(), event.getTownBlock().getZ()),
-                        TownTag.getCornerMax(event.getPlayer().getWorld(), event.getTownBlock().getX(), event.getTownBlock().getZ()));
+                return TownTag.getCuboid(event.getPlayer().getWorld(), event.getTownBlock().getX(), event.getTownBlock().getZ());
         }
         return super.getContext(name);
     }

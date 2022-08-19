@@ -106,12 +106,12 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         }
     }
 
-    public static LocationTag getCornerMin(World world, int townCoordX, int townCoordZ) {
-        return new LocationTag(world, townCoordX * Coord.getCellSize(), world.getMinHeight(), townCoordZ * Coord.getCellSize());
-    }
-
-    public static LocationTag getCornerMax(World world, int townCoordX, int townCoordZ) {
-        return new LocationTag(world, townCoordX * Coord.getCellSize() + Coord.getCellSize() - 1, world.getMaxHeight(), townCoordZ * Coord.getCellSize() + Coord.getCellSize() - 1);
+    public static CuboidTag getCuboid(World world, int townCoordX, int townCoordZ) {
+        int x = townCoordX * Coord.getCellSize();
+        int z = townCoordZ * Coord.getCellSize();
+        return new CuboidTag(
+                new LocationTag(world, x, world.getMinHeight(), z),
+                new LocationTag(world, x + Coord.getCellSize() - 1, world.getMaxHeight(), z + Coord.getCellSize() - 1));
     }
 
     /////////////////////
@@ -474,7 +474,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // @description
         // Returns a list of chunks the town has claimed.
         // Note that this will not be accurate if the plot size has been changed in your Towny config.
-        // Generally, use <@link tag TownTag.claimed_cuboid> instead.
+        // Generally, use <@link tag TownTag.cuboids> instead.
         // -->
         tagProcessor.registerTag(ListTag.class, "plots", (attribute, object) -> {
             ListTag output = new ListTag();
@@ -485,16 +485,17 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         });
 
         // <--[tag]
-        // @attribute <TownTag.claimed_cuboid>
-        // @returns CuboidTag
+        // @attribute <TownTag.cuboids>
+        // @returns ListTag(CuboidTag)
         // @plugin Depenizen, Towny
         // @description
-        // Returns a cuboid of all plots claimed by the town.
+        // Returns a list of plot cuboids claimed by the town.
+        // Note that the cuboids may be in separate worlds if the town has outposts.
         // -->
-        tagProcessor.registerTag(CuboidTag.class, "claimed_cuboid", (attribute, object) -> {
-            CuboidTag output = new CuboidTag();
+        tagProcessor.registerTag(ListTag.class, "cuboids", (attribute, object) -> {
+            ListTag output = new ListTag();
             for (TownBlock block : object.town.getTownBlocks()) {
-                output.addPair(getCornerMin(object.town.getWorld(), block.getX(), block.getZ()), getCornerMax(object.town.getWorld(), block.getX(), block.getZ()));
+                output.addObject(getCuboid(object.town.getWorld(), block.getX(), block.getZ()));
             }
             return output;
         });
