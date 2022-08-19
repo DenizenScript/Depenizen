@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.towny;
 
-import com.denizenscript.denizen.objects.ChunkTag;
-import com.denizenscript.denizen.objects.WorldTag;
+import com.denizenscript.denizen.objects.*;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.flags.AbstractFlagTracker;
 import com.denizenscript.denizencore.flags.FlaggableObject;
@@ -12,8 +11,6 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.*;
 import com.palmergames.bukkit.towny.TownyUniverse;
-import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -21,6 +18,7 @@ import com.denizenscript.denizencore.tags.TagContext;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 
 import java.util.UUID;
 
@@ -106,6 +104,14 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         catch (NotRegisteredException e) {
             return null;
         }
+    }
+
+    public static LocationTag getCornerMin(World world, int townCoordX, int townCoordZ) {
+        return new LocationTag(world, townCoordX * Coord.getCellSize(), world.getMinHeight(), townCoordZ * Coord.getCellSize());
+    }
+
+    public static LocationTag getCornerMax(World world, int townCoordX, int townCoordZ) {
+        return new LocationTag(world, townCoordX * Coord.getCellSize() + Coord.getCellSize() - 1, world.getMaxHeight(), townCoordZ * Coord.getCellSize() + Coord.getCellSize() - 1);
     }
 
     /////////////////////
@@ -463,15 +469,32 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
 
         // <--[tag]
         // @attribute <TownTag.plots>
-        // @returns ListTag(LocationTag)
+        // @returns ListTag(ChunkTag)
         // @plugin Depenizen, Towny
         // @description
-        // Returns a list of the names of town plots.
+        // Returns a list of chunks the town has claimed.
+        // Note that this will not be accurate if the plot size has been changed in your Towny config.
+        // Generally, use <@link tag TownTag.claimed_cuboid> instead.
         // -->
         tagProcessor.registerTag(ListTag.class, "plots", (attribute, object) -> {
             ListTag output = new ListTag();
             for (TownBlock block : object.town.getTownBlocks()) {
                 output.addObject(new ChunkTag(new WorldTag(block.getWorld().getName()), block.getX(), block.getZ()));
+            }
+            return output;
+        });
+
+        // <--[tag]
+        // @attribute <TownTag.claimed_cuboid>
+        // @returns CuboidTag
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns a cuboid of all plots claimed by the town.
+        // -->
+        tagProcessor.registerTag(CuboidTag.class, "claimed_cuboid", (attribute, object) -> {
+            CuboidTag output = new CuboidTag();
+            for (TownBlock block : object.town.getTownBlocks()) {
+                output.addPair(getCornerMin(object.town.getWorld(), block.getX(), block.getZ()), getCornerMax(object.town.getWorld(), block.getX(), block.getZ()));
             }
             return output;
         });

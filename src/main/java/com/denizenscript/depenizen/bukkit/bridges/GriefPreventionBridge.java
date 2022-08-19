@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
@@ -15,6 +16,7 @@ import com.denizenscript.depenizen.bukkit.properties.griefprevention.GriefPreven
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.depenizen.bukkit.properties.griefprevention.GriefPreventionWorldProperties;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 
@@ -25,6 +27,7 @@ public class GriefPreventionBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(GriefPreventionClaimTag.class);
         PropertyParser.registerProperty(GriefPreventionPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(GriefPreventionLocationProperties.class, LocationTag.class);
+        PropertyParser.registerProperty(GriefPreventionWorldProperties.class, WorldTag.class);
         ScriptEvent.registerScriptEvent(GPClaimEnterEvent.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override

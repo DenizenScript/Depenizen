@@ -1,15 +1,12 @@
 package com.denizenscript.depenizen.bukkit.objects.griefprevention;
 
+import com.denizenscript.denizen.objects.*;
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
-import com.denizenscript.denizen.objects.ChunkTag;
-import com.denizenscript.denizen.objects.CuboidTag;
-import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -236,10 +233,20 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // -->
         else if (attribute.startsWith("cuboid")) {
             LocationTag lower = new LocationTag(claim.getLesserBoundaryCorner());
-            lower.setY(0);
             LocationTag upper = new LocationTag(claim.getGreaterBoundaryCorner());
-            upper.setY(255);
+            upper.setY(upper.getWorld().getMaxHeight());
             return new CuboidTag(lower, upper).getObjectAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
+        // @attribute <GriefPreventionClaimTag.world>
+        // @returns WorldTag
+        // @Plugin Depenizen, GriefPrevention
+        // @description
+        // Returns the world this GriefPreventionClaim is in.
+        // -->
+        else if (attribute.startsWith("world")) {
+            return new WorldTag(claim.getLesserBoundaryCorner().getWorld());
         }
 
         // <--[tag]
