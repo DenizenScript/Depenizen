@@ -3,10 +3,10 @@ package com.denizenscript.depenizen.bukkit.properties.towny;
 import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
 
 public class TownyWorldProperties implements Property {
 
@@ -37,10 +37,6 @@ public class TownyWorldProperties implements Property {
         }
     }
 
-    public static final String[] handledTags = new String[] {
-            "towny_enabled"
-    };
-
     public static final String[] handledMechs = new String[] {
     }; // None
 
@@ -50,8 +46,7 @@ public class TownyWorldProperties implements Property {
 
     public WorldTag world;
 
-    @Override
-    public ObjectTag getObjectAttribute(Attribute attribute) {
+    public static void registerTags() {
 
         // <--[tag]
         // @attribute <WorldTag.towny_enabled>
@@ -60,10 +55,8 @@ public class TownyWorldProperties implements Property {
         // @description
         // Returns whether this world has Towny enabled.
         // -->
-        if (attribute.startsWith("towny_enabled")) {
-            return new ElementTag(TownyAPI.getInstance().isTownyWorld(world.getWorld())).getObjectAttribute(attribute.fulfill(1));
-        }
-
-        return null;
+        PropertyParser.<TownyWorldProperties, ElementTag>registerTag(ElementTag.class, "towny_enabled", (attribute, property) -> {
+            return new ElementTag(TownyAPI.getInstance().isTownyWorld(property.world.getWorld()));
+        });
     }
 }
