@@ -13,8 +13,6 @@ public class TownCreatedScriptEvent extends BukkitScriptEvent implements Listene
     // @Events
     // towny town created
     //
-    // @Regex ^on towny town created$
-    //
     // @Triggers after all checks are complete and a Towny town is fully created.
     //
     // @Context

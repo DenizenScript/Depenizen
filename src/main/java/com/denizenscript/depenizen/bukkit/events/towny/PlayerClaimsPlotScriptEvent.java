@@ -18,8 +18,6 @@ public class PlayerClaimsPlotScriptEvent extends BukkitScriptEvent implements Li
     // @Events
     // towny player claims plot
     //
-    // @Regex ^on towny player claims plot$
-    //
     // @Location true
     //
     // @Cancellable true

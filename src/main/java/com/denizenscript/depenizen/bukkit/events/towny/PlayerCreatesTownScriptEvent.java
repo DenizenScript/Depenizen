@@ -18,8 +18,6 @@ public class PlayerCreatesTownScriptEvent extends BukkitScriptEvent implements L
     // @Events
     // towny player creates town
     //
-    // @Regex ^on towny player creates town$
-    //
     // @Location true
     //
     // @Cancellable true
