@@ -1,11 +1,15 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.depenizen.bukkit.Bridge;
+import com.denizenscript.depenizen.bukkit.events.griefprevention.GPClaimChangedScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.griefprevention.GPClaimCreatedScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.griefprevention.GPClaimDeletedScriptEvent;
 import com.denizenscript.depenizen.bukkit.properties.griefprevention.GriefPreventionPlayerProperties;
 import com.denizenscript.depenizen.bukkit.objects.griefprevention.GriefPreventionClaimTag;
 import com.denizenscript.denizen.objects.LocationTag;
@@ -15,6 +19,7 @@ import com.denizenscript.depenizen.bukkit.properties.griefprevention.GriefPreven
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.depenizen.bukkit.properties.griefprevention.GriefPreventionWorldProperties;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 
@@ -22,9 +27,13 @@ public class GriefPreventionBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(GriefPreventionClaimTag.class);
+        ObjectFetcher.registerWithObjectFetcher(GriefPreventionClaimTag.class, GriefPreventionClaimTag.tagProcessor);
         PropertyParser.registerProperty(GriefPreventionPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(GriefPreventionLocationProperties.class, LocationTag.class);
+        PropertyParser.registerProperty(GriefPreventionWorldProperties.class, WorldTag.class);
+        ScriptEvent.registerScriptEvent(GPClaimChangedScriptEvent.class);
+        ScriptEvent.registerScriptEvent(GPClaimCreatedScriptEvent.class);
+        ScriptEvent.registerScriptEvent(GPClaimDeletedScriptEvent.class);
         ScriptEvent.registerScriptEvent(GPClaimEnterEvent.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override

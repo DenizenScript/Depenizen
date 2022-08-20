@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.towny;
 
-import com.denizenscript.denizen.objects.ChunkTag;
-import com.denizenscript.denizen.objects.WorldTag;
+import com.denizenscript.denizen.objects.*;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.flags.AbstractFlagTracker;
 import com.denizenscript.denizencore.flags.FlaggableObject;
@@ -12,8 +11,6 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.*;
 import com.palmergames.bukkit.towny.TownyUniverse;
-import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -21,6 +18,7 @@ import com.denizenscript.denizencore.tags.TagContext;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 
 import java.util.UUID;
 
@@ -106,6 +104,14 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         catch (NotRegisteredException e) {
             return null;
         }
+    }
+
+    public static CuboidTag getCuboid(World world, int townCoordX, int townCoordZ) {
+        int x = townCoordX * Coord.getCellSize();
+        int z = townCoordZ * Coord.getCellSize();
+        return new CuboidTag(
+                new LocationTag(world, x, world.getMinHeight(), z),
+                new LocationTag(world, x + Coord.getCellSize() - 1, world.getMaxHeight(), z + Coord.getCellSize() - 1));
     }
 
     /////////////////////
@@ -463,15 +469,33 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
 
         // <--[tag]
         // @attribute <TownTag.plots>
-        // @returns ListTag(LocationTag)
+        // @returns ListTag(ChunkTag)
         // @plugin Depenizen, Towny
         // @description
-        // Returns a list of the names of town plots.
+        // Returns a list of chunks the town has claimed.
+        // Note that this will not be accurate if the plot size has been changed in your Towny config.
+        // Generally, use <@link tag TownTag.cuboids> instead.
         // -->
         tagProcessor.registerTag(ListTag.class, "plots", (attribute, object) -> {
             ListTag output = new ListTag();
             for (TownBlock block : object.town.getTownBlocks()) {
                 output.addObject(new ChunkTag(new WorldTag(block.getWorld().getName()), block.getX(), block.getZ()));
+            }
+            return output;
+        });
+
+        // <--[tag]
+        // @attribute <TownTag.cuboids>
+        // @returns ListTag(CuboidTag)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns a list of plot cuboids claimed by the town.
+        // Note that the cuboids may be in separate worlds if the town has outposts.
+        // -->
+        tagProcessor.registerTag(ListTag.class, "cuboids", (attribute, object) -> {
+            ListTag output = new ListTag();
+            for (TownBlock block : object.town.getTownBlocks()) {
+                output.addObject(getCuboid(object.town.getWorld(), block.getX(), block.getZ()));
             }
             return output;
         });
