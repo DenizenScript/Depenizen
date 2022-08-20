@@ -495,7 +495,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         tagProcessor.registerTag(ListTag.class, "cuboids", (attribute, object) -> {
             ListTag output = new ListTag();
             for (TownBlock block : object.town.getTownBlocks()) {
-                output.addObject(getCuboid(object.town.getWorld(), block.getX(), block.getZ()));
+                output.addObject(getCuboid(block.getWorldCoord().getBukkitWorld(), block.getX(), block.getZ()));
             }
             return output;
         });
