@@ -27,7 +27,7 @@ public class GriefPreventionBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(GriefPreventionClaimTag.class);
+        ObjectFetcher.registerWithObjectFetcher(GriefPreventionClaimTag.class, GriefPreventionClaimTag.tagProcessor);
         PropertyParser.registerProperty(GriefPreventionPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(GriefPreventionLocationProperties.class, LocationTag.class);
         PropertyParser.registerProperty(GriefPreventionWorldProperties.class, WorldTag.class);
