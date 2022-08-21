@@ -25,22 +25,15 @@ public class GPClaimDeletedScriptEvent extends BukkitScriptEvent implements List
     // -->
 
     public GPClaimDeletedScriptEvent() {
-        instance = this;
         registerCouldMatcher("gp claim deleted");
     }
 
-    public static GPClaimDeletedScriptEvent instance;
     public ClaimDeletedEvent event;
 
     @Override
-    public String getName() {
-        return "GPClaimDeleted";
-    }
-
-    @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("claim")) {
-            return new GriefPreventionClaimTag(event.getClaim());
+        switch (name) {
+            case "claim": new GriefPreventionClaimTag(event.getClaim());
         }
         return super.getContext(name);
     }

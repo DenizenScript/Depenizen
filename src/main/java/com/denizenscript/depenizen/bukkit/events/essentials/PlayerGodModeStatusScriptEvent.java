@@ -35,11 +35,9 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
     //
     // -->
 
-    public static PlayerGodModeStatusScriptEvent instance;
     public GodStatusChangeEvent event;
 
     public PlayerGodModeStatusScriptEvent() {
-        instance = this;
     }
 
     @Override
@@ -64,11 +62,6 @@ public class PlayerGodModeStatusScriptEvent extends BukkitScriptEvent implements
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerGodModeStatus";
     }
 
     @Override

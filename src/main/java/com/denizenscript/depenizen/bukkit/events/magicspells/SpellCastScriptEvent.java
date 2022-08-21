@@ -59,11 +59,9 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     // -->
 
     public SpellCastScriptEvent() {
-        instance = this;
         registerCouldMatcher("magicspells <entity> casts <'spell'>");
     }
 
-    public static SpellCastScriptEvent instance;
 
     public SpellCastEvent event;
     public EntityTag caster;
@@ -79,11 +77,6 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "SpellCastEvent";
     }
 
     @Override

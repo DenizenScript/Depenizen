@@ -40,7 +40,6 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
     public WeaponExplodeEvent event;
 
     public CrackShotWeaponCausesExplosionEvent() {
-        instance = this;
     }
 
     @Override
@@ -51,11 +50,6 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("crackshot weapon causes explosion");
-    }
-
-    @Override
-    public String getName() {
-        return "CrackShotWeaponCausesExplosion";
     }
 
     @Override

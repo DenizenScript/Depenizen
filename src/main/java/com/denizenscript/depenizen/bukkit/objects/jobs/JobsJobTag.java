@@ -122,11 +122,6 @@ public class JobsJobTag implements ObjectTag, Adjustable {
     }
 
     @Override
-    public String getObjectType() {
-        return "Job";
-    }
-
-    @Override
     public String identify() {
         return "job@" + job.getName() + PropertyParser.getPropertiesString(this);
     }

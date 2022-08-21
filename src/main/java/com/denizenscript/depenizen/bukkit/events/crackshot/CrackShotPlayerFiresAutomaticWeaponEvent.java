@@ -42,7 +42,6 @@ public class CrackShotPlayerFiresAutomaticWeaponEvent extends BukkitScriptEvent 
     public WeaponFireRateEvent event;
 
     public CrackShotPlayerFiresAutomaticWeaponEvent() {
-        instance = this;
     }
 
     @Override
@@ -69,11 +68,6 @@ public class CrackShotPlayerFiresAutomaticWeaponEvent extends BukkitScriptEvent 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("crackshot player fires automatic weapon");
-    }
-
-    @Override
-    public String getName() {
-        return "CrackShotPlayerFiresAutomaticWeapon";
     }
 
     @Override

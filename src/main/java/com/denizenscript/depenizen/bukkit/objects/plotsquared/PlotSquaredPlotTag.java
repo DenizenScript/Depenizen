@@ -121,11 +121,6 @@ public class PlotSquaredPlotTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "PlotSquaredPlot";
-    }
-
-    @Override
     public String identify() {
         return "plotsquaredplot@" + plot.getId().x + "," + plot.getId().y + "," + plot.getArea().worldname;
     }

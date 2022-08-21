@@ -31,11 +31,9 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
     // -->
 
     public EntityDisguisesScriptEvent() {
-        instance = this;
         registerCouldMatcher("libsdisguises disguise|disguises <'disguise'>");
     }
 
-    public static EntityDisguisesScriptEvent instance;
 
     public DisguiseEvent event;
     public EntityTag entity;
@@ -48,11 +46,6 @@ public class EntityDisguisesScriptEvent extends BukkitScriptEvent implements Lis
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "DisguiseEvent";
     }
 
     @Override

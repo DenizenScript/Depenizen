@@ -93,11 +93,6 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable, Flaggable
     }
 
     @Override
-    public String getObjectType() {
-        return "GriefPreventionClaim";
-    }
-
-    @Override
     public String identify() {
         return "gpclaim@" + claim.getID();
     }

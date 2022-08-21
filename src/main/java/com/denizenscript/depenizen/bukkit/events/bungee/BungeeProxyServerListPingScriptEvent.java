@@ -87,11 +87,6 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public String getName() {
-        return "BungeeProxyServerListPing";
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(null, null);
     }

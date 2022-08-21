@@ -55,7 +55,7 @@ public class TownyWorldProperties implements Property {
         // @description
         // Returns whether this world has Towny enabled.
         // -->
-        PropertyParser.<TownyWorldProperties, ElementTag>registerTag(ElementTag.class, "towny_enabled", (attribute, property) -> {
+        PropertyParser.registerTag(TownyWorldProperties.class, ElementTag.class, "towny_enabled", (attribute, property) -> {
             return new ElementTag(TownyAPI.getInstance().isTownyWorld(property.world.getWorld()));
         });
     }

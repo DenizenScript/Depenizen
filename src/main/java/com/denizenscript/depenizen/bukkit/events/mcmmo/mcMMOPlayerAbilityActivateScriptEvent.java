@@ -39,11 +39,9 @@ public class mcMMOPlayerAbilityActivateScriptEvent extends BukkitScriptEvent imp
     // -->
 
     public mcMMOPlayerAbilityActivateScriptEvent() {
-        instance = this;
         registerCouldMatcher("mcmmo player activates <'ability'> for <'skill'>");
     }
 
-    public static mcMMOPlayerAbilityActivateScriptEvent instance;
     public McMMOPlayerAbilityActivateEvent event;
     public PlayerTag player;
     public ElementTag skill;
@@ -66,11 +64,6 @@ public class mcMMOPlayerAbilityActivateScriptEvent extends BukkitScriptEvent imp
         }
 
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "McMMOPlayerAbilityActivateEvent";
     }
 
     @Override

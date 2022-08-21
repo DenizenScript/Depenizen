@@ -31,23 +31,16 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
     //
     // -->
 
-    public static SkyBlockResetScriptEvent instance;
     public IslandResetEvent event;
     public LocationTag location;
     public PlayerTag owner;
 
     public SkyBlockResetScriptEvent() {
-        instance = this;
     }
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("skyblock island reset");
-    }
-
-    @Override
-    public String getName() {
-        return "SkyBlockReset";
     }
 
     @Override

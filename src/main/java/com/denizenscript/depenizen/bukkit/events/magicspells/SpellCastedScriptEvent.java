@@ -36,10 +36,8 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
     // -->
 
     public SpellCastedScriptEvent() {
-        instance = this;
     }
 
-    public static SpellCastedScriptEvent instance;
 
     public SpellCastedEvent event;
     public EntityTag caster;
@@ -70,11 +68,6 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "SpellCastedEvent";
     }
 
     @Override

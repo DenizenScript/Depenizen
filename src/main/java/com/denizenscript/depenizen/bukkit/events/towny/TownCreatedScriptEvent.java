@@ -25,17 +25,10 @@ public class TownCreatedScriptEvent extends BukkitScriptEvent implements Listene
     // -->
 
     public TownCreatedScriptEvent() {
-        instance = this;
         registerCouldMatcher("towny town created");
     }
 
-    public static TownCreatedScriptEvent instance;
     public NewTownEvent event;
-
-    @Override
-    public String getName() {
-        return "TownyTownCreated";
-    }
 
     @Override
     public ObjectTag getContext(String name) {

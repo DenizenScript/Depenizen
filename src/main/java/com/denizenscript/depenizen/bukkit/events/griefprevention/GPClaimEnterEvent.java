@@ -42,7 +42,6 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
     // -->
 
     public GPClaimEnterEvent() {
-        instance = this;
         registerCouldMatcher("gp player enters|exits <'gpclaim'>");
     }
 
@@ -73,11 +72,6 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
             return super.matches(path);
         }
         return false;
-    }
-
-    @Override
-    public String getName() {
-        return "GPClaimEnter";
     }
 
     @Override

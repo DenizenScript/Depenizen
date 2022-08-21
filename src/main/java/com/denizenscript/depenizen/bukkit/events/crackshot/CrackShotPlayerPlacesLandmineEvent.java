@@ -36,7 +36,6 @@ public class CrackShotPlayerPlacesLandmineEvent extends BukkitScriptEvent implem
     public WeaponPlaceMineEvent event;
 
     public CrackShotPlayerPlacesLandmineEvent() {
-        instance = this;
     }
 
     @Override
@@ -47,11 +46,6 @@ public class CrackShotPlayerPlacesLandmineEvent extends BukkitScriptEvent implem
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("crackshot player places landmine");
-    }
-
-    @Override
-    public String getName() {
-        return "CrackShotWeaponPlaceLandmine";
     }
 
     @Override

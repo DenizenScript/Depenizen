@@ -35,21 +35,14 @@ public class ShopKeeperCreatedScriptEvent extends BukkitScriptEvent implements L
     // -->
 
     public ShopKeeperCreatedScriptEvent() {
-        instance = this;
     }
 
-    public static ShopKeeperCreatedScriptEvent instance;
     public PlayerCreateShopkeeperEvent event;
     public PlayerTag player;
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("player creates shopkeeper");
-    }
-
-    @Override
-    public String getName() {
-        return "ShopKeeperCreated";
     }
 
     @Override

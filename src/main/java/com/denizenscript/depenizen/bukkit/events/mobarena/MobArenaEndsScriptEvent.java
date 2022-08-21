@@ -30,11 +30,9 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
     // -->
 
     public MobArenaEndsScriptEvent() {
-        instance = this;
         registerCouldMatcher("mobarena <'arena'> ends");
     }
 
-    public static MobArenaEndsScriptEvent instance;
     public ArenaEndEvent event;
     public MobArenaArenaTag arena;
     public ElementTag wave;
@@ -47,11 +45,6 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "MobArenaEnds";
     }
 
     @Override

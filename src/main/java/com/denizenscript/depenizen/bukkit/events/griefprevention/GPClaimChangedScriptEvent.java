@@ -38,19 +38,12 @@ public class GPClaimChangedScriptEvent extends BukkitScriptEvent implements List
     // -->
 
     public GPClaimChangedScriptEvent() {
-        instance = this;
         registerCouldMatcher("gp claim changed");
     }
 
-    public static GPClaimChangedScriptEvent instance;
     public ClaimChangeEvent event;
     public Player player;
     public String sourceType;
-
-    @Override
-    public String getName() {
-        return "GPClaimChanged";
-    }
 
     @Override
     public ScriptEntryData getScriptEntryData() {

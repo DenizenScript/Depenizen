@@ -116,11 +116,6 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
     }
 
     @Override
-    public String getObjectType() {
-        return "MythicMob";
-    }
-
-    @Override
     public String identify() {
         return "mythicmob@" + mob.getUniqueId();
     }

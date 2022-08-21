@@ -45,6 +45,7 @@ public class GriefPreventionWorldProperties implements Property {
     WorldTag world;
 
     public static void registerTags() {
+
         // <--[tag]
         // @attribute <WorldTag.griefprevention_claims>
         // @returns ListTag(GriefPreventionClaimTag)
@@ -52,7 +53,7 @@ public class GriefPreventionWorldProperties implements Property {
         // @description
         // Returns a list of GriefPreventionClaim in this world.
         // -->
-        PropertyParser.<GriefPreventionWorldProperties, ListTag>registerTag(ListTag.class, "griefprevention_claims", (attribute, property) -> {
+        PropertyParser.registerTag(GriefPreventionWorldProperties.class, ListTag.class, "griefprevention_claims", (attribute, property) -> {
             ListTag result = new ListTag();
             for (Claim claim : GriefPrevention.instance.dataStore.getClaims()) {
                 if (property.world.getWorld().equals(claim.getLesserBoundaryCorner().getWorld())) {

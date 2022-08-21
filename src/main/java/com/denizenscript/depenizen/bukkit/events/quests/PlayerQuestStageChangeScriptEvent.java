@@ -33,11 +33,9 @@ public class PlayerQuestStageChangeScriptEvent extends BukkitScriptEvent impleme
     // -->
 
     public PlayerQuestStageChangeScriptEvent() {
-        instance = this;
         registerCouldMatcher("quests player changes <'quest'> stage");
     }
 
-    public static PlayerQuestStageChangeScriptEvent instance;
     public QuesterPostChangeStageEvent event;
 
     @Override
@@ -48,11 +46,6 @@ public class PlayerQuestStageChangeScriptEvent extends BukkitScriptEvent impleme
         }
 
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "QuestsPlayerQuestStageChange";
     }
 
     @Override

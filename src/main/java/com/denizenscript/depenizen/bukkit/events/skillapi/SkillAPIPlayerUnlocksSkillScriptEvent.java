@@ -37,11 +37,9 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
     // -->
 
     public SkillAPIPlayerUnlocksSkillScriptEvent() {
-        instance = this;
         registerCouldMatcher("skillapi player unlocks <'skill'>");
     }
 
-    public static SkillAPIPlayerUnlocksSkillScriptEvent instance;
     public PlayerSkillUnlockEvent event;
     public PlayerTag player;
     public ElementTag skill;
@@ -59,11 +57,6 @@ public class SkillAPIPlayerUnlocksSkillScriptEvent extends BukkitScriptEvent imp
         }
 
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "SkillAPIPlayerUnlocksSkill";
     }
 
     @Override

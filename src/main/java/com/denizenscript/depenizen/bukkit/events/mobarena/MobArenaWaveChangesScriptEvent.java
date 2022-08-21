@@ -29,11 +29,9 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
     // -->
 
     public MobArenaWaveChangesScriptEvent() {
-        instance = this;
         registerCouldMatcher("mobarena <'arena'> wave changes");
     }
 
-    public static MobArenaWaveChangesScriptEvent instance;
     public NewWaveEvent event;
     public MobArenaArenaTag arena;
     public ElementTag wave;
@@ -46,11 +44,6 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "MobArenaWaveChanges";
     }
 
     @Override

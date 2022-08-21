@@ -77,11 +77,6 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
     }
 
     @Override
-    public String getObjectType() {
-        return "BigDoorsDoor";
-    }
-
-    @Override
     public String identify() {
         return "bigdoor@" + door.getDoorUID();
     }

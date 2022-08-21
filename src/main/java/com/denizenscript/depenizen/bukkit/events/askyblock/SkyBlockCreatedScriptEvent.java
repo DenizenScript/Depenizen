@@ -33,24 +33,17 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
     //
     // -->
 
-    public static SkyBlockCreatedScriptEvent instance;
     public IslandNewEvent event;
     public LocationTag location;
     public ElementTag schematic;
     public PlayerTag owner;
 
     public SkyBlockCreatedScriptEvent() {
-        instance = this;
     }
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("skyblock island created");
-    }
-
-    @Override
-    public String getName() {
-        return "SkyBlockCreated";
     }
 
     @Override

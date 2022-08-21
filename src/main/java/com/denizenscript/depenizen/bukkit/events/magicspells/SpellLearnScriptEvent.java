@@ -35,10 +35,8 @@ public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener
     // -->
 
     public SpellLearnScriptEvent() {
-        instance = this;
     }
 
-    public static SpellLearnScriptEvent instance;
 
     public SpellLearnEvent event;
     public PlayerTag player;
@@ -48,11 +46,6 @@ public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("magicspells player learns spell");
-    }
-
-    @Override
-    public String getName() {
-        return "SpellLearnEvent";
     }
 
     @Override

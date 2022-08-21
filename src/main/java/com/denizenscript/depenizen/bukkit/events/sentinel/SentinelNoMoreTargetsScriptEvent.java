@@ -27,21 +27,14 @@ public class SentinelNoMoreTargetsScriptEvent extends BukkitScriptEvent implemen
     // -->
 
     public SentinelNoMoreTargetsScriptEvent() {
-        instance = this;
     }
 
-    public static SentinelNoMoreTargetsScriptEvent instance;
     public SentinelNoMoreTargetsEvent event;
     public NPCTag npc;
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("sentinel npc has no more targets");
-    }
-
-    @Override
-    public String getName() {
-        return "SentinelNoMoreTargets";
     }
 
     @Override

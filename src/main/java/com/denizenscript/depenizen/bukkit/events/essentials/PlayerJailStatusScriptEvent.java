@@ -36,11 +36,9 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
     //
     // -->
 
-    public static PlayerJailStatusScriptEvent instance;
     public JailStatusChangeEvent event;
 
     public PlayerJailStatusScriptEvent() {
-        instance = this;
     }
 
     @Override
@@ -67,11 +65,6 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerJailStatus";
     }
 
     @Override

@@ -36,7 +36,6 @@ public class CrackShotPlayerFinishesReloadingWeaponEvent extends BukkitScriptEve
     public WeaponReloadCompleteEvent event;
 
     public CrackShotPlayerFinishesReloadingWeaponEvent() {
-        instance = this;
     }
 
     @Override
@@ -47,11 +46,6 @@ public class CrackShotPlayerFinishesReloadingWeaponEvent extends BukkitScriptEve
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("crackshot player finishes reloading weapon");
-    }
-
-    @Override
-    public String getName() {
-        return "CrackShotPlayerFinishesReloadingWeapon";
     }
 
     @Override

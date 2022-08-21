@@ -29,11 +29,9 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
     // -->
 
     public PlotClearScriptEvent() {
-        instance = this;
         registerCouldMatcher("plotsquared plot clear|clears <'plotsquaredplot'>");
     }
 
-    public static PlotClearScriptEvent instance;
     public PlotClearEvent event;
     public PlotSquaredPlotTag plot;
 
@@ -44,11 +42,6 @@ public class PlotClearScriptEvent extends BukkitScriptEvent implements Listener 
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "PlotClearEvent";
     }
 
     @Override

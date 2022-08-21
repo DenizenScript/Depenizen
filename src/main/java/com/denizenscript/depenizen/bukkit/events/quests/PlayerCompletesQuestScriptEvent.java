@@ -33,11 +33,9 @@ public class PlayerCompletesQuestScriptEvent extends BukkitScriptEvent implement
     // -->
 
     public PlayerCompletesQuestScriptEvent() {
-        instance = this;
         registerCouldMatcher("quests player completes <'quest'>");
     }
 
-    public static PlayerCompletesQuestScriptEvent instance;
     public QuesterPreCompleteQuestEvent event;
 
     @Override
@@ -48,11 +46,6 @@ public class PlayerCompletesQuestScriptEvent extends BukkitScriptEvent implement
         }
 
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "QuestsPlayerCompletesQuest";
     }
 
     @Override

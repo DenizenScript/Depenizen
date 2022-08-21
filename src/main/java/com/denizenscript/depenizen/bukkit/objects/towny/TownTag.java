@@ -137,11 +137,6 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
     }
 
     @Override
-    public String getObjectType() {
-        return "Town";
-    }
-
-    @Override
     public String identify() {
         return "town@" + town.getUUID();
     }

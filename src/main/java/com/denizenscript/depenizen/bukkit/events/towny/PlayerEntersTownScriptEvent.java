@@ -30,11 +30,9 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
     // -->
 
     public PlayerEntersTownScriptEvent() {
-        instance = this;
         registerCouldMatcher("towny player enters <'town'>");
     }
 
-    public static PlayerEntersTownScriptEvent instance;
     public PlayerEnterTownEvent event;
     public TownTag town;
 
@@ -45,11 +43,6 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "TownyPlayerEntersTown";
     }
 
     @Override

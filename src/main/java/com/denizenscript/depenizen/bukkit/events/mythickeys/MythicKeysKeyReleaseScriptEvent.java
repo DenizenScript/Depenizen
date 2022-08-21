@@ -33,12 +33,10 @@ public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implement
     // -->
 
     public MythicKeysKeyReleaseScriptEvent() {
-        instance = this;
         registerCouldMatcher("mythickeys key released");
         registerSwitches("id");
     }
 
-    public static MythicKeysKeyReleaseScriptEvent instance;
     public MythicKeyReleaseEvent event;
 
     @Override
@@ -50,11 +48,6 @@ public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implement
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "MythicKeysKeyReleased";
     }
 
     @Override

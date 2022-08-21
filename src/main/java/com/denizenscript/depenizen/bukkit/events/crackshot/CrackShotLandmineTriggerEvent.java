@@ -38,7 +38,6 @@ public class CrackShotLandmineTriggerEvent extends BukkitScriptEvent implements 
     public WeaponTriggerEvent event;
 
     public CrackShotLandmineTriggerEvent() {
-        instance = this;
     }
 
     @Override
@@ -49,11 +48,6 @@ public class CrackShotLandmineTriggerEvent extends BukkitScriptEvent implements 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("crackshot landmine triggered");
-    }
-
-    @Override
-    public String getName() {
-        return "CrackShotLandmineTriggered";
     }
 
     @Override

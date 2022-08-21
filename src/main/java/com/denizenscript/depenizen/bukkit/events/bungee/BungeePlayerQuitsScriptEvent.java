@@ -52,11 +52,6 @@ public class BungeePlayerQuitsScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public String getName() {
-        return "BungeePlayerQuits";
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         OfflinePlayer player = null;
         try {

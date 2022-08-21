@@ -119,11 +119,6 @@ public class NationTag implements ObjectTag, FlaggableObject {
     }
 
     @Override
-    public String getObjectType() {
-        return "Nation";
-    }
-
-    @Override
     public String identify() {
         return "nation@" + nation.getUUID();
     }
