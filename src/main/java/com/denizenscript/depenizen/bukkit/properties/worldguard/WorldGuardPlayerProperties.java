@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.worldguard;
 
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.bridges.WorldGuardBridge;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
@@ -61,9 +62,8 @@ public class WorldGuardPlayerProperties implements Property {
 
     Player player;
 
-    private StateFlag getStateFlag(String s) {
-        Flag flag = Flags.fuzzyMatchFlag(WorldGuard.getInstance().getFlagRegistry(), s);
-        return flag instanceof StateFlag ? (StateFlag) flag : null;
+    public Flag getFlag(String s) {
+        return Flags.fuzzyMatchFlag(WorldGuard.getInstance().getFlagRegistry(), s);
     }
 
     @Override
@@ -93,18 +93,21 @@ public class WorldGuardPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <PlayerTag.worldguard.test_flag[<name>]>
-        // @returns ElementTag(Boolean)
+        // @returns ElementTag
         // @plugin Depenizen, WorldGuard
         // @description
-        // Returns the state of a flag for that player at their location.
-        // For example: .test_flag[pvp] returns 'true' when the player can be attacked.
+        // Returns the boolean state of a flag for that player at their location.
+        // For non-state tags, returns the current value of the flag.
+        // @example
+        // # Returns 'true' if the player can be attacked (according to WG) or 'false' if not.
+        // - narrate <player.worldguard.test_flag[pvp]>
         // -->
         if (attribute.startsWith("test_flag")) {
             if (!attribute.hasParam()) {
                 Debug.echoError("The tag PlayerTag.worlduard.test_flag[...] must have a value.");
                 return null;
             }
-            StateFlag flag = getStateFlag(attribute.getParam());
+            Flag flag = getFlag(attribute.getParam());
             if (flag == null) {
                 Debug.echoError("The tag PlayerTag.worlduard.test_flag[...] has an invalid value: " + attribute.getParam());
                 return null;
@@ -116,10 +119,11 @@ public class WorldGuardPlayerProperties implements Property {
 
             // <--[tag]
             // @attribute <PlayerTag.worldguard.test_flag[<name>].at[<location>]>
-            // @returns ElementTag(Boolean)
+            // @returns ElementTag
             // @plugin Depenizen, WorldGuard
             // @description
-            // Returns the state of a flag for that player at the specified location.
+            // Returns the boolean state of a flag for that player at the specified location.
+            // For non-state tags, returns the current value of the flag.
             // -->
             if (attribute.getAttribute(2).startsWith("at") && attribute.hasContext(2)) {
                 loc = attribute.contextAsType(2, LocationTag.class);
@@ -129,8 +133,14 @@ public class WorldGuardPlayerProperties implements Property {
                 }
             }
             WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
-            return new ElementTag(query.testState(BukkitAdapter.adapt(loc), worldGuard.wrapPlayer(player), flag))
-                    .getObjectAttribute(attribute.fulfill(args));
+            ObjectTag result;
+            if (flag instanceof StateFlag) {
+                result = new ElementTag(query.testState(BukkitAdapter.adapt(loc), worldGuard.wrapPlayer(player), (StateFlag) flag));
+            }
+            else {
+                result = CoreUtilities.objectToTagForm(query.queryValue(BukkitAdapter.adapt(loc), worldGuard.wrapPlayer(player), flag), attribute.context);
+            }
+            return result.getObjectAttribute(attribute.fulfill(args));
         }
 
         return null;

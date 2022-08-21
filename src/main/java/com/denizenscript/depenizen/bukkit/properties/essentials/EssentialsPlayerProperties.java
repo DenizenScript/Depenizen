@@ -14,6 +14,7 @@ import com.denizenscript.denizen.utilities.debugging.Debug;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.depenizen.bukkit.bridges.EssentialsBridge;
+import org.bukkit.Location;
 
 import java.util.UUID;
 
@@ -137,7 +138,10 @@ public class EssentialsPlayerProperties implements Property {
             MapTag homes = new MapTag();
             for (String home : getUser().getHomes()) {
                 try {
-                    homes.putObject(home, new LocationTag(getUser().getHome(home)));
+                    Location homeLoc = getUser().getHome(home);
+                    if (homeLoc != null) { // home location can be null if the world isn't loaded
+                        homes.putObject(home, new LocationTag(homeLoc));
+                    }
                 }
                 catch (Exception e) {
                     if (!attribute.hasAlternative()) {
