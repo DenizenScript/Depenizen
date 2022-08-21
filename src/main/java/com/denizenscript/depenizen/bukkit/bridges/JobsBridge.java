@@ -32,39 +32,32 @@ public class JobsBridge extends Bridge {
         PropertyParser.registerProperty(JobsPlayerProperties.class, PlayerTag.class);
 
         // <--[tag]
-        // @attribute <jobs[<name>]>
-        // @returns JobsJobTag
+        // @attribute <jobs>
+        // @returns ListTag(JobsJobTag)
         // @plugin Depenizen, Jobs
         // @description
-        // Returns the job tag with the given name.
+        // Returns the list of all jobs on the server.
         // -->
         TagManager.registerTagHandler(ObjectTag.class, "jobs", (attribute) -> {
-            if (attribute.hasParam()) {
-                return JobsJobTag.valueOf(attribute.getParam(), attribute.context);
-            }
-
-            // <--[tag]
-            // @attribute <jobs.server_jobs>
-            // @returns ListTag(JobsJobTag)
-            // @plugin Depenizen, Jobs
-            // @description
-            // Returns the list of all jobs on the server.
-            // -->
-            if (attribute.startsWith("server_jobs", 2)) {
-                attribute.fulfill(1);
-                ListTag jobsList = new ListTag();
-                for (Job job : Jobs.getJobs()) {
-                    jobsList.addObject(new JobsJobTag(job));
-                }
-                return jobsList;
-            }
-
-            blankJobsConstructor.warn(attribute.context);
             ListTag jobsList = new ListTag();
             for (Job job : Jobs.getJobs()) {
                 jobsList.addObject(new JobsJobTag(job));
             }
             return jobsList;
+        });
+
+        // <--[tag]
+        // @attribute <jobs_job[<name>]>
+        // @returns JobsJobTag
+        // @plugin Depenizen, Jobs
+        // @description
+        // Returns the job tag with the given name.
+        // -->
+        TagManager.registerTagHandler(JobsJobTag.class, "jobs_job", attribute -> {
+            if (attribute.hasParam()) {
+                return JobsJobTag.valueOf(attribute.getParam(), attribute.context);
+            }
+            return null;
         });
         DenizenCore.commandRegistry.registerCommand(JobsCommand.class);
     }

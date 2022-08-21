@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.jobs;
 
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
@@ -66,8 +67,8 @@ public class JobsPlayerProperties implements Property {
         // -->
         PropertyParser.<JobsPlayerProperties, JobsJobTag>registerTag(JobsJobTag.class, "job", (attribute, object) -> {
             if (attribute.hasParam()) {
-                Job job = Jobs.getJob(attribute.getParam());
-                return new JobsJobTag(job, object.player);
+                JobsJobTag job = JobsJobTag.valueOf(attribute.getParam());
+                return new JobsJobTag(job.getJob(), object.player);
             }
             attribute.echoError("Invalid or missing job specified.");
             return null;

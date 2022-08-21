@@ -4,6 +4,7 @@ import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.debugging.SlowWarning;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
@@ -17,6 +18,7 @@ import com.denizenscript.denizencore.tags.TagContext;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class JobsJobTag implements ObjectTag, Adjustable {
     public static ObjectTagProcessor<JobsJobTag> tagProcessor = new ObjectTagProcessor<>();
@@ -26,12 +28,13 @@ public class JobsJobTag implements ObjectTag, Adjustable {
     // @prefix job
     // @base ElementTag
     // @format
-    // The identity format for jobs is <job_name>
-    // For example, 'job@job_name'.
+    // The identity format for jobs is the player UUID (optional), followed by the job name
+    // For example: job@05f57b6e-77ba-4546-b214-b58dacc30356,job_name
+    // Or: job@job_name
     //
     // @plugin Depenizen, Jobs
     // @description
-    // A JobsJobTag represents a Jobs job, with a player's progression if created from a player.
+    // A JobsJobTag represents a Jobs job, with a player's progression if specified.
     //
     // -->
 
@@ -45,13 +48,28 @@ public class JobsJobTag implements ObjectTag, Adjustable {
 
     @Fetchable("job")
     public static JobsJobTag valueOf(String string, TagContext context) {
-        if (string == null) {
+        if (string.startsWith("job@")) {
+            string = string.substring("job@".length());
+        }
+        if (string.contains("@")) {
             return null;
         }
-        if (ObjectFetcher.isObjectWithProperties(string)) {
-            return ObjectFetcher.getObjectFromWithProperties(JobsJobTag.class, string, context);
+        int comma = string.indexOf(',');
+        PlayerTag player = null;
+        if (comma > 0) {
+            //player = new PlayerTag(UUID.fromString(string.substring(0, comma)));
+            player = PlayerTag.valueOf(string.substring(0, comma), context);
+            string = string.substring(comma + 1);
         }
-        return new JobsJobTag(Jobs.getJob(string.replace("job@", "")));
+        JobsJobTag job = new JobsJobTag(Jobs.getJob(string));
+        if (player != null) {
+            if (player.isValid()) {
+                job.setOwner(player);
+            } else {
+                Debug.echoError("Player specified in JobsJobTag is not valid");
+            }
+        }
+        return job;
     }
 
     public static boolean matches(String arg) {
@@ -137,12 +155,15 @@ public class JobsJobTag implements ObjectTag, Adjustable {
 
     @Override
     public String identify() {
-        return "job@" + job.getName() + PropertyParser.getPropertiesString(this);
+        if (jobOwner != null) {
+            return "job@" + jobOwner.playerUUID + "," + job.getName();
+        }
+        return "job@" + job.getName();
     }
 
     @Override
     public String identifySimple() {
-        return "job@" + job.getName();
+        return identify();
     }
 
     @Override
@@ -161,7 +182,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
 
     @Override
     public void applyProperty(Mechanism mechanism) {
-        adjust(mechanism);
+        mechanism.echoError("Cannot apply Properties to a Jobs Job!");
     }
 
     public static void registerTags() {
@@ -318,10 +339,10 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object JobsJobTag
         // @name xp
-        // @input ElementTag(Double)
+        // @input ElementTag(Decimal)
         // @plugin Depenizen, Jobs
         // @description
-        // Set the amount of job XP the player has in this job
+        // Set the amount of job XP the player has in this job.
         // -->
         if (!mechanism.isProperty && mechanism.matches("xp") && mechanism.requireDouble()) {
             if (jobProgression == null) {
@@ -329,18 +350,6 @@ public class JobsJobTag implements ObjectTag, Adjustable {
                 return;
             }
             jobProgression.setExperience(mechanism.getValue().asDouble());
-        }
-
-        // <--[mechanism]
-        // @object JobsJobTag
-        // @name player
-        // @input PlayerTag
-        // @plugin Depenizen, Jobs
-        // @description
-        // Sets the owner of the job, to enable player-required tags.
-        // -->
-        if (mechanism.matches("player") && mechanism.requireObject(PlayerTag.class)) {
-            setOwner(mechanism.valueAsType(PlayerTag.class));
         }
 
         CoreUtilities.autoPropertyMechanism(this, mechanism);
