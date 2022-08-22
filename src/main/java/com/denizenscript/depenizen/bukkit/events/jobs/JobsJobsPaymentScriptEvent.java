@@ -10,7 +10,6 @@ import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.api.JobsPrePaymentEvent;
-import com.gamingmesh.jobs.container.ActionType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 

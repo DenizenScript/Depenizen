@@ -16,10 +16,6 @@ import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 public class JobsJobTag implements ObjectTag, Adjustable {
     public static ObjectTagProcessor<JobsJobTag> tagProcessor = new ObjectTagProcessor<>();
 
@@ -264,6 +260,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // @attribute <JobsJobTag.xp>
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, Jobs
+        // @mechanism JobsJobTag.xp
         // @description
         // Returns the current experience a player has for the current level in a specified job.
         // -->
@@ -338,6 +335,8 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // @plugin Depenizen, Jobs
         // @description
         // Set the amount of job XP the player has in this job.
+        // @tags
+        // <JobsJobTag.xp>
         // -->
         if (!mechanism.isProperty && mechanism.matches("xp") && mechanism.requireDouble()) {
             if (jobProgression == null) {
