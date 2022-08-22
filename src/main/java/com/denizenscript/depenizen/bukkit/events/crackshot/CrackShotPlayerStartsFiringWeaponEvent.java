@@ -36,7 +36,6 @@ public class CrackShotPlayerStartsFiringWeaponEvent extends BukkitScriptEvent im
     public WeaponPrepareShootEvent event;
 
     public CrackShotPlayerStartsFiringWeaponEvent() {
-        instance = this;
     }
 
     @Override
@@ -47,11 +46,6 @@ public class CrackShotPlayerStartsFiringWeaponEvent extends BukkitScriptEvent im
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("crackshot player starts firing weapon");
-    }
-
-    @Override
-    public String getName() {
-        return "CrackShotPlayerStartsFiringWeapon";
     }
 
     @Override

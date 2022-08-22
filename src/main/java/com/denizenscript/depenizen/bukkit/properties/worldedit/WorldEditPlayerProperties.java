@@ -88,7 +88,7 @@ public class WorldEditPlayerProperties implements Property {
         //
         // Note that some values may be listed as "unknown" or strange values due to WorldEdit having a messy API (no way to automatically stringify brush data).
         // -->
-        PropertyParser.<WorldEditPlayerProperties, ListTag>registerTag(ListTag.class, "we_brush_info", (attribute, object) -> {
+        PropertyParser.registerTag(WorldEditPlayerProperties.class, ListTag.class, "we_brush_info", (attribute, object) -> {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             ItemType itemType;
             if (attribute.hasParam()) {
@@ -128,7 +128,7 @@ public class WorldEditPlayerProperties implements Property {
         // @description
         // Returns the player's current block area selection, as a CuboidTag, EllipsoidTag, or PolygonTag.
         // -->
-        PropertyParser.<WorldEditPlayerProperties, ObjectTag>registerTag(ObjectTag.class, "we_selection", (attribute, object) -> {
+        PropertyParser.registerTag(WorldEditPlayerProperties.class, ObjectTag.class, "we_selection", (attribute, object) -> {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             RegionSelector selection = worldEdit.getSession(object.player).getRegionSelector(BukkitAdapter.adapt(object.player.getWorld()));
             try {

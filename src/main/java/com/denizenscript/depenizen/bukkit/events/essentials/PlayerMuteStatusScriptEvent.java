@@ -36,11 +36,9 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
     //
     // -->
 
-    public static PlayerMuteStatusScriptEvent instance;
     public MuteStatusChangeEvent event;
 
     public PlayerMuteStatusScriptEvent() {
-        instance = this;
     }
 
     @Override
@@ -67,11 +65,6 @@ public class PlayerMuteStatusScriptEvent extends BukkitScriptEvent implements Li
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerMuteStatus";
     }
 
     @Override

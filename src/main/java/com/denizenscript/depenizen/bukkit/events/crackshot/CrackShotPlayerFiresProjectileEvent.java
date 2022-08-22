@@ -48,7 +48,6 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
     public WeaponPreShootEvent event;
 
     public CrackShotPlayerFiresProjectileEvent() {
-        instance = this;
     }
 
     @Override
@@ -83,11 +82,6 @@ public class CrackShotPlayerFiresProjectileEvent extends BukkitScriptEvent imple
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("crackshot player fires projectile");
-    }
-
-    @Override
-    public String getName() {
-        return "CrackShotPlayerFiresProjectile";
     }
 
     @Override

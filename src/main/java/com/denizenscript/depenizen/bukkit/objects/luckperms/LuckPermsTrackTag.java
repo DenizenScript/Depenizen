@@ -115,11 +115,6 @@ public class LuckPermsTrackTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "LuckPermsTrack";
-    }
-
-    @Override
     public String identify() {
         return "luckpermstrack@" + track.getName();
     }

@@ -47,7 +47,6 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
     public WeaponDamageEntityEvent event;
 
     public CrackShotWeaponDamageEntityEvent() {
-        instance = this;
     }
 
     @Override
@@ -69,11 +68,6 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("crackshot weapon damages entity");
-    }
-
-    @Override
-    public String getName() {
-        return "CrackShotWeaponDamagesEntity";
     }
 
     @Override

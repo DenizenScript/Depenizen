@@ -43,7 +43,6 @@ public class CrackShotPlayerTogglesWeaponAttachmentEvent extends BukkitScriptEve
     public WeaponAttachmentToggleEvent event;
 
     public CrackShotPlayerTogglesWeaponAttachmentEvent() {
-        instance = this;
     }
 
     @Override
@@ -70,11 +69,6 @@ public class CrackShotPlayerTogglesWeaponAttachmentEvent extends BukkitScriptEve
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("crackshot player toggles weapon attachment");
-    }
-
-    @Override
-    public String getName() {
-        return "CrackShotPlayerTogglesWeaponAttachment";
     }
 
     @Override

@@ -61,11 +61,6 @@ public class BungeePlayerServerSwitchScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public String getName() {
-        return "BungeePlayerServerSwitch";
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         OfflinePlayer player = null;
         try {

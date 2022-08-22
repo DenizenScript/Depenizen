@@ -33,24 +33,17 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
     //
     // -->
 
-    public static PlayerExitsSkyBlockScriptEvent instance;
     public IslandExitEvent event;
     public LocationTag location;
     public LocationTag island_location;
     public PlayerTag owner;
 
     public PlayerExitsSkyBlockScriptEvent() {
-        instance = this;
     }
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("player exits skyblock");
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerEntersSkyBlock";
     }
 
     @Override

@@ -80,11 +80,6 @@ public class AreaShopTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "AreaShop";
-    }
-
-    @Override
     public String identify() {
         return "areashop@" + areaShop.getName();
     }

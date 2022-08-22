@@ -43,11 +43,9 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
     // -->
 
     public mcMMOPlayerGainsXPScriptEvent() {
-        instance = this;
         registerCouldMatcher("mcmmo player gains xp for <'skill'>");
     }
 
-    public static mcMMOPlayerGainsXPScriptEvent instance;
     public McMMOPlayerXpGainEvent event;
     public PlayerTag player;
     public ElementTag skill;
@@ -66,11 +64,6 @@ public class mcMMOPlayerGainsXPScriptEvent extends BukkitScriptEvent implements 
         }
 
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "mcMMOPlayerXPGain";
     }
 
     @Override

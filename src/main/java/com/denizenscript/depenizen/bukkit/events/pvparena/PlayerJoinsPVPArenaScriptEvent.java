@@ -32,22 +32,15 @@ public class PlayerJoinsPVPArenaScriptEvent extends BukkitScriptEvent implements
     //
     // -->
 
-    public static PlayerJoinsPVPArenaScriptEvent instance;
     public PAJoinEvent event;
     public PVPArenaArenaTag arena;
 
     public PlayerJoinsPVPArenaScriptEvent() {
-        instance = this;
     }
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("pvparena player joins");
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerJoinsPVPArena";
     }
 
     @Override

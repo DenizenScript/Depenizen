@@ -18,10 +18,8 @@ import org.bukkit.event.Listener;
 public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listener {
 
     public VotifierVoteScriptEvent() {
-        instance = this;
     }
 
-    public static VotifierVoteScriptEvent instance;
 
     // <--[event]
     // @Events
@@ -49,11 +47,6 @@ public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listen
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("votifier vote");
-    }
-
-    @Override
-    public String getName() {
-        return "VotifierVote";
     }
 
     @Override

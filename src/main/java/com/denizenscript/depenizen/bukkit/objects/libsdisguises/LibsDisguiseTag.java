@@ -101,11 +101,6 @@ public class LibsDisguiseTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "LibsDisguise";
-    }
-
-    @Override
     public String identify() {
         return "libsdisguise@" + disguise.toString();
     }

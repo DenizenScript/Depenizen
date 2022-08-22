@@ -37,20 +37,13 @@ public class SentinelAttackScriptEvent extends BukkitScriptEvent implements List
     // -->
 
     public SentinelAttackScriptEvent() {
-        instance = this;
         registerCouldMatcher("sentinel npc attacks");
         registerSwitches("entity");
     }
 
-    public static SentinelAttackScriptEvent instance;
     public SentinelAttackEvent event;
     public EntityTag entity;
     public NPCTag npc;
-
-    @Override
-    public String getName() {
-        return "SentinelAttack";
-    }
 
     @Override
     public boolean matches(ScriptPath path) {

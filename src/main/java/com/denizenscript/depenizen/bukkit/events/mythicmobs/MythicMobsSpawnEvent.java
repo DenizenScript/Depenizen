@@ -36,7 +36,6 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
     // -->
 
     public MythicMobsSpawnEvent() {
-        instance = this;
         registerCouldMatcher("mythicmob <'mob'> spawns");
     }
 
@@ -55,11 +54,6 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "MythicMobsSpawn";
     }
 
     @Override

@@ -60,7 +60,7 @@ public class CoreProtectLocationProperties implements Property {
         // "player_name" (player username, not a PlayerTag instance),
         // "time" (TimeTag)
         // -->
-        PropertyParser.<CoreProtectLocationProperties, ListTag>registerTag(ListTag.class, "coreprotect_logs", (attribute, property) -> {
+        PropertyParser.registerTag(CoreProtectLocationProperties.class, ListTag.class, "coreprotect_logs", (attribute, property) -> {
             if (!attribute.hasParam()) {
                 return null;
             }

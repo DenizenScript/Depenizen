@@ -40,17 +40,11 @@ public class PlayerEntersSkyBlockScriptEvent extends BukkitScriptEvent implement
     public PlayerTag owner;
 
     public PlayerEntersSkyBlockScriptEvent() {
-        instance = this;
     }
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("skyblock player enters skyblock");
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerEntersSkyBlock";
     }
 
     @Override

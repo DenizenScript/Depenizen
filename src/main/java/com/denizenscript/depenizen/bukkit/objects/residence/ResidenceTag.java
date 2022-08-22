@@ -78,11 +78,6 @@ public class ResidenceTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "Residence";
-    }
-
-    @Override
     public String identify() {
         return "residence@" + residence.getName();
     }

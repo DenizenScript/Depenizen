@@ -39,11 +39,9 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
     // -->
 
     public SkillAPIPlayerDowngradesSkillScriptEvent() {
-        instance = this;
         registerCouldMatcher("skillapi player downgrades <'skill'>");
     }
 
-    public static SkillAPIPlayerDowngradesSkillScriptEvent instance;
     public PlayerSkillDowngradeEvent event;
     public PlayerTag player;
     public ElementTag level;
@@ -63,11 +61,6 @@ public class SkillAPIPlayerDowngradesSkillScriptEvent extends BukkitScriptEvent 
         }
 
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "SkillAPIPlayerDowngradesSkill";
     }
 
     @Override

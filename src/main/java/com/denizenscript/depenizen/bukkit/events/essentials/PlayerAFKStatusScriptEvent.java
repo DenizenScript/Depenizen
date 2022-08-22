@@ -35,11 +35,9 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
     //
     // -->
 
-    public static PlayerAFKStatusScriptEvent instance;
     public AfkStatusChangeEvent event;
 
     public PlayerAFKStatusScriptEvent() {
-        instance = this;
     }
 
     @Override
@@ -65,11 +63,6 @@ public class PlayerAFKStatusScriptEvent extends BukkitScriptEvent implements Lis
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerAFKStatus";
     }
 
     @Override

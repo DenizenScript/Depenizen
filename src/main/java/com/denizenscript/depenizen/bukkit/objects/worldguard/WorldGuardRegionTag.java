@@ -128,11 +128,6 @@ public class WorldGuardRegionTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "WorldGuardRegion";
-    }
-
-    @Override
     public String identify() {
         return "region@" + region.getId() + "," + world.getName();
     }

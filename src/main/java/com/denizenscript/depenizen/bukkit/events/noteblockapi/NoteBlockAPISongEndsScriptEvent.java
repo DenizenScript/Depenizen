@@ -35,11 +35,9 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
     // -->
 
     public NoteBlockAPISongEndsScriptEvent() {
-        instance = this;
         registerCouldMatcher("noteblockapi song (<'song'>) ends");
     }
 
-    public static NoteBlockAPISongEndsScriptEvent instance;
     public SongEndEvent event;
 
     @Override
@@ -49,11 +47,6 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String getName() {
-        return "NoteBlockAPISongEnds";
     }
 
     @Override

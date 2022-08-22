@@ -30,11 +30,9 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
     // -->
 
     public MobArenaStartsScriptEvent() {
-        instance = this;
         registerCouldMatcher("mobarena <'arena'> starts");
     }
 
-    public static MobArenaStartsScriptEvent instance;
     public ArenaStartEvent event;
     public MobArenaArenaTag arena;
 
@@ -46,11 +44,6 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "MobArenaStarts";
     }
 
     @Override

@@ -93,11 +93,6 @@ public class PartyTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "Party";
-    }
-
-    @Override
     public String identify() {
         return "party@" + party.getName();
     }

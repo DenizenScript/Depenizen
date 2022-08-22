@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.towny;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -40,11 +39,9 @@ public class PlayerCreatesTownScriptEvent extends BukkitScriptEvent implements L
     // -->
 
     public PlayerCreatesTownScriptEvent() {
-        instance = this;
         registerCouldMatcher("towny player creates town");
     }
 
-    public static PlayerCreatesTownScriptEvent instance;
     public PreNewTownEvent event;
 
     @Override
@@ -53,11 +50,6 @@ public class PlayerCreatesTownScriptEvent extends BukkitScriptEvent implements L
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "TownyPlayerCreatesTown";
     }
 
     @Override

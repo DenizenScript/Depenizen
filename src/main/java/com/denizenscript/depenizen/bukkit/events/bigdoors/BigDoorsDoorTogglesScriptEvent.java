@@ -33,11 +33,9 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
     // -->
 
     public BigDoorsDoorTogglesScriptEvent() {
-        instance = this;
         registerCouldMatcher("bigdoors door toggles|opens|closes");
     }
 
-    public static BigDoorsDoorTogglesScriptEvent instance;
     public DoorEventTogglePrepare event;
     public Door door;
     public DoorEventToggle.ToggleType toggleType;
@@ -55,11 +53,6 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "BigDoorsDoorToggles";
     }
 
     @Override

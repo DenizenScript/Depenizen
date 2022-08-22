@@ -46,7 +46,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
     // -->
 
     public MythicMobsDeathEvent() {
-        instance = this;
         registerCouldMatcher("mythicmob <'mob'> dies|death|killed");
         registerSwitches("by");
     }
@@ -73,11 +72,6 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "MythicMobsDeath";
     }
 
     @Override

@@ -57,7 +57,7 @@ public class MythicMobsEntityProperties implements Property {
         // @description
         // Returns whether the entity is a MythicMob.
         // -->
-        PropertyParser.<MythicMobsEntityProperties, ElementTag>registerTag(ElementTag.class, "is_mythicmob", (attribute, object) -> {
+        PropertyParser.registerTag(MythicMobsEntityProperties.class, ElementTag.class, "is_mythicmob", (attribute, object) -> {
             return new ElementTag(object.isMythicMob());
         }, "is_mythic_mob");
 
@@ -68,7 +68,7 @@ public class MythicMobsEntityProperties implements Property {
         // @description
         // Returns the MythicMob for this entity.
         // -->
-        PropertyParser.<MythicMobsEntityProperties, MythicMobsMobTag>registerTag(MythicMobsMobTag.class, "mythicmob", (attribute, object) -> {
+        PropertyParser.registerTag(MythicMobsEntityProperties.class, MythicMobsMobTag.class, "mythicmob", (attribute, object) -> {
             if (object.isMythicMob()) {
                 return object.getMythicMob();
             }

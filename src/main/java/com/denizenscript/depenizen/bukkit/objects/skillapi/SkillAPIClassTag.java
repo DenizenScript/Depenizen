@@ -95,11 +95,6 @@ public class SkillAPIClassTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "SkillAPI Class";
-    }
-
-    @Override
     public String identify() {
         return "skillapiclass@" + rpgClass.getName();
     }

@@ -108,11 +108,6 @@ public class FactionTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "Faction";
-    }
-
-    @Override
     public String identify() {
         return "faction@" + faction.getName();
     }

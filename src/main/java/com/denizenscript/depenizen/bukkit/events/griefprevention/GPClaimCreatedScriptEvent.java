@@ -35,18 +35,11 @@ public class GPClaimCreatedScriptEvent extends BukkitScriptEvent implements List
     // -->
 
     public GPClaimCreatedScriptEvent() {
-        instance = this;
         registerCouldMatcher("gp claim created");
     }
 
-    public static GPClaimCreatedScriptEvent instance;
     public ClaimCreatedEvent event;
     public String sourceType;
-
-    @Override
-    public String getName() {
-        return "GPClaimCreated";
-    }
 
     @Override
     public ScriptEntryData getScriptEntryData() {
