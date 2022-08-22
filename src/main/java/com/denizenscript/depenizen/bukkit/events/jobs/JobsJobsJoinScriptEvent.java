@@ -34,11 +34,9 @@ public class JobsJobsJoinScriptEvent extends BukkitScriptEvent implements Listen
     // -->
 
     public JobsJobsJoinScriptEvent() {
-        instance = this;
         registerCouldMatcher("jobs player joins <'job'>");
     }
 
-    public static JobsJobsJoinScriptEvent instance;
     public JobsJoinEvent event;
     public JobsJobTag job;
 
@@ -52,16 +50,13 @@ public class JobsJobsJoinScriptEvent extends BukkitScriptEvent implements Listen
     }
 
     @Override
-    public String getName() {
-        return "JobsJoin";
-    }
-
-    @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("job")) {
-            return job;
+        switch (name) {
+            case "job":
+                return job;
+            default:
+                return super.getContext(name);
         }
-        return super.getContext(name);
     }
 
     @Override

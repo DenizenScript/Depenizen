@@ -65,7 +65,7 @@ public class JobsPlayerProperties implements Property {
         // @description
         // Returns the job specified with the player's information attached.
         // -->
-        PropertyParser.<JobsPlayerProperties, JobsJobTag>registerTag(JobsJobTag.class, "job", (attribute, object) -> {
+        PropertyParser.registerTag(JobsPlayerProperties.class, JobsJobTag.class, "job", (attribute, object) -> {
             if (attribute.hasParam()) {
                 JobsJobTag job = JobsJobTag.valueOf(attribute.getParam());
                 return new JobsJobTag(job.getJob(), object.player);
@@ -81,7 +81,7 @@ public class JobsPlayerProperties implements Property {
         // @description
         // Returns a list of all jobs that the player is in.
         // -->
-        PropertyParser.<JobsPlayerProperties, ListTag>registerTag(ListTag.class, "current_jobs", (attribute, object) -> {
+        PropertyParser.registerTag(JobsPlayerProperties.class, ListTag.class, "current_jobs", (attribute, object) -> {
             ListTag response = new ListTag();
             for (JobProgression progress : object.player.getJobProgression()) {
                 response.addObject(new JobsJobTag(progress.getJob(), object.player));

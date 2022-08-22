@@ -34,11 +34,9 @@ public class JobsJobsLeaveScriptEvent extends BukkitScriptEvent implements Liste
     // -->
 
     public JobsJobsLeaveScriptEvent() {
-        instance = this;
         registerCouldMatcher("jobs player leaves <'job'>");
     }
 
-    public static JobsJobsLeaveScriptEvent instance;
     public JobsLeaveEvent event;
     public JobsJobTag job;
 
@@ -52,16 +50,13 @@ public class JobsJobsLeaveScriptEvent extends BukkitScriptEvent implements Liste
     }
 
     @Override
-    public String getName() {
-        return "JobsLeave";
-    }
-
-    @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("job")) {
-            return job;
+        switch (name) {
+            case "job":
+                return job;
+            default:
+                return super.getContext(name);
         }
-        return super.getContext(name);
     }
 
     @Override

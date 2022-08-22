@@ -34,11 +34,9 @@ public class JobsJobsLevelUpScriptEvent extends BukkitScriptEvent implements Lis
     // -->
 
     public JobsJobsLevelUpScriptEvent() {
-        instance = this;
         registerCouldMatcher("jobs player levels up <'job'>");
     }
 
-    public static JobsJobsLevelUpScriptEvent instance;
     public JobsLevelUpEvent event;
     public JobsJobTag job;
 
@@ -52,16 +50,13 @@ public class JobsJobsLevelUpScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @Override
-    public String getName() {
-        return "JobsLevel";
-    }
-
-    @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("job")) {
-            return job;
+        switch (name) {
+            case "job":
+                return job;
+            default:
+                return super.getContext(name);
         }
-        return super.getContext(name);
     }
 
     @Override

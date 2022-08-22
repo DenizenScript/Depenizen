@@ -43,12 +43,10 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
     // -->
 
     public JobsJobsExpGainScriptEvent() {
-        instance = this;
         registerCouldMatcher("jobs player earns exp for <'job'>");
         registerSwitches("action");
     }
 
-    public static JobsJobsExpGainScriptEvent instance;
     public JobsExpGainEvent event;
     public JobsJobTag job;
 
@@ -62,11 +60,6 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "JobsExpGain";
     }
 
     @Override

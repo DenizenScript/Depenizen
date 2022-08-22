@@ -19,7 +19,7 @@ import com.denizenscript.denizencore.tags.TagManager;
 
 public class JobsBridge extends Bridge {
 
-    public static SlowWarning blankJobsConstructor = new SlowWarning("jobsEmptyConstructor", "The tag 'jobs' from Depenizen/Jobs is deprecated: use 'jobs.server_jobs'");
+    public static SlowWarning deprecatedJobsConstructor = new SlowWarning("jobsDeprecatedConstructor", "The 'jobs' constructor from Depenizen/Jobs is deprecated: use 'jobs_job'");
 
     @Override
     public void init() {
@@ -39,6 +39,10 @@ public class JobsBridge extends Bridge {
         // Returns the list of all jobs on the server.
         // -->
         TagManager.registerTagHandler(ObjectTag.class, "jobs", (attribute) -> {
+            if (attribute.hasParam()) {
+                deprecatedJobsConstructor.warn(attribute.context);
+                return JobsJobTag.valueOf(attribute.getParam(), attribute.context);
+            }
             ListTag jobsList = new ListTag();
             for (Job job : Jobs.getJobs()) {
                 jobsList.addObject(new JobsJobTag(job));

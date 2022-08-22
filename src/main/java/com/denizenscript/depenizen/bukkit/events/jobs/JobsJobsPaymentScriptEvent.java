@@ -45,12 +45,10 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
     // -->
 
     public JobsJobsPaymentScriptEvent() {
-        instance = this;
         registerCouldMatcher("jobs player earns money for <'job'>");
         registerSwitches("action");
     }
 
-    public static JobsJobsPaymentScriptEvent instance;
     public JobsPrePaymentEvent event;
     public JobsJobTag job;
 
@@ -64,11 +62,6 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "JobsPrePayment";
     }
 
     @Override
