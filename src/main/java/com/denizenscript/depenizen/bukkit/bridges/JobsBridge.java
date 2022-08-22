@@ -1,7 +1,10 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizencore.DenizenCore;
-import com.denizenscript.depenizen.bukkit.properties.jobs.JobPlayer;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.utilities.debugging.SlowWarning;
+import com.denizenscript.depenizen.bukkit.events.jobs.*;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.jobs.JobsCommand;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
@@ -9,62 +12,57 @@ import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
-import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
-import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.depenizen.bukkit.properties.jobs.JobsPlayerProperties;
 import com.denizenscript.denizencore.tags.TagManager;
 
 public class JobsBridge extends Bridge {
 
+    public static SlowWarning deprecatedJobsConstructor = new SlowWarning("jobsDeprecatedConstructor", "The 'jobs' constructor from Depenizen/Jobs is deprecated: use 'jobs_job'");
+
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(JobsJobTag.class);
-        PropertyParser.registerProperty(JobPlayer.class, JobsJobTag.class);
+        ScriptEvent.registerScriptEvent(JobsJobsPaymentScriptEvent.class);
+        ScriptEvent.registerScriptEvent(JobsJobsExpGainScriptEvent.class);
+        ScriptEvent.registerScriptEvent(JobsJobsJoinScriptEvent.class);
+        ScriptEvent.registerScriptEvent(JobsJobsLeaveScriptEvent.class);
+        ScriptEvent.registerScriptEvent(JobsJobsLevelUpScriptEvent.class);
+        ObjectFetcher.registerWithObjectFetcher(JobsJobTag.class, JobsJobTag.tagProcessor);
         PropertyParser.registerProperty(JobsPlayerProperties.class, PlayerTag.class);
-        TagManager.registerTagHandler(new TagRunnable.RootForm() {
-            @Override
-            public void run(ReplaceableTagEvent event) {
-                tagEvent(event);
+
+        // <--[tag]
+        // @attribute <jobs>
+        // @returns ListTag(JobsJobTag)
+        // @plugin Depenizen, Jobs
+        // @description
+        // Returns the list of all jobs on the server.
+        // -->
+        TagManager.registerTagHandler(ObjectTag.class, "jobs", (attribute) -> {
+            if (attribute.hasParam()) {
+                deprecatedJobsConstructor.warn(attribute.context);
+                return JobsJobTag.valueOf(attribute.getParam(), attribute.context);
             }
-        }, "jobs");
+            ListTag jobsList = new ListTag();
+            for (Job job : Jobs.getJobs()) {
+                jobsList.addObject(new JobsJobTag(job));
+            }
+            return jobsList;
+        });
+
+        // <--[tag]
+        // @attribute <jobs_job[<name>]>
+        // @returns JobsJobTag
+        // @plugin Depenizen, Jobs
+        // @description
+        // Returns the job tag with the given name.
+        // -->
+        TagManager.registerTagHandler(JobsJobTag.class, "jobs_job", attribute -> {
+            if (attribute.hasParam()) {
+                return JobsJobTag.valueOf(attribute.getParam(), attribute.context);
+            }
+            return null;
+        });
         DenizenCore.commandRegistry.registerCommand(JobsCommand.class);
-    }
-
-    public void tagEvent(ReplaceableTagEvent event) {
-        Attribute attribute = event.getAttributes();
-        JobsJobTag j = null;
-        if (attribute.hasParam()) {
-            // Documented below.
-            if (JobsJobTag.matches(attribute.getParam())) {
-                j = attribute.paramAsType(JobsJobTag.class);
-            }
-            else {
-                attribute.echoError("Could not match '" + attribute.getParam() + "' to a valid job!");
-                return;
-            }
-        }
-        else {
-            // <--[tag]
-            // @attribute <jobs[(<name>)]>
-            // @returns ListTag(JobsJobTag)/JobsJobTag
-            // @plugin Depenizen, Jobs
-            // @description
-            // Returns a list of all known jobs, or the job by the given input name if one is given.
-            // -->
-            ListTag jobList = new ListTag();
-            for (Job jb : Jobs.getJobs()) {
-                jobList.addObject(new JobsJobTag(jb));
-            }
-            event.setReplacedObject(jobList.getObjectAttribute(attribute.fulfill(1)));
-        }
-        if (j == null) {
-            attribute.echoError("Invalid or missing job!");
-            return;
-        }
-        event.setReplacedObject(j.getObjectAttribute(attribute.fulfill(1)));
-
     }
 }
