@@ -65,7 +65,7 @@ public class RunCommandsPacketIn extends PacketIn {
             }
             if (!shouldDebug) {
                 for (ScriptEntry entry : entries) {
-                    entry.shouldDebugBool = false;
+                    entry.internal.shouldDebugBool = false;
                 }
             }
             ScriptQueue queue = new InstantQueue("BUNGEE_");
