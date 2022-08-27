@@ -25,6 +25,7 @@ import de.slikey.effectlib.util.DynamicLocation;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.MemoryConfiguration;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class EffectLibCommand extends AbstractCommand implements Holdable {
@@ -46,9 +47,12 @@ public class EffectLibCommand extends AbstractCommand implements Holdable {
     // @Short Show custom effects using EffectLib
     // @Description
     // Displays EffectLib effects.
+    //
     // Specify which effect to display using the 'type:' argument, note that effect names are CASE-SENSITIVE.
+    //
     // The origin is the entity/location to play the effect at. If an entity is specified, the effect will follow it.
     // Defaults to the linked player if unspecified.
+    //
     // Some effects (such as the 'Line' effect) require an origin and a target, an effect's target can be a location or an entity.
     // If an entity is specified, the effect will follow it.
     //
@@ -57,7 +61,7 @@ public class EffectLibCommand extends AbstractCommand implements Holdable {
     // EffectLib effects can take additional data to change how the effect looks/works, you can specify that data in the form of a MapTag using the 'effect_data:' argument.
     // See EffectLib's docs for further information on the available options for each effect: <@link url https://reference.elmakers.com/#effectlib>
     //
-    // Note that this should only be used for displaying effects. for showing single particles, etc. use <@link command playeffect>.
+    // Note that this should only be used for displaying EffectLib's advanced effect shapes. For more general particle usage, use <@link command playeffect>.
     //
     // The effectlib command is ~waitable. Refer to <@link language ~waitable>.
     // When ~waited for, the command will wait until the effect is done playing.
@@ -80,9 +84,20 @@ public class EffectLibCommand extends AbstractCommand implements Holdable {
     //
     // -->
 
-    public static Warning durationArgument = new SlowWarning("effectlibCommandDuration", "The 'duration:<duration>' argument for the 'effectlib' command is deprecated in favour of the 'duration' key in the 'effect_data' map, refer to the meta docs for more information.");
-    public static Warning oldTargetArguments = new SlowWarning("effectlibCommandOldTarget", "The 'target:<entity>'/'location:<location>' arguments for the 'effectlib' command are deprecated in favour of the 'origin:<entity>/<location>' argument.");
-    public static Warning caseInsensitiveEffectName = new SlowWarning("effectlibCommandCaseInsensitiveType", "Case-Insensitive effect types in the 'effectlib' commands are deprecated. make sure you're using correct casing.");
+    public static Warning durationArgument = new SlowWarning("effectlibCommandDuration", "The 'duration:<duration>' argument for the 'effectlib' command is deprecated in favor of the 'duration' key in the 'effect_data' map, refer to the meta docs for more information.");
+    public static Warning oldTargetArguments = new SlowWarning("effectlibCommandOldTarget", "The 'target:<entity>'/'location:<location>' arguments for the 'effectlib' command are deprecated in favor of the 'origin:<entity>/<location>' argument.");
+
+    public static HashMap<String, String> nameCasings = new HashMap<>();
+    public static void registerNameCasing(String s) {
+        nameCasings.put(CoreUtilities.toLowerCase(s), s);
+    }
+    static { // Effect names that have more than 1 capital letter
+        registerNameCasing("AnimatedBall");
+        registerNameCasing("BigBang");
+        registerNameCasing("ColoredImage");
+        registerNameCasing("DiscoBall");
+        registerNameCasing("SkyRocket");
+    }
 
     public static void autoExecute(ScriptEntry scriptEntry,
                                    @ArgPrefixed @ArgName("type") String effectInput,
@@ -109,10 +124,13 @@ public class EffectLibCommand extends AbstractCommand implements Holdable {
             Debug.echoError(scriptEntry, "Must specify an origin location or entity!");
             return;
         }
-        // EffectLib is case-sensitive, and the way the command used to handle effect names let you input 'atom', where now 'Atom' is required
+        // EffectLib is case-sensitive, so correct for casing as best as possible
         if (Character.isLowerCase(effectInput.charAt(0))) {
-            caseInsensitiveEffectName.warn(scriptEntry);
             effectInput = Character.toUpperCase(effectInput.charAt(0)) + effectInput.substring(1);
+            String fixed = nameCasings.get(CoreUtilities.toLowerCase(effectInput));
+            if (fixed != null) {
+                effectInput = fixed;
+            }
         }
         Effect effect;
         if (effectData == null) {
