@@ -118,9 +118,9 @@
         <dependency>
             <groupId>de.slikey</groupId>
             <artifactId>EffectLib</artifactId>
-            <version>5.8</version>
+            <version>9.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/EffectLib-5.8.jar</systemPath>
+            <systemPath>${project.basedir}/lib/EffectLib.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.ess3</groupId>
