@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.properties.mythicmobs;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.text.StringHolder;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizencore.objects.core.ElementTag;
