@@ -10,7 +10,7 @@ import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.depenizen.bukkit.bridges.EssentialsBridge;

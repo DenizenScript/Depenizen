@@ -6,7 +6,7 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.plotsquared.PlotSquaredPlotTag;
 import com.github.intellectualsites.plotsquared.api.PlotAPI;
 import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 

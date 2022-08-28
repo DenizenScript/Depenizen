@@ -4,7 +4,7 @@ import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ExecuteCommandPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;

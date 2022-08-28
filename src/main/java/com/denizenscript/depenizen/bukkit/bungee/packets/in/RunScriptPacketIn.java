@@ -11,7 +11,7 @@ import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
 import io.netty.buffer.ByteBuf;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.core.ScriptTag;
 import org.bukkit.Bukkit;

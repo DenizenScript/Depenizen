@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.skillapi;
 
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.classes.RPGClass;
 import com.denizenscript.denizen.objects.ItemTag;

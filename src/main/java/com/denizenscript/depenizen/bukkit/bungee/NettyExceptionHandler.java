@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
 import io.netty.channel.*;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 import java.net.SocketAddress;
 
