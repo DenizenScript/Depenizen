@@ -42,7 +42,7 @@ public class MythicMobsPlayerProperties implements Property {
 
     public static final String[] handledMechs = new String[] {
             "mythic_variable_map"
-    }; // None
+    };
 
     public MythicMobsPlayerProperties(PlayerTag player) {
         this.player = player;
@@ -78,7 +78,6 @@ public class MythicMobsPlayerProperties implements Property {
             return result;
         });
     }
-
 
     @Override
     public void adjust(Mechanism mechanism) {
