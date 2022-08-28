@@ -371,8 +371,8 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @description
         // Returns the value of a MythicMobs variable for this MythicMob.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "mythic_variable", (attribute, object) -> {
-            return new ElementTag(MythicMobsBridge.getMythicVariable(object.getEntity(), attribute.getParam()), true);
+        tagProcessor.registerTag(ElementTag.class, ElementTag.class, "mythic_variable", (attribute, object, secondVal) -> {
+            return new ElementTag(MythicMobsBridge.getMythicVariable(object.getEntity(), secondVal.asString()), true);
         });
 
         // <--[tag]
@@ -411,11 +411,11 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // -->
         if (mechanism.matches("mythic_variable_map") && mechanism.requireObject(MapTag.class)) {
             MapTag map = mechanism.valueAsType(MapTag.class);
-            Map<String, Variable> new_map = new HashMap<String, Variable>();
+            Map<String, Variable> newMap = new HashMap<String, Variable>();
             for (Map.Entry<StringHolder, ObjectTag> entry : map.map.entrySet()) {
-                new_map.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
+                newMap.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
             }
-            MythicMobsBridge.setMythicVariableMap(mob.getEntity().getBukkitEntity(), new_map);
+            MythicMobsBridge.setMythicVariableMap(mob.getEntity().getBukkitEntity(), newMap);
         }
 
         // <--[mechanism]

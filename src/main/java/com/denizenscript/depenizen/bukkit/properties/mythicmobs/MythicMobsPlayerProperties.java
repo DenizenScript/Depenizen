@@ -53,7 +53,6 @@ public class MythicMobsPlayerProperties implements Property {
 
     public static void registerTags() {
 
-
         // <--[tag]
         // @attribute <PlayerTag.mythic_variable[<name>]>
         // @returns ElementTag
@@ -80,8 +79,11 @@ public class MythicMobsPlayerProperties implements Property {
             return result;
         });
     }
+
+
     @Override
     public void adjust(Mechanism mechanism) {
+        
         // <--[mechanism]
         // @object PlayerTag
         // @name mythic_variable_map
@@ -94,11 +96,11 @@ public class MythicMobsPlayerProperties implements Property {
         // -->
         if (mechanism.matches("mythic_variable_map") && mechanism.requireObject(MapTag.class)) {
             MapTag map = mechanism.valueAsType(MapTag.class);
-            Map<String, Variable> new_map = new HashMap<String, Variable>();
+            Map<String, Variable> newMap = new HashMap<String, Variable>();
             for (Map.Entry<StringHolder, ObjectTag> entry : map.map.entrySet()) {
-                new_map.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
+                newMap.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
             }
-            MythicMobsBridge.setMythicVariableMap(player.getPlayerEntity(), new_map);
+            MythicMobsBridge.setMythicVariableMap(player.getPlayerEntity(), newMap);
         }
     }
 }

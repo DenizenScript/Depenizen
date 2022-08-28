@@ -188,7 +188,7 @@ public class MythicMobsBridge extends Bridge {
         return getMythicVariableMap(entity).get(key).toString();
     }
 
-    public static ImmutableMap<String, Variable> getMythicVariableMap(Entity entity) {
+    public static Map<String, Variable> getMythicVariableMap(Entity entity) {
         VariableManager variables = MythicBukkit.inst().getVariableManager();
         VariableRegistry registry = variables.getRegistry(VariableScope.TARGET, BukkitAdapter.adapt(entity));
         return registry.asMap();
