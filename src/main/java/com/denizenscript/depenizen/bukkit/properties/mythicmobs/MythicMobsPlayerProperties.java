@@ -67,6 +67,7 @@ public class MythicMobsPlayerProperties implements Property {
         // @attribute <PlayerTag.mythic_variable_map>
         // @returns MapTag
         // @plugin Depenizen, MythicMobs
+        // @mechanism PlayerTag.mythic_variable_map
         // @description
         // Returns a map of the MythicMob's variables.
         // -->

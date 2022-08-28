@@ -376,6 +376,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @attribute <MythicMobsMobTag.mythic_variable_map>
         // @returns MapTag
         // @plugin Depenizen, MythicMobs
+        // @mechanism MythicMobsMobTag.mythic_variable_map
         // @description
         // Returns a map of the MythicMob's variables.
         // -->
