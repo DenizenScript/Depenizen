@@ -22,8 +22,6 @@ import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
-import com.google.common.collect.ImmutableMap;
-import io.lumine.mythic.api.adapters.AbstractEntity;
 import io.lumine.mythic.api.mobs.MobManager;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
@@ -34,7 +32,6 @@ import io.lumine.mythic.core.mobs.ActiveMob;
 import io.lumine.mythic.core.skills.variables.*;
 import io.lumine.mythic.core.spawning.spawners.MythicSpawner;
 import io.lumine.mythic.core.spawning.spawners.SpawnerManager;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
@@ -197,8 +194,8 @@ public class MythicMobsBridge extends Bridge {
     public static void setMythicVariable(Entity entity, String variable, String value, String type) {
         VariableManager variables = MythicBukkit.inst().getVariableManager();
         VariableRegistry registry = variables.getRegistry(VariableScope.TARGET, BukkitAdapter.adapt(entity));
-        VariableType var_type = VariableType.valueOf(type);
-        registry.put(variable, Variable.ofType(var_type, value));
+        VariableType varType = VariableType.valueOf(type);
+        registry.put(variable, Variable.ofType(varType, value));
     }
     public static void setMythicVariableMap(Entity entity, Map<String, Variable> map) {
         VariableManager variables = MythicBukkit.inst().getVariableManager();

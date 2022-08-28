@@ -83,7 +83,7 @@ public class MythicMobsPlayerProperties implements Property {
 
     @Override
     public void adjust(Mechanism mechanism) {
-        
+
         // <--[mechanism]
         // @object PlayerTag
         // @name mythic_variable_map
