@@ -440,6 +440,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
             BukkitEntity target = new BukkitEntity(mTarget.getBukkitEntity());
             mob.setTarget(target);
         }
+        tagProcessor.processMechanism(this, mechanism);
         CoreUtilities.autoPropertyMechanism(this, mechanism);
         if (!mechanism.fulfilled()) {
             mechanism.reportInvalid();

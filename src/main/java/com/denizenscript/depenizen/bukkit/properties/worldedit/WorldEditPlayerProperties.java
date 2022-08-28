@@ -4,6 +4,7 @@ import com.denizenscript.denizen.objects.*;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.utilities.debugging.DebugInternals;
 import com.denizenscript.depenizen.bukkit.bridges.WorldEditBridge;
 import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
@@ -104,7 +105,7 @@ public class WorldEditPlayerProperties implements Property {
             }
             BrushTool brush = (BrushTool) tool;
             Brush btype = brush.getBrush();
-            String brushType = CoreUtilities.toLowerCase(btype.getClass().getSimpleName());
+            String brushType = CoreUtilities.toLowerCase(DebugInternals.getClassNameOpti(btype.getClass()));
             String materialInfo = "unknown";
             Pattern materialPattern = brush.getMaterial();
             if (materialPattern instanceof BlockPattern) {

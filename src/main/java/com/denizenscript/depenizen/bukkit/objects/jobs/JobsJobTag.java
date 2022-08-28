@@ -346,6 +346,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
             jobProgression.setExperience(mechanism.getValue().asDouble());
         }
 
+        tagProcessor.processMechanism(this, mechanism);
         CoreUtilities.autoPropertyMechanism(this, mechanism);
     }
 }
