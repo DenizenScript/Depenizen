@@ -5,20 +5,27 @@ import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
+import com.denizenscript.denizencore.utilities.text.StringHolder;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
+import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
+import com.google.common.collect.Maps;
 import io.lumine.mythic.api.adapters.AbstractEntity;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.adapters.BukkitEntity;
 import io.lumine.mythic.core.mobs.ActiveMob;
+import io.lumine.mythic.core.skills.variables.Variable;
+import io.lumine.mythic.core.skills.variables.VariableType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -356,6 +363,32 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         tagProcessor.registerTag(DurationTag.class, "global_cooldown", (attribute, object) -> {
             return new DurationTag(object.getMob().getGlobalCooldown());
         });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.mythic_variable[<name>]>
+        // @returns ElementTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Returns the value of a MythicMobs variable for this MythicMob.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "mythic_variable", (attribute, object) -> {
+            return new ElementTag(MythicMobsBridge.getMythicVariable(object.getEntity(), attribute.getParam()), true);
+        });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.mythic_variable_map>
+        // @returns MapTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Returns a map of the MythicMob's variables.
+        // -->
+        tagProcessor.registerTag(MapTag.class, "mythic_variable_map", (attribute, object) -> {
+            MapTag result = new MapTag();
+            for (Map.Entry<String, Variable> entry : MythicMobsBridge.getMythicVariableMap(object.getEntity()).entrySet()) {
+                result.putObject(entry.getKey(), new ElementTag(entry.getValue().toString(), true));
+            }
+            return result;
+        });
     }
 
     @Override
@@ -365,6 +398,25 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
 
     @Override
     public void adjust(Mechanism mechanism) {
+
+        // <--[mechanism]
+        // @object MythicMobsMobTag
+        // @name mythic_variable_map
+        // @input MapTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Sets the variables of a MythicMob from a map.
+        // @tags
+        // <MythicMobsMobTag.mythic_variable_map>
+        // -->
+        if (mechanism.matches("mythic_variable_map") && mechanism.requireObject(MapTag.class)) {
+            MapTag map = mechanism.valueAsType(MapTag.class);
+            Map<String, Variable> new_map = new HashMap<String, Variable>();
+            for (Map.Entry<StringHolder, ObjectTag> entry : map.map.entrySet()) {
+                new_map.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
+            }
+            MythicMobsBridge.setMythicVariableMap(mob.getEntity().getBukkitEntity(), new_map);
+        }
 
         // <--[mechanism]
         // @object MythicMobsMobTag

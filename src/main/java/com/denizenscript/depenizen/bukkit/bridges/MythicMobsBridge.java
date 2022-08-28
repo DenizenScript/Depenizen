@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
@@ -19,7 +20,10 @@ import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsSpawnEvent
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
+import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
+import com.google.common.collect.ImmutableMap;
+import io.lumine.mythic.api.adapters.AbstractEntity;
 import io.lumine.mythic.api.mobs.MobManager;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
@@ -27,11 +31,14 @@ import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.items.MythicItem;
 import io.lumine.mythic.core.mobs.ActiveMob;
+import io.lumine.mythic.core.skills.variables.*;
 import io.lumine.mythic.core.spawning.spawners.MythicSpawner;
 import io.lumine.mythic.core.spawning.spawners.SpawnerManager;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -42,6 +49,7 @@ public class MythicMobsBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(MythicMobsMobTag.class, MythicMobsMobTag.tagProcessor);
         ObjectFetcher.registerWithObjectFetcher(MythicSpawnerTag.class, MythicSpawnerTag.tagProcessor);
         PropertyParser.registerProperty(MythicMobsEntityProperties.class, EntityTag.class);
+        PropertyParser.registerProperty(MythicMobsPlayerProperties.class, PlayerTag.class);
         ScriptEvent.registerScriptEvent(MythicMobsDeathEvent.class);
         ScriptEvent.registerScriptEvent(MythicMobsSpawnEvent.class);
         DenizenCore.commandRegistry.registerCommand(MythicSpawnCommand.class);
@@ -174,6 +182,31 @@ public class MythicMobsBridge extends Bridge {
 
     public static BukkitAPIHelper getAPI() {
         return MythicBukkit.inst().getAPIHelper();
+    }
+
+    public static String getMythicVariable(Entity entity, String key) {
+        return getMythicVariableMap(entity).get(key).toString();
+    }
+
+    public static ImmutableMap<String, Variable> getMythicVariableMap(Entity entity) {
+        VariableManager variables = MythicBukkit.inst().getVariableManager();
+        VariableRegistry registry = variables.getRegistry(VariableScope.TARGET, BukkitAdapter.adapt(entity));
+        return registry.asMap();
+    }
+
+    public static void setMythicVariable(Entity entity, String variable, String value, String type) {
+        VariableManager variables = MythicBukkit.inst().getVariableManager();
+        VariableRegistry registry = variables.getRegistry(VariableScope.TARGET, BukkitAdapter.adapt(entity));
+        VariableType var_type = VariableType.valueOf(type);
+        registry.put(variable, Variable.ofType(var_type, value));
+    }
+    public static void setMythicVariableMap(Entity entity, Map<String, Variable> map) {
+        VariableManager variables = MythicBukkit.inst().getVariableManager();
+        VariableRegistry registry = variables.getRegistry(VariableScope.TARGET, BukkitAdapter.adapt(entity));
+        for (String key : registry.asMap().keySet()) {
+            registry.remove(key);
+        }
+        registry.putAll(map);
     }
 
     public static boolean skillExists(String name) {
