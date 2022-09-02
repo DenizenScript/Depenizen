@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
@@ -108,6 +109,9 @@ public class PlaceholderAPIBridge extends Bridge {
 
         @Override
         public String onRequest(OfflinePlayer player, String identifier) {
+            if (!DenizenCore.isMainThread()) {
+                return "WARNING-ILLEGAL-ASYNC-ACCESS";
+            }
             return TagManager.tag(identifier, new BukkitTagContext(PlayerTag.mirrorBukkitPlayer(player), null, null, false, null));
         }
     }
