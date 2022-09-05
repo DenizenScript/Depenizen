@@ -33,23 +33,16 @@ public class PVPArenaStartsScriptEvent extends BukkitScriptEvent implements List
     //
     // -->
 
-    public static PVPArenaStartsScriptEvent instance;
     public PAStartEvent event;
     public ListTag fighters;
     public PVPArenaArenaTag arena;
 
     public PVPArenaStartsScriptEvent() {
-        instance = this;
     }
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("pvparena starts");
-    }
-
-    @Override
-    public String getName() {
-        return "PVPArenaStarts";
     }
 
     @Override

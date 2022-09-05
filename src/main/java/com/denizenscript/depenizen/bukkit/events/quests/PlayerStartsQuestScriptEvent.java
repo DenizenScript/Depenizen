@@ -33,11 +33,9 @@ public class PlayerStartsQuestScriptEvent extends BukkitScriptEvent implements L
     // -->
 
     public PlayerStartsQuestScriptEvent() {
-        instance = this;
         registerCouldMatcher("quests player starts <'quest'>");
     }
 
-    public static PlayerStartsQuestScriptEvent instance;
     public QuesterPreStartQuestEvent event;
 
     @Override
@@ -47,11 +45,6 @@ public class PlayerStartsQuestScriptEvent extends BukkitScriptEvent implements L
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "QuestsPlayerStartsQuest";
     }
 
     @Override

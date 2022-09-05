@@ -83,11 +83,6 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public String getName() {
-        return "BungeeProxyServerCommand";
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         OfflinePlayer player = null;
         if (senderId != null) {

@@ -10,7 +10,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedPolygonalRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -125,11 +125,6 @@ public class WorldGuardRegionTag implements ObjectTag {
     @Override
     public boolean isUnique() {
         return true;
-    }
-
-    @Override
-    public String getObjectType() {
-        return "WorldGuardRegion";
     }
 
     @Override

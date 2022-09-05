@@ -31,11 +31,9 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
     // -->
 
     public PlayerLeavePlotScriptEvent() {
-        instance = this;
         registerCouldMatcher("plotsquared player leaves|exits <'plotsquaredplot'>");
     }
 
-    public static PlayerLeavePlotScriptEvent instance;
     public PlayerLeavePlotEvent event;
     public PlayerTag player;
     public PlotSquaredPlotTag plot;
@@ -47,11 +45,6 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerLeavePlotEvent";
     }
 
     @Override

@@ -44,11 +44,9 @@ public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implement
     // -->
 
     public mcMMOPlayerLevelDownScriptEvent() {
-        instance = this;
         registerCouldMatcher("mcmmo player levels down <'skill'>");
     }
 
-    public static mcMMOPlayerLevelDownScriptEvent instance;
     public McMMOPlayerLevelDownEvent event;
     public PlayerTag player;
     public ElementTag skill;
@@ -68,11 +66,6 @@ public class mcMMOPlayerLevelDownScriptEvent extends BukkitScriptEvent implement
         }
 
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "mcMMOPlayerLevelsDown";
     }
 
     @Override

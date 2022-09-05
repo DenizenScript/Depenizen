@@ -34,11 +34,9 @@ public class PlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements
     //
     // -->
 
-    public static PlayerBalanceChangeScriptEvent instance;
     public UserBalanceUpdateEvent event;
 
     public PlayerBalanceChangeScriptEvent() {
-        instance = this;
     }
 
     @Override
@@ -52,11 +50,6 @@ public class PlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "EssentialsPlayerBalanceChange";
     }
 
     @Override

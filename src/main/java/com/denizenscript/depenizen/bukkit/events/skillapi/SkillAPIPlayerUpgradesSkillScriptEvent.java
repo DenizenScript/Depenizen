@@ -39,11 +39,9 @@ public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent im
     // -->
 
     public SkillAPIPlayerUpgradesSkillScriptEvent() {
-        instance = this;
         registerCouldMatcher("skillapi player upgrades <'skill'>");
     }
 
-    public static SkillAPIPlayerUpgradesSkillScriptEvent instance;
     public PlayerSkillUpgradeEvent event;
     public PlayerTag player;
     public ElementTag level;
@@ -62,11 +60,6 @@ public class SkillAPIPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent im
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "SkillAPIPlayerUpgradesSkill";
     }
 
     @Override

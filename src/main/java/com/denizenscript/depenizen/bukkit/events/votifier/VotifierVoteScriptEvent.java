@@ -1,6 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.votifier;
 
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.TimeTag;
 import com.vexsoftware.votifier.model.Vote;
 import com.vexsoftware.votifier.model.VotifierEvent;
@@ -18,10 +18,8 @@ import org.bukkit.event.Listener;
 public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listener {
 
     public VotifierVoteScriptEvent() {
-        instance = this;
     }
 
-    public static VotifierVoteScriptEvent instance;
 
     // <--[event]
     // @Events
@@ -49,11 +47,6 @@ public class VotifierVoteScriptEvent extends BukkitScriptEvent implements Listen
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("votifier vote");
-    }
-
-    @Override
-    public String getName() {
-        return "VotifierVote";
     }
 
     @Override

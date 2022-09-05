@@ -1,15 +1,17 @@
 package com.denizenscript.depenizen.bukkit.objects.griefprevention;
 
+import com.denizenscript.denizen.objects.*;
+import com.denizenscript.denizencore.DenizenCore;
+import com.denizenscript.denizencore.flags.AbstractFlagTracker;
+import com.denizenscript.denizencore.flags.FlaggableObject;
+import com.denizenscript.denizencore.flags.RedirectionFlagTracker;
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.DataStore;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
-import com.denizenscript.denizen.objects.ChunkTag;
-import com.denizenscript.denizen.objects.CuboidTag;
-import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -20,12 +22,13 @@ import org.bukkit.Chunk;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
+public class GriefPreventionClaimTag implements ObjectTag, Adjustable, FlaggableObject {
 
     // <--[ObjectType]
     // @name GriefPreventionClaimTag
     // @prefix gpclaim
     // @base ElementTag
+    // @implements FlaggableObject
     // @format
     // The identity format for claims is <claim_id>
     // For example, 'gpclaim@1234'.
@@ -33,6 +36,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
     // @plugin Depenizen, GriefPrevention
     // @description
     // A GriefPreventionClaimTag represents a GriefPrevention claim.
+    //
+    // This object type is flaggable.
+    // Flags on this object type will be stored in the server saves file, under special sub-key "__depenizen_gp_claims_id"
     //
     // -->
 
@@ -87,11 +93,6 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
     }
 
     @Override
-    public String getObjectType() {
-        return "GriefPreventionClaim";
-    }
-
-    @Override
     public String identify() {
         return "gpclaim@" + claim.getID();
     }
@@ -99,6 +100,16 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
     @Override
     public String toString() {
         return identify();
+    }
+
+    @Override
+    public AbstractFlagTracker getFlagTracker() {
+        return new RedirectionFlagTracker(DenizenCore.serverFlagMap, "__depenizen_gp_claims_id." + claim.getID());
+    }
+
+    @Override
+    public void reapplyTracker(AbstractFlagTracker tracker) {
+        // Nothing to do.
     }
 
     public String simple() {
@@ -110,11 +121,16 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         return identify();
     }
 
+    public static ObjectTagProcessor<GriefPreventionClaimTag> tagProcessor = new ObjectTagProcessor<>();
+
     @Override
     public ObjectTag getObjectAttribute(Attribute attribute) {
-        if (attribute == null) {
-            return null;
-        }
+        return tagProcessor.getObjectAttribute(this, attribute);
+    }
+
+    public static void registerTags() {
+
+        AbstractFlagTracker.registerFlagHandlers(tagProcessor);
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.id>
@@ -123,9 +139,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns the GriefPreventionClaim's ID.
         // -->
-        if (attribute.startsWith("id")) {
-            return new ElementTag(claim.getID()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "id", (attribute, object) -> {
+            return new ElementTag(object.claim.getID());
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.managers>
@@ -134,13 +150,13 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns the GriefPreventionClaim's managers.
         // -->
-        if (attribute.startsWith("managers")) {
+        tagProcessor.registerTag(ListTag.class, "managers", (attribute, object) -> {
             ListTag managers = new ListTag();
-            for (String manager : claim.managers) {
+            for (String manager : object.claim.managers) {
                 managers.addObject(new PlayerTag(UUID.fromString(manager)));
             }
-            return managers.getObjectAttribute(attribute.fulfill(1));
-        }
+            return managers;
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.trusted>
@@ -149,15 +165,15 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns the GriefPreventionClaim's trusted.
         // -->
-        if (attribute.startsWith("trusted")) {
+        tagProcessor.registerTag(ListTag.class, "trusted", (attribute, object) -> {
             ListTag trusted = new ListTag();
             ArrayList<String> b = new ArrayList<>();
-            claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+            object.claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             for (String trust : b) {
                 trusted.addObject(new PlayerTag(UUID.fromString(trust)));
             }
-            return trusted.getObjectAttribute(attribute.fulfill(1));
-        }
+            return trusted;
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.builders>
@@ -166,15 +182,15 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns the GriefPreventionClaim's builders.
         // -->
-        if (attribute.startsWith("builders")) {
+        tagProcessor.registerTag(ListTag.class, "builders", (attribute, object) -> {
             ListTag trusted = new ListTag();
             ArrayList<String> b = new ArrayList<>();
-            claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+            object.claim.getPermissions(b, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
             for (String trust : b) {
                 trusted.addObject(new PlayerTag(UUID.fromString(trust)));
             }
-            return trusted.getObjectAttribute(attribute.fulfill(1));
-        }
+            return trusted;
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.containers>
@@ -183,15 +199,15 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns the GriefPreventionClaim's containers.
         // -->
-        if (attribute.startsWith("containers")) {
+        tagProcessor.registerTag(ListTag.class, "containers", (attribute, object) -> {
             ListTag trusted = new ListTag();
             ArrayList<String> c = new ArrayList<>();
-            claim.getPermissions(new ArrayList<>(), c, new ArrayList<>(), new ArrayList<>());
+            object.claim.getPermissions(new ArrayList<>(), c, new ArrayList<>(), new ArrayList<>());
             for (String container : c) {
                 trusted.addObject(new PlayerTag(UUID.fromString(container)));
             }
-            return trusted.getObjectAttribute(attribute.fulfill(1));
-        }
+            return trusted;
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.accessors>
@@ -200,15 +216,15 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns the GriefPreventionClaim's accessors.
         // -->
-        if (attribute.startsWith("accessors")) {
+        tagProcessor.registerTag(ListTag.class, "accessors", (attribute, object) -> {
             ListTag trusted = new ListTag();
             ArrayList<String> a = new ArrayList<>();
-            claim.getPermissions(new ArrayList<>(), new ArrayList<>(), a, new ArrayList<>());
+            object.claim.getPermissions(new ArrayList<>(), new ArrayList<>(), a, new ArrayList<>());
             for (String access : a) {
                 trusted.addObject(new PlayerTag(UUID.fromString(access)));
             }
-            return trusted.getObjectAttribute(attribute.fulfill(1));
-        }
+            return trusted;
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.owner>
@@ -219,13 +235,12 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // Returns the GriefPreventionClaim's owner.
         // Can be "Admin" or a PlayerTag.
         // -->
-        else if (attribute.startsWith("owner")) {
-            if (claim.isAdminClaim()) {
-                return new ElementTag("Admin").getObjectAttribute(attribute.fulfill(1));
+        tagProcessor.registerTag(ObjectTag.class, "owner", (attribute, object) -> {
+            if (object.claim.isAdminClaim()) {
+                return new ElementTag("Admin");
             }
-            return new PlayerTag(claim.ownerID)
-                    .getObjectAttribute(attribute.fulfill(1));
-        }
+            return new PlayerTag(object.claim.ownerID);
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.cuboid>
@@ -234,13 +249,23 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns the GriefPreventionClaim's cuboid area.
         // -->
-        else if (attribute.startsWith("cuboid")) {
-            LocationTag lower = new LocationTag(claim.getLesserBoundaryCorner());
-            lower.setY(0);
-            LocationTag upper = new LocationTag(claim.getGreaterBoundaryCorner());
-            upper.setY(255);
-            return new CuboidTag(lower, upper).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(CuboidTag.class, "cuboid", (attribute, object) -> {
+            LocationTag lower = new LocationTag(object.claim.getLesserBoundaryCorner());
+            LocationTag upper = new LocationTag(object.claim.getGreaterBoundaryCorner());
+            upper.setY(upper.getWorld().getMaxHeight());
+            return new CuboidTag(lower, upper);
+        });
+
+        // <--[tag]
+        // @attribute <GriefPreventionClaimTag.world>
+        // @returns WorldTag
+        // @Plugin Depenizen, GriefPrevention
+        // @description
+        // Returns the world this GriefPreventionClaim is in.
+        // -->
+        tagProcessor.registerTag(WorldTag.class, "world", (attribute, object) -> {
+            return new WorldTag(object.claim.getLesserBoundaryCorner().getWorld());
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.is_adminclaim>
@@ -249,9 +274,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether GriefPreventionClaim is an Admin Claim.
         // -->
-        else if (attribute.startsWith("is_adminclaim") || attribute.startsWith("is_admin_claim")) {
-            return new ElementTag(claim.isAdminClaim()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "is_adminclaim", (attribute, object) -> {
+            return new ElementTag(object.claim.isAdminClaim());
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.chunks>
@@ -260,13 +285,13 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns a list of all chunks in the GriefPreventionClaim.
         // -->
-        else if (attribute.startsWith("chunks")) {
+        tagProcessor.registerTag(ListTag.class, "chunks", (attribute, object) -> {
             ListTag chunks = new ListTag();
-            for (Chunk chunk : claim.getChunks()) {
+            for (Chunk chunk : object.claim.getChunks()) {
                 chunks.addObject(new ChunkTag(chunk));
             }
-            return chunks.getObjectAttribute(attribute.fulfill(1));
-        }
+            return chunks;
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.can_siege[<player>]>
@@ -275,13 +300,16 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the GriefPreventionClaim can siege the player.
         // -->
-        else if (attribute.startsWith("can_siege") && attribute.hasParam()) {
+        tagProcessor.registerTag(ElementTag.class, "can_siege", (attribute, object) -> {
+            if (!attribute.hasParam()) {
+                return null;
+            }
             PlayerTag defender = attribute.paramAsType(PlayerTag.class);
             if (defender == null || defender.getPlayerEntity() == null) {
                 return null;
             }
-            return new ElementTag(claim.canSiege(defender.getPlayerEntity())).getObjectAttribute(attribute.fulfill(1));
-        }
+            return new ElementTag(object.claim.canSiege(defender.getPlayerEntity()));
+        });
 
         // <--[tag]
         // @attribute <GriefPreventionClaimTag.is_sieged>
@@ -290,11 +318,9 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable {
         // @description
         // Returns whether the GriefPreventionClaim is currently under siege.
         // -->
-        else if (attribute.startsWith("is_sieged")) {
-            return new ElementTag(claim.siegeData != null).getObjectAttribute(attribute.fulfill(1));
-        }
-
-        return new ElementTag(identify()).getObjectAttribute(attribute);
+        tagProcessor.registerTag(ElementTag.class, "is_sieged", (attribute, object) -> {
+            return new ElementTag(object.claim.siegeData != null);
+        });
     }
 
     @Override

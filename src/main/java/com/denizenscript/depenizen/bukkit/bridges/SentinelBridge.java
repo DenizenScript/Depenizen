@@ -8,7 +8,7 @@ import com.denizenscript.depenizen.bukkit.events.sentinel.SentinelAttackScriptEv
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.core.ScriptTag;
 import com.denizenscript.denizencore.scripts.containers.core.ProcedureScriptContainer;

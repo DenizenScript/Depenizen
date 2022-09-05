@@ -40,6 +40,7 @@ public class BungeePlayerJoinsScriptEvent extends BukkitScriptEvent {
 
     public static BungeePlayerJoinsScriptEvent instance;
 
+
     public String name;
 
     public UUID uuid;
@@ -49,11 +50,6 @@ public class BungeePlayerJoinsScriptEvent extends BukkitScriptEvent {
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("bungee player joins network");
-    }
-
-    @Override
-    public String getName() {
-        return "BungeePlayerJoins";
     }
 
     @Override

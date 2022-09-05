@@ -30,11 +30,9 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
     // -->
 
     public AreaShopExpiresScriptEvent() {
-        instance = this;
         registerCouldMatcher("areashop <'shop'> expires");
     }
 
-    public static AreaShopExpiresScriptEvent instance;
     public UnrentedRegionEvent event;
     public AreaShopTag areaShop;
 
@@ -45,11 +43,6 @@ public class AreaShopExpiresScriptEvent extends BukkitScriptEvent implements Lis
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "AreaShopExpires";
     }
 
     @Override

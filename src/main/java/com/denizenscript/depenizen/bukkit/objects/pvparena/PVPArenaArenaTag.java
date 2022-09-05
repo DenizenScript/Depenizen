@@ -79,11 +79,6 @@ public class PVPArenaArenaTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "PVPArena";
-    }
-
-    @Override
     public String identify() {
         return "pvparena@" + arena.getName();
     }

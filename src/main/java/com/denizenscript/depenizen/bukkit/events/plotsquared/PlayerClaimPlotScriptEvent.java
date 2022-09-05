@@ -35,11 +35,9 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
     // -->
 
     public PlayerClaimPlotScriptEvent() {
-        instance = this;
         registerCouldMatcher("plotsquared player claims <'plotsquaredplot'>");
     }
 
-    public static PlayerClaimPlotScriptEvent instance;
     public PlayerClaimPlotEvent event;
     public PlayerTag player;
     public PlotSquaredPlotTag plot;
@@ -52,11 +50,6 @@ public class PlayerClaimPlotScriptEvent extends BukkitScriptEvent implements Lis
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerClaimPlotEvent";
     }
 
     @Override

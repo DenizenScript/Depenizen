@@ -97,11 +97,6 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
     }
 
     @Override
-    public String getObjectType() {
-        return "MythicSpawner";
-    }
-
-    @Override
     public String identify() {
         return "mythicspawner@" + spawner.getName();
     }

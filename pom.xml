@@ -12,7 +12,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <craftbukkit.version>1.19-R0.1-SNAPSHOT</craftbukkit.version>
+        <craftbukkit.version>1.19.2-R0.1-SNAPSHOT</craftbukkit.version>
         <citizens.version>2.0.30-SNAPSHOT</citizens.version>
         <denizen.version>1.2.5-SNAPSHOT</denizen.version>
         <BUILD_NUMBER>Unknown</BUILD_NUMBER>
@@ -63,6 +63,12 @@
             <version>${citizens.version}</version>
             <type>jar</type>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- Used For Special Support Targets -->
         <dependency>
@@ -118,9 +124,9 @@
         <dependency>
             <groupId>de.slikey</groupId>
             <artifactId>EffectLib</artifactId>
-            <version>5.8</version>
+            <version>9.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/EffectLib-5.8.jar</systemPath>
+            <systemPath>${project.basedir}/lib/EffectLib.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.ess3</groupId>
@@ -146,7 +152,7 @@
         <dependency>
             <groupId>me.ryanhamshire</groupId>
             <artifactId>GriefPrevention</artifactId>
-            <version>16.10</version>
+            <version>16.18</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/GriefPrevention.jar</systemPath>
         </dependency>

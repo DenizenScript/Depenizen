@@ -86,11 +86,6 @@ public class MobArenaArenaTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "MobArena";
-    }
-
-    @Override
     public String identify() {
         return "mobarena@" + arena.configName();
     }

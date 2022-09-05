@@ -30,22 +30,15 @@ public class PlayerLeavesPVPArenaScriptEvent extends BukkitScriptEvent implement
     //
     // -->
 
-    public static PlayerLeavesPVPArenaScriptEvent instance;
     public PALeaveEvent event;
     public PVPArenaArenaTag arena;
 
     public PlayerLeavesPVPArenaScriptEvent() {
-        instance = this;
     }
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("pvparena player leaves");
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerLeavesPVPArena";
     }
 
     @Override

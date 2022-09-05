@@ -33,11 +33,9 @@ public class PlayerFailsQuestScriptEvent extends BukkitScriptEvent implements Li
     // -->
 
     public PlayerFailsQuestScriptEvent() {
-        instance = this;
         registerCouldMatcher("quests player fails <'quest'>");
     }
 
-    public static PlayerFailsQuestScriptEvent instance;
     public QuesterPreFailQuestEvent event;
 
     @Override
@@ -48,11 +46,6 @@ public class PlayerFailsQuestScriptEvent extends BukkitScriptEvent implements Li
         }
 
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "QuestsPlayerFailsQuest";
     }
 
     @Override

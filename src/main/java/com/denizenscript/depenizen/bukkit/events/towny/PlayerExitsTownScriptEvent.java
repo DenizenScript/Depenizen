@@ -30,11 +30,9 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     // -->
 
     public PlayerExitsTownScriptEvent() {
-        instance = this;
         registerCouldMatcher("towny player exits <'town'>");
     }
 
-    public static PlayerExitsTownScriptEvent instance;
     public PlayerLeaveTownEvent event;
     public TownTag town;
 
@@ -45,11 +43,6 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "TownyPlayerExitsTown";
     }
 
     @Override

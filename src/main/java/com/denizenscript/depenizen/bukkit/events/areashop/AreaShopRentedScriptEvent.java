@@ -32,11 +32,9 @@ public class AreaShopRentedScriptEvent extends BukkitScriptEvent implements List
     // -->
 
     public AreaShopRentedScriptEvent() {
-        instance = this;
         registerCouldMatcher("areashop <'shop'> rented");
     }
 
-    public static AreaShopRentedScriptEvent instance;
     public RentedRegionEvent event;
     public AreaShopTag areaShop;
 
@@ -47,11 +45,6 @@ public class AreaShopRentedScriptEvent extends BukkitScriptEvent implements List
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "AreaShopRented";
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -119,11 +119,6 @@ public class NationTag implements ObjectTag, FlaggableObject {
     }
 
     @Override
-    public String getObjectType() {
-        return "Nation";
-    }
-
-    @Override
     public String identify() {
         return "nation@" + nation.getUUID();
     }
@@ -184,7 +179,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
         tagProcessor.registerTag(ListTag.class, "assistants", (attribute, object) -> {
             ListTag list = new ListTag();
             for (Resident resident : object.nation.getAssistants()) {
-                list.addObject(PlayerTag.valueOf(resident.getName(), attribute.context));
+                list.addObject(new PlayerTag(resident.getUUID()));
             }
             return list;
         });
@@ -248,7 +243,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
         // Returns the king of the nation.
         // -->
         tagProcessor.registerTag(PlayerTag.class, "king", (attribute, object) -> {
-            return PlayerTag.valueOf(object.nation.getCapital().getMayor().getName(), attribute.context);
+            return new PlayerTag(object.nation.getCapital().getMayor().getUUID());
         });
 
         // <--[tag]
@@ -311,7 +306,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
         tagProcessor.registerTag(ListTag.class, "residents", (attribute, object) -> {
             ListTag list = new ListTag();
             for (Resident resident : object.nation.getResidents()) {
-                list.addObject(PlayerTag.valueOf(resident.getName(), attribute.context));
+                list.addObject(new PlayerTag(resident.getUUID()));
             }
             return list;
         });

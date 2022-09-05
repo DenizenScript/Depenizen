@@ -38,10 +38,8 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     // -->
 
     public ManaChangeScriptEvent() {
-        instance = this;
     }
 
-    public static ManaChangeScriptEvent instance;
 
     public ManaChangeEvent event;
     public PlayerTag player;
@@ -53,11 +51,6 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("magicspells player mana change");
-    }
-
-    @Override
-    public String getName() {
-        return "ManaChangeEvent";
     }
 
     @Override

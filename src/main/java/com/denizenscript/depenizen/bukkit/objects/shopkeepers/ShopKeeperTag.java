@@ -122,11 +122,6 @@ public class ShopKeeperTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "ShopKeeper";
-    }
-
-    @Override
     public String identify() {
         return "shopkeeper@" + shopkeeper.getUniqueId();
     }

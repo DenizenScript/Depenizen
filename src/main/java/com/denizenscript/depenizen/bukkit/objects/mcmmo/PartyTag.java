@@ -93,11 +93,6 @@ public class PartyTag implements ObjectTag {
     }
 
     @Override
-    public String getObjectType() {
-        return "Party";
-    }
-
-    @Override
     public String identify() {
         return "party@" + party.getName();
     }
@@ -156,7 +151,7 @@ public class PartyTag implements ObjectTag {
         else if (attribute.startsWith("members")) {
             ListTag players = new ListTag();
             for (UUID uuid : party.getMembers().keySet()) {
-                players.addObject(PlayerTag.valueOf(uuid.toString(), attribute.context));
+                players.addObject(new PlayerTag(uuid));
             }
             return players.getObjectAttribute(attribute.fulfill(1));
         }

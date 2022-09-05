@@ -31,11 +31,9 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
     // -->
 
     public EntityUndisguisesScriptEvent() {
-        instance = this;
         registerCouldMatcher("libsdisguises undisguise|undisguises <'disguise'>");
     }
 
-    public static EntityUndisguisesScriptEvent instance;
 
     public UndisguiseEvent event;
     public EntityTag entity;
@@ -48,11 +46,6 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "UndisguiseEvent";
     }
 
     @Override

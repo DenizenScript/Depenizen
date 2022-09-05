@@ -31,11 +31,9 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
     // -->
 
     public PlayerEntersPlotScriptEvent() {
-        instance = this;
         registerCouldMatcher("plotsquared player enters <'plotsquaredplot'>");
     }
 
-    public static PlayerEntersPlotScriptEvent instance;
     public PlayerEnterPlotEvent event;
     public PlayerTag player;
     public PlotSquaredPlotTag plot;
@@ -47,11 +45,6 @@ public class PlayerEntersPlotScriptEvent extends BukkitScriptEvent implements Li
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerEnterPlotEvent";
     }
 
     @Override

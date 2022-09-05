@@ -6,7 +6,7 @@ import com.massivecraft.massivecore.ps.PS;
 import com.denizenscript.denizen.objects.ChunkTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -105,11 +105,6 @@ public class FactionTag implements ObjectTag {
     @Override
     public boolean isUnique() {
         return true;
-    }
-
-    @Override
-    public String getObjectType() {
-        return "Faction";
     }
 
     @Override
@@ -222,7 +217,7 @@ public class FactionTag implements ObjectTag {
         // -->
         else if (attribute.startsWith("leader")) {
             if (faction.getLeader() != null) {
-                return PlayerTag.valueOf(faction.getLeader().getName(), attribute.context)
+                return new PlayerTag(faction.getLeader().getUuid())
                         .getObjectAttribute(attribute.fulfill(1));
             }
         }
@@ -314,10 +309,9 @@ public class FactionTag implements ObjectTag {
         // Returns a list of all players in the faction.
         // -->
         if (attribute.startsWith("list_players")) {
-            Set<PS> chunks = BoardColl.get().getChunks(faction);
             ListTag players = new ListTag();
             for (MPlayer ps : faction.getMPlayers()) {
-                players.addObject(PlayerTag.valueOf(faction.getLeader().getUuid().toString(), attribute.context));
+                players.addObject(new PlayerTag(ps.getUuid()));
             }
             return players.getObjectAttribute(attribute.fulfill(1));
         }

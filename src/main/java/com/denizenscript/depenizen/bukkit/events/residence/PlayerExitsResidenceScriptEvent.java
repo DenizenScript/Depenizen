@@ -29,11 +29,9 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
     // -->
 
     public PlayerExitsResidenceScriptEvent() {
-        instance = this;
         registerCouldMatcher("residence player exits <'residence'>");
     }
 
-    public static PlayerExitsResidenceScriptEvent instance;
     public ResidenceChangedEvent event;
     public ResidenceTag residence;
 
@@ -44,11 +42,6 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
             return false;
         }
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "ResidencePlayerExitsResidence";
     }
 
     @Override

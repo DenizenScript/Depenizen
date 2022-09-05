@@ -37,24 +37,17 @@ public class PlayerCompletesSkyBlockChallengeScriptEvent extends BukkitScriptEve
     //
     // -->
 
-    public static PlayerCompletesSkyBlockChallengeScriptEvent instance;
     public ChallengeCompleteEvent event;
     public ElementTag challenge;
     public ElementTag xp_reward;
     public ElementTag money_reward;
 
     public PlayerCompletesSkyBlockChallengeScriptEvent() {
-        instance = this;
     }
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("player completes skyblock challenge");
-    }
-
-    @Override
-    public String getName() {
-        return "PlayerCompletesSkyBlockChallenge";
     }
 
     @Override

@@ -37,7 +37,6 @@ public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent impl
     public WeaponScopeEvent event;
 
     public CrackShotPlayerZoomsWeaponScopeEvent() {
-        instance = this;
     }
 
     @Override
@@ -48,11 +47,6 @@ public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent impl
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("crackshot player zooms weapon scope");
-    }
-
-    @Override
-    public String getName() {
-        return "CrackShotPlayerZoomsWeaponScope";
     }
 
     @Override

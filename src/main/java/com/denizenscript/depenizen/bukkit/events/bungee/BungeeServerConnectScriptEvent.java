@@ -39,11 +39,6 @@ public class BungeeServerConnectScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public String getName() {
-        return "BungeeServerConnects";
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(null, null);
     }

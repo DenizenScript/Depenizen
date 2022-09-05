@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
 import io.netty.buffer.ByteBuf;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.scripts.ScriptBuilder;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.queues.ScriptQueue;
@@ -65,7 +65,7 @@ public class RunCommandsPacketIn extends PacketIn {
             }
             if (!shouldDebug) {
                 for (ScriptEntry entry : entries) {
-                    entry.shouldDebugBool = false;
+                    entry.internal.shouldDebugBool = false;
                 }
             }
             ScriptQueue queue = new InstantQueue("BUNGEE_");

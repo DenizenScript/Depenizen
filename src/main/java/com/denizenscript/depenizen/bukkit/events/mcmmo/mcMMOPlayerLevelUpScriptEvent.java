@@ -44,11 +44,9 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
     // -->
 
     public mcMMOPlayerLevelUpScriptEvent() {
-        instance = this;
         registerCouldMatcher("mcmmo player levels up <'skill'>");
     }
 
-    public static mcMMOPlayerLevelUpScriptEvent instance;
     public McMMOPlayerLevelUpEvent event;
     public PlayerTag player;
     public ElementTag skill;
@@ -68,11 +66,6 @@ public class mcMMOPlayerLevelUpScriptEvent extends BukkitScriptEvent implements 
         }
 
         return super.matches(path);
-    }
-
-    @Override
-    public String getName() {
-        return "mcMMOPlayerLevelsUp";
     }
 
     @Override

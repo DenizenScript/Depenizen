@@ -39,11 +39,6 @@ public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
     }
 
     @Override
-    public String getName() {
-        return "BungeeServerDisconnects";
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(null, null);
     }

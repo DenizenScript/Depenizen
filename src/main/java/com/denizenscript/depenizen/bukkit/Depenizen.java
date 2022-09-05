@@ -1,13 +1,15 @@
 package com.denizenscript.depenizen.bukkit;
 
 import com.denizenscript.denizen.Denizen;
+import com.denizenscript.denizencore.utilities.debugging.DebugSubmitter;
 import com.denizenscript.depenizen.bukkit.bridges.*;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.depenizen.bukkit.clientizen.ClientizenSupport;
 import com.denizenscript.depenizen.bukkit.utilities.BridgeLoadException;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -40,6 +42,7 @@ public class Depenizen extends JavaPlugin {
             Debug.echoError(ex);
         }
         ClientizenSupport.instance = new ClientizenSupport();
+        DebugSubmitter.debugHeaderLines.add(() -> "Depenizen Bridges loaded (" + loadedBridges.size() + "): " + ChatColor.DARK_GREEN + String.join(", ", loadedBridges.keySet()));
         Debug.log("Depenizen loaded! <A>" + loadedBridges.size() + "<W> plugin bridge(s) loaded (of <A>" + allBridges.size() + "<W> available)");
     }
 

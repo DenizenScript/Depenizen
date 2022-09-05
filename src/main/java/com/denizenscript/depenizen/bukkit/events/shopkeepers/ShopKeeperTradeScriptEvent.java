@@ -35,21 +35,14 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     // -->
 
     public ShopKeeperTradeScriptEvent() {
-        instance = this;
     }
 
-    public static ShopKeeperTradeScriptEvent instance;
     public ShopkeeperTradeEvent event;
     public PlayerTag player;
 
     @Override
     public boolean couldMatch(ScriptPath path) {
         return path.eventLower.startsWith("shopkeeper trade");
-    }
-
-    @Override
-    public String getName() {
-        return "ShopKeeperTrade";
     }
 
     @Override

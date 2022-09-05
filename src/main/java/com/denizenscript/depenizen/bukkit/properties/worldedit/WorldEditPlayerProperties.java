@@ -4,6 +4,7 @@ import com.denizenscript.denizen.objects.*;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.utilities.debugging.DebugInternals;
 import com.denizenscript.depenizen.bukkit.bridges.WorldEditBridge;
 import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
@@ -21,7 +22,7 @@ import com.sk89q.worldedit.regions.selector.CuboidRegionSelector;
 import com.sk89q.worldedit.regions.selector.EllipsoidRegionSelector;
 import com.sk89q.worldedit.regions.selector.Polygonal2DRegionSelector;
 import com.sk89q.worldedit.world.item.ItemType;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -88,7 +89,7 @@ public class WorldEditPlayerProperties implements Property {
         //
         // Note that some values may be listed as "unknown" or strange values due to WorldEdit having a messy API (no way to automatically stringify brush data).
         // -->
-        PropertyParser.<WorldEditPlayerProperties, ListTag>registerTag(ListTag.class, "we_brush_info", (attribute, object) -> {
+        PropertyParser.registerTag(WorldEditPlayerProperties.class, ListTag.class, "we_brush_info", (attribute, object) -> {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             ItemType itemType;
             if (attribute.hasParam()) {
@@ -104,7 +105,7 @@ public class WorldEditPlayerProperties implements Property {
             }
             BrushTool brush = (BrushTool) tool;
             Brush btype = brush.getBrush();
-            String brushType = CoreUtilities.toLowerCase(btype.getClass().getSimpleName());
+            String brushType = CoreUtilities.toLowerCase(DebugInternals.getClassNameOpti(btype.getClass()));
             String materialInfo = "unknown";
             Pattern materialPattern = brush.getMaterial();
             if (materialPattern instanceof BlockPattern) {
@@ -128,7 +129,7 @@ public class WorldEditPlayerProperties implements Property {
         // @description
         // Returns the player's current block area selection, as a CuboidTag, EllipsoidTag, or PolygonTag.
         // -->
-        PropertyParser.<WorldEditPlayerProperties, ObjectTag>registerTag(ObjectTag.class, "we_selection", (attribute, object) -> {
+        PropertyParser.registerTag(WorldEditPlayerProperties.class, ObjectTag.class, "we_selection", (attribute, object) -> {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             RegionSelector selection = worldEdit.getSession(object.player).getRegionSelector(BukkitAdapter.adapt(object.player.getWorld()));
             try {

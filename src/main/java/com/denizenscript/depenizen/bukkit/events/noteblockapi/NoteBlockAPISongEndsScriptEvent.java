@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.noteblockapi;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -35,11 +35,9 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
     // -->
 
     public NoteBlockAPISongEndsScriptEvent() {
-        instance = this;
         registerCouldMatcher("noteblockapi song (<'song'>) ends");
     }
 
-    public static NoteBlockAPISongEndsScriptEvent instance;
     public SongEndEvent event;
 
     @Override
@@ -49,11 +47,6 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String getName() {
-        return "NoteBlockAPISongEnds";
     }
 
     @Override

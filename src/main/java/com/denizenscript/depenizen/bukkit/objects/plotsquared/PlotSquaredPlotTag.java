@@ -11,7 +11,7 @@ import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.objects.WorldTag;
-import com.denizenscript.denizen.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
@@ -118,11 +118,6 @@ public class PlotSquaredPlotTag implements ObjectTag {
     @Override
     public boolean isUnique() {
         return true;
-    }
-
-    @Override
-    public String getObjectType() {
-        return "PlotSquaredPlot";
     }
 
     @Override
