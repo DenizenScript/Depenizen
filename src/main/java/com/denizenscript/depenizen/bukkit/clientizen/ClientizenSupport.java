@@ -38,7 +38,7 @@ public class ClientizenSupport implements Listener {
             return new ElementTag(clientizenPlayers.contains(object.getUUID()));
         });
         NetworkManager.init();
-        NetworkManager.registerInChannel(Channels.RECIVE_CONFIRM, (player, message) -> {
+        NetworkManager.registerInChannel(Channels.RECEIVE_CONFIRM, (player, message) -> {
             Debug.log("Received confirmation from " + player.getName());
             clientizenPlayers.add(player.getUniqueId());
             // Wait a little to make sure the client is ready to receive packets

@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.clientizen;
 
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,6 +15,8 @@ public class NetworkManager implements PluginMessageListener {
     private static NetworkManager instance;
     private static final Map<String, InChannelRunnable> inChannelRunnables = new HashMap<>();
 
+    private static final byte[] EMPTY = new byte[0];
+
     public static void init() {
         instance = new NetworkManager();
     }
@@ -22,18 +25,26 @@ public class NetworkManager implements PluginMessageListener {
         if (channel == null || runnable == null) {
             return;
         }
+        if (inChannelRunnables.containsKey(channel)) {
+            Debug.echoError("Tried registering plugin channel '" + channel + "', but it is already registered!");
+            return;
+        }
         Bukkit.getMessenger().registerIncomingPluginChannel(Depenizen.instance, channel, instance);
         inChannelRunnables.put(channel, runnable);
     }
 
     public static void send(String channel, Player target, DataSerializer message) {
-        if (channel == null || target == null || message == null) {
+        send(channel, target, message != null ? message.toByteArray() : null);
+    }
+
+    public static void send(String channel, Player target, byte[] message) {
+        if (channel == null || target == null) {
             return;
         }
         if (!Bukkit.getMessenger().isOutgoingChannelRegistered(Depenizen.instance, channel)) {
             Bukkit.getMessenger().registerOutgoingPluginChannel(Depenizen.instance, channel);
         }
-        target.sendPluginMessage(Depenizen.instance, channel, message.toByteArray());
+        target.sendPluginMessage(Depenizen.instance, channel, message != null ? message : EMPTY);
     }
 
     @Override
@@ -43,6 +54,6 @@ public class NetworkManager implements PluginMessageListener {
 
     @FunctionalInterface
     public interface InChannelRunnable {
-        public void run(Player player, byte[] message);
+        void run(Player player, byte[] message);
     }
 }
