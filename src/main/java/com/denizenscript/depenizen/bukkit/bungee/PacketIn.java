@@ -11,12 +11,12 @@ public abstract class PacketIn {
 
     public String readString(ByteBuf buf, String label) {
         if (buf.readableBytes() < 4) {
-            BungeeBridge.instance.handler.fail("Invalid " + getName() + " Packet " + label + " length bytes (needed 4)");
+            BungeeBridge.instance.handler.fail("Invalid " + getName() + " Packet string '" + label + "' length bytes (needed 4)");
             return null;
         }
         int len = buf.readInt();
         if (buf.readableBytes() < len || len < 0) {
-            BungeeBridge.instance.handler.fail("Invalid " + getName() + " Packet " + label + " (bytes requested: " + len + ", bytes available: " + buf.readableBytes() + ")");
+            BungeeBridge.instance.handler.fail("Invalid " + getName() + " Packet string '" + label + "' (bytes requested: " + len + ", bytes available: " + buf.readableBytes() + ")");
             return null;
         }
         byte[] strBytes = new byte[len];

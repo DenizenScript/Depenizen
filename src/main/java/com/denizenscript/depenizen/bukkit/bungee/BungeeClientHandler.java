@@ -37,7 +37,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
         hasClosed = true;
         channel.close();
         BungeeBridge.instance.connected = false;
-        BungeeBridge.runOnMainThread(() -> Debug.echoError("Depenizen-Bungee connection failed: " + reason));
+        BungeeBridge.runOnMainThread(() -> Debug.echoError("Depenizen-Bungee connection failed: " + reason + "... last valid packet: " + (lastPacket == null ? "none" : lastPacket.getName())));
     }
 
     public enum Stage {
@@ -52,6 +52,8 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
     public int packetId;
 
     public Stage currentStage = Stage.AWAIT_HEADER;
+
+    public PacketIn lastPacket;
 
     public void reallocateBuf(ChannelHandlerContext ctx) {
         ByteBuf newBuf = ctx.alloc().buffer(32);
@@ -111,6 +113,10 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
                     fail("Invalid packet id: " + packetId);
                     return;
                 }
+                if (waitingLength < 0 || waitingLength > (1024 * 1024 * 1024)) {
+                    BungeeBridge.instance.handler.fail("Invalid/impossible packet header length value (bytes expected: " + waitingLength + ", bytes readable: " + packetBuffer.readableBytes() + ")");
+                    return;
+                }
             }
             else if (currentStage == Stage.AWAIT_DATA) {
                 if (packetBuffer.readableBytes() < waitingLength) {
@@ -122,6 +128,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
                     packet.process(packetBuffer);
                     currentStage = Stage.AWAIT_HEADER;
                     reallocateBuf(ctx);
+                    lastPacket = packet;
                 }
                 catch (Throwable ex) {
                     ex.printStackTrace();

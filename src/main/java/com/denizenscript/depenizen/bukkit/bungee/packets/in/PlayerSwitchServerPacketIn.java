@@ -18,7 +18,7 @@ public class PlayerSwitchServerPacketIn extends PacketIn {
 
     @Override
     public void process(ByteBuf data) {
-        if (data.readableBytes() < 12) {
+        if (data.readableBytes() < 16) {
             BungeeBridge.instance.handler.fail("Invalid PlayerSwitchServerPacket (bytes available: " + data.readableBytes() + ")");
             return;
         }
