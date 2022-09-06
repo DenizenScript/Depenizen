@@ -24,7 +24,8 @@ public class DataSerializer {
     public DataSerializer writeInt(int i) {
         try {
             output.writeInt(i);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             Debug.echoError(new IllegalStateException(e));
         }
         return this;
@@ -34,7 +35,8 @@ public class DataSerializer {
         try {
             writeInt(bytes.length);
             output.write(bytes);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             Debug.echoError(new IllegalStateException(e));
         }
         return this;

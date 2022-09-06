@@ -30,7 +30,7 @@ public class ClientizenSupport implements Listener {
 
     public static void init() {
         instance = new ClientizenSupport();
-        clientizenFolder = new File(Denizen.getInstance().getDataFolder(), "client-scripts");
+        clientizenFolder = new File(Denizen.instance.getDataFolder(), "client-scripts");
         clientizenFolder.mkdir();
         Bukkit.getPluginManager().registerEvents(instance, Depenizen.instance);
         // A tag for testing
