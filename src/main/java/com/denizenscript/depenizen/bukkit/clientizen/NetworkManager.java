@@ -21,8 +21,8 @@ public class NetworkManager implements PluginMessageListener {
         instance = new NetworkManager();
     }
 
-    public static void registerInChannel(String channel, ClientizenReceiver runnable) {
-        if (channel == null || runnable == null) {
+    public static void registerInChannel(String channel, ClientizenReceiver receiver) {
+        if (channel == null || receiver == null) {
             return;
         }
         if (inChannelRunnables.containsKey(channel)) {
@@ -30,7 +30,7 @@ public class NetworkManager implements PluginMessageListener {
             return;
         }
         Bukkit.getMessenger().registerIncomingPluginChannel(Depenizen.instance, channel, instance);
-        inChannelRunnables.put(channel, runnable);
+        inChannelRunnables.put(channel, receiver);
     }
 
     public static void send(String channel, Player target, DataSerializer message) {
