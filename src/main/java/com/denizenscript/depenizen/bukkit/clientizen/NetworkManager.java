@@ -13,7 +13,7 @@ import java.util.Map;
 public class NetworkManager implements PluginMessageListener {
 
     private static NetworkManager instance;
-    private static final Map<String, ClientizenReceiver> inChannelRunnables = new HashMap<>();
+    private static final Map<String, ClientizenReceiver> registeredReceivers = new HashMap<>();
 
     private static final byte[] EMPTY = new byte[0];
 
@@ -25,12 +25,12 @@ public class NetworkManager implements PluginMessageListener {
         if (channel == null || receiver == null) {
             return;
         }
-        if (inChannelRunnables.containsKey(channel)) {
+        if (registeredReceivers.containsKey(channel)) {
             Debug.echoError("Tried registering plugin channel '" + channel + "', but it is already registered!");
             return;
         }
         Bukkit.getMessenger().registerIncomingPluginChannel(Depenizen.instance, channel, instance);
-        inChannelRunnables.put(channel, receiver);
+        registeredReceivers.put(channel, receiver);
     }
 
     public static void send(String channel, Player target, DataSerializer message) {
@@ -49,7 +49,7 @@ public class NetworkManager implements PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, @NotNull byte[] message) {
-        inChannelRunnables.get(channel).receive(player, message);
+        registeredReceivers.get(channel).receive(player, message);
     }
 
     @FunctionalInterface
