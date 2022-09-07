@@ -13,7 +13,7 @@ import java.util.Map;
 public class NetworkManager implements PluginMessageListener {
 
     private static NetworkManager instance;
-    private static final Map<String, InChannelRunnable> inChannelRunnables = new HashMap<>();
+    private static final Map<String, ClientizenReceiver> inChannelRunnables = new HashMap<>();
 
     private static final byte[] EMPTY = new byte[0];
 
@@ -21,7 +21,7 @@ public class NetworkManager implements PluginMessageListener {
         instance = new NetworkManager();
     }
 
-    public static void registerInChannel(String channel, InChannelRunnable runnable) {
+    public static void registerInChannel(String channel, ClientizenReceiver runnable) {
         if (channel == null || runnable == null) {
             return;
         }
@@ -49,11 +49,11 @@ public class NetworkManager implements PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, @NotNull byte[] message) {
-        inChannelRunnables.get(channel).run(player, message);
+        inChannelRunnables.get(channel).receive(player, message);
     }
 
     @FunctionalInterface
-    public interface InChannelRunnable {
-        void run(Player player, byte[] message);
+    public interface ClientizenReceiver {
+        void receive(Player player, byte[] message);
     }
 }
