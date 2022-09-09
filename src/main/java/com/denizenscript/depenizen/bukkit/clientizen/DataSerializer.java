@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class DataSerializer {
 
-    public DataOutput output;
-    public ByteArrayOutputStream outputStream;
+    private final DataOutput output;
+    private final ByteArrayOutputStream outputStream;
 
     public DataSerializer() {
         outputStream = new ByteArrayOutputStream();

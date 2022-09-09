@@ -49,11 +49,11 @@ public class NetworkManager implements PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, @NotNull byte[] message) {
-        registeredReceivers.get(channel).receive(player, message);
+        registeredReceivers.get(channel).receive(player, new DataDeserializer(message));
     }
 
     @FunctionalInterface
     public interface ClientizenReceiver {
-        void receive(Player player, byte[] message);
+        void receive(Player player, DataDeserializer message);
     }
 }

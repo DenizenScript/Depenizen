@@ -57,8 +57,8 @@ public class ClientizenSupport implements Listener {
                 continue;
             }
             try (FileInputStream stream = new FileInputStream(file)) {
-                String contents = ScriptHelper.convertStreamToString(stream);
-                clientizenScripts.put(name, contents);
+                // TODO: clear comments server-side
+                clientizenScripts.put(name, ScriptHelper.convertStreamToString(stream));
                 Debug.log("Loaded client script: " + name);
             }
             catch (Exception e) {
