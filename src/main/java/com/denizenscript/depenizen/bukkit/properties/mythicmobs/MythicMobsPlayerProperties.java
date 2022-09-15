@@ -57,7 +57,7 @@ public class MythicMobsPlayerProperties implements Property {
         // @returns ElementTag
         // @plugin Depenizen, MythicMobs
         // @description
-        // Returns the value of a MythicMobs variable for this MythicMob.
+        // Returns the value of a MythicMobs variable for this player.
         // -->
         PropertyParser.registerTag(MythicMobsPlayerProperties.class, ElementTag.class, "mythic_variable", (attribute, object) -> {
             return new ElementTag(MythicMobsBridge.getMythicVariable(object.player.getPlayerEntity(), attribute.getParam()), true);
@@ -69,7 +69,7 @@ public class MythicMobsPlayerProperties implements Property {
         // @plugin Depenizen, MythicMobs
         // @mechanism PlayerTag.mythic_variable_map
         // @description
-        // Returns a map of the MythicMob's variables.
+        // Returns a map of the player's variables.
         // -->
         PropertyParser.registerTag(MythicMobsPlayerProperties.class, MapTag.class, "mythic_variable_map", (attribute, object) -> {
             MapTag result = new MapTag();

@@ -4,6 +4,7 @@ import com.denizenscript.denizen.objects.EntityFormObject;
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.utilities.text.StringHolder;
@@ -386,6 +387,36 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
                 result.putObject(entry.getKey(), new ElementTag(entry.getValue().toString(), true));
             }
             return result;
+        });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.ai_goal_selectors>
+        // @returns ListTag
+        // @plugin Depenizen MythicMbos
+        // @description
+        // Returns a ListTag of the MythicMob's AIGoalSelectors.
+        // -->
+        tagProcessor.registerTag(ListTag.class, "ai_goal_selectors", (attribute, object) -> {
+            ListTag list = new ListTag();
+            for (String goal : object.getMobType().getAIGoalSelectors()) {
+                list.addObject(new ElementTag(goal, true));
+            }
+            return list;
+        });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.ai_target_selectors>
+        // @returns ListTag
+        // @plugin Depenizen MythicMbos
+        // @description
+        // Returns a ListTag of the MythicMob's AITargetSelectors.
+        // -->
+        tagProcessor.registerTag(ListTag.class, "ai_target_selectors", (attribute, object) -> {
+            ListTag list = new ListTag();
+            for (String target : object.getMobType().getAITargetSelectors()) {
+                list.addObject(new ElementTag(target, true));
+            }
+            return list;
         });
     }
 

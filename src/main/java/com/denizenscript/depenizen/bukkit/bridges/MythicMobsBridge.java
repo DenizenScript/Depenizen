@@ -7,6 +7,7 @@ import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.TagManager;
@@ -27,6 +28,7 @@ import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.items.ItemExecutor;
 import io.lumine.mythic.core.items.MythicItem;
 import io.lumine.mythic.core.mobs.ActiveMob;
 import io.lumine.mythic.core.skills.variables.*;
@@ -35,9 +37,7 @@ import io.lumine.mythic.core.spawning.spawners.SpawnerManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class MythicMobsBridge extends Bridge {
 
@@ -113,13 +113,58 @@ public class MythicMobsBridge extends Bridge {
             attribute.fulfill(1);
 
             // <--[tag]
+            // @attribute <mythicmobs.items>
+            // @returns ListTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a ListTag of valid MythicItem IDs. See also <@link tag mythic_item>.
+            // -->
+            if (attribute.startsWith("items")) {
+                ListTag list = new ListTag();
+                for (String item : getItemNames()) {
+                    list.addObject(new ElementTag(item, true));
+                }
+                return list;
+            }
+
+            // <--[tag]
+            // @attribute <mythicmobs.skills>
+            // @returns ListTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a ListTag of valid MythicSkill IDs.
+            // -->
+            else if (attribute.startsWith("skills")) {
+                ListTag list = new ListTag();
+                for (String item : getSkillNames()) {
+                    list.addObject(new ElementTag(item, true));
+                }
+                return list;
+            }
+
+            // <--[tag]
+            // @attribute <mythicmobs.mob_ids>
+            // @returns ListTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a ListTag of valid MythicMob IDs.
+            // -->
+            else if (attribute.startsWith("mob_ids")) {
+                ListTag list = new ListTag();
+                for (String item : getMobNames()) {
+                    list.addObject(new ElementTag(item, true));
+                }
+                return list;
+            }
+
+            // <--[tag]
             // @attribute <mythicmobs.active_mobs>
             // @returns ListTag(MythicMobsMobTag)
             // @plugin Depenizen, MythicMobs
             // @description
             // Returns a ListTag of all active MythicMobs on the server.
             // -->
-            if (attribute.startsWith("active_mobs")) {
+            else if (attribute.startsWith("active_mobs")) {
                 ListTag list = new ListTag();
                 for (ActiveMob entity : MythicMobsBridge.getMobManager().getActiveMobs()) {
                     list.addObject(new MythicMobsMobTag(entity));
@@ -161,6 +206,10 @@ public class MythicMobsBridge extends Bridge {
         return MythicBukkit.inst().getMobManager().getMythicMob(name).orElse(null);
     }
 
+    public static Collection<String> getMobNames() {
+        return getMobManager().getMobNames();
+    }
+
     public static MobManager getMobManager() {
         return MythicBukkit.inst().getMobManager();
     }
@@ -182,6 +231,8 @@ public class MythicMobsBridge extends Bridge {
     }
 
     public static String getMythicVariable(Entity entity, String key) {
+        Object value = getMythicVariableMap(entity).get(key);
+        if (value == null) return null;
         return getMythicVariableMap(entity).get(key).toString();
     }
 
@@ -206,7 +257,19 @@ public class MythicMobsBridge extends Bridge {
         registry.putAll(map);
     }
 
+    public static ItemExecutor getItemManager() {
+        return MythicBukkit.inst().getItemManager();
+    }
+
+    public static Collection<String> getItemNames() {
+        return getItemManager().getItemNames();
+    }
+
+    public static Collection<String> getSkillNames() {
+        return MythicBukkit.inst().getSkillManager().getSkillNames();
+    }
+
     public static boolean skillExists(String name) {
-        return MythicBukkit.inst().getSkillManager().getSkillNames().contains(name);
+        return getSkillNames().contains(name);
     }
 }
