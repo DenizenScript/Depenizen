@@ -72,7 +72,7 @@ public class LuckPermsPlayerProperties implements Property {
                 for (String groupName : track.getGroups()) {
                     Group group = LuckPermsBridge.luckPermsInstance.getGroupManager().getGroup(groupName);
                     // Copied from https://github.com/LuckPerms/extension-legacy-api/blob/97f30ce63b32663a0481557f3a081a9554a5bca0/src/main/java/me/lucko/luckperms/extension/legacyapi/impl/permissionholders/PermissionHolderProxy.java#L205-L212
-                    boolean inGroup = user.resolveInheritedNodes(QueryOptions.nonContextual()).stream()
+                    boolean inGroup = group != null && user.resolveInheritedNodes(QueryOptions.nonContextual()).stream()
                             .filter(NodeType.INHERITANCE::matches)
                             .map(NodeType.INHERITANCE::cast)
                             .filter(net.luckperms.api.node.Node::getValue)
