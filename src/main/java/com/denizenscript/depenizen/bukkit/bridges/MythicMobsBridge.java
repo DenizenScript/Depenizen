@@ -206,6 +206,10 @@ public class MythicMobsBridge extends Bridge {
         return MythicBukkit.inst().getMobManager().getMythicMob(name).orElse(null);
     }
 
+    public static Map<String, Double> getDamageModifiers(MythicMob mob) {
+        return mob.getDamageModifiers();
+    }
+
     public static Collection<String> getMobNames() {
         return getMobManager().getMobNames();
     }

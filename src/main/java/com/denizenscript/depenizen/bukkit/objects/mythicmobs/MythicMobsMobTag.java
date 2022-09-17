@@ -418,6 +418,21 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
             }
             return list;
         });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.damage_modifiers>
+        // @returns MapTag
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Returns a MapTag of the MythicMob's damage modifiers.
+        // -->
+        tagProcessor.registerTag(MapTag.class, "damage_modifiers", (attribute, object) -> {
+            MapTag result = new MapTag();
+            for (Map.Entry<String, Double> entry : MythicMobsBridge.getDamageModifiers(object.getMobType()).entrySet()) {
+                result.putObject(entry.getKey(), new ElementTag(entry.getValue().toString()));
+            }
+            return result;
+        });
     }
 
     @Override
