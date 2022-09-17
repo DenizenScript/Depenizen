@@ -13,24 +13,25 @@ import java.util.Map;
 
 public class DataSerializer {
 
-    public DataOutput output;
-    public ByteArrayOutputStream outputStream;
+    private final DataOutput output;
+    private final ByteArrayOutputStream outputStream;
 
     public DataSerializer() {
         outputStream = new ByteArrayOutputStream();
         output = new DataOutputStream(outputStream);
     }
 
-    public void writeInt(int i) {
+    public DataSerializer writeInt(int i) {
         try {
             output.writeInt(i);
         }
         catch (IOException e) {
             Debug.echoError(new IllegalStateException(e));
         }
+        return this;
     }
 
-    public void writeByteArray(@NotNull byte[] bytes) {
+    public DataSerializer writeByteArray(@NotNull byte[] bytes) {
         try {
             writeInt(bytes.length);
             output.write(bytes);
@@ -38,33 +39,38 @@ public class DataSerializer {
         catch (IOException e) {
             Debug.echoError(new IllegalStateException(e));
         }
+        return this;
     }
 
-    public void writeString(@NotNull String s) {
+    public DataSerializer writeString(@NotNull String s) {
         writeByteArray(s.getBytes(StandardCharsets.UTF_8));
+        return this;
     }
 
-    public void writeStringList(@NotNull Collection<String> strings) {
+    public DataSerializer writeStringList(@NotNull Collection<String> strings) {
         writeInt(strings.size());
         for (String s : strings) {
             writeString(s);
         }
+        return this;
     }
 
-    public void writeStringListMap(@NotNull Map<String, Collection<String>> map) {
+    public DataSerializer writeStringListMap(@NotNull Map<String, Collection<String>> map) {
         writeInt(map.size());
         for (Map.Entry<String, Collection<String>> entry : map.entrySet()) {
             writeString(entry.getKey());
             writeStringList(entry.getValue());
         }
+        return this;
     }
 
-    public void writeStringMap(Map<String, String> stringMap) {
-            writeInt(stringMap.size());
-            for (Map.Entry<String, String> entry : stringMap.entrySet()) {
-                writeString(entry.getKey());
-                writeString(entry.getValue());
-            }
+    public DataSerializer writeStringMap(Map<String, String> stringMap) {
+        writeInt(stringMap.size());
+        for (Map.Entry<String, String> entry : stringMap.entrySet()) {
+            writeString(entry.getKey());
+            writeString(entry.getValue());
+        }
+        return this;
     }
 
     public byte[] toByteArray() {

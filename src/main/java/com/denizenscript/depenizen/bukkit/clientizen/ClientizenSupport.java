@@ -13,49 +13,41 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.plugin.messaging.PluginMessageListener;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.*;
 
-public class ClientizenSupport implements Listener, PluginMessageListener {
+public class ClientizenSupport implements Listener {
 
     public static ClientizenSupport instance;
 
     public static final Map<String, String> clientizenScripts = new HashMap<>();
+    public static DataSerializer scriptsSerializer;
     public static final Set<UUID> clientizenPlayers = new HashSet<>();
 
-    public static final File clientizenFolder;
-    public static final String CHANNEL_NAMESPACE = "clientizen";
+    public static File clientizenFolder;
 
-    static {
-        clientizenFolder = new File(Denizen.getInstance().getDataFolder(), "client-scripts");
-        clientizenFolder.mkdirs();
-    }
-
-    public ClientizenSupport() {
-        Bukkit.getPluginManager().registerEvents(this, Depenizen.instance);
+    public static void init() {
+        instance = new ClientizenSupport();
+        clientizenFolder = new File(Denizen.instance.getDataFolder(), "client-scripts");
+        clientizenFolder.mkdir();
+        Bukkit.getPluginManager().registerEvents(instance, Depenizen.instance);
+        // A tag for testing
         PlayerTag.registerOnlineOnlyTag(ElementTag.class, "is_clientizen", (attribute, object) -> {
             return new ElementTag(clientizenPlayers.contains(object.getUUID()));
         });
-        registerInChannel(Channel.RECIVE_CONFIRM);
-        registerOutChannel(Channel.SET_SCRIPTS);
-        Debug.log("ClientizenSupport", "Clientizen support enabled!");
+        NetworkManager.init();
+        NetworkManager.registerInChannel(Channels.RECEIVE_CONFIRM, (player, message) -> {
+            Debug.log("Received confirmation from " + player.getName());
+            clientizenPlayers.add(player.getUniqueId());
+            // Wait a little to make sure the client is ready to receive packets
+            Bukkit.getScheduler().runTaskLater(Depenizen.instance, () -> resendClientScriptsTo(player), 20);
+        });
+        Debug.log("Clientizen support enabled!");
     }
 
-    public void registerInChannel(Channel channel) {
-        Bukkit.getMessenger().registerIncomingPluginChannel(Depenizen.instance, channel.getChannel(), this);
-        Debug.log("ClientizenSupport", "Registered in channel " + channel);
-    }
-
-    public void registerOutChannel(Channel channel) {
-        Bukkit.getMessenger().registerOutgoingPluginChannel(Depenizen.instance, channel.getChannel());
-        Debug.log("ClientizenSupport", "Registered out channel " + channel);
-    }
-
-    public static void refershClientScripts() {
+    public static void reloadClientScripts() {
         clientizenScripts.clear();
         List<File> scriptFiles = CoreUtilities.listDScriptFiles(clientizenFolder);
         for (File file : scriptFiles) {
@@ -64,11 +56,9 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
                 Debug.echoError("Multiple script files named '" + name + "' found in client-scripts folder!");
                 continue;
             }
-            try {
-                FileInputStream stream = new FileInputStream(file);
-                String contents = ScriptHelper.convertStreamToString(stream);
-                stream.close();
-                clientizenScripts.put(name, contents);
+            try (FileInputStream stream = new FileInputStream(file)) {
+                // TODO: clear comments server-side
+                clientizenScripts.put(name, ScriptHelper.convertStreamToString(stream));
                 Debug.log("Loaded client script: " + name);
             }
             catch (Exception e) {
@@ -76,17 +66,12 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
                 Debug.echoError(e);
             }
         }
+        scriptsSerializer = new DataSerializer().writeStringMap(clientizenScripts);
     }
 
     public static void resendClientScripts() {
-        DataSerializer serializer = new DataSerializer();
-        serializer.writeStringMap(clientizenScripts);
         for (UUID uuid : clientizenPlayers) {
-            Player player = Bukkit.getPlayer(uuid);
-            if (player == null) {
-                continue;
-            }
-            send(player, Channel.SET_SCRIPTS, serializer);
+            resendClientScriptsTo(Bukkit.getPlayer(uuid));
         }
     }
 
@@ -94,14 +79,7 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
         if (player == null) {
             return;
         }
-        DataSerializer serializer = new DataSerializer();
-        serializer.writeStringMap(clientizenScripts);
-        send(player, Channel.SET_SCRIPTS, serializer);
-    }
-
-    public static void send(Player player, Channel channel, DataSerializer serializer) {
-        player.sendPluginMessage(Depenizen.instance, channel.getChannel(), serializer == null ? new byte[0] : serializer.toByteArray());
-        Debug.log("ClientizenSupport", "Sent plugin message to " + player.getName() + " on channel " + channel);
+        NetworkManager.send(Channels.SET_SCRIPTS, player, scriptsSerializer);
     }
 
     @EventHandler
@@ -111,57 +89,7 @@ public class ClientizenSupport implements Listener, PluginMessageListener {
 
     @EventHandler
     public void onScriptsReload(ScriptReloadEvent event) {
-        refershClientScripts();
+        reloadClientScripts();
         resendClientScripts();
-    }
-
-    @Override
-    public void onPluginMessageReceived(@NotNull String channelString, @NotNull Player player, @NotNull byte[] bytes) {
-        Channel channel = Channel.fromPath(channelString.substring(CHANNEL_NAMESPACE.length() + 1));
-        switch (channel) {
-            case RECIVE_CONFIRM:
-                Debug.log("ClientizenSupport", "Received confirmation from " + player.getName());
-                clientizenPlayers.add(player.getUniqueId());
-                // Wait a little to make sure the client is ready to receive packets
-                Bukkit.getScheduler().runTaskLater(Depenizen.instance, () -> {
-                    resendClientScriptsTo(player);
-                }, 20);
-        }
-    }
-
-    enum Channel {
-        SET_SCRIPTS("set_scripts"),
-        RECIVE_CONFIRM("receive_confirmation");
-
-        private final String path;
-        private final String channel;
-
-        Channel(String channel) {
-            this.path = channel;
-            this.channel = CHANNEL_NAMESPACE + ":" + channel;
-        }
-
-        public String getChannel() {
-            return channel;
-        }
-
-        public String getPath() {
-            return path;
-        }
-
-        // TODO: A more efficient way of doing this?
-        public static Channel fromPath(String path) {
-            for (Channel channel : values()) {
-                if (channel.path.equals(path)) {
-                    return channel;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return channel;
-        }
     }
 }
