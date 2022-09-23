@@ -264,7 +264,7 @@
         <dependency>
             <groupId>me.blackvein</groupId>
             <artifactId>quests</artifactId>
-            <version>4.0.1</version>
+            <version>4.5.3</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Quests.jar</systemPath>
         </dependency>
