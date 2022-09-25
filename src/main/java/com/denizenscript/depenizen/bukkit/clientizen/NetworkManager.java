@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class NetworkManager implements PluginMessageListener {
 
@@ -31,6 +32,12 @@ public class NetworkManager implements PluginMessageListener {
         }
         Bukkit.getMessenger().registerIncomingPluginChannel(Depenizen.instance, channel, instance);
         registeredReceivers.put(channel, receiver);
+    }
+
+    public static void broadcast(String channel, DataSerializer message) {
+        for (UUID uuid : ClientizenSupport.clientizenPlayers) {
+            send(channel, Bukkit.getPlayer(uuid), message);
+        }
     }
 
     public static void send(String channel, Player target, DataSerializer message) {

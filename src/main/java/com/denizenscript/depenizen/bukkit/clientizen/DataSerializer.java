@@ -31,9 +31,8 @@ public class DataSerializer {
         return this;
     }
 
-    public DataSerializer writeByteArray(@NotNull byte[] bytes) {
+    public DataSerializer writeBytes(@NotNull byte[] bytes) {
         try {
-            writeInt(bytes.length);
             output.write(bytes);
         }
         catch (IOException e) {
@@ -42,8 +41,19 @@ public class DataSerializer {
         return this;
     }
 
+    public DataSerializer writeByteArray(@NotNull byte[] bytes) {
+        return writeInt(bytes.length).writeBytes(bytes);
+    }
+
     public DataSerializer writeString(@NotNull String s) {
-        writeByteArray(s.getBytes(StandardCharsets.UTF_8));
+        return writeByteArray(s.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public DataSerializer writeIntList(@NotNull Collection<Integer> ints) {
+        writeInt(ints.size());
+        for (Integer i : ints) {
+            writeInt(i);
+        }
         return this;
     }
 

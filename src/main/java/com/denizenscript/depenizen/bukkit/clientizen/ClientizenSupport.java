@@ -8,6 +8,8 @@ import com.denizenscript.denizencore.scripts.ScriptHelper;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.clientizen.events.ClientizenEventManager;
+import com.denizenscript.depenizen.bukkit.clientizen.events.ClientizenEventRegistry;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,8 +44,10 @@ public class ClientizenSupport implements Listener {
             Debug.log("Received confirmation from " + player.getName());
             clientizenPlayers.add(player.getUniqueId());
             // Wait a little to make sure the client is ready to receive packets
-            Bukkit.getScheduler().runTaskLater(Depenizen.instance, () -> resendClientScriptsTo(player), 20);
+            Bukkit.getScheduler().runTaskLater(Depenizen.instance, () -> acceptNewPlayer(player), 20);
         });
+        ClientizenEventManager.init();
+        ClientizenEventRegistry.registerEvents();
         Debug.log("Clientizen support enabled!");
     }
 
@@ -70,16 +74,12 @@ public class ClientizenSupport implements Listener {
     }
 
     public static void resendClientScripts() {
-        for (UUID uuid : clientizenPlayers) {
-            resendClientScriptsTo(Bukkit.getPlayer(uuid));
-        }
+        NetworkManager.broadcast(Channels.SET_SCRIPTS, scriptsSerializer);
     }
 
-    public static void resendClientScriptsTo(Player player) {
-        if (player == null) {
-            return;
-        }
+    public static void acceptNewPlayer(Player player) {
         NetworkManager.send(Channels.SET_SCRIPTS, player, scriptsSerializer);
+        NetworkManager.send(Channels.EVENT_DATA, player, ClientizenEventManager.eventsSerializer);
     }
 
     @EventHandler
@@ -91,5 +91,6 @@ public class ClientizenSupport implements Listener {
     public void onScriptsReload(ScriptReloadEvent event) {
         reloadClientScripts();
         resendClientScripts();
+        ClientizenEventManager.reload();
     }
 }
