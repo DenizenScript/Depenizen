@@ -27,6 +27,15 @@ public class DataDeserializer {
         }
     }
 
+    public boolean readBoolean() {
+        try {
+            return input.readBoolean();
+        }
+        catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
     public byte[] readByteArray() {
         byte[] bytes = new byte[readInt()];
         try {
