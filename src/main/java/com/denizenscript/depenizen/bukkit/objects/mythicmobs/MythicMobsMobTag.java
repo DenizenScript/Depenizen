@@ -433,6 +433,21 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
             }
             return result;
         });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.faction>
+        // @returns ElementTag
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Returns the mob's faction.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "faction", (attribute, object) -> {
+            return new ElementTag(MythicMobsBridge.getFaction(object.getMob()), true);
+        });
+
+        // TODO
+        //tagProcessor.registerTag(ElementTag.class, ElementTag.class, "parse_mythic", (attribute, object, string) -> {
+        //});
     }
 
     @Override
@@ -455,11 +470,25 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // -->
         if (mechanism.matches("mythic_variable_map") && mechanism.requireObject(MapTag.class)) {
             MapTag map = mechanism.valueAsType(MapTag.class);
-            Map<String, Variable> newMap = new HashMap<String, Variable>();
+            Map<String, Variable> newMap = new HashMap<>();
             for (Map.Entry<StringHolder, ObjectTag> entry : map.map.entrySet()) {
                 newMap.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
             }
             MythicMobsBridge.setMythicVariableMap(mob.getEntity().getBukkitEntity(), newMap);
+        }
+
+        // <--[mechanism]
+        // @object MythicMobsMobTag
+        // @name faction
+        // @input ElementTag
+        // @plugin Depenizen, Mythicmobs
+        // @description
+        // Sets the mob's faction.
+        // @tags
+        // <MythicMobsMobTag.faction>
+        // -->
+        else if (mechanism.matches("faction") && mechanism.requireObject(ElementTag.class)) {
+            MythicMobsBridge.setFaction(mob, mechanism.getValue().asString());
         }
 
         // <--[mechanism]
@@ -472,7 +501,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.global_cooldown>
         // -->
-        if (mechanism.matches("global_cooldown") && mechanism.requireInteger()) {
+        else if (mechanism.matches("global_cooldown") && mechanism.requireInteger()) {
             mob.setGlobalCooldown(mechanism.getValue().asInt());
         }
 
@@ -486,7 +515,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.stance>
         // -->
-        if (mechanism.matches("stance")) {
+        else if (mechanism.matches("stance")) {
             mob.setStance(mechanism.getValue().asString());
         }
 
