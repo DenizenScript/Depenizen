@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.properties.mythicmobs;
 
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -8,6 +9,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
+import io.lumine.mythic.bukkit.BukkitAdapter;
 
 public class MythicMobsEntityProperties implements Property {
 
@@ -74,6 +76,21 @@ public class MythicMobsEntityProperties implements Property {
             }
             return null;
         }, "mythic_mob");
+
+        // <--[tag]
+        // @attribute <EntityTag.parse_mythic[<placeholder_text>]>
+        // @returns ElementTag
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Parses Mythic placeholders and returns the result. The target scope is set as the entity. (For example, <target.name> returns the entity's name.) Keep in mind that <> will have to be escaped using tags. This is usually over-engineering, consider using other Denizen tags instead.
+        // -->
+        PropertyParser.registerTag(MythicMobsEntityProperties.class, ElementTag.class, "parse_mythic", (attribute, object) -> {
+            if (!attribute.hasParam()) {
+                Debug.echoError("Placeholder text is required!");
+                return null;
+            }
+            return new ElementTag(MythicMobsBridge.parseMythic(BukkitAdapter.adapt(object.entity.getBukkitEntity()), attribute.getParam()));
+        }, "parse_mythicmob");
     }
 
     public boolean isMythicMob() {

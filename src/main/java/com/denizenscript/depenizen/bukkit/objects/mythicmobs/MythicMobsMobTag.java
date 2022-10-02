@@ -16,6 +16,7 @@ import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import io.lumine.mythic.api.adapters.AbstractEntity;
 import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.adapters.BukkitEntity;
 import io.lumine.mythic.core.mobs.ActiveMob;
 import io.lumine.mythic.core.skills.variables.Variable;
@@ -444,10 +445,6 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         tagProcessor.registerTag(ElementTag.class, "faction", (attribute, object) -> {
             return new ElementTag(MythicMobsBridge.getFaction(object.getMob()), true);
         });
-
-        // TODO
-        //tagProcessor.registerTag(ElementTag.class, ElementTag.class, "parse_mythic", (attribute, object, string) -> {
-        //});
     }
 
     @Override

@@ -25,10 +25,13 @@ import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
+import io.lumine.mythic.api.adapters.AbstractEntity;
 import io.lumine.mythic.api.config.MythicLineConfig;
 import io.lumine.mythic.api.mobs.MobManager;
 import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.api.packs.Pack;
 import io.lumine.mythic.api.skills.SkillCaster;
+import io.lumine.mythic.api.skills.placeholders.PlaceholderString;
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
@@ -174,6 +177,21 @@ public class MythicMobsBridge extends Bridge {
                 MythicItem item = getMythicItem(id.asString());
                 if (item == null) return null;
                 return new ElementTag(item.getConfig().getFile().getPath(), true);
+            });
+
+            // <--[tag]
+            // @attribute <mythicmobs.packs>
+            // @returns ListTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a list of all Mythic pack IDs.
+            // -->
+            tagProcessor.registerTag(ListTag.class, "packs", (attribute, object) -> {
+                ListTag list = new ListTag();
+                for (Pack pack : MythicBukkit.inst().getPackManager().getPacks()) {
+                    list.addObject(new ElementTag(pack.getName(), true));
+                }
+                return list;
             });
         }
     }
@@ -347,6 +365,11 @@ public class MythicMobsBridge extends Bridge {
 
     public static String getFaction(ActiveMob mob) {
         return mob.getFaction();
+    }
+
+    public static String parseMythic(AbstractEntity entity, String string) {
+        PlaceholderString placeholderString = PlaceholderString.of(string);
+        return placeholderString.get(entity);
     }
 
     public static boolean skillExists(String name) {
