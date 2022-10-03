@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.clientizen;
+package com.denizenscript.depenizen.bukkit.clientizen.network;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInput;

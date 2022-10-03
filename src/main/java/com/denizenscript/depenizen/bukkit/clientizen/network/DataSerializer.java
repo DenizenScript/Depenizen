@@ -1,4 +1,4 @@
-package com.denizenscript.depenizen.bukkit.clientizen;
+package com.denizenscript.depenizen.bukkit.clientizen.network;
 
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.jetbrains.annotations.NotNull;

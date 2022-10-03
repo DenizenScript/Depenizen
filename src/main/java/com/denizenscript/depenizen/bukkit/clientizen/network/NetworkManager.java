@@ -1,7 +1,8 @@
-package com.denizenscript.depenizen.bukkit.clientizen;
+package com.denizenscript.depenizen.bukkit.clientizen.network;
 
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.clientizen.ClientizenSupport;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
