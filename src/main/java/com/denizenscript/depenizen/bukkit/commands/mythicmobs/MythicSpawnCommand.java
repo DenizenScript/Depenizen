@@ -56,7 +56,7 @@ public class MythicSpawnCommand extends AbstractCommand {
                     && arg.matchesInteger()) {
                 scriptEntry.addObject("level", arg.asElement());
             }
-            else if (!scriptEntry.hasObject("reason") && args.matchesEnum()) {
+            else if (!scriptEntry.hasObject("reason") && arg.matchesEnum(SpawnReason.class)) {
                 scriptEntry.addObject("reason", arg.asElement());
             }
             else if (!scriptEntry.hasObject("name")) {
