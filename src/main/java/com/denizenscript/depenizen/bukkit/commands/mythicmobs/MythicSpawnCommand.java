@@ -17,7 +17,7 @@ public class MythicSpawnCommand extends AbstractCommand {
 
     public MythicSpawnCommand() {
         setName("mythicspawn");
-        setSyntax("mythicspawn [<name>] [<location>] (level:<#>)");
+        setSyntax("mythicspawn [<name>] [<location>] (level:<#>) (reason:<reason>)");
         setRequiredArguments(2, 3);
     }
 
@@ -56,11 +56,11 @@ public class MythicSpawnCommand extends AbstractCommand {
                     && arg.matchesInteger()) {
                 scriptEntry.addObject("level", arg.asElement());
             }
+            else if (!scriptEntry.hasObject("reason") && args.matchesEnum()) {
+                scriptEntry.addObject("reason", arg.asElement());
+            }
             else if (!scriptEntry.hasObject("name")) {
                 scriptEntry.addObject("name", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("reason")) {
-                scriptEntry.addObject("reason", arg.asElement());
             }
             else {
                 arg.reportUnhandled();
@@ -79,7 +79,7 @@ public class MythicSpawnCommand extends AbstractCommand {
         ElementTag level = scriptEntry.getElement("level");
         ElementTag reason = scriptEntry.getElement("reason");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), name, location, level);
+            Debug.report(scriptEntry, getName(), name, location, level, reason);
         }
         try {
             MythicMob mob = MythicMobsBridge.getMythicMob(name.asString());
