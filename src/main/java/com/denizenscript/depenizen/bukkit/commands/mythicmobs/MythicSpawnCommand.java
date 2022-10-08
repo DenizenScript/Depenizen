@@ -10,6 +10,7 @@ import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.api.mobs.entities.SpawnReason;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import org.bukkit.entity.Entity;
 
@@ -17,13 +18,13 @@ public class MythicSpawnCommand extends AbstractCommand {
 
     public MythicSpawnCommand() {
         setName("mythicspawn");
-        setSyntax("mythicspawn [<name>] [<location>] (level:<#>)");
+        setSyntax("mythicspawn [<name>] [<location>] (level:<#>) (reason:<#>)");
         setRequiredArguments(2, 3);
     }
 
     // <--[command]
     // @Name MythicSpawn
-    // @Syntax mythicspawn [<name>] [<location>] (level:<#>)
+    // @Syntax mythicspawn [<name>] [<location>] (level:<#>) (reason:<#>)
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
     // @Required 2
@@ -32,6 +33,7 @@ public class MythicSpawnCommand extends AbstractCommand {
     //
     // @Description
     // This allows you to spawn a MythicMob at a location using the mob's internal name.
+    // (Requires paper) Additionaly, you may specify a spawn reason for this MythicMob, which can be any of these: <@link url https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html>
     //
     // @Tags
     // <entry[saveName].spawned_mythicmob> returns the spawned MythicMobsMob.
@@ -57,6 +59,9 @@ public class MythicSpawnCommand extends AbstractCommand {
             else if (!scriptEntry.hasObject("name")) {
                 scriptEntry.addObject("name", arg.asElement());
             }
+            else if (!scriptEntry.hasObject("reason") && arg.matchesEnum(SpawnReason.class)) {
+                scriptEntry.addObject("reason", arg.asElement());
+            }
             else {
                 arg.reportUnhandled();
             }
@@ -72,8 +77,9 @@ public class MythicSpawnCommand extends AbstractCommand {
         ElementTag name = scriptEntry.getElement("name");
         LocationTag location = scriptEntry.getObjectTag("location");
         ElementTag level = scriptEntry.getElement("level");
+        SpawnReason reason = SpawnReason.valueOf(scriptEntry.hasObject("reason") ? scriptEntry.getElement("reason").asString() : "OTHER");
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), name, location, level);
+            Debug.report(scriptEntry, getName(), name, location, level, reason);
         }
         try {
             MythicMob mob = MythicMobsBridge.getMythicMob(name.asString());
@@ -81,7 +87,7 @@ public class MythicSpawnCommand extends AbstractCommand {
                 Debug.echoError("MythicMob does not exist: " + name.asString());
                 return;
             }
-            Entity entity = mob.spawn(BukkitAdapter.adapt(location), level.asDouble()).getEntity().getBukkitEntity();
+            Entity entity = mob.spawn(BukkitAdapter.adapt(location), level.asDouble(), reason).getEntity().getBukkitEntity();
             scriptEntry.addObject("spawned_mythicmob", new MythicMobsMobTag(MythicMobsBridge.getActiveMob(entity)));
         }
         catch (Exception e) {

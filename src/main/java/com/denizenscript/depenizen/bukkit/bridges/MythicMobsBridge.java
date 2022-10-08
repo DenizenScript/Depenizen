@@ -26,11 +26,9 @@ import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntity
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
 import io.lumine.mythic.api.adapters.AbstractEntity;
-import io.lumine.mythic.api.config.MythicLineConfig;
 import io.lumine.mythic.api.mobs.MobManager;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.api.packs.Pack;
-import io.lumine.mythic.api.skills.SkillCaster;
 import io.lumine.mythic.api.skills.placeholders.PlaceholderString;
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
 import io.lumine.mythic.bukkit.BukkitAdapter;
@@ -44,7 +42,10 @@ import io.lumine.mythic.core.spawning.spawners.SpawnerManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 public class MythicMobsBridge extends Bridge {
 

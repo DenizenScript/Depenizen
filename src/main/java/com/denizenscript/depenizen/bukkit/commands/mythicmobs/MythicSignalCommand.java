@@ -7,6 +7,7 @@ import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgLinear;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgName;
+import com.denizenscript.denizencore.scripts.commands.generator.ArgPrefixed;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 
@@ -26,7 +27,7 @@ public class MythicSignalCommand extends AbstractCommand {
     // @Plugin Depenizen, MythicMobs
     // @Required 3
     // @Maximum 3
-    // @Short Sends a signal trigger to the target MythicMobs.
+    // @Short Sends a signal trigger to the target MythicMob(s).
     //
     // @Description
     // This allows you to send a signal trigger to multiple MythicMobs.
@@ -43,7 +44,7 @@ public class MythicSignalCommand extends AbstractCommand {
     public static void autoExecute(ScriptEntry scriptEntry,
                                    @ArgLinear @ArgName("targets") ListTag targets,
                                    @ArgLinear @ArgName("signal") ElementTag signal,
-                                   @ArgName("source") EntityTag source) {
+                                   @ArgPrefixed @ArgName("source") EntityTag source) {
         for (MythicMobsMobTag mob : targets.filter(MythicMobsMobTag.class, scriptEntry)) {
             mob.getMob().signalMob(BukkitAdapter.adapt(source.getBukkitEntity()), signal.asString());
         }

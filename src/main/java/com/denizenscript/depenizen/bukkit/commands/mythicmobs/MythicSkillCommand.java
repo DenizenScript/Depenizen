@@ -17,7 +17,6 @@ import io.lumine.mythic.core.skills.variables.Variable;
 import io.lumine.mythic.core.skills.variables.VariableType;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
