@@ -266,11 +266,6 @@ public class MythicMobsBridge extends Bridge {
             }
             return MythicSpawnerTag.valueOf(attribute.getParam(), attribute.context);
         });
-
-        TagManager.registerTagHandler(ObjectTag.class, "mythicmobs", (attribute) -> {
-            attribute.fulfill(1);
-            return null;
-        });
     }
 
     public static boolean isMythicMob(Entity entity) {
