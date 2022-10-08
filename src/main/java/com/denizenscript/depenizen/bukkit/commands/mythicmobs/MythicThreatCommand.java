@@ -12,7 +12,7 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 
-public class MythicThreatCommand  extends AbstractCommand {
+public class MythicThreatCommand extends AbstractCommand {
 
     public MythicThreatCommand() {
         setName("mythicthreat");
@@ -40,7 +40,7 @@ public class MythicThreatCommand  extends AbstractCommand {
     //
     // -->
 
-    private enum Operation {ADD, SUBTRACT, SET}
+    private enum Operation { ADD, SUBTRACT, SET }
 
     public static void autoExecute(ScriptEntry scriptEntry,
                                    @ArgLinear @ArgName("mythicmob") MythicMobsMobTag mythicmob,

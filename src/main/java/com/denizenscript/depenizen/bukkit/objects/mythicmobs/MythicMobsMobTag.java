@@ -1,21 +1,26 @@
 package com.denizenscript.depenizen.bukkit.objects.mythicmobs;
 
 import com.denizenscript.denizen.objects.EntityFormObject;
-import com.denizenscript.denizencore.objects.*;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizencore.objects.Adjustable;
+import com.denizenscript.denizencore.objects.Fetchable;
+import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
-import com.denizenscript.denizencore.tags.ObjectTagProcessor;
-import com.denizenscript.denizencore.utilities.text.StringHolder;
-import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
-import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.text.StringHolder;
+import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import io.lumine.mythic.api.adapters.AbstractEntity;
+import io.lumine.mythic.api.mobs.GenericCaster;
 import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.api.skills.SkillCaster;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.adapters.BukkitEntity;
 import io.lumine.mythic.core.mobs.ActiveMob;
@@ -445,6 +450,49 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         tagProcessor.registerTag(ElementTag.class, "faction", (attribute, object) -> {
             return new ElementTag(MythicMobsBridge.getFaction(object.getMob()), true);
         });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.children>
+        // @returns ListTag(EntityTag)
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Returns the mob's children.
+        // @mechanism MythicMobsMobTag.add_child
+        // -->
+        tagProcessor.registerTag(ListTag.class, "children", (attribute, object) -> {
+            ListTag result = new ListTag();
+            for (AbstractEntity entity : object.getMob().getChildren()) {
+                result.addObject(new EntityTag(entity.getBukkitEntity()));
+            }
+            return result;
+        });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.parent>
+        // @returns EntityTag
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Returns the mob's parent.
+        // @mechanism MythicMobsMobTag.parent
+        // -->
+        tagProcessor.registerTag(EntityTag.class, "parent", (attribute, object) -> {
+            SkillCaster parent = object.getMob().getParent();
+            if (parent == null) {
+                return null;
+            }
+            return new EntityTag(parent.getEntity().getBukkitEntity());
+        });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.mob_path>
+        // @returns ElementTag
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Returns the path to the file that stores this MythicMob's configuration. Equivalent to <@link tag mythicmobs.mob_path>.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "mob_path", (attribute, object) -> {
+            return new ElementTag(object.getMob().getType().getConfig().getFile().getPath(), true);
+        });
     }
 
     @Override
@@ -562,6 +610,37 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
             BukkitEntity target = new BukkitEntity(mTarget.getBukkitEntity());
             mob.setTarget(target);
         }
+
+        // <--[mechanism]
+        // @object MythicMobsMobTag
+        // @name add_child
+        // @input EntityTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Add a child to the MythicMob.
+        // @tags
+        // <MythicMobsMobTag.children>
+        // -->
+        else if (mechanism.matches("add_child") && mechanism.requireObject(EntityTag.class)) {
+            EntityTag child = mechanism.valueAsType(EntityTag.class);
+            mob.addChild(BukkitAdapter.adapt(child.getBukkitEntity()));
+        }
+
+        // <--[mechanism]
+        // @object MythicMobsMobTag
+        // @name parent
+        // @input EntityTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Sets the MythicMob's parent.
+        // @tags
+        // <MythicMobsMobTag.parent>
+        // -->
+        else if (mechanism.matches("parent") && mechanism.requireObject(EntityTag.class)) {
+            EntityTag parent = mechanism.valueAsType(EntityTag.class);
+            mob.setParent(new GenericCaster(BukkitAdapter.adapt(parent.getBukkitEntity())));
+        }
+
         tagProcessor.processMechanism(this, mechanism);
         CoreUtilities.autoPropertyMechanism(this, mechanism);
         if (!mechanism.fulfilled()) {
