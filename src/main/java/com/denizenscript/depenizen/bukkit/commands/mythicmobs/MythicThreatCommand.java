@@ -1,19 +1,16 @@
 package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
 import com.denizenscript.denizen.objects.EntityTag;
-import com.denizenscript.denizen.utilities.Utilities;
-import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
+import com.denizenscript.denizencore.scripts.commands.generator.ArgLinear;
+import com.denizenscript.denizencore.scripts.commands.generator.ArgName;
+import com.denizenscript.denizencore.scripts.commands.generator.ArgPrefixed;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import io.lumine.mythic.bukkit.BukkitAdapter;
-
-import java.util.Collections;
-import java.util.List;
 
 public class MythicThreatCommand  extends AbstractCommand {
 
@@ -21,6 +18,7 @@ public class MythicThreatCommand  extends AbstractCommand {
         setName("mythicthreat");
         setSyntax("mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] (for:<entity>|...)");
         setRequiredArguments(3, 4);
+        autoCompile();
     }
 
     // <--[command]
@@ -44,71 +42,28 @@ public class MythicThreatCommand  extends AbstractCommand {
 
     private enum Operation {ADD, SUBTRACT, SET}
 
-    @Override
-    public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (Argument arg : scriptEntry) {
-            if (!scriptEntry.hasObject("mythicmob")
-                    && arg.matchesArgumentType(MythicMobsMobTag.class)) {
-                scriptEntry.addObject("mythicmob", arg.asType(MythicMobsMobTag.class));
-            }
-            else if (!scriptEntry.hasObject("operation")
-                    && arg.matchesEnum(Operation.class)) {
-                scriptEntry.addObject("operation", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("threat")
-                    && arg.matchesFloat()) {
-                scriptEntry.addObject("threat", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("targets")
-                    && arg.matchesPrefix("for")
-                    && arg.matchesArgumentList(EntityTag.class)) {
-                scriptEntry.addObject("targets", arg.asType(ListTag.class).filter(EntityTag.class, scriptEntry));
-            }
-            else {
-                arg.reportUnhandled();
-            }
-        }
-        if (!scriptEntry.hasObject("mythicmob")) {
-            throw new InvalidArgumentsException("Must specify a MythicMob!");
-        }
-        if (!scriptEntry.hasObject("operation")) {
-            throw new InvalidArgumentsException("Must specify an Operation!");
-        }
-        if (!scriptEntry.hasObject("threat")) {
-            throw new InvalidArgumentsException("Must specify a threat value!");
-        }
-        if (!scriptEntry.hasObject("targets")) {
-            scriptEntry.defaultObject("targets", (Utilities.entryHasPlayer(scriptEntry) ? Collections.singletonList(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity()) : null));
-        }
-    }
-
-    @Override
-    public void execute(ScriptEntry scriptEntry) {
-        MythicMobsMobTag mythicmob = scriptEntry.getObjectTag("mythicmob");
-        ElementTag operation = scriptEntry.getObjectTag("operation");
-        ElementTag threat = scriptEntry.getElement("threat");
-        List<EntityTag> targets = (List<EntityTag>) scriptEntry.getObject("targets");
-        if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), mythicmob, operation, threat, db("targets", targets));
-        }
+    public static void autoExecute(ScriptEntry scriptEntry,
+                                   @ArgLinear @ArgName("mythicmob") MythicMobsMobTag mythicmob,
+                                   @ArgLinear @ArgName("operation") Operation operation,
+                                   @ArgLinear @ArgName("threat") ElementTag threat,
+                                   @ArgPrefixed @ArgName("for") ListTag targets) {
         if (!mythicmob.getMob().hasThreatTable()) {
             Debug.echoError("MythicMob does not have a threat table: " + mythicmob);
             return;
         }
-        Operation op = Operation.valueOf(operation.toString().toUpperCase());
-        switch (op) {
+        switch (operation) {
             case ADD:
-                for (EntityTag target : targets) {
+                for (EntityTag target : targets.filter(EntityTag.class, scriptEntry)) {
                     mythicmob.getMob().getThreatTable().threatGain(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
                 }
                 break;
             case SUBTRACT:
-                for (EntityTag target : targets) {
+                for (EntityTag target : targets.filter(EntityTag.class, scriptEntry)) {
                     mythicmob.getMob().getThreatTable().threatLoss(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
                 }
                 break;
             case SET:
-                for (EntityTag target : targets) {
+                for (EntityTag target : targets.filter(EntityTag.class, scriptEntry)) {
                     mythicmob.getMob().getThreatTable().threatSet(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
                 }
                 break;
