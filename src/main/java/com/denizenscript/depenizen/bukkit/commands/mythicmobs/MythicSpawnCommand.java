@@ -1,6 +1,10 @@
 package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
 import com.denizenscript.denizencore.objects.Argument;
+import com.denizenscript.denizencore.scripts.commands.generator.ArgDefaultText;
+import com.denizenscript.denizencore.scripts.commands.generator.ArgLinear;
+import com.denizenscript.denizencore.scripts.commands.generator.ArgName;
+import com.denizenscript.denizencore.scripts.commands.generator.ArgPrefixed;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
@@ -14,12 +18,15 @@ import io.lumine.mythic.api.mobs.entities.SpawnReason;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import org.bukkit.entity.Entity;
 
+import java.util.Set;
+
 public class MythicSpawnCommand extends AbstractCommand {
 
     public MythicSpawnCommand() {
         setName("mythicspawn");
         setSyntax("mythicspawn [<name>] [<location>] (level:<#>) (reason:<#>)");
         setRequiredArguments(2, 3);
+        autoCompile();
     }
 
     // <--[command]
@@ -45,42 +52,15 @@ public class MythicSpawnCommand extends AbstractCommand {
     // -->
 
     @Override
-    public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (Argument arg : scriptEntry) {
-            if (!scriptEntry.hasObject("location")
-                    && arg.matchesArgumentType(LocationTag.class)) {
-                scriptEntry.addObject("location", arg.asType(LocationTag.class));
-            }
-            else if (!scriptEntry.hasObject("level")
-                    && arg.matchesPrefix("level", "l")
-                    && arg.matchesInteger()) {
-                scriptEntry.addObject("level", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("name")) {
-                scriptEntry.addObject("name", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("reason") && arg.matchesEnum(SpawnReason.class)) {
-                scriptEntry.addObject("reason", arg.asElement());
-            }
-            else {
-                arg.reportUnhandled();
-            }
-        }
-        if (!scriptEntry.hasObject("location") || !scriptEntry.hasObject("name")) {
-            throw new InvalidArgumentsException("Must specify a name and location.");
-        }
-        scriptEntry.defaultObject("level", new ElementTag(1));
+    public void addCustomTabCompletions(TabCompletionsBuilder tab) {
+        tab.add((Set<String>) MythicMobsBridge.getMobNames());
     }
 
-    @Override
-    public void execute(ScriptEntry scriptEntry) {
-        ElementTag name = scriptEntry.getElement("name");
-        LocationTag location = scriptEntry.getObjectTag("location");
-        ElementTag level = scriptEntry.getElement("level");
-        SpawnReason reason = SpawnReason.valueOf(scriptEntry.hasObject("reason") ? scriptEntry.getElement("reason").asString() : "OTHER");
-        if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), name, location, level, reason);
-        }
+    public static void autoExecute(ScriptEntry scriptEntry,
+                                   @ArgLinear @ArgName("name") ElementTag name,
+                                   @ArgLinear @ArgName("location") LocationTag location,
+                                   @ArgPrefixed @ArgName("level") @ArgDefaultText("1") ElementTag level,
+                                   @ArgPrefixed @ArgName("reason") @ArgDefaultText("OTHER") SpawnReason reason) {
         try {
             MythicMob mob = MythicMobsBridge.getMythicMob(name.asString());
             if (mob == null) {
