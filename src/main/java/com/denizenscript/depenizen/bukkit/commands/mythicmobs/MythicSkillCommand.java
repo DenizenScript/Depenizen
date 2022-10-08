@@ -63,8 +63,7 @@ public class MythicSkillCommand extends AbstractCommand {
 
     public static void autoExecute(ScriptEntry scriptEntry,
                                    @ArgLinear @ArgName("skill") ElementTag skill,
-                                   @ArgLinear @ArgDefaultNull @ArgName("entity_targets") ListTag entityTargets,
-                                   @ArgLinear @ArgDefaultNull @ArgName("location_targets") ListTag locationTargets,
+                                   @ArgLinear @ArgName("targets") ListTag targets,
                                    @ArgPrefixed @ArgName("power") @ArgDefaultText("1") ElementTag power,
                                    @ArgPrefixed @ArgName("casters") @ArgDefaultNull ListTag casters,
                                    @ArgPrefixed @ArgName("trigger") @ArgDefaultNull EntityTag trigger,
@@ -72,25 +71,17 @@ public class MythicSkillCommand extends AbstractCommand {
                                    @ArgPrefixed @ArgName("parameters") @ArgDefaultNull MapTag parameters,
                                    @ArgPrefixed @ArgName("variables") @ArgDefaultNull MapTag variables,
                                    @ArgLinear @ArgName("async") @ArgDefaultText("false") boolean async) {
-        if (entityTargets != null && locationTargets != null) {
+        List<Entity> entityTargets = Arrays.stream(targets.toArray()).filter(object -> object.getClass() == EntityTag.class).map(entity -> ((EntityTag) entity).getBukkitEntity()).toList();
+        List<Location> locationTargets = Arrays.stream(targets.toArray()).filter(object -> object.getClass() == LocationTag.class).map(location ->  (Location) location).toList();
+        //List<Entity> entityTargets = targets.filter(EntityTag.class, scriptEntry).stream().map(EntityTag::getBukkitEntity).toList();
+        //List<Location> locationTargets = targets.filter(LocationTag.class, scriptEntry).stream().map(location -> (Location) location).toList();
+        if (!entityTargets.isEmpty() && !locationTargets.isEmpty()) {
             Debug.echoError("Cannot have both entity and location targets.");
             return;
         }
 
-        ArrayList<Entity> entityTargetsArray = null;
-        ArrayList<Location> locationTargetsArray = null;
-        if (entityTargets != null) {
-            entityTargetsArray = new ArrayList<>();
-            for (EntityTag entity : entityTargets.filter(EntityTag.class, scriptEntry)) {
-                entityTargetsArray.add(entity.getBukkitEntity());
-            }
-        }
-        else {
-            locationTargetsArray = new ArrayList<>(locationTargets.filter(LocationTag.class, scriptEntry));
-        }
-
         for (EntityTag caster : casters != null ? casters.filter(EntityTag.class, scriptEntry) : Utilities.entryDefaultEntityList(scriptEntry, true)) {
-            MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill.asString(), trigger != null ? trigger.entity : caster.getBukkitEntity(), origin, entityTargetsArray, locationTargetsArray, power.asFloat() , (metadata) -> {
+            MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill.asString(), trigger != null ? trigger.entity : caster.getBukkitEntity(), origin, entityTargets, locationTargets, power.asFloat() , (metadata) -> {
                 if (parameters != null) {
                     Map<String, String> parameterMap = new HashMap<>();
                     for (Map.Entry<StringHolder, ObjectTag> entry : parameters.map.entrySet()) {
