@@ -16,17 +16,17 @@ public class MythicThreatCommand extends AbstractCommand {
 
     public MythicThreatCommand() {
         setName("mythicthreat");
-        setSyntax("mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] (for:<entity>|...)");
-        setRequiredArguments(3, 4);
+        setSyntax("mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] [for:<entity>|...]");
+        setRequiredArguments(4, 4);
         autoCompile();
     }
 
     // <--[command]
     // @Name MythicThreat
-    // @Syntax mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] (for:<entity>|...)
+    // @Syntax mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] [for:<entity>|...]
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
-    // @Required 3
+    // @Required 4
     // @Maximum 4
     // @Short Modifies the threat table of a Mythic Mob.
     //
@@ -40,7 +40,7 @@ public class MythicThreatCommand extends AbstractCommand {
     //
     // -->
 
-    private enum Operation { ADD, SUBTRACT, SET }
+    public enum Operation {ADD, SUBTRACT, SET}
 
     public static void autoExecute(ScriptEntry scriptEntry,
                                    @ArgLinear @ArgName("mythicmob") MythicMobsMobTag mythicmob,

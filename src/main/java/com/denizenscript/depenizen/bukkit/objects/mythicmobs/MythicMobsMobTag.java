@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.objects.mythicmobs;
 
 import com.denizenscript.denizen.objects.EntityFormObject;
 import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.Adjustable;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.Mechanism;
@@ -18,6 +19,7 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.text.StringHolder;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import io.lumine.mythic.api.adapters.AbstractEntity;
+import io.lumine.mythic.api.adapters.AbstractLocation;
 import io.lumine.mythic.api.mobs.GenericCaster;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.api.skills.SkillCaster;
@@ -26,6 +28,7 @@ import io.lumine.mythic.bukkit.adapters.BukkitEntity;
 import io.lumine.mythic.core.mobs.ActiveMob;
 import io.lumine.mythic.core.skills.variables.Variable;
 import io.lumine.mythic.core.skills.variables.VariableType;
+import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
@@ -493,6 +496,18 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         tagProcessor.registerTag(ElementTag.class, "mob_path", (attribute, object) -> {
             return new ElementTag(object.getMob().getType().getConfig().getFile().getPath(), true);
         });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.tracked_location>
+        // @returns LocationTag
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Returns the MythicMob's tracked location. (The location that the @TrackedLocation targeter in Mythic skills will return)
+        // @mechanism MythicMobsMobTag.tracked_location
+        // -->
+        tagProcessor.registerTag(LocationTag.class, "tracked_location", (attribute, object) -> {
+            return new LocationTag(MythicMobsBridge.locationFromAbstractLocation(object.getMob().getTrackedLocation()));
+        });
     }
 
     @Override
@@ -639,6 +654,20 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         else if (mechanism.matches("parent") && mechanism.requireObject(EntityTag.class)) {
             EntityTag parent = mechanism.valueAsType(EntityTag.class);
             mob.setParent(new GenericCaster(BukkitAdapter.adapt(parent.getBukkitEntity())));
+        }
+
+        // <--[mechanism]
+        // @object MythicMobsMobTag
+        // @name tracked_location
+        // @input LocationTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Sets the MythicMob's tracked location. (The location that the @TrackedLocation targeter in Mythic skills will return)
+        // @tags
+        // <MythicMobsMobTag.tracked_location>
+        // -->
+        else if (mechanism.matches("tracked_location") && mechanism.requireObject(LocationTag.class)) {
+            mob.setTrackedLocation(BukkitAdapter.adapt((Location) mechanism.valueAsType(LocationTag.class).getJavaObject()));
         }
 
         tagProcessor.processMechanism(this, mechanism);

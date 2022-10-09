@@ -7,6 +7,7 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import io.lumine.mythic.api.adapters.AbstractLocation;
+import io.lumine.mythic.api.mobs.entities.SpawnReason;
 import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,6 +29,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
     // <context.location> Returns the LocationTag of where the MythicMob will spawn.
     // <context.from_spawner> Returns true if the mob was from a spawner.
     // <context.spawner_location> Returns the LocationTag of the spawner that spawned the mob, if any.
+    // <context.spawn_reason> Returns the reason for the MythicMob's spawning. Can be NATURAL, COMMAND, SPAWNER, SUMMON, OTHER, or DISPENSER.
     //
     // @Plugin Depenizen, MythicMobs
     //
@@ -43,6 +45,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
     public MythicMobSpawnEvent event;
     public MythicMobsMobTag mythicmob;
     public LocationTag location;
+    public SpawnReason reason;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -71,8 +74,11 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
             return new ElementTag(event.isFromMythicSpawner());
         }
         else if (name.equals("spawner_location") && event.isFromMythicSpawner()) {
-                AbstractLocation loc = event.getMythicSpawner().getLocation();
-                return new LocationTag(loc.getX(), loc.getY(), loc.getZ(), loc.getWorld().getName());
+            AbstractLocation loc = event.getMythicSpawner().getLocation();
+            return new LocationTag(loc.getX(), loc.getY(), loc.getZ(), loc.getWorld().getName());
+        }
+        else if (name.equals("spawn_reason")) {
+            return new ElementTag(reason.toString());
         }
         return super.getContext(name);
     }
@@ -81,6 +87,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
     public void onMythicMobSpawns(MythicMobSpawnEvent event) {
         mythicmob = new MythicMobsMobTag(event.getMob());
         location = new LocationTag(event.getLocation());
+        reason = event.getSpawnReason();
         this.event = event;
         EntityTag.rememberEntity(event.getEntity());
         fire(event);

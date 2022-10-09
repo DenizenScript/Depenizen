@@ -71,8 +71,16 @@ public class MythicSkillCommand extends AbstractCommand {
                                    @ArgPrefixed @ArgName("parameters") @ArgDefaultNull MapTag parameters,
                                    @ArgPrefixed @ArgName("variables") @ArgDefaultNull MapTag variables,
                                    @ArgLinear @ArgName("async") @ArgDefaultText("false") boolean async) {
-        List<Entity> entityTargets = targets.objectForms.stream().filter(object -> object.canBeType(EntityTag.class)).map(entity -> ((EntityTag) entity).getBukkitEntity()).toList();
-        List<Location> locationTargets = targets.objectForms.stream().filter(object -> object.canBeType(LocationTag.class)).map(location ->  (Location) location).toList();
+        List<Entity> entityTargets = new ArrayList<>();
+        List<Location> locationTargets = new ArrayList<>();
+        for (ObjectTag object : targets.objectForms) {
+            if (object.canBeType(EntityTag.class)) {
+                entityTargets.add(((EntityTag) object).getBukkitEntity());
+            }
+            else if (object.canBeType(LocationTag.class)) {
+                locationTargets.add((Location) object);
+            }
+        }
         if (!entityTargets.isEmpty() && !locationTargets.isEmpty()) {
             Debug.echoError("Cannot have both entity and location targets.");
             return;
