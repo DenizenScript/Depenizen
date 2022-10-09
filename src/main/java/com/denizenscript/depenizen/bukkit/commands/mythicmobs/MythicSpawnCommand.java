@@ -58,7 +58,7 @@ public class MythicSpawnCommand extends AbstractCommand {
                                    @ArgLinear @ArgName("name") ElementTag name,
                                    @ArgLinear @ArgName("location") LocationTag location,
                                    @ArgPrefixed @ArgName("level") @ArgDefaultText("1") ElementTag level,
-                                   @ArgPrefixed @ArgName("reason") @ArgDefaultText("OTHER") SpawnReason reason) {
+                                   @ArgPrefixed @ArgName("reason") @ArgDefaultText("COMMAND") SpawnReason reason) {
         try {
             MythicMob mob = MythicMobsBridge.getMythicMob(name.asString());
             if (mob == null) {
