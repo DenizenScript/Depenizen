@@ -440,7 +440,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // -->
         tagProcessor.registerTag(MapTag.class, "damage_modifiers", (attribute, object) -> {
             MapTag result = new MapTag();
-            for (Map.Entry<String, Double> entry : MythicMobsBridge.getDamageModifiers(object.getMobType()).entrySet()) {
+            for (Map.Entry<String, Double> entry : object.getMobType().getDamageModifiers().entrySet()) {
                 result.putObject(entry.getKey(), new ElementTag(entry.getValue().toString()));
             }
             return result;
@@ -506,7 +506,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @mechanism MythicMobsMobTag.tracked_location
         // -->
         tagProcessor.registerTag(LocationTag.class, "tracked_location", (attribute, object) -> {
-            return object.getMob().getTrackedLocation() != null ? new LocationTag(MythicMobsBridge.locationFromAbstractLocation(object.getMob().getTrackedLocation())) : null;
+            return object.getMob().getTrackedLocation() != null ? new LocationTag(BukkitAdapter.adapt(object.getMob().getTrackedLocation())) : null;
         });
 
         // <--[tag]

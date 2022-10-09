@@ -51,7 +51,7 @@ public class MythicSpawnCommand extends AbstractCommand {
 
     @Override
     public void addCustomTabCompletions(TabCompletionsBuilder tab) {
-        tab.add((Set<String>) MythicMobsBridge.getMobNames());
+        tab.add((Set<String>) MythicMobsBridge.getMobManager().getMobNames());
     }
 
     public static void autoExecute(ScriptEntry scriptEntry,

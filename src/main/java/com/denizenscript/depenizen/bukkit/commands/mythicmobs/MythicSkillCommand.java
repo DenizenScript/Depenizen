@@ -70,15 +70,15 @@ public class MythicSkillCommand extends AbstractCommand {
                                    @ArgPrefixed @ArgName("origin") @ArgDefaultNull LocationTag origin,
                                    @ArgPrefixed @ArgName("parameters") @ArgDefaultNull MapTag parameters,
                                    @ArgPrefixed @ArgName("variables") @ArgDefaultNull MapTag variables,
-                                   @ArgLinear @ArgName("async") @ArgDefaultText("false") boolean async) {
+                                   @ArgName("async") boolean async) {
         List<Entity> entityTargets = new ArrayList<>();
         List<Location> locationTargets = new ArrayList<>();
         for (ObjectTag object : targets.objectForms) {
             if (object.canBeType(EntityTag.class)) {
-                entityTargets.add(((EntityTag) object).getBukkitEntity());
+                entityTargets.add(object.asType(EntityTag.class, scriptEntry.context).getBukkitEntity());
             }
             else if (object.canBeType(LocationTag.class)) {
-                locationTargets.add((Location) object);
+                locationTargets.add(object.asType(LocationTag.class, scriptEntry.context));
             }
         }
         if (!entityTargets.isEmpty() && !locationTargets.isEmpty()) {
@@ -91,7 +91,7 @@ public class MythicSkillCommand extends AbstractCommand {
                 if (parameters != null) {
                     Map<String, String> parameterMap = new HashMap<>();
                     for (Map.Entry<StringHolder, ObjectTag> entry : parameters.map.entrySet()) {
-                        parameterMap.put(entry.getKey().toString(), entry.getValue().toString());
+                        parameterMap.put(entry.getKey().str, entry.getValue().toString());
                     }
                     metadata.getParameters().putAll(parameterMap);
                 }

@@ -9,6 +9,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
+import io.lumine.mythic.api.skills.placeholders.PlaceholderString;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 
 public class MythicMobsEntityProperties implements Property {
@@ -89,7 +90,7 @@ public class MythicMobsEntityProperties implements Property {
                 Debug.echoError("Placeholder text is required!");
                 return null;
             }
-            return new ElementTag(MythicMobsBridge.parseMythic(BukkitAdapter.adapt(object.entity.getBukkitEntity()), attribute.getParam()));
+            return new ElementTag(PlaceholderString.of(attribute.getParam()).get(BukkitAdapter.adapt(object.entity.getBukkitEntity())));
         }, "parse_mythicmob");
     }
 

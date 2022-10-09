@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
-import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
@@ -25,12 +24,9 @@ import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
-import io.lumine.mythic.api.adapters.AbstractEntity;
-import io.lumine.mythic.api.adapters.AbstractLocation;
 import io.lumine.mythic.api.mobs.MobManager;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.api.packs.Pack;
-import io.lumine.mythic.api.skills.placeholders.PlaceholderString;
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
@@ -101,7 +97,7 @@ public class MythicMobsBridge extends Bridge {
             // -->
             tagProcessor.registerTag(ListTag.class, "mob_ids", (attribute, object) -> {
                 ListTag list = new ListTag();
-                for (String item : getMobNames()) {
+                for (String item : getMobManager().getMobNames()) {
                     list.addObject(new ElementTag(item, true));
                 }
                 return list;
@@ -116,7 +112,7 @@ public class MythicMobsBridge extends Bridge {
             // -->
             tagProcessor.registerTag(ListTag.class, "active_mobs", (attribute, object) -> {
                 ListTag list = new ListTag();
-                for (ActiveMob entity : MythicMobsBridge.getMobManager().getActiveMobs()) {
+                for (ActiveMob entity : getMobManager().getActiveMobs()) {
                     list.addObject(new MythicMobsMobTag(entity));
                 }
                 return list;
@@ -146,11 +142,13 @@ public class MythicMobsBridge extends Bridge {
             // -->
             tagProcessor.registerTag(MapTag.class, ElementTag.class, "damage_modifiers", (attribute, object, id) -> {
                 Optional<MythicMob> optionalMythicMob = MythicBukkit.inst().getMobManager().getMythicMob(id.asString());
-                if (!optionalMythicMob.isPresent()) return null;
+                if (!optionalMythicMob.isPresent()) {
+                    return null;
+                }
                 MythicMob mob = optionalMythicMob.get();
                 MapTag result = new MapTag();
-                for (Map.Entry<String, Double> entry : MythicMobsBridge.getDamageModifiers(mob).entrySet()) {
-                    result.putObject(entry.getKey(), new ElementTag(entry.getValue().toString()));
+                for (Map.Entry<String, Double> entry : mob.getDamageModifiers().entrySet()) {
+                    result.putObject(entry.getKey(), new ElementTag(entry.getValue()));
                 }
                 return result;
             });
@@ -285,14 +283,6 @@ public class MythicMobsBridge extends Bridge {
         return MythicBukkit.inst().getMobManager().getMythicMob(name).orElse(null);
     }
 
-    public static Map<String, Double> getDamageModifiers(MythicMob mob) {
-        return mob.getDamageModifiers();
-    }
-
-    public static Collection<String> getMobNames() {
-        return getMobManager().getMobNames();
-    }
-
     public static MobManager getMobManager() {
         return MythicBukkit.inst().getMobManager();
     }
@@ -340,10 +330,6 @@ public class MythicMobsBridge extends Bridge {
         registry.putAll(map);
     }
 
-    public static LocationTag locationFromAbstractLocation(AbstractLocation location) {
-        return new LocationTag(location.getWorld().getName(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
-    }
-
     public static ItemExecutor getItemManager() {
         return MythicBukkit.inst().getItemManager();
     }
@@ -366,11 +352,6 @@ public class MythicMobsBridge extends Bridge {
 
     public static String getFaction(ActiveMob mob) {
         return mob.getFaction();
-    }
-
-    public static String parseMythic(AbstractEntity entity, String string) {
-        PlaceholderString placeholderString = PlaceholderString.of(string);
-        return placeholderString.get(entity);
     }
 
     public static boolean skillExists(String name) {
