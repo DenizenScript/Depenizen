@@ -1,10 +1,12 @@
 package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
 import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
+import com.denizenscript.denizencore.scripts.commands.generator.ArgDefaultNull;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgLinear;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgName;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgPrefixed;
@@ -16,17 +18,17 @@ public class MythicThreatCommand extends AbstractCommand {
 
     public MythicThreatCommand() {
         setName("mythicthreat");
-        setSyntax("mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] [for:<entity>|...]");
-        setRequiredArguments(4, 4);
+        setSyntax("mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] (for:<entity>|...)");
+        setRequiredArguments(3, 4);
         autoCompile();
     }
 
     // <--[command]
     // @Name MythicThreat
-    // @Syntax mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] [for:<entity>|...]
+    // @Syntax mythicthreat [<mythicmob>] [add/subtract/set] [<#.#>] (for:<entity>|...)
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
-    // @Required 4
+    // @Required 3
     // @Maximum 4
     // @Short Modifies the threat table of a Mythic Mob.
     //
@@ -46,10 +48,13 @@ public class MythicThreatCommand extends AbstractCommand {
                                    @ArgLinear @ArgName("mythicmob") MythicMobsMobTag mythicmob,
                                    @ArgLinear @ArgName("operation") Operation operation,
                                    @ArgLinear @ArgName("threat") ElementTag threat,
-                                   @ArgPrefixed @ArgName("for") ListTag targets) {
+                                   @ArgPrefixed @ArgName("for") @ArgDefaultNull ListTag targets) {
         if (!mythicmob.getMob().hasThreatTable()) {
             Debug.echoError("MythicMob does not have a threat table: " + mythicmob);
             return;
+        }
+        if (targets == null) {
+            targets = new ListTag(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity());
         }
         switch (operation) {
             case ADD:
