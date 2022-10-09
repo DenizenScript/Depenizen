@@ -25,7 +25,9 @@ import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.api.skills.SkillCaster;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.adapters.BukkitEntity;
+import io.lumine.mythic.bukkit.utils.serialize.Optl;
 import io.lumine.mythic.core.mobs.ActiveMob;
+import io.lumine.mythic.core.skills.auras.Aura;
 import io.lumine.mythic.core.skills.variables.Variable;
 import io.lumine.mythic.core.skills.variables.VariableType;
 import org.bukkit.Location;
@@ -34,6 +36,7 @@ import org.bukkit.entity.LivingEntity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
 import java.util.UUID;
 
 public class MythicMobsMobTag implements ObjectTag, Adjustable {
@@ -480,10 +483,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // -->
         tagProcessor.registerTag(EntityTag.class, "parent", (attribute, object) -> {
             SkillCaster parent = object.getMob().getParent();
-            if (parent == null) {
-                return null;
-            }
-            return new EntityTag(parent.getEntity().getBukkitEntity());
+            return parent != null ? new EntityTag(parent.getEntity().getBukkitEntity()) : null;
         });
 
         // <--[tag]
@@ -506,7 +506,64 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @mechanism MythicMobsMobTag.tracked_location
         // -->
         tagProcessor.registerTag(LocationTag.class, "tracked_location", (attribute, object) -> {
-            return new LocationTag(MythicMobsBridge.locationFromAbstractLocation(object.getMob().getTrackedLocation()));
+            return object.getMob().getTrackedLocation() != null ? new LocationTag(MythicMobsBridge.locationFromAbstractLocation(object.getMob().getTrackedLocation())) : null;
+        });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.owner>
+        // @returns EntityTag
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Returns the MythicMob's owner, if present.
+        // @mechanism MythicMobsMobTag.owner
+        // -->
+        tagProcessor.registerTag(EntityTag.class, "owner", (attribute, object) -> {
+            Optl<UUID> owner = object.getMob().getOwner();
+            if (!owner.isPresent()) {
+                return null;
+            }
+            Entity ownerEntity = EntityTag.getEntityForID(owner.get());
+            if (ownerEntity == null) {
+                return null;
+            }
+            return new EntityTag(ownerEntity);
+        });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.has_aura[<name>]>
+        // @returns ElementTag(Boolean)
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Returns whether the MythicMob has an aura whose name is the same as the parameter.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, ElementTag.class, "has_aura", (attribute, object, auraName) -> {
+            return new ElementTag(object.getMob().getAuraRegistry().hasAura(auraName.asString()));
+        });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.aura_stacks[<name>]>
+        // @return ElementTag(Number)
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Returns the amount of stacks of auras with the same name as the parameter that the MythicMob has.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, ElementTag.class, "aura_stacks", (attribute, object, auraName) -> {
+            return new ElementTag(object.getMob().getAuraRegistry().getStacks(auraName.asString()));
+        });
+
+        // <--[tag]
+        // @attribute <MythicMobsMobTag.auras>
+        // @return ListTag
+        // @plugin Depenizen MythicMobs
+        // @description
+        // Returns a list of auras that the MythicMob currently has.
+        // -->
+        tagProcessor.registerTag(ListTag.class, "auras", (attribute, object) -> {
+            ListTag result = new ListTag();
+            for (Map.Entry<String, Queue<Aura.AuraTracker>> name : object.getMob().getAuraRegistry().getAuras().entrySet()) {
+                result.addObject(new ElementTag(name.getKey()));
+            }
+            return result;
         });
     }
 
@@ -668,6 +725,20 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // -->
         else if (mechanism.matches("tracked_location") && mechanism.requireObject(LocationTag.class)) {
             mob.setTrackedLocation(BukkitAdapter.adapt((Location) mechanism.valueAsType(LocationTag.class).getJavaObject()));
+        }
+
+        // <--[mechanism]
+        // @object MythicMobsMobTag
+        // @name owner
+        // @input EntityTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Sets the MythicMob's owner.
+        // @tags
+        // <MythicMobsMobTag.owner>
+        // -->
+        else if (mechanism.matches("owner") && mechanism.requireObject(EntityTag.class)) {
+            mob.setOwner(mechanism.valueAsType(EntityTag.class).getUUID());
         }
 
         tagProcessor.processMechanism(this, mechanism);

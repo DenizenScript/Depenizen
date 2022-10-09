@@ -23,7 +23,7 @@ public class MythicSpawnCommand extends AbstractCommand {
     public MythicSpawnCommand() {
         setName("mythicspawn");
         setSyntax("mythicspawn [<name>] [<location>] (level:<#>) (reason:<#>)");
-        setRequiredArguments(2, 3);
+        setRequiredArguments(2, 4);
         autoCompile();
     }
 
@@ -33,7 +33,7 @@ public class MythicSpawnCommand extends AbstractCommand {
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
     // @Required 2
-    // @Maximum 3
+    // @Maximum 4
     // @Short Spawns a MythicMob at a location.
     //
     // @Description
