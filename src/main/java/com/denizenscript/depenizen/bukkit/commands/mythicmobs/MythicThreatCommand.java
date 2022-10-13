@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
 import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -54,7 +55,12 @@ public class MythicThreatCommand extends AbstractCommand {
             return;
         }
         if (targets == null) {
-            targets = new ListTag(Utilities.getEntryPlayer(scriptEntry).getDenizenEntity());
+            PlayerTag player = Utilities.getEntryPlayer(scriptEntry);
+            if (player == null || !player.isOnline()) {
+                Debug.echoError("Threat targets default to the queue's linked player, but this queue does not have one! Please specify targets to modify threat for!");
+                return;
+            }
+            targets = new ListTag(player.getDenizenEntity());
         }
         switch (operation) {
             case ADD:

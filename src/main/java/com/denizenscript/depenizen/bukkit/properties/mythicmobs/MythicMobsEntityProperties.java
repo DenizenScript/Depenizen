@@ -81,16 +81,13 @@ public class MythicMobsEntityProperties implements Property {
         // <--[tag]
         // @attribute <EntityTag.parse_mythic[<placeholder_text>]>
         // @returns ElementTag
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
         // @description
-        // Parses Mythic placeholders and returns the result. The target scope is set as the entity. (For example, <target.name> returns the entity's name.) Keep in mind that <> will have to be escaped using tags. This is usually over-engineering, consider using other Denizen tags instead.
+        // Parses Mythic placeholders and returns the result. The target scope is set as the entity. (For example, <target.name> returns the entity's name.)
+        // Keep in mind that <> will have to be escaped using tags. This is usually over-engineering, consider using other Denizen tags instead.
         // -->
-        PropertyParser.registerTag(MythicMobsEntityProperties.class, ElementTag.class, "parse_mythic", (attribute, object) -> {
-            if (!attribute.hasParam()) {
-                Debug.echoError("Placeholder text is required!");
-                return null;
-            }
-            return new ElementTag(PlaceholderString.of(attribute.getParam()).get(BukkitAdapter.adapt(object.entity.getBukkitEntity())));
+        PropertyParser.registerTag(MythicMobsEntityProperties.class, ElementTag.class, ElementTag.class, "parse_mythic", (attribute, object, text) -> {
+            return new ElementTag(PlaceholderString.of(text.asString()).get(BukkitAdapter.adapt(object.entity.getBukkitEntity())));
         }, "parse_mythicmob");
     }
 

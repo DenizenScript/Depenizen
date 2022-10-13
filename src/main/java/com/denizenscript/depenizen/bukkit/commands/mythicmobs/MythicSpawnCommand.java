@@ -29,7 +29,7 @@ public class MythicSpawnCommand extends AbstractCommand {
 
     // <--[command]
     // @Name MythicSpawn
-    // @Syntax mythicspawn [<name>] [<location>] (level:<#>) (reason:<#>)
+    // @Syntax mythicspawn [<name>] [<location>] (level:<#>) (reason:<reason>)
     // @Group Depenizen
     // @Plugin Depenizen, MythicMobs
     // @Required 2
@@ -38,7 +38,7 @@ public class MythicSpawnCommand extends AbstractCommand {
     //
     // @Description
     // This allows you to spawn a MythicMob at a location using the mob's internal name.
-    // (Requires paper) Additionaly, you may specify a spawn reason for this MythicMob, which can be any of these: <@link url https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html>
+    // (Requires Paper) Additionally, you may specify a spawn reason for this MythicMob, which can be any of these: <@link url https://www.mythicmobs.net/javadocs/io/lumine/xikage/mythicmobs/mobs/entities/SpawnReason.html>
     //
     // @Tags
     // <entry[saveName].spawned_mythicmob> returns the spawned MythicMobsMob.
@@ -58,7 +58,7 @@ public class MythicSpawnCommand extends AbstractCommand {
                                    @ArgLinear @ArgName("name") ElementTag name,
                                    @ArgLinear @ArgName("location") LocationTag location,
                                    @ArgPrefixed @ArgName("level") @ArgDefaultText("1") ElementTag level,
-                                   @ArgPrefixed @ArgName("reason") @ArgDefaultText("COMMAND") SpawnReason reason) {
+                                   @ArgPrefixed @ArgName("reason") @ArgDefaultText("command") SpawnReason reason) {
         try {
             MythicMob mob = MythicMobsBridge.getMythicMob(name.asString());
             if (mob == null) {

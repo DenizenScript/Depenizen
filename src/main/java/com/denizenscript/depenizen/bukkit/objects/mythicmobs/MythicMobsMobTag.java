@@ -404,7 +404,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.ai_goal_selectors>
         // @returns ListTag
-        // @plugin Depenizen MythicMbos
+        // @plugin Depenizen MythicMobs
         // @description
         // Returns a ListTag of the MythicMob's AIGoalSelectors.
         // -->
@@ -419,7 +419,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.ai_target_selectors>
         // @returns ListTag
-        // @plugin Depenizen MythicMbos
+        // @plugin Depenizen MythicMobs
         // @description
         // Returns a ListTag of the MythicMob's AITargetSelectors.
         // -->
@@ -434,7 +434,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.damage_modifiers>
         // @returns MapTag
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
         // @description
         // Returns a MapTag of the MythicMob's damage modifiers.
         // -->
@@ -449,7 +449,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.faction>
         // @returns ElementTag
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
         // @description
         // Returns the mob's faction.
         // -->
@@ -460,10 +460,10 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.children>
         // @returns ListTag(EntityTag)
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
+        // @mechanism MythicMobsMobTag.add_child
         // @description
         // Returns the mob's children.
-        // @mechanism MythicMobsMobTag.add_child
         // -->
         tagProcessor.registerTag(ListTag.class, "children", (attribute, object) -> {
             ListTag result = new ListTag();
@@ -476,10 +476,10 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.parent>
         // @returns EntityTag
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
+        // @mechanism MythicMobsMobTag.parent
         // @description
         // Returns the mob's parent.
-        // @mechanism MythicMobsMobTag.parent
         // -->
         tagProcessor.registerTag(EntityTag.class, "parent", (attribute, object) -> {
             SkillCaster parent = object.getMob().getParent();
@@ -489,9 +489,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.mob_path>
         // @returns ElementTag
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
         // @description
-        // Returns the path to the file that stores this MythicMob's configuration. Equivalent to <@link tag mythicmobs.mob_path>.
+        // Returns the path to the file that stores this MythicMob's configuration file. Equivalent to <@link tag mythicmobs.mob_path>.
         // -->
         tagProcessor.registerTag(ElementTag.class, "mob_path", (attribute, object) -> {
             return new ElementTag(object.getMob().getType().getConfig().getFile().getPath(), true);
@@ -500,9 +500,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.tracked_location>
         // @returns LocationTag
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
         // @description
-        // Returns the MythicMob's tracked location. (The location that the @TrackedLocation targeter in Mythic skills will return)
+        // Returns the MythicMob's tracked location (The location that the @TrackedLocation targeter in Mythic skills will return).
         // @mechanism MythicMobsMobTag.tracked_location
         // -->
         tagProcessor.registerTag(LocationTag.class, "tracked_location", (attribute, object) -> {
@@ -512,7 +512,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.owner>
         // @returns EntityTag
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
         // @description
         // Returns the MythicMob's owner, if present.
         // @mechanism MythicMobsMobTag.owner
@@ -532,7 +532,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.has_aura[<name>]>
         // @returns ElementTag(Boolean)
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
         // @description
         // Returns whether the MythicMob has an aura whose name is the same as the parameter.
         // -->
@@ -543,7 +543,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.aura_stacks[<name>]>
         // @return ElementTag(Number)
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
         // @description
         // Returns the amount of stacks of auras with the same name as the parameter that the MythicMob has.
         // -->
@@ -554,7 +554,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[tag]
         // @attribute <MythicMobsMobTag.auras>
         // @return ListTag
-        // @plugin Depenizen MythicMobs
+        // @plugin Depenizen, MythicMobs
         // @description
         // Returns a list of auras that the MythicMob currently has.
         // -->
@@ -565,15 +565,6 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
             }
             return result;
         });
-    }
-
-    @Override
-    public void applyProperty(Mechanism mechanism) {
-        mechanism.echoError("Cannot apply properties to a MythicMob!");
-    }
-
-    @Override
-    public void adjust(Mechanism mechanism) {
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -585,14 +576,13 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.mythic_variable_map>
         // -->
-        if (mechanism.matches("mythic_variable_map") && mechanism.requireObject(MapTag.class)) {
-            MapTag map = mechanism.valueAsType(MapTag.class);
+        tagProcessor.registerMechanism("mythic_variable_map", true, MapTag.class, (object, mechanism, map) -> {
             Map<String, Variable> newMap = new HashMap<>();
             for (Map.Entry<StringHolder, ObjectTag> entry : map.map.entrySet()) {
                 newMap.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
             }
-            MythicMobsBridge.setMythicVariableMap(mob.getEntity().getBukkitEntity(), newMap);
-        }
+            MythicMobsBridge.setMythicVariableMap(object.getEntity(), newMap);
+        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -604,9 +594,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.faction>
         // -->
-        else if (mechanism.matches("faction") && mechanism.requireObject(ElementTag.class)) {
-            MythicMobsBridge.setFaction(mob, mechanism.getValue().asString());
-        }
+        tagProcessor.registerMechanism("faction", true, ElementTag.class, (object, mechanism, value) -> {
+            object.getMob().setFaction(value.asString());
+        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -618,9 +608,10 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.global_cooldown>
         // -->
-        else if (mechanism.matches("global_cooldown") && mechanism.requireInteger()) {
-            mob.setGlobalCooldown(mechanism.getValue().asInt());
-        }
+        // TODO: How do I make this require an int
+        tagProcessor.registerMechanism("global_cooldown", true, ElementTag.class, (object, mechanism, value) -> {
+            object.getMob().setGlobalCooldown(value.asInt());
+        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -632,9 +623,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.stance>
         // -->
-        else if (mechanism.matches("stance")) {
-            mob.setStance(mechanism.getValue().asString());
-        }
+        tagProcessor.registerMechanism("stance", true, ElementTag.class, (object, mechanism, value) -> {
+            object.getMob().setStance(value.asString());
+        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -646,9 +637,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.target>
         // -->
-        else if (mechanism.matches("reset_target")) {
-            mob.resetTarget();
-        }
+        tagProcessor.registerMechanism("reset_target", false, (object, mechanism) -> {
+            object.getMob().resetTarget();
+        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -660,9 +651,10 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.level>
         // -->
-        else if (mechanism.matches("level") && mechanism.requireInteger()) {
-            mob.setLevel(mechanism.getValue().asInt());
-        }
+        // TODO: How do I make this require a double
+        tagProcessor.registerMechanism("level", true, ElementTag.class, (object, mechanism, value) -> {
+            object.getMob().setLevel(value.asDouble());
+        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -674,14 +666,12 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.target>
         // -->
-        else if (mechanism.matches("target") && mechanism.requireObject(EntityTag.class)) {
-            EntityTag mTarget = mechanism.valueAsType(EntityTag.class);
-            if (mTarget == null || !mTarget.isValid() || mTarget.getLivingEntity() == null) {
+        tagProcessor.registerMechanism("target", true, EntityTag.class, (object, mechanism, target) -> {
+            if (target == null || !target.isValid() || target.getLivingEntity() == null) {
                 return;
             }
-            BukkitEntity target = new BukkitEntity(mTarget.getBukkitEntity());
-            mob.setTarget(target);
-        }
+            object.getMob().setTarget(new BukkitEntity(target.getBukkitEntity()));
+        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -693,10 +683,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.children>
         // -->
-        else if (mechanism.matches("add_child") && mechanism.requireObject(EntityTag.class)) {
-            EntityTag child = mechanism.valueAsType(EntityTag.class);
-            mob.addChild(BukkitAdapter.adapt(child.getBukkitEntity()));
-        }
+        tagProcessor.registerMechanism("add_child", true, EntityTag.class, (object, mechanism, child) -> {
+            object.getMob().addChild(BukkitAdapter.adapt(child.getBukkitEntity()));
+        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -708,10 +697,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.parent>
         // -->
-        else if (mechanism.matches("parent") && mechanism.requireObject(EntityTag.class)) {
-            EntityTag parent = mechanism.valueAsType(EntityTag.class);
-            mob.setParent(new GenericCaster(BukkitAdapter.adapt(parent.getBukkitEntity())));
-        }
+        tagProcessor.registerMechanism("parent", true, EntityTag.class, (object, mechanism, parent) -> {
+            object.getMob().setParent(new GenericCaster(BukkitAdapter.adapt(parent.getBukkitEntity())));
+        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -719,13 +707,13 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @input LocationTag
         // @plugin Depenizen, MythicMobs
         // @description
-        // Sets the MythicMob's tracked location. (The location that the @TrackedLocation targeter in Mythic skills will return)
+        // Sets the MythicMob's tracked location (The location that the @TrackedLocation targeter in Mythic skills will return).
         // @tags
         // <MythicMobsMobTag.tracked_location>
         // -->
-        else if (mechanism.matches("tracked_location") && mechanism.requireObject(LocationTag.class)) {
-            mob.setTrackedLocation(BukkitAdapter.adapt((Location) mechanism.valueAsType(LocationTag.class).getJavaObject()));
-        }
+        tagProcessor.registerMechanism("tracked_location", true, LocationTag.class, (object, mechanism, location) -> {
+            object.getMob().setTrackedLocation(BukkitAdapter.adapt(location));
+        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -737,14 +725,13 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.owner>
         // -->
-        else if (mechanism.matches("owner") && mechanism.requireObject(EntityTag.class)) {
-            mob.setOwner(mechanism.valueAsType(EntityTag.class).getUUID());
-        }
+        tagProcessor.registerMechanism("owner", true, EntityTag.class, (object, mechanism, owner) -> {
+            object.getMob().setOwner(owner.getUUID());
+        });
+    }
 
-        tagProcessor.processMechanism(this, mechanism);
-        CoreUtilities.autoPropertyMechanism(this, mechanism);
-        if (!mechanism.fulfilled()) {
-            mechanism.reportInvalid();
-        }
+    @Override
+    public void applyProperty(Mechanism mechanism) {
+        mechanism.echoError("Cannot apply properties to a MythicMob!");
     }
 }

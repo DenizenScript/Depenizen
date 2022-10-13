@@ -158,11 +158,13 @@ public class MythicMobsBridge extends Bridge {
             // @returns ElementTag
             // @plugin Depenizen, MythicMobs
             // @description
-            // Returns the path to the configuration for the MythicMob from a Mob ID.
+            // Returns the path to the configuration file for the MythicMob from a Mob ID.
             // -->
             tagProcessor.registerTag(ElementTag.class, ElementTag.class, "mob_path", (attribute, object, id) -> {
                 MythicMob mob = getMythicMob(id.asString());
-                if (mob == null) return null;
+                if (mob == null) {
+                    return null;
+                }
                 return new ElementTag(mob.getConfig().getFile().getPath(), true);
             });
 
@@ -171,11 +173,13 @@ public class MythicMobsBridge extends Bridge {
             // @returns ElementTag
             // @plugin Depenizen, MythicMobs
             // @description
-            // Returns the path to the configuration for the MythicItem from an Item ID.
+            // Returns the path to the configuration file for the MythicItem from an Item ID.
             // -->
             tagProcessor.registerTag(ElementTag.class, ElementTag.class, "item_path", (attribute, object, id) -> {
                 MythicItem item = getMythicItem(id.asString());
-                if (item == null) return null;
+                if (item == null) {
+                    return null;
+                }
                 return new ElementTag(item.getConfig().getFile().getPath(), true);
             });
 
@@ -209,7 +213,6 @@ public class MythicMobsBridge extends Bridge {
         DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
-
         MythicMobsBridgeTags.register();
 
         // <--[tag]
@@ -344,10 +347,6 @@ public class MythicMobsBridge extends Bridge {
 
     public static Collection<String> getSkillNames() {
         return MythicBukkit.inst().getSkillManager().getSkillNames();
-    }
-
-    public static void setFaction(ActiveMob mob, String faction) {
-        mob.setFaction(faction);
     }
 
     public static String getFaction(ActiveMob mob) {

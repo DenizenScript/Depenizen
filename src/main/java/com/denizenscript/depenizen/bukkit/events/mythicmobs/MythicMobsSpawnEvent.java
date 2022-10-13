@@ -8,6 +8,7 @@ import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import io.lumine.mythic.api.adapters.AbstractLocation;
 import io.lumine.mythic.api.mobs.entities.SpawnReason;
+import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -45,7 +46,6 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
     public MythicMobSpawnEvent event;
     public MythicMobsMobTag mythicmob;
     public LocationTag location;
-    public SpawnReason reason;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -61,33 +61,31 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("mob")) {
-            return mythicmob;
+        switch (name) {
+            case "mob":
+                return mythicmob;
+            case "entity":
+                return new EntityTag(event.getEntity());
+            case "location":
+                return location;
+            case "from_spawner":
+                return new ElementTag(event.isFromMythicSpawner());
+            case "spawner_location":
+                if (!event.isFromMythicSpawner()) {
+                    return null;
+                }
+                return new LocationTag(BukkitAdapter.adapt(event.getMythicSpawner().getLocation()));
+            case "spawn_reason":
+                return new ElementTag(event.getSpawnReason().toString());
+            default:
+                return super.getContext(name);
         }
-        else if (name.equals("entity")) {
-            return new EntityTag(event.getEntity());
-        }
-        else if (name.equals("location")) {
-            return location;
-        }
-        else if (name.equals("from_spawner")) {
-            return new ElementTag(event.isFromMythicSpawner());
-        }
-        else if (name.equals("spawner_location") && event.isFromMythicSpawner()) {
-            AbstractLocation loc = event.getMythicSpawner().getLocation();
-            return new LocationTag(loc.getX(), loc.getY(), loc.getZ(), loc.getWorld().getName());
-        }
-        else if (name.equals("spawn_reason")) {
-            return new ElementTag(reason.toString());
-        }
-        return super.getContext(name);
     }
 
     @EventHandler
     public void onMythicMobSpawns(MythicMobSpawnEvent event) {
         mythicmob = new MythicMobsMobTag(event.getMob());
         location = new LocationTag(event.getLocation());
-        reason = event.getSpawnReason();
         this.event = event;
         EntityTag.rememberEntity(event.getEntity());
         fire(event);

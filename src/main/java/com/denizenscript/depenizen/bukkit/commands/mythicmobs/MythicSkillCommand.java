@@ -45,10 +45,8 @@ public class MythicSkillCommand extends AbstractCommand {
     // You may not have both the Entity and Location targets, one or the other.
     // The MythicMob configuration must be configured to account for this.
     // You may also specify an EntityTag as the trigger of the skill, an
-    // origin of the skill, a Map of skill parameters to be set
-    // for the skill, and a Map of skill variables to be set for the skill.
-    // The value of the variables can be obtained from MythicMobs through
-    // the placeholder <skill.var.x>, where x is the variable ID (the key of the map).
+    // origin of the skill, a Map of skill parameters to be set for the skill, and a Map of skill variables to be set for the skill.
+    // The value of the variables can be obtained from MythicMobs through the placeholder <skill.var.x>, where x is the variable ID (the key of the map).
     //
     // @Usage
     // Used to make the player use the MythicMob skill frostbolt on their target.
@@ -85,9 +83,8 @@ public class MythicSkillCommand extends AbstractCommand {
             Debug.echoError("Cannot have both entity and location targets.");
             return;
         }
-
         for (EntityTag caster : casters != null ? casters.filter(EntityTag.class, scriptEntry) : Utilities.entryDefaultEntityList(scriptEntry, true)) {
-            MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill.asString(), trigger != null ? trigger.entity : caster.getBukkitEntity(), origin, entityTargets, locationTargets, power.asFloat() , (metadata) -> {
+            MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill.asString(), trigger != null ? trigger.entity : caster.getBukkitEntity(), origin, entityTargets, locationTargets, power.asFloat(), (metadata) -> {
                 if (parameters != null) {
                     Map<String, String> parameterMap = new HashMap<>();
                     for (Map.Entry<StringHolder, ObjectTag> entry : parameters.map.entrySet()) {
