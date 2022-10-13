@@ -98,7 +98,7 @@ public class MythicSkillCommand extends AbstractCommand {
                 if (variables != null) {
                     Map<String, Variable> variableMap = new HashMap<>();
                     for (Map.Entry<StringHolder, ObjectTag> entry : variables.map.entrySet()) {
-                        variableMap.put(entry.getKey().toString(), Variable.ofType(VariableType.STRING, entry.getValue().toString()));
+                        variableMap.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue().toString()));
                     }
                     metadata.getVariables().putAll(variableMap);
                 }
