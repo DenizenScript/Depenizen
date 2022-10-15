@@ -127,7 +127,7 @@ public class MythicMobsBridge extends Bridge {
             // -->
             tagProcessor.registerTag(ListTag.class, "spawners", (attribute, object) -> {
                 ListTag list = new ListTag();
-                for (MythicSpawner spawner : MythicMobsBridge.getSpawnerManager().getSpawners()) {
+                for (MythicSpawner spawner : getSpawnerManager().getSpawners()) {
                     list.addObject(new MythicSpawnerTag(spawner));
                 }
                 return list;
@@ -141,11 +141,10 @@ public class MythicMobsBridge extends Bridge {
             // Returns a map of the damage modifiers for a MythicMob from a Mob ID.
             // -->
             tagProcessor.registerTag(MapTag.class, ElementTag.class, "damage_modifiers", (attribute, object, id) -> {
-                Optional<MythicMob> optionalMythicMob = MythicBukkit.inst().getMobManager().getMythicMob(id.asString());
-                if (!optionalMythicMob.isPresent()) {
+                MythicMob mob = getMythicMob(id.asString());
+                if (mob == null) {
                     return null;
                 }
-                MythicMob mob = optionalMythicMob.get();
                 MapTag result = new MapTag();
                 for (Map.Entry<String, Double> entry : mob.getDamageModifiers().entrySet()) {
                     result.putObject(entry.getKey(), new ElementTag(entry.getValue()));
@@ -347,10 +346,6 @@ public class MythicMobsBridge extends Bridge {
 
     public static Collection<String> getSkillNames() {
         return MythicBukkit.inst().getSkillManager().getSkillNames();
-    }
-
-    public static String getFaction(ActiveMob mob) {
-        return mob.getFaction();
     }
 
     public static boolean skillExists(String name) {

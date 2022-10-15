@@ -454,7 +454,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // Returns the mob's faction.
         // -->
         tagProcessor.registerTag(ElementTag.class, "faction", (attribute, object) -> {
-            return new ElementTag(MythicMobsBridge.getFaction(object.getMob()), true);
+            return new ElementTag(object.getMob().getFaction(), true);
         });
 
         // <--[tag]
@@ -728,6 +728,11 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         tagProcessor.registerMechanism("owner", true, EntityTag.class, (object, mechanism, owner) -> {
             object.getMob().setOwner(owner.getUUID());
         });
+    }
+
+    @Override
+    public void adjust(Mechanism mechanism) {
+        tagProcessor.processMechanism(this, mechanism);
     }
 
     @Override
