@@ -93,7 +93,7 @@ public class ManaChangeScriptEvent extends BukkitScriptEvent implements Listener
         new_mana = event.getNewAmount();
         old_mana = event.getOldAmount();
         max_mana = event.getMaxMana();
-        reason = new ElementTag(event.getReason().name());
+        reason = new ElementTag(event.getReason());
         this.event = event;
         fire(event);
     }
