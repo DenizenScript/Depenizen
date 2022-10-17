@@ -576,7 +576,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.mythic_variable_map>
         // -->
-        tagProcessor.registerMechanism("mythic_variable_map", true, MapTag.class, (object, mechanism, map) -> {
+        tagProcessor.registerMechanism("mythic_variable_map", false, MapTag.class, (object, mechanism, map) -> {
             Map<String, Variable> newMap = new HashMap<>();
             for (Map.Entry<StringHolder, ObjectTag> entry : map.map.entrySet()) {
                 newMap.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
@@ -594,7 +594,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.faction>
         // -->
-        tagProcessor.registerMechanism("faction", true, ElementTag.class, (object, mechanism, value) -> {
+        tagProcessor.registerMechanism("faction", false, ElementTag.class, (object, mechanism, value) -> {
             object.getMob().setFaction(value.asString());
         });
 
@@ -609,7 +609,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <MythicMobsMobTag.global_cooldown>
         // -->
         // TODO: How do I make this require an int
-        tagProcessor.registerMechanism("global_cooldown", true, ElementTag.class, (object, mechanism, value) -> {
+        tagProcessor.registerMechanism("global_cooldown", false, ElementTag.class, (object, mechanism, value) -> {
             object.getMob().setGlobalCooldown(value.asInt());
         });
 
@@ -623,7 +623,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.stance>
         // -->
-        tagProcessor.registerMechanism("stance", true, ElementTag.class, (object, mechanism, value) -> {
+        tagProcessor.registerMechanism("stance", false, ElementTag.class, (object, mechanism, value) -> {
             object.getMob().setStance(value.asString());
         });
 
@@ -652,7 +652,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <MythicMobsMobTag.level>
         // -->
         // TODO: How do I make this require a double
-        tagProcessor.registerMechanism("level", true, ElementTag.class, (object, mechanism, value) -> {
+        tagProcessor.registerMechanism("level", false, ElementTag.class, (object, mechanism, value) -> {
             object.getMob().setLevel(value.asDouble());
         });
 
@@ -666,7 +666,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.target>
         // -->
-        tagProcessor.registerMechanism("target", true, EntityTag.class, (object, mechanism, target) -> {
+        tagProcessor.registerMechanism("target", false, EntityTag.class, (object, mechanism, target) -> {
             if (target == null || !target.isValid() || target.getLivingEntity() == null) {
                 return;
             }
@@ -683,7 +683,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.children>
         // -->
-        tagProcessor.registerMechanism("add_child", true, EntityTag.class, (object, mechanism, child) -> {
+        tagProcessor.registerMechanism("add_child", false, EntityTag.class, (object, mechanism, child) -> {
             object.getMob().addChild(BukkitAdapter.adapt(child.getBukkitEntity()));
         });
 
@@ -697,7 +697,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.parent>
         // -->
-        tagProcessor.registerMechanism("parent", true, EntityTag.class, (object, mechanism, parent) -> {
+        tagProcessor.registerMechanism("parent", false, EntityTag.class, (object, mechanism, parent) -> {
             object.getMob().setParent(new GenericCaster(BukkitAdapter.adapt(parent.getBukkitEntity())));
         });
 
@@ -711,7 +711,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.tracked_location>
         // -->
-        tagProcessor.registerMechanism("tracked_location", true, LocationTag.class, (object, mechanism, location) -> {
+        tagProcessor.registerMechanism("tracked_location", false, LocationTag.class, (object, mechanism, location) -> {
             object.getMob().setTrackedLocation(BukkitAdapter.adapt(location));
         });
 
@@ -725,7 +725,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.owner>
         // -->
-        tagProcessor.registerMechanism("owner", true, EntityTag.class, (object, mechanism, owner) -> {
+        tagProcessor.registerMechanism("owner", false, EntityTag.class, (object, mechanism, owner) -> {
             object.getMob().setOwner(owner.getUUID());
         });
     }
