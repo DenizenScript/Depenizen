@@ -658,10 +658,9 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <MythicMobsMobTag.level>
         // -->
         tagProcessor.registerMechanism("level", false, ElementTag.class, (object, mechanism, value) -> {
-            if (!mechanism.requireDouble()) {
-                return;
+            if (mechanism.requireDouble()) {
+                object.getMob().setLevel(value.asDouble());
             }
-            object.getMob().setLevel(value.asDouble());
         });
 
         // <--[mechanism]
