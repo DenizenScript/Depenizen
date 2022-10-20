@@ -601,16 +601,22 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object MythicMobsMobTag
         // @name global_cooldown
-        // @input ElementTag(Number)
+        // @input DurationTag
         // @plugin Depenizen, MythicMobs
         // @description
         // Sets global cooldown of the MythicMob.
         // @tags
         // <MythicMobsMobTag.global_cooldown>
         // -->
-        // TODO: How do I make this require an int
-        tagProcessor.registerMechanism("global_cooldown", false, ElementTag.class, (object, mechanism, value) -> {
-            object.getMob().setGlobalCooldown(value.asInt());
+        tagProcessor.registerMechanism("global_cooldown", false, DurationTag.class, (object, mechanism, value) -> {
+            DurationTag duration;
+            if (mechanism.getValue().isInt()) { // Soft-deprecated - backwards compatibility, as this used to use a tick count
+                duration = new DurationTag((long) value.getSecondsAsInt());
+            }
+            else {
+                duration = value;
+            }
+            object.getMob().setGlobalCooldown(duration.getTicksAsInt());
         });
 
         // <--[mechanism]
