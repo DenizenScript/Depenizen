@@ -67,7 +67,7 @@ public class MythicMobsBridge extends Bridge {
             // -->
             tagProcessor.registerTag(ListTag.class, "item_ids", (attribute, object) -> {
                 ListTag list = new ListTag();
-                for (String item : getItemNames()) {
+                for (String item : getItemManager().getItemNames()) {
                     list.addObject(new ElementTag(item, true));
                 }
                 return list;
@@ -334,10 +334,6 @@ public class MythicMobsBridge extends Bridge {
 
     public static ItemExecutor getItemManager() {
         return MythicBukkit.inst().getItemManager();
-    }
-
-    public static Collection<String> getItemNames() {
-        return getItemManager().getItemNames();
     }
 
     public static MythicItem getMythicItem(String name) {
