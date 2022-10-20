@@ -371,7 +371,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // Returns the MythicMob's global cooldown.
         // -->
         tagProcessor.registerTag(DurationTag.class, "global_cooldown", (attribute, object) -> {
-            return new DurationTag(object.getMob().getGlobalCooldown());
+            return new DurationTag((long) object.getMob().getGlobalCooldown());
         });
 
         // <--[tag]
