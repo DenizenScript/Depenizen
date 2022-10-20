@@ -441,7 +441,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         tagProcessor.registerTag(MapTag.class, "damage_modifiers", (attribute, object) -> {
             MapTag result = new MapTag();
             for (Map.Entry<String, Double> entry : object.getMobType().getDamageModifiers().entrySet()) {
-                result.putObject(entry.getKey(), new ElementTag(entry.getValue().toString()));
+                result.putObject(entry.getKey(), new ElementTag(entry.getValue()));
             }
             return result;
         });
