@@ -606,14 +606,10 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <MythicMobsMobTag.global_cooldown>
         // -->
         tagProcessor.registerMechanism("global_cooldown", false, DurationTag.class, (object, mechanism, value) -> {
-            DurationTag duration;
             if (mechanism.getValue().isInt()) { // Soft-deprecated - backwards compatibility, as this used to use a tick count
-                duration = new DurationTag((long) value.getSecondsAsInt());
+                value = new DurationTag((long) value.getSecondsAsInt());
             }
-            else {
-                duration = value;
-            }
-            object.getMob().setGlobalCooldown(duration.getTicksAsInt());
+            object.getMob().setGlobalCooldown(value.getTicksAsInt());
         });
 
         // <--[mechanism]
