@@ -657,8 +657,10 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @tags
         // <MythicMobsMobTag.level>
         // -->
-        // TODO: How do I make this require a double
         tagProcessor.registerMechanism("level", false, ElementTag.class, (object, mechanism, value) -> {
+            if (!mechanism.requireDouble()) {
+                return;
+            }
             object.getMob().setLevel(value.asDouble());
         });
 
