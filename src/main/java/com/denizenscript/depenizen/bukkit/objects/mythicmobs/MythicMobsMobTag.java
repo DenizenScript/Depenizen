@@ -14,12 +14,10 @@ import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.text.StringHolder;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
 import io.lumine.mythic.api.adapters.AbstractEntity;
-import io.lumine.mythic.api.adapters.AbstractLocation;
 import io.lumine.mythic.api.mobs.GenericCaster;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.api.skills.SkillCaster;
@@ -30,7 +28,6 @@ import io.lumine.mythic.core.mobs.ActiveMob;
 import io.lumine.mythic.core.skills.auras.Aura;
 import io.lumine.mythic.core.skills.variables.Variable;
 import io.lumine.mythic.core.skills.variables.VariableType;
-import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
@@ -406,7 +403,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @returns ListTag
         // @plugin Depenizen MythicMobs
         // @description
-        // Returns a ListTag of the MythicMob's AIGoalSelectors.
+        // Returns a ListTag of the MythicMob's AI Goal Selectors.
         // -->
         tagProcessor.registerTag(ListTag.class, "ai_goal_selectors", (attribute, object) -> {
             ListTag list = new ListTag();
@@ -421,7 +418,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @returns ListTag
         // @plugin Depenizen MythicMobs
         // @description
-        // Returns a ListTag of the MythicMob's AITargetSelectors.
+        // Returns a ListTag of the MythicMob's AI Target Selectors.
         // -->
         tagProcessor.registerTag(ListTag.class, "ai_target_selectors", (attribute, object) -> {
             ListTag list = new ListTag();
@@ -479,7 +476,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @plugin Depenizen, MythicMobs
         // @mechanism MythicMobsMobTag.parent
         // @description
-        // Returns the mob's parent.
+        // Returns the mob's parent, if any.
         // -->
         tagProcessor.registerTag(EntityTag.class, "parent", (attribute, object) -> {
             SkillCaster parent = object.getMob().getParent();

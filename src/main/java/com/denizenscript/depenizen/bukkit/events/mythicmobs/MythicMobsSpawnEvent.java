@@ -1,13 +1,12 @@
 package com.denizenscript.depenizen.bukkit.events.mythicmobs;
 
-import com.denizenscript.denizencore.objects.*;
-import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.LocationTag;
-import io.lumine.mythic.api.adapters.AbstractLocation;
-import io.lumine.mythic.api.mobs.entities.SpawnReason;
+import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
+import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.events.MythicMobSpawnEvent;
 import org.bukkit.event.EventHandler;
@@ -30,6 +29,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
     // <context.location> Returns the LocationTag of where the MythicMob will spawn.
     // <context.from_spawner> Returns true if the mob was from a spawner.
     // <context.spawner_location> Returns the LocationTag of the spawner that spawned the mob, if any.
+    // <context.spawner> Returns the MythicMobsSpawnerTag of the spawner, if any.
     // <context.spawn_reason> Returns the reason for the MythicMob's spawning. Can be NATURAL, COMMAND, SPAWNER, SUMMON, OTHER, or DISPENSER.
     //
     // @Plugin Depenizen, MythicMobs
@@ -75,6 +75,11 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
                     return null;
                 }
                 return new LocationTag(BukkitAdapter.adapt(event.getMythicSpawner().getLocation()));
+            case "spawner":
+                if (!event.isFromMythicSpawner()) {
+                    return null;
+                }
+                return new MythicSpawnerTag(event.getMythicSpawner());
             case "spawn_reason":
                 return new ElementTag(event.getSpawnReason().toString());
             default:
