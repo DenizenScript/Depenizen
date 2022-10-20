@@ -26,6 +26,7 @@ import io.lumine.mythic.bukkit.adapters.BukkitEntity;
 import io.lumine.mythic.bukkit.utils.serialize.Optl;
 import io.lumine.mythic.core.mobs.ActiveMob;
 import io.lumine.mythic.core.skills.auras.Aura;
+import io.lumine.mythic.core.skills.auras.AuraRegistry;
 import io.lumine.mythic.core.skills.variables.Variable;
 import io.lumine.mythic.core.skills.variables.VariableType;
 import org.bukkit.entity.Entity;
@@ -525,40 +526,19 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
             }
             return new EntityTag(ownerEntity);
         });
-
-        // <--[tag]
-        // @attribute <MythicMobsMobTag.has_aura[<name>]>
-        // @returns ElementTag(Boolean)
-        // @plugin Depenizen, MythicMobs
-        // @description
-        // Returns whether the MythicMob has an aura whose name is the same as the parameter.
-        // -->
-        tagProcessor.registerTag(ElementTag.class, ElementTag.class, "has_aura", (attribute, object, auraName) -> {
-            return new ElementTag(object.getMob().getAuraRegistry().hasAura(auraName.asString()));
-        });
-
-        // <--[tag]
-        // @attribute <MythicMobsMobTag.aura_stacks[<name>]>
-        // @return ElementTag(Number)
-        // @plugin Depenizen, MythicMobs
-        // @description
-        // Returns the amount of stacks of auras with the same name as the parameter that the MythicMob has.
-        // -->
-        tagProcessor.registerTag(ElementTag.class, ElementTag.class, "aura_stacks", (attribute, object, auraName) -> {
-            return new ElementTag(object.getMob().getAuraRegistry().getStacks(auraName.asString()));
-        });
-
+        
         // <--[tag]
         // @attribute <MythicMobsMobTag.auras>
-        // @return ListTag
+        // @return MapTag
         // @plugin Depenizen, MythicMobs
         // @description
-        // Returns a list of auras that the MythicMob currently has.
+        // Returns a MapTag of the MythicMob's aura information, where the key is the aura name and the value is the amount of stacks the MythicMob has of that aura.
         // -->
-        tagProcessor.registerTag(ListTag.class, "auras", (attribute, object) -> {
-            ListTag result = new ListTag();
-            for (Map.Entry<String, Queue<Aura.AuraTracker>> name : object.getMob().getAuraRegistry().getAuras().entrySet()) {
-                result.addObject(new ElementTag(name.getKey()));
+        tagProcessor.registerTag(MapTag.class, "auras", (attribute, object) -> {
+            MapTag result = new MapTag();
+            AuraRegistry registry = object.getMob().getAuraRegistry();
+            for (Map.Entry<String, Queue<Aura.AuraTracker>> aura : object.getMob().getAuraRegistry().getAuras().entrySet()) {
+                result.putObject(aura.getKey(), new ElementTag(registry.getStacks(aura.getKey())));
             }
             return result;
         });
@@ -643,7 +623,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <--[mechanism]
         // @object MythicMobsMobTag
         // @name level
-        // @input ElementTag(Number)
+        // @input ElementTag(Decimal)
         // @plugin Depenizen, MythicMobs
         // @description
         // Set the MythicMob's level.
