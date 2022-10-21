@@ -22,6 +22,7 @@ import io.lumine.mythic.api.mobs.GenericCaster;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.api.skills.SkillCaster;
 import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.bukkit.adapters.BukkitEntity;
 import io.lumine.mythic.bukkit.utils.serialize.Optl;
 import io.lumine.mythic.core.mobs.ActiveMob;
@@ -526,22 +527,6 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
             }
             return new EntityTag(ownerEntity);
         });
-        
-        // <--[tag]
-        // @attribute <MythicMobsMobTag.auras>
-        // @return MapTag
-        // @plugin Depenizen, MythicMobs
-        // @description
-        // Returns a MapTag of the MythicMob's aura information, where the key is the aura name and the value is the amount of stacks the MythicMob has of that aura.
-        // -->
-        tagProcessor.registerTag(MapTag.class, "auras", (attribute, object) -> {
-            MapTag result = new MapTag();
-            AuraRegistry registry = object.getMob().getAuraRegistry();
-            for (Map.Entry<String, Queue<Aura.AuraTracker>> aura : object.getMob().getAuraRegistry().getAuras().entrySet()) {
-                result.putObject(aura.getKey(), new ElementTag(registry.getStacks(aura.getKey())));
-            }
-            return result;
-        });
 
         // <--[mechanism]
         // @object MythicMobsMobTag
@@ -687,7 +672,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @input LocationTag
         // @plugin Depenizen, MythicMobs
         // @description
-        // Sets the MythicMob's tracked location (The location that the @TrackedLocation targeter in Mythic skills will return).
+        // Sets the MythicMob's tracked location (the location that the @TrackedLocation targeter in Mythic skills will return).
         // @tags
         // <MythicMobsMobTag.tracked_location>
         // -->

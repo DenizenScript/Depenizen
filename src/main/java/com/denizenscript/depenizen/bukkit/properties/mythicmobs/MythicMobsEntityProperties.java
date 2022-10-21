@@ -1,5 +1,7 @@
 package com.denizenscript.depenizen.bukkit.properties.mythicmobs;
 
+import com.denizenscript.denizencore.objects.core.DurationTag;
+import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.bridges.MythicMobsBridge;
@@ -11,6 +13,11 @@ import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import io.lumine.mythic.api.skills.placeholders.PlaceholderString;
 import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.core.skills.auras.Aura;
+import io.lumine.mythic.core.skills.auras.AuraRegistry;
+
+import java.util.Map;
+import java.util.Queue;
 
 public class MythicMobsEntityProperties implements Property {
 
@@ -89,6 +96,32 @@ public class MythicMobsEntityProperties implements Property {
         PropertyParser.registerTag(MythicMobsEntityProperties.class, ElementTag.class, ElementTag.class, "parse_mythic", (attribute, object, text) -> {
             return new ElementTag(PlaceholderString.of(text.asString()).get(BukkitAdapter.adapt(object.entity.getBukkitEntity())));
         }, "parse_mythicmob");
+
+
+        // <--[tag]
+        // @attribute <EntityTag.auras>
+        // @return MapTag
+        // @plugin Depenizen, MythicMobs
+        // @description
+        // Returns a MapTag of the mob's aura information, where the key is the aura name and the value is a MapTag containing info about that aura (stacks, interval, duration, etc).
+        // -->
+        PropertyParser.registerTag(MythicMobsEntityProperties.class, MapTag.class, "auras", (attribute, object) -> {
+            MapTag result = new MapTag();
+            AuraRegistry registry = MythicMobsBridge.getSkillManager().getAuraManager().getAuraRegistry(BukkitAdapter.adapt(object.entity.getBukkitEntity()));
+            for (Map.Entry<String, Queue<Aura.AuraTracker>> aura : registry.getAuras().entrySet()) {
+                MapTag auraInfo = new MapTag();
+                Aura.AuraTracker tracker = aura.getValue().element();
+                auraInfo.putObject("stacks", new ElementTag(tracker.getStacks()));
+                auraInfo.putObject("max_stacks", new ElementTag(tracker.getMaxStacks()));
+                auraInfo.putObject("interval", new ElementTag(tracker.getInterval()));
+                auraInfo.putObject("start_charges", new ElementTag(tracker.getStartCharges()));
+                auraInfo.putObject("charges_remaining", new ElementTag(tracker.getChargesRemaining()));
+                auraInfo.putObject("start_duration", new DurationTag((long) tracker.getStartDuration()));
+                auraInfo.putObject("expiration", new DurationTag((long) tracker.getTicksRemaining()));
+                result.putObject(aura.getKey(), auraInfo);
+            }
+            return result;
+        });
     }
 
     public boolean isMythicMob() {
