@@ -267,7 +267,13 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // Returns the MythicMob's target.
         // -->
         tagProcessor.registerTag(EntityFormObject.class, "target", (attribute, object) -> {
-            AbstractEntity target = object.getMob().getThreatTable().getTopThreatHolder();
+            AbstractEntity target;
+            if (object.getMob().hasThreatTable()) {
+                target = object.getMob().getThreatTable().getTopThreatHolder();
+            }
+            else {
+                target = object.getMob().getEntity().getTarget();
+            }
             if (target == null) {
                 return null;
             }
