@@ -81,7 +81,7 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
                 }
                 return new MythicSpawnerTag(event.getMythicSpawner());
             case "spawn_reason":
-                return new ElementTag(event.getSpawnReason().toString());
+                return new ElementTag(event.getSpawnReason());
             default:
                 return super.getContext(name);
         }

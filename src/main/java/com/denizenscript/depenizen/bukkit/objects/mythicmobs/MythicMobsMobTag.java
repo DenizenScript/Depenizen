@@ -296,8 +296,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @returns MapTag
         // @plugin Depenizen, MythicMobs
         // @description
-        // Returns the MythicMob's threat table, can contain multiple types of entities.
-        // Map is in the formatting of "UUID/Threat|UUID/Threat"
+        // Returns the MythicMob's threat table as a map where the key is the entity's UUID, and the value is the amount of threat.
         // -->
         tagProcessor.registerTag(MapTag.class, "threat_table", (attribute, object) -> {
             if (!object.getMob().hasThreatTable()) {
@@ -317,7 +316,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @plugin Depenizen, MythicMobs
         // @description
         // Returns the MythicMob's threat table, only containing players.
-        // Map is in the formatting of "UUID/Threat|UUID/Threat"
+        // The map's key is the player's UUID, and the value is the amount of threat.
         // -->
         tagProcessor.registerTag(MapTag.class, "threat_table_players", (attribute, object) -> {
             if (!object.getMob().hasThreatTable()) {
