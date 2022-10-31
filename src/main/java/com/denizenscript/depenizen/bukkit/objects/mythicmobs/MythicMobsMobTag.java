@@ -637,7 +637,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // <MythicMobsMobTag.target>
         // -->
         tagProcessor.registerMechanism("target", false, EntityTag.class, (object, mechanism, target) -> {
-            if (target == null || !target.isValid() || target.getLivingEntity() == null) {
+            if (target == null || !target.isValid() || !target.isLivingEntity()) {
                 return;
             }
             object.getMob().setTarget(new BukkitEntity(target.getBukkitEntity()));
