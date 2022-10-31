@@ -95,8 +95,8 @@ public class MythicMobsEntityProperties implements Property {
         // -->
         PropertyParser.registerTag(MythicMobsEntityProperties.class, ElementTag.class, ElementTag.class, "parse_mythic", (attribute, object, text) -> {
             return new ElementTag(PlaceholderString.of(text.asString()).get(BukkitAdapter.adapt(object.entity.getBukkitEntity())));
-        }, "parse_mythicmob");
-        
+        });
+
         // <--[tag]
         // @attribute <EntityTag.auras>
         // @return MapTag
