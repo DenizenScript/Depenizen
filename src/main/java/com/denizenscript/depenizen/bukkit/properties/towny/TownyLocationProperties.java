@@ -130,7 +130,7 @@ public class TownyLocationProperties implements Property {
         // Returns whether the location is within a town.
         // -->
         if (attribute.startsWith("has_town")) {
-            if (TownyAPI.getInstance().getTownName(location) != null) {
+            if (TownyAPI.getInstance().getTown(location) != null) {
                 return new ElementTag(true).getObjectAttribute(attribute.fulfill(1));
             }
             else {
