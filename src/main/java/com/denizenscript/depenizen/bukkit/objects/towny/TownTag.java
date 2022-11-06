@@ -231,7 +231,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // @returns ListTag
         // @plugin Depenizen, Towny
         // @description
-        // Returns a list of the players with a given rank in town. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
+        // Returns a list of the town's members with a given rank. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
         // -->
         tagProcessor.registerTag(ListTag.class, "get_rank", (attribute, object) -> {
             String rank = attribute.getParam();

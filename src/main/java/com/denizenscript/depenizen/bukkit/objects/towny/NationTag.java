@@ -17,7 +17,9 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.TagContext;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class NationTag implements ObjectTag, FlaggableObject {
 
@@ -220,6 +222,25 @@ public class NationTag implements ObjectTag, FlaggableObject {
             ListTag list = new ListTag();
             for (Nation enemy : object.nation.getEnemies()) {
                 list.addObject(new NationTag(enemy));
+            }
+            return list;
+        });
+
+        // <--[tag]
+        // @attribute <NationTag.get_rank[(<rank>)]>
+        // @returns ListTag(PlayerTag)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns a list of the nation's members with a given rank.
+        // -->
+        tagProcessor.registerTag(ListTag.class, "get_rank", (attribute, object) -> {
+            String rank = attribute.getParam();
+            ListTag list = new ListTag();
+
+            List<Resident> rankList = object.nation.getResidents().stream().filter((assistant) -> assistant.hasNationRank(rank)).collect(Collectors.toList());
+
+            for (Resident resident : rankList) {
+                list.addObject(new PlayerTag(resident.getUUID()));
             }
             return list;
         });
