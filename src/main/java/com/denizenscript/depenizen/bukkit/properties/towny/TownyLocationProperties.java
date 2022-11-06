@@ -112,7 +112,7 @@ public class TownyLocationProperties implements Property {
         // @plugin Depenizen, Towny
         // @description
         // Returns the type of the Towny area this location is in.
-        // Can be RESIDENTIAL, COMMERCIAL, ARENA, EMBASSY, WILDS, INN, JAIL, FARM, or BANK.
+        // Can be Default, Shop, Arena, Embassy, Wilds, Inn, Jail, Farm, Bank
         // -->
         if (attribute.startsWith("towny_type")) {
             TownBlock block = TownyAPI.getInstance().getTownBlock(location);
