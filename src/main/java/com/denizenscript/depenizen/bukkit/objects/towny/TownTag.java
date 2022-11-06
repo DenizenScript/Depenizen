@@ -183,8 +183,10 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // @attribute <TownTag.assistants>
         // @returns ListTag
         // @plugin Depenizen, Towny
+        // @deprecated use 'get_rank'
         // @description
         // Returns a list of the town's assistants. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
+        // Deprecated in favor of <@link tag TownTag.get_rank[(rank)]>.
         // -->
         tagProcessor.registerTag(ListTag.class, "assistants", (attribute, object) -> {
             ListTag list = new ListTag();
@@ -223,6 +225,30 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         tagProcessor.registerTag(ElementTag.class, "board", (attribute, object) -> {
             return new ElementTag(object.town.getBoard());
         });
+
+        // <--[tag]
+        // @attribute <TownTag.get_rank[(<rank>)]>
+        // @returns ListTag
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns a list of the players with a given rank in town. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
+        // -->
+        tagProcessor.registerTag(ListTag.class, "get_rank", (attribute, object) -> {
+            String rank = attribute.getParam();
+            ListTag list = new ListTag();
+            for (Resident resident : object.town.getRank(rank)) {
+                if (resident.getUUID() != null) {
+                    OfflinePlayer pl = Bukkit.getOfflinePlayer(resident.getUUID());
+                    if (pl.hasPlayedBefore()) {
+                        list.addObject(new PlayerTag(pl));
+                        continue;
+                    }
+                }
+                list.add(resident.getName());
+            }
+            return list;
+        });
+
 
         // <--[tag]
         // @attribute <TownTag.is_open>
@@ -290,6 +316,28 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
             catch (NotRegisteredException e) {
             }
             return null;
+        });
+
+        // <--[tag]
+        // @attribute <TownTag.outlaws>
+        // @returns ListTag
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns a list of the town's outlaws. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
+        // -->
+        tagProcessor.registerTag(ListTag.class, "outlaws", (attribute, object) -> {
+            ListTag list = new ListTag();
+            for (Resident resident : object.town.getOutlaws()) {
+                if (resident.getUUID() != null) {
+                    OfflinePlayer pl = Bukkit.getOfflinePlayer(resident.getUUID());
+                    if (pl.hasPlayedBefore()) {
+                        list.addObject(new PlayerTag(pl));
+                        continue;
+                    }
+                }
+                list.add(resident.getName());
+            }
+            return list;
         });
 
         // <--[tag]
