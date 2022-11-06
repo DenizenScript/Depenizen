@@ -146,7 +146,7 @@ public class TownyLocationProperties implements Property {
         // Returns the town at the specified location.
         // -->
         if (attribute.startsWith("town")) {
-            String town = TownyAPI.getInstance().getTownName(location);
+            String town = TownyAPI.getInstance().getTown(location);
             if (town == null) {
                 return null;
             }
