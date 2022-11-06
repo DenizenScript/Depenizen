@@ -47,7 +47,7 @@ public class TownyLocationProperties implements Property {
     }
 
     public static final String[] handledTags = new String[] {
-            "has_town", "town", "is_wilderness", "is_nationzone", "towny"
+            "has_town", "town", "is_wilderness", "is_nationzone", "towny", "towny_type"
     };
 
     public static final String[] handledMechs = new String[] {
