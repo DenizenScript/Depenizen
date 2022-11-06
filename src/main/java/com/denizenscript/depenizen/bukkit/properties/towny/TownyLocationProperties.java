@@ -47,7 +47,7 @@ public class TownyLocationProperties implements Property {
     }
 
     public static final String[] handledTags = new String[] {
-            "has_town", "town", "is_wilderness", "towny"
+            "has_town", "town", "is_wilderness", "is_nationzone", "towny"
     };
 
     public static final String[] handledMechs = new String[] {
@@ -65,9 +65,16 @@ public class TownyLocationProperties implements Property {
         if (attribute.startsWith("towny")) {
             attribute = attribute.fulfill(1);
             try {
-                TownBlock block = TownyAPI.getInstance().getTownBlock(location);
-                if (block == null) {
-                    return null;
+
+                // <--[tag]
+                // @attribute <LocationTag.towny.is_pvp>
+                // @returns ElementTag(Boolean)
+                // @plugin Depenizen, Towny
+                // @description
+                // Returns whether Towny would block PVP here.
+                // -->
+                if (attribute.startsWith("is_pvp")) {
+                    return new ElementTag(TownyAPI.getInstance().isPVP(location)).getObjectAttribute(attribute.fulfill(1));
                 }
 
                 // <--[tag]
@@ -78,6 +85,10 @@ public class TownyLocationProperties implements Property {
                 // Returns the resident of a Towny plot at the location, if any.
                 // -->
                 if (attribute.startsWith("resident")) {
+                    TownBlock block = TownyAPI.getInstance().getTownBlock(location);
+                    if (block == null) {
+                        return null;
+                    }
                     if (!block.hasResident()) {
                         return null;
                     }
@@ -144,14 +155,25 @@ public class TownyLocationProperties implements Property {
         }
 
         // <--[tag]
+        // @attribute <LocationTag.is_nationzone>
+        // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns whether the location is a nation zone.
+        // -->
+        if (attribute.startsWith("is_nationzone")) {
+            return new ElementTag(TownyAPI.getInstance().isNationZone(location)).getObjectAttribute(attribute.fulfill(1));
+        }
+
+        // <--[tag]
         // @attribute <LocationTag.is_wilderness>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Towny
         // @description
         // Returns whether the location is wilderness.
         // -->
-        else if (attribute.startsWith("is_wilderness")) {
-            return new ElementTag(TownyAPI.getInstance().isWilderness(location.getBlock())).getObjectAttribute(attribute.fulfill(1));
+        if (attribute.startsWith("is_wilderness")) {
+            return new ElementTag(TownyAPI.getInstance().isWilderness(location)).getObjectAttribute(attribute.fulfill(1));
         }
 
         return null;
