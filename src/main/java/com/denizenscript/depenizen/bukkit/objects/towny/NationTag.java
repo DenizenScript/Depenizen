@@ -236,9 +236,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
         tagProcessor.registerTag(ListTag.class, "get_rank", (attribute, object) -> {
             String rank = attribute.getParam();
             ListTag list = new ListTag();
-
             List<Resident> rankList = object.nation.getResidents().stream().filter((assistant) -> assistant.hasNationRank(rank)).collect(Collectors.toList());
-
             for (Resident resident : rankList) {
                 list.addObject(new PlayerTag(resident.getUUID()));
             }
