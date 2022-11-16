@@ -1,48 +1,43 @@
-package com.denizenscript.depenizen.bukkit.events.mythickeys;
+package com.denizenscript.depenizen.bukkit.events.arikeys;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.utilities.debugging.Warning;
-import eu.asangarin.mythickeys.api.MythicKeyReleaseEvent;
-import org.bukkit.Bukkit;
+import eu.asangarin.arikeys.api.AriKeyReleaseEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implements Listener {
+public class AriKeysKeyReleaseScriptEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]
     // @Events
-    // mythickeys key released
+    // arikeys key released
     //
     // @Location true
     //
     // @Switch id:<id> to only process the event if the key ID matches the given text matcher.
     //
-    // @Triggers When a key stops being pressed by a client running MythicKeys, if that key is in the MythicKeys config.
+    // @Triggers When a key stops being pressed by a client running AriKeys, if that key is in the AriKeys config.
     //
     // @Context
-    // <context.id> Returns the ID of the key that was released according to the MythicKeys config, as a namespaced key.
+    // <context.id> Returns the ID of the key that was released according to the AriKeys config, as a namespaced key.
     //
     // @Player Always.
     //
-    // @Plugin Depenizen, MythicKeys
+    // @Plugin Depenizen, AriKeys
     //
     // @Group Depenizen
     //
-    // @Warning For 1.19+ servers use AriKeysPlugin.
-    //
     // -->
 
-    public MythicKeysKeyReleaseScriptEvent() {
-        registerCouldMatcher("mythickeys key released");
+    public AriKeysKeyReleaseScriptEvent() {
+        registerCouldMatcher("arikeys key released");
         registerSwitches("id");
     }
 
-    public MythicKeyReleaseEvent event;
-    public Warning outdatedMythicKeys = new Warning("mythicKeysOutdated", "MythicKeys is outdated. Use the plugin 'AriKeysPlugin' for 1.19+ servers.");
+    public AriKeyReleaseEvent event;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -51,9 +46,6 @@ public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implement
         }
         if (!runInCheck(path, event.getPlayer().getLocation())) {
             return false;
-        }
-        if (Bukkit.getBukkitVersion().substring(0, 4).equals("1.19")) {
-            outdatedMythicKeys.warn();
         }
         return super.matches(path);
     }
@@ -72,7 +64,7 @@ public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implement
     }
 
     @EventHandler
-    public void onKeyRelease(MythicKeyReleaseEvent event) {
+    public void onKeyRelease(AriKeyReleaseEvent event) {
         this.event = event;
         fire(event);
     }

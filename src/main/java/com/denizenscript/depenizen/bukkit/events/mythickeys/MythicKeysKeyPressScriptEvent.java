@@ -5,7 +5,10 @@ import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
+import com.denizenscript.denizencore.utilities.debugging.SlowWarning;
+import com.denizenscript.denizencore.utilities.debugging.Warning;
 import eu.asangarin.mythickeys.api.MythicKeyPressEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -30,6 +33,8 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
     //
     // @Group Depenizen
     //
+    // @Warning For 1.19+ servers use AriKeysPlugin.
+    //
     // -->
 
     public MythicKeysKeyPressScriptEvent() {
@@ -38,6 +43,7 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
     }
 
     public MythicKeyPressEvent event;
+    public Warning outdatedMythicKeys = new Warning("mythicKeysOutdated", "MythicKeys is outdated. Use the plugin 'AriKeysPlugin' for 1.19+ servers.");
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -46,6 +52,9 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
         }
         if (!runInCheck(path, event.getPlayer().getLocation())) {
             return false;
+        }
+        if (Bukkit.getBukkitVersion().substring(0, 4).equals("1.19")) {
+            outdatedMythicKeys.warn();
         }
         return super.matches(path);
     }
