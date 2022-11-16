@@ -15,12 +15,10 @@ public class PlayerLeavesTownScriptEvent extends BukkitScriptEvent implements Li
     // @Events
     // towny player leaves town
     //
-    // @Cancellable false
-    //
     // @Triggers when a player is removed from a Towny town or when a Towny town is dissolved.
     //
     // @Context
-    // <context.town> Returns town the player belongs to.
+    // <context.town> returns the town the player belongs to.
     //
     // @Plugin Depenizen, Towny
     //
@@ -29,6 +27,7 @@ public class PlayerLeavesTownScriptEvent extends BukkitScriptEvent implements Li
     // @Group Depenizen
     //
     // -->
+
     public PlayerLeavesTownScriptEvent() {
         registerCouldMatcher("towny player leaves town");
     }
@@ -43,8 +42,7 @@ public class PlayerLeavesTownScriptEvent extends BukkitScriptEvent implements Li
     @Override
     public ObjectTag getContext(String name) {
         switch (name) {
-            case "town":
-                return new TownTag(event.getTown());
+            case "town": return new TownTag(event.getTown());
         }
         return super.getContext(name);
     }
@@ -54,5 +52,4 @@ public class PlayerLeavesTownScriptEvent extends BukkitScriptEvent implements Li
         this.event = event;
         fire(event);
     }
-
 }

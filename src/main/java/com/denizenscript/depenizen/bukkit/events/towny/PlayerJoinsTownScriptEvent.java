@@ -15,12 +15,10 @@ public class PlayerJoinsTownScriptEvent extends BukkitScriptEvent implements Lis
     // @Events
     // towny player joins town
     //
-    // @Cancellable false
-    //
     // @Triggers when a player joins a Towny town.
     //
     // @Context
-    // <context.town> Returns town the player is joining in.
+    // <context.town> returns the town the player is joining.
     //
     // @Plugin Depenizen, Towny
     //
@@ -29,6 +27,7 @@ public class PlayerJoinsTownScriptEvent extends BukkitScriptEvent implements Lis
     // @Group Depenizen
     //
     // -->
+
     public PlayerJoinsTownScriptEvent() {
         registerCouldMatcher("towny player joins town");
     }
@@ -43,8 +42,7 @@ public class PlayerJoinsTownScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public ObjectTag getContext(String name) {
         switch (name) {
-            case "town":
-                return new TownTag(event.getTown());
+            case "town": return new TownTag(event.getTown());
         }
         return super.getContext(name);
     }
@@ -54,5 +52,4 @@ public class PlayerJoinsTownScriptEvent extends BukkitScriptEvent implements Lis
         this.event = event;
         fire(event);
     }
-
 }
