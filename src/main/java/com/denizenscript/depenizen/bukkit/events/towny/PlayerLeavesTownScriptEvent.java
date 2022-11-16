@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.towny;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -18,7 +19,7 @@ public class PlayerLeavesTownScriptEvent extends BukkitScriptEvent implements Li
     // @Triggers when a player is removed from a Towny town or when a Towny town is dissolved.
     //
     // @Context
-    // <context.town> returns the town the player belongs to.
+    // <context.town> returns the TownTag that player is leaving.
     //
     // @Plugin Depenizen, Towny
     //
@@ -36,7 +37,7 @@ public class PlayerLeavesTownScriptEvent extends BukkitScriptEvent implements Li
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(event.getResident().getPlayer());
+        return new BukkitScriptEntryData(new PlayerTag(event.getResident().getUUID()), null);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.towny;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -18,7 +19,7 @@ public class PlayerJoinsTownScriptEvent extends BukkitScriptEvent implements Lis
     // @Triggers when a player joins a Towny town.
     //
     // @Context
-    // <context.town> returns the town the player is joining.
+    // <context.town> returns the TownTag that the player is joining.
     //
     // @Plugin Depenizen, Towny
     //
@@ -36,7 +37,7 @@ public class PlayerJoinsTownScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(event.getResident().getPlayer());
+        return new BukkitScriptEntryData(new PlayerTag(event.getResident().getUUID()), null);
     }
 
     @Override

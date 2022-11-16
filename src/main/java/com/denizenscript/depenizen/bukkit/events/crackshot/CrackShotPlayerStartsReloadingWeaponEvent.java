@@ -25,8 +25,6 @@ public class CrackShotPlayerStartsReloadingWeaponEvent extends BukkitScriptEvent
     //
     // @Triggers when a player starts reloading their CrackShot weapon.
     //
-    // @Cancellable false
-    //
     // @Context
     // <context.weapon> returns the name of the weapon.
     // <context.reload_speed> returns the rate at which the weapon is reloaded.
