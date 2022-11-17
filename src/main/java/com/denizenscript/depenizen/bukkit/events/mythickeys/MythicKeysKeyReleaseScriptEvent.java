@@ -7,9 +7,7 @@ import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.utilities.debugging.Warning;
 import eu.asangarin.mythickeys.api.MythicKeyReleaseEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -44,7 +42,14 @@ public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implement
     }
 
     public MythicKeyReleaseEvent event;
-    public Warning outdatedMythicKeys = new Warning("mythicKeysOutdated", "MythicKeys is outdated. Use the plugin 'AriKeysPlugin' for 1.19+ servers.");
+
+    @Override
+    public boolean couldMatch(ScriptPath path) {
+        if (NMSHandler.getVersion().isAtLeast(NMSVersion.v1_19)) {
+            MythicKeysKeyPressScriptEvent.outdatedMythicKeys.warn();
+        }
+        return super.couldMatch(path);
+    }
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -53,9 +58,6 @@ public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implement
         }
         if (!runInCheck(path, event.getPlayer().getLocation())) {
             return false;
-        }
-        if (NMSHandler.getVersion().isAtLeast(NMSVersion.v1_19)) {
-            outdatedMythicKeys.warn();
         }
         return super.matches(path);
     }
