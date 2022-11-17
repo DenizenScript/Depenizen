@@ -1,6 +1,8 @@
 package com.denizenscript.depenizen.bukkit.events.mythickeys;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.nms.NMSHandler;
+import com.denizenscript.denizen.nms.NMSVersion;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -53,7 +55,7 @@ public class MythicKeysKeyPressScriptEvent extends BukkitScriptEvent implements 
         if (!runInCheck(path, event.getPlayer().getLocation())) {
             return false;
         }
-        if (Bukkit.getBukkitVersion().substring(0, 4).equals("1.19")) {
+        if (NMSHandler.getVersion().isAtLeast(NMSVersion.v1_19)) {
             outdatedMythicKeys.warn();
         }
         return super.matches(path);
