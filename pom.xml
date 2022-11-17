@@ -94,6 +94,13 @@
             <systemPath>${basedir}/lib/AreaShop.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>eu.asangarin</groupId>
+            <artifactId>arikeys</artifactId>
+            <version>2.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/arikeys.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.wasteofplastic</groupId>
             <artifactId>askyblock</artifactId>
             <version>2.9.8.1</version>
