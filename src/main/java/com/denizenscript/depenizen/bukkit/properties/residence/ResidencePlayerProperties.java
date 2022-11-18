@@ -7,7 +7,7 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
@@ -55,8 +55,7 @@ public class ResidencePlayerProperties implements Property {
 
     ResidencePlayer player;
 
-    @Override
-    public ObjectTag getObjectAttribute(Attribute attribute) {
+    public static void registerTags() {
 
         // <--[tag]
         // @attribute <PlayerTag.has_main_residence>
@@ -65,10 +64,10 @@ public class ResidencePlayerProperties implements Property {
         // @description
         // Returns whether the player has a main Residence.
         // -->
-        if (attribute.startsWith("has_main_residence")) {
-            ClaimedResidence residence = player.getMainResidence();
-            return new ElementTag(residence != null).getObjectAttribute(attribute.fulfill(1));
-        }
+        PropertyParser.registerTag(ResidencePlayerProperties.class, ElementTag.class, "has_main_residence", (attribute, object) -> {
+            ClaimedResidence res = object.player.getMainResidence();
+            return new ElementTag(res != null);
+        });
 
         // <--[tag]
         // @attribute <PlayerTag.main_residence>
@@ -77,12 +76,13 @@ public class ResidencePlayerProperties implements Property {
         // @description
         // Returns the player's current main Residence if they have one.
         // -->
-        else if (attribute.startsWith("main_residence")) {
-            ClaimedResidence residence = player.getMainResidence();
-            if (residence != null) {
-                return new ResidenceTag(player.getMainResidence()).getObjectAttribute(attribute.fulfill(1));
+        PropertyParser.registerTag(ResidencePlayerProperties.class, ResidenceTag.class, "main_residence", (attribute, object) -> {
+            ClaimedResidence res = object.player.getMainResidence();
+            if (res != null) {
+                return new ResidenceTag(res);
             }
-        }
+            return null;
+        });
 
         // <--[tag]
         // @attribute <PlayerTag.residences>
@@ -91,15 +91,12 @@ public class ResidencePlayerProperties implements Property {
         // @description
         // Returns the player's current list of Residences.
         // -->
-        else if (attribute.startsWith("residences")) {
+        PropertyParser.registerTag(ResidencePlayerProperties.class, ListTag.class, "residences", (attribute, object) -> {
             ListTag list = new ListTag();
-            for (ClaimedResidence residence : player.getResList()) {
-                list.addObject(new ResidenceTag(residence));
+            for (ClaimedResidence res : object.player.getResList()) {
+                list.addObject(new ResidenceTag(res));
             }
-            return list.getObjectAttribute(attribute.fulfill(1));
-        }
-
-        return null;
-
+            return list;
+        });
     }
 }

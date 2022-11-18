@@ -4,11 +4,11 @@ import com.bekvon.bukkit.residence.Residence;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
 
 public class ResidenceLocationProperties implements Property {
 
@@ -48,8 +48,8 @@ public class ResidenceLocationProperties implements Property {
 
     LocationTag location;
 
-    @Override
-    public ObjectTag getObjectAttribute(Attribute attribute) {
+    public static void registerTags() {
+
         // <--[tag]
         // @attribute <LocationTag.has_residence>
         // @returns ElementTag(Boolean)
@@ -57,10 +57,10 @@ public class ResidenceLocationProperties implements Property {
         // @description
         // Returns if the location has a residence.
         // -->
-        if (attribute.startsWith("has_residence")) {
-            ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);
-            return new ElementTag(res != null).getObjectAttribute(attribute.fulfill(1));
-        }
+        PropertyParser.registerTag(ResidenceLocationProperties.class, ElementTag.class, "has_residence", (attribute, object) -> {
+            ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(object.location);
+            return new ElementTag(res != null);
+        });
 
         // <--[tag]
         // @attribute <LocationTag.residence>
@@ -69,15 +69,13 @@ public class ResidenceLocationProperties implements Property {
         // @description
         // Returns the residence contained by this location.
         // -->
-        if (attribute.startsWith("residence")) {
-            ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);
+        PropertyParser.registerTag(ResidenceLocationProperties.class, ResidenceTag.class, "residence", (attribute, object) -> {
+            ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(object.location);
             if (res != null) {
-                return new ResidenceTag(res).getObjectAttribute(attribute.fulfill(1));
+                return new ResidenceTag(res);
             }
             return null;
-        }
-
-        return null;
+        });
     }
 
     @Override
