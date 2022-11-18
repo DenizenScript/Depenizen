@@ -14,6 +14,7 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
     // <--[event]
     // @Events
     // residence player exits <'residence'>
+    // residence player exit <'residence'>
     //
     // @Triggers when a player exits a Residence.
     //
@@ -29,7 +30,7 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
     // -->
 
     public PlayerExitsResidenceScriptEvent() {
-        registerCouldMatcher("residence player exits <'residence'>");
+        registerCouldMatcher("residence player exits <'residence'>"); registerCouldMatcher("residence player exit <'residence'>");
     }
 
     public ResidenceChangedEvent event;

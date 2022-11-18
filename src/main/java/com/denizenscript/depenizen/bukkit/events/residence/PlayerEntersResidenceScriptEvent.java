@@ -14,6 +14,7 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
     // <--[event]
     // @Events
     // residence player enters <'residence'>
+    // residence player enter <'residence'>
     //
     // @Triggers when a player enters a Residence.
     //
@@ -29,7 +30,7 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
     // -->
 
     public PlayerEntersResidenceScriptEvent() {
-        registerCouldMatcher("residence player enters <'residence'>");
+        registerCouldMatcher("residence player enters <'residence'>"); registerCouldMatcher("residence player enter <'residence'>");
     }
 
     public ResidenceChangedEvent event;
