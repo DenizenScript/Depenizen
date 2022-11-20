@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.residence;
 
 import com.bekvon.bukkit.residence.Residence;
-import com.bekvon.bukkit.residence.containers.ResidencePlayer;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 import com.bekvon.bukkit.residence.protection.CuboidArea;
 import com.denizenscript.denizen.objects.CuboidTag;
@@ -150,8 +149,8 @@ public class ResidenceTag implements ObjectTag {
         // -->
         tagProcessor.registerTag(ListTag.class, "subzones", (attribute, object) -> {
             ListTag list = new ListTag();
-            for ( ClaimedResidence subzone : object.getResidence().getSubzones() ) {
-                list.addObject( new ResidenceTag(subzone));
+            for (ClaimedResidence subzone : object.getResidence().getSubzones()) {
+                list.addObject(new ResidenceTag(subzone));
             }
             return list;
         });
@@ -166,21 +165,6 @@ public class ResidenceTag implements ObjectTag {
         tagProcessor.registerTag(CuboidTag.class, "area", (attribute, object) -> {
             CuboidArea area = object.getResidence().getMainArea();
             return new CuboidTag(area.getLowLocation(), area.getHighLocation());
-        });
-
-        // <--[tag]
-        // @attribute <ResidenceTag.trusted_players>
-        // @returns ListTag(PlayerTag)
-        // @plugin Depenizen, Residence
-        // @description
-        // Returns a ListTag(PlayerTag) of trusted players in this Residence.
-        // -->
-        tagProcessor.registerTag(ListTag.class, "trusted_players", (attribute, object) -> {
-            ListTag players = new ListTag();
-            for (ResidencePlayer p : object.getResidence().getTrustedPlayers() ) {
-                players.addObject(new PlayerTag(p.getPlayer()));
-            }
-            return players;
         });
 
         // <--[tag]

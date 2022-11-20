@@ -62,7 +62,7 @@ public class ResidencePlayerProperties implements Property {
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Residence
         // @description
-        // Returns whether the player has a main Residence.
+        // Returns boolean whether the player has a main Residence.
         // -->
         PropertyParser.registerTag(ResidencePlayerProperties.class, ElementTag.class, "has_main_residence", (attribute, object) -> {
             ClaimedResidence res = object.player.getMainResidence();

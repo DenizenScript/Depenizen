@@ -55,7 +55,7 @@ public class ResidenceLocationProperties implements Property {
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Residence
         // @description
-        // Returns if the location has a residence.
+        // Returns boolean whether the location has a Residence.
         // -->
         PropertyParser.registerTag(ResidenceLocationProperties.class, ElementTag.class, "has_residence", (attribute, object) -> {
             ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(object.location);
@@ -67,7 +67,7 @@ public class ResidenceLocationProperties implements Property {
         // @returns ResidenceTag
         // @plugin Depenizen, Residence
         // @description
-        // Returns the residence contained by this location.
+        // Returns the Residence contained by this location.
         // -->
         PropertyParser.registerTag(ResidenceLocationProperties.class, ResidenceTag.class, "residence", (attribute, object) -> {
             ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(object.location);

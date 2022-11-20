@@ -42,8 +42,8 @@ public class PlayerCreatesResidenceScriptEvent extends BukkitScriptEvent impleme
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("residence")) {
-            return new ResidenceTag(event.getResidence());
+        switch (name) {
+            case "residence": return new ResidenceTag(event.getResidence());
         }
         return super.getContext(name);
     }

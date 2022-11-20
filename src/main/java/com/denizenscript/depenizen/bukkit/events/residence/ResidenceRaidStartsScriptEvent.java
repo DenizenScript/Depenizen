@@ -57,14 +57,14 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
         switch (name) {
             case "attackers":
                 attackers = new ListTag();
-                for (RaidAttacker p : event.getAttackers().values()) {
-                    attackers.addObject(new PlayerTag(p.getPlayer().getPlayer()));
+                for (RaidAttacker player : event.getAttackers().values()) {
+                    attackers.addObject(new PlayerTag(player.getPlayer().getPlayer()));
                 }
                 return attackers;
             case "defenders":
                 defenders = new ListTag();
-                for (RaidDefender p : event.getDefenders().values()) {
-                    defenders.addObject(new PlayerTag(p.getPlayer().getPlayer()));
+                for (RaidDefender player : event.getDefenders().values()) {
+                    defenders.addObject(new PlayerTag(player.getPlayer().getPlayer()));
                 }
                 return defenders;
             case "residence":

@@ -47,8 +47,8 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("residence")) {
-            return new ResidenceTag(residence);
+        switch (name) {
+            case "residence": return new ResidenceTag(residence);
         }
         return super.getContext(name);
     }
