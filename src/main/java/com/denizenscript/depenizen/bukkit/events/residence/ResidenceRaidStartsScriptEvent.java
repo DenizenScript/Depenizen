@@ -16,10 +16,9 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
 
     // <--[event]
     // @Events
-    // residence raid start
     // residence raid starts
     //
-    // @Switch residence:<residence_name> to only process the event if the residence name equals specified name
+    // @Switch residence:<residence_name> to only process the event if the residence name matches specified name.
     //
     // @Triggers when a player(s) starts raiding a Residence.
     //
@@ -35,7 +34,7 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
     // -->
 
     public ResidenceRaidStartsScriptEvent() {
-        registerCouldMatcher("residence raid starts"); registerCouldMatcher("residence raid start");
+        registerCouldMatcher("residence raid starts");
         registerSwitches("residence");
     }
 

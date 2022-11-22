@@ -14,7 +14,6 @@ public class PlayerCreatesResidenceScriptEvent extends BukkitScriptEvent impleme
     // <--[event]
     // @Events
     // residence player creates residence
-    // residence player create residence
     //
     // @Triggers when a player creates a Residence.
     //
@@ -30,7 +29,7 @@ public class PlayerCreatesResidenceScriptEvent extends BukkitScriptEvent impleme
     // -->
 
     public PlayerCreatesResidenceScriptEvent() {
-        registerCouldMatcher("residence player creates residence"); registerCouldMatcher("residence player create residence");
+        registerCouldMatcher("residence player creates residence");
     }
 
     public ResidenceCreationEvent event;

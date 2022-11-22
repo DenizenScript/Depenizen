@@ -15,11 +15,10 @@ public class ResidenceGetsDeletedScriptEvent extends BukkitScriptEvent implement
     // <--[event]
     // @Events
     // residence gets deleted
-    // residence get deleted
     //
-    // @Switch cause:<cause> to only process the event if the cause equals specified cause
+    // @Switch cause:<cause> to only process the event if the cause matches specified cause.
     //
-    // @Triggers when a player deletes a Residence.
+    // @Triggers when a Residence gets deleted.
     //
     // @Context
     // <context.cause> Returns the cause of deletion. ( Available causes: PLAYER_DELETE, OTHER, LEASE_EXPIRE )
@@ -34,7 +33,7 @@ public class ResidenceGetsDeletedScriptEvent extends BukkitScriptEvent implement
     // -->
 
     public ResidenceGetsDeletedScriptEvent() {
-        registerCouldMatcher("residence gets deleted"); registerCouldMatcher("residence get deleted");
+        registerCouldMatcher("residence gets deleted");
         registerSwitches("cause");
     }
 

@@ -13,10 +13,9 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
 
     // <--[event]
     // @Events
-    // residence raid end
     // residence raid ends
     //
-    // @Switch residence:<residence_name> to only process the event if the residence name equals specified name
+    // @Switch residence:<residence_name> to only process the event if the residence name matches specified name.
     //
     // @Triggers when a raiding a Residence ends.
     //
@@ -30,7 +29,7 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
     // -->
 
     public ResidenceRaidEndsScriptEvent() {
-        registerCouldMatcher("residence raid ends"); registerCouldMatcher("residence raid end");
+        registerCouldMatcher("residence raid ends");
         registerSwitches("residence");
     }
 
