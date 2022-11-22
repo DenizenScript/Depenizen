@@ -17,6 +17,7 @@ import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class ResidenceTag implements ObjectTag {
+
     public static ObjectTagProcessor<ResidenceTag> tagProcessor = new ObjectTagProcessor<>();
 
     // <--[ObjectType]

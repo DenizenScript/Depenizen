@@ -54,9 +54,6 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
 
     @EventHandler
     public void onResidenceRaidEndsScriptEvent(ResidenceRaidEndEvent event) {
-        if (event.getRes() == null) {
-            return;
-        }
         residence = event.getRes();
         this.event = event;
         fire(event);

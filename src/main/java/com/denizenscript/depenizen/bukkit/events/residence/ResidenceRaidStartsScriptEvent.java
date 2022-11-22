@@ -39,9 +39,6 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
     }
 
     public ResidenceRaidStartEvent event;
-    public ResidenceTag residence;
-    public ListTag attackers;
-    public ListTag defenders;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -55,13 +52,13 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
     public ObjectTag getContext(String name) {
         switch (name) {
             case "attackers":
-                attackers = new ListTag();
+                ListTag attackers = new ListTag();
                 for (RaidAttacker player : event.getAttackers().values()) {
                     attackers.addObject(new PlayerTag(player.getPlayer().getPlayer()));
                 }
                 return attackers;
             case "defenders":
-                defenders = new ListTag();
+                ListTag defenders = new ListTag();
                 for (RaidDefender player : event.getDefenders().values()) {
                     defenders.addObject(new PlayerTag(player.getPlayer().getPlayer()));
                 }
@@ -75,9 +72,6 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
 
     @EventHandler
     public void onResidenceRaidStartsScriptEvent(ResidenceRaidStartEvent event) {
-        if (event.getRes() == null) {
-            return;
-        }
         this.event = event;
         fire(event);
     }

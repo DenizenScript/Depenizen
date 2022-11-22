@@ -64,9 +64,6 @@ public class ResidenceGetsDeletedScriptEvent extends BukkitScriptEvent implement
 
     @EventHandler
     public void onResidenceGetsDeleted(ResidenceDeleteEvent event) {
-        if (event.getResidence() == null) {
-            return;
-        }
         cause = event.getCause().name();
         this.event = event;
         fire(event);
