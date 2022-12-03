@@ -64,7 +64,7 @@ public class SpellCastedScriptEvent extends BukkitScriptEvent implements Listene
 
     @Override
     public boolean matches(ScriptPath path) {
-        if (!caster.tryAdvancedMatcher(path.eventArgLowerAt(1))) {
+        if (!path.tryArgObject(1, caster)) {
             return false;
         }
         return super.matches(path);

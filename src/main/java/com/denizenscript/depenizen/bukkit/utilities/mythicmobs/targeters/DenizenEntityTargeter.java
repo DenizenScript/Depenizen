@@ -34,7 +34,7 @@ public class DenizenEntityTargeter implements IEntityTargeter {
     public HashSet<AbstractEntity> getEntities(SkillMetadata skillMetadata) {
         TagContext tagContext = CoreUtilities.noDebugContext.clone();
         tagContext.contextSource = source;
-        source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
+        source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()).getDenizenObject());
         ObjectTag object = TagManager.tagObject(tag, tagContext);
         List<EntityTag> list = object.asType(ListTag.class, tagContext).filter(EntityTag.class, tagContext);
         HashSet<AbstractEntity> entities = new HashSet<>();
