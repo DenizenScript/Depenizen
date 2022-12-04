@@ -19,8 +19,6 @@ public class CrackShotPlayerPlacesLandmineEvent extends BukkitScriptEvent implem
     //
     // @Triggers when a player places a landmine.
     //
-    // @Cancellable false
-    //
     // @Context
     // <context.landmine> returns the EntityTag for the landmine.
     //

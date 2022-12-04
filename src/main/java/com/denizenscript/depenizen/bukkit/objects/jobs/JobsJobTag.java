@@ -193,7 +193,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
 
         // <--[tag]
         // @attribute <JobsJobTag.full_description>
-        // @returns ElementTag
+        // @returns ListTag
         // @plugin Depenizen, Jobs
         // @description
         // Returns the full description of the job.

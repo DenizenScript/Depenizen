@@ -35,7 +35,7 @@ public class DenizenLocationTargeter implements ILocationTargeter {
     public HashSet<AbstractLocation> getLocations(SkillMetadata skillMetadata) {
         TagContext tagContext = CoreUtilities.noDebugContext.clone();
         tagContext.contextSource = source;
-        source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()));
+        source.contexts.put("entity", new EntityTag(skillMetadata.getCaster().getEntity().getBukkitEntity()).getDenizenObject());
         ObjectTag object = TagManager.tagObject( tag , tagContext);
         List<LocationTag> list = (object.asType(ListTag.class, tagContext)).filter(LocationTag.class, tagContext);
         HashSet<AbstractLocation> locations = new HashSet<>();

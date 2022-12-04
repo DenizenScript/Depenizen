@@ -120,7 +120,6 @@ public class QuestsCommand extends AbstractCommand {
                 if (questId != null) {
                     for (Quest quest : quests.getQuests()) {
                         if (quest.getId().equals(questId.asString())) {
-
                             quests.getQuester(player.getPlayerEntity().getUniqueId()).takeQuest(quest, override_checks.asBoolean());
                             break;
                         }

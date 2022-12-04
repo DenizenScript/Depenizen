@@ -345,7 +345,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // -->
         tagProcessor.registerTag(LocationTag.class, "spawn", (attribute, object) -> {
             try {
-                return new LocationTag(object.town.getSpawn()).getBlockLocation();
+                return new LocationTag(object.town.getSpawn());
             }
             catch (TownyException e) {
             }

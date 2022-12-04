@@ -36,7 +36,7 @@ public class DenizenCondition implements IEntityCondition, ILocationCondition, I
     @Override
     public boolean check(AbstractEntity entity) {
         reset();
-        source.contexts.put("target", new EntityTag(entity.getBukkitEntity()));
+        source.contexts.put("target", new EntityTag(entity.getBukkitEntity()).getDenizenObject());
         return runCheck();
     }
 
@@ -48,10 +48,10 @@ public class DenizenCondition implements IEntityCondition, ILocationCondition, I
     }
 
     public void addContext(SkillCaster caster) {
-        source.contexts.put("entity", new EntityTag(caster.getEntity().getBukkitEntity()));
+        source.contexts.put("entity", new EntityTag(caster.getEntity().getBukkitEntity()).getDenizenObject());
         AbstractEntity target = caster.getEntity().getTarget();
         if (target != null) {
-            source.contexts.put("target", new EntityTag(target.getBukkitEntity()));
+            source.contexts.put("target", new EntityTag(target.getBukkitEntity()).getDenizenObject());
         }
     }
 
@@ -66,7 +66,7 @@ public class DenizenCondition implements IEntityCondition, ILocationCondition, I
     public boolean check(SkillMetadata skillMetadata) {
         reset();
         if (skillMetadata.getTrigger() != null) {
-            source.contexts.put("trigger", new EntityTag(skillMetadata.getTrigger().getBukkitEntity()));
+            source.contexts.put("trigger", new EntityTag(skillMetadata.getTrigger().getBukkitEntity()).getDenizenObject());
         }
         addContext(skillMetadata.getCaster());
         return runCheck();
@@ -74,8 +74,8 @@ public class DenizenCondition implements IEntityCondition, ILocationCondition, I
 
     @Override
     public boolean check(AbstractEntity entity1, AbstractEntity entity2) {
-        source.contexts.put("entity", new EntityTag(entity1.getBukkitEntity()));
-        source.contexts.put("target", new EntityTag(entity2.getBukkitEntity()));
+        source.contexts.put("entity", new EntityTag(entity1.getBukkitEntity()).getDenizenObject());
+        source.contexts.put("target", new EntityTag(entity2.getBukkitEntity()).getDenizenObject());
         return runCheck();
     }
 

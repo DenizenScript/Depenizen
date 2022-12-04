@@ -68,7 +68,7 @@ public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener
     public void onPlayerCastsSpell(SpellLearnEvent event) {
         player = PlayerTag.mirrorBukkitPlayer(event.getLearner());
         spell = new ElementTag(event.getSpell().getName());
-        source = new ElementTag(event.getSource().name());
+        source = new ElementTag(event.getSource());
         this.event = event;
         fire(event);
     }

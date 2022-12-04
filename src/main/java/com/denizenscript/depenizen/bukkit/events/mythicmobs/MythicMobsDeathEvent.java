@@ -62,7 +62,7 @@ public class MythicMobsDeathEvent extends BukkitScriptEvent implements Listener 
         if (!mob.equals("mob") && !runGenericCheck(mob, mythicmob.getMobType().getInternalName())) {
             return false;
         }
-        if ((path.eventArgLowerAt(3).equals("by")) && (killer == null || !killer.tryAdvancedMatcher(path.eventArgLowerAt(4)))) {
+        if ((path.eventArgLowerAt(3).equals("by")) && (killer == null || !path.tryArgObject(4, killer))) {
             return false;
         }
         if (!path.tryObjectSwitch("by", killer)) {

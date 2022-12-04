@@ -1,6 +1,8 @@
 package com.denizenscript.depenizen.bukkit.events.mythickeys;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.nms.NMSHandler;
+import com.denizenscript.denizen.nms.NMSVersion;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -30,6 +32,8 @@ public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implement
     //
     // @Group Depenizen
     //
+    // @Warning For 1.19+ servers use AriKeysPlugin.
+    //
     // -->
 
     public MythicKeysKeyReleaseScriptEvent() {
@@ -38,6 +42,14 @@ public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implement
     }
 
     public MythicKeyReleaseEvent event;
+
+    @Override
+    public boolean couldMatch(ScriptPath path) {
+        if (NMSHandler.getVersion().isAtLeast(NMSVersion.v1_19)) {
+            MythicKeysKeyPressScriptEvent.outdatedMythicKeys.warn();
+        }
+        return super.couldMatch(path);
+    }
 
     @Override
     public boolean matches(ScriptPath path) {
