@@ -21,8 +21,8 @@ public class ViveMirrorCommand extends AbstractCommand {
 
     public ViveMirrorCommand() {
         setName("vivemirror");
-        setSyntax("vivemirror [<npc>] (mirror:{<player>}) (targets:{<player>}|...)");
-        setRequiredArguments(1, 3);
+        setSyntax("vivemirror [<npc>] [mirror:<vivecraftplayer>] (targets:{player}/<player>|...");
+        setRequiredArguments(2, 3);
         autoCompile();
     }
 
@@ -44,11 +44,11 @@ public class ViveMirrorCommand extends AbstractCommand {
     //
     // @Usage
     // # Use to mirror the current players pose.
-    // - vivemirror <npc>
+    // - vivemirror <npc> mirror:<player.vivecraft>
     //
     // @Usage
     // # Use to show your dancing skills to other players.
-    // - vivemirror <npc> targets:<server.online_players>
+    // - vivemirror <npc> mirror:<player.vivecraft> targets:<server.online_players>
 
     public static void autoExecute(ScriptEntry scriptEntry,
                                    @ArgLinear @ArgName("npc") @ArgRaw NPCTag npc,

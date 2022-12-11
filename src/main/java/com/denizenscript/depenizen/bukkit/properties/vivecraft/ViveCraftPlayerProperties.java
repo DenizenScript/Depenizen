@@ -50,7 +50,7 @@ public class ViveCraftPlayerProperties implements Property {
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, ViveCraft
         // @description
-        // Returns whether the player is running on VR.
+        // Returns whether the player is running on VR or not.
         // -->
 
         PropertyParser.registerTag(ViveCraftPlayerProperties.class, ElementTag.class,"is_vivecraft", (attribute, object) -> {
@@ -62,7 +62,7 @@ public class ViveCraftPlayerProperties implements Property {
         // @returns ViveCraftPlayerTag
         // @plugin Depenizen, ViveCraft
         // @description
-        // Returns the ViveCraftPlayer for this player.
+        // Returns the ViveCraftPlayerTag for this player.
         // -->
 
         PropertyParser.registerTag(ViveCraftPlayerProperties.class, ViveCraftPlayerTag.class, "vivecraft", (attribute, object) -> {

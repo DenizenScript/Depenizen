@@ -125,7 +125,7 @@ public class ViveCraftPlayerTag implements ObjectTag {
         // @attribute <ViveCraftPlayerTag.active_hand>
         // @returns ElementTag
         // @description
-        // Returns the active hand of the ViveCraftPlayer. Can be right or left.
+        // Returns the active hand of the ViveCraftPlayer. Returns either right or left.
         // -->
         tagProcessor.registerTag(ElementTag.class, "active_hand", (attribute, object) -> {
             return new ElementTag(object.getPlayer().getMetadata("activehand").get(0).asString());
