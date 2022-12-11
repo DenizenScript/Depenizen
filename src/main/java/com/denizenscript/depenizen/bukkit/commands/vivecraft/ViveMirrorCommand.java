@@ -3,14 +3,11 @@ package com.denizenscript.depenizen.bukkit.commands.vivecraft;
 import com.denizenscript.denizen.objects.NPCTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
-import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsRuntimeException;
-import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.scripts.commands.generator.*;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.bridges.ViveCraftBridge;
 import com.denizenscript.depenizen.bukkit.objects.vivecraft.ViveCraftPlayerTag;
 import org.bukkit.entity.Player;
@@ -31,10 +28,10 @@ public class ViveMirrorCommand extends AbstractCommand {
 
     // <--[command]
     // @Name ViveMirror
-    // @Syntax vivemirror [<npc>] [mirror:<player>] (targets:{player}/<player>)"
+    // @Syntax vivemirror [<npc>] [mirror:<vivecraftplayer>] (targets:{player}/<player>|...)"
     // @Required 1
     // @Maximum 3
-    // @Short Mirrors a ViveCraftPlayers pose to the npc.
+    // @Short Mirrors a ViveCraftPlayers pose to the npc, once.
     // @Group ViveCraft
     //
     // @Description
@@ -50,7 +47,7 @@ public class ViveMirrorCommand extends AbstractCommand {
     // - vivemirror <npc>
     //
     // @Usage
-    // # Use to show your dancing skills to other players
+    // # Use to show your dancing skills to other players.
     // - vivemirror <npc> targets:<server.online_players>
 
     public static void autoExecute(ScriptEntry scriptEntry,

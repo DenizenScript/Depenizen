@@ -24,12 +24,11 @@ public class ViveCraftPlayerTag implements ObjectTag {
     // @prefix vivecraft
     // @base ElementTag
     // @format
-    // The identity format for ViveCraftPlayerTag is <uuid>
-    // For example, 'vivecraft@1234-1234-1234'.
+    // The identity format for ViveCraftPlayerTag is the UUID of the relevant player.
     //
     // @plugin Depenizen, ViveCraft
     // @description
-    // A ViveCraftPlayerTag represents a player who uses ViveCraft.
+    // A ViveCraftPlayerTag represents a player which is in VR.
     //
     // -->
 
