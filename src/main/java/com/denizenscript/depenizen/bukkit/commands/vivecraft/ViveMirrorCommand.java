@@ -21,7 +21,7 @@ public class ViveMirrorCommand extends AbstractCommand {
 
     public ViveMirrorCommand() {
         setName("vivemirror");
-        setSyntax("vivemirror [<npc>] [mirror:<vivecraftplayer>] (targets:{player}/<player>|...");
+        setSyntax("vivemirror [<npc>] [mirror:<vivecraftplayer>] (targets:{player}/<player>|...)");
         setRequiredArguments(2, 3);
         autoCompile();
     }
