@@ -39,8 +39,8 @@ public class ViveMirrorCommand extends AbstractCommand {
     //
     // Ideally should run in a loop.
     //
-    // Optionally, specify a mirror player that will be mirrored to the NPC.
-    // Optionally, specify a list of targets to show the NPCs pose to. (targets must be in VR).
+    // Specify a vivecraftplayer that will be mirrored to the NPC.
+    // Optionally, specify a list of targets to show the NPCs pose to. (targets must be in VR to see the effect).
     //
     // @Usage
     // # Use to mirror the current players pose.
