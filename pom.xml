@@ -352,6 +352,13 @@
             <systemPath>${basedir}/lib/nuvotifier.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>org.vivecraft</groupId>
+            <artifactId>ViveCraft</artifactId>
+            <version>1.19.1-1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/ViveCraft.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-bukkit</artifactId>
             <version>7.3.0-SNAPSHOT</version>
