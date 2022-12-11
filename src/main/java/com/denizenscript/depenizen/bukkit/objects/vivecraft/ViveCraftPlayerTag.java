@@ -20,7 +20,7 @@ import java.util.UUID;
 public class ViveCraftPlayerTag implements ObjectTag {
 
     // <--[ObjectTag]
-    // @name ViveCraftPlayer
+    // @name ViveCraftPlayerTag
     // @prefix vivecraft
     // @base ElementTag
     // @format
@@ -109,7 +109,9 @@ public class ViveCraftPlayerTag implements ObjectTag {
     }
 
     @Override
-    public String toString() { return identify();}
+    public String toString() {
+        return identify();
+    }
 
     @Override
     public ObjectTag setPrefix(String prefix) {
@@ -169,7 +171,7 @@ public class ViveCraftPlayerTag implements ObjectTag {
                     return null;
             }
             if (location == null) {
-                attribute.echoError("Location is not valid. Did a plugin overwrote the data?");
+                attribute.echoError("Location is not valid. Did a plugin overwrite the data?");
                 return null;
             }
             return new LocationTag(location);

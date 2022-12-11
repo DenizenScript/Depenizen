@@ -28,8 +28,8 @@ public class ViveMirrorCommand extends AbstractCommand {
 
     // <--[command]
     // @Name ViveMirror
-    // @Syntax vivemirror [<npc>] [mirror:<vivecraftplayer>] (targets:{player}/<player>|...)"
-    // @Required 1
+    // @Syntax vivemirror [<npc>] [mirror:<vivecraftplayer>] (targets:{player}/<player>|...)
+    // @Required 2
     // @Maximum 3
     // @Short Mirrors a ViveCraftPlayers pose to the npc, once.
     // @Group ViveCraft
@@ -37,10 +37,10 @@ public class ViveMirrorCommand extends AbstractCommand {
     // @Description
     // Mirrors a ViveCraftPlayers pose to the npc, once.
     //
-    // Ideally should run in a loop.
+    // Ideally should run every tick.
     //
     // Specify a vivecraftplayer that will be mirrored to the NPC.
-    // Optionally, specify a list of targets to show the NPCs pose to. (targets must be in VR to see the effect).
+    // Optionally, specify a list of targets to show the NPCs pose to (targets must be in VR to see the effect).
     //
     // @Usage
     // # Use to mirror the current players pose.
@@ -49,6 +49,8 @@ public class ViveMirrorCommand extends AbstractCommand {
     // @Usage
     // # Use to show your dancing skills to other players.
     // - vivemirror <npc> mirror:<player.vivecraft> targets:<server.online_players>
+    //
+    // -->
 
     public static void autoExecute(ScriptEntry scriptEntry,
                                    @ArgLinear @ArgName("npc") @ArgRaw NPCTag npc,

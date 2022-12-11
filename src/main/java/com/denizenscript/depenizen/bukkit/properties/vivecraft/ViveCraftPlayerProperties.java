@@ -52,7 +52,6 @@ public class ViveCraftPlayerProperties implements Property {
         // @description
         // Returns whether the player is running on VR or not.
         // -->
-
         PropertyParser.registerTag(ViveCraftPlayerProperties.class, ElementTag.class,"is_vivecraft", (attribute, object) -> {
             return new ElementTag(VSE.isVive(object.player.getPlayerEntity()));
         });
@@ -64,7 +63,6 @@ public class ViveCraftPlayerProperties implements Property {
         // @description
         // Returns the ViveCraftPlayerTag for this player.
         // -->
-
         PropertyParser.registerTag(ViveCraftPlayerProperties.class, ViveCraftPlayerTag.class, "vivecraft", (attribute, object) -> {
             return new ViveCraftPlayerTag(object.player.getPlayerEntity());
         });
