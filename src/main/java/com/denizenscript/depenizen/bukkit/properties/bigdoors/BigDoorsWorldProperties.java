@@ -44,7 +44,7 @@ public class BigDoorsWorldProperties implements Property {
         return "BigDoorsWorld";
     }
 
-    public static void registerTags() {
+    public static void register() {
         // <--[tag]
         // @attribute <WorldTag.bigdoors>
         // @returns ListTag(BigDoorsDoorTag)

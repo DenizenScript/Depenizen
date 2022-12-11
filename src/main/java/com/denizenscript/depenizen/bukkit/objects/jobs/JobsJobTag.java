@@ -176,7 +176,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         mechanism.echoError("Cannot apply Properties to a Jobs Job!");
     }
 
-    public static void registerTags() {
+    public static void register() {
         PropertyParser.registerPropertyTagHandlers(JobsJobTag.class, tagProcessor);
 
         // <--[tag]

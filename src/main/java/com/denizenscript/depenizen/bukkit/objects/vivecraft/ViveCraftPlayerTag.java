@@ -121,7 +121,7 @@ public class ViveCraftPlayerTag implements ObjectTag {
 
     public static ObjectTagProcessor<ViveCraftPlayerTag> tagProcessor = new ObjectTagProcessor<>();
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <ViveCraftPlayerTag.active_hand>

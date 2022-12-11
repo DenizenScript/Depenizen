@@ -46,7 +46,7 @@ public class TownyWorldProperties implements Property {
 
     public WorldTag world;
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <WorldTag.towny_enabled>

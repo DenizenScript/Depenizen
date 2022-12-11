@@ -128,7 +128,7 @@ public class GriefPreventionClaimTag implements ObjectTag, Adjustable, Flaggable
         return tagProcessor.getObjectAttribute(this, attribute);
     }
 
-    public static void registerTags() {
+    public static void register() {
 
         AbstractFlagTracker.registerFlagHandlers(tagProcessor);
 

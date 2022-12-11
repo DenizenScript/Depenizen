@@ -50,7 +50,7 @@ public class MythicMobsPlayerProperties implements Property {
 
     PlayerTag player;
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <PlayerTag.mythic_variable[<name>]>
