@@ -45,6 +45,7 @@ softdepend:
     - TownyChat
     - Vampire
     - ViaVersion
+    - Vivecraft-Spigot-Extensions
     - Votifier
     - WorldEdit
     - WorldGuard
