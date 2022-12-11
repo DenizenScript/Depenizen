@@ -16,7 +16,6 @@ import org.vivecraft.VivePlayer;
 
 import java.util.List;
 
-
 public class ViveMirrorCommand extends AbstractCommand {
 
     public ViveMirrorCommand() {
@@ -54,7 +53,7 @@ public class ViveMirrorCommand extends AbstractCommand {
 
     public static void autoExecute(ScriptEntry scriptEntry,
                                    @ArgLinear @ArgName("npc") @ArgRaw NPCTag npc,
-                                   @ArgPrefixed @ArgName("mirror") @ArgDefaultNull ViveCraftPlayerTag mirror,
+                                   @ArgPrefixed @ArgName("mirror") ViveCraftPlayerTag mirror,
                                    @ArgPrefixed @ArgName("targets") @ArgDefaultNull ListTag targets) {
         if (!(npc.getEntity() instanceof Player)) {
             throw new InvalidArgumentsRuntimeException("NPC must be a PLAYER type NPC.");
@@ -65,9 +64,6 @@ public class ViveMirrorCommand extends AbstractCommand {
             }
             targets = new ListTag();
             targets.addObject(Utilities.getEntryPlayer(scriptEntry));
-        }
-        if (mirror == null) {
-            throw new InvalidArgumentsRuntimeException("Missing ViveCraftPlayerTag input.");
         }
         List<PlayerTag> players = targets.filter(PlayerTag.class, scriptEntry);
         VivePlayer vp = new VivePlayer((Player) npc.getLivingEntity());
