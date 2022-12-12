@@ -117,7 +117,7 @@ public class ResidenceTag implements ObjectTag {
         return tagProcessor.getObjectAttribute(this, attribute);
     }
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <ResidenceTag.name>
@@ -135,7 +135,7 @@ public class ResidenceTag implements ObjectTag {
         // @returns PlayerTag
         // @plugin Depenizen, Residence
         // @description
-        // Returns a PlayerTag of owner in this Residence.
+        // Returns the owner of the Residence.
         // -->
         tagProcessor.registerTag(PlayerTag.class, "owner", (attribute, object) -> {
             return new PlayerTag(object.getResidence().getOwnerUUID());
@@ -143,10 +143,10 @@ public class ResidenceTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <ResidenceTag.subzones>
-        // @returns ListTag
+        // @returns ListTag(ResidenceTag)
         // @plugin Depenizen, Residence
         // @description
-        // Returns a ListTag(ResidenceTag) of subzones in this Residence.
+        // Returns a list of subzones in this Residence.
         // -->
         tagProcessor.registerTag(ListTag.class, "subzones", (attribute, object) -> {
             ListTag list = new ListTag();
@@ -161,7 +161,7 @@ public class ResidenceTag implements ObjectTag {
         // @returns CuboidTag
         // @plugin Depenizen, Residence
         // @description
-        // Returns a CuboidTag of this Residences area.
+        // Returns the area of the Residences.
         // -->
         tagProcessor.registerTag(CuboidTag.class, "area", (attribute, object) -> {
             CuboidArea area = object.getResidence().getMainArea();
@@ -175,12 +175,8 @@ public class ResidenceTag implements ObjectTag {
         // @description
         // Returns boolean whether the specified location is within this Residence.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "is_within", (attribute, object) -> {
-            if (attribute.hasParam()) {
-                LocationTag location = attribute.paramAsType(LocationTag.class);
-                return new ElementTag(object.getResidence().containsLoc(location));
-            }
-            return null;
+        tagProcessor.registerTag(ElementTag.class, LocationTag.class, "is_within", (attribute, object, loc) -> {
+            return new ElementTag(object.getResidence().containsLoc(loc));
         });
     }
 }

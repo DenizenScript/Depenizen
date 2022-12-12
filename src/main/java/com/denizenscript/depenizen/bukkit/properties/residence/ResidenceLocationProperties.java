@@ -48,7 +48,7 @@ public class ResidenceLocationProperties implements Property {
 
     LocationTag location;
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <LocationTag.has_residence>

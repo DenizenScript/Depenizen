@@ -15,10 +15,12 @@ public class PlayerCreatesResidenceScriptEvent extends BukkitScriptEvent impleme
     // @Events
     // residence player creates residence
     //
+    // @Cancellable true
+    //
     // @Triggers when a player creates a Residence.
     //
     // @Context
-    // <context.residence> Returns the ResidenceTag of created residence.
+    // <context.residence> Returns the created ResidenceTag.
     //
     // @Plugin Depenizen, Residence
     //
@@ -49,9 +51,6 @@ public class PlayerCreatesResidenceScriptEvent extends BukkitScriptEvent impleme
 
     @EventHandler
     public void onResidencePlayerCreatesResidence(ResidenceCreationEvent event) {
-        if (event.getResidence() == null) {
-            return;
-        }
         this.event = event;
         fire(event);
     }

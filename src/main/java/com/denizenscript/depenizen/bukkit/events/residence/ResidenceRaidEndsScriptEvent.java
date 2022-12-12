@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.residence;
 
 import com.bekvon.bukkit.residence.event.ResidenceRaidEndEvent;
-import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
@@ -20,7 +19,7 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
     // @Triggers when a raiding a Residence ends.
     //
     // @Context
-    // <context.residence> Returns a ResidenceTag of residence that was being raided.
+    // <context.residence> Returns a ResidenceTag of the residence that was being raided.
     //
     // @Plugin Depenizen, Residence
     //
@@ -34,11 +33,10 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
     }
 
     public ResidenceRaidEndEvent event;
-    public ClaimedResidence residence;
 
     @Override
     public boolean matches(ScriptPath path) {
-        if (!runGenericSwitchCheck(path, "residence", residence.getName())) {
+        if (!runGenericSwitchCheck(path, "residence", event.getRes().getName())) {
             return false;
         }
         return super.matches(path);
@@ -47,14 +45,13 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
     @Override
     public ObjectTag getContext(String name) {
         switch (name) {
-            case "residence": return new ResidenceTag(residence);
+            case "residence": return new ResidenceTag(event.getRes());
         }
         return super.getContext(name);
     }
 
     @EventHandler
     public void onResidenceRaidEndsScriptEvent(ResidenceRaidEndEvent event) {
-        residence = event.getRes();
         this.event = event;
         fire(event);
     }

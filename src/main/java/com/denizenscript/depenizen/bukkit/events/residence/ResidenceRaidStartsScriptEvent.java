@@ -1,8 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.residence;
 
 import com.bekvon.bukkit.residence.event.ResidenceRaidStartEvent;
-import com.bekvon.bukkit.residence.raid.RaidAttacker;
-import com.bekvon.bukkit.residence.raid.RaidDefender;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
@@ -10,7 +8,7 @@ import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-
+import java.util.UUID;
 
 public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements Listener {
 
@@ -18,14 +16,16 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
     // @Events
     // residence raid starts
     //
+    // @Cancellable true
+    //
     // @Switch residence:<residence_name> to only process the event if the residence name matches specified name.
     //
     // @Triggers when a player(s) starts raiding a Residence.
     //
     // @Context
-    // <context.residence> Returns a ResidenceTag of residence that is being attacked.
-    // <context.defenders> Returns a ListTag(PlayerTag) of players defending the Residence.
-    // <context.attackers> Returns a ListTag(PlayerTag) of players attacking the Residence.
+    // <context.residence> Returns a ResidenceTag of the residence that is being attacked.
+    // <context.defenders> Returns a ListTag(PlayerTag) of the players defending the Residence.
+    // <context.attackers> Returns a ListTag(PlayerTag) of the players attacking the Residence.
     //
     // @Plugin Depenizen, Residence
     //
@@ -39,6 +39,7 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
     }
 
     public ResidenceRaidStartEvent event;
+    public ResidenceTag residence;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -53,26 +54,25 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
         switch (name) {
             case "attackers":
                 ListTag attackers = new ListTag();
-                for (RaidAttacker player : event.getAttackers().values()) {
-                    attackers.addObject(new PlayerTag(player.getPlayer().getPlayer()));
+                for (UUID uuid : event.getAttackers().keySet()) {
+                    attackers.addObject(new PlayerTag(uuid));
                 }
                 return attackers;
             case "defenders":
                 ListTag defenders = new ListTag();
-                for (RaidDefender player : event.getDefenders().values()) {
-                    defenders.addObject(new PlayerTag(player.getPlayer().getPlayer()));
+                for (UUID uuid : event.getDefenders().keySet()) {
+                    defenders.addObject(new PlayerTag(uuid));
                 }
                 return defenders;
-            case "residence":
-                return new ResidenceTag(event.getRes());
-            default:
-                return super.getContext(name);
+            case "residence": return residence;
         }
+        return super.getContext(name);
     }
 
     @EventHandler
     public void onResidenceRaidStartsScriptEvent(ResidenceRaidStartEvent event) {
         this.event = event;
+        residence = new ResidenceTag(event.getRes());
         fire(event);
     }
 }

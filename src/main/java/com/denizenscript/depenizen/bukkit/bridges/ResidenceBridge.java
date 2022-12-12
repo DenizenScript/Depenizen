@@ -22,7 +22,7 @@ public class ResidenceBridge extends Bridge {
         ScriptEvent.registerScriptEvent(PlayerEntersResidenceScriptEvent.class);
         ScriptEvent.registerScriptEvent(PlayerExitsResidenceScriptEvent.class);
         ScriptEvent.registerScriptEvent(PlayerCreatesResidenceScriptEvent.class);
-        ScriptEvent.registerScriptEvent(ResidenceGetsDeletedScriptEvent.class);
+        ScriptEvent.registerScriptEvent(ResidenceDeletedScriptEvent.class);
         ScriptEvent.registerScriptEvent(ResidenceRaidStartsScriptEvent.class);
         ScriptEvent.registerScriptEvent(ResidenceRaidEndsScriptEvent.class);
 

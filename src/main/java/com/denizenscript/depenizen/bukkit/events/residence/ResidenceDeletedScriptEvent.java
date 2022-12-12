@@ -10,19 +10,19 @@ import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class ResidenceGetsDeletedScriptEvent extends BukkitScriptEvent implements Listener {
+public class ResidenceDeletedScriptEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]
     // @Events
-    // residence gets deleted
+    // residence deleted
     //
-    // @Switch cause:<cause> to only process the event if the cause matches specified cause.
+    // @Switch cause:<cause> to only process the event if the cause of deletion matches.
     //
     // @Triggers when a Residence gets deleted.
     //
     // @Context
-    // <context.cause> Returns the cause of deletion. ( Available causes: PLAYER_DELETE, OTHER, LEASE_EXPIRE )
-    // <context.residence> Returns the ResidenceTag of deleted residence.
+    // <context.cause> Returns the cause of deletion. Can be: PLAYER_DELETE, OTHER or LEASE_EXPIRE
+    // <context.residence> Returns the ResidenceTag of the deleted residence.
     //
     // @Plugin Depenizen, Residence
     //
@@ -32,17 +32,16 @@ public class ResidenceGetsDeletedScriptEvent extends BukkitScriptEvent implement
     //
     // -->
 
-    public ResidenceGetsDeletedScriptEvent() {
-        registerCouldMatcher("residence gets deleted");
+    public ResidenceDeletedScriptEvent() {
+        registerCouldMatcher("residence deleted");
         registerSwitches("cause");
     }
 
     public ResidenceDeleteEvent event;
-    public String cause;
 
     @Override
     public boolean matches(ScriptPath path) {
-        if (!runGenericSwitchCheck(path, "cause", cause)) {
+        if (!runGenericSwitchCheck(path, "cause", event.getCause().name())) {
             return false;
         }
         return super.matches(path);
@@ -56,15 +55,14 @@ public class ResidenceGetsDeletedScriptEvent extends BukkitScriptEvent implement
     @Override
     public ObjectTag getContext(String name) {
         switch (name) {
-            case "cause": return new ElementTag(cause);
+            case "cause": return new ElementTag(event.getCause().name());
             case "residence": return new ResidenceTag(event.getResidence());
         }
         return super.getContext(name);
     }
 
     @EventHandler
-    public void onResidenceGetsDeleted(ResidenceDeleteEvent event) {
-        cause = event.getCause().name();
+    public void onResidenceDeleted(ResidenceDeleteEvent event) {
         this.event = event;
         fire(event);
     }

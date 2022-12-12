@@ -55,7 +55,7 @@ public class ResidencePlayerProperties implements Property {
 
     ResidencePlayer player;
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <PlayerTag.has_main_residence>
