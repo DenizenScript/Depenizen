@@ -269,8 +269,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // Returns true if the town is currently public.
         // -->
         tagProcessor.registerTag(ElementTag.class, "is_public", (attribute, object) -> {
-            return new ElementTag(object.town.isPublic())
-                    ;
+            return new ElementTag(object.town.isPublic());
         });
 
         // <--[tag]
