@@ -47,7 +47,7 @@ public class TownyLocationProperties implements Property {
     }
 
     public static final String[] handledTags = new String[] {
-            "has_town", "town", "is_wilderness", "is_nationzone", "towny", "towny_type"
+            "has_town", "town", "is_wilderness", "is_nation_zone", "towny", "towny_type"
     };
 
     public static final String[] handledMechs = new String[] {
@@ -155,13 +155,13 @@ public class TownyLocationProperties implements Property {
         }
 
         // <--[tag]
-        // @attribute <LocationTag.is_nationzone>
+        // @attribute <LocationTag.is_nation_zone>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Towny
         // @description
         // Returns whether the location is a nation zone.
         // -->
-        if (attribute.startsWith("is_nationzone")) {
+        if (attribute.startsWith("is_nation_zone")) {
             return new ElementTag(TownyAPI.getInstance().isNationZone(location)).getObjectAttribute(attribute.fulfill(1));
         }
 
