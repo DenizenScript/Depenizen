@@ -183,10 +183,10 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // @attribute <TownTag.assistants>
         // @returns ListTag
         // @plugin Depenizen, Towny
-        // @deprecated use 'get_rank'
+        // @deprecated use 'members_by_rank'
         // @description
         // Returns a list of the town's assistants. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
-        // Deprecated in favor of <@link tag TownTag.get_rank[(rank)]>.
+        // Deprecated in favor of <@link tag TownTag.members_by_rank[(rank)]>.
         // -->
         tagProcessor.registerTag(ListTag.class, "assistants", (attribute, object) -> {
             ListTag list = new ListTag();
@@ -227,13 +227,13 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         });
 
         // <--[tag]
-        // @attribute <TownTag.get_rank[(<rank>)]>
+        // @attribute <TownTag.members_by_rank[(<rank>)]>
         // @returns ListTag
         // @plugin Depenizen, Towny
         // @description
         // Returns a list of the town's members with a given rank. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
         // -->
-        tagProcessor.registerTag(ListTag.class, "get_rank", (attribute, object) -> {
+        tagProcessor.registerTag(ListTag.class, "members_by_rank", (attribute, object) -> {
             String rank = attribute.getParam();
             ListTag list = new ListTag();
             for (Resident resident : object.town.getRank(rank)) {
