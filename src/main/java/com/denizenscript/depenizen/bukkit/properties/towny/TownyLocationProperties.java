@@ -1,82 +1,31 @@
 package com.denizenscript.depenizen.bukkit.properties.towny;
 
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizencore.objects.properties.Property;
-import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.TownBlock;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
 
 import java.util.UUID;
 
-public class TownyLocationProperties implements Property {
+public class TownyLocationProperties {
+    public static void register() {
+        // <--[tag]
+        // @attribute <LocationTag.towny_allows_pvp>
+        // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns whether Towny would allow PVP here.
+        // -->
+        LocationTag.tagProcessor.registerTag(ElementTag.class, "towny_allows_pvp", (attribute, location) -> {
+            return new ElementTag(TownyAPI.getInstance().isPVP(location));
+        });
 
-    @Override
-    public String getPropertyString() {
-        return null;
-    }
-
-    @Override
-    public String getPropertyId() {
-        return "TownyLocation";
-    }
-
-    @Override
-    public void adjust(Mechanism mechanism) {
-        // None
-    }
-
-    public static boolean describes(ObjectTag object) {
-        return object instanceof LocationTag;
-    }
-
-    public static TownyLocationProperties getFrom(ObjectTag object) {
-        if (!describes(object)) {
-            return null;
-        }
-        else {
-            return new TownyLocationProperties((LocationTag) object);
-        }
-    }
-
-    public static final String[] handledTags = new String[] {
-            "has_town", "town", "is_wilderness", "is_nation_zone", "towny", "towny_type"
-    };
-
-    public static final String[] handledMechs = new String[] {
-    }; // None
-
-    private TownyLocationProperties(LocationTag location) {
-        this.location = location;
-    }
-
-    public LocationTag location;
-
-    @Override
-    public ObjectTag getObjectAttribute(Attribute attribute) {
-
-        if (attribute.startsWith("towny")) {
-            attribute = attribute.fulfill(1);
+        LocationTag.tagProcessor.registerTag(PlayerTag.class, "towny", (attribute, location) -> {
             try {
-
-                // <--[tag]
-                // @attribute <LocationTag.towny.is_pvp>
-                // @returns ElementTag(Boolean)
-                // @plugin Depenizen, Towny
-                // @description
-                // Returns whether Towny would block PVP here.
-                // -->
-                if (attribute.startsWith("is_pvp")) {
-                    return new ElementTag(TownyAPI.getInstance().isPVP(location)).getObjectAttribute(attribute.fulfill(1));
-                }
-
                 // <--[tag]
                 // @attribute <LocationTag.towny.resident>
                 // @returns PlayerTag
@@ -84,7 +33,7 @@ public class TownyLocationProperties implements Property {
                 // @description
                 // Returns the resident of a Towny plot at the location, if any.
                 // -->
-                if (attribute.startsWith("resident")) {
+                if (attribute.startsWith("resident", 2)) {
                     TownBlock block = TownyAPI.getInstance().getTownBlock(location);
                     if (block == null) {
                         return null;
@@ -96,15 +45,16 @@ public class TownyLocationProperties implements Property {
                     if (player == null) {
                         return null;
                     }
-                    return new PlayerTag(player).getObjectAttribute(attribute.fulfill(1));
+                    return new PlayerTag(player);
                 }
             }
             catch (NotRegisteredException ex) {
                 if (!attribute.hasAlternative()) {
-                    Debug.echoError("Towny tag NotRegisteredException: " + ex.getMessage());
+                    attribute.echoError("Towny tag NotRegisteredException: " + ex.getMessage());
                 }
             }
-        }
+            return null;
+        });
 
         // <--[tag]
         // @attribute <LocationTag.towny_type>
@@ -114,13 +64,13 @@ public class TownyLocationProperties implements Property {
         // Returns the type of the Towny area this location is in.
         // Can be Default, Shop, Arena, Embassy, Wilds, Inn, Jail, Farm, Bank
         // -->
-        if (attribute.startsWith("towny_type")) {
+        LocationTag.tagProcessor.registerTag(ElementTag.class, "towny_type", (attribute, location) -> {
             TownBlock block = TownyAPI.getInstance().getTownBlock(location);
             if (block != null) {
-                return new ElementTag(block.getType().getName()).getObjectAttribute(attribute.fulfill(1));
+                return new ElementTag(block.getType().getName());
             }
             return null;
-        }
+        });
 
         // <--[tag]
         // @attribute <LocationTag.has_town>
@@ -129,14 +79,9 @@ public class TownyLocationProperties implements Property {
         // @description
         // Returns whether the location is within a town.
         // -->
-        if (attribute.startsWith("has_town")) {
-            if (TownyAPI.getInstance().getTown(location) != null) {
-                return new ElementTag(true).getObjectAttribute(attribute.fulfill(1));
-            }
-            else {
-                return new ElementTag(false).getObjectAttribute(attribute.fulfill(1));
-            }
-        }
+        LocationTag.tagProcessor.registerTag(ElementTag.class, "has_town", (attribute, location) -> {
+            return new ElementTag(TownyAPI.getInstance().getTown(location) != null);
+        });
 
         // <--[tag]
         // @attribute <LocationTag.town>
@@ -145,14 +90,13 @@ public class TownyLocationProperties implements Property {
         // @description
         // Returns the town at the specified location.
         // -->
-        if (attribute.startsWith("town")) {
+        LocationTag.tagProcessor.registerTag(TownTag.class, "town", (attribute, location) -> {
             String town = TownyAPI.getInstance().getTownName(location);
             if (town == null) {
                 return null;
             }
-            return new TownTag(TownyUniverse.getInstance().getTown(town))
-                    .getObjectAttribute(attribute.fulfill(1));
-        }
+            return new TownTag(TownyUniverse.getInstance().getTown(town));
+        });
 
         // <--[tag]
         // @attribute <LocationTag.is_nation_zone>
@@ -161,9 +105,9 @@ public class TownyLocationProperties implements Property {
         // @description
         // Returns whether the location is a nation zone.
         // -->
-        if (attribute.startsWith("is_nation_zone")) {
-            return new ElementTag(TownyAPI.getInstance().isNationZone(location)).getObjectAttribute(attribute.fulfill(1));
-        }
+        LocationTag.tagProcessor.registerTag(ElementTag.class, "is_nation_zone", (attribute, location) -> {
+            return new ElementTag(TownyAPI.getInstance().isNationZone(location));
+        });
 
         // <--[tag]
         // @attribute <LocationTag.is_wilderness>
@@ -172,11 +116,8 @@ public class TownyLocationProperties implements Property {
         // @description
         // Returns whether the location is wilderness.
         // -->
-        if (attribute.startsWith("is_wilderness")) {
-            return new ElementTag(TownyAPI.getInstance().isWilderness(location)).getObjectAttribute(attribute.fulfill(1));
-        }
-
-        return null;
-
+        LocationTag.tagProcessor.registerTag(ElementTag.class, "is_wilderness", (attribute, location) -> {
+            return new ElementTag(TownyAPI.getInstance().isWilderness(location));
+        });
     }
 }
