@@ -91,7 +91,7 @@ public class BigDoorsDoorTag implements ObjectTag, Adjustable {
         return identify();
     }
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <BigDoorsDoorTag.is_open>

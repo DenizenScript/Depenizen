@@ -136,7 +136,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
 
     public static ObjectTagProcessor<MythicMobsMobTag> tagProcessor = new ObjectTagProcessor<>();
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <MythicMobsMobTag.internal_name>

@@ -44,7 +44,7 @@ public class GriefPreventionWorldProperties implements Property {
 
     WorldTag world;
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <WorldTag.griefprevention_claims>
