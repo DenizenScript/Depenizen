@@ -1,23 +1,24 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.denizencore.DenizenCore;
-import com.denizenscript.depenizen.bukkit.commands.worldguard.RegionCommand;
-import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardCuboidProperties;
-import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardWorldProperties;
-import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.objects.WorldTag;
+import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
-import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
-import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.depenizen.bukkit.Bridge;
+import com.denizenscript.depenizen.bukkit.commands.worldguard.RegionCommand;
+import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
+import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardCuboidProperties;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardLocationProperties;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardPlayerProperties;
-import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
-import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardWorldProperties;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+import org.bukkit.World;
 
 public class WorldGuardBridge extends Bridge {
 
@@ -26,22 +27,12 @@ public class WorldGuardBridge extends Bridge {
     @Override
     public void init() {
         instance = this;
-        ObjectFetcher.registerWithObjectFetcher(WorldGuardRegionTag.class);
+        ObjectFetcher.registerWithObjectFetcher(WorldGuardRegionTag.class, WorldGuardRegionTag.tagProcessor);
         PropertyParser.registerProperty(WorldGuardLocationProperties.class, LocationTag.class);
         PropertyParser.registerProperty(WorldGuardPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(WorldGuardCuboidProperties.class, CuboidTag.class);
         PropertyParser.registerProperty(WorldGuardWorldProperties.class, WorldTag.class);
         DenizenCore.commandRegistry.registerCommand(RegionCommand.class);
-        TagManager.registerTagHandler(new TagRunnable.RootForm() {
-            @Override
-            public void run(ReplaceableTagEvent event) {
-                tagEvent(event);
-            }
-        }, "region");
-    }
-
-    public void tagEvent(ReplaceableTagEvent event) {
-        Attribute attribute = event.getAttributes();
 
         // <--[tag]
         // @attribute <region[<region>]>
@@ -51,14 +42,12 @@ public class WorldGuardBridge extends Bridge {
         // Returns a WorldGuard region object constructed from the input value.
         // Refer to <@link objecttype WorldGuardRegionTag>.
         // -->
-        if (attribute.startsWith("region") && attribute.hasParam()) {
-            WorldGuardRegionTag region =  attribute.paramAsType(WorldGuardRegionTag.class);
-            if (region != null) {
-                event.setReplacedObject(region.getObjectAttribute(attribute.fulfill(1)));
-            }
-            else {
-                attribute.echoError("Unknown WorldGuard region '" + attribute.getParam() + "' for region[] tag.");
-            }
-        }
+        TagManager.registerTagHandler(WorldGuardRegionTag.class, WorldGuardRegionTag.class, "region", (attribute, region) -> {
+            return region;
+        });
+    }
+
+    public static RegionManager getManager(World world) {
+        return WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
     }
 }
