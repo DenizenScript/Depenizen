@@ -8,6 +8,7 @@ import com.palmergames.bukkit.towny.object.TownBlock;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -26,28 +27,38 @@ public class TownyLocationProperties {
             return new ElementTag(TownyAPI.getInstance().isPVP(location));
         });
 
+        // <--[tag]
+        // @attribute <LocationTag.towny_resident>
+        // @returns PlayerTag
+        // @plugin Depenizen, Towny
+        // @description
+        // Returns the resident of a Towny plot at the location, if any.
+        // -->
+        LocationTag.tagProcessor.registerTag(PlayerTag.class, "towny_resident", (attribute, location) -> {
+            try {
+                return getResidentAtLocation(location);
+            }
+            catch (NotRegisteredException ex) {
+                if (!attribute.hasAlternative()) {
+                    attribute.echoError("Towny tag NotRegisteredException: " + ex.getMessage());
+                }
+            }
+            return null;
+        });
+
         LocationTag.tagProcessor.registerTag(PlayerTag.class, "towny", (attribute, location) -> {
             try {
                 // <--[tag]
                 // @attribute <LocationTag.towny.resident>
                 // @returns PlayerTag
                 // @plugin Depenizen, Towny
+                // @deprecated use 'towny_resident'
                 // @description
                 // Returns the resident of a Towny plot at the location, if any.
+                // Deprecated in favor of <@link tag LocationTag.towny_resident>.
                 // -->
                 if (attribute.startsWith("resident", 2)) {
-                    TownBlock block = TownyAPI.getInstance().getTownBlock(location);
-                    if (block == null) {
-                        return null;
-                    }
-                    if (!block.hasResident()) {
-                        return null;
-                    }
-                    UUID player = block.getResident().getUUID();
-                    if (player == null) {
-                        return null;
-                    }
-                    return new PlayerTag(player);
+                    return getResidentAtLocation(location);
                 }
             }
             catch (NotRegisteredException ex) {
@@ -121,5 +132,21 @@ public class TownyLocationProperties {
         LocationTag.tagProcessor.registerTag(ElementTag.class, "is_wilderness", (attribute, location) -> {
             return new ElementTag(TownyAPI.getInstance().isWilderness(location));
         });
+    }
+
+    @Nullable
+    private static PlayerTag getResidentAtLocation(LocationTag location) throws NotRegisteredException {
+        TownBlock block = TownyAPI.getInstance().getTownBlock(location);
+        if (block == null) {
+            return null;
+        }
+        if (!block.hasResident()) {
+            return null;
+        }
+        UUID player = block.getResident().getUUID();
+        if (player == null) {
+            return null;
+        }
+        return new PlayerTag(player);
     }
 }
