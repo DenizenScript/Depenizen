@@ -178,7 +178,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
         // @deprecated use 'members_by_rank'
         // @description
         // Returns a list of the nation's assistants.
-        // Deprecated in favor of <@link tag NationTag.members_by_rank[(rank)]>.
+        // Deprecated in favor of <@link tag NationTag.members_by_rank[<rank>]>.
         // -->
         tagProcessor.registerTag(ListTag.class, "assistants", (attribute, object) -> {
             ListTag list = new ListTag();
@@ -229,7 +229,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
         });
 
         // <--[tag]
-        // @attribute <NationTag.members_by_rank[(<rank>)]>
+        // @attribute <NationTag.members_by_rank[<rank>]>
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, Towny
         // @description
