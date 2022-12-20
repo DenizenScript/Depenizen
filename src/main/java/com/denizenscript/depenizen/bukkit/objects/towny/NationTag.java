@@ -228,13 +228,13 @@ public class NationTag implements ObjectTag, FlaggableObject {
         });
 
         // <--[tag]
-        // @attribute <NationTag.get_rank[(<rank>)]>
+        // @attribute <NationTag.members_by_rank[(<rank>)]>
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, Towny
         // @description
         // Returns a list of the nation's members with a given rank.
         // -->
-        tagProcessor.registerTag(ListTag.class, "get_rank", (attribute, object) -> {
+        tagProcessor.registerTag(ListTag.class, "members_by_rank", (attribute, object) -> {
             String rank = attribute.getParam();
             ListTag list = new ListTag();
             List<Resident> rankList = object.nation.getResidents().stream().filter((assistant) -> assistant.hasNationRank(rank)).collect(Collectors.toList());
