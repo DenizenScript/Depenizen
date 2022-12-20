@@ -175,6 +175,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
         // @attribute <NationTag.assistants>
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, Towny
+        // @deprecated use 'members_by_rank'
         // @description
         // Returns a list of the nation's assistants.
         // -->

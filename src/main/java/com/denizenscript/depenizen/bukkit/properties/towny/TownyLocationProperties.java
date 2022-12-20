@@ -12,7 +12,9 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import java.util.UUID;
 
 public class TownyLocationProperties {
+
     public static void register() {
+
         // <--[tag]
         // @attribute <LocationTag.towny_allows_pvp>
         // @returns ElementTag(Boolean)
