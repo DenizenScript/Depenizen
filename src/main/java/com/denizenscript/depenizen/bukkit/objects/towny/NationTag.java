@@ -178,6 +178,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
         // @deprecated use 'members_by_rank'
         // @description
         // Returns a list of the nation's assistants.
+        // Deprecated in favor of <@link tag NationTag.members_by_rank[(rank)]>.
         // -->
         tagProcessor.registerTag(ListTag.class, "assistants", (attribute, object) -> {
             ListTag list = new ListTag();
