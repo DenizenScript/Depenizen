@@ -295,15 +295,13 @@ public class NationTag implements ObjectTag, FlaggableObject {
         // @description
         // Returns the nation's current relation with another nation.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "relation", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, NationTag.class, "relation", (attribute, object, nationObj) -> {
 
             try {
-                NationTag to = valueOf(attribute.getParam());
-
-                if (object.nation.hasAlly(to.nation)) {
+                if (object.nation.hasAlly(nationObj.nation)) {
                     return new ElementTag("allies");
                 }
-                else if (object.nation.hasEnemy(to.nation)) {
+                else if (object.nation.hasEnemy(nationObj.nation)) {
                     return new ElementTag("enemies");
                 }
                 else {
