@@ -233,10 +233,9 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // @description
         // Returns a list of the town's members with a given rank. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
         // -->
-        tagProcessor.registerTag(ListTag.class, "members_by_rank", (attribute, object) -> {
-            String rank = attribute.getParam();
+        tagProcessor.registerTag(ListTag.class, ElementTag.class, "members_by_rank", (attribute, object, rankObj) -> {
             ListTag list = new ListTag();
-            for (Resident resident : object.town.getRank(rank)) {
+            for (Resident resident : object.town.getRank(rankObj.asString())) {
                 if (resident.getUUID() != null) {
                     OfflinePlayer pl = Bukkit.getOfflinePlayer(resident.getUUID());
                     if (pl.hasPlayedBefore()) {
