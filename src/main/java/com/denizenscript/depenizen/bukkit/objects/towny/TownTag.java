@@ -20,6 +20,7 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 
+import java.util.Collection;
 import java.util.UUID;
 
 public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
@@ -106,6 +107,21 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         }
     }
 
+    public static ListTag getPlayersFromResidents(Collection<Resident> residentCollection) {
+        ListTag list = new ListTag();
+        for (Resident resident : residentCollection) {
+            if (resident.getUUID() != null) {
+                OfflinePlayer pl = Bukkit.getOfflinePlayer(resident.getUUID());
+                if (pl.hasPlayedBefore()) {
+                    list.addObject(new PlayerTag(pl));
+                    continue;
+                }
+            }
+            list.add(resident.getName());
+        }
+        return list;
+    }
+
     public static CuboidTag getCuboid(World world, int townCoordX, int townCoordZ) {
         int x = townCoordX * Coord.getCellSize();
         int z = townCoordZ * Coord.getCellSize();
@@ -189,18 +205,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // Deprecated in favor of <@link tag TownTag.members_by_rank[<rank>]>.
         // -->
         tagProcessor.registerTag(ListTag.class, "assistants", (attribute, object) -> {
-            ListTag list = new ListTag();
-            for (Resident resident : object.town.getRank("assistant")) {
-                if (resident.getUUID() != null) {
-                    OfflinePlayer pl = Bukkit.getOfflinePlayer(resident.getUUID());
-                    if (pl.hasPlayedBefore()) {
-                        list.addObject(new PlayerTag(pl));
-                        continue;
-                    }
-                }
-                list.add(resident.getName());
-            }
-            return list;
+            return getPlayersFromResidents(object.town.getRank("assistant"));
         });
 
         // <--[tag]
@@ -234,18 +239,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // Returns a list of the town's members with a given rank. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
         // -->
         tagProcessor.registerTag(ListTag.class, ElementTag.class, "members_by_rank", (attribute, object, rankObj) -> {
-            ListTag list = new ListTag();
-            for (Resident resident : object.town.getRank(rankObj.asString())) {
-                if (resident.getUUID() != null) {
-                    OfflinePlayer pl = Bukkit.getOfflinePlayer(resident.getUUID());
-                    if (pl.hasPlayedBefore()) {
-                        list.addObject(new PlayerTag(pl));
-                        continue;
-                    }
-                }
-                list.add(resident.getName());
-            }
-            return list;
+            return getPlayersFromResidents(object.town.getRank(rankObj.asString()));
         });
 
 
@@ -324,18 +318,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // Returns a list of the town's outlaws. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
         // -->
         tagProcessor.registerTag(ListTag.class, "outlaws", (attribute, object) -> {
-            ListTag list = new ListTag();
-            for (Resident resident : object.town.getOutlaws()) {
-                if (resident.getUUID() != null) {
-                    OfflinePlayer pl = Bukkit.getOfflinePlayer(resident.getUUID());
-                    if (pl.hasPlayedBefore()) {
-                        list.addObject(new PlayerTag(pl));
-                        continue;
-                    }
-                }
-                list.add(resident.getName());
-            }
-            return list;
+            return getPlayersFromResidents(object.town.getOutlaws());
         });
 
         // <--[tag]
