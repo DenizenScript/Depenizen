@@ -58,6 +58,7 @@ public class TownyLocationProperties {
                 // Deprecated in favor of <@link tag LocationTag.towny_resident>.
                 // -->
                 if (attribute.startsWith("resident", 2)) {
+                    attribute.fulfill(1);
                     return getResidentAtLocation(location);
                 }
             }
