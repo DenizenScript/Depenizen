@@ -242,7 +242,6 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
             return getPlayersFromResidents(object.town.getRank(rankObj.asString()));
         });
 
-
         // <--[tag]
         // @attribute <TownTag.is_open>
         // @returns ElementTag(Boolean)

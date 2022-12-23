@@ -8,7 +8,6 @@ import com.palmergames.bukkit.towny.object.TownBlock;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -135,7 +134,6 @@ public class TownyLocationProperties {
         });
     }
 
-    @Nullable
     private static PlayerTag getResidentAtLocation(LocationTag location) throws NotRegisteredException {
         TownBlock block = TownyAPI.getInstance().getTownBlock(location);
         if (block == null) {
