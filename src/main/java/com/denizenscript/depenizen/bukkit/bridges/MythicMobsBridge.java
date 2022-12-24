@@ -53,7 +53,7 @@ public class MythicMobsBridge extends Bridge {
         public static MythicMobsBridgeTags instance;
 
         public MythicMobsBridgeTags() {
-            instance = new MythicMobsBridgeTags();
+            instance = this;
             TagManager.registerStaticTagBaseHandler(MythicMobsBridgeTags.class, "mythicmobs", (t) -> instance);
         }
 
