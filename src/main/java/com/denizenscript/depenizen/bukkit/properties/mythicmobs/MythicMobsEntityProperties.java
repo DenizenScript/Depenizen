@@ -16,6 +16,7 @@ import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.core.skills.auras.Aura;
 import io.lumine.mythic.core.skills.auras.AuraRegistry;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Queue;
 
@@ -109,14 +110,15 @@ public class MythicMobsEntityProperties implements Property {
             AuraRegistry registry = MythicMobsBridge.getSkillManager().getAuraManager().getAuraRegistry(BukkitAdapter.adapt(object.entity.getBukkitEntity()));
             for (Map.Entry<String, Queue<Aura.AuraTracker>> aura : registry.getAuras().entrySet()) {
                 MapTag auraInfo = new MapTag();
-                Aura.AuraTracker tracker = aura.getValue().element();
-                auraInfo.putObject("stacks", new ElementTag(tracker.getStacks()));
-                auraInfo.putObject("max_stacks", new ElementTag(tracker.getMaxStacks()));
-                auraInfo.putObject("interval", new ElementTag(tracker.getInterval()));
-                auraInfo.putObject("start_charges", new ElementTag(tracker.getStartCharges()));
-                auraInfo.putObject("charges_remaining", new ElementTag(tracker.getChargesRemaining()));
-                auraInfo.putObject("start_duration", new DurationTag((long) tracker.getStartDuration()));
-                auraInfo.putObject("expiration", new DurationTag((long) tracker.getTicksRemaining()));
+                for (Aura.AuraTracker tracker : aura.getValue()) {
+                    auraInfo.putObject("stacks", new ElementTag(tracker.getStacks()));
+                    auraInfo.putObject("max_stacks", new ElementTag(tracker.getMaxStacks()));
+                    auraInfo.putObject("interval", new ElementTag(tracker.getInterval()));
+                    auraInfo.putObject("start_charges", new ElementTag(tracker.getStartCharges()));
+                    auraInfo.putObject("charges_remaining", new ElementTag(tracker.getChargesRemaining()));
+                    auraInfo.putObject("start_duration", new DurationTag((long) tracker.getStartDuration()));
+                    auraInfo.putObject("expiration", new DurationTag((long) tracker.getTicksRemaining()));
+                }
                 result.putObject(aura.getKey(), auraInfo);
             }
             return result;

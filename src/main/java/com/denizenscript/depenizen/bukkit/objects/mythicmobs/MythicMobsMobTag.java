@@ -264,7 +264,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @mechanism MythicMobsMobTag.target
         // @plugin Depenizen, MythicMobs
         // @description
-        // Returns the MythicMob's target.
+        // Returns the MythicMob's target, if any.
         // -->
         tagProcessor.registerTag(EntityFormObject.class, "target", (attribute, object) -> {
             AbstractEntity target;

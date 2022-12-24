@@ -52,13 +52,13 @@ public class MythicMobsBridge extends Bridge {
 
         public static MythicMobsBridgeTags instance;
 
-        public static void register() {
+        public MythicMobsBridgeTags() {
             instance = new MythicMobsBridgeTags();
             TagManager.registerStaticTagBaseHandler(MythicMobsBridgeTags.class, "mythicmobs", (t) -> instance);
         }
 
         @Override
-        public void registerTags() {
+        public void register() {
 
             // <--[tag]
             // @attribute <mythicmobs.item_ids>
@@ -214,7 +214,7 @@ public class MythicMobsBridge extends Bridge {
         DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
-        MythicMobsBridgeTags.register();
+        new MythicMobsBridgeTags().register();
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>
