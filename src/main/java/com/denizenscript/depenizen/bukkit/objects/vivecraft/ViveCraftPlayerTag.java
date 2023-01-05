@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class ViveCraftPlayerTag implements ObjectTag {
 
-    // <--[ObjectTag]
+    // <--[ObjectType]
     // @name ViveCraftPlayerTag
     // @prefix vivecraft
     // @base ElementTag

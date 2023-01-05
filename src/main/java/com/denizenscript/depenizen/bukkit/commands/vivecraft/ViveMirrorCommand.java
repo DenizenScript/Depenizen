@@ -4,7 +4,6 @@ import com.denizenscript.denizen.objects.NPCTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsRuntimeException;
-import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.scripts.commands.generator.*;
@@ -14,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.vivecraft.VSE;
 import org.vivecraft.VivePlayer;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ViveMirrorCommand extends AbstractCommand {
@@ -54,7 +54,7 @@ public class ViveMirrorCommand extends AbstractCommand {
     public static void autoExecute(ScriptEntry scriptEntry,
                                    @ArgLinear @ArgName("npc") @ArgRaw NPCTag npc,
                                    @ArgPrefixed @ArgName("mirror") ViveCraftPlayerTag mirror,
-                                   @ArgPrefixed @ArgName("targets") @ArgDefaultNull ListTag targets) {
+                                   @ArgPrefixed @ArgName("targets") @ArgDefaultNull @ArgSubType(PlayerTag.class) List<PlayerTag> targets) {
         if (!(npc.getEntity() instanceof Player)) {
             throw new InvalidArgumentsRuntimeException("NPC must be a PLAYER type NPC.");
         }
@@ -62,10 +62,8 @@ public class ViveMirrorCommand extends AbstractCommand {
             if (!Utilities.entryHasPlayer(scriptEntry)) {
                 throw new InvalidArgumentsRuntimeException("Missing player input.");
             }
-            targets = new ListTag();
-            targets.addObject(Utilities.getEntryPlayer(scriptEntry));
+            targets = Collections.singletonList(Utilities.getEntryPlayer(scriptEntry));
         }
-        List<PlayerTag> players = targets.filter(PlayerTag.class, scriptEntry);
         VivePlayer vp = new VivePlayer((Player) npc.getLivingEntity());
         VivePlayer copy = mirror.getVivePlayer();
         vp.worldScale = copy.worldScale;
@@ -73,7 +71,7 @@ public class ViveMirrorCommand extends AbstractCommand {
         vp.hmdData = copy.hmdData;
         vp.controller0data = copy.controller0data;
         vp.controller1data = copy.controller1data;
-        for (PlayerTag target : players) {
+        for (PlayerTag target : targets) {
             if (ViveCraftBridge.isViveCraftPlayer(target.getPlayerEntity())) {
                 target.getPlayerEntity().sendPluginMessage(VSE.getPlugin(VSE.class), VSE.CHANNEL, vp.getUberPacket());
             }
