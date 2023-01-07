@@ -3,12 +3,14 @@ package com.denizenscript.depenizen.bukkit.clientizen;
 import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizen.events.bukkit.ScriptReloadEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptHelper;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.clientizen.commands.ClientRunCommand;
 import com.denizenscript.depenizen.bukkit.clientizen.network.Channels;
 import com.denizenscript.depenizen.bukkit.clientizen.network.DataSerializer;
 import com.denizenscript.depenizen.bukkit.clientizen.network.NetworkManager;
@@ -48,6 +50,8 @@ public class ClientizenSupport implements Listener {
         // Register ClientizenEvent
         ScriptEvent.registerScriptEvent(ClientizenEventScriptEvent.class);
         NetworkManager.registerInChannel(Channels.RECEIVE_EVENT, (player, message) -> ClientizenEventScriptEvent.instance.tryFire(player, message));
+        // Register ClientRunCommand
+        DenizenCore.commandRegistry.registerCommand(ClientRunCommand.class);
         Debug.log("Clientizen support enabled!");
     }
 

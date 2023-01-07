@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class DataSerializer {
 
@@ -19,6 +20,16 @@ public class DataSerializer {
     public DataSerializer() {
         outputStream = new ByteArrayOutputStream();
         output = new DataOutputStream(outputStream);
+    }
+
+    public DataSerializer writeBoolean(boolean bool) {
+        try {
+            output.writeBoolean(bool);
+        }
+        catch (IOException e) {
+            Debug.echoError(new IllegalStateException(e));
+        }
+        return this;
     }
 
     public DataSerializer writeInt(int i) {
@@ -79,6 +90,17 @@ public class DataSerializer {
         for (Map.Entry<String, String> entry : stringMap.entrySet()) {
             writeString(entry.getKey());
             writeString(entry.getValue());
+        }
+        return this;
+    }
+
+    public <T> DataSerializer writeNullable(T object, BiConsumer<DataSerializer, T> writeMethod) {
+        if (object != null) {
+            writeBoolean(true);
+            writeMethod.accept(this, object);
+        }
+        else {
+            writeBoolean(false);
         }
         return this;
     }
