@@ -1,11 +1,11 @@
 package com.denizenscript.depenizen.bukkit.events.towny;
 
 import com.denizenscript.depenizen.bukkit.objects.towny.TownTag;
-import com.palmergames.bukkit.towny.event.PlayerLeaveTownEvent;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
+import com.palmergames.bukkit.towny.event.player.PlayerExitsFromTownBorderEvent;
 import com.palmergames.bukkit.towny.object.TownyWorld;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,7 +33,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
         registerCouldMatcher("towny player exits <'town'>");
     }
 
-    public PlayerLeaveTownEvent event;
+    public PlayerExitsFromTownBorderEvent event;
     public TownTag town;
 
     @Override
@@ -59,7 +59,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @EventHandler
-    public void onTownyPlayerExitsTown(PlayerLeaveTownEvent event) {
+    public void onTownyPlayerExitsTown(PlayerExitsFromTownBorderEvent event) {
         TownyWorld world = event.getTo().getTownyWorld();
         if (world == null || !world.isUsingTowny()) {
             return;
