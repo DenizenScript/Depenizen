@@ -37,17 +37,14 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
 
     @Override
     public boolean matches(ScriptPath path) {
-        String name = path.eventArgLowerAt(3);
-        if (!name.equals("residence") && !residence.equals(ResidenceTag.valueOf(name))) {
+        if (!path.tryArgObject(3, residence)) {
             return false;
         }
         return super.matches(path);
     }
 
     @Override
-    public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(event.getPlayer());
-    }
+    public ScriptEntryData getScriptEntryData() { return new BukkitScriptEntryData(event.getPlayer()); }
 
     @Override
     public ObjectTag getContext(String name) {

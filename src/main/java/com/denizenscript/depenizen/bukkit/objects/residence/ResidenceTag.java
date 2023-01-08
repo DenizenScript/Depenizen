@@ -6,6 +6,7 @@ import com.bekvon.bukkit.residence.protection.CuboidArea;
 import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -178,5 +179,14 @@ public class ResidenceTag implements ObjectTag {
         tagProcessor.registerTag(ElementTag.class, LocationTag.class, "is_within", (attribute, object, loc) -> {
             return new ElementTag(object.getResidence().containsLoc(loc));
         });
+    }
+
+    @Override
+    public boolean advancedMatches(String matcher) {
+        String matcherLow = CoreUtilities.toLowerCase(matcher);
+        if (matcherLow.equals("residence")) {
+            return true;
+        }
+        return ScriptEvent.runGenericCheck(matcherLow, getResidence().getName());
     }
 }
