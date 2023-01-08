@@ -37,8 +37,7 @@ public class PlayerExitsResidenceScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public boolean matches(ScriptPath path) {
-        String name = path.eventArgLowerAt(3);
-        if (!name.equals("residence") && !residence.equals(ResidenceTag.valueOf(name))) {
+        if (!path.tryArgObject(3, residence)) {
             return false;
         }
         return super.matches(path);
