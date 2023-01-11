@@ -38,10 +38,11 @@ public class ResidenceDeletedScriptEvent extends BukkitScriptEvent implements Li
     }
 
     public ResidenceDeleteEvent event;
+    public ElementTag cause;
 
     @Override
     public boolean matches(ScriptPath path) {
-        if (!runGenericSwitchCheck(path, "cause", event.getCause().name())) {
+        if (!path.tryObjectSwitch("cause", cause)) {
             return false;
         }
         return super.matches(path);
@@ -55,7 +56,7 @@ public class ResidenceDeletedScriptEvent extends BukkitScriptEvent implements Li
     @Override
     public ObjectTag getContext(String name) {
         switch (name) {
-            case "cause": return new ElementTag(event.getCause().name());
+            case "cause": return cause;
             case "residence": return new ResidenceTag(event.getResidence());
         }
         return super.getContext(name);
@@ -64,6 +65,7 @@ public class ResidenceDeletedScriptEvent extends BukkitScriptEvent implements Li
     @EventHandler
     public void onResidenceDeleted(ResidenceDeleteEvent event) {
         this.event = event;
+        cause = new ElementTag(event.getCause());
         fire(event);
     }
 

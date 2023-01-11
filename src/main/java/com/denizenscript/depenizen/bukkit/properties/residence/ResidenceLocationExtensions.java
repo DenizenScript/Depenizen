@@ -6,7 +6,8 @@ import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 
-public class ResidenceLocationProperties {
+public class ResidenceLocationExtensions {
+
     public static void register() {
 
         // <--[tag]
@@ -14,7 +15,7 @@ public class ResidenceLocationProperties {
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Residence
         // @description
-        // Returns boolean whether the location has a Residence.
+        // Returns whether the location has a Residence.
         // -->
         LocationTag.tagProcessor.registerTag(ElementTag.class, "has_residence", (attribute, location) -> {
             ClaimedResidence res = Residence.getInstance().getResidenceManager().getByLoc(location);

@@ -174,7 +174,7 @@ public class ResidenceTag implements ObjectTag {
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Residence
         // @description
-        // Returns boolean whether the specified location is within this Residence.
+        // Returns whether the specified location is within this Residence.
         // -->
         tagProcessor.registerTag(ElementTag.class, LocationTag.class, "is_within", (attribute, object, loc) -> {
             return new ElementTag(object.getResidence().containsLoc(loc));

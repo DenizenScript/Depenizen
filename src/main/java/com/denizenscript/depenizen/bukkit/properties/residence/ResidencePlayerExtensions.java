@@ -1,15 +1,14 @@
 package com.denizenscript.depenizen.bukkit.properties.residence;
 
 import com.bekvon.bukkit.residence.Residence;
-import com.bekvon.bukkit.residence.containers.ResidencePlayer;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
-import org.bukkit.entity.Player;
 
-public class ResidencePlayerProperties {
+public class ResidencePlayerExtensions {
+
     public static void register() {
 
         // <--[tag]
@@ -17,10 +16,10 @@ public class ResidencePlayerProperties {
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Residence
         // @description
-        // Returns boolean whether the player has a main Residence.
+        // Returns whether the player has a main Residence.
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, "has_main_residence", (attribute, player) -> {
-            ClaimedResidence res = Residence.getInstance().getPlayerManager().getResidencePlayer(player.getName()).getMainResidence();
+            ClaimedResidence res = Residence.getInstance().getPlayerManager().getResidencePlayer(player.getUUID()).getMainResidence();
             return new ElementTag(res != null);
         });
 
@@ -32,7 +31,7 @@ public class ResidencePlayerProperties {
         // Returns the player's current main Residence if they have one.
         // -->
         PlayerTag.tagProcessor.registerTag(ResidenceTag.class, "main_residence", (attribute, player) -> {
-            ClaimedResidence res = Residence.getInstance().getPlayerManager().getResidencePlayer(player.getName()).getMainResidence();
+            ClaimedResidence res = Residence.getInstance().getPlayerManager().getResidencePlayer(player.getUUID()).getMainResidence();
             if (res != null) {
                 return new ResidenceTag(res);
             }
@@ -48,7 +47,7 @@ public class ResidencePlayerProperties {
         // -->
         PlayerTag.tagProcessor.registerTag(ListTag.class, "residences", (attribute, player) -> {
             ListTag list = new ListTag();
-            for (ClaimedResidence res : Residence.getInstance().getPlayerManager().getResidencePlayer(player.getName()).getResList()) {
+            for (ClaimedResidence res : Residence.getInstance().getPlayerManager().getResidencePlayer(player.getUUID()).getResList()) {
                 list.addObject(new ResidenceTag(res));
             }
             return list;

@@ -44,7 +44,9 @@ public class PlayerEntersResidenceScriptEvent extends BukkitScriptEvent implemen
     }
 
     @Override
-    public ScriptEntryData getScriptEntryData() { return new BukkitScriptEntryData(event.getPlayer()); }
+    public ScriptEntryData getScriptEntryData() {
+        return new BukkitScriptEntryData(event.getPlayer());
+    }
 
     @Override
     public ObjectTag getContext(String name) {
