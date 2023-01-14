@@ -12,12 +12,14 @@ public class ResidenceBridge extends Bridge {
 
     @Override
     public void init() {
+
         // <--[tag]
         // @attribute <residence[<name>]>
         // @returns ResidenceTag
         // @plugin Depenizen, Residence
         // @description
         // Returns a residence object constructed from the input value.
+        // Refer to <@link objecttype ResidenceTag>.
         // -->
         ObjectFetcher.registerWithObjectFetcher(ResidenceTag.class, ResidenceTag.tagProcessor).generateBaseTag();
         ResidencePlayerExtensions.register();

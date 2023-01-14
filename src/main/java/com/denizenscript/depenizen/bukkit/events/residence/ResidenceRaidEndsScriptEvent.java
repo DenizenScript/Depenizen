@@ -2,7 +2,6 @@ package com.denizenscript.depenizen.bukkit.events.residence;
 
 import com.bekvon.bukkit.residence.event.ResidenceRaidEndEvent;
 import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import org.bukkit.event.EventHandler;
@@ -34,10 +33,11 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
     }
 
     public ResidenceRaidEndEvent event;
+    public ResidenceTag residence;
 
     @Override
     public boolean matches(ScriptPath path) {
-        if (!path.tryObjectSwitch("residence", new ElementTag(event.getRes().getName()))) {
+        if (!path.tryObjectSwitch("residence", residence)) {
             return false;
         }
         return super.matches(path);
@@ -46,7 +46,7 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
     @Override
     public ObjectTag getContext(String name) {
         switch (name) {
-            case "residence": return new ResidenceTag(event.getRes());
+            case "residence": return residence;
         }
         return super.getContext(name);
     }
@@ -54,6 +54,7 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
     @EventHandler
     public void onResidenceRaidEndsScriptEvent(ResidenceRaidEndEvent event) {
         this.event = event;
+        residence = new ResidenceTag(event.getRes());
         fire(event);
     }
 }

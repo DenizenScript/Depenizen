@@ -3,7 +3,6 @@ package com.denizenscript.depenizen.bukkit.events.residence;
 import com.bekvon.bukkit.residence.event.ResidenceRaidStartEvent;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
@@ -44,7 +43,7 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
 
     @Override
     public boolean matches(ScriptPath path) {
-        if (!path.tryObjectSwitch("residence", new ElementTag(event.getRes().getName()))) {
+        if (!path.tryObjectSwitch("residence", residence)) {
             return false;
         }
         return super.matches(path);
