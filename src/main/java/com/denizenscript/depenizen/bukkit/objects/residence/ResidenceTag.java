@@ -25,14 +25,20 @@ public class ResidenceTag implements ObjectTag {
     // @name ResidenceTag
     // @prefix residence
     // @base ElementTag
+    // @ExampleTagBase residence[myresidence]
+    // @ExampleValues myresidence
     // @format
-    // The identity format for residences is <residence_name>
+    // The identity format for residences is just the name.
     // For example, 'residence@myresidence'.
     //
     // @plugin Depenizen, Residence
     // @description
     // A ResidenceTag represents a Residence in the world.
     //
+    // @Matchable
+    // ResidenceTag matchers, sometimes identified as "<residence>":
+    // "residence" plaintext: always matches.
+    // Residence name: matches if the residence is named matches the input, using advanced matchers.
     // -->
 
     public static ResidenceTag valueOf(String string) {
