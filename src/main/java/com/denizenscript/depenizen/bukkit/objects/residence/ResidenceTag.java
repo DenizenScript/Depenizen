@@ -2,30 +2,43 @@ package com.denizenscript.depenizen.bukkit.objects.residence;
 
 import com.bekvon.bukkit.residence.Residence;
 import com.bekvon.bukkit.residence.protection.ClaimedResidence;
+import com.bekvon.bukkit.residence.protection.CuboidArea;
+import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 public class ResidenceTag implements ObjectTag {
 
+    public static ObjectTagProcessor<ResidenceTag> tagProcessor = new ObjectTagProcessor<>();
+
     // <--[ObjectType]
     // @name ResidenceTag
     // @prefix residence
     // @base ElementTag
+    // @ExampleTagBase residence[myresidence]
+    // @ExampleValues myresidence
     // @format
-    // The identity format for residences is <residence_name>
+    // The identity format for residences is just the name.
     // For example, 'residence@myresidence'.
     //
     // @plugin Depenizen, Residence
     // @description
     // A ResidenceTag represents a Residence in the world.
     //
+    // @Matchable
+    // ResidenceTag matchers, sometimes identified as "<residence>":
+    // "residence" plaintext: always matches.
+    // Residence name: matches if the residence is named matches the input, using advanced matchers.
     // -->
 
     public static ResidenceTag valueOf(String string) {
@@ -108,31 +121,59 @@ public class ResidenceTag implements ObjectTag {
 
     @Override
     public ObjectTag getObjectAttribute(Attribute attribute) {
-        if (attribute == null) {
-            return null;
-        }
+        return tagProcessor.getObjectAttribute(this, attribute);
+    }
+
+    public static void register() {
 
         // <--[tag]
         // @attribute <ResidenceTag.name>
         // @returns ElementTag
         // @plugin Depenizen, Residence
         // @description
-        // Returns the name of the residence.
+        // Returns the name of this Residence.
         // -->
-        if (attribute.startsWith("name")) {
-            return new ElementTag(residence.getName()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
+            return new ElementTag(object.getResidence().getName());
+        });
 
         // <--[tag]
         // @attribute <ResidenceTag.owner>
         // @returns PlayerTag
         // @plugin Depenizen, Residence
         // @description
-        // Returns the owner of the residence.
+        // Returns the owner of the Residence.
         // -->
-        else if (attribute.startsWith("owner")) {
-            return new PlayerTag(residence.getOwnerUUID()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(PlayerTag.class, "owner", (attribute, object) -> {
+            return new PlayerTag(object.getResidence().getOwnerUUID());
+        });
+
+        // <--[tag]
+        // @attribute <ResidenceTag.subzones>
+        // @returns ListTag(ResidenceTag)
+        // @plugin Depenizen, Residence
+        // @description
+        // Returns a list of subzones in this Residence.
+        // -->
+        tagProcessor.registerTag(ListTag.class, "subzones", (attribute, object) -> {
+            ListTag list = new ListTag();
+            for (ClaimedResidence subzone : object.getResidence().getSubzones()) {
+                list.addObject(new ResidenceTag(subzone));
+            }
+            return list;
+        });
+
+        // <--[tag]
+        // @attribute <ResidenceTag.area>
+        // @returns CuboidTag
+        // @plugin Depenizen, Residence
+        // @description
+        // Returns the area of the Residences.
+        // -->
+        tagProcessor.registerTag(CuboidTag.class, "area", (attribute, object) -> {
+            CuboidArea area = object.getResidence().getMainArea();
+            return new CuboidTag(area.getLowLocation(), area.getHighLocation());
+        });
 
         // <--[tag]
         // @attribute <ResidenceTag.is_within[<location>]>
@@ -141,11 +182,17 @@ public class ResidenceTag implements ObjectTag {
         // @description
         // Returns whether the specified location is within this Residence.
         // -->
-        else if (attribute.startsWith("is_within") && attribute.hasParam()) {
-            LocationTag location = attribute.paramAsType(LocationTag.class);
-            return new ElementTag(residence.containsLoc(location)).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, LocationTag.class, "is_within", (attribute, object, loc) -> {
+            return new ElementTag(object.getResidence().containsLoc(loc));
+        });
+    }
 
-        return new ElementTag(identify()).getObjectAttribute(attribute);
+    @Override
+    public boolean advancedMatches(String matcher) {
+        String matcherLow = CoreUtilities.toLowerCase(matcher);
+        if (matcherLow.equals("residence")) {
+            return true;
+        }
+        return ScriptEvent.runGenericCheck(matcherLow, getResidence().getName());
     }
 }

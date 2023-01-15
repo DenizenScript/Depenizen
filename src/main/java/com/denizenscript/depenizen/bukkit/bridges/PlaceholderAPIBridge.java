@@ -1,7 +1,9 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.utilities.Settings;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.depenizen.bukkit.Bridge;
+import com.denizenscript.depenizen.bukkit.Depenizen;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -13,7 +15,10 @@ import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+
+import java.util.concurrent.Future;
 
 public class PlaceholderAPIBridge extends Bridge {
 
@@ -110,6 +115,24 @@ public class PlaceholderAPIBridge extends Bridge {
         @Override
         public String onRequest(OfflinePlayer player, String identifier) {
             if (!DenizenCore.isMainThread()) {
+                if (Settings.allowAsyncPassThrough) {
+                    try {
+                        Future<String> future = Bukkit.getScheduler().callSyncMethod(Depenizen.instance, () -> onRequest(player, identifier));
+                        return future.get();
+                    }
+                    catch (Throwable ex) {
+                        Debug.echoError(ex);
+                        return null;
+                    }
+                }
+                Debug.echoError("Warning: PlaceholderAPI from wrong thread, blocked. Inform the developer of whatever plugin tried to read Placeholder data that it is forbidden to do so async."
+                        + " You can use config option 'Scripts.Economy.Pass async to main thread' to enable dangerous access.");
+                try {
+                    throw new RuntimeException("Stack reference");
+                }
+                catch (RuntimeException ex) {
+                    Debug.echoError(ex);
+                }
                 return "WARNING-ILLEGAL-ASYNC-ACCESS";
             }
             return TagManager.tag(identifier, new BukkitTagContext(PlayerTag.mirrorBukkitPlayer(player), null, null, false, null));
