@@ -18,9 +18,9 @@ public class ResidenceRaidStartsScriptEvent extends BukkitScriptEvent implements
     //
     // @Cancellable true
     //
-    // @Switch residence:<residence_name> to only process the event if the residence name matches specified name.
+    // @Switch residence:<residence> to only process the event if the residence matches the input.
     //
-    // @Triggers when a player(s) starts raiding a Residence.
+    // @Triggers when players start raiding a Residence.
     //
     // @Context
     // <context.residence> Returns a ResidenceTag of the residence that is being attacked.

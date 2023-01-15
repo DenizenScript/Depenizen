@@ -14,9 +14,9 @@ public class ResidenceRaidEndsScriptEvent extends BukkitScriptEvent implements L
     // @Events
     // residence raid ends
     //
-    // @Switch residence:<residence_name> to only process the event if the residence name matches specified name.
+    // @Switch residence:<residence> to only process the event if the residence matches the input.
     //
-    // @Triggers when a raiding a Residence ends.
+    // @Triggers when a Residence raid ends.
     //
     // @Context
     // <context.residence> Returns a ResidenceTag of the residence that was being raided.
