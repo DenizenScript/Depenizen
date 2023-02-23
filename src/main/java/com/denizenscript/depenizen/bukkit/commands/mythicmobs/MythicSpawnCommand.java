@@ -82,7 +82,7 @@ public class MythicSpawnCommand extends AbstractCommand {
                 return;
             }
             Entity entity = mob.spawn(BukkitAdapter.adapt(location), level.asDouble()).getEntity().getBukkitEntity();
-            scriptEntry.addObject("spawned_mythicmob", new MythicMobsMobTag(MythicMobsBridge.getActiveMob(entity)));
+            scriptEntry.saveObject("spawned_mythicmob", new MythicMobsMobTag(MythicMobsBridge.getActiveMob(entity)));
         }
         catch (Exception e) {
             Debug.echoError(e);

@@ -96,7 +96,7 @@ public class BungeeTagCommand extends AbstractCommand implements Holdable {
         if (entry == null) {
             return;
         }
-        entry.addObject("result", new ElementTag(result));
+        entry.saveObject("result", new ElementTag(result));
         entry.setFinished(true);
     }
 
