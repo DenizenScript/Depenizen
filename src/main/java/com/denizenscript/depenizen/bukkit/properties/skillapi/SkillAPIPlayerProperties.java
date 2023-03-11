@@ -354,7 +354,7 @@ public class SkillAPIPlayerProperties implements Property {
                 // Can be: ON_COOLDOWN, MISSING_MANA, or READY
                 // -->
                 if (attribute.startsWith("skill_status")) {
-                    return new ElementTag(playerSkill.getStatus().name()).getObjectAttribute(attribute.fulfill(1));
+                    return new ElementTag(playerSkill.getStatus()).getObjectAttribute(attribute.fulfill(1));
                 }
             }
 

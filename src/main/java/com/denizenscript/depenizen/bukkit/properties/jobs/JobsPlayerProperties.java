@@ -54,7 +54,7 @@ public class JobsPlayerProperties implements Property {
 
     JobsPlayer player;
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <PlayerTag.job[<job>]>

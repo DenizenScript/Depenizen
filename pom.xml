@@ -12,16 +12,16 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <craftbukkit.version>1.19.2-R0.1-SNAPSHOT</craftbukkit.version>
+        <craftbukkit.version>1.19.3-R0.1-SNAPSHOT</craftbukkit.version>
         <citizens.version>2.0.30-SNAPSHOT</citizens.version>
-        <denizen.version>1.2.5-SNAPSHOT</denizen.version>
+        <denizen.version>1.2.6-SNAPSHOT</denizen.version>
         <BUILD_NUMBER>Unknown</BUILD_NUMBER>
     </properties>
 
     <repositories>
         <repository>
             <id>everything</id>
-            <url>https://maven.citizensnpcs.co/</url>
+            <url>https://maven.citizensnpcs.co/repo</url>
         </repository>
         <repository>
             <id>placeholderapi</id>
@@ -92,6 +92,13 @@
             <version>2.4.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/AreaShop.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>eu.asangarin</groupId>
+            <artifactId>arikeys</artifactId>
+            <version>2.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/arikeys.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.wasteofplastic</groupId>
@@ -264,21 +271,21 @@
         <dependency>
             <groupId>me.blackvein</groupId>
             <artifactId>quests</artifactId>
-            <version>4.0.1</version>
+            <version>4.5.3</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Quests.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.bekvon.bukkit</groupId>
             <artifactId>residence</artifactId>
-            <version>4.5.13.4</version>
+            <version>5.1.0.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Residence.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.mcmonkey</groupId>
             <artifactId>sentinel</artifactId>
-            <version>2.0.0-SNAPSHOT</version>
+            <version>2.7.0-SNAPSHOT</version>
             <type>jar</type>
             <scope>provided</scope>
             <exclusions>
@@ -312,14 +319,14 @@
         <dependency>
             <groupId>com.palmergames</groupId>
             <artifactId>Towny</artifactId>
-            <version>0.98.0.0</version>
+            <version>0.98.5.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Towny.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.palmergames</groupId>
             <artifactId>TownyChat</artifactId>
-            <version>0.95</version>
+            <version>0.100</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/TownyChat.jar</systemPath>
         </dependency>
@@ -343,6 +350,13 @@
             <version>1.9</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/nuvotifier.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.vivecraft</groupId>
+            <artifactId>ViveCraft</artifactId>
+            <version>1.19.1-1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/ViveCraft.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
@@ -402,7 +416,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.3.0</version>
                 <configuration>
                     <finalName>Depenizen-${project.version}-b${BUILD_NUMBER}</finalName>
                 </configuration>
@@ -412,8 +426,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
             <plugin>

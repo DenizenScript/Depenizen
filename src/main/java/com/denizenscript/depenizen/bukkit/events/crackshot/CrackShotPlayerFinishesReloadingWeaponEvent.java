@@ -19,8 +19,6 @@ public class CrackShotPlayerFinishesReloadingWeaponEvent extends BukkitScriptEve
     //
     // @Triggers when a player finishes reloading their CrackShot weapon.
     //
-    // @Cancellable false
-    //
     // @Context
     // <context.weapon> returns the name of the weapon.
     //

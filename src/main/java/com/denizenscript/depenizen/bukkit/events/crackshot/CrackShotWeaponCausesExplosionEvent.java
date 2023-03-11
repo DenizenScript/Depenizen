@@ -20,8 +20,6 @@ public class CrackShotWeaponCausesExplosionEvent extends BukkitScriptEvent imple
     //
     // @Triggers when a CrackShot weapon explodes, splits or airstrikes.
     //
-    // @Cancellable false
-    //
     // @Context
     // <context.location> returns the LocationTag for where the explosion occurred.
     // <context.weapon> returns the weapon name that caused the explosion.

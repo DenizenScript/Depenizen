@@ -8,6 +8,7 @@ api-version: '1.13'
 
 softdepend:
     - AreaShop
+    - AriKeys
     - ASkyBlock
     - BetonQuest
     - BigDoors
@@ -44,6 +45,7 @@ softdepend:
     - TownyChat
     - Vampire
     - ViaVersion
+    - Vivecraft-Spigot-Extensions
     - Votifier
     - WorldEdit
     - WorldGuard

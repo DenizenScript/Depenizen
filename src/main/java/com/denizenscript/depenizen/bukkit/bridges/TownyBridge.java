@@ -14,7 +14,6 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.denizenscript.denizen.objects.CuboidTag;
-import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
@@ -33,7 +32,7 @@ public class TownyBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(TownTag.class, TownTag.tagProcessor);
         ObjectFetcher.registerWithObjectFetcher(NationTag.class, NationTag.tagProcessor);
         PropertyParser.registerProperty(TownyPlayerProperties.class, PlayerTag.class);
-        PropertyParser.registerProperty(TownyLocationProperties.class, LocationTag.class);
+        TownyLocationProperties.register();
         PropertyParser.registerProperty(TownyCuboidProperties.class, CuboidTag.class);
         PropertyParser.registerProperty(TownyWorldProperties.class, WorldTag.class);
         ScriptEvent.registerScriptEvent(PlayerClaimsPlotScriptEvent.class);
@@ -41,6 +40,8 @@ public class TownyBridge extends Bridge {
         ScriptEvent.registerScriptEvent(PlayerEntersTownScriptEvent.class);
         ScriptEvent.registerScriptEvent(PlayerExitsTownScriptEvent.class);
         ScriptEvent.registerScriptEvent(TownCreatedScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerJoinsTownScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerLeavesTownScriptEvent.class);
         TagManager.registerTagHandler(new TagRunnable.RootForm() {
             @Override
             public void run(ReplaceableTagEvent event) {

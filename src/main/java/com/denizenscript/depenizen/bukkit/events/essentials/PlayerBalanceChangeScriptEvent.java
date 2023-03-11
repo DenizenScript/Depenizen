@@ -66,7 +66,7 @@ public class PlayerBalanceChangeScriptEvent extends BukkitScriptEvent implements
             return new ElementTag(event.getOldBalance());
         }
         if (name.equals("cause")) {
-            return new ElementTag(event.getCause().name());
+            return new ElementTag(event.getCause());
         }
         return super.getContext(name);
     }

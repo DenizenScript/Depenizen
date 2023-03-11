@@ -112,7 +112,7 @@ public class MythicSpawnerTag implements ObjectTag, Adjustable {
     }
     public static ObjectTagProcessor<MythicSpawnerTag> tagProcessor = new ObjectTagProcessor<>();
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <MythicSpawnerTag.name>

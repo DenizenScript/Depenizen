@@ -33,7 +33,7 @@ public class BetonQuestPlayerProperties implements Property {
 
     PlayerTag player;
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <PlayerTag.beton_quest[<package>].variable[<variable>]>

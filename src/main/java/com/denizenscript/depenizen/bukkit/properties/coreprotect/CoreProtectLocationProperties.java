@@ -45,7 +45,7 @@ public class CoreProtectLocationProperties implements Property {
         return "CoreProtectLocation";
     }
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <LocationTag.coreprotect_logs[<duration>]>

@@ -46,7 +46,7 @@ public class BigDoorsPlayerProperties implements Property {
         return "BigDoorsPlayer";
     }
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <PlayerTag.bigdoors>

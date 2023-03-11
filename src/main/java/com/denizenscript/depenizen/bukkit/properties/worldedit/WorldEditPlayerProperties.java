@@ -76,7 +76,7 @@ public class WorldEditPlayerProperties implements Property {
         return mat;
     }
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <PlayerTag.we_brush_info[(<item>)]>

@@ -1,25 +1,34 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.depenizen.bukkit.events.residence.PlayerExitsResidenceScriptEvent;
-import com.denizenscript.depenizen.bukkit.properties.residence.ResidenceLocationProperties;
-import com.denizenscript.depenizen.bukkit.properties.residence.ResidencePlayerProperties;
+import com.denizenscript.depenizen.bukkit.events.residence.*;
+import com.denizenscript.depenizen.bukkit.properties.residence.ResidenceLocationExtensions;
+import com.denizenscript.depenizen.bukkit.properties.residence.ResidencePlayerExtensions;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.depenizen.bukkit.events.residence.PlayerEntersResidenceScriptEvent;
 import com.denizenscript.depenizen.bukkit.objects.residence.ResidenceTag;
-import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
 
 public class ResidenceBridge extends Bridge {
 
     @Override
     public void init() {
-        ObjectFetcher.registerWithObjectFetcher(ResidenceTag.class);
-        PropertyParser.registerProperty(ResidencePlayerProperties.class, PlayerTag.class);
-        PropertyParser.registerProperty(ResidenceLocationProperties.class, LocationTag.class);
+
+        // <--[tag]
+        // @attribute <residence[<name>]>
+        // @returns ResidenceTag
+        // @plugin Depenizen, Residence
+        // @description
+        // Returns a residence object constructed from the input value.
+        // Refer to <@link objecttype ResidenceTag>.
+        // -->
+        ObjectFetcher.registerWithObjectFetcher(ResidenceTag.class, ResidenceTag.tagProcessor).generateBaseTag();
+        ResidencePlayerExtensions.register();
+        ResidenceLocationExtensions.register();
         ScriptEvent.registerScriptEvent(PlayerEntersResidenceScriptEvent.class);
         ScriptEvent.registerScriptEvent(PlayerExitsResidenceScriptEvent.class);
+        ScriptEvent.registerScriptEvent(PlayerCreatesResidenceScriptEvent.class);
+        ScriptEvent.registerScriptEvent(ResidenceDeletedScriptEvent.class);
+        ScriptEvent.registerScriptEvent(ResidenceRaidStartsScriptEvent.class);
+        ScriptEvent.registerScriptEvent(ResidenceRaidEndsScriptEvent.class);
     }
 }

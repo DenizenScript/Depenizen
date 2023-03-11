@@ -50,7 +50,7 @@ public class MythicMobsPlayerProperties implements Property {
 
     PlayerTag player;
 
-    public static void registerTags() {
+    public static void register() {
 
         // <--[tag]
         // @attribute <PlayerTag.mythic_variable[<name>]>
@@ -95,7 +95,7 @@ public class MythicMobsPlayerProperties implements Property {
         // -->
         if (mechanism.matches("mythic_variable_map") && mechanism.requireObject(MapTag.class)) {
             MapTag map = mechanism.valueAsType(MapTag.class);
-            Map<String, Variable> newMap = new HashMap<String, Variable>();
+            Map<String, Variable> newMap = new HashMap<>();
             for (Map.Entry<StringHolder, ObjectTag> entry : map.map.entrySet()) {
                 newMap.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
             }
