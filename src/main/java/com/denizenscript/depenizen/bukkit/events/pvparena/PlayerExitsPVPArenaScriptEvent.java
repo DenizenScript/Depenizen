@@ -57,7 +57,6 @@ public class PlayerExitsPVPArenaScriptEvent extends BukkitScriptEvent implements
     @EventHandler
     public void onPlayerExitsPVPArena(PAExitEvent event) {
         arena = new PVPArenaArenaTag(event.getArena());
-        cancelled = false;
         this.event = event;
         fire(event);
     }
