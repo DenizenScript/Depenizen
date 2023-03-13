@@ -14,6 +14,7 @@ import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.api.mobs.entities.SpawnReason;
 import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.core.mobs.ActiveMob;
 import org.bukkit.entity.Entity;
 
 import java.util.Set;
@@ -51,7 +52,7 @@ public class MythicSpawnCommand extends AbstractCommand {
 
     @Override
     public void addCustomTabCompletions(TabCompletionsBuilder tab) {
-        tab.add((Set<String>) MythicMobsBridge.getMobManager().getMobNames());
+        tab.add(MythicMobsBridge.getMobManager().getMobNames());
     }
 
     public static void autoExecute(ScriptEntry scriptEntry,
@@ -65,8 +66,8 @@ public class MythicSpawnCommand extends AbstractCommand {
                 Debug.echoError("MythicMob does not exist: " + name.asString());
                 return;
             }
-            Entity entity = mob.spawn(BukkitAdapter.adapt(location), level.asDouble(), reason).getEntity().getBukkitEntity();
-            scriptEntry.addObject("spawned_mythicmob", new MythicMobsMobTag(MythicMobsBridge.getActiveMob(entity)));
+            ActiveMob entity = mob.spawn(BukkitAdapter.adapt(location), level.asDouble(), reason);
+            scriptEntry.addObject("spawned_mythicmob", new MythicMobsMobTag(entity));
         }
         catch (Exception e) {
             Debug.echoError(e);

@@ -56,14 +56,14 @@ public class MythicSkillCommand extends AbstractCommand {
 
     @Override
     public void addCustomTabCompletions(TabCompletionsBuilder tab) {
-        tab.add((Set<String>) MythicMobsBridge.getSkillNames());
+        tab.add(MythicMobsBridge.getSkillNames());
     }
 
     public static void autoExecute(ScriptEntry scriptEntry,
                                    @ArgLinear @ArgName("skill") ElementTag skill,
                                    @ArgLinear @ArgName("targets") ListTag targets,
                                    @ArgPrefixed @ArgName("power") @ArgDefaultText("1") ElementTag power,
-                                   @ArgPrefixed @ArgName("casters") @ArgDefaultNull ListTag casters,
+                                   @ArgPrefixed @ArgName("casters") @ArgSubType(ListTag.class) @ArgDefaultNull List<EntityTag> casters,
                                    @ArgPrefixed @ArgName("trigger") @ArgDefaultNull EntityTag trigger,
                                    @ArgPrefixed @ArgName("origin") @ArgDefaultNull LocationTag origin,
                                    @ArgPrefixed @ArgName("parameters") @ArgDefaultNull MapTag parameters,
@@ -83,7 +83,7 @@ public class MythicSkillCommand extends AbstractCommand {
             Debug.echoError("Cannot have both entity and location targets.");
             return;
         }
-        for (EntityTag caster : casters != null ? casters.filter(EntityTag.class, scriptEntry) : Utilities.entryDefaultEntityList(scriptEntry, true)) {
+        for (EntityTag caster : casters != null ? casters : Utilities.entryDefaultEntityList(scriptEntry, true)) {
             MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill.asString(), trigger != null ? trigger.getBukkitEntity() : caster.getBukkitEntity(), origin, entityTargets, locationTargets, power.asFloat(), (metadata) -> {
                 if (parameters != null) {
                     Map<String, String> parameterMap = new HashMap<>();
