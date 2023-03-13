@@ -84,7 +84,7 @@ public class MythicSkillCommand extends AbstractCommand {
             return;
         }
         for (EntityTag caster : casters != null ? casters.filter(EntityTag.class, scriptEntry) : Utilities.entryDefaultEntityList(scriptEntry, true)) {
-            MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill.asString(), trigger != null ? trigger.entity : caster.getBukkitEntity(), origin, entityTargets, locationTargets, power.asFloat(), (metadata) -> {
+            MythicMobsBridge.getAPI().castSkill(caster.getBukkitEntity(), skill.asString(), trigger != null ? trigger.getBukkitEntity() : caster.getBukkitEntity(), origin, entityTargets, locationTargets, power.asFloat(), (metadata) -> {
                 if (parameters != null) {
                     Map<String, String> parameterMap = new HashMap<>();
                     for (Map.Entry<StringHolder, ObjectTag> entry : parameters.map.entrySet()) {
