@@ -61,16 +61,17 @@ public class MythicMobsSpawnEvent extends BukkitScriptEvent implements Listener 
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "mob": return mythicmob;
-            case "entity": return new EntityTag(event.getEntity());
-            case "location": return location;
-            case "from_spawner": return new ElementTag(event.isFromMythicSpawner());
-            case "spawner_location": return event.isFromMythicSpawner() ? new LocationTag(BukkitAdapter.adapt(event.getMythicSpawner().getLocation())) : null;
-            case "spawner": return event.isFromMythicSpawner() ? new MythicSpawnerTag(event.getMythicSpawner()) : null;
-            case "spawn_reason": return new ElementTag(event.getSpawnReason());
-            default: return super.getContext(name);
-        }
+        return switch (name) {
+            case "mob" -> mythicmob;
+            case "entity" -> new EntityTag(event.getEntity());
+            case "location" -> location;
+            case "from_spawner" -> new ElementTag(event.isFromMythicSpawner());
+            case "spawner_location" ->
+                    event.isFromMythicSpawner() ? new LocationTag(BukkitAdapter.adapt(event.getMythicSpawner().getLocation())) : null;
+            case "spawner" -> event.isFromMythicSpawner() ? new MythicSpawnerTag(event.getMythicSpawner()) : null;
+            case "spawn_reason" -> new ElementTag(event.getSpawnReason());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler
