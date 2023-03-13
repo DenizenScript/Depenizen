@@ -2,14 +2,16 @@ package com.denizenscript.depenizen.bukkit.commands.mythicmobs;
 
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgLinear;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgName;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgPrefixed;
+import com.denizenscript.denizencore.scripts.commands.generator.ArgSubType;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import io.lumine.mythic.bukkit.BukkitAdapter;
+
+import java.util.List;
 
 public class MythicSignalCommand extends AbstractCommand {
 
@@ -42,10 +44,10 @@ public class MythicSignalCommand extends AbstractCommand {
     // -->
 
     public static void autoExecute(ScriptEntry scriptEntry,
-                                   @ArgLinear @ArgName("targets") ListTag targets,
+                                   @ArgLinear @ArgName("targets") @ArgSubType(MythicMobsMobTag.class) List<MythicMobsMobTag> targets,
                                    @ArgLinear @ArgName("signal") ElementTag signal,
                                    @ArgPrefixed @ArgName("source") EntityTag source) {
-        for (MythicMobsMobTag mob : targets.filter(MythicMobsMobTag.class, scriptEntry)) {
+        for (MythicMobsMobTag mob : targets) {
             mob.getMob().signalMob(BukkitAdapter.adapt(source.getBukkitEntity()), signal.asString());
         }
     }
