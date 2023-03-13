@@ -296,7 +296,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         // @returns MapTag
         // @plugin Depenizen, MythicMobs
         // @description
-        // Returns the MythicMob's threat table as a map where the key is the entity's UUID, and the value is the amount of threat.
+        // Returns the MythicMob's threat table as a map of player's UUIDs to the threat amount.
         // -->
         tagProcessor.registerTag(MapTag.class, "threat_table", (attribute, object) -> {
             if (!object.getMob().hasThreatTable()) {
