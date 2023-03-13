@@ -63,21 +63,21 @@ public class MythicThreatCommand extends AbstractCommand {
             targets = new ListTag(player.getDenizenEntity());
         }
         switch (operation) {
-            case ADD:
+            case ADD -> {
                 for (EntityTag target : targets.filter(EntityTag.class, scriptEntry)) {
                     mythicmob.getMob().getThreatTable().threatGain(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
                 }
-                break;
-            case SUBTRACT:
+            }
+            case SUBTRACT -> {
                 for (EntityTag target : targets.filter(EntityTag.class, scriptEntry)) {
                     mythicmob.getMob().getThreatTable().threatLoss(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
                 }
-                break;
-            case SET:
+            }
+            case SET -> {
                 for (EntityTag target : targets.filter(EntityTag.class, scriptEntry)) {
                     mythicmob.getMob().getThreatTable().threatSet(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
                 }
-                break;
+            }
         }
     }
 }
