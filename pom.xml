@@ -220,9 +220,9 @@
             <systemPath>${basedir}/lib/mythickeysplugin.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>io.lumine.xikage</groupId>
+            <groupId>io.lumine</groupId>
             <artifactId>mythicmobs</artifactId>
-            <version>5.1.4</version>
+            <version>5.2.1</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/MythicMobs.jar</systemPath>
         </dependency>

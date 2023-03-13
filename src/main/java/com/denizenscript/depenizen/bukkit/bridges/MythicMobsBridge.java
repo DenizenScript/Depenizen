@@ -214,7 +214,6 @@ public class MythicMobsBridge extends Bridge {
         DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
-        new MythicMobsBridgeTags().register();
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>
