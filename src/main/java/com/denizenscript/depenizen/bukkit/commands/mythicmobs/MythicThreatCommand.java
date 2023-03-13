@@ -7,13 +7,12 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
-import com.denizenscript.denizencore.scripts.commands.generator.ArgDefaultNull;
-import com.denizenscript.denizencore.scripts.commands.generator.ArgLinear;
-import com.denizenscript.denizencore.scripts.commands.generator.ArgName;
-import com.denizenscript.denizencore.scripts.commands.generator.ArgPrefixed;
+import com.denizenscript.denizencore.scripts.commands.generator.*;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import io.lumine.mythic.bukkit.BukkitAdapter;
+
+import java.util.List;
 
 public class MythicThreatCommand extends AbstractCommand {
 
@@ -49,7 +48,7 @@ public class MythicThreatCommand extends AbstractCommand {
                                    @ArgLinear @ArgName("mythicmob") MythicMobsMobTag mythicmob,
                                    @ArgLinear @ArgName("operation") Operation operation,
                                    @ArgLinear @ArgName("threat") ElementTag threat,
-                                   @ArgPrefixed @ArgName("for") @ArgDefaultNull ListTag targets) {
+                                   @ArgPrefixed @ArgName("for") @ArgSubType(EntityTag.class) @ArgDefaultNull List<EntityTag> targets) {
         if (!mythicmob.getMob().hasThreatTable()) {
             Debug.echoError("MythicMob does not have a threat table: " + mythicmob);
             return;
@@ -60,21 +59,21 @@ public class MythicThreatCommand extends AbstractCommand {
                 Debug.echoError("Threat targets default to the queue's linked player, but this queue does not have one! Please specify targets to modify threat for!");
                 return;
             }
-            targets = new ListTag(player.getDenizenEntity());
+            targets = List.of(player.getDenizenEntity());
         }
         switch (operation) {
             case ADD -> {
-                for (EntityTag target : targets.filter(EntityTag.class, scriptEntry)) {
+                for (EntityTag target : targets) {
                     mythicmob.getMob().getThreatTable().threatGain(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
                 }
             }
             case SUBTRACT -> {
-                for (EntityTag target : targets.filter(EntityTag.class, scriptEntry)) {
+                for (EntityTag target : targets) {
                     mythicmob.getMob().getThreatTable().threatLoss(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
                 }
             }
             case SET -> {
-                for (EntityTag target : targets.filter(EntityTag.class, scriptEntry)) {
+                for (EntityTag target : targets) {
                     mythicmob.getMob().getThreatTable().threatSet(BukkitAdapter.adapt(target.getBukkitEntity()), threat.asDouble());
                 }
             }
