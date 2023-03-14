@@ -42,7 +42,7 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
     @Override
     public boolean matches(ScriptPath path) {
         String disguiseName = path.eventArgLowerAt(2);
-        if (!disguiseName.equals("disguise") && !disguise.equals(LibsDisguiseTag.valueOf(disguiseName))) {
+        if (!disguiseName.equals("disguise") && !disguise.equals(LibsDisguiseTag.valueOf(disguiseName, getTagContext(path)))) {
             return false;
         }
         return super.matches(path);

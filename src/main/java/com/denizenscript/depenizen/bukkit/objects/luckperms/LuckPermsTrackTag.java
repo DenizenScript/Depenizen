@@ -38,20 +38,11 @@ public class LuckPermsTrackTag implements ObjectTag {
     //   OBJECT FETCHER
     /////////////////
 
-    public static LuckPermsTrackTag valueOf(String string) {
-        return valueOf(string, null);
-    }
-
     @Fetchable("luckpermstrack")
     public static LuckPermsTrackTag valueOf(String string, TagContext context) {
-        if (string == null) {
-            return null;
+        if (string.startsWith("luckpermstrack@")) {
+            string = string.substring("luckpermstrack@".length());
         }
-
-        ////////
-        // Match luckpermstrack name
-
-        string = string.replace("luckpermstrack@", "");
         try {
             Track track = LuckPermsBridge.luckPermsInstance.getTrackManager().getTrack(string);
             if (track == null) {

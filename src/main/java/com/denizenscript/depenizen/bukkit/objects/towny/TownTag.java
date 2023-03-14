@@ -7,6 +7,7 @@ import com.denizenscript.denizencore.flags.FlaggableObject;
 import com.denizenscript.denizencore.flags.RedirectionFlagTracker;
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.*;
@@ -47,16 +48,11 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
     //   OBJECT FETCHER
     /////////////////
 
-    public static TownTag valueOf(String string) {
-        return valueOf(string, null);
-    }
-
     @Fetchable("town")
     public static TownTag valueOf(String string, TagContext context) {
-        if (string == null) {
-            return null;
+        if (string.startsWith("town@")) {
+            string = string.substring("town@".length());
         }
-        string = string.replace("town@", "");
         if (string.length() == 36 && string.indexOf('-') >= 0) {
             try {
                 UUID uuid = UUID.fromString(string);
@@ -82,7 +78,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         if (arg.startsWith("town@")) {
             return true;
         }
-        return valueOf(arg) != null;
+        return valueOf(arg, CoreUtilities.noDebugContext) != null;
     }
 
     /////////////////////

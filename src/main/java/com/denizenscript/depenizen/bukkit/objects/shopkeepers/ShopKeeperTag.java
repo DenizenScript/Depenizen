@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.objects.shopkeepers;
 
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.depenizen.bukkit.bridges.ShopkeepersBridge;
 import com.nisovin.shopkeepers.api.shopkeeper.Shopkeeper;
 import com.nisovin.shopkeepers.api.shopkeeper.TradingRecipe;
@@ -38,14 +39,10 @@ public class ShopKeeperTag implements ObjectTag {
     //
     // -->
 
-    public static ShopKeeperTag valueOf(String string) {
-        return valueOf(string, null);
-    }
-
     @Fetchable("shopkeeper")
     public static ShopKeeperTag valueOf(String string, TagContext context) {
-        if (string == null) {
-            return null;
+        if (string.startsWith("shopkeeper@")) {
+            string = string.substring("shopkeeper@".length());
         }
         try {
             UUID uuid = UUID.fromString(string);
@@ -61,7 +58,7 @@ public class ShopKeeperTag implements ObjectTag {
     }
 
     public static boolean matches(String string) {
-        return valueOf(string) != null;
+        return valueOf(string, CoreUtilities.noDebugContext) != null;
     }
 
     public static boolean isShopKeeper(EntityTag entity) {

@@ -38,10 +38,6 @@ public class JobsJobTag implements ObjectTag, Adjustable {
     //   OBJECT FETCHER
     /////////////////
 
-    public static JobsJobTag valueOf(String string) {
-        return valueOf(string, null);
-    }
-
     @Fetchable("job")
     public static JobsJobTag valueOf(String string, TagContext context) {
         if (string.startsWith("job@")) {
@@ -69,7 +65,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
     }
 
     public static boolean matches(String arg) {
-        if (valueOf(arg) != null) {
+        if (valueOf(arg, CoreUtilities.noDebugContext) != null) {
             return true;
         }
         return false;

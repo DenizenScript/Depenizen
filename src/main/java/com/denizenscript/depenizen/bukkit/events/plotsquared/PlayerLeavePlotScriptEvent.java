@@ -41,7 +41,7 @@ public class PlayerLeavePlotScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public boolean matches(ScriptPath path) {
         String plotName = path.eventArgLowerAt(3);
-        if (!plotName.equals("plotsquaredplot") && !plot.equals(PlotSquaredPlotTag.valueOf(plotName))) {
+        if (!plotName.equals("plotsquaredplot") && !plot.equals(PlotSquaredPlotTag.valueOf(plotName, getTagContext(path)))) {
             return false;
         }
         return super.matches(path);

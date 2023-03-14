@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.skillapi;
 
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.classes.RPGClass;
@@ -30,28 +31,20 @@ public class SkillAPIClassTag implements ObjectTag {
     //   OBJECT FETCHER
     /////////////////
 
-    public static SkillAPIClassTag valueOf(String string) {
-        return valueOf(string, null);
-    }
-
     @Fetchable("skillapiclass")
     public static SkillAPIClassTag valueOf(String string, TagContext context) {
-        if (string == null) {
-            return null;
+        if (string.startsWith("skillapiclass@")) {
+            string = string.substring("skillapiclass@".length());
         }
-
-        string = string.replace("skillapiclass@", "");
-
         RPGClass rpgClass = SkillAPI.getClass(string);
         if (rpgClass != null) {
             return new SkillAPIClassTag(rpgClass);
         }
-
         return null;
     }
 
     public static boolean matches(String arg) {
-        if (valueOf(arg) != null) {
+        if (valueOf(arg, CoreUtilities.noDebugContext) != null) {
             return true;
         }
 

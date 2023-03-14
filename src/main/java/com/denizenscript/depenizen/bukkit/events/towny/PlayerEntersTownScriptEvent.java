@@ -39,7 +39,7 @@ public class PlayerEntersTownScriptEvent extends BukkitScriptEvent implements Li
     @Override
     public boolean matches(ScriptPath path) {
         String name = path.eventArgAt(3);
-        if (!name.equals("town") && !town.equals(TownTag.valueOf(name))) {
+        if (!name.equals("town") && !town.equals(TownTag.valueOf(name, getTagContext(path)))) {
             return false;
         }
         return super.matches(path);

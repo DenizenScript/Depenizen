@@ -61,7 +61,7 @@ public class JobsCommand extends AbstractCommand {
             }
             else if (!scriptEntry.hasObject("job")
                     && arg.matchesArgumentType(JobsJobTag.class)) {
-                scriptEntry.addObject("job", JobsJobTag.valueOf(arg.getValue()));
+                scriptEntry.addObject("job", JobsJobTag.valueOf(arg.getValue(), scriptEntry.context));
             }
             else if (!scriptEntry.hasObject("number")
                     && arg.matchesInteger()) {

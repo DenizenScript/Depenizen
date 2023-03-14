@@ -63,13 +63,8 @@ public class JobsPlayerProperties implements Property {
         // @description
         // Returns the job specified with the player's information attached.
         // -->
-        PropertyParser.registerTag(JobsPlayerProperties.class, JobsJobTag.class, "job", (attribute, object) -> {
-            if (attribute.hasParam()) {
-                JobsJobTag job = JobsJobTag.valueOf(attribute.getParam());
-                return new JobsJobTag(job.getJob(), object.player);
-            }
-            attribute.echoError("Invalid or missing job specified.");
-            return null;
+        PropertyParser.registerTag(JobsPlayerProperties.class, JobsJobTag.class, JobsJobTag.class, "job", (attribute, object, job) -> {
+            return new JobsJobTag(job.getJob(), object.player);
         });
 
         // <--[tag]
