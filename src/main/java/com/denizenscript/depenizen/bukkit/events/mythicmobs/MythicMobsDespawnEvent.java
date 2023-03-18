@@ -50,7 +50,7 @@ public class MythicMobsDespawnEvent extends BukkitScriptEvent implements Listene
     public ObjectTag getContext(String name) {
         return switch (name) {
             case "mob" -> mythicmob;
-            case "entity" -> new EntityTag((event.getEntity()));
+            case "entity" -> new EntityTag(event.getEntity());
             default -> super.getContext(name);
         };
     }
