@@ -33,7 +33,6 @@ public class MythicMobsDespawnEvent extends BukkitScriptEvent implements Listene
         registerCouldMatcher("mythicmob <'mob'> despawns");
     }
 
-    public static MythicMobsDespawnEvent instance;
     public MythicMobDespawnEvent event;
     public MythicMobsMobTag mythicmob;
 
