@@ -16,6 +16,7 @@ import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSkillCommand
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicThreatCommand;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
+import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDespawnEvent;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsSpawnEvent;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
@@ -49,6 +50,7 @@ public class MythicMobsBridge extends Bridge {
         PropertyParser.registerProperty(MythicMobsPlayerProperties.class, PlayerTag.class);
         ScriptEvent.registerScriptEvent(MythicMobsDeathEvent.class);
         ScriptEvent.registerScriptEvent(MythicMobsSpawnEvent.class);
+        ScriptEvent.registerScriptEvent(MythicMobsDespawnEvent.class);
         DenizenCore.commandRegistry.registerCommand(MythicSpawnCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicThreatCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);
