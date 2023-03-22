@@ -29,7 +29,7 @@ public class BungeeProxyServerCommandScriptEvent extends BukkitScriptEvent {
     // <context.command> returns the command executed.
     //
     // @Determine
-    // "COMMAND:" + Element to change the command that will be ran.
+    // "COMMAND:<ElementTag>" to change the command that will be ran.
     //
     // @Plugin Depenizen, DepenizenBungee, BungeeCord
     //

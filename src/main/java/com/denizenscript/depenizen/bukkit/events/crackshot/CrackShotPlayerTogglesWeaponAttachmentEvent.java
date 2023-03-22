@@ -29,7 +29,7 @@ public class CrackShotPlayerTogglesWeaponAttachmentEvent extends BukkitScriptEve
     // <context.delay> returns the delay between toggles.
     //
     // @Determine
-    // "TOGGLE_DELAY:" + ElementTag(Number) to set the time between toggles.
+    // "TOGGLE_DELAY:<ElementTag(Number)>" to set the time between toggles.
     //
     // @Plugin Depenizen, CrackShot
     //

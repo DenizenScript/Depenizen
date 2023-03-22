@@ -31,10 +31,10 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     // <context.version> returns the name of the server version that will be given to the ping requester.
     //
     // @Determine
-    // "MAX_PLAYERS:" + ElementTag(Number) to change the listed maximum number of players.
-    // "VERSION:" + ElementTag to change the listed server version.
-    // "MOTD:" + ElementTag to change the server MOTD that will be displayed.
-    // "PLAYERS:" + List(PlayerTag) to set what players are displayed in the "online players sample" view of the list ping.
+    // "MAX_PLAYERS:<ElementTag(Number)>" to change the listed maximum number of players.
+    // "VERSION:<ElementTag>" to change the listed server version.
+    // "MOTD:<ElementTag>" to change the server MOTD that will be displayed.
+    // "PLAYERS:<List(PlayerTag)>" to set what players are displayed in the "online players sample" view of the list ping.
     //
     // @Plugin Depenizen, DepenizenBungee, BungeeCord
     //
