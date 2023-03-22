@@ -53,7 +53,7 @@ public class EssentialsPlayerProperties implements Property {
             "is_afk", "god_mode", "is_muted", "socialspy", "vanish", "essentials_ignore"
     };
 
-    private EssentialsPlayerProperties(PlayerTag player) {
+    public EssentialsPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

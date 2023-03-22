@@ -52,7 +52,7 @@ public class TownyCuboidProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private TownyCuboidProperties(CuboidTag cuboid) {
+    public TownyCuboidProperties(CuboidTag cuboid) {
         this.cuboid = cuboid;
     }
 

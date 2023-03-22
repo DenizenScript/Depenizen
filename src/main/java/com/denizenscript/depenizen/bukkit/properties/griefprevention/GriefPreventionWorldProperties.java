@@ -38,7 +38,7 @@ public class GriefPreventionWorldProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private GriefPreventionWorldProperties(WorldTag world) {
+    public GriefPreventionWorldProperties(WorldTag world) {
         this.world = world;
     }
 

@@ -56,13 +56,13 @@ public class WorldGuardCuboidProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private WorldGuardCuboidProperties(CuboidTag cuboid) {
+    public WorldGuardCuboidProperties(CuboidTag cuboid) {
         this.cuboid = cuboid;
     }
 
     CuboidTag cuboid;
 
-    private ApplicableRegionSet getApplicableRegions() {
+    public ApplicableRegionSet getApplicableRegions() {
         WorldGuardPlugin worldGuard = (WorldGuardPlugin) WorldGuardBridge.instance.plugin;
         LocationTag low = cuboid.getLow(0);
         LocationTag high = cuboid.getHigh(0);
@@ -72,11 +72,11 @@ public class WorldGuardCuboidProperties implements Property {
         return WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(cuboid.getWorld().getWorld())).getApplicableRegions(region);
     }
 
-    private boolean hasRegion() {
+    public boolean hasRegion() {
         return getApplicableRegions().size() > 0;
     }
 
-    private ListTag getRegions(World world) {
+    public ListTag getRegions(World world) {
         ListTag regionList = new ListTag();
         for (ProtectedRegion protectedRegion : getApplicableRegions()) {
             regionList.addObject(new WorldGuardRegionTag(protectedRegion, world));

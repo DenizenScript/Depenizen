@@ -41,7 +41,7 @@ public class ViaVersionPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private ViaVersionPlayerProperties(PlayerTag player) {
+    public ViaVersionPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

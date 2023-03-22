@@ -53,7 +53,7 @@ public class SentinelNPCProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private SentinelNPCProperties(NPCTag npc) {
+    public SentinelNPCProperties(NPCTag npc) {
         this.npc = npc;
     }
 

@@ -40,7 +40,7 @@ public class NoCheatPlusPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private NoCheatPlusPlayerProperties(PlayerTag player) {
+    public NoCheatPlusPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

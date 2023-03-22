@@ -45,7 +45,7 @@ public class McMMOLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private McMMOLocationProperties(LocationTag location) {
+    public McMMOLocationProperties(LocationTag location) {
         this.location = location;
     }
 

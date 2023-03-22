@@ -48,7 +48,7 @@ public class FactionsNPCProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private FactionsNPCProperties(NPCTag object) {
+    public FactionsNPCProperties(NPCTag object) {
         npc = object;
     }
 

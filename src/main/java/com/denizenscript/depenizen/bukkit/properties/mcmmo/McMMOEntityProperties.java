@@ -46,7 +46,7 @@ public class McMMOEntityProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private McMMOEntityProperties(EntityTag entity) {
+    public McMMOEntityProperties(EntityTag entity) {
         this.entity = entity;
     }
 

@@ -48,7 +48,7 @@ public class JobsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private JobsPlayerProperties(PlayerTag player) {
+    public JobsPlayerProperties(PlayerTag player) {
         this.player = Jobs.getPlayerManager().getJobsPlayer(player.getName());
     }
 

@@ -43,7 +43,7 @@ public class PlotSquaredPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private PlotSquaredPlayerProperties(PlayerTag player) {
+    public PlotSquaredPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

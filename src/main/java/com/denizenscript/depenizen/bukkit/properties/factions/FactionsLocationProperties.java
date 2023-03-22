@@ -46,7 +46,7 @@ public class FactionsLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private FactionsLocationProperties(LocationTag location) {
+    public FactionsLocationProperties(LocationTag location) {
         this.location = location;
     }
 

@@ -46,7 +46,7 @@ public class TCLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private TCLocationProperties(LocationTag object) {
+    public TCLocationProperties(LocationTag object) {
         location = object;
     }
 

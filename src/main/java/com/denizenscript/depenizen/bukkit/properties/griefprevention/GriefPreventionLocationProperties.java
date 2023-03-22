@@ -45,7 +45,7 @@ public class GriefPreventionLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private GriefPreventionLocationProperties(LocationTag location) {
+    public GriefPreventionLocationProperties(LocationTag location) {
         this.location = location;
     }
 

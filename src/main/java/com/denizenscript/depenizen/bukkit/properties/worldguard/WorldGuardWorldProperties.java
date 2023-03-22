@@ -46,7 +46,7 @@ public class WorldGuardWorldProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private WorldGuardWorldProperties(WorldTag world) {
+    public WorldGuardWorldProperties(WorldTag world) {
         this.world = world.getWorld();
         this.manager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(this.world));
     }

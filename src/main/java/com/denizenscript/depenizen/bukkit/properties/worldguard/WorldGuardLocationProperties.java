@@ -51,22 +51,22 @@ public class WorldGuardLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private WorldGuardLocationProperties(LocationTag loc) {
+    public WorldGuardLocationProperties(LocationTag loc) {
         location = loc;
     }
 
     LocationTag location;
 
-    private ApplicableRegionSet getApplicableRegions() {
+    public ApplicableRegionSet getApplicableRegions() {
         return WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(location.getWorld()))
                 .getApplicableRegions(BukkitAdapter.asBlockVector(location));
     }
 
-    private boolean inRegion() {
+    public boolean inRegion() {
         return getApplicableRegions().size() > 0;
     }
 
-    private boolean inRegion(String region) {
+    public boolean inRegion(String region) {
         for (ProtectedRegion protectedRegion : getApplicableRegions()) {
             if (protectedRegion.getId().equalsIgnoreCase(region)) {
                 return true;
@@ -75,7 +75,7 @@ public class WorldGuardLocationProperties implements Property {
         return false;
     }
 
-    private ListTag getRegions(World world) {
+    public ListTag getRegions(World world) {
         ListTag regionList = new ListTag();
         for (ProtectedRegion protectedRegion : getApplicableRegions()) {
             regionList.addObject(new WorldGuardRegionTag(protectedRegion, world));

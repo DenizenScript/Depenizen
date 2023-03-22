@@ -46,7 +46,7 @@ public class LuckPermsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private LuckPermsPlayerProperties(PlayerTag player) {
+    public LuckPermsPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

@@ -42,7 +42,7 @@ public class PlotSquaredLocationProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private PlotSquaredLocationProperties(LocationTag location) {
+    public PlotSquaredLocationProperties(LocationTag location) {
         this.location = location;
     }
 

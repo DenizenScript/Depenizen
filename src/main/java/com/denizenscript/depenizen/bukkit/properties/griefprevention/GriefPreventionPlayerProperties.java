@@ -48,7 +48,7 @@ public class GriefPreventionPlayerProperties implements Property {
             "bonus_blocks", "normal_blocks"
     };
 
-    private GriefPreventionPlayerProperties(PlayerTag player) {
+    public GriefPreventionPlayerProperties(PlayerTag player) {
         this.player = player;
         data = dataStore.getPlayerData(player.getUUID());
     }

@@ -19,7 +19,7 @@ public class CrackShotItemProperties implements Property {
 
     ItemTag item;
 
-    private CrackShotItemProperties(ItemTag item) {
+    public CrackShotItemProperties(ItemTag item) {
         this.item = item;
     }
 
