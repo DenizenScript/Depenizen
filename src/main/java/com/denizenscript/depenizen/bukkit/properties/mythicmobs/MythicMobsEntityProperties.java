@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.properties.mythicmobs;
 
 import com.denizenscript.denizencore.objects.core.DurationTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
@@ -19,6 +20,7 @@ import io.lumine.mythic.core.skills.auras.AuraRegistry;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 public class MythicMobsEntityProperties implements Property {
 
@@ -44,13 +46,12 @@ public class MythicMobsEntityProperties implements Property {
     public static MythicMobsEntityProperties getFrom(ObjectTag object) {
         if (!describes(object)) {
             return null;
-        }
-        else {
+        } else {
             return new MythicMobsEntityProperties((EntityTag) object);
         }
     }
 
-    public static final String[] handledMechs = new String[] {
+    public static final String[] handledMechs = new String[]{
     }; // None
 
     public MythicMobsEntityProperties(EntityTag entity) {
@@ -103,14 +104,15 @@ public class MythicMobsEntityProperties implements Property {
         // @return MapTag
         // @plugin Depenizen, MythicMobs
         // @description
-        // Returns a MapTag of the mob's aura information, where the key is the aura name and the value is a MapTag containing info about that aura (stacks, interval, duration, etc).
+        // Returns a MapTag of the mob's aura information, where the key is the aura name and the value is a ListTag of MapTags containing info about that aura (stacks, interval, duration, etc).
         // -->
         PropertyParser.registerTag(MythicMobsEntityProperties.class, MapTag.class, "auras", (attribute, object) -> {
             MapTag result = new MapTag();
             AuraRegistry registry = MythicMobsBridge.getSkillManager().getAuraManager().getAuraRegistry(BukkitAdapter.adapt(object.entity.getBukkitEntity()));
             for (Map.Entry<String, Queue<Aura.AuraTracker>> aura : registry.getAuras().entrySet()) {
-                MapTag auraInfo = new MapTag();
+                ListTag list = new ListTag();
                 for (Aura.AuraTracker tracker : aura.getValue()) {
+                    MapTag auraInfo = new MapTag();
                     auraInfo.putObject("stacks", new ElementTag(tracker.getStacks()));
                     auraInfo.putObject("max_stacks", new ElementTag(tracker.getMaxStacks()));
                     auraInfo.putObject("interval", new ElementTag(tracker.getInterval()));
@@ -118,8 +120,9 @@ public class MythicMobsEntityProperties implements Property {
                     auraInfo.putObject("charges_remaining", new ElementTag(tracker.getChargesRemaining()));
                     auraInfo.putObject("start_duration", new DurationTag((long) tracker.getStartDuration()));
                     auraInfo.putObject("expiration", new DurationTag((long) tracker.getTicksRemaining()));
+                    list.addObject(auraInfo);
                 }
-                result.putObject(aura.getKey(), auraInfo);
+                result.putObject(aura.getKey(), list);
             }
             return result;
         });
