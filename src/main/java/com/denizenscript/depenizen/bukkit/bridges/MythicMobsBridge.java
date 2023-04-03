@@ -33,7 +33,6 @@ import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.items.ItemExecutor;
 import io.lumine.mythic.core.items.MythicItem;
 import io.lumine.mythic.core.mobs.ActiveMob;
-import io.lumine.mythic.core.skills.SkillExecutor;
 import io.lumine.mythic.core.skills.variables.*;
 import io.lumine.mythic.core.spawning.spawners.MythicSpawner;
 import io.lumine.mythic.core.spawning.spawners.SpawnerManager;
@@ -316,10 +315,6 @@ public class MythicMobsBridge extends Bridge {
 
     public static Collection<String> getSkillNames() {
         return MythicBukkit.inst().getSkillManager().getSkillNames();
-    }
-
-    public static SkillExecutor getSkillManager() {
-        return MythicBukkit.inst().getSkillManager();
     }
 
     public static boolean skillExists(String name) {
