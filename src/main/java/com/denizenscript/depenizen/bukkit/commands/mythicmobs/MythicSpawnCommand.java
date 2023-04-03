@@ -15,9 +15,6 @@ import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.api.mobs.entities.SpawnReason;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.core.mobs.ActiveMob;
-import org.bukkit.entity.Entity;
-
-import java.util.Set;
 
 public class MythicSpawnCommand extends AbstractCommand {
 

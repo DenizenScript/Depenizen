@@ -25,10 +25,8 @@ import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
-import com.sucy.skill.api.skills.Skill;
 import io.lumine.mythic.api.mobs.MobManager;
 import io.lumine.mythic.api.mobs.MythicMob;
-import io.lumine.mythic.api.packs.Pack;
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
@@ -188,6 +186,7 @@ public class MythicMobsBridge extends Bridge {
         DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
+        new MythicMobsBridgeTags();
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>
@@ -203,7 +202,7 @@ public class MythicMobsBridge extends Bridge {
             }
             String name = attribute.getParam();
             Optional<MythicItem> itemOpt = MythicBukkit.inst().getItemManager().getItem(name);
-            if (!itemOpt.isPresent()) {
+            if (itemOpt.isEmpty()) {
                 attribute.echoError("'" + name + "' is not a valid Mythic item.");
                 return null;
             }

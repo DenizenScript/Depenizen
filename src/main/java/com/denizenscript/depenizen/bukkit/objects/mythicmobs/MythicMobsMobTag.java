@@ -22,12 +22,9 @@ import io.lumine.mythic.api.mobs.GenericCaster;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.api.skills.SkillCaster;
 import io.lumine.mythic.bukkit.BukkitAdapter;
-import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.bukkit.adapters.BukkitEntity;
 import io.lumine.mythic.bukkit.utils.serialize.Optl;
 import io.lumine.mythic.core.mobs.ActiveMob;
-import io.lumine.mythic.core.skills.auras.Aura;
-import io.lumine.mythic.core.skills.auras.AuraRegistry;
 import io.lumine.mythic.core.skills.variables.Variable;
 import io.lumine.mythic.core.skills.variables.VariableType;
 import org.bukkit.entity.Entity;
@@ -35,7 +32,6 @@ import org.bukkit.entity.LivingEntity;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Queue;
 import java.util.UUID;
 
 public class MythicMobsMobTag implements ObjectTag, Adjustable {
