@@ -103,7 +103,7 @@ public class MythicMobsBridge extends Bridge {
             // Returns a ListTag of all active MythicMobs on the server.
             // -->
             tagProcessor.registerTag(ListTag.class, "active_mobs", (attribute, object) -> {
-                return new ListTag(getMobManager().getActiveMobs().stream().map(MythicMobsMobTag::new).toList());
+                return new ListTag(getMobManager().getActiveMobs(), MythicMobsMobTag::new);
             });
 
             // <--[tag]
@@ -114,7 +114,7 @@ public class MythicMobsBridge extends Bridge {
             // Returns a ListTag of all MythicSpawners.
             // -->
             tagProcessor.registerTag(ListTag.class, "spawners", (attribute, object) -> {
-                return new ListTag(getSpawnerManager().getSpawners().stream().map(MythicSpawnerTag::new).toList());
+                return new ListTag(getSpawnerManager().getSpawners(), MythicSpawnerTag::new);
             });
 
             // <--[tag]
@@ -170,7 +170,7 @@ public class MythicMobsBridge extends Bridge {
             // Returns a list of all Mythic pack IDs.
             // -->
             tagProcessor.registerTag(ListTag.class, "packs", (attribute, object) -> {
-                return new ListTag(MythicBukkit.inst().getPackManager().getPacks().stream().map(Pack::getName).toList(), true);
+                return new ListTag(MythicBukkit.inst().getPackManager().getPacks(), (pack) -> new ElementTag(pack.getName()));
             });
         }
     }
