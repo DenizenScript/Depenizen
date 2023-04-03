@@ -12,6 +12,7 @@ import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.PseudoObjectTagBase;
 import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.utilities.text.StringHolder;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSignalCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSkillCommand;
@@ -45,6 +46,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class MythicMobsBridge extends Bridge {
 
@@ -68,11 +70,7 @@ public class MythicMobsBridge extends Bridge {
             // Returns a ListTag of valid MythicItem IDs. See also <@link tag mythic_item>.
             // -->
             tagProcessor.registerTag(ListTag.class, "item_ids", (attribute, object) -> {
-                ListTag list = new ListTag();
-                for (String item : getItemManager().getItemNames()) {
-                    list.addObject(new ElementTag(item, true));
-                }
-                return list;
+                return new ListTag(getItemManager().getItemNames(), true);
             });
 
             // <--[tag]
@@ -83,11 +81,7 @@ public class MythicMobsBridge extends Bridge {
             // Returns a ListTag of valid MythicSkill IDs.
             // -->
             tagProcessor.registerTag(ListTag.class, "skills", (attribute, object) -> {
-                ListTag list = new ListTag();
-                for (String item : getSkillNames()) {
-                    list.addObject(new ElementTag(item, true));
-                }
-                return list;
+                return new ListTag(getSkillNames(), true);
             });
 
             // <--[tag]
@@ -98,11 +92,7 @@ public class MythicMobsBridge extends Bridge {
             // Returns a ListTag of valid MythicMob IDs.
             // -->
             tagProcessor.registerTag(ListTag.class, "mob_ids", (attribute, object) -> {
-                ListTag list = new ListTag();
-                for (String item : getMobManager().getMobNames()) {
-                    list.addObject(new ElementTag(item, true));
-                }
-                return list;
+                return new ListTag(getMobManager().getMobNames(), true);
             });
 
             // <--[tag]
@@ -113,11 +103,7 @@ public class MythicMobsBridge extends Bridge {
             // Returns a ListTag of all active MythicMobs on the server.
             // -->
             tagProcessor.registerTag(ListTag.class, "active_mobs", (attribute, object) -> {
-                ListTag list = new ListTag();
-                for (ActiveMob entity : getMobManager().getActiveMobs()) {
-                    list.addObject(new MythicMobsMobTag(entity));
-                }
-                return list;
+                return new ListTag(getMobManager().getActiveMobs().stream().map(MythicMobsMobTag::new).toList());
             });
 
             // <--[tag]
@@ -128,11 +114,7 @@ public class MythicMobsBridge extends Bridge {
             // Returns a ListTag of all MythicSpawners.
             // -->
             tagProcessor.registerTag(ListTag.class, "spawners", (attribute, object) -> {
-                ListTag list = new ListTag();
-                for (MythicSpawner spawner : getSpawnerManager().getSpawners()) {
-                    list.addObject(new MythicSpawnerTag(spawner));
-                }
-                return list;
+                return new ListTag(getSpawnerManager().getSpawners().stream().map(MythicSpawnerTag::new).toList());
             });
 
             // <--[tag]
@@ -147,11 +129,7 @@ public class MythicMobsBridge extends Bridge {
                 if (mob == null) {
                     return null;
                 }
-                MapTag result = new MapTag();
-                for (Map.Entry<String, Double> entry : mob.getDamageModifiers().entrySet()) {
-                    result.putObject(entry.getKey(), new ElementTag(entry.getValue()));
-                }
-                return result;
+                return new MapTag(mob.getDamageModifiers().entrySet().stream().map((e) -> Map.entry(new StringHolder(e.getKey()), new ElementTag(e.getValue()))).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
             });
 
             // <--[tag]
@@ -192,11 +170,7 @@ public class MythicMobsBridge extends Bridge {
             // Returns a list of all Mythic pack IDs.
             // -->
             tagProcessor.registerTag(ListTag.class, "packs", (attribute, object) -> {
-                ListTag list = new ListTag();
-                for (Pack pack : MythicBukkit.inst().getPackManager().getPacks()) {
-                    list.addObject(new ElementTag(pack.getName(), true));
-                }
-                return list;
+                return new ListTag(MythicBukkit.inst().getPackManager().getPacks().stream().map(Pack::getName).toList(), true);
             });
         }
     }
