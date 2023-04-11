@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -56,6 +57,50 @@ public class MythicMobsBridge extends Bridge {
         DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
+
+        EntityTag.tagProcessor.custommatchers.add((entityTag, matcher) -> {
+            if (!matcher.startsWith("mythic_mob")) {
+                return null;
+            }
+            Entity entity = entityTag.getBukkitEntity();
+            if (entity == null) {
+                return false;
+            }
+            ActiveMob activeMob = getActiveMob(entity);
+            if (activeMob == null) {
+                return false;
+            }
+            int colonIndex = matcher.indexOf(':');
+            if (colonIndex == -1) {
+                return true;
+            }
+            return colonIndex == 10 ? ScriptEvent.runGenericCheck(matcher.substring(colonIndex + 1), activeMob.getType().getInternalName()) : null;
+        });
+        ItemTag.tagProcessor.custommatchers.add((itemTag, matcher) -> {
+            if (!matcher.startsWith("mythic_item")) {
+                return null;
+            }
+            String mythicType = MythicBukkit.inst().getItemManager().getMythicTypeFromItem(itemTag.getItemStack());
+            if (mythicType == null) {
+                return false;
+            }
+            int colonIndex = matcher.indexOf(':');
+            if (colonIndex == -1) {
+                return true;
+            }
+            return colonIndex == 11 ? ScriptEvent.runGenericCheck(matcher.substring(colonIndex + 1), mythicType) : null;
+        });
+
+        // <--[data]
+        // @name not_switches
+        // @values mythic_mob, mythic_item
+        // -->
+        ScriptEvent.ScriptPath.notSwitches.add("mythic_mob");
+        EntityTag.specialEntityMatchables.add("mythic_mob");
+        BukkitScriptEvent.entityCouldMatchPrefixes.add("mythic_mob");
+        ScriptEvent.ScriptPath.notSwitches.add("mythic_item");
+        BukkitScriptEvent.itemCouldMatchableText.add("mythic_item");
+        BukkitScriptEvent.itemCouldMatchPrefixes.add("mythic_item");
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>
