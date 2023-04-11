@@ -72,7 +72,7 @@ public class MythicMobsBridge extends Bridge {
             }
             int colonIndex = matcher.indexOf(':');
             if (colonIndex == -1) {
-                return true;
+                return matcher.length() == "mythic_mob".length() ? true : null;
             }
             return colonIndex == 10 ? ScriptEvent.runGenericCheck(matcher.substring(colonIndex + 1), activeMob.getType().getInternalName()) : null;
         });
@@ -86,7 +86,7 @@ public class MythicMobsBridge extends Bridge {
             }
             int colonIndex = matcher.indexOf(':');
             if (colonIndex == -1) {
-                return true;
+                return matcher.length() == "mythic_item".length() ? true : null;
             }
             return colonIndex == 11 ? ScriptEvent.runGenericCheck(matcher.substring(colonIndex + 1), mythicType) : null;
         });
