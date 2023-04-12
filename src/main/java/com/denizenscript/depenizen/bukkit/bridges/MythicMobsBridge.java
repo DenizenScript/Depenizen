@@ -11,6 +11,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSignalCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSkillCommand;
@@ -31,6 +32,7 @@ import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.items.MythicItem;
 import io.lumine.mythic.core.mobs.ActiveMob;
+import io.lumine.mythic.core.mobs.MobExecutor;
 import io.lumine.mythic.core.skills.variables.*;
 import io.lumine.mythic.core.spawning.spawners.MythicSpawner;
 import io.lumine.mythic.core.spawning.spawners.SpawnerManager;
@@ -59,36 +61,37 @@ public class MythicMobsBridge extends Bridge {
         new MythicMobsLoaders().RegisterEvents();
 
         EntityTag.tagProcessor.custommatchers.add((entityTag, matcher) -> {
-            if (!matcher.startsWith("mythic_mob")) {
+            if (!matcher.equals("mythic_mob")) {
+                return null;
+            }
+            return entityTag.getBukkitEntity() != null && getMobManager().isActiveMob(entityTag.getUUID());
+        });
+        EntityTag.tagProcessor.custommatchers.add((entityTag, matcher) -> {
+            if (!matcher.startsWith("mythic_mob:")) {
                 return null;
             }
             Entity entity = entityTag.getBukkitEntity();
-            if (entity == null) {
-                return false;
-            }
-            ActiveMob activeMob = getActiveMob(entity);
+            ActiveMob activeMob = entity != null ? getActiveMob(entity) : null;
             if (activeMob == null) {
                 return false;
             }
-            int colonIndex = matcher.indexOf(':');
-            if (colonIndex == -1) {
-                return matcher.length() == "mythic_mob".length() ? true : null;
-            }
-            return colonIndex == 10 ? ScriptEvent.runGenericCheck(matcher.substring(colonIndex + 1), activeMob.getType().getInternalName()) : null;
+            return ScriptEvent.runGenericCheck(matcher.substring("mythic_mob:".length()), activeMob.getType().getInternalName());
         });
         ItemTag.tagProcessor.custommatchers.add((itemTag, matcher) -> {
-            if (!matcher.startsWith("mythic_item")) {
+            if (!matcher.equals("mythic_item")) {
+                return null;
+            }
+            return MythicBukkit.inst().getItemManager().isMythicItem(itemTag.getItemStack());
+        });
+        ItemTag.tagProcessor.custommatchers.add((itemTag, matcher) -> {
+            if (!matcher.startsWith("mythic_item:")) {
                 return null;
             }
             String mythicType = MythicBukkit.inst().getItemManager().getMythicTypeFromItem(itemTag.getItemStack());
             if (mythicType == null) {
                 return false;
             }
-            int colonIndex = matcher.indexOf(':');
-            if (colonIndex == -1) {
-                return matcher.length() == "mythic_item".length() ? true : null;
-            }
-            return colonIndex == 11 ? ScriptEvent.runGenericCheck(matcher.substring(colonIndex + 1), mythicType) : null;
+            return ScriptEvent.runGenericCheck(matcher.substring("mythic_item:".length()), mythicType);
         });
 
         // <--[data]
@@ -208,7 +211,7 @@ public class MythicMobsBridge extends Bridge {
         return MythicBukkit.inst().getMobManager().getMythicMob(name).orElse(null);
     }
 
-    public static MobManager getMobManager() {
+    public static MobExecutor getMobManager() {
         return MythicBukkit.inst().getMobManager();
     }
 
