@@ -62,7 +62,7 @@ public class MythicMobsBridge extends Bridge {
             if (!matcher.equals("mythic_mob")) {
                 return null;
             }
-            return entityTag.getBukkitEntity() != null && getMobManager().isActiveMob(entityTag.getUUID());
+            return entityTag.getUUID() != null && getMobManager().isActiveMob(entityTag.getUUID());
         });
         EntityTag.tagProcessor.custommatchers.add((entityTag, matcher) -> {
             if (!matcher.startsWith("mythic_mob:")) {
