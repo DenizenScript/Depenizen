@@ -70,10 +70,7 @@ public class MythicMobsBridge extends Bridge {
             }
             Entity entity = entityTag.getBukkitEntity();
             ActiveMob activeMob = entity != null ? getActiveMob(entity) : null;
-            if (activeMob == null) {
-                return false;
-            }
-            return ScriptEvent.runGenericCheck(matcher.substring("mythic_mob:".length()), activeMob.getType().getInternalName());
+            return activeMob != null && ScriptEvent.runGenericCheck(matcher.substring("mythic_mob:".length()), activeMob.getType().getInternalName());
         });
         ItemTag.tagProcessor.custommatchers.add((itemTag, matcher) -> {
             if (!matcher.equals("mythic_item")) {
@@ -85,11 +82,8 @@ public class MythicMobsBridge extends Bridge {
             if (!matcher.startsWith("mythic_item:")) {
                 return null;
             }
-            String mythicType = MythicBukkit.inst().getItemManager().getMythicTypeFromItem(itemTag.getItemStack());
-            if (mythicType == null) {
-                return false;
-            }
-            return ScriptEvent.runGenericCheck(matcher.substring("mythic_item:".length()), mythicType);
+            String mythicID = MythicBukkit.inst().getItemManager().getMythicTypeFromItem(itemTag.getItemStack());
+            return mythicID != null && ScriptEvent.runGenericCheck(matcher.substring("mythic_item:".length()), mythicID);
         });
 
         // <--[data]
