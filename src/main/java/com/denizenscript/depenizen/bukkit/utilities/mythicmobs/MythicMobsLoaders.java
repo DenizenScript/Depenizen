@@ -22,12 +22,14 @@ public class MythicMobsLoaders implements Listener {
     // @group Depenizen Bridges
     // @plugin Depenizen, MythicMobs
     // @description
-    // In addition to the tags, commands, and events found by searching for "mythicmobs" throughout the meta documentation, 4 new Denizen matchers are added:
+    // In addition to the tags, commands, and events found by searching for "mythicmobs" throughout the meta documentation,
+    // Depenizen adds 4 new Denizen matchers, and additional features to Mythic Mobs: 2 Targeters, and a Condition.
+    //
+    // Depenizen provides additional <@link objecttype EntityTag> and <@link objecttype ItemTag> matchers to match MythicMobs mobs/items:
     // - "mythic_mob" plaintext EntityTag matcher, matches if the entity is a mythic mob.
-    // - "mythic_mob:<MythicMobID>" EntityTag matcher, matches if the entity is a mythic mob, and it's ID matches the advanced matcher specified.
+    // - "mythic_mob:<MythicMobID>" EntityTag matcher, matches if the entity is a mythic mob, and its ID matches the advanced matcher specified.
     // - "mythic_item" plaintext ItemTag matcher, matches if the item is a mythic item.
-    // - "mythic_item:<MythicItemID>" ItemTag matcher, matches if the item is a mythic item, and it's ID matches the advanced matcher specified.
-    // Depenizen also adds additional features to Mythic Mobs: 2 Targeters, and a Condition.
+    // - "mythic_item:<MythicItemID>" ItemTag matcher, matches if the item is a mythic item, and its ID matches the advanced matcher specified.
     //
     // Depenizen provides two additional targeters via the MythicMobs API: @DenizenEntity is an entity-based targeter, @DenizenLocation is a location-based targeter.
     // Both targeters can parse tags; they accept input of either an EntityTag or LocationTag respectively.

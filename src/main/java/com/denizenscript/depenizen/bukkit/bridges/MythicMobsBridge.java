@@ -59,31 +59,25 @@ public class MythicMobsBridge extends Bridge {
         new MythicMobsLoaders().RegisterEvents();
 
         EntityTag.tagProcessor.custommatchers.add((entityTag, matcher) -> {
-            if (!matcher.equals("mythic_mob")) {
-                return null;
+            if (matcher.equals("mythic_mob")) {
+                return entityTag.getUUID() != null && getMobManager().isActiveMob(entityTag.getUUID());
             }
-            return entityTag.getUUID() != null && getMobManager().isActiveMob(entityTag.getUUID());
-        });
-        EntityTag.tagProcessor.custommatchers.add((entityTag, matcher) -> {
-            if (!matcher.startsWith("mythic_mob:")) {
-                return null;
+            if (matcher.startsWith("mythic_mob:")) {
+                Entity entity = entityTag.getBukkitEntity();
+                ActiveMob activeMob = entity != null ? getActiveMob(entity) : null;
+                return activeMob != null && ScriptEvent.runGenericCheck(matcher.substring("mythic_mob:".length()), activeMob.getType().getInternalName());
             }
-            Entity entity = entityTag.getBukkitEntity();
-            ActiveMob activeMob = entity != null ? getActiveMob(entity) : null;
-            return activeMob != null && ScriptEvent.runGenericCheck(matcher.substring("mythic_mob:".length()), activeMob.getType().getInternalName());
+            return null;
         });
         ItemTag.tagProcessor.custommatchers.add((itemTag, matcher) -> {
-            if (!matcher.equals("mythic_item")) {
-                return null;
+            if (matcher.equals("mythic_item")) {
+                return MythicBukkit.inst().getItemManager().isMythicItem(itemTag.getItemStack());
             }
-            return MythicBukkit.inst().getItemManager().isMythicItem(itemTag.getItemStack());
-        });
-        ItemTag.tagProcessor.custommatchers.add((itemTag, matcher) -> {
-            if (!matcher.startsWith("mythic_item:")) {
-                return null;
+            if (matcher.startsWith("mythic_item:")) {
+                String mythicID = MythicBukkit.inst().getItemManager().getMythicTypeFromItem(itemTag.getItemStack());
+                return mythicID != null && ScriptEvent.runGenericCheck(matcher.substring("mythic_item:".length()), mythicID);
             }
-            String mythicID = MythicBukkit.inst().getItemManager().getMythicTypeFromItem(itemTag.getItemStack());
-            return mythicID != null && ScriptEvent.runGenericCheck(matcher.substring("mythic_item:".length()), mythicID);
+            return null;
         });
 
         // <--[data]
