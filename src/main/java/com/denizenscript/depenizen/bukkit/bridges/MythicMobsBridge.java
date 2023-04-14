@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -23,13 +24,13 @@ import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
-import io.lumine.mythic.api.mobs.MobManager;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.items.MythicItem;
 import io.lumine.mythic.core.mobs.ActiveMob;
+import io.lumine.mythic.core.mobs.MobExecutor;
 import io.lumine.mythic.core.skills.variables.*;
 import io.lumine.mythic.core.spawning.spawners.MythicSpawner;
 import io.lumine.mythic.core.spawning.spawners.SpawnerManager;
@@ -56,6 +57,39 @@ public class MythicMobsBridge extends Bridge {
         DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
+
+        EntityTag.tagProcessor.custommatchers.add((entityTag, matcher) -> {
+            if (matcher.equals("mythic_mob")) {
+                return entityTag.getUUID() != null && getMobManager().isActiveMob(entityTag.getUUID());
+            }
+            if (matcher.startsWith("mythic_mob:")) {
+                Entity entity = entityTag.getBukkitEntity();
+                ActiveMob activeMob = entity != null ? getActiveMob(entity) : null;
+                return activeMob != null && ScriptEvent.runGenericCheck(matcher.substring("mythic_mob:".length()), activeMob.getType().getInternalName());
+            }
+            return null;
+        });
+        ItemTag.tagProcessor.custommatchers.add((itemTag, matcher) -> {
+            if (matcher.equals("mythic_item")) {
+                return MythicBukkit.inst().getItemManager().isMythicItem(itemTag.getItemStack());
+            }
+            if (matcher.startsWith("mythic_item:")) {
+                String mythicID = MythicBukkit.inst().getItemManager().getMythicTypeFromItem(itemTag.getItemStack());
+                return mythicID != null && ScriptEvent.runGenericCheck(matcher.substring("mythic_item:".length()), mythicID);
+            }
+            return null;
+        });
+
+        // <--[data]
+        // @name not_switches
+        // @values mythic_mob, mythic_item
+        // -->
+        ScriptEvent.ScriptPath.notSwitches.add("mythic_mob");
+        EntityTag.specialEntityMatchables.add("mythic_mob");
+        BukkitScriptEvent.entityCouldMatchPrefixes.add("mythic_mob");
+        ScriptEvent.ScriptPath.notSwitches.add("mythic_item");
+        BukkitScriptEvent.itemCouldMatchableText.add("mythic_item");
+        BukkitScriptEvent.itemCouldMatchPrefixes.add("mythic_item");
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>
@@ -163,7 +197,7 @@ public class MythicMobsBridge extends Bridge {
         return MythicBukkit.inst().getMobManager().getMythicMob(name).orElse(null);
     }
 
-    public static MobManager getMobManager() {
+    public static MobExecutor getMobManager() {
         return MythicBukkit.inst().getMobManager();
     }
 
