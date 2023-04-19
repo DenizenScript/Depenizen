@@ -304,16 +304,17 @@ public class EssentialsPlayerProperties implements Property {
         // <--[mechanism]
         // @object PlayerTag
         // @name remove_essentials_home
-        // @input ElementTag(String)
+        // @input ElementTag
         // @plugin Depenizen, Essentials
         // @description
-        // Removes the specified player's Essentials home.
+        // Removes the player's Essentials home that matches the specified name.
         // -->
         if (mechanism.matches("remove_essentials_home")) {
             try {
                 getUser().delHome(mechanism.getValue().toString());
-            } catch (Exception e) {
-                Debug.echoError(e);
+            }
+            catch (Exception e) {
+                Debug.echoError("Invalid home name specified!");
             }
         }
 
