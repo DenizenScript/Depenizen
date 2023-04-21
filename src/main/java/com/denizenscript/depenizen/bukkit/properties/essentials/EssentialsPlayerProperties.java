@@ -314,7 +314,7 @@ public class EssentialsPlayerProperties implements Property {
                 getUser().delHome(mechanism.getValue().toString());
             }
             catch (Exception e) {
-                Debug.echoError("Invalid home name specified!");
+                mechanism.echoError("Invalid home name specified!");
             }
         }
 
