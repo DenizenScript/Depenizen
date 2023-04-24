@@ -311,10 +311,15 @@ public class EssentialsPlayerProperties implements Property {
         // -->
         if (mechanism.matches("remove_essentials_home")) {
             try {
-                getUser().delHome(mechanism.getValue().toString());
+                if (getUser().hasHome(mechanism.getValue().toString())) {
+                    getUser().delHome(mechanism.getValue().toString());
+                }
+                else {
+                    mechanism.echoError("Invalid home name specified!");
+                }
             }
             catch (Exception e) {
-                mechanism.echoError("Invalid home name specified!");
+                Debug.echoError(e);
             }
         }
 
