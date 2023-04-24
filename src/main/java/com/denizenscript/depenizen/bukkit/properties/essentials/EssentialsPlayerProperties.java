@@ -50,7 +50,7 @@ public class EssentialsPlayerProperties implements Property {
     };
 
     public static final String[] handledMechs = new String[] {
-            "is_afk", "god_mode", "is_muted", "socialspy", "vanish", "essentials_ignore"
+            "is_afk", "god_mode", "is_muted", "socialspy", "vanish", "essentials_ignore", "remove_essentials_home"
     };
 
     public EssentialsPlayerProperties(PlayerTag player) {
@@ -298,6 +298,28 @@ public class EssentialsPlayerProperties implements Property {
             getUser().setMuted(new ElementTag(split.get(0)).asBoolean());
             if (split.size() > 1) {
                 getUser().setMuteTimeout(System.currentTimeMillis() + DurationTag.valueOf(split.get(1), mechanism.context).getMillis());
+            }
+        }
+
+        // <--[mechanism]
+        // @object PlayerTag
+        // @name remove_essentials_home
+        // @input ElementTag
+        // @plugin Depenizen, Essentials
+        // @description
+        // Removes the player's Essentials home that matches the specified name.
+        // -->
+        if (mechanism.matches("remove_essentials_home")) {
+            try {
+                if (getUser().hasHome(mechanism.getValue().toString())) {
+                    getUser().delHome(mechanism.getValue().toString());
+                }
+                else {
+                    mechanism.echoError("Invalid home name specified!");
+                }
+            }
+            catch (Exception e) {
+                Debug.echoError(e);
             }
         }
 
