@@ -33,8 +33,8 @@ public class BungeeExecuteCommand extends AbstractCommand {
     // @Short Runs a command on the Bungee proxy server.
     //
     // @Description
-    // Runs a command on the Bungee proxy server.
-    // The command is run as the server by default, use 'as_player' to run the command as the linked player.
+    // Runs a command on the Bungee proxy server, works similarly to <@link command execute>.
+    // The command is run as the server by default, use 'as_player' to run it as the linked player.
     //
     // @Tags
     // None
