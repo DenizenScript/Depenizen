@@ -34,13 +34,13 @@ public class BungeeExecuteCommand extends AbstractCommand {
     //
     // @Description
     // Runs a command on the Bungee proxy server, works similarly to <@link command execute>.
-    // The command is run as the server by default, use 'as_player' to run it as the linked player.
+    // The command is run as the proxy by default, use 'as_player' to run it as the linked player.
     //
     // @Tags
     // None
     //
     // @Usage
-    // Use to run the 'alert' bungee command as the server.
+    // Use to run the 'alert' bungee command as the proxy.
     // - bungeeexecute "alert Network restart in 5 minutes..."
     // @Usage
     // Use to run the 'perms' bungee command as the linked player.
