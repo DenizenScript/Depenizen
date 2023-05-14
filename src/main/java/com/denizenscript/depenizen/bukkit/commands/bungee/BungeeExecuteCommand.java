@@ -62,7 +62,7 @@ public class BungeeExecuteCommand extends AbstractCommand {
             case AS_PLAYER -> {
                 PlayerTag player = Utilities.getEntryPlayer(scriptEntry);
                 if (player == null) {
-                    throw new InvalidArgumentsRuntimeException("Must have a linked player to use 'as_player'.");
+                    throw new InvalidArgumentsRuntimeException("Must have a linked player to execute 'as_player'.");
                 }
                 yield new ExecuteCommandPacketOut(command.asString(), player.getUUID());
             }
