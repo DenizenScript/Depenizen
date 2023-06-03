@@ -31,20 +31,11 @@ public class PartyTag implements ObjectTag {
     //
     // -->
 
-    public static PartyTag valueOf(String string) {
-        return PartyTag.valueOf(string, null);
-    }
-
     @Fetchable("party")
     public static PartyTag valueOf(String string, TagContext context) {
-        if (string == null) {
-            return null;
+        if (string.startsWith("party@")) {
+            string = string.substring("party@".length());
         }
-
-        ////////
-        // Match party name
-
-        string = string.replace("party@", "");
         Party party = PartyManager.getParty(string);
         if (party == null) {
             return null;

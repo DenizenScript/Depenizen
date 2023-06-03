@@ -32,7 +32,7 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
     // <context.action> Returns the name of the action being paid for, which can be any of the strings from: <@link url https://github.com/Zrips/Jobs/blob/master/src/main/java/com/gamingmesh/jobs/container/ActionType.java>.
     //
     // @Determine
-    // "EXP:" + ElementTag(Decimal) to change the amount of Jobs exp this action should provide.
+    // "EXP:<ElementTag(Decimal)>" to change the amount of Jobs exp this action should provide.
     //
     // @Plugin Depenizen, Jobs
     //

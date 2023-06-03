@@ -49,7 +49,7 @@ public class AreaShopPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private AreaShopPlayerProperties(PlayerTag player) {
+    public AreaShopPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

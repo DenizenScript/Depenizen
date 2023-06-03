@@ -40,7 +40,7 @@ public class AreaShopResoldScriptEvent extends BukkitScriptEvent implements List
     @Override
     public boolean matches(ScriptPath path) {
         String shopName = path.eventArgLowerAt(2).replace("areashop@", "");
-        if (!shopName.equals("shop") && !areaShop.equals(AreaShopTag.valueOf(shopName))) {
+        if (!shopName.equals("shop") && !areaShop.equals(AreaShopTag.valueOf(shopName, getTagContext(path)))) {
             return false;
         }
         return super.matches(path);

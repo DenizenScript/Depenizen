@@ -41,10 +41,6 @@ public class ResidenceTag implements ObjectTag {
     // Residence name: matches if the residence is named matches the input, using advanced matchers.
     // -->
 
-    public static ResidenceTag valueOf(String string) {
-        return ResidenceTag.valueOf(string, null);
-    }
-
     @Fetchable("residence")
     public static ResidenceTag valueOf(String string, TagContext context) {
         if (string == null) {

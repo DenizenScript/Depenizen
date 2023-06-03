@@ -28,7 +28,7 @@ public class PlayerCreatesTownScriptEvent extends BukkitScriptEvent implements L
     // <context.cuboid> Returns the cuboid that will be claimed by the town.
     //
     // @Determine
-    // "CANCEL_MESSAGE:" + ElementTag to set the message Towny sends when cancelled.
+    // "CANCEL_MESSAGE:<ElementTag>" to set the message Towny sends when cancelled.
     //
     // @Plugin Depenizen, Towny
     //

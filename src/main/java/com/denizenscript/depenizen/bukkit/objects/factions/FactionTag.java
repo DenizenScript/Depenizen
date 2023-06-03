@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.objects.factions;
 
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.massivecraft.factions.entity.*;
 import com.massivecraft.massivecore.money.Money;
 import com.massivecraft.massivecore.ps.PS;
@@ -36,10 +37,6 @@ public class FactionTag implements ObjectTag {
     //   OBJECT FETCHER
     /////////////////
 
-    public static FactionTag valueOf(String string) {
-        return valueOf(string, null);
-    }
-
     @Fetchable("faction")
     public static FactionTag valueOf(String string, TagContext context) {
         if (string == null) {
@@ -59,7 +56,7 @@ public class FactionTag implements ObjectTag {
     }
 
     public static boolean matches(String arg) {
-        if (valueOf(arg) != null) {
+        if (valueOf(arg, CoreUtilities.noDebugContext) != null) {
             return true;
         }
 
@@ -266,7 +263,7 @@ public class FactionTag implements ObjectTag {
         // Returns the current relation between the faction and another faction.
         // -->
         else if (attribute.startsWith("relation")) {
-            FactionTag to = valueOf(attribute.getParam());
+            FactionTag to = valueOf(attribute.getParam(), attribute.context);
             if (to != null) {
                 return new ElementTag(faction.getRelationTo(to.getFaction()).toString())
                         .getObjectAttribute(attribute.fulfill(1));

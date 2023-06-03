@@ -32,8 +32,8 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
     // <context.action> Returns the name of the action being paid for, which can be any of the strings from: <@link url https://github.com/Zrips/Jobs/blob/master/src/main/java/com/gamingmesh/jobs/container/ActionType.java>.
     //
     // @Determine
-    // "MONEY:" + ElementTag(Decimal) to change the amount of money this action should provide.
-    // "POINTS:" + ElementTag(Decimal) to change the amount of Jobs points this action should provide.
+    // "MONEY:<ElementTag(Decimal)>" to change the amount of money this action should provide.
+    // "POINTS:<ElementTag(Decimal)>" to change the amount of Jobs points this action should provide.
     //
     // @Plugin Depenizen, Jobs
     //

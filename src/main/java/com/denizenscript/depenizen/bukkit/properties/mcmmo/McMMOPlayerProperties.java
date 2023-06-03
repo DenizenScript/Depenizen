@@ -48,7 +48,7 @@ public class McMMOPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private McMMOPlayerProperties(PlayerTag player) {
+    public McMMOPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

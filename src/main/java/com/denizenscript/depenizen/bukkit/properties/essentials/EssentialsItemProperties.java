@@ -45,7 +45,7 @@ public class EssentialsItemProperties implements Property {
             "worth"
     };
 
-    private EssentialsItemProperties(ItemTag item) {
+    public EssentialsItemProperties(ItemTag item) {
         this.item = item;
     }
 

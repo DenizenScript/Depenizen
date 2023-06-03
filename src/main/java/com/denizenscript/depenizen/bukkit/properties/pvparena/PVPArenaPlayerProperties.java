@@ -47,7 +47,7 @@ public class PVPArenaPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private PVPArenaPlayerProperties(PlayerTag player) {
+    public PVPArenaPlayerProperties(PlayerTag player) {
         this.player = ArenaPlayer.parsePlayer(player.getName());
     }
 

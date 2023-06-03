@@ -32,16 +32,11 @@ public class LibsDisguiseTag implements ObjectTag {
     //   OBJECT FETCHER
     /////////////////
 
-    public static LibsDisguiseTag valueOf(String string) {
-        return valueOf(string, null);
-    }
-
     @Fetchable("libsdisguise")
     public static LibsDisguiseTag valueOf(String string, TagContext context) {
-        if (string == null) {
-            return null;
+        if (string.startsWith("libsdisguise@")) {
+            string = string.substring("libsdisguise@".length());
         }
-        string = string.replace("libsdisguise@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');
             return new LibsDisguiseTag(DisguiseAPI.getCustomDisguise(split.get(0)));

@@ -40,20 +40,11 @@ public class PlotSquaredPlotTag implements ObjectTag {
     //   OBJECT FETCHER
     /////////////////
 
-    public static PlotSquaredPlotTag valueOf(String string) {
-        return valueOf(string, null);
-    }
-
     @Fetchable("plotsquaredplot")
     public static PlotSquaredPlotTag valueOf(String string, TagContext context) {
-        if (string == null) {
-            return null;
+        if (string.startsWith("plotsquaredplot@")) {
+            string = string.substring("plotsquaredplot@".length());
         }
-
-        ////////
-        // Match plotsquaredplot name
-
-        string = string.replace("plotsquaredplot@", "");
         try {
             List<String> split = CoreUtilities.split(string, ',');
             if (split.size() < 3) {

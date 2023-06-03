@@ -22,8 +22,14 @@ public class MythicMobsLoaders implements Listener {
     // @group Depenizen Bridges
     // @plugin Depenizen, MythicMobs
     // @description
-    // In addition to the the tags, commands, and events found by searching for "mythicmobs" throughout the meta documentation,
-    // Depenizen adds additional features to Mythic Mobs: 2 Targeters, and a Condition.
+    // In addition to the tags, commands, and events found by searching for "mythicmobs" throughout the meta documentation,
+    // Depenizen adds 4 new Denizen matchers, and additional features to Mythic Mobs: 2 Targeters, and a Condition.
+    //
+    // Depenizen provides additional <@link objecttype EntityTag> and <@link objecttype ItemTag> matchers to match MythicMobs mobs/items:
+    // - "mythic_mob" plaintext EntityTag matcher, matches if the entity is a mythic mob.
+    // - "mythic_mob:<MythicMobID>" EntityTag matcher, matches if the entity is a mythic mob, and its ID matches the advanced matcher specified.
+    // - "mythic_item" plaintext ItemTag matcher, matches if the item is a mythic item.
+    // - "mythic_item:<MythicItemID>" ItemTag matcher, matches if the item is a mythic item, and its ID matches the advanced matcher specified.
     //
     // Depenizen provides two additional targeters via the MythicMobs API: @DenizenEntity is an entity-based targeter, @DenizenLocation is a location-based targeter.
     // Both targeters can parse tags; they accept input of either an EntityTag or LocationTag respectively.
@@ -34,7 +40,7 @@ public class MythicMobsLoaders implements Listener {
     // The syntax for calling a Denizen tag as a condition is DenizenCondition.
     // The tag should return an ElementTag of a boolean value (true or false).
     // <context.location> is available for location-based checks,
-    // <context.entity> is available for for entity- and caster-based checks,
+    // <context.entity> is available for entity-based and caster-based checks,
     // and <context.target> is available for target-based checks.
     // NOTE: TriggerConditions are NOT currently supported.
     //

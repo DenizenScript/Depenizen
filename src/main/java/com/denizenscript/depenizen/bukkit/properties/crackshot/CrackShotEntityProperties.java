@@ -22,7 +22,7 @@ public class CrackShotEntityProperties implements Property {
 
     EntityTag entity;
 
-    private CrackShotEntityProperties(EntityTag entity) {
+    public CrackShotEntityProperties(EntityTag entity) {
         this.entity = entity;
     }
 

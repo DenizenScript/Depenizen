@@ -42,12 +42,12 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     // <context.spell_reagent_items> returns a ListTag of ItemTags of reagent cost.
     //
     // @Determine
-    // "POWER:" + ElementTag(Number) to change the power of the spell.
-    // "CAST_TIME:" + ElementTag(Decimal) to change the cast time.
-    // "COOLDOWN:" + ElementTag(Number) to change the cooldown.
-    // "REAGENT:<TYPE>:" + ElementTag(Number) to change the reagent cost of the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
-    // "REAGANT:VARIABLE:<NAME>:" + ElementTag(Decimal) to change the reagant cost for the given variable name.
-    // "REAGENT:ITEMS:" + ListTag(ItemTag) to change the reagent item cost.
+    // "POWER:<ElementTag(Number)>" to change the power of the spell.
+    // "CAST_TIME:<ElementTag(Decimal)>" to change the cast time.
+    // "COOLDOWN:<ElementTag(Number)>" to change the cooldown.
+    // "REAGENT:<TYPE>:<ElementTag(Number)>" to change the reagent cost of the given type. Valid types are: mana, health, hunger, experience, levels, durability, money
+    // "REAGANT:VARIABLE:<NAME>:<ElementTag(Decimal)>" to change the reagant cost for the given variable name.
+    // "REAGENT:ITEMS:<ListTag(ItemTag)>" to change the reagent item cost.
     // "CLEAR_REAGENTS" to clear away all reagent costs.
     //
     // @Plugin Depenizen, MagicSpells

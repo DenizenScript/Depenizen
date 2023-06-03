@@ -134,7 +134,7 @@ public class TownyLocationProperties {
         });
     }
 
-    private static PlayerTag getResidentAtLocation(LocationTag location) throws NotRegisteredException {
+    public static PlayerTag getResidentAtLocation(LocationTag location) throws NotRegisteredException {
         TownBlock block = TownyAPI.getInstance().getTownBlock(location);
         if (block == null) {
             return null;

@@ -40,7 +40,7 @@ public class NoteBlockAPIPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private NoteBlockAPIPlayerProperties(PlayerTag player) {
+    public NoteBlockAPIPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

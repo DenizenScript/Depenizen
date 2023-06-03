@@ -30,10 +30,6 @@ public class AreaShopTag implements ObjectTag {
     //
     // -->
 
-    public static AreaShopTag valueOf(String string) {
-        return AreaShopTag.valueOf(string, null);
-    }
-
     @Fetchable("areashop")
     public static AreaShopTag valueOf(String string, TagContext context) {
         if (string == null) {

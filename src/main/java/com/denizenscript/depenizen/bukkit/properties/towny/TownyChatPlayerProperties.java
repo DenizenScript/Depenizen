@@ -48,7 +48,7 @@ public class TownyChatPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private TownyChatPlayerProperties(PlayerTag player) {
+    public TownyChatPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

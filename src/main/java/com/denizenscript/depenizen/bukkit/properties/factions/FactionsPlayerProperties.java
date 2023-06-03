@@ -47,7 +47,7 @@ public class FactionsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private FactionsPlayerProperties(PlayerTag object) {
+    public FactionsPlayerProperties(PlayerTag object) {
         player = object;
     }
 

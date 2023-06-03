@@ -5,6 +5,7 @@ import com.denizenscript.denizencore.flags.AbstractFlagTracker;
 import com.denizenscript.denizencore.flags.FlaggableObject;
 import com.denizenscript.denizencore.flags.RedirectionFlagTracker;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.TownyUniverse;
@@ -45,16 +46,11 @@ public class NationTag implements ObjectTag, FlaggableObject {
     //   OBJECT FETCHER
     /////////////////
 
-    public static NationTag valueOf(String string) {
-        return valueOf(string, null);
-    }
-
     @Fetchable("nation")
     public static NationTag valueOf(String string, TagContext context) {
-        if (string == null) {
-            return null;
+        if (string.startsWith("nation@")) {
+            string = string.substring("nation@".length());
         }
-        string = string.replace("nation@", "");
         if (string.length() == 36 && string.indexOf('-') >= 0) {
             try {
                 UUID uuid = UUID.fromString(string);
@@ -80,7 +76,7 @@ public class NationTag implements ObjectTag, FlaggableObject {
         if (arg.startsWith("nation@")) {
             return true;
         }
-        return valueOf(arg) != null;
+        return valueOf(arg, CoreUtilities.noDebugContext) != null;
     }
 
     /////////////////////

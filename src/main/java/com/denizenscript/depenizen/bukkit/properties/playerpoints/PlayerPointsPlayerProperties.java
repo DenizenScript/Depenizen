@@ -41,7 +41,7 @@ public class PlayerPointsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private PlayerPointsPlayerProperties(PlayerTag player) {
+    public PlayerPointsPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

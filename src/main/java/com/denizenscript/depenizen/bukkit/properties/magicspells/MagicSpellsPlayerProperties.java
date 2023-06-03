@@ -49,11 +49,11 @@ public class MagicSpellsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private MagicSpellsPlayerProperties(PlayerTag player) {
+    public MagicSpellsPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 
-    private PlayerTag player;
+    public PlayerTag player;
 
     @Override
     public ObjectTag getObjectAttribute(Attribute attribute) {

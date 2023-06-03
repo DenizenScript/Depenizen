@@ -44,7 +44,7 @@ public class QuestsPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private QuestsPlayerProperties(PlayerTag player) {
+    public QuestsPlayerProperties(PlayerTag player) {
         this.player = player;
     }
 

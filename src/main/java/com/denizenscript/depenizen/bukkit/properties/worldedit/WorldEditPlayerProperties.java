@@ -63,7 +63,7 @@ public class WorldEditPlayerProperties implements Property {
             "we_selection"
     };
 
-    private WorldEditPlayerProperties(PlayerTag player) {
+    public WorldEditPlayerProperties(PlayerTag player) {
         this.player = player.getPlayerEntity();
     }
 

@@ -39,7 +39,7 @@ public class PlayerExitsTownScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public boolean matches(ScriptPath path) {
         String name = path.eventArgLowerAt(3);
-        if (!name.equals("town") && !town.equals(TownTag.valueOf(name))) {
+        if (!name.equals("town") && !town.equals(TownTag.valueOf(name, getTagContext(path)))) {
             return false;
         }
         return super.matches(path);

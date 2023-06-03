@@ -56,7 +56,7 @@ public class WorldGuardPlayerProperties implements Property {
     public static final String[] handledMechs = new String[] {
     }; // None
 
-    private WorldGuardPlayerProperties(PlayerTag player) {
+    public WorldGuardPlayerProperties(PlayerTag player) {
         this.player = player.getPlayerEntity();
     }
 
