@@ -48,13 +48,13 @@ public class ClientizenBridge implements Listener {
         DenizenCore.commandRegistry.registerCommand(ClientRunCommand.class);
 
         // <--[tag]
-        // @attribute <PlayerTag.is_clientizen>
+        // @attribute <PlayerTag.has_clientizen>
         // @returns ElementTag(Boolean)
         // @group Clientizen
         // @description
         // Returns whether the player has Clientizen running on their client.
         // -->
-        PlayerTag.registerOnlineOnlyTag(ElementTag.class, "is_clientizen", (attribute, object) -> {
+        PlayerTag.registerOnlineOnlyTag(ElementTag.class, "has_clientizen", (attribute, object) -> {
             return new ElementTag(clientizenPlayers.contains(object.getUUID()));
         });
         Debug.log("Clientizen support enabled!");
