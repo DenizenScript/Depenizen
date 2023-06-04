@@ -43,6 +43,13 @@ public class ClientizenBridge implements Listener {
         ScriptEvent.registerScriptEvent(ClientizenEventScriptEvent.class);
         NetworkManager.registerInChannel(Channels.RECEIVE_EVENT, ClientizenEventScriptEvent.instance::tryFire);
         DenizenCore.commandRegistry.registerCommand(ClientRunCommand.class);
+
+        // <--[tag]
+        // @attribute <PlayerTag.is_clientizen>
+        // @returns ElementTag(Boolean)
+        // @description
+        // Returns whether the player has Clientizen running on their client.
+        // -->
         PlayerTag.registerOnlineOnlyTag(ElementTag.class, "is_clientizen", (attribute, object) -> {
             return new ElementTag(clientizenPlayers.contains(object.getUUID()));
         });

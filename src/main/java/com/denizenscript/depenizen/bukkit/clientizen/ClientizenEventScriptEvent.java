@@ -15,6 +15,30 @@ import java.util.Map;
 
 public class ClientizenEventScriptEvent extends ScriptEvent {
 
+    // <--[event]
+    // @Events
+    // clientizen event
+    //
+    // @Group Clientizen
+    //
+    // @Switch id:<id> to only process the event if the identifier received from the client matches the specified matcher.
+    //
+    // @Triggers When the server receives an event from a clientizen client.
+    //
+    // @Context
+    // <context.id> returns an ElementTag of the event identifier received from the client.
+    // <context.data> returns the context MapTag received from the client.
+    // <context.(key)> returns the value of the input key in the context map, if available.
+    //
+    // @Player Always.
+    //
+    // @Example
+    // # Use to listen to clientizen events with the id 'my_id' and give the player that sent it a free diamond.
+    // on clientizen event id:my_id:
+    // - give diamond
+    //
+    // -->
+
     public static ClientizenEventScriptEvent instance;
 
     public ClientizenEventScriptEvent() {

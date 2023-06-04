@@ -21,6 +21,42 @@ import java.util.Map;
 
 public class ClientRunCommand extends AbstractCommand {
 
+    // <--[command]
+    // @Name Run
+    // @Syntax clientrun [<script>] (path:<name>) (def.<name>:<value>) (defmap:<map>)
+    // @Required 1
+    // @Maximum -1
+    // @Short Runs a client script on a Clientizen client.
+    // @Group Clientizen
+    //
+    // @Description
+    // Runs a client script on the linked player's client, if they are using Clientizen.
+    //
+    // You must specify a client script name to run.
+    //
+    // Optionally, use the "path:" argument to choose a specific sub-path within a script.
+    //
+    // Optionally, use "def.<name>:<value>" to pass one or more definitions to the client.
+    // Alternately, use "defmap:<map>" to specify definitions to pass as a MapTag, where the keys will be definition names and the values will of course be definition values.
+    //
+    // @Usage
+    // Use to run a task script named 'MyTask' on the linked player's client.
+    // - clientrun MyTask
+    //
+    // @Usage
+    // Use to run the sub-script under 'sub_path' in a task script named 'MyTask' on the linked player's client.
+    // - clientrun MyTask path:sub_path
+    //
+    // @Usage
+    // Use to run 'MyTask' on the linked player's client and pass 2 definitions to it.
+    // - clientrun MyTask def.amount:42 def.location:<server.flag[spawn_location]>
+    //
+    // @Usage
+    // Use to run 'MyTask' on a specific Clientizen player's client.
+    // - clientrun MyTask player:<[clientizenPlayer]>
+    //
+    // -->
+
     public ClientRunCommand() {
         setName("clientrun");
         setSyntax("clientrun [<script>] (path:<name>) (def.<name>:<value>) (defmap:<map>)");
