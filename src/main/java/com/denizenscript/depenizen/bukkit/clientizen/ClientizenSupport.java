@@ -26,32 +26,26 @@ import java.util.*;
 
 public class ClientizenSupport implements Listener {
 
-    public static ClientizenSupport instance;
-
     public static final Map<String, String> clientizenScripts = new HashMap<>();
     public static DataSerializer scriptsSerializer;
     public static final Set<UUID> clientizenPlayers = new HashSet<>();
 
-    public static File clientizenFolder;
+    public static final File clientizenFolder = new File(Denizen.instance.getDataFolder(), "client-scripts");
 
     public static void init() {
-        instance = new ClientizenSupport();
-        // Create the client scripts folder
-        clientizenFolder = new File(Denizen.instance.getDataFolder(), "client-scripts");
+        Bukkit.getPluginManager().registerEvents(new ClientizenSupport(), Depenizen.instance);
+        // Setup client scripts folder
         clientizenFolder.mkdir();
-        Bukkit.getPluginManager().registerEvents(instance, Depenizen.instance);
-        // A tag for testing
+        // Networking
+        NetworkManager.init();
+        NetworkManager.registerInChannel(Channels.RECEIVE_CONFIRM, (player, message) -> acceptNewPlayer(player));
+        // Scripts features
+        ScriptEvent.registerScriptEvent(ClientizenEventScriptEvent.class);
+        NetworkManager.registerInChannel(Channels.RECEIVE_EVENT, ClientizenEventScriptEvent.instance::tryFire);
+        DenizenCore.commandRegistry.registerCommand(ClientRunCommand.class);
         PlayerTag.registerOnlineOnlyTag(ElementTag.class, "is_clientizen", (attribute, object) -> {
             return new ElementTag(clientizenPlayers.contains(object.getUUID()));
         });
-        // Initialize the network manager and listen to Clientizen clients sending confirmation packets
-        NetworkManager.init();
-        NetworkManager.registerInChannel(Channels.RECEIVE_CONFIRM, (player, message) -> acceptNewPlayer(player));
-        // Register ClientizenEvent
-        ScriptEvent.registerScriptEvent(ClientizenEventScriptEvent.class);
-        NetworkManager.registerInChannel(Channels.RECEIVE_EVENT, (player, message) -> ClientizenEventScriptEvent.instance.tryFire(player, message));
-        // Register ClientRunCommand
-        DenizenCore.commandRegistry.registerCommand(ClientRunCommand.class);
         Debug.log("Clientizen support enabled!");
     }
 
@@ -63,6 +57,7 @@ public class ClientizenSupport implements Listener {
         }, 20);
     }
 
+    // TODO: load client scripts async, same as regular ones
     public static void reloadClientScripts() {
         clientizenScripts.clear();
         for (File file : CoreUtilities.listDScriptFiles(clientizenFolder)) {

@@ -34,7 +34,6 @@ public class ClientRunCommand extends AbstractCommand {
         if (player == null || !ClientizenSupport.clientizenPlayers.contains(player.getUUID())) {
             throw new InvalidArgumentsException("No valid clientizen player found.");
         }
-        scriptEntry.addObject("player", player);
         MapTag defMap = new MapTag();
         for (Argument arg : scriptEntry) {
             if (arg.matchesPrefix("defmap")
@@ -46,8 +45,9 @@ public class ClientRunCommand extends AbstractCommand {
                 defMap.putObject(arg.getPrefix().getRawValue().substring("def.".length()), arg.object);
             }
             else if (!arg.hasPrefix() && arg.getRawValue().startsWith("def.") && arg.getRawValue().contains(":")) {
-                int colon = arg.getRawValue().indexOf(':');
-                defMap.putObject(arg.getRawValue().substring("def.".length(), colon), new ElementTag(arg.getRawValue().substring(colon + 1)));
+                String rawValue = arg.getRawValue();
+                int colon = rawValue.indexOf(':');
+                defMap.putObject(rawValue.substring("def.".length(), colon), new ElementTag(rawValue.substring(colon + 1)));
             }
             else if (!scriptEntry.hasObject("path")
                     && arg.matchesPrefix("path")) {
@@ -72,15 +72,15 @@ public class ClientRunCommand extends AbstractCommand {
     public void execute(ScriptEntry scriptEntry) {
         String path = (String) scriptEntry.getObject("path");
         ElementTag script = scriptEntry.getElement("script");
-        MapTag defMap = scriptEntry.getObjectTag("def_map");
-        PlayerTag clientizenPlayer = scriptEntry.getObjectTag("player");
+        MapTag definitions = scriptEntry.getObjectTag("def_map");
+        PlayerTag clientizenPlayer = Utilities.getEntryPlayer(scriptEntry);
         if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), script, clientizenPlayer, db("path", path), defMap);
+            Debug.report(scriptEntry, getName(), script, clientizenPlayer, path, definitions);
         }
         Map<String, String> stringDefMap = Map.of();
-        if (defMap != null) {
-            stringDefMap = new HashMap<>(defMap.map.size());
-            for (Map.Entry<StringHolder, ObjectTag> entry : defMap.map.entrySet()) {
+        if (definitions != null) {
+            stringDefMap = new HashMap<>(definitions.map.size());
+            for (Map.Entry<StringHolder, ObjectTag> entry : definitions.map.entrySet()) {
                 stringDefMap.put(entry.getKey().str, entry.getValue().savable());
             }
         }

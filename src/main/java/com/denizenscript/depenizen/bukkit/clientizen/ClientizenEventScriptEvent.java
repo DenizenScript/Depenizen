@@ -15,13 +15,13 @@ import java.util.Map;
 
 public class ClientizenEventScriptEvent extends ScriptEvent {
 
+    public static ClientizenEventScriptEvent instance;
+
     public ClientizenEventScriptEvent() {
         instance = this;
         registerCouldMatcher("clientizen event");
         registerSwitches("id");
     }
-
-    public static ClientizenEventScriptEvent instance;
 
     boolean enabled = false;
 
@@ -39,15 +39,14 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "id": return new ElementTag(id);
-            case "data": return contextMap;
-        }
-        ObjectTag value = contextMap.getObject(name);
-        if (value != null) {
-            return value;
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "id" -> new ElementTag(id);
+            case "data" -> contextMap;
+            default -> {
+                ObjectTag value = contextMap.getObject(name);
+                yield value != null ? value : super.getContext(name);
+            }
+        };
     }
 
     public void tryFire(Player source, DataDeserializer data) {
