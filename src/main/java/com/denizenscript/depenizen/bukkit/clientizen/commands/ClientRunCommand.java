@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.clientizen.commands;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
+import com.denizenscript.denizencore.exceptions.InvalidArgumentsRuntimeException;
 import com.denizenscript.denizencore.objects.Argument;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
@@ -66,10 +67,6 @@ public class ClientRunCommand extends AbstractCommand {
 
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        PlayerTag player = Utilities.getEntryPlayer(scriptEntry);
-        if (player == null || !ClientizenBridge.clientizenPlayers.contains(player.getUUID())) {
-            throw new InvalidArgumentsException("No valid clientizen player found.");
-        }
         MapTag defMap = new MapTag();
         for (Argument arg : scriptEntry) {
             if (arg.matchesPrefix("defmap")
@@ -106,10 +103,16 @@ public class ClientRunCommand extends AbstractCommand {
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
+        PlayerTag clientizenPlayer = Utilities.getEntryPlayer(scriptEntry);
+        if (clientizenPlayer == null) {
+            throw new InvalidArgumentsRuntimeException("Must have a linked player who's client the script will be ran on, but none was found.");
+        }
+        if (!ClientizenBridge.clientizenPlayers.contains(clientizenPlayer.getUUID())) {
+            throw new InvalidArgumentsRuntimeException("Player found, but isn't running Clientizen.");
+        }
         String path = (String) scriptEntry.getObject("path");
         ElementTag script = scriptEntry.getElement("script");
         MapTag definitions = scriptEntry.getObjectTag("def_map");
-        PlayerTag clientizenPlayer = Utilities.getEntryPlayer(scriptEntry);
         if (scriptEntry.dbCallShouldDebug()) {
             Debug.report(scriptEntry, getName(), script, clientizenPlayer, path, definitions);
         }
