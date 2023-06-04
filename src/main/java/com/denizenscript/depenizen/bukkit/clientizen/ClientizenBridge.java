@@ -50,6 +50,7 @@ public class ClientizenBridge implements Listener {
         // <--[tag]
         // @attribute <PlayerTag.is_clientizen>
         // @returns ElementTag(Boolean)
+        // @group Clientizen
         // @description
         // Returns whether the player has Clientizen running on their client.
         // -->
