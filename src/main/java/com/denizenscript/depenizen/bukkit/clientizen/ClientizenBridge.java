@@ -27,11 +27,11 @@ import java.util.*;
 
 public class ClientizenBridge implements Listener {
 
-    public static final Map<String, String> clientizenScripts = new HashMap<>();
+    public static Map<String, String> clientizenScripts = new HashMap<>();
     public static DataSerializer scriptsSerializer;
-    public static final Set<UUID> clientizenPlayers = new HashSet<>();
+    public static Set<UUID> clientizenPlayers = new HashSet<>();
 
-    public static final File clientizenFolder = new File(Denizen.instance.getDataFolder(), "client-scripts");
+    public static File clientizenFolder = new File(Denizen.instance.getDataFolder(), "client-scripts");
 
     public static void init() {
         Bukkit.getPluginManager().registerEvents(new ClientizenBridge(), Depenizen.instance);
