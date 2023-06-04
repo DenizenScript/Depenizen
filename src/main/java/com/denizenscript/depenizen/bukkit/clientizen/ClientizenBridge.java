@@ -7,6 +7,7 @@ import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptHelper;
+import com.denizenscript.denizencore.utilities.CoreConfiguration;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
@@ -78,7 +79,9 @@ public class ClientizenBridge implements Listener {
             try (FileInputStream stream = new FileInputStream(file)) {
                 // TODO: clear comments server-side
                 clientizenScripts.put(name, ScriptHelper.convertStreamToString(stream));
-                Debug.log("Loaded client script: " + name);
+                if (CoreConfiguration.debugLoadingInfo) {
+                    Debug.log("Loaded client script: " + name);
+                }
             }
             catch (Exception e) {
                 Debug.echoError("Failed to load client script file '" + name + "', see below stack trace:");
