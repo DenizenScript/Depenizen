@@ -42,7 +42,7 @@ public class DataSerializer {
         return this;
     }
 
-    public DataSerializer writeBytes(@NotNull byte[] bytes) {
+    public DataSerializer writeBytes(byte[] bytes) {
         try {
             output.write(bytes);
         }
@@ -52,15 +52,15 @@ public class DataSerializer {
         return this;
     }
 
-    public DataSerializer writeByteArray(@NotNull byte[] bytes) {
+    public DataSerializer writeByteArray(byte[] bytes) {
         return writeInt(bytes.length).writeBytes(bytes);
     }
 
-    public DataSerializer writeString(@NotNull String s) {
+    public DataSerializer writeString(String s) {
         return writeByteArray(s.getBytes(StandardCharsets.UTF_8));
     }
 
-    public DataSerializer writeIntList(@NotNull Collection<Integer> ints) {
+    public DataSerializer writeIntList(Collection<Integer> ints) {
         writeInt(ints.size());
         for (Integer i : ints) {
             writeInt(i);
@@ -68,7 +68,7 @@ public class DataSerializer {
         return this;
     }
 
-    public DataSerializer writeStringList(@NotNull Collection<String> strings) {
+    public DataSerializer writeStringList(Collection<String> strings) {
         writeInt(strings.size());
         for (String s : strings) {
             writeString(s);
@@ -76,7 +76,7 @@ public class DataSerializer {
         return this;
     }
 
-    public DataSerializer writeStringListMap(@NotNull Map<String, Collection<String>> map) {
+    public DataSerializer writeStringListMap(Map<String, Collection<String>> map) {
         writeInt(map.size());
         for (Map.Entry<String, Collection<String>> entry : map.entrySet()) {
             writeString(entry.getKey());
