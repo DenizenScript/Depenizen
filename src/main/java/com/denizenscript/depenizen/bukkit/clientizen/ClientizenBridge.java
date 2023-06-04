@@ -62,10 +62,7 @@ public class ClientizenBridge implements Listener {
 
     public static void acceptNewPlayer(Player player) {
         clientizenPlayers.add(player.getUniqueId());
-        // Wait a little to make sure the client is ready to receive packets
-        Bukkit.getScheduler().runTaskLater(Depenizen.instance, () -> {
-            NetworkManager.send(Channels.SET_SCRIPTS, player, scriptsSerializer);
-        }, 20);
+        NetworkManager.send(Channels.SET_SCRIPTS, player, scriptsSerializer);
     }
 
     // TODO: load client scripts async, same as regular ones
