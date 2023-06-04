@@ -41,7 +41,7 @@ public class Depenizen extends JavaPlugin {
             Debug.echoError("Cannot load Depenizen-Bungee bridge: Internal exception was thrown!");
             Debug.echoError(ex);
         }
-        ClientizenSupport.init();
+        checkLoadClientizenBridge();
         DebugSubmitter.debugHeaderLines.add(() -> "Depenizen Bridges loaded (" + loadedBridges.size() + "): " + ChatColor.DARK_GREEN + String.join(", ", loadedBridges.keySet()));
         Debug.log("Depenizen loaded! <A>" + loadedBridges.size() + "<W> plugin bridge(s) loaded (of <A>" + allBridges.size() + "<W> available)");
     }
@@ -62,6 +62,12 @@ public class Depenizen extends JavaPlugin {
         }
         new BungeeBridge().init(bungeeServer, getConfig().getInt("Bungee server port", 25565));
         Debug.log("Loaded bungee bridge!");
+    }
+
+    public void checkLoadClientizenBridge() {
+        if (getConfig().getBoolean("Clientizen.enabled")) {
+            ClientizenSupport.init();
+        }
     }
 
     public void loadBridge(String name, Supplier<Bridge> bridgeSupplier) {
