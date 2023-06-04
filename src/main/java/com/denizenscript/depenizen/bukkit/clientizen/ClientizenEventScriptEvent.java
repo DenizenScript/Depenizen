@@ -29,8 +29,8 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
     //
     // @Context
     // <context.id> returns an ElementTag of the event identifier received from the client.
-    // <context.data> returns the context MapTag received from the client.
-    // <context.(key)> returns the value of the input key in the context map, if available.
+    // <context.data> returns the context MapTag received from the client as a map of keys to ElementTags.
+    // <context.(key)> returns the ElementTag value of the input key in the context map, if available.
     //
     // @Player Always.
     //
@@ -69,7 +69,7 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
             case "id" -> new ElementTag(id);
             case "data" -> contextMap;
             default -> {
-                ObjectTag value = contextMap.getObject(name);
+                ElementTag value = contextMap.getElement(name);
                 yield value != null ? value : super.getContext(name);
             }
         };
@@ -83,7 +83,7 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
         id = data.readString();
         contextMap = new MapTag();
         for (Map.Entry<String, String> entry : data.readStringMap().entrySet()) {
-            contextMap.putObject(entry.getKey(), ObjectFetcher.pickObjectFor(entry.getValue(), CoreUtilities.noDebugContext));
+            contextMap.putObject(entry.getKey(), new ElementTag(entry.getValue()));
         }
         fire();
     }
