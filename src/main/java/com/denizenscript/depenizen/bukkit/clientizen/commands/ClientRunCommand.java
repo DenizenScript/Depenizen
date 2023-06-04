@@ -11,7 +11,7 @@ import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.text.StringHolder;
-import com.denizenscript.depenizen.bukkit.clientizen.ClientizenSupport;
+import com.denizenscript.depenizen.bukkit.clientizen.ClientizenBridge;
 import com.denizenscript.depenizen.bukkit.clientizen.network.Channels;
 import com.denizenscript.depenizen.bukkit.clientizen.network.DataSerializer;
 import com.denizenscript.depenizen.bukkit.clientizen.network.NetworkManager;
@@ -31,7 +31,7 @@ public class ClientRunCommand extends AbstractCommand {
     @Override
     public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
         PlayerTag player = Utilities.getEntryPlayer(scriptEntry);
-        if (player == null || !ClientizenSupport.clientizenPlayers.contains(player.getUUID())) {
+        if (player == null || !ClientizenBridge.clientizenPlayers.contains(player.getUUID())) {
             throw new InvalidArgumentsException("No valid clientizen player found.");
         }
         MapTag defMap = new MapTag();

@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.clientizen.network;
 
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
-import com.denizenscript.depenizen.bukkit.clientizen.ClientizenSupport;
+import com.denizenscript.depenizen.bukkit.clientizen.ClientizenBridge;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
@@ -36,7 +36,7 @@ public class NetworkManager implements PluginMessageListener {
     }
 
     public static void broadcast(String channel, DataSerializer message) {
-        for (UUID uuid : ClientizenSupport.clientizenPlayers) {
+        for (UUID uuid : ClientizenBridge.clientizenPlayers) {
             send(channel, Bukkit.getPlayer(uuid), message);
         }
     }

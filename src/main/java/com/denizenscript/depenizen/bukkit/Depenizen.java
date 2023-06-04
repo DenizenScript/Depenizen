@@ -1,13 +1,13 @@
 package com.denizenscript.depenizen.bukkit;
 
 import com.denizenscript.denizen.Denizen;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.debugging.DebugSubmitter;
 import com.denizenscript.depenizen.bukkit.bridges.*;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
-import com.denizenscript.depenizen.bukkit.clientizen.ClientizenSupport;
+import com.denizenscript.depenizen.bukkit.clientizen.ClientizenBridge;
 import com.denizenscript.depenizen.bukkit.utilities.BridgeLoadException;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
@@ -66,7 +66,7 @@ public class Depenizen extends JavaPlugin {
 
     public void checkLoadClientizenBridge() {
         if (getConfig().getBoolean("Clientizen.enabled")) {
-            ClientizenSupport.init();
+            ClientizenBridge.init();
         }
     }
 

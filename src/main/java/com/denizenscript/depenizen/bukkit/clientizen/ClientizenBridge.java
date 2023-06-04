@@ -24,7 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.*;
 
-public class ClientizenSupport implements Listener {
+public class ClientizenBridge implements Listener {
 
     public static final Map<String, String> clientizenScripts = new HashMap<>();
     public static DataSerializer scriptsSerializer;
@@ -33,7 +33,7 @@ public class ClientizenSupport implements Listener {
     public static final File clientizenFolder = new File(Denizen.instance.getDataFolder(), "client-scripts");
 
     public static void init() {
-        Bukkit.getPluginManager().registerEvents(new ClientizenSupport(), Depenizen.instance);
+        Bukkit.getPluginManager().registerEvents(new ClientizenBridge(), Depenizen.instance);
         // Setup client scripts folder
         clientizenFolder.mkdir();
         // Networking
