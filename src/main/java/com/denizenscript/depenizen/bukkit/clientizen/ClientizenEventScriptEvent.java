@@ -21,6 +21,8 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
     //
     // @Group Clientizen
     //
+    // @Warning The client can send any data it wants, so should very carefully verify any input before using it.
+    //
     // @Switch id:<id> to only process the event if the identifier received from the client matches the specified matcher.
     //
     // @Triggers When the server receives an event from a clientizen client, this requires config option 'Clientizen.process events' in the Depenizen config.
@@ -33,9 +35,9 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
     // @Player Always.
     //
     // @Example
-    // # Use to listen to clientizen events with the id 'my_id' and give the player that sent it a free diamond.
+    // # Use to listen to Clientizen events with the id 'my_id' and send the player that sent them a message.
     // on clientizen event id:my_id:
-    // - give diamond
+    // - narrate "Hello! you sent an event with the id '<context.id>'"
     //
     // -->
 
