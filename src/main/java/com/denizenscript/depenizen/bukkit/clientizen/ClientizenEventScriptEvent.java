@@ -23,7 +23,7 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
     //
     // @Switch id:<id> to only process the event if the identifier received from the client matches the specified matcher.
     //
-    // @Triggers When the server receives an event from a clientizen client.
+    // @Triggers When the server receives an event from a clientizen client, this requires config option 'Clientizen.process events' in the Depenizen config.
     //
     // @Context
     // <context.id> returns an ElementTag of the event identifier received from the client.

@@ -14,3 +14,5 @@ Clientizen:
   # This controls things like the server sending Clientizen clients scripts, receiving events from clients, etc.
   # Disabling this setting will override all other Clientizen settings.
   enabled: false
+  # Whether the server should listen to clients sending the server events, see the 'clientizen event' script event.
+  process events: true

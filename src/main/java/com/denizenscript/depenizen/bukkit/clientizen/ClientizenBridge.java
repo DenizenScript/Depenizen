@@ -41,7 +41,9 @@ public class ClientizenBridge implements Listener {
         NetworkManager.registerInChannel(Channels.RECEIVE_CONFIRM, (player, message) -> acceptNewPlayer(player));
         // Scripts features
         ScriptEvent.registerScriptEvent(ClientizenEventScriptEvent.class);
-        NetworkManager.registerInChannel(Channels.RECEIVE_EVENT, ClientizenEventScriptEvent.instance::tryFire);
+        if (Depenizen.instance.getConfig().getBoolean("Clientizen.process events")) {
+            NetworkManager.registerInChannel(Channels.RECEIVE_EVENT, ClientizenEventScriptEvent.instance::tryFire);
+        }
         DenizenCore.commandRegistry.registerCommand(ClientRunCommand.class);
 
         // <--[tag]
