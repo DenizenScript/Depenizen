@@ -19,6 +19,8 @@ public class NetworkManager implements PluginMessageListener {
 
     private static final byte[] EMPTY = new byte[0];
 
+    public static final int MAX_PACKET_LENGTH = Depenizen.instance.getConfig().getInt("Clientizen.max packet length", 10000);
+
     public static void init() {
         instance = new NetworkManager();
     }
@@ -57,6 +59,10 @@ public class NetworkManager implements PluginMessageListener {
 
     @Override
     public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, @NotNull byte[] message) {
+        if (message.length > MAX_PACKET_LENGTH) {
+            Debug.log("Packet with length " + message.length + " received from " + player.getName() + ", which exceeds the maximum packet length of " + MAX_PACKET_LENGTH + " - ignoring.");
+            return;
+        }
         registeredReceivers.get(channel).receive(player, new DataDeserializer(message));
     }
 

@@ -16,3 +16,5 @@ Clientizen:
   enabled: false
   # Whether the server should listen to clients sending the server events, see the 'clientizen event' script event.
   process events: true
+  # The maximum length for packets received from clients, any packets exceeding this length will be refused.
+  max packet length: 10,000
