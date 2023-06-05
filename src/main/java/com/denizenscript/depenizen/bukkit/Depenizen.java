@@ -107,6 +107,8 @@ public class Depenizen extends JavaPlugin {
         registerBridge("EffectLib", () -> new EffectLibBridge());
         registerBridge("Essentials", () -> new EssentialsBridge());
         registerBridge("Factions", () -> new FactionsBridge());
+        registerBridge("floodgate", () -> new FloodgateBridge());
+        registerBridge("Geyser-Spigot", () -> new GeyserBridge());
         registerBridge("GriefPrevention", () -> new GriefPreventionBridge());
         registerBridge("Jobs", () -> new JobsBridge());
         registerBridge("LibsDisguises", () -> new LibsDisguisesBridge());
