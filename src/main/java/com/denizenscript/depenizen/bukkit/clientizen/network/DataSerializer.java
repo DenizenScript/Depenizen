@@ -1,12 +1,8 @@
 package com.denizenscript.depenizen.bukkit.clientizen.network;
 
-import com.denizenscript.denizencore.utilities.debugging.Debug;
-import org.jetbrains.annotations.NotNull;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Map;
@@ -14,41 +10,24 @@ import java.util.function.BiConsumer;
 
 public class DataSerializer {
 
-    private final DataOutput output;
-    private final ByteArrayOutputStream outputStream;
+    private final ByteBuf output;
 
     public DataSerializer() {
-        outputStream = new ByteArrayOutputStream();
-        output = new DataOutputStream(outputStream);
+        output = Unpooled.buffer();
     }
 
     public DataSerializer writeBoolean(boolean bool) {
-        try {
-            output.writeBoolean(bool);
-        }
-        catch (IOException e) {
-            Debug.echoError(new IllegalStateException(e));
-        }
+        output.writeBoolean(bool);
         return this;
     }
 
     public DataSerializer writeInt(int i) {
-        try {
-            output.writeInt(i);
-        }
-        catch (IOException e) {
-            Debug.echoError(new IllegalStateException(e));
-        }
+        output.writeInt(i);
         return this;
     }
 
     public DataSerializer writeBytes(byte[] bytes) {
-        try {
-            output.write(bytes);
-        }
-        catch (IOException e) {
-            Debug.echoError(new IllegalStateException(e));
-        }
+        output.writeBytes(bytes);
         return this;
     }
 
@@ -60,27 +39,10 @@ public class DataSerializer {
         return writeByteArray(s.getBytes(StandardCharsets.UTF_8));
     }
 
-    public DataSerializer writeIntList(Collection<Integer> ints) {
-        writeInt(ints.size());
-        for (Integer i : ints) {
-            writeInt(i);
-        }
-        return this;
-    }
-
     public DataSerializer writeStringList(Collection<String> strings) {
         writeInt(strings.size());
         for (String s : strings) {
             writeString(s);
-        }
-        return this;
-    }
-
-    public DataSerializer writeStringListMap(Map<String, Collection<String>> map) {
-        writeInt(map.size());
-        for (Map.Entry<String, Collection<String>> entry : map.entrySet()) {
-            writeString(entry.getKey());
-            writeStringList(entry.getValue());
         }
         return this;
     }
@@ -106,6 +68,6 @@ public class DataSerializer {
     }
 
     public byte[] toByteArray() {
-        return outputStream.toByteArray();
+        return output.array();
     }
 }

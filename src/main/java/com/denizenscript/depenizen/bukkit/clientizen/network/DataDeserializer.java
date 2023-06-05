@@ -1,49 +1,34 @@
 package com.denizenscript.depenizen.bukkit.clientizen.network;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInput;
-import java.io.DataInputStream;
-import java.io.IOException;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class DataDeserializer {
 
-    private final DataInput input;
+    private final ByteBuf input;
 
     public DataDeserializer(byte[] bytes) {
-        input = new DataInputStream(new ByteArrayInputStream(bytes));
+        input = Unpooled.wrappedBuffer(bytes);
     }
 
     public int readInt() {
-        try {
-            return input.readInt();
-        }
-        catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
+        return input.readInt();
     }
 
     public boolean readBoolean() {
-        try {
-            return input.readBoolean();
-        }
-        catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
+        return input.readBoolean();
     }
 
     public byte[] readByteArray() {
         byte[] bytes = new byte[readInt()];
-        try {
-            input.readFully(bytes);
-        }
-        catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
+        input.readBytes(bytes);
         return bytes;
     }
 
@@ -71,14 +56,7 @@ public class DataDeserializer {
         return stringMap;
     }
 
-    public Map<String, List<String>> readStringListMap() {
-        int size = readInt();
-        Map<String, List<String>> stringListMap = new HashMap<>(size);
-        for (int i = 0; i < size; i++) {
-            String key = readString();
-            List<String> value = readStringList();
-            stringListMap.put(key, value);
-        }
-        return stringListMap;
+    public <T> T readNullable(Supplier<T> readMethod) {
+        return readBoolean() ? readMethod.get() : null;
     }
 }
