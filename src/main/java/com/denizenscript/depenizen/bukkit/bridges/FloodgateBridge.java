@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FloodgateBridge extends Bridge {
-    public static final Map<String, FormContainer> forms = new HashMap<>();
     @Override
     public void init() {
         PropertyParser.registerProperty(FloodgatePlayerProperties.class, PlayerTag.class);
