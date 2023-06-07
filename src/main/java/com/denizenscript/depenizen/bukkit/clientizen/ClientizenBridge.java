@@ -12,9 +12,10 @@ import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.clientizen.commands.ClientRunCommand;
-import com.denizenscript.depenizen.bukkit.clientizen.network.Channels;
-import com.denizenscript.depenizen.bukkit.clientizen.network.DataSerializer;
 import com.denizenscript.depenizen.bukkit.clientizen.network.NetworkManager;
+import com.denizenscript.depenizen.bukkit.clientizen.network.packets.FireEventPacketIn;
+import com.denizenscript.depenizen.bukkit.clientizen.network.packets.ReceiveConfirmPacketIn;
+import com.denizenscript.depenizen.bukkit.clientizen.network.packets.SetScriptsPacketOut;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,7 +29,7 @@ import java.util.*;
 public class ClientizenBridge implements Listener {
 
     public static Map<String, String> clientizenScripts = new HashMap<>();
-    public static DataSerializer scriptsSerializer;
+    public static SetScriptsPacketOut scriptsPacket;
     public static Set<UUID> clientizenPlayers = new HashSet<>();
 
     public static File clientizenFolder = new File(Denizen.instance.getDataFolder(), "client-scripts");
@@ -39,11 +40,11 @@ public class ClientizenBridge implements Listener {
         clientizenFolder.mkdir();
         // Networking
         NetworkManager.init();
-        NetworkManager.registerInChannel(Channels.RECEIVE_CONFIRM, (player, message) -> acceptNewPlayer(player));
+        NetworkManager.registerInPacket(new ReceiveConfirmPacketIn());
         // Scripts features
         ScriptEvent.registerScriptEvent(ClientizenEventScriptEvent.class);
         if (Depenizen.instance.getConfig().getBoolean("Clientizen.process events")) {
-            NetworkManager.registerInChannel(Channels.RECEIVE_EVENT, ClientizenEventScriptEvent.instance::tryFire);
+            NetworkManager.registerInPacket(new FireEventPacketIn());
         }
         DenizenCore.commandRegistry.registerCommand(ClientRunCommand.class);
 
@@ -62,7 +63,7 @@ public class ClientizenBridge implements Listener {
 
     public static void acceptNewPlayer(Player player) {
         clientizenPlayers.add(player.getUniqueId());
-        NetworkManager.send(Channels.SET_SCRIPTS, player, scriptsSerializer);
+        NetworkManager.send(player, scriptsPacket);
     }
 
     // TODO: load client scripts async, same as regular ones
@@ -86,7 +87,7 @@ public class ClientizenBridge implements Listener {
                 Debug.echoError(e);
             }
         }
-        scriptsSerializer = new DataSerializer().writeStringMap(clientizenScripts);
+        scriptsPacket = new SetScriptsPacketOut(clientizenScripts);
     }
 
     @EventHandler
@@ -97,6 +98,6 @@ public class ClientizenBridge implements Listener {
     @EventHandler
     public void onScriptsReload(ScriptReloadEvent event) {
         reloadClientScripts();
-        NetworkManager.broadcast(Channels.SET_SCRIPTS, scriptsSerializer);
+        NetworkManager.broadcast(scriptsPacket);
     }
 }

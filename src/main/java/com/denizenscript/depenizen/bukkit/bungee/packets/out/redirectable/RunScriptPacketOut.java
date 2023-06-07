@@ -1,11 +1,11 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable;
 
-import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketOut;
 import io.netty.buffer.ByteBuf;
 
 import java.util.UUID;
 
-public class RunScriptPacketOut extends PacketOut {
+public class RunScriptPacketOut extends BungeePacketOut {
 
     public String scriptName;
 

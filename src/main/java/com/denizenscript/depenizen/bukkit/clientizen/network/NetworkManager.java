@@ -3,6 +3,8 @@ package com.denizenscript.depenizen.bukkit.clientizen.network;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.clientizen.ClientizenBridge;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
@@ -15,9 +17,8 @@ import java.util.UUID;
 public class NetworkManager implements PluginMessageListener {
 
     private static NetworkManager instance;
-    private static final Map<String, ClientizenReceiver> registeredReceivers = new HashMap<>();
-
-    private static final byte[] EMPTY = new byte[0];
+    private static final Map<String, ClientizenPacketIn> IN_PACKETS = new HashMap<>();
+    public static final String CHANNEL_NAMESPACE = "clientizen";
 
     public static final int MAX_PACKET_LENGTH = Depenizen.instance.getConfig().getInt("Clientizen.max packet length", 10000);
 
@@ -25,36 +26,33 @@ public class NetworkManager implements PluginMessageListener {
         instance = new NetworkManager();
     }
 
-    public static void registerInChannel(String channel, ClientizenReceiver receiver) {
-        if (channel == null || receiver == null) {
-            return;
-        }
-        if (registeredReceivers.containsKey(channel)) {
-            Debug.echoError("Tried registering plugin channel '" + channel + "', but it is already registered!");
+    public static String channel(String path) {
+        return CHANNEL_NAMESPACE + ':' + path;
+    }
+
+    public static void registerInPacket(ClientizenPacketIn packet) {
+        String channel = channel(packet.getName());
+        if (IN_PACKETS.containsKey(channel)) {
+            Debug.echoError("Tried registering in packet on channel '" + channel + "', but it is already registered!");
             return;
         }
         Bukkit.getMessenger().registerIncomingPluginChannel(Depenizen.instance, channel, instance);
-        registeredReceivers.put(channel, receiver);
+        IN_PACKETS.put(channel, packet);
     }
 
-    public static void broadcast(String channel, DataSerializer message) {
+    public static void broadcast(ClientizenPacketOut packet) {
         for (UUID uuid : ClientizenBridge.clientizenPlayers) {
-            send(channel, Bukkit.getPlayer(uuid), message);
+            send(Bukkit.getPlayer(uuid), packet);
         }
     }
 
-    public static void send(String channel, Player target, DataSerializer message) {
-        send(channel, target, message != null ? message.toByteArray() : null);
-    }
-
-    public static void send(String channel, Player target, byte[] message) {
-        if (channel == null || target == null) {
-            return;
+    public static void send(Player target, ClientizenPacketOut packet) {
+        if (!Bukkit.getMessenger().isOutgoingChannelRegistered(Depenizen.instance, packet.channel)) {
+            Bukkit.getMessenger().registerOutgoingPluginChannel(Depenizen.instance, packet.channel);
         }
-        if (!Bukkit.getMessenger().isOutgoingChannelRegistered(Depenizen.instance, channel)) {
-            Bukkit.getMessenger().registerOutgoingPluginChannel(Depenizen.instance, channel);
-        }
-        target.sendPluginMessage(Depenizen.instance, channel, message != null ? message : EMPTY);
+        ByteBuf buf = Unpooled.buffer();
+        packet.writeTo(buf);
+        target.sendPluginMessage(Depenizen.instance, packet.channel, buf.array());
     }
 
     @Override
@@ -63,11 +61,6 @@ public class NetworkManager implements PluginMessageListener {
             Debug.log("Packet with length " + message.length + " received from " + player.getName() + ", which exceeds the maximum packet length of " + MAX_PACKET_LENGTH + " - ignoring.");
             return;
         }
-        registeredReceivers.get(channel).receive(player, new DataDeserializer(message));
-    }
-
-    @FunctionalInterface
-    public interface ClientizenReceiver {
-        void receive(Player player, DataDeserializer message);
+        IN_PACKETS.get(channel).process(player, Unpooled.wrappedBuffer(message));
     }
 }

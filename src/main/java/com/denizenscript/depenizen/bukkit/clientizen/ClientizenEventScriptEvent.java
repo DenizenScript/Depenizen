@@ -2,13 +2,10 @@ package com.denizenscript.depenizen.bukkit.clientizen;
 
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.events.ScriptEvent;
-import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
-import com.denizenscript.depenizen.bukkit.clientizen.network.DataDeserializer;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -49,7 +46,7 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
         registerSwitches("id");
     }
 
-    boolean enabled = false;
+    public boolean enabled = false;
 
     public MapTag contextMap;
     public String id;
@@ -75,14 +72,11 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
         };
     }
 
-    public void tryFire(Player source, DataDeserializer data) {
-        if (!enabled) {
-            return;
-        }
+    public void fire(Player source, String id, Map<String, String> contexts) {
         player = source;
-        id = data.readString();
+        this.id = id;
         contextMap = new MapTag();
-        for (Map.Entry<String, String> entry : data.readStringMap().entrySet()) {
+        for (Map.Entry<String, String> entry : contexts.entrySet()) {
             contextMap.putObject(entry.getKey(), new ElementTag(entry.getValue()));
         }
         fire();

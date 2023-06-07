@@ -1,24 +1,24 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.in;
 
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.tags.BukkitTagContext;
+import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
+import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.objects.core.ScriptTag;
 import com.denizenscript.denizencore.scripts.containers.core.TaskScriptContainer;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.ScriptUtilities;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
-import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketIn;
 import io.netty.buffer.ByteBuf;
-import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
-import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.core.ScriptTag;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;
 
-public class RunScriptPacketIn extends PacketIn {
+public class RunScriptPacketIn extends BungeePacketIn {
 
     @Override
     public String getName() {

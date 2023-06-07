@@ -1,11 +1,11 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.in;
 
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
-import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketIn;
 import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
 import io.netty.buffer.ByteBuf;
 
-public class TagResponsePacketIn extends PacketIn {
+public class TagResponsePacketIn extends BungeePacketIn {
 
     @Override
     public String getName() {

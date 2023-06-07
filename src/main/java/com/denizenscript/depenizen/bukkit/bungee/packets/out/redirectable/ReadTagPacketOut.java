@@ -1,12 +1,12 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable;
 
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
-import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketOut;
 import io.netty.buffer.ByteBuf;
 
 import java.util.UUID;
 
-public class ReadTagPacketOut extends PacketOut {
+public class ReadTagPacketOut extends BungeePacketOut {
 
     public String tag;
 

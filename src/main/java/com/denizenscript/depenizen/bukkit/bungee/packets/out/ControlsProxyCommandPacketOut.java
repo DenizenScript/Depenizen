@@ -1,9 +1,9 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.out;
 
-import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketOut;
 import io.netty.buffer.ByteBuf;
 
-public class ControlsProxyCommandPacketOut extends PacketOut {
+public class ControlsProxyCommandPacketOut extends BungeePacketOut {
 
     public ControlsProxyCommandPacketOut(boolean control) {
         this.control = control;

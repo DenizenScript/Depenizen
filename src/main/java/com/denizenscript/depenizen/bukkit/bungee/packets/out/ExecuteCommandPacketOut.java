@@ -1,9 +1,9 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.out;
 
-import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketOut;
 import io.netty.buffer.ByteBuf;
 
-public class ExecuteCommandPacketOut extends PacketOut {
+public class ExecuteCommandPacketOut extends BungeePacketOut {
 
     public ExecuteCommandPacketOut(String command) {
         this.command = command;

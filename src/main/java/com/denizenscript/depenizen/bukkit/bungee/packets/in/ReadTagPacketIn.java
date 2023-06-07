@@ -1,23 +1,23 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.in;
 
-import com.denizenscript.denizen.tags.BukkitTagContext;
-import com.denizenscript.depenizen.bukkit.Depenizen;
-import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
-import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
-import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
-import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.TagResponsePacketOut;
-import io.netty.buffer.ByteBuf;
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizen.tags.BukkitTagContext;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketIn;
+import com.denizenscript.depenizen.bukkit.bungee.packets.out.RedirectPacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable.TagResponsePacketOut;
+import io.netty.buffer.ByteBuf;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 import java.util.List;
 import java.util.UUID;
 
-public class ReadTagPacketIn extends PacketIn {
+public class ReadTagPacketIn extends BungeePacketIn {
 
     @Override
     public String getName() {

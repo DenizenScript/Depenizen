@@ -1,12 +1,12 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.out;
 
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketOut;
 import io.netty.buffer.ByteBuf;
 
 import java.util.List;
 
-public class ProxyPingResultPacketOut extends PacketOut {
+public class ProxyPingResultPacketOut extends BungeePacketOut {
 
     public long id;
 

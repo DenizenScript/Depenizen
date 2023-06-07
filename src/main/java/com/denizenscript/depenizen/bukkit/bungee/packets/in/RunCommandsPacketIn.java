@@ -1,23 +1,23 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.in;
 
-import com.denizenscript.depenizen.bukkit.Depenizen;
-import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
-import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
-import io.netty.buffer.ByteBuf;
-import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
+import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.scripts.ScriptBuilder;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.queues.ScriptQueue;
 import com.denizenscript.denizencore.scripts.queues.core.InstantQueue;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
+import com.denizenscript.depenizen.bukkit.Depenizen;
+import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketIn;
+import io.netty.buffer.ByteBuf;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 import java.util.*;
 
-public class RunCommandsPacketIn extends PacketIn {
+public class RunCommandsPacketIn extends BungeePacketIn {
 
     @Override
     public String getName() {

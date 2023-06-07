@@ -13,9 +13,8 @@ import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.text.StringHolder;
 import com.denizenscript.depenizen.bukkit.clientizen.ClientizenBridge;
-import com.denizenscript.depenizen.bukkit.clientizen.network.Channels;
-import com.denizenscript.depenizen.bukkit.clientizen.network.DataSerializer;
 import com.denizenscript.depenizen.bukkit.clientizen.network.NetworkManager;
+import com.denizenscript.depenizen.bukkit.clientizen.network.packets.RunClientScriptPacketOut;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -123,10 +122,6 @@ public class ClientRunCommand extends AbstractCommand {
                 stringDefMap.put(entry.getKey().str, entry.getValue().savable());
             }
         }
-        DataSerializer runData = new DataSerializer()
-                .writeString(script.asString())
-                .writeNullable(path, DataSerializer::writeString)
-                .writeStringMap(stringDefMap);
-        NetworkManager.send(Channels.RUN_CLIENT_SCRIPT, clientizenPlayer.getPlayerEntity(), runData);
+        NetworkManager.send(clientizenPlayer.getPlayerEntity(), new RunClientScriptPacketOut(script.asString(), path, stringDefMap));
     }
 }
