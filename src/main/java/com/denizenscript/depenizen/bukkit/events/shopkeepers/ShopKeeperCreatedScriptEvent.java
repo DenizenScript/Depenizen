@@ -5,8 +5,6 @@ import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.nisovin.shopkeepers.api.events.PlayerCreatePlayerShopkeeperEvent;
 import com.nisovin.shopkeepers.api.events.PlayerCreateShopkeeperEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -52,7 +50,7 @@ public class ShopKeeperCreatedScriptEvent extends BukkitScriptEvent implements L
     }
 
     @EventHandler
-    public void onShopKeeperCreated(PlayerCreateShopkeeperEvent event) {
+    public void onPlayerCreateShopkeeper(PlayerCreateShopkeeperEvent event) {
         this.event = event;
         fire(event);
     }
