@@ -24,7 +24,7 @@ public class ShopkeepersBridge extends Bridge {
         ShopKeepersEntityExtensions.register();
     }
 
-    public static ListTag wrapTradingRecipe(TradingRecipe tradingRecipe) {
+    public static ListTag tradingRecipeToList(TradingRecipe tradingRecipe) {
         ListTag recipe = new ListTag(3);
         recipe.addObject(new ItemTag(tradingRecipe.getItem1().asItemStack()));
         recipe.addObject(new ItemTag(tradingRecipe.getItem2() != null ? tradingRecipe.getItem2().asItemStack() : null));

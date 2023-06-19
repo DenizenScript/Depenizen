@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.shopkeepers;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
@@ -47,7 +46,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
-            case "recipe" -> ShopkeepersBridge.wrapTradingRecipe(event.getTradingRecipe());
+            case "recipe" -> ShopkeepersBridge.tradingRecipeToList(event.getTradingRecipe());
             case "shopkeeper" -> new ShopKeeperTag(event.getShopkeeper());
             default -> super.getContext(name);
         };

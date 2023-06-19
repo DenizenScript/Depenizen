@@ -133,7 +133,7 @@ public class ShopKeeperTag implements ObjectTag {
         // Returns a ListTag of the Shopkeeper's trades (as sub-lists).
         // -->
         tagProcessor.registerTag(ListTag.class, "trades", (attribute, object) -> {
-            return new ListTag(object.shopkeeper.getTradingRecipes(null), ShopkeepersBridge::wrapTradingRecipe);
+            return new ListTag(object.shopkeeper.getTradingRecipes(null), ShopkeepersBridge::tradingRecipeToList);
         }, "recipes");
 
         // <--[tag]
