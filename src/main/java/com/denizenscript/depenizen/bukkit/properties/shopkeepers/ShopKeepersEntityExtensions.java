@@ -24,7 +24,7 @@ public class ShopKeepersEntityExtensions {
         // @returns ShopKeeperTag
         // @plugin Depenizen, ShopKeepers
         // @description
-        // Returns the ShopKeeper for this entity.
+        // Returns the ShopKeeper for this entity, if it is one (see also <@link tag EntityTag.is_shopkeeper>).
         // -->
         EntityTag.tagProcessor.registerTag(ShopKeeperTag.class, "shopkeeper", (attribute, object) -> {
             return ShopKeeperTag.fromEntity(object);
