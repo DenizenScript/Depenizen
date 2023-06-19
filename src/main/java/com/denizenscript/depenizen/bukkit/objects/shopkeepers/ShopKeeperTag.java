@@ -171,6 +171,11 @@ public class ShopKeeperTag implements ObjectTag {
     }
 
     @Override
+    public Shopkeeper getJavaObject() {
+        return shopkeeper;
+    }
+
+    @Override
     public boolean isUnique() {
         return true;
     }
