@@ -46,13 +46,16 @@ public class ShopKeeperTag implements ObjectTag {
             UUID uuid = UUID.fromString(string);
             Shopkeeper keeper = ShopkeepersAPI.getShopkeeperRegistry().getShopkeeperByUniqueId(uuid);
             if (keeper == null) {
+                if (context == null || context.showErrors()) {
+                    Debug.echoError("valueOf ShopKeeperTag returning null: UUID '" + string + "' is valid, but doesn't match any shopkeeper.");
+                }
                 return null;
             }
             return new ShopKeeperTag(keeper);
         }
         catch (IllegalArgumentException e) {
             if (context == null || context.showErrors()) {
-                Debug.echoError("valueOf ShopKeeperTag returning null: Invalid ShopKeeper UUID '" + string + "' specified.");
+                Debug.echoError("valueOf ShopKeeperTag returning null: Invalid UUID '" + string + "' specified.");
             }
             return null;
         }
