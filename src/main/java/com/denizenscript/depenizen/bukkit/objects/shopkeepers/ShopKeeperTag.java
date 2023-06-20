@@ -1,25 +1,23 @@
 package com.denizenscript.depenizen.bukkit.objects.shopkeepers;
 
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.objects.Fetchable;
+import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.tags.ObjectTagProcessor;
+import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.bridges.ShopkeepersBridge;
-import com.nisovin.shopkeepers.api.shopkeeper.Shopkeeper;
-import com.nisovin.shopkeepers.api.shopkeeper.TradingRecipe;
 import com.nisovin.shopkeepers.api.ShopkeepersAPI;
-import com.nisovin.shopkeepers.api.ShopkeepersPlugin;
+import com.nisovin.shopkeepers.api.shopkeeper.Shopkeeper;
 import com.nisovin.shopkeepers.api.shopkeeper.player.PlayerShopkeeper;
 import com.nisovin.shopkeepers.api.shopobjects.entity.EntityShopObject;
-import com.denizenscript.denizen.objects.EntityTag;
-import com.denizenscript.denizen.objects.ItemTag;
-import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.denizencore.tags.TagContext;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
+import com.nisovin.shopkeepers.api.ui.UISession;
 import org.bukkit.entity.Entity;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
@@ -48,31 +46,38 @@ public class ShopKeeperTag implements ObjectTag {
             UUID uuid = UUID.fromString(string);
             Shopkeeper keeper = ShopkeepersAPI.getShopkeeperRegistry().getShopkeeperByUniqueId(uuid);
             if (keeper == null) {
+                if (context == null || context.showErrors()) {
+                    Debug.echoError("valueOf ShopKeeperTag returning null: UUID '" + string + "' is valid, but doesn't match any shopkeeper.");
+                }
                 return null;
             }
             return new ShopKeeperTag(keeper);
         }
-        catch (Exception e) {
+        catch (IllegalArgumentException e) {
+            if (context == null || context.showErrors()) {
+                Debug.echoError("valueOf ShopKeeperTag returning null: Invalid UUID '" + string + "' specified.");
+            }
             return null;
         }
     }
 
     public static boolean matches(String string) {
+        if (string.startsWith("shopkeeper@")) {
+            return true;
+        }
         return valueOf(string, CoreUtilities.noDebugContext) != null;
     }
 
     public static boolean isShopKeeper(EntityTag entity) {
-        if (entity == null) {
-            return false;
-        }
-        return ((ShopkeepersPlugin) ShopkeepersBridge.instance.plugin).getShopkeeperRegistry().isShopkeeper(entity.getBukkitEntity());
+        return entity != null && ShopkeepersAPI.getShopkeeperRegistry().isShopkeeper(entity.getBukkitEntity());
     }
 
     public static ShopKeeperTag fromEntity(EntityTag entity) {
-        if (!isShopKeeper(entity)) {
+        if (entity == null) {
             return null;
         }
-        return new ShopKeeperTag(ShopkeepersAPI.getShopkeeperRegistry().getShopkeeperByEntity(entity.getBukkitEntity()));
+        Shopkeeper shopkeeper = ShopkeepersAPI.getShopkeeperRegistry().getShopkeeperByEntity(entity.getBukkitEntity());
+        return shopkeeper != null ? new ShopKeeperTag(shopkeeper) : null;
     }
 
     public ShopKeeperTag(Shopkeeper shopkeeper) {
@@ -83,8 +88,6 @@ public class ShopKeeperTag implements ObjectTag {
             Debug.echoError("Shopkeeper referenced is null!");
         }
     }
-
-    private String prefix;
     Shopkeeper shopkeeper;
 
     public Shopkeeper getShopkeeper() {
@@ -92,25 +95,84 @@ public class ShopKeeperTag implements ObjectTag {
     }
 
     public EntityTag getDenizenEntity() {
-        return new EntityTag(getBukkitEntity());
+        Entity entity = getBukkitEntity();
+        return entity != null ? new EntityTag(entity) : null;
     }
 
     public Entity getBukkitEntity() {
-        if (shopkeeper.getShopObject() instanceof EntityShopObject) {
-            return ((EntityShopObject) shopkeeper.getShopObject()).getEntity();
-        }
-        return null;
+        return shopkeeper.getShopObject() instanceof EntityShopObject entityShopObject ? entityShopObject.getEntity() : null;
+    }
+
+    public static void register() {
+
+        // <--[tag]
+        // @attribute <ShopKeeperTag.is_active>
+        // @returns ElementTag(Boolean)
+        // @plugin Depenizen, ShopKeepers
+        // @description
+        // Returns whether the Shopkeeper is active (has been spawned and is still valid and present in the world).
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "is_active", (attribute, object) -> {
+            return new ElementTag(object.shopkeeper.getShopObject().isActive());
+        });
+
+        // <--[tag]
+        // @attribute <ShopKeeperTag.is_ui_active>
+        // @returns ElementTag(Boolean)
+        // @plugin Depenizen, ShopKeepers
+        // @description
+        // Returns whether the Shopkeeper's UI is currently active (may be false when the UI is about to be closed).
+        // -->
+        // TODO: It seems a single shopkeeper can have multiple UI sessions now, should have better handling here
+        tagProcessor.registerTag(ElementTag.class, "is_ui_active", (attribute, object) -> {
+           return new ElementTag(object.shopkeeper.getUISessions().stream().anyMatch(UISession::isUIActive));
+        });
+
+        // <--[tag]
+        // @attribute <ShopKeeperTag.trades>
+        // @returns ListTag(ListTag(ItemTag))
+        // @plugin Depenizen, ShopKeepers
+        // @description
+        // Returns a ListTag of the Shopkeeper's trades (as sub-lists).
+        // -->
+        tagProcessor.registerTag(ListTag.class, "trades", (attribute, object) -> {
+            return new ListTag(object.shopkeeper.getTradingRecipes(null), ShopkeepersBridge::tradingRecipeToList);
+        }, "recipes");
+
+        // <--[tag]
+        // @attribute <ShopKeeperTag.entity>
+        // @returns EntityTag
+        // @plugin Depenizen, ShopKeepers
+        // @description
+        // Returns the EntityTag for this ShopKeeper, if any.
+        // -->
+        tagProcessor.registerTag(EntityTag.class, "entity", (attribute, object) -> {
+            return object.getDenizenEntity();
+        });
+
+        // <--[tag]
+        // @attribute <ShopKeeperTag.owner>
+        // @returns PlayerTag
+        // @plugin Depenizen, ShopKeepers
+        // @description
+        // Returns the player that owns this ShopKeeper, if any.
+        // -->
+        tagProcessor.registerTag(PlayerTag.class, "owner", (attribute, object) -> {
+            return object.shopkeeper instanceof PlayerShopkeeper playerShopkeeper ? new PlayerTag(playerShopkeeper.getOwnerUUID()) : null;
+        });
+
+    }
+
+    public static final ObjectTagProcessor<ShopKeeperTag> tagProcessor = new ObjectTagProcessor<>();
+
+    @Override
+    public ObjectTag getObjectAttribute(Attribute attribute) {
+        return tagProcessor.getObjectAttribute(this, attribute);
     }
 
     @Override
-    public ObjectTag setPrefix(String prefix) {
-        this.prefix = prefix;
-        return this;
-    }
-
-    @Override
-    public String getPrefix() {
-        return prefix;
+    public Shopkeeper getJavaObject() {
+        return shopkeeper;
     }
 
     @Override
@@ -124,6 +186,11 @@ public class ShopKeeperTag implements ObjectTag {
     }
 
     @Override
+    public String debuggable() {
+        return "<LG>shopkeeper@<Y>" + shopkeeper.getUniqueId();
+    }
+
+    @Override
     public String identifySimple() {
         return identify();
     }
@@ -133,87 +200,16 @@ public class ShopKeeperTag implements ObjectTag {
         return identify();
     }
 
+    private String prefix;
+
     @Override
-    public ObjectTag getObjectAttribute(Attribute attribute) {
-        if (attribute == null) {
-            return null;
-        }
-
-        // <--[tag]
-        // @attribute <ShopKeeperTag.is_active>
-        // @returns ElementTag(Boolean)
-        // @plugin Depenizen, ShopKeepers
-        // @description
-        // Returns whether the Shopkeeper is active.
-        // -->
-        if (attribute.startsWith("is_active")) {
-            return new ElementTag(shopkeeper.isActive()).getObjectAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <ShopKeeperTag.is_ui_active>
-        // @returns ElementTag(Boolean)
-        // @plugin Depenizen, ShopKeepers
-        // @description
-        // Returns whether the Shopkeeper UI is currently active (may be false when the UI is about to be closed).
-        // -->
-        else if (attribute.startsWith("is_ui_active")) {
-            return new ElementTag(shopkeeper.isUIActive()).getObjectAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <ShopKeeperTag.trades>
-        // @returns ListTag
-        // @plugin Depenizen, ShopKeepers
-        // @description
-        // Returns a ListTag of the Shopkeeper's trades (as sub-lists).
-        // -->
-        else if (attribute.startsWith("trades") || attribute.startsWith("recipes")) {
-            ListTag trades = new ListTag();
-            for (TradingRecipe trade : shopkeeper.getTradingRecipes(null)) {
-                ListTag recipe = wrapTradingRecipe(trade);
-                trades.addObject(recipe);
-            }
-            return trades.getObjectAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <ShopKeeperTag.entity>
-        // @returns EntityTag
-        // @plugin Depenizen, ShopKeepers
-        // @description
-        // Returns the EntityTag for this ShopKeeper.
-        // -->
-        else if (attribute.startsWith("entity")) {
-            return getDenizenEntity().getObjectAttribute(attribute.fulfill(1));
-        }
-
-        // <--[tag]
-        // @attribute <ShopKeeperTag.owner>
-        // @returns PlayerTag
-        // @plugin Depenizen, ShopKeepers
-        // @description
-        // Returns the player that owns this ShopKeeper, if any.
-        // -->
-        else if (attribute.startsWith("owner")) {
-            if (shopkeeper instanceof PlayerShopkeeper) {
-                return new PlayerTag(((PlayerShopkeeper) shopkeeper).getOwnerUUID()).getObjectAttribute(attribute.fulfill(1));
-            }
-            return null;
-        }
-
-        return null;
+    public ObjectTag setPrefix(String prefix) {
+        this.prefix = prefix;
+        return this;
     }
 
-    public static ListTag wrapTradingRecipe(TradingRecipe tradingRecipe) {
-        ItemStack item1 = tradingRecipe.getItem1();
-        ItemStack item2 = tradingRecipe.getItem2();
-        ItemStack resultItem = tradingRecipe.getResultItem();
-
-        ListTag recipe = new ListTag();
-        recipe.addObject(new ItemTag(item1));
-        recipe.addObject(new ItemTag(item2));
-        recipe.addObject(new ItemTag(resultItem));
-        return recipe;
+    @Override
+    public String getPrefix() {
+        return prefix;
     }
 }
