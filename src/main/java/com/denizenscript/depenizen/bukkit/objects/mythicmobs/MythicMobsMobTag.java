@@ -410,7 +410,7 @@ public class MythicMobsMobTag implements ObjectTag, Adjustable {
         if (mechanism.matches("mythic_variable_map") && mechanism.requireObject(MapTag.class)) {
             MapTag map = mechanism.valueAsType(MapTag.class);
             Map<String, Variable> newMap = new HashMap<>();
-            for (Map.Entry<StringHolder, ObjectTag> entry : map.map.entrySet()) {
+            for (Map.Entry<StringHolder, ObjectTag> entry : map.entrySet()) {
                 newMap.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
             }
             MythicMobsBridge.setMythicVariableMap(mob.getEntity().getBukkitEntity(), newMap);

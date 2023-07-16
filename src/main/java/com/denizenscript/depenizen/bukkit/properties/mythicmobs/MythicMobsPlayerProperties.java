@@ -96,7 +96,7 @@ public class MythicMobsPlayerProperties implements Property {
         if (mechanism.matches("mythic_variable_map") && mechanism.requireObject(MapTag.class)) {
             MapTag map = mechanism.valueAsType(MapTag.class);
             Map<String, Variable> newMap = new HashMap<>();
-            for (Map.Entry<StringHolder, ObjectTag> entry : map.map.entrySet()) {
+            for (Map.Entry<StringHolder, ObjectTag> entry : map.entrySet()) {
                 newMap.put(entry.getKey().str, Variable.ofType(VariableType.STRING, entry.getValue()));
             }
             MythicMobsBridge.setMythicVariableMap(player.getPlayerEntity(), newMap);

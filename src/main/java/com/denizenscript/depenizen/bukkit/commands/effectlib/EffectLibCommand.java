@@ -143,7 +143,7 @@ public class EffectLibCommand extends AbstractCommand implements Holdable {
         }
         else {
             ConfigurationSection effectLibData = new MemoryConfiguration();
-            for (Map.Entry<StringHolder, ObjectTag> entry : effectData.map.entrySet()) {
+            for (Map.Entry<StringHolder, ObjectTag> entry : effectData.entrySet()) {
                 effectLibData.set(entry.getKey().str, CoreUtilities.objectTagToJavaForm(entry.getValue(), false, true));
             }
             effect = EffectLibBridge.instance.effectManager.getEffect(

@@ -90,7 +90,7 @@ public class BungeeCommand extends BracedCommand {
         }
         StringBuilder defNames = new StringBuilder();
         StringBuilder defValues = new StringBuilder();
-        for (Map.Entry<StringHolder, ObjectTag> def : scriptEntry.getResidingQueue().getAllDefinitions().map.entrySet()) {
+        for (Map.Entry<StringHolder, ObjectTag> def : scriptEntry.getResidingQueue().getAllDefinitions().entrySet()) {
             defNames.append(escape(def.getKey().low)).append("\n");
             defValues.append(escape(def.getValue().toString())).append("\n");
         }
