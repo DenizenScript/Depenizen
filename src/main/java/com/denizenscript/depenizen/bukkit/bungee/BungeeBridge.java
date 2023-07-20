@@ -1,8 +1,15 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
 import com.denizenscript.denizencore.DenizenCore;
+import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.commands.core.AdjustCommand;
+import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
+import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.packets.in.*;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyCommandPacketOut;
@@ -15,24 +22,19 @@ import com.denizenscript.depenizen.bukkit.commands.bungee.BungeeTagCommand;
 import com.denizenscript.depenizen.bukkit.events.bungee.*;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.tags.TagRunnable;
-import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
-import com.denizenscript.denizencore.tags.TagManager;
 import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.denizenscript.denizencore.events.ScriptEvent.*;
+import static com.denizenscript.denizencore.events.ScriptEvent.registerScriptEvent;
 
 public class BungeeBridge {
 
@@ -52,7 +54,7 @@ public class BungeeBridge {
 
     public List<String> knownServers = new ArrayList<>();
 
-    public HashMap<Integer, PacketIn> packets = new HashMap<>();
+    public HashMap<Integer, BungeePacketIn> packets = new HashMap<>();
 
     public boolean connected = false;
 
@@ -105,7 +107,7 @@ public class BungeeBridge {
         }
     }
 
-    public void sendPacket(PacketOut packet) {
+    public void sendPacket(BungeePacketOut packet) {
         if (!connected && !packet.canBeFirstPacket) {
             runOnMainThread(() -> Debug.echoError("BungeeBridge tried to send packet '" + packet.getClass().getName() + "' while not connected."));
             return;

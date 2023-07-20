@@ -1,9 +1,9 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.in;
 
-import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketIn;
 import io.netty.buffer.ByteBuf;
 
-public class KeepAlivePacketIn extends PacketIn {
+public class KeepAlivePacketIn extends BungeePacketIn {
 
     @Override
     public String getName() {

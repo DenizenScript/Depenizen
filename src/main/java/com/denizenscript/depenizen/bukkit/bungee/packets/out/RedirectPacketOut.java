@@ -1,18 +1,18 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.out;
 
-import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketOut;
 import io.netty.buffer.ByteBuf;
 
-public class RedirectPacketOut extends PacketOut {
+public class RedirectPacketOut extends BungeePacketOut {
 
-    public RedirectPacketOut(String server, PacketOut toSend) {
+    public RedirectPacketOut(String server, BungeePacketOut toSend) {
         this.server = server;
         this.toSend = toSend;
     }
 
     public String server;
 
-    public PacketOut toSend;
+    public BungeePacketOut toSend;
 
     @Override
     public int getPacketId() {

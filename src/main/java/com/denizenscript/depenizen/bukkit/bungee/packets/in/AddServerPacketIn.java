@@ -2,12 +2,12 @@ package com.denizenscript.depenizen.bukkit.bungee.packets.in;
 
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
-import com.denizenscript.depenizen.bukkit.bungee.PacketIn;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketIn;
 import com.denizenscript.depenizen.bukkit.events.bungee.BungeeServerConnectScriptEvent;
 import io.netty.buffer.ByteBuf;
 import org.bukkit.Bukkit;
 
-public class AddServerPacketIn extends PacketIn {
+public class AddServerPacketIn extends BungeePacketIn {
 
     @Override
     public String getName() {

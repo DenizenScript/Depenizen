@@ -6,3 +6,15 @@
 Bungee server address: none
 # Set to the bungee server's primary port (if in use).
 Bungee server port: 25565
+
+# Settings related to the server-side support of the Clientizen mod, a mod providing client-side scripting & integration with servers running Denizen (and Depenizen).
+# For more information, see the GitHub repository: https://github.com/DenizenScript/Clientizen
+Clientizen:
+  # Whether server-side Clientizen support should be enabled.
+  # This controls things like the server sending Clientizen clients scripts, receiving events from clients, etc.
+  # Disabling this setting will override all other Clientizen settings.
+  enabled: false
+  # Whether the server should listen to clients sending the server events, see the 'clientizen event' script event.
+  process events: true
+  # The maximum length (in bytes) for packets received from clients. Any packets exceeding this length will be refused.
+  max packet length: 10000

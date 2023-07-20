@@ -1,12 +1,13 @@
 package com.denizenscript.depenizen.bukkit;
 
 import com.denizenscript.denizen.Denizen;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.debugging.DebugSubmitter;
 import com.denizenscript.depenizen.bukkit.bridges.*;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
+import com.denizenscript.depenizen.bukkit.clientizen.ClientizenBridge;
 import com.denizenscript.depenizen.bukkit.utilities.BridgeLoadException;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
@@ -40,6 +41,7 @@ public class Depenizen extends JavaPlugin {
             Debug.echoError("Cannot load Depenizen-Bungee bridge: Internal exception was thrown!");
             Debug.echoError(ex);
         }
+        checkLoadClientizenBridge();
         DebugSubmitter.debugHeaderLines.add(() -> "Depenizen Bridges loaded (" + loadedBridges.size() + "): " + ChatColor.DARK_GREEN + String.join(", ", loadedBridges.keySet()));
         Debug.log("Depenizen loaded! <A>" + loadedBridges.size() + "<W> plugin bridge(s) loaded (of <A>" + allBridges.size() + "<W> available)");
     }
@@ -60,6 +62,12 @@ public class Depenizen extends JavaPlugin {
         }
         new BungeeBridge().init(bungeeServer, getConfig().getInt("Bungee server port", 25565));
         Debug.log("Loaded bungee bridge!");
+    }
+
+    public void checkLoadClientizenBridge() {
+        if (getConfig().getBoolean("Clientizen.enabled")) {
+            ClientizenBridge.init();
+        }
     }
 
     public void loadBridge(String name, Supplier<Bridge> bridgeSupplier) {

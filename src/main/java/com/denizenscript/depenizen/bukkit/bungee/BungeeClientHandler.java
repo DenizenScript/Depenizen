@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bungee;
 
 import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyCommandPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ControlsProxyPingPacketOut;
@@ -9,7 +10,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
 import org.bukkit.Bukkit;
 
 public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
@@ -53,7 +53,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
 
     public Stage currentStage = Stage.AWAIT_HEADER;
 
-    public PacketIn lastPacket;
+    public BungeePacketIn lastPacket;
 
     public void reallocateBuf(ChannelHandlerContext ctx) {
         ByteBuf newBuf = ctx.alloc().buffer(32);
@@ -124,7 +124,7 @@ public class BungeeClientHandler extends ChannelInboundHandlerAdapter {
                 }
                 try {
                     BungeeBridge.instance.lastPacketReceived = CoreUtilities.monotonicMillis();
-                    PacketIn packet = BungeeBridge.instance.packets.get(packetId);
+                    BungeePacketIn packet = BungeeBridge.instance.packets.get(packetId);
                     packet.process(packetBuffer);
                     currentStage = Stage.AWAIT_HEADER;
                     reallocateBuf(ctx);

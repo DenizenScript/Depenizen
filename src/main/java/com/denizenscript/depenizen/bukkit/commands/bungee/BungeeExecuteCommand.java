@@ -1,16 +1,16 @@
 package com.denizenscript.depenizen.bukkit.commands.bungee;
 
+import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgDefaultNull;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgLinear;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgName;
 import com.denizenscript.denizencore.scripts.commands.generator.ArgPrefixed;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
-import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ExecuteCommandPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.ExecutePlayerCommandPacketOut;
 import com.denizenscript.depenizen.bukkit.bungee.packets.out.KeepAlivePacketOut;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 
 public class BungeeExecuteCommand extends AbstractCommand {
 
@@ -49,7 +49,7 @@ public class BungeeExecuteCommand extends AbstractCommand {
             Debug.echoError("Cannot BungeeExecute: bungee is not connected!");
             return;
         }
-        PacketOut packet;
+        BungeePacketOut packet;
         if (asPlayer == null || asPlayer.length() == 0) {
             packet = new ExecuteCommandPacketOut(command);
         }

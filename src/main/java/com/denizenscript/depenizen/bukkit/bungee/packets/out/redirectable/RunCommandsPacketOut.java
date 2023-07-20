@@ -1,11 +1,11 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.out.redirectable;
 
-import com.denizenscript.depenizen.bukkit.bungee.PacketOut;
+import com.denizenscript.depenizen.bukkit.bungee.BungeePacketOut;
 import io.netty.buffer.ByteBuf;
 
 import java.util.UUID;
 
-public class RunCommandsPacketOut extends PacketOut {
+public class RunCommandsPacketOut extends BungeePacketOut {
 
     public RunCommandsPacketOut(String commands, String defs, boolean shouldDebug, UUID playerUUID) {
         this.commands = commands;
