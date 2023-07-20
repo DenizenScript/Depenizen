@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.clientizen.network.packets;
 
+import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.clientizen.ClientizenEventScriptEvent;
 import com.denizenscript.depenizen.bukkit.clientizen.network.ClientizenPacketIn;
 import io.netty.buffer.ByteBuf;
@@ -9,9 +10,11 @@ import java.util.Map;
 
 public class FireEventPacketIn extends ClientizenPacketIn {
 
+    public static final boolean enabled = Depenizen.instance.getConfig().getBoolean("Clientizen.process events");
+
     @Override
     public void process(Player sender, ByteBuf data) {
-        if (ClientizenEventScriptEvent.instance.enabled) {
+        if (enabled && ClientizenEventScriptEvent.instance.enabled) {
             String id = readString(data, "Event ID");
             Map<String, String> contexts = readStringMap(data);
             if (id == null || contexts == null) {

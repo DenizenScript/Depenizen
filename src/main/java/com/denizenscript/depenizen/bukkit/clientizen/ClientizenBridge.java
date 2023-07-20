@@ -43,9 +43,7 @@ public class ClientizenBridge implements Listener {
         NetworkManager.registerInPacket(new ReceiveConfirmPacketIn());
         // Scripts features
         ScriptEvent.registerScriptEvent(ClientizenEventScriptEvent.class);
-        if (Depenizen.instance.getConfig().getBoolean("Clientizen.process events")) {
-            NetworkManager.registerInPacket(new FireEventPacketIn());
-        }
+        NetworkManager.registerInPacket(new FireEventPacketIn());
         DenizenCore.commandRegistry.registerCommand(ClientRunCommand.class);
 
         // <--[tag]
