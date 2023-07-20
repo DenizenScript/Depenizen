@@ -117,8 +117,8 @@ public class ClientRunCommand extends AbstractCommand {
         }
         Map<String, String> stringDefMap = Map.of();
         if (definitions != null) {
-            stringDefMap = new HashMap<>(definitions.map.size());
-            for (Map.Entry<StringHolder, ObjectTag> entry : definitions.map.entrySet()) {
+            stringDefMap = new HashMap<>(definitions.size());
+            for (Map.Entry<StringHolder, ObjectTag> entry : definitions.entrySet()) {
                 stringDefMap.put(entry.getKey().str, entry.getValue().savable());
             }
         }
