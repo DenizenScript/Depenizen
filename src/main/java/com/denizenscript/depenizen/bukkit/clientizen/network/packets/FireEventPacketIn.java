@@ -10,11 +10,11 @@ import java.util.Map;
 
 public class FireEventPacketIn extends ClientizenPacketIn {
 
-    public static final boolean enabled = Depenizen.instance.getConfig().getBoolean("Clientizen.process events");
+    public static final boolean ENABLED = Depenizen.instance.getConfig().getBoolean("Clientizen.process events");
 
     @Override
     public void process(Player sender, ByteBuf data) {
-        if (enabled && ClientizenEventScriptEvent.instance.enabled) {
+        if (ENABLED && ClientizenEventScriptEvent.instance.enabled) {
             String id = readString(data, "Event ID");
             Map<String, String> contexts = readStringMap(data);
             if (id == null || contexts == null) {
