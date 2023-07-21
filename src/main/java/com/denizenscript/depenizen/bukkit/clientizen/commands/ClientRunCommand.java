@@ -22,7 +22,7 @@ import java.util.Map;
 public class ClientRunCommand extends AbstractCommand {
 
     // <--[command]
-    // @Name Run
+    // @Name ClientRun
     // @Syntax clientrun [<script>] (path:<name>) (def.<name>:<value>) (defmap:<map>)
     // @Required 1
     // @Maximum -1

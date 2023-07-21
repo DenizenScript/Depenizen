@@ -14,7 +14,7 @@ import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.clientizen.commands.ClientRunCommand;
 import com.denizenscript.depenizen.bukkit.clientizen.network.NetworkManager;
 import com.denizenscript.depenizen.bukkit.clientizen.network.packets.FireEventPacketIn;
-import com.denizenscript.depenizen.bukkit.clientizen.network.packets.ReceiveConfirmPacketIn;
+import com.denizenscript.depenizen.bukkit.clientizen.network.packets.ReceiveConfirmationPacketIn;
 import com.denizenscript.depenizen.bukkit.clientizen.network.packets.SetScriptsPacketOut;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -40,10 +40,10 @@ public class ClientizenBridge implements Listener {
         clientizenFolder.mkdir();
         // Networking
         NetworkManager.init();
-        NetworkManager.registerInPacket(new ReceiveConfirmPacketIn());
+        NetworkManager.registerInPacket(new ReceiveConfirmationPacketIn());
+        NetworkManager.registerInPacket(new FireEventPacketIn());
         // Scripts features
         ScriptEvent.registerScriptEvent(ClientizenEventScriptEvent.class);
-        NetworkManager.registerInPacket(new FireEventPacketIn());
         DenizenCore.commandRegistry.registerCommand(ClientRunCommand.class);
 
         // <--[tag]
