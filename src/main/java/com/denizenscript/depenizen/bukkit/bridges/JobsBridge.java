@@ -12,7 +12,7 @@ import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.jobs.JobsCommand;
 import com.denizenscript.depenizen.bukkit.events.jobs.*;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
-import com.denizenscript.depenizen.bukkit.properties.jobs.JobsPlayerProperties;
+import com.denizenscript.depenizen.bukkit.properties.jobs.JobsPlayerExtensions;
 import com.gamingmesh.jobs.Jobs;
 
 public class JobsBridge extends Bridge {
@@ -32,7 +32,7 @@ public class JobsBridge extends Bridge {
         ScriptEvent.registerScriptEvent(JobsJobsLevelUpScriptEvent.class);
         ObjectFetcher.registerWithObjectFetcher(JobsJobTag.class, JobsJobTag.tagProcessor);
         DenizenCore.commandRegistry.registerCommand(JobsCommand.class);
-        JobsPlayerProperties.register();
+        JobsPlayerExtensions.register();
 
         // <--[tag]
         // @attribute <jobs>

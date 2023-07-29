@@ -6,7 +6,7 @@ import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.JobsPlayer;
 
-public class JobsPlayerProperties {
+public class JobsPlayerExtensions {
 
     public static void register() {
 
