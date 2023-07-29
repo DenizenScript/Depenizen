@@ -1,9 +1,17 @@
 package com.denizenscript.depenizen.bukkit.objects.jobs;
 
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.events.ScriptEvent;
-import com.denizenscript.denizencore.objects.*;
+import com.denizenscript.denizencore.objects.Adjustable;
+import com.denizenscript.denizencore.objects.Fetchable;
+import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
+import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.bridges.JobsBridge;
@@ -11,11 +19,8 @@ import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobProgression;
 import com.gamingmesh.jobs.container.JobsPlayer;
-import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
-import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.denizencore.tags.TagContext;
+
+import java.util.UUID;
 
 public class JobsJobTag implements ObjectTag, Adjustable {
 
@@ -51,16 +56,23 @@ public class JobsJobTag implements ObjectTag, Adjustable {
             return null;
         }
         int comma = string.indexOf(',');
-        PlayerTag player = null;
+        UUID playerUUID = null;
         if (comma > 0) {
-            player = PlayerTag.valueOf(string.substring(0, comma), context);
-            string = string.substring(comma + 1);
+            try {
+                playerUUID = UUID.fromString(string.substring(0, comma));
+                string = string.substring(comma + 1);
+            }
+            catch (IllegalArgumentException iae) {
+                if (context == null || context.showErrors()) {
+                    Debug.echoError("valueOf JobsJobTag returning null: Invalid UUID '" + string.substring(0, comma) + "' specified.");
+                }
+                return null;
+            }
         }
         JobsJobTag job = new JobsJobTag(Jobs.getJob(string)); // TODO maybe
-        if (player != null) {
-            if (player.isValid()) {
-                job.setOwner(player);
-            } else {
+        if (playerUUID != null) {
+            job.setOwner(playerUUID);
+            if (!job.hasOwner()) {
                 Debug.echoError("Player specified in JobsJobTag is not valid");
             }
         }
@@ -109,15 +121,18 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         return jobOwner != null;
     }
 
-    public PlayerTag getOwner() {
+    public UUID getOwner() {
         if (jobOwner == null) {
             return null;
         }
-        return new PlayerTag(jobOwner.getUniqueId());
+        return jobOwner.getUniqueId();
     }
 
-    public void setOwner(PlayerTag player) {
-        this.jobOwner = Jobs.getPlayerManager().getJobsPlayer(player.getUUID());
+    public void setOwner(UUID playerUUID) {
+        this.jobOwner = Jobs.getPlayerManager().getJobsPlayer(playerUUID);
+        if (jobOwner == null) {
+            return;
+        }
         this.jobProgression = jobOwner.getJobProgression(job);
     }
 
@@ -268,7 +283,8 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // Returns the player the job progression for this tag belongs to.
         // -->
         tagProcessor.registerTag(PlayerTag.class, "player", (attribute, object) -> {
-            return object.getOwner();
+            UUID ownerUUID = object.getOwner();
+            return ownerUUID != null ? new PlayerTag(ownerUUID) : null;
         });
 
         // <--[mechanism]
