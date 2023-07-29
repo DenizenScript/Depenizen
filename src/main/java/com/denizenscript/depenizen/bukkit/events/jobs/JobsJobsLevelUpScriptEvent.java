@@ -40,8 +40,7 @@ public class JobsJobsLevelUpScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public boolean matches(ScriptPath path) {
-        if (!path.eventArgLowerAt(4).equals("job")
-                && !runGenericCheck(path.eventArgAt(4), job.getJob().getName())) {
+        if (!path.tryArgObject(4, job)) {
             return false;
         }
         return super.matches(path);
@@ -49,12 +48,10 @@ public class JobsJobsLevelUpScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "job":
-                return job;
-            default:
-                return super.getContext(name);
-        }
+        return switch (name) {
+            case "job" -> job;
+            default -> super.getContext(name);
+        };
     }
 
     @Override

@@ -2,24 +2,26 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.denizencore.utilities.debugging.SlowWarning;
-import com.denizenscript.depenizen.bukkit.events.jobs.*;
+import com.denizenscript.denizencore.utilities.debugging.Warning;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.jobs.JobsCommand;
+import com.denizenscript.depenizen.bukkit.events.jobs.*;
 import com.denizenscript.depenizen.bukkit.objects.jobs.JobsJobTag;
-import com.gamingmesh.jobs.Jobs;
-import com.gamingmesh.jobs.container.Job;
-import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.depenizen.bukkit.properties.jobs.JobsPlayerProperties;
-import com.denizenscript.denizencore.tags.TagManager;
+import com.gamingmesh.jobs.Jobs;
 
 public class JobsBridge extends Bridge {
 
-    public static SlowWarning deprecatedJobsConstructor = new SlowWarning("jobsDeprecatedConstructor", "The 'jobs' constructor from Depenizen/Jobs is deprecated: use 'jobs_job'");
+    public static Warning jobsDeprecatedConstructor = new SlowWarning("jobsDeprecatedConstructor", "The 'jobs' constructor from Depenizen/Jobs is deprecated: use 'jobs_job'");
+    public static Warning jobsNameShort = new SlowWarning("jobsNameShort", "The tag 'JobsJobTag.name.short' from Depenizen/Jobs is deprecated: use 'JobsJobTag.short_name'");
+    public static Warning jobsXpLevel = new SlowWarning("jobsXpLevel", "The tag 'JobsJobTag.xp.level' from Depenizen/Jobs is deprecated: use 'JobsJobTag.level'");
+    public static Warning jobsXpMax = new SlowWarning("jobsXpMax", "The tag 'JobsJobTag.xp.max' from Depenizen/Jobs is deprecated: use 'JobsJobTag.max_xp'");
+    public static Warning jobsSingleLineDescription = new SlowWarning("jobsSingleLineDescription", "'JobsJobTag.description' is deprecated, as single-line descriptions are deprecated in Jobs. Use 'JobsJobTag.full_description' instead.");
 
     @Override
     public void init() {
@@ -29,7 +31,8 @@ public class JobsBridge extends Bridge {
         ScriptEvent.registerScriptEvent(JobsJobsLeaveScriptEvent.class);
         ScriptEvent.registerScriptEvent(JobsJobsLevelUpScriptEvent.class);
         ObjectFetcher.registerWithObjectFetcher(JobsJobTag.class, JobsJobTag.tagProcessor);
-        PropertyParser.registerProperty(JobsPlayerProperties.class, PlayerTag.class);
+        DenizenCore.commandRegistry.registerCommand(JobsCommand.class);
+        JobsPlayerProperties.register();
 
         // <--[tag]
         // @attribute <jobs>
@@ -40,14 +43,10 @@ public class JobsBridge extends Bridge {
         // -->
         TagManager.registerTagHandler(ObjectTag.class, "jobs", (attribute) -> {
             if (attribute.hasParam()) {
-                deprecatedJobsConstructor.warn(attribute.context);
+                jobsDeprecatedConstructor.warn(attribute.context);
                 return JobsJobTag.valueOf(attribute.getParam(), attribute.context);
             }
-            ListTag jobsList = new ListTag();
-            for (Job job : Jobs.getJobs()) {
-                jobsList.addObject(new JobsJobTag(job));
-            }
-            return jobsList;
+            return new ListTag(Jobs.getJobs(), JobsJobTag::new);
         });
 
         // <--[tag]
@@ -57,12 +56,6 @@ public class JobsBridge extends Bridge {
         // @description
         // Returns the job tag with the given name.
         // -->
-        TagManager.registerTagHandler(JobsJobTag.class, "jobs_job", attribute -> {
-            if (attribute.hasParam()) {
-                return JobsJobTag.valueOf(attribute.getParam(), attribute.context);
-            }
-            return null;
-        });
-        DenizenCore.commandRegistry.registerCommand(JobsCommand.class);
+        TagManager.registerTagHandler(JobsJobTag.class, JobsJobTag.class, "jobs_job", (attribute, param) -> param);
     }
 }
