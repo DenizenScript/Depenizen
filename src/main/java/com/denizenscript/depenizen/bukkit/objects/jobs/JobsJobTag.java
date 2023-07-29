@@ -69,14 +69,21 @@ public class JobsJobTag implements ObjectTag, Adjustable {
                 return null;
             }
         }
-        JobsJobTag job = new JobsJobTag(Jobs.getJob(string)); // TODO maybe
+        Job job = Jobs.getJob(string);
+        if (job == null) {
+            if (context == null || context.showErrors()) {
+                Debug.echoError("valueOf JobsJobTag returning null: Invalid job '" + string + "' specified.");
+            }
+            return null;
+        }
+        JobsJobTag jobTag = new JobsJobTag(job);
         if (playerUUID != null) {
-            job.setOwner(playerUUID);
-            if (!job.hasOwner()) {
+            jobTag.setOwner(playerUUID);
+            if (!jobTag.hasOwner()) {
                 Debug.echoError("Player specified in JobsJobTag is not valid");
             }
         }
-        return job;
+        return jobTag;
     }
 
     public static boolean matches(String arg) {
