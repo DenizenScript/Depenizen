@@ -30,7 +30,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
     // @base ElementTag
     // @format
     // The identity format for jobs is the player UUID (optional), followed by the job name
-    // For example: job@05f57b6e-77ba-4546-b214-b58dacc30356,job_name
+    // For example: job@460e96b9-7a0e-416d-b2c3-4508164b8b1b,job_name
     // Or: job@job_name
     //
     // @plugin Depenizen, Jobs
