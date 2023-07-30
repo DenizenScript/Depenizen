@@ -1,23 +1,28 @@
 package com.denizenscript.depenizen.bukkit.objects.jobs;
 
-import com.denizenscript.denizencore.objects.*;
+import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.events.ScriptEvent;
+import com.denizenscript.denizencore.objects.Adjustable;
+import com.denizenscript.denizencore.objects.Fetchable;
+import com.denizenscript.denizencore.objects.Mechanism;
+import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
+import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.denizenscript.denizencore.utilities.debugging.SlowWarning;
+import com.denizenscript.depenizen.bukkit.bridges.JobsBridge;
 import com.gamingmesh.jobs.Jobs;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobProgression;
 import com.gamingmesh.jobs.container.JobsPlayer;
-import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
-import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.denizencore.tags.TagContext;
+
+import java.util.UUID;
 
 public class JobsJobTag implements ObjectTag, Adjustable {
-    public static ObjectTagProcessor<JobsJobTag> tagProcessor = new ObjectTagProcessor<>();
 
     // <--[ObjectType]
     // @name JobsJobTag
@@ -25,13 +30,17 @@ public class JobsJobTag implements ObjectTag, Adjustable {
     // @base ElementTag
     // @format
     // The identity format for jobs is the player UUID (optional), followed by the job name
-    // For example: job@05f57b6e-77ba-4546-b214-b58dacc30356,job_name
+    // For example: job@460e96b9-7a0e-416d-b2c3-4508164b8b1b,job_name
     // Or: job@job_name
     //
     // @plugin Depenizen, Jobs
     // @description
     // A JobsJobTag represents a Jobs job, with a player's progression if specified.
     //
+    // @Matchable
+    // JobsJobTag matchers, sometimes identified as "<job>":
+    // "job" plaintext: always matches.
+    // Job name: matches if the job name matches the input, using advanced matchers.
     // -->
 
     /////////////////////
@@ -43,32 +52,42 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         if (string.startsWith("job@")) {
             string = string.substring("job@".length());
         }
-        if (string.contains("@")) {
+        int comma = string.indexOf(',');
+        UUID playerUUID = null;
+        if (comma > 0) {
+            try {
+                playerUUID = UUID.fromString(string.substring(0, comma));
+                string = string.substring(comma + 1);
+            }
+            catch (IllegalArgumentException iae) {
+                if (context == null || context.showErrors()) {
+                    Debug.echoError("valueOf JobsJobTag returning null: Invalid UUID '" + string.substring(0, comma) + "' specified.");
+                }
+                return null;
+            }
+        }
+        Job job = Jobs.getJob(string);
+        if (job == null) {
+            if (context == null || context.showErrors()) {
+                Debug.echoError("valueOf JobsJobTag returning null: Invalid job '" + string + "' specified.");
+            }
             return null;
         }
-        int comma = string.indexOf(',');
-        PlayerTag player = null;
-        if (comma > 0) {
-            //player = new PlayerTag(UUID.fromString(string.substring(0, comma)));
-            player = PlayerTag.valueOf(string.substring(0, comma), context);
-            string = string.substring(comma + 1);
-        }
-        JobsJobTag job = new JobsJobTag(Jobs.getJob(string));
-        if (player != null) {
-            if (player.isValid()) {
-                job.setOwner(player);
-            } else {
+        JobsJobTag jobTag = new JobsJobTag(job);
+        if (playerUUID != null) {
+            jobTag.setOwner(playerUUID);
+            if (!jobTag.hasOwner()) {
                 Debug.echoError("Player specified in JobsJobTag is not valid");
             }
         }
-        return job;
+        return jobTag;
     }
 
     public static boolean matches(String arg) {
-        if (valueOf(arg, CoreUtilities.noDebugContext) != null) {
+        if (arg.startsWith("job@")) {
             return true;
         }
-        return false;
+        return valueOf(arg, CoreUtilities.noDebugContext) != null;
     }
 
     /////////////////////
@@ -106,15 +125,18 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         return jobOwner != null;
     }
 
-    public PlayerTag getOwner() {
+    public UUID getOwner() {
         if (jobOwner == null) {
             return null;
         }
-        return new PlayerTag(jobOwner.playerUUID);
+        return jobOwner.getUniqueId();
     }
 
-    public void setOwner(PlayerTag player) {
-        this.jobOwner = Jobs.getPlayerManager().getJobsPlayer(player.getName());
+    public void setOwner(UUID playerUUID) {
+        this.jobOwner = Jobs.getPlayerManager().getJobsPlayer(playerUUID);
+        if (jobOwner == null) {
+            return;
+        }
         this.jobProgression = jobOwner.getJobProgression(job);
     }
 
@@ -122,58 +144,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
     //   ObjectTag Methods
     /////////////////
 
-    private String prefix = "Job";
-
-    @Override
-    public String getPrefix() {
-        return prefix;
-    }
-
-    @Override
-    public ObjectTag setPrefix(String prefix) {
-        this.prefix = prefix;
-        return this;
-    }
-
-    @Override
-    public boolean isUnique() {
-        return true;
-    }
-
-    @Override
-    public String identify() {
-        if (jobOwner != null) {
-            return "job@" + jobOwner.playerUUID + "," + job.getName();
-        }
-        return "job@" + job.getName();
-    }
-
-    @Override
-    public String identifySimple() {
-        return identify();
-    }
-
-    @Override
-    public String toString() {
-        return identify();
-    }
-
-    @Override
-    public ObjectTag getObjectAttribute(Attribute attribute) {
-        return tagProcessor.getObjectAttribute(this, attribute);
-    }
-
-    public static SlowWarning nameShortTag = new SlowWarning("jobsNameShort", "The tag 'JobsJobTag.name.short' from Depenizen/Jobs is deprecated: use 'JobsJobTag.short_name'");
-    public static SlowWarning xpLevelTag = new SlowWarning("jobsXpLevel", "The tag 'JobsJobTag.xp.level' from Depenizen/Jobs is deprecated: use 'JobsJobTag.level'");
-    public static SlowWarning xpMaxTag = new SlowWarning("jobsXpMax", "The tag 'JobsJobTag.xp.max' from Depenizen/Jobs is deprecated: use 'JobsJobTag.max_xp'");
-
-    @Override
-    public void applyProperty(Mechanism mechanism) {
-        mechanism.echoError("Cannot apply Properties to a Jobs Job!");
-    }
-
     public static void register() {
-        PropertyParser.registerPropertyTagHandlers(JobsJobTag.class, tagProcessor);
 
         // <--[tag]
         // @attribute <JobsJobTag.description>
@@ -184,7 +155,8 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // Single line description is deprecated in Jobs. Use <@link tag JobsJobTag.full_description> instead.
         // -->
         tagProcessor.registerTag(ElementTag.class, "description", (attribute, object) -> {
-            return new ElementTag(object.getJob().getDescription());
+            JobsBridge.jobsSingleLineDescription.warn(attribute.context);
+            return new ElementTag(object.getJob().getDescription(), true);
         });
 
         // <--[tag]
@@ -195,7 +167,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // Returns the full description of the job.
         // -->
         tagProcessor.registerTag(ListTag.class, "full_description", (attribute, object) -> {
-            return new ListTag(object.getJob().getFullDescription());
+            return new ListTag(object.getJob().getFullDescription(), true);
         });
 
         // <--[tag]
@@ -216,11 +188,11 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // -->
         tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
             if (attribute.startsWith("short", 2)) {
-                nameShortTag.warn(attribute.context);
+                JobsBridge.jobsNameShort.warn(attribute.context);
                 attribute.fulfill(1);
-                return new ElementTag(object.getJob().getShortName());
+                return new ElementTag(object.getJob().getShortName(), true);
             }
-            return new ElementTag(object.getJob().getName());
+            return new ElementTag(object.getJob().getName(), true);
         });
 
         // <--[tag]
@@ -231,7 +203,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // Returns the shortened name of the job.
         // -->
         tagProcessor.registerTag(ElementTag.class, "short_name", (attribute, object) -> {
-            return new ElementTag(object.getJob().getShortName());
+            return new ElementTag(object.getJob().getShortName(), true);
         });
 
         // <--[tag]
@@ -261,20 +233,20 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // Returns the current experience a player has for the current level in a specified job.
         // -->
         tagProcessor.registerTag(ElementTag.class, "xp", (attribute, object) -> {
-            if (object.jobProgression != null) {
-                if (attribute.startsWith("max", 2)) {
-                    xpMaxTag.warn(attribute.context);
-                    attribute.fulfill(1);
-                    return new ElementTag(object.jobProgression.getMaxExperience());
-                }
-                if (attribute.startsWith("level", 2)) {
-                    xpLevelTag.warn(attribute.context);
-                    attribute.fulfill(1);
-                    return new ElementTag(object.jobProgression.getLevel());
-                }
-                return new ElementTag(object.jobProgression.getExperience());
+            if (object.jobProgression == null) {
+                return null;
             }
-            return null;
+            if (attribute.startsWith("max", 2)) {
+                JobsBridge.jobsXpMax.warn(attribute.context);
+                attribute.fulfill(1);
+                return new ElementTag(object.jobProgression.getMaxExperience());
+            }
+            if (attribute.startsWith("level", 2)) {
+                JobsBridge.jobsXpLevel.warn(attribute.context);
+                attribute.fulfill(1);
+                return new ElementTag(object.jobProgression.getLevel());
+            }
+            return new ElementTag(object.jobProgression.getExperience());
         });
 
         // <--[tag]
@@ -285,10 +257,7 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // Returns the current level a player has in a specified job.
         // -->
         tagProcessor.registerTag(ElementTag.class, "level", (attribute, object) -> {
-            if (object.jobProgression != null) {
-                return new ElementTag(object.jobProgression.getLevel());
-            }
-            return null;
+            return object.jobProgression != null ? new ElementTag(object.jobProgression.getLevel()) : null;
         });
 
         // <--[tag]
@@ -300,13 +269,13 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // If the level is not specified, uses the current level of the player.
         // -->
         tagProcessor.registerTag(ElementTag.class, "max_xp", (attribute, object) -> {
-            if (object.jobProgression != null) {
-                if (attribute.hasParam()) {
-                    return new ElementTag(object.jobProgression.getMaxExperience(attribute.getIntParam()));
-                }
-                return new ElementTag(object.jobProgression.getMaxExperience());
+            if (object.jobProgression == null) {
+                return null;
             }
-            return null;
+            if (attribute.hasParam()) {
+                return new ElementTag(object.jobProgression.getMaxExperience(attribute.getIntParam()));
+            }
+            return new ElementTag(object.jobProgression.getMaxExperience());
         });
 
         // <--[tag]
@@ -317,12 +286,9 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // Returns the player the job progression for this tag belongs to.
         // -->
         tagProcessor.registerTag(PlayerTag.class, "player", (attribute, object) -> {
-            return object.getOwner();
+            UUID ownerUUID = object.getOwner();
+            return ownerUUID != null ? new PlayerTag(ownerUUID) : null;
         });
-    }
-
-    @Override
-    public void adjust(Mechanism mechanism) {
 
         // <--[mechanism]
         // @object JobsJobTag
@@ -334,15 +300,86 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         // @tags
         // <JobsJobTag.xp>
         // -->
-        if (!mechanism.isProperty && mechanism.matches("xp") && mechanism.requireDouble()) {
-            if (jobProgression == null) {
+        tagProcessor.registerMechanism("xp", false, ElementTag.class, (object, mechanism, input) -> {
+            if (!mechanism.requireDouble()) {
+                return;
+            }
+            if (object.jobProgression == null) {
                 mechanism.echoError("This mechanism requires the object to be linked to a player.");
                 return;
             }
-            jobProgression.setExperience(mechanism.getValue().asDouble());
-        }
+            object.jobProgression.setExperience(input.asDouble());
+        });
+    }
 
+    public static final ObjectTagProcessor<JobsJobTag> tagProcessor = new ObjectTagProcessor<>();
+
+    @Override
+    public ObjectTag getObjectAttribute(Attribute attribute) {
+        return tagProcessor.getObjectAttribute(this, attribute);
+    }
+
+    @Override
+    public void adjust(Mechanism mechanism) {
         tagProcessor.processMechanism(this, mechanism);
-        CoreUtilities.autoPropertyMechanism(this, mechanism);
+    }
+
+    @Override
+    public void applyProperty(Mechanism mechanism) {
+        mechanism.echoError("Cannot apply Properties to a Jobs Job!");
+    }
+
+    @Override
+    public String identify() {
+        return identify("job@", ",");
+    }
+
+    @Override
+    public String debuggable() {
+        return identify("<LG>job@<Y>", "<LG>,<Y>");
+    }
+
+    public String identify(String prefix, String separator) {
+        if (jobOwner != null) {
+            return prefix + jobOwner.getUniqueId() + separator + job.getName();
+        }
+        return prefix + job.getName();
+    }
+
+    @Override
+    public String identifySimple() {
+        return identify();
+    }
+
+    @Override
+    public String toString() {
+        return identify();
+    }
+
+    @Override
+    public boolean advancedMatches(String matcher) {
+        String lowerMatcher = CoreUtilities.toLowerCase(matcher);
+        if (lowerMatcher.equals("job")) {
+            return true;
+        }
+        return ScriptEvent.createMatcher(lowerMatcher).doesMatch(getJob().getName());
+    }
+
+    @Override
+    public boolean isUnique() {
+        return true;
+    }
+
+    private String prefix = "Job";
+
+    @Override
+    public String getPrefix() {
+        return prefix;
+    }
+
+    @Override
+    public ObjectTag setPrefix(String prefix) {
+        this.prefix = prefix;
+        return this;
     }
 }
