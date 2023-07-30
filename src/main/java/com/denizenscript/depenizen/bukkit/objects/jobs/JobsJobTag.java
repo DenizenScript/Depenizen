@@ -52,9 +52,6 @@ public class JobsJobTag implements ObjectTag, Adjustable {
         if (string.startsWith("job@")) {
             string = string.substring("job@".length());
         }
-        if (string.contains("@")) {
-            return null;
-        }
         int comma = string.indexOf(',');
         UUID playerUUID = null;
         if (comma > 0) {
