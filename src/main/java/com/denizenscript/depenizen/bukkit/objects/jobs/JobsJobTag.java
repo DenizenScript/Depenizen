@@ -148,7 +148,6 @@ public class JobsJobTag implements ObjectTag, Adjustable {
     /////////////////
 
     public static void register() {
-        PropertyParser.registerPropertyTagHandlers(JobsJobTag.class, tagProcessor);
 
         // <--[tag]
         // @attribute <JobsJobTag.description>
