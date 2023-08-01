@@ -1,47 +1,171 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.ObjectTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.tags.PseudoObjectTagBase;
 import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.utilities.text.StringHolder;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSignalCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSkillCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicThreatCommand;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
-import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDespawnEvent;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsSpawnEvent;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
+import io.lumine.mythic.api.mobs.MobManager;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.items.ItemExecutor;
 import io.lumine.mythic.core.items.MythicItem;
 import io.lumine.mythic.core.mobs.ActiveMob;
-import io.lumine.mythic.core.mobs.MobExecutor;
 import io.lumine.mythic.core.skills.variables.*;
 import io.lumine.mythic.core.spawning.spawners.MythicSpawner;
 import io.lumine.mythic.core.spawning.spawners.SpawnerManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class MythicMobsBridge extends Bridge {
+
+    static class MythicMobsBridgeTags extends PseudoObjectTagBase<MythicMobsBridgeTags> {
+
+        public static MythicMobsBridgeTags instance;
+
+        public MythicMobsBridgeTags() {
+            instance = this;
+            TagManager.registerStaticTagBaseHandler(MythicMobsBridgeTags.class, "mythicmobs", (t) -> instance);
+        }
+
+        @Override
+        public void register() {
+
+            // <--[tag]
+            // @attribute <mythicmobs.item_ids>
+            // @returns ListTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a ListTag of valid MythicItem IDs. See also <@link tag mythic_item>.
+            // -->
+            tagProcessor.registerTag(ListTag.class, "item_ids", (attribute, object) -> {
+                return new ListTag(getItemManager().getItemNames(), true);
+            });
+
+            // <--[tag]
+            // @attribute <mythicmobs.skills>
+            // @returns ListTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a ListTag of valid MythicSkill IDs.
+            // -->
+            tagProcessor.registerTag(ListTag.class, "skills", (attribute, object) -> {
+                return new ListTag(getSkillNames(), true);
+            });
+
+            // <--[tag]
+            // @attribute <mythicmobs.mob_ids>
+            // @returns ListTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a ListTag of valid MythicMob IDs.
+            // -->
+            tagProcessor.registerTag(ListTag.class, "mob_ids", (attribute, object) -> {
+                return new ListTag(getMobManager().getMobNames(), true);
+            });
+
+            // <--[tag]
+            // @attribute <mythicmobs.active_mobs>
+            // @returns ListTag(MythicMobsMobTag)
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a ListTag of all active MythicMobs on the server.
+            // -->
+            tagProcessor.registerTag(ListTag.class, "active_mobs", (attribute, object) -> {
+                return new ListTag(getMobManager().getActiveMobs(), MythicMobsMobTag::new);
+            });
+
+            // <--[tag]
+            // @attribute <mythicmobs.spawners>
+            // @returns ListTag(MythicSpawnerTag)
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a ListTag of all MythicSpawners.
+            // -->
+            tagProcessor.registerTag(ListTag.class, "spawners", (attribute, object) -> {
+                return new ListTag(getSpawnerManager().getSpawners(), MythicSpawnerTag::new);
+            });
+
+            // <--[tag]
+            // @attribute <mythicmobs.damage_modifiers[<mob_id>]>
+            // @returns MapTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a map of the damage modifiers for a MythicMob from a Mob ID.
+            // -->
+            tagProcessor.registerTag(MapTag.class, ElementTag.class, "damage_modifiers", (attribute, object, id) -> {
+                MythicMob mob = getMythicMob(id.asString());
+                if (mob == null) {
+                    return null;
+                }
+                return new MapTag(mob.getDamageModifiers().entrySet().stream().map((e) -> Map.entry(new StringHolder(e.getKey()), new ElementTag(e.getValue()))).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+            });
+
+            // <--[tag]
+            // @attribute <mythicmobs.mob_path[<mob_id>]>
+            // @returns ElementTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns the path to the configuration file for the MythicMob from a Mob ID.
+            // -->
+            tagProcessor.registerTag(ElementTag.class, ElementTag.class, "mob_path", (attribute, object, id) -> {
+                MythicMob mob = getMythicMob(id.asString());
+                if (mob == null) {
+                    return null;
+                }
+                return new ElementTag(mob.getConfig().getFile().getPath(), true);
+            });
+
+            // <--[tag]
+            // @attribute <mythicmobs.item_path[<item_id>]>
+            // @returns ElementTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns the path to the configuration file for the MythicItem from an Item ID.
+            // -->
+            tagProcessor.registerTag(ElementTag.class, ElementTag.class, "item_path", (attribute, object, id) -> {
+                Optional<MythicItem> item = getItemManager().getItem(id.asString());
+                return item.map(mythicItem -> new ElementTag(mythicItem.getConfig().getFile().getPath(), true)).orElse(null);
+            });
+
+            // <--[tag]
+            // @attribute <mythicmobs.packs>
+            // @returns ListTag
+            // @plugin Depenizen, MythicMobs
+            // @description
+            // Returns a list of all Mythic pack IDs.
+            // -->
+            tagProcessor.registerTag(ListTag.class, "packs", (attribute, object) -> new ListTag(MythicBukkit.inst().getPackManager().getPacks(), (pack) -> new ElementTag(pack.getName())));
+        }
+    }
 
     @Override
     public void init() {
@@ -51,45 +175,12 @@ public class MythicMobsBridge extends Bridge {
         PropertyParser.registerProperty(MythicMobsPlayerProperties.class, PlayerTag.class);
         ScriptEvent.registerScriptEvent(MythicMobsDeathEvent.class);
         ScriptEvent.registerScriptEvent(MythicMobsSpawnEvent.class);
-        ScriptEvent.registerScriptEvent(MythicMobsDespawnEvent.class);
         DenizenCore.commandRegistry.registerCommand(MythicSpawnCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicThreatCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSkillCommand.class);
         new MythicMobsLoaders().RegisterEvents();
-
-        EntityTag.tagProcessor.custommatchers.add((entityTag, matcher) -> {
-            if (matcher.equals("mythic_mob")) {
-                return entityTag.getUUID() != null && getMobManager().isActiveMob(entityTag.getUUID());
-            }
-            if (matcher.startsWith("mythic_mob:")) {
-                Entity entity = entityTag.getBukkitEntity();
-                ActiveMob activeMob = entity != null ? getActiveMob(entity) : null;
-                return activeMob != null && ScriptEvent.runGenericCheck(matcher.substring("mythic_mob:".length()), activeMob.getType().getInternalName());
-            }
-            return null;
-        });
-        ItemTag.tagProcessor.custommatchers.add((itemTag, matcher) -> {
-            if (matcher.equals("mythic_item")) {
-                return MythicBukkit.inst().getItemManager().isMythicItem(itemTag.getItemStack());
-            }
-            if (matcher.startsWith("mythic_item:")) {
-                String mythicID = MythicBukkit.inst().getItemManager().getMythicTypeFromItem(itemTag.getItemStack());
-                return mythicID != null && ScriptEvent.runGenericCheck(matcher.substring("mythic_item:".length()), mythicID);
-            }
-            return null;
-        });
-
-        // <--[data]
-        // @name not_switches
-        // @values mythic_mob, mythic_item
-        // -->
-        ScriptEvent.ScriptPath.notSwitches.add("mythic_mob");
-        EntityTag.specialEntityMatchables.add("mythic_mob");
-        BukkitScriptEvent.entityCouldMatchPrefixes.add("mythic_mob");
-        ScriptEvent.ScriptPath.notSwitches.add("mythic_item");
-        BukkitScriptEvent.itemCouldMatchableText.add("mythic_item");
-        BukkitScriptEvent.itemCouldMatchPrefixes.add("mythic_item");
+        new MythicMobsBridgeTags();
 
         // <--[tag]
         // @attribute <mythic_item[<name>]>
@@ -105,7 +196,7 @@ public class MythicMobsBridge extends Bridge {
             }
             String name = attribute.getParam();
             Optional<MythicItem> itemOpt = MythicBukkit.inst().getItemManager().getItem(name);
-            if (!itemOpt.isPresent()) {
+            if (itemOpt.isEmpty()) {
                 attribute.echoError("'" + name + "' is not a valid Mythic item.");
                 return null;
             }
@@ -144,41 +235,6 @@ public class MythicMobsBridge extends Bridge {
             }
             return MythicSpawnerTag.valueOf(attribute.getParam(), attribute.context);
         });
-
-        TagManager.registerTagHandler(ObjectTag.class, "mythicmobs", (attribute) -> {
-            attribute.fulfill(1);
-
-            // <--[tag]
-            // @attribute <mythicmobs.active_mobs>
-            // @returns ListTag(MythicMobsMobTag)
-            // @plugin Depenizen, MythicMobs
-            // @description
-            // Returns a ListTag of all active MythicMobs on the server.
-            // -->
-            if (attribute.startsWith("active_mobs")) {
-                ListTag list = new ListTag();
-                for (ActiveMob entity : MythicMobsBridge.getMobManager().getActiveMobs()) {
-                    list.addObject(new MythicMobsMobTag(entity));
-                }
-                return list;
-            }
-
-            // <--[tag]
-            // @attribute <mythicmobs.spawners>
-            // @returns ListTag(MythicSpawnerTag)
-            // @plugin Depenizen, MythicMobs
-            // @description
-            // Returns a ListTag of all MythicSpawners.
-            // -->
-            else if (attribute.startsWith("spawners")) {
-                ListTag list = new ListTag();
-                for (MythicSpawner spawner : MythicMobsBridge.getSpawnerManager().getSpawners()) {
-                    list.addObject(new MythicSpawnerTag(spawner));
-                }
-                return list;
-            }
-            return null;
-        });
     }
 
     public static boolean isMythicMob(Entity entity) {
@@ -197,7 +253,7 @@ public class MythicMobsBridge extends Bridge {
         return MythicBukkit.inst().getMobManager().getMythicMob(name).orElse(null);
     }
 
-    public static MobExecutor getMobManager() {
+    public static MobManager getMobManager() {
         return MythicBukkit.inst().getMobManager();
     }
 
@@ -218,7 +274,8 @@ public class MythicMobsBridge extends Bridge {
     }
 
     public static String getMythicVariable(Entity entity, String key) {
-        return getMythicVariableMap(entity).get(key).toString();
+        Object value = getMythicVariableMap(entity).get(key);
+        return value == null ? null : value.toString();
     }
 
     public static Map<String, Variable> getMythicVariableMap(Entity entity) {
@@ -233,6 +290,7 @@ public class MythicMobsBridge extends Bridge {
         VariableType varType = VariableType.valueOf(type);
         registry.put(variable, Variable.ofType(varType, value));
     }
+
     public static void setMythicVariableMap(Entity entity, Map<String, Variable> map) {
         VariableManager variables = MythicBukkit.inst().getVariableManager();
         VariableRegistry registry = variables.getRegistry(VariableScope.TARGET, BukkitAdapter.adapt(entity));
@@ -242,7 +300,11 @@ public class MythicMobsBridge extends Bridge {
         registry.putAll(map);
     }
 
-    public static boolean skillExists(String name) {
-        return MythicBukkit.inst().getSkillManager().getSkillNames().contains(name);
+    public static ItemExecutor getItemManager() {
+        return MythicBukkit.inst().getItemManager();
+    }
+
+    public static Collection<String> getSkillNames() {
+        return MythicBukkit.inst().getSkillManager().getSkillNames();
     }
 }

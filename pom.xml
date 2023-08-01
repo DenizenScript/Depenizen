@@ -222,7 +222,7 @@
         <dependency>
             <groupId>io.lumine.xikage</groupId>
             <artifactId>mythicmobs</artifactId>
-            <version>5.2.1</version>
+            <version>5.3.5</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/MythicMobs.jar</systemPath>
         </dependency>
