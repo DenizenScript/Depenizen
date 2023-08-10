@@ -1,59 +1,19 @@
 package com.denizenscript.depenizen.bukkit.properties.luckperms;
 
-import com.denizenscript.denizencore.objects.properties.Property;
-import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.depenizen.bukkit.bridges.LuckPermsBridge;
-import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrackTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.depenizen.bukkit.bridges.LuckPermsBridge;
+import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsGroupTag;
+import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrackTag;
 import net.luckperms.api.model.group.Group;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.NodeType;
 import net.luckperms.api.query.QueryOptions;
 import net.luckperms.api.track.Track;
 
-public class LuckPermsPlayerProperties implements Property {
+public class LuckPermsPlayerExtensions {
 
-    @Override
-    public String getPropertyString() {
-        return null;
-    }
-
-    @Override
-    public String getPropertyId() {
-        return "LuckPermsPlayer";
-    }
-
-    public static boolean describes(ObjectTag object) {
-        return object instanceof PlayerTag;
-    }
-
-    public static LuckPermsPlayerProperties getFrom(ObjectTag object) {
-        if (!describes(object)) {
-            return null;
-        }
-        else {
-            return new LuckPermsPlayerProperties((PlayerTag) object);
-        }
-    }
-
-    public static final String[] handledTags = new String[] {
-            "luckperms_tracks"
-    };
-
-    public static final String[] handledMechs = new String[] {
-    }; // None
-
-    public LuckPermsPlayerProperties(PlayerTag player) {
-        this.player = player;
-    }
-
-    PlayerTag player;
-
-    @Override
-    public ObjectTag getObjectAttribute(Attribute attribute) {
+    public static void register() {
 
         // <--[tag]
         // @attribute <PlayerTag.luckperms_tracks>
@@ -62,7 +22,7 @@ public class LuckPermsPlayerProperties implements Property {
         // @description
         // Returns a list of tracks the player is in.
         // -->
-        if (attribute.startsWith("luckperms_tracks")) {
+        PlayerTag.tagProcessor.registerTag(ListTag.class, "luckperms_tracks", (attribute, player) -> {
             ListTag tracks = new ListTag();
             User user = LuckPermsBridge.luckPermsInstance.getUserManager().getUser(player.getUUID());
             if (user == null) {
@@ -85,13 +45,27 @@ public class LuckPermsPlayerProperties implements Property {
                     }
                 }
             }
-            return tracks.getObjectAttribute(attribute.fulfill(1));
-        }
+            return tracks;
+        });
 
-        return null;
-    }
+        // <--[tag]
+        // @attribute <PlayerTag.luckperms_primary_group>
+        // @returns LuckPermsGroupTag
+        // @plugin Depenizen, LuckPerms
+        // @description
+        // Returns a players primary group.
+        // -->
+        PlayerTag.tagProcessor.registerTag(LuckPermsGroupTag.class, "luckperms_primary_group", (attribute, player) -> {
+            User user = LuckPermsBridge.luckPermsInstance.getUserManager().getUser(player.getUUID());
+            if (user == null) {
+                return null;
+            }
+            Group group = LuckPermsBridge.luckPermsInstance.getGroupManager().getGroup(user.getPrimaryGroup());
+            if (group == null) {
+                return null;
+            }
+            return new LuckPermsGroupTag(group);
+        });
 
-    @Override
-    public void adjust(Mechanism mechanism) {
     }
 }
