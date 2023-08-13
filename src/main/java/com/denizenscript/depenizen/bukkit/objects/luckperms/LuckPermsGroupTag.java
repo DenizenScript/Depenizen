@@ -13,8 +13,6 @@ import java.util.OptionalInt;
 
 public class LuckPermsGroupTag implements ObjectTag {
 
-    public static ObjectTagProcessor<LuckPermsGroupTag> tagProcessor = new ObjectTagProcessor<>();
-
     // <--[ObjectType]
     // @name LuckPermsGroupTag
     // @prefix luckpermsgroup
@@ -31,10 +29,9 @@ public class LuckPermsGroupTag implements ObjectTag {
 
     @Fetchable("luckpermsgroup")
     public static LuckPermsGroupTag valueOf(String string, TagContext context) {
-        if (string == null) {
-            return null;
+        if (string.startsWith("luckpermsgroup@")) {
+            string = string.substring("@luckpermsgroup".length());
         }
-        string = string.replace("luckpermsgroup@", "");
         Group group = LuckPermsBridge.luckPermsInstance.getGroupManager().getGroup(string);
         if (group == null) {
             return null;
@@ -43,18 +40,24 @@ public class LuckPermsGroupTag implements ObjectTag {
     }
 
     public static boolean matches(String arg) {
-        arg = arg.replace("luckpermsgroup@", "");
-        return LuckPermsBridge.luckPermsInstance.getGroupManager().getGroup(arg) != null;
+        if (arg.startsWith("luckpermsgroup@")) {
+            return true;
+        }
+        return LuckPermsBridge.luckPermsInstance.getGroupManager().isLoaded(arg);
     }
 
-    Group group = null;
+    Group group;
 
-    public LuckPermsGroupTag(Group group) { this.group = group; }
+    public LuckPermsGroupTag(Group group) {
+        this.group = group;
+    }
 
     String prefix = "LuckPermsGroup";
 
     @Override
-    public String getPrefix() { return prefix; }
+    public String getPrefix() {
+        return prefix;
+    }
 
     @Override
     public ObjectTag setPrefix(String prefix) {
@@ -63,10 +66,14 @@ public class LuckPermsGroupTag implements ObjectTag {
     }
 
     @Override
-    public boolean isUnique() { return true; }
+    public boolean isUnique() {
+        return true;
+    }
 
     @Override
-    public String identify() { return "luckpermsgroup@" + group.getName(); }
+    public String identify() {
+        return "luckpermsgroup@" + group.getName();
+    }
 
     @Override
     public String identifySimple() {
@@ -144,7 +151,10 @@ public class LuckPermsGroupTag implements ObjectTag {
         // Returns whether the group has the specified permission node.
         // -->
         tagProcessor.registerTag(ElementTag.class, ElementTag.class, "has_permission", (attribute, object, p) -> {
-            return new ElementTag(object.getGroup().getCachedData().getPermissionData().checkPermission(p.toString()).asBoolean());
+            return new ElementTag(object.getGroup().getCachedData().getPermissionData().checkPermission(p.asString()).asBoolean());
         });
     }
+
+    public static final ObjectTagProcessor<LuckPermsGroupTag> tagProcessor = new ObjectTagProcessor<>();
+
 }

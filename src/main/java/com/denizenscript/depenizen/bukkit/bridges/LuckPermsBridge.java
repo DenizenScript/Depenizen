@@ -1,26 +1,26 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.tags.*;
-import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsGroupTag;
-import com.denizenscript.depenizen.bukkit.properties.luckperms.LuckPermsPlayerExtensions;
-import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrackTag;
-import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.tags.PseudoObjectTagBase;
+import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.depenizen.bukkit.Bridge;
+import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsGroupTag;
+import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsTrackTag;
+import com.denizenscript.depenizen.bukkit.properties.luckperms.LuckPermsPlayerExtensions;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.track.Track;
 
 public class LuckPermsBridge extends Bridge {
 
-    static class LuckPermsBridgeTags extends PseudoObjectTagBase<LuckPermsBridgeTags> {
+    static class LuckPermsTagBase extends PseudoObjectTagBase<LuckPermsTagBase> {
 
-        public static LuckPermsBridgeTags instance;
+        public static LuckPermsTagBase instance;
 
-        public LuckPermsBridgeTags() {
+        public LuckPermsTagBase() {
             instance = this;
-            TagManager.registerStaticTagBaseHandler(LuckPermsBridgeTags.class, "luckperms", (t) -> instance);
+            TagManager.registerStaticTagBaseHandler(LuckPermsTagBase.class, "luckperms", (t) -> instance);
         }
 
         public void register() {
@@ -44,13 +44,12 @@ public class LuckPermsBridge extends Bridge {
             // Returns the track from the name given.
             // -->
             tagProcessor.registerTag(LuckPermsTrackTag.class, ElementTag.class, "track", (attribute, object, name) -> {
-                Track track = luckPermsInstance.getTrackManager().getTrack(name.toString());
-                return track != null ? new LuckPermsTrackTag(track) : null;
+                return attribute.paramAsType(LuckPermsTrackTag.class);
             });
 
             // <--[tag]
             // @attribute <luckperms.list_groups>
-            // @returns ListTag(LuckPermsGrupTag)
+            // @returns ListTag(LuckPermsGroupTag)
             // @plugin Depenizen, LuckPerms
             // @description
             // Returns a list of all luckperms groups.
@@ -68,8 +67,17 @@ public class LuckPermsBridge extends Bridge {
     public void init() {
         luckPermsInstance = LuckPermsProvider.get();
         LuckPermsPlayerExtensions.register();
-        ObjectFetcher.registerWithObjectFetcher(LuckPermsGroupTag.class, LuckPermsGroupTag.tagProcessor).generateBaseTag();
-        ObjectFetcher.registerWithObjectFetcher(LuckPermsTrackTag.class, LuckPermsTrackTag.tagProcessor).generateBaseTag();
-        new LuckPermsBridgeTags();
+        ObjectFetcher.registerWithObjectFetcher(LuckPermsGroupTag.class, LuckPermsGroupTag.tagProcessor);
+        ObjectFetcher.registerWithObjectFetcher(LuckPermsTrackTag.class, LuckPermsTrackTag.tagProcessor);
+        new LuckPermsTagBase();
+
+        // <--[tag]
+        // @attribute <luckperms_group[<name>]>
+        // @returns LuckPermsGroupTag
+        // @plugin Depenizen, LuckPerms
+        // @description
+        // Returns the luckperms group tag with the given name.
+        // -->
+        TagManager.registerTagHandler(LuckPermsGroupTag.class, LuckPermsGroupTag.class, "luckperms_group", (attribute, param) -> param);
     }
 }

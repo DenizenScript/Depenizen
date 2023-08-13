@@ -21,8 +21,6 @@ import java.util.List;
 
 public class LuckPermsTrackTag implements ObjectTag {
 
-    public static ObjectTagProcessor<LuckPermsTrackTag> tagProcessor = new ObjectTagProcessor<>();
-
     // <--[ObjectType]
     // @name LuckPermsTrackTag
     // @prefix luckpermstrack
@@ -123,7 +121,9 @@ public class LuckPermsTrackTag implements ObjectTag {
         return identify();
     }
 
-    public Track getTrack() { return track; }
+    public Track getTrack() {
+        return track;
+    }
 
     @Override
     public ObjectTag getObjectAttribute(Attribute attribute) {
@@ -140,7 +140,7 @@ public class LuckPermsTrackTag implements ObjectTag {
         // Returns the name of the track.
         // -->
         tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
-            return new ElementTag(object.getTrack().getName());
+            return new ElementTag(object.getTrack().getName(), true);
         });
 
         // <--[tag]
@@ -154,7 +154,7 @@ public class LuckPermsTrackTag implements ObjectTag {
         tagProcessor.registerTag(ListTag.class,"groups", (attribute, object) -> {
             List<String> trackGroups = object.getTrack().getGroups();
             if (!attribute.hasParam()) {
-                return new ListTag(trackGroups);
+                return new ListTag(trackGroups, true);
             }
             PlayerTag player = attribute.paramAsType(PlayerTag.class);
             if (player == null) {
@@ -171,7 +171,7 @@ public class LuckPermsTrackTag implements ObjectTag {
                     .filter(net.luckperms.api.node.Node::getValue)
                     .map(InheritanceNode::getGroupName)
                     .filter(trackGroups::contains).toList();
-            return new ListTag(memberGroups);
+            return new ListTag(memberGroups, true);
         });
 
         // <--[tag]
@@ -218,4 +218,7 @@ public class LuckPermsTrackTag implements ObjectTag {
             return groups;
         });
     }
+
+    public static final ObjectTagProcessor<LuckPermsTrackTag> tagProcessor = new ObjectTagProcessor<>();
+
 }
