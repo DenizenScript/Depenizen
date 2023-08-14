@@ -58,7 +58,10 @@ public class LuckPermsTrackTag implements ObjectTag {
     }
 
     public static boolean matches(String arg) {
-        return arg.startsWith("luckpermstrack@");
+        if (arg.startsWith("luckpermstrack@")) {
+            return true;
+        }
+        return LuckPermsBridge.luckPermsInstance.getTrackManager().isLoaded(arg);
     }
 
     /////////////////////
