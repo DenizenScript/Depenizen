@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.PseudoObjectTagBase;
 import com.denizenscript.denizencore.tags.TagManager;
@@ -43,9 +42,7 @@ public class LuckPermsBridge extends Bridge {
             // @description
             // Returns the track from the name given.
             // -->
-            tagProcessor.registerTag(LuckPermsTrackTag.class, ElementTag.class, "track", (attribute, object, name) -> {
-                return attribute.paramAsType(LuckPermsTrackTag.class);
-            });
+            tagProcessor.registerTag(LuckPermsTrackTag.class, LuckPermsTrackTag.class, "track", (attribute, object, track) -> track);
 
             // <--[tag]
             // @attribute <luckperms.list_groups>

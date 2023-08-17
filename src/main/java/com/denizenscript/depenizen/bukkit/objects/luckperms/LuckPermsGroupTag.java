@@ -103,7 +103,7 @@ public class LuckPermsGroupTag implements ObjectTag {
         // @description
         // Returns the group's name.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
+        tagProcessor.registerStaticTag(ElementTag.class, "name", (attribute, object) -> {
             return new ElementTag(object.getGroup().getName(), true);
         });
 
