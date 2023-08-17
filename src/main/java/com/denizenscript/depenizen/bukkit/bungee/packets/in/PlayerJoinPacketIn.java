@@ -27,6 +27,7 @@ public class PlayerJoinPacketIn extends BungeePacketIn {
         UUID uuid = new UUID(mostSigBits, leastSigBits);
         String name = readString(data, "name");
         String ip = readString(data, "ip");
+        String host = readString(data, "host");
         if (name == null || ip == null) {
             return;
         }
@@ -34,6 +35,7 @@ public class PlayerJoinPacketIn extends BungeePacketIn {
             BungeePlayerJoinsScriptEvent.instance.name = name;
             BungeePlayerJoinsScriptEvent.instance.uuid = uuid;
             BungeePlayerJoinsScriptEvent.instance.ip = ip;
+            BungeePlayerJoinsScriptEvent.instance.host = host;
             BungeePlayerJoinsScriptEvent.instance.fire();
         });
     }

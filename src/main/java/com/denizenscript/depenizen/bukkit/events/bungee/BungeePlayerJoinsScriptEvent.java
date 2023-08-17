@@ -25,6 +25,7 @@ public class BungeePlayerJoinsScriptEvent extends BukkitScriptEvent {
     // <context.name> returns the connecting player's name.
     // <context.uuid> returns the connecting player's UUID.
     // <context.ip> returns the connecting player's IP address.
+    // <context.hostname> returns the virtual hostname that the player is connecting to.
     //
     // @Plugin Depenizen, DepenizenBungee, BungeeCord
     //
@@ -46,6 +47,8 @@ public class BungeePlayerJoinsScriptEvent extends BukkitScriptEvent {
     public UUID uuid;
 
     public String ip;
+
+    public String host;
 
     @Override
     public boolean couldMatch(ScriptPath path) {
@@ -73,6 +76,7 @@ public class BungeePlayerJoinsScriptEvent extends BukkitScriptEvent {
             case "name": return new ElementTag(this.name);
             case "uuid": return new ElementTag(uuid.toString());
             case "ip": return new ElementTag(ip);
+            case "hostname": return new ElementTag(host);
         }
         return super.getContext(name);
     }
