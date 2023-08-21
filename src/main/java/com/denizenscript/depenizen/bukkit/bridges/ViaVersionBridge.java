@@ -1,14 +1,17 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.depenizen.bukkit.Bridge;
-import com.denizenscript.depenizen.bukkit.properties.viaversion.ViaVersionPlayerProperties;
+import com.denizenscript.depenizen.bukkit.properties.viaversion.ViaVersionPlayerExtensions;
+import com.viaversion.viaversion.api.Via;
+import com.viaversion.viaversion.api.ViaAPI;
 
 public class ViaVersionBridge extends Bridge {
 
+    public static ViaAPI viaVersionInstance;
+
     @Override
     public void init() {
-        PropertyParser.registerProperty(ViaVersionPlayerProperties.class, PlayerTag.class);
+        viaVersionInstance = Via.getAPI();
+        ViaVersionPlayerExtensions.register();
     }
 }
