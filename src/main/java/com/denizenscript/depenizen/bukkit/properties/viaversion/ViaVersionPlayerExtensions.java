@@ -37,6 +37,7 @@ public class ViaVersionPlayerExtensions {
         // @plugin Depenizen, ViaVersion
         // @description
         // Returns the version based on the protocol version number of the player's client.
+        // Note: When getting the players protocol, join events may not have the protocol linked with the player in time. It is suggested to delay this check by a few ticks.
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, "viaversion_version", (attribute, object) -> {
             int version = ViaVersionBridge.viaVersionInstance.getPlayerVersion(object.getUUID());
