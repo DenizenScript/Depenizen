@@ -42,7 +42,9 @@ public class LuckPermsBridge extends Bridge {
             // @description
             // Returns the track from the name given.
             // -->
-            tagProcessor.registerTag(LuckPermsTrackTag.class, LuckPermsTrackTag.class, "track", (attribute, object, track) -> track);
+            tagProcessor.registerTag(LuckPermsTrackTag.class, LuckPermsTrackTag.class, "track", (attribute, object, track) -> {
+                return track;
+            });
 
             // <--[tag]
             // @attribute <luckperms.list_groups>

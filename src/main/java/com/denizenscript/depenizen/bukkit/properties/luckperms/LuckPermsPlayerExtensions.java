@@ -53,7 +53,7 @@ public class LuckPermsPlayerExtensions {
         // @returns LuckPermsGroupTag
         // @plugin Depenizen, LuckPerms
         // @description
-        // Returns a players primary group.
+        // Returns a player's primary group.
         // -->
         PlayerTag.tagProcessor.registerTag(LuckPermsGroupTag.class, "luckperms_primary_group", (attribute, player) -> {
             User user = LuckPermsBridge.luckPermsInstance.getUserManager().getUser(player.getUUID());

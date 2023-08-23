@@ -142,7 +142,7 @@ public class LuckPermsTrackTag implements ObjectTag {
         // @description
         // Returns the name of the track.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
+        tagProcessor.registerStaticTag(ElementTag.class, "name", (attribute, object) -> {
             return new ElementTag(object.getTrack().getName(), true);
         });
 
