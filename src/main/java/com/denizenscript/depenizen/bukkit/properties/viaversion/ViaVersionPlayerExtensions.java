@@ -2,7 +2,7 @@ package com.denizenscript.depenizen.bukkit.properties.viaversion;
 
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.depenizen.bukkit.bridges.ViaVersionBridge;
+import com.viaversion.viaversion.api.Via;
 import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
 
 public class ViaVersionPlayerExtensions {
@@ -25,10 +25,10 @@ public class ViaVersionPlayerExtensions {
         // @description
         // Returns the protocol version number of the player's client.
         // See <@link url https://wiki.vg/Protocol_version_numbers> as a reference list.
-        // Note: When getting the players protocol, join events may not have the protocol linked with the player in time. It is suggested to delay this check by a few ticks.
+        // See also <@link tag PlayerTag.viaversion_version>
         // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, "viaversion_protocol", (attribute, object) -> {
-            return new ElementTag(ViaVersionBridge.viaVersionInstance.getPlayerVersion(object.getUUID()));
+        PlayerTag.registerOnlineOnlyTag(ElementTag.class, "viaversion_protocol", (attribute, object) -> {
+            return new ElementTag(Via.getAPI().getPlayerVersion(object.getUUID()));
         }, "viaversion");
 
         // <--[tag]
@@ -36,11 +36,11 @@ public class ViaVersionPlayerExtensions {
         // @returns ElementTag
         // @plugin Depenizen, ViaVersion
         // @description
-        // Returns the version based on the protocol version number of the player's client.
-        // Note: When getting the players protocol, join events may not have the protocol linked with the player in time. It is suggested to delay this check by a few ticks.
+        // Returns the player's client version ("1.19.4", "1.18.2"...).
+        // See also <@link tag PlayerTag.viaversion_protocol>
         // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, "viaversion_version", (attribute, object) -> {
-            int version = ViaVersionBridge.viaVersionInstance.getPlayerVersion(object.getUUID());
+        PlayerTag.registerOnlineOnlyTag(ElementTag.class, "viaversion_version", (attribute, object) -> {
+            int version = Via.getAPI().getPlayerVersion(object.getUUID());
             return new ElementTag(ProtocolVersion.getProtocol(version).getName(), true);
         });
     }
