@@ -34,6 +34,7 @@ import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.items.ItemExecutor;
 import io.lumine.mythic.core.items.MythicItem;
 import io.lumine.mythic.core.mobs.ActiveMob;
+import io.lumine.mythic.core.mobs.MobExecutor;
 import io.lumine.mythic.core.skills.variables.*;
 import io.lumine.mythic.core.spawning.spawners.MythicSpawner;
 import io.lumine.mythic.core.spawning.spawners.SpawnerManager;
@@ -189,7 +190,7 @@ public class MythicMobsBridge extends Bridge {
         new MythicMobsBridgeTags();
         EntityTag.tagProcessor.custommatchers.add((entityTag, matcher) -> {
             if (matcher.equals("mythic_mob")) {
-                return entityTag.getUUID() != null && isMythicMob(entityTag.getUUID());
+                return entityTag.getUUID() != null && getMobManager().isActiveMob(entityTag.getUUID());
             }
             if (matcher.startsWith("mythic_mob:")) {
                 Entity entity = entityTag.getBukkitEntity();
@@ -290,7 +291,7 @@ public class MythicMobsBridge extends Bridge {
         return MythicBukkit.inst().getMobManager().getMythicMob(name).orElse(null);
     }
 
-    public static MobManager getMobManager() {
+    public static MobExecutor getMobManager() {
         return MythicBukkit.inst().getMobManager();
     }
 
