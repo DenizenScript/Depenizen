@@ -44,7 +44,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class MythicMobsBridge extends Bridge {
 
@@ -127,8 +126,12 @@ public class MythicMobsBridge extends Bridge {
                 if (mob == null) {
                     return null;
                 }
-                return new MapTag(mob.getDamageModifiers().entrySet().stream().map((e) -> Map.entry(new StringHolder(e.getKey()), new ElementTag(e.getValue()))).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
-            });
+                MapTag damageModifiers = new MapTag();
+                for (Map.Entry<String, Double> entry : mob.getDamageModifiers().entrySet()) {
+                    damageModifiers.putObject(entry.getKey(), new ElementTag(entry.getValue()));
+                }
+                return damageModifiers;
+        });
 
             // <--[tag]
             // @attribute <mythicmobs.mob_path[<mob_id>]>
@@ -165,7 +168,7 @@ public class MythicMobsBridge extends Bridge {
             // Returns a list of all Mythic pack IDs.
             // -->
             tagProcessor.registerTag(ListTag.class, "packs", (attribute, object) -> {
-                return new ListTag(MythicBukkit.inst().getPackManager().getPacks(), (pack) -> new ElementTag(pack.getName()));
+                return new ListTag(MythicBukkit.inst().getPackManager().getPacks(), (pack) -> new ElementTag(pack.getName(), true));
             });
         };
     }
