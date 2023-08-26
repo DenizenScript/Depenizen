@@ -10,7 +10,7 @@ public class ViaVersionPlayerExtensions {
     public static void register() {
 
         // <--[tag]
-        // @attribute  <PlayerTag.viaversion>
+        // @attribute <PlayerTag.viaversion>
         // @returns ElementTag(Number)
         // @plugin Depenizen, ViaVersion
         // @deprecated Use 'PlayerTag.viaversion_protocol'
