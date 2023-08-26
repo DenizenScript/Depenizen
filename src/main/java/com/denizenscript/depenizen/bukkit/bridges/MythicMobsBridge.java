@@ -13,20 +13,19 @@ import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.PseudoObjectTagBase;
 import com.denizenscript.denizencore.tags.TagManager;
-import com.denizenscript.denizencore.utilities.text.StringHolder;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSignalCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSkillCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicSpawnCommand;
 import com.denizenscript.depenizen.bukkit.commands.mythicmobs.MythicThreatCommand;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDeathEvent;
+import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsDespawnEvent;
 import com.denizenscript.depenizen.bukkit.events.mythicmobs.MythicMobsSpawnEvent;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicMobsMobTag;
 import com.denizenscript.depenizen.bukkit.objects.mythicmobs.MythicSpawnerTag;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsEntityProperties;
 import com.denizenscript.depenizen.bukkit.properties.mythicmobs.MythicMobsPlayerProperties;
 import com.denizenscript.depenizen.bukkit.utilities.mythicmobs.MythicMobsLoaders;
-import io.lumine.mythic.api.mobs.MobManager;
 import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.BukkitAPIHelper;
 import io.lumine.mythic.bukkit.BukkitAdapter;
@@ -182,6 +181,7 @@ public class MythicMobsBridge extends Bridge {
         PropertyParser.registerProperty(MythicMobsPlayerProperties.class, PlayerTag.class);
         ScriptEvent.registerScriptEvent(MythicMobsDeathEvent.class);
         ScriptEvent.registerScriptEvent(MythicMobsSpawnEvent.class);
+        ScriptEvent.registerScriptEvent(MythicMobsDespawnEvent.class);
         DenizenCore.commandRegistry.registerCommand(MythicSpawnCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicThreatCommand.class);
         DenizenCore.commandRegistry.registerCommand(MythicSignalCommand.class);
@@ -220,6 +220,7 @@ public class MythicMobsBridge extends Bridge {
         ScriptEvent.ScriptPath.notSwitches.add("mythic_item");
         BukkitScriptEvent.itemCouldMatchableText.add("mythic_item");
         BukkitScriptEvent.itemCouldMatchPrefixes.add("mythic_item");
+
         // <--[tag]
         // @attribute <mythic_item[<name>]>
         // @returns ItemTag
