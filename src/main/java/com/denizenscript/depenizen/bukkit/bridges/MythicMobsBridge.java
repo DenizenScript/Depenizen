@@ -235,7 +235,7 @@ public class MythicMobsBridge extends Bridge {
             }
             String name = attribute.getParam();
             Optional<MythicItem> itemOpt = MythicBukkit.inst().getItemManager().getItem(name);
-            if (itemOpt.isEmpty()) {
+            if (!itemOpt.isPresent()) {
                 attribute.echoError("'" + name + "' is not a valid Mythic item.");
                 return null;
             }
