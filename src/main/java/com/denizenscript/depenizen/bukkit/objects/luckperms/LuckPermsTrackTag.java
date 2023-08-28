@@ -154,7 +154,7 @@ public class LuckPermsTrackTag implements ObjectTag {
         // This returns names of the groups instead of <@link objecttype LuckPermsGroupTag>s, as groups can be unloaded from LuckPerms but still be part of the track.
         // If a player input is specified, limits to only the groups that the player is in.
         // -->
-        tagProcessor.registerTag(ListTag.class,"groups", (attribute, object) -> {
+        tagProcessor.registerTag(ListTag.class, "groups", (attribute, object) -> {
             List<String> trackGroups = object.getTrack().getGroups();
             if (!attribute.hasParam()) {
                 return new ListTag(trackGroups, true);

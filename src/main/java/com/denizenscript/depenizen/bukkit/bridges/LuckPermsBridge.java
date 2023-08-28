@@ -77,6 +77,8 @@ public class LuckPermsBridge extends Bridge {
         // @description
         // Returns the luckperms group tag with the given name.
         // -->
-        TagManager.registerTagHandler(LuckPermsGroupTag.class, LuckPermsGroupTag.class, "luckperms_group", (attribute, param) -> param);
+        TagManager.registerTagHandler(LuckPermsGroupTag.class, LuckPermsGroupTag.class, "luckperms_group", (attribute, param) -> {
+            return param;
+        });
     }
 }

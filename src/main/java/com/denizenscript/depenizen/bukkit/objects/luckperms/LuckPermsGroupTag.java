@@ -30,7 +30,7 @@ public class LuckPermsGroupTag implements ObjectTag {
     @Fetchable("luckpermsgroup")
     public static LuckPermsGroupTag valueOf(String string, TagContext context) {
         if (string.startsWith("luckpermsgroup@")) {
-            string = string.substring("@luckpermsgroup".length());
+            string = string.substring("luckpermsgroup@".length());
         }
         Group group = LuckPermsBridge.luckPermsInstance.getGroupManager().getGroup(string);
         if (group == null) {
@@ -97,54 +97,54 @@ public class LuckPermsGroupTag implements ObjectTag {
     public static void register() {
 
         // <--[tag]
-        // @attribute <LuckPermsGroupTag.name>
+        // @attribute <LuckPermsGroupTag.group_name>
         // @returns ElementTag
         // @plugin Depenizen, LuckPerms
         // @description
         // Returns the group's name.
         // -->
-        tagProcessor.registerStaticTag(ElementTag.class, "name", (attribute, object) -> {
+        tagProcessor.registerStaticTag(ElementTag.class, "group_name", (attribute, object) -> {
             return new ElementTag(object.getGroup().getName(), true);
         });
 
         // <--[tag]
-        // @attribute <LuckPermsGroupTag.prefix>
+        // @attribute <LuckPermsGroupTag.group_prefix>
         // @returns ElementTag
         // @plugin Depenizen, LuckPerms
         // @description
         // Returns the group's prefix, if any.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "prefix", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "group_prefix", (attribute, object) -> {
             String prefix = object.getGroup().getCachedData().getMetaData().getPrefix();
             return prefix != null ? new ElementTag(prefix, true) : null;
         });
 
         // <--[tag]
-        // @attribute <LuckPermsGroupTag.suffix>
+        // @attribute <LuckPermsGroupTag.group_suffix>
         // @returns ElementTag
         // @plugin Depenizen, LuckPerms
         // @description
         // Returns the group's suffix, if any.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "suffix", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "group_suffix", (attribute, object) -> {
             String suffix = object.getGroup().getCachedData().getMetaData().getSuffix();
             return suffix != null ? new ElementTag(suffix, true) : null;
         });
 
         // <--[tag]
-        // @attribute <LuckPermsGroupTag.weight>
+        // @attribute <LuckPermsGroupTag.group_weight>
         // @returns ElementTag
         // @plugin Depenizen, LuckPerms
         // @description
         // Returns the group's weight, if any.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "weight", (attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "group_weight", (attribute, object) -> {
             OptionalInt weight = object.getGroup().getWeight();
             return weight.isPresent() ? new ElementTag(weight.getAsInt()) : null;
         });
 
         // <--[tag]
-        // @attribute <LuckPermsGroupTag.has_permission[permission.node]>
+        // @attribute <LuckPermsGroupTag.has_permission[<permission.node>]>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, LuckPerms
         // @description
