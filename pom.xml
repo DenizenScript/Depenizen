@@ -186,8 +186,8 @@
         </dependency>
         <dependency>
             <groupId>me.lucko.luckperms</groupId>
-            <artifactId>luckperms-api</artifactId>
-            <version>5.4.98</version>
+            <artifactId>luckperms</artifactId>
+            <version>5.4.102</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/LuckPerms.jar</systemPath>
         </dependency>
