@@ -32,6 +32,9 @@ public class MythicThreatCommand  extends AbstractCommand {
     // @Maximum 4
     // @Short Modifies the threat table of a Mythic Mob.
     //
+    // @Tags
+    // None
+    //
     // @Description
     // This allows you to modify a threat table for an active MythicMob.
     // Optionally, set a list of entities to apply the threat modification to.

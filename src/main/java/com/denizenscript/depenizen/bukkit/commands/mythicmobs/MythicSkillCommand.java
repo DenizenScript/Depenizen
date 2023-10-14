@@ -34,6 +34,9 @@ public class MythicSkillCommand extends AbstractCommand {
     // @Maximum 5
     // @Short Cast a MythicMob skill from an entity.
     //
+    // @Tags
+    // None
+    //
     // @Description
     // This will cast a MythicMob skill from any specified entity.
     // Optionally, you can have multiple entities cast the skill.

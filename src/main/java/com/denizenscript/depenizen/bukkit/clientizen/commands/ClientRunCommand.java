@@ -27,7 +27,8 @@ public class ClientRunCommand extends AbstractCommand {
     // @Required 1
     // @Maximum -1
     // @Short Runs a client script on a Clientizen client.
-    // @Group Clientizen
+    // @Group Depenizen
+    // @plugin Depenizen, Clientizen
     //
     // @Description
     // Runs a client script on the linked player's client, if they are using Clientizen.
@@ -38,6 +39,9 @@ public class ClientRunCommand extends AbstractCommand {
     //
     // Optionally, use "def.<name>:<value>" to pass one or more definitions to the client.
     // Alternately, use "defmap:<map>" to specify definitions to pass as a MapTag, where the keys will be definition names and the values will of course be definition values.
+    //
+    // @Tags
+    // None
     //
     // @Usage
     // Use to run a task script named 'MyTask' on the linked player's client.

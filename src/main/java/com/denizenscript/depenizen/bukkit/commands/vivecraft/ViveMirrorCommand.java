@@ -31,7 +31,11 @@ public class ViveMirrorCommand extends AbstractCommand {
     // @Required 2
     // @Maximum 3
     // @Short Mirrors a ViveCraftPlayers pose to the npc, once.
-    // @Group ViveCraft
+    // @Group Depenizen
+    // @plugin Depenizen, ViveCraft
+    //
+    // @Tags
+    // None
     //
     // @Description
     // Mirrors a ViveCraftPlayers pose to the npc, once.
