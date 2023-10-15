@@ -2,6 +2,7 @@ package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizen.objects.NPCTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.objects.WorldTag;
 import com.denizenscript.denizencore.DenizenCore;
@@ -13,6 +14,7 @@ import com.denizenscript.depenizen.bukkit.commands.worldguard.RegionCommand;
 import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardCuboidProperties;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardLocationProperties;
+import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardNPCProperties;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardPlayerProperties;
 import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardWorldProperties;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
@@ -32,6 +34,7 @@ public class WorldGuardBridge extends Bridge {
         PropertyParser.registerProperty(WorldGuardPlayerProperties.class, PlayerTag.class);
         PropertyParser.registerProperty(WorldGuardCuboidProperties.class, CuboidTag.class);
         PropertyParser.registerProperty(WorldGuardWorldProperties.class, WorldTag.class);
+        PropertyParser.registerProperty(WorldGuardNPCProperties.class, NPCTag.class);
         DenizenCore.commandRegistry.registerCommand(RegionCommand.class);
 
         // <--[tag]
