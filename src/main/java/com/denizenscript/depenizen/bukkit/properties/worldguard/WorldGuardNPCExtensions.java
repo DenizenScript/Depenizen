@@ -1,7 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.worldguard;
 
 import com.denizenscript.denizen.objects.NPCTag;
-import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
 import net.citizensnpcs.trait.waypoint.WanderWaypointProvider;
 import net.citizensnpcs.trait.waypoint.Waypoints;
@@ -12,38 +11,48 @@ public class WorldGuardNPCExtensions {
     public static void register() {
 
         // <--[tag]
-        // @attribute <NPCTag.worldguard_wanderregion>
+        // @attribute <NPCTag.worldguard_wander_region>
         // @returns WorldGuardRegionTag
+        // @mechanism NPCTag.worldguard_wander_region
         // @plugin Depenizen, WorldGuard
         // @description
-        // Returns the worldguardRegion for the NPC's wander Waypoint Provider, if that provider is in use.
+        // If the NPC's waypoint provider is set to wander (<@link tag NPCTag.waypoint_provider>),
+        // returns the current WorldGuard region that wandering is restricted to, if any.
         // -->
-        NPCTag.tagProcessor.registerTag(WorldGuardRegionTag.class, "worldguard_wanderregion", (attribute, object) -> {
+        NPCTag.tagProcessor.registerTag(WorldGuardRegionTag.class, "worldguard_wander_region", (attribute, object) -> {
             Waypoints waypoints = object.npc.getOrAddTrait(Waypoints.class);
             if (waypoints.getCurrentProvider() instanceof WanderWaypointProvider wanderWaypointProvider) {
                 Object worldGuardRegion = wanderWaypointProvider.getWorldGuardRegion();
                 org.bukkit.World world = object.getWorld();
-                if ((worldGuardRegion != null) && (world != null)) {
+                if (worldGuardRegion != null && world != null) {
                     return new WorldGuardRegionTag((ProtectedRegion) worldGuardRegion, world);
                 }
             }
             return null;
-        });           
+        });
 
         // <--[mechanism]
         // @object NPCTag
-        // @name wander_worldguardregion
-        // @input ElementTag
+        // @name worldguard_wander_region
+        // @input WorldGuardRegionTag
         // @plugin Depenizen, WorldGuard
         // @description
-        // Sets the worldguardRegion for an NPC's wander Waypoints Provider, if that provider is in use. 
+        // If the NPC's waypoint provider is set to wander (<@link mechanism NPCTag.waypoint_provider>),
+        // sets the current WorldGuard region that wandering is restricted to.
+        // Provide no input to remove the region restriction.
         // @tags
-        // <NPCTag.wander_worldguardregion>
+        // <NPCTag.worldguard_wander_region>
         // -->
-        NPCTag.tagProcessor.registerMechanism("wander_worldguardregion", false, ElementTag.class, (object, mechanism, input) -> {
+        NPCTag.tagProcessor.registerMechanism("worldguard_wander_region", false, (object, mechanism) -> {
             Waypoints waypoints = object.npc.getOrAddTrait(Waypoints.class);
             if (waypoints.getCurrentProvider() instanceof WanderWaypointProvider wanderWaypointProvider) {
-                wanderWaypointProvider.setWorldGuardRegion(input.asString());
+                if (mechanism.hasValue() && mechanism.requireObject(WorldGuardRegionTag.class)) {
+                    WorldGuardRegionTag input = mechanism.valueAsType(WorldGuardRegionTag.class);
+                    wanderWaypointProvider.setWorldGuardRegion(input.getRegion().getId());
+                }
+                else {
+                    wanderWaypointProvider.setWorldGuardRegion(null);
+                }
             }
         });
     }
