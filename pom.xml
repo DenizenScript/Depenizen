@@ -20,10 +20,6 @@
 
     <repositories>
         <repository>
-            <id>spigot</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
             <id>everything</id>
             <url>https://maven.citizensnpcs.co/repo</url>
         </repository>

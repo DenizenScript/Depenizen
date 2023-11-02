@@ -123,11 +123,13 @@ public class QuestsCommand extends AbstractCommand {
                             break;
                         }
                     }
-                } else if (points != null && points.asInt() > 0) {
+                }
+                else if (points != null && points.asInt() > 0) {
                     Quester quester = quests.getQuester(player.getPlayerEntity().getUniqueId());
                     quester.setQuestPoints(quester.getQuestPoints() + points.asInt());
                     reloadData(quester);
-                } else {
+                }
+                else {
                     Debug.echoError("Must specify either a quest or a points value.");
                 }
             }
@@ -145,12 +147,14 @@ public class QuestsCommand extends AbstractCommand {
                             break;
                         }
                     }
-                } else if (points != null && points.asInt() > 0) {
+                }
+                else if (points != null && points.asInt() > 0) {
                     Quester quester = quests.getQuester(player.getPlayerEntity().getUniqueId());
                     int n = quester.getQuestPoints() - points.asInt();
                     quester.setQuestPoints(Math.max(n, 0));
                     reloadData(quester);
-                } else {
+                }
+                else {
                     Debug.echoError("Must specify either a quest value or a points value.");
                 }
             }
@@ -160,17 +164,20 @@ public class QuestsCommand extends AbstractCommand {
                         if (quest.getId().equals(questId.asString())) {
                             try {
                                 quest.setStage(quests.getQuester(player.getPlayerEntity().getUniqueId()), stageNum.asInt());
-                            } catch (IndexOutOfBoundsException ex) {
+                            }
+                            catch (IndexOutOfBoundsException ex) {
                                 Debug.echoError(ex);
                             }
                             break;
                         }
                     }
-                } else if (points != null && points.asInt() >= 0) {
+                }
+                else if (points != null && points.asInt() >= 0) {
                     Quester quester = quests.getQuester(player.getPlayerEntity().getUniqueId());
                     quester.setQuestPoints(points.asInt());
                     reloadData(quester);
-                } else {
+                }
+                else {
                     Debug.echoError("Must specify either a quest and stage value, or a points value.");
                 }
             }
