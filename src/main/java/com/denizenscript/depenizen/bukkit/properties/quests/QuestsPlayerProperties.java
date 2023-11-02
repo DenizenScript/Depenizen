@@ -3,14 +3,14 @@ package com.denizenscript.depenizen.bukkit.properties.quests;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.depenizen.bukkit.bridges.QuestsBridge;
-import me.blackvein.quests.Quest;
-import me.blackvein.quests.Quester;
-import me.blackvein.quests.Quests;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.tags.Attribute;
+import me.pikamug.quests.BukkitQuestsPlugin;
+import me.pikamug.quests.player.Quester;
+import me.pikamug.quests.quests.Quest;
 
 public class QuestsPlayerProperties implements Property {
 
@@ -49,7 +49,7 @@ public class QuestsPlayerProperties implements Property {
     }
 
     public Quester getQuester() {
-        Quests quests = (Quests) QuestsBridge.instance.plugin;
+        BukkitQuestsPlugin quests = (BukkitQuestsPlugin) QuestsBridge.instance.plugin;
         // This would be Quests.getInstance() but the developers of Quests did a stupid and broke that method.
         return quests.getQuester(player.getUUID());
     }

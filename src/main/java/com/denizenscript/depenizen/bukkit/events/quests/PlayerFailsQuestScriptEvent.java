@@ -7,7 +7,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import me.blackvein.quests.events.quester.QuesterPreFailQuestEvent;
+import me.pikamug.quests.events.quester.BukkitQuesterPreFailQuestEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -36,7 +36,7 @@ public class PlayerFailsQuestScriptEvent extends BukkitScriptEvent implements Li
         registerCouldMatcher("quests player fails <'quest'>");
     }
 
-    public QuesterPreFailQuestEvent event;
+    public BukkitQuesterPreFailQuestEvent event;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -62,7 +62,7 @@ public class PlayerFailsQuestScriptEvent extends BukkitScriptEvent implements Li
     }
 
     @EventHandler
-    public void onQuestEvent(QuesterPreFailQuestEvent event) {
+    public void onQuestEvent(BukkitQuesterPreFailQuestEvent event) {
         this.event = event;
         fire(event);
     }

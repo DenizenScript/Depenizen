@@ -20,6 +20,10 @@
 
     <repositories>
         <repository>
+            <id>spigot</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
             <id>everything</id>
             <url>https://maven.citizensnpcs.co/repo</url>
         </repository>
@@ -269,9 +273,9 @@
             <systemPath>${basedir}/lib/pvpstats.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>me.blackvein</groupId>
-            <artifactId>quests</artifactId>
-            <version>4.5.3</version>
+            <groupId>me.pikamug.quests</groupId>
+            <artifactId>quests-core</artifactId>
+            <version>5.0.0-rc.1</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Quests.jar</systemPath>
         </dependency>
