@@ -16,8 +16,8 @@ import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.quests.QuestsCommand;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
-import me.blackvein.quests.Quest;
-import me.blackvein.quests.Quests;
+import me.pikamug.quests.BukkitQuestsPlugin;
+import me.pikamug.quests.quests.Quest;
 
 public class QuestsBridge extends Bridge {
 
@@ -52,7 +52,7 @@ public class QuestsBridge extends Bridge {
         // -->
         if (attribute.startsWith("list_quests")) {
             ListTag list = new ListTag();
-            for (Quest quest : ((Quests) plugin).getQuests()) {
+            for (Quest quest : ((BukkitQuestsPlugin) plugin).getLoadedQuests()) {
                 list.add(quest.getId());
             }
             event.setReplacedObject(list.getObjectAttribute(attribute.fulfill(1)));

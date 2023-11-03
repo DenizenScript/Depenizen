@@ -2,11 +2,6 @@ package com.denizenscript.depenizen.bukkit.commands.quests;
 
 import com.denizenscript.denizencore.objects.Argument;
 
-import me.blackvein.quests.Quest;
-import me.blackvein.quests.Quester;
-import me.blackvein.quests.Quests;
-import me.blackvein.quests.util.Lang;
-
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
@@ -15,6 +10,10 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.depenizen.bukkit.bridges.QuestsBridge;
+import me.pikamug.quests.BukkitQuestsPlugin;
+import me.pikamug.quests.player.Quester;
+import me.pikamug.quests.quests.Quest;
+import me.pikamug.quests.util.BukkitLang;
 
 public class QuestsCommand extends AbstractCommand {
 
@@ -105,7 +104,7 @@ public class QuestsCommand extends AbstractCommand {
 
     @Override
     public void execute(ScriptEntry scriptEntry) {
-        Quests quests = (Quests) QuestsBridge.instance.plugin;
+        BukkitQuestsPlugin quests = (BukkitQuestsPlugin) QuestsBridge.instance.plugin;
         ElementTag action = scriptEntry.getElement("action");
         ElementTag questId = scriptEntry.getElement("quest");
         ElementTag stageNum = scriptEntry.getElement("stage");
@@ -116,9 +115,9 @@ public class QuestsCommand extends AbstractCommand {
             Debug.report(scriptEntry, getName(), action, questId, stageNum, points, override_checks);
         }
         switch (Action.valueOf(action.asString().toUpperCase())) {
-            case ADD: {
+            case ADD -> {
                 if (questId != null) {
-                    for (Quest quest : quests.getQuests()) {
+                    for (Quest quest : quests.getLoadedQuests()) {
                         if (quest.getId().equals(questId.asString())) {
                             quests.getQuester(player.getPlayerEntity().getUniqueId()).takeQuest(quest, override_checks.asBoolean());
                             break;
@@ -133,16 +132,15 @@ public class QuestsCommand extends AbstractCommand {
                 else {
                     Debug.echoError("Must specify either a quest or a points value.");
                 }
-                break;
             }
-            case REMOVE: {
+            case REMOVE -> {
                 if (questId != null) {
-                    for (Quest quest : quests.getQuests()) {
+                    for (Quest quest : quests.getLoadedQuests()) {
                         if (quest.getId().equals(questId.asString())) {
                             Quester quester = quests.getQuester(player.getPlayerEntity().getUniqueId());
                             quester.hardQuit(quest);
                             if (override_checks.asBoolean() && player.isOnline()) {
-                                player.getPlayerEntity().sendMessage(Lang.get(player.getPlayerEntity(), "questQuit").replace("<quest>", quest.getName()));
+                                player.getPlayerEntity().sendMessage(BukkitLang.get(player.getPlayerEntity(), "questQuit").replace("<quest>", quest.getName()));
                             }
                             reloadData(quester);
                             quester.updateJournal();
@@ -153,17 +151,16 @@ public class QuestsCommand extends AbstractCommand {
                 else if (points != null && points.asInt() > 0) {
                     Quester quester = quests.getQuester(player.getPlayerEntity().getUniqueId());
                     int n = quester.getQuestPoints() - points.asInt();
-                    quester.setQuestPoints(n <= 0 ? 0 : n);
+                    quester.setQuestPoints(Math.max(n, 0));
                     reloadData(quester);
                 }
                 else {
                     Debug.echoError("Must specify either a quest value or a points value.");
                 }
-                break;
             }
-            case SET: {
+            case SET -> {
                 if (questId != null && stageNum != null && stageNum.asInt() > 0) {
-                    for (Quest quest : quests.getQuests()) {
+                    for (Quest quest : quests.getLoadedQuests()) {
                         if (quest.getId().equals(questId.asString())) {
                             try {
                                 quest.setStage(quests.getQuester(player.getPlayerEntity().getUniqueId()), stageNum.asInt());
@@ -183,10 +180,8 @@ public class QuestsCommand extends AbstractCommand {
                 else {
                     Debug.echoError("Must specify either a quest and stage value, or a points value.");
                 }
-                break;
             }
         }
-
     }
 
     private void reloadData(Quester quester) {
@@ -194,6 +189,6 @@ public class QuestsCommand extends AbstractCommand {
             return;
         }
         quester.saveData();
-        quester.loadData();
+        quester.hasData();
     }
 }

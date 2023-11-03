@@ -7,7 +7,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import me.blackvein.quests.events.quester.QuesterPostChangeStageEvent;
+import me.pikamug.quests.events.quester.BukkitQuesterPostChangeStageEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -36,7 +36,7 @@ public class PlayerQuestStageChangeScriptEvent extends BukkitScriptEvent impleme
         registerCouldMatcher("quests player changes <'quest'> stage");
     }
 
-    public QuesterPostChangeStageEvent event;
+    public BukkitQuesterPostChangeStageEvent event;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -62,7 +62,7 @@ public class PlayerQuestStageChangeScriptEvent extends BukkitScriptEvent impleme
     }
 
     @EventHandler
-    public void onQuestEvent(QuesterPostChangeStageEvent event) {
+    public void onQuestEvent(BukkitQuesterPostChangeStageEvent event) {
         this.event = event;
         fire(event);
     }

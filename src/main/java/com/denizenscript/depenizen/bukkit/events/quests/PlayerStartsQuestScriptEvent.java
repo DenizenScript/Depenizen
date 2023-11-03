@@ -7,7 +7,7 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
-import me.blackvein.quests.events.quester.QuesterPreStartQuestEvent;
+import me.pikamug.quests.events.quester.BukkitQuesterPreStartQuestEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -36,7 +36,7 @@ public class PlayerStartsQuestScriptEvent extends BukkitScriptEvent implements L
         registerCouldMatcher("quests player starts <'quest'>");
     }
 
-    public QuesterPreStartQuestEvent event;
+    public BukkitQuesterPreStartQuestEvent event;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -61,7 +61,7 @@ public class PlayerStartsQuestScriptEvent extends BukkitScriptEvent implements L
     }
 
     @EventHandler
-    public void onQuestEvent(QuesterPreStartQuestEvent event) {
+    public void onQuestEvent(BukkitQuesterPreStartQuestEvent event) {
         this.event = event;
         fire(event);
     }
