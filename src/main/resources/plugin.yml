@@ -9,7 +9,6 @@ api-version: '1.13'
 softdepend:
     - AreaShop
     - AriKeys
-    - ASkyBlock
     - BetonQuest
     - BigDoors
     - BossShopPro

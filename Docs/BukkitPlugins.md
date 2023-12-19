@@ -3,7 +3,6 @@ Supported Plugins: (And the sources we acquired Jar files from.)
 
 - AreaShop (https://www.spigotmc.org/resources/areashop.2991/)
 - AriKeys (https://www.spigotmc.org/resources/arikeysplugin-custom-keybinds.105968/)
-- ASkyBlock (https://www.spigotmc.org/resources/a-skyblock.1220/)
 - BetonQuest (https://www.spigotmc.org/resources/betonquest.2117/)
 - BigDoors (https://www.spigotmc.org/resources/big-doors.58669)
 - BossShopPro (https://www.spigotmc.org/resources/bossshop.222/)
