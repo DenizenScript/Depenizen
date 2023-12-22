@@ -14,7 +14,7 @@ public class FireEventPacketIn extends ClientizenPacketIn {
 
     @Override
     public void process(Player sender, ByteBuf data) {
-        if (ENABLED && ClientizenEventScriptEvent.instance.enabled) {
+        if (ENABLED && ClientizenEventScriptEvent.instance.eventData.isEnabled) {
             String id = readString(data, "Event ID");
             Map<String, String> contexts = readStringMap(data);
             if (id == null || contexts == null) {

@@ -46,11 +46,11 @@ public class ViveMirrorCommand extends AbstractCommand {
     // Optionally, specify a list of targets to show the NPCs pose to (targets must be in VR to see the effect).
     //
     // @Usage
-    // # Use to mirror the current players pose.
+    // Use to mirror the current players pose.
     // - vivemirror <npc> mirror:<player.vivecraft>
     //
     // @Usage
-    // # Use to show your dancing skills to other players.
+    // Use to show your dancing skills to other players.
     // - vivemirror <npc> mirror:<player.vivecraft> targets:<server.online_players>
     //
     // -->

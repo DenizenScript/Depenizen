@@ -46,8 +46,6 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
         registerSwitches("id");
     }
 
-    public boolean enabled = false;
-
     public MapTag contextMap;
     public String id;
     public Player player;
@@ -85,15 +83,5 @@ public class ClientizenEventScriptEvent extends ScriptEvent {
     @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(player);
-    }
-
-    @Override
-    public void init() {
-        enabled = true;
-    }
-
-    @Override
-    public void destroy() {
-        enabled = false;
     }
 }
