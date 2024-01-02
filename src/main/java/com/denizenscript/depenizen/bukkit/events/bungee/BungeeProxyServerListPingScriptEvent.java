@@ -2,6 +2,8 @@ package com.denizenscript.depenizen.bukkit.events.bungee;
 
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.utilities.CoreConfiguration;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.bungee.BungeeBridge;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
@@ -10,7 +12,9 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
 
@@ -35,6 +39,7 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     // "VERSION:<ElementTag>" to change the listed server version.
     // "MOTD:<ElementTag>" to change the server MOTD that will be displayed.
     // "PLAYERS:<List(PlayerTag)>" to set what players are displayed in the "online players sample" view of the list ping.
+    // "ALTERNATE_PLAYER_TEXT:<ListTag>" to set custom text for the player list section of the server status. (Requires "Allow restricted actions" in Denizen/config.yml). Usage of this to present lines that look like player names (but aren't) is forbidden.
     //
     // @Plugin Depenizen, DepenizenBungee, BungeeCord
     //
@@ -47,6 +52,12 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
     }
 
     public static BungeeProxyServerListPingScriptEvent instance;
+
+    public static class PlayerInfo {
+        public UUID id;
+
+        public String name;
+    }
 
     public static class PingData {
 
@@ -62,7 +73,7 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
 
         public String version;
 
-        public List<PlayerTag> playerSample;
+        public List<PlayerInfo> playerSample;
     }
 
     public PingData data;
@@ -109,7 +120,29 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
                 return true;
             }
             else if (determinationLow.startsWith("players:")) {
-                data.playerSample = ListTag.valueOf(determination.substring("players:".length()), getTagContext(path)).filter(PlayerTag.class, getTagContext(path));
+                List<PlayerTag> players = ListTag.valueOf(determination.substring("players:".length()), getTagContext(path)).filter(PlayerTag.class, getTagContext(path));
+                data.playerSample = new ArrayList<>(players.size());
+                for (PlayerTag player : players) {
+                    PlayerInfo info = new PlayerInfo();
+                    info.id = player.getUUID();
+                    info.name = player.getName();
+                    data.playerSample.add(info);
+                }
+                return true;
+            }
+            else if (determinationLow.startsWith("alternate_player_text:")) {
+                if (!CoreConfiguration.allowRestrictedActions) {
+                    Debug.echoError("Cannot use 'alternate_player_text' in proxy list ping event: 'Allow restricted actions' is disabled in Denizen config.yml.");
+                    return true;
+                }
+                List<String> text = ListTag.valueOf(determination.substring("alternate_player_text:".length()), getTagContext(path));
+                data.playerSample = new ArrayList<>(text.size());
+                for (String line : text) {
+                    PlayerInfo info = new PlayerInfo();
+                    info.name = line;
+                    info.id = new UUID(0, 0);
+                    data.playerSample.add(info);
+                }
                 return true;
             }
         }

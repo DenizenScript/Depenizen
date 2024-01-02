@@ -1,7 +1,7 @@
 package com.denizenscript.depenizen.bukkit.bungee.packets.out;
 
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.depenizen.bukkit.bungee.BungeePacketOut;
+import com.denizenscript.depenizen.bukkit.events.bungee.BungeeProxyServerListPingScriptEvent;
 import io.netty.buffer.ByteBuf;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class ProxyPingResultPacketOut extends BungeePacketOut {
 
     public String motd;
 
-    public List<PlayerTag> playerSample;
+    public List<BungeeProxyServerListPingScriptEvent.PlayerInfo> playerSample;
 
     @Override
     public int getPacketId() {
@@ -35,9 +35,9 @@ public class ProxyPingResultPacketOut extends BungeePacketOut {
         else {
             buf.writeInt(playerSample.size());
             for (int i = 0; i < playerSample.size(); i++) {
-                writeString(buf, playerSample.get(i).getName());
-                buf.writeLong(playerSample.get(i).getUUID().getMostSignificantBits());
-                buf.writeLong(playerSample.get(i).getUUID().getLeastSignificantBits());
+                writeString(buf, playerSample.get(i).name);
+                buf.writeLong(playerSample.get(i).id.getMostSignificantBits());
+                buf.writeLong(playerSample.get(i).id.getLeastSignificantBits());
             }
         }
     }
