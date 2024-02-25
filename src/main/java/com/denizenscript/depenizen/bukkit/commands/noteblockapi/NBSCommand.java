@@ -23,7 +23,7 @@ public class NBSCommand extends AbstractCommand {
 
     public NBSCommand() {
         setName("nbs");
-        setSyntax("nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>)");
+        setSyntax("nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>/{16})");
         setRequiredArguments(1, 5);
         autoCompile();
     }
