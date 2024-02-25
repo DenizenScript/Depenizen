@@ -30,7 +30,7 @@ public class NBSCommand extends AbstractCommand {
 
     // <--[command]
     // @Name nbs
-    // @Syntax nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>)
+    // @Syntax nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>/{16})
     // @Group Depenizen
     // @Plugin Depenizen, NoteBlockAPI
     // @Required 1
