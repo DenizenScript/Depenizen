@@ -41,7 +41,7 @@ public class NBSCommand extends AbstractCommand {
     // Plays a .nbs file for the targets, being players specified.
     // If no targets are specified, the target will be the player in the queue.
     // Optionally specify the location to play the song from using the 'at' argument. Players must still be added using 'targets' in order to hear the song when they are within range.
-    // Setting 'distance' will change the range that a player must be in to hear the song. Numbers below 16 will decrease volume, not decrease range. Numbers greater than 16 will increase range.
+    // Setting 'distance' will change the range in blocks that a player must be in to hear the song. Numbers below 16 will decrease volume, not decrease range. Numbers greater than 16 will increase range.
     // Note block song files are created using NoteBlockStudio or other programs.
     // The file path starts in the denizen folder: /plugins/Denizen/
     //
@@ -64,6 +64,13 @@ public class NBSCommand extends AbstractCommand {
     // Use to stop the current song playing for all online players.
     // - nbs stop targets:<server.online_players>
     //
+    // @Usage
+    // Use to play a song only for the linked player in a queue at a specified location.
+    // - nbs play file:MySong at:<[my_location]>
+    //
+    // @Usage
+    // Use to play a song to everyone online if they are 30 blocks away from a specified location.
+    // - nbs play file:MySong targets:<server.online_players> at:<[my_location]> distance:30
     // -->
 
     public enum Action {PLAY, STOP}
