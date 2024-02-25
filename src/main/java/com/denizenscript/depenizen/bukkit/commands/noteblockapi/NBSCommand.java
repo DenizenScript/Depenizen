@@ -1,45 +1,47 @@
 package com.denizenscript.depenizen.bukkit.commands.noteblockapi;
 
-import com.denizenscript.denizencore.objects.Argument;
+import com.denizenscript.denizen.objects.LocationTag;
+import com.denizenscript.denizencore.exceptions.InvalidArgumentsRuntimeException;
+import com.denizenscript.denizencore.scripts.commands.generator.*;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 import com.xxmicloxx.NoteBlockAPI.model.Song;
+import com.xxmicloxx.NoteBlockAPI.songplayer.PositionSongPlayer;
 import com.xxmicloxx.NoteBlockAPI.songplayer.RadioSongPlayer;
 import com.xxmicloxx.NoteBlockAPI.songplayer.SongPlayer;
 import com.xxmicloxx.NoteBlockAPI.utils.NBSDecoder;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
-import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 import java.io.File;
 import java.net.URLDecoder;
-import java.util.Collections;
 import java.util.List;
 
 public class NBSCommand extends AbstractCommand {
 
     public NBSCommand() {
         setName("nbs");
-        setSyntax("nbs [play/stop] (file:<file path>) (targets:<entity>|...)");
-        setRequiredArguments(1, 3);
+        setSyntax("nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>)");
+        setRequiredArguments(1, 5);
+        autoCompile();
     }
 
     // <--[command]
     // @Name nbs
-    // @Syntax nbs [play/stop] (file:<file path>) (targets:<entity>|...)
+    // @Syntax nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>)
     // @Group Depenizen
     // @Plugin Depenizen, NoteBlockAPI
     // @Required 1
-    // @Maximum 3
+    // @Maximum 5
     // @Short Plays or stops a noteblock song.
     //
     // @Description
     // Plays a .nbs file for the targets, being players specified.
     // If no targets are specified, the target will be the player in the queue.
+    // Optionally specify the location to play the song from using the 'at' argument. Players must still be added using 'targets' in order to hear the song when they are within range.
+    // Setting 'distance' will change the range that a player must be in to hear the song. Numbers below 16 will decrease volume, not decrease range. Numbers greater than 16 will increase range.
     // Note block song files are created using NoteBlockStudio or other programs.
     // The file path starts in the denizen folder: /plugins/Denizen/
     //
@@ -64,70 +66,46 @@ public class NBSCommand extends AbstractCommand {
     //
     // -->
 
-    private enum Action {PLAY, STOP}
+    public enum Action {PLAY, STOP}
 
-    @Override
-    public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (Argument arg : scriptEntry) {
-            if (!scriptEntry.hasObject("targets")
-                    && arg.matchesPrefix("targets", "targets")
-                    && arg.matchesArgumentList(PlayerTag.class)) {
-                scriptEntry.addObject("targets", arg.asType(ListTag.class).filter(PlayerTag.class, scriptEntry));
-            }
-            else if (!scriptEntry.hasObject("file")
-                    && arg.matchesPrefix("file")) {
-                scriptEntry.addObject("file", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("action")
-                    && arg.matchesEnum(Action.class)) {
-                scriptEntry.addObject("action", arg.asElement());
-            }
-            else {
-                arg.reportUnhandled();
-            }
-        }
-        if (!scriptEntry.hasObject("action")) {
-            throw new InvalidArgumentsException("Action not specified! (play/stop)");
-        }
-        else if (!scriptEntry.hasObject("targets")) {
+    public static void autoExecute(ScriptEntry scriptEntry,
+                                   @ArgName("action") Action action,
+                                   @ArgName("file") @ArgPrefixed @ArgDefaultNull String file,
+                                   @ArgName("targets") @ArgPrefixed @ArgDefaultNull @ArgSubType(PlayerTag.class) List<PlayerTag> targets,
+                                   @ArgName("at") @ArgPrefixed @ArgDefaultNull LocationTag location,
+                                   @ArgName("distance") @ArgPrefixed @ArgDefaultText("16") int distance) {
+        if (targets == null) {
             if (Utilities.entryHasPlayer(scriptEntry)) {
-                scriptEntry.addObject("targets", Collections.singletonList(Utilities.getEntryPlayer(scriptEntry)));
+                targets = List.of(Utilities.getEntryPlayer(scriptEntry));
             }
             else {
-                throw new InvalidArgumentsException("Must specify players to add, remove or spectate!");
+                throw new InvalidArgumentsRuntimeException("Must specify players to add or remove!");
             }
         }
-    }
-
-    @Override
-    public void execute(ScriptEntry scriptEntry) {
-        ElementTag file = scriptEntry.getObjectTag("file");
-        ElementTag action = scriptEntry.getObjectTag("action");
-        List<PlayerTag> targets = (List<PlayerTag>) scriptEntry.getObject("targets");
-        if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), action, db("targets", targets), file);
-        }
-        if (targets == null || targets.isEmpty()) {
-            Debug.echoError(scriptEntry, "Targets not found!");
-            return;
-        }
-        if (action.asString().equalsIgnoreCase("play")) {
-            if (file == null) {
-                Debug.echoError(scriptEntry, "File not specified!");
-                return;
+        switch (action) {
+            case PLAY -> {
+                if (file == null) {
+                    Debug.echoError(scriptEntry, "File not specified!");
+                    return;
+                }
+                String directory = URLDecoder.decode(System.getProperty("user.dir"));
+                Song s = NBSDecoder.parse(new File(directory + "/plugins/Denizen/" + file + ".nbs"));
+                SongPlayer sp = new RadioSongPlayer(s);
+                if (location != null) {
+                    sp = new PositionSongPlayer(s);
+                    ((PositionSongPlayer) sp).setTargetLocation(location);
+                    ((PositionSongPlayer) sp).setDistance(distance);
+                }
+                for (PlayerTag p : targets) {
+                    sp.addPlayer(p.getPlayerEntity());
+                }
+                sp.setAutoDestroy(true);
+                sp.setPlaying(true);
             }
-            String directory = URLDecoder.decode(System.getProperty("user.dir"));
-            Song s = NBSDecoder.parse(new File(directory + "/plugins/Denizen/" + file + ".nbs"));
-            SongPlayer sp = new RadioSongPlayer(s);
-            sp.setAutoDestroy(true);
-            for (PlayerTag p : targets) {
-                sp.addPlayer(p.getPlayerEntity());
-            }
-            sp.setPlaying(true);
-        }
-        else if (action.asString().equalsIgnoreCase("stop")) {
-            for (PlayerTag p : targets) {
-                NoteBlockAPI.stopPlaying(p.getPlayerEntity());
+            case STOP -> {
+                for (PlayerTag p : targets) {
+                    NoteBlockAPI.stopPlaying(p.getPlayerEntity());
+                }
             }
         }
     }
