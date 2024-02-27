@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.noteblockapi;
 
+import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsRuntimeException;
 import com.denizenscript.denizencore.scripts.commands.generator.*;
@@ -95,8 +96,12 @@ public class NBSCommand extends AbstractCommand {
                     Debug.echoError(scriptEntry, "File not specified!");
                     return;
                 }
-                String directory = URLDecoder.decode(System.getProperty("user.dir"));
-                Song s = NBSDecoder.parse(new File(directory + "/plugins/Denizen/" + file + ".nbs"));
+                File songFile = new File(Denizen.getInstance().getDataFolder(), file + ".nbs");
+                if (!Utilities.canReadFile(songFile)) {
+                    Debug.echoError("Cannot read from that file path due to security settings in Denizen/config.yml.");
+                    return;
+                }
+                Song s = NBSDecoder.parse(songFile);
                 SongPlayer sp = new RadioSongPlayer(s);
                 if (location != null) {
                     sp = new PositionSongPlayer(s);
