@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.commands.worldedit;
 
+import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
@@ -31,7 +32,6 @@ import com.sk89q.worldedit.util.io.Closer;
 import com.sk89q.worldedit.world.World;
 
 import java.io.*;
-import java.net.URLDecoder;
 
 public class WorldEditCommand extends AbstractCommand {
 
@@ -166,8 +166,7 @@ public class WorldEditCommand extends AbstractCommand {
                 Debug.echoError("Position not specified");
                 return;
             }
-            String directory = URLDecoder.decode(System.getProperty("user.dir"));
-            File fileToLoad = new File(directory + "/plugins/Denizen/schematics/" + file + ".schem");
+            File fileToLoad = new File(Denizen.getInstance().getDataFolder(), "schematics/" + file + ".schem");
             if (!Utilities.canReadFile(fileToLoad)) {
                 Debug.echoError("Cannot read from that file path due to security settings in Denizen/config.yml.");
                 return;
@@ -243,8 +242,7 @@ public class WorldEditCommand extends AbstractCommand {
                 Debug.echoError("File not specified");
                 return;
             }
-            String directory = URLDecoder.decode(System.getProperty("user.dir"));
-            File fileToSave = new File(directory + "/plugins/Denizen/schematics/" + file + ".schem");
+            File fileToSave = new File(Denizen.getInstance().getDataFolder(), "schematics/" + file + ".schem");
             if (!Utilities.canWriteToFile(fileToSave)) {
                 Debug.echoError("Cannot write to that file path due to security settings in Denizen/config.yml.");
                 return;
@@ -336,8 +334,7 @@ public class WorldEditCommand extends AbstractCommand {
                 Debug.echoError("Cuboid or file must be specified.");
                 return;
             }
-            String directory = URLDecoder.decode(System.getProperty("user.dir"));
-            File fileToLoad = new File(directory + "/plugins/Denizen/schematics/" + file + ".schem");
+            File fileToLoad = new File(Denizen.getInstance().getDataFolder(), "schematics/" + file + ".schem");
             if (!Utilities.canReadFile(fileToLoad)) {
                 Debug.echoError("Cannot read from that file path due to security settings in Denizen/config.yml.");
                 return;

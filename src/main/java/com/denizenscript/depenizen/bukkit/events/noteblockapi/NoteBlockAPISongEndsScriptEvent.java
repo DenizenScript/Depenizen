@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.events.noteblockapi;
 
+import com.denizenscript.denizen.Denizen;
 import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
@@ -11,8 +12,6 @@ import com.xxmicloxx.NoteBlockAPI.event.SongEndEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.io.File;
-import java.net.URLDecoder;
 import java.nio.file.Path;
 
 public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implements Listener {
@@ -57,8 +56,7 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
     public String getSongFileName() {
         try {
             Path songPath = event.getSongPlayer().getSong().getPath().toPath();
-            String directory = URLDecoder.decode(System.getProperty("user.dir"));
-            Path denizenPath = new File(directory + "/plugins/Denizen/").toPath();
+            Path denizenPath = Denizen.getInstance().getDataFolder().toPath();
             String finalPath = denizenPath.relativize(songPath).toString();
             if (finalPath.endsWith(".nbs")) {
                 finalPath = finalPath.substring(0, finalPath.length() - ".nbs".length());
