@@ -17,7 +17,6 @@ import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 
 import java.io.File;
-import java.net.URLDecoder;
 import java.util.List;
 
 public class NBSCommand extends AbstractCommand {
