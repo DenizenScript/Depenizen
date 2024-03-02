@@ -92,7 +92,7 @@ public class NBSCommand extends AbstractCommand {
         switch (action) {
             case PLAY -> {
                 if (file == null) {
-                    Debug.echoError(scriptEntry, "File not specified!");
+                    Debug.echoError("File not specified!");
                     return;
                 }
                 File songFile = new File(Denizen.getInstance().getDataFolder(), file + ".nbs");
