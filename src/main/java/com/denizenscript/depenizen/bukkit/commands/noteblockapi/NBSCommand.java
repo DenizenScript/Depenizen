@@ -23,14 +23,14 @@ public class NBSCommand extends AbstractCommand {
 
     public NBSCommand() {
         setName("nbs");
-        setSyntax("nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>{16})");
+        setSyntax("nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>/{16})");
         setRequiredArguments(1, 5);
         autoCompile();
     }
 
     // <--[command]
     // @Name nbs
-    // @Syntax nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>{16})
+    // @Syntax nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>/{16})
     // @Group Depenizen
     // @Plugin Depenizen, NoteBlockAPI
     // @Required 1
