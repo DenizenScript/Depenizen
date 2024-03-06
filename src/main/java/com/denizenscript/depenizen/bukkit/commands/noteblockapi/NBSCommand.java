@@ -23,14 +23,14 @@ public class NBSCommand extends AbstractCommand {
 
     public NBSCommand() {
         setName("nbs");
-        setSyntax("nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>/{16})");
+        setSyntax("nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>{16})");
         setRequiredArguments(1, 5);
         autoCompile();
     }
 
     // <--[command]
     // @Name nbs
-    // @Syntax nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>/{16})
+    // @Syntax nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>{16})
     // @Group Depenizen
     // @Plugin Depenizen, NoteBlockAPI
     // @Required 1
@@ -86,7 +86,7 @@ public class NBSCommand extends AbstractCommand {
                 targets = List.of(Utilities.getEntryPlayer(scriptEntry));
             }
             else {
-                throw new InvalidArgumentsRuntimeException("Must specify players to add or remove!");
+                throw new InvalidArgumentsRuntimeException("Must specify players that can hear the song!");
             }
         }
         switch (action) {
@@ -101,8 +101,11 @@ public class NBSCommand extends AbstractCommand {
                     return;
                 }
                 Song s = NBSDecoder.parse(songFile);
-                SongPlayer sp = new RadioSongPlayer(s);
-                if (location != null) {
+                SongPlayer sp;
+                if (location == null) {
+                    sp = new RadioSongPlayer(s);
+                }
+                else {
                     sp = new PositionSongPlayer(s);
                     ((PositionSongPlayer) sp).setTargetLocation(location);
                     ((PositionSongPlayer) sp).setDistance(distance);
