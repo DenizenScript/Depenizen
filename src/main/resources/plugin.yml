@@ -33,6 +33,7 @@ softdepend:
     - PlaceholderAPI
     - PlayerPoints
     - PlotSquared
+    - ProjectKorra
     - PVPArena
     - PVPStats
     - Quests
