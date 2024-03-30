@@ -14,20 +14,22 @@ public class PlayerAbilityEndScriptEvent extends BukkitScriptEvent implements Li
 
     // <--[event]
     // @Events
-    // projectkorra player ends ability <ability>
+    // projectkorra player ends|stops
+    //
+    // @Switch ability:<ability> to only process the event if the ability matches the specified ability.
     //
     // @Triggers when a player ends a bending ability.
     //
     // @Context
-    // <context.ability> returns ElementTag(String) of the ability's name.
-    // <context.source> returns PlayerTag of the player who triggered the ability.
-    // <context.element> returns ElementTag(String) ability's element.
-    // <context.cooldown> returns ElementTag(Number) of the ability's cooldown.
-    // <context.is_explosive> returns ElementTag(Boolean) if the ability is explosive.
-    // <context.is_harmless> returns ElementTag(Boolean) if the ability is harmless.
-    // <context.is_hidden> returns ElementTag(Boolean) if the ability is hidden.
-    // <context.is_ignite> returns ElementTag(Boolean) if the ability can ignite.
-    // <context.is_sneak> returns ElementTag(Boolean) if the ability is triggered by sneak.
+    // <context.ability> returns the ability's name.
+    // <context.source> returns the player who triggered the ability.
+    // <context.element> returns the ability's element name.
+    // <context.cooldown> returns the ability's cooldown.
+    // <context.is_explosive> returns if the ability is explosive.
+    // <context.is_harmless> returns if the ability is harmless.
+    // <context.is_hidden> returns if the ability is hidden.
+    // <context.is_ignite> returns if the ability can ignite.
+    // <context.is_sneak> returns if the ability is triggered by sneak.
     //
     // @Plugin Depenizen, ProjectKorra
     //
@@ -36,16 +38,19 @@ public class PlayerAbilityEndScriptEvent extends BukkitScriptEvent implements Li
     // -->
 
     public PlayerAbilityEndScriptEvent() {
-        registerCouldMatcher("projectkorra player ends <'ability'>");
+        registerCouldMatcher("projectkorra player ends|stops");
+        registerSwitches("ability");
     }
 
     public AbilityEndEvent event;
+    public ElementTag ability;
 
     @Override
     public boolean matches(ScriptPath path) {
-        String ability = path.eventArgLowerAt(3);
-        // Check if event applies to any ability
-        if (!ability.equals("ability") && !ability.equalsIgnoreCase(event.getAbility().getName())) {
+        if ((path.eventArgLowerAt(3).equals("ability")) && (ability == null || !path.tryArgObject(4, ability))) {
+            return false;
+        }
+        if (!path.tryObjectSwitch("ability", ability)) {
             return false;
         }
         return super.matches(path);
@@ -59,7 +64,7 @@ public class PlayerAbilityEndScriptEvent extends BukkitScriptEvent implements Li
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
-            case "ability" -> new ElementTag(event.getAbility().getName());
+            case "ability" -> ability;
             case "source" -> new PlayerTag(event.getAbility().getPlayer());
             case "element" -> new ElementTag(event.getAbility().getElement().getName());
             case "cooldown" -> new ElementTag(event.getAbility().getCooldown());
@@ -75,6 +80,7 @@ public class PlayerAbilityEndScriptEvent extends BukkitScriptEvent implements Li
     @EventHandler
     public void onAbilityEnd(AbilityEndEvent event) {
         this.event = event;
+        this.ability = new ElementTag(event.getAbility().getName());
         fire(event);
     }
 }

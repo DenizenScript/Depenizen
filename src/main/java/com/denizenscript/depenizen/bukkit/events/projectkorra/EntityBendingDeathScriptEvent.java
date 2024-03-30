@@ -15,19 +15,21 @@ public class EntityBendingDeathScriptEvent extends BukkitScriptEvent implements 
 
     // <--[event]
     // @Events
-    // projectkorra player|entity dies|death|killed by <ability>
+    // projectkorra entity dies|death|killed
+    //
+    // @Switch by:<ability> to only process the event if the ability matches the specified ability.
     //
     // @Triggers when an entity dies from bending.
     //
     // @Context
-    // <context.ability> returns ElementTag(String) of the ability's name.
-    // <context.source> returns PlayerTag of the player who triggered the ability.
-    // <context.target> returns EntityTag of the target damaged by the ability.
-    // <context.damage> returns ElementTag(Decimal) of the damage dealt to the entity.
-    // <context.element> returns ElementTag(String) ability's element.
-    // <context.is_explosive> returns ElementTag(Boolean) if the ability is explosive.
-    // <context.is_ignite> returns ElementTag(Boolean) if the ability can ignite.
-    // <context.is_sneak> returns ElementTag(Boolean) if the ability is triggered by sneak.
+    // <context.ability> returns the ability's name.
+    // <context.source> returns the player who triggered the ability.
+    // <context.target> returns the target damaged by the ability.
+    // <context.damage> returns the damage dealt to the entity as a decimal.
+    // <context.element> returns the ability's element name.
+    // <context.is_explosive> returns if the ability is explosive.
+    // <context.is_ignite> returns if the ability can ignite.
+    // <context.is_sneak> returns if the ability is triggered by sneak.
     //
     // @Plugin Depenizen, ProjectKorra
     //
@@ -36,16 +38,19 @@ public class EntityBendingDeathScriptEvent extends BukkitScriptEvent implements 
     // -->
 
     public EntityBendingDeathScriptEvent() {
-        registerCouldMatcher("projectkorra player|entity dies|death|killed by <'ability'>");
+        registerCouldMatcher("projectkorra entity dies|death|killed");
+        registerSwitches("by");
     }
 
     public EntityBendingDeathEvent event;
+    public ElementTag ability;
 
     @Override
     public boolean matches(ScriptPath path) {
-        String ability = path.eventArgLowerAt(4);
-        // Check if event applies to any ability
-        if (!ability.equals("ability") && !ability.equalsIgnoreCase(event.getAbility().getName())) {
+        if ((path.eventArgLowerAt(3).equals("by")) && (ability == null || !path.tryArgObject(4, ability))) {
+            return false;
+        }
+        if (!path.tryObjectSwitch("by", ability)) {
             return false;
         }
         return super.matches(path);
@@ -59,7 +64,7 @@ public class EntityBendingDeathScriptEvent extends BukkitScriptEvent implements 
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
-            case "ability" -> new ElementTag(event.getAbility().getName());
+            case "ability" -> ability;
             case "source" -> new PlayerTag(event.getAttacker());
             case "target" -> new EntityTag(event.getEntity());
             case "damage" -> new ElementTag(event.getDamage());
@@ -72,8 +77,9 @@ public class EntityBendingDeathScriptEvent extends BukkitScriptEvent implements 
     }
 
     @EventHandler
-    public void onAbilityStart(EntityBendingDeathEvent event) {
+    public void onBendingDeath(EntityBendingDeathEvent event) {
         this.event = event;
+        this.ability = new ElementTag(event.getAbility().getName());
         fire(event);
     }
 }

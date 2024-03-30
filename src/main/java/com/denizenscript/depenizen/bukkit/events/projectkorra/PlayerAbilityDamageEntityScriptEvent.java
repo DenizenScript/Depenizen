@@ -15,21 +15,23 @@ public class PlayerAbilityDamageEntityScriptEvent extends BukkitScriptEvent impl
 
     // <--[event]
     // @Events
-    // projectkorra player damages player|entity with <ability>
+    // projectkorra player damages player|entity
+    //
+    // @Switch by:<ability> to only process the event if the ability matches the specified ability.
     //
     // @Triggers when a player damages an entity with a bending ability.
     //
     // @Context
-    // <context.ability> returns ElementTag(String) of the ability's name.
-    // <context.source> returns PlayerTag of the player who triggered the ability.
-    // <context.target> returns EntityTag of the target damaged by the ability.
-    // <context.damage> returns ElementTag(Decimal) of the damage dealt to the entity.
-    // <context.element> returns ElementTag(String) ability's element.
-    // <context.cooldown> returns ElementTag(Number) of the ability's cooldown.
-    // <context.is_explosive> returns ElementTag(Boolean) if the ability is explosive.
-    // <context.is_ignite> returns ElementTag(Boolean) if the ability can ignite.
-    // <context.is_sneak> returns ElementTag(Boolean) if the ability is triggered by sneak.
-    // <context.ignores_armor> returns ElementTag(Boolean) if the event ignores armor.
+    // <context.ability> returns the ability's name.
+    // <context.source> returns the player who triggered the ability.
+    // <context.target> returns the target damaged by the ability.
+    // <context.damage> returns the damage dealt to the entity as a decimal.
+    // <context.element> returns the ability's element name.
+    // <context.cooldown> returns the ability's cooldown.
+    // <context.is_explosive> returns if the ability is explosive.
+    // <context.is_ignite> returns if the ability can ignite.
+    // <context.is_sneak> returns if the ability is triggered by sneak.
+    // <context.ignores_armor> returns if the event ignores armor.
     //
     // @Plugin Depenizen, ProjectKorra
     //
@@ -38,16 +40,19 @@ public class PlayerAbilityDamageEntityScriptEvent extends BukkitScriptEvent impl
     // -->
 
     public PlayerAbilityDamageEntityScriptEvent() {
-        registerCouldMatcher("projectkorra player damages player|entity with <'ability'>");
+        registerCouldMatcher("projectkorra player damages player|entity");
+        registerSwitches("by");
     }
 
     public AbilityDamageEntityEvent event;
+    public ElementTag ability;
 
     @Override
     public boolean matches(ScriptPath path) {
-        String ability = path.eventArgLowerAt(5);
-        // Check if event applies to any ability
-        if (!ability.equals("ability") && !ability.equalsIgnoreCase(event.getAbility().getName())) {
+        if ((path.eventArgLowerAt(4).equals("by")) && (ability == null || !path.tryArgObject(5, ability))) {
+            return false;
+        }
+        if (!path.tryObjectSwitch("by", ability)) {
             return false;
         }
         return super.matches(path);
@@ -61,7 +66,7 @@ public class PlayerAbilityDamageEntityScriptEvent extends BukkitScriptEvent impl
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
-            case "ability" -> new ElementTag(event.getAbility().getName());
+            case "ability" -> ability;
             case "source" -> new PlayerTag(event.getSource());
             case "target" -> new EntityTag(event.getEntity());
             case "damage" -> new ElementTag(event.getDamage());
@@ -76,8 +81,9 @@ public class PlayerAbilityDamageEntityScriptEvent extends BukkitScriptEvent impl
     }
 
     @EventHandler
-    public void onAbilityStart(AbilityDamageEntityEvent event) {
+    public void onAbilityDamage(AbilityDamageEntityEvent event) {
         this.event = event;
+        this.ability = new ElementTag(event.getAbility().getName());
         fire(event);
     }
 }
