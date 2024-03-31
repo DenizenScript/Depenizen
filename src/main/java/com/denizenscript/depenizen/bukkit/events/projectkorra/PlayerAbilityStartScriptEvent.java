@@ -14,7 +14,7 @@ public class PlayerAbilityStartScriptEvent extends BukkitScriptEvent implements 
 
     // <--[event]
     // @Events
-    // projectkorra player starts|begins
+    // projectkorra player starts
     //
     // @Switch ability:<ability> to only process the event if the ability matches the specified ability.
     //
@@ -38,7 +38,7 @@ public class PlayerAbilityStartScriptEvent extends BukkitScriptEvent implements 
     // -->
 
     public PlayerAbilityStartScriptEvent() {
-        registerCouldMatcher("projectkorra player starts|begins");
+        registerCouldMatcher("projectkorra player starts");
         registerSwitches("ability");
     }
 
@@ -47,9 +47,6 @@ public class PlayerAbilityStartScriptEvent extends BukkitScriptEvent implements 
 
     @Override
     public boolean matches(ScriptPath path) {
-        if ((path.eventArgLowerAt(3).equals("ability")) && (ability == null || !path.tryArgObject(4, ability))) {
-            return false;
-        }
         if (!path.tryObjectSwitch("ability", ability)) {
             return false;
         }

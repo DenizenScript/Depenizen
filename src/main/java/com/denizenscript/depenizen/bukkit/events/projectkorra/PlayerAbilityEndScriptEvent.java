@@ -14,7 +14,7 @@ public class PlayerAbilityEndScriptEvent extends BukkitScriptEvent implements Li
 
     // <--[event]
     // @Events
-    // projectkorra player ends|stops
+    // projectkorra player ends
     //
     // @Switch ability:<ability> to only process the event if the ability matches the specified ability.
     //
@@ -38,7 +38,7 @@ public class PlayerAbilityEndScriptEvent extends BukkitScriptEvent implements Li
     // -->
 
     public PlayerAbilityEndScriptEvent() {
-        registerCouldMatcher("projectkorra player ends|stops");
+        registerCouldMatcher("projectkorra player ends");
         registerSwitches("ability");
     }
 
@@ -47,9 +47,6 @@ public class PlayerAbilityEndScriptEvent extends BukkitScriptEvent implements Li
 
     @Override
     public boolean matches(ScriptPath path) {
-        if ((path.eventArgLowerAt(3).equals("ability")) && (ability == null || !path.tryArgObject(4, ability))) {
-            return false;
-        }
         if (!path.tryObjectSwitch("ability", ability)) {
             return false;
         }

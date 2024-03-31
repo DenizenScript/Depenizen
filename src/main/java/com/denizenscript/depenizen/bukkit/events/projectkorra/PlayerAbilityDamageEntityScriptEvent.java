@@ -15,7 +15,7 @@ public class PlayerAbilityDamageEntityScriptEvent extends BukkitScriptEvent impl
 
     // <--[event]
     // @Events
-    // projectkorra player damages player|entity
+    // projectkorra player damages <entity>
     //
     // @Switch by:<ability> to only process the event if the ability matches the specified ability.
     //
@@ -40,7 +40,7 @@ public class PlayerAbilityDamageEntityScriptEvent extends BukkitScriptEvent impl
     // -->
 
     public PlayerAbilityDamageEntityScriptEvent() {
-        registerCouldMatcher("projectkorra player damages player|entity");
+        registerCouldMatcher("projectkorra player damages entity");
         registerSwitches("by");
     }
 
@@ -49,9 +49,6 @@ public class PlayerAbilityDamageEntityScriptEvent extends BukkitScriptEvent impl
 
     @Override
     public boolean matches(ScriptPath path) {
-        if ((path.eventArgLowerAt(4).equals("by")) && (ability == null || !path.tryArgObject(5, ability))) {
-            return false;
-        }
         if (!path.tryObjectSwitch("by", ability)) {
             return false;
         }

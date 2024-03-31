@@ -14,7 +14,7 @@ public class PlayerAbilityProgressScriptEvent extends BukkitScriptEvent implemen
 
     // <--[event]
     // @Events
-    // projectkorra player progresses|continues
+    // projectkorra player progresses
     //
     // @Switch ability:<ability> to only process the event if the ability matches the specified ability.
     //
@@ -38,7 +38,7 @@ public class PlayerAbilityProgressScriptEvent extends BukkitScriptEvent implemen
     // -->
 
     public PlayerAbilityProgressScriptEvent() {
-        registerCouldMatcher("projectkorra player progresses|continues");
+        registerCouldMatcher("projectkorra player progresses");
         registerSwitches("ability");
     }
 
@@ -47,9 +47,6 @@ public class PlayerAbilityProgressScriptEvent extends BukkitScriptEvent implemen
 
     @Override
     public boolean matches(ScriptPath path) {
-        if ((path.eventArgLowerAt(3).equals("ability")) && (ability == null || !path.tryArgObject(4, ability))) {
-            return false;
-        }
         if (!path.tryObjectSwitch("ability", ability)) {
             return false;
         }

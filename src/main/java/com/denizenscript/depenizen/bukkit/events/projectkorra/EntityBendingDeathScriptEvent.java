@@ -15,7 +15,7 @@ public class EntityBendingDeathScriptEvent extends BukkitScriptEvent implements 
 
     // <--[event]
     // @Events
-    // projectkorra entity dies|death|killed
+    // projectkorra <entity> killed
     //
     // @Switch by:<ability> to only process the event if the ability matches the specified ability.
     //
@@ -38,7 +38,7 @@ public class EntityBendingDeathScriptEvent extends BukkitScriptEvent implements 
     // -->
 
     public EntityBendingDeathScriptEvent() {
-        registerCouldMatcher("projectkorra entity dies|death|killed");
+        registerCouldMatcher("projectkorra entity killed");
         registerSwitches("by");
     }
 
@@ -47,9 +47,6 @@ public class EntityBendingDeathScriptEvent extends BukkitScriptEvent implements 
 
     @Override
     public boolean matches(ScriptPath path) {
-        if ((path.eventArgLowerAt(3).equals("by")) && (ability == null || !path.tryArgObject(4, ability))) {
-            return false;
-        }
         if (!path.tryObjectSwitch("by", ability)) {
             return false;
         }
