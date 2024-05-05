@@ -38,15 +38,15 @@ public class EssentialsBridge extends Bridge {
             // @description
             // Returns the location of the warp name.
             // -->
-            tagProcessor.registerTag(LocationTag.class, ElementTag.class, "warp", (object, attribute, name) -> {
+            tagProcessor.registerTag(LocationTag.class, ElementTag.class, "warp", (attribute, object, name) -> {
                 try {
                     return new LocationTag(essentials.getWarps().getWarp(name.toString()));
                 }
                 catch (WarpNotFoundException e) {
-                    Debug.echoError("Warp not found");
+                    attribute.echoError("Warp not found");
                 }
                 catch (InvalidWorldException e) {
-                    Debug.echoError("Invalid world for getting warp");
+                    attribute.echoError("Invalid world for getting warp");
                 }
                 return null;
             });
@@ -58,7 +58,7 @@ public class EssentialsBridge extends Bridge {
             // @description
             // Returns a list of all Warp names.
             // -->
-            tagProcessor.registerTag(ListTag.class, "list_warps", (object, attribute) -> {
+            tagProcessor.registerTag(ListTag.class, "list_warps", (attribute, object) -> {
                 return new ListTag(essentials.getWarps().getList(), true);
             });
         }
