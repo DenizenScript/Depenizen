@@ -1,12 +1,12 @@
 package com.denizenscript.depenizen.bukkit.events.breweryx;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.depenizen.bukkit.objects.breweryx.BRecipeTag;
-import com.dre.brewery.api.events.brew.BrewEvent;
 import com.dre.brewery.api.events.brew.BrewModifyEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,8 +33,6 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     //
     // @Plugin Depenizen, BreweryX
     //
-    // @Player Always.
-    //
     // @Group Depenizen
     //
     // -->
@@ -57,12 +55,13 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
         return switch (name) {
             case "recipe" -> recipeTag;
             case "type" -> new ElementTag(type);
+            case "item" -> new ItemTag(event.getBrew().createItem(event.getBrew().getCurrentRecipe()));
             default -> super.getContext(name);
         };
     }
 
     @EventHandler
-    public void onBrewDrinkEvent(BrewModifyEvent event) {
+    public void onBrewModifyEvent(BrewModifyEvent event) {
         this.event = event;
         this.recipeTag = new BRecipeTag(event.getBrew().getCurrentRecipe());
         this.type = event.getType().name();

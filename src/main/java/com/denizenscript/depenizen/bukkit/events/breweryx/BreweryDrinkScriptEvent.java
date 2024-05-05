@@ -30,6 +30,7 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
     // <context.item> Returns an ItemTag of the potion that was drunk.
     // <context.recipe> Returns an BRecipeTag of the recipe that the brew is based off of.
     // <context.bplayer> Returns an BPlayerTag of the player that drank the brew.
+    // <context.player> Returns a PlayerTag of the player that drank the brew.
     //
     // @Plugin Depenizen, BreweryX
     //
@@ -58,6 +59,7 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
             case "recipe" -> recipeTag;
             case "bplayer" -> bPlayerTag;
             case "item" -> new ItemTag(event.getBrew().createItem(event.getBrew().getCurrentRecipe()));
+            case "player" -> new PlayerTag(event.getPlayer());
             default -> super.getContext(name);
         };
     }
