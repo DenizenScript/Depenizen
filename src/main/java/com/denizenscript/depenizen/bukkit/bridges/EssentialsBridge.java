@@ -29,6 +29,7 @@ public class EssentialsBridge extends Bridge {
             TagManager.registerStaticTagBaseHandler(EssentialsTagBase.class, "essentials", (t) -> instance);
         }
 
+        @Override
         public void register() {
 
             // <--[tag]
