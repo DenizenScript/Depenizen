@@ -41,9 +41,11 @@ public class EssentialsBridge extends Bridge {
             tagProcessor.registerTag(LocationTag.class, ElementTag.class, "warp", (object, attribute, name) -> {
                 try {
                     return new LocationTag(essentials.getWarps().getWarp(name.toString()));
-                } catch (WarpNotFoundException e) {
+                }
+                catch (WarpNotFoundException e) {
                     Debug.echoError("Warp not found");
-                } catch (InvalidWorldException e) {
+                }
+                catch (InvalidWorldException e) {
                     Debug.echoError("Invalid world for getting warp");
                 }
                 return null;
@@ -57,9 +59,7 @@ public class EssentialsBridge extends Bridge {
             // Returns a list of all Warp names.
             // -->
             tagProcessor.registerTag(ListTag.class, "list_warps", (object, attribute) -> {
-                ListTag list = new ListTag();
-                list.addAll(essentials.getWarps().getList());
-                return list;
+                return new ListTag(essentials.getWarps().getList(), true);
             });
         }
     }
@@ -69,6 +69,7 @@ public class EssentialsBridge extends Bridge {
 
     @Override
     public void init() {
+        instance = this;
         ScriptEvent.registerScriptEvent(PlayerAFKStatusScriptEvent.class);
         ScriptEvent.registerScriptEvent(PlayerGodModeStatusScriptEvent.class);
         ScriptEvent.registerScriptEvent(PlayerJailStatusScriptEvent.class);
