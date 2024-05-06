@@ -4,6 +4,7 @@ import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.denizenscript.depenizen.bukkit.clientizen.ClientizenBridge;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -52,7 +53,11 @@ public class NetworkManager implements PluginMessageListener {
         }
         ByteBuf buf = Unpooled.buffer();
         packet.writeTo(buf);
-        target.sendPluginMessage(Depenizen.instance, packet.channel, buf.array());
+        target.sendPluginMessage(Depenizen.instance, packet.channel, bufToBytes(buf));
+    }
+
+    public static byte[] bufToBytes(ByteBuf buf) {
+        return ByteBufUtil.getBytes(buf, buf.readerIndex(), buf.readableBytes(), false);
     }
 
     @Override
