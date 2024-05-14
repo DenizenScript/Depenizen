@@ -24,9 +24,7 @@ public class EssentialsItemExtensions {
         ItemTag.tagProcessor.registerTag(ElementTag.class, "essentials_worth", (attribute, item) -> {
             BigDecimal price = EssentialsBridge.essentials.getWorth().getPrice(EssentialsBridge.essentials, item.getItemStack());
             if (price == null) {
-                if (!attribute.hasAlternative()) {
-                    attribute.echoError("Item does not have a worth value: " + item.identify());
-                }
+                attribute.echoError("Item does not have a worth value: " + item.identify());
                 return null;
             }
             return new ElementTag(price);
@@ -45,9 +43,7 @@ public class EssentialsItemExtensions {
             oldWorthTag.warn();
             BigDecimal price = EssentialsBridge.essentials.getWorth().getPrice(EssentialsBridge.essentials, item.getItemStack());
             if (price == null) {
-                if (!attribute.hasAlternative()) {
-                    attribute.echoError("Item does not have a worth value: " + item.identify());
-                }
+                attribute.echoError("Item does not have a worth value: " + item.identify());
                 return null;
             }
 
