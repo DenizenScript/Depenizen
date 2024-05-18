@@ -5,6 +5,7 @@ import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizencore.exceptions.InvalidArgumentsRuntimeException;
 import com.denizenscript.denizencore.scripts.commands.Holdable;
 import com.denizenscript.denizencore.scripts.commands.generator.*;
+import com.denizenscript.depenizen.bukkit.Depenizen;
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 import com.xxmicloxx.NoteBlockAPI.event.SongEndEvent;
 import com.xxmicloxx.NoteBlockAPI.model.Song;
@@ -33,7 +34,7 @@ public class NBSCommand extends AbstractCommand implements Holdable, Listener {
         setSyntax("nbs [play/stop] (file:<file_path>) (targets:<entity>|...) (at:<location>) (distance:<#>/{16})");
         setRequiredArguments(1, 5);
         autoCompile();
-        Bukkit.getServer().getPluginManager().registerEvents(this, Denizen.getInstance());
+        Bukkit.getServer().getPluginManager().registerEvents(this, Depenizen.instance);
     }
 
     // <--[command]
@@ -102,6 +103,7 @@ public class NBSCommand extends AbstractCommand implements Holdable, Listener {
                 targets = List.of(Utilities.getEntryPlayer(scriptEntry));
             }
             else {
+                scriptEntry.setFinished(true);
                 throw new InvalidArgumentsRuntimeException("Must specify players that can hear the song!");
             }
         }
@@ -109,11 +111,13 @@ public class NBSCommand extends AbstractCommand implements Holdable, Listener {
             case PLAY -> {
                 if (file == null) {
                     Debug.echoError("File not specified!");
+                    scriptEntry.setFinished(true);
                     return;
                 }
                 File songFile = new File(Denizen.getInstance().getDataFolder(), file + ".nbs");
                 if (!Utilities.canReadFile(songFile)) {
                     Debug.echoError("Cannot read from that file path due to security settings in Denizen/config.yml.");
+                    scriptEntry.setFinished(true);
                     return;
                 }
                 Song s = NBSDecoder.parse(songFile);
