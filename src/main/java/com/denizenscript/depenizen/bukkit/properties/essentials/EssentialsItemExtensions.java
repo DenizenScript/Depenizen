@@ -70,13 +70,13 @@ public class EssentialsItemExtensions {
         // @description
         // Sets the worth of this item in Essentials.
         // @tags
-        // <ItemTag.worth>
+        // <ItemTag.essentials_worth>
         // -->
-        ItemTag.tagProcessor.registerMechanism("worth", false, ElementTag.class, (object, mechanism, input) -> {
+        ItemTag.tagProcessor.registerMechanism("essentials_worth", false, ElementTag.class, (object, mechanism, input) -> {
             if (mechanism.requireDouble()) {
                 EssentialsBridge.essentials.getWorth().setPrice(EssentialsBridge.essentials, object.getItemStack(), input.asDouble());
             }
-        });
+        }, "worth");
 
     }
 
