@@ -16,7 +16,7 @@ public class EssentialsItemExtensions {
         // <--[tag]
         // @attribute <ItemTag.essentials_worth>
         // @returns ElementTag(Decimal)
-        // @mechanism ItemTag.worth
+        // @mechanism ItemTag.essentials_worth
         // @plugin Depenizen, Essentials
         // @description
         // Returns the amount of money one of this item is worth in Essentials.
@@ -33,7 +33,7 @@ public class EssentialsItemExtensions {
         // <--[tag]
         // @attribute <ItemTag.worth>
         // @returns ElementTag(Decimal)
-        // @mechanism ItemTag.worth
+        // @mechanism ItemTag.essentials_worth
         // @plugin Depenizen, Essentials
         // @deprecated Use 'ItemTag.essentials_worth'
         // @description
