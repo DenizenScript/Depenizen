@@ -154,9 +154,9 @@ public class NBSCommand extends AbstractCommand implements Holdable, Listener {
     @EventHandler
     public void onSongEnds(SongEndEvent event) {
         SongPlayer sp = event.getSongPlayer();
-        if (waitingForSongs.containsKey(sp)) {
-            waitingForSongs.get(sp).setFinished(true);
-            waitingForSongs.remove(sp);
+        ScriptEntry scriptEntry = waitingForSongs.remove(sp);
+        if (scriptEntry != null) {
+            scriptEntry.setFinished(true);
         }
     }
 }
