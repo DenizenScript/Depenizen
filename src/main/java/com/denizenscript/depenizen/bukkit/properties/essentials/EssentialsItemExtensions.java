@@ -77,7 +77,5 @@ public class EssentialsItemExtensions {
                 EssentialsBridge.essentials.getWorth().setPrice(EssentialsBridge.essentials, object.getItemStack(), input.asDouble());
             }
         }, "worth");
-
     }
-
 }
