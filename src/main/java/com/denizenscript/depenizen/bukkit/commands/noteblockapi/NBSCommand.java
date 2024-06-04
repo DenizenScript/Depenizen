@@ -145,8 +145,8 @@ public class NBSCommand extends AbstractCommand implements Holdable, Listener {
             case STOP -> {
                 for (PlayerTag p : targets) {
                     NoteBlockAPI.stopPlaying(p.getPlayerEntity());
-                    scriptEntry.setFinished(true);
                 }
+                scriptEntry.setFinished(true);
             }
         }
     }
