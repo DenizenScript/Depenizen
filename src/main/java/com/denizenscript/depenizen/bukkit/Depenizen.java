@@ -146,7 +146,7 @@ public class Depenizen extends JavaPlugin {
         registerBridge("Votifier", () -> new VotifierBridge());
         registerBridge("WorldEdit", () -> new WorldEditBridge());
         registerBridge("WorldGuard", () -> new WorldGuardBridge());
-        registerBridge("Brewery", () -> new BreweryXBridge());
+        registerBridge("BreweryX", () -> new BreweryXBridge());
     }
 
     public void registerBridge(String name, Supplier<Bridge> bridgeSupplier) {
