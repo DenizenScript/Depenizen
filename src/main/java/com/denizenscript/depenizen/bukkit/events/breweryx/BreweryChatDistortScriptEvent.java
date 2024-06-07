@@ -48,6 +48,11 @@ public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements 
     }
 
     @Override
+    public boolean matches(ScriptPath path) {
+
+    }
+
+    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()), null);
     }

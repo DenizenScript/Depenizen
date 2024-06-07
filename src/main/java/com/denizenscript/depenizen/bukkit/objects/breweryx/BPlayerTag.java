@@ -12,12 +12,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 // TODO: OfflinePlayer support
-public class BPlayerTag implements ObjectTag {
+public class BPlayerTag extends PlayerTag {
 
     // <--[ObjectType]
     // @name BplayerTag
     // @prefix bplayer
-    // @base ElementTag
+    // @base PlayerTag
     // @format
     // The identity format for brewery players is <player_name>
     // For example, 'bplayer@my_player'.
@@ -56,6 +56,7 @@ public class BPlayerTag implements ObjectTag {
     BPlayer bPlayer = null;
 
     public BPlayerTag(Player player) {
+        super(player);
         if (BPlayer.hasPlayer(player)) {
             bPlayer = BPlayer.get(player);
         }
@@ -69,32 +70,27 @@ public class BPlayerTag implements ObjectTag {
 
     @Override
     public String getPrefix() {
-        return prefix;
-    }
-
-    @Override
-    public boolean isUnique() {
-        return true;
+        return this.prefix;
     }
 
     @Override
     public String identify() {
-        return "bplayer@" + bPlayer.getName();
+        return "bplayer@" + this.getUUID();
     }
 
     @Override
     public String identifySimple() {
-        return identify();
+        return "bplayer@" + bPlayer.getName();
     }
 
     @Override
-    public ObjectTag setPrefix(String aString) {
+    public PlayerTag setPrefix(String aString) {
         this.prefix = aString;
         return this;
     }
 
 
-    @Override
+    @Override // FIXME: Reference some other class to fix this
     public ObjectTag getObjectAttribute(Attribute attribute) {
         if (attribute == null) {
             return null;
