@@ -4,6 +4,7 @@ import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ColorTag;
+import com.denizenscript.denizencore.objects.core.DurationTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
@@ -21,7 +22,7 @@ import java.util.Optional;
 public class BreweryRecipeTag implements ObjectTag {
 
     // <--[ObjectType]
-    // @name BRecipeTag
+    // @name BreweryRecipeTag
     // @prefix brecipe
     // @base ElementTag
     // @format
@@ -96,13 +97,13 @@ public class BreweryRecipeTag implements ObjectTag {
         // Returns the ID of the recipe as specified in the config.
         // -->
         tagProcessor.registerTag(ElementTag.class, "id", (attribute, object) -> {
-            /*
-            This being optional was infrastructure added by the original authors and is not used
-            in Brewery. It will be deprecated and replaced soon.
-            */
+
+            // This being optional was infrastructure added by the original authors and is not used
+            // in Brewery. It will be deprecated and replaced soon.
+
             Optional<String> id = object.bRecipe.getOptionalID();
             if (id.isPresent()) {
-                return new ElementTag(id.get());
+                return new ElementTag(id.get(), true);
             }
             return null;
         });
@@ -115,7 +116,7 @@ public class BreweryRecipeTag implements ObjectTag {
         // Returns the name of the recipe at it's highest quality.
         // -->
         tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
-            return new ElementTag(object.bRecipe.getRecipeName());
+            return new ElementTag(object.bRecipe.getRecipeName(), true);
         });
 
         // <--[tag]
@@ -156,8 +157,8 @@ public class BreweryRecipeTag implements ObjectTag {
         // @description
         // Returns the cooking time of the recipe.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "cooking_time", (attribute, object) -> {
-            return new ElementTag(object.bRecipe.getCookingTime());
+        tagProcessor.registerTag(DurationTag.class, "cooking_time", (attribute, object) -> {
+            return new DurationTag(object.bRecipe.getCookingTime() * 60); // Brewery returns value in minutes
         });
 
         // <--[tag]
@@ -165,7 +166,7 @@ public class BreweryRecipeTag implements ObjectTag {
         // @returns ElementTag(Number)
         // @plugin Depenizen, BreweryX
         // @description
-        // Returns the distill runs of the recipe
+        // Returns the distill runs of the recipe.
         // -->
         tagProcessor.registerTag(ElementTag.class, "distill_runs", (attribute, object) -> {
             return new ElementTag(object.bRecipe.getDistillRuns());
@@ -221,7 +222,7 @@ public class BreweryRecipeTag implements ObjectTag {
         // @returns ElementTag(Number)
         // @plugin Depenizen, BreweryX
         // @description
-        // Returns the amount of alcohol in a perfect potion.
+        // Returns the absolute amount of alcohol 0-100 in a perfect potion (will be added directly to the player, where 100 means fainting)
         // -->
         tagProcessor.registerTag(ElementTag.class, "alcohol", (attribute, object) -> {
             return new ElementTag(object.bRecipe.getAlcohol());
@@ -229,7 +230,7 @@ public class BreweryRecipeTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <BRecipeTag.lore>
-        // @returns ListTag(ElementTag)
+        // @returns ListTag
         // @plugin Depenizen, BreweryX
         // @description
         // Returns a ListTag of the lore of the recipe (displayed on potion).
@@ -240,7 +241,7 @@ public class BreweryRecipeTag implements ObjectTag {
             }
             ListTag lore = new ListTag();
             for (Tuple<Integer, String> tuple : object.bRecipe.getLore()) {
-                lore.addObject(new ElementTag(tuple.second()));
+                lore.addObject(new ElementTag(tuple.second(), true));
             }
             return lore;
         });
@@ -262,7 +263,7 @@ public class BreweryRecipeTag implements ObjectTag {
 
         // <--[tag]
         // @attribute <BRecipeTag.effects>
-        // @returns ListTag(ElementTag)
+        // @returns ListTag
         // @plugin Depenizen, BreweryX
         // @description
         // Returns a ListTag of potion effects of as their names (Example: SLOW_FALLING).
@@ -270,14 +271,14 @@ public class BreweryRecipeTag implements ObjectTag {
         tagProcessor.registerTag(ListTag.class, "effects", (attribute, object) -> {
             ListTag effects = new ListTag();
             for (BEffect bEffect : object.bRecipe.getEffects()) {
-                effects.addObject(new ElementTag(bEffect.getType().toString()));
+                effects.addObject(new ElementTag(bEffect.getType().toString(), true));
             }
             return effects;
         });
 
         // <--[tag]
         // @attribute <BRecipeTag.player_commands>
-        // @returns ListTag(ElementTag)
+        // @returns ListTag
         // @plugin Depenizen, BreweryX
         // @description
         // Returns a ListTag of commands that are run by the player when the potion is drunk.
@@ -288,14 +289,14 @@ public class BreweryRecipeTag implements ObjectTag {
             }
             ListTag cmds = new ListTag();
             for (Tuple<Integer, String> tuple : object.bRecipe.getPlayercmds()) {
-                cmds.addObject(new ElementTag(tuple.second()));
+                cmds.addObject(new ElementTag(tuple.second(), true));
             }
             return cmds;
         });
 
         // <--[tag]
         // @attribute <BRecipeTag.server_commands>
-        // @returns ListTag(ElementTag)
+        // @returns ListTag
         // @plugin Depenizen, BreweryX
         // @description
         // Returns a ListTag of commands that are run by the server when the potion is drunk.
@@ -306,7 +307,7 @@ public class BreweryRecipeTag implements ObjectTag {
             }
             ListTag cmds = new ListTag();
             for (Tuple<Integer, String> tuple : object.bRecipe.getServercmds()) {
-                cmds.addObject(new ElementTag(tuple.second()));
+                cmds.addObject(new ElementTag(tuple.second(), true));
             }
             return cmds;
         });
@@ -322,7 +323,7 @@ public class BreweryRecipeTag implements ObjectTag {
             if (object.bRecipe.getDrinkMsg() == null) {
                 return null;
             }
-            return new ElementTag(object.bRecipe.getDrinkMsg());
+            return new ElementTag(object.bRecipe.getDrinkMsg(), true);
         });
 
         // <--[tag]
@@ -336,7 +337,7 @@ public class BreweryRecipeTag implements ObjectTag {
             if (object.bRecipe.getDrinkTitle() == null) {
                 return null;
             }
-            return new ElementTag(object.bRecipe.getDrinkTitle());
+            return new ElementTag(object.bRecipe.getDrinkTitle(), true);
         }));
     }
 

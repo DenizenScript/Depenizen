@@ -29,7 +29,7 @@ public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements 
     // <context.player> Returns a PlayerTag of the player that had their chat distorted.
     //
     // @Determine
-    // ElementTag(String) to set the message to be sent after being distorted.
+    // ElementTag to set the message to be sent after being distorted.
     //
     // @Plugin Depenizen, BreweryX
     //
@@ -68,8 +68,8 @@ public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements 
 
     @Override
     public boolean handleDetermination(ScriptPath path, String prefix, ObjectTag value) {
-        if (prefix.equals("message") && value instanceof ElementTag elementTag) { // FIXME - Cast redundant but .toString() returns class and hash?
-            event.setDistortedMessage(elementTag.asString());
+        if (prefix.equals("message")) {
+            event.setDistortedMessage(value.asElement().asString());
             return true;
         }
         return super.handleDetermination(path, prefix, value);

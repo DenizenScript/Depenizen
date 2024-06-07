@@ -12,10 +12,10 @@ import com.dre.brewery.BPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class BreweryPlayerTag implements ObjectTag {
+public class BreweryPlayerTag extends PlayerTag {
 
     // <--[ObjectType]
-    // @name BplayerTag
+    // @name BreweryPlayerTag
     // @prefix bplayer
     // @base PlayerTag
     // @format
@@ -56,6 +56,7 @@ public class BreweryPlayerTag implements ObjectTag {
     BPlayer bPlayer = null;
 
     public BreweryPlayerTag(Player player) {
+        super(player);
         if (BPlayer.hasPlayer(player)) {
             bPlayer = BPlayer.get(player);
         }
@@ -65,7 +66,7 @@ public class BreweryPlayerTag implements ObjectTag {
     }
 
 
-    String prefix = "BPlayer";
+    String prefix = "bplayer";
 
     @Override
     public String getPrefix() {
@@ -88,24 +89,12 @@ public class BreweryPlayerTag implements ObjectTag {
     }
 
     @Override
-    public ObjectTag setPrefix(String aString) {
+    public PlayerTag setPrefix(String aString) {
         this.prefix = aString;
         return this;
     }
 
     public static void register() {
-
-        // <--[tag]
-        // @attribute <BPlayerTag.name>
-        // @returns ElementTag
-        // @plugin Depenizen, BreweryX
-        // @description
-        // Returns the name of the brewery player.
-        // -->
-        tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
-            return new ElementTag(object.bPlayer.getName());
-        });
-
 
         // <--[tag]
         // @attribute <BPlayerTag.drunkenness>
@@ -140,16 +129,6 @@ public class BreweryPlayerTag implements ObjectTag {
             return new ElementTag(object.bPlayer.getAlcRecovery());
         });
 
-        // <--[tag]
-        // @attribute <BPlayerTag.uuid>
-        // @returns ElementTag
-        // @plugin Depenizen, BreweryX
-        // @description
-        // Returns the Brewery player's UUID.
-        // -->
-        tagProcessor.registerTag(ElementTag.class, "uuid", (attribute, object) -> {
-            return new ElementTag(object.bPlayer.getUuid());
-        });
     }
 
     public static ObjectTagProcessor<BreweryPlayerTag> tagProcessor = new ObjectTagProcessor<>();
