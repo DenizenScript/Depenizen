@@ -6,7 +6,6 @@ import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.depenizen.bukkit.objects.breweryx.BreweryPlayerTag;
 import com.dre.brewery.api.events.PlayerChatDistortEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,7 +24,6 @@ public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements 
     // @Context
     // <context.message> Returns the message to be sent after being distorted.
     // <context.original_message> Returns the original message before being distorted.
-    // <context.bplayer> Returns an BPlayerTag of the player that drank the brew.
     // <context.player> Returns a PlayerTag of the player that had their chat distorted.
     //
     // @Determine
@@ -60,7 +58,6 @@ public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements 
         return switch (name) {
             case "message" -> new ElementTag(event.getDistortedMessage());
             case "original_message" -> new ElementTag(event.getWrittenMessage());
-            case "bplayer" -> BreweryPlayerTag.forPlayer(playerTag);
             case "player" -> playerTag;
             default -> super.getContext(name);
         };
