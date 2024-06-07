@@ -64,6 +64,16 @@ public class EssentialsItemExtensions {
 
         // <--[mechanism]
         // @object ItemTag
+        // @name worth
+        // @input ElementTag(Decimal)
+        // @plugin Depenizen, Essentials
+        // @deprecated Use 'ItemTag.essentials_worth'
+        // @description
+        // Deprecated in favor of <@link mechanism ItemTag.essentials_worth>.
+        // -->
+
+        // <--[mechanism]
+        // @object ItemTag
         // @name essentials_worth
         // @input ElementTag(Decimal)
         // @plugin Depenizen, Essentials
