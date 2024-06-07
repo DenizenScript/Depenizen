@@ -110,6 +110,7 @@ public class Depenizen extends JavaPlugin {
         registerBridge("BetonQuest", () -> new BetonQuestBridge());
         registerBridge("BigDoors", () -> new BigDoorsBridge());
         registerBridge("BossShopPro", () -> new BossShopBridge());
+        registerBridge("BreweryX", () -> new BreweryXBridge());
         registerBridge("CoreProtect", () -> new CoreProtectBridge());
         registerBridge("CrackShot", () -> new CrackShotBridge());
         registerBridge("EffectLib", () -> new EffectLibBridge());
@@ -146,7 +147,6 @@ public class Depenizen extends JavaPlugin {
         registerBridge("Votifier", () -> new VotifierBridge());
         registerBridge("WorldEdit", () -> new WorldEditBridge());
         registerBridge("WorldGuard", () -> new WorldGuardBridge());
-        registerBridge("BreweryX", () -> new BreweryXBridge());
     }
 
     public void registerBridge(String name, Supplier<Bridge> bridgeSupplier) {
