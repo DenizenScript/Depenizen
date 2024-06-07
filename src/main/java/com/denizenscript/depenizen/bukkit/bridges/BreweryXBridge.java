@@ -7,8 +7,8 @@ import com.denizenscript.depenizen.bukkit.events.breweryx.BreweryChatDistortScri
 import com.denizenscript.depenizen.bukkit.events.breweryx.BreweryDrinkScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.breweryx.BreweryIngredientAddScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.breweryx.BreweryModifyBrewScriptEvent;
-import com.denizenscript.depenizen.bukkit.objects.breweryx.BPlayerTag;
-import com.denizenscript.depenizen.bukkit.objects.breweryx.BRecipeTag;
+import com.denizenscript.depenizen.bukkit.objects.breweryx.BreweryPlayerTag;
+import com.denizenscript.depenizen.bukkit.objects.breweryx.BreweryRecipeTag;
 
 public class BreweryXBridge extends Bridge {
     @Override
@@ -17,7 +17,7 @@ public class BreweryXBridge extends Bridge {
         ScriptEvent.registerScriptEvent(BreweryModifyBrewScriptEvent.class);
         ScriptEvent.registerScriptEvent(BreweryIngredientAddScriptEvent.class);
         ScriptEvent.registerScriptEvent(BreweryChatDistortScriptEvent.class);
-        ObjectFetcher.registerWithObjectFetcher(BPlayerTag.class);
-        ObjectFetcher.registerWithObjectFetcher(BRecipeTag.class);
+        ObjectFetcher.registerWithObjectFetcher(BreweryPlayerTag.class);
+        ObjectFetcher.registerWithObjectFetcher(BreweryRecipeTag.class);
     }
 }

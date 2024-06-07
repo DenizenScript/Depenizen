@@ -12,7 +12,7 @@ import com.dre.brewery.BPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class BPlayerTag implements ObjectTag {
+public class BreweryPlayerTag implements ObjectTag {
 
     // <--[ObjectType]
     // @name BplayerTag
@@ -29,7 +29,7 @@ public class BPlayerTag implements ObjectTag {
     // -->
 
     @Fetchable("bplayer")
-    public static BPlayerTag valueOf(String string, TagContext context) {
+    public static BreweryPlayerTag valueOf(String string, TagContext context) {
         if (string.startsWith("bplayer@")) {
             string = string.substring("bplayer@".length());
         }
@@ -37,7 +37,7 @@ public class BPlayerTag implements ObjectTag {
         if (player == null) {
             return null;
         }
-        return new BPlayerTag(player);
+        return new BreweryPlayerTag(player);
     }
 
     public static boolean matches(String arg) {
@@ -49,13 +49,13 @@ public class BPlayerTag implements ObjectTag {
         return BPlayer.hasPlayer(player);
     }
 
-    public static BPlayerTag forPlayer(PlayerTag player) {
-        return new BPlayerTag(player.getPlayerEntity());
+    public static BreweryPlayerTag forPlayer(PlayerTag player) {
+        return new BreweryPlayerTag(player.getPlayerEntity());
     }
 
     BPlayer bPlayer = null;
 
-    public BPlayerTag(Player player) {
+    public BreweryPlayerTag(Player player) {
         if (BPlayer.hasPlayer(player)) {
             bPlayer = BPlayer.get(player);
         }
@@ -152,7 +152,7 @@ public class BPlayerTag implements ObjectTag {
         });
     }
 
-    public static ObjectTagProcessor<BPlayerTag> tagProcessor = new ObjectTagProcessor<>();
+    public static ObjectTagProcessor<BreweryPlayerTag> tagProcessor = new ObjectTagProcessor<>();
 
     @Override
     public ObjectTag getObjectAttribute(Attribute attribute) {

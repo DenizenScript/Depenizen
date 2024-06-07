@@ -6,7 +6,7 @@ import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.depenizen.bukkit.objects.breweryx.BRecipeTag;
+import com.denizenscript.depenizen.bukkit.objects.breweryx.BreweryRecipeTag;
 import com.dre.brewery.api.events.brew.BrewModifyEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -38,7 +38,7 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     }
 
     public BrewModifyEvent event;
-    public BRecipeTag recipeTag;
+    public BreweryRecipeTag recipeTag;
     public String type;
 
     @Override
@@ -64,7 +64,7 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     @EventHandler
     public void onBrewModifyEvent(BrewModifyEvent event) {
         this.event = event;
-        this.recipeTag = new BRecipeTag(event.getBrew().getCurrentRecipe());
+        this.recipeTag = new BreweryRecipeTag(event.getBrew().getCurrentRecipe());
         this.type = event.getType().name();
         fire(event);
     }

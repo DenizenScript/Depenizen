@@ -7,8 +7,8 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.depenizen.bukkit.objects.breweryx.BPlayerTag;
-import com.denizenscript.depenizen.bukkit.objects.breweryx.BRecipeTag;
+import com.denizenscript.depenizen.bukkit.objects.breweryx.BreweryPlayerTag;
+import com.denizenscript.depenizen.bukkit.objects.breweryx.BreweryRecipeTag;
 import com.dre.brewery.api.events.brew.BrewDrinkEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -41,8 +41,8 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
     }
 
     public BrewDrinkEvent event;
-    public BRecipeTag recipeTag;
-    public BPlayerTag bPlayerTag;
+    public BreweryRecipeTag recipeTag;
+    public BreweryPlayerTag bPlayerTag;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -68,8 +68,8 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
     @EventHandler
     public void onBrewDrinkEvent(BrewDrinkEvent event) {
         this.event = event;
-        this.recipeTag = new BRecipeTag(event.getBrew().getCurrentRecipe());
-        this.bPlayerTag = BPlayerTag.forPlayer(new PlayerTag(event.getPlayer()));
+        this.recipeTag = new BreweryRecipeTag(event.getBrew().getCurrentRecipe());
+        this.bPlayerTag = BreweryPlayerTag.forPlayer(new PlayerTag(event.getPlayer()));
         fire(event);
     }
 }

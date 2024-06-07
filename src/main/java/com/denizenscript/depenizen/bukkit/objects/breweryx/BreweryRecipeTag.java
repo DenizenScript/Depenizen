@@ -18,7 +18,7 @@ import org.bukkit.Material;
 
 import java.util.Optional;
 
-public class BRecipeTag implements ObjectTag {
+public class BreweryRecipeTag implements ObjectTag {
 
     // <--[ObjectType]
     // @name BRecipeTag
@@ -35,7 +35,7 @@ public class BRecipeTag implements ObjectTag {
     // -->
 
     @Fetchable("brecipe")
-    public static BRecipeTag valueOf(String string, TagContext context) {
+    public static BreweryRecipeTag valueOf(String string, TagContext context) {
         if (string.startsWith("brecipe@")) {
             string = string.substring("brecipe@".length());
         }
@@ -44,7 +44,7 @@ public class BRecipeTag implements ObjectTag {
         if (recipe == null) {
             return null;
         }
-        return new BRecipeTag(recipe);
+        return new BreweryRecipeTag(recipe);
     }
 
     public static boolean matches(String arg) {
@@ -54,7 +54,7 @@ public class BRecipeTag implements ObjectTag {
 
     BRecipe bRecipe;
 
-    public BRecipeTag(BRecipe bRecipe) {
+    public BreweryRecipeTag(BRecipe bRecipe) {
         this.bRecipe = bRecipe;
     }
 
@@ -340,7 +340,7 @@ public class BRecipeTag implements ObjectTag {
         }));
     }
 
-    public static ObjectTagProcessor<BRecipeTag> tagProcessor = new ObjectTagProcessor<>();
+    public static ObjectTagProcessor<BreweryRecipeTag> tagProcessor = new ObjectTagProcessor<>();
 
     @Override
     public ObjectTag getObjectAttribute(Attribute attribute) {
