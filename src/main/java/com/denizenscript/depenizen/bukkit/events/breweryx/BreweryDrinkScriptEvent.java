@@ -15,9 +15,6 @@ import org.bukkit.event.Listener;
 
 public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listener {
 
-    public BreweryDrinkScriptEvent() {
-    }
-
     // <--[event]
     // @Events
     // brewery drink
@@ -39,18 +36,22 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
     // @Group Depenizen
     //
     // -->
+    public BreweryDrinkScriptEvent() {
+        registerCouldMatcher("brewery drink");
+    }
+
     public BrewDrinkEvent event;
     public BRecipeTag recipeTag;
     public BPlayerTag bPlayerTag;
 
     @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("brewery drink");
+    public boolean matches(ScriptPath path) {
+        return super.matches(path);
     }
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()), null);
+        return new BukkitScriptEntryData(event.getPlayer());
     }
 
     @Override

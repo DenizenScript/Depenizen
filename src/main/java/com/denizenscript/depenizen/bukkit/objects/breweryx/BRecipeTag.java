@@ -7,6 +7,7 @@ import com.denizenscript.denizencore.objects.core.ColorTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.dre.brewery.recipe.BEffect;
 import com.dre.brewery.recipe.BRecipe;
@@ -32,7 +33,6 @@ public class BRecipeTag implements ObjectTag {
     // A BRecipeTag represents a Brewery recipe.
     //
     // -->
-
 
     @Fetchable("brecipe")
     public static BRecipeTag valueOf(String string, TagContext context) {
@@ -86,13 +86,7 @@ public class BRecipeTag implements ObjectTag {
         return this;
     }
 
-
-
-    @Override
-    public ObjectTag getObjectAttribute(Attribute attribute) {
-        if (attribute == null) {
-            return null;
-        }
+    public static void register() {
 
         // <--[tag]
         // @attribute <BRecipeTag.id>
@@ -101,16 +95,17 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the ID of the recipe as specified in the config.
         // -->
-        if (attribute.startsWith("id")) {
+        tagProcessor.registerTag(ElementTag.class, "id", (attribute, object) -> {
             /*
-            TODO: This being optional was infrastructure added by the original authors and is not used
+            This being optional was infrastructure added by the original authors and is not used
             in Brewery. It will be deprecated and replaced soon.
-             */
-            Optional<String> id = bRecipe.getOptionalID();
+            */
+            Optional<String> id = object.bRecipe.getOptionalID();
             if (id.isPresent()) {
-                return new ElementTag(id.get()).getObjectAttribute(attribute.fulfill(1));
+                return new ElementTag(id.get());
             }
-        }
+            return null;
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.name>
@@ -119,9 +114,9 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the name of the recipe at it's highest quality.
         // -->
-        else if (attribute.startsWith("name")) {
-            return new ElementTag(bRecipe.getRecipeName()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
+            return new ElementTag(object.bRecipe.getRecipeName());
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.ingredients>
@@ -130,9 +125,9 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns a ListTag of ItemTags that are the ingredients of the recipe.
         // -->
-        else if (attribute.startsWith("ingredients")) {
+        tagProcessor.registerTag(ListTag.class, "ingredients", (attribute, object) -> {
             ListTag ingredients = new ListTag();
-            for (RecipeItem recipeItem : bRecipe.getIngredients()) {
+            for (RecipeItem recipeItem : object.bRecipe.getIngredients()) {
                 if (recipeItem.getMaterials() == null) {
                     continue;
                 }
@@ -140,8 +135,8 @@ public class BRecipeTag implements ObjectTag {
                     ingredients.addObject(new ItemTag(material, recipeItem.getAmount()));
                 }
             }
-            return ingredients.getObjectAttribute(attribute.fulfill(1));
-        }
+            return ingredients;
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.difficulty>
@@ -150,9 +145,9 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the difficulty of the recipe.
         // -->
-        else if (attribute.startsWith("difficulty")) {
-            return new ElementTag(bRecipe.getDifficulty()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "difficulty", (attribute, object) -> {
+            return new ElementTag(object.bRecipe.getDifficulty());
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.cooking_time>
@@ -161,9 +156,9 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the cooking time of the recipe.
         // -->
-        else if (attribute.startsWith("cooking_time")) {
-            return new ElementTag(bRecipe.getCookingTime()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "cooking_time", (attribute, object) -> {
+            return new ElementTag(object.bRecipe.getCookingTime());
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.distill_runs>
@@ -172,9 +167,9 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the distill runs of the recipe
         // -->
-        else if (attribute.startsWith("distill_runs")) {
-            return new ElementTag(bRecipe.getDistillRuns()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "distill_runs", (attribute, object) -> {
+            return new ElementTag(object.bRecipe.getDistillRuns());
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.distill_time>
@@ -183,9 +178,9 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the amount of time each distill run takes.
         // -->
-        else if (attribute.startsWith("distill_time")) {
-            return new ElementTag(bRecipe.getDistillTime()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "distill_time", (attribute, object) -> {
+            return new ElementTag(object.bRecipe.getDistillTime());
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.wood>
@@ -194,9 +189,9 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the type of wood used in the recipe (by number, Ex: 0 = Any, 1 = Oak).
         // -->
-        else if (attribute.startsWith("wood")) {
-            return new ElementTag(bRecipe.getWood()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "wood", (attribute, object) -> {
+            return new ElementTag(object.bRecipe.getWood());
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.age>
@@ -205,9 +200,9 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the amount of minecraft days the potion must age in a Brewery barrel.
         // -->
-        else if (attribute.startsWith("age")) {
-            return new ElementTag(bRecipe.getAge()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "age", (attribute, object) -> {
+            return new ElementTag(object.bRecipe.getAge());
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.color>
@@ -216,10 +211,10 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the color of the distilled/finished potion.
         // -->
-        else if (attribute.startsWith("color")) {
-            Color color = bRecipe.getColor().getColor();
-            return new ColorTag(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ColorTag.class, "color", ((attribute, object) -> {
+            Color color = object.bRecipe.getColor().getColor();
+            return new ColorTag(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+        }));
 
         // <--[tag]
         // @attribute <BRecipeTag.alcohol>
@@ -228,9 +223,9 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the amount of alcohol in a perfect potion.
         // -->
-        else if (attribute.startsWith("alcohol")) {
-            return new ElementTag(bRecipe.getAlcohol()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "alcohol", (attribute, object) -> {
+            return new ElementTag(object.bRecipe.getAlcohol());
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.lore>
@@ -239,16 +234,16 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns a ListTag of the lore of the recipe (displayed on potion).
         // -->
-        else if (attribute.startsWith("lore")) {
-            if (bRecipe.getLore() == null) {
+        tagProcessor.registerTag(ListTag.class, "lore", (attribute, object) -> {
+            if (object.bRecipe.getLore() == null) {
                 return null;
             }
             ListTag lore = new ListTag();
-            for (Tuple<Integer, String> tuple : bRecipe.getLore()) {
+            for (Tuple<Integer, String> tuple : object.bRecipe.getLore()) {
                 lore.addObject(new ElementTag(tuple.second()));
             }
-            return lore.getObjectAttribute(attribute.fulfill(1));
-        }
+            return lore;
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.custom_model_data>
@@ -257,13 +252,13 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns a ListTag of the 3 possible custom model data's for each varied quality of the recipe/potion.
         // -->
-        else if (attribute.startsWith("custom_model_data")) {
+        tagProcessor.registerTag(ListTag.class, "custom_model_data", (attribute, object) -> {
             ListTag cmDatas = new ListTag();
-            for (int cmData : bRecipe.getCmData()) {
+            for (int cmData : object.bRecipe.getCmData()) {
                 cmDatas.addObject(new ElementTag(cmData));
             }
-            return cmDatas.getObjectAttribute(attribute.fulfill(1));
-        }
+            return cmDatas;
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.effects>
@@ -272,13 +267,13 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns a ListTag of potion effects of as their names (Example: SLOW_FALLING).
         // -->
-        else if (attribute.startsWith("effects")) {
+        tagProcessor.registerTag(ListTag.class, "effects", (attribute, object) -> {
             ListTag effects = new ListTag();
-            for (BEffect bEffect : bRecipe.getEffects()) {
+            for (BEffect bEffect : object.bRecipe.getEffects()) {
                 effects.addObject(new ElementTag(bEffect.getType().toString()));
             }
-            return effects.getObjectAttribute(attribute.fulfill(1));
-        }
+            return effects;
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.player_commands>
@@ -287,16 +282,16 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns a ListTag of commands that are run by the player when the potion is drunk.
         // -->
-        else if (attribute.startsWith("player_commands")) {
-            if (bRecipe.getPlayercmds() == null) {
+        tagProcessor.registerTag(ListTag.class, "player_commands", (attribute, object) -> {
+            if (object.bRecipe.getPlayercmds() == null) {
                 return null;
             }
             ListTag cmds = new ListTag();
-            for (Tuple<Integer, String> tuple : bRecipe.getPlayercmds()) {
+            for (Tuple<Integer, String> tuple : object.bRecipe.getPlayercmds()) {
                 cmds.addObject(new ElementTag(tuple.second()));
             }
-            return cmds.getObjectAttribute(attribute.fulfill(1));
-        }
+            return cmds;
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.server_commands>
@@ -305,16 +300,16 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns a ListTag of commands that are run by the server when the potion is drunk.
         // -->
-        else if (attribute.startsWith("server_commands")) {
-            if (bRecipe.getServercmds() == null) {
+        tagProcessor.registerTag(ListTag.class, "server_commands", (attribute, object) -> {
+            if (object.bRecipe.getServercmds() == null) {
                 return null;
             }
             ListTag cmds = new ListTag();
-            for (Tuple<Integer, String> tuple : bRecipe.getServercmds()) {
+            for (Tuple<Integer, String> tuple : object.bRecipe.getServercmds()) {
                 cmds.addObject(new ElementTag(tuple.second()));
             }
-            return cmds.getObjectAttribute(attribute.fulfill(1));
-        }
+            return cmds;
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.message>
@@ -323,12 +318,12 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the message sent to the player when the potion is drunk.
         // -->
-        else if (attribute.startsWith("message")) {
-            if (bRecipe.getDrinkMsg() == null) {
+        tagProcessor.registerTag(ElementTag.class, "message", (attribute, object) -> {
+            if (object.bRecipe.getDrinkMsg() == null) {
                 return null;
             }
-            return new ElementTag(bRecipe.getDrinkMsg()).getObjectAttribute(attribute.fulfill(1));
-        }
+            return new ElementTag(object.bRecipe.getDrinkMsg());
+        });
 
         // <--[tag]
         // @attribute <BRecipeTag.title>
@@ -337,13 +332,18 @@ public class BRecipeTag implements ObjectTag {
         // @description
         // Returns the title message sent to the player when the potion is drunk.
         // -->
-        else if (attribute.startsWith("title")) {
-            if (bRecipe.getDrinkTitle() == null) {
+        tagProcessor.registerTag(ElementTag.class, "title", ((attribute, object) -> {
+            if (object.bRecipe.getDrinkTitle() == null) {
                 return null;
             }
-            return new ElementTag(bRecipe.getDrinkTitle()).getObjectAttribute(attribute.fulfill(1));
-        }
+            return new ElementTag(object.bRecipe.getDrinkTitle());
+        }));
+    }
 
-        return new ElementTag(identify()).getObjectAttribute(attribute);
+    public static ObjectTagProcessor<BRecipeTag> tagProcessor = new ObjectTagProcessor<>();
+
+    @Override
+    public ObjectTag getObjectAttribute(Attribute attribute) {
+        return tagProcessor.getObjectAttribute(this, attribute);
     }
 }

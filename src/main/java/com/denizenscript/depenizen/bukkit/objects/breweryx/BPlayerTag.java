@@ -5,14 +5,14 @@ import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.tags.Attribute;
+import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.dre.brewery.BPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-// TODO: OfflinePlayer support
-public class BPlayerTag extends PlayerTag {
+public class BPlayerTag implements ObjectTag {
 
     // <--[ObjectType]
     // @name BplayerTag
@@ -56,7 +56,6 @@ public class BPlayerTag extends PlayerTag {
     BPlayer bPlayer = null;
 
     public BPlayerTag(Player player) {
-        super(player);
         if (BPlayer.hasPlayer(player)) {
             bPlayer = BPlayer.get(player);
         }
@@ -66,7 +65,7 @@ public class BPlayerTag extends PlayerTag {
     }
 
 
-    String prefix = "bplayer";
+    String prefix = "BPlayer";
 
     @Override
     public String getPrefix() {
@@ -74,8 +73,13 @@ public class BPlayerTag extends PlayerTag {
     }
 
     @Override
+    public boolean isUnique() {
+        return true;
+    }
+
+    @Override
     public String identify() {
-        return "bplayer@" + this.getUUID();
+        return "bplayer@" + bPlayer.getUuid();
     }
 
     @Override
@@ -84,17 +88,12 @@ public class BPlayerTag extends PlayerTag {
     }
 
     @Override
-    public PlayerTag setPrefix(String aString) {
+    public ObjectTag setPrefix(String aString) {
         this.prefix = aString;
         return this;
     }
 
-
-    @Override // FIXME: Reference some other class to fix this
-    public ObjectTag getObjectAttribute(Attribute attribute) {
-        if (attribute == null) {
-            return null;
-        }
+    public static void register() {
 
         // <--[tag]
         // @attribute <BPlayerTag.name>
@@ -103,9 +102,10 @@ public class BPlayerTag extends PlayerTag {
         // @description
         // Returns the name of the brewery player.
         // -->
-        if (attribute.startsWith("name")) {
-            return new ElementTag(bPlayer.getName()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
+            return new ElementTag(object.bPlayer.getName());
+        });
+
 
         // <--[tag]
         // @attribute <BPlayerTag.drunkenness>
@@ -114,9 +114,9 @@ public class BPlayerTag extends PlayerTag {
         // @description
         // Returns the drunkness of the brewery player.
         // -->
-        else if (attribute.startsWith("drunkenness")) {
-            return new ElementTag(bPlayer.getDrunkeness()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "drunkenness", (attribute, object) -> {
+            return new ElementTag(object.bPlayer.getDrunkeness());
+        });
 
         // <--[tag]
         // @attribute <BPlayerTag.quality>
@@ -125,9 +125,9 @@ public class BPlayerTag extends PlayerTag {
         // @description
         // Returns the quality of the brewery player's drunkenness (drunkeness * drunkeness).
         // -->
-        else if (attribute.startsWith("quality")) {
-            return new ElementTag(bPlayer.getQuality()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "quality", (attribute, object) -> {
+            return new ElementTag(object.bPlayer.getQuality());
+        });
 
         // <--[tag]
         // @attribute <BPlayerTag.alcrecovery>
@@ -136,9 +136,9 @@ public class BPlayerTag extends PlayerTag {
         // @description
         // Returns the drunkenness reduction per minute.
         // -->
-        else if (attribute.startsWith("alcrecovery")) {
-            return new ElementTag(bPlayer.getQuality()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "alcrecovery", (attribute, object) -> {
+            return new ElementTag(object.bPlayer.getAlcRecovery());
+        });
 
         // <--[tag]
         // @attribute <BPlayerTag.uuid>
@@ -147,11 +147,15 @@ public class BPlayerTag extends PlayerTag {
         // @description
         // Returns the Brewery player's UUID.
         // -->
-        else if (attribute.startsWith("uuid")) {
-            return new ElementTag(bPlayer.getUuid()).getObjectAttribute(attribute.fulfill(1));
-        }
+        tagProcessor.registerTag(ElementTag.class, "uuid", (attribute, object) -> {
+            return new ElementTag(object.bPlayer.getUuid());
+        });
+    }
 
+    public static ObjectTagProcessor<BPlayerTag> tagProcessor = new ObjectTagProcessor<>();
 
-        return new ElementTag(identify()).getObjectAttribute(attribute);
+    @Override
+    public ObjectTag getObjectAttribute(Attribute attribute) {
+        return tagProcessor.getObjectAttribute(this, attribute);
     }
 }

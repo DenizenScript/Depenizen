@@ -12,8 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements Listener {
-    public BreweryChatDistortScriptEvent() {
-    }
+
 
     // <--[event]
     // @Events
@@ -39,22 +38,21 @@ public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements 
     // @Group Depenizen
     //
     // -->
+    public BreweryChatDistortScriptEvent() {
+        registerCouldMatcher("brewery chat distort");
+    }
+
     public PlayerChatDistortEvent event;
     public PlayerTag playerTag;
 
     @Override
-    public boolean couldMatch(ScriptPath path) {
-        return path.eventLower.startsWith("brewery chat distort");
-    }
-
-    @Override
     public boolean matches(ScriptPath path) {
-
+        return super.matches(path);
     }
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(new PlayerTag(event.getPlayer()), null);
+        return new BukkitScriptEntryData(event.getPlayer());
     }
 
     @Override
@@ -70,7 +68,7 @@ public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements 
 
     @Override
     public boolean handleDetermination(ScriptPath path, String prefix, ObjectTag value) {
-        if (prefix.equals("message") && value instanceof ElementTag elementTag) {
+        if (prefix.equals("message") && value instanceof ElementTag elementTag) { // FIXME - Cast redundant but .toString() returns class and hash?
             event.setDistortedMessage(elementTag.asString());
             return true;
         }
