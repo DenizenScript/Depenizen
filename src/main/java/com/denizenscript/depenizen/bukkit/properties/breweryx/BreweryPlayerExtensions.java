@@ -15,7 +15,7 @@ public class BreweryPlayerExtensions {
         // Returns the drunkenness of the brewery player or null if Brewery has no data on the player.
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, "brewery_drunkenness", (attribute, object) -> {
-            BPlayer bPlayer = BPlayer.hasPlayer(object.getPlayerEntity()) ? BPlayer.get(object.getPlayerEntity()) : null;
+            BPlayer bPlayer = BPlayer.hasPlayer(object.getOfflinePlayer()) ? BPlayer.get(object.getOfflinePlayer()) : null;
             if (bPlayer != null) {
                 return new ElementTag(bPlayer.getDrunkeness());
             }
@@ -30,7 +30,7 @@ public class BreweryPlayerExtensions {
         // Returns the quality of the brewery player's drunkenness (drunkeness * drunkeness) or null if Brewery has no data on the player.
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, "brewery_quality", (attribute, object) -> {
-            BPlayer bPlayer = BPlayer.hasPlayer(object.getPlayerEntity()) ? BPlayer.get(object.getPlayerEntity()) : null;
+            BPlayer bPlayer = BPlayer.hasPlayer(object.getOfflinePlayer()) ? BPlayer.get(object.getOfflinePlayer()) : null;
             if (bPlayer != null) {
                 return new ElementTag(bPlayer.getQuality());
             }
@@ -45,7 +45,7 @@ public class BreweryPlayerExtensions {
         // Returns the drunkenness reduction per minute or null if Brewery has no data on the player.
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, "brewery_alcoholrecovery", (attribute, object) -> {
-            BPlayer bPlayer = BPlayer.hasPlayer(object.getPlayerEntity()) ? BPlayer.get(object.getPlayerEntity()) : null;
+            BPlayer bPlayer = BPlayer.hasPlayer(object.getOfflinePlayer()) ? BPlayer.get(object.getOfflinePlayer()) : null;
             if (bPlayer != null) {
                 return new ElementTag(bPlayer.getAlcRecovery());
             }
