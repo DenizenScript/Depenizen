@@ -23,22 +23,22 @@ public class BreweryRecipeTag implements ObjectTag {
 
     // <--[ObjectType]
     // @name BreweryRecipeTag
-    // @prefix brecipe
+    // @prefix breweryrecipe
     // @base ElementTag
     // @format
     // The identity format for brewery is <recipe_name>
-    // For example, 'brecipe@my_recipe'.
+    // For example, 'breweryrecipe@my_recipe'.
     //
     // @plugin Depenizen, BreweryX
     // @description
-    // A BRecipeTag represents a Brewery recipe.
+    // A BreweryRecipeTag represents a Brewery recipe.
     //
     // -->
 
-    @Fetchable("brecipe")
+    @Fetchable("breweryrecipe")
     public static BreweryRecipeTag valueOf(String string, TagContext context) {
-        if (string.startsWith("brecipe@")) {
-            string = string.substring("brecipe@".length());
+        if (string.startsWith("breweryrecipe@")) {
+            string = string.substring("breweryrecipe@".length());
         }
 
         BRecipe recipe = BRecipe.get(string);
@@ -49,7 +49,7 @@ public class BreweryRecipeTag implements ObjectTag {
     }
 
     public static boolean matches(String arg) {
-        arg = arg.replace("brecipe@", "");
+        arg = arg.replace("breweryrecipe@", "");
         return BRecipe.get(arg) != null;
     }
 
@@ -59,7 +59,7 @@ public class BreweryRecipeTag implements ObjectTag {
         this.bRecipe = bRecipe;
     }
 
-    String prefix = "brecipe";
+    String prefix = "breweryrecipe";
 
     @Override
     public String getPrefix() {
@@ -73,7 +73,7 @@ public class BreweryRecipeTag implements ObjectTag {
 
     @Override
     public String identify() {
-        return "brecipe@" + bRecipe.getRecipeName();
+        return "breweryrecipe@" + bRecipe.getRecipeName();
     }
 
     @Override
@@ -88,19 +88,16 @@ public class BreweryRecipeTag implements ObjectTag {
     }
 
     public static void register() {
-
         // <--[tag]
-        // @attribute <BRecipeTag.id>
+        // @attribute <BreweryRecipeTag.id>
         // @returns ElementTag
         // @plugin Depenizen, BreweryX
         // @description
         // Returns the ID of the recipe as specified in the config.
         // -->
         tagProcessor.registerTag(ElementTag.class, "id", (attribute, object) -> {
-
             // This being optional was infrastructure added by the original authors and is not used
             // in Brewery. It will be deprecated and replaced soon.
-
             Optional<String> id = object.bRecipe.getOptionalID();
             if (id.isPresent()) {
                 return new ElementTag(id.get(), true);
@@ -109,7 +106,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.name>
+        // @attribute <BreweryRecipeTag.name>
         // @returns ElementTag
         // @plugin Depenizen, BreweryX
         // @description
@@ -120,7 +117,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.ingredients>
+        // @attribute <BreweryRecipeTag.ingredients>
         // @returns ListTag(ItemTag)
         // @plugin Depenizen, BreweryX
         // @description
@@ -140,7 +137,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.difficulty>
+        // @attribute <BreweryRecipeTag.difficulty>
         // @returns ElementTag(Number)
         // @plugin Depenizen, BreweryX
         // @description
@@ -151,8 +148,8 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.cooking_time>
-        // @returns ElementTag(Number)
+        // @attribute <BreweryRecipeTag.cooking_time>
+        // @returns DurationTag
         // @plugin Depenizen, BreweryX
         // @description
         // Returns the cooking time of the recipe.
@@ -162,7 +159,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.distill_runs>
+        // @attribute <BreweryRecipeTag.distill_runs>
         // @returns ElementTag(Number)
         // @plugin Depenizen, BreweryX
         // @description
@@ -173,7 +170,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.distill_time>
+        // @attribute <BreweryRecipeTag.distill_time>
         // @returns ElementTag(Number)
         // @plugin Depenizen, BreweryX
         // @description
@@ -184,7 +181,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.wood>
+        // @attribute <BreweryRecipeTag.wood>
         // @returns ElementTag(Number)
         // @plugin Depenizen, BreweryX
         // @description
@@ -195,7 +192,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.age>
+        // @attribute <BreweryRecipeTag.age>
         // @returns ElementTag(Number)
         // @plugin Depenizen, BreweryX
         // @description
@@ -206,7 +203,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.color>
+        // @attribute <BreweryRecipeTag.color>
         // @returns ColorTag
         // @plugin Depenizen, BreweryX
         // @description
@@ -218,18 +215,18 @@ public class BreweryRecipeTag implements ObjectTag {
         }));
 
         // <--[tag]
-        // @attribute <BRecipeTag.alcohol>
+        // @attribute <BreweryRecipeTag.alcohol>
         // @returns ElementTag(Number)
         // @plugin Depenizen, BreweryX
         // @description
-        // Returns the absolute amount of alcohol 0-100 in a perfect potion (will be added directly to the player, where 100 means fainting)
+        // Returns the absolute amount of alcohol 0-100 in a perfect potion (will be added directly to the player, where 100 means fainting).
         // -->
         tagProcessor.registerTag(ElementTag.class, "alcohol", (attribute, object) -> {
             return new ElementTag(object.bRecipe.getAlcohol());
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.lore>
+        // @attribute <BreweryRecipeTag.lore>
         // @returns ListTag
         // @plugin Depenizen, BreweryX
         // @description
@@ -247,7 +244,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.custom_model_data>
+        // @attribute <BreweryRecipeTag.custom_model_data>
         // @returns ListTag(ElementTag(Number))
         // @plugin Depenizen, BreweryX
         // @description
@@ -262,7 +259,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.effects>
+        // @attribute <BreweryRecipeTag.effects>
         // @returns ListTag
         // @plugin Depenizen, BreweryX
         // @description
@@ -277,7 +274,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.player_commands>
+        // @attribute <BreweryRecipeTag.player_commands>
         // @returns ListTag
         // @plugin Depenizen, BreweryX
         // @description
@@ -295,7 +292,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.server_commands>
+        // @attribute <BreweryRecipeTag.server_commands>
         // @returns ListTag
         // @plugin Depenizen, BreweryX
         // @description
@@ -313,7 +310,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.message>
+        // @attribute <BreweryRecipeTag.message>
         // @returns ElementTag
         // @plugin Depenizen, BreweryX
         // @description
@@ -327,7 +324,7 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BRecipeTag.title>
+        // @attribute <BreweryRecipeTag.title>
         // @returns ElementTag
         // @plugin Depenizen, BreweryX
         // @description

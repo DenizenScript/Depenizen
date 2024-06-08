@@ -8,13 +8,13 @@ public class BreweryPlayerExtensions {
 
     public static void register() {
         // <--[tag]
-        // @attribute <BPlayerTag.drunkenness>
+        // @attribute <PlayerTag.brewery_drunkenness>
         // @returns ElementTag
         // @plugin Depenizen, BreweryX
         // @description
-        // Returns the drunkness of the brewery player.
+        // Returns the drunkenness of the brewery player or null if Brewery has no data on the player.
         // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, "drunkenness", (attribute, object) -> {
+        PlayerTag.tagProcessor.registerTag(ElementTag.class, "brewery_drunkenness", (attribute, object) -> {
             BPlayer bPlayer = BPlayer.hasPlayer(object.getPlayerEntity()) ? BPlayer.get(object.getPlayerEntity()) : null;
             if (bPlayer != null) {
                 return new ElementTag(bPlayer.getDrunkeness());
@@ -23,13 +23,13 @@ public class BreweryPlayerExtensions {
         });
 
         // <--[tag]
-        // @attribute <BPlayerTag.quality>
+        // @attribute <PlayerTag.brewery_quality>
         // @returns ElementTag
         // @plugin Depenizen, BreweryX
         // @description
-        // Returns the quality of the brewery player's drunkenness (drunkeness * drunkeness).
+        // Returns the quality of the brewery player's drunkenness (drunkeness * drunkeness) or null if Brewery has no data on the player.
         // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, "quality", (attribute, object) -> {
+        PlayerTag.tagProcessor.registerTag(ElementTag.class, "brewery_quality", (attribute, object) -> {
             BPlayer bPlayer = BPlayer.hasPlayer(object.getPlayerEntity()) ? BPlayer.get(object.getPlayerEntity()) : null;
             if (bPlayer != null) {
                 return new ElementTag(bPlayer.getQuality());
@@ -38,13 +38,13 @@ public class BreweryPlayerExtensions {
         });
 
         // <--[tag]
-        // @attribute <BPlayerTag.alcrecovery>
+        // @attribute <PlayerTag.brewery_alcoholrecovery>
         // @returns ElementTag
         // @plugin Depenizen, BreweryX
         // @description
-        // Returns the drunkenness reduction per minute.
+        // Returns the drunkenness reduction per minute or null if Brewery has no data on the player.
         // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, "alcrecovery", (attribute, object) -> {
+        PlayerTag.tagProcessor.registerTag(ElementTag.class, "brewery_alcoholrecovery", (attribute, object) -> {
             BPlayer bPlayer = BPlayer.hasPlayer(object.getPlayerEntity()) ? BPlayer.get(object.getPlayerEntity()) : null;
             if (bPlayer != null) {
                 return new ElementTag(bPlayer.getAlcRecovery());

@@ -12,7 +12,6 @@ import org.bukkit.event.Listener;
 
 public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements Listener {
 
-
     // <--[event]
     // @Events
     // brewery chat distort

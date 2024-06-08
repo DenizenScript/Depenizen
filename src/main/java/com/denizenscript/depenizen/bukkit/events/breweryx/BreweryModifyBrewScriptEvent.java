@@ -26,7 +26,7 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     //
     // @Context
     // <context.item> Returns an ItemTag of the potion that was drunk.
-    // <context.recipe> Returns an BRecipeTag of the recipe that the brew is based off of.
+    // <context.recipe> Returns an BreweryRecipeTag of the recipe that the brew is based off of.
     //
     // @Plugin Depenizen, BreweryX
     //
