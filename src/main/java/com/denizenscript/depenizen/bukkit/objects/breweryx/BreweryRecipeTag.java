@@ -96,8 +96,7 @@ public class BreweryRecipeTag implements ObjectTag {
         // Returns the ID of the recipe as specified in the config.
         // -->
         tagProcessor.registerTag(ElementTag.class, "id", (attribute, object) -> {
-            // This being optional was infrastructure added by the original authors and is not used
-            // in Brewery. It will be deprecated and replaced soon.
+            // This being optional was infrastructure added by the original authors and is not used in Brewery. It will be deprecated and replaced soon.
             Optional<String> id = object.bRecipe.getOptionalID();
             if (id.isPresent()) {
                 return new ElementTag(id.get(), true);
