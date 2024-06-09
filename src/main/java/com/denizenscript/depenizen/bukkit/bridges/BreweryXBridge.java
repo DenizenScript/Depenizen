@@ -17,7 +17,7 @@ public class BreweryXBridge extends Bridge {
         ScriptEvent.registerScriptEvent(BreweryModifyBrewScriptEvent.class);
         ScriptEvent.registerScriptEvent(BreweryIngredientAddScriptEvent.class);
         ScriptEvent.registerScriptEvent(BreweryChatDistortScriptEvent.class);
-        ObjectFetcher.registerWithObjectFetcher(BreweryRecipeTag.class);
+        ObjectFetcher.registerWithObjectFetcher(BreweryRecipeTag.class, BreweryRecipeTag.tagProcessor);
         BreweryPlayerExtensions.register();
     }
 }
