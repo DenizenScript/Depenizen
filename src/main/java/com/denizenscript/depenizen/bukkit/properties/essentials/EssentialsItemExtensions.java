@@ -70,6 +70,8 @@ public class EssentialsItemExtensions {
         // @deprecated Use 'ItemTag.essentials_worth'
         // @description
         // Deprecated in favor of <@link mechanism ItemTag.essentials_worth>.
+        // @tags
+        // <ItemTag.essentials_worth>
         // -->
 
         // <--[mechanism]
