@@ -77,7 +77,7 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
             case "experience" -> new ElementTag(event.getExp());
             case "action" -> new ElementTag(event.getActionInfo().getType().getName(), true);
             case "entity" -> new EntityTag(event.getLivingEntity());
-            case "block" -> new LocationTag(event.getBlock().getLocation());
+            case "block" -> event.getBlock() == null ? null : new LocationTag(event.getBlock().getLocation());
             default -> super.getContext(name);
         };
     }
