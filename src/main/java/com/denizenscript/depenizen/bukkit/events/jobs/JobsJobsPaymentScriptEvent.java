@@ -1,6 +1,7 @@
 package com.denizenscript.depenizen.bukkit.events.jobs;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.objects.EntityTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -29,6 +30,7 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
     // <context.money> Returns an ElementTag(Decimal) of the amount of money the player will be paid.
     // <context.points> Returns an ElementTag(Decimal) of the amount of points the player will be paid.
     // <context.action> Returns an ElementTag the name of the action being paid for, which can be any of the strings from: <@link url https://github.com/Zrips/Jobs/blob/master/src/main/java/com/gamingmesh/jobs/container/ActionType.java>.
+    // <context.entity> Returns an EntityTag of the entity involved with this event, if applicable.
     //
     // @Determine
     // "MONEY:<ElementTag(Decimal)>" to change the amount of money this action should provide.
@@ -82,6 +84,7 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
             case "money" -> new ElementTag(event.getAmount());
             case "points" -> new ElementTag(event.getPoints());
             case "action" -> new ElementTag(event.getActionInfo().getType().getName(), true);
+            case "entity" -> new EntityTag(event.getLivingEntity());
             default -> super.getContext(name);
         };
     }
