@@ -1,6 +1,8 @@
 package com.denizenscript.depenizen.bukkit.events.jobs;
 
 import com.denizenscript.denizen.events.BukkitScriptEvent;
+import com.denizenscript.denizen.objects.EntityTag;
+import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
@@ -28,6 +30,8 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
     // <context.job> Returns a JobsJobTag of the job that the player is gaining exp for.
     // <context.experience> Returns an ElementTag(Decimal) of the amount of exp the player will earn.
     // <context.action> Returns an ElementTag of the name of the action being paid for, which can be any of the strings from: <@link url https://github.com/Zrips/Jobs/blob/master/src/main/java/com/gamingmesh/jobs/container/ActionType.java>.
+    // <context.entity> Returns an EntityTag of the entity involved with this event, if applicable.
+    // <context.block> Returns a LocationTag of the block involved with this event, if applicable.
     //
     // @Determine
     // "EXP:<ElementTag(Decimal)>" to change the amount of Jobs exp this action should provide.
@@ -72,6 +76,8 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
             case "job" -> job;
             case "experience" -> new ElementTag(event.getExp());
             case "action" -> new ElementTag(event.getActionInfo().getType().getName(), true);
+            case "entity" -> event.getLivingEntity() == null ? null : new EntityTag(event.getLivingEntity());
+            case "block" -> event.getBlock() == null ? null : new LocationTag(event.getBlock().getLocation());
             default -> super.getContext(name);
         };
     }
