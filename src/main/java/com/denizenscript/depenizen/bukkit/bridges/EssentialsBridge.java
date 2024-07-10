@@ -1,6 +1,5 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.events.ScriptEvent;
@@ -9,10 +8,9 @@ import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.PseudoObjectTagBase;
 import com.denizenscript.denizencore.tags.TagManager;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.events.essentials.*;
-import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsItemProperties;
+import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsItemExtensions;
 import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsPlayerProperties;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.commands.WarpNotFoundException;
@@ -77,7 +75,7 @@ public class EssentialsBridge extends Bridge {
         ScriptEvent.registerScriptEvent(PlayerMuteStatusScriptEvent.class);
         ScriptEvent.registerScriptEvent(PlayerBalanceChangeScriptEvent.class);
         PropertyParser.registerProperty(EssentialsPlayerProperties.class, PlayerTag.class);
-        PropertyParser.registerProperty(EssentialsItemProperties.class, ItemTag.class);
+        EssentialsItemExtensions.register();
         essentials = (Essentials) plugin;
         new EssentialsTagBase();
     }
