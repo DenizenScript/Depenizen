@@ -5,6 +5,7 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.QuaternionTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
@@ -175,6 +176,34 @@ public class ViveCraftPlayerTag implements ObjectTag {
                 return null;
             }
             return new LocationTag(location);
+        });
+
+        tagProcessor.registerTag(QuaternionTag.class, "rotation", (attribute, object) -> {
+            if (!attribute.hasParam()) {
+                attribute.echoError("ViveCraftPlayer.rotation[...] tag must have an input.");
+                return null;
+            }
+            float[] rotation;
+            ElementTag type = attribute.paramAsType(ElementTag.class);
+            switch (type.toString()) {
+                case "head":
+                    rotation = (float[]) object.getPlayer().getMetadata("head.rot").get(0).value();
+                    break;
+                case "left":
+                    rotation = (float[]) object.getPlayer().getMetadata("lefthand.rot").get(0).value();
+                    break;
+                case "right":
+                    rotation = (float[]) object.getPlayer().getMetadata("righthand.rot").get(0).value();
+                    break;
+                default:
+                    attribute.echoError("Attribute must be 'head', 'left' or 'right'");
+                    return null;
+            }
+            if (rotation == null) {
+                attribute.echoError("Location is not valid. Did a plugin overwrite the data?");
+                return null;
+            }
+            return new QuaternionTag(rotation[1], rotation[2], rotation[3], rotation[0]);
         });
     }
 }
