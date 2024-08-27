@@ -179,7 +179,7 @@ public class ViveCraftPlayerTag implements ObjectTag {
         // @description
         // Returns a QuaternionTag of the rotation of the input player part.
         // -->
-        tagProcessor.registerTag(QuaternionTag.class, ElementTag.class,"rotation", (attribute, object, input) -> {
+        tagProcessor.registerTag(QuaternionTag.class, ElementTag.class, "rotation", (attribute, object, input) -> {
             float[] rotation;
             switch (input.toString()) {
                 case "head":
