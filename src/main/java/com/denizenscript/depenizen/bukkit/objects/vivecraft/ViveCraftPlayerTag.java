@@ -178,14 +178,9 @@ public class ViveCraftPlayerTag implements ObjectTag {
             return new LocationTag(location);
         });
 
-        tagProcessor.registerTag(QuaternionTag.class, "rotation", (attribute, object) -> {
-            if (!attribute.hasParam()) {
-                attribute.echoError("ViveCraftPlayer.rotation[...] tag must have an input.");
-                return null;
-            }
+        tagProcessor.registerTag(QuaternionTag.class, ElementTag.class,"rotation", (attribute, object, input) -> {
             float[] rotation;
-            ElementTag type = attribute.paramAsType(ElementTag.class);
-            switch (type.toString()) {
+            switch (input.toString()) {
                 case "head":
                     rotation = (float[]) object.getPlayer().getMetadata("head.rot").get(0).value();
                     break;
