@@ -40,6 +40,13 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
     //
     // @Player Always.
     //
+    // @Example
+    // on jobs player earns exp for job:
+    // # Returns true if the target of the action was an entity. Valid actions include but are not limited to: Kill, Shear, Milk.
+    // - narrate <context.entity.exists>
+    // # Returns true if the target of the action was a block. Valid actions include but are not limited to: Place, Break, Strip.
+    // - narrate <context.block.exists>
+    //
     // @Group Depenizen
     //
     // -->
