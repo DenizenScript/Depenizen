@@ -31,8 +31,8 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
     // <context.money> Returns an ElementTag(Decimal) of the amount of money the player will be paid.
     // <context.points> Returns an ElementTag(Decimal) of the amount of points the player will be paid.
     // <context.action> Returns an ElementTag the name of the action being paid for, which can be any of the strings from: <@link url https://github.com/Zrips/Jobs/blob/master/src/main/java/com/gamingmesh/jobs/container/ActionType.java>.
-    // <context.entity> Returns an EntityTag of the entity involved with this event, if applicable.
-    // <context.block> Returns a LocationTag of the block involved with this event, if applicable.
+    // <context.entity> Returns an EntityTag of the entity involved with this event, if any.
+    // <context.block> Returns a LocationTag of the block involved with this event, if any.
     //
     // @Determine
     // "MONEY:<ElementTag(Decimal)>" to change the amount of money this action should provide.

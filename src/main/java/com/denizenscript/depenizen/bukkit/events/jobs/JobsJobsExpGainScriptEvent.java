@@ -30,8 +30,8 @@ public class JobsJobsExpGainScriptEvent extends BukkitScriptEvent implements Lis
     // <context.job> Returns a JobsJobTag of the job that the player is gaining exp for.
     // <context.experience> Returns an ElementTag(Decimal) of the amount of exp the player will earn.
     // <context.action> Returns an ElementTag of the name of the action being paid for, which can be any of the strings from: <@link url https://github.com/Zrips/Jobs/blob/master/src/main/java/com/gamingmesh/jobs/container/ActionType.java>.
-    // <context.entity> Returns an EntityTag of the entity involved with this event, if applicable.
-    // <context.block> Returns a LocationTag of the block involved with this event, if applicable.
+    // <context.entity> Returns an EntityTag of the entity involved with this event, if any.
+    // <context.block> Returns a LocationTag of the block involved with this event, if any.
     //
     // @Determine
     // "EXP:<ElementTag(Decimal)>" to change the amount of Jobs exp this action should provide.
