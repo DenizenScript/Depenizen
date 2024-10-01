@@ -86,7 +86,7 @@ public class JobsJobsPaymentScriptEvent extends BukkitScriptEvent implements Lis
             case "money" -> new ElementTag(event.getAmount());
             case "points" -> new ElementTag(event.getPoints());
             case "action" -> new ElementTag(event.getActionInfo().getType().getName(), true);
-            case "entity" -> event.getLivingEntity() == null ? null : new EntityTag(event.getLivingEntity());
+            case "entity" -> event.getLivingEntity() == null ? null : new EntityTag(event.getLivingEntity()).getDenizenObject();
             case "block" -> event.getBlock() == null ? null : new LocationTag(event.getBlock().getLocation());
             default -> super.getContext(name);
         };
