@@ -33,7 +33,7 @@ public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent imple
     // -->
 
     public ShopKeeperTradeCompletedScriptEvent() {
-        registerCouldMatcher("shopkeeper trade");
+        registerCouldMatcher("player completes shopkeeper trade");
     }
 
     public ShopkeeperTradeCompletedEvent event;
