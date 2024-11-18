@@ -9,7 +9,7 @@ import com.nisovin.shopkeepers.api.events.ShopkeeperTradeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Listener {
+public class ShopKeeperTradeInitiatedScriptEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]
     // @Events
@@ -30,7 +30,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     //
     // -->
 
-    public ShopKeeperTradeScriptEvent() {
+    public ShopKeeperTradeInitiatedScriptEvent() {
         registerCouldMatcher("shopkeeper trade initiated");
     }
 

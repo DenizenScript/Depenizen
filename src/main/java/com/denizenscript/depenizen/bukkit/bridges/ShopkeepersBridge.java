@@ -7,7 +7,7 @@ import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.events.shopkeepers.ShopKeeperCreatedScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.shopkeepers.ShopKeeperTradeCompletedScriptEvent;
-import com.denizenscript.depenizen.bukkit.events.shopkeepers.ShopKeeperTradeScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.shopkeepers.ShopKeeperTradeInitiatedScriptEvent;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeperTag;
 import com.denizenscript.depenizen.bukkit.properties.shopkeepers.ShopKeepersEntityExtensions;
 import com.nisovin.shopkeepers.api.shopkeeper.TradingRecipe;
@@ -22,7 +22,7 @@ public class ShopkeepersBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(ShopKeeperTag.class, ShopKeeperTag.tagProcessor);
         ScriptEvent.registerScriptEvent(ShopKeeperCreatedScriptEvent.class);
         ScriptEvent.registerScriptEvent(ShopKeeperTradeCompletedScriptEvent.class);
-        ScriptEvent.registerScriptEvent(ShopKeeperTradeScriptEvent.class);
+        ScriptEvent.registerScriptEvent(ShopKeeperTradeInitiatedScriptEvent.class);
         ShopKeepersEntityExtensions.register();
     }
 
