@@ -13,14 +13,14 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
 
     // <--[event]
     // @Events
-    // shopkeeper trade
+    // shopkeeper trade initiated
     //
     // @Cancellable true
     //
     // @Triggers when a trade with a shopkeeper is initiated.
     //
     // @Context
-    // <context.shopkeeper> Returns the ShopKeeperTag of the ShopKeeper that the trade occurred with.
+    // <context.shopkeeper> Returns the ShopKeeperTag of the ShopKeeper that the trade occurs with.
     //
     // @Plugin Depenizen, ShopKeepers
     //
@@ -31,7 +31,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     // -->
 
     public ShopKeeperTradeScriptEvent() {
-        registerCouldMatcher("shopkeeper trade");
+        registerCouldMatcher("shopkeeper trade initiated");
     }
 
     public ShopkeeperTradeEvent event;
