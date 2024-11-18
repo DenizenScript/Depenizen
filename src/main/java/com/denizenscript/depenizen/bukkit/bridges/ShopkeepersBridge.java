@@ -6,6 +6,7 @@ import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.events.shopkeepers.ShopKeeperCreatedScriptEvent;
+import com.denizenscript.depenizen.bukkit.events.shopkeepers.ShopKeeperTradeCompletedScriptEvent;
 import com.denizenscript.depenizen.bukkit.events.shopkeepers.ShopKeeperTradeScriptEvent;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeperTag;
 import com.denizenscript.depenizen.bukkit.properties.shopkeepers.ShopKeepersEntityExtensions;
@@ -19,16 +20,17 @@ public class ShopkeepersBridge extends Bridge {
     public void init() {
         instance = this;
         ObjectFetcher.registerWithObjectFetcher(ShopKeeperTag.class, ShopKeeperTag.tagProcessor);
-        ScriptEvent.registerScriptEvent(ShopKeeperTradeScriptEvent.class);
         ScriptEvent.registerScriptEvent(ShopKeeperCreatedScriptEvent.class);
+        ScriptEvent.registerScriptEvent(ShopKeeperTradeCompletedScriptEvent.class);
+        ScriptEvent.registerScriptEvent(ShopKeeperTradeScriptEvent.class);
         ShopKeepersEntityExtensions.register();
     }
 
     public static ListTag tradingRecipeToList(TradingRecipe tradingRecipe) {
         ListTag recipe = new ListTag(3);
-        recipe.addObject(new ItemTag(tradingRecipe.getItem1().asItemStack()));
-        recipe.addObject(new ItemTag(tradingRecipe.getItem2() != null ? tradingRecipe.getItem2().asItemStack() : null));
-        recipe.addObject(new ItemTag(tradingRecipe.getResultItem().asItemStack()));
+        recipe.addObject(new ItemTag(tradingRecipe.getItem1().copy()));
+        recipe.addObject(new ItemTag(tradingRecipe.getItem2() != null ? tradingRecipe.getItem2().copy() : null));
+        recipe.addObject(new ItemTag(tradingRecipe.getResultItem().copy()));
         return recipe;
     }
 }
