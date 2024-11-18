@@ -53,7 +53,7 @@ public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent imple
     }
 
     @EventHandler
-    public void onShopKeeperTrade(ShopkeeperTradeCompletedEvent event) {
+    public void onShopKeeperTradeCompleted(ShopkeeperTradeCompletedEvent event) {
         this.event = event;
         fire(event);
     }
