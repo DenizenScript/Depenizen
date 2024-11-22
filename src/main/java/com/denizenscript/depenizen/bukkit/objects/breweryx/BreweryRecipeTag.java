@@ -17,8 +17,6 @@ import com.dre.brewery.utility.Tuple;
 import org.bukkit.Color;
 import org.bukkit.Material;
 
-import java.util.Optional;
-
 public class BreweryRecipeTag implements ObjectTag {
 
     // <--[ObjectType]
@@ -96,12 +94,8 @@ public class BreweryRecipeTag implements ObjectTag {
         // Returns the ID of the recipe as specified in the config.
         // -->
         tagProcessor.registerTag(ElementTag.class, "id", (attribute, object) -> {
-            // This being optional was infrastructure added by the original authors and is not used in Brewery. It will be deprecated and replaced soon.
-            Optional<String> id = object.bRecipe.getOptionalID();
-            if (id.isPresent()) {
-                return new ElementTag(id.get(), true);
-            }
-            return null;
+            String id = object.bRecipe.getId();
+            return new ElementTag(id, true);
         });
 
         // <--[tag]
@@ -125,12 +119,7 @@ public class BreweryRecipeTag implements ObjectTag {
         tagProcessor.registerTag(ListTag.class, "ingredients", (attribute, object) -> {
             ListTag ingredients = new ListTag();
             for (RecipeItem recipeItem : object.bRecipe.getIngredients()) {
-                if (recipeItem.getMaterials() == null) {
-                    continue;
-                }
-                for (Material material : recipeItem.getMaterials()) {
-                    ingredients.addObject(new ItemTag(material, recipeItem.getAmount()));
-                }
+                ingredients.add(recipeItem.toConfigString());
             }
             return ingredients;
         });
@@ -165,7 +154,7 @@ public class BreweryRecipeTag implements ObjectTag {
         // Returns the distill runs of the recipe.
         // -->
         tagProcessor.registerTag(ElementTag.class, "distill_runs", (attribute, object) -> {
-            return new ElementTag(object.bRecipe.getDistillRuns());
+            return new ElementTag(object.bRecipe.getDistillruns());
         });
 
         // <--[tag]

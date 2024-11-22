@@ -56,7 +56,7 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
         return switch (name) {
             case "recipe" -> recipeTag;
             case "type" -> new ElementTag(type);
-            case "item" -> new ItemTag(event.getBrew().createItem(event.getBrew().getCurrentRecipe()));
+            case "item" -> new ItemTag(event.getBrew().createItem(event.getBrew().getCurrentRecipe(), false));
             default -> super.getContext(name);
         };
     }

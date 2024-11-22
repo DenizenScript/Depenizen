@@ -55,7 +55,7 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
     public ObjectTag getContext(String name) {
         return switch (name) {
             case "recipe" -> recipeTag;
-            case "item" -> new ItemTag(event.getBrew().createItem(event.getBrew().getCurrentRecipe()));
+            case "item" -> new ItemTag(event.getBrew().createItem(event.getBrew().getCurrentRecipe(), false));
             case "player" -> new PlayerTag(event.getPlayer());
             default -> super.getContext(name);
         };
