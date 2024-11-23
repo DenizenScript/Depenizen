@@ -1,6 +1,5 @@
 package com.denizenscript.depenizen.bukkit.objects.breweryx;
 
-import com.denizenscript.denizen.objects.ItemTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ColorTag;
@@ -15,7 +14,6 @@ import com.dre.brewery.recipe.BRecipe;
 import com.dre.brewery.recipe.RecipeItem;
 import com.dre.brewery.utility.Tuple;
 import org.bukkit.Color;
-import org.bukkit.Material;
 
 public class BreweryRecipeTag implements ObjectTag {
 
@@ -25,7 +23,7 @@ public class BreweryRecipeTag implements ObjectTag {
     // @base ElementTag
     // @format
     // The identity format for brewery is <recipe_name>
-    // For example, 'breweryrecipe@my_recipe'.
+    // For example, 'breweryrecipe@example_recipe'.
     //
     // @plugin Depenizen, BreweryX
     // @description
@@ -71,7 +69,7 @@ public class BreweryRecipeTag implements ObjectTag {
 
     @Override
     public String identify() {
-        return "breweryrecipe@" + bRecipe.getRecipeName();
+        return "breweryrecipe@" + bRecipe.getId();
     }
 
     @Override
@@ -91,7 +89,7 @@ public class BreweryRecipeTag implements ObjectTag {
         // @returns ElementTag
         // @plugin Depenizen, BreweryX
         // @description
-        // Returns the ID of the recipe as specified in the config.
+        // Returns the ID of the recipe.
         // -->
         tagProcessor.registerTag(ElementTag.class, "id", (attribute, object) -> {
             String id = object.bRecipe.getId();
@@ -99,14 +97,25 @@ public class BreweryRecipeTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <BreweryRecipeTag.name>
+        // @attribute <BreweryRecipeTag.name>[<quality>]
         // @returns ElementTag
         // @plugin Depenizen, BreweryX
         // @description
-        // Returns the name of the recipe at it's highest quality.
+        // Returns the name of the recipe based on the provided quality number.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
-            return new ElementTag(object.bRecipe.getRecipeName(), true);
+        tagProcessor.registerTag(ElementTag.class, ElementTag.class, "name", (attribute, object, quality) -> {
+            return new ElementTag(object.bRecipe.getName(quality.asInt()), true);
+        });
+
+        // <--[tag]
+        // @attribute <BreweryRecipeTag.full_name>
+        // @returns ElementTag
+        // @plugin Depenizen, BreweryX
+        // @description
+        // Returns the full name of the recipe as declared in the recipes file.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "full_name", (attribute, object) -> {
+            return new ElementTag(String.join("/", object.bRecipe.getName()), true);
         });
 
         // <--[tag]
@@ -323,6 +332,29 @@ public class BreweryRecipeTag implements ObjectTag {
                 return null;
             }
             return new ElementTag(object.bRecipe.getDrinkTitle(), true);
+        }));
+
+        // <--[tag]
+        // @attribute <BreweryRecipeTag.has_glint>
+        // @returns ElementTag
+        // @plugin Depenizen, BreweryX
+        // @description
+        // Returns if the recipe, once created into a brew, has a glint effect.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "has_glint", ((attribute, object) -> {
+            return new ElementTag(object.bRecipe.isGlint());
+        }));
+
+
+        // <--[tag]
+        // @attribute <BreweryRecipeTag.is_valid>
+        // @returns ElementTag
+        // @plugin Depenizen, BreweryX
+        // @description
+        // Returns if the recipe is valid and can be created.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "is_valid", ((attribute, object) -> {
+            return new ElementTag(object.bRecipe.isValid());
         }));
     }
 
