@@ -6,11 +6,11 @@ import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import com.denizenscript.depenizen.bukkit.bridges.ShopkeepersBridge;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeperTag;
-import com.nisovin.shopkeepers.api.events.ShopkeeperTradeEvent;
+import com.nisovin.shopkeepers.api.events.ShopkeeperTradeCompletedEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Listener {
+public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]
     // @Events
@@ -32,11 +32,11 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     //
     // -->
 
-    public ShopKeeperTradeScriptEvent() {
+    public ShopKeeperTradeCompletedScriptEvent() {
         registerCouldMatcher("shopkeeper trade");
     }
 
-    public ShopkeeperTradeEvent event;
+    public ShopkeeperTradeCompletedEvent event;
 
     @Override
     public ScriptEntryData getScriptEntryData() {
@@ -53,7 +53,7 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     }
 
     @EventHandler
-    public void onShopKeeperTrade(ShopkeeperTradeEvent event) {
+    public void onShopKeeperTradeCompleted(ShopkeeperTradeCompletedEvent event) {
         this.event = event;
         fire(event);
     }
