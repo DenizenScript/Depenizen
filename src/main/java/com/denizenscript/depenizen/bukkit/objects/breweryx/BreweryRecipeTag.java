@@ -206,10 +206,10 @@ public class BreweryRecipeTag implements ObjectTag {
         // @description
         // Returns the color of the distilled/finished potion.
         // -->
-        tagProcessor.registerTag(ColorTag.class, "color", ((attribute, object) -> {
+        tagProcessor.registerTag(ColorTag.class, "color", (attribute, object) -> {
             Color color = object.bRecipe.getColor().getColor();
             return new ColorTag(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
-        }));
+        });
 
         // <--[tag]
         // @attribute <BreweryRecipeTag.alcohol>
@@ -327,12 +327,12 @@ public class BreweryRecipeTag implements ObjectTag {
         // @description
         // Returns the title message sent to the player when the potion is drunk.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "title", ((attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "title", (attribute, object) -> {
             if (object.bRecipe.getDrinkTitle() == null) {
                 return null;
             }
             return new ElementTag(object.bRecipe.getDrinkTitle(), true);
-        }));
+        });
 
         // <--[tag]
         // @attribute <BreweryRecipeTag.has_glint>
@@ -341,9 +341,9 @@ public class BreweryRecipeTag implements ObjectTag {
         // @description
         // Returns if the recipe, once created into a brew, has a glint effect.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "has_glint", ((attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "has_glint", (attribute, object) -> {
             return new ElementTag(object.bRecipe.isGlint());
-        }));
+        });
 
 
         // <--[tag]
@@ -353,9 +353,9 @@ public class BreweryRecipeTag implements ObjectTag {
         // @description
         // Returns if the recipe is valid and can be created.
         // -->
-        tagProcessor.registerTag(ElementTag.class, "is_valid", ((attribute, object) -> {
+        tagProcessor.registerTag(ElementTag.class, "is_valid", (attribute, object) -> {
             return new ElementTag(object.bRecipe.isValid());
-        }));
+        });
     }
 
     public static ObjectTagProcessor<BreweryRecipeTag> tagProcessor = new ObjectTagProcessor<>();
