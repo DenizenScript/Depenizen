@@ -14,7 +14,6 @@ import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsItemEx
 import com.denizenscript.depenizen.bukkit.properties.essentials.EssentialsPlayerProperties;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.commands.WarpNotFoundException;
-import net.ess3.api.InvalidWorldException;
 
 public class EssentialsBridge extends Bridge {
 
@@ -43,9 +42,6 @@ public class EssentialsBridge extends Bridge {
                 }
                 catch (WarpNotFoundException e) {
                     attribute.echoError("Warp not found");
-                }
-                catch (InvalidWorldException e) {
-                    attribute.echoError("Invalid world for getting warp");
                 }
                 return null;
             });
