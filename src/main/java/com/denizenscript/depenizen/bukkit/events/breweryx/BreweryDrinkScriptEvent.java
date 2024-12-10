@@ -53,7 +53,7 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
-            case "recipe" -> new BreweryRecipeTag(event.getBrew().getCurrentRecipe());;
+            case "recipe" -> new BreweryRecipeTag(event.getBrew().getCurrentRecipe());
             case "item" -> new ItemTag(event.getBrew().createItem(event.getBrew().getCurrentRecipe(), false));
             case "player" -> new PlayerTag(event.getPlayer());
             default -> super.getContext(name);
