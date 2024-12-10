@@ -25,7 +25,7 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     // Cancelling reverts the Brew to the state it was before the modification
     //
     // @Context
-    // <context.item> Returns an ItemTag of the potion that was drunk.
+    // <context.item> Returns an ItemTag of the potion.
     // <context.recipe> Returns an BreweryRecipeTag of the recipe that the brew is based off of.
     //
     // @Plugin Depenizen, BreweryX
