@@ -5,6 +5,7 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.Fetchable;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.QuaternionTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
@@ -149,14 +150,9 @@ public class ViveCraftPlayerTag implements ObjectTag {
         // @description
         // Returns a LocationTag of the given position.
         // -->
-        tagProcessor.registerTag(LocationTag.class, "position", (attribute, object) -> {
-            if (!attribute.hasParam()) {
-                attribute.echoError("ViveCraftPlayer.position[...] tag must have an input.");
-                return null;
-            }
+        tagProcessor.registerTag(LocationTag.class, ElementTag.class, "position", (attribute, object, input) -> {
             Location location;
-            ElementTag type = attribute.paramAsType(ElementTag.class);
-            switch (type.toString()) {
+            switch (input.toString()) {
                 case "head":
                     location = (Location) object.getPlayer().getMetadata("head.pos").get(0).value();
                     break;
@@ -175,6 +171,29 @@ public class ViveCraftPlayerTag implements ObjectTag {
                 return null;
             }
             return new LocationTag(location);
+        });
+
+        // <--[tag]
+        // @attribute <ViveCraftPlayerTag.rotation[head/left/right]>
+        // @returns QuaternionTag
+        // @description
+        // Returns a QuaternionTag of the rotation of the input player part.
+        // -->
+        tagProcessor.registerTag(QuaternionTag.class, ElementTag.class, "rotation", (attribute, object, input) -> {
+            float[] rotation = switch (input.toString()) {
+                case "head" -> (float[]) object.getPlayer().getMetadata("head.rot").get(0).value();
+                case "left" -> (float[]) object.getPlayer().getMetadata("lefthand.rot").get(0).value();
+                case "right" -> (float[]) object.getPlayer().getMetadata("righthand.rot").get(0).value();
+                default -> {
+                    attribute.echoError("Invalid part specified, must be 'head', 'left' or 'right'");
+                    yield null;
+                }
+            };
+            if (rotation == null) {
+                attribute.echoError("Rotation is not valid. Did a plugin overwrite the data?");
+                return null;
+            }
+            return new QuaternionTag(rotation[1], rotation[2], rotation[3], rotation[0]);
         });
     }
 }
