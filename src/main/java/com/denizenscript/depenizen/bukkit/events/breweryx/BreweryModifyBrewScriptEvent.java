@@ -25,8 +25,9 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     // Cancelling reverts the Brew to the state it was before the modification
     //
     // @Context
-    // <context.item> Returns an ItemTag of the potion.
     // <context.recipe> Returns an BreweryRecipeTag of the recipe that the brew is based off of.
+    // <context.item> Returns an ItemTag of the potion.
+    // <context.type> Returns an ElementTag of the type of modification.
     //
     // @Plugin Depenizen, BreweryX
     //
@@ -38,8 +39,6 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     }
 
     public BrewModifyEvent event;
-    public BreweryRecipeTag recipeTag;
-    public String type;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -54,9 +53,9 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
-            case "recipe" -> recipeTag;
-            case "type" -> new ElementTag(type);
+            case "recipe" -> new BreweryRecipeTag(event.getBrew().getCurrentRecipe());
             case "item" -> new ItemTag(event.getBrew().createItem(event.getBrew().getCurrentRecipe(), false));
+            case "type" -> new ElementTag(event.getType());
             default -> super.getContext(name);
         };
     }
@@ -64,8 +63,6 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     @EventHandler
     public void onBrewModifyEvent(BrewModifyEvent event) {
         this.event = event;
-        this.recipeTag = new BreweryRecipeTag(event.getBrew().getCurrentRecipe());
-        this.type = event.getType().name();
         fire(event);
     }
 }
