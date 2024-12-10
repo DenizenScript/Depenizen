@@ -39,7 +39,6 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
     }
 
     public BrewDrinkEvent event;
-    public BreweryRecipeTag recipeTag;
 
     @Override
     public boolean matches(ScriptPath path) {
@@ -54,7 +53,7 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
-            case "recipe" -> recipeTag;
+            case "recipe" -> new BreweryRecipeTag(event.getBrew().getCurrentRecipe());;
             case "item" -> new ItemTag(event.getBrew().createItem(event.getBrew().getCurrentRecipe(), false));
             case "player" -> new PlayerTag(event.getPlayer());
             default -> super.getContext(name);
@@ -64,7 +63,6 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
     @EventHandler
     public void onBrewDrinkEvent(BrewDrinkEvent event) {
         this.event = event;
-        this.recipeTag = new BreweryRecipeTag(event.getBrew().getCurrentRecipe());
         fire(event);
     }
 }
