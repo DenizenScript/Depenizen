@@ -180,23 +180,17 @@ public class ViveCraftPlayerTag implements ObjectTag {
         // Returns a QuaternionTag of the rotation of the input player part.
         // -->
         tagProcessor.registerTag(QuaternionTag.class, ElementTag.class, "rotation", (attribute, object, input) -> {
-            float[] rotation;
-            switch (input.toString()) {
-                case "head":
-                    rotation = (float[]) object.getPlayer().getMetadata("head.rot").get(0).value();
-                    break;
-                case "left":
-                    rotation = (float[]) object.getPlayer().getMetadata("lefthand.rot").get(0).value();
-                    break;
-                case "right":
-                    rotation = (float[]) object.getPlayer().getMetadata("righthand.rot").get(0).value();
-                    break;
-                default:
-                    attribute.echoError("Attribute must be 'head', 'left' or 'right'");
-                    return null;
-            }
+            float[] rotation = switch (input.toString()) {
+                case "head" -> (float[]) object.getPlayer().getMetadata("head.rot").get(0).value();
+                case "left" -> (float[]) object.getPlayer().getMetadata("lefthand.rot").get(0).value();
+                case "right" -> (float[]) object.getPlayer().getMetadata("righthand.rot").get(0).value();
+                default -> {
+                    attribute.echoError("Invalid part specified, must be 'head', 'left' or 'right'");
+                    yield null;
+                }
+            };
             if (rotation == null) {
-                attribute.echoError("Location is not valid. Did a plugin overwrite the data?");
+                attribute.echoError("Rotation is not valid. Did a plugin overwrite the data?");
                 return null;
             }
             return new QuaternionTag(rotation[1], rotation[2], rotation[3], rotation[0]);
