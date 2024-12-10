@@ -182,7 +182,7 @@ public class BreweryRecipeTag implements ObjectTag {
         // @returns ElementTag(Number)
         // @plugin Depenizen, BreweryX
         // @description
-        // Returns the type of wood used in the recipe (by number, Ex: 0 = Any, 1 = Oak).
+        // Returns the enum of the wood type to be used in the Recipe (ANY, BIRCH, OAK...).
         // -->
         tagProcessor.registerTag(ElementTag.class, "wood", (attribute, object) -> {
             return new ElementTag(object.bRecipe.getWood());
