@@ -10,19 +10,21 @@ import com.nisovin.shopkeepers.api.events.ShopkeeperTradeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Listener {
+public class ShopKeeperTradeInitiatedScriptEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]
     // @Events
-    // shopkeeper trade
+    // shopkeeper player tries trading
+    //
+    // @Warning This event is called for each successful trade option a ShopKeeper offers. Canceling a trade will also cancel all successive trades that might otherwise have been triggered.
     //
     // @Cancellable true
     //
-    // @Triggers when a trade with a shopkeeper is completed.
+    // @Triggers when a trade with a shopkeeper is initiated.
     //
     // @Context
-    // <context.recipe> Returns a ListTag(ItemTag) of the recipe for this trade.
-    // <context.shopkeeper> Returns the ShopKeeperTag of the ShopKeeper that the trade occurred with.
+    // <context.recipe> Returns a ListTag(ItemTag) of the trade in the form Offered(,Offered),Result.
+    // <context.shopkeeper> Returns the ShopKeeperTag of the ShopKeeper that the trade occurs with.
     //
     // @Plugin Depenizen, ShopKeepers
     //
@@ -32,8 +34,8 @@ public class ShopKeeperTradeScriptEvent extends BukkitScriptEvent implements Lis
     //
     // -->
 
-    public ShopKeeperTradeScriptEvent() {
-        registerCouldMatcher("shopkeeper trade");
+    public ShopKeeperTradeInitiatedScriptEvent() {
+        registerCouldMatcher("shopkeeper player tries trading");
     }
 
     public ShopkeeperTradeEvent event;
