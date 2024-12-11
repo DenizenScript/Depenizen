@@ -4,6 +4,7 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
+import com.denizenscript.depenizen.bukkit.bridges.ShopkeepersBridge;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeperTag;
 import com.nisovin.shopkeepers.api.events.ShopkeeperTradeEvent;
 import org.bukkit.event.EventHandler;
@@ -13,13 +14,16 @@ public class ShopKeeperTradeInitiatedScriptEvent extends BukkitScriptEvent imple
 
     // <--[event]
     // @Events
-    // shopkeeper trade initiated
+    // shopkeeper player tries trading
+    //
+    // @Warning This event is called for each successful trade option a ShopKeeper offers. Canceling a trade will also cancel all successive trades that might otherwise have been triggered.
     //
     // @Cancellable true
     //
     // @Triggers when a trade with a shopkeeper is initiated.
     //
     // @Context
+    // <context.recipe> Returns a ListTag(ItemTag) of the trade in the form Offered(,Offered),Result.
     // <context.shopkeeper> Returns the ShopKeeperTag of the ShopKeeper that the trade occurs with.
     //
     // @Plugin Depenizen, ShopKeepers
@@ -31,7 +35,7 @@ public class ShopKeeperTradeInitiatedScriptEvent extends BukkitScriptEvent imple
     // -->
 
     public ShopKeeperTradeInitiatedScriptEvent() {
-        registerCouldMatcher("shopkeeper trade initiated");
+        registerCouldMatcher("shopkeeper player tries trading");
     }
 
     public ShopkeeperTradeEvent event;
@@ -44,6 +48,7 @@ public class ShopKeeperTradeInitiatedScriptEvent extends BukkitScriptEvent imple
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
+            case "recipe" -> ShopkeepersBridge.tradingRecipeToList(event.getTradingRecipe());
             case "shopkeeper" -> new ShopKeeperTag(event.getShopkeeper());
             default -> super.getContext(name);
         };

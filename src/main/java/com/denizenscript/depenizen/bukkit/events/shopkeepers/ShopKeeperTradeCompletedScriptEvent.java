@@ -4,7 +4,6 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
-import com.denizenscript.depenizen.bukkit.bridges.ShopkeepersBridge;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeperTag;
 import com.nisovin.shopkeepers.api.events.ShopkeeperTradeCompletedEvent;
 import org.bukkit.event.EventHandler;
@@ -16,12 +15,11 @@ public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent imple
     // @Events
     // shopkeeper trade
     //
-    // @Cancellable true
+    // @Warning This event should not be cancelled. Consider using <@link event ShopKeeperTradeInitiatedScriptEvent> instead.
     //
     // @Triggers when a trade with a shopkeeper is completed.
     //
     // @Context
-    // <context.recipe> Returns a ListTag(ItemTag) of the recipe for this trade.
     // <context.shopkeeper> Returns the ShopKeeperTag of the ShopKeeper that the trade occurred with.
     //
     // @Plugin Depenizen, ShopKeepers
@@ -45,11 +43,10 @@ public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent imple
 
     @Override
     public ObjectTag getContext(String name) {
-        return switch (name) {
-            case "recipe" -> ShopkeepersBridge.tradingRecipeToList(event.getTradingRecipe());
-            case "shopkeeper" -> new ShopKeeperTag(event.getShopkeeper());
-            default -> super.getContext(name);
-        };
+        if (name.equals("shopkeeper")) {
+            return new ShopKeeperTag(event.getShopkeeper());
+        }
+        return super.getContext(name);
     }
 
     @EventHandler
