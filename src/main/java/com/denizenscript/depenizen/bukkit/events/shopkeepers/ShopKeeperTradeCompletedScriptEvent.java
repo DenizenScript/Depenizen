@@ -15,11 +15,13 @@ public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent imple
     // @Events
     // shopkeeper trade
     //
-    // @Warning This event should not be cancelled. Consider using <@link event ShopKeeperTradeInitiatedScriptEvent> instead.
-    //
     // @Triggers when a trade with a shopkeeper is completed.
     //
+    // @description
+    // If you intend to cancel this event, use <@link event ShopKeeperTradeInitiatedScriptEvent> instead.
+    //
     // @Context
+    // <context.recipe> Returns a ListTag(ItemTag) of the recipe for this trade.
     // <context.shopkeeper> Returns the ShopKeeperTag of the ShopKeeper that the trade occurred with.
     //
     // @Plugin Depenizen, ShopKeepers
@@ -43,10 +45,11 @@ public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent imple
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("shopkeeper")) {
-            return new ShopKeeperTag(event.getShopkeeper());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "recipe" -> ShopkeepersBridge.tradingRecipeToList(event.getCompletedTrade());
+            case "shopkeeper" -> new ShopKeeperTag(event.getShopkeeper());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

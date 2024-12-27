@@ -14,7 +14,7 @@ public class ShopKeeperTradeInitiatedScriptEvent extends BukkitScriptEvent imple
 
     // <--[event]
     // @Events
-    // shopkeeper player tries trading
+    // shopkeepers player tries trading
     //
     // @Warning This event is called for each successful trade option a ShopKeeper offers. Canceling a trade will also cancel all successive trades that might otherwise have been triggered.
     //
@@ -23,7 +23,7 @@ public class ShopKeeperTradeInitiatedScriptEvent extends BukkitScriptEvent imple
     // @Triggers when a trade with a shopkeeper is initiated.
     //
     // @Context
-    // <context.recipe> Returns a ListTag(ItemTag) of the trade in the form Offered(,Offered),Result.
+    // <context.recipe> Returns a ListTag(ItemTag) of the trade in the form Offered(|Offered)|Result.
     // <context.shopkeeper> Returns the ShopKeeperTag of the ShopKeeper that the trade occurs with.
     //
     // @Plugin Depenizen, ShopKeepers
@@ -35,7 +35,7 @@ public class ShopKeeperTradeInitiatedScriptEvent extends BukkitScriptEvent imple
     // -->
 
     public ShopKeeperTradeInitiatedScriptEvent() {
-        registerCouldMatcher("shopkeeper player tries trading");
+        registerCouldMatcher("shopkeepers player tries trading");
     }
 
     public ShopkeeperTradeEvent event;
