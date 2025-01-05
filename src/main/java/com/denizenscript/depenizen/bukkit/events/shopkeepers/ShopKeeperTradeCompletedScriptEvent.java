@@ -16,8 +16,6 @@ public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent imple
     // shopkeeper trade
     //
     // @Triggers when a trade with a shopkeeper is completed.
-    //
-    // @description
     // If you intend to cancel this event, use <@link event ShopKeeperTradeInitiatedScriptEvent> instead.
     //
     // @Context
