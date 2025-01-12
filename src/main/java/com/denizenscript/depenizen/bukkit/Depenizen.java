@@ -77,19 +77,19 @@ public class Depenizen extends JavaPlugin {
         if (plugin == null) {
             return;
         }
-        if (bridgeData.classCheck != null) {
+        if (bridgeData.classCheck() != null) {
             try {
-                Class.forName(bridgeData.classCheck);
+                Class.forName(bridgeData.classCheck());
             }
             catch (ClassNotFoundException e) {
-                Debug.echoError("Tried loading plugin bridge for '<Y>" + name + "<W>', but could not match class '<Y>" + bridgeData.classCheck + "<W>'.\n" +
+                Debug.echoError("Tried loading plugin bridge for '<Y>" + name + "<W>', but could not match class '<Y>" + bridgeData.classCheck() + "<W>'.\n" +
                         "<FORCE_ALIGN>This usually means you have a plugin with the same name as one supported by Depenizen, which should be reported to the developers.");
                 return;
             }
         }
         Bridge newBridge;
         try {
-            newBridge = bridgeData.creator.get();
+            newBridge = bridgeData.creator().get();
         }
         catch (Throwable ex) {
             Debug.echoError("Cannot load Depenizen bridge for '" + name + "': fundamental loading error:");
