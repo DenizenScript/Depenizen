@@ -4,6 +4,7 @@ import com.denizenscript.denizen.events.BukkitScriptEvent;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
+import com.denizenscript.depenizen.bukkit.bridges.ShopkeepersBridge;
 import com.denizenscript.depenizen.bukkit.objects.shopkeepers.ShopKeeperTag;
 import com.nisovin.shopkeepers.api.events.ShopkeeperTradeCompletedEvent;
 import org.bukkit.event.EventHandler;
@@ -44,7 +45,7 @@ public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent imple
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
-            case "recipe" -> ShopkeepersBridge.tradingRecipeToList(event.getCompletedTrade());
+            case "recipe" -> ShopkeepersBridge.tradingRecipeToList(event.getCompletedTrade().getTradeRecipe());
             case "shopkeeper" -> new ShopKeeperTag(event.getShopkeeper());
             default -> super.getContext(name);
         };
