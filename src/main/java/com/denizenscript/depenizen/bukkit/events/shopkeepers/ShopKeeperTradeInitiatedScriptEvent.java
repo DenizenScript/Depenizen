@@ -23,7 +23,7 @@ public class ShopKeeperTradeInitiatedScriptEvent extends BukkitScriptEvent imple
     // @Triggers when a trade with a shopkeeper is initiated.
     //
     // @Context
-    // <context.recipe> Returns a ListTag(ItemTag) of the trade in the form Offered(|Offered)|Result.
+    // <context.recipe> Returns a ListTag(ItemTag) of the trade in the form Offered|Offered|Result.
     // <context.shopkeeper> Returns the ShopKeeperTag of the ShopKeeper that the trade occurs with.
     //
     // @Plugin Depenizen, ShopKeepers

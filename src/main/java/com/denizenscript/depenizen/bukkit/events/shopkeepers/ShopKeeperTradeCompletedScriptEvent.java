@@ -20,7 +20,7 @@ public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent imple
     // If you intend to cancel this event, use <@link event ShopKeeperTradeInitiatedScriptEvent> instead.
     //
     // @Context
-    // <context.recipe> Returns a ListTag(ItemTag) of the recipe for this trade.
+    // <context.recipe> Returns a ListTag(ItemTag) of the trade in the form Offered|Offered|Result.
     // <context.shopkeeper> Returns the ShopKeeperTag of the ShopKeeper that the trade occurred with.
     //
     // @Plugin Depenizen, ShopKeepers
