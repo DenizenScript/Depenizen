@@ -50,10 +50,10 @@ public class SkyBlockResetScriptEvent extends BukkitScriptEvent implements Liste
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("location")) {
-            return location;
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "location" -> location;
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

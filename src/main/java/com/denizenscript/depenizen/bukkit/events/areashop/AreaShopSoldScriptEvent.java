@@ -52,10 +52,10 @@ public class AreaShopSoldScriptEvent extends BukkitScriptEvent implements Listen
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("shop")) {
-            return areaShop;
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "shop" -> areaShop;
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

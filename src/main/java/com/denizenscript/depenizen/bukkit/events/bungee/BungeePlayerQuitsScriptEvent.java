@@ -68,11 +68,11 @@ public class BungeePlayerQuitsScriptEvent extends BukkitScriptEvent {
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "name": return new ElementTag(this.name);
-            case "uuid": return new ElementTag(uuid.toString());
-            case "ip": return new ElementTag(ip);
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "name" -> new ElementTag(this.name);
+            case "uuid" -> new ElementTag(uuid.toString());
+            case "ip" -> new ElementTag(ip);
+            default -> super.getContext(name);
+        };
     }
 }
