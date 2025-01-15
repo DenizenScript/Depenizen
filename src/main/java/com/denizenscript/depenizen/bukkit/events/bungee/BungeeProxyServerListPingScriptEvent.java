@@ -151,21 +151,14 @@ public class BungeeProxyServerListPingScriptEvent extends BukkitScriptEvent {
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "address":
-                return new ElementTag(data.address);
-            case "num_players":
-            case "current_players":
-                return new ElementTag(data.currentPlayers);
-            case "max_players":
-                return new ElementTag(data.maxPlayers);
-            case "motd":
-                return new ElementTag(data.motd);
-            case "protocol":
-                return new ElementTag(data.protocol);
-            case "version":
-                return new ElementTag(data.version);
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "address" -> new ElementTag(data.address);
+            case "num_players", "current_players" -> new ElementTag(data.currentPlayers);
+            case "max_players" -> new ElementTag(data.maxPlayers);
+            case "motd" -> new ElementTag(data.motd);
+            case "protocol" -> new ElementTag(data.protocol);
+            case "version" -> new ElementTag(data.version);
+            default -> super.getContext(name);
+        };
     }
 }

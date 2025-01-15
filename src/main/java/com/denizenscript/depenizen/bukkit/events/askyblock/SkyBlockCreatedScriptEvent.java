@@ -53,13 +53,11 @@ public class SkyBlockCreatedScriptEvent extends BukkitScriptEvent implements Lis
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("location")) {
-            return location;
-        }
-        else if (name.equals("schematic")) {
-            return schematic;
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "location" -> location;
+            case "schematic" -> schematic;
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler
