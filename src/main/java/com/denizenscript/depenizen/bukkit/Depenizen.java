@@ -21,9 +21,11 @@ public class Depenizen extends JavaPlugin {
 
     public static Depenizen instance;
 
-    public HashMap<String, Supplier<Bridge>> allBridges = new HashMap<>();
+    public HashMap<String, BridgeData> allBridges = new HashMap<>();
 
     public HashMap<String, Bridge> loadedBridges = new HashMap<>();
+
+    public record BridgeData(String classCheck, Supplier<Bridge> creator) {}
 
     @Override
     public void onEnable() {
@@ -31,7 +33,7 @@ public class Depenizen extends JavaPlugin {
         saveDefaultConfig();
         instance = this;
         registerCoreBridges();
-        for (Map.Entry<String, Supplier<Bridge>> bridge : allBridges.entrySet()) {
+        for (Map.Entry<String, BridgeData> bridge : allBridges.entrySet()) {
             loadBridge(bridge.getKey(), bridge.getValue());
         }
         try {
@@ -70,14 +72,24 @@ public class Depenizen extends JavaPlugin {
         }
     }
 
-    public void loadBridge(String name, Supplier<Bridge> bridgeSupplier) {
+    public void loadBridge(String name, BridgeData bridgeData) {
         Plugin plugin = Bukkit.getPluginManager().getPlugin(name);
         if (plugin == null) {
             return;
         }
+        if (bridgeData.classCheck() != null) {
+            try {
+                Class.forName(bridgeData.classCheck());
+            }
+            catch (ClassNotFoundException e) {
+                Debug.echoError("Tried loading plugin bridge for '<Y>" + name + "<W>', but could not match class '<Y>" + bridgeData.classCheck() + "<W>'.\n" +
+                        "<FORCE_ALIGN>This usually means you have a plugin with the same name as one supported by Depenizen, which should be reported to the developers.");
+                return;
+            }
+        }
         Bridge newBridge;
         try {
-            newBridge = bridgeSupplier.get();
+            newBridge = bridgeData.creator().get();
         }
         catch (Throwable ex) {
             Debug.echoError("Cannot load Depenizen bridge for '" + name + "': fundamental loading error:");
@@ -132,7 +144,7 @@ public class Depenizen extends JavaPlugin {
         registerBridge("PlotSquared", () -> new PlotSquaredBridge());
         registerBridge("PVPArena", () -> new PVPArenaBridge());
         registerBridge("PVPStats", () -> new PVPStatsBridge());
-        registerBridge("Quests", () -> new QuestsBridge());
+        registerBridge("Quests", "me.pikamug.quests.Quests", () -> new QuestsBridge());
         registerBridge("Residence", () -> new ResidenceBridge());
         registerBridge("Sentinel", () -> new SentinelBridge());
         registerBridge("Shopkeepers", () -> new ShopkeepersBridge());
@@ -149,6 +161,10 @@ public class Depenizen extends JavaPlugin {
     }
 
     public void registerBridge(String name, Supplier<Bridge> bridgeSupplier) {
-        allBridges.put(name, bridgeSupplier);
+        registerBridge(name, null, bridgeSupplier);
+    }
+
+    public void registerBridge(String name, String classCheck, Supplier<Bridge> bridgeSupplier) {
+        allBridges.put(name, new BridgeData(classCheck, bridgeSupplier));
     }
 }
