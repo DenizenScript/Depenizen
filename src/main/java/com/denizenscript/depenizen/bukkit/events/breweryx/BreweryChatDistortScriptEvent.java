@@ -40,12 +40,6 @@ public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements 
     }
 
     public PlayerChatDistortEvent event;
-    public PlayerTag playerTag;
-
-    @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
 
     @Override
     public ScriptEntryData getScriptEntryData() {
@@ -57,7 +51,6 @@ public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements 
         return switch (name) {
             case "message" -> new ElementTag(event.getDistortedMessage());
             case "original_message" -> new ElementTag(event.getWrittenMessage());
-            case "player" -> playerTag;
             default -> super.getContext(name);
         };
     }
@@ -74,7 +67,6 @@ public class BreweryChatDistortScriptEvent extends BukkitScriptEvent implements 
     @EventHandler
     public void onChatDistort(PlayerChatDistortEvent event) {
         this.event = event;
-        this.playerTag = new PlayerTag(event.getPlayer());
         fire(event);
     }
 }

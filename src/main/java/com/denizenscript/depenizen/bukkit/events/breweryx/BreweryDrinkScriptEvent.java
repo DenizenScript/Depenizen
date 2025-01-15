@@ -41,11 +41,6 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
     public BrewDrinkEvent event;
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(event.getPlayer());
     }
@@ -55,7 +50,6 @@ public class BreweryDrinkScriptEvent extends BukkitScriptEvent implements Listen
         return switch (name) {
             case "recipe" -> new BreweryRecipeTag(event.getBrew().getCurrentRecipe());
             case "item" -> new ItemTag(event.getBrew().createItem(event.getBrew().getCurrentRecipe(), false));
-            case "player" -> new PlayerTag(event.getPlayer());
             default -> super.getContext(name);
         };
     }

@@ -25,11 +25,14 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     // Cancelling reverts the Brew to the state it was before the modification
     //
     // @Context
+    // <context.player> Returns a PlayerTag of the player that modified the brew.
     // <context.recipe> Returns an BreweryRecipeTag of the recipe that the brew is based off of.
     // <context.item> Returns an ItemTag of the potion.
     // <context.type> Returns an ElementTag of the type of modification.
     //
     // @Plugin Depenizen, BreweryX
+    //
+    // @Player Always.
     //
     // @Group Depenizen
     //
@@ -41,13 +44,8 @@ public class BreweryModifyBrewScriptEvent extends BukkitScriptEvent implements L
     public BrewModifyEvent event;
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(null, null);
+        return new BukkitScriptEntryData(event.getPlayer());
     }
 
     @Override

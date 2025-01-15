@@ -46,11 +46,6 @@ public class BreweryIngredientAddScriptEvent extends BukkitScriptEvent implement
     public IngedientAddEvent event;
 
     @Override
-    public boolean matches(ScriptPath path) {
-        return super.matches(path);
-    }
-
-    @Override
     public ScriptEntryData getScriptEntryData() {
         return new BukkitScriptEntryData(event.getPlayer());
     }
@@ -59,7 +54,6 @@ public class BreweryIngredientAddScriptEvent extends BukkitScriptEvent implement
     public ObjectTag getContext(String name) {
         return switch (name) {
             case "location" -> new LocationTag(event.getBlock().getLocation());
-            case "player" -> new PlayerTag(event.getPlayer());
             case "item" -> new ItemTag(event.getIngredient());
             case "take_item" -> new ElementTag(event.willTakeItem());
             default -> super.getContext(name);
