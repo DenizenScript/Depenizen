@@ -39,13 +39,13 @@ public class ShopKeeperTradeCompletedScriptEvent extends BukkitScriptEvent imple
 
     @Override
     public ScriptEntryData getScriptEntryData() {
-        return new BukkitScriptEntryData(event.getPlayer());
+        return new BukkitScriptEntryData(event.getCompletedTrade().getPlayer());
     }
 
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
-            case "recipe" -> ShopkeepersBridge.tradingRecipeToList(event.getCompletedTrade().getTradeRecipe());
+            case "recipe" -> ShopkeepersBridge.tradingRecipeToList(event.getCompletedTrade().getTradingRecipe());
             case "shopkeeper" -> new ShopKeeperTag(event.getShopkeeper());
             default -> super.getContext(name);
         };
