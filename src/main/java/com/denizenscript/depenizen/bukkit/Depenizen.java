@@ -83,7 +83,7 @@ public class Depenizen extends JavaPlugin {
             }
             catch (ClassNotFoundException e) {
                 Debug.echoError("Tried loading plugin bridge for '<Y>" + name + "<W>', but could not match class '<Y>" + bridgeData.classCheck() + "<W>'.\n" +
-                        "<FORCE_ALIGN>This usually means you have a plugin with the same name as one supported by Depenizen, which should be reported to the developers.");
+                        "<FORCE_ALIGN>This usually means you have a plugin with the same name as one supported by Depenizen, which should be reported to the developers of that plugin.");
                 return;
             }
         }
