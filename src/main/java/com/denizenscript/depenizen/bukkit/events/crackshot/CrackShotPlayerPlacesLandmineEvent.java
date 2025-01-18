@@ -48,10 +48,10 @@ public class CrackShotPlayerPlacesLandmineEvent extends BukkitScriptEvent implem
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("landmine")) {
-            return new EntityTag(event.getMine());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "landmine" -> new EntityTag(event.getMine());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

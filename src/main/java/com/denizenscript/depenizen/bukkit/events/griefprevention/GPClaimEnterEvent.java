@@ -82,17 +82,13 @@ public class GPClaimEnterEvent extends BukkitScriptEvent implements Listener {
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "to":
-                return to;
-            case "from":
-                return from;
-            case "old_claim":
-                return old_claim;
-            case "new_claim":
-                return new_claim;
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "to" -> to;
+            case "from" -> from;
+            case "old_claim" -> old_claim;
+            case "new_claim" -> new_claim;
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

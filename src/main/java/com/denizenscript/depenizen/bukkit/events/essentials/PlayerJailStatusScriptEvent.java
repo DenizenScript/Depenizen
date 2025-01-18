@@ -74,10 +74,10 @@ public class PlayerJailStatusScriptEvent extends BukkitScriptEvent implements Li
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("status")) {
-            return new ElementTag(event.getValue());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "status" -> new ElementTag(event.getValue());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

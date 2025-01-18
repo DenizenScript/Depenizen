@@ -32,10 +32,10 @@ public class GPClaimDeletedScriptEvent extends BukkitScriptEvent implements List
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "claim": new GriefPreventionClaimTag(event.getClaim());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "claim" -> new GriefPreventionClaimTag(event.getClaim());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

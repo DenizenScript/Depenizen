@@ -73,13 +73,11 @@ public class CrackShotPlayerTogglesWeaponAttachmentEvent extends BukkitScriptEve
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("delay")) {
-            return new DurationTag(event.getToggleDelay());
-        }
-        else if (name.equals("weapon")) {
-            return new ElementTag(event.getWeaponTitle());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "delay" -> new DurationTag(event.getToggleDelay());
+            case "weapon" -> new ElementTag(event.getWeaponTitle());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

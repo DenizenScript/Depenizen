@@ -72,23 +72,16 @@ public class CrackShotWeaponDamageEntityEvent extends BukkitScriptEvent implemen
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "headshot":
-                return new ElementTag(event.isHeadshot());
-            case "critical":
-                return new ElementTag(event.isCritical());
-            case "backstab":
-                return new ElementTag(event.isBackstab());
-            case "damage":
-                return new ElementTag(event.getDamage());
-            case "damager":
-                return getDamager();
-            case "victim":
-                return new EntityTag(event.getVictim()).getDenizenObject();
-            case "weapon":
-                return new ElementTag(event.getWeaponTitle());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "headshot" -> new ElementTag(event.isHeadshot());
+            case "critical" -> new ElementTag(event.isCritical());
+            case "backstab" -> new ElementTag(event.isBackstab());
+            case "damage" -> new ElementTag(event.getDamage());
+            case "damager" -> getDamager();
+            case "victim" -> new EntityTag(event.getVictim()).getDenizenObject();
+            case "weapon" -> new ElementTag(event.getWeaponTitle());
+            default -> super.getContext(name);
+        };
     }
 
     public ObjectTag getDamager() {

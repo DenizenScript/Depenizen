@@ -50,10 +50,10 @@ public class CrackShotPlayerStartsFiringWeaponEvent extends BukkitScriptEvent im
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("weapon")) {
-            return new ElementTag(event.getWeaponTitle());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "weapon" -> new ElementTag(event.getWeaponTitle());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

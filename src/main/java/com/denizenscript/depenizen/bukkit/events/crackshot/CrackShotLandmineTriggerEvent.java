@@ -52,13 +52,11 @@ public class CrackShotLandmineTriggerEvent extends BukkitScriptEvent implements 
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("victim")) {
-            return new EntityTag(event.getVictim()).getDenizenObject();
-        }
-        else if (name.equals("weapon")) {
-            return new ElementTag(event.getWeaponTitle());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "victim" -> new EntityTag(event.getVictim()).getDenizenObject();
+            case "weapon" -> new ElementTag(event.getWeaponTitle());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

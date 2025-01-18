@@ -52,15 +52,12 @@ public class GPClaimChangedScriptEvent extends BukkitScriptEvent implements List
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "old_claim":
-                return new GriefPreventionClaimTag(event.getFrom());
-            case "new_claim":
-                return new GriefPreventionClaimTag(event.getTo());
-            case "source_type":
-                return new ElementTag(sourceType);
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "old_claim" -> new GriefPreventionClaimTag(event.getFrom());
+            case "new_claim" -> new GriefPreventionClaimTag(event.getTo());
+            case "source_type" -> new ElementTag(sourceType);
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

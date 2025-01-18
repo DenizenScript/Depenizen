@@ -9,6 +9,8 @@ import com.shampaggon.crackshot.events.WeaponScopeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import javax.swing.text.Element;
+
 public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]
@@ -51,13 +53,11 @@ public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent impl
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("weapon")) {
-            return new ElementTag(event.getWeaponTitle());
-        }
-        else if (name.equals("zoomed")) {
-            return new ElementTag(event.isZoomIn());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "weapon" -> new ElementTag(event.getWeaponTitle());
+            case "zoomed" -> new ElementTag(event.isZoomIn());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler
