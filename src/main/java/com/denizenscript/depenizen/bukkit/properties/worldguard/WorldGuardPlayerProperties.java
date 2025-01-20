@@ -3,6 +3,7 @@ package com.denizenscript.depenizen.bukkit.properties.worldguard;
 import com.denizenscript.denizencore.objects.properties.Property;
 import com.denizenscript.denizencore.objects.Mechanism;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.debugging.Warning;
 import com.denizenscript.depenizen.bukkit.bridges.WorldGuardBridge;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
@@ -21,6 +22,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class WorldGuardPlayerProperties implements Property {
+
+    public static Warning oldWgPlayerProperty = new Warning("", "");
 
     @Override
     public String getPropertyString() {
@@ -82,6 +85,7 @@ public class WorldGuardPlayerProperties implements Property {
         // Whether WorldGuard allows to build at a location.
         // -->
         if (attribute.startsWith("can_build") && attribute.hasParam()) {
+            oldWgPlayerProperty.warn();
             LocationTag location = attribute.paramAsType(LocationTag.class);
             if (location == null) {
                 return null;
@@ -103,6 +107,7 @@ public class WorldGuardPlayerProperties implements Property {
         // - narrate <player.worldguard.test_flag[pvp]>
         // -->
         if (attribute.startsWith("test_flag")) {
+            oldWgPlayerProperty.warn();
             if (!attribute.hasParam()) {
                 Debug.echoError("The tag PlayerTag.worlduard.test_flag[...] must have a value.");
                 return null;
