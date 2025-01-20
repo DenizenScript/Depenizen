@@ -77,14 +77,11 @@ public class BungeePlayerServerSwitchScriptEvent extends BukkitScriptEvent {
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "name":
-                return new ElementTag(this.name);
-            case "uuid":
-                return new ElementTag(uuid.toString());
-            case "server":
-                return new ElementTag(newServer);
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "name" -> new ElementTag(this.name);
+            case "uuid" -> new ElementTag(uuid.toString());
+            case "server" -> new ElementTag(newServer);
+            default -> super.getContext(name);
+        };
     }
 }

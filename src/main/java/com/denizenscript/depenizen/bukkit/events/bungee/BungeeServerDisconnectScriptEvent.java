@@ -45,9 +45,9 @@ public class BungeeServerDisconnectScriptEvent extends BukkitScriptEvent {
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("server")) {
-            return new ElementTag(serverName);
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "server" -> new ElementTag(serverName);
+            default -> super.getContext(name);
+        };
     }
 }

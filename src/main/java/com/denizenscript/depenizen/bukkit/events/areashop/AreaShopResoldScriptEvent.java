@@ -53,13 +53,11 @@ public class AreaShopResoldScriptEvent extends BukkitScriptEvent implements List
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("shop")) {
-            return areaShop;
-        }
-        if (name.equals("seller")) {
-            return new PlayerTag(event.getFromPlayer());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "shop" -> areaShop;
+            case "seller" -> new PlayerTag(event.getFromPlayer());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

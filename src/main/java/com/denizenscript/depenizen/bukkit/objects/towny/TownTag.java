@@ -198,7 +198,7 @@ public class TownTag implements ObjectTag, Adjustable, FlaggableObject {
         // @deprecated use 'members_by_rank'
         // @description
         // Returns a list of the town's assistants. Players will be valid PlayerTag instances, non-players will be plaintext of the name.
-        // Deprecated in favor of <@link tag TownTag.members_by_rank[<rank>]>.
+        // Deprecated in favor of <@link tag TownTag.members_by_rank>.
         // -->
         tagProcessor.registerTag(ListTag.class, "assistants", (attribute, object) -> {
             return getPlayersFromResidents(object.town.getRank("assistant"));

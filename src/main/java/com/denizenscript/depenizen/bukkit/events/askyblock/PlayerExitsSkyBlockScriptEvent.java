@@ -53,15 +53,12 @@ public class PlayerExitsSkyBlockScriptEvent extends BukkitScriptEvent implements
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "owner":
-                return owner;
-            case "island_location":
-                return island_location;
-            case "location":
-                return location;
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "owner" -> owner;
+            case "island_location" -> island_location;
+            case "location" -> location;
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

@@ -57,13 +57,11 @@ public class BigDoorsDoorTogglesScriptEvent extends BukkitScriptEvent implements
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("door")) {
-            return new BigDoorsDoorTag(door);
-        }
-        else if (name.equals("state")) {
-            return new ElementTag(toggleType.toString());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "door" -> new BigDoorsDoorTag(door);
+            case "state" -> new ElementTag(toggleType.toString());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler
