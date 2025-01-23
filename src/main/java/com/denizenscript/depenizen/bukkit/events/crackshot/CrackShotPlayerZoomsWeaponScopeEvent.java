@@ -9,8 +9,6 @@ import com.shampaggon.crackshot.events.WeaponScopeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import javax.swing.text.Element;
-
 public class CrackShotPlayerZoomsWeaponScopeEvent extends BukkitScriptEvent implements Listener {
 
     // <--[event]
