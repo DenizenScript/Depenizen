@@ -122,6 +122,7 @@ public class Depenizen extends JavaPlugin {
         registerBridge("BetonQuest", () -> new BetonQuestBridge());
         registerBridge("BigDoors", () -> new BigDoorsBridge());
         registerBridge("BossShopPro", () -> new BossShopBridge());
+        registerBridge("BreweryX", () -> new BreweryXBridge());
         registerBridge("CoreProtect", () -> new CoreProtectBridge());
         registerBridge("CrackShot", () -> new CrackShotBridge());
         registerBridge("EffectLib", () -> new EffectLibBridge());
