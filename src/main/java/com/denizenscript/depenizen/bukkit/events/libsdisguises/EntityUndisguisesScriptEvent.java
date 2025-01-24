@@ -55,13 +55,11 @@ public class EntityUndisguisesScriptEvent extends BukkitScriptEvent implements L
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("entity")) {
-            return entity;
-        }
-        else if (name.equals("disguise")) {
-            return disguise;
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "entity" -> entity;
+            case "disguise" -> disguise;
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

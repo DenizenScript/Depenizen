@@ -71,10 +71,10 @@ public class NoteBlockAPISongEndsScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("song")) {
-            return new ElementTag(getSongFileName());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "song" -> new ElementTag(getSongFileName());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

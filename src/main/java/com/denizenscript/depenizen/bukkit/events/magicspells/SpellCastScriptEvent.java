@@ -27,13 +27,13 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
     // @Events
     // magicspells <entity> casts <'spell'>
     //
-    // @Triggers when an entity starts to casts a spell.
+    // @Triggers when an entity starts to cast a spell.
     //
     // @Cancellable true
     //
     // @Context
     // <context.spell_name> returns the name of the spell.
-    // <context.caster> returns the entity that casted the spell.
+    // <context.caster> returns the entity that cast the spell.
     // <context.power> returns an ElementTag(Decimal) of the power of the spell.
     // <context.cast_time> returns an ElementTag(Number) of the cast time of the spell.
     // <context.cooldown> returns an ElementTag(Decimal) of the cooldown of the spell.
@@ -190,40 +190,34 @@ public class SpellCastScriptEvent extends BukkitScriptEvent implements Listener 
         else if (name.startsWith("spell_reagent_")) {
             SpellReagents reagents = event.getReagents();
             if (reagents != null) {
-                switch (name) {
-                    case "spell_reagant_mana":
-                        return new ElementTag(reagents.getMana());
-                    case "spell_reagant_health":
-                        return new ElementTag(reagents.getHealth());
-                    case "spell_reagant_hunger":
-                        return new ElementTag(reagents.getHunger());
-                    case "spell_reagant_experience":
-                        return new ElementTag(reagents.getExperience());
-                    case "spell_reagant_levels":
-                        return new ElementTag(reagents.getLevels());
-                    case "spell_reagant_durability":
-                        return new ElementTag(reagents.getDurability());
-                    case "spell_reagant_money":
-                        return new ElementTag(reagents.getMoney());
-                    case "spell_reagant_variables": {
+                return switch (name) {
+                    case "spell_reagant_mana" -> new ElementTag(reagents.getMana());
+                    case "spell_reagant_health" -> new ElementTag(reagents.getHealth());
+                    case "spell_reagant_hunger" -> new ElementTag(reagents.getHunger());
+                    case "spell_reagant_experience" -> new ElementTag(reagents.getExperience());
+                    case "spell_reagant_levels" -> new ElementTag(reagents.getLevels());
+                    case "spell_reagant_durability" -> new ElementTag(reagents.getDurability());
+                    case "spell_reagant_money" -> new ElementTag(reagents.getMoney());
+                    case "spell_reagant_variables" -> {
                         ListTag list = new ListTag();
                         if (reagents.getVariables() != null) {
                             for (Map.Entry<String, Double> entry : reagents.getVariables().entrySet()) {
                                 list.add(entry.getKey() + "/" + entry.getValue());
                             }
                         }
-                        return list;
+                        yield list;
                     }
-                    case "spell_reagant_items": {
+                    case "spell_reagant_items" -> {
                         ListTag list = new ListTag();
                         if (reagents.getItems() != null) {
                             for (ItemStack item : reagents.getItems()) {
                                 list.addObject(new ItemTag(item));
                             }
                         }
-                        return list;
+                        yield list;
                     }
-                }
+                    default -> super.getContext(name);
+                };
             }
         }
         return super.getContext(name);
