@@ -53,10 +53,10 @@ public class MobArenaStartsScriptEvent extends BukkitScriptEvent implements List
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("arena")) {
-            return arena;
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "arena" -> arena;
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

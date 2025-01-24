@@ -69,10 +69,10 @@ public class MythicKeysKeyReleaseScriptEvent extends BukkitScriptEvent implement
 
     @Override
     public ObjectTag getContext(String name) {
-        switch (name) {
-            case "id": return new ElementTag(event.getId().toString());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "id" -> new ElementTag(event.getId().toString());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler
