@@ -54,13 +54,11 @@ public class AreaShopRentedScriptEvent extends BukkitScriptEvent implements List
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("shop")) {
-            return areaShop;
-        }
-        if (name.equals("extended")) {
-            return new ElementTag(event.hasExtended());
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "shop" -> areaShop;
+            case "extended" -> new ElementTag(event.hasExtended());
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler
