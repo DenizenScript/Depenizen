@@ -1,10 +1,8 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.depends.Depends;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.worldguard.RegionCommand;
@@ -25,7 +23,6 @@ public class WorldGuardBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(WorldGuardRegionTag.class, WorldGuardRegionTag.tagProcessor);
         WorldGuardLocationExtensions.register();
         WorldGuardPlayerExtensions.register();
-        PropertyParser.registerProperty(WorldGuardPlayerProperties.class, PlayerTag.class);
         WorldGuardCuboidExtensions.register();
         WorldGuardWorldExtensions.register();
         if (Depends.citizens != null) {
