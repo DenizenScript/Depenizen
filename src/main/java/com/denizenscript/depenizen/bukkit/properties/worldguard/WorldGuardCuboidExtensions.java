@@ -26,7 +26,7 @@ public class WorldGuardCuboidExtensions {
     public static void register() {
 
         // <--[tag]
-        // @attribute <CuboidTag.worldguard_has_region>
+        // @attribute <CuboidTag.has_region>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, WorldGuard
         // @deprecated Use 'CuboidTag.worldguard_has_region'
@@ -46,7 +46,7 @@ public class WorldGuardCuboidExtensions {
         }, "has_region");
 
         // <--[tag]
-        // @attribute <CuboidTag.worldguard_regions>
+        // @attribute <CuboidTag.regions>
         // @returns ListTag(WorldGuardRegionTag)
         // @plugin Depenizen, WorldGuard
         // @deprecated Use 'CuboidTag.worldguard_regions'
