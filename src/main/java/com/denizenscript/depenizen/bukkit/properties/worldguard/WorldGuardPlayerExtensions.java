@@ -32,8 +32,9 @@ public class WorldGuardPlayerExtensions {
             // @attribute <PlayerTag.worldguard.can_build[<location>]>
             // @returns ElementTag(Boolean)
             // @plugin Depenizen, WorldGuard
+            // @deprecated Use 'PlayerTag.worldguard_can_build'
             // @description
-            // Whether WorldGuard allows to build at a location.
+            // Deprecated in favor of <@link tag PlayerTag.worldguard_can_build>
             // -->
             if (attribute.startsWith("can_build", 2) && attribute.hasContext(2)) {
                 worldguardCanBuild.warn(attribute.context);
@@ -48,14 +49,11 @@ public class WorldGuardPlayerExtensions {
 
             // <--[tag]
             // @attribute <PlayerTag.worldguard.test_flag[<name>]>
-            // @returns ElementTag
+            // @returns ObjectTag
             // @plugin Depenizen, WorldGuard
+            // @deprecated Use 'PlayerTag.worldguard_flag'
             // @description
-            // Returns the boolean state of a flag for that player at their location.
-            // For non-state tags, returns the current value of the flag.
-            // @example
-            // # Returns 'true' if the player can be attacked (according to WG) or 'false' if not.
-            // - narrate <player.worldguard.test_flag[pvp]>
+            // Deprecated in favor of <@link tag PlayerTag.worldguard_flag>
             // -->
             if (attribute.startsWith("test_flag", 2) && attribute.hasContext(2)) {
                 worldguardTestFlag.warn(attribute.context);
@@ -69,12 +67,12 @@ public class WorldGuardPlayerExtensions {
                 LocationTag loc = player.getLocation();
 
                 // <--[tag]
-                // @attribute <PlayerTag.worldguard_test_flag[<name>].at[<location>]>
-                // @returns ElementTag
+                // @attribute <PlayerTag.worldguard.test_flag[<name>].at[<location>]>
+                // @returns ObjectTag
                 // @plugin Depenizen, WorldGuard
+                // @deprecated Use 'PlayerTag.worldguard_flag'
                 // @description
-                // Returns the boolean state of a flag for that player at the specified location.
-                // For non-state tags, returns the current value of the flag.
+                // Deprecated in favor of <@link tag PlayerTag.worldguard_flag>
                 // -->
                 if (attribute.startsWith("at", 2) && attribute.hasContext(2)) {
                     loc = attribute.contextAsType(2, LocationTag.class);
@@ -118,6 +116,9 @@ public class WorldGuardPlayerExtensions {
         // @description
         // Returns the boolean state of a flag for that player at the specified location.
         // For non-state tags, returns the current value of the flag.
+        // @example
+        // # Returns 'true' if the player can be attacked (according to WG) or 'false' if not.
+        // - narrate <player.worldguard_flag[flag=pvp]>
         // -->
         PlayerTag.tagProcessor.registerTag(ObjectTag.class, MapTag.class, "worldguard_flag", (attribute, player, map) -> {
             ElementTag name = map.getRequiredObjectAs("flag", ElementTag.class, attribute);
