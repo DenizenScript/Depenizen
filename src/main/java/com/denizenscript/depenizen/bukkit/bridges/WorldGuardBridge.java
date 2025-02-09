@@ -1,21 +1,13 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
-import com.denizenscript.denizen.objects.CuboidTag;
-import com.denizenscript.denizen.objects.LocationTag;
-import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizen.objects.WorldTag;
+import com.denizenscript.denizen.utilities.depends.Depends;
 import com.denizenscript.denizencore.DenizenCore;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
 import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.commands.worldguard.RegionCommand;
 import com.denizenscript.depenizen.bukkit.objects.worldguard.WorldGuardRegionTag;
-import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardCuboidProperties;
-import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardLocationProperties;
-import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardNPCExtensions;
-import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardPlayerProperties;
-import com.denizenscript.depenizen.bukkit.properties.worldguard.WorldGuardWorldProperties;
+import com.denizenscript.depenizen.bukkit.properties.worldguard.*;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.managers.RegionManager;
@@ -29,11 +21,13 @@ public class WorldGuardBridge extends Bridge {
     public void init() {
         instance = this;
         ObjectFetcher.registerWithObjectFetcher(WorldGuardRegionTag.class, WorldGuardRegionTag.tagProcessor);
-        PropertyParser.registerProperty(WorldGuardLocationProperties.class, LocationTag.class);
-        PropertyParser.registerProperty(WorldGuardPlayerProperties.class, PlayerTag.class);
-        PropertyParser.registerProperty(WorldGuardCuboidProperties.class, CuboidTag.class);
-        PropertyParser.registerProperty(WorldGuardWorldProperties.class, WorldTag.class);
-        WorldGuardNPCExtensions.register();
+        WorldGuardLocationExtensions.register();
+        WorldGuardPlayerExtensions.register();
+        WorldGuardCuboidExtensions.register();
+        WorldGuardWorldExtensions.register();
+        if (Depends.citizens != null) {
+            WorldGuardNPCExtensions.register();
+        }
         DenizenCore.commandRegistry.registerCommand(RegionCommand.class);
 
         // <--[tag]
