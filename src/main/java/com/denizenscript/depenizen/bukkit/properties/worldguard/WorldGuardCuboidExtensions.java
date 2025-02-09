@@ -29,45 +29,27 @@ public class WorldGuardCuboidExtensions {
         // @attribute <CuboidTag.has_region>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, WorldGuard
-        // @deprecated Use 'CuboidTag.worldguard_has_region'
-        // @description
-        // Deprecated in favor of <@link tag CuboidTag.worldguard_has_region>.
-        // -->
-
-        // <--[tag]
-        // @attribute <CuboidTag.worldguard_has_region>
-        // @returns ElementTag(Boolean)
-        // @plugin Depenizen, WorldGuard
         // @description
         // Returns whether the cuboid contains any region.
         // -->
-        CuboidTag.tagProcessor.registerTag(ElementTag.class, "worldguard_has_region", (attribute, area) -> {
+        CuboidTag.tagProcessor.registerTag(ElementTag.class, "has_region", (attribute, area) -> {
             return new ElementTag(getApplicableRegions(area).size() > 0);
-        }, "has_region");
+        });
 
         // <--[tag]
         // @attribute <CuboidTag.regions>
         // @returns ListTag(WorldGuardRegionTag)
         // @plugin Depenizen, WorldGuard
-        // @deprecated Use 'CuboidTag.worldguard_regions'
-        // @description
-        // Deprecated in favor of <@link tag CuboidTag.worldguard_regions>.
-        // -->
-
-        // <--[tag]
-        // @attribute <CuboidTag.worldguard_regions>
-        // @returns ListTag(WorldGuardRegionTag)
-        // @plugin Depenizen, WorldGuard
         // @description
         // Returns a list of regions that are in this cuboid.
         // -->
-        CuboidTag.tagProcessor.registerTag(ListTag.class, "worldguard_regions", (attribute, area) -> {
+        CuboidTag.tagProcessor.registerTag(ListTag.class, "regions", (attribute, area) -> {
             ListTag regionList = new ListTag();
             for (ProtectedRegion protectedRegion : getApplicableRegions(area)) {
                 regionList.addObject(new WorldGuardRegionTag(protectedRegion, area.getWorld().getWorld()));
             }
             return regionList;
-        }, "regions");
+        });
     }
 
 }

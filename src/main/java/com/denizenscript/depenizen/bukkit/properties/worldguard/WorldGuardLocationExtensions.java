@@ -20,15 +20,6 @@ public class WorldGuardLocationExtensions {
 
         // <--[tag]
         // @attribute <LocationTag.in_region[(<name>|...)]>
-        // @returns ListTag(WorldGuardRegionTag)
-        // @plugin Depenizen, WorldGuard
-        // @deprecated Use 'LocationTag.worldguard_in_region[(<name>|...)]'
-        // @description
-        // Deprecated in favor of <@link tag LocationTag.worldguard_in_region[(<name>|...)]>.
-        // -->
-
-        // <--[tag]
-        // @attribute <LocationTag.worldguard_in_region[(<name>|...)]>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, WorldGuard
         // @description
@@ -36,7 +27,7 @@ public class WorldGuardLocationExtensions {
         // location is in one of the listed regions, otherwise returns whether
         // the location is in any region.
         // -->
-        LocationTag.tagProcessor.registerTag(ElementTag.class, "worldguard_in_region", (attribute, loc) -> {
+        LocationTag.tagProcessor.registerTag(ElementTag.class, "in_region", (attribute, loc) -> {
             Set<ProtectedRegion> queryRegions = getApplicableRegions(loc);
             if (attribute.hasParam()) {
                 ListTag regions = attribute.paramAsType(ListTag.class);
@@ -50,32 +41,23 @@ public class WorldGuardLocationExtensions {
                 return new ElementTag(false);
             }
             return new ElementTag(!queryRegions.isEmpty());
-        }, "in_region");
+        });
 
         // <--[tag]
         // @attribute <LocationTag.regions>
         // @returns ListTag(WorldGuardRegionTag)
         // @plugin Depenizen, WorldGuard
-        // @deprecated Use 'LocationTag.worldguard_regions'
-        // @description
-        // Deprecated in favor of <@link tag LocationTag.worldguard_regions>.
-        // -->
-
-        // <--[tag]
-        // @attribute <LocationTag.worldguard_regions>
-        // @returns ListTag(WorldGuardRegionTag)
-        // @plugin Depenizen, WorldGuard
         // @description
         // Returns a list of regions that the location is in.
         // -->
-        LocationTag.tagProcessor.registerTag(ListTag.class, "worldguard_regions", (attribute, loc) -> {
+        LocationTag.tagProcessor.registerTag(ListTag.class, "regions", (attribute, loc) -> {
             Set<ProtectedRegion> queryRegions = getApplicableRegions(loc);
             ListTag regions = new ListTag(queryRegions.size());
             for (ProtectedRegion region : queryRegions) {
                 regions.addObject(new WorldGuardRegionTag(region, loc.getWorld()));
             }
             return regions;
-        }, "regions");
+        });
     }
 
 }
