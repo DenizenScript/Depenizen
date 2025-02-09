@@ -5,7 +5,6 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
-import com.denizenscript.denizencore.tags.TagRunnable;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.debugging.SlowWarning;
@@ -19,14 +18,16 @@ import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 
+import static com.denizenscript.denizencore.utilities.Deprecations.pointlessSubtagPrefix;
+
 public class WorldGuardPlayerExtensions {
 
-    public static Warning worldguardCanBuild = new SlowWarning("worldguardCanBuild", "The tag 'PlayerTag.worldguard.can_build' from Depenizen/Worldguard is deprecated: use 'PlayerTag.worldguard_can_build'");
-    public static Warning worldguardTestFlag = new SlowWarning("worldguardTestFlag", "The tag 'PlayerTag.worldguard.test_flag' from Depenizen/Worldguard is deprecated: use 'PlayerTag.worldguard_flag'");
+    public static Warning worldguardCanBuild = new SlowWarning("worldguardCanBuild",  pointlessSubtagPrefix + "The tag 'PlayerTag.worldguard.can_build[...]' from Depenizen/Worldguard is deprecated: use 'PlayerTag.worldguard_can_build[...]'");
+    public static Warning worldguardTestFlag = new SlowWarning("worldguardTestFlag", pointlessSubtagPrefix + "The tag 'PlayerTag.worldguard.test_flag[...]' from Depenizen/Worldguard is deprecated: use 'PlayerTag.worldguard_flag[...]'");
 
     public static void register() {
 
-        TagRunnable.ObjectInterface<PlayerTag, ObjectTag> runnable = (attribute, player) -> {
+        PlayerTag.tagProcessor.registerTag(ObjectTag.class, "worldguard", (attribute, player) -> {
 
             // <--[tag]
             // @attribute <PlayerTag.worldguard.can_build[<location>]>
@@ -92,10 +93,7 @@ public class WorldGuardPlayerExtensions {
             }
 
             return null;
-        };
-
-        PlayerTag.tagProcessor.registerTag(ObjectTag.class, "worldguard", runnable);
-        PlayerTag.tagProcessor.registerTag(ObjectTag.class, "wg", runnable);
+        });
 
         // <--[tag]
         // @attribute <PlayerTag.worldguard_can_build[<location>]>
@@ -114,7 +112,7 @@ public class WorldGuardPlayerExtensions {
         // @returns ObjectTag
         // @plugin Depenizen, WorldGuard
         // @description
-        // Returns the boolean state of a flag for that player at the specified location.
+        // Returns the boolean state of a flag for that player at the specified location, defaults to player location.
         // For non-state tags, returns the current value of the flag.
         // @example
         // # Returns 'true' if the player can be attacked (according to WG) or 'false' if not.
