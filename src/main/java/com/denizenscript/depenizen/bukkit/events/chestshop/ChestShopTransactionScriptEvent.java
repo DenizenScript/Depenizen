@@ -19,15 +19,15 @@ public class ChestShopTransactionScriptEvent extends BukkitScriptEvent implement
     //
     // @Triggers when a transaction occurs at a chestshop.
     //
-    // @Switch type:<type> to only process if transaction was either a "buy" or "sell" event.
+    // @Switch type:<type> to only process if the transaction was either a "buy" or "sell" event.
     //
     // @Cancellable true
     //
     // @Context
     // <context.container> returns a LocationTag of the container attached to the shop, if any.
     // <context.item> returns an ItemTag of the item involved in the transaction.
-    // <context.price> returns an ElementTag(Decimal) of the amount of money involved in the transaction.
-    // <context.sign> returns a LocationTag of the sign.
+    // <context.money> returns an ElementTag(Decimal) of the amount of money involved in the transaction.
+    // <context.sign> returns a LocationTag of the sign running the shop.
     // <context.type> returns whether the transaction was a "BUY" or "SELL" event.
     //
     // @Plugin Depenizen, ChestShop
@@ -63,7 +63,7 @@ public class ChestShopTransactionScriptEvent extends BukkitScriptEvent implement
         return switch (name) {
             case "container" -> event.getOwnerInventory().getLocation() == null ? null : new LocationTag(event.getOwnerInventory().getLocation());
             case "item" -> new ItemTag(event.getStock()[0]);
-            case "price" -> new ElementTag(event.getExactPrice());
+            case "money" -> new ElementTag(event.getExactPrice());
             case "sign" -> new LocationTag(event.getSign().getLocation());
             case "type" -> new ElementTag(event.getTransactionType());
             default -> super.getContext(name);
