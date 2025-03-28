@@ -7,9 +7,11 @@ import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.utilities.implementation.BukkitScriptEntryData;
 import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
+import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 
 public class ChestShopTransactionScriptEvent extends BukkitScriptEvent implements Listener {
 
@@ -25,10 +27,10 @@ public class ChestShopTransactionScriptEvent extends BukkitScriptEvent implement
     //
     // @Context
     // <context.container> returns a LocationTag of the container attached to the shop, if any.
-    // <context.item> returns an ItemTag of the item involved in the transaction.
+    // <context.item> returns a ListTag(ItemTag) of the item(s) involved in the transaction.
     // <context.money> returns an ElementTag(Decimal) of the amount of money involved in the transaction.
     // <context.sign> returns a LocationTag of the sign running the shop.
-    // <context.type> returns whether the transaction was a "BUY" or "SELL" event.
+    // <context.type> returns the transaction type, either "BUY" or "SELL".
     //
     // @Plugin Depenizen, ChestShop
     //
@@ -62,7 +64,13 @@ public class ChestShopTransactionScriptEvent extends BukkitScriptEvent implement
     public ObjectTag getContext(String name) {
         return switch (name) {
             case "container" -> event.getOwnerInventory().getLocation() == null ? null : new LocationTag(event.getOwnerInventory().getLocation());
-            case "item" -> new ItemTag(event.getStock()[0]);
+            case "item" -> {
+                ListTag list = new ListTag();
+                for (ItemStack item : event.getStock()) {
+                    list.addObject(new ItemTag(item));
+                }
+                yield list;
+            }
             case "money" -> new ElementTag(event.getExactPrice());
             case "sign" -> new LocationTag(event.getSign().getLocation());
             case "type" -> new ElementTag(event.getTransactionType());
