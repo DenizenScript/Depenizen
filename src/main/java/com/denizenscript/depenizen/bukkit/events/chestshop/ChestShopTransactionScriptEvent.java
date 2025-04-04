@@ -11,7 +11,8 @@ import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.scripts.ScriptEntryData;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
+
+import java.util.Arrays;
 
 public class ChestShopTransactionScriptEvent extends BukkitScriptEvent implements Listener {
 
@@ -64,13 +65,7 @@ public class ChestShopTransactionScriptEvent extends BukkitScriptEvent implement
     public ObjectTag getContext(String name) {
         return switch (name) {
             case "container" -> event.getOwnerInventory().getLocation() == null ? null : new LocationTag(event.getOwnerInventory().getLocation());
-            case "item" -> {
-                ListTag list = new ListTag();
-                for (ItemStack item : event.getStock()) {
-                    list.addObject(new ItemTag(item));
-                }
-                yield list;
-            }
+            case "item" -> new ListTag(Arrays.asList(event.getStock()), ItemTag::new);
             case "money" -> new ElementTag(event.getExactPrice());
             case "sign" -> new LocationTag(event.getSign().getLocation());
             case "type" -> new ElementTag(event.getTransactionType());
