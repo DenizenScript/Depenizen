@@ -339,7 +339,7 @@
         </dependency>
         <dependency>
             <groupId>com.viaversion</groupId>
-            <artifactId>version-api</artifactId>
+            <artifactId>viaversion-api</artifactId>
             <version>5.3.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/ViaVersion.jar</systemPath>
