@@ -338,9 +338,9 @@
             <systemPath>${basedir}/lib/Vampire.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>us.myles</groupId>
-            <artifactId>ViaVersion</artifactId>
-            <version>4.7.0</version>
+            <groupId>com.viaversion</groupId>
+            <artifactId>version-api</artifactId>
+            <version>5.3.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/ViaVersion.jar</systemPath>
         </dependency>
