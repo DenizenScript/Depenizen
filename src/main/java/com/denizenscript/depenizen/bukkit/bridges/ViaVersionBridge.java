@@ -48,7 +48,7 @@ public class ViaVersionBridge extends Bridge {
             tagProcessor.registerTag(ListTag.class, "supported_versions", (attribute, object) -> {
                 ListTag list = new ListTag();
                 for (Object protocol : Via.getAPI().getSupportedProtocolVersions()) {
-                    list.add(String.valueOf(((ProtocolVersion) protocol).getName()));
+                    list.add(((ProtocolVersion) protocol).getName());
                 }
                 return list;
             });
