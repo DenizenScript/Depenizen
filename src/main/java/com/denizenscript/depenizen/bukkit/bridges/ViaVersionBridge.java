@@ -28,6 +28,7 @@ public class ViaVersionBridge extends Bridge {
             // @plugin Depenizen, ViaVersion
             // @description
             // Returns a list of all supported protocol versions on the server.
+            // Versions blocked in the ViaVersion config.yml file will not be shown in this list.
             // -->
             tagProcessor.registerTag(ListTag.class, "supported_protocol_versions", (attribute, object) -> {
                 ListTag list = new ListTag();
@@ -44,6 +45,7 @@ public class ViaVersionBridge extends Bridge {
             // @plugin Depenizen, ViaVersion
             // @description
             // Returns a list of all supported versions on the server.
+            // Versions blocked in the ViaVersion config.yml file will not be shown in this list.
             // -->
             tagProcessor.registerTag(ListTag.class, "supported_versions", (attribute, object) -> {
                 ListTag list = new ListTag();
