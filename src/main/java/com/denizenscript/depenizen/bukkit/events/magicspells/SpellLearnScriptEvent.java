@@ -55,13 +55,11 @@ public class SpellLearnScriptEvent extends BukkitScriptEvent implements Listener
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("source")) {
-            return source;
-        }
-        else if (name.equals("spell_name")) {
-            return spell;
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "source" -> source;
+            case "spell_name" -> spell;
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler

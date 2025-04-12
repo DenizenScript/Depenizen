@@ -54,13 +54,11 @@ public class MobArenaEndsScriptEvent extends BukkitScriptEvent implements Listen
 
     @Override
     public ObjectTag getContext(String name) {
-        if (name.equals("arena")) {
-            return arena;
-        }
-        else if (name.equals("wave")) {
-            return wave;
-        }
-        return super.getContext(name);
+        return switch (name) {
+            case "arena" -> arena;
+            case "wave" -> wave;
+            default -> super.getContext(name);
+        };
     }
 
     @EventHandler
