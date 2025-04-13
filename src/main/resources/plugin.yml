@@ -13,6 +13,7 @@ softdepend:
     - BetonQuest
     - BigDoors
     - BossShopPro
+    - ChestShop
     - CoreProtect
     - CrackShot
     - EffectLib
