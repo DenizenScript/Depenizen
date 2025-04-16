@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.PseudoObjectTagBase;
 import com.denizenscript.denizencore.tags.TagManager;
@@ -31,16 +32,11 @@ public class ViaVersionBridge extends Bridge {
             // Versions blocked in the ViaVersion config.yml file will not be shown in this list.
             // -->
             tagProcessor.registerTag(ListTag.class, "supported_protocol_versions", (attribute, object) -> {
-                ListTag list = new ListTag();
-                for (Object protocol : Via.getAPI().getSupportedProtocolVersions()) {
-                    int version = ((ProtocolVersion) protocol).getVersion();
-                    list.add(String.valueOf(version));
-                }
-                return list;
+                return new ListTag(Via.getAPI().getSupportedProtocolVersions(), versions -> new ElementTag(String.valueOf(((ProtocolVersion) versions).getVersion()), true));
             });
 
             // <--[tag]
-            // @attribute <viaversion.full_supported_versions>
+            // @attribute <viaversion.supported_versions>
             // @returns ListTag
             // @plugin Depenizen, ViaVersion
             // @description
@@ -48,11 +44,7 @@ public class ViaVersionBridge extends Bridge {
             // Versions blocked in the ViaVersion config.yml file will not be shown in this list.
             // -->
             tagProcessor.registerTag(ListTag.class, "supported_versions", (attribute, object) -> {
-                ListTag list = new ListTag();
-                for (Object protocol : Via.getAPI().getSupportedProtocolVersions()) {
-                    list.add(((ProtocolVersion) protocol).getName());
-                }
-                return list;
+                return new ListTag(Via.getAPI().getSupportedProtocolVersions(), versions -> new ElementTag(((ProtocolVersion) versions).getName(), true));
             });
         }
     }
