@@ -33,7 +33,7 @@ public class ViaVersionBridge extends Bridge {
             // Versions blocked in the ViaVersion config.yml file will not be shown in this list.
             // -->
             tagProcessor.registerTag(ListTag.class, "supported_protocol_versions", (attribute, object) -> {
-                return new ListTag(((ViaAPI<Player>) Via.getAPI()).getSupportedProtocolVersions(), versions -> new ElementTag(versions.getVersion()));
+                return new ListTag(getViaAPI().getSupportedProtocolVersions(), versions -> new ElementTag(versions.getVersion()));
             });
 
             // <--[tag]
@@ -45,7 +45,7 @@ public class ViaVersionBridge extends Bridge {
             // Versions blocked in the ViaVersion config.yml file will not be shown in this list.
             // -->
             tagProcessor.registerTag(ListTag.class, "supported_versions", (attribute, object) -> {
-                return new ListTag(((ViaAPI<Player>) Via.getAPI()).getSupportedProtocolVersions(), versions -> new ElementTag(versions.getName(), true));
+                return new ListTag(getViaAPI().getSupportedProtocolVersions(), versions -> new ElementTag(versions.getName(), true));
             });
         }
     }
@@ -54,5 +54,9 @@ public class ViaVersionBridge extends Bridge {
     public void init() {
         ViaVersionPlayerExtensions.register();
         new ViaVersionTagBase();
+    }
+
+    public static ViaAPI<Player> getViaAPI() {
+        return Via.getAPI();
     }
 }
