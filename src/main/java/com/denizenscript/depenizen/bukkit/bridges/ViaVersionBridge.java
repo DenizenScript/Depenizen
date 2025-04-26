@@ -7,7 +7,8 @@ import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.properties.viaversion.ViaVersionPlayerExtensions;
 import com.viaversion.viaversion.api.Via;
-import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
+import com.viaversion.viaversion.api.ViaAPI;
+import org.bukkit.entity.Player;
 
 public class ViaVersionBridge extends Bridge {
 
@@ -32,7 +33,7 @@ public class ViaVersionBridge extends Bridge {
             // Versions blocked in the ViaVersion config.yml file will not be shown in this list.
             // -->
             tagProcessor.registerTag(ListTag.class, "supported_protocol_versions", (attribute, object) -> {
-                return new ListTag(Via.getAPI().getSupportedProtocolVersions(), versions -> new ElementTag(String.valueOf(((ProtocolVersion) versions).getVersion()), true));
+                return new ListTag(((ViaAPI<Player>) Via.getAPI()).getSupportedProtocolVersions(), versions -> new ElementTag(versions.getVersion()));
             });
 
             // <--[tag]
@@ -44,7 +45,7 @@ public class ViaVersionBridge extends Bridge {
             // Versions blocked in the ViaVersion config.yml file will not be shown in this list.
             // -->
             tagProcessor.registerTag(ListTag.class, "supported_versions", (attribute, object) -> {
-                return new ListTag(Via.getAPI().getSupportedProtocolVersions(), versions -> new ElementTag(((ProtocolVersion) versions).getName(), true));
+                return new ListTag(((ViaAPI<Player>) Via.getAPI()).getSupportedProtocolVersions(), versions -> new ElementTag(versions.getName(), true));
             });
         }
     }
