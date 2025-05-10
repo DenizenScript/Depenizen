@@ -359,7 +359,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // <SuperiorSkyblockIslandTag.name>
         // -->
         tagProcessor.registerMechanism("name", false, ElementTag.class, (object, mechanism, value) -> {
-            if (!mechanism.getValue().asString().isEmpty() && SuperiorSkyblockAPI.getIsland(mechanism.getValue().asString()) != null) {
+            if (!mechanism.getValue().asString().isEmpty() && SuperiorSkyblockAPI.getIsland(mechanism.getValue().asString()) == null) {
                 object.getIsland().setName(mechanism.getValue().toString());
             }
         });
