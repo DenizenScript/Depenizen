@@ -314,7 +314,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // -->
         tagProcessor.registerMechanism("balance", false, ElementTag.class, (object, mechanism, value) -> {
             if (mechanism.requireDouble()) {
-                object.getIsland().getIslandBank().setBalance(mechanism.getValue().asBigDecimal());
+                object.getIsland().getIslandBank().setBalance(value.asBigDecimal());
             }
         });
 
@@ -329,7 +329,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // <SuperiorSkyblockIslandTag.description>
         // -->
         tagProcessor.registerMechanism("description", false, ElementTag.class, (object, mechanism, value) -> {
-            object.getIsland().setDescription(mechanism.getValue().asString());
+            object.getIsland().setDescription(value.asString());
         });
 
         // <--[mechanism]
@@ -344,7 +344,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // -->
         tagProcessor.registerMechanism("locked", false, ElementTag.class, (object, mechanism, value) -> {
             if (mechanism.requireBoolean()) {
-                object.getIsland().setLocked(mechanism.getValue().asBoolean());
+                object.getIsland().setLocked(value.asBoolean());
             }
         });
 
@@ -354,13 +354,18 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @input ElementTag
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Changes an island's name.
+        // Changes an island's name. Multiple islands cannot have the same name.
         // @tags
         // <SuperiorSkyblockIslandTag.name>
         // -->
         tagProcessor.registerMechanism("name", false, ElementTag.class, (object, mechanism, value) -> {
-            if (!mechanism.getValue().asString().isEmpty() && SuperiorSkyblockAPI.getIsland(mechanism.getValue().asString()) == null) {
-                object.getIsland().setName(mechanism.getValue().toString());
+            if (!mechanism.getValue().asString().isEmpty()) {
+                if (SuperiorSkyblockAPI.getIsland(value.asString()) == null) {
+                    object.getIsland().setName(value.toString());
+                }
+                else {
+                    mechanism.echoError("There is already an island with the name '" + value.asString() + "'.");
+                }
             }
         });
 
@@ -375,8 +380,13 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // <SuperiorSkyblockIslandTag.size>
         // -->
         tagProcessor.registerMechanism("size", false, ElementTag.class, (object, mechanism, value) -> {
-            if (mechanism.requireInteger() && mechanism.getValue().asInt() >= 1) {
-                object.getIsland().setIslandSize(mechanism.getValue().asInt());
+            if (mechanism.requireInteger()) {
+                if (value.asInt() >= 1) {
+                    object.getIsland().setIslandSize(value.asInt());
+                }
+                else {
+                    mechanism.echoError("Island size must be a positive integer.");
+                }
             }
         });
     }

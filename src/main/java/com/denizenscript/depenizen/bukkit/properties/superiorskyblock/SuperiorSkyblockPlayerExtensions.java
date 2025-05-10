@@ -100,7 +100,7 @@ public class SuperiorSkyblockPlayerExtensions {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("superiorskyblock_bypass_mode", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireBoolean()) {
-                getSuperiorPlayer(player).setBypassMode(mechanism.getValue().asBoolean());
+                getSuperiorPlayer(player).setBypassMode(value.asBoolean());
             }
         });
 
@@ -116,7 +116,7 @@ public class SuperiorSkyblockPlayerExtensions {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("superiorskyblock_disbands", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getSuperiorPlayer(player).setDisbands(mechanism.getValue().asInt());
+                getSuperiorPlayer(player).setDisbands(value.asInt());
             }
         });
 
@@ -132,7 +132,7 @@ public class SuperiorSkyblockPlayerExtensions {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("superiorskyblock_spy_mode", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireBoolean()) {
-                getSuperiorPlayer(player).setAdminSpy(mechanism.getValue().asBoolean());
+                getSuperiorPlayer(player).setAdminSpy(value.asBoolean());
             }
         });
     }
