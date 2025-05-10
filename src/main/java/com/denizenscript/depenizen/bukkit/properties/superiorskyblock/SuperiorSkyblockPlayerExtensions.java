@@ -18,37 +18,37 @@ public class SuperiorSkyblockPlayerExtensions {
     public static void register() {
 
         // <--[tag]
-        // @attribute <PlayerTag.bypass_mode>
+        // @attribute <PlayerTag.superiorskyblock_bypass_mode>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, SuperiorSkyblock
-        // @mechanism PlayerTag.bypass_mode
+        // @mechanism PlayerTag.superiorskyblock_bypass_mode
         // @description
         // Returns whether a player can build on islands that they are not a part of.
         // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, "bypass_mode", (attribute, player) -> {
+        PlayerTag.tagProcessor.registerTag(ElementTag.class, "superiorskyblock_bypass_mode", (attribute, player) -> {
             return new ElementTag(SuperiorSkyblockAPI.getPlayer(player.getUUID()).hasBypassModeEnabled());
         });
 
         // <--[tag]
-        // @attribute <PlayerTag.disbands>
+        // @attribute <PlayerTag.superiorskyblock_disbands>
         // @returns ElementTag(Number)
         // @plugin Depenizen, SuperiorSkyblock
-        // @mechanism PlayerTag.disbands
+        // @mechanism PlayerTag.superiorskyblock_disbands
         // @description
         // Returns the amount of disbands a player has left.
         // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, "disbands", (attribute, player) -> {
+        PlayerTag.tagProcessor.registerTag(ElementTag.class, "superiorskyblock_disbands", (attribute, player) -> {
             return new ElementTag(SuperiorSkyblockAPI.getPlayer(player.getUUID()).getDisbands());
         });
 
         // <--[tag]
-        // @attribute <PlayerTag.island>
+        // @attribute <PlayerTag.superiorskyblock_island>
         // @returns SuperiorSkyblockIslandTag
         // @plugin Depenizen, SuperiorSkyblock
         // @description
         // Returns the island a player belongs to, if any.
         // -->
-        PlayerTag.tagProcessor.registerTag(SuperiorSkyblockIslandTag.class, "island", (attribute, player) -> {
+        PlayerTag.tagProcessor.registerTag(SuperiorSkyblockIslandTag.class, "superiorskyblock_island", (attribute, player) -> {
             Island island = SuperiorSkyblockAPI.getPlayer(player.getUUID()).getIsland();
             if (island != null) {
                 return new SuperiorSkyblockIslandTag(island);
@@ -57,13 +57,13 @@ public class SuperiorSkyblockPlayerExtensions {
         });
 
         // <--[tag]
-        // @attribute <PlayerTag.island_role>
+        // @attribute <PlayerTag.superiorskyblock_island_role>
         // @returns ElementTag
         // @plugin Depenizen, SuperiorSkyblock
         // @description
         // Returns the role a player has on an island, if any.
         // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, "island_role", (attribute, player) -> {
+        PlayerTag.tagProcessor.registerTag(ElementTag.class, "superiorskyblock_island_role", (attribute, player) -> {
             PlayerRole role = SuperiorSkyblockAPI.getPlayer(player.getUUID()).getPlayerRole();
             if (role != null) {
                 return new ElementTag(role.getName(), true);
@@ -72,28 +72,28 @@ public class SuperiorSkyblockPlayerExtensions {
         });
 
         // <--[tag]
-        // @attribute <PlayerTag.spy_mode>
+        // @attribute <PlayerTag.superiorskyblock_spy_mode>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, SuperiorSkyblock
-        // @mechanism PlayerTag.spy_mode
+        // @mechanism PlayerTag.superiorskyblock_spy_mode
         // @description
         // Returns whether a player can see team chat from all islands.
         // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, "spy_mode", (attribute, player) -> {
+        PlayerTag.tagProcessor.registerTag(ElementTag.class, "superiorskyblock_spy_mode", (attribute, player) -> {
             return new ElementTag(SuperiorSkyblockAPI.getPlayer(player.getUUID()).hasAdminSpyEnabled());
         });
 
         // <--[mechanism]
         // @object PlayerTag
-        // @name bypass_mode
+        // @name superiorskyblock_bypass_mode
         // @input ElementTag(Boolean)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
         // Changes whether a player can build on islands that are not a part of.
         // @tags
-        // <PlayerTag.bypass_mode>
+        // <PlayerTag.superiorskyblock_bypass_mode>
         // -->
-        PlayerTag.registerOnlineOnlyMechanism("bypass_mode", ElementTag.class, (player, mechanism, value) -> {
+        PlayerTag.registerOnlineOnlyMechanism("superiorskyblock_bypass_mode", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireBoolean()) {
                 SuperiorSkyblockAPI.getPlayer(player.getUUID()).setBypassMode(mechanism.getValue().asBoolean());
             }
@@ -101,15 +101,15 @@ public class SuperiorSkyblockPlayerExtensions {
 
         // <--[mechanism]
         // @object PlayerTag
-        // @name disbands
+        // @name superiorskyblock_disbands
         // @input ElementTag(Number)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
         // Changes how many disbands a player can use.
         // @tags
-        // <PlayerTag.disbands>
+        // <PlayerTag.superiorskyblock_disbands>
         // -->
-        PlayerTag.registerOnlineOnlyMechanism("disbands", ElementTag.class, (player, mechanism, value) -> {
+        PlayerTag.registerOnlineOnlyMechanism("superiorskyblock_disbands", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
                 SuperiorSkyblockAPI.getPlayer(player.getUUID()).setDisbands(mechanism.getValue().asInt());
             }
@@ -117,15 +117,15 @@ public class SuperiorSkyblockPlayerExtensions {
 
         // <--[mechanism]
         // @object PlayerTag
-        // @name spy_mode
+        // @name superiorskyblock_spy_mode
         // @input ElementTag(Boolean)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
         // Changes whether a player can see team chats from all islands.
         // @tags
-        // <PlayerTag.spy_mode>
+        // <PlayerTag.superiorskyblock_spy_mode>
         // -->
-        PlayerTag.registerOnlineOnlyMechanism("spy_mode", ElementTag.class, (player, mechanism, value) -> {
+        PlayerTag.registerOnlineOnlyMechanism("superiorskyblock_spy_mode", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireBoolean()) {
                 SuperiorSkyblockAPI.getPlayer(player.getUUID()).setAdminSpy(mechanism.getValue().asBoolean());
             }

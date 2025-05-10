@@ -18,11 +18,11 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
 
     // <--[ObjectType]
     // @name SuperiorSkyblockIslandTag
-    // @prefix island
+    // @prefix superiorskyblock_island
     // @base ElementTag
     // @format
     // The identity format for group is <island_name>
-    // For example, 'island@denizen_scripters'.
+    // For example, 'superiorskyblock_island@denizen_scripters'.
     //
     // @plugin Depenizen, SuperiorSkyblock
     // @description
@@ -30,10 +30,10 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
     //
     // -->
 
-    @Fetchable("island")
+    @Fetchable("superiorskyblock_island")
     public static SuperiorSkyblockIslandTag valueOf(String string, TagContext context) {
-        if (string.startsWith("island@")) {
-            string = string.substring(7);
+        if (string.startsWith("superiorskyblock_island@")) {
+            string = string.substring("superiorskyblock_island@".length());
         }
         Island island = SuperiorSkyblockAPI.getIsland(string);
         if (island == null) {
@@ -43,7 +43,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
     }
 
     public static boolean matches(String string) {
-        string = string.replace("island@", "");
+        string = string.replace("superiorskyblock_island@", "");
         return SuperiorSkyblockAPI.getIsland(string) != null;
     }
 
@@ -73,7 +73,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
 
     @Override
     public String identify() {
-        return "island@" + island.getName();
+        return "superiorskyblock_island@" + island.getName();
     }
 
     @Override
@@ -359,7 +359,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // <SuperiorSkyblockIslandTag.name>
         // -->
         tagProcessor.registerMechanism("name", false, ElementTag.class, (object, mechanism, value) -> {
-            if (!mechanism.getValue().asString().isEmpty()) {
+            if (!mechanism.getValue().asString().isEmpty() && SuperiorSkyblockAPI.getIsland(mechanism.getValue().asString()) != null) {
                 object.getIsland().setName(mechanism.getValue().toString());
             }
         });

@@ -18,13 +18,13 @@ public class SuperiorSkyblockBridge extends Bridge {
         ObjectFetcher.registerWithObjectFetcher(SuperiorSkyblockIslandTag.class, SuperiorSkyblockIslandTag.tagProcessor);
 
         // <--[tag]
-        // @attribute <island[<name>]>
+        // @attribute <superiorskyblock_island[<name>]>
         // @returns SuperiorSkyblockIslandTag
         // @plugin Depenizen, SuperiorSkyblock
         // @description
         // Returns the superiorskyblock island tag with the given name.
         // -->
-        TagManager.registerTagHandler(SuperiorSkyblockIslandTag.class, SuperiorSkyblockIslandTag.class, "island", (attribute, param) -> {
+        TagManager.registerTagHandler(SuperiorSkyblockIslandTag.class, SuperiorSkyblockIslandTag.class, "superiorskyblock_island", (attribute, param) -> {
             return param;
         });
     }
