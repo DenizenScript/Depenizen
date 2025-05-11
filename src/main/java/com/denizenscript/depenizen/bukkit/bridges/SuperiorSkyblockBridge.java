@@ -6,7 +6,7 @@ import com.denizenscript.denizencore.tags.TagManager;
 import com.denizenscript.depenizen.bukkit.Bridge;
 import com.denizenscript.depenizen.bukkit.events.superiorskyblock.*;
 import com.denizenscript.depenizen.bukkit.objects.superiorskyblock.SuperiorSkyblockIslandTag;
-import com.denizenscript.depenizen.bukkit.properties.superiorskyblock.SuperiorSkyblockPlayerExtensions;
+import com.denizenscript.depenizen.bukkit.properties.superiorskyblock.*;
 
 public class SuperiorSkyblockBridge extends Bridge {
 
@@ -14,6 +14,7 @@ public class SuperiorSkyblockBridge extends Bridge {
     public void init() {
         ScriptEvent.registerScriptEvent(SuperiorSkyblockIslandCreatedScriptEvent.class);
         ScriptEvent.registerScriptEvent(SuperiorSkyblockIslandDisbandedScriptEvent.class);
+        SuperiorSkyblockLocationExtensions.register();
         SuperiorSkyblockPlayerExtensions.register();
         ObjectFetcher.registerWithObjectFetcher(SuperiorSkyblockIslandTag.class, SuperiorSkyblockIslandTag.tagProcessor);
 
