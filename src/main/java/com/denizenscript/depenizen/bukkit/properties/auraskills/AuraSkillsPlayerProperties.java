@@ -17,7 +17,14 @@ public class AuraSkillsPlayerProperties {
         // Returns the skill level of a player.
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "auraskills_level", (attribute, player, value) -> {
-            return new ElementTag(getAuraApi().getUser(player.getUUID()).getSkillLevel(Skills.valueOf(value.toString().toUpperCase())));
+            Skills skill;
+            try {
+                skill = Skills.valueOf(value.toString().toUpperCase());
+            }
+            catch (IllegalArgumentException e) {
+                return null;
+            }
+            return new ElementTag(getAuraApi().getUser(player.getUUID()).getSkillLevel(skill));
         });
 
         // <--[mechanism]
@@ -32,7 +39,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_agility_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.AGILITY, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills agility level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.AGILITY, value.asInt());
+                }
             }
         });
 
@@ -48,7 +60,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_alchemy_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.ALCHEMY, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills alchemy level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.ALCHEMY, value.asInt());
+                }
             }
         });
 
@@ -64,7 +81,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_archery_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.ARCHERY, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills archery level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.ARCHERY, value.asInt());
+                }
             }
         });
 
@@ -80,7 +102,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_defense_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.DEFENSE, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills defense level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.DEFENSE, value.asInt());
+                }
             }
         });
 
@@ -96,7 +123,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_enchanting_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.ENCHANTING, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills enchanting level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.ENCHANTING, value.asInt());
+                }
             }
         });
 
@@ -112,7 +144,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_excavation_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.EXCAVATION, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills excavation level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.EXCAVATION, value.asInt());
+                }
             }
         });
 
@@ -128,7 +165,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_farming_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.FARMING, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills farming level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.FARMING, value.asInt());
+                }
             }
         });
 
@@ -144,7 +186,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_fighting_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.FIGHTING, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills fighting level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.FIGHTING, value.asInt());
+                }
             }
         });
 
@@ -160,7 +207,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_fishing_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.FISHING, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills fishing level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.FISHING, value.asInt());
+                }
             }
         });
 
@@ -176,7 +228,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_foraging_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.FORAGING, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills foraging level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.FORAGING, value.asInt());
+                }
             }
         });
 
@@ -192,7 +249,12 @@ public class AuraSkillsPlayerProperties {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_mining_level", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
-                getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.MINING, value.asInt());
+                if (value.asInt() < 0) {
+                    mechanism.echoError("Invalid auraskills mining level: " + value.asInt());
+                }
+                else {
+                    getAuraApi().getUser(player.getUUID()).setSkillLevel(Skills.MINING, value.asInt());
+                }
             }
         });
     }
