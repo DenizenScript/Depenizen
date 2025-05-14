@@ -38,14 +38,14 @@ public class AuraSkillsPlayerExtensions {
         // <PlayerTag.auraskills_levels>
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_levels", MapTag.class, (player, mechanism, levels) -> {
-            boolean valid = true;
+            boolean valid = false;
             for (Skills skill : Skills.values()) {
                 if (levels.containsKey(skill.name().toLowerCase())) {
-                    valid = false;
+                    valid = true;
                     break;
                 }
             }
-            if (valid) {
+            if (!valid) {
                 mechanism.echoError("There are no valid skills as part of the input.");
                 return;
             }
