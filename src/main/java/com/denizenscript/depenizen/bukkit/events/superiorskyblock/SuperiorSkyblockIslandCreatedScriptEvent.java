@@ -24,7 +24,7 @@ public class SuperiorSkyblockIslandCreatedScriptEvent extends BukkitScriptEvent 
     // <context.island> returns a SuperiorSkyblockIslandTag of the island.
     //
     // @Determine
-    // "NAME:<ElementTag>" to change the name of the island.
+    // "TELEPORT:<ElementTag(Boolean)>" to set whether the player will automatically teleport to the island once it's generated.
     //
     // @Plugin Depenizen, SuperiorSkyblock
     //
@@ -36,8 +36,12 @@ public class SuperiorSkyblockIslandCreatedScriptEvent extends BukkitScriptEvent 
 
     public SuperiorSkyblockIslandCreatedScriptEvent() {
         registerCouldMatcher("superiorskyblock island created");
-        this.<SuperiorSkyblockIslandCreatedScriptEvent, ElementTag>registerDetermination("name", ElementTag.class, (evt, context, name) -> {
-            evt.event.getIsland().setName(name.asString());
+        this.<SuperiorSkyblockIslandCreatedScriptEvent, ElementTag>registerOptionalDetermination("teleport", ElementTag.class, (evt, context, value) -> {
+            if (value.isBoolean()) {
+                evt.event.setTeleport(value.asBoolean());
+                return true;
+            }
+            return false;
         });
     }
 

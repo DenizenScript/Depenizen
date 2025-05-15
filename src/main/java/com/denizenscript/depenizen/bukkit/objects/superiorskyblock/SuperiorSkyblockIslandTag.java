@@ -13,6 +13,10 @@ import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
+
+import java.util.UUID;
 
 public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
 
@@ -21,8 +25,8 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
     // @prefix superiorskyblock_island
     // @base ElementTag
     // @format
-    // The identity format for group is <island_name>
-    // For example, 'superiorskyblock_island@denizen_scripters'.
+    // The identity format is <island_uuid>.
+    // For example, 'superiorskyblock_island@460e96b9-7a0e-416d-b2c3-4508164b8b1b'.
     //
     // @plugin Depenizen, SuperiorSkyblock
     // @description
@@ -35,16 +39,19 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         if (string.startsWith("superiorskyblock_island@")) {
             string = string.substring("superiorskyblock_island@".length());
         }
-        Island island = SuperiorSkyblockAPI.getIsland(string);
+        Island island = SuperiorSkyblockAPI.getIslandByUUID(UUID.fromString(string));
         if (island == null) {
+            Debug.echoError("No island with the uuid '" + string + "' exists.");
             return null;
         }
         return new SuperiorSkyblockIslandTag(island);
     }
 
     public static boolean matches(String string) {
-        string = string.replace("superiorskyblock_island@", "");
-        return SuperiorSkyblockAPI.getIsland(string) != null;
+        if (string.startsWith("superiorskyblock_island@")) {
+            return true;
+        }
+        return valueOf(string, CoreUtilities.noDebugContext) != null;
     }
 
     public SuperiorSkyblockIslandTag(Island island) {
@@ -73,7 +80,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
 
     @Override
     public String identify() {
-        return "superiorskyblock_island@" + island.getName();
+        return "superiorskyblock_island@" + island.getUniqueId();
     }
 
     @Override
@@ -113,7 +120,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @plugin Depenizen, SuperiorSkyblock
         // @mechanism SuperiorSkyblockIslandTag.balance
         // @description
-        // Returns the balance of the specified island.
+        // Returns the balance of this island.
         // -->
         tagProcessor.registerTag(ElementTag.class, "balance", (attribute, object) -> {
             return new ElementTag(object.getIsland().getIslandBank().getBalance());
@@ -124,10 +131,10 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns a list of players banned on the specified island.
+        // Returns a list of players banned on this island.
         // -->
         tagProcessor.registerTag(ListTag.class, "banned_players", (attribute, object) -> {
-            return new ListTag(object.getIsland().getBannedPlayers(), players -> new PlayerTag(players.asPlayer()));
+            return new ListTag(object.getIsland().getBannedPlayers(), player -> new PlayerTag(player.asPlayer()));
         });
 
         // <--[tag]
@@ -157,7 +164,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the coop members of the specified island, if any.
+        // Returns the coop members of this island.
         // -->
         tagProcessor.registerTag(ListTag.class, "coop_members", (attribute, object) -> {
             return new ListTag(object.getIsland().getCoopPlayers(), players -> new PlayerTag(players.asPlayer()));
@@ -168,7 +175,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the players currently within the bounds of the specified island.
+        // Returns the players currently within the bounds of this island.
         // -->
         tagProcessor.registerTag(ListTag.class, "current_visitors", (attribute, object) -> {
             return new ListTag(object.getIsland().getAllPlayersInside(), players -> new PlayerTag(players.asPlayer()));
@@ -179,10 +186,10 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the description of the specified island, if any.
+        // Returns the description of this island, if any.
         // -->
         tagProcessor.registerTag(ElementTag.class, "description", (attribute, object) -> {
-            return object.getIsland().getDescription().isBlank() ? null : new ElementTag(object.getIsland().getDescription(), true);
+            return new ElementTag(object.getIsland().getDescription(), true);
         });
 
         // <--[tag]
@@ -190,7 +197,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the level of the specified island.
+        // Returns the level of this island.
         // -->
         tagProcessor.registerTag(ElementTag.class, "level", (attribute, object) -> {
             return new ElementTag(object.getIsland().getIslandLevel());
@@ -213,10 +220,10 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the members of the specified island, including the leader.
+        // Returns the members of this island, including the leader.
         // -->
         tagProcessor.registerTag(ListTag.class, "members", (attribute, object) -> {
-            return new ListTag(object.getIsland().getIslandMembers(true), players -> new PlayerTag(players.asPlayer()));
+            return new ListTag(object.getIsland().getIslandMembers(true), player -> new PlayerTag(player.asPlayer()));
         });
 
         // <--[tag]
@@ -225,7 +232,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @plugin Depenizen, SuperiorSkyblock
         // @mechanism SuperiorSkyblockIslandTag.name
         // @description
-        // Returns the name of the specified island.
+        // Returns the name of this island.
         // -->
         tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
             return new ElementTag(object.getIsland().getName(), true);
@@ -236,7 +243,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the net worth of the specified island. Includes money in the bank.
+        // Returns the net worth of this island. Includes money in the bank.
         // -->
         tagProcessor.registerTag(ElementTag.class, "net_worth", (attribute, object) -> {
             return new ElementTag(object.getIsland().getWorth());
@@ -247,7 +254,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns PlayerTag
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the owner of the specified island.
+        // Returns the owner of this island.
         // -->
         tagProcessor.registerTag(PlayerTag.class, "owner", (attribute, object) -> {
             return new PlayerTag(object.getIsland().getOwner().asPlayer());
@@ -258,7 +265,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag(Number)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the rating a player gave the specified island, if any.
+        // Returns the rating a player gave an island, if any.
         // -->
         tagProcessor.registerTag(ElementTag.class, PlayerTag.class, "rating", (attribute, object, player) -> {
             Rating rating = object.getIsland().getRating(SuperiorSkyblockAPI.getPlayer(player.getUUID()));
@@ -273,7 +280,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the schematic used to create the specified island.
+        // Returns the schematic used to create an island.
         // -->
         tagProcessor.registerTag(ElementTag.class, "schematic", (attribute, object) -> {
             return new ElementTag(object.getIsland().getSchematicName(), true);
@@ -285,7 +292,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @plugin Depenizen, SuperiorSkyblock
         // @mechanism SuperiorSkyblockIslandTag.size
         // @description
-        // Returns the size of the specified island.
+        // Returns the size of this island.
         // -->
         tagProcessor.registerTag(ElementTag.class, "size", (attribute, object) -> {
             return new ElementTag(object.getIsland().getIslandSize());
@@ -296,10 +303,21 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the current average rating of the specified island.
+        // Returns the current average rating of an island.
         // -->
         tagProcessor.registerTag(ElementTag.class, "total_rating", (attribute, object) -> {
             return new ElementTag(object.getIsland().getTotalRating());
+        });
+
+        // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.uuid>
+        // @returns ElementTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Returns the uuid of an island.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "uuid", (attribute, object) -> {
+            return new ElementTag(object.getIsland().getUniqueId().toString());
         });
 
         // <--[mechanism]
@@ -359,11 +377,11 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // <SuperiorSkyblockIslandTag.name>
         // -->
         tagProcessor.registerMechanism("name", false, ElementTag.class, (object, mechanism, value) -> {
-            if (mechanism.getValue().asString().isEmpty()) {
+            if (value.asString().isEmpty()) {
                 mechanism.echoError("You cannot have an island with no name.");
             }
             else if (SuperiorSkyblockAPI.getIsland(value.asString()) != null) {
-                mechanism.echoError("There is already an island with the name '" + value.asString() + "'.");
+                mechanism.echoError("There is already an island with the name '" + value + "'.");
             }
             else {
                 object.getIsland().setName(value.toString());

@@ -94,7 +94,7 @@ public class SuperiorSkyblockPlayerExtensions {
         // @input ElementTag(Boolean)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Changes whether a player can build on islands that are not a part of.
+        // Changes whether a player can build on islands they are not a part of.
         // @tags
         // <PlayerTag.superiorskyblock_bypass_mode>
         // -->
