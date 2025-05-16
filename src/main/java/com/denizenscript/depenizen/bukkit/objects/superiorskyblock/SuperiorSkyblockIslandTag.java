@@ -186,7 +186,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the description of this island, if any.
+        // Returns the description of this island. This may be empty if an island does not have one set.
         // -->
         tagProcessor.registerTag(ElementTag.class, "description", (attribute, object) -> {
             return new ElementTag(object.getIsland().getDescription(), true);
