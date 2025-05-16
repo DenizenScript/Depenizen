@@ -4,7 +4,6 @@ import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
 import dev.aurelium.auraskills.api.AuraSkillsApi;
-import dev.aurelium.auraskills.api.skill.Skill;
 import dev.aurelium.auraskills.api.skill.Skills;
 
 public class AuraSkillsPlayerExtensions {
@@ -18,6 +17,9 @@ public class AuraSkillsPlayerExtensions {
         // @description
         // Returns the skill levels of a player.
         // @mechanism PlayerTag.auraskills_levels
+        // @example
+        // # Returns 'map@[FARMING=0;FORAGING=0;MINING=0;FISHING=0;EXCAVATION=0;ARCHERY=0;FIGHTING=0;DEFENSE=0;AGILITY=0;ENDURANCE=0;ALCHEMY=0;ENCHANTING=0;SORCERY=0;HEALING=0;FORGING=0]' on a brand new player.
+        // - narrate <player.auraskills_levels>
         // -->
         PlayerTag.tagProcessor.registerTag(MapTag.class,  "auraskills_levels", (attribute, player) -> {
             MapTag levels = new MapTag();
@@ -34,6 +36,9 @@ public class AuraSkillsPlayerExtensions {
         // @description
         // Returns the experience for each skill level of a player.
         // @mechanism PlayerTag.auraskills_experience
+        // @example
+        // # Returns 'map@[FARMING=0;FORAGING=0;MINING=0;FISHING=0;EXCAVATION=0;ARCHERY=0;FIGHTING=0;DEFENSE=0;AGILITY=0;ENDURANCE=0;ALCHEMY=0;ENCHANTING=0;SORCERY=0;HEALING=0;FORGING=0]' on a brand new player.
+        // - narrate <player.auraskills_experience>
         // -->
         PlayerTag.tagProcessor.registerTag(MapTag.class,  "auraskills_experience", (attribute, player) -> {
             MapTag levels = new MapTag();
@@ -52,28 +57,25 @@ public class AuraSkillsPlayerExtensions {
         // Changes a player's skill levels. Inputted as "skill=level".
         // @tags
         // <PlayerTag.auraskills_levels>
+        // @example
+        // # Sets the player's agility level to 5 and their excavation level to 3.
+        // - adjust <player> auraskills_levels:agility=5;excavation=3
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_levels", MapTag.class, (player, mechanism, levels) -> {
             boolean valid = false;
             for (Skills skill : Skills.values()) {
                 if (levels.containsKey(skill.name().toLowerCase())) {
-                    valid = true;
-                    break;
-                }
-            }
-            if (!valid) {
-                mechanism.echoError("There are no valid skills as part of the input.");
-                return;
-            }
-            for (Skill skill : Skills.values()) {
-                if (levels.containsKey(skill.name())) {
                     if (!levels.getElement(skill.name()).isInt() || levels.getElement(skill.name()).asInt() < 0) {
                         mechanism.echoError("'" + levels.getElement(skill.name()).asInt() + "' is not a valid level.");
                     }
                     else {
                         getAuraApi().getUser(player.getUUID()).setSkillLevel(skill, levels.getElement(skill.name()).asInt());
                     }
+                    valid = true;
                 }
+            }
+            if (!valid) {
+                mechanism.echoError("There are no valid skills as part of the input.");
             }
         });
 
@@ -86,28 +88,25 @@ public class AuraSkillsPlayerExtensions {
         // Changes a player's skill experience. Inputted as "skill=experience".
         // @tags
         // <PlayerTag.auraskills_experience>
+        // @example
+        // # Sets the player's agility experience to 500 and their excavation experience to 300.
+        // - adjust <player> auraskills_experienceAGILITY=500;EXCAVATION=300
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_experience", MapTag.class, (player, mechanism, experience) -> {
             boolean valid = false;
             for (Skills skill : Skills.values()) {
                 if (experience.containsKey(skill.name().toLowerCase())) {
-                    valid = true;
-                    break;
-                }
-            }
-            if (!valid) {
-                mechanism.echoError("There are no valid skills as part of the input.");
-                return;
-            }
-            for (Skill skill : Skills.values()) {
-                if (experience.containsKey(skill.name())) {
                     if (!experience.getElement(skill.name()).isDouble() || experience.getElement(skill.name()).asDouble() < 0) {
                         mechanism.echoError("'" + experience.getElement(skill.name()).asDouble() + "' is not a valid experience amount.");
                     }
                     else {
                         getAuraApi().getUser(player.getUUID()).setSkillXp(skill, experience.getElement(skill.name()).asDouble());
                     }
+                    valid = true;
                 }
+            }
+            if (!valid) {
+                mechanism.echoError("There are no valid skills as part of the input.");
             }
         });
     }
