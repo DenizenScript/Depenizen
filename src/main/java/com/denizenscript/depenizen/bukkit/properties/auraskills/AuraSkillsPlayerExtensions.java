@@ -70,7 +70,7 @@ public class AuraSkillsPlayerExtensions {
             for (Skills skill : Skills.values()) {
                 if (levels.containsKey(skill.name().toLowerCase())) {
                     if (!levels.getElement(skill.name()).isInt() || levels.getElement(skill.name()).asInt() < 0) {
-                        mechanism.echoError("'" + levels.getElement(skill.name()).asInt() + "' is not a valid level.");
+                        mechanism.echoError("'" + levels.getElement(skill.name()) + "' is not a valid level.");
                     }
                     else {
                         user.setSkillLevel(skill, levels.getElement(skill.name()).asInt());
@@ -102,7 +102,7 @@ public class AuraSkillsPlayerExtensions {
             for (Skills skill : Skills.values()) {
                 if (experience.containsKey(skill.name().toLowerCase())) {
                     if (!experience.getElement(skill.name()).isDouble() || experience.getElement(skill.name()).asDouble() < 0) {
-                        mechanism.echoError("'" + experience.getElement(skill.name()).asDouble() + "' is not a valid experience amount.");
+                        mechanism.echoError("'" + experience.getElement(skill.name()) + "' is not a valid experience amount.");
                     }
                     else {
                         user.setSkillXp(skill, experience.getElement(skill.name()).asDouble());
