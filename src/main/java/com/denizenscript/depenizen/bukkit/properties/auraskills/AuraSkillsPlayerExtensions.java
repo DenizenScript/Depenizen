@@ -64,17 +64,17 @@ public class AuraSkillsPlayerExtensions {
         // # Sets the player's agility level to 5 and their excavation level to 3.
         // - adjust <player> auraskills_levels:agility=5;excavation=3
         // -->
-        PlayerTag.registerOnlineOnlyMechanism("auraskills_levels", MapTag.class, (player, mechanism, levels) -> {
+        PlayerTag.registerOnlineOnlyMechanism("auraskills_levels", MapTag.class, (player, mechanism, value) -> {
             boolean valid = false;
             SkillsUser user = AuraSkillsApi.get().getUser(player.getUUID());
             for (Skills skill : Skills.values()) {
-                if (levels.containsKey(skill.name().toLowerCase())) {
-                    ElementTag name = levels.getElement(skill.name());
-                    if (!name.isInt() || name.asInt() < 0) {
-                        mechanism.echoError("'" + name + "' is not a valid level.");
+                if (value.containsKey(skill.name().toLowerCase())) {
+                    ElementTag experience = value.getElement(skill.name());
+                    if (!experience.isInt() || experience.asInt() < 0) {
+                        mechanism.echoError("'" + experience + "' is not a valid level.");
                     }
                     else {
-                        user.setSkillLevel(skill, name.asInt());
+                        user.setSkillLevel(skill, experience.asInt());
                     }
                     valid = true;
                 }
