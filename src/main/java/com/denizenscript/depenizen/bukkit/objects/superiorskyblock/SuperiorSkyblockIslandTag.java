@@ -39,7 +39,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         if (string.startsWith("superiorskyblock_island@")) {
             string = string.substring("superiorskyblock_island@".length());
         }
-        Island island = SuperiorSkyblockAPI.getIslandByUUID(UUID.fromString(string));
+        Island island = string.equals("00000000-0000-0000-0000-000000000000") ? SuperiorSkyblockAPI.getSpawnIsland() : SuperiorSkyblockAPI.getIslandByUUID(UUID.fromString(string));
         if (island == null) {
             Debug.echoError("No island with the uuid '" + string + "' exists.");
             return null;
@@ -273,7 +273,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag(Number)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the rating a player gave an island, or 'null' if the player hasn't.
+        // Returns the rating a player gave an island, or 'null' if the player hasn't given one.
         // -->
         tagProcessor.registerTag(ElementTag.class, PlayerTag.class, "rating", (attribute, object, player) -> {
             Rating rating = object.getIsland().getRating(SuperiorSkyblockAPI.getPlayer(player.getUUID()));
