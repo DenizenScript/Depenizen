@@ -124,7 +124,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // -->
         tagProcessor.registerTag(ElementTag.class, "balance", (attribute, object) -> {
             if (object.getIsland().isSpawn()) {
-                Debug.echoError("Spawn islands cannot have a balance.");
+                attribute.echoError("Spawn islands cannot have a balance.");
                 return null;
             }
             return new ElementTag(object.getIsland().getIslandBank().getBalance());
@@ -262,7 +262,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // -->
         tagProcessor.registerTag(PlayerTag.class, "owner", (attribute, object) -> {
             if (object.getIsland().isSpawn()) {
-                Debug.echoError("Spawn islands do not have an owner.");
+                attribute.echoError("Spawn islands do not have an owner.");
                 return null;
             }
             return new PlayerTag(object.getIsland().getOwner().asPlayer());
