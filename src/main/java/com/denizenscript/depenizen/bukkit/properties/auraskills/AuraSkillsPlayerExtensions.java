@@ -1,11 +1,15 @@
 package com.denizenscript.depenizen.bukkit.properties.auraskills;
 
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.objects.ObjectTag;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
+import com.denizenscript.denizencore.utilities.text.StringHolder;
 import dev.aurelium.auraskills.api.AuraSkillsApi;
 import dev.aurelium.auraskills.api.skill.Skills;
 import dev.aurelium.auraskills.api.user.SkillsUser;
+
+import java.util.Map;
 
 public class AuraSkillsPlayerExtensions {
 
@@ -65,22 +69,22 @@ public class AuraSkillsPlayerExtensions {
         // - adjust <player> auraskills_levels:agility=5;excavation=3
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_levels", MapTag.class, (player, mechanism, value) -> {
-            boolean valid = false;
             SkillsUser user = AuraSkillsApi.get().getUser(player.getUUID());
-            for (Skills skill : Skills.values()) {
-                if (value.containsKey(skill.name().toLowerCase())) {
-                    ElementTag experience = value.getElement(skill.name());
-                    if (!experience.isInt() || experience.asInt() < 0) {
-                        mechanism.echoError("'" + experience + "' is not a valid level.");
-                    }
-                    else {
-                        user.setSkillLevel(skill, experience.asInt());
-                    }
-                    valid = true;
+            for (Map.Entry<StringHolder, ObjectTag> entry : value.entrySet()) {
+                try {
+                    Skills.valueOf(entry.getKey().toString().toUpperCase());
                 }
-            }
-            if (!valid) {
-                mechanism.echoError("There are no valid skills as part of the input.");
+                catch (Exception e) {
+                    mechanism.echoError("'" + entry.getKey() + "' is not a valid skill.");
+                    continue;
+                }
+                ElementTag element = entry.getValue().asElement();
+                if (element.isInt() && element.asInt() >= 0) {
+                    user.setSkillLevel(Skills.valueOf(entry.getKey().toString().toUpperCase()), element.asInt());
+                }
+                else {
+                    mechanism.echoError("'" + entry.getValue() + "' is not a valid level.");
+                }
             }
         });
 
@@ -98,22 +102,22 @@ public class AuraSkillsPlayerExtensions {
         // - adjust <player> auraskills_experience:AGILITY=500;EXCAVATION=300
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_experience", MapTag.class, (player, mechanism, value) -> {
-            boolean valid = false;
             SkillsUser user = AuraSkillsApi.get().getUser(player.getUUID());
-            for (Skills skill : Skills.values()) {
-                if (value.containsKey(skill.name().toLowerCase())) {
-                    ElementTag experience = value.getElement(skill.name());
-                    if (!experience.isDouble() || experience.asDouble() < 0) {
-                        mechanism.echoError("'" + experience + "' is not a valid experience amount.");
-                    }
-                    else {
-                        user.setSkillXp(skill, experience.asDouble());
-                    }
-                    valid = true;
+            for (Map.Entry<StringHolder, ObjectTag> entry : value.entrySet()) {
+                try {
+                    Skills.valueOf(entry.getKey().toString().toUpperCase());
                 }
-            }
-            if (!valid) {
-                mechanism.echoError("There are no valid skills as part of the input.");
+                catch (Exception e) {
+                    mechanism.echoError("'" + entry.getKey() + "' is not a valid skill.");
+                    continue;
+                }
+                ElementTag element = entry.getValue().asElement();
+                if (element.isFloat() && element.asDouble() >= 0) {
+                    user.setSkillXp(Skills.valueOf(entry.getKey().toString().toUpperCase()), element.asDouble());
+                }
+                else {
+                    mechanism.echoError("'" + entry.getValue() + "' is not a valid experience amount.");
+                }
             }
         });
     }
