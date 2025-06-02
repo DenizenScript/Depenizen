@@ -112,7 +112,7 @@ public class AuraSkillsPlayerExtensions {
                     continue;
                 }
                 ElementTag element = entry.getValue().asElement();
-                if (element.isFloat() && element.asDouble() >= 0) {
+                if (element.isDouble() && element.asDouble() >= 0) {
                     user.setSkillXp(Skills.valueOf(entry.getKey().toString().toUpperCase()), element.asDouble());
                 }
                 else {
