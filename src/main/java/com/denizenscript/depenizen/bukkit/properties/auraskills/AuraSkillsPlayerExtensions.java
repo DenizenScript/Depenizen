@@ -6,6 +6,7 @@ import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.MapTag;
 import com.denizenscript.denizencore.utilities.text.StringHolder;
 import dev.aurelium.auraskills.api.AuraSkillsApi;
+import dev.aurelium.auraskills.api.skill.Skill;
 import dev.aurelium.auraskills.api.skill.Skills;
 import dev.aurelium.auraskills.api.user.SkillsUser;
 
@@ -61,7 +62,7 @@ public class AuraSkillsPlayerExtensions {
         // @input MapTag
         // @plugin Depenizen, AuraSkills
         // @description
-        // Changes a player's skill level. Inputted as "<skill>=<level>".
+        // Changes a player's skill level. Input as "<skill>=<level>".
         // @tags
         // <PlayerTag.auraskills_levels>
         // @example
@@ -70,9 +71,10 @@ public class AuraSkillsPlayerExtensions {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_levels", MapTag.class, (player, mechanism, value) -> {
             SkillsUser user = AuraSkillsApi.get().getUser(player.getUUID());
+            Skill skill = null;
             for (Map.Entry<StringHolder, ObjectTag> entry : value.entrySet()) {
                 try {
-                    Skills.valueOf(entry.getKey().toString().toUpperCase());
+                    skill = Skills.valueOf(entry.getKey().toString().toUpperCase());
                 }
                 catch (Exception e) {
                     mechanism.echoError("'" + entry.getKey() + "' is not a valid skill.");
@@ -80,7 +82,7 @@ public class AuraSkillsPlayerExtensions {
                 }
                 ElementTag element = entry.getValue().asElement();
                 if (element.isInt() && element.asInt() >= 0) {
-                    user.setSkillLevel(Skills.valueOf(entry.getKey().toString().toUpperCase()), element.asInt());
+                    user.setSkillLevel(skill, element.asInt());
                 }
                 else {
                     mechanism.echoError("'" + entry.getValue() + "' is not a valid level.");
@@ -94,7 +96,7 @@ public class AuraSkillsPlayerExtensions {
         // @input MapTag
         // @plugin Depenizen, AuraSkills
         // @description
-        // Changes a player's skill experience. Inputted as "<skill>=<experience>".
+        // Changes a player's skill experience. Input as "<skill>=<experience>".
         // @tags
         // <PlayerTag.auraskills_experience>
         // @example
@@ -103,9 +105,10 @@ public class AuraSkillsPlayerExtensions {
         // -->
         PlayerTag.registerOnlineOnlyMechanism("auraskills_experience", MapTag.class, (player, mechanism, value) -> {
             SkillsUser user = AuraSkillsApi.get().getUser(player.getUUID());
+            Skill skill = null;
             for (Map.Entry<StringHolder, ObjectTag> entry : value.entrySet()) {
                 try {
-                    Skills.valueOf(entry.getKey().toString().toUpperCase());
+                    skill = Skills.valueOf(entry.getKey().toString().toUpperCase());
                 }
                 catch (Exception e) {
                     mechanism.echoError("'" + entry.getKey() + "' is not a valid skill.");
@@ -113,7 +116,7 @@ public class AuraSkillsPlayerExtensions {
                 }
                 ElementTag element = entry.getValue().asElement();
                 if (element.isDouble() && element.asDouble() >= 0) {
-                    user.setSkillXp(Skills.valueOf(entry.getKey().toString().toUpperCase()), element.asDouble());
+                    user.setSkillXp(skill, element.asDouble());
                 }
                 else {
                     mechanism.echoError("'" + entry.getValue() + "' is not a valid experience amount.");
