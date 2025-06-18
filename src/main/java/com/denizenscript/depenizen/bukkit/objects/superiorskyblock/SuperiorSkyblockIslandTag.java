@@ -41,8 +41,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         }
         try {
             UUID uuid = UUID.fromString(string);
-            UUID spawnUUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
-            Island island = uuid.equals(spawnUUID) ? SuperiorSkyblockAPI.getSpawnIsland() : SuperiorSkyblockAPI.getIslandByUUID(uuid);
+            Island island = SuperiorSkyblockAPI.getIslandByUUID(uuid);
             if (island == null) {
                 if (context == null || context.showErrors()) {
                     Debug.echoError("SuperiorSkyblockIslandTag returning null: UUID '" + string + "' is valid, but doesn't match any island.");
