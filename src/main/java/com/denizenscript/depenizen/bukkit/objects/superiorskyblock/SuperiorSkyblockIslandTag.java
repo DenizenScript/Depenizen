@@ -39,12 +39,24 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         if (string.startsWith("superiorskyblock_island@")) {
             string = string.substring("superiorskyblock_island@".length());
         }
-        Island island = string.equals("00000000-0000-0000-0000-000000000000") ? SuperiorSkyblockAPI.getSpawnIsland() : SuperiorSkyblockAPI.getIslandByUUID(UUID.fromString(string));
-        if (island == null) {
-            Debug.echoError("No island with the uuid '" + string + "' exists.");
+        try {
+            UUID uuid = UUID.fromString(string);
+            UUID spawnUUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
+            Island island = uuid.equals(spawnUUID) ? SuperiorSkyblockAPI.getSpawnIsland() : SuperiorSkyblockAPI.getIslandByUUID(uuid);
+            if (island == null) {
+                if (context == null || context.showErrors()) {
+                    Debug.echoError("SuperiorSkyblockIslandTag returning null: UUID '" + string + "' is valid, but doesn't match any island.");
+                }
+                return null;
+            }
+            return new SuperiorSkyblockIslandTag(island);
+        }
+        catch (IllegalArgumentException e) {
+            if (context == null || context.showErrors()) {
+                Debug.echoError("SuperiorSkyblockIslandTag returning null: Invalid UUID '" + string + "' specified.");
+            }
             return null;
         }
-        return new SuperiorSkyblockIslandTag(island);
     }
 
     public static boolean matches(String string) {
@@ -113,6 +125,17 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
     }
 
     public static void register() {
+
+        // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.average_rating>
+        // @returns ElementTag(Decimal)
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Returns the current average rating of an island.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "average_rating", (attribute, object) -> {
+            return new ElementTag(object.getIsland().getTotalRating());
+        });
 
         // <--[tag]
         // @attribute <SuperiorSkyblockIslandTag.balance>
@@ -197,6 +220,17 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         });
 
         // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.is_spawn_island>
+        // @returns ElementTag(Boolean)
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Returns whether this is the spawn island.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "is_spawn_island", (attribute, object) -> {
+            return new ElementTag(object.getIsland().isSpawn());
+        });
+
+        // <--[tag]
         // @attribute <SuperiorSkyblockIslandTag.level>
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
@@ -224,7 +258,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the members of this island, including the leader.
+        // Returns the members of this island, including the owner.
         // -->
         tagProcessor.registerTag(ListTag.class, "members", (attribute, object) -> {
             return new ListTag(object.getIsland().getIslandMembers(true), player -> new PlayerTag(player.asPlayer()));
@@ -304,17 +338,6 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // -->
         tagProcessor.registerTag(ElementTag.class, "size", (attribute, object) -> {
             return new ElementTag(object.getIsland().getIslandSize());
-        });
-
-        // <--[tag]
-        // @attribute <SuperiorSkyblockIslandTag.total_rating>
-        // @returns ElementTag(Decimal)
-        // @plugin Depenizen, SuperiorSkyblock
-        // @description
-        // Returns the current average rating of an island.
-        // -->
-        tagProcessor.registerTag(ElementTag.class, "total_rating", (attribute, object) -> {
-            return new ElementTag(object.getIsland().getTotalRating());
         });
 
         // <--[tag]
