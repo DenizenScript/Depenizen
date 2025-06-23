@@ -63,7 +63,7 @@ public class FabledPlayerUpgradesSkillScriptEvent extends BukkitScriptEvent impl
         return switch (name) {
             case "level" -> new ElementTag(event.getUpgradedSkill().getLevel());
             case "cost" -> new ElementTag(event.getCost());
-            case "skill" -> new ElementTag(event.getUpgradedSkill().getData().getName());
+            case "skill" -> new ElementTag(event.getUpgradedSkill().getData().getName(), true);
             default -> super.getContext(name);
         };
     }

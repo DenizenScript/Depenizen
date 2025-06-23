@@ -14,11 +14,6 @@ import studio.magemonkey.fabled.manager.FabledAttribute;
 
 public class FabledPlayerExtensions {
 
-    public FabledPlayerExtensions(PlayerTag player) {
-        this.player = player;
-    }
-
-    PlayerTag player;
     static Skill fabledSkill;
     static FabledClass fabledClass;
     static PlayerClass playerClass;
