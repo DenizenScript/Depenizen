@@ -157,6 +157,13 @@
             <systemPath>${basedir}/lib/EssentialsX.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>studio.magemonkey</groupId>
+            <artifactId>fabled</artifactId>
+            <version>1.0.4-R0.44-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/Fabled.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>MassiveCore</artifactId>
             <version>3.2.3</version>
@@ -315,13 +322,6 @@
             <version>2.33.3</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Shopkeepers.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.sucy</groupId>
-            <artifactId>SkillAPI</artifactId>
-            <version>3.37</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/SkillAPI.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.khorn</groupId>
