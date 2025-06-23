@@ -14,8 +14,6 @@ import studio.magemonkey.fabled.manager.FabledAttribute;
 
 public class FabledPlayerExtensions {
 
-    static Skill fabledSkill;
-    static FabledClass fabledClass;
     static PlayerClass playerClass;
     static PlayerSkill playerSkill;
 
@@ -134,18 +132,6 @@ public class FabledPlayerExtensions {
         });
 
         // <--[tag]
-        // @attribute <PlayerTag.fabled_skill_cooldown[<skill>]>
-        // @returns DurationTag
-        // @plugin Depenizen, Fabled
-        // @description
-        // Returns the remaining cooldown the player has in the specified skill.
-        // -->
-        PlayerTag.tagProcessor.registerTag(DurationTag.class, ElementTag.class, "fabled_skill_cooldown", (attribute, player, skill) -> {
-            playerSkill = getPlayer(player).getSkill(skill.asString());
-            return playerSkill != null ? new DurationTag(playerSkill.getCooldown()) : null;
-        });
-
-        // <--[tag]
         // @attribute <PlayerTag.fabled_has_skill[<skill>]>
         // @returns ElementTag(Boolean)
         // @plugin Depenizen, Fabled
@@ -153,7 +139,7 @@ public class FabledPlayerExtensions {
         // Returns whether the player has the specified skill.
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_has_skill", (attribute, player, skill) -> {
-            fabledSkill = Fabled.getSkill(skill.toString());
+            Skill fabledSkill = Fabled.getSkill(skill.toString());
             return fabledSkill != null ? new ElementTag(getPlayer(player).hasSkill(fabledSkill.getName())) : null;
         });
 
@@ -166,7 +152,7 @@ public class FabledPlayerExtensions {
         // If none is specified, returns whether the player professes in any class.
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_in_class", (attribute, player, value) -> {
-            fabledClass = Fabled.getClass(value.asString());
+            FabledClass fabledClass = Fabled.getClass(value.asString());
             return fabledClass != null ? new ElementTag(getPlayer(player).isExactClass(fabledClass)) : null;
         });
 
@@ -178,7 +164,7 @@ public class FabledPlayerExtensions {
         // Returns the player's main Fabled class. Returns null if the player doesn't have one.
         // -->
         PlayerTag.tagProcessor.registerTag(FabledClassTag.class, "fabled_main_class", (attribute, player) -> {
-            PlayerClass playerClass = getPlayer(player).getMainClass();
+            playerClass = getPlayer(player).getMainClass();
             return playerClass != null ? new FabledClassTag(playerClass.getData()) : null;
         });
 
@@ -214,6 +200,18 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(MaterialTag.class, ElementTag.class, "fabled_skill_bind", (attribute, player, skill) -> {
             playerSkill = getPlayer(player).getSkill(skill.asString());
             return playerSkill != null ? new MaterialTag(playerSkill.getBind()) : null;
+        });
+
+        // <--[tag]
+        // @attribute <PlayerTag.fabled_skill_cooldown[<skill>]>
+        // @returns DurationTag
+        // @plugin Depenizen, Fabled
+        // @description
+        // Returns the remaining cooldown the player has in the specified skill.
+        // -->
+        PlayerTag.tagProcessor.registerTag(DurationTag.class, ElementTag.class, "fabled_skill_cooldown", (attribute, player, skill) -> {
+            playerSkill = getPlayer(player).getSkill(skill.asString());
+            return playerSkill != null ? new DurationTag(playerSkill.getCooldown()) : null;
         });
 
         // <--[tag]
