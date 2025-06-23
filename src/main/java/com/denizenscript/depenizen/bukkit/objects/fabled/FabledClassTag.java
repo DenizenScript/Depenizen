@@ -118,17 +118,6 @@ public class FabledClassTag implements ObjectTag {
         });
 
         // <--[tag]
-        // @attribute <FabledClassTag.prefix_color>
-        // @returns ElementTag
-        // @plugin Depenizen, Fabled
-        // @description
-        // Returns the color of the prefix of this Fabled class.
-        // -->
-        tagProcessor.registerTag(ElementTag.class, "prefix_color", (attribute, object) -> {
-            return new ElementTag(fabledClass.getPrefixColor());
-        });
-
-        // <--[tag]
         // @attribute <FabledClassTag.class_prefix>
         // @returns ElementTag
         // @plugin Depenizen, Fabled
