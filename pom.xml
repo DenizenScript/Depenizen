@@ -159,7 +159,7 @@
         <dependency>
             <groupId>studio.magemonkey</groupId>
             <artifactId>fabled</artifactId>
-            <version>1.0.4-R0.44-SNAPSHOT</version>
+            <version>1.0.4-R0.52-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/Fabled.jar</systemPath>
         </dependency>
