@@ -10,12 +10,6 @@ import com.denizenscript.depenizen.bukkit.objects.superiorskyblock.SuperiorSkybl
 
 public class SuperiorSkyblockPlayerExtensions {
 
-    public SuperiorSkyblockPlayerExtensions(PlayerTag player) {
-        this.player = player;
-    }
-
-    PlayerTag player;
-
     public static SuperiorPlayer getSuperiorPlayer(PlayerTag player) {
         return SuperiorSkyblockAPI.getPlayer(player.getUUID());
     }
