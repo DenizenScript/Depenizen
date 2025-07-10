@@ -45,7 +45,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_class_exp", (attribute, player, value) -> {
             playerClass = getPlayer(player).getClass(value.asString());
             return playerClass != null ? new ElementTag(playerClass.getExp()) : null;
-        });
+        }, "skillapi.class_exp");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_class_health[<class>]>
@@ -57,7 +57,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_class_health", (attribute, player, value) -> {
             playerClass = getPlayer(player).getClass(value.asString());
             return playerClass != null ? new ElementTag(playerClass.getHealth()) : null;
-        });
+        }, "skillapi.class_health");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_class_level[<class>]>
@@ -69,7 +69,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_class_level", (attribute, player, value) -> {
             playerClass = getPlayer(player).getClass(value.asString());
             return playerClass != null ? new ElementTag(playerClass.getLevel()) : null;
-        });
+        }, "skillapi.class_level");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_class_mana[<class>]>
@@ -81,7 +81,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_class_mana", (attribute, player, value) -> {
             playerClass = getPlayer(player).getClass(value.asString());
             return playerClass != null ? new ElementTag(playerClass.getMana()) : null;
-        });
+        }, "skillapi.class_mana");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_class_maxed[<class>]>
@@ -93,7 +93,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_class_maxed", (attribute, player, value) -> {
             playerClass = getPlayer(player).getClass(value.asString());
             return playerClass != null ? new ElementTag(playerClass.isLevelMaxed()) : null;
-        });
+        }, "skillapi.class_maxed");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_class_points[<class>]>
@@ -105,7 +105,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_class_points", (attribute, player, value) -> {
             playerClass = getPlayer(player).getClass(value.asString());
             return playerClass != null ? new ElementTag(playerClass.getPoints()) : null;
-        });
+        }, "skillapi.class_points");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_class_required_exp[<class>]>
@@ -117,7 +117,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_class_required_exp", (attribute, player, value) -> {
             playerClass = getPlayer(player).getClass(value.asString());
             return playerClass != null ? new ElementTag(playerClass.getRequiredExp()) : null;
-        });
+        }, "skillapi.class_required_exp");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_class_total_exp[<class>]>
@@ -129,7 +129,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_class_total_exp", (attribute, player, value) -> {
             playerClass = getPlayer(player).getClass(value.asString());
             return playerClass != null ? new ElementTag(playerClass.getTotalExp()) : null;
-        });
+        }, "skillapi.class_total_exp");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_has_skill[<skill>]>
@@ -141,7 +141,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_has_skill", (attribute, player, skill) -> {
             Skill fabledSkill = Fabled.getSkill(skill.toString());
             return fabledSkill != null ? new ElementTag(getPlayer(player).hasSkill(fabledSkill.getName())) : null;
-        });
+        }, "skillapi.has_skill");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_in_class[<class>]>
@@ -154,7 +154,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_in_class", (attribute, player, value) -> {
             FabledClass fabledClass = Fabled.getClass(value.asString());
             return fabledClass != null ? new ElementTag(getPlayer(player).isExactClass(fabledClass)) : null;
-        });
+        }, "skillapi.in_class");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_main_class>
@@ -166,7 +166,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(FabledClassTag.class, "fabled_main_class", (attribute, player) -> {
             playerClass = getPlayer(player).getMainClass();
             return playerClass != null ? new FabledClassTag(playerClass.getData()) : null;
-        });
+        }, "skillapi.main_class");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_mana>
@@ -177,7 +177,7 @@ public class FabledPlayerExtensions {
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, "fabled_mana", (attribute, player) -> {
             return new ElementTag(getPlayer(player).getMana());
-        });
+        }, "skillapi.mana");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_max_mana>
@@ -188,7 +188,7 @@ public class FabledPlayerExtensions {
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, "fabled_max_mana", (attribute, player) -> {
             return new ElementTag(getPlayer(player).getMaxMana());
-        });
+        }, "skillapi.max_mana");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_skill_bind[<skill>]>
@@ -200,7 +200,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(MaterialTag.class, ElementTag.class, "fabled_skill_bind", (attribute, player, skill) -> {
             playerSkill = getPlayer(player).getSkill(skill.asString());
             return playerSkill != null ? new MaterialTag(playerSkill.getBind()) : null;
-        });
+        }, "skillapi.skill_bind");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_skill_cooldown[<skill>]>
@@ -212,7 +212,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(DurationTag.class, ElementTag.class, "fabled_skill_cooldown", (attribute, player, skill) -> {
             playerSkill = getPlayer(player).getSkill(skill.asString());
             return playerSkill != null ? new DurationTag(playerSkill.getCooldown()) : null;
-        });
+        }, "skillapi.skill_cooldown");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_skill_cost[<skill>]>
@@ -224,7 +224,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_skill_cost", (attribute, player, skill) -> {
             playerSkill = getPlayer(player).getSkill(skill.asString());
             return playerSkill != null ? new ElementTag(playerSkill.getCost()) : null;
-        });
+        }, "skillapi.skill_cost");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_skill_indicator[<skill>]>
@@ -236,7 +236,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ItemTag.class, ElementTag.class, "fabled_skill_indicator", (attribute, player, skill) -> {
             playerSkill = getPlayer(player).getSkill(skill.asString());
             return playerSkill != null ? new ItemTag(playerSkill.getData().getIcon(getPlayer(player))) : null;
-        });
+        }, "skillapi.skill_indicator");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_skill_level[<skill>]>
@@ -248,19 +248,7 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_skill_level", (attribute, player, skill) -> {
             playerSkill = getPlayer(player).getSkill(skill.asString());
             return playerSkill != null ? new ElementTag(playerSkill.getLevel()) : null;
-        });
-
-        // <--[tag]
-        // @attribute <PlayerTag.fabled_skill_maxed[<skill>]>
-        // @returns ElementTag(Boolean)
-        // @plugin Depenizen, Fabled
-        // @description
-        // Returns whether the player has reached max level in the specified skill.
-        // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_skill_maxed", (attribute, player, skill) -> {
-            playerSkill = getPlayer(player).getSkill(skill.asString());
-            return playerSkill != null ? new ElementTag(playerSkill.isMaxed()) : null;
-        });
+        }, "skillapi.skill_level");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_skill_level_requirement[<skill>]>
@@ -272,7 +260,19 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_skill_level_requirement", (attribute, player, skill) -> {
             playerSkill = getPlayer(player).getSkill(skill.asString());
             return playerSkill != null ? new ElementTag(playerSkill.getLevelReq()) : null;
-        });
+        }, "skillapi.skill_level_requirement");
+
+        // <--[tag]
+        // @attribute <PlayerTag.fabled_skill_maxed[<skill>]>
+        // @returns ElementTag(Boolean)
+        // @plugin Depenizen, Fabled
+        // @description
+        // Returns whether the player has reached max level in the specified skill.
+        // -->
+        PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_skill_maxed", (attribute, player, skill) -> {
+            playerSkill = getPlayer(player).getSkill(skill.asString());
+            return playerSkill != null ? new ElementTag(playerSkill.isMaxed()) : null;
+        }, "skillapi.skill_maxed");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_skill_on_cooldown[<skill>]>
@@ -284,7 +284,19 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_skill_on_cooldown", (attribute, player, skill) -> {
             playerSkill = getPlayer(player).getSkill(skill.asString());
             return playerSkill != null ? new ElementTag(playerSkill.isOnCooldown()) : null;
-        });
+        }, "skillapi.skill_on_cooldown");
+
+        // <--[tag]
+        // @attribute <PlayerTag.fabled_skill_points[<skill>]>
+        // @returns ElementTag(Number)
+        // @plugin Depenizen, Fabled
+        // @description
+        // Returns how many skill points the player has invested in the specified skill.
+        // -->
+        PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_skill_points", (attribute, player, skill) -> {
+            playerSkill = getPlayer(player).getSkill(skill.asString());
+            return playerSkill != null ? new ElementTag(playerSkill.getPlayerData().getPoints()) : null;
+        }, "skillapi.skill_points");
 
         // <--[tag]
         // @attribute <PlayerTag.fabled_skill_status[<skill>]>
@@ -297,6 +309,6 @@ public class FabledPlayerExtensions {
         PlayerTag.tagProcessor.registerTag(ElementTag.class, ElementTag.class, "fabled_skill_status", (attribute, player, skill) -> {
             playerSkill = getPlayer(player).getSkill(skill.asString());
             return playerSkill != null ? new ElementTag(playerSkill.getStatus()) : null;
-        });
+        }, "skillapi.skill_status");
     }
 }
