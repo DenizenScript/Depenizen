@@ -58,6 +58,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         }
     }
 
+    // Yes, this is the actual UUID that is associated with the spawn island.
     public static final UUID spawnIsland = UUID.fromString("00000000-0000-0000-0000-000000000000");
 
     public static boolean matches(String string) {
@@ -308,14 +309,11 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag(Number)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the rating a player gave an island, or 'null' if the player hasn't given one.
+        // Returns the rating a player gave an island, or null if the player hasn't given one.
         // -->
         tagProcessor.registerTag(ElementTag.class, PlayerTag.class, "rating", (attribute, object, player) -> {
             Rating rating = object.getIsland().getRating(SuperiorSkyblockAPI.getPlayer(player.getUUID()));
-            if (rating.getValue() > -1) {
-                return new ElementTag(rating.getValue());
-            }
-            return null;
+            return rating.getValue() > -1 ? new ElementTag(rating.getValue()) : null;
         });
 
         // <--[tag]
@@ -365,9 +363,8 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         tagProcessor.registerMechanism("balance", false, ElementTag.class, (object, mechanism, value) -> {
             if (object.getIsland().isSpawn()) {
                 mechanism.echoError("Spawn islands cannot have a balance.");
-                return;
             }
-            if (mechanism.requireDouble()) {
+            else if (mechanism.requireDouble()) {
                 object.getIsland().getIslandBank().setBalance(value.asBigDecimal());
             }
         });
@@ -403,9 +400,8 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         tagProcessor.registerMechanism("locked", false, ElementTag.class, (object, mechanism, value) -> {
             if (object.getIsland().isSpawn()) {
                 mechanism.echoError("Spawn islands cannot be locked.");
-                return;
             }
-            if (mechanism.requireBoolean()) {
+            else if (mechanism.requireBoolean()) {
                 object.getIsland().setLocked(value.asBoolean());
             }
         });
@@ -423,9 +419,8 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         tagProcessor.registerMechanism("name", false, ElementTag.class, (object, mechanism, value) -> {
             if (object.getIsland().isSpawn()) {
                 mechanism.echoError("Spawn islands cannot have a name.");
-                return;
             }
-            if (value.asString().isEmpty()) {
+            else if (value.asString().isEmpty()) {
                 mechanism.echoError("You cannot have an island with no name.");
             }
             else if (SuperiorSkyblockAPI.getIsland(value.asString()) != null) {
@@ -449,9 +444,8 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         tagProcessor.registerMechanism("size", false, ElementTag.class, (object, mechanism, value) -> {
             if (object.getIsland().isSpawn()) {
                 mechanism.echoError("Spawn islands cannot have their size adjusted.");
-                return;
             }
-            if (mechanism.requireInteger()) {
+            else if (mechanism.requireInteger()) {
                 if (value.asInt() >= 1) {
                     object.getIsland().setIslandSize(value.asInt());
                 }

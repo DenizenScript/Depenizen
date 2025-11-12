@@ -18,10 +18,7 @@ public class SuperiorSkyblockLocationExtensions {
         // -->
         LocationTag.tagProcessor.registerTag(SuperiorSkyblockIslandTag.class, "superiorskyblock_island", (attribute, location) -> {
             Island island = SuperiorSkyblockAPI.getIslandAt(location);
-            if (island != null) {
-                return new SuperiorSkyblockIslandTag(island);
-            }
-            return null;
+            return island != null ? new SuperiorSkyblockIslandTag(island) : null;
         });
     }
 }

@@ -49,10 +49,7 @@ public class SuperiorSkyblockPlayerExtensions {
         // -->
         PlayerTag.tagProcessor.registerTag(SuperiorSkyblockIslandTag.class, "superiorskyblock_island", (attribute, player) -> {
             Island island = getSuperiorPlayer(player).getIsland();
-            if (island != null) {
-                return new SuperiorSkyblockIslandTag(island);
-            }
-            return null;
+            return island != null ? new SuperiorSkyblockIslandTag(island) : null;
         });
 
         // <--[tag]
@@ -64,10 +61,7 @@ public class SuperiorSkyblockPlayerExtensions {
         // -->
         PlayerTag.tagProcessor.registerTag(ElementTag.class, "superiorskyblock_island_role", (attribute, player) -> {
             PlayerRole role = getSuperiorPlayer(player).getPlayerRole();
-            if (role != null) {
-                return new ElementTag(role.getName(), true);
-            }
-            return null;
+            return role != null ? new ElementTag(role.getName(), true) : null;
         });
 
         // <--[tag]
