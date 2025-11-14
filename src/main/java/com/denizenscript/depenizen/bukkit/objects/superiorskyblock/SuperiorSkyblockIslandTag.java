@@ -196,7 +196,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // Returns the coop members of this island.
         // -->
         tagProcessor.registerTag(ListTag.class, "coop_members", (attribute, object) -> {
-            return new ListTag(object.getIsland().getCoopPlayers(), players -> new PlayerTag(players.asPlayer()));
+            return new ListTag(object.getIsland().getCoopPlayers(), player -> new PlayerTag(player.asPlayer()));
         });
 
         // <--[tag]
@@ -207,7 +207,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // Returns the players currently within the bounds of this island.
         // -->
         tagProcessor.registerTag(ListTag.class, "current_visitors", (attribute, object) -> {
-            return new ListTag(object.getIsland().getAllPlayersInside(), players -> new PlayerTag(players.asPlayer()));
+            return new ListTag(object.getIsland().getAllPlayersInside(), player -> new PlayerTag(player.asPlayer()));
         });
 
         // <--[tag]
