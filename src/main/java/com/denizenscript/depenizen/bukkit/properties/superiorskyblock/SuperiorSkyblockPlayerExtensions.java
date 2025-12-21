@@ -1,5 +1,6 @@
 package com.denizenscript.depenizen.bukkit.properties.superiorskyblock;
 
+import com.bgsoftware.superiorskyblock.SuperiorSkyblockPlugin;
 import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
 import com.bgsoftware.superiorskyblock.api.island.Island;
 import com.bgsoftware.superiorskyblock.api.island.PlayerRole;
@@ -47,7 +48,7 @@ public class SuperiorSkyblockPlayerExtensions {
         // @description
         // Returns the island a player belongs to, if any.
         // -->
-        PlayerTag.tagProcessor.registerTag(SuperiorSkyblockIslandTag.class, "superiorskyblock_island", (attribute, player) -> {
+        PlayerTag.registerOnlineOnlyTag(SuperiorSkyblockIslandTag.class, "superiorskyblock_island", (attribute, player) -> {
             Island island = getSuperiorPlayer(player).getIsland();
             return island != null ? new SuperiorSkyblockIslandTag(island) : null;
         });
@@ -56,10 +57,11 @@ public class SuperiorSkyblockPlayerExtensions {
         // @attribute <PlayerTag.superiorskyblock_island_role>
         // @returns ElementTag
         // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism <PlayerTag.superiorskyblock_island_role>
         // @description
-        // Returns the role a player has on an island, if any.
+        // Returns the role a player has on their island, if they are part of one.
         // -->
-        PlayerTag.tagProcessor.registerTag(ElementTag.class, "superiorskyblock_island_role", (attribute, player) -> {
+        PlayerTag.registerOnlineOnlyTag(ElementTag.class, "superiorskyblock_island_role", (attribute, player) -> {
             PlayerRole role = getSuperiorPlayer(player).getPlayerRole();
             return role != null ? new ElementTag(role.getName(), true) : null;
         });
@@ -86,7 +88,7 @@ public class SuperiorSkyblockPlayerExtensions {
         // @tags
         // <PlayerTag.superiorskyblock_bypass_mode>
         // -->
-        PlayerTag.registerOnlineOnlyMechanism("superiorskyblock_bypass_mode", ElementTag.class, (player, mechanism, value) -> {
+        PlayerTag.registerOfflineMechanism("superiorskyblock_bypass_mode", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireBoolean()) {
                 getSuperiorPlayer(player).setBypassMode(value.asBoolean());
             }
@@ -102,9 +104,38 @@ public class SuperiorSkyblockPlayerExtensions {
         // @tags
         // <PlayerTag.superiorskyblock_disbands>
         // -->
-        PlayerTag.registerOnlineOnlyMechanism("superiorskyblock_disbands", ElementTag.class, (player, mechanism, value) -> {
+        PlayerTag.registerOfflineMechanism("superiorskyblock_disbands", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireInteger()) {
                 getSuperiorPlayer(player).setDisbands(value.asInt());
+            }
+        });
+
+        // <--[mechanism]
+        // @object PlayerTag
+        // @name superiorskyblock_island_role
+        // @input ElementTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Changes what role a player has on their island.
+        // Valid roles are Guest, Coop, Member, Moderator, and Admin.
+        // See <@link mechanism SuperiorSkyblockIslandTag.leader> to transfer the island's 'Leader' role.
+        // @tags
+        // <PlayerTag.superiorskyblock_island_role>
+        // -->
+        PlayerTag.registerOnlineOnlyMechanism("superiorskyblock_island_role", ElementTag.class, (player, mechanism, value) -> {
+            if (!(getSuperiorPlayer(player).hasIsland())) {
+                mechanism.echoError("This player is not part of an island.");
+                return;
+            }
+            PlayerRole role = SuperiorSkyblockPlugin.getPlugin().getRoles().getPlayerRole(value.toString());
+            if (role == null) {
+                mechanism.echoError("'" + value + "' is not a valid player role.");
+            }
+            else if (getSuperiorPlayer(player).getPlayerRole().isLastRole() || role.isLastRole()) {
+                mechanism.echoError("Changes involving the 'leader' role cannot be transferred through the 'PlayerTag.superiorskyblock_island_role' mechanism. Use the 'SuperiorSkyblockIslandTag.leader' mechanism instead.");
+            }
+            else {
+                getSuperiorPlayer(player).setPlayerRole(role);
             }
         });
 
@@ -118,7 +149,7 @@ public class SuperiorSkyblockPlayerExtensions {
         // @tags
         // <PlayerTag.superiorskyblock_spy_mode>
         // -->
-        PlayerTag.registerOnlineOnlyMechanism("superiorskyblock_spy_mode", ElementTag.class, (player, mechanism, value) -> {
+        PlayerTag.registerOfflineMechanism("superiorskyblock_spy_mode", ElementTag.class, (player, mechanism, value) -> {
             if (mechanism.requireBoolean()) {
                 getSuperiorPlayer(player).setAdminSpy(value.asBoolean());
             }

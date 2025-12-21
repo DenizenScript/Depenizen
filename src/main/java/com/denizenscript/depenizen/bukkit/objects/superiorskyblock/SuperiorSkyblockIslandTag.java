@@ -1,21 +1,29 @@
 package com.denizenscript.depenizen.bukkit.objects.superiorskyblock;
 
+import com.bgsoftware.superiorskyblock.SuperiorSkyblockPlugin;
 import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
+import com.bgsoftware.superiorskyblock.api.enums.MemberRemoveReason;
 import com.bgsoftware.superiorskyblock.api.enums.Rating;
 import com.bgsoftware.superiorskyblock.api.island.Island;
-import com.denizenscript.denizen.objects.PlayerTag;
-import com.denizenscript.denizencore.objects.Adjustable;
-import com.denizenscript.denizencore.objects.Fetchable;
-import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.objects.core.ElementTag;
-import com.denizenscript.denizencore.objects.core.ListTag;
+import com.bgsoftware.superiorskyblock.api.island.IslandFlag;
+import com.bgsoftware.superiorskyblock.api.world.Dimension;
+import com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer;
+import com.denizenscript.denizen.objects.*;
+import com.denizenscript.denizencore.objects.*;
+import com.denizenscript.denizencore.objects.core.*;
 import com.denizenscript.denizencore.tags.Attribute;
 import com.denizenscript.denizencore.tags.ObjectTagProcessor;
 import com.denizenscript.denizencore.tags.TagContext;
+import com.bgsoftware.superiorskyblock.api.wrappers.WorldPosition;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
+import com.denizenscript.denizencore.utilities.text.StringHolder;
+import org.bukkit.Registry;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import java.util.UUID;
 
 public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
@@ -31,7 +39,6 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
     // @plugin Depenizen, SuperiorSkyblock
     // @description
     // A SuperiorSkyblockIslandTag represents a SuperiorSkyblock island.
-    //
     // -->
 
     @Fetchable("superiorskyblock_island")
@@ -42,13 +49,13 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         try {
             UUID uuid = UUID.fromString(string);
             Island island = uuid.equals(spawnIsland) ? SuperiorSkyblockAPI.getSpawnIsland() : SuperiorSkyblockAPI.getIslandByUUID(uuid);
-            if (island == null) {
-                if (context == null || context.showErrors()) {
-                    Debug.echoError("SuperiorSkyblockIslandTag returning null: UUID '" + string + "' is valid, but doesn't match any island.");
-                }
-                return null;
+            if (island != null) {
+                return new SuperiorSkyblockIslandTag(island);
             }
-            return new SuperiorSkyblockIslandTag(island);
+            if (context == null || context.showErrors()) {
+                Debug.echoError("SuperiorSkyblockIslandTag returning null: UUID '" + string + "' is valid, but doesn't match any island.");
+            }
+            return null;
         }
         catch (IllegalArgumentException e) {
             if (context == null || context.showErrors()) {
@@ -126,6 +133,10 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         return island;
     }
 
+    public static SuperiorPlayer getSuperiorPlayer(PlayerTag player) {
+        return SuperiorSkyblockAPI.getPlayer(player.getUUID());
+    }
+
     public static void register() {
 
         // <--[tag]
@@ -145,11 +156,11 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @plugin Depenizen, SuperiorSkyblock
         // @mechanism SuperiorSkyblockIslandTag.balance
         // @description
-        // Returns the balance of this island.
+        // Returns the bank balance of an island.
         // -->
         tagProcessor.registerTag(ElementTag.class, "balance", (attribute, object) -> {
             if (object.getIsland().isSpawn()) {
-                attribute.echoError("Spawn islands cannot have a balance.");
+                attribute.echoError("Spawn islands do not have a balance.");
                 return null;
             }
             return new ElementTag(object.getIsland().getIslandBank().getBalance());
@@ -159,17 +170,32 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @attribute <SuperiorSkyblockIslandTag.banned_players>
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism <SuperiorSkyblockIslandTag.ban_player>
+        // @mechanism <SuperiorSkyblockIslandTag.unban_player>
         // @description
-        // Returns a list of players banned on this island.
+        // Returns the players banned on an island.
         // -->
         tagProcessor.registerTag(ListTag.class, "banned_players", (attribute, object) -> {
             return new ListTag(object.getIsland().getBannedPlayers(), player -> new PlayerTag(player.asPlayer()));
         });
 
         // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.biome>
+        // @returns BiomeTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism <SuperiorSkyblockIslandTag.biome>
+        // @description
+        // Returns the current biome of an island.
+        // -->
+        tagProcessor.registerTag(BiomeTag.class, "biome", (attribute, object) -> {
+            return new BiomeTag(object.getIsland().getBiome());
+        });
+
+        // <--[tag]
         // @attribute <SuperiorSkyblockIslandTag.bonus_level>
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism <SuperiorSkyblockIslandTag.bonus_level>
         // @description
         // Returns the bonus level of an island.
         // -->
@@ -181,6 +207,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @attribute <SuperiorSkyblockIslandTag.bonus_worth>
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism <SuperiorSkyblockIslandTag.bonus_worth>
         // @description
         // Returns the bonus worth of an island.
         // -->
@@ -189,14 +216,50 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         });
 
         // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.center[<dimension>]>
+        // @returns LocationTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Returns the center of an island in the provided dimension.
+        // Valid dimensions are NORMAL, NETHER, and THE_END.
+        // -->
+        tagProcessor.registerTag(LocationTag.class, ElementTag.class, "center", (attribute, object, value) -> {
+            return new LocationTag(object.getIsland().getCenter(Dimension.getByName(value.toString())));
+        });
+
+        // <--[tag]
         // @attribute <SuperiorSkyblockIslandTag.coop_members>
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism <SuperiorSkyblockIslandTag.add_coop_member>
+        // @mechanism <SuperiorSkyblockIslandTag.kick_coop_member>
         // @description
-        // Returns the coop members of this island.
+        // Returns the coop members of an island.
         // -->
         tagProcessor.registerTag(ListTag.class, "coop_members", (attribute, object) -> {
             return new ListTag(object.getIsland().getCoopPlayers(), player -> new PlayerTag(player.asPlayer()));
+        });
+
+        // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.creation_time>
+        // @returns TimeTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Returns the time an island was created.
+        // -->
+        tagProcessor.registerTag(TimeTag.class, "creation_time", (attribute, object) -> {
+            return new TimeTag(LocalDateTime.parse(object.getIsland().getCreationTimeDate(), DateTimeFormatter.ofPattern(SuperiorSkyblockPlugin.getPlugin().getSettings().getDateFormat())).atZone(ZoneOffset.UTC));
+        });
+
+        // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.cuboid>
+        // @returns CuboidTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Returns the boundaries of an island.
+        // -->
+        tagProcessor.registerTag(CuboidTag.class, "cuboid", (attribute, object) -> {
+            return new CuboidTag(object.getIsland().getMinimum(), object.getIsland().getMaximum());
         });
 
         // <--[tag]
@@ -204,7 +267,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the players currently within the bounds of this island.
+        // Returns the players currently within the bounds of an island.
         // -->
         tagProcessor.registerTag(ListTag.class, "current_visitors", (attribute, object) -> {
             return new ListTag(object.getIsland().getAllPlayersInside(), player -> new PlayerTag(player.asPlayer()));
@@ -215,10 +278,26 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the description of this island. This may be empty if an island does not have one set.
+        // Returns the description of an island. This may be empty if an island does not have one set.
         // -->
         tagProcessor.registerTag(ElementTag.class, "description", (attribute, object) -> {
             return new ElementTag(object.getIsland().getDescription(), true);
+        });
+
+        // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.homes>
+        // @returns ListTag(LocationTag)
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Returns the home locations of an island, with the "world" being the dimension.
+        // -->
+        tagProcessor.registerTag(ListTag.class, "homes", (attribute, object) -> {
+            ListTag values = new ListTag();
+            for (Map.Entry<Dimension, WorldPosition> map : object.getIsland().getIslandHomes().entrySet()) {
+                WorldPosition pos = map.getValue();
+                values.addObject(new LocationTag(pos.getX(), pos.getY(), pos.getZ(), map.getKey().getName()));
+            }
+            return values;
         });
 
         // <--[tag]
@@ -233,11 +312,27 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         });
 
         // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.leader>
+        // @returns PlayerTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism <SuperiorSkyblockIslandTag.leader>
+        // @description
+        // Returns the leader of an island.
+        // -->
+        tagProcessor.registerTag(PlayerTag.class, "leader", (attribute, object) -> {
+            if (object.getIsland().isSpawn()) {
+                attribute.echoError("Spawn islands do not have a leader.");
+                return null;
+            }
+            return new PlayerTag(object.getIsland().getOwner().asPlayer());
+        });
+
+        // <--[tag]
         // @attribute <SuperiorSkyblockIslandTag.level>
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the level of this island.
+        // Returns the level of an island.
         // -->
         tagProcessor.registerTag(ElementTag.class, "level", (attribute, object) -> {
             return new ElementTag(object.getIsland().getIslandLevel());
@@ -259,8 +354,10 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @attribute <SuperiorSkyblockIslandTag.members>
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism <SuperiorSkyblockIslandTag.add_member>
+        // @mechanism <SuperiorSkyblockIslandTag.kick_member>
         // @description
-        // Returns the members of this island, including the owner.
+        // Returns the members of an island, including the leader.
         // -->
         tagProcessor.registerTag(ListTag.class, "members", (attribute, object) -> {
             return new ListTag(object.getIsland().getIslandMembers(true), player -> new PlayerTag(player.asPlayer()));
@@ -272,7 +369,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @plugin Depenizen, SuperiorSkyblock
         // @mechanism SuperiorSkyblockIslandTag.name
         // @description
-        // Returns the name of this island.
+        // Returns the name of an island.
         // -->
         tagProcessor.registerTag(ElementTag.class, "name", (attribute, object) -> {
             return new ElementTag(object.getIsland().getName(), true);
@@ -283,25 +380,10 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the net worth of this island. Includes money in the bank.
+        // Returns the net worth of an island. Includes money in the bank.
         // -->
         tagProcessor.registerTag(ElementTag.class, "net_worth", (attribute, object) -> {
             return new ElementTag(object.getIsland().getWorth());
-        });
-
-        // <--[tag]
-        // @attribute <SuperiorSkyblockIslandTag.owner>
-        // @returns PlayerTag
-        // @plugin Depenizen, SuperiorSkyblock
-        // @description
-        // Returns the owner of this island.
-        // -->
-        tagProcessor.registerTag(PlayerTag.class, "owner", (attribute, object) -> {
-            if (object.getIsland().isSpawn()) {
-                attribute.echoError("Spawn islands do not have an owner.");
-                return null;
-            }
-            return new PlayerTag(object.getIsland().getOwner().asPlayer());
         });
 
         // <--[tag]
@@ -312,7 +394,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // Returns the rating a player gave an island, or null if the player hasn't given one.
         // -->
         tagProcessor.registerTag(ElementTag.class, PlayerTag.class, "rating", (attribute, object, player) -> {
-            Rating rating = object.getIsland().getRating(SuperiorSkyblockAPI.getPlayer(player.getUUID()));
+            Rating rating = object.getIsland().getRating(getSuperiorPlayer(player));
             return rating.getValue() > -1 ? new ElementTag(rating.getValue()) : null;
         });
 
@@ -328,15 +410,43 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         });
 
         // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.settings>
+        // @returns MapTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism <SuperiorSkyblockIslandTag.settings>
+        // @description
+        // Returns the settings of an island.
+        // -->
+        tagProcessor.registerTag(MapTag.class, "settings", (attribute, object) -> {
+            MapTag values = new MapTag();
+            for (IslandFlag flag : IslandFlag.values()) {
+                values.putObject(flag.getName(), new ElementTag(object.getIsland().hasSettingsEnabled(flag)));
+            }
+            return values;
+        });
+
+        // <--[tag]
         // @attribute <SuperiorSkyblockIslandTag.size>
         // @returns ElementTag(Number)
         // @plugin Depenizen, SuperiorSkyblock
         // @mechanism SuperiorSkyblockIslandTag.size
         // @description
-        // Returns the world border width of the island.
+        // Returns the world border width of an island.
         // -->
         tagProcessor.registerTag(ElementTag.class, "size", (attribute, object) -> {
             return new ElementTag(object.getIsland().getIslandSize());
+        });
+
+        // <--[tag]
+        // @attribute <SuperiorSkyblockIslandTag.team_limit>
+        // @returns ElementTag(Number)
+        // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism SuperiorSkyblockIslandTag.team_limit
+        // @description
+        // Returns the maximum amount of players on an island's team.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "team_limit", (attribute, object) -> {
+            return new ElementTag(object.getIsland().getTeamLimit());
         });
 
         // <--[tag]
@@ -348,6 +458,50 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // -->
         tagProcessor.registerTag(ElementTag.class, "uuid", (attribute, object) -> {
             return new ElementTag(object.getIsland().getUniqueId().toString(), true);
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name add_coop_member
+        // @input PlayerTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Adds a coop member to an island's team.
+        // @tags
+        // <SuperiorSkyblockIslandTag.coop_members>
+        // -->
+        tagProcessor.registerMechanism("add_coop_member", false, PlayerTag.class, (object, mechanism, value) -> {
+            if (object.getIsland().isSpawn()) {
+                mechanism.echoError("Spawn islands cannot have a team of players.");
+            }
+            else if (object.getIsland().getCoopPlayers().contains(getSuperiorPlayer(value))) {
+                mechanism.echoError("This player is already part of the island.");
+            }
+            else {
+                object.getIsland().addCoop(getSuperiorPlayer(value));
+            }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name add_member
+        // @input PlayerTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Adds a member to an island's team.
+        // @tags
+        // <SuperiorSkyblockIslandTag.members>
+        // -->
+        tagProcessor.registerMechanism("add_member", false, PlayerTag.class, (object, mechanism, value) -> {
+            if (object.getIsland().isSpawn()) {
+                mechanism.echoError("Spawn islands cannot have a team of players.");
+            }
+            else if (object.getIsland().getIslandMembers(true).contains(getSuperiorPlayer(value))) {
+                mechanism.echoError("This player is already part of the island.");
+            }
+            else {
+                object.getIsland().addMember(getSuperiorPlayer(value), SuperiorSkyblockPlugin.getPlugin().getRoles().getDefaultRole());
+            }
         });
 
         // <--[mechanism]
@@ -371,6 +525,74 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
 
         // <--[mechanism]
         // @object SuperiorSkyblockIslandTag
+        // @name ban_player
+        // @input PlayerTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Bans a player from an island.
+        // @tags
+        // <SuperiorSkyblockIslandTag.banned_players>
+        // -->
+        tagProcessor.registerMechanism("ban_player", false, PlayerTag.class, (object, mechanism, value) -> {
+            if (object.getIsland().isSpawn()) {
+                mechanism.echoError("Spawn islands cannot have banned players.");
+            }
+            else if (object.getIsland().getBannedPlayers().contains(getSuperiorPlayer(value))) {
+                mechanism.echoError("This player is already banned from the island.");
+            }
+            else {
+                object.getIsland().banMember(getSuperiorPlayer(value));
+            }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name biome
+        // @input BiomeTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Sets the biome of an island.
+        // @tags
+        // <SuperiorSkyblockIslandTag.biome>
+        // -->
+        tagProcessor.registerMechanism("biome", false, BiomeTag.class, (object, mechanism, value) -> {
+            object.getIsland().setBiome(Registry.BIOME.get(value.getBiome().getKey()));
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name bonus_level
+        // @input ElementTag(Decimal)
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Sets the bonus level given to an island.
+        // @tags
+        // <SuperiorSkyblockIslandTag.bonus_level>
+        // -->
+        tagProcessor.registerMechanism("bonus_level", false, ElementTag.class, (object, mechanism, value) -> {
+            if (mechanism.requireDouble()) {
+                object.getIsland().setBonusLevel(value.asBigDecimal());
+            }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name bonus_worth
+        // @input ElementTag(Decimal)
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Controls the bonus worth given to an island.
+        // @tags
+        // <SuperiorSkyblockIslandTag.bonus_worth>
+        // -->
+        tagProcessor.registerMechanism("bonus_worth", false, ElementTag.class, (object, mechanism, value) -> {
+            if (mechanism.requireDouble()) {
+                object.getIsland().setBonusWorth(value.asBigDecimal());
+            }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
         // @name description
         // @input ElementTag
         // @plugin Depenizen, SuperiorSkyblock
@@ -382,9 +604,63 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         tagProcessor.registerMechanism("description", false, ElementTag.class, (object, mechanism, value) -> {
             if (object.getIsland().isSpawn()) {
                 mechanism.echoError("Spawn islands cannot have a description.");
-                return;
             }
-            object.getIsland().setDescription(value.asString());
+            else {
+                object.getIsland().setDescription(value.asString());
+            }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name kick_coop_member
+        // @input PlayerTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Kick a coop member from an island's team.
+        // @tags
+        // <SuperiorSkyblockIslandTag.coop_members>
+        // -->
+        tagProcessor.registerMechanism("kick_coop_member", false, PlayerTag.class, (object, mechanism, value) -> {
+            if (!(object.getIsland().getCoopPlayers().contains(getSuperiorPlayer(value)))) {
+                mechanism.echoError("This player is already not a part of this island.");
+            }
+            else {
+                object.getIsland().removeCoop(getSuperiorPlayer(value));
+            }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name kick_member
+        // @input PlayerTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Kick a member from an island's team.
+        // @tags
+        // <SuperiorSkyblockIslandTag.members>
+        // -->
+        tagProcessor.registerMechanism("kick_member", false, PlayerTag.class, (object, mechanism, value) -> {
+            if (!(object.getIsland().getIslandMembers(true).contains(getSuperiorPlayer(value)))) {
+                mechanism.echoError("This player is already not a part of this island.");
+            }
+            else {
+                object.getIsland().removeMember(getSuperiorPlayer(value), MemberRemoveReason.KICK);
+            }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name leader
+        // @input PlayerTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Transfers island leadership to the specified player.
+        // Since only one player can have the 'Leader' role at a time, the current leader will be shifted to the 'Admin' role.
+        // @tags
+        // <SuperiorSkyblockIslandTag.leader>
+        // -->
+        tagProcessor.registerMechanism("leader", false, PlayerTag.class, (object, mechanism, value) -> {
+            object.getIsland().transferIsland(getSuperiorPlayer(value));
         });
 
         // <--[mechanism]
@@ -433,6 +709,44 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
 
         // <--[mechanism]
         // @object SuperiorSkyblockIslandTag
+        // @name settings
+        // @input MapTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Controls the settings of an island.
+        // Valid settings are ALWAYS_DAY, ALWAYS_MIDDLE_DAY, ALWAYS_MIDDLE_NIGHT, ALWAYS_NIGHT, ALWAYS_RAIN, ALWAYS_SHINY, CREEPER_EXPLOSION, CROPS_GROWTH, EGG_LAY, ENDERMAN_GRIEF, FIRE_SPREAD,
+        // GHAST_FIREBALL, LAVA_FLOW, NATURAL_ANIMALS_SPAWN, NATURAL_MONSTER_SPAWN, PVP, SPAWNER_ANIMALS_SPAWN, SPAWNER_MONSTER_SPAWN, TNT_EXPLOSION, TREE_GROWTH, WATER_FLOW, and WITHER_EXPLOSION.
+        // @example
+        // # Enables pvp and disables creeper explosions.
+        // - adjust <[island]> settings:<map[pvp=true;creeper_explosion=false]>
+        // @tags
+        // <SuperiorSkyblockIslandTag.settings>
+        // -->
+        tagProcessor.registerMechanism("settings", false, MapTag.class, (object, mechanism, map) -> {
+            for (Map.Entry<StringHolder, ObjectTag> setting : map.entrySet()) {
+                IslandFlag key;
+                try {
+                    key = IslandFlag.getByName(setting.getKey().toString());
+                }
+                catch (NullPointerException e) {
+                    mechanism.echoError("'" + setting.getKey() + "' is not a valid island setting.");
+                    continue;
+                }
+                ElementTag value = setting.getValue().asElement();
+                if (!(value.isBoolean())) {
+                    mechanism.echoError("The setting for '" + key.getName() + "' is not a boolean.");
+                }
+                else if (value.asBoolean()) {
+                    object.getIsland().enableSettings(key);
+                }
+                else {
+                    object.getIsland().disableSettings(key);
+                }
+            }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
         // @name size
         // @input ElementTag(Number)
         // @plugin Depenizen, SuperiorSkyblock
@@ -446,12 +760,56 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
                 mechanism.echoError("Spawn islands cannot have their size adjusted.");
             }
             else if (mechanism.requireInteger()) {
-                if (value.asInt() >= 1) {
+                int max = SuperiorSkyblockPlugin.getPlugin().getSettings().getMaxIslandSize();
+                if (value.asInt() >= 1 && value.asInt() <= max) {
                     object.getIsland().setIslandSize(value.asInt());
                 }
                 else {
-                    mechanism.echoError("Island size must be a positive integer.");
+                    mechanism.echoError("Island size must be between 1 and " + max + ".");
                 }
+            }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name team_limit
+        // @input ElementTag(Number)
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Changes the maximum amount of players on an island's team.
+        // @tags
+        // <SuperiorSkyblockIslandTag.team_limit>
+        // -->
+        tagProcessor.registerMechanism("team_limit", false, ElementTag.class, (object, mechanism, value) -> {
+            if (object.getIsland().isSpawn()) {
+                mechanism.echoError("Spawn islands cannot have a team.");
+            }
+            else if (mechanism.requireInteger()) {
+                if (value.asInt() >= 1) {
+                    object.getIsland().setTeamLimit(value.asInt());
+                }
+                else {
+                    mechanism.echoError("Island team limit must be a positive integer.");
+                }
+            }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name unban_player
+        // @input PlayerTag
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Unbans a player from an island.
+        // @tags
+        // <SuperiorSkyblockIslandTag.banned_players>
+        // -->
+        tagProcessor.registerMechanism("unban_player", false, PlayerTag.class, (object, mechanism, value) -> {
+            if (!(object.getIsland().getBannedPlayers().contains(getSuperiorPlayer(value)))) {
+                mechanism.echoError("This player is not banned from the island.");
+            }
+            else {
+                object.getIsland().unbanMember(getSuperiorPlayer(value));
             }
         });
     }
