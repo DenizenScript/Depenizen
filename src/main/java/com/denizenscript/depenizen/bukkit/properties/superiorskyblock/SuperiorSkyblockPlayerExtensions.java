@@ -132,7 +132,7 @@ public class SuperiorSkyblockPlayerExtensions {
                 mechanism.echoError("'" + value + "' is not a valid player role.");
             }
             else if (getSuperiorPlayer(player).getPlayerRole().isLastRole() || role.isLastRole()) {
-                mechanism.echoError("Changes involving the 'leader' role cannot be transferred through the 'PlayerTag.superiorskyblock_island_role' mechanism. Use the 'SuperiorSkyblockIslandTag.leader' mechanism instead.");
+                mechanism.echoError("Changes involving the 'leader' role cannot be done through the 'PlayerTag.superiorskyblock_island_role' mechanism. Use the 'SuperiorSkyblockIslandTag.leader' mechanism instead.");
             }
             else {
                 getSuperiorPlayer(player).setPlayerRole(role);
