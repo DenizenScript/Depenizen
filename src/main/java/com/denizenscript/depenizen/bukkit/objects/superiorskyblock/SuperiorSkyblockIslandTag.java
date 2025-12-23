@@ -171,8 +171,8 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @attribute <SuperiorSkyblockIslandTag.banned_players>
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
-        // @mechanism <SuperiorSkyblockIslandTag.ban_player>
-        // @mechanism <SuperiorSkyblockIslandTag.unban_player>
+        // @mechanism SuperiorSkyblockIslandTag.ban_player
+        // @mechanism SuperiorSkyblockIslandTag.unban_player
         // @description
         // Returns the players banned on an island.
         // -->
@@ -184,7 +184,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @attribute <SuperiorSkyblockIslandTag.biome>
         // @returns BiomeTag
         // @plugin Depenizen, SuperiorSkyblock
-        // @mechanism <SuperiorSkyblockIslandTag.biome>
+        // @mechanism SuperiorSkyblockIslandTag.biome
         // @description
         // Returns the current biome of an island.
         // -->
@@ -196,7 +196,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @attribute <SuperiorSkyblockIslandTag.bonus_level>
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
-        // @mechanism <SuperiorSkyblockIslandTag.bonus_level>
+        // @mechanism SuperiorSkyblockIslandTag.bonus_level
         // @description
         // Returns the bonus level of an island.
         // -->
@@ -208,7 +208,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @attribute <SuperiorSkyblockIslandTag.bonus_worth>
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
-        // @mechanism <SuperiorSkyblockIslandTag.bonus_worth>
+        // @mechanism SuperiorSkyblockIslandTag.bonus_worth
         // @description
         // Returns the bonus worth of an island.
         // -->
@@ -217,23 +217,28 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         });
 
         // <--[tag]
-        // @attribute <SuperiorSkyblockIslandTag.center[<dimension>]>
+        // @attribute <SuperiorSkyblockIslandTag.center[<world>]>
         // @returns LocationTag
         // @plugin Depenizen, SuperiorSkyblock
         // @description
-        // Returns the center of an island in the provided dimension.
-        // Valid dimensions are NORMAL, NETHER, and THE_END.
+        // Returns the center of an island in the provided world.
         // -->
-        tagProcessor.registerTag(LocationTag.class, ElementTag.class, "center", (attribute, object, value) -> {
-            return new LocationTag(object.getIsland().getCenter(Dimension.getByName(value.toString())));
+        tagProcessor.registerTag(LocationTag.class, WorldTag.class, "center", (attribute, object, value) -> {
+            if (SuperiorSkyblockAPI.getProviders().getWorldsProvider().isIslandsWorld(value.getWorld())) {
+                return new LocationTag(object.getIsland().getCenter(SuperiorSkyblockAPI.getProviders().getWorldsProvider().getIslandsWorldDimension(value.getWorld())));
+            }
+            else {
+                attribute.echoError("The provided world does not contain islands.");
+                return null;
+            }
         });
 
         // <--[tag]
         // @attribute <SuperiorSkyblockIslandTag.coop_members>
         // @returns ListTag(PlayerTag)
         // @plugin Depenizen, SuperiorSkyblock
-        // @mechanism <SuperiorSkyblockIslandTag.add_coop_member>
-        // @mechanism <SuperiorSkyblockIslandTag.kick_coop_member>
+        // @mechanism SuperiorSkyblockIslandTag.add_coop_member
+        // @mechanism SuperiorSkyblockIslandTag.kick_coop_member
         // @description
         // Returns the coop members of an island.
         // -->
@@ -381,6 +386,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // @attribute <SuperiorSkyblockIslandTag.net_worth>
         // @returns ElementTag(Decimal)
         // @plugin Depenizen, SuperiorSkyblock
+        // @mechanism SuperiorSkyblockIslandTag.recalculate_worth
         // @description
         // Returns the net worth of an island. Includes money in the bank.
         // -->
@@ -707,6 +713,20 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
             else {
                 object.getIsland().setName(value.toString());
             }
+        });
+
+        // <--[mechanism]
+        // @object SuperiorSkyblockIslandTag
+        // @name recalculate_worth
+        // @input None
+        // @plugin Depenizen, SuperiorSkyblock
+        // @description
+        // Recalculates an island's net worth.
+        // @tags
+        // <SuperiorSkyblockIslandTag.net_worth>
+        // -->
+        tagProcessor.registerMechanism("recalculate_worth", false, (object, mechanism) -> {
+            object.getIsland().calcIslandWorth(null);
         });
 
         // <--[mechanism]
