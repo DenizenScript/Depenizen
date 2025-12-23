@@ -19,7 +19,6 @@ import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.text.StringHolder;
 import org.bukkit.Registry;
-import org.bukkit.World;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -301,8 +300,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
             ListTag values = new ListTag();
             for (Map.Entry<Dimension, WorldPosition> map : object.getIsland().getIslandHomes().entrySet()) {
                 WorldPosition pos = map.getValue();
-                World world = SuperiorSkyblockAPI.getProviders().getWorldsProvider().getIslandsWorld(object.getIsland(), map.getKey());
-                values.addObject(new LocationTag(pos.getX(), pos.getY(), pos.getZ(), world.getName()));
+                values.addObject(new LocationTag(pos.getX(), pos.getY(), pos.getZ(), SuperiorSkyblockAPI.getProviders().getWorldsProvider().getIslandsWorld(object.getIsland(), map.getKey()).getName()));
             }
             return values;
         });
