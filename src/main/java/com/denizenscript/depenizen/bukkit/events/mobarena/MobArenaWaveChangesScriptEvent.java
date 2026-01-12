@@ -19,7 +19,7 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
     // @Triggers when a wave changes in a MobArena.
     //
     // @Context
-    // <context.arena> Returns the arena in which the wave change occured.
+    // <context.arena> Returns the arena in which the wave change occurred.
     // <context.wave> Returns the number of the new wave.
     //
     // @Plugin Depenizen, MobArena
@@ -33,12 +33,10 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
     }
 
     public NewWaveEvent event;
-    public MobArenaArenaTag arena;
-    public ElementTag wave;
 
     @Override
     public boolean matches(ScriptPath path) {
-        String arenaname = path.eventArgLowerAt(2).replace("mobarena@", "");
+        String arenaname = path.eventArgLowerAt(1).replace("mobarena@", "");
         MobArenaArenaTag a = MobArenaArenaTag.valueOf(arenaname);
         if (!((arenaname.equals("arena") || (a != null && a.getArena() == event.getArena())) && event.getWave() != null)) {
             return false;
@@ -54,16 +52,14 @@ public class MobArenaWaveChangesScriptEvent extends BukkitScriptEvent implements
     @Override
     public ObjectTag getContext(String name) {
         return switch (name) {
-            case "arena" -> arena;
-            case "wave" -> wave;
+            case "arena" -> new MobArenaArenaTag(event.getArena());
+            case "wave" -> new ElementTag(event.getWaveNumber());
             default -> super.getContext(name);
         };
     }
 
     @EventHandler
     public void onMobArenaWaveChanges(NewWaveEvent event) {
-        arena = new MobArenaArenaTag(event.getArena());
-        wave = new ElementTag(event.getWaveNumber());
         this.event = event;
         fire(event);
     }
