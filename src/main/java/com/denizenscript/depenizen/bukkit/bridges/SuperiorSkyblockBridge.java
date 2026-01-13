@@ -1,5 +1,8 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
+import com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI;
+import com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer;
+import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
 import com.denizenscript.denizencore.tags.TagManager;
@@ -9,6 +12,10 @@ import com.denizenscript.depenizen.bukkit.objects.superiorskyblock.SuperiorSkybl
 import com.denizenscript.depenizen.bukkit.properties.superiorskyblock.*;
 
 public class SuperiorSkyblockBridge extends Bridge {
+
+    public static SuperiorPlayer getSuperiorPlayer(PlayerTag player) {
+        return SuperiorSkyblockAPI.getPlayer(player.getUUID());
+    }
 
     @Override
     public void init() {

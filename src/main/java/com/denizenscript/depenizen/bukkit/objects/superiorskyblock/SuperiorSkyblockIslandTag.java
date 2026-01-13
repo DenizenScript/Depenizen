@@ -7,7 +7,6 @@ import com.bgsoftware.superiorskyblock.api.enums.Rating;
 import com.bgsoftware.superiorskyblock.api.island.Island;
 import com.bgsoftware.superiorskyblock.api.island.IslandFlag;
 import com.bgsoftware.superiorskyblock.api.world.Dimension;
-import com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer;
 import com.denizenscript.denizen.objects.*;
 import com.denizenscript.denizencore.objects.*;
 import com.denizenscript.denizencore.objects.core.*;
@@ -18,6 +17,7 @@ import com.bgsoftware.superiorskyblock.api.wrappers.WorldPosition;
 import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.Debug;
 import com.denizenscript.denizencore.utilities.text.StringHolder;
+import com.denizenscript.depenizen.bukkit.bridges.SuperiorSkyblockBridge;
 import org.bukkit.Registry;
 
 import java.time.LocalDateTime;
@@ -131,10 +131,6 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
 
     public Island getIsland() {
         return island;
-    }
-
-    public static SuperiorPlayer getSuperiorPlayer(PlayerTag player) {
-        return SuperiorSkyblockAPI.getPlayer(player.getUUID());
     }
 
     public static void register() {
@@ -400,7 +396,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // Returns the rating a player gave an island, or null if the player hasn't given one.
         // -->
         tagProcessor.registerTag(ElementTag.class, PlayerTag.class, "rating", (attribute, object, player) -> {
-            Rating rating = object.getIsland().getRating(getSuperiorPlayer(player));
+            Rating rating = object.getIsland().getRating(SuperiorSkyblockBridge.getSuperiorPlayer(player));
             return rating.getValue() > -1 ? new ElementTag(rating.getValue()) : null;
         });
 
@@ -480,11 +476,11 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
             if (object.getIsland().isSpawn()) {
                 mechanism.echoError("Spawn islands cannot have a team of players.");
             }
-            else if (object.getIsland().getCoopPlayers().contains(getSuperiorPlayer(value))) {
+            else if (object.getIsland().getCoopPlayers().contains(SuperiorSkyblockBridge.getSuperiorPlayer(value))) {
                 mechanism.echoError("This player is already part of the island.");
             }
             else {
-                object.getIsland().addCoop(getSuperiorPlayer(value));
+                object.getIsland().addCoop(SuperiorSkyblockBridge.getSuperiorPlayer(value));
             }
         });
 
@@ -502,11 +498,11 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
             if (object.getIsland().isSpawn()) {
                 mechanism.echoError("Spawn islands cannot have a team of players.");
             }
-            else if (object.getIsland().getIslandMembers(true).contains(getSuperiorPlayer(value))) {
+            else if (object.getIsland().getIslandMembers(true).contains(SuperiorSkyblockBridge.getSuperiorPlayer(value))) {
                 mechanism.echoError("This player is already part of the island.");
             }
             else {
-                object.getIsland().addMember(getSuperiorPlayer(value), SuperiorSkyblockPlugin.getPlugin().getRoles().getDefaultRole());
+                object.getIsland().addMember(SuperiorSkyblockBridge.getSuperiorPlayer(value), SuperiorSkyblockPlugin.getPlugin().getRoles().getDefaultRole());
             }
         });
 
@@ -543,11 +539,11 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
             if (object.getIsland().isSpawn()) {
                 mechanism.echoError("Spawn islands cannot have banned players.");
             }
-            else if (object.getIsland().getBannedPlayers().contains(getSuperiorPlayer(value))) {
+            else if (object.getIsland().getBannedPlayers().contains(SuperiorSkyblockBridge.getSuperiorPlayer(value))) {
                 mechanism.echoError("This player is already banned from the island.");
             }
             else {
-                object.getIsland().banMember(getSuperiorPlayer(value));
+                object.getIsland().banMember(SuperiorSkyblockBridge.getSuperiorPlayer(value));
             }
         });
 
@@ -627,11 +623,11 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // <SuperiorSkyblockIslandTag.coop_members>
         // -->
         tagProcessor.registerMechanism("kick_coop_member", false, PlayerTag.class, (object, mechanism, value) -> {
-            if (!(object.getIsland().getCoopPlayers().contains(getSuperiorPlayer(value)))) {
+            if (!(object.getIsland().getCoopPlayers().contains(SuperiorSkyblockBridge.getSuperiorPlayer(value)))) {
                 mechanism.echoError("This player is already not a part of this island.");
             }
             else {
-                object.getIsland().removeCoop(getSuperiorPlayer(value));
+                object.getIsland().removeCoop(SuperiorSkyblockBridge.getSuperiorPlayer(value));
             }
         });
 
@@ -646,11 +642,11 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // <SuperiorSkyblockIslandTag.members>
         // -->
         tagProcessor.registerMechanism("kick_member", false, PlayerTag.class, (object, mechanism, value) -> {
-            if (!(object.getIsland().getIslandMembers(true).contains(getSuperiorPlayer(value)))) {
+            if (!(object.getIsland().getIslandMembers(true).contains(SuperiorSkyblockBridge.getSuperiorPlayer(value)))) {
                 mechanism.echoError("This player is already not a part of this island.");
             }
             else {
-                object.getIsland().removeMember(getSuperiorPlayer(value), MemberRemoveReason.KICK);
+                object.getIsland().removeMember(SuperiorSkyblockBridge.getSuperiorPlayer(value), MemberRemoveReason.KICK);
             }
         });
 
@@ -666,7 +662,7 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // <SuperiorSkyblockIslandTag.leader>
         // -->
         tagProcessor.registerMechanism("leader", false, PlayerTag.class, (object, mechanism, value) -> {
-            object.getIsland().transferIsland(getSuperiorPlayer(value));
+            object.getIsland().transferIsland(SuperiorSkyblockBridge.getSuperiorPlayer(value));
         });
 
         // <--[mechanism]
@@ -825,11 +821,11 @@ public class SuperiorSkyblockIslandTag implements ObjectTag, Adjustable {
         // <SuperiorSkyblockIslandTag.banned_players>
         // -->
         tagProcessor.registerMechanism("unban_player", false, PlayerTag.class, (object, mechanism, value) -> {
-            if (!(object.getIsland().getBannedPlayers().contains(getSuperiorPlayer(value)))) {
+            if (!(object.getIsland().getBannedPlayers().contains(SuperiorSkyblockBridge.getSuperiorPlayer(value)))) {
                 mechanism.echoError("This player is not banned from the island.");
             }
             else {
-                object.getIsland().unbanMember(getSuperiorPlayer(value));
+                object.getIsland().unbanMember(SuperiorSkyblockBridge.getSuperiorPlayer(value));
             }
         });
     }
