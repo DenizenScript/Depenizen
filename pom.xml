@@ -222,7 +222,7 @@
         <dependency>
             <groupId>com.garbagemule</groupId>
             <artifactId>MobArena</artifactId>
-            <version>0.109</version>
+            <version>0.97.1</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/MobArena.jar</systemPath>
         </dependency>
