@@ -324,6 +324,13 @@
             <systemPath>${basedir}/lib/SkillAPI.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>com.bgsoftware</groupId>
+            <artifactId>SuperiorSkyblock</artifactId>
+            <version>2025.2.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/SuperiorSkyblock2.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.khorn</groupId>
             <artifactId>TerrainControl</artifactId>
             <version>2.7.2</version>

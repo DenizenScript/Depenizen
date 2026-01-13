@@ -42,6 +42,7 @@ softdepend:
     - Sentinel
     - Shopkeepers
     - SkillAPI
+    - SuperiorSkyblock2
     - TerrainControl
     - Towny
     - TownyChat
