@@ -34,7 +34,6 @@ softdepend:
     - OpenTerrainGenerator
     - PlaceholderAPI
     - PlayerPoints
-    - PlotSquared
     - PVPArena
     - PVPStats
     - Quests
