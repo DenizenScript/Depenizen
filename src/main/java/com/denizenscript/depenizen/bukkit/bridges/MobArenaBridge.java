@@ -1,24 +1,20 @@
 package com.denizenscript.depenizen.bukkit.bridges;
 
 import com.denizenscript.denizencore.DenizenCore;
-import com.denizenscript.depenizen.bukkit.events.mobarena.MobArenaStartsScriptEvent;
-import com.denizenscript.depenizen.bukkit.Bridge;
-import com.garbagemule.MobArena.MobArena;
-import com.garbagemule.MobArena.framework.Arena;
-import com.denizenscript.depenizen.bukkit.commands.mobarena.MobArenaCommand;
-import com.denizenscript.depenizen.bukkit.events.mobarena.MobArenaEndsScriptEvent;
-import com.denizenscript.depenizen.bukkit.properties.mobarena.MobArenaPlayerProperties;
-import com.denizenscript.depenizen.bukkit.objects.mobarena.MobArenaArenaTag;
-import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizencore.events.ScriptEvent;
 import com.denizenscript.denizencore.objects.ObjectFetcher;
-import com.denizenscript.denizencore.tags.TagRunnable;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
-import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.denizencore.tags.Attribute;
-import com.denizenscript.depenizen.bukkit.events.mobarena.MobArenaWaveChangesScriptEvent;
+import com.denizenscript.denizencore.tags.ReplaceableTagEvent;
 import com.denizenscript.denizencore.tags.TagManager;
+import com.denizenscript.denizencore.tags.TagRunnable;
+import com.denizenscript.depenizen.bukkit.Bridge;
+import com.denizenscript.depenizen.bukkit.commands.mobarena.*;
+import com.denizenscript.depenizen.bukkit.events.mobarena.*;
+import com.denizenscript.depenizen.bukkit.objects.mobarena.*;
+import com.denizenscript.depenizen.bukkit.properties.mobarena.*;
+import com.garbagemule.MobArena.MobArena;
+import com.garbagemule.MobArena.framework.Arena;
 
 public class MobArenaBridge extends Bridge {
 
@@ -38,7 +34,7 @@ public class MobArenaBridge extends Bridge {
         ScriptEvent.registerScriptEvent(MobArenaStartsScriptEvent.class);
         ScriptEvent.registerScriptEvent(MobArenaEndsScriptEvent.class);
         ScriptEvent.registerScriptEvent(MobArenaWaveChangesScriptEvent.class);
-        PropertyParser.registerProperty(MobArenaPlayerProperties.class, PlayerTag.class);
+        MobArenaPlayerExtensions.register();
     }
 
     public void tagEvent(ReplaceableTagEvent event) {
