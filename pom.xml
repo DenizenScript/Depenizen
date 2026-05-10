@@ -262,13 +262,6 @@
             <systemPath>${project.basedir}/lib/PlayerPoints.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>com.github.intellectualsites</groupId>
-            <artifactId>plotsquared</artifactId>
-            <version>4.298</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/PlotSquared.jar</systemPath>
-        </dependency>
-        <dependency>
             <groupId>net.slipcor</groupId>
             <artifactId>pvparena</artifactId>
             <version>1.3.2.58</version>

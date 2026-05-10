@@ -143,7 +143,6 @@ public class Depenizen extends JavaPlugin {
         registerBridge("OpenTerrainGenerator", () -> new OpenTerrainGeneratorBridge());
         registerBridge("PlaceholderAPI", () -> new PlaceholderAPIBridge());
         registerBridge("PlayerPoints", () -> new PlayerPointsBridge());
-        registerBridge("PlotSquared", () -> new PlotSquaredBridge());
         registerBridge("PVPArena", () -> new PVPArenaBridge());
         registerBridge("PVPStats", () -> new PVPStatsBridge());
         registerBridge("Quests", "me.pikamug.quests.Quests", () -> new QuestsBridge());
