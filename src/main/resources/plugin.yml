@@ -19,6 +19,7 @@ softdepend:
     - CrackShot
     - EffectLib
     - Essentials
+    - Fabled
     - Factions
     - GriefPrevention
     - Jobs
@@ -41,7 +42,6 @@ softdepend:
     - Residence
     - Sentinel
     - Shopkeepers
-    - SkillAPI
     - TerrainControl
     - Towny
     - TownyChat
