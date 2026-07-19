@@ -16,6 +16,7 @@ softdepend:
     - BossShopPro
     - ChestShop
     - CoreProtect
+    - CoordinateOffset
     - CrackShot
     - EffectLib
     - Essentials

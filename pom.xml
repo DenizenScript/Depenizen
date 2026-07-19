@@ -143,6 +143,13 @@
             <systemPath>${project.basedir}/lib/CoreProtect.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>com.jtprince</groupId>
+            <artifactId>CoordinateOffset</artifactId>
+            <version>6.1.8-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/CoordinateOffset.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>de.slikey</groupId>
             <artifactId>EffectLib</artifactId>
             <version>9.4</version>
@@ -403,6 +410,7 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/BigDoors.jar</systemPath>
         </dependency>
+
     </dependencies>
 
     <distributionManagement>

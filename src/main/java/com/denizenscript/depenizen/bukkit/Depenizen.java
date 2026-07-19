@@ -124,6 +124,7 @@ public class Depenizen extends JavaPlugin {
         registerBridge("BigDoors", () -> new BigDoorsBridge());
         registerBridge("BossShopPro", () -> new BossShopBridge());
         registerBridge("ChestShop", () -> new ChestShopBridge());
+        registerBridge("CoordinateOffset", () -> new CoordinateOffsetBridge());
         registerBridge("CoreProtect", () -> new CoreProtectBridge());
         registerBridge("CrackShot", () -> new CrackShotBridge());
         registerBridge("EffectLib", () -> new EffectLibBridge());
@@ -170,3 +171,4 @@ public class Depenizen extends JavaPlugin {
         allBridges.put(name, new BridgeData(classCheck, bridgeSupplier));
     }
 }
+
