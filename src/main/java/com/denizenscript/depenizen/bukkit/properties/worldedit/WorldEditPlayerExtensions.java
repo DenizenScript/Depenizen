@@ -1,9 +1,8 @@
 package com.denizenscript.depenizen.bukkit.properties.worldedit;
 
 import com.denizenscript.denizen.objects.*;
-import com.denizenscript.denizencore.objects.properties.Property;
-import com.denizenscript.denizencore.objects.Mechanism;
-import com.denizenscript.denizencore.objects.properties.PropertyParser;
+import com.denizenscript.denizencore.objects.core.ListTag;
+import com.denizenscript.denizencore.utilities.CoreUtilities;
 import com.denizenscript.denizencore.utilities.debugging.DebugInternals;
 import com.denizenscript.depenizen.bukkit.bridges.WorldEditBridge;
 import com.sk89q.worldedit.LocalSession;
@@ -22,52 +21,13 @@ import com.sk89q.worldedit.regions.selector.CuboidRegionSelector;
 import com.sk89q.worldedit.regions.selector.EllipsoidRegionSelector;
 import com.sk89q.worldedit.regions.selector.Polygonal2DRegionSelector;
 import com.sk89q.worldedit.world.item.ItemType;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.denizenscript.denizencore.objects.core.ListTag;
-import com.denizenscript.denizencore.objects.ObjectTag;
-import com.denizenscript.denizencore.utilities.CoreUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.stream.Collectors;
 
-public class WorldEditPlayerProperties implements Property {
-
-    @Override
-    public String getPropertyString() {
-        return null;
-    }
-
-    @Override
-    public String getPropertyId() {
-        return "WorldEditPlayer";
-    }
-
-    public static boolean describes(ObjectTag object) {
-        return object instanceof PlayerTag
-                && ((PlayerTag) object).isOnline();
-    }
-
-    public static WorldEditPlayerProperties getFrom(ObjectTag object) {
-        if (!describes(object)) {
-            return null;
-        }
-        else {
-            return new WorldEditPlayerProperties((PlayerTag) object);
-        }
-    }
-
-    public static final String[] handledMechs = new String[] {
-            "we_selection"
-    };
-
-    public WorldEditPlayerProperties(PlayerTag player) {
-        this.player = player.getPlayerEntity();
-    }
-
-    Player player;
+public class WorldEditPlayerExtensions {
 
     public static Material deLegacy(Material mat) {
         if (mat.isLegacy()) {
@@ -89,27 +49,26 @@ public class WorldEditPlayerProperties implements Property {
         //
         // Note that some values may be listed as "unknown" or strange values due to WorldEdit having a messy API (no way to automatically stringify brush data).
         // -->
-        PropertyParser.registerTag(WorldEditPlayerProperties.class, ListTag.class, "we_brush_info", (attribute, object) -> {
+        PlayerTag.tagProcessor.registerTag(ListTag.class, "we_brush_info", (attribute, player) -> {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             ItemType itemType;
             if (attribute.hasParam()) {
-                itemType = BukkitAdapter.asItemType(deLegacy(attribute.paramAsType(ItemTag.class).getMaterial().getMaterial()));
+                itemType = BukkitAdapter.asItemType(deLegacy(attribute.paramAsType(ItemTag.class).getBukkitMaterial()));
             }
             else {
-                ItemStack itm = object.player.getEquipment().getItemInMainHand();
+                ItemStack itm = player.getPlayerEntity().getEquipment().getItemInMainHand();
                 itemType = BukkitAdapter.asItemType(deLegacy(itm == null ? Material.AIR : itm.getType()));
             }
-            Tool tool = worldEdit.getSession(object.player).getTool(itemType);
-            if (!(tool instanceof BrushTool)) {
+            Tool tool = worldEdit.getSession(player.getPlayerEntity()).getTool(itemType);
+            if (!(tool instanceof BrushTool brush)) {
                 return null;
             }
-            BrushTool brush = (BrushTool) tool;
             Brush btype = brush.getBrush();
             String brushType = CoreUtilities.toLowerCase(DebugInternals.getClassNameOpti(btype.getClass()));
             String materialInfo = "unknown";
             Pattern materialPattern = brush.getMaterial();
-            if (materialPattern instanceof BlockPattern) {
-                materialInfo = ((BlockPattern) materialPattern).getBlock().getAsString();
+            if (materialPattern instanceof BlockPattern blockPattern) {
+                materialInfo = blockPattern.getBlock().getAsString();
             }
             // TODO: other patterns?
             // TODO: mask?
@@ -123,23 +82,23 @@ public class WorldEditPlayerProperties implements Property {
 
         // <--[tag]
         // @attribute <PlayerTag.we_selection>
-        // @returns ObjectTag
+        // @returns AreaObject
         // @mechanism PlayerTag.we_selection
         // @plugin Depenizen, WorldEdit
         // @description
         // Returns the player's current block area selection, as a CuboidTag, EllipsoidTag, or PolygonTag.
         // -->
-        PropertyParser.registerTag(WorldEditPlayerProperties.class, ObjectTag.class, "we_selection", (attribute, object) -> {
+        PlayerTag.tagProcessor.registerTag(AreaContainmentObject.class, "we_selection", (attribute, player) -> {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
-            RegionSelector selection = worldEdit.getSession(object.player).getRegionSelector(BukkitAdapter.adapt(object.player.getWorld()));
+            RegionSelector selection = worldEdit.getSession(player.getPlayerEntity()).getRegionSelector(BukkitAdapter.adapt(player.getWorld()));
             try {
                 if (selection != null && selection.isDefined()) {
-                    if (selection instanceof EllipsoidRegionSelector) {
-                        EllipsoidRegion region = ((EllipsoidRegionSelector) selection).getRegion();
+                    if (selection instanceof EllipsoidRegionSelector ellipsoid) {
+                        EllipsoidRegion region = ellipsoid.getRegion();
                         return new EllipsoidTag(new LocationTag(BukkitAdapter.adapt(BukkitAdapter.adapt(region.getWorld()), region.getCenter())), new LocationTag(BukkitAdapter.adapt(BukkitAdapter.adapt(region.getWorld()), region.getRadius())));
                     }
-                    else if (selection instanceof Polygonal2DRegionSelector) {
-                        Polygonal2DRegion region = ((Polygonal2DRegionSelector) selection).getRegion();
+                    else if (selection instanceof Polygonal2DRegionSelector polygonal) {
+                        Polygonal2DRegion region = polygonal.getRegion();
                         PolygonTag poly = new PolygonTag(new WorldTag(region.getWorld().getName()));
                         for (BlockVector2 vec2 : region.getPoints()) {
                             poly.corners.add(new PolygonTag.Corner(vec2.getX(), vec2.getZ()));
@@ -149,52 +108,48 @@ public class WorldEditPlayerProperties implements Property {
                         poly.recalculateBox();
                         return poly;
                     }
-                    return new CuboidTag(BukkitAdapter.adapt(object.player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
-                            BukkitAdapter.adapt(object.player.getWorld(), selection.getIncompleteRegion().getMaximumPoint()));
+                    return new CuboidTag(BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMinimumPoint()),
+                            BukkitAdapter.adapt(player.getWorld(), selection.getIncompleteRegion().getMaximumPoint()));
                 }
             }
             catch (Throwable ex) {
-                Debug.echoError(ex);
+                attribute.echoError(ex);
             }
             return null;
         }, "selected_region");
-    }
-
-    @Override
-    public void adjust(Mechanism mechanism) {
 
         // <--[mechanism]
         // @object PlayerTag
         // @name we_selection
         // @plugin Depenizen, WorldEdit
-        // @input ObjectTag
+        // @input AreaObject
         // @description
         // Sets the player's current block area selection, as a CuboidTag, EllipsoidTag, or PolygonTag.
         // @tags
         // <PlayerTag.we_selection>
         // -->
-        if (mechanism.matches("we_selection")) {
+        PlayerTag.tagProcessor.registerMechanism("we_selection", false, AreaContainmentObject.class, (player, mechanism, input) -> {
             WorldEditPlugin worldEdit = (WorldEditPlugin) WorldEditBridge.instance.plugin;
             RegionSelector selector;
-            if (mechanism.getValue().asString().startsWith("cu@")) {
-                CuboidTag input = mechanism.valueAsType(CuboidTag.class);
-                selector = new CuboidRegionSelector(BukkitAdapter.adapt(input.getWorld().getWorld()), BukkitAdapter.asBlockVector(input.getLow(0)), BukkitAdapter.asBlockVector(input.getHigh(0)));
+            if (input.canBeType(CuboidTag.class)) {
+                CuboidTag area = input.asType(CuboidTag.class, mechanism.context);
+                selector = new CuboidRegionSelector(BukkitAdapter.adapt(area.getWorld().getWorld()), BukkitAdapter.asBlockVector(area.getLow(0)), BukkitAdapter.asBlockVector(area.getHigh(0)));
             }
-            else if (mechanism.getValue().asString().startsWith("ellipsoid@")) {
-                EllipsoidTag input = mechanism.valueAsType(EllipsoidTag.class);
-                selector = new EllipsoidRegionSelector(BukkitAdapter.adapt(input.center.getWorld()), BukkitAdapter.asBlockVector(input.center), BukkitAdapter.asVector(input.size));
+            else if (input.canBeType(EllipsoidTag.class)) {
+                EllipsoidTag area = input.asType(EllipsoidTag.class, mechanism.context);
+                selector = new EllipsoidRegionSelector(BukkitAdapter.adapt(area.center.getWorld()), BukkitAdapter.asBlockVector(area.center), BukkitAdapter.asVector(area.size));
             }
-            else if (mechanism.getValue().asString().startsWith("polygon@")) {
-                PolygonTag input = mechanism.valueAsType(PolygonTag.class);
-                selector = new Polygonal2DRegionSelector(BukkitAdapter.adapt(input.world.getWorld()), input.corners.stream().map(c -> BlockVector2.at(c.x, c.z)).collect(Collectors.toList()), (int)input.yMin, (int)input.yMax);
+            else if (input.canBeType(PolygonTag.class)) {
+                PolygonTag area = input.asType(PolygonTag.class, mechanism.context);
+                selector = new Polygonal2DRegionSelector(BukkitAdapter.adapt(area.world.getWorld()), area.corners.stream().map(c -> BlockVector2.at(c.x, c.z)).collect(Collectors.toList()), (int) area.yMin, (int) area.yMax);
             }
             else {
-                Debug.echoError("Invalid we_selection input");
+                mechanism.echoError("Invalid we_selection input");
                 return;
             }
-            LocalSession session = worldEdit.getSession(player);
+            LocalSession session = worldEdit.getSession(player.getPlayerEntity());
             session.setRegionSelector(BukkitAdapter.adapt(player.getWorld()), selector);
-            selector.explainRegionAdjust(BukkitAdapter.adapt(player), session);
-        }
+            selector.explainRegionAdjust(BukkitAdapter.adapt(player.getPlayerEntity()), session);
+        });
     }
 }

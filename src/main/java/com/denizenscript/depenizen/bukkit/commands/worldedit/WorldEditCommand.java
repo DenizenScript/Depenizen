@@ -5,16 +5,13 @@ import com.denizenscript.denizen.objects.CuboidTag;
 import com.denizenscript.denizen.objects.LocationTag;
 import com.denizenscript.denizen.objects.PlayerTag;
 import com.denizenscript.denizen.utilities.Utilities;
-import com.denizenscript.denizencore.utilities.debugging.Debug;
-import com.denizenscript.denizencore.exceptions.InvalidArgumentsException;
-import com.denizenscript.denizencore.objects.Argument;
+import com.denizenscript.denizencore.exceptions.InvalidArgumentsRuntimeException;
 import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.scripts.ScriptEntry;
 import com.denizenscript.denizencore.scripts.commands.AbstractCommand;
-import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.EmptyClipboardException;
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.WorldEditException;
+import com.denizenscript.denizencore.scripts.commands.generator.*;
+import com.denizenscript.denizencore.utilities.debugging.Debug;
+import com.sk89q.worldedit.*;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.entity.Player;
@@ -39,6 +36,7 @@ public class WorldEditCommand extends AbstractCommand {
         setName("worldedit");
         setSyntax("worldedit [create_schematic/copy_to_clipboard/paste] (file:<file path>) (cuboid:<cuboid>) (position:<location>) (rotate:<#>) (undoable) (noair)");
         setRequiredArguments(2, 7);
+        autoCompile();
     }
 
     // <--[command]
@@ -93,280 +91,231 @@ public class WorldEditCommand extends AbstractCommand {
     //
     // -->
 
-    private enum Action {CREATE_SCHEMATIC, COPY_TO_CLIPBOARD, PASTE}
+    public enum Action {CREATE_SCHEMATIC, COPY_TO_CLIPBOARD, PASTE}
 
-    @Override
-    public void parseArgs(ScriptEntry scriptEntry) throws InvalidArgumentsException {
-        for (Argument arg : scriptEntry) {
-            if (!scriptEntry.hasObject("position")
-                    && arg.matchesPrefix("position")) {
-                scriptEntry.addObject("position", arg.asType(LocationTag.class));
-            }
-            else if (!scriptEntry.hasObject("file")
-                    && arg.matchesPrefix("file")) {
-                scriptEntry.addObject("file", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("cuboid")
-                    && arg.matchesPrefix("cuboid")) {
-                scriptEntry.addObject("cuboid", arg.asType(CuboidTag.class));
-            }
-            else if (!scriptEntry.hasObject("noair")
-                    && arg.matches("noair")) {
-                scriptEntry.addObject("noair", new ElementTag(true));
-            }
-            else if (!scriptEntry.hasObject("undoable")
-                    && arg.matches("undoable")) {
-                scriptEntry.addObject("undoable", new ElementTag(true));
-            }
-            else if (!scriptEntry.hasObject("rotate")
-                    && arg.matchesPrefix("rotate")) {
-                scriptEntry.addObject("rotate", arg.asElement());
-            }
-            else if (!scriptEntry.hasObject("action")
-                    && arg.matchesEnum(Action.class)) {
-                scriptEntry.addObject("action", arg.asElement());
-            }
-            else {
-                arg.reportUnhandled();
-            }
-        }
-        if (!scriptEntry.hasObject("action")) {
-            throw new InvalidArgumentsException("Action not specified!");
-        }
-    }
-
-    public CuboidRegion cuboidToWECuboid(CuboidTag cuboid) {
-        LocationTag top = cuboid.getHigh(0);
-        LocationTag bottom = cuboid.getLow(0);
-        BlockVector3 topVector = BlockVector3.at(top.getBlockX(), top.getBlockY(), top.getBlockZ());
-        BlockVector3 bottomVector = BlockVector3.at(bottom.getBlockX(), bottom.getBlockY(), bottom.getBlockZ());
-        World w = new BukkitWorld(cuboid.getWorld().getWorld());
-        return new CuboidRegion(w, bottomVector, topVector);
-    }
-
-    @Override
-    public void execute(ScriptEntry scriptEntry) {
-        ElementTag action = scriptEntry.getObjectTag("action");
-        ElementTag file = scriptEntry.getObjectTag("file");
-        LocationTag position = scriptEntry.getObjectTag("position");
-        ElementTag noAir = scriptEntry.getObjectTag("noair");
-        CuboidTag cuboid = scriptEntry.getObjectTag("cuboid");
-        ElementTag undoable = scriptEntry.getObjectTag("undoable");
-        ElementTag rotate = scriptEntry.getObjectTag("rotate");
-        if (scriptEntry.dbCallShouldDebug()) {
-            Debug.report(scriptEntry, getName(), action, file, position, noAir, cuboid, undoable, rotate);
+    public static void autoExecute(ScriptEntry scriptEntry,
+                                   @ArgName("action") @ArgLinear @ArgDefaultNull Action action,
+                                   @ArgName("file") @ArgPrefixed @ArgDefaultNull ElementTag file,
+                                   @ArgName("cuboid") @ArgPrefixed @ArgDefaultNull CuboidTag cuboid,
+                                   @ArgName("position") @ArgPrefixed @ArgDefaultNull LocationTag position,
+                                   @ArgName("rotate") @ArgPrefixed @ArgDefaultNull ElementTag rotate,
+                                   @ArgName("undoable") boolean undoable,
+                                   @ArgName("noair") boolean noAir) {
+        if (action == null) {
+            throw new InvalidArgumentsRuntimeException("Action not specified!");
         }
         PlayerTag target = Utilities.getEntryPlayer(scriptEntry);
-        if (action.asString().equalsIgnoreCase("paste")) {
-            if (file == null) {
-                Debug.echoError("File path not specified");
-                return;
-            }
-            if (position == null) {
-                Debug.echoError("Position not specified");
-                return;
-            }
-            File fileToLoad = new File(Denizen.getInstance().getDataFolder(), "schematics/" + file + ".schem");
-            if (!Utilities.canReadFile(fileToLoad)) {
-                Debug.echoError("Cannot read from that file path due to security settings in Denizen/config.yml.");
-                return;
-            }
-            if (!fileToLoad.exists()) {
-                Debug.echoError("File not found");
-                return;
-            }
-            ClipboardFormat format = ClipboardFormats.findByFile(fileToLoad);
-            if (format == null) {
-                Debug.echoError("File not found");
-                return;
-            }
-            Clipboard clipboard;
-            try {
-                ClipboardReader reader = format.getReader(new FileInputStream(fileToLoad));
-                clipboard = reader.read();
-            }
-            catch (IOException ex) {
-                Debug.echoError(ex);
-                return;
-            }
-            if (clipboard == null) {
-                Debug.echoError("Clipboard became null");
-                return;
-            }
-            ClipboardHolder holder = new ClipboardHolder(clipboard);
-            if (rotate != null) {
-                AffineTransform transform = new AffineTransform();
-                transform = transform.rotateY(rotate.asInt());
-                holder.setTransform(holder.getTransform().combine(transform));
-            }
-            World weWorld = new BukkitWorld(position.getWorld());
-            if (undoable != null) {
-                if (target == null) {
-                    Debug.echoError("Player not found in queue");
+        switch (action) {
+            case PASTE: {
+                if (file == null) {
+                    Debug.echoError("File path not specified.");
                     return;
                 }
-                Player wePlayer = BukkitAdapter.adapt(target.getPlayerEntity());
-                EditSession editSession = WorldEdit.getInstance().newEditSessionBuilder().world(weWorld).actor(wePlayer).build();
-                Operation operation = holder.createPaste(editSession)
-                        .to(BlockVector3.at(position.getBlockX(), position.getBlockY(), position.getBlockZ()))
-                        .ignoreAirBlocks(noAir != null).build();
-                try {
-                    Operations.complete(operation);
-                }
-                catch (WorldEditException ex) {
-                    Debug.echoError("Exception in WorldEdit while loading a schematic to clipboard");
-                    Debug.echoError(ex);
-                    return;
-                }
-                Operations.completeBlindly(editSession.commit());
-                WorldEdit.getInstance().getSessionManager().get(wePlayer).remember(editSession);
-            }
-            else {
-                EditSession editSession = WorldEdit.getInstance().newEditSessionBuilder().world(weWorld).build();
-                Operation operation = holder.createPaste(editSession)
-                        .to(BlockVector3.at(position.getBlockX(), position.getBlockY(), position.getBlockZ()))
-                        .ignoreAirBlocks(noAir != null).build();
-                try {
-                    Operations.complete(operation);
-                }
-                catch (WorldEditException ex) {
-                    Debug.echoError("Exception in WorldEdit while loading a schematic to clipboard");
-                    Debug.echoError(ex);
-                    return;
-                }
-                Operations.completeBlindly(editSession.commit());
-            }
-        }
-        else if (action.asString().equalsIgnoreCase("create_schematic")) {
-            if (file == null) {
-                Debug.echoError("File not specified");
-                return;
-            }
-            File fileToSave = new File(Denizen.getInstance().getDataFolder(), "schematics/" + file + ".schem");
-            if (!Utilities.canWriteToFile(fileToSave)) {
-                Debug.echoError("Cannot write to that file path due to security settings in Denizen/config.yml.");
-                return;
-            }
-            if (cuboid == null) {
-                if (target == null) {
-                    Debug.echoError("Cuboid not specified");
-                    return;
-                }
-                Player wePlayer = BukkitAdapter.adapt(target.getPlayerEntity());
-                try {
-                    ClipboardHolder clipboard = WorldEdit.getInstance().getSessionManager().get(wePlayer).getClipboard();
-                    try (ClipboardWriter writer = BuiltInClipboardFormat.SPONGE_SCHEMATIC.getWriter(new FileOutputStream(fileToSave))) {
-                        writer.write(clipboard.getClipboard());
-                    }
-                    catch (IOException ex) {
-                        Debug.echoError(ex);
-                    }
-                }
-                catch (EmptyClipboardException ex) {
-                    Debug.echoError("Cuboid not specified, and player does not have a clipboard");
-                    return;
-                }
-                return;
-            }
-            CuboidRegion region = cuboidToWECuboid(cuboid);
-            if (position == null) {
-                Debug.echoError("Position not specified");
-                return;
-            }
-            BlockVector3 pos = BlockVector3.at(position.getBlockX(), position.getBlockY(), position.getBlockZ());
-            BlockArrayClipboard clipboard = new BlockArrayClipboard(region);
-            clipboard.setOrigin(pos);
-            EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(region.getWorld(), -1);
-            ForwardExtentCopy forwardExtentCopy = new ForwardExtentCopy(editSession, region, clipboard, region.getMinimumPoint());
-            forwardExtentCopy.setCopyingEntities(false);
-            try {
-                Operations.complete(forwardExtentCopy);
-            }
-            catch (WorldEditException ex) {
-                Debug.echoError("Exception in WorldEdit while loading a schematic to clipboard");
-                Debug.echoError(ex);
-                return;
-            }
-            try (ClipboardWriter writer = BuiltInClipboardFormat.SPONGE_SCHEMATIC.getWriter(new FileOutputStream(fileToSave))) {
-                writer.write(clipboard);
-            }
-            catch (IOException ex) {
-                Debug.echoError(ex);
-            }
-        }
-        else if (action.asString().equalsIgnoreCase("copy_to_clipboard")) {
-
-            if (target == null) {
-                Debug.echoError("Player not found in queue");
-                return;
-            }
-            if (file != null && cuboid != null) {
-                Debug.echoError("Both cuboid and file args were specified. Only one can be used.");
-                return;
-            }
-            if (cuboid != null) {
                 if (position == null) {
-                    Debug.echoError("Position not specified");
+                    Debug.echoError("Position not specified.");
+                    return;
+                }
+                File fileToLoad = new File(Denizen.getInstance().getDataFolder(), "schematics/" + file + ".schem");
+                if (!Utilities.canReadFile(fileToLoad)) {
+                    Debug.echoError("Cannot read from that file path due to security settings in Denizen/config.yml.");
+                    return;
+                }
+                if (!fileToLoad.exists()) {
+                    Debug.echoError("File not found.");
+                    return;
+                }
+                ClipboardFormat format = ClipboardFormats.findByFile(fileToLoad);
+                if (format == null) {
+                    Debug.echoError("File not found.");
+                    return;
+                }
+                Clipboard clipboard;
+                try {
+                    clipboard = format.getReader(new FileInputStream(fileToLoad)).read();
+                }
+                catch (IOException ex) {
+                    Debug.echoError(ex);
+                    return;
+                }
+                if (clipboard == null) {
+                    Debug.echoError("Clipboard became null.");
+                    return;
+                }
+                ClipboardHolder holder = new ClipboardHolder(clipboard);
+                if (rotate != null) {
+                    holder.setTransform(holder.getTransform().combine(new AffineTransform().rotateY(rotate.asInt())));
+                }
+                World weWorld = new BukkitWorld(position.getWorld());
+                if (undoable) {
+                    if (target == null) {
+                        Debug.echoError("Player not found in queue.");
+                        return;
+                    }
+                    Player wePlayer = BukkitAdapter.adapt(target.getPlayerEntity());
+                    EditSession editSession = WorldEdit.getInstance().newEditSessionBuilder().world(weWorld).actor(wePlayer).build();
+                    Operation operation = holder.createPaste(editSession)
+                            .to(BlockVector3.at(position.getBlockX(), position.getBlockY(), position.getBlockZ()))
+                            .ignoreAirBlocks(noAir).build();
+                    try {
+                        Operations.complete(operation);
+                    }
+                    catch (WorldEditException ex) {
+                        Debug.echoError("Exception in WorldEdit while loading a schematic to clipboard.");
+                        Debug.echoError(ex);
+                        return;
+                    }
+                    Operations.completeBlindly(editSession.commit());
+                    WorldEdit.getInstance().getSessionManager().get(wePlayer).remember(editSession);
+                }
+                else {
+                    EditSession editSession = WorldEdit.getInstance().newEditSessionBuilder().world(weWorld).build();
+                    Operation operation = holder.createPaste(editSession)
+                            .to(BlockVector3.at(position.getBlockX(), position.getBlockY(), position.getBlockZ()))
+                            .ignoreAirBlocks(noAir).build();
+                    try {
+                        Operations.complete(operation);
+                    }
+                    catch (WorldEditException ex) {
+                        Debug.echoError("Exception in WorldEdit while loading a schematic to clipboard.");
+                        Debug.echoError(ex);
+                        return;
+                    }
+                    Operations.completeBlindly(editSession.commit());
+                }
+            }
+            case CREATE_SCHEMATIC: {
+                if (file == null) {
+                    Debug.echoError("File not specified.");
+                    return;
+                }
+                File fileToSave = new File(Denizen.getInstance().getDataFolder(), "schematics/" + file + ".schem");
+                if (!Utilities.canWriteToFile(fileToSave)) {
+                    Debug.echoError("Cannot write to that file path due to security settings in Denizen/config.yml.");
+                    return;
+                }
+                if (cuboid == null) {
+                    if (target == null) {
+                        Debug.echoError("Cuboid not specified.");
+                        return;
+                    }
+                    try {
+                        ClipboardHolder clipboard = WorldEdit.getInstance().getSessionManager().get(BukkitAdapter.adapt(target.getPlayerEntity())).getClipboard();
+                        try (ClipboardWriter writer = BuiltInClipboardFormat.SPONGE_SCHEMATIC.getWriter(new FileOutputStream(fileToSave))) {
+                            writer.write(clipboard.getClipboard());
+                        }
+                        catch (IOException ex) {
+                            Debug.echoError(ex);
+                        }
+                    }
+                    catch (EmptyClipboardException ex) {
+                        Debug.echoError("Cuboid not specified, and player does not have a clipboard.");
+                        return;
+                    }
                     return;
                 }
                 CuboidRegion region = cuboidToWECuboid(cuboid);
-                Player p = BukkitAdapter.adapt(target.getPlayerEntity());
+                if (position == null) {
+                    Debug.echoError("Position not specified.");
+                    return;
+                }
                 BlockArrayClipboard clipboard = new BlockArrayClipboard(region);
-                BlockVector3 pos = BlockVector3.at(position.getBlockX(), position.getBlockY(), position.getBlockZ());
-                clipboard.setOrigin(pos);
-                EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(region.getWorld(), -1, p);
-
+                clipboard.setOrigin(BlockVector3.at(position.getBlockX(), position.getBlockY(), position.getBlockZ()));
+                EditSession editSession = WorldEdit.getInstance().newEditSessionBuilder().world(region.getWorld()).maxBlocks(-1).build();
                 ForwardExtentCopy forwardExtentCopy = new ForwardExtentCopy(editSession, region, clipboard, region.getMinimumPoint());
                 forwardExtentCopy.setCopyingEntities(false);
                 try {
                     Operations.complete(forwardExtentCopy);
                 }
                 catch (WorldEditException ex) {
-                    Debug.echoError("Exception in WorldEdit while loading a schematic to clipboard");
+                    Debug.echoError("Exception in WorldEdit while loading a schematic to clipboard.");
                     Debug.echoError(ex);
                     return;
                 }
-                ClipboardHolder holder = new ClipboardHolder(clipboard);
-                WorldEdit.getInstance().getSessionManager().get(p).setClipboard(holder);
-                return;
+                try (ClipboardWriter writer = BuiltInClipboardFormat.SPONGE_SCHEMATIC.getWriter(new FileOutputStream(fileToSave))) {
+                    writer.write(clipboard);
+                }
+                catch (IOException ex) {
+                    Debug.echoError(ex);
+                }
             }
-            if (file == null) {
-                Debug.echoError("Cuboid or file must be specified.");
-                return;
+            case COPY_TO_CLIPBOARD: {
+                if (target == null) {
+                    Debug.echoError("Player not found in queue.");
+                    return;
+                }
+                if (file != null && cuboid != null) {
+                    Debug.echoError("Both cuboid and file args were specified. Only one can be used.");
+                    return;
+                }
+                if (cuboid != null) {
+                    if (position == null) {
+                        Debug.echoError("Position not specified.");
+                        return;
+                    }
+                    CuboidRegion region = cuboidToWECuboid(cuboid);
+                    Player player = BukkitAdapter.adapt(target.getPlayerEntity());
+                    BlockArrayClipboard clipboard = new BlockArrayClipboard(region);
+                    BlockVector3 pos = BlockVector3.at(position.getBlockX(), position.getBlockY(), position.getBlockZ());
+                    clipboard.setOrigin(pos);
+                    EditSession editSession = WorldEdit.getInstance().newEditSessionBuilder().world(region.getWorld()).maxBlocks(-1).actor(player).build();
+                    ForwardExtentCopy forwardExtentCopy = new ForwardExtentCopy(editSession, region, clipboard, region.getMinimumPoint());
+                    forwardExtentCopy.setCopyingEntities(false);
+                    try {
+                        Operations.complete(forwardExtentCopy);
+                    }
+                    catch (WorldEditException ex) {
+                        Debug.echoError("Exception in WorldEdit while loading a schematic to clipboard.");
+                        Debug.echoError(ex);
+                        return;
+                    }
+                    WorldEdit.getInstance().getSessionManager().get(player).setClipboard(new ClipboardHolder(clipboard));
+                    return;
+                }
+                if (file == null) {
+                    Debug.echoError("Cuboid or file must be specified.");
+                    return;
+                }
+                File fileToLoad = new File(Denizen.getInstance().getDataFolder(), "schematics/" + file + ".schem");
+                if (!Utilities.canReadFile(fileToLoad)) {
+                    Debug.echoError("Cannot read from that file path due to security settings in Denizen/config.yml.");
+                    return;
+                }
+                if (!fileToLoad.exists()) {
+                    Debug.echoError("File not found.");
+                    return;
+                }
+                ClipboardFormat format = ClipboardFormats.findByFile(fileToLoad);
+                if (format == null) {
+                    Debug.echoError("File not found.");
+                    return;
+                }
+                Clipboard clipboard;
+                Closer closer = Closer.create();
+                try {
+                    FileInputStream fis = closer.register(new FileInputStream(fileToLoad));
+                    BufferedInputStream bis = closer.register(new BufferedInputStream(fis));
+                    clipboard = closer.register(format.getReader(bis)).read();
+                }
+                catch (IOException ex) {
+                    Debug.echoError(ex);
+                    return;
+                }
+                if (clipboard == null) {
+                    Debug.echoError("Clipboard returned null.");
+                    return;
+                }
+                WorldEdit.getInstance().getSessionManager().get(BukkitAdapter.adapt(target.getPlayerEntity())).setClipboard(new ClipboardHolder(clipboard));
             }
-            File fileToLoad = new File(Denizen.getInstance().getDataFolder(), "schematics/" + file + ".schem");
-            if (!Utilities.canReadFile(fileToLoad)) {
-                Debug.echoError("Cannot read from that file path due to security settings in Denizen/config.yml.");
-                return;
-            }
-            if (!fileToLoad.exists()) {
-                Debug.echoError("File not found");
-                return;
-            }
-            ClipboardFormat format = ClipboardFormats.findByFile(fileToLoad);
-            if (format == null) {
-                Debug.echoError("File not found");
-                return;
-            }
-            Clipboard clipboard;
-            Closer closer = Closer.create();
-            try {
-                FileInputStream fis = closer.register(new FileInputStream(fileToLoad));
-                BufferedInputStream bis = closer.register(new BufferedInputStream(fis));
-                ClipboardReader reader = closer.register(format.getReader(bis));
-                clipboard = reader.read();
-            }
-            catch (IOException ex) {
-                Debug.echoError(ex);
-                return;
-            }
-            if (clipboard == null) {
-                Debug.echoError("Clipboard returned null");
-                return;
-            }
-            ClipboardHolder holder = new ClipboardHolder(clipboard);
-            Player wePlayer = BukkitAdapter.adapt(target.getPlayerEntity());
-            WorldEdit.getInstance().getSessionManager().get(wePlayer).setClipboard(holder);
         }
+    }
+
+
+    public static CuboidRegion cuboidToWECuboid(CuboidTag cuboid) {
+        LocationTag top = cuboid.getHigh(0);
+        LocationTag bottom = cuboid.getLow(0);
+        BlockVector3 topVector = BlockVector3.at(top.getBlockX(), top.getBlockY(), top.getBlockZ());
+        BlockVector3 bottomVector = BlockVector3.at(bottom.getBlockX(), bottom.getBlockY(), bottom.getBlockZ());
+        World w = new BukkitWorld(cuboid.getWorld().getWorld());
+        return new CuboidRegion(w, bottomVector, topVector);
     }
 }

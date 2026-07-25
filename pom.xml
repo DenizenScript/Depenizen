@@ -12,8 +12,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <craftbukkit.version>1.21.5-R0.1-SNAPSHOT</craftbukkit.version>
-        <citizens.version>2.0.38-SNAPSHOT</citizens.version>
+        <craftbukkit.version>26.2-R0.1-SNAPSHOT</craftbukkit.version>
+        <citizens.version>2.0.43-SNAPSHOT</citizens.version>
         <denizen.version>1.3.1-SNAPSHOT</denizen.version>
         <BUILD_NUMBER>Unknown</BUILD_NUMBER>
     </properties>
@@ -375,7 +375,7 @@
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-bukkit</artifactId>
-            <version>7.3.0-SNAPSHOT</version>
+            <version>7.4.4-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/WorldEdit.jar</systemPath>
         </dependency>
