@@ -108,6 +108,18 @@ public class LuckPermsGroupTag implements ObjectTag {
         });
 
         // <--[tag]
+        // @attribute <LuckPermsGroupTag.display_name>
+        // @returns ElementTag
+        // @plugin Depenizen, LuckPerms
+        // @description
+        // Returns the group's display name, if any.
+        // -->
+        tagProcessor.registerTag(ElementTag.class, "display_name", (attribute, object) -> {
+            String displayName = object.getGroup().getDisplayName();
+            return displayName != null ? new ElementTag(displayName, true) : null;
+        });
+
+        // <--[tag]
         // @attribute <LuckPermsGroupTag.group_prefix>
         // @returns ElementTag
         // @plugin Depenizen, LuckPerms

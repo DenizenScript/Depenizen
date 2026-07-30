@@ -201,7 +201,7 @@
         <dependency>
             <groupId>me.lucko.luckperms</groupId>
             <artifactId>luckperms</artifactId>
-            <version>5.4.102</version>
+            <version>5.5.65</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/LuckPerms.jar</systemPath>
         </dependency>
