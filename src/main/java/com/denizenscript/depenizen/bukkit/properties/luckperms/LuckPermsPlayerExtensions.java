@@ -1,6 +1,8 @@
 package com.denizenscript.depenizen.bukkit.properties.luckperms;
 
 import com.denizenscript.denizen.objects.PlayerTag;
+import com.denizenscript.denizencore.objects.core.DurationTag;
+import com.denizenscript.denizencore.objects.core.ElementTag;
 import com.denizenscript.denizencore.objects.core.ListTag;
 import com.denizenscript.depenizen.bukkit.bridges.LuckPermsBridge;
 import com.denizenscript.depenizen.bukkit.objects.luckperms.LuckPermsGroupTag;
@@ -67,5 +69,17 @@ public class LuckPermsPlayerExtensions {
             return new LuckPermsGroupTag(group);
         });
 
+        // <--[tag]
+        // @attribute <PlayerTag.luckperms_permission_expiration[<permission.node>]>
+        // @returns DurationTag
+        // @plugin Depenizen, LuckPerms
+        // @description
+        // Returns how long a player has a permission for.
+        // If the player does not have the specific permission set, this will return the time for the closest wildcard permission, if any.
+        // -->
+        PlayerTag.tagProcessor.registerTag(DurationTag.class, ElementTag.class, "luckperms_permission_expiration", (attribute, player, param) -> {
+            User user = LuckPermsBridge.luckPermsInstance.getUserManager().getUser(player.getUUID());
+            return user != null ? LuckPermsBridge.getPermissionExpiry(user.getNodes(NodeType.PERMISSION), param.asString()) : null;
+        });
     }
 }
